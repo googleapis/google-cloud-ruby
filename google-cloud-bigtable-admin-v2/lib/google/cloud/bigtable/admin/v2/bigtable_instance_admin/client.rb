@@ -108,6 +108,11 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
 
+                  default_config.rpcs.partial_update_cluster.timeout = 60.0
+                  default_config.rpcs.partial_update_cluster.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
+                  }
+
                   default_config.rpcs.delete_cluster.timeout = 60.0
 
                   default_config.rpcs.create_app_profile.timeout = 60.0
@@ -236,6 +241,12 @@ module Google
               ##
               # Create an instance within a project.
               #
+              # Note that exactly one of Cluster.serve_nodes and
+              # Cluster.cluster_config.cluster_autoscaling_config can be set. If
+              # serve_nodes is set to non-zero, then the cluster is manually scaled. If
+              # cluster_config.cluster_autoscaling_config is non-empty, then autoscaling is
+              # enabled.
+              #
               # @overload create_instance(request, options = nil)
               #   Pass arguments to `create_instance` via a request object, either of type
               #   {::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest} or an equivalent Hash.
@@ -276,6 +287,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new
+              #
+              #   # Call the create_instance method.
+              #   result = client.create_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def create_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -293,9 +326,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -346,6 +381,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetInstanceRequest.new
+              #
+              #   # Call the get_instance method.
+              #   result = client.get_instance request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Instance.
+              #   p result
+              #
               def get_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -363,9 +413,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -417,6 +469,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListInstancesRequest.new
+              #
+              #   # Call the list_instances method.
+              #   result = client.list_instances request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::ListInstancesResponse.
+              #   p result
+              #
               def list_instances request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -434,9 +501,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -506,6 +575,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::Instance.new
+              #
+              #   # Call the update_instance method.
+              #   result = client.update_instance request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Instance.
+              #   p result
+              #
               def update_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -523,9 +607,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -578,6 +664,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::PartialUpdateInstanceRequest.new
+              #
+              #   # Call the partial_update_instance method.
+              #   result = client.partial_update_instance request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def partial_update_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -595,9 +703,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "instance.name" => request.instance.name
-                }
+                header_params = {}
+                if request.instance&.name
+                  header_params["instance.name"] = request.instance.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -648,6 +758,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteInstanceRequest.new
+              #
+              #   # Call the delete_instance method.
+              #   result = client.delete_instance request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_instance request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -665,9 +790,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -689,6 +816,12 @@ module Google
 
               ##
               # Creates a cluster within an instance.
+              #
+              # Note that exactly one of Cluster.serve_nodes and
+              # Cluster.cluster_config.cluster_autoscaling_config can be set. If
+              # serve_nodes is set to non-zero, then the cluster is manually scaled. If
+              # cluster_config.cluster_autoscaling_config is non-empty, then autoscaling is
+              # enabled.
               #
               # @overload create_cluster(request, options = nil)
               #   Pass arguments to `create_cluster` via a request object, either of type
@@ -725,6 +858,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateClusterRequest.new
+              #
+              #   # Call the create_cluster method.
+              #   result = client.create_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def create_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -742,9 +897,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -795,6 +952,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetClusterRequest.new
+              #
+              #   # Call the get_cluster method.
+              #   result = client.get_cluster request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::Cluster.
+              #   p result
+              #
               def get_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -812,9 +984,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -868,6 +1042,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListClustersRequest.new
+              #
+              #   # Call the list_clusters method.
+              #   result = client.list_clusters request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::ListClustersResponse.
+              #   p result
+              #
               def list_clusters request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -885,9 +1074,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -910,6 +1101,10 @@ module Google
               ##
               # Updates a cluster within an instance.
               #
+              # Note that UpdateCluster does not support updating
+              # cluster_config.cluster_autoscaling_config. In order to update it, you
+              # must use PartialUpdateCluster.
+              #
               # @overload update_cluster(request, options = nil)
               #   Pass arguments to `update_cluster` via a request object, either of type
               #   {::Google::Cloud::Bigtable::Admin::V2::Cluster} or an equivalent Hash.
@@ -920,7 +1115,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_cluster(location: nil, serve_nodes: nil, default_storage_type: nil, encryption_config: nil)
+              # @overload update_cluster(location: nil, serve_nodes: nil, cluster_config: nil, default_storage_type: nil, encryption_config: nil)
               #   Pass arguments to `update_cluster` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -932,8 +1127,10 @@ module Google
               #     cluster. Currently only zones are supported, so values should be of the
               #     form `projects/{project}/locations/{zone}`.
               #   @param serve_nodes [::Integer]
-              #     Required. The number of nodes allocated to this cluster. More nodes enable
-              #     higher throughput and more consistent performance.
+              #     The number of nodes allocated to this cluster. More nodes enable higher
+              #     throughput and more consistent performance.
+              #   @param cluster_config [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig, ::Hash]
+              #     Configuration for this cluster.
               #   @param default_storage_type [::Google::Cloud::Bigtable::Admin::V2::StorageType]
               #     (`CreationOnly`)
               #     The type of storage used by this cluster to serve its
@@ -948,6 +1145,28 @@ module Google
               # @return [::Gapic::Operation]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::Cluster.new
+              #
+              #   # Call the update_cluster method.
+              #   result = client.update_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
               #
               def update_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -966,9 +1185,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -981,6 +1202,113 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @bigtable_instance_admin_stub.call_rpc :update_cluster, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Partially updates a cluster within a project. This method is the preferred
+              # way to update a Cluster.
+              #
+              # To enable and update autoscaling, set
+              # cluster_config.cluster_autoscaling_config. When autoscaling is enabled,
+              # serve_nodes is treated as an OUTPUT_ONLY field, meaning that updates to it
+              # are ignored. Note that an update cannot simultaneously set serve_nodes to
+              # non-zero and cluster_config.cluster_autoscaling_config to non-empty, and
+              # also specify both in the update_mask.
+              #
+              # To disable autoscaling, clear cluster_config.cluster_autoscaling_config,
+              # and explicitly set a serve_node count via the update_mask.
+              #
+              # @overload partial_update_cluster(request, options = nil)
+              #   Pass arguments to `partial_update_cluster` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload partial_update_cluster(cluster: nil, update_mask: nil)
+              #   Pass arguments to `partial_update_cluster` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param cluster [::Google::Cloud::Bigtable::Admin::V2::Cluster, ::Hash]
+              #     Required. The Cluster which contains the partial updates to be applied, subject to
+              #     the update_mask.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The subset of Cluster fields which should be replaced.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest.new
+              #
+              #   # Call the partial_update_cluster method.
+              #   result = client.partial_update_cluster request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
+              def partial_update_cluster request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::PartialUpdateClusterRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.partial_update_cluster.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.cluster&.name
+                  header_params["cluster.name"] = request.cluster.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.partial_update_cluster.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.partial_update_cluster.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :partial_update_cluster, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
                   yield response, operation if block_given?
                   return response
@@ -1019,6 +1347,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new
+              #
+              #   # Call the delete_cluster method.
+              #   result = client.delete_cluster request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_cluster request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1036,9 +1379,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1098,6 +1443,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::CreateAppProfileRequest.new
+              #
+              #   # Call the create_app_profile method.
+              #   result = client.create_app_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::AppProfile.
+              #   p result
+              #
               def create_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1115,9 +1475,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1167,6 +1529,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::GetAppProfileRequest.new
+              #
+              #   # Call the get_app_profile method.
+              #   result = client.get_app_profile request
+              #
+              #   # The returned object is of type Google::Cloud::Bigtable::Admin::V2::AppProfile.
+              #   p result
+              #
               def get_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1184,9 +1561,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1251,6 +1630,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListAppProfilesRequest.new
+              #
+              #   # Call the list_app_profiles method.
+              #   result = client.list_app_profiles request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::AppProfile.
+              #     p response
+              #   end
+              #
               def list_app_profiles request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1268,9 +1668,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1325,6 +1727,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new
+              #
+              #   # Call the update_app_profile method.
+              #   result = client.update_app_profile request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def update_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1342,9 +1766,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "app_profile.name" => request.app_profile.name
-                }
+                header_params = {}
+                if request.app_profile&.name
+                  header_params["app_profile.name"] = request.app_profile.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1397,6 +1823,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::DeleteAppProfileRequest.new
+              #
+              #   # Call the delete_app_profile method.
+              #   result = client.delete_app_profile request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_app_profile request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1414,9 +1855,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1470,6 +1913,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::GetIamPolicyRequest.new
+              #
+              #   # Call the get_iam_policy method.
+              #   result = client.get_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1487,9 +1945,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "resource" => request.resource
-                }
+                header_params = {}
+                if request.resource
+                  header_params["resource"] = request.resource
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1545,6 +2005,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::SetIamPolicyRequest.new
+              #
+              #   # Call the set_iam_policy method.
+              #   result = client.set_iam_policy request
+              #
+              #   # The returned object is of type Google::Iam::V1::Policy.
+              #   p result
+              #
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1562,9 +2037,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "resource" => request.resource
-                }
+                header_params = {}
+                if request.resource
+                  header_params["resource"] = request.resource
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1619,6 +2096,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+              #
+              #   # Call the test_iam_permissions method.
+              #   result = client.test_iam_permissions request
+              #
+              #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+              #   p result
+              #
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1636,9 +2128,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "resource" => request.resource
-                }
+                header_params = {}
+                if request.resource
+                  header_params["resource"] = request.resource
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1844,6 +2338,11 @@ module Google
                   #
                   attr_reader :update_cluster
                   ##
+                  # RPC-specific configuration for `partial_update_cluster`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :partial_update_cluster
+                  ##
                   # RPC-specific configuration for `delete_cluster`
                   # @return [::Gapic::Config::Method]
                   #
@@ -1911,6 +2410,8 @@ module Google
                     @list_clusters = ::Gapic::Config::Method.new list_clusters_config
                     update_cluster_config = parent_rpcs.update_cluster if parent_rpcs.respond_to? :update_cluster
                     @update_cluster = ::Gapic::Config::Method.new update_cluster_config
+                    partial_update_cluster_config = parent_rpcs.partial_update_cluster if parent_rpcs.respond_to? :partial_update_cluster
+                    @partial_update_cluster = ::Gapic::Config::Method.new partial_update_cluster_config
                     delete_cluster_config = parent_rpcs.delete_cluster if parent_rpcs.respond_to? :delete_cluster
                     @delete_cluster = ::Gapic::Config::Method.new delete_cluster_config
                     create_app_profile_config = parent_rpcs.create_app_profile if parent_rpcs.respond_to? :create_app_profile

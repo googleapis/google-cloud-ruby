@@ -205,6 +205,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::GetEnvironmentRequest.new
+            #
+            #   # Call the get_environment method.
+            #   result = client.get_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Shell::V1::Environment.
+            #   p result
+            #
             def get_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -222,9 +237,11 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -287,6 +304,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::StartEnvironmentRequest.new
+            #
+            #   # Call the start_environment method.
+            #   result = client.start_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def start_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -304,9 +343,11 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -368,6 +409,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::AuthorizeEnvironmentRequest.new
+            #
+            #   # Call the authorize_environment method.
+            #   result = client.authorize_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def authorize_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -385,9 +448,11 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -447,6 +512,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::AddPublicKeyRequest.new
+            #
+            #   # Call the add_public_key method.
+            #   result = client.add_public_key request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def add_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -464,9 +551,11 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "environment" => request.environment
-              }
+              header_params = {}
+              if request.environment
+                header_params["environment"] = request.environment
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -522,6 +611,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/shell/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Shell::V1::CloudShellService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Shell::V1::RemovePublicKeyRequest.new
+            #
+            #   # Call the remove_public_key method.
+            #   result = client.remove_public_key request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def remove_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -539,9 +650,11 @@ module Google
                 gapic_version: ::Google::Cloud::Shell::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "environment" => request.environment
-              }
+              header_params = {}
+              if request.environment
+                header_params["environment"] = request.environment
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

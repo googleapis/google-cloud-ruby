@@ -28,7 +28,7 @@ module Google
             # Service for managing [Agents][google.cloud.dialogflow.cx.v3.Agent].
             class Service
 
-              include GRPC::GenericService
+              include ::GRPC::GenericService
 
               self.marshal_class_method = :encode
               self.unmarshal_class_method = :decode
@@ -53,6 +53,7 @@ module Google
               # Deletes the specified agent.
               rpc :DeleteAgent, ::Google::Cloud::Dialogflow::CX::V3::DeleteAgentRequest, ::Google::Protobuf::Empty
               # Exports the specified agent to a binary file.
+              #
               # This method is a [long-running
               # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
               # The returned `Operation` type has the following method-specific fields:
@@ -66,6 +67,14 @@ module Google
               # Replaces the current agent with a new one. Note that all existing resources
               # in agent (e.g. intents, entity types, flows) will be removed.
               #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: An [Empty
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
               #
               # Note: You should always train flows prior to sending them queries. See the
               # [training

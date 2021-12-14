@@ -251,6 +251,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::Topic.new
+            #
+            #   # Call the create_topic method.
+            #   result = client.create_topic request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Topic.
+            #   p result
+            #
             def create_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -268,9 +283,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -326,6 +343,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::UpdateTopicRequest.new
+            #
+            #   # Call the update_topic method.
+            #   result = client.update_topic request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Topic.
+            #   p result
+            #
             def update_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -343,9 +375,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic.name" => request.topic.name
-              }
+              header_params = {}
+              if request.topic&.name
+                header_params["topic.name"] = request.topic.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -398,6 +432,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::PublishRequest.new
+            #
+            #   # Call the publish method.
+            #   result = client.publish request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::PublishResponse.
+            #   p result
+            #
             def publish request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -415,9 +464,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -467,6 +518,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::GetTopicRequest.new
+            #
+            #   # Call the get_topic method.
+            #   result = client.get_topic request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::Topic.
+            #   p result
+            #
             def get_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -484,9 +550,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -542,6 +610,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListTopicsRequest.new
+            #
+            #   # Call the list_topics method.
+            #   result = client.list_topics request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::PubSub::V1::Topic.
+            #     p response
+            #   end
+            #
             def list_topics request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -559,9 +648,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project" => request.project
-              }
+              header_params = {}
+              if request.project
+                header_params["project"] = request.project
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -618,6 +709,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListTopicSubscriptionsRequest.new
+            #
+            #   # Call the list_topic_subscriptions method.
+            #   result = client.list_topic_subscriptions request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::ListTopicSubscriptionsResponse.
+            #   p result
+            #
             def list_topic_subscriptions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -635,9 +741,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -697,6 +805,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::ListTopicSnapshotsRequest.new
+            #
+            #   # Call the list_topic_snapshots method.
+            #   result = client.list_topic_snapshots request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::ListTopicSnapshotsResponse.
+            #   p result
+            #
             def list_topic_snapshots request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -714,9 +837,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -770,6 +895,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DeleteTopicRequest.new
+            #
+            #   # Call the delete_topic method.
+            #   result = client.delete_topic request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_topic request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -787,9 +927,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "topic" => request.topic
-              }
+              header_params = {}
+              if request.topic
+                header_params["topic"] = request.topic
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -842,6 +984,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/pubsub/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PubSub::V1::Publisher::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PubSub::V1::DetachSubscriptionRequest.new
+            #
+            #   # Call the detach_subscription method.
+            #   result = client.detach_subscription request
+            #
+            #   # The returned object is of type Google::Cloud::PubSub::V1::DetachSubscriptionResponse.
+            #   p result
+            #
             def detach_subscription request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -859,9 +1016,11 @@ module Google
                 gapic_version: ::Google::Cloud::PubSub::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "subscription" => request.subscription
-              }
+              header_params = {}
+              if request.subscription
+                header_params["subscription"] = request.subscription
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

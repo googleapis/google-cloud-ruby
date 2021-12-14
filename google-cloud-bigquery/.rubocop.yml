@@ -14,7 +14,7 @@ Style/Documentation:
 Lint/MixedRegexpCaptureTypes:
   Enabled: false
 Metrics/AbcSize:
-  Max: 50
+  Max: 55
 Metrics/BlockLength:
   Exclude:
     - "google-cloud-bigquery.gemspec"

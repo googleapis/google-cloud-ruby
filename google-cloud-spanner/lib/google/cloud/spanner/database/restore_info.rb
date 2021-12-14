@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
+
 
 require "google/cloud/spanner/database/backup_info"
 
@@ -19,6 +22,8 @@ module Google
   module Cloud
     module Spanner
       class Database
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Database::V1::RestoreInfo} instead.
         class RestoreInfo
           ##
           # @private Creates a new Database::RestoreInfo instance.

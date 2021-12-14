@@ -57,8 +57,13 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Integer}]
         #     A map associating each issue resource name with its respective number of
         #     matches in the set of conversations. Key has the format:
-        #     `projects/<Project ID>/locations/<Location ID>/issueModels/<Issue Model
-        #     ID>/issues/<Issue ID>`
+        #     `projects/<Project-ID>/locations/<Location-ID>/issueModels/<Issue-Model-ID>/issues/<Issue-ID>`
+        #     Deprecated, use `issue_matches_stats` field instead.
+        # @!attribute [rw] issue_matches_stats
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::ContactCenterInsights::V1::IssueModelLabelStats::IssueStats}]
+        #     A map associating each issue resource name with its respective number of
+        #     matches in the set of conversations. Key has the format:
+        #     `projects/<Project-ID>/locations/<Location-ID>/issueModels/<Issue-Model-ID>/issues/<Issue-ID>`
         # @!attribute [rw] conversation_count_time_series
         #   @return [::Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse::TimeSeries]
         #     A time series representing the count of conversations created over time
@@ -119,6 +124,15 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::ContactCenterInsights::V1::IssueModelLabelStats::IssueStats]
+          class IssueMatchesStatsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Metadata for a create analysis operation.
@@ -149,8 +163,8 @@ module Google
         #     component of the conversation's resource name. If no ID is specified, a
         #     server-generated ID will be used.
         #
-        #     This value should be 4-32 characters and must match the regular
-        #     expression /^[a-z0-9-]\\{4,32}$/. Valid characters are /[a-z][0-9]-/
+        #     This value should be 4-64 characters and must match the regular
+        #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
         class CreateConversationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -318,6 +332,9 @@ module Google
         #     A fully qualified KMS key name for BigQuery tables protected by CMEK.
         #     Format:
         #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyring}/cryptoKeys/\\{key}/cryptoKeyVersions/\\{version}
+        # @!attribute [rw] write_disposition
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest::WriteDisposition]
+        #     Options for what to do if the destination table already exists.
         class ExportInsightsDataRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -341,6 +358,19 @@ module Google
           class BigQueryDestination
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Specifies the action that occurs if the destination table already exists.
+          module WriteDisposition
+            # Write disposition is not specified. Defaults to WRITE_TRUNCATE.
+            WRITE_DISPOSITION_UNSPECIFIED = 0
+
+            # If the table already exists, BigQuery will overwrite the table data and
+            # use the schema from the load.
+            WRITE_TRUNCATE = 1
+
+            # If the table already exists, BigQuery will append data to the table.
+            WRITE_APPEND = 2
           end
         end
 
@@ -643,6 +673,18 @@ module Google
         #   @return [::String]
         #     Required. The name of the phrase matcher to delete.
         class DeletePhraseMatcherRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update a phrase matcher.
+        # @!attribute [rw] phrase_matcher
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
+        #     Required. The new values for the phrase matcher.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated.
+        class UpdatePhraseMatcherRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

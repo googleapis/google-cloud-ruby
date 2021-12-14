@@ -201,6 +201,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::ListCatalogsRequest.new
+            #
+            #   # Call the list_catalogs method.
+            #   result = client.list_catalogs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Retail::V2::Catalog.
+            #     p response
+            #   end
+            #
             def list_catalogs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -218,9 +239,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -283,6 +306,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::UpdateCatalogRequest.new
+            #
+            #   # Call the update_catalog method.
+            #   result = client.update_catalog request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::Catalog.
+            #   p result
+            #
             def update_catalog request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -300,9 +338,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "catalog.name" => request.catalog.name
-              }
+              header_params = {}
+              if request.catalog&.name
+                header_params["catalog.name"] = request.catalog.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -400,6 +440,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::SetDefaultBranchRequest.new
+            #
+            #   # Call the set_default_branch method.
+            #   result = client.set_default_branch request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def set_default_branch request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -417,9 +472,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "catalog" => request.catalog
-              }
+              header_params = {}
+              if request.catalog
+                header_params["catalog"] = request.catalog
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -475,6 +532,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::GetDefaultBranchRequest.new
+            #
+            #   # Call the get_default_branch method.
+            #   result = client.get_default_branch request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::GetDefaultBranchResponse.
+            #   p result
+            #
             def get_default_branch request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -492,9 +564,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "catalog" => request.catalog
-              }
+              header_params = {}
+              if request.catalog
+                header_params["catalog"] = request.catalog
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

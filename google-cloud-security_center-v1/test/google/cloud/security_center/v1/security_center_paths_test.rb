@@ -23,6 +23,24 @@ require "gapic/grpc/service_stub"
 require "google/cloud/security_center/v1/security_center"
 
 class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Minitest::Test
+  def test_external_system_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.external_system_path organization: "value0", source: "value1", finding: "value2", externalsystem: "value3"
+      assert_equal "organizations/value0/sources/value1/findings/value2/externalSystems/value3", path
+
+      path = client.external_system_path folder: "value0", source: "value1", finding: "value2", externalsystem: "value3"
+      assert_equal "folders/value0/sources/value1/findings/value2/externalSystems/value3", path
+
+      path = client.external_system_path project: "value0", source: "value1", finding: "value2", externalsystem: "value3"
+      assert_equal "projects/value0/sources/value1/findings/value2/externalSystems/value3", path
+    end
+  end
+
   def test_finding_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -50,6 +68,24 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.folder_path folder: "value0"
       assert_equal "folders/value0", path
+    end
+  end
+
+  def test_mute_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.mute_config_path organization: "value0", mute_config: "value1"
+      assert_equal "organizations/value0/muteConfigs/value1", path
+
+      path = client.mute_config_path folder: "value0", mute_config: "value1"
+      assert_equal "folders/value0/muteConfigs/value1", path
+
+      path = client.mute_config_path project: "value0", mute_config: "value1"
+      assert_equal "projects/value0/muteConfigs/value1", path
     end
   end
 

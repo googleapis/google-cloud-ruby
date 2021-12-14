@@ -69,6 +69,25 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
     _(rows[2]).must_equal({ name: "Gandalf", spells_name: "Skydragon", spells_properties_name: "Explodey", spells_properties_power: 11.0 })
   end
 
+  it "queries in session mode" do
+    job = bigquery.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", dataset: dataset, create_session: true
+    job.wait_until_done!
+    _(job).wont_be :failed?
+    _(job.session_id).wont_be :nil?
+
+    job_2 = bigquery.query_job "SELECT * FROM temptable", dataset: dataset, session_id: job.session_id
+    job_2.wait_until_done!
+    _(job_2).wont_be :failed?
+    _(job_2.session_id).wont_be :nil?
+    _(job_2.session_id).must_equal job.session_id
+    _(job_2.data.first).wont_be :nil?
+    _(job_2.data.first[:foo]).must_equal 17
+
+    data = bigquery.query "SELECT * FROM temptable", dataset: dataset, session_id: job.session_id
+    _(data.first).wont_be :nil?
+    _(data.first[:foo]).must_equal 17
+  end
+
   it "modifies a nested schema via field" do
     empty_table_id = "#{table_id}_empty"
     empty_table = dataset.table empty_table_id
@@ -232,10 +251,16 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
   it "knows its schema precision and scale for numeric and bignumeric fields" do
     _(table.schema.field("age").precision).must_be :nil?
     _(table.schema.field("age").scale).must_be :nil?
+
     _(table.schema.field("my_numeric").precision).must_equal precision_numeric
     _(table.schema.field("my_numeric").scale).must_equal scale_numeric
     _(table.schema.field("my_bignumeric").precision).must_equal precision_bignumeric
     _(table.schema.field("my_bignumeric").scale).must_equal scale_bignumeric
+
+    _(table.schema.field("spells").field("my_nested_numeric").precision).must_equal precision_numeric
+    _(table.schema.field("spells").field("my_nested_numeric").scale).must_equal scale_numeric
+    _(table.schema.field("spells").field("my_nested_bignumeric").precision).must_equal precision_bignumeric
+    _(table.schema.field("spells").field("my_nested_bignumeric").scale).must_equal scale_bignumeric
   end
 
   def assert_rows_equal returned_row, example_row
@@ -279,6 +304,8 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
           end
           spells.bytes "icon", mode: :nullable, max_length: max_length_bytes
           spells.timestamp "last_used", mode: :nullable
+          spells.numeric "my_nested_numeric", mode: :nullable, precision: precision_numeric, scale: scale_numeric
+          spells.bignumeric "my_nested_bignumeric", mode: :nullable, precision: precision_bignumeric, scale: scale_bignumeric
         end
         schema.time "tea_time", mode: :nullable
         schema.date "next_vacation", mode: :nullable
@@ -321,7 +348,9 @@ describe Google::Cloud::Bigquery, :advanced, :bigquery do
               { name: "Explodey", power: 11.0 }
             ],
             icon: File.open("acceptance/data/kitten-test-data.json", "rb"),
-            last_used: Time.parse("2015-10-31 23:59:56 UTC")
+            last_used: Time.parse("2015-10-31 23:59:56 UTC"),
+            my_nested_numeric: BigDecimal(string_numeric),
+            my_nested_bignumeric: string_bignumeric, # BigDecimal would be rounded, use String instead!
           }
         ],
         tea_time: Google::Cloud::Bigquery::Time.new("15:00:00"),

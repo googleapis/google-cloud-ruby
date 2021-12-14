@@ -292,6 +292,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/datastore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new
+              #
+              #   # Call the export_entities method.
+              #   result = client.export_entities request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def export_entities request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -309,9 +331,11 @@ module Google
                   gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "project_id" => request.project_id
-                }
+                header_params = {}
+                if request.project_id
+                  header_params["project_id"] = request.project_id
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -386,6 +410,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/datastore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastore::Admin::V1::ImportEntitiesRequest.new
+              #
+              #   # Call the import_entities method.
+              #   result = client.import_entities request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def import_entities request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -403,9 +449,11 @@ module Google
                   gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "project_id" => request.project_id
-                }
+                header_params = {}
+                if request.project_id
+                  header_params["project_id"] = request.project_id
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -471,6 +519,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/datastore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastore::Admin::V1::CreateIndexRequest.new
+              #
+              #   # Call the create_index method.
+              #   result = client.create_index request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def create_index request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -488,9 +558,11 @@ module Google
                   gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "project_id" => request.project_id
-                }
+                header_params = {}
+                if request.project_id
+                  header_params["project_id"] = request.project_id
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -551,6 +623,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/datastore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastore::Admin::V1::DeleteIndexRequest.new
+              #
+              #   # Call the delete_index method.
+              #   result = client.delete_index request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def delete_index request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -568,10 +662,14 @@ module Google
                   gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "project_id" => request.project_id,
-                  "index_id" => request.index_id
-                }
+                header_params = {}
+                if request.project_id
+                  header_params["project_id"] = request.project_id
+                end
+                if request.index_id
+                  header_params["index_id"] = request.index_id
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -623,6 +721,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/datastore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastore::Admin::V1::GetIndexRequest.new
+              #
+              #   # Call the get_index method.
+              #   result = client.get_index request
+              #
+              #   # The returned object is of type Google::Cloud::Datastore::Admin::V1::Index.
+              #   p result
+              #
               def get_index request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -640,10 +753,14 @@ module Google
                   gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "project_id" => request.project_id,
-                  "index_id" => request.index_id
-                }
+                header_params = {}
+                if request.project_id
+                  header_params["project_id"] = request.project_id
+                end
+                if request.index_id
+                  header_params["index_id"] = request.index_id
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -700,6 +817,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/datastore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Datastore::Admin::V1::ListIndexesRequest.new
+              #
+              #   # Call the list_indexes method.
+              #   result = client.list_indexes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Datastore::Admin::V1::Index.
+              #     p response
+              #   end
+              #
               def list_indexes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -717,9 +855,11 @@ module Google
                   gapic_version: ::Google::Cloud::Datastore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "project_id" => request.project_id
-                }
+                header_params = {}
+                if request.project_id
+                  header_params["project_id"] = request.project_id
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 

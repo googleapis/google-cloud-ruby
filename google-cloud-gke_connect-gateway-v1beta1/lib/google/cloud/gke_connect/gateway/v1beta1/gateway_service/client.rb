@@ -181,6 +181,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the get_resource method.
+              #   result = client.get_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def get_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -247,6 +262,21 @@ module Google
               # @return [::Google::Api::HttpBody]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the post_resource method.
+              #   result = client.post_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
               #
               def post_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -315,6 +345,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the delete_resource method.
+              #   result = client.delete_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def delete_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -382,6 +427,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the put_resource method.
+              #   result = client.put_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
+              #
               def put_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -448,6 +508,21 @@ module Google
               # @return [::Google::Api::HttpBody]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/gke_connect/gateway/v1beta1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Api::HttpBody.new
+              #
+              #   # Call the patch_resource method.
+              #   result = client.patch_resource request
+              #
+              #   # The returned object is of type Google::Api::HttpBody.
+              #   p result
               #
               def patch_resource request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?

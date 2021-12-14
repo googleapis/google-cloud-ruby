@@ -189,6 +189,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ListSessionEntityTypesRequest.new
+              #
+              #   # Call the list_session_entity_types method.
+              #   result = client.list_session_entity_types request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::SessionEntityType.
+              #     p response
+              #   end
+              #
               def list_session_entity_types request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -206,9 +227,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -264,6 +287,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::GetSessionEntityTypeRequest.new
+              #
+              #   # Call the get_session_entity_type method.
+              #   result = client.get_session_entity_type request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::SessionEntityType.
+              #   p result
+              #
               def get_session_entity_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -281,9 +319,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -339,6 +379,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::CreateSessionEntityTypeRequest.new
+              #
+              #   # Call the create_session_entity_type method.
+              #   result = client.create_session_entity_type request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::SessionEntityType.
+              #   p result
+              #
               def create_session_entity_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,9 +411,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -415,6 +472,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::UpdateSessionEntityTypeRequest.new
+              #
+              #   # Call the update_session_entity_type method.
+              #   result = client.update_session_entity_type request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::SessionEntityType.
+              #   p result
+              #
               def update_session_entity_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -432,9 +504,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "session_entity_type.name" => request.session_entity_type.name
-                }
+                header_params = {}
+                if request.session_entity_type&.name
+                  header_params["session_entity_type.name"] = request.session_entity_type.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -489,6 +563,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::SessionEntityTypes::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::DeleteSessionEntityTypeRequest.new
+              #
+              #   # Call the delete_session_entity_type method.
+              #   result = client.delete_session_entity_type request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_session_entity_type request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -506,9 +595,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 

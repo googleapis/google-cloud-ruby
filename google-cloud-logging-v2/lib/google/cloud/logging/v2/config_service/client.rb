@@ -232,6 +232,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListBucketsRequest.new
+            #
+            #   # Call the list_buckets method.
+            #   result = client.list_buckets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Logging::V2::LogBucket.
+            #     p response
+            #   end
+            #
             def list_buckets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -249,9 +270,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -309,6 +332,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::GetBucketRequest.new
+            #
+            #   # Call the get_bucket method.
+            #   result = client.get_bucket request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogBucket.
+            #   p result
+            #
             def get_bucket request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -326,9 +364,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -390,6 +430,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::CreateBucketRequest.new
+            #
+            #   # Call the create_bucket method.
+            #   result = client.create_bucket request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogBucket.
+            #   p result
+            #
             def create_bucket request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -407,9 +462,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -488,6 +545,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::UpdateBucketRequest.new
+            #
+            #   # Call the update_bucket method.
+            #   result = client.update_bucket request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogBucket.
+            #   p result
+            #
             def update_bucket request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -505,9 +577,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -567,6 +641,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::DeleteBucketRequest.new
+            #
+            #   # Call the delete_bucket method.
+            #   result = client.delete_bucket request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_bucket request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -584,9 +673,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -644,6 +735,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::UndeleteBucketRequest.new
+            #
+            #   # Call the undelete_bucket method.
+            #   result = client.undelete_bucket request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def undelete_bucket request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -661,9 +767,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -723,6 +831,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListViewsRequest.new
+            #
+            #   # Call the list_views method.
+            #   result = client.list_views request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Logging::V2::LogView.
+            #     p response
+            #   end
+            #
             def list_views request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -740,9 +869,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -797,6 +928,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::GetViewRequest.new
+            #
+            #   # Call the get_view method.
+            #   result = client.get_view request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogView.
+            #   p result
+            #
             def get_view request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -814,9 +960,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -875,6 +1023,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::CreateViewRequest.new
+            #
+            #   # Call the create_view method.
+            #   result = client.create_view request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogView.
+            #   p result
+            #
             def create_view request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -892,9 +1055,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -960,6 +1125,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::UpdateViewRequest.new
+            #
+            #   # Call the update_view method.
+            #   result = client.update_view request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogView.
+            #   p result
+            #
             def update_view request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -977,9 +1157,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1033,6 +1215,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::DeleteViewRequest.new
+            #
+            #   # Call the delete_view method.
+            #   result = client.delete_view request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_view request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1050,9 +1247,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1115,6 +1314,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListSinksRequest.new
+            #
+            #   # Call the list_sinks method.
+            #   result = client.list_sinks request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Logging::V2::LogSink.
+            #     p response
+            #   end
+            #
             def list_sinks request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1132,9 +1352,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1191,6 +1413,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::GetSinkRequest.new
+            #
+            #   # Call the get_sink method.
+            #   result = client.get_sink request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogSink.
+            #   p result
+            #
             def get_sink request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1208,9 +1445,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "sink_name" => request.sink_name
-              }
+              header_params = {}
+              if request.sink_name
+                header_params["sink_name"] = request.sink_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1284,6 +1523,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::CreateSinkRequest.new
+            #
+            #   # Call the create_sink method.
+            #   result = client.create_sink request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogSink.
+            #   p result
+            #
             def create_sink request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1301,9 +1555,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1394,6 +1650,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::UpdateSinkRequest.new
+            #
+            #   # Call the update_sink method.
+            #   result = client.update_sink request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogSink.
+            #   p result
+            #
             def update_sink request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1411,9 +1682,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "sink_name" => request.sink_name
-              }
+              header_params = {}
+              if request.sink_name
+                header_params["sink_name"] = request.sink_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1471,6 +1744,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::DeleteSinkRequest.new
+            #
+            #   # Call the delete_sink method.
+            #   result = client.delete_sink request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_sink request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1488,9 +1776,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "sink_name" => request.sink_name
-              }
+              header_params = {}
+              if request.sink_name
+                header_params["sink_name"] = request.sink_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1553,6 +1843,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListExclusionsRequest.new
+            #
+            #   # Call the list_exclusions method.
+            #   result = client.list_exclusions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Logging::V2::LogExclusion.
+            #     p response
+            #   end
+            #
             def list_exclusions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1570,9 +1881,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1629,6 +1942,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::GetExclusionRequest.new
+            #
+            #   # Call the get_exclusion method.
+            #   result = client.get_exclusion request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogExclusion.
+            #   p result
+            #
             def get_exclusion request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1646,9 +1974,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1709,6 +2039,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::CreateExclusionRequest.new
+            #
+            #   # Call the create_exclusion method.
+            #   result = client.create_exclusion request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogExclusion.
+            #   p result
+            #
             def create_exclusion request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1726,9 +2071,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1795,6 +2142,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::UpdateExclusionRequest.new
+            #
+            #   # Call the update_exclusion method.
+            #   result = client.update_exclusion request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogExclusion.
+            #   p result
+            #
             def update_exclusion request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1812,9 +2174,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1870,6 +2234,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::DeleteExclusionRequest.new
+            #
+            #   # Call the delete_exclusion method.
+            #   result = client.delete_exclusion request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_exclusion request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1887,9 +2266,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1957,6 +2338,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::GetCmekSettingsRequest.new
+            #
+            #   # Call the get_cmek_settings method.
+            #   result = client.get_cmek_settings request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::CmekSettings.
+            #   p result
+            #
             def get_cmek_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1974,9 +2370,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2064,6 +2462,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::ConfigService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::UpdateCmekSettingsRequest.new
+            #
+            #   # Call the update_cmek_settings method.
+            #   result = client.update_cmek_settings request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::CmekSettings.
+            #   p result
+            #
             def update_cmek_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2081,9 +2494,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

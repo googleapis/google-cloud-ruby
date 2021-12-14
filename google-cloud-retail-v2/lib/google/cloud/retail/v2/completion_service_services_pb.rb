@@ -31,7 +31,7 @@ module Google
           # cloud sales if you are interested in using Retail Search.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

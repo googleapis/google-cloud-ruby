@@ -223,6 +223,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::CreateJobRequest.new
+            #
+            #   # Call the create_job method.
+            #   result = client.create_job request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Job.
+            #   p result
+            #
             def create_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -240,9 +255,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -297,6 +314,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::BatchCreateJobsRequest.new
+            #
+            #   # Call the batch_create_jobs method.
+            #   result = client.batch_create_jobs request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_create_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -314,9 +353,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -374,6 +415,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::GetJobRequest.new
+            #
+            #   # Call the get_job method.
+            #   result = client.get_job request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Job.
+            #   p result
+            #
             def get_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -391,9 +447,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -453,6 +511,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::UpdateJobRequest.new
+            #
+            #   # Call the update_job method.
+            #   result = client.update_job request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Job.
+            #   p result
+            #
             def update_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -470,9 +543,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "job.name" => request.job.name
-              }
+              header_params = {}
+              if request.job&.name
+                header_params["job.name"] = request.job.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -542,6 +617,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::BatchUpdateJobsRequest.new
+            #
+            #   # Call the batch_update_jobs method.
+            #   result = client.batch_update_jobs request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_update_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -559,9 +656,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -621,6 +720,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::DeleteJobRequest.new
+            #
+            #   # Call the delete_job method.
+            #   result = client.delete_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -638,9 +752,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -705,6 +821,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::BatchDeleteJobsRequest.new
+            #
+            #   # Call the batch_delete_jobs method.
+            #   result = client.batch_delete_jobs request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def batch_delete_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -722,9 +853,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -809,6 +942,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::ListJobsRequest.new
+            #
+            #   # Call the list_jobs method.
+            #   result = client.list_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Talent::V4beta1::Job.
+            #     p response
+            #   end
+            #
             def list_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -826,9 +980,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -917,7 +1073,7 @@ module Google
             #
             #     Data types:
             #
-            #     * Histogram facet: facet names with format [a-zA-Z][a-zA-Z0-9_]+.
+            #     * Histogram facet: facet names with format `[a-zA-Z][a-zA-Z0-9_]+`.
             #     * String: string like "any string with backslash escape for quote(\")."
             #     * Number: whole number and floating point number like 10, -1 and -0.01.
             #     * List: list of elements with comma(,) separator surrounded by square
@@ -1110,6 +1266,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::SearchJobsRequest.new
+            #
+            #   # Call the search_jobs method.
+            #   result = client.search_jobs request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::SearchJobsResponse.
+            #   p result
+            #
             def search_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1127,9 +1298,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1222,7 +1395,7 @@ module Google
             #
             #     Data types:
             #
-            #     * Histogram facet: facet names with format [a-zA-Z][a-zA-Z0-9_]+.
+            #     * Histogram facet: facet names with format `[a-zA-Z][a-zA-Z0-9_]+`.
             #     * String: string like "any string with backslash escape for quote(\")."
             #     * Number: whole number and floating point number like 10, -1 and -0.01.
             #     * List: list of elements with comma(,) separator surrounded by square
@@ -1415,6 +1588,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::SearchJobsRequest.new
+            #
+            #   # Call the search_jobs_for_alert method.
+            #   result = client.search_jobs_for_alert request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::SearchJobsResponse.
+            #   p result
+            #
             def search_jobs_for_alert request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1432,9 +1620,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

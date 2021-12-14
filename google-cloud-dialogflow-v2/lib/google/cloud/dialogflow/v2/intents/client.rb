@@ -212,6 +212,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListIntentsRequest.new
+            #
+            #   # Call the list_intents method.
+            #   result = client.list_intents request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Intent.
+            #     p response
+            #   end
+            #
             def list_intents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -229,9 +250,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -290,6 +313,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetIntentRequest.new
+            #
+            #   # Call the get_intent method.
+            #   result = client.get_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
+            #   p result
+            #
             def get_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -307,9 +345,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -373,6 +413,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateIntentRequest.new
+            #
+            #   # Call the create_intent method.
+            #   result = client.create_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
+            #   p result
+            #
             def create_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -390,9 +445,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -455,6 +512,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateIntentRequest.new
+            #
+            #   # Call the update_intent method.
+            #   result = client.update_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
+            #   p result
+            #
             def update_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -472,9 +544,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "intent.name" => request.intent.name
-              }
+              header_params = {}
+              if request.intent&.name
+                header_params["intent.name"] = request.intent.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -529,6 +603,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DeleteIntentRequest.new
+            #
+            #   # Call the delete_intent method.
+            #   result = client.delete_intent request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -546,9 +635,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -626,6 +717,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchUpdateIntentsRequest.new
+            #
+            #   # Call the batch_update_intents method.
+            #   result = client.batch_update_intents request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_update_intents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -643,9 +756,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -712,6 +827,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchDeleteIntentsRequest.new
+            #
+            #   # Call the batch_delete_intents method.
+            #   result = client.batch_delete_intents request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_delete_intents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -729,9 +866,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

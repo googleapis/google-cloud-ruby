@@ -29,6 +29,9 @@ module Google
         #     at https://cloud.google.com/dlp/docs/infotypes-reference when specifying
         #     a built-in type.  When sending Cloud DLP results to Data Catalog, infoType
         #     names should conform to the pattern `[A-Za-z0-9$-_]{1,64}`.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional version name for this InfoType.
         class InfoType
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,7 +103,7 @@ module Google
           # Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
           # will be replaced with whitespace when scanning for matches, so the
           # dictionary phrase "Sam Johnson" will match all three phrases "sam johnson",
-          # "Sam, Johnson", and "Sam (Johnson)". Additionally, the characters
+          # Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
           # surrounding any match must be of a different type than the adjacent
           # characters within the word, so letters must be next to non-letters and
           # digits next to non-digits. For example, the dictionary word "jen" will
@@ -113,7 +116,7 @@ module Google
           # [limits](https://cloud.google.com/dlp/limits) page contains details about
           # the size limits of dictionaries. For dictionaries that do not fit within
           # these constraints, consider using `LargeCustomDictionaryConfig` in the
-          # `StoredInfoType` API.
+          # [limits](https://cloud.google.com/dlp/limits) page contains details about
           # @!attribute [rw] word_list
           #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
           #     List of words or phrases to search for.
@@ -145,6 +148,7 @@ module Google
           #     google/re2 repository on GitHub.
           # @!attribute [rw] group_indexes
           #   @return [::Array<::Integer>]
+          #     (https://github.com/google/re2/wiki/Syntax) can be found under the
           #     The index of the submatch to extract as findings. When not
           #     specified, the entire match is returned. No more than 3 may be included.
           class Regex
@@ -157,7 +161,7 @@ module Google
           # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
           # These types of transformations are
           # those that perform pseudonymization, thereby producing a "surrogate" as
-          # output. This should be used in conjunction with a field on the
+          # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
           # transformation such as `surrogate_info_type`. This CustomInfoType does
           # not support the use of `detection_rules`.
           class SurrogateType
@@ -339,6 +343,7 @@ module Google
         #     under the google/re2 repository on GitHub.
         # @!attribute [rw] exclude_regex
         #   @return [::Array<::String>]
+        #     [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
         #     A list of regular expressions matching file paths to exclude. All files in
         #     the bucket that match at least one of these regular expressions will be
         #     excluded from the scan.
@@ -361,12 +366,14 @@ module Google
         #     Max number of bytes to scan from a file. If a scanned file's size is bigger
         #     than this value then the rest of the bytes are omitted. Only one
         #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+        #     Cannot be set if de-identification is requested.
         # @!attribute [rw] bytes_limit_per_file_percent
         #   @return [::Integer]
         #     Max percentage of bytes to scan from a file. The rest are omitted. The
         #     number of bytes scanned is rounded down. Must be between 0 and 100,
         #     inclusively. Both 0 and 100 means no limit. Defaults to 0. Only one
         #     of bytes_limit_per_file and bytes_limit_per_file_percent can be specified.
+        #     Cannot be set if de-identification is requested.
         # @!attribute [rw] file_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
         #     List of file type groups to include in the scan.
@@ -474,6 +481,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
         #     References to fields excluded from scanning. This allows you to skip
         #     inspection of entire columns which you know have no findings.
+        # @!attribute [rw] included_fields
+        #   @return [::Array<::Google::Cloud::Dlp::V2::FieldId>]
+        #     Limit scanning only to these fields.
         class BigQueryOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -507,9 +517,6 @@ module Google
         # @!attribute [rw] hybrid_options
         #   @return [::Google::Cloud::Dlp::V2::HybridOptions]
         #     Hybrid inspection options.
-        #     Early access feature is in a pre-release state and might change or have
-        #     limited support. For more information, see
-        #     https://cloud.google.com/products#product-launch-stages.
         # @!attribute [rw] timespan_config
         #   @return [::Google::Cloud::Dlp::V2::StorageConfig::TimespanConfig]
         class StorageConfig
@@ -787,11 +794,12 @@ module Google
           BINARY_FILE = 1
 
           # Included file extensions:
-          #   asc, brf, c, cc, cpp, csv, cxx, c++, cs, css, dart, eml, go, h, hh, hpp,
-          #   hxx, h++, hs, html, htm, shtml, shtm, xhtml, lhs, ini, java, js, json,
-          #   ocaml, md, mkd, markdown, m, ml, mli, pl, pm, php, phtml, pht, py, pyw,
-          #   rb, rbw, rs, rc, scala, sh, sql, tex, txt, text, tsv, vcard, vcs, wml,
-          #   xml, xsl, xsd, yml, yaml.
+          #   asc,asp, aspx, brf, c, cc,cfm, cgi, cpp, csv, cxx, c++, cs, css, dart,
+          #   dat, dot, eml,, epbub, ged, go, h, hh, hpp, hxx, h++, hs, html, htm,
+          #   mkd, markdown, m, ml, mli, perl, pl, plist, pm, php, phtml, pht,
+          #   properties, py, pyw, rb, rbw, rs, rss,  rc, scala, sh, sql, swift, tex,
+          #   shtml, shtm, xhtml, lhs, ics, ini, java, js, json, kix, kml, ocaml, md,
+          #   txt, text, tsv, vb, vcard, vcs, wml, xcodeproj, xml, xsl, xsd, yml, yaml.
           TEXT_FILE = 2
 
           # Included file extensions:

@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/speech/v1/version"
 
 require "google/cloud/speech/v1/speech/credentials"
+require "google/cloud/speech/v1/speech/paths"
 require "google/cloud/speech/v1/speech/operations"
 require "google/cloud/speech/v1/speech/client"
 

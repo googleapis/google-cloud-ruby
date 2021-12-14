@@ -214,6 +214,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::GetTableRequest.new
+            #
+            #   # Call the get_table method.
+            #   result = client.get_table request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Table.
+            #   p result
+            #
             def get_table request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -231,9 +246,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -291,6 +308,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Area120::Tables::V1alpha1::Table>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::ListTablesRequest.new
+            #
+            #   # Call the list_tables method.
+            #   result = client.list_tables request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Table.
+            #     p response
+            #   end
             #
             def list_tables request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -356,6 +394,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::GetWorkspaceRequest.new
+            #
+            #   # Call the get_workspace method.
+            #   result = client.get_workspace request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Workspace.
+            #   p result
+            #
             def get_workspace request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -373,9 +426,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -433,6 +488,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Area120::Tables::V1alpha1::Workspace>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::ListWorkspacesRequest.new
+            #
+            #   # Call the list_workspaces method.
+            #   result = client.list_workspaces request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Workspace.
+            #     p response
+            #   end
             #
             def list_workspaces request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -501,6 +577,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::GetRowRequest.new
+            #
+            #   # Call the get_row method.
+            #   result = client.get_row request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Row.
+            #   p result
+            #
             def get_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -518,9 +609,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -589,6 +682,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::ListRowsRequest.new
+            #
+            #   # Call the list_rows method.
+            #   result = client.list_rows request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Area120::Tables::V1alpha1::Row.
+            #     p response
+            #   end
+            #
             def list_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -606,9 +720,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -664,6 +780,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::CreateRowRequest.new
+            #
+            #   # Call the create_row method.
+            #   result = client.create_row request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Row.
+            #   p result
+            #
             def create_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -681,9 +812,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -737,6 +870,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::BatchCreateRowsRequest.new
+            #
+            #   # Call the batch_create_rows method.
+            #   result = client.batch_create_rows request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::BatchCreateRowsResponse.
+            #   p result
+            #
             def batch_create_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -754,9 +902,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -810,6 +960,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::UpdateRowRequest.new
+            #
+            #   # Call the update_row method.
+            #   result = client.update_row request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::Row.
+            #   p result
+            #
             def update_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -827,9 +992,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "row.name" => request.row.name
-              }
+              header_params = {}
+              if request.row&.name
+                header_params["row.name"] = request.row.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -883,6 +1050,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::BatchUpdateRowsRequest.new
+            #
+            #   # Call the batch_update_rows method.
+            #   result = client.batch_update_rows request
+            #
+            #   # The returned object is of type Google::Area120::Tables::V1alpha1::BatchUpdateRowsResponse.
+            #   p result
+            #
             def batch_update_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -900,9 +1082,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -952,6 +1136,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::DeleteRowRequest.new
+            #
+            #   # Call the delete_row method.
+            #   result = client.delete_row request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -969,9 +1168,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1026,6 +1227,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/area120/tables/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new
+            #
+            #   # Call the batch_delete_rows method.
+            #   result = client.batch_delete_rows request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def batch_delete_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1043,9 +1259,11 @@ module Google
                 gapic_version: ::Google::Area120::Tables::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

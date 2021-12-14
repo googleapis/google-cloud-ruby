@@ -202,6 +202,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListEntityTypesRequest.new
+            #
+            #   # Call the list_entity_types method.
+            #   result = client.list_entity_types request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::EntityType.
+            #     p response
+            #   end
+            #
             def list_entity_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -219,9 +240,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -278,6 +301,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new
+            #
+            #   # Call the get_entity_type method.
+            #   result = client.get_entity_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::EntityType.
+            #   p result
+            #
             def get_entity_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -295,9 +333,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -359,6 +399,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateEntityTypeRequest.new
+            #
+            #   # Call the create_entity_type method.
+            #   result = client.create_entity_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::EntityType.
+            #   p result
+            #
             def create_entity_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -376,9 +431,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -439,6 +496,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateEntityTypeRequest.new
+            #
+            #   # Call the update_entity_type method.
+            #   result = client.update_entity_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::EntityType.
+            #   p result
+            #
             def update_entity_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -456,9 +528,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "entity_type.name" => request.entity_type.name
-              }
+              header_params = {}
+              if request.entity_type&.name
+                header_params["entity_type.name"] = request.entity_type.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -512,6 +586,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DeleteEntityTypeRequest.new
+            #
+            #   # Call the delete_entity_type method.
+            #   result = client.delete_entity_type request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_entity_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -529,9 +618,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -608,6 +699,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchUpdateEntityTypesRequest.new
+            #
+            #   # Call the batch_update_entity_types method.
+            #   result = client.batch_update_entity_types request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_update_entity_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -625,9 +738,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -694,6 +809,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchDeleteEntityTypesRequest.new
+            #
+            #   # Call the batch_delete_entity_types method.
+            #   result = client.batch_delete_entity_types request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_delete_entity_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -711,9 +848,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -785,6 +924,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new
+            #
+            #   # Call the batch_create_entities method.
+            #   result = client.batch_create_entities request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_create_entities request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -802,9 +963,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -880,6 +1043,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchUpdateEntitiesRequest.new
+            #
+            #   # Call the batch_update_entities method.
+            #   result = client.batch_update_entities request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_update_entities request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -897,9 +1082,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -973,6 +1160,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::BatchDeleteEntitiesRequest.new
+            #
+            #   # Call the batch_delete_entities method.
+            #   result = client.batch_delete_entities request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_delete_entities request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -990,9 +1199,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

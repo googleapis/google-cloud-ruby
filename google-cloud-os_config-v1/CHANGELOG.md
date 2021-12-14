@@ -1,5 +1,27 @@
 # Release History
 
+### 0.9.0 / 2021-12-07
+
+#### Features
+
+* Return the list of items affected by a vulnerability
+
+### 0.8.0 / 2021-11-08
+
+#### Features
+
+* Support for OS policy assignments
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.7.0 / 2021-10-21
+
+#### Features
+
+* Support daily frequency for recurring patch deployments
+
 ### 0.6.0 / 2021-09-07
 
 #### Features

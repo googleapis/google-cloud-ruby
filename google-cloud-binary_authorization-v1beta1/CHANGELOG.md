@@ -1,5 +1,17 @@
 # Release History
 
+### 0.4.0 / 2021-11-11
+
+#### Features
+
+* Support for the SystemPolicy service
+
+### 0.3.5 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.3.4 / 2021-08-11
 
 #### Bug Fixes

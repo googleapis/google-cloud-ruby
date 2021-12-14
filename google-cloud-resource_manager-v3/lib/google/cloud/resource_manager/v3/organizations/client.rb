@@ -189,6 +189,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::Organizations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceManager::V3::GetOrganizationRequest.new
+            #
+            #   # Call the get_organization method.
+            #   result = client.get_organization request
+            #
+            #   # The returned object is of type Google::Cloud::ResourceManager::V3::Organization.
+            #   p result
+            #
             def get_organization request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -206,9 +221,11 @@ module Google
                 gapic_version: ::Google::Cloud::ResourceManager::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -262,12 +279,13 @@ module Google
             #     Optional. An optional query string used to filter the Organizations to return in
             #     the response. Query rules are case-insensitive.
             #
-            #
+            #     ```
             #     | Field            | Description                                |
             #     |------------------|--------------------------------------------|
             #     | directoryCustomerId, owner.directoryCustomerId | Filters by directory
             #     customer id. |
             #     | domain           | Filters by domain.                         |
+            #     ```
             #
             #     Organizations may be queried by `directoryCustomerId` or by
             #     `domain`, where the domain is a G Suite domain, for example:
@@ -284,6 +302,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::ResourceManager::V3::Organization>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::Organizations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest.new
+            #
+            #   # Call the search_organizations method.
+            #   result = client.search_organizations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ResourceManager::V3::Organization.
+            #     p response
+            #   end
             #
             def search_organizations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -357,6 +396,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::Organizations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -374,9 +428,11 @@ module Google
                 gapic_version: ::Google::Cloud::ResourceManager::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -436,6 +492,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::Organizations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -453,9 +524,11 @@ module Google
                 gapic_version: ::Google::Cloud::ResourceManager::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -514,6 +587,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/resource_manager/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ResourceManager::V3::Organizations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -531,9 +619,11 @@ module Google
                 gapic_version: ::Google::Cloud::ResourceManager::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

@@ -62,13 +62,8 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.rpcs.list_voices.timeout = 600.0
-                default_config.rpcs.list_voices.retry_policy = {
-                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
-                }
-
-                default_config.rpcs.synthesize_speech.timeout = 600.0
-                default_config.rpcs.synthesize_speech.retry_policy = {
+                default_config.timeout = 300.0
+                default_config.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
@@ -174,11 +169,11 @@ module Google
             #     Optional. Recommended.
             #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
             #     specified, the ListVoices call will only return voices that can be used to
-            #     synthesize this language_code. E.g. when specifying "en-NZ", you will get
-            #     supported "en-\*" voices; when specifying "no", you will get supported
-            #     "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh"
-            #     will also get supported "cmn-\*" voices; specifying "zh-hk" will also get
-            #     supported "yue-\*" voices.
+            #     synthesize this language_code. E.g. when specifying `"en-NZ"`, you will get
+            #     supported `"en-\*"` voices; when specifying `"no"`, you will get supported
+            #     `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices; specifying
+            #     `"zh"` will also get supported `"cmn-\*"` voices; specifying `"zh-hk"` will
+            #     also get supported `"yue-\*"` voices.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::TextToSpeech::V1::ListVoicesResponse]
@@ -187,6 +182,21 @@ module Google
             # @return [::Google::Cloud::TextToSpeech::V1::ListVoicesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/text_to_speech/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::TextToSpeech::V1::ListVoicesRequest.new
+            #
+            #   # Call the list_voices method.
+            #   result = client.list_voices request
+            #
+            #   # The returned object is of type Google::Cloud::TextToSpeech::V1::ListVoicesResponse.
+            #   p result
             #
             def list_voices request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -254,6 +264,21 @@ module Google
             # @return [::Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/text_to_speech/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::TextToSpeech::V1::TextToSpeech::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::TextToSpeech::V1::SynthesizeSpeechRequest.new
+            #
+            #   # Call the synthesize_speech method.
+            #   result = client.synthesize_speech request
+            #
+            #   # The returned object is of type Google::Cloud::TextToSpeech::V1::SynthesizeSpeechResponse.
+            #   p result
             #
             def synthesize_speech request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

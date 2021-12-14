@@ -239,6 +239,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/org_policy/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new
+            #
+            #   # Call the list_constraints method.
+            #   result = client.list_constraints request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OrgPolicy::V2::Constraint.
+            #     p response
+            #   end
+            #
             def list_constraints request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -256,9 +277,11 @@ module Google
                 gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -321,6 +344,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/org_policy/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OrgPolicy::V2::ListPoliciesRequest.new
+            #
+            #   # Call the list_policies method.
+            #   result = client.list_policies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::OrgPolicy::V2::Policy.
+            #     p response
+            #   end
+            #
             def list_policies request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -338,9 +382,11 @@ module Google
                 gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -394,6 +440,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/org_policy/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OrgPolicy::V2::GetPolicyRequest.new
+            #
+            #   # Call the get_policy method.
+            #   result = client.get_policy request
+            #
+            #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+            #   p result
+            #
             def get_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -411,9 +472,11 @@ module Google
                 gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -467,6 +530,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/org_policy/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OrgPolicy::V2::GetEffectivePolicyRequest.new
+            #
+            #   # Call the get_effective_policy method.
+            #   result = client.get_effective_policy request
+            #
+            #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+            #   p result
+            #
             def get_effective_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -484,9 +562,11 @@ module Google
                 gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -547,6 +627,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/org_policy/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new
+            #
+            #   # Call the create_policy method.
+            #   result = client.create_policy request
+            #
+            #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+            #   p result
+            #
             def create_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -564,9 +659,11 @@ module Google
                 gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -623,6 +720,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/org_policy/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OrgPolicy::V2::UpdatePolicyRequest.new
+            #
+            #   # Call the update_policy method.
+            #   result = client.update_policy request
+            #
+            #   # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+            #   p result
+            #
             def update_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -640,9 +752,11 @@ module Google
                 gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "policy.name" => request.policy.name
-              }
+              header_params = {}
+              if request.policy&.name
+                header_params["policy.name"] = request.policy.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -695,6 +809,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/org_policy/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new
+            #
+            #   # Call the delete_policy method.
+            #   result = client.delete_policy request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -712,9 +841,11 @@ module Google
                 gapic_version: ::Google::Cloud::OrgPolicy::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

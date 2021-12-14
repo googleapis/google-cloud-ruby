@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
+
 
 require "delegate"
 
@@ -25,6 +28,10 @@ module Google
           #
           # List is a special case Array with additional values for backup
           # operations.
+          #
+          # @deprecated Use the result of
+          # {Google::Cloud::Spanner::Admin::Database#database_admin Client#list_backup_operations}
+          # instead.
           #
           class List < DelegateClass(::Array)
             # @private

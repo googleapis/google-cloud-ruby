@@ -165,6 +165,13 @@ module Google
             # and session entity types to be updated, which in turn might affect
             # results of future queries.
             #
+            # If you might use
+            # [Agent Assist](https://cloud.google.com/dialogflow/docs/#aa)
+            # or other CCAI products now or in the future, consider using
+            # {::Google::Cloud::Dialogflow::V2::Participants::Client#analyze_content AnalyzeContent}
+            # instead of `DetectIntent`. `AnalyzeContent` has additional
+            # functionality for Agent Assist and other CCAI products.
+            #
             # Note: Always use agent versions for production traffic.
             # See [Versions and
             # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
@@ -237,6 +244,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DetectIntentRequest.new
+            #
+            #   # Call the detect_intent method.
+            #   result = client.detect_intent request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::DetectIntentResponse.
+            #   p result
+            #
             def detect_intent request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -254,9 +276,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "session" => request.session
-              }
+              header_params = {}
+              if request.session
+                header_params["session"] = request.session
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -281,6 +305,13 @@ module Google
             # and returns structured, actionable data as a result. This method is only
             # available via the gRPC API (not REST).
             #
+            # If you might use
+            # [Agent Assist](https://cloud.google.com/dialogflow/docs/#aa)
+            # or other CCAI products now or in the future, consider using
+            # [StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent]
+            # instead of `StreamingDetectIntent`. `StreamingAnalyzeContent` has
+            # additional functionality for Agent Assist and other CCAI products.
+            #
             # Note: Always use agent versions for production traffic.
             # See [Versions and
             # environments](https://cloud.google.com/dialogflow/es/docs/agents-versions).
@@ -297,6 +328,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Sessions::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_detect_intent method to start streaming.
+            #   output = client.streaming_detect_intent input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new
+            #   input << Google::Cloud::Dialogflow::V2::StreamingDetectIntentRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::Dialogflow::V2::StreamingDetectIntentResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
             #
             def streaming_detect_intent request, options = nil
               unless request.is_a? ::Enumerable

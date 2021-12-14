@@ -96,6 +96,10 @@ module Google
         #     "projects/\\{project_number}/sources/\\{source_id}/findings/\\{finding_id}",
         #     depending on the closest CRM ancestor of the resource associated with the
         #     finding.
+        # @!attribute [rw] mute
+        #   @return [::Google::Cloud::SecurityCenter::V1::Finding::Mute]
+        #     Indicates the mute state of a finding (either unspecified, muted, unmuted
+        #     or undefined).
         # @!attribute [rw] finding_class
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::FindingClass]
         #     The class of the finding.
@@ -106,6 +110,23 @@ module Google
         #     operating system that, with high confidence, indicates a computer
         #     intrusion.
         #     Reference: https://en.wikipedia.org/wiki/Indicator_of_compromise
+        # @!attribute [rw] vulnerability
+        #   @return [::Google::Cloud::SecurityCenter::V1::Vulnerability]
+        #     Represents vulnerability specific fields like cve, cvss scores etc.
+        #     CVE stands for Common Vulnerabilities and Exposures
+        #     (https://cve.mitre.org/about/)
+        # @!attribute [r] mute_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time this finding was muted or unmuted.
+        # @!attribute [r] external_systems
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
+        #     information and external system finding fields.
+        # @!attribute [rw] mute_initiator
+        #   @return [::String]
+        #     First known as mute_annotation. Records additional information about the
+        #     mute operation e.g. mute config that muted the finding, user who muted the
+        #     finding, etc.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -115,6 +136,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Protobuf::Value]
           class SourcePropertiesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
+          class ExternalSystemsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -189,6 +219,21 @@ module Google
             # Indicates a threat that has obtained minimal access to an environment but
             # is not able to access data, execute code, or create resources.
             LOW = 4
+          end
+
+          # Mute state a finding can be in.
+          module Mute
+            # Unspecified.
+            MUTE_UNSPECIFIED = 0
+
+            # Finding has been muted.
+            MUTED = 1
+
+            # Finding has been unmuted.
+            UNMUTED = 2
+
+            # Finding has never been muted/unmuted.
+            UNDEFINED = 4
           end
 
           # Represents what kind of Finding it is.

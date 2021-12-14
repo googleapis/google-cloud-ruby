@@ -18,7 +18,7 @@ describe Google::Cloud::Bigquery::External::ParquetSource do
   let(:source_uri) { "gs://my-bucket/path/to/file.parquet" }
   let(:source_format) { "PARQUET" }
 
-  it "can be used for CSV" do
+  it "can be used for PARQUET" do
     table = Google::Cloud::Bigquery::External::ParquetSource.new.tap do |e|
       e.gapi.source_uris = [source_uri]
       e.gapi.source_format = source_format

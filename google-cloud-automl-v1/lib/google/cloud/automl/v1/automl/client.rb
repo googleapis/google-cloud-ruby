@@ -263,6 +263,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::CreateDatasetRequest.new
+            #
+            #   # Call the create_dataset method.
+            #   result = client.create_dataset request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -280,9 +302,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -332,6 +356,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::GetDatasetRequest.new
+            #
+            #   # Call the get_dataset method.
+            #   result = client.get_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1::Dataset.
+            #   p result
+            #
             def get_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -349,9 +388,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -395,10 +436,11 @@ module Google
             #     An expression for filtering the results of the request.
             #
             #       * `dataset_metadata` - for existence of the case (e.g.
-            #                 image_classification_dataset_metadata:*). Some examples of using the filter are:
+            #                 `image_classification_dataset_metadata:*`). Some examples of
+            #                 using the filter are:
             #
             #       * `translation_dataset_metadata:*` --> The dataset has
-            #                                              translation_dataset_metadata.
+            #                                              `translation_dataset_metadata`.
             #   @param page_size [::Integer]
             #     Requested page size. Server may return fewer results than requested.
             #     If unspecified, server will pick a default size.
@@ -415,6 +457,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1::Dataset>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::ListDatasetsRequest.new
+            #
+            #   # Call the list_datasets method.
+            #   result = client.list_datasets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1::Dataset.
+            #     p response
+            #   end
             #
             def list_datasets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -433,9 +496,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -487,6 +552,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::UpdateDatasetRequest.new
+            #
+            #   # Call the update_dataset method.
+            #   result = client.update_dataset request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1::Dataset.
+            #   p result
+            #
             def update_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -504,9 +584,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "dataset.name" => request.dataset.name
-              }
+              header_params = {}
+              if request.dataset&.name
+                header_params["dataset.name"] = request.dataset.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -559,6 +641,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::DeleteDatasetRequest.new
+            #
+            #   # Call the delete_dataset method.
+            #   result = client.delete_dataset request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_dataset request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -576,9 +680,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -640,6 +746,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::ImportDataRequest.new
+            #
+            #   # Call the import_data method.
+            #   result = client.import_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def import_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -657,9 +785,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -713,6 +843,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::ExportDataRequest.new
+            #
+            #   # Call the export_data method.
+            #   result = client.export_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def export_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -730,9 +882,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -782,6 +936,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::GetAnnotationSpecRequest.new
+            #
+            #   # Call the get_annotation_spec method.
+            #   result = client.get_annotation_spec request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1::AnnotationSpec.
+            #   p result
+            #
             def get_annotation_spec request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -799,9 +968,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -856,6 +1027,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::CreateModelRequest.new
+            #
+            #   # Call the create_model method.
+            #   result = client.create_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -873,9 +1066,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -925,6 +1120,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::GetModelRequest.new
+            #
+            #   # Call the get_model method.
+            #   result = client.get_model request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1::Model.
+            #   p result
+            #
             def get_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -942,9 +1152,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -988,11 +1200,11 @@ module Google
             #     An expression for filtering the results of the request.
             #
             #       * `model_metadata` - for existence of the case (e.g.
-            #                 video_classification_model_metadata:*).
+            #                 `video_classification_model_metadata:*`).
             #       * `dataset_id` - for = or !=. Some examples of using the filter are:
             #
             #       * `image_classification_model_metadata:*` --> The model has
-            #                                            image_classification_model_metadata.
+            #                                          `image_classification_model_metadata`.
             #       * `dataset_id=5` --> The model was created from a dataset with ID 5.
             #   @param page_size [::Integer]
             #     Requested page size.
@@ -1009,6 +1221,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1::Model>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::ListModelsRequest.new
+            #
+            #   # Call the list_models method.
+            #   result = client.list_models request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1::Model.
+            #     p response
+            #   end
             #
             def list_models request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1027,9 +1260,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1083,6 +1318,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::DeleteModelRequest.new
+            #
+            #   # Call the delete_model method.
+            #   result = client.delete_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1100,9 +1357,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1154,6 +1413,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::UpdateModelRequest.new
+            #
+            #   # Call the update_model method.
+            #   result = client.update_model request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1::Model.
+            #   p result
+            #
             def update_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1171,9 +1445,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "model.name" => request.model.name
-              }
+              header_params = {}
+              if request.model&.name
+                header_params["model.name"] = request.model.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1237,6 +1513,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::DeployModelRequest.new
+            #
+            #   # Call the deploy_model method.
+            #   result = client.deploy_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def deploy_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1254,9 +1552,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1312,6 +1612,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::UndeployModelRequest.new
+            #
+            #   # Call the undeploy_model method.
+            #   result = client.undeploy_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def undeploy_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1329,9 +1651,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1389,6 +1713,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::ExportModelRequest.new
+            #
+            #   # Call the export_model method.
+            #   result = client.export_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def export_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1406,9 +1752,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1458,6 +1806,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::GetModelEvaluationRequest.new
+            #
+            #   # Call the get_model_evaluation method.
+            #   result = client.get_model_evaluation request
+            #
+            #   # The returned object is of type Google::Cloud::AutoML::V1::ModelEvaluation.
+            #   p result
+            #
             def get_model_evaluation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1475,9 +1838,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1547,6 +1912,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/automl/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AutoML::V1::AutoML::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AutoML::V1::ListModelEvaluationsRequest.new
+            #
+            #   # Call the list_model_evaluations method.
+            #   result = client.list_model_evaluations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AutoML::V1::ModelEvaluation.
+            #     p response
+            #   end
+            #
             def list_model_evaluations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1564,9 +1950,11 @@ module Google
                 gapic_version: ::Google::Cloud::AutoML::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

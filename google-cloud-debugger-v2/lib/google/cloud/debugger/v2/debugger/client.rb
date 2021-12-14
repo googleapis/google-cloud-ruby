@@ -210,6 +210,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Debugger::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::SetBreakpointRequest.new
+            #
+            #   # Call the set_breakpoint method.
+            #   result = client.set_breakpoint request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::SetBreakpointResponse.
+            #   p result
+            #
             def set_breakpoint request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -227,9 +242,11 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -283,6 +300,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Debugger::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::GetBreakpointRequest.new
+            #
+            #   # Call the get_breakpoint method.
+            #   result = client.get_breakpoint request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::GetBreakpointResponse.
+            #   p result
+            #
             def get_breakpoint request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -300,10 +332,14 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id,
-                "breakpoint_id" => request.breakpoint_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+              if request.breakpoint_id
+                header_params["breakpoint_id"] = request.breakpoint_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -357,6 +393,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Debugger::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::DeleteBreakpointRequest.new
+            #
+            #   # Call the delete_breakpoint method.
+            #   result = client.delete_breakpoint request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_breakpoint request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -374,10 +425,14 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id,
-                "breakpoint_id" => request.breakpoint_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+              if request.breakpoint_id
+                header_params["breakpoint_id"] = request.breakpoint_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -446,6 +501,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Debugger::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::ListBreakpointsRequest.new
+            #
+            #   # Call the list_breakpoints method.
+            #   result = client.list_breakpoints request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::ListBreakpointsResponse.
+            #   p result
+            #
             def list_breakpoints request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -463,9 +533,11 @@ module Google
                 gapic_version: ::Google::Cloud::Debugger::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "debuggee_id" => request.debuggee_id
-              }
+              header_params = {}
+              if request.debuggee_id
+                header_params["debuggee_id"] = request.debuggee_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -519,6 +591,21 @@ module Google
             # @return [::Google::Cloud::Debugger::V2::ListDebuggeesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/debugger/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Debugger::V2::Debugger::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Debugger::V2::ListDebuggeesRequest.new
+            #
+            #   # Call the list_debuggees method.
+            #   result = client.list_debuggees request
+            #
+            #   # The returned object is of type Google::Cloud::Debugger::V2::ListDebuggeesResponse.
+            #   p result
             #
             def list_debuggees request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

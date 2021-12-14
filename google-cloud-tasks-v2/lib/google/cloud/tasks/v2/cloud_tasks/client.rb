@@ -262,6 +262,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::ListQueuesRequest.new
+            #
+            #   # Call the list_queues method.
+            #   result = client.list_queues request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Tasks::V2::Queue.
+            #     p response
+            #   end
+            #
             def list_queues request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -279,9 +300,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -332,6 +355,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::GetQueueRequest.new
+            #
+            #   # Call the get_queue method.
+            #   result = client.get_queue request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Queue.
+            #   p result
+            #
             def get_queue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -349,9 +387,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -420,6 +460,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::CreateQueueRequest.new
+            #
+            #   # Call the create_queue method.
+            #   result = client.create_queue request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Queue.
+            #   p result
+            #
             def create_queue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -437,9 +492,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -512,6 +569,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::UpdateQueueRequest.new
+            #
+            #   # Call the update_queue method.
+            #   result = client.update_queue request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Queue.
+            #   p result
+            #
             def update_queue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -529,9 +601,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "queue.name" => request.queue.name
-              }
+              header_params = {}
+              if request.queue&.name
+                header_params["queue.name"] = request.queue.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -593,6 +667,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::DeleteQueueRequest.new
+            #
+            #   # Call the delete_queue method.
+            #   result = client.delete_queue request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_queue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -610,9 +699,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -667,6 +758,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::PurgeQueueRequest.new
+            #
+            #   # Call the purge_queue method.
+            #   result = client.purge_queue request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Queue.
+            #   p result
+            #
             def purge_queue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -684,9 +790,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -742,6 +850,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::PauseQueueRequest.new
+            #
+            #   # Call the pause_queue method.
+            #   result = client.pause_queue request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Queue.
+            #   p result
+            #
             def pause_queue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -759,9 +882,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -823,6 +948,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::ResumeQueueRequest.new
+            #
+            #   # Call the resume_queue method.
+            #   result = client.resume_queue request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Queue.
+            #   p result
+            #
             def resume_queue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -840,9 +980,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -903,6 +1045,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -920,9 +1077,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -987,6 +1146,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1004,9 +1178,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1067,6 +1243,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1084,9 +1275,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1176,6 +1369,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::ListTasksRequest.new
+            #
+            #   # Call the list_tasks method.
+            #   result = client.list_tasks request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Tasks::V2::Task.
+            #     p response
+            #   end
+            #
             def list_tasks request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1193,9 +1407,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1259,6 +1475,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::GetTaskRequest.new
+            #
+            #   # Call the get_task method.
+            #   result = client.get_task request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Task.
+            #   p result
+            #
             def get_task request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1276,9 +1507,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1381,6 +1614,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::CreateTaskRequest.new
+            #
+            #   # Call the create_task method.
+            #   result = client.create_task request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Task.
+            #   p result
+            #
             def create_task request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1398,9 +1646,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1454,6 +1704,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::DeleteTaskRequest.new
+            #
+            #   # Call the delete_task method.
+            #   result = client.delete_task request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_task request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1471,9 +1736,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1559,6 +1826,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/tasks/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Tasks::V2::RunTaskRequest.new
+            #
+            #   # Call the run_task method.
+            #   result = client.run_task request
+            #
+            #   # The returned object is of type Google::Cloud::Tasks::V2::Task.
+            #   p result
+            #
             def run_task request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1576,9 +1858,11 @@ module Google
                 gapic_version: ::Google::Cloud::Tasks::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

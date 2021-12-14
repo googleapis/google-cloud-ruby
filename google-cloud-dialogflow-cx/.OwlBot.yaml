@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/dialogflow/cx/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-dialogflow-cx/$1

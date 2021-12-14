@@ -217,6 +217,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::DeleteLogRequest.new
+            #
+            #   # Call the delete_log method.
+            #   result = client.delete_log request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_log request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -234,9 +249,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "log_name" => request.log_name
-              }
+              header_params = {}
+              if request.log_name
+                header_params["log_name"] = request.log_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -356,6 +373,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::WriteLogEntriesRequest.new
+            #
+            #   # Call the write_log_entries method.
+            #   result = client.write_log_entries request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::WriteLogEntriesResponse.
+            #   p result
+            #
             def write_log_entries request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -460,6 +492,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListLogEntriesRequest.new
+            #
+            #   # Call the list_log_entries method.
+            #   result = client.list_log_entries request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Logging::V2::LogEntry.
+            #     p response
+            #   end
+            #
             def list_log_entries request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -529,6 +582,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Api::MonitoredResourceDescriptor>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListMonitoredResourceDescriptorsRequest.new
+            #
+            #   # Call the list_monitored_resource_descriptors method.
+            #   result = client.list_monitored_resource_descriptors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Api::MonitoredResourceDescriptor.
+            #     p response
+            #   end
             #
             def list_monitored_resource_descriptors request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -620,6 +694,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListLogsRequest.new
+            #
+            #   # Call the list_logs method.
+            #   result = client.list_logs request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::ListLogsResponse.
+            #   p result
+            #
             def list_logs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -637,9 +726,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -675,6 +766,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Logging::V2::TailLogEntriesResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::LoggingService::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the tail_log_entries method to start streaming.
+            #   output = client.tail_log_entries input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
+            #   input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::Logging::V2::TailLogEntriesResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
             #
             def tail_log_entries request, options = nil
               unless request.is_a? ::Enumerable

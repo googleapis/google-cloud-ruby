@@ -1,5 +1,17 @@
 # Release History
 
+### 0.7.0 / 2021-12-07
+
+#### Features
+
+* Added custom voice configuration
+
+### 0.6.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.6.3 / 2021-08-11
 
 #### Bug Fixes

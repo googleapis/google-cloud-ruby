@@ -18,3 +18,4 @@
 
 require "google/cloud/monitoring" unless defined? Google::Cloud::Monitoring::VERSION
 require "google/cloud/monitoring/dashboard" unless defined? Google::Cloud::Monitoring::Dashboard::VERSION
+require "google/cloud/monitoring/metrics_scope" unless defined? Google::Cloud::Monitoring::MetricsScope::VERSION

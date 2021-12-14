@@ -1,5 +1,23 @@
 # Release History
 
+### 0.8.2 / 2021-12-07
+
+#### Documentation
+
+* Formatting fixes in the reference docs
+
+### 0.8.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.8.0 / 2021-09-21
+
+#### Features
+
+* Support for updating tags, taints, labels, and gvnic on node pools
+
 ### 0.7.1 / 2021-08-11
 
 #### Bug Fixes

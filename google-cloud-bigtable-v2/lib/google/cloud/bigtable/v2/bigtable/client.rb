@@ -220,6 +220,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::ReadRowsRequest.new
+            #
+            #   # Call the read_rows method.
+            #   result = client.read_rows request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::ReadRowsResponse.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
             def read_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -237,9 +255,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -296,6 +316,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::SampleRowKeysRequest.new
+            #
+            #   # Call the sample_row_keys method.
+            #   result = client.sample_row_keys request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::SampleRowKeysResponse.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
             def sample_row_keys request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -313,9 +351,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -376,6 +416,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::MutateRowRequest.new
+            #
+            #   # Call the mutate_row method.
+            #   result = client.mutate_row request
+            #
+            #   # The returned object is of type Google::Cloud::Bigtable::V2::MutateRowResponse.
+            #   p result
+            #
             def mutate_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -393,9 +448,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -455,6 +512,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::MutateRowsRequest.new
+            #
+            #   # Call the mutate_rows method.
+            #   result = client.mutate_rows request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Bigtable::V2::MutateRowsResponse.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
             def mutate_rows request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -472,9 +547,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -548,6 +625,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new
+            #
+            #   # Call the check_and_mutate_row method.
+            #   result = client.check_and_mutate_row request
+            #
+            #   # The returned object is of type Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse.
+            #   p result
+            #
             def check_and_mutate_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -565,9 +657,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -632,6 +726,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::ReadModifyWriteRowRequest.new
+            #
+            #   # Call the read_modify_write_row method.
+            #   result = client.read_modify_write_row request
+            #
+            #   # The returned object is of type Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse.
+            #   p result
+            #
             def read_modify_write_row request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -649,9 +758,11 @@ module Google
                 gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "table_name" => request.table_name
-              }
+              header_params = {}
+              if request.table_name
+                header_params["table_name"] = request.table_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

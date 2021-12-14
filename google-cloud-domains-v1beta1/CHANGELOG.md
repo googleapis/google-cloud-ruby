@@ -1,5 +1,17 @@
 # Release History
 
+### 0.3.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.3.0 / 2021-10-21
+
+#### Features
+
+* Add support for domain transfers
+
 ### 0.2.3 / 2021-08-11
 
 #### Bug Fixes

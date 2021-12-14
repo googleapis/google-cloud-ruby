@@ -218,7 +218,7 @@ module Google
             #     well as how to combine the retrieved time series together (such as
             #     when aggregating multiple streams on each resource to a single
             #     stream for each resource or when aggregating streams across all
-            #     members of a group of resrouces). Multiple aggregations
+            #     members of a group of resources). Multiple aggregations
             #     are applied in the order specified.
             #
             #     This field is similar to the one in the [`ListTimeSeries`
@@ -307,7 +307,7 @@ module Google
             #     well as how to combine the retrieved time series together (such as
             #     when aggregating multiple streams on each resource to a single
             #     stream for each resource or when aggregating streams across all
-            #     members of a group of resrouces). Multiple aggregations
+            #     members of a group of resources). Multiple aggregations
             #     are applied in the order specified.
             #
             #     This field is similar to the one in the [`ListTimeSeries`
@@ -341,8 +341,8 @@ module Google
             # @!attribute [rw] filter
             #   @return [::String]
             #     Required. A logs-based filter. See [Advanced Logs
-            #     Queries](/logging/docs/view/advanced-queries) for how this filter
-            #     should be constructed.
+            #     Queries](https://cloud.google.com/logging/docs/view/advanced-queries)
+            #     for how this filter should be constructed.
             # @!attribute [rw] label_extractors
             #   @return [::Google::Protobuf::Map{::String => ::String}]
             #     Optional. A map from a label key to an extractor expression, which is
@@ -354,7 +354,7 @@ module Google
             #     condition.
             #
             #     Please see [the documentation on logs-based metric
-            #     `valueExtractor`s](/logging/docs/reference/v2/rest/v2/projects.metrics#LogMetric.FIELDS.value_extractor)
+            #     `valueExtractor`s](https://cloud.google.com/logging/docs/reference/v2/rest/v2/projects.metrics#LogMetric.FIELDS.value_extractor)
             #     for syntax and examples.
             class LogMatch
               include ::Google::Protobuf::MessageExts
@@ -409,6 +409,10 @@ module Google
           #     Required for alert policies with a `LogMatch` condition.
           #
           #     This limit is not implemented for alert policies that are not log-based.
+          # @!attribute [rw] auto_close
+          #   @return [::Google::Protobuf::Duration]
+          #     If an alert policy that was active has no data for this long, any open
+          #     incidents will close
           class AlertStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

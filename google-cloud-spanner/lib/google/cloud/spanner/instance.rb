@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
+
 
 require "google/cloud/spanner/instance/job"
 require "google/cloud/spanner/instance/list"
@@ -25,6 +28,13 @@ module Google
       ##
       # # Instance
       #
+      # NOTE: From `google-cloud-spanner/v2.11.0` onwards, new features for
+      # mananging instances will only be available through the
+      # [google-cloud-spanner-admin-instance-v1](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner-admin-instance-v1)
+      # client. See the
+      # [README](https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-spanner#google-cloud-spanner)
+      # for further details.
+      #
       # Represents a Cloud Spanner instance. Instances are dedicated Cloud
       # Spanner serving and storage resources to be used by Cloud Spanner
       # databases. Instances offer isolation: problems with databases in one
@@ -37,6 +47,10 @@ module Google
       # See {Google::Cloud::Spanner::Project#instances},
       # {Google::Cloud::Spanner::Project#instance}, and
       # {Google::Cloud::Spanner::Project#create_instance}.
+      #
+      # @deprecated Use
+      # {Google::Cloud::Spanner::Admin::Instance#instance_admin}
+      # instead.
       #
       # @example
       #   require "google/cloud/spanner"

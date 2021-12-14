@@ -1,5 +1,34 @@
 # Release History
 
+### 0.11.0 / 2021-12-07
+
+#### Features
+
+* Support for mute configs
+* Support for updating a finding with external system metadata
+
+#### Documentation
+
+* Formatting fixes in the reference docs
+
+### 0.10.0 / 2021-11-11
+
+#### Features
+
+* Added fields display_name and resource type.
+
+### 0.9.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.9.0 / 2021-10-18
+
+#### Features
+
+* Added vulnerability fields to findings
+
 ### 0.8.1 / 2021-08-11
 
 #### Bug Fixes

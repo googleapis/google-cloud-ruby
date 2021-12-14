@@ -27,12 +27,8 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the search engine placement, such as
         #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
-        #     This field is used to identify the set of models that will be used to make
-        #     the search.
-        #
-        #     We currently support one placement with the following ID:
-        #
-        #     * `default_search`.
+        #     This field is used to identify the serving configuration name and the set
+        #     of models that will be used to make the search.
         # @!attribute [rw] branch
         #   @return [::String]
         #     The branch resource name, such as
@@ -87,7 +83,8 @@ module Google
         #   @return [::String]
         #     The filter syntax consists of an expression language for constructing a
         #     predicate from one or more fields of the products being filtered. Filter
-        #     expression is case-sensitive.
+        #     expression is case-sensitive. See more details at this [user
+        #     guide](https://cloud.google.com/retail/docs/filter-and-order#filter).
         #
         #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
         # @!attribute [rw] canonical_filter
@@ -105,7 +102,9 @@ module Google
         #   @return [::String]
         #     The order in which products are returned. Products can be ordered by
         #     a field in an {::Google::Cloud::Retail::V2::Product Product} object. Leave it
-        #     unset if ordered by relevance. OrderBy expression is case-sensitive.
+        #     unset if ordered by relevance. OrderBy expression is case-sensitive. See
+        #     more details at this [user
+        #     guide](https://cloud.google.com/retail/docs/filter-and-order#order).
         #
         #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
         # @!attribute [rw] facet_specs
@@ -123,11 +122,19 @@ module Google
         #     support team if you are interested in using dynamic facet feature.
         # @!attribute [rw] boost_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::BoostSpec]
-        #     Boost specification to boost certain products.
+        #     Boost specification to boost certain products. See more details at this
+        #     [user guide](https://cloud.google.com/retail/docs/boosting).
+        #
+        #     Notice that if both [ServingConfig.boost_control_ids][] and
+        #     [SearchRequest.boost_spec] are set, the boost conditions from both places
+        #     are evaluated. If a search request matches multiple boost conditions,
+        #     the final boost score is equal to the sum of the boost scores from all
+        #     matched boost conditions.
         # @!attribute [rw] query_expansion_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec]
         #     The query expansion specification that specifies the conditions under which
-        #     query expansion will occur.
+        #     query expansion will occur. See more details at this [user
+        #     guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
         # @!attribute [rw] variant_rollup_keys
         #   @return [::Array<::String>]
         #     The keys to fetch and rollup the matching
@@ -150,6 +157,10 @@ module Google
         #     * price
         #     * originalPrice
         #     * discount
+        #     * variantId
+        #     * inventory(place_id,price)
+        #     * inventory(place_id,attributes.key), where key is any key in the
+        #       [Product.inventories.attributes][] map.
         #     * attributes.key, where key is any key in the
         #       {::Google::Cloud::Retail::V2::Product#attributes Product.attributes} map.
         #     * pickupInStore.id, where id is any
@@ -205,6 +216,10 @@ module Google
         #     Category pages include special pages such as sales or promotions. For
         #     instance, a special sale page may have the category hierarchy:
         #     "pageCategories" : ["Sales > 2017 Black Friday Deals"].
+        # @!attribute [rw] search_mode
+        #   @return [::Google::Cloud::Retail::V2::SearchRequest::SearchMode]
+        #     The search mode of the search request. If not specified, a single search
+        #     request triggers both product search and faceted search.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -307,6 +322,7 @@ module Google
             #         * "customFulfillment3"
             #         * "customFulfillment4"
             #         * "customFulfillment5"
+            #         * "inventory(place_id,attributes.key)"
             #
             #     * numerical_field =
             #         * "price"
@@ -314,6 +330,8 @@ module Google
             #         * "rating"
             #         * "ratingCount"
             #         * "attributes.key"
+            #         * "inventory(place_id,price)"
+            #         * "inventory(place_id,attributes.key)"
             # @!attribute [rw] intervals
             #   @return [::Array<::Google::Cloud::Retail::V2::Interval>]
             #     Set only if values should be bucketized into intervals. Must be set
@@ -513,6 +531,35 @@ module Google
               AUTO = 3
             end
           end
+
+          # The search mode of each search request.
+          module SearchMode
+            # Default value. In this case both product search and faceted search will
+            # be performed. Both [SearchResponse.SearchResult] and
+            # [SearchResponse.Facet] will be returned.
+            SEARCH_MODE_UNSPECIFIED = 0
+
+            # Only product search will be performed. The faceted search will be
+            # disabled.
+            #
+            # Only [SearchResponse.SearchResult] will be returned.
+            # [SearchResponse.Facet] will not be returned, even if
+            # {::Google::Cloud::Retail::V2::SearchRequest#facet_specs SearchRequest.facet_specs}
+            # or
+            # {::Google::Cloud::Retail::V2::SearchRequest#dynamic_facet_spec SearchRequest.dynamic_facet_spec}
+            # is set.
+            PRODUCT_SEARCH_ONLY = 1
+
+            # Only faceted search will be performed. The product search will be
+            # disabled.
+            #
+            # When in this mode, one or both of [SearchRequest.facet_spec][] and
+            # {::Google::Cloud::Retail::V2::SearchRequest#dynamic_facet_spec SearchRequest.dynamic_facet_spec}
+            # should be set. Otherwise, an INVALID_ARGUMENT error is returned. Only
+            # [SearchResponse.Facet] will be returned. [SearchResponse.SearchResult]
+            # will not be returned.
+            FACETED_SEARCH_ONLY = 2
+          end
         end
 
         # Response message for
@@ -692,7 +739,8 @@ module Google
           # @!attribute [rw] pinned_result_count
           #   @return [::Integer]
           #     Number of pinned results. This field will only be set when expansion
-          #     happens and [SearchRequest.query_expansion_spec.pin_unexpanded_results][]
+          #     happens and
+          #     {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec#pin_unexpanded_results SearchRequest.QueryExpansionSpec.pin_unexpanded_results}
           #     is set to true.
           class QueryExpansionInfo
             include ::Google::Protobuf::MessageExts

@@ -10,6 +10,11 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client",
           "rpcs": {
+            "BulkMuteFindings": {
+              "methods": [
+                "bulk_mute_findings"
+              ]
+            },
             "CreateSource": {
               "methods": [
                 "create_source"
@@ -20,9 +25,19 @@
                 "create_finding"
               ]
             },
+            "CreateMuteConfig": {
+              "methods": [
+                "create_mute_config"
+              ]
+            },
             "CreateNotificationConfig": {
               "methods": [
                 "create_notification_config"
+              ]
+            },
+            "DeleteMuteConfig": {
+              "methods": [
+                "delete_mute_config"
               ]
             },
             "DeleteNotificationConfig": {
@@ -33,6 +48,11 @@
             "GetIamPolicy": {
               "methods": [
                 "get_iam_policy"
+              ]
+            },
+            "GetMuteConfig": {
+              "methods": [
+                "get_mute_config"
               ]
             },
             "GetNotificationConfig": {
@@ -70,6 +90,11 @@
                 "list_findings"
               ]
             },
+            "ListMuteConfigs": {
+              "methods": [
+                "list_mute_configs"
+              ]
+            },
             "ListNotificationConfigs": {
               "methods": [
                 "list_notification_configs"
@@ -90,6 +115,11 @@
                 "set_finding_state"
               ]
             },
+            "SetMute": {
+              "methods": [
+                "set_mute"
+              ]
+            },
             "SetIamPolicy": {
               "methods": [
                 "set_iam_policy"
@@ -100,9 +130,19 @@
                 "test_iam_permissions"
               ]
             },
+            "UpdateExternalSystem": {
+              "methods": [
+                "update_external_system"
+              ]
+            },
             "UpdateFinding": {
               "methods": [
                 "update_finding"
+              ]
+            },
+            "UpdateMuteConfig": {
+              "methods": [
+                "update_mute_config"
               ]
             },
             "UpdateNotificationConfig": {

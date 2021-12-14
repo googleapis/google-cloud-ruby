@@ -227,6 +227,16 @@ module Google
         end
 
         ##
+        # The ID of the session if this job is part of one. See the `create_session` param in {Project#query_job} and
+        # {Dataset#query_job}.
+        #
+        # @return [String, nil] The session ID, or `nil` if not associated with a session.
+        #
+        def session_id
+          @gapi.statistics.session_info&.session_id
+        end
+
+        ##
         # The ID of a multi-statement transaction.
         #
         # @return [String, nil] The transaction ID, or `nil` if not associated with a transaction.
@@ -389,6 +399,28 @@ module Google
           ensure_service!
           resp = service.cancel_job job_id, location: location
           @gapi = resp.job
+          true
+        end
+
+        ##
+        # Requests that a job is deleted. This call will return when the job is deleted.
+        #
+        # @return [Boolean] Returns `true` if the job was deleted.
+        #
+        # @example
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #
+        #   job = bigquery.job "my_job"
+        #
+        #   job.delete
+        #
+        # @!group Lifecycle
+        #
+        def delete
+          ensure_service!
+          service.delete_job job_id, location: location
           true
         end
 

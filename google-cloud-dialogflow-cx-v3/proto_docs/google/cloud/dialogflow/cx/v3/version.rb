@@ -175,6 +175,49 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # The request message for {::Google::Cloud::Dialogflow::CX::V3::Versions::Client#compare_versions Versions.CompareVersions}.
+          # @!attribute [rw] base_version
+          #   @return [::String]
+          #     Required. Name of the base flow version to compare with the target version. Use
+          #     version ID `0` to indicate the draft version of the specified flow.
+          #
+          #     Format: `projects/<Project ID>/locations/<Location ID>/agents/
+          #     <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+          # @!attribute [rw] target_version
+          #   @return [::String]
+          #     Required. Name of the target flow version to compare with the
+          #     base version. Use version ID `0` to indicate the draft version of the
+          #     specified flow. Format: `projects/<Project ID>/locations/<Location
+          #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+          # @!attribute [rw] language_code
+          #   @return [::String]
+          #     The language to compare the flow versions for.
+          #
+          #     If not specified, the agent's default language is used.
+          #     [Many
+          #     languages](https://cloud.google.com/dialogflow/docs/reference/language) are
+          #     supported. Note: languages must be enabled in the agent before they can be
+          #     used.
+          class CompareVersionsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response message for {::Google::Cloud::Dialogflow::CX::V3::Versions::Client#compare_versions Versions.CompareVersions}.
+          # @!attribute [rw] base_version_content_json
+          #   @return [::String]
+          #     JSON representation of the base version content.
+          # @!attribute [rw] target_version_content_json
+          #   @return [::String]
+          #     JSON representation of the target version content.
+          # @!attribute [rw] compare_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The timestamp when the two version compares.
+          class CompareVersionsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

@@ -47,6 +47,73 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_bulk_mute_findings
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    filter = "hello world"
+    mute_annotation = "hello world"
+
+    bulk_mute_findings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :bulk_mute_findings, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["mute_annotation"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, bulk_mute_findings_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.bulk_mute_findings({ parent: parent, filter: filter, mute_annotation: mute_annotation }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.bulk_mute_findings parent: parent, filter: filter, mute_annotation: mute_annotation do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.bulk_mute_findings ::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_annotation: mute_annotation) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.bulk_mute_findings({ parent: parent, filter: filter, mute_annotation: mute_annotation }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.bulk_mute_findings(::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new(parent: parent, filter: filter, mute_annotation: mute_annotation), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, bulk_mute_findings_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_source
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::Source.new
@@ -169,6 +236,68 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_create_mute_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::MuteConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    mute_config = {}
+    mute_config_id = "hello world"
+
+    create_mute_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_mute_config, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::MuteConfig), request["mute_config"]
+      assert_equal "hello world", request["mute_config_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_mute_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_mute_config({ parent: parent, mute_config: mute_config, mute_config_id: mute_config_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_mute_config parent: parent, mute_config: mute_config, mute_config_id: mute_config_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_mute_config ::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new(parent: parent, mute_config: mute_config, mute_config_id: mute_config_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_mute_config({ parent: parent, mute_config: mute_config, mute_config_id: mute_config_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_mute_config(::Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new(parent: parent, mute_config: mute_config, mute_config_id: mute_config_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_mute_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_notification_config
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::NotificationConfig.new
@@ -228,6 +357,64 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, create_notification_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_mute_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_mute_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_mute_config, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_mute_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_mute_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_mute_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_mute_config ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_mute_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_mute_config(::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_mute_config_client_stub.call_rpc_count
     end
   end
 
@@ -346,6 +533,64 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, get_iam_policy_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_mute_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::MuteConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_mute_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_mute_config, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_mute_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_mute_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_mute_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_mute_config ::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_mute_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_mute_config(::Google::Cloud::SecurityCenter::V1::GetMuteConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_mute_config_client_stub.call_rpc_count
     end
   end
 
@@ -827,6 +1072,73 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_list_mute_configs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_mute_configs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_mute_configs, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_mute_configs_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_mute_configs({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_mute_configs parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_mute_configs ::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_mute_configs({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_mute_configs(::Google::Cloud::SecurityCenter::V1::ListMuteConfigsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_mute_configs_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_notification_configs
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::ListNotificationConfigsResponse.new
@@ -1086,6 +1398,66 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_set_mute
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::Finding.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    mute = :MUTE_UNSPECIFIED
+
+    set_mute_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_mute, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::SetMuteRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal :MUTE_UNSPECIFIED, request["mute"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_mute_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.set_mute({ name: name, mute: mute }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.set_mute name: name, mute: mute do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.set_mute ::Google::Cloud::SecurityCenter::V1::SetMuteRequest.new(name: name, mute: mute) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.set_mute({ name: name, mute: mute }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.set_mute(::Google::Cloud::SecurityCenter::V1::SetMuteRequest.new(name: name, mute: mute), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_mute_client_stub.call_rpc_count
+    end
+  end
+
   def test_set_iam_policy
     # Create GRPC objects.
     grpc_response = ::Google::Iam::V1::Policy.new
@@ -1206,6 +1578,66 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_update_external_system
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ExternalSystem.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    external_system = {}
+    update_mask = {}
+
+    update_external_system_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_external_system, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::ExternalSystem), request["external_system"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_external_system_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_external_system({ external_system: external_system, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_external_system external_system: external_system, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_external_system ::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new(external_system: external_system, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_external_system({ external_system: external_system, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_external_system(::Google::Cloud::SecurityCenter::V1::UpdateExternalSystemRequest.new(external_system: external_system, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_external_system_client_stub.call_rpc_count
+    end
+  end
+
   def test_update_finding
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::SecurityCenter::V1::Finding.new
@@ -1263,6 +1695,66 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, update_finding_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_mute_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::MuteConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    mute_config = {}
+    update_mask = {}
+
+    update_mute_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_mute_config, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::MuteConfig), request["mute_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_mute_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_mute_config({ mute_config: mute_config, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_mute_config mute_config: mute_config, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_mute_config ::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest.new(mute_config: mute_config, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_mute_config({ mute_config: mute_config, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_mute_config(::Google::Cloud::SecurityCenter::V1::UpdateMuteConfigRequest.new(mute_config: mute_config, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_mute_config_client_stub.call_rpc_count
     end
   end
 

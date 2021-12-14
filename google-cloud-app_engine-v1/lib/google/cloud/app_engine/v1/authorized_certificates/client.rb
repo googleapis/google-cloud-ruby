@@ -178,6 +178,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::ListAuthorizedCertificatesRequest.new
+            #
+            #   # Call the list_authorized_certificates method.
+            #   result = client.list_authorized_certificates request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AppEngine::V1::AuthorizedCertificate.
+            #     p response
+            #   end
+            #
             def list_authorized_certificates request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -195,9 +216,11 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -250,6 +273,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::GetAuthorizedCertificateRequest.new
+            #
+            #   # Call the get_authorized_certificate method.
+            #   result = client.get_authorized_certificate request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::AuthorizedCertificate.
+            #   p result
+            #
             def get_authorized_certificate request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -267,9 +305,11 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -320,6 +360,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::CreateAuthorizedCertificateRequest.new
+            #
+            #   # Call the create_authorized_certificate method.
+            #   result = client.create_authorized_certificate request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::AuthorizedCertificate.
+            #   p result
+            #
             def create_authorized_certificate request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -337,9 +392,11 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -399,6 +456,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::UpdateAuthorizedCertificateRequest.new
+            #
+            #   # Call the update_authorized_certificate method.
+            #   result = client.update_authorized_certificate request
+            #
+            #   # The returned object is of type Google::Cloud::AppEngine::V1::AuthorizedCertificate.
+            #   p result
+            #
             def update_authorized_certificate request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -416,9 +488,11 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -468,6 +542,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/app_engine/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AppEngine::V1::DeleteAuthorizedCertificateRequest.new
+            #
+            #   # Call the delete_authorized_certificate method.
+            #   result = client.delete_authorized_certificate request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_authorized_certificate request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -485,9 +574,11 @@ module Google
                 gapic_version: ::Google::Cloud::AppEngine::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

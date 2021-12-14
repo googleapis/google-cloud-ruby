@@ -203,6 +203,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::CreateJobRequest.new
+              #
+              #   # Call the create_job method.
+              #   result = client.create_job request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1::Job.
+              #   p result
+              #
               def create_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -220,9 +235,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -282,6 +299,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::ListJobsRequest.new
+              #
+              #   # Call the list_jobs method.
+              #   result = client.list_jobs request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1::Job.
+              #     p response
+              #   end
+              #
               def list_jobs request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -299,9 +337,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -352,6 +392,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::GetJobRequest.new
+              #
+              #   # Call the get_job method.
+              #   result = client.get_job request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1::Job.
+              #   p result
+              #
               def get_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -369,9 +424,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -404,7 +461,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload delete_job(name: nil)
+              # @overload delete_job(name: nil, allow_missing: nil)
               #   Pass arguments to `delete_job` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -412,6 +469,9 @@ module Google
               #   @param name [::String]
               #     Required. The name of the job to delete.
               #     Format: `projects/{project}/locations/{location}/jobs/{job}`
+              #   @param allow_missing [::Boolean]
+              #     If set to true, and the job is not found, the request will succeed but no
+              #     action will be taken on the server.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -420,6 +480,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::DeleteJobRequest.new
+              #
+              #   # Call the delete_job method.
+              #   result = client.delete_job request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_job request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -438,9 +513,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -498,6 +575,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::CreateJobTemplateRequest.new
+              #
+              #   # Call the create_job_template method.
+              #   result = client.create_job_template request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1::JobTemplate.
+              #   p result
+              #
               def create_job_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -515,9 +607,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -578,6 +672,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::ListJobTemplatesRequest.new
+              #
+              #   # Call the list_job_templates method.
+              #   result = client.list_job_templates request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Video::Transcoder::V1::JobTemplate.
+              #     p response
+              #   end
+              #
               def list_job_templates request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -595,9 +710,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -649,6 +766,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::GetJobTemplateRequest.new
+              #
+              #   # Call the get_job_template method.
+              #   result = client.get_job_template request
+              #
+              #   # The returned object is of type Google::Cloud::Video::Transcoder::V1::JobTemplate.
+              #   p result
+              #
               def get_job_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -666,9 +798,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -701,7 +835,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload delete_job_template(name: nil)
+              # @overload delete_job_template(name: nil, allow_missing: nil)
               #   Pass arguments to `delete_job_template` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -709,6 +843,9 @@ module Google
               #   @param name [::String]
               #     Required. The name of the job template to delete.
               #     `projects/{project}/locations/{location}/jobTemplates/{job_template}`
+              #   @param allow_missing [::Boolean]
+              #     If set to true, and the job template is not found, the request will succeed
+              #     but no action will be taken on the server.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -717,6 +854,21 @@ module Google
               # @return [::Google::Protobuf::Empty]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/video/transcoder/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Video::Transcoder::V1::DeleteJobTemplateRequest.new
+              #
+              #   # Call the delete_job_template method.
+              #   result = client.delete_job_template request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
               #
               def delete_job_template request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
@@ -735,9 +887,11 @@ module Google
                   gapic_version: ::Google::Cloud::Video::Transcoder::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 

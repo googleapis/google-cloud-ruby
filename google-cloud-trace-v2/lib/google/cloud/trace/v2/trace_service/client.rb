@@ -189,6 +189,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/trace/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Trace::V2::TraceService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Trace::V2::BatchWriteSpansRequest.new
+            #
+            #   # Call the batch_write_spans method.
+            #   result = client.batch_write_spans request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def batch_write_spans request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -206,9 +221,11 @@ module Google
                 gapic_version: ::Google::Cloud::Trace::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -310,6 +327,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/trace/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Trace::V2::TraceService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Trace::V2::Span.new
+            #
+            #   # Call the create_span method.
+            #   result = client.create_span request
+            #
+            #   # The returned object is of type Google::Cloud::Trace::V2::Span.
+            #   p result
+            #
             def create_span request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -327,9 +359,11 @@ module Google
                 gapic_version: ::Google::Cloud::Trace::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

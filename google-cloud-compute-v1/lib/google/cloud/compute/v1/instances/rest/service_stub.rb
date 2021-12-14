@@ -960,6 +960,49 @@ module Google
               end
 
               ##
+              # Baseline implementation for the send_diagnostic_interrupt REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse]
+              #   A result object deserialized from the server's reply
+              def send_diagnostic_interrupt request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                uri, _body, _query_string_params = transcode_send_diagnostic_interrupt_request request_pb
+                response = @client_stub.make_post_request(
+                  uri:     uri,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              end
+
+              ##
+              # GRPC transcoding helper method for the send_diagnostic_interrupt REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_send_diagnostic_interrupt_request request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/sendDiagnosticInterrupt"
+                body = nil
+                query_string_params = {}
+
+                [uri, body, query_string_params]
+              end
+
+              ##
               # Baseline implementation for the set_deletion_protection REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::SetDeletionProtectionInstanceRequest]

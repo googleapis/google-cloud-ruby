@@ -577,7 +577,7 @@ module Google
         #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
         # @!attribute [rw] digest
         #   @return [::Google::Cloud::Kms::V1::Digest]
-        #     Required. The digest of the data to sign. The digest must be produced with
+        #     Optional. The digest of the data to sign. The digest must be produced with
         #     the same digest algorithm as specified by the key version's
         #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
         # @!attribute [rw] digest_crc32c
@@ -589,6 +589,26 @@ module Google
         #     fails. If you receive a checksum error, your client should verify that
         #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest AsymmetricSignRequest.digest}) is equal to
         #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#digest_crc32c AsymmetricSignRequest.digest_crc32c}, and if so, perform a limited
+        #     number of retries. A persistent mismatch may indicate an issue in your
+        #     computation of the CRC32C checksum.
+        #     Note: This field is defined as int64 for reasons of compatibility across
+        #     different languages. However, it is a non-negative integer, which will
+        #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+        #     that support this type.
+        # @!attribute [rw] data
+        #   @return [::String]
+        #     Optional. This field will only be honored for RAW_PKCS1 keys.
+        #     The data to sign. A digest is computed over the data that will be signed,
+        #     PKCS #1 padding is applied to the digest directly and then encrypted.
+        # @!attribute [rw] data_crc32c
+        #   @return [::Google::Protobuf::Int64Value]
+        #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}. If
+        #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+        #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data} using this checksum.
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+        #     fails. If you receive a checksum error, your client should verify that
+        #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}) is equal to
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data_crc32c AsymmetricSignRequest.data_crc32c}, and if so, perform a limited
         #     number of retries. A persistent mismatch may indicate an issue in your
         #     computation of the CRC32C checksum.
         #     Note: This field is defined as int64 for reasons of compatibility across
@@ -832,6 +852,16 @@ module Google
         #   @return [::String]
         #     The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for signing. Check
         #     this field to verify that the intended resource was used for signing.
+        # @!attribute [rw] verified_data_crc32c
+        #   @return [::Boolean]
+        #     Integrity verification field. A flag indicating whether
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data_crc32c AsymmetricSignRequest.data_crc32c} was received by
+        #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} and used for the integrity verification of the
+        #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data data}. A false value of this field
+        #     indicates either that {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data_crc32c AsymmetricSignRequest.data_crc32c} was left
+        #     unset or that it was not delivered to {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService}. If you've
+        #     set {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data_crc32c AsymmetricSignRequest.data_crc32c} but this field is still false,
+        #     discard the response and perform a limited number of retries.
         # @!attribute [rw] protection_level
         #   @return [::Google::Cloud::Kms::V1::ProtectionLevel]
         #     The {::Google::Cloud::Kms::V1::ProtectionLevel ProtectionLevel} of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} used for signing.

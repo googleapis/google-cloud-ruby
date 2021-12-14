@@ -216,6 +216,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::DetectIntentRequest.new
+              #
+              #   # Call the detect_intent method.
+              #   result = client.detect_intent request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse.
+              #   p result
+              #
               def detect_intent request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -233,9 +248,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "session" => request.session
-                }
+                header_params = {}
+                if request.session
+                  header_params["session"] = request.session
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -276,6 +293,30 @@ module Google
               # @return [::Enumerable<::Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentResponse>]
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new
+              #
+              #   # Create an input stream
+              #   input = Gapic::StreamInput.new
+              #
+              #   # Call the streaming_detect_intent method to start streaming.
+              #   output = client.streaming_detect_intent input
+              #
+              #   # Send requests on the stream. For each request, pass in keyword
+              #   # arguments to set fields. Be sure to close the stream when done.
+              #   input << Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentRequest.new
+              #   input << Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentRequest.new
+              #   input.close
+              #
+              #   # Handle streamed responses. These may be interleaved with inputs.
+              #   # Each response is of type ::Google::Cloud::Dialogflow::CX::V3::StreamingDetectIntentResponse.
+              #   output.each do |response|
+              #     p response
+              #   end
               #
               def streaming_detect_intent request, options = nil
                 unless request.is_a? ::Enumerable
@@ -360,6 +401,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::MatchIntentRequest.new
+              #
+              #   # Call the match_intent method.
+              #   result = client.match_intent request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::MatchIntentResponse.
+              #   p result
+              #
               def match_intent request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -377,9 +433,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "session" => request.session
-                }
+                header_params = {}
+                if request.session
+                  header_params["session"] = request.session
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -435,6 +493,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Sessions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::FulfillIntentRequest.new
+              #
+              #   # Call the fulfill_intent method.
+              #   result = client.fulfill_intent request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::FulfillIntentResponse.
+              #   p result
+              #
               def fulfill_intent request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -452,9 +525,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "match_intent_request.session" => request.match_intent_request.session
-                }
+                header_params = {}
+                if request.match_intent_request&.session
+                  header_params["match_intent_request.session"] = request.match_intent_request.session
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 

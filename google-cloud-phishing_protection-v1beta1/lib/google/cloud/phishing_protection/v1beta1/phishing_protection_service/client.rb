@@ -184,6 +184,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/phishing_protection/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::PhishingProtection::V1beta1::PhishingProtectionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.new
+            #
+            #   # Call the report_phishing method.
+            #   result = client.report_phishing request
+            #
+            #   # The returned object is of type Google::Cloud::PhishingProtection::V1beta1::ReportPhishingResponse.
+            #   p result
+            #
             def report_phishing request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -201,9 +216,11 @@ module Google
                 gapic_version: ::Google::Cloud::PhishingProtection::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

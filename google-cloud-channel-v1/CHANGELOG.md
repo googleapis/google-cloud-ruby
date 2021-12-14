@@ -1,5 +1,24 @@
 # Release History
 
+### 0.9.2 / 2021-12-07
+
+#### Documentation
+
+* Minor clarifications in the documentation
+
+### 0.9.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+* Clarifications in the documentation for entitlement parameters
+
+### 0.9.0 / 2021-11-02
+
+#### Features
+
+* Add a path helper for partner link resources
+
 ### 0.8.0 / 2021-09-08
 
 #### Features

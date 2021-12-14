@@ -59,6 +59,11 @@ module Google
           #     request_stream_count values *may* result in this list being unpopulated,
           #     in that case, the user will need to use a List method to get the streams
           #     instead, which is not yet available.
+          # @!attribute [r] estimated_total_bytes_scanned
+          #   @return [::Integer]
+          #     Output only. An estimate on the number of bytes this session will scan when
+          #     all streams are completely consumed. This estimate is based on
+          #     metadata from the table which might be incomplete or stale.
           class ReadSession
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,6 +115,64 @@ module Google
           class ReadStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Information about a single stream that gets data inside the storage system.
+          # @!attribute [r] name
+          #   @return [::String]
+          #     Output only. Name of the stream, in the form
+          #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::Type]
+          #     Immutable. Type of the stream.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Create time of the stream. For the _default stream, this is the
+          #     creation_time of the table.
+          # @!attribute [r] commit_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Commit time of the stream.
+          #     If a stream is of `COMMITTED` type, then it will have a commit_time same as
+          #     `create_time`. If the stream is of `PENDING` type, empty commit_time
+          #     means it is not committed.
+          # @!attribute [r] table_schema
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::TableSchema]
+          #     Output only. The schema of the destination table. It is only returned in
+          #     `CreateWriteStream` response. Caller should generate data that's
+          #     compatible with this schema to send in initial `AppendRowsRequest`.
+          #     The table schema could go out of date during the life time of the stream.
+          # @!attribute [rw] write_mode
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::WriteMode]
+          #     Immutable. Mode of the stream.
+          class WriteStream
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type enum of the stream.
+            module Type
+              # Unknown type.
+              TYPE_UNSPECIFIED = 0
+
+              # Data will commit automatically and appear as soon as the write is
+              # acknowledged.
+              COMMITTED = 1
+
+              # Data is invisible until the stream is committed.
+              PENDING = 2
+
+              # Data is only visible up to the offset to which it was flushed.
+              BUFFERED = 3
+            end
+
+            # Mode enum of the stream.
+            module WriteMode
+              # Unknown type.
+              WRITE_MODE_UNSPECIFIED = 0
+
+              # Insert new records into the table.
+              # It is the default value if customers do not specify it.
+              INSERT = 1
+            end
           end
 
           # Data format for input or output data.

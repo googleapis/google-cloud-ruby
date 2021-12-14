@@ -27,7 +27,7 @@ module Google
           # Service for managing [SessionEntityTypes][google.cloud.dialogflow.v2.SessionEntityType].
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode

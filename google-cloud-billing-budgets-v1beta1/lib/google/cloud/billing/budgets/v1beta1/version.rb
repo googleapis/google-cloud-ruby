@@ -22,7 +22,7 @@ module Google
     module Billing
       module Budgets
         module V1beta1
-          VERSION = "0.6.2"
+          VERSION = "0.6.3"
         end
       end
     end

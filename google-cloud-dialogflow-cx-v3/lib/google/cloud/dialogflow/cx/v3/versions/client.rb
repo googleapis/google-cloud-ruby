@@ -198,6 +198,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::ListVersionsRequest.new
+              #
+              #   # Call the list_versions method.
+              #   result = client.list_versions request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::Version.
+              #     p response
+              #   end
+              #
               def list_versions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -215,9 +236,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -269,6 +292,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::GetVersionRequest.new
+              #
+              #   # Call the get_version method.
+              #   result = client.get_version request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Version.
+              #   p result
+              #
               def get_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -286,9 +324,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -310,6 +350,13 @@ module Google
 
               ##
               # Creates a {::Google::Cloud::Dialogflow::CX::V3::Version Version} in the specified {::Google::Cloud::Dialogflow::CX::V3::Flow Flow}.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: {::Google::Cloud::Dialogflow::CX::V3::CreateVersionOperationMetadata CreateVersionOperationMetadata}
+              # - `response`: {::Google::Cloud::Dialogflow::CX::V3::Version Version}
               #
               # @overload create_version(request, options = nil)
               #   Pass arguments to `create_version` via a request object, either of type
@@ -341,6 +388,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::CreateVersionRequest.new
+              #
+              #   # Call the create_version method.
+              #   result = client.create_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def create_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -358,9 +427,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -413,6 +484,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::UpdateVersionRequest.new
+              #
+              #   # Call the update_version method.
+              #   result = client.update_version request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Version.
+              #   p result
+              #
               def update_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -430,9 +516,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "version.name" => request.version.name
-                }
+                header_params = {}
+                if request.version&.name
+                  header_params["version.name"] = request.version.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -483,6 +571,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::DeleteVersionRequest.new
+              #
+              #   # Call the delete_version method.
+              #   result = client.delete_version request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -500,9 +603,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -524,6 +629,15 @@ module Google
 
               ##
               # Loads resources in the specified version to the draft flow.
+              #
+              # This method is a [long-running
+              # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+              # The returned `Operation` type has the following method-specific fields:
+              #
+              # - `metadata`: An empty [Struct
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#struct)
+              # - `response`: An [Empty
+              #   message](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#empty)
               #
               # @overload load_version(request, options = nil)
               #   Pass arguments to `load_version` via a request object, either of type
@@ -558,6 +672,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::LoadVersionRequest.new
+              #
+              #   # Call the load_version method.
+              #   result = client.load_version request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def load_version request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -575,9 +711,11 @@ module Google
                   gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -591,6 +729,108 @@ module Google
 
                 @versions_stub.call_rpc :load_version, request, options: options do |response, operation|
                   response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Compares the specified base version with target version.
+              #
+              # @overload compare_versions(request, options = nil)
+              #   Pass arguments to `compare_versions` via a request object, either of type
+              #   {::Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload compare_versions(base_version: nil, target_version: nil, language_code: nil)
+              #   Pass arguments to `compare_versions` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param base_version [::String]
+              #     Required. Name of the base flow version to compare with the target version. Use
+              #     version ID `0` to indicate the draft version of the specified flow.
+              #
+              #     Format: `projects/<Project ID>/locations/<Location ID>/agents/
+              #     <Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+              #   @param target_version [::String]
+              #     Required. Name of the target flow version to compare with the
+              #     base version. Use version ID `0` to indicate the draft version of the
+              #     specified flow. Format: `projects/<Project ID>/locations/<Location
+              #     ID>/agents/<Agent ID>/flows/<Flow ID>/versions/<Version ID>`.
+              #   @param language_code [::String]
+              #     The language to compare the flow versions for.
+              #
+              #     If not specified, the agent's default language is used.
+              #     [Many
+              #     languages](https://cloud.google.com/dialogflow/docs/reference/language) are
+              #     supported. Note: languages must be enabled in the agent before they can be
+              #     used.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Dialogflow::CX::V3::CompareVersionsResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Dialogflow::CX::V3::CompareVersionsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/dialogflow/cx/v3"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Dialogflow::CX::V3::Versions::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest.new
+              #
+              #   # Call the compare_versions method.
+              #   result = client.compare_versions request
+              #
+              #   # The returned object is of type Google::Cloud::Dialogflow::CX::V3::CompareVersionsResponse.
+              #   p result
+              #
+              def compare_versions request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::CX::V3::CompareVersionsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.compare_versions.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Dialogflow::CX::V3::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.base_version
+                  header_params["base_version"] = request.base_version
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.compare_versions.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.compare_versions.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @versions_stub.call_rpc :compare_versions, request, options: options do |response, operation|
                   yield response, operation if block_given?
                   return response
                 end
@@ -763,6 +1003,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :load_version
+                  ##
+                  # RPC-specific configuration for `compare_versions`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :compare_versions
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -778,6 +1023,8 @@ module Google
                     @delete_version = ::Gapic::Config::Method.new delete_version_config
                     load_version_config = parent_rpcs.load_version if parent_rpcs.respond_to? :load_version
                     @load_version = ::Gapic::Config::Method.new load_version_config
+                    compare_versions_config = parent_rpcs.compare_versions if parent_rpcs.respond_to? :compare_versions
+                    @compare_versions = ::Gapic::Config::Method.new compare_versions_config
 
                     yield self if block_given?
                   end

@@ -101,6 +101,14 @@ module Grafeas
     # @!attribute [rw] revision
     #   @return [::String]
     #     The iteration of the package build from the above version.
+    # @!attribute [rw] inclusive
+    #   @return [::Boolean]
+    #     Whether this version is specifying part of an inclusive range. Grafeas
+    #     does not have the capability to specify version ranges; instead we have
+    #     fields that specify start version and end versions. At times this is
+    #     insufficient - we also need to specify whether the version is included in
+    #     the range or is excluded from the range. This boolean is expected to be set
+    #     to true when the version is included in a range.
     # @!attribute [rw] kind
     #   @return [::Grafeas::V1::Version::VersionKind]
     #     Required. Distinguishes between sentinel MIN/MAX versions and normal

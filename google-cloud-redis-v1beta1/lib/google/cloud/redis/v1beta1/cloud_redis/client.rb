@@ -40,7 +40,7 @@ module Google
           # * As such, Redis instances are resources of the form:
           #   `/projects/{project_id}/locations/{location_id}/instances/{instance_id}`
           #
-          # Note that location_id must be refering to a GCP `region`; for example:
+          # Note that location_id must be referring to a GCP `region`; for example:
           # * `projects/redpepper-1290/locations/us-central1/instances/my-redis`
           #
           class Client
@@ -228,7 +228,8 @@ module Google
             #     to determine if there are more instances left to be queried.
             #   @param page_token [::String]
             #     The `next_page_token` value returned from a previous
-            #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances} request, if any.
+            #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances}
+            #     request, if any.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Redis::V1beta1::Instance>]
@@ -237,6 +238,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Redis::V1beta1::Instance>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::ListInstancesRequest.new
+            #
+            #   # Call the list_instances method.
+            #   result = client.list_instances request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Redis::V1beta1::Instance.
+            #     p response
+            #   end
             #
             def list_instances request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -255,9 +277,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -309,6 +333,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::GetInstanceRequest.new
+            #
+            #   # Call the get_instance method.
+            #   result = client.get_instance request
+            #
+            #   # The returned object is of type Google::Cloud::Redis::V1beta1::Instance.
+            #   p result
+            #
             def get_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -326,9 +365,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -356,7 +397,7 @@ module Google
             #
             # The creation is executed asynchronously and callers may check the returned
             # operation to track its progress. Once the operation is completed the Redis
-            # instance will be fully functional. Completed longrunning.Operation will
+            # instance will be fully functional. The completed longrunning.Operation will
             # contain the new instance object in the response field.
             #
             # The returned operation is automatically deleted after a few hours, so there
@@ -401,6 +442,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::CreateInstanceRequest.new
+            #
+            #   # Call the create_instance method.
+            #   result = client.create_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -418,9 +481,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -472,6 +537,7 @@ module Google
             #      *   `labels`
             #      *   `memorySizeGb`
             #      *   `redisConfig`
+            #      *   `replica_count`
             #   @param instance [::Google::Cloud::Redis::V1beta1::Instance, ::Hash]
             #     Required. Update description.
             #     Only fields specified in update_mask are updated.
@@ -483,6 +549,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::UpdateInstanceRequest.new
+            #
+            #   # Call the update_instance method.
+            #   result = client.update_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -501,9 +589,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "instance.name" => request.instance.name
-              }
+              header_params = {}
+              if request.instance&.name
+                header_params["instance.name"] = request.instance.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -558,6 +648,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::UpgradeInstanceRequest.new
+            #
+            #   # Call the upgrade_instance method.
+            #   result = client.upgrade_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def upgrade_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -575,9 +687,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -638,6 +752,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::ImportInstanceRequest.new
+            #
+            #   # Call the import_instance method.
+            #   result = client.import_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def import_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -655,9 +791,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -716,6 +854,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::ExportInstanceRequest.new
+            #
+            #   # Call the export_instance method.
+            #   result = client.export_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def export_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -733,9 +893,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -757,7 +919,7 @@ module Google
             end
 
             ##
-            # Initiates a failover of the master node to current replica node for a
+            # Initiates a failover of the primary node to current replica node for a
             # specific STANDARD tier Cloud Memorystore for Redis instance.
             #
             # @overload failover_instance(request, options = nil)
@@ -791,6 +953,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::FailoverInstanceRequest.new
+            #
+            #   # Call the failover_instance method.
+            #   result = client.failover_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def failover_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -808,9 +992,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -863,6 +1049,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/redis/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1beta1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1beta1::DeleteInstanceRequest.new
+            #
+            #   # Call the delete_instance method.
+            #   result = client.delete_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -880,9 +1088,11 @@ module Google
                 gapic_version: ::Google::Cloud::Redis::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

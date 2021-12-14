@@ -54,7 +54,7 @@ module Google
       #   The default scope is:
       #
       #   * `https://www.googleapis.com/auth/pubsub`
-      # @param [Integer] timeout Default timeout to use in requests. Optional.
+      # @param [Numeric] timeout Default timeout to use in requests. Optional.
       # @param [String] endpoint Override of the endpoint host name. Optional.
       #   If the param is nil, uses the default endpoint.
       # @param [String] emulator_host Pub/Sub emulator host. Optional.
@@ -121,9 +121,9 @@ module Google
       #   parameter `keyfile` is considered deprecated, but may also be used.)
       # * `scope` - (String, Array<String>) The OAuth 2.0 scopes controlling
       #   the set of resources and operations that the connection can access.
-      # * `retries` - (Integer) Number of times to retry requests on server
-      #   error.
-      # * `timeout` - (Integer) Default timeout to use in requests.
+      # * `quota_project` - (String) The project ID for a project that can be
+      #   used by client libraries for quota and billing purposes.
+      # * `timeout` - (Numeric) Default timeout to use in requests.
       # * `endpoint` - (String) Override of the endpoint host name, or `nil`
       #   to use the default endpoint.
       # * `emulator_host` - (String) Host name of the emulator. Defaults to

@@ -28,7 +28,7 @@ class Google::Cloud::AssuredWorkloads::ClientConstructionMinitest < Minitest::Te
       client = Google::Cloud::AssuredWorkloads.assured_workloads_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client, client
+      assert_kind_of Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client, client
     end
   end
 end

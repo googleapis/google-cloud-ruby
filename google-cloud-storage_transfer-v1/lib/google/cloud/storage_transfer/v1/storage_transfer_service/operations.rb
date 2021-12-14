@@ -143,6 +143,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/longrunning"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Longrunning::Operations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Longrunning::ListOperationsRequest.new
+            #
+            #   # Call the list_operations method.
+            #   result = client.list_operations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Longrunning::Operation.
+            #     p response
+            #   end
+            #
             def list_operations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -160,9 +181,11 @@ module Google
                 gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -215,6 +238,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/longrunning"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Longrunning::Operations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Longrunning::GetOperationRequest.new
+            #
+            #   # Call the get_operation method.
+            #   result = client.get_operation request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def get_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -232,9 +277,11 @@ module Google
                 gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -287,6 +334,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/longrunning"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Longrunning::Operations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Longrunning::DeleteOperationRequest.new
+            #
+            #   # Call the delete_operation method.
+            #   result = client.delete_operation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -304,9 +366,11 @@ module Google
                 gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -364,6 +428,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/longrunning"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Longrunning::Operations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Longrunning::CancelOperationRequest.new
+            #
+            #   # Call the cancel_operation method.
+            #   result = client.cancel_operation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def cancel_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -381,9 +460,11 @@ module Google
                 gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -443,6 +524,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/longrunning"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Longrunning::Operations::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Longrunning::WaitOperationRequest.new
+            #
+            #   # Call the wait_operation method.
+            #   result = client.wait_operation request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def wait_operation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?

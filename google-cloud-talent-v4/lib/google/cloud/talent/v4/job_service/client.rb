@@ -222,6 +222,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::CreateJobRequest.new
+            #
+            #   # Call the create_job method.
+            #   result = client.create_job request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::Job.
+            #   p result
+            #
             def create_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -239,9 +254,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -296,6 +313,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::BatchCreateJobsRequest.new
+            #
+            #   # Call the batch_create_jobs method.
+            #   result = client.batch_create_jobs request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_create_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -313,9 +352,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -370,6 +411,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::GetJobRequest.new
+            #
+            #   # Call the get_job method.
+            #   result = client.get_job request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::Job.
+            #   p result
+            #
             def get_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -387,9 +443,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -449,6 +507,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::UpdateJobRequest.new
+            #
+            #   # Call the update_job method.
+            #   result = client.update_job request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::Job.
+            #   p result
+            #
             def update_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -466,9 +539,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "job.name" => request.job.name
-              }
+              header_params = {}
+              if request.job&.name
+                header_params["job.name"] = request.job.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -538,6 +613,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::BatchUpdateJobsRequest.new
+            #
+            #   # Call the batch_update_jobs method.
+            #   result = client.batch_update_jobs request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_update_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -555,9 +652,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -614,6 +713,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::DeleteJobRequest.new
+            #
+            #   # Call the delete_job method.
+            #   result = client.delete_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -631,9 +745,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -694,6 +810,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::BatchDeleteJobsRequest.new
+            #
+            #   # Call the batch_delete_jobs method.
+            #   result = client.batch_delete_jobs request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_delete_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -711,9 +849,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -803,6 +943,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::ListJobsRequest.new
+            #
+            #   # Call the list_jobs method.
+            #   result = client.list_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Talent::V4::Job.
+            #     p response
+            #   end
+            #
             def list_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -820,9 +981,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -860,7 +1023,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil)
+            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -900,7 +1063,7 @@ module Google
             #
             #     Data types:
             #
-            #     * Histogram facet: facet names with format [a-zA-Z][a-zA-Z0-9_]+.
+            #     * Histogram facet: facet names with format `[a-zA-Z][a-zA-Z0-9_]+`.
             #     * String: string like "any string with backslash escape for quote(\")."
             #     * Number: whole number and floating point number like 10, -1 and -0.01.
             #     * List: list of elements with comma(,) separator surrounded by square
@@ -1068,6 +1231,14 @@ module Google
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
             #   @param disable_keyword_match [::Boolean]
+            #     This field is deprecated. Please use
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+            #
+            #     To migrate, disable_keyword_match set to false maps to
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+            #     true maps to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+            #
             #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4::Job#title Job.title},
             #     {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
             #     {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -1087,6 +1258,12 @@ module Google
             #     requests.
             #
             #     Defaults to false.
+            #   @param keyword_match_mode [::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode]
+            #     Controls what keyword match options to use. If both keyword_match_mode and
+            #     disable_keyword_match are set, keyword_match_mode will take precedence.
+            #
+            #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+            #     is specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::SearchJobsResponse]
@@ -1095,6 +1272,21 @@ module Google
             # @return [::Google::Cloud::Talent::V4::SearchJobsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::SearchJobsRequest.new
+            #
+            #   # Call the search_jobs method.
+            #   result = client.search_jobs request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::SearchJobsResponse.
+            #   p result
             #
             def search_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1113,9 +1305,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1157,7 +1351,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil)
+            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs_for_alert` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1197,7 +1391,7 @@ module Google
             #
             #     Data types:
             #
-            #     * Histogram facet: facet names with format [a-zA-Z][a-zA-Z0-9_]+.
+            #     * Histogram facet: facet names with format `[a-zA-Z][a-zA-Z0-9_]+`.
             #     * String: string like "any string with backslash escape for quote(\")."
             #     * Number: whole number and floating point number like 10, -1 and -0.01.
             #     * List: list of elements with comma(,) separator surrounded by square
@@ -1365,6 +1559,14 @@ module Google
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
             #   @param disable_keyword_match [::Boolean]
+            #     This field is deprecated. Please use
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+            #
+            #     To migrate, disable_keyword_match set to false maps to
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+            #     true maps to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+            #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+            #
             #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4::Job#title Job.title},
             #     {::Google::Cloud::Talent::V4::Job#description Job.description}, {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
             #     {::Google::Cloud::Talent::V4::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -1384,6 +1586,12 @@ module Google
             #     requests.
             #
             #     Defaults to false.
+            #   @param keyword_match_mode [::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode]
+            #     Controls what keyword match options to use. If both keyword_match_mode and
+            #     disable_keyword_match are set, keyword_match_mode will take precedence.
+            #
+            #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+            #     is specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::SearchJobsResponse]
@@ -1392,6 +1600,21 @@ module Google
             # @return [::Google::Cloud::Talent::V4::SearchJobsResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/talent/v4"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4::JobService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4::SearchJobsRequest.new
+            #
+            #   # Call the search_jobs_for_alert method.
+            #   result = client.search_jobs_for_alert request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4::SearchJobsResponse.
+            #   p result
             #
             def search_jobs_for_alert request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1410,9 +1633,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

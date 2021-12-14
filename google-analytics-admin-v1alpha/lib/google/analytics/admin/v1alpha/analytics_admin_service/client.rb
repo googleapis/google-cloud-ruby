@@ -264,6 +264,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetAccountRequest.new
+            #
+            #   # Call the get_account method.
+            #   result = client.get_account request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::Account.
+            #   p result
+            #
             def get_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -281,9 +296,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -347,6 +364,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Analytics::Admin::V1alpha::Account>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListAccountsRequest.new
+            #
+            #   # Call the list_accounts method.
+            #   result = client.list_accounts request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Account.
+            #     p response
+            #   end
             #
             def list_accounts request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -423,6 +461,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteAccountRequest.new
+            #
+            #   # Call the delete_account method.
+            #   result = client.delete_account request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -440,9 +493,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -496,6 +551,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateAccountRequest.new
+            #
+            #   # Call the update_account method.
+            #   result = client.update_account request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::Account.
+            #   p result
+            #
             def update_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -513,9 +583,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "account.name" => request.account.name
-              }
+              header_params = {}
+              if request.account&.name
+                header_params["account.name"] = request.account.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -566,6 +638,21 @@ module Google
             # @return [::Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest.new
+            #
+            #   # Call the provision_account_ticket method.
+            #   result = client.provision_account_ticket request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse.
+            #   p result
             #
             def provision_account_ticket request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -637,6 +724,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListAccountSummariesRequest.new
+            #
+            #   # Call the list_account_summaries method.
+            #   result = client.list_account_summaries request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AccountSummary.
+            #     p response
+            #   end
+            #
             def list_account_summaries request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -702,6 +810,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetPropertyRequest.new
+            #
+            #   # Call the get_property method.
+            #   result = client.get_property request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+            #   p result
+            #
             def get_property request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -719,9 +842,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -801,6 +926,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListPropertiesRequest.new
+            #
+            #   # Call the list_properties method.
+            #   result = client.list_properties request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::Property.
+            #     p response
+            #   end
+            #
             def list_properties request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -864,6 +1010,21 @@ module Google
             # @return [::Google::Analytics::Admin::V1alpha::Property]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreatePropertyRequest.new
+            #
+            #   # Call the create_property method.
+            #   result = client.create_property request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+            #   p result
             #
             def create_property request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -939,6 +1100,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeletePropertyRequest.new
+            #
+            #   # Call the delete_property method.
+            #   result = client.delete_property request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+            #   p result
+            #
             def delete_property request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -956,9 +1132,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1013,6 +1191,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdatePropertyRequest.new
+            #
+            #   # Call the update_property method.
+            #   result = client.update_property request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::Property.
+            #   p result
+            #
             def update_property request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1030,9 +1223,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "property.name" => request.property.name
-              }
+              header_params = {}
+              if request.property&.name
+                header_params["property.name"] = request.property.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1081,6 +1276,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetUserLinkRequest.new
+            #
+            #   # Call the get_user_link method.
+            #   result = client.get_user_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
+            #   p result
+            #
             def get_user_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1098,9 +1308,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1156,6 +1368,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchGetUserLinksRequest.new
+            #
+            #   # Call the batch_get_user_links method.
+            #   result = client.batch_get_user_links request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchGetUserLinksResponse.
+            #   p result
+            #
             def batch_get_user_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1173,9 +1400,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1234,6 +1463,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListUserLinksRequest.new
+            #
+            #   # Call the list_user_links method.
+            #   result = client.list_user_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::UserLink.
+            #     p response
+            #   end
+            #
             def list_user_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1251,9 +1501,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1321,6 +1573,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::AuditUserLinksRequest.new
+            #
+            #   # Call the audit_user_links method.
+            #   result = client.audit_user_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AuditUserLink.
+            #     p response
+            #   end
+            #
             def audit_user_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1338,9 +1611,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1399,6 +1674,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateUserLinkRequest.new
+            #
+            #   # Call the create_user_link method.
+            #   result = client.create_user_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
+            #   p result
+            #
             def create_user_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1416,9 +1706,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1480,6 +1772,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchCreateUserLinksRequest.new
+            #
+            #   # Call the batch_create_user_links method.
+            #   result = client.batch_create_user_links request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchCreateUserLinksResponse.
+            #   p result
+            #
             def batch_create_user_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1497,9 +1804,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1548,6 +1857,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateUserLinkRequest.new
+            #
+            #   # Call the update_user_link method.
+            #   result = client.update_user_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::UserLink.
+            #   p result
+            #
             def update_user_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1565,9 +1889,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "user_link.name" => request.user_link.name
-              }
+              header_params = {}
+              if request.user_link&.name
+                header_params["user_link.name"] = request.user_link.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1622,6 +1948,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksRequest.new
+            #
+            #   # Call the batch_update_user_links method.
+            #   result = client.batch_update_user_links request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::BatchUpdateUserLinksResponse.
+            #   p result
+            #
             def batch_update_user_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1639,9 +1980,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1690,6 +2033,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest.new
+            #
+            #   # Call the delete_user_link method.
+            #   result = client.delete_user_link request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_user_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1707,9 +2065,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1764,6 +2124,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest.new
+            #
+            #   # Call the batch_delete_user_links method.
+            #   result = client.batch_delete_user_links request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def batch_delete_user_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1781,9 +2156,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1834,6 +2211,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest.new
+            #
+            #   # Call the get_web_data_stream method.
+            #   result = client.get_web_data_stream request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::WebDataStream.
+            #   p result
+            #
             def get_web_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1851,9 +2243,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1904,6 +2298,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest.new
+            #
+            #   # Call the delete_web_data_stream method.
+            #   result = client.delete_web_data_stream request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_web_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1921,9 +2330,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1977,6 +2388,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest.new
+            #
+            #   # Call the update_web_data_stream method.
+            #   result = client.update_web_data_stream request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::WebDataStream.
+            #   p result
+            #
             def update_web_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1994,9 +2420,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "web_data_stream.name" => request.web_data_stream.name
-              }
+              header_params = {}
+              if request.web_data_stream&.name
+                header_params["web_data_stream.name"] = request.web_data_stream.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2048,6 +2476,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest.new
+            #
+            #   # Call the create_web_data_stream method.
+            #   result = client.create_web_data_stream request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::WebDataStream.
+            #   p result
+            #
             def create_web_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2065,9 +2508,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2130,6 +2575,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest.new
+            #
+            #   # Call the list_web_data_streams method.
+            #   result = client.list_web_data_streams request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::WebDataStream.
+            #     p response
+            #   end
+            #
             def list_web_data_streams request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2147,9 +2613,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2201,6 +2669,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest.new
+            #
+            #   # Call the get_ios_app_data_stream method.
+            #   result = client.get_ios_app_data_stream request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::IosAppDataStream.
+            #   p result
+            #
             def get_ios_app_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2218,9 +2701,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2271,6 +2756,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest.new
+            #
+            #   # Call the delete_ios_app_data_stream method.
+            #   result = client.delete_ios_app_data_stream request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_ios_app_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2288,9 +2788,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2344,6 +2846,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest.new
+            #
+            #   # Call the update_ios_app_data_stream method.
+            #   result = client.update_ios_app_data_stream request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::IosAppDataStream.
+            #   p result
+            #
             def update_ios_app_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2361,9 +2878,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "ios_app_data_stream.name" => request.ios_app_data_stream.name
-              }
+              header_params = {}
+              if request.ios_app_data_stream&.name
+                header_params["ios_app_data_stream.name"] = request.ios_app_data_stream.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2426,6 +2945,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest.new
+            #
+            #   # Call the list_ios_app_data_streams method.
+            #   result = client.list_ios_app_data_streams request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::IosAppDataStream.
+            #     p response
+            #   end
+            #
             def list_ios_app_data_streams request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2443,9 +2983,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2497,6 +3039,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest.new
+            #
+            #   # Call the get_android_app_data_stream method.
+            #   result = client.get_android_app_data_stream request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::AndroidAppDataStream.
+            #   p result
+            #
             def get_android_app_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2514,9 +3071,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2567,6 +3126,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest.new
+            #
+            #   # Call the delete_android_app_data_stream method.
+            #   result = client.delete_android_app_data_stream request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_android_app_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2584,9 +3158,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2640,6 +3216,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest.new
+            #
+            #   # Call the update_android_app_data_stream method.
+            #   result = client.update_android_app_data_stream request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::AndroidAppDataStream.
+            #   p result
+            #
             def update_android_app_data_stream request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2657,9 +3248,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "android_app_data_stream.name" => request.android_app_data_stream.name
-              }
+              header_params = {}
+              if request.android_app_data_stream&.name
+                header_params["android_app_data_stream.name"] = request.android_app_data_stream.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2724,6 +3317,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest.new
+            #
+            #   # Call the list_android_app_data_streams method.
+            #   result = client.list_android_app_data_streams request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream.
+            #     p response
+            #   end
+            #
             def list_android_app_data_streams request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2741,9 +3355,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2798,6 +3414,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest.new
+            #
+            #   # Call the get_enhanced_measurement_settings method.
+            #   result = client.get_enhanced_measurement_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.
+            #   p result
+            #
             def get_enhanced_measurement_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2815,9 +3446,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2873,6 +3506,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest.new
+            #
+            #   # Call the update_enhanced_measurement_settings method.
+            #   result = client.update_enhanced_measurement_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings.
+            #   p result
+            #
             def update_enhanced_measurement_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2890,9 +3538,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "enhanced_measurement_settings.name" => request.enhanced_measurement_settings.name
-              }
+              header_params = {}
+              if request.enhanced_measurement_settings&.name
+                header_params["enhanced_measurement_settings.name"] = request.enhanced_measurement_settings.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2946,6 +3596,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest.new
+            #
+            #   # Call the create_firebase_link method.
+            #   result = client.create_firebase_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::FirebaseLink.
+            #   p result
+            #
             def create_firebase_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2963,9 +3628,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3015,6 +3682,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteFirebaseLinkRequest.new
+            #
+            #   # Call the delete_firebase_link method.
+            #   result = client.delete_firebase_link request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_firebase_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3032,9 +3714,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3095,6 +3779,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListFirebaseLinksRequest.new
+            #
+            #   # Call the list_firebase_links method.
+            #   result = client.list_firebase_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::FirebaseLink.
+            #     p response
+            #   end
+            #
             def list_firebase_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3112,9 +3817,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3168,6 +3875,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetGlobalSiteTagRequest.new
+            #
+            #   # Call the get_global_site_tag method.
+            #   result = client.get_global_site_tag request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::GlobalSiteTag.
+            #   p result
+            #
             def get_global_site_tag request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3185,9 +3907,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3238,6 +3962,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateGoogleAdsLinkRequest.new
+            #
+            #   # Call the create_google_ads_link method.
+            #   result = client.create_google_ads_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+            #   p result
+            #
             def create_google_ads_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3255,9 +3994,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3310,6 +4051,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateGoogleAdsLinkRequest.new
+            #
+            #   # Call the update_google_ads_link method.
+            #   result = client.update_google_ads_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+            #   p result
+            #
             def update_google_ads_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3327,9 +4083,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "google_ads_link.name" => request.google_ads_link.name
-              }
+              header_params = {}
+              if request.google_ads_link&.name
+                header_params["google_ads_link.name"] = request.google_ads_link.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3378,6 +4136,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteGoogleAdsLinkRequest.new
+            #
+            #   # Call the delete_google_ads_link method.
+            #   result = client.delete_google_ads_link request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_google_ads_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3395,9 +4168,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3456,6 +4231,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListGoogleAdsLinksRequest.new
+            #
+            #   # Call the list_google_ads_links method.
+            #   result = client.list_google_ads_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+            #     p response
+            #   end
+            #
             def list_google_ads_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3473,9 +4269,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3528,6 +4326,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest.new
+            #
+            #   # Call the get_data_sharing_settings method.
+            #   result = client.get_data_sharing_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataSharingSettings.
+            #   p result
+            #
             def get_data_sharing_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3545,9 +4358,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3600,6 +4415,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetMeasurementProtocolSecretRequest.new
+            #
+            #   # Call the get_measurement_protocol_secret method.
+            #   result = client.get_measurement_protocol_secret request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+            #   p result
+            #
             def get_measurement_protocol_secret request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3617,9 +4447,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3682,6 +4514,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListMeasurementProtocolSecretsRequest.new
+            #
+            #   # Call the list_measurement_protocol_secrets method.
+            #   result = client.list_measurement_protocol_secrets request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+            #     p response
+            #   end
+            #
             def list_measurement_protocol_secrets request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3699,9 +4552,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3756,6 +4611,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateMeasurementProtocolSecretRequest.new
+            #
+            #   # Call the create_measurement_protocol_secret method.
+            #   result = client.create_measurement_protocol_secret request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+            #   p result
+            #
             def create_measurement_protocol_secret request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3773,9 +4643,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3828,6 +4700,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteMeasurementProtocolSecretRequest.new
+            #
+            #   # Call the delete_measurement_protocol_secret method.
+            #   result = client.delete_measurement_protocol_secret request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_measurement_protocol_secret request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3845,9 +4732,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3898,6 +4787,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateMeasurementProtocolSecretRequest.new
+            #
+            #   # Call the update_measurement_protocol_secret method.
+            #   result = client.update_measurement_protocol_secret request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret.
+            #   p result
+            #
             def update_measurement_protocol_secret request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3915,9 +4819,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "measurement_protocol_secret.name" => request.measurement_protocol_secret.name
-              }
+              header_params = {}
+              if request.measurement_protocol_secret&.name
+                header_params["measurement_protocol_secret.name"] = request.measurement_protocol_secret.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3992,6 +4898,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest.new
+            #
+            #   # Call the search_change_history_events method.
+            #   result = client.search_change_history_events request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ChangeHistoryEvent.
+            #     p response
+            #   end
+            #
             def search_change_history_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4009,9 +4936,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "account" => request.account
-              }
+              header_params = {}
+              if request.account
+                header_params["account"] = request.account
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4062,6 +4991,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetGoogleSignalsSettingsRequest.new
+            #
+            #   # Call the get_google_signals_settings method.
+            #   result = client.get_google_signals_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleSignalsSettings.
+            #   p result
+            #
             def get_google_signals_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4079,9 +5023,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4135,6 +5081,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateGoogleSignalsSettingsRequest.new
+            #
+            #   # Call the update_google_signals_settings method.
+            #   result = client.update_google_signals_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleSignalsSettings.
+            #   p result
+            #
             def update_google_signals_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4152,9 +5113,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "google_signals_settings.name" => request.google_signals_settings.name
-              }
+              header_params = {}
+              if request.google_signals_settings&.name
+                header_params["google_signals_settings.name"] = request.google_signals_settings.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4206,6 +5169,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateConversionEventRequest.new
+            #
+            #   # Call the create_conversion_event method.
+            #   result = client.create_conversion_event request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ConversionEvent.
+            #   p result
+            #
             def create_conversion_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4223,9 +5201,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4276,6 +5256,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetConversionEventRequest.new
+            #
+            #   # Call the get_conversion_event method.
+            #   result = client.get_conversion_event request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ConversionEvent.
+            #   p result
+            #
             def get_conversion_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4293,9 +5288,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4346,6 +5343,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteConversionEventRequest.new
+            #
+            #   # Call the delete_conversion_event method.
+            #   result = client.delete_conversion_event request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_conversion_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4363,9 +5375,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4426,6 +5440,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListConversionEventsRequest.new
+            #
+            #   # Call the list_conversion_events method.
+            #   result = client.list_conversion_events request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::ConversionEvent.
+            #     p response
+            #   end
+            #
             def list_conversion_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4443,9 +5478,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4496,6 +5533,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkRequest.new
+            #
+            #   # Call the get_display_video360_advertiser_link method.
+            #   result = client.get_display_video360_advertiser_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+            #   p result
+            #
             def get_display_video360_advertiser_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4513,9 +5565,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4575,6 +5629,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinksRequest.new
+            #
+            #   # Call the list_display_video360_advertiser_links method.
+            #   result = client.list_display_video360_advertiser_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+            #     p response
+            #   end
+            #
             def list_display_video360_advertiser_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4592,9 +5667,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4650,6 +5727,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkRequest.new
+            #
+            #   # Call the create_display_video360_advertiser_link method.
+            #   result = client.create_display_video360_advertiser_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+            #   p result
+            #
             def create_display_video360_advertiser_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4667,9 +5759,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4719,6 +5813,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkRequest.new
+            #
+            #   # Call the delete_display_video360_advertiser_link method.
+            #   result = client.delete_display_video360_advertiser_link request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_display_video360_advertiser_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4736,9 +5845,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4791,6 +5902,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest.new
+            #
+            #   # Call the update_display_video360_advertiser_link method.
+            #   result = client.update_display_video360_advertiser_link request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+            #   p result
+            #
             def update_display_video360_advertiser_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4808,9 +5934,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "display_video_360_advertiser_link.name" => request.display_video_360_advertiser_link.name
-              }
+              header_params = {}
+              if request.display_video_360_advertiser_link&.name
+                header_params["display_video_360_advertiser_link.name"] = request.display_video_360_advertiser_link.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4860,6 +5988,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetDisplayVideo360AdvertiserLinkProposalRequest.new
+            #
+            #   # Call the get_display_video360_advertiser_link_proposal method.
+            #   result = client.get_display_video360_advertiser_link_proposal request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+            #   p result
+            #
             def get_display_video360_advertiser_link_proposal request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4877,9 +6020,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -4940,6 +6085,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListDisplayVideo360AdvertiserLinkProposalsRequest.new
+            #
+            #   # Call the list_display_video360_advertiser_link_proposals method.
+            #   result = client.list_display_video360_advertiser_link_proposals request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+            #     p response
+            #   end
+            #
             def list_display_video360_advertiser_link_proposals request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -4957,9 +6123,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5011,6 +6179,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateDisplayVideo360AdvertiserLinkProposalRequest.new
+            #
+            #   # Call the create_display_video360_advertiser_link_proposal method.
+            #   result = client.create_display_video360_advertiser_link_proposal request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+            #   p result
+            #
             def create_display_video360_advertiser_link_proposal request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5028,9 +6211,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5081,6 +6266,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::DeleteDisplayVideo360AdvertiserLinkProposalRequest.new
+            #
+            #   # Call the delete_display_video360_advertiser_link_proposal method.
+            #   result = client.delete_display_video360_advertiser_link_proposal request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_display_video360_advertiser_link_proposal request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5098,9 +6298,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5152,6 +6354,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalRequest.new
+            #
+            #   # Call the approve_display_video360_advertiser_link_proposal method.
+            #   result = client.approve_display_video360_advertiser_link_proposal request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::ApproveDisplayVideo360AdvertiserLinkProposalResponse.
+            #   p result
+            #
             def approve_display_video360_advertiser_link_proposal request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5169,9 +6386,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5225,6 +6444,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CancelDisplayVideo360AdvertiserLinkProposalRequest.new
+            #
+            #   # Call the cancel_display_video360_advertiser_link_proposal method.
+            #   result = client.cancel_display_video360_advertiser_link_proposal request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLinkProposal.
+            #   p result
+            #
             def cancel_display_video360_advertiser_link_proposal request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5242,9 +6476,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5295,6 +6531,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateCustomDimensionRequest.new
+            #
+            #   # Call the create_custom_dimension method.
+            #   result = client.create_custom_dimension request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
+            #   p result
+            #
             def create_custom_dimension request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5312,9 +6563,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5367,6 +6620,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateCustomDimensionRequest.new
+            #
+            #   # Call the update_custom_dimension method.
+            #   result = client.update_custom_dimension request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
+            #   p result
+            #
             def update_custom_dimension request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5384,9 +6652,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "custom_dimension.name" => request.custom_dimension.name
-              }
+              header_params = {}
+              if request.custom_dimension&.name
+                header_params["custom_dimension.name"] = request.custom_dimension.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5445,6 +6715,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListCustomDimensionsRequest.new
+            #
+            #   # Call the list_custom_dimensions method.
+            #   result = client.list_custom_dimensions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomDimension.
+            #     p response
+            #   end
+            #
             def list_custom_dimensions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5462,9 +6753,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5515,6 +6808,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ArchiveCustomDimensionRequest.new
+            #
+            #   # Call the archive_custom_dimension method.
+            #   result = client.archive_custom_dimension request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def archive_custom_dimension request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5532,9 +6840,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5584,6 +6894,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetCustomDimensionRequest.new
+            #
+            #   # Call the get_custom_dimension method.
+            #   result = client.get_custom_dimension request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomDimension.
+            #   p result
+            #
             def get_custom_dimension request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5601,9 +6926,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5654,6 +6981,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::CreateCustomMetricRequest.new
+            #
+            #   # Call the create_custom_metric method.
+            #   result = client.create_custom_metric request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomMetric.
+            #   p result
+            #
             def create_custom_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5671,9 +7013,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5726,6 +7070,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateCustomMetricRequest.new
+            #
+            #   # Call the update_custom_metric method.
+            #   result = client.update_custom_metric request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomMetric.
+            #   p result
+            #
             def update_custom_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5743,9 +7102,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "custom_metric.name" => request.custom_metric.name
-              }
+              header_params = {}
+              if request.custom_metric&.name
+                header_params["custom_metric.name"] = request.custom_metric.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5804,6 +7165,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ListCustomMetricsRequest.new
+            #
+            #   # Call the list_custom_metrics method.
+            #   result = client.list_custom_metrics request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Analytics::Admin::V1alpha::CustomMetric.
+            #     p response
+            #   end
+            #
             def list_custom_metrics request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5821,9 +7203,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5874,6 +7258,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::ArchiveCustomMetricRequest.new
+            #
+            #   # Call the archive_custom_metric method.
+            #   result = client.archive_custom_metric request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def archive_custom_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5891,9 +7290,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -5943,6 +7344,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetCustomMetricRequest.new
+            #
+            #   # Call the get_custom_metric method.
+            #   result = client.get_custom_metric request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::CustomMetric.
+            #   p result
+            #
             def get_custom_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -5960,9 +7376,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -6014,6 +7432,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest.new
+            #
+            #   # Call the get_data_retention_settings method.
+            #   result = client.get_data_retention_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataRetentionSettings.
+            #   p result
+            #
             def get_data_retention_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6031,9 +7464,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -6087,6 +7522,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/analytics/admin/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest.new
+            #
+            #   # Call the update_data_retention_settings method.
+            #   result = client.update_data_retention_settings request
+            #
+            #   # The returned object is of type Google::Analytics::Admin::V1alpha::DataRetentionSettings.
+            #   p result
+            #
             def update_data_retention_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -6104,9 +7554,11 @@ module Google
                 gapic_version: ::Google::Analytics::Admin::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "data_retention_settings.name" => request.data_retention_settings.name
-              }
+              header_params = {}
+              if request.data_retention_settings&.name
+                header_params["data_retention_settings.name"] = request.data_retention_settings.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

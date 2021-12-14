@@ -20,7 +20,8 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   # Create a job object with the project's mocked connection object
   let(:region) { "US" }
   let(:labels) { { "foo" => "bar" } }
-  let(:job_hash) { random_job_hash location: region, transaction_id: "123456789" }
+  let(:session_id) { "mysessionid" }
+  let(:job_hash) { random_job_hash location: region, transaction_id: "123456789", session_id: session_id }
   let(:job_gapi) do
     job_gapi = Google::Apis::BigqueryV2::Job.from_json job_hash.to_json
     job_gapi.configuration.labels = labels
@@ -60,6 +61,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     _(job.user_email).must_equal "user@example.com"
     _(job.num_child_jobs).must_equal 2
     _(job.parent_job_id).must_equal "2222222222"
+    _(job.session_id).must_equal session_id
   end
 
   it "knows its state" do
@@ -245,6 +247,15 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     bigquery.service.mocked_service = mock
 
     job.cancel
+    mock.verify
+  end
+
+  it "can delete itself" do
+    mock = Minitest::Mock.new
+    mock.expect :delete_job, nil, [project, job_id, location: region]
+    bigquery.service.mocked_service = mock
+
+    job.delete
     mock.verify
   end
 

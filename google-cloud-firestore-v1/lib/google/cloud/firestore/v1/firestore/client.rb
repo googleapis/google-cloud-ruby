@@ -261,6 +261,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::GetDocumentRequest.new
+            #
+            #   # Call the get_document method.
+            #   result = client.get_document request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+            #   p result
+            #
             def get_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -278,9 +293,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -361,6 +378,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::ListDocumentsRequest.new
+            #
+            #   # Call the list_documents method.
+            #   result = client.list_documents request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Firestore::V1::Document.
+            #     p response
+            #   end
+            #
             def list_documents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -378,10 +416,14 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent,
-                "collection_id" => request.collection_id
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+              if request.collection_id
+                header_params["collection_id"] = request.collection_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -448,6 +490,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::UpdateDocumentRequest.new
+            #
+            #   # Call the update_document method.
+            #   result = client.update_document request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+            #   p result
+            #
             def update_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -465,9 +522,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "document.name" => request.document.name
-              }
+              header_params = {}
+              if request.document&.name
+                header_params["document.name"] = request.document.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -520,6 +579,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::DeleteDocumentRequest.new
+            #
+            #   # Call the delete_document method.
+            #   result = client.delete_document request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -537,9 +611,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -612,6 +688,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::BatchGetDocumentsRequest.new
+            #
+            #   # Call the batch_get_documents method.
+            #   result = client.batch_get_documents request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Firestore::V1::BatchGetDocumentsResponse.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
             def batch_get_documents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -629,9 +723,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -684,6 +780,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::BeginTransactionRequest.new
+            #
+            #   # Call the begin_transaction method.
+            #   result = client.begin_transaction request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::BeginTransactionResponse.
+            #   p result
+            #
             def begin_transaction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -701,9 +812,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -759,6 +872,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::CommitRequest.new
+            #
+            #   # Call the commit method.
+            #   result = client.commit request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::CommitResponse.
+            #   p result
+            #
             def commit request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -776,9 +904,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -830,6 +960,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::RollbackRequest.new
+            #
+            #   # Call the rollback method.
+            #   result = client.rollback request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def rollback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -847,9 +992,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -915,6 +1062,24 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::RunQueryRequest.new
+            #
+            #   # Call the run_query method.
+            #   result = client.run_query request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Firestore::V1::RunQueryResponse.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
             def run_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -932,9 +1097,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1024,6 +1191,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::PartitionQueryRequest.new
+            #
+            #   # Call the partition_query method.
+            #   result = client.partition_query request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Firestore::V1::Cursor.
+            #     p response
+            #   end
+            #
             def partition_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1041,9 +1229,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1079,6 +1269,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Firestore::V1::WriteResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the write method to start streaming.
+            #   output = client.write input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::Firestore::V1::WriteRequest.new
+            #   input << Google::Cloud::Firestore::V1::WriteRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::Firestore::V1::WriteResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
             #
             def write request, options = nil
               unless request.is_a? ::Enumerable
@@ -1133,6 +1347,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Firestore::V1::ListenResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the listen method to start streaming.
+            #   output = client.listen input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::Firestore::V1::ListenRequest.new
+            #   input << Google::Cloud::Firestore::V1::ListenRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::Firestore::V1::ListenResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
             #
             def listen request, options = nil
               unless request.is_a? ::Enumerable
@@ -1209,6 +1447,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new
+            #
+            #   # Call the list_collection_ids method.
+            #   result = client.list_collection_ids request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::ListCollectionIdsResponse.
+            #   p result
+            #
             def list_collection_ids request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1226,9 +1479,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1294,6 +1549,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::BatchWriteRequest.new
+            #
+            #   # Call the batch_write method.
+            #   result = client.batch_write request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::BatchWriteResponse.
+            #   p result
+            #
             def batch_write request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1311,9 +1581,11 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "database" => request.database
-              }
+              header_params = {}
+              if request.database
+                header_params["database"] = request.database
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1377,6 +1649,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::CreateDocumentRequest.new
+            #
+            #   # Call the create_document method.
+            #   result = client.create_document request
+            #
+            #   # The returned object is of type Google::Cloud::Firestore::V1::Document.
+            #   p result
+            #
             def create_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1394,10 +1681,14 @@ module Google
                 gapic_version: ::Google::Cloud::Firestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent,
-                "collection_id" => request.collection_id
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+              if request.collection_id
+                header_params["collection_id"] = request.collection_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

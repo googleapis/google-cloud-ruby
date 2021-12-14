@@ -345,6 +345,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::InspectContentRequest.new
+            #
+            #   # Call the inspect_content method.
+            #   result = client.inspect_content request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectContentResponse.
+            #   p result
+            #
             def inspect_content request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -362,9 +377,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -446,6 +463,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::RedactImageRequest.new
+            #
+            #   # Call the redact_image method.
+            #   result = client.redact_image request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::RedactImageResponse.
+            #   p result
+            #
             def redact_image request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -463,9 +495,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -560,6 +594,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeidentifyContentRequest.new
+            #
+            #   # Call the deidentify_content method.
+            #   result = client.deidentify_content request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyContentResponse.
+            #   p result
+            #
             def deidentify_content request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -577,9 +626,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -677,6 +728,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ReidentifyContentRequest.new
+            #
+            #   # Call the reidentify_content method.
+            #   result = client.reidentify_content request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ReidentifyContentResponse.
+            #   p result
+            #
             def reidentify_content request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -694,9 +760,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -759,6 +827,21 @@ module Google
             # @return [::Google::Cloud::Dlp::V2::ListInfoTypesResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListInfoTypesRequest.new
+            #
+            #   # Call the list_info_types method.
+            #   result = client.list_info_types request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::ListInfoTypesResponse.
+            #   p result
             #
             def list_info_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -852,6 +935,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateInspectTemplateRequest.new
+            #
+            #   # Call the create_inspect_template method.
+            #   result = client.create_inspect_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+            #   p result
+            #
             def create_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -869,9 +967,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -927,6 +1027,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateInspectTemplateRequest.new
+            #
+            #   # Call the update_inspect_template method.
+            #   result = client.update_inspect_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+            #   p result
+            #
             def update_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -944,9 +1059,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -998,6 +1115,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetInspectTemplateRequest.new
+            #
+            #   # Call the get_inspect_template method.
+            #   result = client.get_inspect_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::InspectTemplate.
+            #   p result
+            #
             def get_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1015,9 +1147,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1108,6 +1242,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new
+            #
+            #   # Call the list_inspect_templates method.
+            #   result = client.list_inspect_templates request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::InspectTemplate.
+            #     p response
+            #   end
+            #
             def list_inspect_templates request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1125,9 +1280,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1180,6 +1337,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new
+            #
+            #   # Call the delete_inspect_template method.
+            #   result = client.delete_inspect_template request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_inspect_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1197,9 +1369,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1279,6 +1453,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateDeidentifyTemplateRequest.new
+            #
+            #   # Call the create_deidentify_template method.
+            #   result = client.create_deidentify_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #   p result
+            #
             def create_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1296,9 +1485,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1355,6 +1546,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateDeidentifyTemplateRequest.new
+            #
+            #   # Call the update_deidentify_template method.
+            #   result = client.update_deidentify_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #   p result
+            #
             def update_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1372,9 +1578,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1427,6 +1635,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetDeidentifyTemplateRequest.new
+            #
+            #   # Call the get_deidentify_template method.
+            #   result = client.get_deidentify_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #   p result
+            #
             def get_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1444,9 +1667,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1538,6 +1763,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListDeidentifyTemplatesRequest.new
+            #
+            #   # Call the list_deidentify_templates method.
+            #   result = client.list_deidentify_templates request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::DeidentifyTemplate.
+            #     p response
+            #   end
+            #
             def list_deidentify_templates request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1555,9 +1801,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1611,6 +1859,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteDeidentifyTemplateRequest.new
+            #
+            #   # Call the delete_deidentify_template method.
+            #   result = client.delete_deidentify_template request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_deidentify_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1628,9 +1891,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1705,6 +1970,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateJobTriggerRequest.new
+            #
+            #   # Call the create_job_trigger method.
+            #   result = client.create_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+            #   p result
+            #
             def create_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1722,9 +2002,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1779,6 +2061,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateJobTriggerRequest.new
+            #
+            #   # Call the update_job_trigger method.
+            #   result = client.update_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+            #   p result
+            #
             def update_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1796,9 +2093,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1822,9 +2121,6 @@ module Google
             # Inspect hybrid content and store findings to a trigger. The inspection
             # will be processed asynchronously. To review the findings monitor the
             # jobs within the trigger.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload hybrid_inspect_job_trigger(request, options = nil)
             #   Pass arguments to `hybrid_inspect_job_trigger` via a request object, either of type
@@ -1855,6 +2151,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::HybridInspectJobTriggerRequest.new
+            #
+            #   # Call the hybrid_inspect_job_trigger method.
+            #   result = client.hybrid_inspect_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::HybridInspectResponse.
+            #   p result
+            #
             def hybrid_inspect_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1872,9 +2183,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1925,6 +2238,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetJobTriggerRequest.new
+            #
+            #   # Call the get_job_trigger method.
+            #   result = client.get_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::JobTrigger.
+            #   p result
+            #
             def get_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1942,9 +2270,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1978,7 +2308,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_job_triggers(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil, location_id: nil)
+            # @overload list_job_triggers(parent: nil, page_token: nil, page_size: nil, order_by: nil, filter: nil, type: nil, location_id: nil)
             #   Pass arguments to `list_job_triggers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2031,7 +2361,7 @@ module Google
             #     * Restrictions can be combined by `AND` or `OR` logical operators. A
             #     sequence of restrictions implicitly uses `AND`.
             #     * A restriction has the form of `{field} {operator} {value}`.
-            #     * Supported fields/values for inspect jobs:
+            #     * Supported fields/values for inspect triggers:
             #         - `status` - HEALTHY|PAUSED|CANCELLED
             #         - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
             #         - 'last_run_time` - RFC 3339 formatted timestamp, surrounded by
@@ -2047,6 +2377,8 @@ module Google
             #     * last_run_time > \"2017-12-12T00:00:00+00:00\"
             #
             #     The length of this field should be no more than 500 characters.
+            #   @param type [::Google::Cloud::Dlp::V2::DlpJobType]
+            #     The type of jobs. Will use `DlpJobType.INSPECT` if not set.
             #   @param location_id [::String]
             #     Deprecated. This field has no effect.
             #
@@ -2057,6 +2389,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dlp::V2::JobTrigger>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListJobTriggersRequest.new
+            #
+            #   # Call the list_job_triggers method.
+            #   result = client.list_job_triggers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::JobTrigger.
+            #     p response
+            #   end
             #
             def list_job_triggers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2075,9 +2428,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2129,6 +2484,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteJobTriggerRequest.new
+            #
+            #   # Call the delete_job_trigger method.
+            #   result = client.delete_job_trigger request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2146,9 +2516,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2199,6 +2571,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ActivateJobTriggerRequest.new
+            #
+            #   # Call the activate_job_trigger method.
+            #   result = client.activate_job_trigger request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+            #   p result
+            #
             def activate_job_trigger request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2216,9 +2603,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2280,9 +2669,10 @@ module Google
             #
             #         parent=projects/example-project/locations/europe-west3
             #   @param inspect_job [::Google::Cloud::Dlp::V2::InspectJobConfig, ::Hash]
-            #     Set to control what and how to inspect.
+            #     An inspection job scans a storage repository for InfoTypes.
             #   @param risk_job [::Google::Cloud::Dlp::V2::RiskAnalysisJobConfig, ::Hash]
-            #     Set to choose what metric to calculate.
+            #     A risk analysis job calculates re-identification risk metrics for a
+            #     BigQuery table.
             #   @param job_id [::String]
             #     The job id can contain uppercase and lowercase letters,
             #     numbers, and hyphens; that is, it must match the regular
@@ -2298,6 +2688,21 @@ module Google
             # @return [::Google::Cloud::Dlp::V2::DlpJob]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateDlpJobRequest.new
+            #
+            #   # Call the create_dlp_job method.
+            #   result = client.create_dlp_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+            #   p result
             #
             def create_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2316,9 +2721,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2435,6 +2842,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListDlpJobsRequest.new
+            #
+            #   # Call the list_dlp_jobs method.
+            #   result = client.list_dlp_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::DlpJob.
+            #     p response
+            #   end
+            #
             def list_dlp_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2452,9 +2880,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2506,6 +2936,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetDlpJobRequest.new
+            #
+            #   # Call the get_dlp_job method.
+            #   result = client.get_dlp_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+            #   p result
+            #
             def get_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2523,9 +2968,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2578,6 +3025,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteDlpJobRequest.new
+            #
+            #   # Call the delete_dlp_job method.
+            #   result = client.delete_dlp_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2595,9 +3057,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2650,6 +3114,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CancelDlpJobRequest.new
+            #
+            #   # Call the cancel_dlp_job method.
+            #   result = client.cancel_dlp_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def cancel_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2667,9 +3146,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2748,6 +3229,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::CreateStoredInfoTypeRequest.new
+            #
+            #   # Call the create_stored_info_type method.
+            #   result = client.create_stored_info_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+            #   p result
+            #
             def create_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2765,9 +3261,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2827,6 +3325,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::UpdateStoredInfoTypeRequest.new
+            #
+            #   # Call the update_stored_info_type method.
+            #   result = client.update_stored_info_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+            #   p result
+            #
             def update_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2844,9 +3357,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2899,6 +3414,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::GetStoredInfoTypeRequest.new
+            #
+            #   # Call the get_stored_info_type method.
+            #   result = client.get_stored_info_type request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::StoredInfoType.
+            #   p result
+            #
             def get_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2916,9 +3446,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3011,6 +3543,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::ListStoredInfoTypesRequest.new
+            #
+            #   # Call the list_stored_info_types method.
+            #   result = client.list_stored_info_types request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dlp::V2::StoredInfoType.
+            #     p response
+            #   end
+            #
             def list_stored_info_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3028,9 +3581,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3084,6 +3639,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::DeleteStoredInfoTypeRequest.new
+            #
+            #   # Call the delete_stored_info_type method.
+            #   result = client.delete_stored_info_type request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_stored_info_type request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3101,9 +3671,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3125,11 +3697,8 @@ module Google
 
             ##
             # Inspect hybrid content and store findings to a job.
-            # To review the findings inspect the job. Inspection will occur
+            # To review the findings, inspect the job. Inspection will occur
             # asynchronously.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload hybrid_inspect_dlp_job(request, options = nil)
             #   Pass arguments to `hybrid_inspect_dlp_job` via a request object, either of type
@@ -3160,6 +3729,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::HybridInspectDlpJobRequest.new
+            #
+            #   # Call the hybrid_inspect_dlp_job method.
+            #   result = client.hybrid_inspect_dlp_job request
+            #
+            #   # The returned object is of type Google::Cloud::Dlp::V2::HybridInspectResponse.
+            #   p result
+            #
             def hybrid_inspect_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3177,9 +3761,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3202,9 +3788,6 @@ module Google
             ##
             # Finish a running hybrid DlpJob. Triggers the finalization steps and running
             # of any enabled actions that have not yet run.
-            # Early access feature is in a pre-release state and might change or have
-            # limited support. For more information, see
-            # https://cloud.google.com/products#product-launch-stages.
             #
             # @overload finish_dlp_job(request, options = nil)
             #   Pass arguments to `finish_dlp_job` via a request object, either of type
@@ -3232,6 +3815,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dlp/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dlp::V2::DlpService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dlp::V2::FinishDlpJobRequest.new
+            #
+            #   # Call the finish_dlp_job method.
+            #   result = client.finish_dlp_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def finish_dlp_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3249,9 +3847,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dlp::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

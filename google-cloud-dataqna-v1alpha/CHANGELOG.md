@@ -1,5 +1,17 @@
 # Release History
 
+### 0.2.5 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.2.4 / 2021-09-28
+
+#### Documentation
+
+* Remove a broken documentation link
+
 ### 0.2.3 / 2021-08-11
 
 #### Bug Fixes

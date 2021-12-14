@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-monitoring-v3", ">= 0.4", "< 2.a"
   gem.add_dependency "google-cloud-monitoring-dashboard-v1", ">= 0.5", "< 2.a"
+  gem.add_dependency "google-cloud-monitoring-metrics_scope-v1", ">= 0.0", "< 2.a"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"
   gem.add_development_dependency "minitest", "~> 5.14"

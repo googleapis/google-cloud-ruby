@@ -1,5 +1,24 @@
 # Release History
 
+### 0.10.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.10.0 / 2021-10-21
+
+#### Features
+
+* Support for raw PKCS1 signing keys
+
+### 0.9.0 / 2021-10-18
+
+#### Features
+
+* Added OAEP+SHA1 to the list of supported algorithms
+* Support RSA encrypt with SHA-1 digest
+
 ### 0.8.0 / 2021-09-02
 
 #### Features

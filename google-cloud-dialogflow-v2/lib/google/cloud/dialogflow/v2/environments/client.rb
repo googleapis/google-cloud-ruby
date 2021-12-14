@@ -187,6 +187,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ListEnvironmentsRequest.new
+            #
+            #   # Call the list_environments method.
+            #   result = client.list_environments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::Environment.
+            #     p response
+            #   end
+            #
             def list_environments request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -204,9 +225,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -263,6 +286,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetEnvironmentRequest.new
+            #
+            #   # Call the get_environment method.
+            #   result = client.get_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
+            #   p result
+            #
             def get_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -280,9 +318,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -339,6 +379,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new
+            #
+            #   # Call the create_environment method.
+            #   result = client.create_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
+            #   p result
+            #
             def create_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,9 +411,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -425,6 +482,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::UpdateEnvironmentRequest.new
+            #
+            #   # Call the update_environment method.
+            #   result = client.update_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
+            #   p result
+            #
             def update_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -442,9 +514,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "environment.name" => request.environment.name
-              }
+              header_params = {}
+              if request.environment&.name
+                header_params["environment.name"] = request.environment.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -500,6 +574,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::DeleteEnvironmentRequest.new
+            #
+            #   # Call the delete_environment method.
+            #   result = client.delete_environment request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_environment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -517,9 +606,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -580,6 +671,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::GetEnvironmentHistoryRequest.new
+            #
+            #   # Call the get_environment_history method.
+            #   result = client.get_environment_history request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dialogflow::V2::EnvironmentHistory::Entry.
+            #     p response
+            #   end
+            #
             def get_environment_history request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -597,9 +709,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

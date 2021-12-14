@@ -30,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :epoch, :int32, 1
       optional :name, :string, 2
       optional :revision, :string, 3
+      optional :inclusive, :bool, 6
       optional :kind, :enum, 4, "grafeas.v1.Version.VersionKind"
       optional :full_name, :string, 5
     end

@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-billing-budgets
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Credentials`):
+`::Google::Cloud::Billing::Budgets::V1::BudgetService::Credentials`):
 
 * `BILLING_BUDGETS_CREDENTIALS` - Path to JSON file, or JSON contents
 * `BILLING_BUDGETS_KEYFILE` - Path to JSON file, or JSON contents

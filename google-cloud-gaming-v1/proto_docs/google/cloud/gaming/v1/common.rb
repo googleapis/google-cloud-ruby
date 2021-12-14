@@ -126,8 +126,10 @@ module Google
         # If only cron_spec + cron_job_duration are specified, the event is effective
         # starting at the local time specified by cron_spec, and is recurring.
         #
-        #   start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
-        #   cron job: cron spec start time + duration
+        # ```
+        # start_time|-------[cron job]-------[cron job]-------[cron job]---|end_time
+        # cron job: cron spec start time + duration
+        # ```
         # @!attribute [rw] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The start time of the event.

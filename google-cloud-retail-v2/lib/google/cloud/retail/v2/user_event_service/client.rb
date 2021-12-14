@@ -74,7 +74,7 @@ module Google
                   initial_delay: 0.1, max_delay: 30.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
-                default_config.rpcs.import_user_events.timeout = 300.0
+                default_config.rpcs.import_user_events.timeout = 600.0
                 default_config.rpcs.import_user_events.retry_policy = {
                   initial_delay: 0.1, max_delay: 300.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
@@ -203,6 +203,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::WriteUserEventRequest.new
+            #
+            #   # Call the write_user_event method.
+            #   result = client.write_user_event request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::UserEvent.
+            #   p result
+            #
             def write_user_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -220,9 +235,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -288,6 +305,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::CollectUserEventRequest.new
+            #
+            #   # Call the collect_user_event method.
+            #   result = client.collect_user_event request
+            #
+            #   # The returned object is of type Google::Api::HttpBody.
+            #   p result
+            #
             def collect_user_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -305,9 +337,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -389,6 +423,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::PurgeUserEventsRequest.new
+            #
+            #   # Call the purge_user_events method.
+            #   result = client.purge_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def purge_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -406,9 +462,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -469,6 +527,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::ImportUserEventsRequest.new
+            #
+            #   # Call the import_user_events method.
+            #   result = client.import_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def import_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -486,9 +566,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -550,6 +632,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::UserEventService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::RejoinUserEventsRequest.new
+            #
+            #   # Call the rejoin_user_events method.
+            #   result = client.rejoin_user_events request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def rejoin_user_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -567,9 +671,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

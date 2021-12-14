@@ -1,5 +1,33 @@
 # Release History
 
+### 0.6.3 / 2021-12-07
+
+#### Bug Fixes
+
+* Update the timeout for import_user_events
+
+### 0.6.2 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.1 / 2021-11-02
+
+#### Documentation
+
+* Formatting fixes in the reference documentation
+
+### 0.6.0 / 2021-10-21
+
+#### Features
+
+* Support for limiting searches to either product or faceted search
+
+#### Documentation
+
+* Some documentation formatting fixes
+
 ### 0.5.1 / 2021-08-26
 
 #### Bug Fixes

@@ -1,5 +1,23 @@
 # Release History
 
+### 0.6.2 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.6.1 / 2021-11-02
+
+#### Documentation
+
+* Formatting fixes in the reference documentation
+
+### 0.6.0 / 2021-09-21
+
+#### Features
+
+* Replaced disable_keyword_match with keyword_match_mode in the search_jobs call
+
 ### 0.5.0 / 2021-08-19
 
 #### Features

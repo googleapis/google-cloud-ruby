@@ -27,11 +27,11 @@ module Google
         #     Optional. Recommended.
         #     [BCP-47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt) language tag. If
         #     specified, the ListVoices call will only return voices that can be used to
-        #     synthesize this language_code. E.g. when specifying "en-NZ", you will get
-        #     supported "en-\*" voices; when specifying "no", you will get supported
-        #     "no-\*" (Norwegian) and "nb-\*" (Norwegian Bokmal) voices; specifying "zh"
-        #     will also get supported "cmn-\*" voices; specifying "zh-hk" will also get
-        #     supported "yue-\*" voices.
+        #     synthesize this language_code. E.g. when specifying `"en-NZ"`, you will get
+        #     supported `"en-\*"` voices; when specifying `"no"`, you will get supported
+        #     `"no-\*"` (Norwegian) and `"nb-\*"` (Norwegian Bokmal) voices; specifying
+        #     `"zh"` will also get supported `"cmn-\*"` voices; specifying `"zh-hk"` will
+        #     also get supported `"yue-\*"` voices.
         class ListVoicesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -205,7 +205,7 @@ module Google
           # A female voice.
           FEMALE = 2
 
-          # A gender-neutral voice.
+          # A gender-neutral voice. This voice is not yet supported.
           NEUTRAL = 3
         end
 
@@ -227,6 +227,14 @@ module Google
           # Chrome and Firefox). The quality of the encoding is considerably higher
           # than MP3 while using approximately the same bitrate.
           OGG_OPUS = 3
+
+          # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/mu-law.
+          # Audio content returned as MULAW also contains a WAV header.
+          MULAW = 5
+
+          # 8-bit samples that compand 14-bit audio samples using G.711 PCMU/A-law.
+          # Audio content returned as ALAW also contains a WAV header.
+          ALAW = 6
         end
       end
     end

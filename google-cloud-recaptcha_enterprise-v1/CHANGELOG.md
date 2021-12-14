@@ -1,5 +1,27 @@
 # Release History
 
+### 0.7.0 / 2021-12-07
+
+#### Features
+
+* Support the CHARGEBACK_FRAUD and CHARGEBACK_DISPUTE annotation reasons
+
+### 0.6.0 / 2021-11-08
+
+#### Features
+
+* Support related account groups and account defender assessments
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.5.0 / 2021-09-21
+
+#### Features
+
+* Support migrate_key and get_metrics calls
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes

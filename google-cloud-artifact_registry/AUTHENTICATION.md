@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-artifact_registry
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Credentials`):
+`::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Credentials`):
 
 * `ARTIFACT_REGISTRY_CREDENTIALS` - Path to JSON file, or JSON contents
 * `ARTIFACT_REGISTRY_KEYFILE` - Path to JSON file, or JSON contents

@@ -61,7 +61,7 @@ module Google
         #   of the previous interval.
         #
         # * For `CUMULATIVE` metrics, the start time and end time must specify a
-        #   a non-zero interval, with subsequent points specifying the same
+        #   non-zero interval, with subsequent points specifying the same
         #   start time and increasing end times, until an event resets the
         #   cumulative value to zero and sets a new start time for the following
         #   points. The new start time must be at least a millisecond after the
@@ -458,6 +458,30 @@ module Google
 
           # True if the left argument is not equal to the right argument.
           COMPARISON_NE = 6
+        end
+
+        # The tier of service for a Workspace. Please see the
+        # [service tiers
+        # documentation](https://cloud.google.com/monitoring/workspaces/tiers) for more
+        # details.
+        module ServiceTier
+          # An invalid sentinel value, used to indicate that a tier has not
+          # been provided explicitly.
+          SERVICE_TIER_UNSPECIFIED = 0
+
+          # The Stackdriver Basic tier, a free tier of service that provides basic
+          # features, a moderate allotment of logs, and access to built-in metrics.
+          # A number of features are not available in this tier. For more details,
+          # see [the service tiers
+          # documentation](https://cloud.google.com/monitoring/workspaces/tiers).
+          SERVICE_TIER_BASIC = 1
+
+          # The Stackdriver Premium tier, a higher, more expensive tier of service
+          # that provides access to all Stackdriver features, lets you use Stackdriver
+          # with AWS accounts, and has a larger allotments for logs and metrics. For
+          # more details, see [the service tiers
+          # documentation](https://cloud.google.com/monitoring/workspaces/tiers).
+          SERVICE_TIER_PREMIUM = 2
         end
       end
     end

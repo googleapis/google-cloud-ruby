@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.1.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.1.3 / 2021-10-21
+
+#### Documentation
+
+* Corrected a few details in the documentation for workflow fields
+
 ### 0.1.2 / 2021-08-11
 
 #### Bug Fixes

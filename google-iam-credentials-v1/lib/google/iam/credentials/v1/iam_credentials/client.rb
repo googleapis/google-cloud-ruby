@@ -225,6 +225,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new
+            #
+            #   # Call the generate_access_token method.
+            #   result = client.generate_access_token request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::GenerateAccessTokenResponse.
+            #   p result
+            #
             def generate_access_token request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -242,9 +257,11 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -313,6 +330,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::GenerateIdTokenRequest.new
+            #
+            #   # Call the generate_id_token method.
+            #   result = client.generate_id_token request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::GenerateIdTokenResponse.
+            #   p result
+            #
             def generate_id_token request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -330,9 +362,11 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -397,6 +431,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::SignBlobRequest.new
+            #
+            #   # Call the sign_blob method.
+            #   result = client.sign_blob request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::SignBlobResponse.
+            #   p result
+            #
             def sign_blob request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -414,9 +463,11 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -481,6 +532,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/iam/credentials/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::Credentials::V1::SignJwtRequest.new
+            #
+            #   # Call the sign_jwt method.
+            #   result = client.sign_jwt request
+            #
+            #   # The returned object is of type Google::Iam::Credentials::V1::SignJwtResponse.
+            #   p result
+            #
             def sign_jwt request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -498,9 +564,11 @@ module Google
                 gapic_version: ::Google::Iam::Credentials::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

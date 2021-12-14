@@ -274,6 +274,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::PredictionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::PredictRequest.new
+            #
+            #   # Call the predict method.
+            #   result = client.predict request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::PredictResponse.
+            #   p result
+            #
             def predict request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -291,9 +306,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "placement" => request.placement
-              }
+              header_params = {}
+              if request.placement
+                header_params["placement"] = request.placement
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

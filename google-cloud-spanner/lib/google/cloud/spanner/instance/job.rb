@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# DO NOT EDIT: Unless you're fixing a P0/P1 and/or a security issue. This class
+# is frozen to all new features from `google-cloud-spanner/v2.11.0` onwards.
+
 
 require "google/cloud/spanner/status"
 
@@ -30,6 +33,10 @@ module Google
         #
         # @see https://cloud.google.com/spanner/reference/rpc/google.longrunning#google.longrunning.Operation
         #   Long-running Operation
+        #
+        # @deprecated Use the long-running operation returned by
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#create_instance}
+        # instead.
         #
         # @example
         #   require "google/cloud/spanner"

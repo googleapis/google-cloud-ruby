@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Filestore
       module V1
-        VERSION = "0.1.0"
+        VERSION = "0.1.2"
       end
     end
   end

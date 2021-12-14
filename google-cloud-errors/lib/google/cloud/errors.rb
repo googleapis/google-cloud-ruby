@@ -118,6 +118,61 @@ module Google
         cause.status_details
       end
 
+      ##
+      # Returns the `::Google::Rpc::ErrorInfo` object present in `status_details` array,
+      # given that the following is true:
+      #   * `status_details` exists and is an array
+      #   * there is exactly one `::Google::Rpc::ErrorInfo` object in the `status_details` array
+      #
+      # @return [::Google::Rpc::ErrorInfo, nil]
+      def error_info
+        @error_info ||= if status_details.is_a? Array
+                          error_infos = status_details.find_all { |status| status.is_a?(::Google::Rpc::ErrorInfo) }
+                          if error_infos.length == 1
+                            error_infos[0]
+                          end
+                        end
+      end
+
+      ##
+      # Returns the value of `domain` from the `::Google::Rpc::ErrorInfo`
+      # object, if it exists in the `status_details` array.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @return [Object, nil]
+      def domain
+        return nil unless error_info.respond_to? :domain
+        error_info.domain
+      end
+
+      ##
+      # Returns the value of `reason` from the `::Google::Rpc::ErrorInfo`
+      # object, if it exists in the `status_details` array.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @return [Object, nil]
+      def reason
+        return nil unless error_info.respond_to? :reason
+        error_info.reason
+      end
+
+      ##
+      # Returns the value of `metadata` from the `::Google::Rpc::ErrorInfo`
+      # object, if it exists in the `status_details` array.
+      #
+      # This is typically present on errors originating from calls to an API
+      # over gRPC.
+      #
+      # @return [Hash, nil]
+      def error_metadata
+        return nil unless error_info.respond_to? :metadata
+        error_info.metadata.to_h
+      end
+
       # @private Create a new error object from a client error
       def self.from_error error
         klass = if error.respond_to? :code

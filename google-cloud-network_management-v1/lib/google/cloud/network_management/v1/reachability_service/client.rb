@@ -220,6 +220,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkManagement::V1::ListConnectivityTestsRequest.new
+            #
+            #   # Call the list_connectivity_tests method.
+            #   result = client.list_connectivity_tests request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::NetworkManagement::V1::ConnectivityTest.
+            #     p response
+            #   end
+            #
             def list_connectivity_tests request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -237,9 +258,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -290,6 +313,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkManagement::V1::GetConnectivityTestRequest.new
+            #
+            #   # Call the get_connectivity_test method.
+            #   result = client.get_connectivity_test request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkManagement::V1::ConnectivityTest.
+            #   p result
+            #
             def get_connectivity_test request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -307,9 +345,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -382,6 +422,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkManagement::V1::CreateConnectivityTestRequest.new
+            #
+            #   # Call the create_connectivity_test method.
+            #   result = client.create_connectivity_test request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_connectivity_test request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -399,9 +461,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -467,6 +531,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkManagement::V1::UpdateConnectivityTestRequest.new
+            #
+            #   # Call the update_connectivity_test method.
+            #   result = client.update_connectivity_test request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_connectivity_test request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -484,9 +570,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource.name" => request.resource.name
-              }
+              header_params = {}
+              if request.resource&.name
+                header_params["resource.name"] = request.resource.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -548,6 +636,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkManagement::V1::RerunConnectivityTestRequest.new
+            #
+            #   # Call the rerun_connectivity_test method.
+            #   result = client.rerun_connectivity_test request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def rerun_connectivity_test request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -565,9 +675,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -618,6 +730,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_management/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkManagement::V1::DeleteConnectivityTestRequest.new
+            #
+            #   # Call the delete_connectivity_test method.
+            #   result = client.delete_connectivity_test request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_connectivity_test request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -635,9 +769,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkManagement::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

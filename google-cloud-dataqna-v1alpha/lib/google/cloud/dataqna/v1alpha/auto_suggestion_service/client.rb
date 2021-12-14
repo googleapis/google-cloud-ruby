@@ -257,6 +257,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataqna/v1alpha"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataQnA::V1alpha::AutoSuggestionService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new
+            #
+            #   # Call the suggest_queries method.
+            #   result = client.suggest_queries request
+            #
+            #   # The returned object is of type Google::Cloud::DataQnA::V1alpha::SuggestQueriesResponse.
+            #   p result
+            #
             def suggest_queries request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -274,9 +289,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataQnA::V1alpha::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

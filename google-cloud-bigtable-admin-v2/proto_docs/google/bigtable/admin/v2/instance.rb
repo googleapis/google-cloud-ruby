@@ -55,6 +55,11 @@ module Google
           #       the regular expression: `[\p{Ll}\p{Lo}\p{N}_-]{0,63}`.
           #     * No more than 64 labels can be associated with a given resource.
           #     * Keys and values must both be under 128 bytes.
+          # @!attribute [r] create_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. A server-assigned timestamp representing when this Instance was created.
+          #     For instances created before this field was added (August 2021), this value
+          #     is `seconds: 0, nanos: 1`.
           class Instance
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -104,6 +109,29 @@ module Google
             end
           end
 
+          # The Autoscaling targets for a Cluster. These determine the recommended nodes.
+          # @!attribute [rw] cpu_utilization_percent
+          #   @return [::Integer]
+          #     The cpu utilization that the Autoscaler should be trying to achieve.
+          #     This number is on a scale from 0 (no utilization) to
+          #     100 (total utilization).
+          class AutoscalingTargets
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Limits for the number of nodes a Cluster can autoscale up/down to.
+          # @!attribute [rw] min_serve_nodes
+          #   @return [::Integer]
+          #     Required. Minimum number of nodes to scale down to.
+          # @!attribute [rw] max_serve_nodes
+          #   @return [::Integer]
+          #     Required. Maximum number of nodes to scale up to.
+          class AutoscalingLimits
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # A resizable group of nodes in a particular cloud location, capable
           # of serving all {::Google::Cloud::Bigtable::Admin::V2::Table Tables} in the parent
           # {::Google::Cloud::Bigtable::Admin::V2::Instance Instance}.
@@ -123,8 +151,11 @@ module Google
           #     The current state of the cluster.
           # @!attribute [rw] serve_nodes
           #   @return [::Integer]
-          #     Required. The number of nodes allocated to this cluster. More nodes enable
-          #     higher throughput and more consistent performance.
+          #     The number of nodes allocated to this cluster. More nodes enable higher
+          #     throughput and more consistent performance.
+          # @!attribute [rw] cluster_config
+          #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig]
+          #     Configuration for this cluster.
           # @!attribute [rw] default_storage_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::StorageType]
           #     (`CreationOnly`)
@@ -136,6 +167,27 @@ module Google
           class Cluster
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Autoscaling config for a cluster.
+            # @!attribute [rw] autoscaling_limits
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::AutoscalingLimits]
+            #     Required. Autoscaling limits for this cluster.
+            # @!attribute [rw] autoscaling_targets
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::AutoscalingTargets]
+            #     Required. Autoscaling targets for this cluster.
+            class ClusterAutoscalingConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for a cluster.
+            # @!attribute [rw] cluster_autoscaling_config
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterAutoscalingConfig]
+            #     Autoscaling configuration for this cluster.
+            class ClusterConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # Cloud Key Management Service (Cloud KMS) settings for a CMEK-protected
             # cluster.

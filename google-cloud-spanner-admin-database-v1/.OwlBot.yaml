@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/spanner/admin/database/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-spanner-admin-database-v1/$1

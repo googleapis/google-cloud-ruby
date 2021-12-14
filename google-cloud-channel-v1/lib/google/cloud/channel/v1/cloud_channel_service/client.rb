@@ -249,6 +249,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListCustomersRequest.new
+            #
+            #   # Call the list_customers method.
+            #   result = client.list_customers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::Customer.
+            #     p response
+            #   end
+            #
             def list_customers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -266,9 +287,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -330,6 +353,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::GetCustomerRequest.new
+            #
+            #   # Call the get_customer method.
+            #   result = client.get_customer request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+            #   p result
+            #
             def get_customer request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -347,9 +385,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -416,6 +456,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistRequest.new
+            #
+            #   # Call the check_cloud_identity_accounts_exist method.
+            #   result = client.check_cloud_identity_accounts_exist request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::CheckCloudIdentityAccountsExistResponse.
+            #   p result
+            #
             def check_cloud_identity_accounts_exist request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -433,9 +488,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -499,6 +556,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::CreateCustomerRequest.new
+            #
+            #   # Call the create_customer method.
+            #   result = client.create_customer request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+            #   p result
+            #
             def create_customer request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -516,9 +588,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -581,6 +655,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::UpdateCustomerRequest.new
+            #
+            #   # Call the update_customer method.
+            #   result = client.update_customer request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+            #   p result
+            #
             def update_customer request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -598,9 +687,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "customer.name" => request.customer.name
-              }
+              header_params = {}
+              if request.customer&.name
+                header_params["customer.name"] = request.customer.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -657,6 +748,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::DeleteCustomerRequest.new
+            #
+            #   # Call the delete_customer method.
+            #   result = client.delete_customer request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_customer request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -674,9 +780,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -764,6 +872,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ImportCustomerRequest.new
+            #
+            #   # Call the import_customer method.
+            #   result = client.import_customer request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::Customer.
+            #   p result
+            #
             def import_customer request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -781,9 +904,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -859,6 +984,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ProvisionCloudIdentityRequest.new
+            #
+            #   # Call the provision_cloud_identity method.
+            #   result = client.provision_cloud_identity request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def provision_cloud_identity request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -876,9 +1023,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "customer" => request.customer
-              }
+              header_params = {}
+              if request.customer
+                header_params["customer"] = request.customer
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -947,6 +1096,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListEntitlementsRequest.new
+            #
+            #   # Call the list_entitlements method.
+            #   result = client.list_entitlements request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::Entitlement.
+            #     p response
+            #   end
+            #
             def list_entitlements request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -964,9 +1134,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1062,6 +1234,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListTransferableSkusRequest.new
+            #
+            #   # Call the list_transferable_skus method.
+            #   result = client.list_transferable_skus request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::TransferableSku.
+            #     p response
+            #   end
+            #
             def list_transferable_skus request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1079,9 +1272,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1168,6 +1363,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListTransferableOffersRequest.new
+            #
+            #   # Call the list_transferable_offers method.
+            #   result = client.list_transferable_offers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::TransferableOffer.
+            #     p response
+            #   end
+            #
             def list_transferable_offers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1185,9 +1401,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1248,6 +1466,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::GetEntitlementRequest.new
+            #
+            #   # Call the get_entitlement method.
+            #   result = client.get_entitlement request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::Entitlement.
+            #   p result
+            #
             def get_entitlement request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1265,9 +1498,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1367,6 +1602,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::CreateEntitlementRequest.new
+            #
+            #   # Call the create_entitlement method.
+            #   result = client.create_entitlement request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_entitlement request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1384,9 +1641,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1453,6 +1712,9 @@ module Google
             #     accounts/\\{account_id}/customers/\\{customer_id}/entitlements/\\{entitlement_id}
             #   @param parameters [::Array<::Google::Cloud::Channel::V1::Parameter, ::Hash>]
             #     Required. Entitlement parameters to update. You can only change editable parameters.
+            #
+            #     To view the available Parameters for a request, refer to the
+            #     {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions} from the desired offer.
             #   @param request_id [::String]
             #     Optional. You can specify an optional unique request ID, and if you need to retry
             #     your request, the server will know to ignore the request if it's complete.
@@ -1476,6 +1738,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ChangeParametersRequest.new
+            #
+            #   # Call the change_parameters method.
+            #   result = client.change_parameters request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def change_parameters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1493,9 +1777,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1583,6 +1869,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ChangeRenewalSettingsRequest.new
+            #
+            #   # Call the change_renewal_settings method.
+            #   result = client.change_renewal_settings request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def change_renewal_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1600,9 +1908,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1669,7 +1979,8 @@ module Google
             #     Required. New Offer.
             #     Format: accounts/\\{account_id}/offers/\\{offer_id}.
             #   @param parameters [::Array<::Google::Cloud::Channel::V1::Parameter, ::Hash>]
-            #     Optional. Parameters needed to purchase the Offer.
+            #     Optional. Parameters needed to purchase the Offer. To view the available Parameters
+            #     refer to the {::Google::Cloud::Channel::V1::Offer#parameter_definitions Offer.parameter_definitions} from the desired offer.
             #   @param purchase_order_id [::String]
             #     Optional. Purchase order id provided by the reseller.
             #   @param request_id [::String]
@@ -1693,6 +2004,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ChangeOfferRequest.new
+            #
+            #   # Call the change_offer method.
+            #   result = client.change_offer request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def change_offer request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1710,9 +2043,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1799,6 +2134,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::StartPaidServiceRequest.new
+            #
+            #   # Call the start_paid_service method.
+            #   result = client.start_paid_service request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def start_paid_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1816,9 +2173,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1902,6 +2261,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::SuspendEntitlementRequest.new
+            #
+            #   # Call the suspend_entitlement method.
+            #   result = client.suspend_entitlement request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def suspend_entitlement request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1919,9 +2300,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2010,6 +2393,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::CancelEntitlementRequest.new
+            #
+            #   # Call the cancel_entitlement method.
+            #   result = client.cancel_entitlement request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def cancel_entitlement request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2027,9 +2432,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2119,6 +2526,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ActivateEntitlementRequest.new
+            #
+            #   # Call the activate_entitlement method.
+            #   result = client.activate_entitlement request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def activate_entitlement request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2136,9 +2565,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2237,6 +2668,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::TransferEntitlementsRequest.new
+            #
+            #   # Call the transfer_entitlements method.
+            #   result = client.transfer_entitlements request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def transfer_entitlements request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2254,9 +2707,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2350,6 +2805,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::TransferEntitlementsToGoogleRequest.new
+            #
+            #   # Call the transfer_entitlements_to_google method.
+            #   result = client.transfer_entitlements_to_google request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def transfer_entitlements_to_google request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2367,9 +2844,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2442,6 +2921,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListChannelPartnerLinksRequest.new
+            #
+            #   # Call the list_channel_partner_links method.
+            #   result = client.list_channel_partner_links request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::ChannelPartnerLink.
+            #     p response
+            #   end
+            #
             def list_channel_partner_links request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2459,9 +2959,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2527,6 +3029,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::GetChannelPartnerLinkRequest.new
+            #
+            #   # Call the get_channel_partner_link method.
+            #   result = client.get_channel_partner_link request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
+            #   p result
+            #
             def get_channel_partner_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2544,9 +3061,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2622,6 +3141,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::CreateChannelPartnerLinkRequest.new
+            #
+            #   # Call the create_channel_partner_link method.
+            #   result = client.create_channel_partner_link request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
+            #   p result
+            #
             def create_channel_partner_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2639,9 +3173,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2719,6 +3255,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest.new
+            #
+            #   # Call the update_channel_partner_link method.
+            #   result = client.update_channel_partner_link request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
+            #   p result
+            #
             def update_channel_partner_link request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2736,9 +3287,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2798,6 +3351,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::LookupOfferRequest.new
+            #
+            #   # Call the lookup_offer method.
+            #   result = client.lookup_offer request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::Offer.
+            #   p result
+            #
             def lookup_offer request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2815,9 +3383,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "entitlement" => request.entitlement
-              }
+              header_params = {}
+              if request.entitlement
+                header_params["entitlement"] = request.entitlement
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2880,6 +3450,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::Product>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListProductsRequest.new
+            #
+            #   # Call the list_products method.
+            #   result = client.list_products request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::Product.
+            #     p response
+            #   end
             #
             def list_products request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2964,6 +3555,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListSkusRequest.new
+            #
+            #   # Call the list_skus method.
+            #   result = client.list_skus request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::Sku.
+            #     p response
+            #   end
+            #
             def list_skus request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2981,9 +3593,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3054,6 +3668,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListOffersRequest.new
+            #
+            #   # Call the list_offers method.
+            #   result = client.list_offers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::Offer.
+            #     p response
+            #   end
+            #
             def list_offers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3071,9 +3706,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3146,6 +3783,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListPurchasableSkusRequest.new
+            #
+            #   # Call the list_purchasable_skus method.
+            #   result = client.list_purchasable_skus request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::PurchasableSku.
+            #     p response
+            #   end
+            #
             def list_purchasable_skus request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3163,9 +3821,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "customer" => request.customer
-              }
+              header_params = {}
+              if request.customer
+                header_params["customer"] = request.customer
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3238,6 +3898,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListPurchasableOffersRequest.new
+            #
+            #   # Call the list_purchasable_offers method.
+            #   result = client.list_purchasable_offers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Channel::V1::PurchasableOffer.
+            #     p response
+            #   end
+            #
             def list_purchasable_offers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3255,9 +3936,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "customer" => request.customer
-              }
+              header_params = {}
+              if request.customer
+                header_params["customer"] = request.customer
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3325,6 +4008,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::RegisterSubscriberRequest.new
+            #
+            #   # Call the register_subscriber method.
+            #   result = client.register_subscriber request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::RegisterSubscriberResponse.
+            #   p result
+            #
             def register_subscriber request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3342,9 +4040,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "account" => request.account
-              }
+              header_params = {}
+              if request.account
+                header_params["account"] = request.account
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3415,6 +4115,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::UnregisterSubscriberRequest.new
+            #
+            #   # Call the unregister_subscriber method.
+            #   result = client.unregister_subscriber request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::UnregisterSubscriberResponse.
+            #   p result
+            #
             def unregister_subscriber request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3432,9 +4147,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "account" => request.account
-              }
+              header_params = {}
+              if request.account
+                header_params["account"] = request.account
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -3510,6 +4227,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/channel/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Channel::V1::ListSubscribersRequest.new
+            #
+            #   # Call the list_subscribers method.
+            #   result = client.list_subscribers request
+            #
+            #   # The returned object is of type Google::Cloud::Channel::V1::ListSubscribersResponse.
+            #   p result
+            #
             def list_subscribers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -3527,9 +4259,11 @@ module Google
                 gapic_version: ::Google::Cloud::Channel::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "account" => request.account
-              }
+              header_params = {}
+              if request.account
+                header_params["account"] = request.account
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

@@ -193,6 +193,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_control/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceControl::V1::QuotaController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceControl::V1::AllocateQuotaRequest.new
+            #
+            #   # Call the allocate_quota method.
+            #   result = client.allocate_quota request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceControl::V1::AllocateQuotaResponse.
+            #   p result
+            #
             def allocate_quota request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -210,9 +225,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceControl::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

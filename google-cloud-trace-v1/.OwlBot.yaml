@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/devtools/cloudtrace/v1/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-trace-v1/$1

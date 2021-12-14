@@ -195,6 +195,7 @@ module Google
         #     included in the query, the it will return results that match any of the
         #     fields. Some eligible fields are:
         #
+        #     ```
         #     | Field                   | Description                                  |
         #     |-------------------------|----------------------------------------------|
         #     | displayName, name       | Filters by displayName.                      |
@@ -207,11 +208,13 @@ module Google
         #     | labels                  | Filters by label name or value.              |
         #     | labels.<key> (where *key* is the name of a label) | Filters by label
         #     name. |
+        #     ```
         #
         #     Search expressions are case insensitive.
         #
         #     Some examples queries:
         #
+        #     ```
         #     | Query            | Description                                         |
         #     |------------------|-----------------------------------------------------|
         #     | name:how*        | The project's name starts with "how".               |
@@ -222,6 +225,7 @@ module Google
         #     | labels.color:red | The project's label `color` has the value `red`.    |
         #     | labels.color:red&nbsp;labels.size:big | The project's label `color` has
         #     the value `red` and its label `size` has the value `big`.                |
+        #     ```
         #
         #     If no query is specified, the call will return projects for which the user
         #     has the `resourcemanager.projects.get` permission.

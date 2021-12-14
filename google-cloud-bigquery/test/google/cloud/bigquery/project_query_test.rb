@@ -24,12 +24,11 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
   let(:job_id) { "job_9876543210" }
   let(:dataset_id) { "my_dataset" }
   let(:dataset_gapi) { random_dataset_gapi dataset_id }
-  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi,
-                                                      bigquery.service }
+  let(:dataset) { Google::Cloud::Bigquery::Dataset.from_gapi dataset_gapi, bigquery.service }
   let(:table_id) { "my_table" }
   let(:table_gapi) { random_table_gapi dataset_id, table_id }
-  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi,
-                                                  bigquery.service }
+  let(:table) { Google::Cloud::Bigquery::Table.from_gapi table_gapi, bigquery.service }
+  let(:session_id) { "mysessionid" }
 
   it "queries the data" do
     mock = Minitest::Mock.new
@@ -279,6 +278,25 @@ describe Google::Cloud::Bigquery::Project, :query, :mock_bigquery do
 
 
     data = bigquery.query query, cache: false
+    _(data.class).must_equal Google::Cloud::Bigquery::Data
+    _(data.count).must_equal 3
+    mock.verify
+  end
+
+  it "queries the data with session_id option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil, session_id: session_id
+    mock.expect :insert_job, query_job_resp_gapi(query, job_id: job_id), [project, job_gapi]
+    mock.expect :get_job_query_results,
+                query_data_gapi,
+                [project, job_id, {location: "US", max_results: 0, page_token: nil, start_index: nil, timeout_ms: nil}]
+    mock.expect :list_table_data,
+                table_data_gapi.to_json,
+                [project, "target_dataset_id", "target_table_id", {  max_results: nil, page_token: nil, start_index: nil, options: {skip_deserialization: true} }]
+
+    data = bigquery.query query, session_id: session_id
     _(data.class).must_equal Google::Cloud::Bigquery::Data
     _(data.count).must_equal 3
     mock.verify

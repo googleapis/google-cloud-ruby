@@ -18,7 +18,7 @@ require_relative "../acls"
 describe "ACL Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
   let(:local_file)       { File.expand_path "data/file.txt", __dir__ }
-  let(:email)            { "user-test@test.com" }
+  let(:email)            { "user-test@example.com" }
   let(:remote_file_name) { "path/file_name.txt" }
   let(:bucket) { @bucket }
 

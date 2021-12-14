@@ -170,7 +170,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil)
+            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -178,12 +178,8 @@ module Google
             #   @param placement [::String]
             #     Required. The resource name of the search engine placement, such as
             #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
-            #     This field is used to identify the set of models that will be used to make
-            #     the search.
-            #
-            #     We currently support one placement with the following ID:
-            #
-            #     * `default_search`.
+            #     This field is used to identify the serving configuration name and the set
+            #     of models that will be used to make the search.
             #   @param branch [::String]
             #     The branch resource name, such as
             #     `projects/*/locations/global/catalogs/default_catalog/branches/0`.
@@ -230,7 +226,8 @@ module Google
             #   @param filter [::String]
             #     The filter syntax consists of an expression language for constructing a
             #     predicate from one or more fields of the products being filtered. Filter
-            #     expression is case-sensitive.
+            #     expression is case-sensitive. See more details at this [user
+            #     guide](https://cloud.google.com/retail/docs/filter-and-order#filter).
             #
             #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
             #   @param canonical_filter [::String]
@@ -246,7 +243,9 @@ module Google
             #   @param order_by [::String]
             #     The order in which products are returned. Products can be ordered by
             #     a field in an {::Google::Cloud::Retail::V2::Product Product} object. Leave it
-            #     unset if ordered by relevance. OrderBy expression is case-sensitive.
+            #     unset if ordered by relevance. OrderBy expression is case-sensitive. See
+            #     more details at this [user
+            #     guide](https://cloud.google.com/retail/docs/filter-and-order#order).
             #
             #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
             #   @param facet_specs [::Array<::Google::Cloud::Retail::V2::SearchRequest::FacetSpec, ::Hash>]
@@ -261,10 +260,18 @@ module Google
             #     This feature requires additional allowlisting. Contact Retail Search
             #     support team if you are interested in using dynamic facet feature.
             #   @param boost_spec [::Google::Cloud::Retail::V2::SearchRequest::BoostSpec, ::Hash]
-            #     Boost specification to boost certain products.
+            #     Boost specification to boost certain products. See more details at this
+            #     [user guide](https://cloud.google.com/retail/docs/boosting).
+            #
+            #     Notice that if both [ServingConfig.boost_control_ids][] and
+            #     [SearchRequest.boost_spec] are set, the boost conditions from both places
+            #     are evaluated. If a search request matches multiple boost conditions,
+            #     the final boost score is equal to the sum of the boost scores from all
+            #     matched boost conditions.
             #   @param query_expansion_spec [::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec, ::Hash]
             #     The query expansion specification that specifies the conditions under which
-            #     query expansion will occur.
+            #     query expansion will occur. See more details at this [user
+            #     guide](https://cloud.google.com/retail/docs/result-size#query_expansion).
             #   @param variant_rollup_keys [::Array<::String>]
             #     The keys to fetch and rollup the matching
             #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
@@ -286,6 +293,10 @@ module Google
             #     * price
             #     * originalPrice
             #     * discount
+            #     * variantId
+            #     * inventory(place_id,price)
+            #     * inventory(place_id,attributes.key), where key is any key in the
+            #       [Product.inventories.attributes][] map.
             #     * attributes.key, where key is any key in the
             #       {::Google::Cloud::Retail::V2::Product#attributes Product.attributes} map.
             #     * pickupInStore.id, where id is any
@@ -340,6 +351,9 @@ module Google
             #     Category pages include special pages such as sales or promotions. For
             #     instance, a special sale page may have the category hierarchy:
             #     "pageCategories" : ["Sales > 2017 Black Friday Deals"].
+            #   @param search_mode [::Google::Cloud::Retail::V2::SearchRequest::SearchMode]
+            #     The search mode of the search request. If not specified, a single search
+            #     request triggers both product search and faceted search.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]
@@ -348,6 +362,27 @@ module Google
             # @return [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::SearchService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::SearchRequest.new
+            #
+            #   # Call the search method.
+            #   result = client.search request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Retail::V2::SearchResponse::SearchResult.
+            #     p response
+            #   end
             #
             def search request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -366,9 +401,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "placement" => request.placement
-              }
+              header_params = {}
+              if request.placement
+                header_params["placement"] = request.placement
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

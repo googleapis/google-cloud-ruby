@@ -1,5 +1,23 @@
 # Changelog
 
+### 0.4.2 / 2021-11-11
+
+#### Documentation
+
+* Improved reference documentation formatting
+
+### 0.4.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.4.0 / 2021-11-02
+
+#### Features
+
+* Support schema restrictions, currency code, and time zone fields
+
 ### 0.3.0 / 2021-09-07
 
 #### Features

@@ -218,6 +218,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemRequest.new
+            #
+            #   # Call the create_catalog_item method.
+            #   result = client.create_catalog_item request
+            #
+            #   # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::CatalogItem.
+            #   p result
+            #
             def create_catalog_item request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -235,9 +250,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -287,6 +304,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest.new
+            #
+            #   # Call the get_catalog_item method.
+            #   result = client.get_catalog_item request
+            #
+            #   # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::CatalogItem.
+            #   p result
+            #
             def get_catalog_item request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -304,9 +336,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -363,6 +397,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::ListCatalogItemsRequest.new
+            #
+            #   # Call the list_catalog_items method.
+            #   result = client.list_catalog_items request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::CatalogItem.
+            #     p response
+            #   end
+            #
             def list_catalog_items request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -380,9 +435,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -440,6 +497,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::UpdateCatalogItemRequest.new
+            #
+            #   # Call the update_catalog_item method.
+            #   result = client.update_catalog_item request
+            #
+            #   # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::CatalogItem.
+            #   p result
+            #
             def update_catalog_item request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -457,9 +529,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -509,6 +583,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::DeleteCatalogItemRequest.new
+            #
+            #   # Call the delete_catalog_item method.
+            #   result = client.delete_catalog_item request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_catalog_item request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -526,9 +615,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -591,6 +682,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::ImportCatalogItemsRequest.new
+            #
+            #   # Call the import_catalog_items method.
+            #   result = client.import_catalog_items request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def import_catalog_items request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -608,9 +721,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

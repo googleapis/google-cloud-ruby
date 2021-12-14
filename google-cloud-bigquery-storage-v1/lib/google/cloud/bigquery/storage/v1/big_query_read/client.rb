@@ -180,7 +180,7 @@ module Google
               # limits are enforced based on the number of pre-filtered rows, so some
               # filters can lead to lopsided assignments.
               #
-              # Read sessions automatically expire 24 hours after they are created and do
+              # Read sessions automatically expire 6 hours after they are created and do
               # not require manual clean-up by the caller.
               #
               # @overload create_read_session(request, options = nil)
@@ -221,6 +221,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new
+              #
+              #   # Call the create_read_session method.
+              #   result = client.create_read_session request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::ReadSession.
+              #   p result
+              #
               def create_read_session request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -238,9 +253,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "read_session.table" => request.read_session.table
-                }
+                header_params = {}
+                if request.read_session&.table
+                  header_params["read_session.table"] = request.read_session.table
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -299,6 +316,24 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::ReadRowsRequest.new
+              #
+              #   # Call the read_rows method.
+              #   result = client.read_rows request
+              #
+              #   # The returned object is a streamed enumerable yielding elements of
+              #   # type ::Google::Cloud::Bigquery::Storage::V1::ReadRowsResponse.
+              #   result.each do |response|
+              #     p response
+              #   end
+              #
               def read_rows request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -316,9 +351,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "read_stream" => request.read_stream
-                }
+                header_params = {}
+                if request.read_stream
+                  header_params["read_stream"] = request.read_stream
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -386,6 +423,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/bigquery/storage/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new
+              #
+              #   # Call the split_read_stream method.
+              #   result = client.split_read_stream request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse.
+              #   p result
+              #
               def split_read_stream request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -403,9 +455,11 @@ module Google
                   gapic_version: ::Google::Cloud::Bigquery::Storage::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 

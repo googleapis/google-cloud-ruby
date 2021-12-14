@@ -1,5 +1,27 @@
 # Release History
 
+### 0.8.0 / 2021-12-07
+
+#### Features
+
+* Support for cluster autoscaling and partial updates
+
+#### Bug Fixes
+
+* Use the correct backend hostname by default
+
+### 0.7.1 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.7.0 / 2021-10-25
+
+#### Features
+
+* Reports the creation time of instances
+
 ### 0.6.1 / 2021-08-30
 
 #### Documentation

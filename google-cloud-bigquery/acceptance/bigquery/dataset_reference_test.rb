@@ -218,6 +218,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :bigquery do
     query_job = dataset.query_job query, job_id: job_id
     _(query_job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     _(query_job.job_id).must_equal job_id
+    _(query_job.session_id).must_be :nil?
     query_job.wait_until_done!
     _(query_job.done?).must_equal true
     _(query_job.data.total).wont_be_nil

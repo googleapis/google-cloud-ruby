@@ -256,6 +256,27 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new
+          #
+          #   # Call the list_workload_identity_pools method.
+          #   result = client.list_workload_identity_pools request
+          #
+          #   # The returned object is of type Gapic::PagedEnumerable. You can
+          #   # iterate over all elements by calling #each, and the enumerable
+          #   # will lazily make API calls to fetch subsequent pages. Other
+          #   # methods are also available for managing paging directly.
+          #   result.each do |response|
+          #     # Each element is of type ::Google::Iam::V1beta::WorkloadIdentityPool.
+          #     p response
+          #   end
+          #
           def list_workload_identity_pools request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -273,9 +294,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "parent" => request.parent
-            }
+            header_params = {}
+            if request.parent
+              header_params["parent"] = request.parent
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -326,6 +349,21 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::GetWorkloadIdentityPoolRequest.new
+          #
+          #   # Call the get_workload_identity_pool method.
+          #   result = client.get_workload_identity_pool request
+          #
+          #   # The returned object is of type Google::Iam::V1beta::WorkloadIdentityPool.
+          #   p result
+          #
           def get_workload_identity_pool request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -343,9 +381,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "name" => request.name
-            }
+            header_params = {}
+            if request.name
+              header_params["name"] = request.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -405,6 +445,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::CreateWorkloadIdentityPoolRequest.new
+          #
+          #   # Call the create_workload_identity_pool method.
+          #   result = client.create_workload_identity_pool request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def create_workload_identity_pool request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -422,9 +484,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "parent" => request.parent
-            }
+            header_params = {}
+            if request.parent
+              header_params["parent"] = request.parent
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -477,6 +541,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::UpdateWorkloadIdentityPoolRequest.new
+          #
+          #   # Call the update_workload_identity_pool method.
+          #   result = client.update_workload_identity_pool request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def update_workload_identity_pool request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -494,9 +580,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "workload_identity_pool.name" => request.workload_identity_pool.name
-            }
+            header_params = {}
+            if request.workload_identity_pool&.name
+              header_params["workload_identity_pool.name"] = request.workload_identity_pool.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -557,6 +645,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::DeleteWorkloadIdentityPoolRequest.new
+          #
+          #   # Call the delete_workload_identity_pool method.
+          #   result = client.delete_workload_identity_pool request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def delete_workload_identity_pool request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -574,9 +684,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "name" => request.name
-            }
+            header_params = {}
+            if request.name
+              header_params["name"] = request.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -627,6 +739,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::UndeleteWorkloadIdentityPoolRequest.new
+          #
+          #   # Call the undelete_workload_identity_pool method.
+          #   result = client.undelete_workload_identity_pool request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def undelete_workload_identity_pool request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -644,9 +778,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "name" => request.name
-            }
+            header_params = {}
+            if request.name
+              header_params["name"] = request.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -709,6 +845,27 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::ListWorkloadIdentityPoolProvidersRequest.new
+          #
+          #   # Call the list_workload_identity_pool_providers method.
+          #   result = client.list_workload_identity_pool_providers request
+          #
+          #   # The returned object is of type Gapic::PagedEnumerable. You can
+          #   # iterate over all elements by calling #each, and the enumerable
+          #   # will lazily make API calls to fetch subsequent pages. Other
+          #   # methods are also available for managing paging directly.
+          #   result.each do |response|
+          #     # Each element is of type ::Google::Iam::V1beta::WorkloadIdentityPoolProvider.
+          #     p response
+          #   end
+          #
           def list_workload_identity_pool_providers request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -726,9 +883,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "parent" => request.parent
-            }
+            header_params = {}
+            if request.parent
+              header_params["parent"] = request.parent
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -779,6 +938,21 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::GetWorkloadIdentityPoolProviderRequest.new
+          #
+          #   # Call the get_workload_identity_pool_provider method.
+          #   result = client.get_workload_identity_pool_provider request
+          #
+          #   # The returned object is of type Google::Iam::V1beta::WorkloadIdentityPoolProvider.
+          #   p result
+          #
           def get_workload_identity_pool_provider request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -796,9 +970,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "name" => request.name
-            }
+            header_params = {}
+            if request.name
+              header_params["name"] = request.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -859,6 +1035,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::CreateWorkloadIdentityPoolProviderRequest.new
+          #
+          #   # Call the create_workload_identity_pool_provider method.
+          #   result = client.create_workload_identity_pool_provider request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def create_workload_identity_pool_provider request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -876,9 +1074,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "parent" => request.parent
-            }
+            header_params = {}
+            if request.parent
+              header_params["parent"] = request.parent
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -931,6 +1131,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::UpdateWorkloadIdentityPoolProviderRequest.new
+          #
+          #   # Call the update_workload_identity_pool_provider method.
+          #   result = client.update_workload_identity_pool_provider request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def update_workload_identity_pool_provider request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -948,9 +1170,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "workload_identity_pool_provider.name" => request.workload_identity_pool_provider.name
-            }
+            header_params = {}
+            if request.workload_identity_pool_provider&.name
+              header_params["workload_identity_pool_provider.name"] = request.workload_identity_pool_provider.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1006,6 +1230,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::DeleteWorkloadIdentityPoolProviderRequest.new
+          #
+          #   # Call the delete_workload_identity_pool_provider method.
+          #   result = client.delete_workload_identity_pool_provider request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def delete_workload_identity_pool_provider request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1023,9 +1269,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "name" => request.name
-            }
+            header_params = {}
+            if request.name
+              header_params["name"] = request.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1077,6 +1325,28 @@ module Google
           #
           # @raise [::Google::Cloud::Error] if the RPC is aborted.
           #
+          # @example Basic example
+          #   require "google/iam/v1beta"
+          #
+          #   # Create a client object. The client can be reused for multiple calls.
+          #   client = Google::Iam::V1beta::WorkloadIdentityPools::Client.new
+          #
+          #   # Create a request. To set request fields, pass in keyword arguments.
+          #   request = Google::Iam::V1beta::UndeleteWorkloadIdentityPoolProviderRequest.new
+          #
+          #   # Call the undelete_workload_identity_pool_provider method.
+          #   result = client.undelete_workload_identity_pool_provider request
+          #
+          #   # The returned object is of type Gapic::Operation. You can use this
+          #   # object to check the status of an operation, cancel it, or wait
+          #   # for results. Here is how to block until completion:
+          #   result.wait_until_done! timeout: 60
+          #   if result.response?
+          #     p result.response
+          #   else
+          #     puts "Error!"
+          #   end
+          #
           def undelete_workload_identity_pool_provider request, options = nil
             raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1094,9 +1364,11 @@ module Google
               gapic_version: ::Google::Iam::V1beta::VERSION
             metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-            header_params = {
-              "name" => request.name
-            }
+            header_params = {}
+            if request.name
+              header_params["name"] = request.name
+            end
+
             request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
             metadata[:"x-goog-request-params"] ||= request_params_header
 

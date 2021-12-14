@@ -190,6 +190,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1beta1::CreateAssessmentRequest.new
+            #
+            #   # Call the create_assessment method.
+            #   result = client.create_assessment request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1beta1::Assessment.
+            #   p result
+            #
             def create_assessment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -207,9 +222,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -262,6 +279,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentRequest.new
+            #
+            #   # Call the annotate_assessment method.
+            #   result = client.annotate_assessment request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1beta1::AnnotateAssessmentResponse.
+            #   p result
+            #
             def annotate_assessment request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -279,9 +311,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -333,6 +367,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1beta1::CreateKeyRequest.new
+            #
+            #   # Call the create_key method.
+            #   result = client.create_key request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1beta1::Key.
+            #   p result
+            #
             def create_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -350,9 +399,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -408,6 +459,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1beta1::ListKeysRequest.new
+            #
+            #   # Call the list_keys method.
+            #   result = client.list_keys request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1beta1::Key.
+            #     p response
+            #   end
+            #
             def list_keys request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -425,9 +497,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -478,6 +552,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1beta1::GetKeyRequest.new
+            #
+            #   # Call the get_key method.
+            #   result = client.get_key request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1beta1::Key.
+            #   p result
+            #
             def get_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -495,9 +584,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -549,6 +640,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1beta1::UpdateKeyRequest.new
+            #
+            #   # Call the update_key method.
+            #   result = client.update_key request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1beta1::Key.
+            #   p result
+            #
             def update_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -566,9 +672,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "key.name" => request.key.name
-              }
+              header_params = {}
+              if request.key&.name
+                header_params["key.name"] = request.key.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -618,6 +726,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1beta1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1beta1::DeleteKeyRequest.new
+            #
+            #   # Call the delete_key method.
+            #   result = client.delete_key request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -635,9 +758,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

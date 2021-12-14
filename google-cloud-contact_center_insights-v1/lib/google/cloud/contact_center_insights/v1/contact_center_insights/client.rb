@@ -188,8 +188,8 @@ module Google
             #     component of the conversation's resource name. If no ID is specified, a
             #     server-generated ID will be used.
             #
-            #     This value should be 4-32 characters and must match the regular
-            #     expression /^[a-z0-9-]\\{4,32}$/. Valid characters are /[a-z][0-9]-/
+            #     This value should be 4-64 characters and must match the regular
+            #     expression `^[a-z0-9-]{4,64}$`. Valid characters are `[a-z][0-9]-`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ContactCenterInsights::V1::Conversation]
@@ -198,6 +198,21 @@ module Google
             # @return [::Google::Cloud::ContactCenterInsights::V1::Conversation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreateConversationRequest.new
+            #
+            #   # Call the create_conversation method.
+            #   result = client.create_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #   p result
             #
             def create_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -216,9 +231,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -269,6 +286,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateConversationRequest.new
+            #
+            #   # Call the update_conversation method.
+            #   result = client.update_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #   p result
+            #
             def update_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -286,9 +318,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "conversation.name" => request.conversation.name
-              }
+              header_params = {}
+              if request.conversation&.name
+                header_params["conversation.name"] = request.conversation.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -339,6 +373,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetConversationRequest.new
+            #
+            #   # Call the get_conversation method.
+            #   result = client.get_conversation request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #   p result
+            #
             def get_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,9 +405,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -421,6 +472,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListConversationsRequest.new
+            #
+            #   # Call the list_conversations method.
+            #   result = client.list_conversations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::Conversation.
+            #     p response
+            #   end
+            #
             def list_conversations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -438,9 +510,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -494,6 +568,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteConversationRequest.new
+            #
+            #   # Call the delete_conversation method.
+            #   result = client.delete_conversation request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_conversation request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -511,9 +600,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -565,6 +656,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreateAnalysisRequest.new
+            #
+            #   # Call the create_analysis method.
+            #   result = client.create_analysis request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_analysis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -582,9 +695,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -634,6 +749,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetAnalysisRequest.new
+            #
+            #   # Call the get_analysis method.
+            #   result = client.get_analysis request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Analysis.
+            #   p result
+            #
             def get_analysis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -651,9 +781,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -714,6 +846,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListAnalysesRequest.new
+            #
+            #   # Call the list_analyses method.
+            #   result = client.list_analyses request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::Analysis.
+            #     p response
+            #   end
+            #
             def list_analyses request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -731,9 +884,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -783,6 +938,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteAnalysisRequest.new
+            #
+            #   # Call the delete_analysis method.
+            #   result = client.delete_analysis request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_analysis request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -800,9 +970,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -835,7 +1007,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload export_insights_data(big_query_destination: nil, parent: nil, filter: nil, kms_key: nil)
+            # @overload export_insights_data(big_query_destination: nil, parent: nil, filter: nil, kms_key: nil, write_disposition: nil)
             #   Pass arguments to `export_insights_data` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -851,6 +1023,8 @@ module Google
             #     A fully qualified KMS key name for BigQuery tables protected by CMEK.
             #     Format:
             #     projects/\\{project}/locations/\\{location}/keyRings/\\{keyring}/cryptoKeys/\\{key}/cryptoKeyVersions/\\{version}
+            #   @param write_disposition [::Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest::WriteDisposition]
+            #     Options for what to do if the destination table already exists.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -859,6 +1033,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ExportInsightsDataRequest.new
+            #
+            #   # Call the export_insights_data method.
+            #   result = client.export_insights_data request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def export_insights_data request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -877,9 +1073,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -931,6 +1129,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreateIssueModelRequest.new
+            #
+            #   # Call the create_issue_model method.
+            #   result = client.create_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -948,9 +1168,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1002,6 +1224,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateIssueModelRequest.new
+            #
+            #   # Call the update_issue_model method.
+            #   result = client.update_issue_model request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::IssueModel.
+            #   p result
+            #
             def update_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1019,9 +1256,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "issue_model.name" => request.issue_model.name
-              }
+              header_params = {}
+              if request.issue_model&.name
+                header_params["issue_model.name"] = request.issue_model.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1070,6 +1309,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetIssueModelRequest.new
+            #
+            #   # Call the get_issue_model method.
+            #   result = client.get_issue_model request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::IssueModel.
+            #   p result
+            #
             def get_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1087,9 +1341,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1138,6 +1394,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListIssueModelsRequest.new
+            #
+            #   # Call the list_issue_models method.
+            #   result = client.list_issue_models request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::ListIssueModelsResponse.
+            #   p result
+            #
             def list_issue_models request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1155,9 +1426,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1206,6 +1479,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteIssueModelRequest.new
+            #
+            #   # Call the delete_issue_model method.
+            #   result = client.delete_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1223,9 +1518,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1276,6 +1573,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeployIssueModelRequest.new
+            #
+            #   # Call the deploy_issue_model method.
+            #   result = client.deploy_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def deploy_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1293,9 +1612,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1346,6 +1667,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UndeployIssueModelRequest.new
+            #
+            #   # Call the undeploy_issue_model method.
+            #   result = client.undeploy_issue_model request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def undeploy_issue_model request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1363,9 +1706,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1415,6 +1760,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetIssueRequest.new
+            #
+            #   # Call the get_issue method.
+            #   result = client.get_issue request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Issue.
+            #   p result
+            #
             def get_issue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1432,9 +1792,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1483,6 +1845,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListIssuesRequest.new
+            #
+            #   # Call the list_issues method.
+            #   result = client.list_issues request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::ListIssuesResponse.
+            #   p result
+            #
             def list_issues request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1500,9 +1877,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1553,6 +1932,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateIssueRequest.new
+            #
+            #   # Call the update_issue method.
+            #   result = client.update_issue request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Issue.
+            #   p result
+            #
             def update_issue request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1570,9 +1964,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "issue.name" => request.issue.name
-              }
+              header_params = {}
+              if request.issue&.name
+                header_params["issue.name"] = request.issue.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1621,6 +2017,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsRequest.new
+            #
+            #   # Call the calculate_issue_model_stats method.
+            #   result = client.calculate_issue_model_stats request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::CalculateIssueModelStatsResponse.
+            #   p result
+            #
             def calculate_issue_model_stats request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1638,9 +2049,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "issue_model" => request.issue_model
-              }
+              header_params = {}
+              if request.issue_model
+                header_params["issue_model"] = request.issue_model
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1694,6 +2107,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreatePhraseMatcherRequest.new
+            #
+            #   # Call the create_phrase_matcher method.
+            #   result = client.create_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #   p result
+            #
             def create_phrase_matcher request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1711,9 +2139,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1762,6 +2192,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetPhraseMatcherRequest.new
+            #
+            #   # Call the get_phrase_matcher method.
+            #   result = client.get_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #   p result
+            #
             def get_phrase_matcher request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1779,9 +2224,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1842,6 +2289,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListPhraseMatchersRequest.new
+            #
+            #   # Call the list_phrase_matchers method.
+            #   result = client.list_phrase_matchers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #     p response
+            #   end
+            #
             def list_phrase_matchers request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1859,9 +2327,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1911,6 +2381,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeletePhraseMatcherRequest.new
+            #
+            #   # Call the delete_phrase_matcher method.
+            #   result = client.delete_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_phrase_matcher request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1928,9 +2413,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1943,6 +2430,93 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @contact_center_insights_stub.call_rpc :delete_phrase_matcher, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a phrase matcher.
+            #
+            # @overload update_phrase_matcher(request, options = nil)
+            #   Pass arguments to `update_phrase_matcher` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_phrase_matcher(phrase_matcher: nil, update_mask: nil)
+            #   Pass arguments to `update_phrase_matcher` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param phrase_matcher [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher, ::Hash]
+            #     Required. The new values for the phrase matcher.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ContactCenterInsights::V1::PhraseMatcher]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest.new
+            #
+            #   # Call the update_phrase_matcher method.
+            #   result = client.update_phrase_matcher request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::PhraseMatcher.
+            #   p result
+            #
+            def update_phrase_matcher request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UpdatePhraseMatcherRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_phrase_matcher.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.phrase_matcher&.name
+                header_params["phrase_matcher.name"] = request.phrase_matcher.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_phrase_matcher.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_phrase_matcher.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :update_phrase_matcher, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1982,6 +2556,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CalculateStatsRequest.new
+            #
+            #   # Call the calculate_stats method.
+            #   result = client.calculate_stats request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::CalculateStatsResponse.
+            #   p result
+            #
             def calculate_stats request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1999,9 +2588,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "location" => request.location
-              }
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2050,6 +2641,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest.new
+            #
+            #   # Call the get_settings method.
+            #   result = client.get_settings request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Settings.
+            #   p result
+            #
             def get_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2067,9 +2673,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2120,6 +2728,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest.new
+            #
+            #   # Call the update_settings method.
+            #   result = client.update_settings request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::Settings.
+            #   p result
+            #
             def update_settings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2137,9 +2760,11 @@ module Google
                 gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "settings.name" => request.settings.name
-              }
+              header_params = {}
+              if request.settings&.name
+                header_params["settings.name"] = request.settings.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2420,6 +3045,11 @@ module Google
                 #
                 attr_reader :delete_phrase_matcher
                 ##
+                # RPC-specific configuration for `update_phrase_matcher`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_phrase_matcher
+                ##
                 # RPC-specific configuration for `calculate_stats`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2487,6 +3117,8 @@ module Google
                   @list_phrase_matchers = ::Gapic::Config::Method.new list_phrase_matchers_config
                   delete_phrase_matcher_config = parent_rpcs.delete_phrase_matcher if parent_rpcs.respond_to? :delete_phrase_matcher
                   @delete_phrase_matcher = ::Gapic::Config::Method.new delete_phrase_matcher_config
+                  update_phrase_matcher_config = parent_rpcs.update_phrase_matcher if parent_rpcs.respond_to? :update_phrase_matcher
+                  @update_phrase_matcher = ::Gapic::Config::Method.new update_phrase_matcher_config
                   calculate_stats_config = parent_rpcs.calculate_stats if parent_rpcs.respond_to? :calculate_stats
                   @calculate_stats = ::Gapic::Config::Method.new calculate_stats_config
                   get_settings_config = parent_rpcs.get_settings if parent_rpcs.respond_to? :get_settings

@@ -186,6 +186,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::QueryService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest.new
+            #
+            #   # Call the query_time_series method.
+            #   result = client.query_time_series request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::TimeSeriesData.
+            #     p response
+            #   end
+            #
             def query_time_series request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -203,9 +224,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

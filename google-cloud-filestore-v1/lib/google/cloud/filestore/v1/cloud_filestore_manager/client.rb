@@ -228,9 +228,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location for which to retrieve instance information,
-            #     in the format `projects/{project_id}/locations/{location}`. In Cloud
-            #     Filestore, locations map to GCP zones, for example **us-west1-b**. To
+            #     Required. The project and location for which to retrieve instance
+            #     information, in the format `projects/{project_id}/locations/{location}`. In
+            #     Cloud Filestore, locations map to GCP zones, for example **us-west1-b**. To
             #     retrieve instance information for all locations, use "-" for the
             #     `{location}` value.
             #   @param page_size [::Integer]
@@ -251,6 +251,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::ListInstancesRequest.new
+            #
+            #   # Call the list_instances method.
+            #   result = client.list_instances request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Filestore::V1::Instance.
+            #     p response
+            #   end
+            #
             def list_instances request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -268,9 +289,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -321,6 +344,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::GetInstanceRequest.new
+            #
+            #   # Call the get_instance method.
+            #   result = client.get_instance request
+            #
+            #   # The returned object is of type Google::Cloud::Filestore::V1::Instance.
+            #   p result
+            #
             def get_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -338,9 +376,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -399,6 +439,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::CreateInstanceRequest.new
+            #
+            #   # Call the create_instance method.
+            #   result = client.create_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -416,9 +478,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -476,6 +540,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::UpdateInstanceRequest.new
+            #
+            #   # Call the update_instance method.
+            #   result = client.update_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -493,9 +579,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "instance.name" => request.instance.name
-              }
+              header_params = {}
+              if request.instance&.name
+                header_params["instance.name"] = request.instance.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -542,8 +630,8 @@ module Google
             #     Required. The resource name of the instance, in the format
             #     `projects/{project_number}/locations/{location_id}/instances/{instance_id}`.
             #   @param file_share [::String]
-            #     Required. Name of the file share in the Cloud Filestore instance that the backup
-            #     is being restored to.
+            #     Required. Name of the file share in the Cloud Filestore instance that the
+            #     backup is being restored to.
             #   @param source_backup [::String]
             #     The resource name of the backup, in the format
             #     `projects/{project_number}/locations/{location_id}/backups/{backup_id}`.
@@ -555,6 +643,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::RestoreInstanceRequest.new
+            #
+            #   # Call the restore_instance method.
+            #   result = client.restore_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def restore_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -573,9 +683,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -626,6 +738,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::DeleteInstanceRequest.new
+            #
+            #   # Call the delete_instance method.
+            #   result = client.delete_instance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_instance request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -643,9 +777,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -686,11 +822,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location for which to retrieve backup information,
-            #     in the format `projects/{project_number}/locations/{location}`.
-            #     In Cloud Filestore, backup locations map to GCP regions,
-            #     for example **us-west1**.
-            #     To retrieve backup information for all locations, use "-" for the
+            #     Required. The project and location for which to retrieve backup
+            #     information, in the format
+            #     `projects/{project_number}/locations/{location}`. In Cloud Filestore,
+            #     backup locations map to GCP regions, for example **us-west1**. To retrieve
+            #     backup information for all locations, use "-" for the
             #     `{location}` value.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
@@ -710,6 +846,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::ListBackupsRequest.new
+            #
+            #   # Call the list_backups method.
+            #   result = client.list_backups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Filestore::V1::Backup.
+            #     p response
+            #   end
+            #
             def list_backups request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -727,9 +884,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -780,6 +939,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::GetBackupRequest.new
+            #
+            #   # Call the get_backup method.
+            #   result = client.get_backup request
+            #
+            #   # The returned object is of type Google::Cloud::Filestore::V1::Backup.
+            #   p result
+            #
             def get_backup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -797,9 +971,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -860,6 +1036,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::CreateBackupRequest.new
+            #
+            #   # Call the create_backup method.
+            #   result = client.create_backup request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_backup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -877,9 +1075,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -930,6 +1130,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::DeleteBackupRequest.new
+            #
+            #   # Call the delete_backup method.
+            #   result = client.delete_backup request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_backup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -947,9 +1169,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -991,8 +1215,8 @@ module Google
             #   @param backup [::Google::Cloud::Filestore::V1::Backup, ::Hash]
             #     Required. A {::Google::Cloud::Filestore::V1::Backup backup resource}
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Mask of fields to update.  At least one path must be supplied in this
-            #     field.
+            #     Required. Mask of fields to update.  At least one path must be supplied in
+            #     this field.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1001,6 +1225,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/filestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Filestore::V1::UpdateBackupRequest.new
+            #
+            #   # Call the update_backup method.
+            #   result = client.update_backup request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_backup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1019,9 +1265,11 @@ module Google
                 gapic_version: ::Google::Cloud::Filestore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "backup.name" => request.backup.name
-              }
+              header_params = {}
+              if request.backup&.name
+                header_params["backup.name"] = request.backup.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

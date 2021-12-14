@@ -21,7 +21,7 @@ module Google
   module Area120
     module Tables
       module V1alpha1
-        VERSION = "0.2.3"
+        VERSION = "0.2.4"
       end
     end
   end

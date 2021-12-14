@@ -37,18 +37,23 @@ module Google
         #     and
         #     {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
         #
+        #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time} must be later
+        #     than {::Google::Cloud::Retail::V2::Product#available_time available_time} and
+        #     {::Google::Cloud::Retail::V2::Product#publish_time publish_time}, otherwise an
+        #     INVALID_ARGUMENT error is thrown.
+        #
         #     Google Merchant Center property
         #     [expiration_date](https://support.google.com/merchants/answer/6324499).
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
         #     Input only. The TTL (time to live) of the product.
         #
-        #     If it is set, {::Google::Cloud::Retail::V2::Product#expire_time expire_time}
-        #     is set as current timestamp plus
-        #     {::Google::Cloud::Retail::V2::Product#ttl ttl}. The derived
-        #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time} is returned in
-        #     the output and {::Google::Cloud::Retail::V2::Product#ttl ttl} is left blank
-        #     when retrieving the {::Google::Cloud::Retail::V2::Product Product}.
+        #     If it is set, it must be a non-negative value, and
+        #     {::Google::Cloud::Retail::V2::Product#expire_time expire_time} is set as
+        #     current timestamp plus {::Google::Cloud::Retail::V2::Product#ttl ttl}. The
+        #     derived {::Google::Cloud::Retail::V2::Product#expire_time expire_time} is
+        #     returned in the output and {::Google::Cloud::Retail::V2::Product#ttl ttl} is
+        #     left blank when retrieving the {::Google::Cloud::Retail::V2::Product Product}.
         #
         #     If it is set, the product is not available for
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search} after
@@ -61,8 +66,6 @@ module Google
         #   @return [::String]
         #     Immutable. Full resource name of the product, such as
         #     `projects/*/locations/global/catalogs/default_catalog/branches/default_branch/products/product_id`.
-        #
-        #     The branch ID must be "default_branch".
         # @!attribute [rw] id
         #   @return [::String]
         #     Immutable. {::Google::Cloud::Retail::V2::Product Product} identifier, which is
@@ -237,7 +240,7 @@ module Google
         #     * The key must be a UTF-8 encoded string with a length limit of 128
         #       characters.
         #     * For indexable attribute, the key must match the pattern:
-        #       [a-zA-Z0-9][a-zA-Z0-9_]*. For example, key0LikeThis or KEY_1_LIKE_THIS.
+        #       `[a-zA-Z0-9][a-zA-Z0-9_]*`. For example, key0LikeThis or KEY_1_LIKE_THIS.
         # @!attribute [rw] tags
         #   @return [::Array<::String>]
         #     Custom tags associated with the product.

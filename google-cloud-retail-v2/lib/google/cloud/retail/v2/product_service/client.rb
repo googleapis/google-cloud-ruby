@@ -215,6 +215,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::CreateProductRequest.new
+            #
+            #   # Call the create_product method.
+            #   result = client.create_product request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::Product.
+            #   p result
+            #
             def create_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -232,9 +247,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -292,6 +309,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::GetProductRequest.new
+            #
+            #   # Call the get_product method.
+            #   result = client.get_product request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::Product.
+            #   p result
+            #
             def get_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -309,9 +341,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -431,6 +465,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::ListProductsRequest.new
+            #
+            #   # Call the list_products method.
+            #   result = client.list_products request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Retail::V2::Product.
+            #     p response
+            #   end
+            #
             def list_products request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -448,9 +503,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -521,6 +578,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::UpdateProductRequest.new
+            #
+            #   # Call the update_product method.
+            #   result = client.update_product request
+            #
+            #   # The returned object is of type Google::Cloud::Retail::V2::Product.
+            #   p result
+            #
             def update_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -538,9 +610,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "product.name" => request.product.name
-              }
+              header_params = {}
+              if request.product&.name
+                header_params["product.name"] = request.product.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -609,6 +683,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::DeleteProductRequest.new
+            #
+            #   # Call the delete_product method.
+            #   result = client.delete_product request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_product request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -626,9 +715,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -682,7 +773,7 @@ module Google
             #     Unique identifier provided by client, within the ancestor
             #     dataset scope. Ensures idempotency and used for request deduplication.
             #     Server-generated if unspecified. Up to 128 characters long and must match
-            #     the pattern: "[a-zA-Z0-9_]+". This is returned as [Operation.name][] in
+            #     the pattern: `[a-zA-Z0-9_]+`. This is returned as [Operation.name][] in
             #     {::Google::Cloud::Retail::V2::ImportMetadata ImportMetadata}.
             #
             #     Only supported when
@@ -718,6 +809,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::ImportProductsRequest.new
+            #
+            #   # Call the import_products method.
+            #   result = client.import_products request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def import_products request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -735,9 +848,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -867,7 +982,7 @@ module Google
             #     {::Google::Cloud::Retail::V2::Product#name Product.name} is not found, the
             #     inventory update will still be processed and retained for at most 1 day
             #     until the {::Google::Cloud::Retail::V2::Product Product} is created. If set to
-            #     false, an INVALID_ARGUMENT error is returned if the
+            #     false, a NOT_FOUND error is returned if the
             #     {::Google::Cloud::Retail::V2::Product Product} is not found.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -877,6 +992,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::SetInventoryRequest.new
+            #
+            #   # Call the set_inventory method.
+            #   result = client.set_inventory request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def set_inventory request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -895,9 +1032,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "inventory.name" => request.inventory.name
-              }
+              header_params = {}
+              if request.inventory&.name
+                header_params["inventory.name"] = request.inventory.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -988,7 +1127,7 @@ module Google
             #
             #     At least 1 value is required, and a maximum of 2000 values are allowed.
             #     Each value must be a string with a length limit of 10 characters, matching
-            #     the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+            #     the pattern `[a-zA-Z0-9_-]+`, such as "store1" or "REGION-2". Otherwise, an
             #     INVALID_ARGUMENT error is returned.
             #
             #     If the total number of place IDs exceeds 2000 for this
@@ -1002,8 +1141,8 @@ module Google
             #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
             #     found, the fulfillment information will still be processed and retained for
             #     at most 1 day and processed once the
-            #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, an
-            #     INVALID_ARGUMENT error is returned if the
+            #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, a
+            #     NOT_FOUND error is returned if the
             #     {::Google::Cloud::Retail::V2::Product Product} is not found.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1013,6 +1152,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest.new
+            #
+            #   # Call the add_fulfillment_places method.
+            #   result = client.add_fulfillment_places request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def add_fulfillment_places request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1031,9 +1192,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "product" => request.product
-              }
+              header_params = {}
+              if request.product
+                header_params["product"] = request.product
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1123,7 +1286,7 @@ module Google
             #
             #     At least 1 value is required, and a maximum of 2000 values are allowed.
             #     Each value must be a string with a length limit of 10 characters, matching
-            #     the pattern [a-zA-Z0-9_-]+, such as "store1" or "REGION-2". Otherwise, an
+            #     the pattern `[a-zA-Z0-9_-]+`, such as "store1" or "REGION-2". Otherwise, an
             #     INVALID_ARGUMENT error is returned.
             #   @param remove_time [::Google::Protobuf::Timestamp, ::Hash]
             #     The time when the fulfillment updates are issued, used to prevent
@@ -1133,8 +1296,8 @@ module Google
             #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
             #     found, the fulfillment information will still be processed and retained for
             #     at most 1 day and processed once the
-            #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, an
-            #     INVALID_ARGUMENT error is returned if the
+            #     {::Google::Cloud::Retail::V2::Product Product} is created. If set to false, a
+            #     NOT_FOUND error is returned if the
             #     {::Google::Cloud::Retail::V2::Product Product} is not found.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1144,6 +1307,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/retail/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Retail::V2::ProductService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest.new
+            #
+            #   # Call the remove_fulfillment_places method.
+            #   result = client.remove_fulfillment_places request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def remove_fulfillment_places request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -1162,9 +1347,11 @@ module Google
                 gapic_version: ::Google::Cloud::Retail::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "product" => request.product
-              }
+              header_params = {}
+              if request.product
+                header_params["product"] = request.product
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

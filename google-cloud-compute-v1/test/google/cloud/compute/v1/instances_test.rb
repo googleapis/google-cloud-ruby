@@ -1299,6 +1299,64 @@ class ::Google::Cloud::Compute::V1::Instances::ClientTest < Minitest::Test
     end
   end
 
+  def test_send_diagnostic_interrupt
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    instance = "hello world"
+    project = "hello world"
+    zone = "hello world"
+
+    send_diagnostic_interrupt_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
+      assert_equal :post, verb
+
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+
+      assert_nil body
+    end
+
+    Gapic::Rest::ClientStub.stub :new, send_diagnostic_interrupt_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new do  |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.send_diagnostic_interrupt({ instance: instance, project: project, zone: zone }) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.send_diagnostic_interrupt instance: instance, project: project, zone: zone do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.send_diagnostic_interrupt ::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceRequest.new(instance: instance, project: project, zone: zone) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.send_diagnostic_interrupt({ instance: instance, project: project, zone: zone }, call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.send_diagnostic_interrupt(::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceRequest.new(instance: instance, project: project, zone: zone), call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, send_diagnostic_interrupt_client_stub.call_count
+    end
+  end
+
   def test_set_deletion_protection
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new

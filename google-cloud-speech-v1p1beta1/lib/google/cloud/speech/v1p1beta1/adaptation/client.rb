@@ -165,9 +165,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this phrase set will be created.
-            #     Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/phraseSets
+            #     Required. The parent resource where this phrase set will be created. Format:
+            #
+            #     `projects/{project}/locations/{location}/phraseSets`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #   @param phrase_set_id [::String]
             #     Required. The ID to use for the phrase set, which will become the final
             #     component of the phrase set's resource name.
@@ -184,6 +190,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::PhraseSet]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::CreatePhraseSetRequest.new
+            #
+            #   # Call the create_phrase_set method.
+            #   result = client.create_phrase_set request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #   p result
             #
             def create_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -202,9 +223,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -243,9 +266,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the phrase set to retrieve.
-            #     Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/phraseSets/\\{phrase_set}
+            #     Required. The name of the phrase set to retrieve. Format:
+            #
+            #     `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Speech::V1p1beta1::PhraseSet]
@@ -254,6 +283,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::PhraseSet]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::GetPhraseSetRequest.new
+            #
+            #   # Call the get_phrase_set method.
+            #   result = client.get_phrase_set request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #   p result
             #
             def get_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -272,9 +316,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -313,9 +359,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, which owns this collection of phrase set.
-            #     Format:
-            #     projects/\\{project}/locations/\\{location}
+            #     Required. The parent, which owns this collection of phrase set. Format:
+            #
+            #     `projects/{project}/locations/{location}`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #   @param page_size [::Integer]
             #     The maximum number of phrase sets to return. The service may return
             #     fewer than this value. If unspecified, at most 50 phrase sets will be
@@ -336,6 +388,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::ListPhraseSetRequest.new
+            #
+            #   # Call the list_phrase_set method.
+            #   result = client.list_phrase_set request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #     p response
+            #   end
+            #
             def list_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -353,9 +426,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -399,7 +474,14 @@ module Google
             #
             #     The phrase set's `name` field is used to identify the set to be
             #     updated. Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/phraseSets/\\{phrase_set}
+            #
+            #     `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated.
             #
@@ -410,6 +492,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::PhraseSet]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::UpdatePhraseSetRequest.new
+            #
+            #   # Call the update_phrase_set method.
+            #   result = client.update_phrase_set request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::PhraseSet.
+            #   p result
             #
             def update_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -428,9 +525,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "phrase_set.name" => request.phrase_set.name
-              }
+              header_params = {}
+              if request.phrase_set&.name
+                header_params["phrase_set.name"] = request.phrase_set.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -469,9 +568,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the phrase set to delete.
-            #     Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/phraseSets/\\{phrase_set}
+            #     Required. The name of the phrase set to delete. Format:
+            #
+            #     `projects/{project}/locations/{location}/phraseSets/{phrase_set}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -480,6 +579,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::DeletePhraseSetRequest.new
+            #
+            #   # Call the delete_phrase_set method.
+            #   result = client.delete_phrase_set request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_phrase_set request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -498,9 +612,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -539,9 +655,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this custom class will be created.
-            #     Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/customClasses
+            #     Required. The parent resource where this custom class will be created. Format:
+            #
+            #     `projects/{project}/locations/{location}/customClasses`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #   @param custom_class_id [::String]
             #     Required. The ID to use for the custom class, which will become the final
             #     component of the custom class' resource name.
@@ -558,6 +680,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::CustomClass]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::CreateCustomClassRequest.new
+            #
+            #   # Call the create_custom_class method.
+            #   result = client.create_custom_class request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #   p result
             #
             def create_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -576,9 +713,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -617,9 +756,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the custom class to retrieve.
-            #     Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/customClasses/\\{custom_class}
+            #     Required. The name of the custom class to retrieve. Format:
+            #
+            #     `projects/{project}/locations/{location}/customClasses/{custom_class}`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Speech::V1p1beta1::CustomClass]
@@ -628,6 +767,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::CustomClass]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::GetCustomClassRequest.new
+            #
+            #   # Call the get_custom_class method.
+            #   result = client.get_custom_class request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #   p result
             #
             def get_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -646,9 +800,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -687,9 +843,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, which owns this collection of custom classes.
-            #     Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/customClasses
+            #     Required. The parent, which owns this collection of custom classes. Format:
+            #
+            #     `projects/{project}/locations/{location}/customClasses`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #   @param page_size [::Integer]
             #     The maximum number of custom classes to return. The service may return
             #     fewer than this value. If unspecified, at most 50 custom classes will be
@@ -710,6 +872,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::ListCustomClassesRequest.new
+            #
+            #   # Call the list_custom_classes method.
+            #   result = client.list_custom_classes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #     p response
+            #   end
+            #
             def list_custom_classes request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -727,9 +910,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -773,7 +958,14 @@ module Google
             #
             #     The custom class's `name` field is used to identify the custom class to be
             #     updated. Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/customClasses/\\{custom_class}
+            #
+            #     `projects/{project}/locations/{location}/customClasses/{custom_class}`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated.
             #
@@ -784,6 +976,21 @@ module Google
             # @return [::Google::Cloud::Speech::V1p1beta1::CustomClass]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::UpdateCustomClassRequest.new
+            #
+            #   # Call the update_custom_class method.
+            #   result = client.update_custom_class request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
+            #   p result
             #
             def update_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -802,9 +1009,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "custom_class.name" => request.custom_class.name
-              }
+              header_params = {}
+              if request.custom_class&.name
+                header_params["custom_class.name"] = request.custom_class.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -843,9 +1052,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the custom class to delete.
-            #     Format:
-            #     \\{api_version}/projects/\\{project}/locations/\\{location}/customClasses/\\{custom_class}
+            #     Required. The name of the custom class to delete. Format:
+            #
+            #     `projects/{project}/locations/{location}/customClasses/{custom_class}`
+            #
+            #     Speech-to-Text supports three locations: `global`, `us` (US North America),
+            #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
+            #     endpoint, use the `global` location. To specify a region, use a
+            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
+            #     `eu` location value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -854,6 +1069,21 @@ module Google
             # @return [::Google::Protobuf::Empty]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1p1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1p1beta1::DeleteCustomClassRequest.new
+            #
+            #   # Call the delete_custom_class method.
+            #   result = client.delete_custom_class request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
             #
             def delete_custom_class request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -872,9 +1102,11 @@ module Google
                 gapic_version: ::Google::Cloud::Speech::V1p1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

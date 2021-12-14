@@ -199,8 +199,8 @@ module Google
             #   @param workload [::Google::Cloud::AssuredWorkloads::V1beta1::Workload, ::Hash]
             #     Required. Assured Workload to create
             #   @param external_id [::String]
-            #     Optional. A identifier associated with the workload and underlying projects which
-            #     allows for the break down of billing costs for a workload. The value
+            #     Optional. A identifier associated with the workload and underlying projects
+            #     which allows for the break down of billing costs for a workload. The value
             #     provided for the identifier will add a label to the workload and contained
             #     projects with the identifier as the value.
             #
@@ -211,6 +211,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::CreateWorkloadRequest.new
+            #
+            #   # Call the create_workload method.
+            #   result = client.create_workload request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -229,9 +251,11 @@ module Google
                 gapic_version: ::Google::Cloud::AssuredWorkloads::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -289,6 +313,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest.new
+            #
+            #   # Call the update_workload method.
+            #   result = client.update_workload request
+            #
+            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::Workload.
+            #   p result
+            #
             def update_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -306,9 +345,11 @@ module Google
                 gapic_version: ::Google::Cloud::AssuredWorkloads::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "workload.name" => request.workload.name
-              }
+              header_params = {}
+              if request.workload&.name
+                header_params["workload.name"] = request.workload.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -364,6 +405,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest.new
+            #
+            #   # Call the delete_workload method.
+            #   result = client.delete_workload request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -381,9 +437,11 @@ module Google
                 gapic_version: ::Google::Cloud::AssuredWorkloads::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -422,8 +480,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the Workload to fetch. This is the workloads's
-            #     relative path in the API, formatted as
+            #     Required. The resource name of the Workload to fetch. This is the
+            #     workloads's relative path in the API, formatted as
             #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
             #     For example,
             #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
@@ -435,6 +493,21 @@ module Google
             # @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest.new
+            #
+            #   # Call the get_workload method.
+            #   result = client.get_workload request
+            #
+            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::Workload.
+            #   p result
             #
             def get_workload request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -453,9 +526,11 @@ module Google
                 gapic_version: ::Google::Cloud::AssuredWorkloads::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -514,6 +589,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest.new
+            #
+            #   # Call the list_workloads method.
+            #   result = client.list_workloads request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AssuredWorkloads::V1beta1::Workload.
+            #     p response
+            #   end
+            #
             def list_workloads request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -531,9 +627,11 @@ module Google
                 gapic_version: ::Google::Cloud::AssuredWorkloads::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

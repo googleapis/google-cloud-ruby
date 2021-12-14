@@ -218,6 +218,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/error_reporting/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ErrorReporting::V1beta1::ListGroupStatsRequest.new
+            #
+            #   # Call the list_group_stats method.
+            #   result = client.list_group_stats request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupStats.
+            #     p response
+            #   end
+            #
             def list_group_stats request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -235,9 +256,11 @@ module Google
                 gapic_version: ::Google::Cloud::ErrorReporting::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_name" => request.project_name
-              }
+              header_params = {}
+              if request.project_name
+                header_params["project_name"] = request.project_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -306,6 +329,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/error_reporting/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ErrorReporting::V1beta1::ListEventsRequest.new
+            #
+            #   # Call the list_events method.
+            #   result = client.list_events request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ErrorReporting::V1beta1::ErrorEvent.
+            #     p response
+            #   end
+            #
             def list_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -323,9 +367,11 @@ module Google
                 gapic_version: ::Google::Cloud::ErrorReporting::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_name" => request.project_name
-              }
+              header_params = {}
+              if request.project_name
+                header_params["project_name"] = request.project_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -380,6 +426,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/error_reporting/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new
+            #
+            #   # Call the delete_events method.
+            #   result = client.delete_events request
+            #
+            #   # The returned object is of type Google::Cloud::ErrorReporting::V1beta1::DeleteEventsResponse.
+            #   p result
+            #
             def delete_events request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -397,9 +458,11 @@ module Google
                 gapic_version: ::Google::Cloud::ErrorReporting::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_name" => request.project_name
-              }
+              header_params = {}
+              if request.project_name
+                header_params["project_name"] = request.project_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

@@ -222,6 +222,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateServiceRequest.new
+            #
+            #   # Call the create_service method.
+            #   result = client.create_service request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Service.
+            #   p result
+            #
             def create_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -239,9 +254,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -292,6 +309,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetServiceRequest.new
+            #
+            #   # Call the get_service method.
+            #   result = client.get_service request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Service.
+            #   p result
+            #
             def get_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -309,9 +341,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -392,6 +426,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListServicesRequest.new
+            #
+            #   # Call the list_services method.
+            #   result = client.list_services request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::Service.
+            #     p response
+            #   end
+            #
             def list_services request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -409,9 +464,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -464,6 +521,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateServiceRequest.new
+            #
+            #   # Call the update_service method.
+            #   result = client.update_service request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::Service.
+            #   p result
+            #
             def update_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -481,9 +553,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service.name" => request.service.name
-              }
+              header_params = {}
+              if request.service&.name
+                header_params["service.name"] = request.service.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -534,6 +608,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteServiceRequest.new
+            #
+            #   # Call the delete_service method.
+            #   result = client.delete_service request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -551,9 +640,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -612,6 +703,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::CreateServiceLevelObjectiveRequest.new
+            #
+            #   # Call the create_service_level_objective method.
+            #   result = client.create_service_level_objective request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #   p result
+            #
             def create_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -629,9 +735,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -687,6 +795,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::GetServiceLevelObjectiveRequest.new
+            #
+            #   # Call the get_service_level_objective method.
+            #   result = client.get_service_level_objective request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #   p result
+            #
             def get_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -704,9 +827,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -773,6 +898,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new
+            #
+            #   # Call the list_service_level_objectives method.
+            #   result = client.list_service_level_objectives request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #     p response
+            #   end
+            #
             def list_service_level_objectives request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -790,9 +936,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -845,6 +993,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::UpdateServiceLevelObjectiveRequest.new
+            #
+            #   # Call the update_service_level_objective method.
+            #   result = client.update_service_level_objective request
+            #
+            #   # The returned object is of type Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+            #   p result
+            #
             def update_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -862,9 +1025,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_level_objective.name" => request.service_level_objective.name
-              }
+              header_params = {}
+              if request.service_level_objective&.name
+                header_params["service_level_objective.name"] = request.service_level_objective.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -915,6 +1080,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/monitoring/v3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Monitoring::V3::DeleteServiceLevelObjectiveRequest.new
+            #
+            #   # Call the delete_service_level_objective method.
+            #   result = client.delete_service_level_objective request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_service_level_objective request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -932,9 +1112,11 @@ module Google
                 gapic_version: ::Google::Cloud::Monitoring::V3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

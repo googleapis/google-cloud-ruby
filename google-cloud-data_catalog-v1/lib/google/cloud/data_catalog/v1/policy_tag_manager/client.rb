@@ -184,6 +184,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::CreateTaxonomyRequest.new
+            #
+            #   # Call the create_taxonomy method.
+            #   result = client.create_taxonomy request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::Taxonomy.
+            #   p result
+            #
             def create_taxonomy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -201,9 +216,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -256,6 +273,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::DeleteTaxonomyRequest.new
+            #
+            #   # Call the delete_taxonomy method.
+            #   result = client.delete_taxonomy request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_taxonomy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -273,9 +305,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -332,6 +366,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::UpdateTaxonomyRequest.new
+            #
+            #   # Call the update_taxonomy method.
+            #   result = client.update_taxonomy request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::Taxonomy.
+            #   p result
+            #
             def update_taxonomy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -349,9 +398,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "taxonomy.name" => request.taxonomy.name
-              }
+              header_params = {}
+              if request.taxonomy&.name
+                header_params["taxonomy.name"] = request.taxonomy.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -409,6 +460,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::ListTaxonomiesRequest.new
+            #
+            #   # Call the list_taxonomies method.
+            #   result = client.list_taxonomies request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::DataCatalog::V1::Taxonomy.
+            #     p response
+            #   end
+            #
             def list_taxonomies request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -426,9 +498,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -478,6 +552,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::GetTaxonomyRequest.new
+            #
+            #   # Call the get_taxonomy method.
+            #   result = client.get_taxonomy request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::Taxonomy.
+            #   p result
+            #
             def get_taxonomy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -495,9 +584,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -536,8 +627,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the taxonomy that the policy tag will belong to.<br /><br
-            #     />
+            #     Required. Resource name of the taxonomy that the policy tag will belong to.
             #   @param policy_tag [::Google::Cloud::DataCatalog::V1::PolicyTag, ::Hash]
             #     The policy tag to create.
             #
@@ -548,6 +638,21 @@ module Google
             # @return [::Google::Cloud::DataCatalog::V1::PolicyTag]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::CreatePolicyTagRequest.new
+            #
+            #   # Call the create_policy_tag method.
+            #   result = client.create_policy_tag request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::PolicyTag.
+            #   p result
             #
             def create_policy_tag request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -566,9 +671,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -624,6 +731,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::DeletePolicyTagRequest.new
+            #
+            #   # Call the delete_policy_tag method.
+            #   result = client.delete_policy_tag request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_policy_tag request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -641,9 +763,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -701,6 +825,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::UpdatePolicyTagRequest.new
+            #
+            #   # Call the update_policy_tag method.
+            #   result = client.update_policy_tag request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::PolicyTag.
+            #   p result
+            #
             def update_policy_tag request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -718,9 +857,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "policy_tag.name" => request.policy_tag.name
-              }
+              header_params = {}
+              if request.policy_tag&.name
+                header_params["policy_tag.name"] = request.policy_tag.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -778,6 +919,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::ListPolicyTagsRequest.new
+            #
+            #   # Call the list_policy_tags method.
+            #   result = client.list_policy_tags request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::DataCatalog::V1::PolicyTag.
+            #     p response
+            #   end
+            #
             def list_policy_tags request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -795,9 +957,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -847,6 +1011,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DataCatalog::V1::GetPolicyTagRequest.new
+            #
+            #   # Call the get_policy_tag method.
+            #   result = client.get_policy_tag request
+            #
+            #   # The returned object is of type Google::Cloud::DataCatalog::V1::PolicyTag.
+            #   p result
+            #
             def get_policy_tag request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -864,9 +1043,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -919,6 +1100,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def get_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -936,9 +1132,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -993,6 +1191,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
             def set_iam_policy request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1010,9 +1223,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1068,6 +1283,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/data_catalog/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
             def test_iam_permissions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1085,9 +1315,11 @@ module Google
                 gapic_version: ::Google::Cloud::DataCatalog::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "resource" => request.resource
-              }
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

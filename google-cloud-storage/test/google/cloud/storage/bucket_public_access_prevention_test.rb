@@ -16,7 +16,7 @@ require "helper"
 
 describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storage do
   let(:bucket_name) { "new-bucket-#{Time.now.to_i}" }
-  let(:bucket_hash) { random_bucket_hash bucket_name }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
   let(:bucket_user_project) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service, user_project: true }
@@ -29,41 +29,41 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
     _(bucket.public_access_prevention_enforced?).must_equal false
   end
 
-  it "knows its public_access_prevention_unspecified? value" do
-    _(bucket.public_access_prevention_unspecified?).must_equal false
+  it "knows its public_access_prevention_inherited? value" do
+    _(bucket.public_access_prevention_inherited?).must_equal false
   end
 
   it "updates its public_access_prevention" do
     mock = Minitest::Mock.new
-    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "unspecified"),
-                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"))
+    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "inherited"),
+                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "inherited"))
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
                 patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"))
     bucket.service.mocked_service = mock
 
     _(bucket.public_access_prevention).must_be :nil?
     _(bucket.public_access_prevention_enforced?).must_equal false
-    _(bucket.public_access_prevention_unspecified?).must_equal false
+    _(bucket.public_access_prevention_inherited?).must_equal false
 
-    bucket.public_access_prevention = :unspecified
+    bucket.public_access_prevention = :inherited
 
-    _(bucket.public_access_prevention).must_equal "unspecified"
+    _(bucket.public_access_prevention).must_equal "inherited"
     _(bucket.public_access_prevention_enforced?).must_equal false
-    _(bucket.public_access_prevention_unspecified?).must_equal true
+    _(bucket.public_access_prevention_inherited?).must_equal true
 
     bucket.public_access_prevention = :enforced
 
     _(bucket.public_access_prevention).must_equal "enforced"
     _(bucket.public_access_prevention_enforced?).must_equal true
-    _(bucket.public_access_prevention_unspecified?).must_equal false
+    _(bucket.public_access_prevention_inherited?).must_equal false
 
     mock.verify
   end
 
   it "updates its public_access_prevention with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "unspecified"),
-                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "unspecified"), user_project: "test")
+    mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "inherited"),
+                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "inherited"), user_project: "test")
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
                 patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"), user_project: "test")
 
@@ -71,19 +71,19 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
 
     _(bucket_user_project.public_access_prevention).must_be :nil?
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
-    _(bucket_user_project.public_access_prevention_unspecified?).must_equal false
+    _(bucket_user_project.public_access_prevention_inherited?).must_equal false
 
-    bucket_user_project.public_access_prevention = :unspecified
+    bucket_user_project.public_access_prevention = :inherited
 
-    _(bucket_user_project.public_access_prevention).must_equal "unspecified"
+    _(bucket_user_project.public_access_prevention).must_equal "inherited"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal false
-    _(bucket_user_project.public_access_prevention_unspecified?).must_equal true
+    _(bucket_user_project.public_access_prevention_inherited?).must_equal true
 
     bucket_user_project.public_access_prevention = :enforced
 
     _(bucket_user_project.public_access_prevention).must_equal "enforced"
     _(bucket_user_project.public_access_prevention_enforced?).must_equal true
-    _(bucket_user_project.public_access_prevention_unspecified?).must_equal false
+    _(bucket_user_project.public_access_prevention_inherited?).must_equal false
 
     mock.verify
   end

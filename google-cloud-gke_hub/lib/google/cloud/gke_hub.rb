@@ -45,20 +45,26 @@ module Google
   module Cloud
     module GkeHub
       ##
-      # Create a new client object for GkeHubMembershipService.
+      # Create a new client object for GkeHub.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client](https://googleapis.dev/ruby/google-cloud-gke_hub-v1beta1/latest/Google/Cloud/GkeHub/V1beta1/GkeHubMembershipService/Client.html)
-      # for version V1beta1 of the API.
+      # [Google::Cloud::GkeHub::V1::GkeHub::Client](https://googleapis.dev/ruby/google-cloud-gke_hub-v1/latest/Google/Cloud/GkeHub/V1/GkeHub/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
-      # `version` parameter. If the GkeHubMembershipService service is
+      # `version` parameter. If the GkeHub service is
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
-      # ## About GkeHubMembershipService
+      # ## About GkeHub
       #
-      # The GKE Hub MembershipService handles the registration of many Kubernetes
-      # clusters to Google Cloud, represented with the Membership resource.
+      # The GKE Hub service handles the registration of many Kubernetes clusters to
+      # Google Cloud, and the management of multi-cluster features over those
+      # clusters.
+      #
+      # The GKE Hub service operates on the following resources:
+      #
+      # * Membership
+      # * Feature
       #
       # GKE Hub is currently only available in the global region.
       #
@@ -67,10 +73,10 @@ module Google
       # with Membership resources.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta1`.
-      # @return [GkeHubMembershipService::Client] A client object for the specified version.
+      #   Defaults to `:v1`.
+      # @return [GkeHub::Client] A client object for the specified version.
       #
-      def self.gke_hub_membership_service version: :v1beta1, &block
+      def self.gke_hub version: :v1, &block
         require "google/cloud/gke_hub/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::GkeHub
@@ -78,7 +84,7 @@ module Google
                        .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
                        .first
         package_module = Google::Cloud::GkeHub.const_get package_name
-        package_module.const_get(:GkeHubMembershipService).const_get(:Client).new(&block)
+        package_module.const_get(:GkeHub).const_get(:Client).new(&block)
       end
 
       ##

@@ -212,6 +212,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new
+            #
+            #   # Call the process_document method.
+            #   result = client.process_document request
+            #
+            #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::ProcessResponse.
+            #   p result
+            #
             def process_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -229,9 +244,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -292,6 +309,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::BatchProcessRequest.new
+            #
+            #   # Call the batch_process_documents method.
+            #   result = client.batch_process_documents request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def batch_process_documents request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -309,9 +348,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -362,6 +403,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesRequest.new
+            #
+            #   # Call the fetch_processor_types method.
+            #   result = client.fetch_processor_types request
+            #
+            #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::FetchProcessorTypesResponse.
+            #   p result
+            #
             def fetch_processor_types request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -379,9 +435,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -438,6 +496,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::ListProcessorsRequest.new
+            #
+            #   # Call the list_processors method.
+            #   result = client.list_processors request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::DocumentAI::V1beta3::Processor.
+            #     p response
+            #   end
+            #
             def list_processors request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -455,9 +534,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -512,6 +593,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::CreateProcessorRequest.new
+            #
+            #   # Call the create_processor method.
+            #   result = client.create_processor request
+            #
+            #   # The returned object is of type Google::Cloud::DocumentAI::V1beta3::Processor.
+            #   p result
+            #
             def create_processor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -529,9 +625,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -581,6 +679,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::DeleteProcessorRequest.new
+            #
+            #   # Call the delete_processor method.
+            #   result = client.delete_processor request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_processor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -598,9 +718,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -650,6 +772,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::EnableProcessorRequest.new
+            #
+            #   # Call the enable_processor method.
+            #   result = client.enable_processor request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def enable_processor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -667,9 +811,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -719,6 +865,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::DisableProcessorRequest.new
+            #
+            #   # Call the disable_processor method.
+            #   result = client.disable_processor request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def disable_processor request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -736,9 +904,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -798,6 +968,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/document_ai/v1beta3"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new
+            #
+            #   # Call the review_document method.
+            #   result = client.review_document request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def review_document request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -815,9 +1007,11 @@ module Google
                 gapic_version: ::Google::Cloud::DocumentAI::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "human_review_config" => request.human_review_config
-              }
+              header_params = {}
+              if request.human_review_config
+                header_params["human_review_config"] = request.human_review_config
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

@@ -1,5 +1,17 @@
 # Release History
 
+### 0.5.0 / 2021-11-11
+
+#### Features
+
+* Support multiple read replicas when creating an instance
+
+### 0.4.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.4.3 / 2021-08-11
 
 #### Bug Fixes

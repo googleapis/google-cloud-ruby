@@ -202,7 +202,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_cluster(project_id: nil, region: nil, cluster: nil, request_id: nil)
+            # @overload create_cluster(project_id: nil, region: nil, cluster: nil, request_id: nil, action_on_failed_primary_workers: nil)
             #   Pass arguments to `create_cluster` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -215,7 +215,7 @@ module Google
             #   @param cluster [::Google::Cloud::Dataproc::V1::Cluster, ::Hash]
             #     Required. The cluster to create.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server receives two
+            #     Optional. A unique ID used to identify the request. If the server receives two
             #     [CreateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.CreateClusterRequest)s
             #     with the same id, then the second request will be ignored and the
             #     first {::Google::Longrunning::Operation google.longrunning.Operation} created and stored in the backend
@@ -224,8 +224,10 @@ module Google
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
+            #   @param action_on_failed_primary_workers [::Google::Cloud::Dataproc::V1::FailureAction]
+            #     Optional. Failure action when primary worker creation fails.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -234,6 +236,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::CreateClusterRequest.new
+            #
+            #   # Call the create_cluster method.
+            #   result = client.create_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def create_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -252,10 +276,14 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -280,6 +308,8 @@ module Google
             # Updates a cluster in a project. The returned
             # {::Google::Longrunning::Operation#metadata Operation.metadata} will be
             # [ClusterOperationMetadata](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#clusteroperationmetadata).
+            # The cluster must be in a {::Google::Cloud::Dataproc::V1::ClusterStatus::State `RUNNING`} state or an error
+            # is returned.
             #
             # @overload update_cluster(request, options = nil)
             #   Pass arguments to `update_cluster` via a request object, either of type
@@ -368,7 +398,7 @@ module Google
             #      </tbody>
             #      </table>
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [UpdateClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.UpdateClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -378,7 +408,7 @@ module Google
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -388,6 +418,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::UpdateClusterRequest.new
+            #
+            #   # Call the update_cluster method.
+            #   result = client.update_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def update_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -406,11 +458,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -460,7 +518,7 @@ module Google
             #     Optional. Specifying the `cluster_uuid` means the RPC will fail
             #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [StopClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StopClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -470,7 +528,7 @@ module Google
             #     Recommendation: Set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -480,6 +538,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::StopClusterRequest.new
+            #
+            #   # Call the stop_cluster method.
+            #   result = client.stop_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def stop_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -498,11 +578,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -552,7 +638,7 @@ module Google
             #     Optional. Specifying the `cluster_uuid` means the RPC will fail
             #     (with error NOT_FOUND) if a cluster with the specified UUID does not exist.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [StartClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.StartClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -562,7 +648,7 @@ module Google
             #     Recommendation: Set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -572,6 +658,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::StartClusterRequest.new
+            #
+            #   # Call the start_cluster method.
+            #   result = client.start_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def start_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -590,11 +698,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -646,7 +760,7 @@ module Google
             #     Optional. Specifying the `cluster_uuid` means the RPC should fail
             #     (with error NOT_FOUND) if cluster with specified UUID does not exist.
             #   @param request_id [::String]
-            #     Optional. A unique id used to identify the request. If the server
+            #     Optional. A unique ID used to identify the request. If the server
             #     receives two
             #     [DeleteClusterRequest](https://cloud.google.com/dataproc/docs/reference/rpc/google.cloud.dataproc.v1#google.cloud.dataproc.v1.DeleteClusterRequest)s
             #     with the same id, then the second request will be ignored and the
@@ -656,7 +770,7 @@ module Google
             #     It is recommended to always set this value to a
             #     [UUID](https://en.wikipedia.org/wiki/Universally_unique_identifier).
             #
-            #     The id must contain only letters (a-z, A-Z), numbers (0-9),
+            #     The ID must contain only letters (a-z, A-Z), numbers (0-9),
             #     underscores (_), and hyphens (-). The maximum length is 40 characters.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -666,6 +780,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::DeleteClusterRequest.new
+            #
+            #   # Call the delete_cluster method.
+            #   result = client.delete_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def delete_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -684,11 +820,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -743,6 +885,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::GetClusterRequest.new
+            #
+            #   # Call the get_cluster method.
+            #   result = client.get_cluster request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::Cluster.
+            #   p result
+            #
             def get_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -760,11 +917,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -840,6 +1003,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::ListClustersRequest.new
+            #
+            #   # Call the list_clusters method.
+            #   result = client.list_clusters request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dataproc::V1::Cluster.
+            #     p response
+            #   end
+            #
             def list_clusters request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -857,10 +1041,14 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -921,6 +1109,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::ClusterController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::DiagnoseClusterRequest.new
+            #
+            #   # Call the diagnose_cluster method.
+            #   result = client.diagnose_cluster request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def diagnose_cluster request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -938,11 +1148,17 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id,
-                "region" => request.region,
-                "cluster_name" => request.cluster_name
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.region
+                header_params["region"] = request.region
+              end
+              if request.cluster_name
+                header_params["cluster_name"] = request.cluster_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

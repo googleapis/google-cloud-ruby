@@ -198,6 +198,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/error_reporting/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ErrorReporting::V1beta1::ReportErrorsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventRequest.new
+            #
+            #   # Call the report_error_event method.
+            #   result = client.report_error_event request
+            #
+            #   # The returned object is of type Google::Cloud::ErrorReporting::V1beta1::ReportErrorEventResponse.
+            #   p result
+            #
             def report_error_event request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -215,9 +230,11 @@ module Google
                 gapic_version: ::Google::Cloud::ErrorReporting::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_name" => request.project_name
-              }
+              header_params = {}
+              if request.project_name
+                header_params["project_name"] = request.project_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

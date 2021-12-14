@@ -492,7 +492,7 @@ module Google
             # The migration job is being created.
             CREATING = 3
 
-            # The migration job is created, not started and is fully editable.
+            # The migration job is created and not started.
             NOT_STARTED = 4
 
             # The migration job is running.

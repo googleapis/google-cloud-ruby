@@ -26,6 +26,7 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
                                                   bigquery.service }
   let(:labels) { { "foo" => "bar" } }
   let(:udfs) { [ "return x+1;", "gs://my-bucket/my-lib.js" ] }
+  let(:session_id) { "mysessionid" }
 
   it "queries the data" do
     mock = Minitest::Mock.new
@@ -245,5 +246,71 @@ describe Google::Cloud::Bigquery::Project, :query_job, :mock_bigquery do
 
     _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
     _(job.udfs).must_equal ["gs://my-bucket/my-lib.js"]
+  end
+
+  it "queries the data with create_session option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil, create_session: true
+    job_resp_gapi = query_job_resp_gapi query, session_id: session_id
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query, create_session: true
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.session_id).must_equal session_id
+  end
+
+  it "queries the data with create_session option in a block" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil, create_session: true
+    job_resp_gapi = query_job_resp_gapi query, session_id: session_id
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query do |j|
+      j.create_session = true
+    end
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.session_id).must_equal session_id
+  end
+
+  it "queries the data with session_id option" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil, session_id: session_id
+    job_resp_gapi = query_job_resp_gapi query, session_id: session_id
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query, session_id: session_id
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.session_id).must_equal session_id
+  end
+
+  it "queries the data with session_id option in a block" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = query_job_gapi query, location: nil, session_id: session_id
+    job_resp_gapi = query_job_resp_gapi query, session_id: session_id
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    job = bigquery.query_job query do |j|
+      j.session_id = session_id
+      j.session_id = nil
+      j.session_id = session_id
+    end
+    mock.verify
+
+    _(job).must_be_kind_of Google::Cloud::Bigquery::QueryJob
+    _(job.session_id).must_equal session_id
   end
 end

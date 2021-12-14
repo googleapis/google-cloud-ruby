@@ -232,6 +232,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::CreateWorkflowTemplateRequest.new
+            #
+            #   # Call the create_workflow_template method.
+            #   result = client.create_workflow_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::WorkflowTemplate.
+            #   p result
+            #
             def create_workflow_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -249,9 +264,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -317,6 +334,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::GetWorkflowTemplateRequest.new
+            #
+            #   # Call the get_workflow_template method.
+            #   result = client.get_workflow_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::WorkflowTemplate.
+            #   p result
+            #
             def get_workflow_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -334,9 +366,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -433,6 +467,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::InstantiateWorkflowTemplateRequest.new
+            #
+            #   # Call the instantiate_workflow_template method.
+            #   result = client.instantiate_workflow_template request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def instantiate_workflow_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -450,9 +506,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -477,8 +535,7 @@ module Google
             # Instantiates a template and begins execution.
             #
             # This method is equivalent to executing the sequence
-            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate},
-            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
+            # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#create_workflow_template CreateWorkflowTemplate}, {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#instantiate_workflow_template InstantiateWorkflowTemplate},
             # {::Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#delete_workflow_template DeleteWorkflowTemplate}.
             #
             # The returned Operation can be used to track execution of
@@ -547,6 +604,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::InstantiateInlineWorkflowTemplateRequest.new
+            #
+            #   # Call the instantiate_inline_workflow_template method.
+            #   result = client.instantiate_inline_workflow_template request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def instantiate_inline_workflow_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -564,9 +643,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -619,6 +700,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::UpdateWorkflowTemplateRequest.new
+            #
+            #   # Call the update_workflow_template method.
+            #   result = client.update_workflow_template request
+            #
+            #   # The returned object is of type Google::Cloud::Dataproc::V1::WorkflowTemplate.
+            #   p result
+            #
             def update_workflow_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -636,9 +732,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "template.name" => request.template.name
-              }
+              header_params = {}
+              if request.template&.name
+                header_params["template.name"] = request.template.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -701,6 +799,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest.new
+            #
+            #   # Call the list_workflow_templates method.
+            #   result = client.list_workflow_templates request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dataproc::V1::WorkflowTemplate.
+            #     p response
+            #   end
+            #
             def list_workflow_templates request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -718,9 +837,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -783,6 +904,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/dataproc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataproc::V1::DeleteWorkflowTemplateRequest.new
+            #
+            #   # Call the delete_workflow_template method.
+            #   result = client.delete_workflow_template request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_workflow_template request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -800,9 +936,11 @@ module Google
                 gapic_version: ::Google::Cloud::Dataproc::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

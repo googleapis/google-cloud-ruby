@@ -186,6 +186,44 @@
         }
       }
     },
+    "Changelogs": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Changelogs::Client",
+          "rpcs": {
+            "ListChangelogs": {
+              "methods": [
+                "list_changelogs"
+              ]
+            },
+            "GetChangelog": {
+              "methods": [
+                "get_changelog"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Deployments": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Deployments::Client",
+          "rpcs": {
+            "ListDeployments": {
+              "methods": [
+                "list_deployments"
+              ]
+            },
+            "GetDeployment": {
+              "methods": [
+                "get_deployment"
+              ]
+            }
+          }
+        }
+      }
+    },
     "EntityTypes": {
       "clients": {
         "grpc": {
@@ -420,6 +458,40 @@
         }
       }
     },
+    "Webhooks": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client",
+          "rpcs": {
+            "ListWebhooks": {
+              "methods": [
+                "list_webhooks"
+              ]
+            },
+            "GetWebhook": {
+              "methods": [
+                "get_webhook"
+              ]
+            },
+            "CreateWebhook": {
+              "methods": [
+                "create_webhook"
+              ]
+            },
+            "UpdateWebhook": {
+              "methods": [
+                "update_webhook"
+              ]
+            },
+            "DeleteWebhook": {
+              "methods": [
+                "delete_webhook"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Environments": {
       "clients": {
         "grpc": {
@@ -463,6 +535,11 @@
             "ListContinuousTestResults": {
               "methods": [
                 "list_continuous_test_results"
+              ]
+            },
+            "DeployFlow": {
+              "methods": [
+                "deploy_flow"
               ]
             }
           }
@@ -513,40 +590,6 @@
         }
       }
     },
-    "Webhooks": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client",
-          "rpcs": {
-            "ListWebhooks": {
-              "methods": [
-                "list_webhooks"
-              ]
-            },
-            "GetWebhook": {
-              "methods": [
-                "get_webhook"
-              ]
-            },
-            "CreateWebhook": {
-              "methods": [
-                "create_webhook"
-              ]
-            },
-            "UpdateWebhook": {
-              "methods": [
-                "update_webhook"
-              ]
-            },
-            "DeleteWebhook": {
-              "methods": [
-                "delete_webhook"
-              ]
-            }
-          }
-        }
-      }
-    },
     "Versions": {
       "clients": {
         "grpc": {
@@ -580,6 +623,11 @@
             "LoadVersion": {
               "methods": [
                 "load_version"
+              ]
+            },
+            "CompareVersions": {
+              "methods": [
+                "compare_versions"
               ]
             }
           }

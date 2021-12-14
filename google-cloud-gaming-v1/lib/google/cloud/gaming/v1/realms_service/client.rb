@@ -222,6 +222,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::ListRealmsRequest.new
+            #
+            #   # Call the list_realms method.
+            #   result = client.list_realms request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Gaming::V1::Realm.
+            #     p response
+            #   end
+            #
             def list_realms request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -239,9 +260,11 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -292,6 +315,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::GetRealmRequest.new
+            #
+            #   # Call the get_realm method.
+            #   result = client.get_realm request
+            #
+            #   # The returned object is of type Google::Cloud::Gaming::V1::Realm.
+            #   p result
+            #
             def get_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -309,9 +347,11 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -365,6 +405,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::CreateRealmRequest.new
+            #
+            #   # Call the create_realm method.
+            #   result = client.create_realm request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -382,9 +444,11 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -435,6 +499,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::DeleteRealmRequest.new
+            #
+            #   # Call the delete_realm method.
+            #   result = client.delete_realm request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -452,9 +538,11 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -509,6 +597,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::UpdateRealmRequest.new
+            #
+            #   # Call the update_realm method.
+            #   result = client.update_realm request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_realm request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -526,9 +636,11 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "realm.name" => request.realm.name
-              }
+              header_params = {}
+              if request.realm&.name
+                header_params["realm.name"] = request.realm.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -585,6 +697,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/gaming/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Gaming::V1::RealmsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Gaming::V1::PreviewRealmUpdateRequest.new
+            #
+            #   # Call the preview_realm_update method.
+            #   result = client.preview_realm_update request
+            #
+            #   # The returned object is of type Google::Cloud::Gaming::V1::PreviewRealmUpdateResponse.
+            #   p result
+            #
             def preview_realm_update request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -602,9 +729,11 @@ module Google
                 gapic_version: ::Google::Cloud::Gaming::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "realm.name" => request.realm.name
-              }
+              header_params = {}
+              if request.realm&.name
+                header_params["realm.name"] = request.realm.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

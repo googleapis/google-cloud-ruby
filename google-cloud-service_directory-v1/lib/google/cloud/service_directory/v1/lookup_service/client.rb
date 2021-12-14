@@ -203,6 +203,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_directory/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceDirectory::V1::LookupService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceDirectory::V1::ResolveServiceRequest.new
+            #
+            #   # Call the resolve_service method.
+            #   result = client.resolve_service request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceDirectory::V1::ResolveServiceResponse.
+            #   p result
+            #
             def resolve_service request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -220,9 +235,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceDirectory::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

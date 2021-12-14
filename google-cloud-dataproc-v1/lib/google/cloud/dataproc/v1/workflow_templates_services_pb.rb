@@ -28,7 +28,7 @@ module Google
           # Dataproc API.
           class Service
 
-            include GRPC::GenericService
+            include ::GRPC::GenericService
 
             self.marshal_class_method = :encode
             self.unmarshal_class_method = :decode
@@ -65,8 +65,7 @@ module Google
             # Instantiates a template and begins execution.
             #
             # This method is equivalent to executing the sequence
-            # [CreateWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.CreateWorkflowTemplate],
-            # [InstantiateWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate],
+            # [CreateWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.CreateWorkflowTemplate], [InstantiateWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.InstantiateWorkflowTemplate],
             # [DeleteWorkflowTemplate][google.cloud.dataproc.v1.WorkflowTemplateService.DeleteWorkflowTemplate].
             #
             # The returned Operation can be used to track execution of

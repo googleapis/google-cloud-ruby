@@ -203,6 +203,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::LookupRequest.new
+            #
+            #   # Call the lookup method.
+            #   result = client.lookup request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::LookupResponse.
+            #   p result
+            #
             def lookup request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -220,9 +235,11 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -282,6 +299,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::RunQueryRequest.new
+            #
+            #   # Call the run_query method.
+            #   result = client.run_query request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::RunQueryResponse.
+            #   p result
+            #
             def run_query request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -299,9 +331,11 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -352,6 +386,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::BeginTransactionRequest.new
+            #
+            #   # Call the begin_transaction method.
+            #   result = client.begin_transaction request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::BeginTransactionResponse.
+            #   p result
+            #
             def begin_transaction request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -369,9 +418,11 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -441,6 +492,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::CommitRequest.new
+            #
+            #   # Call the commit method.
+            #   result = client.commit request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::CommitResponse.
+            #   p result
+            #
             def commit request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -458,9 +524,11 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -512,6 +580,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::RollbackRequest.new
+            #
+            #   # Call the rollback method.
+            #   result = client.rollback request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::RollbackResponse.
+            #   p result
+            #
             def rollback request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -529,9 +612,11 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -584,6 +669,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::AllocateIdsRequest.new
+            #
+            #   # Call the allocate_ids method.
+            #   result = client.allocate_ids request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::AllocateIdsResponse.
+            #   p result
+            #
             def allocate_ids request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -601,9 +701,11 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -658,6 +760,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::ReserveIdsRequest.new
+            #
+            #   # Call the reserve_ids method.
+            #   result = client.reserve_ids request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::ReserveIdsResponse.
+            #   p result
+            #
             def reserve_ids request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -675,9 +792,11 @@ module Google
                 gapic_version: ::Google::Cloud::Datastore::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "project_id" => request.project_id
-              }
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

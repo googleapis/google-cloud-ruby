@@ -213,6 +213,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::ListHubsRequest.new
+            #
+            #   # Call the list_hubs method.
+            #   result = client.list_hubs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::NetworkConnectivity::V1alpha1::Hub.
+            #     p response
+            #   end
+            #
             def list_hubs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -230,9 +251,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -282,6 +305,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::GetHubRequest.new
+            #
+            #   # Call the get_hub method.
+            #   result = client.get_hub request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkConnectivity::V1alpha1::Hub.
+            #   p result
+            #
             def get_hub request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -299,9 +337,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -368,6 +408,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::CreateHubRequest.new
+            #
+            #   # Call the create_hub method.
+            #   result = client.create_hub request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_hub request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -385,9 +447,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -457,6 +521,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::UpdateHubRequest.new
+            #
+            #   # Call the update_hub method.
+            #   result = client.update_hub request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_hub request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -474,9 +560,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "hub.name" => request.hub.name
-              }
+              header_params = {}
+              if request.hub&.name
+                header_params["hub.name"] = request.hub.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -540,6 +628,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::DeleteHubRequest.new
+            #
+            #   # Call the delete_hub method.
+            #   result = client.delete_hub request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_hub request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -557,9 +667,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -617,6 +729,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::ListSpokesRequest.new
+            #
+            #   # Call the list_spokes method.
+            #   result = client.list_spokes request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::NetworkConnectivity::V1alpha1::Spoke.
+            #     p response
+            #   end
+            #
             def list_spokes request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -634,9 +767,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -686,6 +821,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::GetSpokeRequest.new
+            #
+            #   # Call the get_spoke method.
+            #   result = client.get_spoke request
+            #
+            #   # The returned object is of type Google::Cloud::NetworkConnectivity::V1alpha1::Spoke.
+            #   p result
+            #
             def get_spoke request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -703,9 +853,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -772,6 +924,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::CreateSpokeRequest.new
+            #
+            #   # Call the create_spoke method.
+            #   result = client.create_spoke request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def create_spoke request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -789,9 +963,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -861,6 +1037,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::UpdateSpokeRequest.new
+            #
+            #   # Call the update_spoke method.
+            #   result = client.update_spoke request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def update_spoke request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -878,9 +1076,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "spoke.name" => request.spoke.name
-              }
+              header_params = {}
+              if request.spoke&.name
+                header_params["spoke.name"] = request.spoke.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -944,6 +1144,28 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/network_connectivity/v1alpha1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::NetworkConnectivity::V1alpha1::DeleteSpokeRequest.new
+            #
+            #   # Call the delete_spoke method.
+            #   result = client.delete_spoke request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
             def delete_spoke request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -961,9 +1183,11 @@ module Google
                 gapic_version: ::Google::Cloud::NetworkConnectivity::V1alpha1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

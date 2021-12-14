@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/apigeeconnect/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-apigee_connect/$1

@@ -1,5 +1,35 @@
 # Release History
 
+### 1.38.0 / 2021-11-16
+
+#### Features
+
+* Add session support
+  * Add create_session and session_id params to Project#query_job
+  * Add create_session and session_id params to Dataset#query_job
+  * Add session_id param to Project#query
+  * Add session_id param to Dataset#query
+  * Add Job#session_id
+  * Add QueryJob::Updater#create_session=
+  * Add QueryJob::Updater#session_id=
+
+### 1.37.0 / 2021-10-21
+
+#### Features
+
+* Add support for Avro options to external data sources
+  * Add External::AvroSource
+
+### 1.36.0 / 2021-09-22
+
+#### Features
+
+* Add Job#delete
+
+#### Bug Fixes
+
+* Add precision and scale to Field#add_field
+
 ### 1.35.1 / 2021-09-14
 
 #### Documentation

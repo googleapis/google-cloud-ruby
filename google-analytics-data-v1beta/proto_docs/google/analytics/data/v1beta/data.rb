@@ -94,7 +94,7 @@ module Google
         #     would like within the allowed character set. For example if a
         #     `dimensionExpression` concatenates `country` and `city`, you could call
         #     that dimension `countryAndCity`. Dimension names that you choose must match
-        #     the regular expression "^[a-zA-Z0-9_]$".
+        #     the regular expression `^[a-zA-Z0-9_]$`.
         #
         #     Dimensions are referenced by `name` in `dimensionFilter`, `orderBys`,
         #     `dimensionExpression`, and `pivots`.
@@ -168,7 +168,7 @@ module Google
         #     within the allowed character set. For example if `expression` is
         #     `screenPageViews/sessions`, you could call that metric's name =
         #     `viewsPerSession`. Metric names that you choose must match the regular
-        #     expression "^[a-zA-Z0-9_]$".
+        #     expression `^[a-zA-Z0-9_]$`.
         #
         #     Metrics are referenced by `name` in `metricFilter`, `orderBys`, and metric
         #     `expression`.
@@ -618,9 +618,61 @@ module Google
         #   @return [::Boolean]
         #     If true, indicates some buckets of dimension combinations are rolled into
         #     "(other)" row. This can happen for high cardinality reports.
+        # @!attribute [rw] schema_restriction_response
+        #   @return [::Google::Analytics::Data::V1beta::ResponseMetaData::SchemaRestrictionResponse]
+        #     Describes the schema restrictions actively enforced in creating this
+        #     report. To learn more, see [Access and data-restriction
+        #     management](https://support.google.com/analytics/answer/10851388).
+        # @!attribute [rw] currency_code
+        #   @return [::String]
+        #     The currency code used in this report. Intended to be used in formatting
+        #     currency metrics like `purchaseRevenue` for visualization. If currency_code
+        #     was specified in the request, this response parameter will echo the request
+        #     parameter; otherwise, this response parameter is the property's current
+        #     currency_code.
+        #
+        #     Currency codes are string encodings of currency types from the ISO 4217
+        #     standard (https://en.wikipedia.org/wiki/ISO_4217); for example "USD",
+        #     "EUR", "JPY". To learn more, see
+        #     https://support.google.com/analytics/answer/9796179.
+        # @!attribute [rw] time_zone
+        #   @return [::String]
+        #     The property's current timezone. Intended to be used to interpret
+        #     time-based dimensions like `hour` and `minute`. Formatted as strings from
+        #     the IANA Time Zone database (https://www.iana.org/time-zones); for example
+        #     "America/New_York" or "Asia/Tokyo".
+        # @!attribute [rw] empty_reason
+        #   @return [::String]
+        #     If empty reason is specified, the report is empty for this reason.
         class ResponseMetaData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The schema restrictions actively enforced in creating this report. To learn
+          # more, see [Access and data-restriction
+          # management](https://support.google.com/analytics/answer/10851388).
+          # @!attribute [rw] active_metric_restrictions
+          #   @return [::Array<::Google::Analytics::Data::V1beta::ResponseMetaData::SchemaRestrictionResponse::ActiveMetricRestriction>]
+          #     All restrictions actively enforced in creating the report. For example,
+          #     `purchaseRevenue` always has the restriction type `REVENUE_DATA`.
+          #     However, this active response restriction is only populated if the user's
+          #     custom role disallows access to `REVENUE_DATA`.
+          class SchemaRestrictionResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A metric actively restricted in creating the report.
+            # @!attribute [rw] metric_name
+            #   @return [::String]
+            #     The name of the restricted metric.
+            # @!attribute [rw] restricted_metric_types
+            #   @return [::Array<::Google::Analytics::Data::V1beta::RestrictedMetricType>]
+            #     The reason for this metric's restriction.
+            class ActiveMetricRestriction
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # Describes a dimension column in the report. Dimensions requested in a report
@@ -858,6 +910,16 @@ module Google
         # @!attribute [rw] custom_definition
         #   @return [::Boolean]
         #     True if the metric is a custom metric for this property.
+        # @!attribute [rw] blocked_reasons
+        #   @return [::Array<::Google::Analytics::Data::V1beta::MetricMetadata::BlockedReason>]
+        #     If reasons are specified, your access is blocked to this metric for this
+        #     property. API requests from you to this property for this metric will
+        #     succeed; however, the report will contain only zeros for this metric. API
+        #     requests with metric filters on blocked metrics will fail. If reasons are
+        #     empty, you have access to this metric.
+        #
+        #     To learn more, see [Access and data-restriction
+        #     management](https://support.google.com/analytics/answer/10851388).
         # @!attribute [rw] category
         #   @return [::String]
         #     The display name of the category that this metrics belongs to. Similar
@@ -865,6 +927,20 @@ module Google
         class MetricMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Justifications for why this metric is blocked.
+          module BlockedReason
+            # Will never be specified in API response.
+            BLOCKED_REASON_UNSPECIFIED = 0
+
+            # If present, your access is blocked to revenue related metrics for this
+            # property, and this metric is revenue related.
+            NO_REVENUE_METRICS = 1
+
+            # If present, your access is blocked to cost related metrics for this
+            # property, and this metric is cost related.
+            NO_COST_METRICS = 2
+          end
         end
 
         # The compatibility for a single dimension.
@@ -955,6 +1031,19 @@ module Google
 
           # A length in kilometers; a special floating point type.
           TYPE_KILOMETERS = 13
+        end
+
+        # Categories of data that you may be restricted from viewing on certain GA4
+        # properties.
+        module RestrictedMetricType
+          # Unspecified type.
+          RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
+
+          # Cost metrics such as `adCost`.
+          COST_DATA = 1
+
+          # Revenue metrics such as `purchaseRevenue`.
+          REVENUE_DATA = 2
         end
 
         # The compatibility types for a single dimension or metric.

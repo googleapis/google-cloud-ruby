@@ -1,5 +1,21 @@
 # Release History
 
+### 0.8.0 / 2021-12-07
+
+#### Features
+
+* Deidentify supports replacement dictionaries
+* Support setting the type of job when listing triggers
+* Findings include a unique finding ID
+* Support for InfoType versioning
+* Support for BigQuery inspect template inclusion lists
+
+### 0.7.4 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
 ### 0.7.3 / 2021-08-11
 
 #### Bug Fixes

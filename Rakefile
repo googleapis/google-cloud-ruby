@@ -1,6 +1,5 @@
 require "bundler/setup"
 require "fileutils"
-require "rake/testtask"
 require "rubocop/rake_task"
 
 desc "Runs rubocop at the root level"
@@ -24,11 +23,8 @@ task :each, :bundleupdate do |t, args|
   end
 end
 
-# rake task for link_transformer_test
-desc "Runs tests for link_transformer class methods"
-Rake::TestTask.new do |t|
-  t.warning = true
-  t.test_files = FileList["test/*_test.rb"]
+task :test do
+  puts "No global tests defined"
 end
 
 namespace :test do
@@ -127,32 +123,6 @@ task :rubocop_all, :bundleupdate do |t, args|
   end
 end
 
-require_relative "rakelib/devsite/devsite_builder"
-
-namespace :docs do
-  desc "Builds documentation for all gems on current branch (assumes master)"
-  task :build_master do
-    DevsiteBuilder.new(__dir__).build_master
-  end
-
-  desc "Add release and builds documentation for a tag"
-  task :publish_tag, [:tag] do |t, args|
-    tag = extract_args args, :tag
-    DevsiteBuilder.new(__dir__).publish_tag(tag)
-  end
-
-  desc "Rebuilds documentation for a tag"
-  task :rebuild_tag, [:tag] do |t, args|
-    tag = extract_args args, :tag
-    DevsiteBuilder.new(__dir__).rebuild_tag(tag)
-  end
-
-  desc "Builds documentation for all tags and current branch (assumes master)"
-  task :republish_all do
-    DevsiteBuilder.new(__dir__).republish_all
-  end
-end
-
 desc "Runs yard-doctest example tests for all gems individually."
 task :doctest, :bundleupdate do |t, args|
   each_valid_gem bundleupdate: args[:bundleupdate] do |gem|
@@ -191,65 +161,6 @@ namespace :ci do
   task :a do
     # This is a handy shortcut to save typing
     Rake::Task["ci:acceptance"].invoke
-  end
-end
-
-task :release, :tag do |t, args|
-  tag = args[:tag]
-  if tag.nil?
-    fail "You must provide a tag to release."
-  end
-  # Verify the tag format "PACKAGE/vVERSION"
-  m = tag.match /(?<package>\S*)\/v(?<version>\S*)/
-  if m.nil? # We have a match!
-    fail "Tag #{tag} does not match the expected format."
-  end
-
-  package = m[:package]
-  version = m[:version]
-  if package.nil? || version.nil?
-    fail "You must provide a package and version."
-  end
-
-  api_token = ENV["RUBYGEMS_API_TOKEN"]
-
-  require "gems"
-  ::Gems.configure do |config|
-    config.key = api_token
-  end if api_token
-
-  require_relative "rakelib/link_transformer"
-  Dir.chdir package do
-    Bundler.with_clean_env do
-      sh "rm -rf pkg"
-      sh "bundle update"
-      # transform markdown links to yard links during build
-      yard_link_transformer = LinkTransformer.new
-      files = yard_link_transformer.find_markdown_files
-      yard_link_transformer.transform_links_in_files files
-      sh "bundle exec rake build"
-    end
-  end
-
-  path_to_be_pushed = "#{package}/pkg/#{package}-#{version}.gem"
-  gem_was_published = nil
-  if File.file? path_to_be_pushed
-    begin
-      response = ::Gems.push File.new path_to_be_pushed
-      puts response
-      raise unless response.include? "Successfully registered gem:"
-      gem_was_published = true
-      puts "Successfully built and pushed #{package} for version #{version}"
-    rescue => e
-      gem_was_published = false
-      raise "Error while releasing #{package} version #{version}: #{e.message}"
-    end
-  else
-    raise "Cannot build #{package} for version #{version}"
-  end
-
-  if gem_was_published
-    Rake::Task["kokoro:publish_docs"].invoke
   end
 end
 
@@ -350,7 +261,7 @@ task :changes, [:gem] do |t, args|
     valid_gems.each do |gem|
       begin
         tag = current_release_tag gem
-        stats = (`git diff --stat #{tag}..master #{gem}`).split("\n")
+        stats = (`git diff --stat #{tag}..main #{gem}`).split("\n")
         if stats.empty?
           puts "#{gem}: no changes"
         else
@@ -368,7 +279,7 @@ namespace :changes do
     valid_gems.each do |gem|
       begin
         tag = current_release_tag gem
-        stats = (`git diff --stat #{tag}..master #{gem}/lib`).split("\n")
+        stats = (`git diff --stat #{tag}..main #{gem}/lib`).split("\n")
         if stats.empty?
           puts "#{gem}: no changes in lib"
         else
@@ -384,14 +295,14 @@ namespace :changes do
   task :diff, [:gem] do |t, args|
     gem = args[:gem]
     tag = current_release_tag gem
-    sh "git diff #{tag}..master #{gem}"
+    sh "git diff #{tag}..main #{gem}"
   end
 
   desc "Print the logs of changes since the last release."
   task :log, [:gem] do |t, args|
     gem = args[:gem]
     tag = current_release_tag gem
-    sh "git log #{tag}..master #{gem}"
+    sh "git log #{tag}..main #{gem}"
   end
 
   desc "Print the stats of changes since the last release."
@@ -402,7 +313,7 @@ namespace :changes do
       begin
         header gem
         tag = current_release_tag gem
-        sh "git diff --stat #{tag}..master #{gem}"
+        sh "git diff --stat #{tag}..main #{gem}"
       rescue => e
         puts e
       end
@@ -417,7 +328,7 @@ namespace :changes do
       begin
         header gem
         tag = current_release_tag gem
-        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=relative #{tag}..master #{gem}"
+        sh "git log --pretty=format:\"%h%x09%an%x09%ad%x09%s\" --date=relative #{tag}..main #{gem}"
       rescue => e
         puts e
       end
@@ -431,7 +342,7 @@ namespace :changes do
   end
 
   def oldest_commit_since_release gem, tag
-    commit_dates = (`git log --pretty=format:\"%ad\" --date=relative #{tag}..master #{gem}`).split("\n")
+    commit_dates = (`git log --pretty=format:\"%ad\" --date=relative #{tag}..main #{gem}`).split("\n")
     commit_dates.last
   end
 end
@@ -445,151 +356,6 @@ task :compile do
   each_valid_gem bundleupdate: true, gem_list: gems_with_ext do |gem|
     header "Compile C extension for #{gem}"
     sh "bundle exec rake compile"
-  end
-end
-
-namespace :kokoro do
-  require_relative "rakelib/kokoro/kokoro"
-  require "net/http"
-  require "uri"
-
-  desc "Generate configs for kokoro"
-  task :build do
-    puts "kokoro:build no longer needed"
-  end
-
-  task :presubmit do
-    kokoro.presubmit
-    exit kokoro.exit_status
-  end
-
-  task :continuous do
-    kokoro.continuous
-    exit kokoro.exit_status
-  end
-
-  task :samples_presubmit do
-    kokoro.samples_presubmit
-    exit kokoro.exit_status
-  end
-
-  task :samples_latest do
-    kokoro.samples_latest
-    exit kokoro.exit_status
-  end
-
-  task :samples_master do
-    kokoro.samples_master
-    exit kokoro.exit_status
-  end
-
-  desc "Runs post-build logic on kokoro."
-  task :post do
-    kokoro.post
-    exit kokoro.exit_status
-  end
-
-  task :nightly do
-    kokoro.nightly
-    exit kokoro.exit_status
-  end
-
-  task :release do
-    kokoro.release
-    Rake::Task["release"].invoke kokoro.tag
-  end
-
-  task :release_please, :gem, :token do |t, args|
-    if args[:gem] && args[:gem] == "all"
-      kokoro.release_please_all args[:token]
-    else
-      kokoro.release_please args[:gem], args[:token]
-    end
-  end
-
-  task :publish_docs do
-    kokoro.devsite
-    # kokoro.cloudrad
-    exit kokoro.exit_status
-  end
-
-  task :republish do
-    kokoro.load_env_vars
-    Rake::Task["docs:republish_all"].invoke
-  end
-
-  task :all_local_docs_tests do
-    kokoro.all_local_docs_tests
-    exit kokoro.exit_status
-  end
-
-  task :updated_local_docs_tests do
-    kokoro.all_local_docs_tests only_updated: true
-    exit kokoro.exit_status
-  end
-
-  task :one_local_docs_test, [:gem] do |t, args|
-    gem = args[:gem]
-    kokoro.one_local_docs_test gem
-    exit kokoro.exit_status
-  end
-
-  def kokoro
-    dockerfile_url = "https://raw.githubusercontent.com/googleapis/testing-infra-docker/master/ruby/multi/Dockerfile"
-    matches = /ENV RUBY_VERSIONS="([\d\.\s]*)"/.match Net::HTTP.get(URI(dockerfile_url))
-    raise "Could not find ruby versions from testing-infra-docker dockerfile" unless matches
-    @kokoro ||= Kokoro.new matches[1].split,
-                           gems,
-                           updated_gems,
-                           gem: ENV["PACKAGE"]
-  end
-end
-
-task :one_local_cloudrad_docs, [:gem] do |t, args|
-  gem = args[:gem]
-  version = "0.1.0"
-  allowed_fields = ["name", "version", "language", "distribution-name", "product-page", "github-repository", "issue-tracker"]
-  Dir.chdir gem do
-    Bundler.with_clean_env do
-      sh "bundle update"
-      version = `bundle exec gem list`
-                .split("\n").select { |line| line.include? gem }
-                .first.split("(").last.split(")").first
-    end
-  end
-
-  Dir.chdir gem do
-    Bundler.with_clean_env do
-      sh "bundle update"
-      FileUtils.remove_dir "doc", true
-      sh "bundle exec rake cloudrad"
-
-      metadata = JSON.parse File.read(".repo-metadata.json")
-      metadata.transform_keys! { |k| k.sub "_", "-" }
-      metadata["version"] = version
-      metadata["name"] = metadata["distribution-name"]
-      metadata.delete_if { |k, _| !allowed_fields.include? k }
-      fields = metadata.to_a.map { |kv| "--#{kv[0]} #{kv[1]}" }
-      sh "python3 -m docuploader create-metadata #{fields.join ' '}"
-
-      gac = ENV["GOOGLE_APPLICATION_CREDENTIALS"]
-      ENV.delete "GOOGLE_APPLICATION_CREDENTIALS"
-      opts = [
-        "--credentials=''",
-        "--staging-bucket=#{ENV.fetch 'V2_STAGING_BUCKET', 'docs-staging-v2-dev'}",
-        "--metadata-file=./docs.metadata",
-        "--destination-prefix docfx"
-      ]
-      sh "python3 -m docuploader upload doc #{opts.join ' '}"
-    end
-  end
-end
-
-desc "Runs python -m synthtool for each gem containing a synth.py file (see https://github.com/googleapis/synthtool)"
-task :synthtool do
-  each_valid_gem gem_list: gapic_gems do |gem|
-    header "Run `python -m synthtool` for #{gem}"
-    sh "python -m synthtool"
   end
 end
 
@@ -627,10 +393,6 @@ def each_valid_gem bundleupdate: false, name: "RUNNING", gem_list: nil
   end
 end
 
-def gapic_gems
-  gems.select { |gem| File.exist? "#{gem}/synth.py" }
-end
-
 def valid_gems_with_coverage_filters
   coverage_override = {
     "google-cloud-datastore" => ["google-cloud-datastore/test/", "google-cloud-datastore/lib/google/datastore/", "google-cloud-datastore/lib/google/cloud/datastore/v1/"],
@@ -661,7 +423,7 @@ end
 
 # Returns [gem_name, gem_version]
 def split_tag str
-  return [nil, str] if str == "master" # Support use of "master" even without gem name
+  return [nil, str] if str == "main" # Support use of "main" even without gem name
   fail "'tag' must be in the format <gem>/<version> Actual: #{str}" unless str.include?("/")
   parts = str.split("/")
   fail "'tag' must be in the format <gem>/<version>. Actual: #{str}" unless parts.length == 2

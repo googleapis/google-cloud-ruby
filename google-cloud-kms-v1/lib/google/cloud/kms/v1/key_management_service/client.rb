@@ -184,6 +184,21 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.mac_sign.timeout = 60.0
+                default_config.rpcs.mac_sign.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.mac_verify.timeout = 60.0
+                default_config.rpcs.mac_verify.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
+                default_config.rpcs.generate_random_bytes.timeout = 60.0
+                default_config.rpcs.generate_random_bytes.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -312,6 +327,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::ListKeyRingsRequest.new
+            #
+            #   # Call the list_key_rings method.
+            #   result = client.list_key_rings request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Kms::V1::KeyRing.
+            #     p response
+            #   end
+            #
             def list_key_rings request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -329,9 +365,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -402,6 +440,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::ListCryptoKeysRequest.new
+            #
+            #   # Call the list_crypto_keys method.
+            #   result = client.list_crypto_keys request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Kms::V1::CryptoKey.
+            #     p response
+            #   end
+            #
             def list_crypto_keys request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -419,9 +478,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -493,6 +554,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::ListCryptoKeyVersionsRequest.new
+            #
+            #   # Call the list_crypto_key_versions method.
+            #   result = client.list_crypto_key_versions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Kms::V1::CryptoKeyVersion.
+            #     p response
+            #   end
+            #
             def list_crypto_key_versions request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -510,9 +592,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -581,6 +665,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::ListImportJobsRequest.new
+            #
+            #   # Call the list_import_jobs method.
+            #   result = client.list_import_jobs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Kms::V1::ImportJob.
+            #     p response
+            #   end
+            #
             def list_import_jobs request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -598,9 +703,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -650,6 +757,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::GetKeyRingRequest.new
+            #
+            #   # Call the get_key_ring method.
+            #   result = client.get_key_ring request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::KeyRing.
+            #   p result
+            #
             def get_key_ring request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -667,9 +789,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -719,6 +843,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::GetCryptoKeyRequest.new
+            #
+            #   # Call the get_crypto_key method.
+            #   result = client.get_crypto_key request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+            #   p result
+            #
             def get_crypto_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -736,9 +875,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -787,6 +928,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::GetCryptoKeyVersionRequest.new
+            #
+            #   # Call the get_crypto_key_version method.
+            #   result = client.get_crypto_key_version request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+            #   p result
+            #
             def get_crypto_key_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -804,9 +960,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -859,6 +1017,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::GetPublicKeyRequest.new
+            #
+            #   # Call the get_public_key method.
+            #   result = client.get_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::PublicKey.
+            #   p result
+            #
             def get_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -876,9 +1049,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -927,6 +1102,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::GetImportJobRequest.new
+            #
+            #   # Call the get_import_job method.
+            #   result = client.get_import_job request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::ImportJob.
+            #   p result
+            #
             def get_import_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -944,9 +1134,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1001,6 +1193,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::CreateKeyRingRequest.new
+            #
+            #   # Call the create_key_ring method.
+            #   result = client.create_key_ring request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::KeyRing.
+            #   p result
+            #
             def create_key_ring request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1018,9 +1225,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1085,6 +1294,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::CreateCryptoKeyRequest.new
+            #
+            #   # Call the create_crypto_key method.
+            #   result = client.create_crypto_key request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+            #   p result
+            #
             def create_crypto_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1102,9 +1326,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1160,6 +1386,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::CreateCryptoKeyVersionRequest.new
+            #
+            #   # Call the create_crypto_key_version method.
+            #   result = client.create_crypto_key_version request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+            #   p result
+            #
             def create_crypto_key_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1177,9 +1418,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1284,6 +1527,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new
+            #
+            #   # Call the import_crypto_key_version method.
+            #   result = client.import_crypto_key_version request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+            #   p result
+            #
             def import_crypto_key_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1301,9 +1559,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1360,6 +1620,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::CreateImportJobRequest.new
+            #
+            #   # Call the create_import_job method.
+            #   result = client.create_import_job request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::ImportJob.
+            #   p result
+            #
             def create_import_job request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1377,9 +1652,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1430,6 +1707,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new
+            #
+            #   # Call the update_crypto_key method.
+            #   result = client.update_crypto_key request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+            #   p result
+            #
             def update_crypto_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1447,9 +1739,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "crypto_key.name" => request.crypto_key.name
-              }
+              header_params = {}
+              if request.crypto_key&.name
+                header_params["crypto_key.name"] = request.crypto_key.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1506,6 +1800,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::UpdateCryptoKeyVersionRequest.new
+            #
+            #   # Call the update_crypto_key_version method.
+            #   result = client.update_crypto_key_version request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+            #   p result
+            #
             def update_crypto_key_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1523,9 +1832,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "crypto_key_version.name" => request.crypto_key_version.name
-              }
+              header_params = {}
+              if request.crypto_key_version&.name
+                header_params["crypto_key_version.name"] = request.crypto_key_version.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1579,6 +1890,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::UpdateCryptoKeyPrimaryVersionRequest.new
+            #
+            #   # Call the update_crypto_key_primary_version method.
+            #   result = client.update_crypto_key_primary_version request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+            #   p result
+            #
             def update_crypto_key_primary_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1596,9 +1922,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1659,6 +1987,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::DestroyCryptoKeyVersionRequest.new
+            #
+            #   # Call the destroy_crypto_key_version method.
+            #   result = client.destroy_crypto_key_version request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+            #   p result
+            #
             def destroy_crypto_key_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1676,9 +2019,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1733,6 +2078,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::RestoreCryptoKeyVersionRequest.new
+            #
+            #   # Call the restore_crypto_key_version method.
+            #   result = client.restore_crypto_key_version request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::CryptoKeyVersion.
+            #   p result
+            #
             def restore_crypto_key_version request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1750,9 +2110,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1855,6 +2217,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::EncryptRequest.new
+            #
+            #   # Call the encrypt method.
+            #   result = client.encrypt request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::EncryptResponse.
+            #   p result
+            #
             def encrypt request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1872,9 +2249,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -1960,6 +2339,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::DecryptRequest.new
+            #
+            #   # Call the decrypt method.
+            #   result = client.decrypt request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::DecryptResponse.
+            #   p result
+            #
             def decrypt request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -1977,9 +2371,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2014,7 +2410,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil)
+            # @overload asymmetric_sign(name: nil, digest: nil, digest_crc32c: nil, data: nil, data_crc32c: nil)
             #   Pass arguments to `asymmetric_sign` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2022,7 +2418,7 @@ module Google
             #   @param name [::String]
             #     Required. The resource name of the {::Google::Cloud::Kms::V1::CryptoKeyVersion CryptoKeyVersion} to use for signing.
             #   @param digest [::Google::Cloud::Kms::V1::Digest, ::Hash]
-            #     Required. The digest of the data to sign. The digest must be produced with
+            #     Optional. The digest of the data to sign. The digest must be produced with
             #     the same digest algorithm as specified by the key version's
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersion#algorithm algorithm}.
             #   @param digest_crc32c [::Google::Protobuf::Int64Value, ::Hash]
@@ -2039,6 +2435,24 @@ module Google
             #     different languages. However, it is a non-negative integer, which will
             #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
             #     that support this type.
+            #   @param data [::String]
+            #     Optional. This field will only be honored for RAW_PKCS1 keys.
+            #     The data to sign. A digest is computed over the data that will be signed,
+            #     PKCS #1 padding is applied to the digest directly and then encrypted.
+            #   @param data_crc32c [::Google::Protobuf::Int64Value, ::Hash]
+            #     Optional. An optional CRC32C checksum of the {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}. If
+            #     specified, {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will verify the integrity of the
+            #     received {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data} using this checksum.
+            #     {::Google::Cloud::Kms::V1::KeyManagementService::Client KeyManagementService} will report an error if the checksum verification
+            #     fails. If you receive a checksum error, your client should verify that
+            #     CRC32C({::Google::Cloud::Kms::V1::AsymmetricSignRequest#data AsymmetricSignRequest.data}) is equal to
+            #     {::Google::Cloud::Kms::V1::AsymmetricSignRequest#data_crc32c AsymmetricSignRequest.data_crc32c}, and if so, perform a limited
+            #     number of retries. A persistent mismatch may indicate an issue in your
+            #     computation of the CRC32C checksum.
+            #     Note: This field is defined as int64 for reasons of compatibility across
+            #     different languages. However, it is a non-negative integer, which will
+            #     never exceed 2^32-1, and can be safely downconverted to uint32 in languages
+            #     that support this type.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
@@ -2047,6 +2461,21 @@ module Google
             # @return [::Google::Cloud::Kms::V1::AsymmetricSignResponse]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::AsymmetricSignRequest.new
+            #
+            #   # Call the asymmetric_sign method.
+            #   result = client.asymmetric_sign request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::AsymmetricSignResponse.
+            #   p result
             #
             def asymmetric_sign request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -2065,9 +2494,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2136,6 +2567,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::AsymmetricDecryptRequest.new
+            #
+            #   # Call the asymmetric_decrypt method.
+            #   result = client.asymmetric_decrypt request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::AsymmetricDecryptResponse.
+            #   p result
+            #
             def asymmetric_decrypt request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2153,9 +2599,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2223,6 +2671,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::MacSignRequest.new
+            #
+            #   # Call the mac_sign method.
+            #   result = client.mac_sign request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::MacSignResponse.
+            #   p result
+            #
             def mac_sign request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2240,9 +2703,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2326,6 +2791,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::MacVerifyRequest.new
+            #
+            #   # Call the mac_verify method.
+            #   result = client.mac_verify request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::MacVerifyResponse.
+            #   p result
+            #
             def mac_verify request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2343,9 +2823,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -2402,6 +2884,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/kms/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Kms::V1::GenerateRandomBytesRequest.new
+            #
+            #   # Call the generate_random_bytes method.
+            #   result = client.generate_random_bytes request
+            #
+            #   # The returned object is of type Google::Cloud::Kms::V1::GenerateRandomBytesResponse.
+            #   p result
+            #
             def generate_random_bytes request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -2419,9 +2916,11 @@ module Google
                 gapic_version: ::Google::Cloud::Kms::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "location" => request.location
-              }
+              header_params = {}
+              if request.location
+                header_params["location"] = request.location
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

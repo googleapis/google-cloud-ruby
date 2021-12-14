@@ -1244,6 +1244,12 @@ module Google
         #   Flattens all nested and repeated fields in the query results. The
         #   default value is `true`. `large_results` parameter must be `true` if
         #   this is set to `false`.
+        # @param [Integer] maximum_billing_tier Limits the billing tier for this
+        #   job. Queries that have resource usage beyond this tier will fail
+        #   (without incurring a charge). WARNING: The billed byte amount can be
+        #   multiplied by an amount up to this number! Most users should not need
+        #   to alter this setting, and we recommend that you avoid introducing new
+        #   uses of it. Deprecated.
         # @param [Integer] maximum_bytes_billed Limits the bytes billed for this
         #   job. Queries that will have bytes billed beyond this limit will fail
         #   (without incurring a charge). Optional. If unspecified, this will be
@@ -1294,8 +1300,13 @@ module Google
         #   For additional information on migrating, see: [Migrating to
         #   standard SQL - Differences in user-defined JavaScript
         #   functions](https://cloud.google.com/bigquery/docs/reference/standard-sql/migrating-from-legacy-sql#differences_in_user-defined_javascript_functions)
-        # @param [Integer] maximum_billing_tier Deprecated: Change the billing
-        #   tier to allow high-compute queries.
+        # @param [Boolean] create_session If true, creates a new session, where the
+        #   session ID will be a server generated random id. If false, runs query
+        #   with an existing session ID when one is provided in the `session_id`
+        #   param, otherwise runs query in non-session mode. See {Job#session_id}.
+        #   The default value is false.
+        # @param [String] session_id The ID of an existing session. See also the
+        #   `create_session` param and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1371,8 +1382,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = dataset.query_job "SELECT name FROM my_table " \
-        #                           "WHERE id IN UNNEST(@ids)",
+        #   job = dataset.query_job "SELECT name FROM my_table WHERE id IN UNNEST(@ids)",
         #                           params: { ids: [] },
         #                           types: { ids: [:INT64] }
         #
@@ -1387,8 +1397,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "CREATE TABLE my_table (x INT64)"
+        #   job = dataset.query_job "CREATE TABLE my_table (x INT64)"
         #
         #   job.wait_until_done!
         #   if !job.failed?
@@ -1399,15 +1410,27 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   job = bigquery.query_job "UPDATE my_table " \
-        #                            "SET x = x + 1 " \
-        #                            "WHERE x IS NOT NULL"
+        #   job = dataset.query_job "UPDATE my_table SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   job.wait_until_done!
         #   if !job.failed?
         #     puts job.num_dml_affected_rows
         #   end
+        #
+        # @example Run query in a session:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   job = dataset.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", create_session: true
+        #
+        #   job.wait_until_done!
+        #
+        #   session_id = job.session_id
+        #   data = dataset.query "SELECT * FROM temptable", session_id: session_id
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
@@ -1435,16 +1458,52 @@ module Google
         #
         # @!group Data
         #
-        def query_job query, params: nil, types: nil, external: nil, priority: "INTERACTIVE", cache: true, table: nil,
-                      create: nil, write: nil, dryrun: nil, standard_sql: nil, legacy_sql: nil, large_results: nil,
-                      flatten: nil, maximum_billing_tier: nil, maximum_bytes_billed: nil, job_id: nil, prefix: nil,
-                      labels: nil, udfs: nil
+        def query_job query,
+                      params: nil,
+                      types: nil,
+                      external: nil,
+                      priority: "INTERACTIVE",
+                      cache: true,
+                      table: nil,
+                      create: nil,
+                      write: nil,
+                      dryrun: nil,
+                      standard_sql: nil,
+                      legacy_sql: nil,
+                      large_results: nil,
+                      flatten: nil,
+                      maximum_billing_tier: nil,
+                      maximum_bytes_billed: nil,
+                      job_id: nil,
+                      prefix: nil,
+                      labels: nil,
+                      udfs: nil,
+                      create_session: nil,
+                      session_id: nil
           ensure_service!
-          options = { params: params, types: types, external: external, priority: priority, cache: cache, table: table,
-                      create: create, write: write, dryrun: dryrun, standard_sql: standard_sql, legacy_sql: legacy_sql,
-                      large_results: large_results, flatten: flatten, maximum_billing_tier: maximum_billing_tier,
-                      maximum_bytes_billed: maximum_bytes_billed, job_id: job_id, prefix: prefix, labels: labels,
-                      udfs: udfs }
+          options = {
+            params: params,
+            types: types,
+            external: external,
+            priority: priority,
+            cache: cache,
+            table: table,
+            create: create,
+            write: write,
+            dryrun: dryrun,
+            standard_sql: standard_sql,
+            legacy_sql: legacy_sql,
+            large_results: large_results,
+            flatten: flatten,
+            maximum_billing_tier: maximum_billing_tier,
+            maximum_bytes_billed: maximum_bytes_billed,
+            job_id: job_id,
+            prefix: prefix,
+            labels: labels,
+            udfs: udfs,
+            create_session: create_session,
+            session_id: session_id
+          }
 
           updater = QueryJob::Updater.from_options service, query, options
           updater.dataset = self
@@ -1566,6 +1625,8 @@ module Google
         #   When set to false, the values of `large_results` and `flatten` are
         #   ignored; the query will be run as if `large_results` is true and
         #   `flatten` is false. Optional. The default value is false.
+        # @param [String] session_id The ID of an existing session. See the
+        #   `create_session` param in {#query_job} and {Job#session_id}.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::QueryJob::Updater] job a job
         #   configuration object for setting additional options for the query.
@@ -1641,8 +1702,7 @@ module Google
         #   bigquery = Google::Cloud::Bigquery.new
         #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = dataset.query "SELECT name FROM my_table " \
-        #                        "WHERE id IN UNNEST(@ids)",
+        #   data = dataset.query "SELECT name FROM my_table WHERE id IN UNNEST(@ids)",
         #                        params: { ids: [] },
         #                        types: { ids: [:INT64] }
         #
@@ -1657,8 +1717,9 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "CREATE TABLE my_table (x INT64)"
+        #   data = dataset.query "CREATE TABLE my_table (x INT64)"
         #
         #   table_ref = data.ddl_target_table # Or ddl_target_routine for CREATE/DROP FUNCTION/PROCEDURE
         #
@@ -1666,12 +1727,24 @@ module Google
         #   require "google/cloud/bigquery"
         #
         #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
         #
-        #   data = bigquery.query "UPDATE my_table " \
-        #                         "SET x = x + 1 " \
-        #                         "WHERE x IS NOT NULL"
+        #   data = dataset.query "UPDATE my_table SET x = x + 1 WHERE x IS NOT NULL"
         #
         #   puts data.num_dml_affected_rows
+        #
+        # @example Run query in a session:
+        #   require "google/cloud/bigquery"
+        #
+        #   bigquery = Google::Cloud::Bigquery.new
+        #   dataset = bigquery.dataset "my_dataset"
+        #
+        #   job = dataset.query_job "CREATE TEMPORARY TABLE temptable AS SELECT 17 as foo", create_session: true
+        #
+        #   job.wait_until_done!
+        #
+        #   session_id = job.session_id
+        #   data = dataset.query "SELECT * FROM temptable", session_id: session_id
         #
         # @example Query using external data source, set destination:
         #   require "google/cloud/bigquery"
@@ -1699,10 +1772,25 @@ module Google
         #
         # @!group Data
         #
-        def query query, params: nil, types: nil, external: nil, max: nil, cache: true,
-                  standard_sql: nil, legacy_sql: nil, &block
-          job = query_job query, params: params, types: types, external: external, cache: cache,
-                                 standard_sql: standard_sql, legacy_sql: legacy_sql, &block
+        def query query,
+                  params: nil,
+                  types: nil,
+                  external: nil,
+                  max: nil,
+                  cache: true,
+                  standard_sql: nil,
+                  legacy_sql: nil,
+                  session_id: nil,
+                  &block
+          job = query_job query,
+                          params: params,
+                          types: types,
+                          external: external,
+                          cache: cache,
+                          standard_sql: standard_sql,
+                          legacy_sql: legacy_sql,
+                          session_id: session_id,
+                          &block
           job.wait_until_done!
           ensure_job_succeeded! job
 

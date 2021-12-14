@@ -203,6 +203,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/profiler/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Profiler::V2::ProfilerService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Profiler::V2::CreateProfileRequest.new
+            #
+            #   # Call the create_profile method.
+            #   result = client.create_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Profiler::V2::Profile.
+            #   p result
+            #
             def create_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -220,9 +235,11 @@ module Google
                 gapic_version: ::Google::Cloud::Profiler::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -275,6 +292,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/profiler/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Profiler::V2::ProfilerService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Profiler::V2::CreateOfflineProfileRequest.new
+            #
+            #   # Call the create_offline_profile method.
+            #   result = client.create_offline_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Profiler::V2::Profile.
+            #   p result
+            #
             def create_offline_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -292,9 +324,11 @@ module Google
                 gapic_version: ::Google::Cloud::Profiler::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -351,6 +385,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/profiler/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Profiler::V2::ProfilerService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Profiler::V2::UpdateProfileRequest.new
+            #
+            #   # Call the update_profile method.
+            #   result = client.update_profile request
+            #
+            #   # The returned object is of type Google::Cloud::Profiler::V2::Profile.
+            #   p result
+            #
             def update_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -368,9 +417,11 @@ module Google
                 gapic_version: ::Google::Cloud::Profiler::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "profile.name" => request.profile.name
-              }
+              header_params = {}
+              if request.profile&.name
+                header_params["profile.name"] = request.profile.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

@@ -225,6 +225,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new
+              #
+              #   # Call the create_index method.
+              #   result = client.create_index request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def create_index request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -242,9 +264,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -303,6 +327,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::ListIndexesRequest.new
+              #
+              #   # Call the list_indexes method.
+              #   result = client.list_indexes request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Firestore::Admin::V1::Index.
+              #     p response
+              #   end
+              #
               def list_indexes request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -320,9 +365,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -373,6 +420,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::GetIndexRequest.new
+              #
+              #   # Call the get_index method.
+              #   result = client.get_index request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::Index.
+              #   p result
+              #
               def get_index request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -390,9 +452,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -442,6 +506,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::DeleteIndexRequest.new
+              #
+              #   # Call the delete_index method.
+              #   result = client.delete_index request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_index request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -459,9 +538,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -511,6 +592,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::GetFieldRequest.new
+              #
+              #   # Call the get_field method.
+              #   result = client.get_field request
+              #
+              #   # The returned object is of type Google::Cloud::Firestore::Admin::V1::Field.
+              #   p result
+              #
               def get_field request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -528,9 +624,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -594,6 +692,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::UpdateFieldRequest.new
+              #
+              #   # Call the update_field method.
+              #   result = client.update_field request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def update_field request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -611,9 +731,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "field.name" => request.field.name
-                }
+                header_params = {}
+                if request.field&.name
+                  header_params["field.name"] = request.field.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -681,6 +803,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::ListFieldsRequest.new
+              #
+              #   # Call the list_fields method.
+              #   result = client.list_fields request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Firestore::Admin::V1::Field.
+              #     p response
+              #   end
+              #
               def list_fields request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -698,9 +841,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -769,6 +914,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::ExportDocumentsRequest.new
+              #
+              #   # Call the export_documents method.
+              #   result = client.export_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def export_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -786,9 +953,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -852,6 +1021,28 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/firestore/admin/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Firestore::Admin::V1::ImportDocumentsRequest.new
+              #
+              #   # Call the import_documents method.
+              #   result = client.import_documents request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
               def import_documents request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -869,9 +1060,11 @@ module Google
                   gapic_version: ::Google::Cloud::Firestore::Admin::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 

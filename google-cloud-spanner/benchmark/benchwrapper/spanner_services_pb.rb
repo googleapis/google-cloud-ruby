@@ -23,7 +23,7 @@ module SpannerBench
   module SpannerBenchWrapper
     class Service
 
-      include GRPC::GenericService
+      include ::GRPC::GenericService
 
       self.marshal_class_method = :encode
       self.unmarshal_class_method = :decode
@@ -34,19 +34,19 @@ module SpannerBench
       # Transaction.Read.
       #
       # It will typically be used to read many items.
-      rpc :Read, ReadQuery, EmptyResponse
+      rpc :Read, ::SpannerBench::ReadQuery, ::SpannerBench::EmptyResponse
       # Insert represents operations like Go's Client.Apply, Java's
       # DatabaseClient.writeAtLeastOnce, Python's transaction.commit, and Node's
       # Transaction.Commit.
       #
       # It will typically be used to insert many items.
-      rpc :Insert, InsertQuery, EmptyResponse
+      rpc :Insert, ::SpannerBench::InsertQuery, ::SpannerBench::EmptyResponse
       # Update represents operations like Go's ReadWriteTransaction.BatchUpdate,
       # Java's TransactionRunner.run, Python's Batch.update, and Node's
       # Transaction.BatchUpdate.
       #
       # It will typically be used to update many items.
-      rpc :Update, UpdateQuery, EmptyResponse
+      rpc :Update, ::SpannerBench::UpdateQuery, ::SpannerBench::EmptyResponse
     end
 
     Stub = Service.rpc_stub_class

@@ -196,6 +196,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/monitoring/dashboard/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::Dashboard::V1::CreateDashboardRequest.new
+              #
+              #   # Call the create_dashboard method.
+              #   result = client.create_dashboard request
+              #
+              #   # The returned object is of type Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
+              #   p result
+              #
               def create_dashboard request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -213,9 +228,11 @@ module Google
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -277,6 +294,27 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/monitoring/dashboard/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::Dashboard::V1::ListDashboardsRequest.new
+              #
+              #   # Call the list_dashboards method.
+              #   result = client.list_dashboards request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
+              #     p response
+              #   end
+              #
               def list_dashboards request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -294,9 +332,11 @@ module Google
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "parent" => request.parent
-                }
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -354,6 +394,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/monitoring/dashboard/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::Dashboard::V1::GetDashboardRequest.new
+              #
+              #   # Call the get_dashboard method.
+              #   result = client.get_dashboard request
+              #
+              #   # The returned object is of type Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
+              #   p result
+              #
               def get_dashboard request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -371,9 +426,11 @@ module Google
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -428,6 +485,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/monitoring/dashboard/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::Dashboard::V1::DeleteDashboardRequest.new
+              #
+              #   # Call the delete_dashboard method.
+              #   result = client.delete_dashboard request
+              #
+              #   # The returned object is of type Google::Protobuf::Empty.
+              #   p result
+              #
               def delete_dashboard request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -445,9 +517,11 @@ module Google
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "name" => request.name
-                }
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -503,6 +577,21 @@ module Google
               #
               # @raise [::Google::Cloud::Error] if the RPC is aborted.
               #
+              # @example Basic example
+              #   require "google/cloud/monitoring/dashboard/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Monitoring::Dashboard::V1::DashboardsService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Monitoring::Dashboard::V1::UpdateDashboardRequest.new
+              #
+              #   # Call the update_dashboard method.
+              #   result = client.update_dashboard request
+              #
+              #   # The returned object is of type Google::Cloud::Monitoring::Dashboard::V1::Dashboard.
+              #   p result
+              #
               def update_dashboard request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -520,9 +609,11 @@ module Google
                   gapic_version: ::Google::Cloud::Monitoring::Dashboard::V1::VERSION
                 metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-                header_params = {
-                  "dashboard.name" => request.dashboard.name
-                }
+                header_params = {}
+                if request.dashboard&.name
+                  header_params["dashboard.name"] = request.dashboard.name
+                end
+
                 request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
                 metadata[:"x-goog-request-params"] ||= request_params_header
 

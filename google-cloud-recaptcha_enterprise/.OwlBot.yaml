@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/recaptchaenterprise/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-recaptcha_enterprise/$1

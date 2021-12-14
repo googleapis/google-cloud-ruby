@@ -199,6 +199,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ApplicationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::CreateApplicationRequest.new
+            #
+            #   # Call the create_application method.
+            #   result = client.create_application request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Application.
+            #   p result
+            #
             def create_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -216,9 +231,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -271,6 +288,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ApplicationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::GetApplicationRequest.new
+            #
+            #   # Call the get_application method.
+            #   result = client.get_application request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Application.
+            #   p result
+            #
             def get_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -288,9 +320,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -347,6 +381,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ApplicationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::UpdateApplicationRequest.new
+            #
+            #   # Call the update_application method.
+            #   result = client.update_application request
+            #
+            #   # The returned object is of type Google::Cloud::Talent::V4beta1::Application.
+            #   p result
+            #
             def update_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -364,9 +413,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "application.name" => request.application.name
-              }
+              header_params = {}
+              if request.application&.name
+                header_params["application.name"] = request.application.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -419,6 +470,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ApplicationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::DeleteApplicationRequest.new
+            #
+            #   # Call the delete_application method.
+            #   result = client.delete_application request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_application request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -436,9 +502,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -496,6 +564,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/talent/v4beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Talent::V4beta1::ApplicationService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Talent::V4beta1::ListApplicationsRequest.new
+            #
+            #   # Call the list_applications method.
+            #   result = client.list_applications request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Talent::V4beta1::Application.
+            #     p response
+            #   end
+            #
             def list_applications request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -513,9 +602,11 @@ module Google
                 gapic_version: ::Google::Cloud::Talent::V4beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

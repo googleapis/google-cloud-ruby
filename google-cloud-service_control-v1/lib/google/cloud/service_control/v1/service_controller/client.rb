@@ -210,6 +210,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_control/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceControl::V1::CheckRequest.new
+            #
+            #   # Call the check method.
+            #   result = client.check request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceControl::V1::CheckResponse.
+            #   p result
+            #
             def check request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -227,9 +242,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceControl::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -315,6 +332,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/service_control/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ServiceControl::V1::ServiceController::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ServiceControl::V1::ReportRequest.new
+            #
+            #   # Call the report method.
+            #   result = client.report request
+            #
+            #   # The returned object is of type Google::Cloud::ServiceControl::V1::ReportResponse.
+            #   p result
+            #
             def report request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -332,9 +364,11 @@ module Google
                 gapic_version: ::Google::Cloud::ServiceControl::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "service_name" => request.service_name
-              }
+              header_params = {}
+              if request.service_name
+                header_params["service_name"] = request.service_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

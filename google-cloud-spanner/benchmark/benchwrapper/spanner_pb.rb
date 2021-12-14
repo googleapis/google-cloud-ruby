@@ -5,18 +5,26 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("spanner.proto", :syntax => :proto3) do
-    add_message "spanner_bench.ReadQuery" do
-      optional :Query, :string, 1
+    add_message "spanner_bench.Singer" do
+      optional :id, :int64, 1
+      optional :first_name, :string, 2
+      optional :last_name, :string, 3
+      optional :singer_info, :string, 4
     end
-    add_message "spanner_bench.User" do
-      optional :name, :string, 1
-      optional :age, :int64, 2
+    add_message "spanner_bench.Album" do
+      optional :id, :int64, 1
+      optional :singer_id, :int64, 2
+      optional :album_title, :string, 3
+    end
+    add_message "spanner_bench.ReadQuery" do
+      optional :query, :string, 1
     end
     add_message "spanner_bench.InsertQuery" do
-      repeated :users, :message, 1, "spanner_bench.User"
+      repeated :singers, :message, 1, "spanner_bench.Singer"
+      repeated :albums, :message, 2, "spanner_bench.Album"
     end
     add_message "spanner_bench.UpdateQuery" do
-      repeated :Queries, :string, 1
+      repeated :queries, :string, 1
     end
     add_message "spanner_bench.EmptyResponse" do
     end
@@ -24,9 +32,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
 end
 
 module SpannerBench
-  ReadQuery = Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.ReadQuery").msgclass
-  User = Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.User").msgclass
-  InsertQuery = Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.InsertQuery").msgclass
-  UpdateQuery = Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.UpdateQuery").msgclass
-  EmptyResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.EmptyResponse").msgclass
+  Singer = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.Singer").msgclass
+  Album = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.Album").msgclass
+  ReadQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.ReadQuery").msgclass
+  InsertQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.InsertQuery").msgclass
+  UpdateQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.UpdateQuery").msgclass
+  EmptyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("spanner_bench.EmptyResponse").msgclass
 end

@@ -68,6 +68,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified InstanceOSPolicyAssignment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param assignment [String]
+            #
+            # @return [::String]
+            def instance_os_policy_assignment_path project:, location:, instance:, assignment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/osPolicyAssignments/#{assignment}"
+            end
+
+            ##
             # Create a fully-qualified Inventory resource string.
             #
             # The resource will be in the following format:
@@ -84,6 +105,63 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/instances/#{instance}/inventory"
+            end
+
+            ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified OSPolicyAssignment resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/osPolicyAssignments/{os_policy_assignment}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param os_policy_assignment [String]
+            #
+            # @return [::String]
+            def os_policy_assignment_path project:, location:, os_policy_assignment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/osPolicyAssignments/#{os_policy_assignment}"
+            end
+
+            ##
+            # Create a fully-qualified OSPolicyAssignmentReport resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/instances/{instance}/osPolicyAssignments/{assignment}/report`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param instance [String]
+            # @param assignment [String]
+            #
+            # @return [::String]
+            def os_policy_assignment_report_path project:, location:, instance:, assignment:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "instance cannot contain /" if instance.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/instances/#{instance}/osPolicyAssignments/#{assignment}/report"
             end
 
             ##

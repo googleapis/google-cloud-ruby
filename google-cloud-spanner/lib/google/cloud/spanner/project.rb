@@ -106,6 +106,10 @@ module Google
         # @return [Array<Google::Cloud::Spanner::Instance>] The list of
         #   instances. (See {Google::Cloud::Spanner::Instance::List})
         #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#list_instances}
+        # instead.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -139,6 +143,10 @@ module Google
         #
         # @return [Google::Cloud::Spanner::Instance, nil] The instance, or `nil`
         #   if the instance does not exist.
+        #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#get_instance}
+        # instead.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -199,6 +207,10 @@ module Google
         # @return [Instance::Job] The job representing the long-running,
         #   asynchronous processing of an instance create operation.
         # @raise [ArgumentError] if both processing_units or nodes are specified.
+        #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#create_instance}
+        # instead.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -266,6 +278,10 @@ module Google
         #   instance configurations. (See
         #   {Google::Cloud::Spanner::Instance::Config::List})
         #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#list_instance_configs}
+        # instead.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -303,6 +319,10 @@ module Google
         #   configuration, or `nil` if the instance configuration does not
         #   exist.
         #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Instance#instance_admin Client#get_instance_config}
+        # instead.
+        #
         # @example
         #   require "google/cloud/spanner"
         #
@@ -334,6 +354,10 @@ module Google
         #
         # @return [Array<Google::Cloud::Spanner::Database>] The list of
         #   databases. (See {Google::Cloud::Spanner::Database::List})
+        #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#list_databases}
+        # instead.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -369,6 +393,10 @@ module Google
         #
         # @return [Google::Cloud::Spanner::Database, nil] The database, or `nil`
         #   if the database does not exist.
+        #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#get_database}
+        # instead.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -416,6 +444,10 @@ module Google
         #
         # @return [Database::Job] The job representing the long-running,
         #   asynchronous processing of a database create operation.
+        #
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#create_database}
+        # instead.
         #
         # @example
         #   require "google/cloud/spanner"
@@ -629,6 +661,9 @@ module Google
           raise "Must have active connection to service" unless service
         end
 
+        # @deprecated Use
+        # {Google::Cloud::Spanner::Admin::Database#database_admin Client#database_path}
+        # instead.
         def database_path instance_id, database_id
           Admin::Database::V1::DatabaseAdminClient.database_path(
             project, instance_id, database_id

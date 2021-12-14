@@ -21,7 +21,7 @@ module Google
   module Cloud
     module RecommendationEngine
       module V1beta1
-        VERSION = "0.3.4"
+        VERSION = "0.3.6"
       end
     end
   end

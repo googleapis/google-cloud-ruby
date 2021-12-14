@@ -30,6 +30,8 @@ module Google
           # Service that implements Google Cloud Speech API.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :speech_stub
 
@@ -199,6 +201,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/speech/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1::Speech::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1::RecognizeRequest.new
+            #
+            #   # Call the recognize method.
+            #   result = client.recognize request
+            #
+            #   # The returned object is of type Google::Cloud::Speech::V1::RecognizeResponse.
+            #   p result
+            #
             def recognize request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -250,7 +267,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload long_running_recognize(config: nil, audio: nil)
+            # @overload long_running_recognize(config: nil, audio: nil, output_config: nil)
             #   Pass arguments to `long_running_recognize` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -260,6 +277,8 @@ module Google
             #     process the request.
             #   @param audio [::Google::Cloud::Speech::V1::RecognitionAudio, ::Hash]
             #     Required. The audio data to be recognized.
+            #   @param output_config [::Google::Cloud::Speech::V1::TranscriptOutputConfig, ::Hash]
+            #     Optional. Specifies an optional destination for the recognition results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -268,6 +287,28 @@ module Google
             # @return [::Gapic::Operation]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1::Speech::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Speech::V1::LongRunningRecognizeRequest.new
+            #
+            #   # Call the long_running_recognize method.
+            #   result = client.long_running_recognize request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
             #
             def long_running_recognize request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
@@ -319,6 +360,30 @@ module Google
             # @return [::Enumerable<::Google::Cloud::Speech::V1::StreamingRecognizeResponse>]
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/speech/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Speech::V1::Speech::Client.new
+            #
+            #   # Create an input stream
+            #   input = Gapic::StreamInput.new
+            #
+            #   # Call the streaming_recognize method to start streaming.
+            #   output = client.streaming_recognize input
+            #
+            #   # Send requests on the stream. For each request, pass in keyword
+            #   # arguments to set fields. Be sure to close the stream when done.
+            #   input << Google::Cloud::Speech::V1::StreamingRecognizeRequest.new
+            #   input << Google::Cloud::Speech::V1::StreamingRecognizeRequest.new
+            #   input.close
+            #
+            #   # Handle streamed responses. These may be interleaved with inputs.
+            #   # Each response is of type ::Google::Cloud::Speech::V1::StreamingRecognizeResponse.
+            #   output.each do |response|
+            #     p response
+            #   end
             #
             def streaming_recognize request, options = nil
               unless request.is_a? ::Enumerable

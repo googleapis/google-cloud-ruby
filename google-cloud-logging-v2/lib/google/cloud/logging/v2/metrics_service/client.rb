@@ -206,6 +206,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::MetricsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::ListLogMetricsRequest.new
+            #
+            #   # Call the list_log_metrics method.
+            #   result = client.list_log_metrics request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Logging::V2::LogMetric.
+            #     p response
+            #   end
+            #
             def list_log_metrics request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -223,9 +244,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -277,6 +300,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::MetricsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::GetLogMetricRequest.new
+            #
+            #   # Call the get_log_metric method.
+            #   result = client.get_log_metric request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogMetric.
+            #   p result
+            #
             def get_log_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -294,9 +332,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "metric_name" => request.metric_name
-              }
+              header_params = {}
+              if request.metric_name
+                header_params["metric_name"] = request.metric_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -352,6 +392,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::MetricsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::CreateLogMetricRequest.new
+            #
+            #   # Call the create_log_metric method.
+            #   result = client.create_log_metric request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogMetric.
+            #   p result
+            #
             def create_log_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -369,9 +424,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -428,6 +485,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::MetricsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::UpdateLogMetricRequest.new
+            #
+            #   # Call the update_log_metric method.
+            #   result = client.update_log_metric request
+            #
+            #   # The returned object is of type Google::Cloud::Logging::V2::LogMetric.
+            #   p result
+            #
             def update_log_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -445,9 +517,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "metric_name" => request.metric_name
-              }
+              header_params = {}
+              if request.metric_name
+                header_params["metric_name"] = request.metric_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -498,6 +572,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/logging/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Logging::V2::MetricsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Logging::V2::DeleteLogMetricRequest.new
+            #
+            #   # Call the delete_log_metric method.
+            #   result = client.delete_log_metric request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_log_metric request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -515,9 +604,11 @@ module Google
                 gapic_version: ::Google::Cloud::Logging::V2::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "metric_name" => request.metric_name
-              }
+              header_params = {}
+              if request.metric_name
+                header_params["metric_name"] = request.metric_name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

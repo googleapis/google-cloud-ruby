@@ -195,6 +195,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::CreatePredictionApiKeyRegistrationRequest.new
+            #
+            #   # Call the create_prediction_api_key_registration method.
+            #   result = client.create_prediction_api_key_registration request
+            #
+            #   # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration.
+            #   p result
+            #
             def create_prediction_api_key_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -212,9 +227,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -269,6 +286,27 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::ListPredictionApiKeyRegistrationsRequest.new
+            #
+            #   # Call the list_prediction_api_key_registrations method.
+            #   result = client.list_prediction_api_key_registrations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistration.
+            #     p response
+            #   end
+            #
             def list_prediction_api_key_registrations request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -286,9 +324,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -339,6 +379,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/recommendation_engine/v1beta1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecommendationEngine::V1beta1::PredictionApiKeyRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecommendationEngine::V1beta1::DeletePredictionApiKeyRegistrationRequest.new
+            #
+            #   # Call the delete_prediction_api_key_registration method.
+            #   result = client.delete_prediction_api_key_registration request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_prediction_api_key_registration request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -356,9 +411,11 @@ module Google
                 gapic_version: ::Google::Cloud::RecommendationEngine::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

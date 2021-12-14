@@ -1,5 +1,29 @@
 # Release History
 
+### 0.12.0 / 2021-12-07
+
+#### Features
+
+* Support for document metadata filters and human assist query parameters
+
+### 0.11.5 / 2021-11-08
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.11.4 / 2021-10-28
+
+#### Documentation
+
+* Clarify some of the reference documentation
+
+### 0.11.3 / 2021-10-18
+
+#### Documentation
+
+* Recommend use of the analyze_content call over detect_intent
+
 ### 0.11.2 / 2021-09-07
 
 #### Documentation

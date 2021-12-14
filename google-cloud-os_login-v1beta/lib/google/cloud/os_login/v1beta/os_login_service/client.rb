@@ -208,6 +208,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1beta::DeletePosixAccountRequest.new
+            #
+            #   # Call the delete_posix_account method.
+            #   result = client.delete_posix_account request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_posix_account request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -225,9 +240,11 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -278,6 +295,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1beta::DeleteSshPublicKeyRequest.new
+            #
+            #   # Call the delete_ssh_public_key method.
+            #   result = client.delete_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
             def delete_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -295,9 +327,11 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -351,6 +385,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1beta::GetLoginProfileRequest.new
+            #
+            #   # Call the get_login_profile method.
+            #   result = client.get_login_profile request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::V1beta::LoginProfile.
+            #   p result
+            #
             def get_login_profile request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -368,9 +417,11 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -421,6 +472,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new
+            #
+            #   # Call the get_ssh_public_key method.
+            #   result = client.get_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+            #   p result
+            #
             def get_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -438,9 +504,11 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -495,6 +563,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyRequest.new
+            #
+            #   # Call the import_ssh_public_key method.
+            #   result = client.import_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::V1beta::ImportSshPublicKeyResponse.
+            #   p result
+            #
             def import_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -512,9 +595,11 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "parent" => request.parent
-              }
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 
@@ -570,6 +655,21 @@ module Google
             #
             # @raise [::Google::Cloud::Error] if the RPC is aborted.
             #
+            # @example Basic example
+            #   require "google/cloud/os_login/v1beta"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::OsLogin::V1beta::UpdateSshPublicKeyRequest.new
+            #
+            #   # Call the update_ssh_public_key method.
+            #   result = client.update_ssh_public_key request
+            #
+            #   # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+            #   p result
+            #
             def update_ssh_public_key request, options = nil
               raise ::ArgumentError, "request must be provided" if request.nil?
 
@@ -587,9 +687,11 @@ module Google
                 gapic_version: ::Google::Cloud::OsLogin::V1beta::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {
-                "name" => request.name
-              }
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
 

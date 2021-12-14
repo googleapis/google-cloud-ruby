@@ -1,5 +1,21 @@
 # Release History
 
+### 0.5.0 / 2021-11-08
+
+#### Features
+
+* Support for build environment variables, min instances, and secret manager and CMEK integration
+
+#### Documentation
+
+* Added simple code snippets to RPC method documentation
+
+### 0.4.0 / 2021-09-22
+
+#### Features
+
+* Added security level to the https trigger
+
 ### 0.3.3 / 2021-08-19
 
 #### Bug Fixes
