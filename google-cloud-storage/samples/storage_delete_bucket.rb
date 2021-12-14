@@ -20,7 +20,7 @@ def delete_bucket bucket_name:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+  bucket  = storage.bucket bucket_name, skip_lookup: true
 
   bucket.delete
 
