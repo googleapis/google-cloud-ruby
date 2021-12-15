@@ -21,6 +21,7 @@ require_relative "../create_job_with_animated_overlay"
 require_relative "../create_job_with_static_overlay"
 require_relative "../create_job_with_periodic_images_spritesheet"
 require_relative "../create_job_with_set_number_images_spritesheet"
+require_relative "../create_job_with_concatenated_inputs"
 require_relative "../get_job"
 require_relative "../get_job_state"
 require_relative "../delete_job"
@@ -34,12 +35,18 @@ describe "Transcoder Snippets" do
   let(:location_id) { "us-central1" }
   let(:bucket_name) { random_bucket_name }
   let(:bucket) { create_bucket_helper bucket_name }
+  let(:input_concat_video1) { "ForBiggerEscapes.mp4" }
+  let(:input_concat_video2) { "ForBiggerJoyrides.mp4" }
   let(:input_video) { "ChromeCast.mp4" }
   let(:input_overlay) { "overlay.jpg" }
   let :files do
     { input_video: { path: "acceptance/data/#{input_video}" },
+      input_concat_video1: { path: "acceptance/data/#{input_concat_video1}" },
+      input_concat_video2: { path: "acceptance/data/#{input_concat_video2}" },
       overlay:  { path: "acceptance/data/#{input_overlay}" } }
   end
+  let(:input_concat_video1_uri) { "gs://#{bucket_name}/#{input_concat_video1}" }
+  let(:input_concat_video2_uri) { "gs://#{bucket_name}/#{input_concat_video2}" }
   let(:input_uri) { "gs://#{bucket_name}/#{input_video}" }
   let(:overlay_uri) { "gs://#{bucket_name}/#{input_overlay}" }
   let(:template_id) { "my-job-test-template-#{SecureRandom.hex 4}".downcase }
@@ -50,6 +57,7 @@ describe "Transcoder Snippets" do
   let(:output_uri_for_delete) { "#{output_uri_prefix}/test-output-delete/" }
   let(:output_uri_for_preset) { "#{output_uri_prefix}/test-output-preset/" }
   let(:output_uri_for_template) { "#{output_uri_prefix}/test-output-template/" }
+  let(:output_uri_for_concat) { "#{output_uri_prefix}/test-output-concat/" }
   let(:job_state_retries) { 4 }
   let(:job_state_succeeded) { "SUCCEEDED" }
   let(:job_state_succeeded_message) { "Job state: #{job_state_succeeded}" }
@@ -58,6 +66,10 @@ describe "Transcoder Snippets" do
     bucket
     original = File.new files[:input_video][:path]
     bucket.create_file original, input_video
+    original = File.new files[:input_concat_video1][:path]
+    bucket.create_file original, input_concat_video1
+    original = File.new files[:input_concat_video2][:path]
+    bucket.create_file original, input_concat_video2
     original = File.new files[:overlay][:path]
     bucket.create_file original, input_overlay
   end
@@ -88,7 +100,7 @@ describe "Transcoder Snippets" do
       state = ""
 
       job_state_retries.times do
-        sleep rand(15..20)
+        sleep rand(30..35)
         expect {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }.must_output(/#{job_state_succeeded_message}/)
@@ -117,7 +129,7 @@ describe "Transcoder Snippets" do
       state = ""
 
       job_state_retries.times do
-        sleep rand(15..20)
+        sleep rand(30..35)
         expect {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }.must_output(/#{job_state_succeeded_message}/)
@@ -157,7 +169,7 @@ describe "Transcoder Snippets" do
       state = ""
 
       job_state_retries.times do
-        sleep rand(15..20)
+        sleep rand(30..35)
         expect {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }.must_output(/#{job_state_succeeded_message}/)
@@ -242,7 +254,7 @@ describe "Transcoder Snippets" do
       state = ""
 
       job_state_retries.times do
-        sleep rand(15..20)
+        sleep rand(30..35)
         expect {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }.must_output(/#{job_state_succeeded_message}/)
@@ -271,7 +283,7 @@ describe "Transcoder Snippets" do
       state = ""
 
       job_state_retries.times do
-        sleep rand(15..20)
+        sleep rand(30..35)
         expect {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }.must_output(/#{job_state_succeeded_message}/)
@@ -300,7 +312,7 @@ describe "Transcoder Snippets" do
       state = ""
 
       job_state_retries.times do
-        sleep rand(15..20)
+        sleep rand(30..35)
         expect {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }.must_output(/#{job_state_succeeded_message}/)
@@ -329,7 +341,39 @@ describe "Transcoder Snippets" do
       state = ""
 
       job_state_retries.times do
-        sleep rand(15..20)
+        sleep rand(30..35)
+        expect {
+          state = get_job_state project_id: project_id, location: location_id, job_id: job_id
+        }.must_output(/#{job_state_succeeded_message}/)
+        break if state.eql? job_state_succeeded
+      end
+    end
+  end
+
+  describe "create a job with periodic images spritesheet" do
+    job_id = ""
+
+    after do
+      delete_job project_id: project_id, location: location_id, job_id: job_id
+    end
+
+    it "creates a concatenated input job" do
+      expect {
+        job = create_job_with_concatenated_inputs(project_id: project_id, location: location_id,
+                                                  input1_uri: input_concat_video1_uri, start_time_input1: 0,
+                                                  end_time_input1: 8.125, input2_uri: input_concat_video2_uri,
+                                                  start_time_input2: 3.5, end_time_input2: 15,
+                                                  output_uri: output_uri_for_concat)
+        expect(job).wont_be_nil
+        expect(job.name).must_include(project_number)
+        str_slice = job.name.split "/"
+        job_id = str_slice[str_slice.length - 1].rstrip
+      }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
+
+      state = ""
+
+      job_state_retries.times do
+        sleep rand(30..35)
         expect {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }.must_output(/#{job_state_succeeded_message}/)
