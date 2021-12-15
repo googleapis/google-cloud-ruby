@@ -1,36 +1,27 @@
+# Dependency installations and lockfiles
 Gemfile.lock
-keyfile.json
-coverage/*
-doc/*
-pkg/*
-html/*
-jsondoc/*
-
-# Ignore vagrant directory
-.vagrant
-
-# Ignore YARD stuffs
-.yardoc
-
-# Ignore devsite/cloudrad stuffs
-*/docs.metadata
-
-# directories left by gh-pages
-_site/*
-.DS_STORE
-
-# Ignore stuff left by synth
-__pycache__
-
-# Ignore bundler directory
-*/.bundle/
-*/vendor/bundle
-*/lib/bundler/man/
-
-node_modules
+.bundle/
+/*/vendor/bundle/
+/*/lib/bundler/man/
 package-lock.json
+node_modules/
 
-# Ignore RubyMine project files
+# Build and test artifacts
+/*/coverage/
+/*/doc/
+/*/pkg/
+/*/html/
+/*/jsondoc/
+/*/.yardoc/
+/*/docs.metadata
+_site/
+__pycache__/
+
+# Environment and dev tool artifacts
+.vagrant
 .idea
+.DS_STORE
+keyfile.json
 
+# Other stuff
 /tmp
