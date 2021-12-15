@@ -1,0 +1,92 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.iap.v1",
+  "libraryPackage": "::Google::Cloud::Iap::V1",
+  "services": {
+    "IdentityAwareProxyAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client",
+          "rpcs": {
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            },
+            "GetIapSettings": {
+              "methods": [
+                "get_iap_settings"
+              ]
+            },
+            "UpdateIapSettings": {
+              "methods": [
+                "update_iap_settings"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "IdentityAwareProxyOAuthService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client",
+          "rpcs": {
+            "ListBrands": {
+              "methods": [
+                "list_brands"
+              ]
+            },
+            "CreateBrand": {
+              "methods": [
+                "create_brand"
+              ]
+            },
+            "GetBrand": {
+              "methods": [
+                "get_brand"
+              ]
+            },
+            "CreateIdentityAwareProxyClient": {
+              "methods": [
+                "create_identity_aware_proxy_client"
+              ]
+            },
+            "ListIdentityAwareProxyClients": {
+              "methods": [
+                "list_identity_aware_proxy_clients"
+              ]
+            },
+            "GetIdentityAwareProxyClient": {
+              "methods": [
+                "get_identity_aware_proxy_client"
+              ]
+            },
+            "ResetIdentityAwareProxyClientSecret": {
+              "methods": [
+                "reset_identity_aware_proxy_client_secret"
+              ]
+            },
+            "DeleteIdentityAwareProxyClient": {
+              "methods": [
+                "delete_identity_aware_proxy_client"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
