@@ -106,6 +106,11 @@ module Google
         #     Output only. If set, the time at which this trashed property will be permanently
         #     deleted. If not set, then this property is not currently in the trash can
         #     and is not slated to be deleted.
+        # @!attribute [rw] account
+        #   @return [::String]
+        #     Immutable. The resource name of the parent account
+        #     Format: accounts/\\{account_id}
+        #     Example: "accounts/123"
         class Property
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -199,10 +204,110 @@ module Google
         #   @return [::String]
         #     Required. Human-readable display name for the Data Stream.
         #
-        #     The max allowed display name length is 100 UTF-16 code units.
+        #     The max allowed display name length is 255 UTF-16 code units.
         class WebDataStream
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A resource message representing a data stream.
+        # @!attribute [rw] web_stream_data
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::WebStreamData]
+        #     Data specific to web streams. Must be populated if type is
+        #     WEB_DATA_STREAM.
+        # @!attribute [rw] android_app_stream_data
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::AndroidAppStreamData]
+        #     Data specific to Android app streams. Must be populated if type is
+        #     ANDROID_APP_DATA_STREAM.
+        # @!attribute [rw] ios_app_stream_data
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::IosAppStreamData]
+        #     Data specific to iOS app streams. Must be populated if type is
+        #     IOS_APP_DATA_STREAM.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this Data Stream.
+        #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}
+        #     Example: "properties/1000/dataStreams/2000"
+        # @!attribute [rw] type
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream::DataStreamType]
+        #     Required. Immutable. The type of this DataStream resource.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     Human-readable display name for the Data Stream.
+        #
+        #     Required for web data streams.
+        #
+        #     The max allowed display name length is 255 UTF-16 code units.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when this stream was originally created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time when stream payload fields were last updated.
+        class DataStream
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Data specific to web streams.
+          # @!attribute [r] measurement_id
+          #   @return [::String]
+          #     Output only. Analytics "Measurement ID", without the "G-" prefix.
+          #     Example: "G-1A2BCD345E" would just be "1A2BCD345E"
+          # @!attribute [r] firebase_app_id
+          #   @return [::String]
+          #     Output only. ID of the corresponding web app in Firebase, if any.
+          #     This ID can change if the web app is deleted and recreated.
+          # @!attribute [rw] default_uri
+          #   @return [::String]
+          #     Immutable. Domain name of the web app being measured, or empty.
+          #     Example: "http://www.google.com", "https://www.google.com"
+          class WebStreamData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Data specific to Android app streams.
+          # @!attribute [r] firebase_app_id
+          #   @return [::String]
+          #     Output only. ID of the corresponding Android app in Firebase, if any.
+          #     This ID can change if the Android app is deleted and recreated.
+          # @!attribute [rw] package_name
+          #   @return [::String]
+          #     Immutable. The package name for the app being measured.
+          #     Example: "com.example.myandroidapp"
+          class AndroidAppStreamData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Data specific to iOS app streams.
+          # @!attribute [r] firebase_app_id
+          #   @return [::String]
+          #     Output only. ID of the corresponding iOS app in Firebase, if any.
+          #     This ID can change if the iOS app is deleted and recreated.
+          # @!attribute [rw] bundle_id
+          #   @return [::String]
+          #     Required. Immutable. The Apple App Store Bundle ID for the app
+          #     Example: "com.example.myiosapp"
+          class IosAppStreamData
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The type of the data stream.
+          module DataStreamType
+            # Type unknown or not specified.
+            DATA_STREAM_TYPE_UNSPECIFIED = 0
+
+            # Web data stream.
+            WEB_DATA_STREAM = 1
+
+            # Android app data stream.
+            ANDROID_APP_DATA_STREAM = 2
+
+            # iOS app data stream.
+            IOS_APP_DATA_STREAM = 3
+          end
         end
 
         # A resource message representing a user's permissions on an Account or
@@ -218,10 +323,12 @@ module Google
         #     Roles directly assigned to this user for this account or property.
         #
         #     Valid values:
-        #     predefinedRoles/read
-        #     predefinedRoles/collaborate
-        #     predefinedRoles/edit
-        #     predefinedRoles/manage-users
+        #     predefinedRoles/viewer
+        #     predefinedRoles/analyst
+        #     predefinedRoles/editor
+        #     predefinedRoles/admin
+        #     predefinedRoles/no-cost-data
+        #     predefinedRoles/no-revenue-data
         #
         #     Excludes roles that are inherited from a higher-level entity, group,
         #     or organization admin role.
@@ -244,7 +351,7 @@ module Google
         #   @return [::Array<::String>]
         #     Roles directly assigned to this user for this entity.
         #
-        #     Format: predefinedRoles/read
+        #     Format: predefinedRoles/viewer
         #
         #     Excludes roles that are inherited from an account (if this is for a
         #     property), group, or organization admin role.
@@ -253,72 +360,13 @@ module Google
         #     Union of all permissions a user has at this account or property (includes
         #     direct permissions, group-inherited permissions, etc.).
         #
-        #     Format: predefinedRoles/read
+        #     Format: predefinedRoles/viewer
         class AuditUserLink
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Singleton resource under a WebDataStream, configuring measurement of
-        # additional site interactions and content.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
-        #     Format:
-        #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
-        #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
-        # @!attribute [rw] stream_enabled
-        #   @return [::Boolean]
-        #     Indicates whether Enhanced Measurement Settings will be used to
-        #     automatically measure interactions and content on this web stream.
-        #
-        #     Changing this value does not affect the settings themselves, but determines
-        #     whether they are respected.
-        # @!attribute [r] page_views_enabled
-        #   @return [::Boolean]
-        #     Output only. If enabled, capture a page view event each time a page loads or the
-        #     website changes the browser history state.
-        # @!attribute [rw] scrolls_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture scroll events each time a visitor gets to the bottom of
-        #     a page.
-        # @!attribute [rw] outbound_clicks_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture an outbound click event each time a visitor clicks a
-        #     link that leads them away from your domain.
-        # @!attribute [rw] site_search_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a view search results event each time a visitor
-        #     performs a search on your site (based on a query parameter).
-        # @!attribute [rw] video_engagement_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture video play, progress, and complete events as visitors
-        #     view embedded videos on your site.
-        # @!attribute [rw] file_downloads_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a file download event each time a link is clicked with
-        #     a common document, compressed file, application, video, or audio extension.
-        # @!attribute [r] page_loads_enabled
-        #   @return [::Boolean]
-        #     Output only. If enabled, capture a page view event each time a page loads.
-        # @!attribute [rw] page_changes_enabled
-        #   @return [::Boolean]
-        #     If enabled, capture a page view event each time the website changes the
-        #     browser history state.
-        # @!attribute [rw] search_query_parameter
-        #   @return [::String]
-        #     Required. URL query parameters to interpret as site search parameters.
-        #     Max length is 1024 characters. Must not be empty.
-        # @!attribute [rw] uri_query_parameter
-        #   @return [::String]
-        #     Additional URL query parameters.
-        #     Max length is 1024 characters.
-        class EnhancedMeasurementSettings
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A link between an GA4 property and a Firebase project.
+        # A link between a GA4 property and a Firebase project.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Example format: properties/1234/firebaseLinks/5678
@@ -354,7 +402,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A link between an GA4 property and a Google Ads account.
+        # A link between a GA4 property and a Google Ads account.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Format: properties/\\{propertyId}/googleAdsLinks/\\{googleAdsLinkId}
@@ -441,7 +489,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A virtual resource representing metadata for an GA4 property.
+        # A virtual resource representing metadata for a GA4 property.
         # @!attribute [rw] property
         #   @return [::String]
         #     Resource name of property referred to by this property summary
@@ -449,7 +497,7 @@ module Google
         #     Example: "properties/1000"
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     Display name for the property referred to in this account summary.
+        #     Display name for the property referred to in this property summary.
         class PropertySummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -606,7 +654,7 @@ module Google
         # @!attribute [rw] cost_data_sharing_enabled
         #   @return [::Google::Protobuf::BoolValue]
         #     Immutable. Enables the import of cost data from Display & Video 360 into the GA4
-        #     property. This can only be enabled if campaign_data_import_enabled is
+        #     property. This can only be enabled if campaign_data_sharing_enabled is
         #     enabled. After link creation, this can only be updated from the Display &
         #     Video 360 product.
         #     If this field is not set on create, it will be defaulted to true.
@@ -615,7 +663,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A proposal for a link between an GA4 property and a Display & Video 360
+        # A proposal for a link between a GA4 property and a Display & Video 360
         # advertiser.
         #
         # A proposal is converted to a DisplayVideo360AdvertiserLink once approved.
@@ -657,7 +705,7 @@ module Google
         # @!attribute [rw] cost_data_sharing_enabled
         #   @return [::Google::Protobuf::BoolValue]
         #     Immutable. Enables the import of cost data from Display & Video 360.
-        #     This can only be enabled if campaign_data_import_enabled is enabled.
+        #     This can only be enabled if campaign_data_sharing_enabled is enabled.
         #     If this field is not set on create, it will be defaulted to true.
         class DisplayVideo360AdvertiserLinkProposal
           include ::Google::Protobuf::MessageExts
@@ -1071,6 +1119,12 @@ module Google
 
           # DataRetentionSettings resource
           DATA_RETENTION_SETTINGS = 13
+
+          # DisplayVideo360AdvertiserLink resource
+          DISPLAY_VIDEO_360_ADVERTISER_LINK = 14
+
+          # DisplayVideo360AdvertiserLinkProposal resource
+          DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL = 15
         end
 
         # Status of the Google Signals settings (i.e., whether this feature has been

@@ -29,6 +29,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service_level, :enum, 10, "google.analytics.admin.v1alpha.ServiceLevel"
       optional :delete_time, :message, 11, "google.protobuf.Timestamp"
       optional :expire_time, :message, 12, "google.protobuf.Timestamp"
+      optional :account, :string, 13
     end
     add_message "google.analytics.admin.v1alpha.AndroidAppDataStream" do
       optional :name, :string, 1
@@ -55,6 +56,37 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :default_uri, :string, 6
       optional :display_name, :string, 7
     end
+    add_message "google.analytics.admin.v1alpha.DataStream" do
+      optional :name, :string, 1
+      optional :type, :enum, 2, "google.analytics.admin.v1alpha.DataStream.DataStreamType"
+      optional :display_name, :string, 3
+      optional :create_time, :message, 4, "google.protobuf.Timestamp"
+      optional :update_time, :message, 5, "google.protobuf.Timestamp"
+      oneof :stream_data do
+        optional :web_stream_data, :message, 6, "google.analytics.admin.v1alpha.DataStream.WebStreamData"
+        optional :android_app_stream_data, :message, 7, "google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData"
+        optional :ios_app_stream_data, :message, 8, "google.analytics.admin.v1alpha.DataStream.IosAppStreamData"
+      end
+    end
+    add_message "google.analytics.admin.v1alpha.DataStream.WebStreamData" do
+      optional :measurement_id, :string, 1
+      optional :firebase_app_id, :string, 2
+      optional :default_uri, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData" do
+      optional :firebase_app_id, :string, 1
+      optional :package_name, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.DataStream.IosAppStreamData" do
+      optional :firebase_app_id, :string, 1
+      optional :bundle_id, :string, 2
+    end
+    add_enum "google.analytics.admin.v1alpha.DataStream.DataStreamType" do
+      value :DATA_STREAM_TYPE_UNSPECIFIED, 0
+      value :WEB_DATA_STREAM, 1
+      value :ANDROID_APP_DATA_STREAM, 2
+      value :IOS_APP_DATA_STREAM, 3
+    end
     add_message "google.analytics.admin.v1alpha.UserLink" do
       optional :name, :string, 1
       optional :email_address, :string, 2
@@ -65,20 +97,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :email_address, :string, 2
       repeated :direct_roles, :string, 3
       repeated :effective_roles, :string, 4
-    end
-    add_message "google.analytics.admin.v1alpha.EnhancedMeasurementSettings" do
-      optional :name, :string, 1
-      optional :stream_enabled, :bool, 2
-      optional :page_views_enabled, :bool, 3
-      optional :scrolls_enabled, :bool, 4
-      optional :outbound_clicks_enabled, :bool, 5
-      optional :site_search_enabled, :bool, 7
-      optional :video_engagement_enabled, :bool, 9
-      optional :file_downloads_enabled, :bool, 10
-      optional :page_loads_enabled, :bool, 12
-      optional :page_changes_enabled, :bool, 13
-      optional :search_query_parameter, :string, 16
-      optional :uri_query_parameter, :string, 17
     end
     add_message "google.analytics.admin.v1alpha.FirebaseLink" do
       optional :name, :string, 1
@@ -301,6 +319,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CUSTOM_DIMENSION, 11
       value :CUSTOM_METRIC, 12
       value :DATA_RETENTION_SETTINGS, 13
+      value :DISPLAY_VIDEO_360_ADVERTISER_LINK, 14
+      value :DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL, 15
     end
     add_enum "google.analytics.admin.v1alpha.GoogleSignalsState" do
       value :GOOGLE_SIGNALS_STATE_UNSPECIFIED, 0
@@ -338,9 +358,13 @@ module Google
         AndroidAppDataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AndroidAppDataStream").msgclass
         IosAppDataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IosAppDataStream").msgclass
         WebDataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.WebDataStream").msgclass
+        DataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream").msgclass
+        DataStream::WebStreamData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream.WebStreamData").msgclass
+        DataStream::AndroidAppStreamData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData").msgclass
+        DataStream::IosAppStreamData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream.IosAppStreamData").msgclass
+        DataStream::DataStreamType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream.DataStreamType").enummodule
         UserLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UserLink").msgclass
         AuditUserLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AuditUserLink").msgclass
-        EnhancedMeasurementSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.EnhancedMeasurementSettings").msgclass
         FirebaseLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.FirebaseLink").msgclass
         GlobalSiteTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GlobalSiteTag").msgclass
         GoogleAdsLink = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GoogleAdsLink").msgclass

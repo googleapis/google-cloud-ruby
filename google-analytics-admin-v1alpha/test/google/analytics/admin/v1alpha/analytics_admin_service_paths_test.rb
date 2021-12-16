@@ -107,6 +107,18 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
     end
   end
 
+  def test_data_stream_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.data_stream_path property: "value0", data_stream: "value1"
+      assert_equal "properties/value0/dataStreams/value1", path
+    end
+  end
+
   def test_display_video360_advertiser_link_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -128,18 +140,6 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
 
       path = client.display_video360_advertiser_link_proposal_path property: "value0", display_video_360_advertiser_link_proposal: "value1"
       assert_equal "properties/value0/displayVideo360AdvertiserLinkProposals/value1", path
-    end
-  end
-
-  def test_enhanced_measurement_settings_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.enhanced_measurement_settings_path property: "value0", web_data_stream: "value1"
-      assert_equal "properties/value0/webDataStreams/value1/enhancedMeasurementSettings", path
     end
   end
 

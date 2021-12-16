@@ -181,13 +181,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :android_app_data_streams, :message, 1, "google.analytics.admin.v1alpha.AndroidAppDataStream"
       optional :next_page_token, :string, 2
     end
-    add_message "google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest" do
-      optional :enhanced_measurement_settings, :message, 1, "google.analytics.admin.v1alpha.EnhancedMeasurementSettings"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
     add_message "google.analytics.admin.v1alpha.CreateFirebaseLinkRequest" do
       optional :parent, :string, 1
       optional :firebase_link, :message, 2, "google.analytics.admin.v1alpha.FirebaseLink"
@@ -237,6 +230,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.ListAccountSummariesResponse" do
       repeated :account_summaries, :message, 1, "google.analytics.admin.v1alpha.AccountSummary"
       optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest" do
+      optional :property, :string, 1
+      optional :acknowledgement, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse" do
     end
     add_message "google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest" do
       optional :account, :string, 1
@@ -406,6 +405,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :data_retention_settings, :message, 1, "google.analytics.admin.v1alpha.DataRetentionSettings"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.analytics.admin.v1alpha.CreateDataStreamRequest" do
+      optional :parent, :string, 1
+      optional :data_stream, :message, 2, "google.analytics.admin.v1alpha.DataStream"
+    end
+    add_message "google.analytics.admin.v1alpha.DeleteDataStreamRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateDataStreamRequest" do
+      optional :data_stream, :message, 1, "google.analytics.admin.v1alpha.DataStream"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.ListDataStreamsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListDataStreamsResponse" do
+      repeated :data_streams, :message, 1, "google.analytics.admin.v1alpha.DataStream"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.GetDataStreamRequest" do
+      optional :name, :string, 1
+    end
   end
 end
 
@@ -457,8 +479,6 @@ module Google
         UpdateAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAndroidAppDataStreamRequest").msgclass
         ListAndroidAppDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsRequest").msgclass
         ListAndroidAppDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse").msgclass
-        GetEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetEnhancedMeasurementSettingsRequest").msgclass
-        UpdateEnhancedMeasurementSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateEnhancedMeasurementSettingsRequest").msgclass
         CreateFirebaseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateFirebaseLinkRequest").msgclass
         DeleteFirebaseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest").msgclass
         ListFirebaseLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListFirebaseLinksRequest").msgclass
@@ -472,6 +492,8 @@ module Google
         GetDataSharingSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataSharingSettingsRequest").msgclass
         ListAccountSummariesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesRequest").msgclass
         ListAccountSummariesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountSummariesResponse").msgclass
+        AcknowledgeUserDataCollectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionRequest").msgclass
+        AcknowledgeUserDataCollectionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AcknowledgeUserDataCollectionResponse").msgclass
         SearchChangeHistoryEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsRequest").msgclass
         SearchChangeHistoryEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.SearchChangeHistoryEventsResponse").msgclass
         GetMeasurementProtocolSecretRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetMeasurementProtocolSecretRequest").msgclass
@@ -515,6 +537,12 @@ module Google
         GetCustomMetricRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetCustomMetricRequest").msgclass
         GetDataRetentionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataRetentionSettingsRequest").msgclass
         UpdateDataRetentionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateDataRetentionSettingsRequest").msgclass
+        CreateDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateDataStreamRequest").msgclass
+        DeleteDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteDataStreamRequest").msgclass
+        UpdateDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateDataStreamRequest").msgclass
+        ListDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDataStreamsRequest").msgclass
+        ListDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDataStreamsResponse").msgclass
+        GetDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataStreamRequest").msgclass
       end
     end
   end
