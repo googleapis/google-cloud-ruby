@@ -5,6 +5,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/dialogflow/v2/gcs_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -43,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.dialogflow.v2.ListDocumentsResponse" do
       repeated :documents, :message, 1, "google.cloud.dialogflow.v2.Document"
@@ -61,8 +63,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dialogflow.v2.ReloadDocumentRequest" do
       optional :name, :string, 1
+      optional :import_gcs_custom_metadata, :bool, 4
+      optional :smart_messaging_partial_update, :bool, 5
       oneof :source do
         optional :content_uri, :string, 3
+      end
+    end
+    add_message "google.cloud.dialogflow.v2.ExportDocumentRequest" do
+      optional :name, :string, 1
+      optional :export_full_content, :bool, 3
+      optional :smart_messaging_partial_update, :bool, 5
+      oneof :destination do
+        optional :gcs_destination, :message, 2, "google.cloud.dialogflow.v2.GcsDestination"
       end
     end
     add_message "google.cloud.dialogflow.v2.KnowledgeOperationMetadata" do
@@ -91,6 +103,7 @@ module Google
         DeleteDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.DeleteDocumentRequest").msgclass
         UpdateDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.UpdateDocumentRequest").msgclass
         ReloadDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ReloadDocumentRequest").msgclass
+        ExportDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ExportDocumentRequest").msgclass
         KnowledgeOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.KnowledgeOperationMetadata").msgclass
         KnowledgeOperationMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.KnowledgeOperationMetadata.State").enummodule
       end

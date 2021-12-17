@@ -80,6 +80,16 @@ module Google
             # Note: The `projects.agent.knowledgeBases.documents` resource is deprecated;
             # only use `projects.knowledgeBases.documents`.
             rpc :ReloadDocument, ::Google::Cloud::Dialogflow::V2::ReloadDocumentRequest, ::Google::Longrunning::Operation
+            # Exports a smart messaging candidate document into the specified
+            # destination.
+            #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/cx/docs/how/long-running-operation).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: [KnowledgeOperationMetadata][google.cloud.dialogflow.v2.KnowledgeOperationMetadata]
+            # - `response`: [Document][google.cloud.dialogflow.v2.Document]
+            rpc :ExportDocument, ::Google::Cloud::Dialogflow::V2::ExportDocumentRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

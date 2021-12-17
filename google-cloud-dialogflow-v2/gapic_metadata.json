@@ -419,6 +419,11 @@
               "methods": [
                 "reload_document"
               ]
+            },
+            "ExportDocument": {
+              "methods": [
+                "export_document"
+              ]
             }
           }
         }
