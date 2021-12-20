@@ -180,16 +180,6 @@
                 "list_android_app_data_streams"
               ]
             },
-            "GetEnhancedMeasurementSettings": {
-              "methods": [
-                "get_enhanced_measurement_settings"
-              ]
-            },
-            "UpdateEnhancedMeasurementSettings": {
-              "methods": [
-                "update_enhanced_measurement_settings"
-              ]
-            },
             "CreateFirebaseLink": {
               "methods": [
                 "create_firebase_link"
@@ -258,6 +248,11 @@
             "UpdateMeasurementProtocolSecret": {
               "methods": [
                 "update_measurement_protocol_secret"
+              ]
+            },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledge_user_data_collection"
               ]
             },
             "SearchChangeHistoryEvents": {
@@ -408,6 +403,31 @@
             "UpdateDataRetentionSettings": {
               "methods": [
                 "update_data_retention_settings"
+              ]
+            },
+            "CreateDataStream": {
+              "methods": [
+                "create_data_stream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "delete_data_stream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "update_data_stream"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "list_data_streams"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "get_data_stream"
               ]
             }
           }

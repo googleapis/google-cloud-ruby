@@ -662,33 +662,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for GetEnhancedMeasurementSettings RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the settings to lookup.
-        #     Format:
-        #     properties/\\{property_id}/webDataStreams/\\{stream_id}/enhancedMeasurementSettings
-        #     Example: "properties/1000/webDataStreams/2000/enhancedMeasurementSettings"
-        class GetEnhancedMeasurementSettingsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateEnhancedMeasurementSettings RPC.
-        # @!attribute [rw] enhanced_measurement_settings
-        #   @return [::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings]
-        #     Required. The settings to update.
-        #     The `name` field is used to identify the settings to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateEnhancedMeasurementSettingsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message for CreateFirebaseLink RPC
         # @!attribute [rw] parent
         #   @return [::String]
@@ -868,6 +841,31 @@ module Google
         #     A token, which can be sent as `page_token` to retrieve the next page.
         #     If this field is omitted, there are no subsequent pages.
         class ListAccountSummariesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for AcknowledgeUserDataCollection RPC.
+        # @!attribute [rw] property
+        #   @return [::String]
+        #     Required. The property for which to acknowledge user data collection.
+        # @!attribute [rw] acknowledgement
+        #   @return [::String]
+        #     Required. An acknowledgement that the caller of this method understands the terms
+        #     of user data collection.
+        #
+        #     This field must contain the exact value:
+        #     "I acknowledge that I have the necessary privacy disclosures and rights
+        #     from my end users for the collection and processing of their data,
+        #     including the association of such data with the visitation information
+        #     Google Analytics collects from my site and/or app property."
+        class AcknowledgeUserDataCollectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for AcknowledgeUserDataCollection RPC.
+        class AcknowledgeUserDataCollectionResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1473,6 +1471,86 @@ module Google
         #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
         #     the entire entity, use one path with the string "*" to match all fields.
         class UpdateDataRetentionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateDataStream RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] data_stream
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
+        #     Required. The DataStream to create.
+        class CreateDataStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteDataStream RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DataStream to delete.
+        #     Example format: properties/1234/dataStreams/5678
+        class DeleteDataStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateDataStream RPC.
+        # @!attribute [rw] data_stream
+        #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
+        #     The DataStream to update
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Omitted fields will not be updated.
+        #     To replace the entire entity, use one path with the string "*" to match
+        #     all fields.
+        class UpdateDataStreamRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListDataStreams RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListDataStreams` call.
+        #     Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListDataStreams` must
+        #     match the call that provided the page token.
+        class ListDataStreamsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListDataStreams RPC.
+        # @!attribute [rw] data_streams
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::DataStream>]
+        #     List of DataStreams.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListDataStreamsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetDataStream RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the DataStream to get.
+        #     Example format: properties/1234/dataStreams/5678
+        class GetDataStreamRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

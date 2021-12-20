@@ -129,6 +129,23 @@ module Google
             end
 
             ##
+            # Create a fully-qualified DataStream resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/dataStreams/{data_stream}`
+            #
+            # @param property [String]
+            # @param data_stream [String]
+            #
+            # @return [::String]
+            def data_stream_path property:, data_stream:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}"
+            end
+
+            ##
             # Create a fully-qualified DisplayVideo360AdvertiserLink resource string.
             #
             # The resource will be in the following format:
@@ -160,23 +177,6 @@ module Google
               raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
 
               "properties/#{property}/displayVideo360AdvertiserLinkProposals/#{display_video_360_advertiser_link_proposal}"
-            end
-
-            ##
-            # Create a fully-qualified EnhancedMeasurementSettings resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `properties/{property}/webDataStreams/{web_data_stream}/enhancedMeasurementSettings`
-            #
-            # @param property [String]
-            # @param web_data_stream [String]
-            #
-            # @return [::String]
-            def enhanced_measurement_settings_path property:, web_data_stream:
-              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
-
-              "properties/#{property}/webDataStreams/#{web_data_stream}/enhancedMeasurementSettings"
             end
 
             ##

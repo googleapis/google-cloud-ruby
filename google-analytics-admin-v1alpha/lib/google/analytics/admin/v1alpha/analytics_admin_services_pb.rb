@@ -154,14 +154,6 @@ module Google
             # Android app streams will be excluded if the caller does not have access.
             # Returns an empty list if no relevant android app streams are found.
             rpc :ListAndroidAppDataStreams, ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsResponse
-            # Returns the singleton enhanced measurement settings for this web stream.
-            # Note that the stream must enable enhanced measurement for these settings to
-            # take effect.
-            rpc :GetEnhancedMeasurementSettings, ::Google::Analytics::Admin::V1alpha::GetEnhancedMeasurementSettingsRequest, ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings
-            # Updates the singleton enhanced measurement settings for this web stream.
-            # Note that the stream must enable enhanced measurement for these settings to
-            # take effect.
-            rpc :UpdateEnhancedMeasurementSettings, ::Google::Analytics::Admin::V1alpha::UpdateEnhancedMeasurementSettingsRequest, ::Google::Analytics::Admin::V1alpha::EnhancedMeasurementSettings
             # Creates a FirebaseLink.
             #
             # Properties can have at most one FirebaseLink.
@@ -196,6 +188,11 @@ module Google
             rpc :DeleteMeasurementProtocolSecret, ::Google::Analytics::Admin::V1alpha::DeleteMeasurementProtocolSecretRequest, ::Google::Protobuf::Empty
             # Updates a measurement protocol secret.
             rpc :UpdateMeasurementProtocolSecret, ::Google::Analytics::Admin::V1alpha::UpdateMeasurementProtocolSecretRequest, ::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret
+            # Acknowledges the terms of user data collection for the specified property.
+            #
+            # This acknowledgement must be completed (either in the Google Analytics UI
+            # or via this API) before MeasurementProtocolSecret resources may be created.
+            rpc :AcknowledgeUserDataCollection, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionRequest, ::Google::Analytics::Admin::V1alpha::AcknowledgeUserDataCollectionResponse
             # Searches through all changes to an account or its children given the
             # specified set of filters.
             rpc :SearchChangeHistoryEvents, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsRequest, ::Google::Analytics::Admin::V1alpha::SearchChangeHistoryEventsResponse
@@ -270,6 +267,16 @@ module Google
             rpc :GetDataRetentionSettings, ::Google::Analytics::Admin::V1alpha::GetDataRetentionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRetentionSettings
             # Updates the singleton data retention settings for this property.
             rpc :UpdateDataRetentionSettings, ::Google::Analytics::Admin::V1alpha::UpdateDataRetentionSettingsRequest, ::Google::Analytics::Admin::V1alpha::DataRetentionSettings
+            # Creates a DataStream.
+            rpc :CreateDataStream, ::Google::Analytics::Admin::V1alpha::CreateDataStreamRequest, ::Google::Analytics::Admin::V1alpha::DataStream
+            # Deletes a DataStream on a property.
+            rpc :DeleteDataStream, ::Google::Analytics::Admin::V1alpha::DeleteDataStreamRequest, ::Google::Protobuf::Empty
+            # Updates a DataStream on a property.
+            rpc :UpdateDataStream, ::Google::Analytics::Admin::V1alpha::UpdateDataStreamRequest, ::Google::Analytics::Admin::V1alpha::DataStream
+            # Lists DataStreams on a property.
+            rpc :ListDataStreams, ::Google::Analytics::Admin::V1alpha::ListDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListDataStreamsResponse
+            # Lookup for a single DataStream.
+            rpc :GetDataStream, ::Google::Analytics::Admin::V1alpha::GetDataStreamRequest, ::Google::Analytics::Admin::V1alpha::DataStream
           end
 
           Stub = Service.rpc_stub_class
