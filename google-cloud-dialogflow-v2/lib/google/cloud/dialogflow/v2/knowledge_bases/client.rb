@@ -162,7 +162,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_knowledge_bases(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_knowledge_bases(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_knowledge_bases` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -175,6 +175,33 @@ module Google
             #     default 10 and at most 100.
             #   @param page_token [::String]
             #     The next_page_token value returned from a previous list request.
+            #   @param filter [::String]
+            #     The filter expression used to filter knowledge bases returned by the list
+            #     method. The expression has the following syntax:
+            #
+            #       <field> <operator> <value> [AND <field> <operator> <value>] ...
+            #
+            #     The following fields and operators are supported:
+            #
+            #     * display_name with has(:) operator
+            #     * language_code with equals(=) operator
+            #
+            #     Examples:
+            #
+            #     * 'language_code=en-us' matches knowledge bases with en-us language code.
+            #     * 'display_name:articles' matches knowledge bases whose display name
+            #       contains "articles".
+            #     * 'display_name:"Best Articles"' matches knowledge bases whose display
+            #       name contains "Best Articles".
+            #     * 'language_code=en-gb AND display_name=articles' matches all knowledge
+            #       bases whose display name contains "articles" and whose language code is
+            #       "en-gb".
+            #
+            #     Note: An empty filter string (i.e. "") is a no-op and will result in no
+            #     filtering.
+            #
+            #     For more information about filtering, see
+            #     [API Filtering](https://aip.dev/160).
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dialogflow::V2::KnowledgeBase>]

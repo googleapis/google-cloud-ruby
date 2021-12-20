@@ -7,6 +7,9 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dialogflow/v2/gcs.proto", :syntax => :proto3) do
+    add_message "google.cloud.dialogflow.v2.GcsDestination" do
+      optional :uri, :string, 1
+    end
   end
 end
 
@@ -14,6 +17,7 @@ module Google
   module Cloud
     module Dialogflow
       module V2
+        GcsDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.GcsDestination").msgclass
       end
     end
   end

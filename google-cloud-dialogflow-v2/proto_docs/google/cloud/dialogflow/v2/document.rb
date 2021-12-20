@@ -163,6 +163,29 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     The filter expression used to filter documents returned by the list method.
+        #     The expression has the following syntax:
+        #
+        #       <field> <operator> <value> [AND <field> <operator> <value>] ...
+        #
+        #     The following fields and operators are supported:
+        #
+        #     * knowledge_types with has(:) operator
+        #     * display_name with has(:) operator
+        #     * state with equals(=) operator
+        #
+        #     Examples:
+        #
+        #     * "knowledge_types:FAQ" matches documents with FAQ knowledge type.
+        #     * "display_name:customer" matches documents whose display name contains
+        #       "customer".
+        #     * "state=ACTIVE" matches documents with ACTIVE state.
+        #     * "knowledge_types:FAQ AND state=ACTIVE" matches all active FAQ documents.
+        #
+        #     For more information about filtering, see
+        #     [API Filtering](https://aip.dev/160).
         class ListDocumentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -233,7 +256,37 @@ module Google
         #
         #     For documents stored in Google Cloud Storage, these URIs must have
         #     the form `gs://<bucket-name>/<object-name>`.
+        # @!attribute [rw] import_gcs_custom_metadata
+        #   @return [::Boolean]
+        #     Optional. Whether to import custom metadata from Google Cloud Storage.
+        #     Only valid when the document source is Google Cloud Storage URI.
+        # @!attribute [rw] smart_messaging_partial_update
+        #   @return [::Boolean]
+        #     Optional. When enabled, the reload request is to apply partial update to the smart
+        #     messaging allowlist.
         class ReloadDocumentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Dialogflow::V2::Documents::Client#export_document Documents.ExportDocument}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the document to export.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/knowledgeBases/<Knowledge Base ID>/documents/<Document ID>`.
+        # @!attribute [rw] gcs_destination
+        #   @return [::Google::Cloud::Dialogflow::V2::GcsDestination]
+        #     Cloud Storage file path to export the document.
+        # @!attribute [rw] export_full_content
+        #   @return [::Boolean]
+        #     When enabled, export the full content of the document including empirical
+        #     probability.
+        # @!attribute [rw] smart_messaging_partial_update
+        #   @return [::Boolean]
+        #     When enabled, export the smart messaging allowlist document for partial
+        #     update.
+        class ExportDocumentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
