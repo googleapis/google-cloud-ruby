@@ -12,17 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def create_job_with_concatenated_inputs project_id:, location:, input1_uri:, start_time_input1:, end_time_input1:, input2_uri:, start_time_input2:, end_time_input2:, output_uri:
+def create_job_with_concatenated_inputs project_id:, location:,
+                                        input1_uri:, start_time_input1:,
+                                        end_time_input1:, input2_uri:,
+                                        start_time_input2:, end_time_input2:,
+                                        output_uri:
   # [START transcoder_create_job_with_concatenated_inputs]
-  # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
-  # location    = "YOUR-JOB-LOCATION"  # (e.g. "us-central1")
-  # input1_uri   = "YOUR-GCS-INPUT-VIDEO1"  # (e.g. "gs://my-bucket/my-video-file1")
-  # start_time_input1   = 0 # Start time in fractional seconds relative to the first input video timeline
-  # end_time_input1   = 8.125 # End time in fractional seconds relative to the first input video timeline
-  # input2_uri   = "YOUR-GCS-INPUT-VIDEO2"  # (e.g. "gs://my-bucket/my-video-file2")
-  # start_time_input2   = 3.5 # Start time in fractional seconds relative to the second input video timeline
-  # end_time_input2   = 15 # End time in fractional seconds relative to the second input video timeline
-  # output_uri  = "YOUR-GCS-OUTPUT-FOLDER/"  # (e.g. "gs://my-bucket/my-output-folder/")
+  # project_id        = "YOUR-GOOGLE-CLOUD-PROJECT" # (e.g. "my-project")
+  # location          = "YOUR-JOB-LOCATION" # (e.g. "us-central1")
+  # input1_uri        = "YOUR-GCS-INPUT-VIDEO1" # (e.g. "gs://my-bucket/
+  #                     my-video-file1")
+  # start_time_input1 = 0 # Start time in fractional seconds relative to the
+  #                     first input video timeline
+  # end_time_input1   = 8.125 # End time in fractional seconds relative to the
+  #                     first input video timeline
+  # input2_uri        = "YOUR-GCS-INPUT-VIDEO2" # (e.g. "gs://my-bucket/
+  #                     my-video-file2")
+  # start_time_input2 = 3.5 # Start time in fractional seconds relative to the
+  #                     second input video timeline
+  # end_time_input2   = 15 # End time in fractional seconds relative to the
+  #                     second input video timeline
+  # output_uri        = "YOUR-GCS-OUTPUT-FOLDER/" # (e.g. "gs://my-bucket/
+  #                     my-output-folder/")
 
   s1_sec = start_time_input1.to_i
   s1_nanos = (start_time_input1.to_f.remainder(1) * 1_000_000_000).round
@@ -148,7 +159,9 @@ if $PROGRAM_NAME == __FILE__
       Usage: bundle exec ruby #{__FILE__} [command] [arguments]
 
       Commands:
-      create_job_with_concatenated_inputs <location> <input1_uri> <start_time_input1> <end_time_input1> <input2_uri> <start_time_input2> <end_time_input2> <output_uri> Create a job with concatenated inputs
+      create_job_with_concatenated_inputs <location> <input1_uri>
+        <start_time_input1> <end_time_input1> <input2_uri> <start_time_input2>
+        <end_time_input2> <output_uri> Create a job with concatenated inputs
 
       Environment variables:
         GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run snippets
