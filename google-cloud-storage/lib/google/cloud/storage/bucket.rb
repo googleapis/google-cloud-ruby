@@ -1030,8 +1030,10 @@ module Google
         #
         def public_access_prevention_inherited?
           return false unless @gapi.iam_configuration&.public_access_prevention
-          @gapi.iam_configuration.public_access_prevention.to_s.eql? "inherited"
+          ["inherited", "unspecified"].include? @gapi.iam_configuration.public_access_prevention.to_s
         end
+
+        alias public_access_prevention_unspecified? public_access_prevention_inherited?
 
         ##
         # Updates the bucket with changes made in the given block in a single
