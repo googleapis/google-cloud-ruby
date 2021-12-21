@@ -67,25 +67,25 @@ class MyInterceptor < GRPC::ClientInterceptor
 
   def request_response(request:, call:, method:, metadata:)
     logger.info "[#{name}] Sending unary request/response to #{method}"
-    metadata['request_id'] = generate_request_id
+    metadata["request_id"] = generate_request_id
     yield
   end
 
   def client_streamer(requests:, call:, method:, metadata:)
     logger.info "[#{name}] Sending client streamer to #{method}"
-    metadata['request_id'] = generate_request_id
+    metadata["request_id"] = generate_request_id
     yield
   end
 
   def server_streamer(request:, call:, method:, metadata:)
     logger.info "[#{name}] Sending server streamer to #{method}"
-    metadata['request_id'] = generate_request_id
+    metadata["request_id"] = generate_request_id
     yield
   end
 
   def bidi_streamer(requests:, call:, method:, metadata:)
     logger.info "[#{name}] Sending bidi streamer to #{method}"
-    metadata['request_id'] = generate_request_id
+    metadata["request_id"] = generate_request_id
     yield
   end
 
