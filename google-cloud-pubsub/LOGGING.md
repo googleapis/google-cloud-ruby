@@ -51,7 +51,9 @@ the underlying
 * [`Google::Cloud::PubSub::V1::Subscriber::Client`](https://googleapis.dev/ruby/google-cloud-pubsub-v1/latest/Google/Cloud/PubSub/V1/Subscriber/Client.html)
 
 To add a gRPC interceptor to one or more of these clients, first implement your logic as a subclass of
-[`GRPC::ClientInterceptor`](https://www.rubydoc.info/gems/grpc/GRPC/ClientInterceptor).
+[`GRPC::ClientInterceptor`](https://www.rubydoc.info/gems/grpc/GRPC/ClientInterceptor). The example below logs all four
+types of gRPC calls (unary, client streaming, server streaming, and bi-directional streaming.) It also demonstrates how
+to set a metadata field.
 
 ```ruby
 require "grpc"
@@ -101,8 +103,11 @@ class MyInterceptor < GRPC::ClientInterceptor
 end
 ```
 
-Next, use the block yielded by a `Client.configure` method to add an instance of your class
-to the `interceptors` configuration of one or more of the generated clients.
+Next, use the block yielded by a `Client.configure` method to add an instance of your class to the `interceptors`
+configuration of one or more of the generated clients listed above.
+
+Note that the `Google::Cloud::PubSub::V1` configurations must be performed **before** the `Google::Cloud::PubSub` client
+is instantiated.
 
 ```ruby
 require "google/cloud/pubsub"
