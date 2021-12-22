@@ -452,7 +452,7 @@ if your account has limited access to the Pub/Sub API. In particular, the role
 `roles/pubsub.subscriber` does not have the permission
 `pubsub.subscriptions.get`, which is required to retrieve a subscription
 resource. See [Access Control -
-Roles](https://cloud.google.com/pubsub/docs/access-control#tbl_roles) for the
+Roles](https://cloud.google.com/pubsub/docs/access-control#roles) for the
 complete list of Pub/Sub roles and permissions.
 
 ## Creating a snapshot and using seek
