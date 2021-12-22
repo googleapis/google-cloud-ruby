@@ -399,6 +399,10 @@ module Google
           #     The unique identifier of the current page.
           #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
           #     ID>/flows/<Flow ID>/pages/<Page ID>`.
+          # @!attribute [rw] display_name
+          #   @return [::String]
+          #     Always present for {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}. Ignored for {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.
+          #     The display name of the current page.
           # @!attribute [rw] form_info
           #   @return [::Google::Cloud::Dialogflow::CX::V3::PageInfo::FormInfo]
           #     Optional for both {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest} and {::Google::Cloud::Dialogflow::CX::V3::WebhookResponse WebhookResponse}.

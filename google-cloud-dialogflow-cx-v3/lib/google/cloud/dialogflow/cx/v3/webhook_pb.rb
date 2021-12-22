@@ -114,6 +114,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dialogflow.cx.v3.PageInfo" do
       optional :current_page, :string, 1
+      optional :display_name, :string, 4
       optional :form_info, :message, 3, "google.cloud.dialogflow.cx.v3.PageInfo.FormInfo"
     end
     add_message "google.cloud.dialogflow.cx.v3.PageInfo.FormInfo" do
