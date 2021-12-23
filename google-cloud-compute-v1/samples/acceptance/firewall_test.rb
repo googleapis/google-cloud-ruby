@@ -24,7 +24,7 @@ class ComputeFirewallTest < Minitest::Test
   end
   
   def teardown
-    client = ::Google::Cloud::Compute::V1::Instances::Rest::Client.new
+    client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
     @firewalls.each do |firewall|
       client.delete project: project, firewall: firewall
     rescue StandardError
