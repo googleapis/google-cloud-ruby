@@ -32,6 +32,8 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
 
   after do
     exporter.reset
+    # Remove the OpenTelemetry::SDK::Trace::TracerProvider so that tests in other files do not trace.
+    OpenTelemetry.tracer_provider = OpenTelemetry::Internal::ProxyTracerProvider.new
   end
 
   it "publishes a message with open telemetry tracing" do

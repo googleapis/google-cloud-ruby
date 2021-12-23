@@ -175,17 +175,6 @@ module Google
           nil
         end
 
-        def propagate_span_in_message span, msg
-          # TODO: How do we keep traceparent out of the pubsub message unless OTEL is being used?
-          # Ensure body executes only conditional on active tracing.
-          return unless span.context.valid?
-          # Add span context to pubsub message attributes.
-          propagator = OpenTelemetry::Trace::Propagation::TraceContext.text_map_propagator
-          propagator.inject msg, setter: TextMapSetter.new
-          # Update the message size in the span attributes after adding span context to message attributes.
-          span.set_attribute "messaging.message_payload_size_bytes", msg.to_proto.bytesize
-        end
-
         ##
         # Begins the process of stopping the publisher. Messages already in
         # the queue will be published, but no new messages can be added. Use
@@ -326,6 +315,16 @@ module Google
           def set msg, key, value
             msg.attributes[key] = value
           end
+        end
+
+        def propagate_span_in_message span, msg
+          return unless span.context.valid?
+          # Add span context to pubsub message attributes.
+          propagator = OpenTelemetry::Trace::Propagation::TraceContext.text_map_propagator
+          propagator.inject msg, setter: TextMapSetter.new
+
+          # Update the message size in the span attributes after adding span context to message attributes.
+          span.set_attribute "messaging.message_payload_size_bytes", msg.to_proto.bytesize
         end
 
         def run_background
