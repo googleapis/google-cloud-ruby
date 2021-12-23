@@ -58,11 +58,12 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
     _(actual_msg.ordering_key).must_equal ordering_key
 
     spans = exporter.finished_spans
-    _(spans.count).must_equal 2
+    _(spans.count).must_equal 3
 
     # TODO: Determine if the order below should be reversed, and how? Is there no parent relationship?
     assert_pubsub_span spans[0], "#{topic_name} add to batch", expected_span_attrs(topic_name, msg.to_proto.bytesize, ordering_key)
-    assert_pubsub_span spans[1], "#{topic_name} send", expected_span_attrs(topic_name, actual_msg.to_proto.bytesize, ordering_key)
+    assert_pubsub_span spans[1], "#{topic_name} publish RPC", expected_span_attrs(topic_name, actual_msg.to_proto.bytesize, ordering_key)
+    assert_pubsub_span spans[2], "#{topic_name} send", expected_span_attrs(topic_name, actual_msg.to_proto.bytesize, ordering_key)
   end
 
   def assert_pubsub_span span, expected_name, expected_attrs

@@ -22,7 +22,7 @@ Metrics/ClassLength:
 Metrics/CyclomaticComplexity:
   Max: 15
 Metrics/MethodLength:
-  Max: 35
+  Max: 40
 Metrics/PerceivedComplexity:
   Max: 15
 Naming/FileName:

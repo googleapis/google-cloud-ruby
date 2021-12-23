@@ -373,7 +373,6 @@ module Google
         end
 
         def publish_batches! stop: nil
-          # @tracer.in_span "#{name} add to batch" do
           @batches.reject! { |_ordering_key, batch| batch.empty? }
           @batches.each_value do |batch|
             ready = batch.publish! stop: stop
@@ -402,7 +401,14 @@ module Google
             items = batch.rebalance!
 
             unless items.empty?
+              spans = items.map do |item|
+                span_attrs = Convert.span_attributes topic_name, item.msg
+                @tracer.start_span "#{topic_name} publish RPC",
+                                   attributes: span_attrs,
+                                   kind: OpenTelemetry::Trace::SpanKind::PRODUCER
+              end
               grpc = @service.publish topic_name, items.map(&:msg)
+              spans.map(&:finish) # TODO: Move to ensure block?
               items.zip Array(grpc.message_ids) do |item, id|
                 @flow_controller.release item.bytesize
                 if item.callback
@@ -410,7 +416,7 @@ module Google
                   publish_result = PublishResult.from_grpc item.msg
                   execute_callback_async item.callback, publish_result
                 end
-                item.span.finish
+                item.span.finish # TODO: Move to ensure block?
               end
             end
 
