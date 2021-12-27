@@ -263,9 +263,9 @@ module Google
                   span = @tracer.start_span "#{subscriber.topic_name} receive",
                                             attributes: span_attrs,
                                             kind: OpenTelemetry::Trace::SpanKind::PRODUCER
-                  rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
+                  rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self, span: span)
                   # No need to synchronize the callback future
-                  register_callback rec_msg, span
+                  register_callback rec_msg
                 end
                 synchronize { pause_streaming! }
               rescue StopIteration
@@ -295,34 +295,34 @@ module Google
 
           # rubocop:enable all
 
-          def register_callback rec_msg, span
+          def register_callback rec_msg
             if @sequencer
               # Add the message to the sequencer to invoke the callback.
-              @sequencer.add rec_msg, span
+              @sequencer.add rec_msg
             else
               # Call user provided code for received message
-              perform_callback_async rec_msg, span
+              perform_callback_async rec_msg
             end
           end
 
-          def perform_callback_async rec_msg, span
+          def perform_callback_async rec_msg
             return unless callback_thread_pool.running?
 
             Concurrent::Promises.future_on(
-              callback_thread_pool, rec_msg, span, &method(:perform_callback_sync)
+              callback_thread_pool, rec_msg, &method(:perform_callback_sync)
             )
           end
 
-          def perform_callback_sync rec_msg, span
+          def perform_callback_sync rec_msg
             @subscriber.callback.call rec_msg unless stopped?
           rescue StandardError => e
             @subscriber.error! e
           ensure
             release rec_msg
-            span.finish
+            rec_msg.finish_span
             if @sequencer && running?
               begin
-                @sequencer.next rec_msg, span
+                @sequencer.next rec_msg
               rescue OrderedMessageDeliveryError => e
                 @subscriber.error! e
               end

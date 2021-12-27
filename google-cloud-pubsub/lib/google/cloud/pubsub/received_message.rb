@@ -54,6 +54,7 @@ module Google
         # @private Create an empty {Subscription} object.
         def initialize
           @subscription = nil
+          @span = nil
           @grpc = Google::Cloud::PubSub::V1::ReceivedMessage.new
         end
 
@@ -273,12 +274,19 @@ module Google
         end
 
         ##
+        # @private Finish the OpenTelemetry::Trace::Span for the receive operation associated with this message.
+        def finish_span
+          @span&.finish
+        end
+
+        ##
         # @private New ReceivedMessage from a
         # Google::Cloud::PubSub::V1::ReceivedMessage object.
-        def self.from_grpc grpc, subscription
+        def self.from_grpc grpc, subscription, span: nil
           new.tap do |rm|
             rm.grpc         = grpc
             rm.subscription = subscription
+            rm.instance_variable_set :@span, span if span
           end
         end
 
