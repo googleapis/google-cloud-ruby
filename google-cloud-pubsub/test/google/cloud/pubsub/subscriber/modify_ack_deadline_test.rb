@@ -52,6 +52,10 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
       msg.modify_ack_deadline! 42
       called = true
     end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
+    end
     subscriber.start
 
     subscriber_retries = 0
@@ -107,6 +111,10 @@ describe Google::Cloud::PubSub::Subscriber, :modify_ack_deadline, :mock_pubsub d
       assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       msg.modify_ack_deadline! 42
       called +=1
+    end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
     end
     subscriber.start
 

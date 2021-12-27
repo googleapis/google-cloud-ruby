@@ -54,6 +54,10 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
       called = true
     end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
+    end
     subscriber.start
 
     subscriber_retries = 0
@@ -118,6 +122,10 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
 
       assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       called += 1
+    end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
     end
     subscriber.start
 

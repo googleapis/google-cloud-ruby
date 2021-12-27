@@ -52,6 +52,10 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
       result.ack!
       called = true
     end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
+    end
     subscriber.start
 
     subscriber_retries = 0
@@ -112,6 +116,10 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
       assert_kind_of Google::Cloud::PubSub::ReceivedMessage, msg
       msg.ack!
       called += 1
+    end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
     end
     subscriber.start
 
@@ -178,6 +186,10 @@ describe Google::Cloud::PubSub::Subscriber, :acknowledge, :mock_pubsub do
 
       result.ack!
       called = true
+    end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
     end
     subscriber.start
 

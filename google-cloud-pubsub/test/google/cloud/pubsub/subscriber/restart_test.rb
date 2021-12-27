@@ -50,6 +50,9 @@ describe Google::Cloud::PubSub::Subscriber, :error, :mock_pubsub do
       errors << error
     end
 
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
+    end
     subscriber.start
 
     subscriber_retries = 0

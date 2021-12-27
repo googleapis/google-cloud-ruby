@@ -78,6 +78,9 @@ describe Google::Cloud::PubSub::Subscriber, :message_ordering, :mock_pubsub do
       msg.ack!
     end
 
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
+    end
     subscriber.start
 
     subscriber_retries = 0
@@ -121,6 +124,10 @@ describe Google::Cloud::PubSub::Subscriber, :message_ordering, :mock_pubsub do
       callback_count += 1
       message_hash[msg.ordering_key].push msg.data
       msg.ack!
+    end
+
+    subscriber.on_error do |error|
+      raise "Subscriber#on_error: #{error.inspect}"
     end
     subscriber.start
 
