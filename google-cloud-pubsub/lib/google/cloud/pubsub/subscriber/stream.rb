@@ -314,7 +314,18 @@ module Google
           end
 
           def perform_callback_sync rec_msg
-            @subscriber.callback.call rec_msg unless stopped?
+            unless stopped?
+              extra_span_attrs = { OpenTelemetry::SemanticConventions::Trace::MESSAGING_OPERATION => "process" }
+              span_attrs = Convert.span_attributes subscriber.topic_name,
+                                                   rec_msg.grpc.message,
+                                                   extra_attrs: extra_span_attrs
+              # TODO: Add otel link from TextMapPropagator
+              @tracer.in_span "#{subscriber.topic_name} process",
+                              attributes: span_attrs,
+                              kind: OpenTelemetry::Trace::SpanKind::PRODUCER do
+                @subscriber.callback.call rec_msg
+              end
+            end
           rescue StandardError => e
             @subscriber.error! e
           ensure

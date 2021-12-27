@@ -83,10 +83,13 @@ describe Google::Cloud::PubSub::Subscriber, :open_telemetry, :mock_pubsub do
     subscriber.wait!
 
     spans = @exporter.finished_spans
-    _(spans.count).must_equal 1
+    _(spans.count).must_equal 2
   
-    assert_pubsub_span spans[0], "#{topic_name} receive"
-    _(spans[0].attributes).must_equal expected_span_attrs(topic_name, rec_msg_grpc.message.message_id, rec_msg_grpc.message.to_proto.bytesize)
+    # TODO: Determine if the order below should be reversed, and how? Is there no parent relationship?
+    assert_pubsub_span spans[0], "#{topic_name} process"
+    _(spans[0].attributes).must_equal expected_span_attrs(topic_name, rec_msg_grpc.message.message_id, rec_msg_grpc.message.to_proto.bytesize, "process")
+    assert_pubsub_span spans[1], "#{topic_name} receive"
+    _(spans[1].attributes).must_equal expected_span_attrs(topic_name, rec_msg_grpc.message.message_id, rec_msg_grpc.message.to_proto.bytesize, "receive")
   end
 
   def assert_pubsub_span span, expected_name
@@ -99,15 +102,15 @@ describe Google::Cloud::PubSub::Subscriber, :open_telemetry, :mock_pubsub do
     _(span.kind).must_equal OpenTelemetry::Trace::SpanKind::PRODUCER
   end
 
-  def expected_span_attrs topic_name, msg_id, msg_size, ordering_key=""
+  def expected_span_attrs topic_name, msg_id, msg_size, operation
     {
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_SYSTEM => "pubsub",
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION => topic_name,
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION_KIND => "topic",
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID => msg_id,
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES => msg_size,
-      OpenTelemetry::SemanticConventions::Trace::MESSAGING_OPERATION => "receive",
-      "pubsub.ordering_key" => ordering_key
+      OpenTelemetry::SemanticConventions::Trace::MESSAGING_OPERATION => operation,
+      "pubsub.ordering_key" => ""
     }
   end
 end
