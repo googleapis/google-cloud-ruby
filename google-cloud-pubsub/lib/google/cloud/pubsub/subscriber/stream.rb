@@ -17,9 +17,11 @@ require "google/cloud/pubsub/subscriber/sequencer"
 require "google/cloud/pubsub/subscriber/enumerator_queue"
 require "google/cloud/pubsub/subscriber/inventory"
 require "google/cloud/pubsub/service"
+require "google/cloud/pubsub/convert"
 require "google/cloud/errors"
 require "monitor"
 require "concurrent"
+require "opentelemetry"
 
 module Google
   module Cloud
@@ -52,6 +54,7 @@ module Google
             super() # to init MonitorMixin
 
             @subscriber = subscriber
+            @tracer = OpenTelemetry.tracer_provider.tracer "Google::Cloud::PubSub", Google::Cloud::PubSub::VERSION
 
             @request_queue = nil
             @stopped = nil
@@ -253,9 +256,16 @@ module Google
                 end
 
                 response.received_messages.each do |rec_msg_grpc|
+                  extra_span_attrs = { OpenTelemetry::SemanticConventions::Trace::MESSAGING_OPERATION => "receive" }
+                  span_attrs = Convert.span_attributes subscriber.topic_name,
+                                                       rec_msg_grpc.message,
+                                                       extra_attrs: extra_span_attrs
+                  span = @tracer.start_span "#{subscriber.topic_name} receive",
+                                            attributes: span_attrs,
+                                            kind: OpenTelemetry::Trace::SpanKind::PRODUCER
                   rec_msg = ReceivedMessage.from_grpc(rec_msg_grpc, self)
                   # No need to synchronize the callback future
-                  register_callback rec_msg
+                  register_callback rec_msg, span
                 end
                 synchronize { pause_streaming! }
               rescue StopIteration
@@ -285,33 +295,34 @@ module Google
 
           # rubocop:enable all
 
-          def register_callback rec_msg
+          def register_callback rec_msg, span
             if @sequencer
               # Add the message to the sequencer to invoke the callback.
-              @sequencer.add rec_msg
+              @sequencer.add rec_msg, span
             else
               # Call user provided code for received message
-              perform_callback_async rec_msg
+              perform_callback_async rec_msg, span
             end
           end
 
-          def perform_callback_async rec_msg
+          def perform_callback_async rec_msg, span
             return unless callback_thread_pool.running?
 
             Concurrent::Promises.future_on(
-              callback_thread_pool, rec_msg, &method(:perform_callback_sync)
+              callback_thread_pool, rec_msg, span, &method(:perform_callback_sync)
             )
           end
 
-          def perform_callback_sync rec_msg
+          def perform_callback_sync rec_msg, span
             @subscriber.callback.call rec_msg unless stopped?
           rescue StandardError => e
             @subscriber.error! e
           ensure
             release rec_msg
+            span.finish
             if @sequencer && running?
               begin
-                @sequencer.next rec_msg
+                @sequencer.next rec_msg, span
               rescue OrderedMessageDeliveryError => e
                 @subscriber.error! e
               end

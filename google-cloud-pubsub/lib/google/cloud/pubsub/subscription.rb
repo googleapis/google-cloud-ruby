@@ -1006,8 +1006,15 @@ module Google
           deadline ||= self.deadline
           message_ordering = message_ordering? if message_ordering.nil?
 
-          Subscriber.new name, block, deadline: deadline, streams: streams, inventory: inventory,
-                                      message_ordering: message_ordering, threads: threads, service: service
+          Subscriber.new name,
+                         topic.name,
+                         block,
+                         deadline: deadline,
+                         streams: streams,
+                         inventory: inventory,
+                         message_ordering: message_ordering,
+                         threads: threads,
+                         service: service
         end
 
         ##

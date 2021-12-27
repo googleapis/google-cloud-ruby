@@ -17,21 +17,21 @@ require "opentelemetry-sdk"
 
 describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
   let(:topic_name) { topic_path "topic-name-goes-here" }
-  let(:exporter) { OpenTelemetry::SDK::Trace::Export::InMemorySpanExporter.new }
-  let(:span_processor) { OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new exporter }
   let(:data) { "async-message".encode(Encoding::ASCII_8BIT) }
   let(:ordering_key) { "foo" }
   let(:msg) { Google::Cloud::PubSub::V1::PubsubMessage.new data: data, ordering_key: ordering_key }
   let(:expected_messages_hash) { { ordering_key => [msg] } }
 
   before do
+    @exporter = OpenTelemetry::SDK::Trace::Export::InMemorySpanExporter.new
+    span_processor = OpenTelemetry::SDK::Trace::Export::SimpleSpanProcessor.new @exporter
     OpenTelemetry::SDK.configure do |c|
       c.add_span_processor span_processor
     end
   end
 
   after do
-    exporter.reset
+    @exporter.reset
     # Remove the OpenTelemetry::SDK::Trace::TracerProvider so that tests in other files do not trace.
     OpenTelemetry.tracer_provider = OpenTelemetry::Internal::ProxyTracerProvider.new
   end
@@ -57,7 +57,7 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
     _(actual_msg.data).must_equal data
     _(actual_msg.ordering_key).must_equal ordering_key
 
-    spans = exporter.finished_spans
+    spans = @exporter.finished_spans
     _(spans.count).must_equal 3
 
     # TODO: Determine if the order below should be reversed, and how? Is there no parent relationship?
@@ -78,13 +78,13 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
   end
 
   def expected_span_attrs topic_name, msg_size, ordering_key
-      {
-        "messaging.system" => "pubsub",
-        "messaging.destination" => topic_name,
-        "messaging.destination_kind" => "topic",
-        "messaging.message_id" => "",
-        "messaging.message_payload_size_bytes" => msg_size,
-        "pubsub.ordering_key" => ordering_key
-      }
-    end
+    {
+      "messaging.system" => "pubsub",
+      "messaging.destination" => topic_name,
+      "messaging.destination_kind" => "topic",
+      "messaging.message_id" => "",
+      "messaging.message_payload_size_bytes" => msg_size,
+      "pubsub.ordering_key" => ordering_key
+    }
+  end
 end

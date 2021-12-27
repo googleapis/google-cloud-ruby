@@ -82,7 +82,9 @@ module Google
             )
           end
 
-          def span_attributes topic_name, msg
+          ##
+          # @param [Google::Cloud::PubSub::V1::PubsubMessage] msg
+          def span_attributes topic_name, msg, extra_attrs: {}
             {
               OpenTelemetry::SemanticConventions::Trace::MESSAGING_SYSTEM => "pubsub",
               OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION => topic_name,
@@ -90,7 +92,7 @@ module Google
               OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID => msg.message_id,
               OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES => msg.to_proto.bytesize,
               "pubsub.ordering_key" => msg.ordering_key
-            }
+            }.merge extra_attrs
           end
         end
 

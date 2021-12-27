@@ -45,6 +45,8 @@ module Google
       #
       # @attr_reader [String] subscription_name The name of the subscription the
       #   messages are pulled from.
+      # @attr_reader [String] topic_name The name of the topic to which the
+      #   subscription belongs.
       # @attr_reader [Proc] callback The procedure that will handle the messages
       #   received from the subscription.
       # @attr_reader [Numeric] deadline The default number of seconds the stream
@@ -65,6 +67,7 @@ module Google
         include MonitorMixin
 
         attr_reader :subscription_name
+        attr_reader :topic_name
         attr_reader :callback
         attr_reader :deadline
         attr_reader :streams
@@ -78,13 +81,21 @@ module Google
 
         ##
         # @private Create an empty {Subscriber} object.
-        def initialize subscription_name, callback, deadline: nil, message_ordering: nil, streams: nil, inventory: nil,
-                       threads: {}, service: nil
+        def initialize subscription_name,
+                       topic_name,
+                       callback,
+                       deadline: nil,
+                       message_ordering: nil,
+                       streams: nil,
+                       inventory: nil,
+                       threads: {},
+                       service: nil
           super() # to init MonitorMixin
 
           @callback = callback
           @error_callbacks = []
           @subscription_name = subscription_name
+          @topic_name = topic_name
           @deadline = deadline || 60
           @streams = streams || 2
           coerce_inventory inventory

@@ -86,6 +86,7 @@ module Google
           super()
           @topic_name = service.topic_path topic_name
           @service    = service
+          @tracer = OpenTelemetry.tracer_provider.tracer "Google::Cloud::PubSub", Google::Cloud::PubSub::VERSION
 
           @max_bytes        = max_bytes
           @max_messages     = max_messages
@@ -106,7 +107,6 @@ module Google
           @cond = new_cond
           @flow_controller = FlowController.new(**@flow_control)
           @thread = Thread.new { run_background }
-          @tracer = OpenTelemetry.tracer_provider.tracer "Google::Cloud::PubSub", Google::Cloud::PubSub::VERSION
         end
 
         ##

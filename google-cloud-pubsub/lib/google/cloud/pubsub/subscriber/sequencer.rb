@@ -40,10 +40,10 @@ module Google
 
           ##
           # @private Add a ReceivedMessage to the sequencer.
-          def add message
+          def add message, span
             # Messages without ordering_key are not managed by the sequencer
             if message.ordering_key.empty?
-              @process_callback.call message
+              @process_callback.call message, span
               return
             end
 
@@ -57,13 +57,13 @@ module Google
               @seq_hash[message.ordering_key].count == 1
             end
 
-            @process_callback.call message if perform_callback
+            @process_callback.call message, span if perform_callback
           end
 
           ##
           # @private Indicate a ReceivedMessage was processed, and the next in
           # the queue can now be processed.
-          def next message
+          def next message, span
             # Messages without ordering_key are not managed by the sequencer
             return if message.ordering_key.empty?
 
@@ -94,7 +94,7 @@ module Google
               next_msg
             end
 
-            @process_callback.call next_message unless next_message.nil?
+            @process_callback.call next_message, span unless next_message.nil?
           end
 
           # @private

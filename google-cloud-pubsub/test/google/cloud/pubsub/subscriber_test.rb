@@ -17,6 +17,7 @@ require "helper"
 describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
   let(:callback) { Proc.new { |msg| puts msg.inspect } }
   let(:subscription_name) { "subscription-name-goes-here" }
+  let(:topic_name) { "topic-name-goes-here" }
   let(:deadline) { 120 }
   let(:streams) { 8 }
   let(:max_outstanding_messages) { 2000 }
@@ -25,6 +26,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
   let :subscriber do
     Google::Cloud::PubSub::Subscriber.new(
       subscription_name,
+      topic_name,
       callback,
       deadline: deadline,
       streams: streams,
@@ -40,6 +42,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
   it "knows its defaults" do
     subscriber = Google::Cloud::PubSub::Subscriber.new(
       subscription_name,
+      topic_name,
       callback,
       service: pubsub.service
     )
@@ -63,6 +66,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
     _(subscriber).must_be_kind_of Google::Cloud::PubSub::Subscriber
     _(subscriber.callback).must_equal callback
     _(subscriber.subscription_name).must_equal subscription_name
+    _(subscriber.topic_name).must_equal topic_name
     _(subscriber.deadline).must_equal deadline
     _(subscriber.streams).must_equal streams
     _(subscriber.inventory).must_equal max_outstanding_messages # deprecated Use #max_outstanding_messages.
@@ -84,6 +88,7 @@ describe Google::Cloud::PubSub::Subscriber, :mock_pubsub do
   it "propagates use_legacy_flow_control" do
     subscriber = Google::Cloud::PubSub::Subscriber.new(
       subscription_name,
+      topic_name,
       callback,
       inventory: {
         max_outstanding_messages: 999,
