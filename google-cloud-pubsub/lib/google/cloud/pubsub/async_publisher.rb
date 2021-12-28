@@ -144,7 +144,7 @@ module Google
           @tracer.in_span "#{topic_name} add to batch",
                           attributes: span_attrs,
                           kind: OpenTelemetry::Trace::SpanKind::PRODUCER do
-            propagate_span_in_message span, msg
+            write_trace_context_to_message_attributes span, msg
             begin
               @flow_controller.acquire msg.to_proto.bytesize
             rescue FlowControlLimitError => e
@@ -309,15 +309,32 @@ module Google
 
         protected
 
-        # Open Telemetry type used by TraceContext#inject to write "traceparent" context into the message attributes.
+        ##
+        # Used by Open Telemetry TextMapPropagator#inject to write trace context to pubsub message attributes.
+        # @see https://www.w3.org/TR/trace-context/
+        #
         class TextMapSetter
-          # Writes key into a message protobuf.
+          ##
+          # Writes a key and value to a V1::PubsubMessage#attributes map.
+          #
+          # @param [Google::Cloud::PubSub::V1::PubsubMessage] msg
+          # @param [String] key Actual keys should be "traceparent" and "tracestate".
+          # @param [String] value See https://www.w3.org/TR/trace-context/
+          #
           def set msg, key, value
-            msg.attributes[key] = value
+            msg.attributes["googclient_#{key}"] = value
           end
         end
 
-        def propagate_span_in_message span, msg
+        ##
+        # Use Open Telemetry TextMapPropagator#inject to write "traceparent" context to pubsub message attributes.
+        # The purpose is to link from the current publish span to the subscriber process span.
+        # @see https://github.com/open-telemetry/opentelemetry-specification/blob/v1.1.0/specification/trace/semantic_conventions/messaging.md#batch-receiving
+        #
+        # @param [OpenTelemetry::Trace::Span] span
+        # @param [Google::Cloud::PubSub::V1::PubsubMessage] msg
+        #
+        def write_trace_context_to_message_attributes span, msg
           return unless span.context.valid?
           # Add span context to pubsub message attributes.
           propagator = OpenTelemetry::Trace::Propagation::TraceContext.text_map_propagator

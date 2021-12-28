@@ -319,9 +319,12 @@ module Google
               span_attrs = Convert.span_attributes subscriber.topic_name,
                                                    rec_msg.grpc.message,
                                                    extra_attrs: extra_span_attrs
-              # TODO: Add otel link from TextMapPropagator
+
+              link = read_trace_context_from_message_attributes rec_msg.grpc.message
+              links = [link] if link
               @tracer.in_span "#{subscriber.topic_name} process",
                               attributes: span_attrs,
+                              links: links,
                               kind: OpenTelemetry::Trace::SpanKind::PRODUCER do
                 @subscriber.callback.call rec_msg
               end
@@ -338,6 +341,40 @@ module Google
                 @subscriber.error! e
               end
             end
+          end
+
+          ##
+          # Used by Open Telemetry TextMapPropagator#inject to read trace context from pubsub message attributes.
+          # @see https://www.w3.org/TR/trace-context/
+          #
+          class TextMapGetter
+            ##
+            # Reads a value from a V1::PubsubMessage#attributes map.
+            #
+            # @param [Google::Cloud::PubSub::V1::PubsubMessage] msg
+            # @param [String] key Actual keys should be "traceparent" and "tracestate".
+            #
+            # @return [String] The value. See https://www.w3.org/TR/trace-context/
+            #
+            def get msg, key
+              msg.attributes["googclient_#{key}"]
+            end
+          end
+
+          ##
+          # Use Open Telemetry TextMapPropagator#extract to read "traceparent" context from pubsub message attributes.
+          # @see https://github.com/open-telemetry/opentelemetry-specification/blob/v1.1.0/specification/trace/semantic_conventions/messaging.md#batch-receiving
+          #
+          # @param [Google::Cloud::PubSub::V1::PubsubMessage] msg
+          #
+          # @return [OpenTelemetry::Trace::Link] The link from the current process span to the original publish span.
+          #
+          def read_trace_context_from_message_attributes msg
+            return unless msg.attributes["googclient_traceparent"]
+            propagator = OpenTelemetry::Trace::Propagation::TraceContext.text_map_propagator
+            link_context = propagator.extract msg, getter: TextMapGetter.new
+            span_context = OpenTelemetry::Trace.current_span(link_context).context
+            OpenTelemetry::Trace::Link.new span_context
           end
 
           def start_streaming!

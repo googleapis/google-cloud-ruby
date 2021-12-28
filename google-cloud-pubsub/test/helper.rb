@@ -268,13 +268,13 @@ class MockPubsub < Minitest::Spec
     schema_hash schema_name
   end
 
-  def rec_message_hash message, id = rand(1000000), delivery_attempt: 10
+  def rec_message_hash message, id = rand(1000000), delivery_attempt: 10, attributes: {}
     {
       ack_id: "ack-id-#{id}",
       delivery_attempt: delivery_attempt,
       message: {
         data: message,
-        attributes: {},
+        attributes: attributes,
         message_id: "msg-id-#{id}"
       }
     }

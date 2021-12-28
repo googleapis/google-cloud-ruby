@@ -25,9 +25,9 @@ describe Google::Cloud::PubSub::Subscriber, :open_telemetry, :mock_pubsub do
 
   let(:rec_message_msg) { "pulled-message" }
   let(:rec_message_ack_id) { 123456789 }
-  let(:rec_msg_grpc) do
-    Google::Cloud::PubSub::V1::ReceivedMessage.new rec_message_hash(rec_message_msg, rec_message_ack_id)
-  end
+  let(:attributes) { { "googclient_traceparent" => "abc123" } }
+  let(:rec_message_hsh) { rec_message_hash rec_message_msg, rec_message_ack_id, attributes: attributes }
+  let(:rec_msg_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new rec_message_hsh }
   let(:client_id) { "my-client-uuid" }
 
   before do
@@ -87,8 +87,11 @@ describe Google::Cloud::PubSub::Subscriber, :open_telemetry, :mock_pubsub do
   
     # TODO: Determine if the order below should be reversed, and how? Is there no parent relationship?
     assert_pubsub_span spans[0], "#{topic_name} process"
+    _(spans[0].total_recorded_links).must_equal 1 # Link with publish span via "googclient_traceparent"
     _(spans[0].attributes).must_equal expected_span_attrs(topic_name, rec_msg_grpc.message.message_id, rec_msg_grpc.message.to_proto.bytesize, "process")
+
     assert_pubsub_span spans[1], "#{topic_name} receive"
+    _(spans[1].total_recorded_links).must_equal 0
     _(spans[1].attributes).must_equal expected_span_attrs(topic_name, rec_msg_grpc.message.message_id, rec_msg_grpc.message.to_proto.bytesize, "receive")
   end
 
