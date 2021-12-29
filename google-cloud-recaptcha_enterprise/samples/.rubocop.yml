@@ -1,0 +1,21 @@
+inherit_gem:
+    google-style: google-style.yml
+
+Lint/EmptyBlock:
+    Enabled: false
+Lint/ShadowingOuterLocalVariable:
+    Enabled: false
+Metrics/AbcSize:
+    Enabled: false
+Metrics/BlockLength:
+    Enabled: false
+Metrics/CyclomaticComplexity:
+    Max: 12
+Metrics/MethodLength:
+    Enabled: false
+Naming/AccessorMethodName:
+    Enabled: false
+Style/Next:
+    Enabled: false
+Style/SymbolProc:
+    Enabled: false
