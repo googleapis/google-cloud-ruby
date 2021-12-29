@@ -1,8 +1,8 @@
 <head>
-    <script  src="https://www.google.com/recaptcha/enterprise.js?render=6LcMNM0dAAAAAGql0UVwKw-bCezXocMb4Zsc8IJ_"></script>
+    <script  src="https://www.google.com/recaptcha/enterprise.js?render=<site_key>"></script>
     <script>
        grecaptcha.enterprise.ready(function() {
-           grecaptcha.enterprise.execute('6LcMNM0dAAAAAGql0UVwKw-bCezXocMb4Zsc8IJ_', {action: 'homepage'}).then(function(token) {
+           grecaptcha.enterprise.execute('<site_key>', {action: 'homepage'}).then(function(token) {
                window.gcp_recaptcha_test_token = token
               // IMPORTANT: The 'token' that results from execute is an encrypted response sent by
               // reCAPTCHA Enterprise to the end user's browser.

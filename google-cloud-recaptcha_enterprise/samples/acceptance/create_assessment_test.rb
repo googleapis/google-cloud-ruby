@@ -21,7 +21,8 @@ require "selenium-webdriver"
 require "webrick"
 
 describe "Create Assessment" do
-  let(:local_file) { File.expand_path "data/test.html", __dir__ }
+  let(:template_file) { File.expand_path "data/test_template.html", __dir__ }
+  let(:html_file) { File.expand_path "data/test.html", __dir__ }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] }
   let(:server)    { @server }
   let(:driver)    { @driver }
@@ -44,9 +45,9 @@ describe "Create Assessment" do
   end
 
   def update_html_with_site_key site_key
-    text = File.read local_file
+    text = File.read template_file
     content = text.gsub(/<site_key>/, site_key)
-    File.open(local_file, "w") { |file| file << content }
+    File.open(html_file, "w") { |file| file << content }
   end
 
   def serve_page_with_recaptcha
@@ -61,7 +62,10 @@ describe "Create Assessment" do
     @server.shutdown
     Process.kill "KILL", @pid
     Process.wait2 @pid
+    
     @driver.close
+
+    File.delete(html_file) if File.exist? html_file
   end
 
   it "gives score for assessment with valid token" do
