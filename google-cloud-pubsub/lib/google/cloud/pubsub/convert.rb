@@ -91,7 +91,7 @@ module Google
               OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION_KIND => "topic",
               OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID => msg.message_id,
               OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES => msg.to_proto.bytesize,
-              "pubsub.ordering_key" => msg.ordering_key
+              "messaging.pubsub.ordering_key" => msg.ordering_key
             }.merge extra_attrs
           end
         end

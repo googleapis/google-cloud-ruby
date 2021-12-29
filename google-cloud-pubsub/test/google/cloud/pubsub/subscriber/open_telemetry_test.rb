@@ -103,6 +103,7 @@ describe Google::Cloud::PubSub::Subscriber, :open_telemetry, :mock_pubsub do
     _(span.instrumentation_library.name).must_equal "Google::Cloud::PubSub"
     _(span.instrumentation_library.version).must_equal Google::Cloud::PubSub::VERSION
     _(span.kind).must_equal OpenTelemetry::Trace::SpanKind::PRODUCER
+    _(span.events).must_be :nil?
   end
 
   def expected_span_attrs topic_name, msg_id, msg_size, operation
@@ -113,7 +114,7 @@ describe Google::Cloud::PubSub::Subscriber, :open_telemetry, :mock_pubsub do
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID => msg_id,
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES => msg_size,
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_OPERATION => operation,
-      "pubsub.ordering_key" => ""
+      "messaging.pubsub.ordering_key" => ""
     }
   end
 end

@@ -75,16 +75,17 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
     _(span.instrumentation_library.version).must_equal Google::Cloud::PubSub::VERSION
     _(span.attributes).must_equal expected_attrs
     _(span.kind).must_equal OpenTelemetry::Trace::SpanKind::PRODUCER
+    _(span.events).must_be :nil?
   end
 
   def expected_span_attrs topic_name, msg_size, ordering_key
     {
-      "messaging.system" => "pubsub",
-      "messaging.destination" => topic_name,
-      "messaging.destination_kind" => "topic",
-      "messaging.message_id" => "",
-      "messaging.message_payload_size_bytes" => msg_size,
-      "pubsub.ordering_key" => ordering_key
+      OpenTelemetry::SemanticConventions::Trace::MESSAGING_SYSTEM => "pubsub",
+      OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION => topic_name,
+      OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION_KIND => "topic",
+      OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID => "",
+      OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES => msg_size,
+      "messaging.pubsub.ordering_key" => ordering_key
     }
   end
 end
