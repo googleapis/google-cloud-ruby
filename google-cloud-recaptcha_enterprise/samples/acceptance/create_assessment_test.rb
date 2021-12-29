@@ -21,12 +21,14 @@ require "selenium-webdriver"
 require "webrick"
 
 describe "Create Assessment" do
+  let(:client) { ::Google::Cloud::RecaptchaEnterprise.recaptcha_enterprise_service }
   let(:template_file) { File.expand_path "data/test_template.html", __dir__ }
   let(:html_file) { File.expand_path "data/test.html", __dir__ }
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] }
-  let(:server)    { @server }
-  let(:driver)    { @driver }
-  let(:pid) { @pid }
+  let(:server)  { @server }
+  let(:driver)  { @driver }
+  let(:pid)  { @pid }
+  let(:key)  { @key }
 
   before :all do
     site_key = get_site_key
@@ -36,12 +38,19 @@ describe "Create Assessment" do
   end
 
   after :all do
-    cleanup
+    shutdown_server
+    @driver.close
+    File.delete html_file if File.exist? html_file
+    client.delete_key name: @key.name
   end
 
   def get_site_key
-    # get_key(name: "projects/{project}/keys/{key}")
-    ENV["GOOGLE_CLOUD_RECAPTCHA_SITE_KEY"]
+    create_key_request = { parent: "projects/starterproject-329009",
+        key:
+         { display_name: "test_key",
+          web_settings: { integration_type: 1, allowed_domains: ["localhost"] } } }
+    @key = client.create_key create_key_request
+    @key.name.split("/").last
   end
 
   def update_html_with_site_key site_key
@@ -57,15 +66,11 @@ describe "Create Assessment" do
     end
   end
 
-  def cleanup
+  def shutdown_server
     @server.stop
     @server.shutdown
     Process.kill "KILL", @pid
     Process.wait2 @pid
-
-    @driver.close
-
-    File.delete html_file if File.exist? html_file
   end
 
   it "gives score for assessment with valid token" do
@@ -74,7 +79,7 @@ describe "Create Assessment" do
     token = @driver.execute_script "return window.gcp_recaptcha_test_token"
 
     assert_output(/The reCAPTCHA score for this token is: \d/) do
-      create_assessment site_key: get_site_key,
+      create_assessment site_key:  @key.name.split("/").last,
                         token: token,
                         project_id: project_id,
                         recaptcha_action: "homepage"
@@ -86,7 +91,7 @@ describe "Create Assessment" do
 
     assert_output "The create_assessment() call failed because the token was invalid with the following reason:" \
                   "MALFORMED\n" do
-      create_assessment site_key: get_site_key,
+      create_assessment site_key:  @key.name.split("/").last,
                         token: token,
                         project_id: project_id,
                         recaptcha_action: "homepage"
@@ -99,7 +104,7 @@ describe "Create Assessment" do
     token = @driver.execute_script "return window.gcp_recaptcha_test_token"
 
     assert_output "The action attribute in your reCAPTCHA tag does not match the action you are expecting to score\n" do
-      create_assessment site_key: get_site_key,
+      create_assessment site_key:  @key.name.split("/").last,
                         token: token,
                         project_id: project_id,
                         recaptcha_action: "click"
