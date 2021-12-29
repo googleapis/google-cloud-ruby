@@ -62,10 +62,10 @@ describe "Create Assessment" do
     @server.shutdown
     Process.kill "KILL", @pid
     Process.wait2 @pid
-    
+
     @driver.close
 
-    File.delete(html_file) if File.exist? html_file
+    File.delete html_file if File.exist? html_file
   end
 
   it "gives score for assessment with valid token" do
