@@ -45,7 +45,7 @@ describe "Create Assessment" do
   end
 
   def get_site_key
-    create_key_request = { parent: "projects/starterproject-329009",
+    create_key_request = { parent: "projects/#{project_id}",
         key:
          { display_name: "test_key",
           web_settings: { integration_type: 1, allowed_domains: ["localhost"] } } }
