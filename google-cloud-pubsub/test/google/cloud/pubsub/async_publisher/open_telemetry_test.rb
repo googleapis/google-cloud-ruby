@@ -42,7 +42,9 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
     publisher = Google::Cloud::PubSub::AsyncPublisher.new topic_name, pubsub.service, interval: 30
     publisher.enable_message_ordering!
 
-    publisher.publish "async-message", ordering_key: ordering_key
+    publisher.publish "async-message", ordering_key: ordering_key do |msg|
+      # No-op callback just to get id into the message in mocked_publisher.message_hash
+    end
 
     _(publisher).must_be :started?
     _(publisher).wont_be :stopped?
@@ -61,9 +63,9 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
     _(spans.count).must_equal 3
 
     # TODO: Determine if the order below should be reversed, and how? Is there no parent relationship?
-    assert_pubsub_span spans[0], "#{topic_name} add to batch", expected_span_attrs(topic_name, msg.to_proto.bytesize, ordering_key)
-    assert_pubsub_span spans[1], "#{topic_name} publish RPC", expected_span_attrs(topic_name, actual_msg.to_proto.bytesize, ordering_key)
-    assert_pubsub_span spans[2], "#{topic_name} send", expected_span_attrs(topic_name, actual_msg.to_proto.bytesize, ordering_key)
+    assert_pubsub_span spans[0], "#{topic_name} add to batch", expected_span_attrs(topic_name, "", 20, ordering_key)
+    assert_pubsub_span spans[1], "#{topic_name} publish RPC", expected_span_attrs(topic_name, actual_msg.message_id, 103, ordering_key)
+    assert_pubsub_span spans[2], "#{topic_name} send", expected_span_attrs(topic_name, actual_msg.message_id, 103, ordering_key)
   end
 
   def assert_pubsub_span span, expected_name, expected_attrs
@@ -78,12 +80,12 @@ describe Google::Cloud::PubSub::AsyncPublisher, :open_telemetry, :mock_pubsub do
     _(span.events).must_be :nil?
   end
 
-  def expected_span_attrs topic_name, msg_size, ordering_key
+  def expected_span_attrs topic_name, msg_id, msg_size, ordering_key
     {
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_SYSTEM => "pubsub",
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION => topic_name,
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_DESTINATION_KIND => "topic",
-      OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID => "",
+      OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID => msg_id,
       OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES => msg_size,
       "messaging.pubsub.ordering_key" => ordering_key
     }

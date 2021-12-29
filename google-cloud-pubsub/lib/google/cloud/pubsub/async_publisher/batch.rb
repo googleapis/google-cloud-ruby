@@ -141,7 +141,7 @@ module Google
 
               until @queue.empty?
                 item = @queue.first
-                if try_add item.msg, item.callback, item.span
+                if try_add item.msg, item.callback, item.trace_span_send
                   @queue.shift
                   next
                 end
@@ -180,7 +180,7 @@ module Google
 
               until @queue.empty?
                 item = @queue.first
-                added = try_add item.msg, item.callback, item.span
+                added = try_add item.msg, item.callback, item.trace_span_send
                 break unless added
                 @queue.shift
               end
@@ -292,7 +292,7 @@ module Google
             @total_message_bytes
           end
 
-          Item = Struct.new :msg, :callback, :span do
+          Item = Struct.new :msg, :callback, :trace_span_send, :trace_span_publish do
             def bytesize
               msg.to_proto.bytesize
             end

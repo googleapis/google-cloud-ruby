@@ -22,6 +22,7 @@ require "google/cloud/pubsub/publish_result"
 require "google/cloud/pubsub/service"
 require "google/cloud/pubsub/convert"
 require "opentelemetry"
+require "opentelemetry/semantic_conventions"
 
 module Google
   module Cloud
@@ -341,7 +342,8 @@ module Google
           propagator.inject msg, setter: TextMapSetter.new
 
           # Update the message size in the span attributes after adding span context to message attributes.
-          span.set_attribute "messaging.message_payload_size_bytes", msg.to_proto.bytesize
+          span.set_attribute OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_PAYLOAD_SIZE_BYTES,
+                             msg.to_proto.bytesize
         end
 
         def run_background
@@ -418,22 +420,31 @@ module Google
             items = batch.rebalance!
 
             unless items.empty?
-              spans = items.map do |item|
+              # Start the "publish RPC" trace spans for each item, to be finished after publishing.
+              items.each do |item|
                 span_attrs = Convert.span_attributes topic_name, item.msg
-                @tracer.start_span "#{topic_name} publish RPC",
-                                   attributes: span_attrs,
-                                   kind: OpenTelemetry::Trace::SpanKind::PRODUCER
+                item.trace_span_publish = @tracer.start_span "#{topic_name} publish RPC",
+                                                             attributes: span_attrs,
+                                                             kind: OpenTelemetry::Trace::SpanKind::PRODUCER
               end
               grpc = @service.publish topic_name, items.map(&:msg)
-              spans.map(&:finish) # TODO: Move to ensure block?
+
               items.zip Array(grpc.message_ids) do |item, id|
+                # Update the "publish RPC" span with the message ID for each item, then finish the span.
+                item.trace_span_publish.set_attribute OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID,
+                                                      id
+                item.trace_span_publish.finish
+
                 @flow_controller.release item.bytesize
                 if item.callback
                   item.msg.message_id = id
                   publish_result = PublishResult.from_grpc item.msg
                   execute_callback_async item.callback, publish_result
                 end
-                item.span.finish # TODO: Move to ensure block?
+
+                # Update the "send" span with the message ID for each item, then finish the span.
+                item.trace_span_send.set_attribute OpenTelemetry::SemanticConventions::Trace::MESSAGING_MESSAGE_ID, id
+                item.trace_span_send.finish
               end
             end
 
