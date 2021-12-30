@@ -349,4 +349,116 @@ describe Google::Cloud::Bigquery::Data, :mock_bigquery do
 
     _(data.class).must_equal Google::Cloud::Bigquery::Data
   end
+
+  describe "statement_type" do
+    let(:data_hash) { { totalRows: nil, rows: [] } }
+
+    it "knows its DDL ALTER_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "ALTER_TABLE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "ALTER_TABLE"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_MODEL"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_MODEL"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_TABLE"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE_AS_SELECT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE_AS_SELECT"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_TABLE_AS_SELECT"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_VIEW"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "CREATE_VIEW"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_MODEL"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DROP_MODEL"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_TABLE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DROP_TABLE"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_VIEW"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DROP_VIEW"
+      _(data.ddl?).must_equal true
+      _(data.dml?).must_equal false
+    end
+
+    it "knows its DML INSERT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "INSERT"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "INSERT"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
+
+    it "knows its DML UPDATE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "UPDATE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "UPDATE"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
+
+    it "knows its DML MERGE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "MERGE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "MERGE"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
+
+    it "knows its DML DELETE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DELETE"
+      data = Google::Cloud::Bigquery::Data.from_gapi_json data_hash, nil, gapi, nil
+
+      _(data.statement_type).must_equal "DELETE"
+      _(data.ddl?).must_equal false
+      _(data.dml?).must_equal true
+    end
+  end
 end

@@ -149,6 +149,118 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
     gapi
   end
 
+  describe "statement_type" do
+    let(:data_hash) { { totalRows: nil, rows: [] } }
+
+    it "knows its DDL ALTER_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "ALTER_TABLE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "ALTER_TABLE"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_MODEL"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_MODEL"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_TABLE"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_TABLE_AS_SELECT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_TABLE_AS_SELECT"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_TABLE_AS_SELECT"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL CREATE_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "CREATE_VIEW"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "CREATE_VIEW"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_MODEL statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_MODEL"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DROP_MODEL"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_TABLE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_TABLE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DROP_TABLE"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DDL DROP_VIEW statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_VIEW"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DROP_VIEW"
+      _(job.ddl?).must_equal true
+      _(job.dml?).must_equal false
+    end
+
+    it "knows its DML INSERT statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "INSERT"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "INSERT"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
+
+    it "knows its DML UPDATE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "UPDATE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "UPDATE"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
+
+    it "knows its DML MERGE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "MERGE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "MERGE"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
+
+    it "knows its DML DELETE statement type" do
+      gapi = query_job_resp_gapi "query is ignored", statement_type: "DELETE"
+      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
+
+      _(job.statement_type).must_equal "DELETE"
+      _(job.ddl?).must_equal false
+      _(job.dml?).must_equal true
+    end
+  end
+
   def query_job_hash
     hash = random_job_hash
     hash["configuration"]["query"] = {

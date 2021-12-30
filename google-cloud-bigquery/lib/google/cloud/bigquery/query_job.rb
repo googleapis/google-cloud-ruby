@@ -250,6 +250,8 @@ module Google
         # The type of query statement, if valid. Possible values (new values
         # might be added in the future):
         #
+        # * "ALTER_TABLE": DDL statement, see [Using Data Definition Language
+        #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
         # * "CREATE_MODEL": DDL statement, see [Using Data Definition Language
         #   Statements](https://cloud.google.com/bigquery/docs/reference/standard-sql/data-definition-language)
         # * "CREATE_TABLE": DDL statement, see [Using Data Definition Language
@@ -295,8 +297,16 @@ module Google
         #   query_job.ddl? #=> true
         #
         def ddl?
-          ["CREATE_MODEL", "CREATE_TABLE", "CREATE_TABLE_AS_SELECT", "CREATE_VIEW", "\n", "DROP_MODEL", "DROP_TABLE",
-           "DROP_VIEW"].include? statement_type
+          [
+            "ALTER_TABLE",
+            "CREATE_MODEL",
+            "CREATE_TABLE",
+            "CREATE_TABLE_AS_SELECT",
+            "CREATE_VIEW",
+            "DROP_MODEL",
+            "DROP_TABLE",
+            "DROP_VIEW"
+          ].include? statement_type
         end
 
         ##
@@ -319,7 +329,12 @@ module Google
         #   query_job.dml? #=> true
         #
         def dml?
-          ["INSERT", "UPDATE", "MERGE", "DELETE"].include? statement_type
+          [
+            "INSERT",
+            "UPDATE",
+            "MERGE",
+            "DELETE"
+          ].include? statement_type
         end
 
         ##
