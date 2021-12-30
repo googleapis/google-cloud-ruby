@@ -30,6 +30,7 @@ RUN dpkg-divert --add --rename --divert /opt/google/chrome/google-chrome.real /o
 # Install Chrome Driver.
 RUN mkdir -p /opt/selenium \
     && curl http://chromedriver.storage.googleapis.com/`curl -sS chromedriver.storage.googleapis.com/LATEST_RELEASE`/chromedriver_linux64.zip -o /opt/selenium/chromedriver_linux64.zip \
+    && apt-get install unzip \
     && cd /opt/selenium; unzip /opt/selenium/chromedriver_linux64.zip; rm -rf chromedriver_linux64.zip; ln -fs /opt/selenium/chromedriver /usr/local/bin/chromedriver;
 
 CMD ["ruby"]
