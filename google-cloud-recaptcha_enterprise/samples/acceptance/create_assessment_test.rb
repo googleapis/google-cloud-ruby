@@ -34,7 +34,10 @@ describe "Create Assessment" do
     site_key = get_site_key
     update_html_with_site_key site_key
     serve_page_with_recaptcha
-    @driver = Selenium::WebDriver.for :chrome
+
+    options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--headless')
+    @driver = Selenium::WebDriver.for :chrome, options: options
   end
 
   after :all do
