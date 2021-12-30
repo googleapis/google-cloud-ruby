@@ -36,7 +36,10 @@ describe "Create Assessment" do
     serve_page_with_recaptcha
 
     options = Selenium::WebDriver::Chrome::Options.new
+    options.add_argument('--window-size=1420,1080')
+    options.add_argument('--no-sandbox')
     options.add_argument('--headless')
+    options.add_argument('--disable-gpu')
     @driver = Selenium::WebDriver.for :chrome, options: options
   end
 
@@ -58,7 +61,7 @@ describe "Create Assessment" do
 
   def update_html_with_site_key site_key
     text = File.read template_file
-    content = text.gsub(/<site_key>/, site_key)
+    content = text.gsub(/{{site_key}}/, site_key)
     File.open(html_file, "w") { |file| file << content }
   end
 
@@ -76,16 +79,28 @@ describe "Create Assessment" do
     Process.wait2 @pid
   end
 
-  it "gives score for assessment with valid token" do
+  def get_token
     @driver.navigate.to "http://localhost:8000/test.html"
-    sleep 2
-    token = @driver.execute_script "return window.gcp_recaptcha_test_token"
+    @driver.find_element(:id,"username").send_keys("username")
+    @driver.find_element(:id,"password").send_keys("password")
+    @driver.find_element(:id,"recaptchabutton").click()
+
+    sleep 5
+
+    element = @driver.find_element(:css,"#assessment")
+    token = element.attribute("data-token")
+    action = element.attribute("data-action")
+    return token, action
+  end
+
+  it "gives score for assessment with valid token" do
+    token, action = get_token
 
     assert_output(/The reCAPTCHA score for this token is: \d/) do
       create_assessment site_key:  @key.name.split("/").last,
                         token: token,
                         project_id: project_id,
-                        recaptcha_action: "homepage"
+                        recaptcha_action: action
     end
   end
 
@@ -102,15 +117,13 @@ describe "Create Assessment" do
   end
 
   it "gives message for assessment with unmatched action" do
-    @driver.navigate.to "http://localhost:8000/test.html"
-    sleep 2
-    token = @driver.execute_script "return window.gcp_recaptcha_test_token"
+    token, action = get_token
 
     assert_output "The action attribute in your reCAPTCHA tag does not match the action you are expecting to score\n" do
       create_assessment site_key:  @key.name.split("/").last,
                         token: token,
                         project_id: project_id,
-                        recaptcha_action: "click"
+                        recaptcha_action: action + "something"
     end
   end
 end
