@@ -197,15 +197,6 @@ describe Google::Cloud::Bigquery::QueryJob, :mock_bigquery do
       _(job.dml?).must_equal false
     end
 
-    it "knows its DDL \\n statement type" do
-      gapi = query_job_resp_gapi "query is ignored", statement_type: "\n"
-      job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil
-
-      _(job.statement_type).must_equal "\n"
-      _(job.ddl?).must_equal true
-      _(job.dml?).must_equal false
-    end
-
     it "knows its DDL DROP_MODEL statement type" do
       gapi = query_job_resp_gapi "query is ignored", statement_type: "DROP_MODEL"
       job = Google::Cloud::Bigquery::Job.from_gapi gapi, nil

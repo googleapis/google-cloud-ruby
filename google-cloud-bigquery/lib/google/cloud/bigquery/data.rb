@@ -284,7 +284,6 @@ module Google
             "CREATE_TABLE",
             "CREATE_TABLE_AS_SELECT",
             "CREATE_VIEW",
-            "\n",
             "DROP_MODEL",
             "DROP_TABLE",
             "DROP_VIEW"
