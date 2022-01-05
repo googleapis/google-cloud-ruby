@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-api_gateway-v1", path: "../google-cloud-api_gateway-v1"
