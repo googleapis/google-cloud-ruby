@@ -25,7 +25,7 @@ export PRIVATE_CA_CREDENTIALS=path/to/keyfile.json
 3. Initialize the client.
 
 ```ruby
-require "google/cloud/security/private_ca/v1"
+require "google/cloud/location"
 
 client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
 ```
@@ -73,7 +73,7 @@ checks for credentials are configured on the service Credentials class (such as
 * `GOOGLE_APPLICATION_CREDENTIALS` - Path to JSON file
 
 ```ruby
-require "google/cloud/security/private_ca/v1"
+require "google/cloud/location"
 
 ENV["PRIVATE_CA_CREDENTIALS"] = "path/to/keyfile.json"
 
@@ -86,7 +86,7 @@ The path to the **Credentials JSON** file can be configured instead of storing
 it in an environment variable. Either on an individual client initialization:
 
 ```ruby
-require "google/cloud/security/private_ca/v1"
+require "google/cloud/location"
 
 client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
@@ -96,7 +96,7 @@ end
 Or globally for all clients:
 
 ```ruby
-require "google/cloud/security/private_ca/v1"
+require "google/cloud/location"
 
 ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
