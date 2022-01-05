@@ -1,5 +1,18 @@
 # Release History
 
+### [1.35.1](https://github.com/googleapis/google-cloud-ruby/compare/google-cloud-storage/v1.35.0...google-cloud-storage/v1.35.1) (2022-01-05)
+---
+### Commits since last release:
+
+* [samples(storage): remove unspecified sample. (#16361)](https://github.com/googleapis/google-cloud-ruby/commit/6d94e566466bdf07be6d14fe22d2ab4938cf2ca2)
+
+### Files edited since last release:
+
+<pre><code>google-cloud-storage/samples/storage_set_public_access_prevention_unspecified.rb
+</code></pre>
+[Compare Changes](https://github.com/googleapis/google-cloud-ruby/compare/361cddbc21f9b6e7816f33faa6029734376bb21b...HEAD)
+
+
 ### 1.35.0 / 2021-12-08
 
 #### Features
