@@ -70,7 +70,7 @@ module Google
             # @!attribute [rw] order
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::Order]
             #     Indicates that this field supports ordering by the specified order or
-            #     comparing using =, <, <=, >, >=.
+            #     comparing using =, !=, <, <=, >, >=.
             # @!attribute [rw] array_config
             #   @return [::Google::Cloud::Firestore::Admin::V1::Index::IndexField::ArrayConfig]
             #     Indicates that this field supports operations on `array_value`s.

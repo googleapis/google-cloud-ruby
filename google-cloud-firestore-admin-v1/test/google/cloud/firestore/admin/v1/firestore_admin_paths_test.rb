@@ -70,4 +70,16 @@ class ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::ClientPathsTest < M
       assert_equal "projects/value0/databases/value1/collectionGroups/value2/indexes/value3", path
     end
   end
+
+  def test_project_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Firestore::Admin::V1::FirestoreAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.project_path project: "value0"
+      assert_equal "projects/value0", path
+    end
+  end
 end
