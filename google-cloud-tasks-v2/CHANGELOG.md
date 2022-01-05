@@ -1,5 +1,18 @@
 # Release History
 
+### [0.4.6](https://github.com/googleapis/google-cloud-ruby/compare/google-cloud-tasks-v2/v0.4.5...google-cloud-tasks-v2/v0.4.6) (2022-01-05)
+---
+### Commits since last release:
+
+* [chore(google-cloud-tasks-v2): Fixes to Google::Api::Resource documentation](https://github.com/googleapis/google-cloud-ruby/commit/b5a57015e300f71770b6ae8254f132254b7cd6e0)
+
+### Files edited since last release:
+
+<pre><code>google-cloud-tasks-v2/proto_docs/google/api/resource.rb
+</code></pre>
+[Compare Changes](https://github.com/googleapis/google-cloud-ruby/compare/84c1477a573015a24d067cd18fbd315da4c22b57...HEAD)
+
+
 ### 0.4.5 / 2021-12-07
 
 #### Documentation
