@@ -1,0 +1,14 @@
+{
+    "api_id": "networkmanagement.googleapis.com",
+    "client_documentation": "https://googleapis.dev/ruby/google-cloud-network_management/latest",
+    "distribution_name": "google-cloud-network_management",
+    "language": "ruby",
+    "name": "networkmanagement",
+    "name_pretty": "Network Management API",
+    "product_documentation": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "The Network Management API provides a collection of network performance monitoring and diagnostic capabilities.",
+    "ruby-cloud-product-url": "https://cloud.google.com/network-intelligence-center/docs/connectivity-tests/reference/networkmanagement/rest",
+    "library_type": "GAPIC_AUTO"
+}

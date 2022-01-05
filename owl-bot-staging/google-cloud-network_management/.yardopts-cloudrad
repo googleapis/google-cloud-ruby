@@ -1,0 +1,11 @@
+--no-private
+--title=Network Management API
+--exclude _pb\.rb$
+--format yaml
+--template-path ../template
+
+./lib/**/*.rb
+-
+README.md
+AUTHENTICATION.md
+LICENSE.md
