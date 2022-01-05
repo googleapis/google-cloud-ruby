@@ -15,17 +15,14 @@
 # [START recaptcha_enterprise_create_assessment]
 require "google/cloud/recaptcha_enterprise"
 
+# Create an assessment to analyze the risk of a UI action.
+#
+# @param site_key [String] Site key obtained by registering a domain/app to use recaptcha services.
+# @param token [String] The token obtained from the client on passing the recaptcha site_key.
+# @param project_id [String] GCloud Project ID.
+# @param recaptcha_action [String] Action name corresponding to the token.
+# @return [void]
 def create_assessment site_key:, token:, project_id:, recaptcha_action:
-  ### Create an assessment to analyze the risk of a UI action.
-
-  # Args:
-  # project_id: GCloud Project ID
-  # site_key: Site key obtained by registering a domain/app to use recaptcha services.
-  # token: The token obtained from the client on passing the recaptcha site_key.
-  # recaptcha_action: Action name corresponding to the token.
-  # assessment_name: Specify a name for this assessment.
-  ###
-
   # Create the reCAPTCHA client.
   client = ::Google::Cloud::RecaptchaEnterprise.recaptcha_enterprise_service
 
