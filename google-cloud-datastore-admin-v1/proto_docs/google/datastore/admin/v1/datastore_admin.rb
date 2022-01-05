@@ -367,6 +367,27 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Metadata for Datastore to Firestore migration operations.
+          #
+          # The DatastoreFirestoreMigration operation is not started by the end-user via
+          # an explicit "creation" method. This is an intentional deviation from the LRO
+          # design pattern.
+          #
+          # This singleton resource can be accessed at:
+          # `projects/{project_id}/datastore-firestore-migration`
+          # @!attribute [rw] migration_state
+          #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationState]
+          #     The current state of migration from Cloud Datastore to Cloud Firestore in
+          #     Datastore mode.
+          # @!attribute [rw] migration_step
+          #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationStep]
+          #     The current step of migration from Cloud Datastore to Cloud Firestore in
+          #     Datastore mode.
+          class DatastoreFirestoreMigrationMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Operation types.
           module OperationType
             # Unspecified.
