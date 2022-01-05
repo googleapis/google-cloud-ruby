@@ -7,7 +7,7 @@ benchmarking code to prod at spanner without speaking Ruby.
 
 ```bash
 cd google-cloud-spanner/benchmark/benchwrapper
-export SPANNER_EMULATOR_HOST=localhost:8080
+export SPANNER_EMULATOR_HOST=localhost:9010
 bundle exec benchwrapper.rb --port=8081
 ```
 
