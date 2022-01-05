@@ -508,7 +508,6 @@
     ".owlbot.rb",
     "acceptance/google/cloud/compute/v1/addresses_smoke_test.rb",
     "acceptance/google/cloud/compute/v1/firewalls_smoke_test.rb",
-    "acceptance/google/cloud/compute/v1/images_smoke_test.rb",
     "acceptance/google/cloud/compute/v1/instances_smoke_test.rb",
     "acceptance/google/cloud/compute/v1/pagination_smoke_test.rb",
     "acceptance/google/cloud/compute/v1/query_params_smoke_test.rb",
