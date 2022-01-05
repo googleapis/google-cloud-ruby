@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-resource_settings-v1", path: "../google-cloud-resource_settings-v1"
