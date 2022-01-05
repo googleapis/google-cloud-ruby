@@ -1,5 +1,18 @@
 # Release History
 
+### [0.7.1](https://github.com/googleapis/google-cloud-ruby/compare/google-cloud-speech-v1/v0.7.0...google-cloud-speech-v1/v0.7.1) (2022-01-05)
+---
+### Commits since last release:
+
+* [chore(google-cloud-speech-v1): Fixes to Google::Api::Resource documentation](https://github.com/googleapis/google-cloud-ruby/commit/41e0b000169ceeeb1837244b074e85a4857ff8f6)
+
+### Files edited since last release:
+
+<pre><code>google-cloud-speech-v1/proto_docs/google/api/resource.rb
+</code></pre>
+[Compare Changes](https://github.com/googleapis/google-cloud-ruby/compare/dfac188546969eb364c9055ea1ece4da3b6232d8...HEAD)
+
+
 ### 0.7.0 / 2021-12-07
 
 #### Features
