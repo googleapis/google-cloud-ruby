@@ -20,6 +20,11 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    "samples/Gemfile",
+    "samples/Rakefile",
+    "samples/acceptance/helper.rb",
+    "samples/acceptance/quickstart_test.rb",
+    "samples/quickstart.rb"
   ]
 }
