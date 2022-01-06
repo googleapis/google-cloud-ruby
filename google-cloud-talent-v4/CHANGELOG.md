@@ -1,5 +1,12 @@
 # Release History
 
+## 1.0.0 (2022-01-06)
+
+
+### Documentation
+
+* **talent-v4:** Formatting fixes in the reference documentation ([4f7b0fc](https://github.com/googleapis/google-cloud-ruby/commit/4f7b0fc8bdcf2f86c1d55588008615eae6dc3507))
+
 ### 0.6.2 / 2021-11-08
 
 #### Documentation
