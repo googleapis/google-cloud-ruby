@@ -1,5 +1,23 @@
 # Release History
 
+## [2.12.0](https://github.com/googleapis/google-cloud-ruby/compare/google-cloud-spanner/v2.11.0...google-cloud-spanner/v2.12.0) (2022-01-06)
+
+
+### Features
+
+* **spanner:** Change spanner emulator port from 8080 to 9010. ([#16378](https://github.com/googleapis/google-cloud-ruby/issues/16378)) ([ccf29bc](https://github.com/googleapis/google-cloud-ruby/commit/ccf29bc18f8a22684913d478e06dfa9eaca7e69b))
+---
+### Commits since last release:
+
+* [feat(spanner): Change spanner emulator port from 8080 to 9010. (#16378)](https://github.com/googleapis/google-cloud-ruby/commit/ccf29bc18f8a22684913d478e06dfa9eaca7e69b)
+
+### Files edited since last release:
+
+<pre><code>google-cloud-spanner/benchmark/benchwrapper/README.md
+</code></pre>
+[Compare Changes](https://github.com/googleapis/google-cloud-ruby/compare/ae4e71f97b80e8bd480b067283e531d2d32b8399...HEAD)
+
+
 ### 2.11.0 / 2021-12-10
 
 #### Features
