@@ -1,5 +1,12 @@
 # Release History
 
+## 1.0.0 (2022-01-06)
+
+
+### Features
+
+* **data_catalog-v1:** Return the latest BigQuery shard resource in a table, and the display name and description for search catalog results ([18c2734](https://github.com/googleapis/google-cloud-ruby/commit/18c273426a3b074bff73557080bf3d9d18b0d06a))
+
 ### 0.9.0 / 2021-11-11
 
 #### Features
