@@ -32,6 +32,10 @@ module Google
     module NetworkSecurity
       module V1beta1
         ##
+        # Network Security API provides resources to configure authentication and
+        # authorization policies. Refer to per API resource documentation for more
+        # information.
+        #
         # To load this service and instantiate a client:
         #
         #     require "google/cloud/network_security/v1beta1/network_security"
