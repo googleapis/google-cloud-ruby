@@ -94,6 +94,16 @@ module Google
             rpc :GetSettings, ::Google::Cloud::ContactCenterInsights::V1::GetSettingsRequest, ::Google::Cloud::ContactCenterInsights::V1::Settings
             # Updates project-level settings.
             rpc :UpdateSettings, ::Google::Cloud::ContactCenterInsights::V1::UpdateSettingsRequest, ::Google::Cloud::ContactCenterInsights::V1::Settings
+            # Creates a view.
+            rpc :CreateView, ::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest, ::Google::Cloud::ContactCenterInsights::V1::View
+            # Gets a view.
+            rpc :GetView, ::Google::Cloud::ContactCenterInsights::V1::GetViewRequest, ::Google::Cloud::ContactCenterInsights::V1::View
+            # Lists views.
+            rpc :ListViews, ::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest, ::Google::Cloud::ContactCenterInsights::V1::ListViewsResponse
+            # Updates a view.
+            rpc :UpdateView, ::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest, ::Google::Cloud::ContactCenterInsights::V1::View
+            # Deletes a view.
+            rpc :DeleteView, ::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class

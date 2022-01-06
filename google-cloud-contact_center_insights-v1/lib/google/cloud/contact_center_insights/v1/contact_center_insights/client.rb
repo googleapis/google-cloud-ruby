@@ -2785,6 +2785,454 @@ module Google
             end
 
             ##
+            # Creates a view.
+            #
+            # @overload create_view(request, options = nil)
+            #   Pass arguments to `create_view` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_view(parent: nil, view: nil)
+            #   Pass arguments to `create_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the view. Required. The location to create
+            #     a view for.
+            #     Format: `projects/<Project ID>/locations/<Location ID>` or
+            #     `projects/<Project Number>/locations/<Location ID>`
+            #   @param view [::Google::Cloud::ContactCenterInsights::V1::View, ::Hash]
+            #     Required. The view resource to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ContactCenterInsights::V1::View]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ContactCenterInsights::V1::View]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::CreateViewRequest.new
+            #
+            #   # Call the create_view method.
+            #   result = client.create_view request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::View.
+            #   p result
+            #
+            def create_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::CreateViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :create_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a view.
+            #
+            # @overload get_view(request, options = nil)
+            #   Pass arguments to `get_view` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::GetViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::GetViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_view(name: nil)
+            #   Pass arguments to `get_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the view to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ContactCenterInsights::V1::View]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ContactCenterInsights::V1::View]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::GetViewRequest.new
+            #
+            #   # Call the get_view method.
+            #   result = client.get_view request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::View.
+            #   p result
+            #
+            def get_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::GetViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :get_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists views.
+            #
+            # @overload list_views(request, options = nil)
+            #   Pass arguments to `list_views` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_views(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_views` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the views.
+            #   @param page_size [::Integer]
+            #     The maximum number of views to return in the response. If this
+            #     value is zero, the service will select a default size. A call may return
+            #     fewer objects than requested. A non-empty `next_page_token` in the response
+            #     indicates that more data is available.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListViewsResponse`; indicates
+            #     that this is a continuation of a prior `ListViews` call and
+            #     the system should return the next page of data.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::View>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ContactCenterInsights::V1::View>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::ListViewsRequest.new
+            #
+            #   # Call the list_views method.
+            #   result = client.list_views request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ContactCenterInsights::V1::View.
+            #     p response
+            #   end
+            #
+            def list_views request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::ListViewsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_views.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_views.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_views.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :list_views, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @contact_center_insights_stub, :list_views, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a view.
+            #
+            # @overload update_view(request, options = nil)
+            #   Pass arguments to `update_view` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_view(view: nil, update_mask: nil)
+            #   Pass arguments to `update_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param view [::Google::Cloud::ContactCenterInsights::V1::View, ::Hash]
+            #     Required. The new view.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ContactCenterInsights::V1::View]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ContactCenterInsights::V1::View]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest.new
+            #
+            #   # Call the update_view method.
+            #   result = client.update_view request
+            #
+            #   # The returned object is of type Google::Cloud::ContactCenterInsights::V1::View.
+            #   p result
+            #
+            def update_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::UpdateViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.view&.name
+                header_params["view.name"] = request.view.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :update_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a view.
+            #
+            # @overload delete_view(request, options = nil)
+            #   Pass arguments to `delete_view` via a request object, either of type
+            #   {::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_view(name: nil)
+            #   Pass arguments to `delete_view` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the view to delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/contact_center_insights/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest.new
+            #
+            #   # Call the delete_view method.
+            #   result = client.delete_view request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_view request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ContactCenterInsights::V1::DeleteViewRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_view.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ContactCenterInsights::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_view.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_view.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @contact_center_insights_stub.call_rpc :delete_view, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ContactCenterInsights API.
             #
             # This class represents the configuration for ContactCenterInsights,
@@ -3064,6 +3512,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_settings
+                ##
+                # RPC-specific configuration for `create_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_view
+                ##
+                # RPC-specific configuration for `get_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_view
+                ##
+                # RPC-specific configuration for `list_views`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_views
+                ##
+                # RPC-specific configuration for `update_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_view
+                ##
+                # RPC-specific configuration for `delete_view`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_view
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3125,6 +3598,16 @@ module Google
                   @get_settings = ::Gapic::Config::Method.new get_settings_config
                   update_settings_config = parent_rpcs.update_settings if parent_rpcs.respond_to? :update_settings
                   @update_settings = ::Gapic::Config::Method.new update_settings_config
+                  create_view_config = parent_rpcs.create_view if parent_rpcs.respond_to? :create_view
+                  @create_view = ::Gapic::Config::Method.new create_view_config
+                  get_view_config = parent_rpcs.get_view if parent_rpcs.respond_to? :get_view
+                  @get_view = ::Gapic::Config::Method.new get_view_config
+                  list_views_config = parent_rpcs.list_views if parent_rpcs.respond_to? :list_views
+                  @list_views = ::Gapic::Config::Method.new list_views_config
+                  update_view_config = parent_rpcs.update_view if parent_rpcs.respond_to? :update_view
+                  @update_view = ::Gapic::Config::Method.new update_view_config
+                  delete_view_config = parent_rpcs.delete_view if parent_rpcs.respond_to? :delete_view
+                  @delete_view = ::Gapic::Config::Method.new delete_view_config
 
                   yield self if block_given?
                 end

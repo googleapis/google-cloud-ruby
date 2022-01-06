@@ -218,6 +218,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :settings, :message, 1, "google.cloud.contactcenterinsights.v1.Settings"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.cloud.contactcenterinsights.v1.CreateViewRequest" do
+      optional :parent, :string, 1
+      optional :view, :message, 2, "google.cloud.contactcenterinsights.v1.View"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.GetViewRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.contactcenterinsights.v1.ListViewsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.contactcenterinsights.v1.ListViewsResponse" do
+      repeated :views, :message, 1, "google.cloud.contactcenterinsights.v1.View"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.contactcenterinsights.v1.UpdateViewRequest" do
+      optional :view, :message, 1, "google.cloud.contactcenterinsights.v1.View"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.contactcenterinsights.v1.DeleteViewRequest" do
+      optional :name, :string, 1
+    end
     add_enum "google.cloud.contactcenterinsights.v1.ConversationView" do
       value :CONVERSATION_VIEW_UNSPECIFIED, 0
       value :BASIC, 1
@@ -279,6 +302,12 @@ module Google
         UpdatePhraseMatcherRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UpdatePhraseMatcherRequest").msgclass
         GetSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.GetSettingsRequest").msgclass
         UpdateSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UpdateSettingsRequest").msgclass
+        CreateViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.CreateViewRequest").msgclass
+        GetViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.GetViewRequest").msgclass
+        ListViewsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListViewsRequest").msgclass
+        ListViewsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ListViewsResponse").msgclass
+        UpdateViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.UpdateViewRequest").msgclass
+        DeleteViewRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DeleteViewRequest").msgclass
         ConversationView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationView").enummodule
       end
     end

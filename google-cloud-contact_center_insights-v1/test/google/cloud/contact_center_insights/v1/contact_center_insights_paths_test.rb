@@ -121,4 +121,16 @@ class ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::ClientP
       assert_equal "projects/value0/locations/value1/settings", path
     end
   end
+
+  def test_view_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.view_path project: "value0", location: "value1", view: "value2"
+      assert_equal "projects/value0/locations/value1/views/value2", path
+    end
+  end
 end

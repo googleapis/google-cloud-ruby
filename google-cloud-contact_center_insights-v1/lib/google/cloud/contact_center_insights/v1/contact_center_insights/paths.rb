@@ -202,6 +202,25 @@ module Google
               "projects/#{project}/locations/#{location}/settings"
             end
 
+            ##
+            # Create a fully-qualified View resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/views/{view}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param view [String]
+            #
+            # @return [::String]
+            def view_path project:, location:, view:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/views/#{view}"
+            end
+
             extend self
           end
         end

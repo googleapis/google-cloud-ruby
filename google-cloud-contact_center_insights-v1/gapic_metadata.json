@@ -154,6 +154,31 @@
               "methods": [
                 "update_settings"
               ]
+            },
+            "CreateView": {
+              "methods": [
+                "create_view"
+              ]
+            },
+            "GetView": {
+              "methods": [
+                "get_view"
+              ]
+            },
+            "ListViews": {
+              "methods": [
+                "list_views"
+              ]
+            },
+            "UpdateView": {
+              "methods": [
+                "update_view"
+              ]
+            },
+            "DeleteView": {
+              "methods": [
+                "delete_view"
+              ]
             }
           }
         }

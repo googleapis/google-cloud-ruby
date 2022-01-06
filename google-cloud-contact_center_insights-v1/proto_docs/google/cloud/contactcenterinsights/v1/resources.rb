@@ -85,6 +85,9 @@ module Google
         #     Output only. All the matched Dialogflow intents in the call. The key corresponds to a
         #     Dialogflow intent, format:
         #     projects/\\{project}/agent/\\{agent}/intents/\\{intent}
+        # @!attribute [rw] obfuscated_user_id
+        #   @return [::String]
+        #     Obfuscated user ID which the customer sent to us.
         class Conversation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -341,6 +344,7 @@ module Google
         # @!attribute [rw] issue_model
         #   @return [::String]
         #     Issue model that generates the result.
+        #     Format: projects/\\{project}/locations/\\{location}/issueModels/\\{issue_model}
         # @!attribute [rw] issues
         #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::IssueAssignment>]
         #     All the matched issues.
@@ -1245,6 +1249,29 @@ module Google
             # Participant is either a human or automated agent.
             ANY_AGENT = 4
           end
+        end
+
+        # The View resource.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Immutable. The resource name of the view.
+        #     Format:
+        #     projects/\\{project}/locations/\\{location}/views/\\{view}
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The human-readable display name of the view.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time at which this view was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The most recent time at which the view was updated.
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     String with specific view properties.
+        class View
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
