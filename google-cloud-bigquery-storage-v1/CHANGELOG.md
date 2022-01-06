@@ -1,5 +1,18 @@
 # Release History
 
+### [0.9.1](https://github.com/googleapis/google-cloud-ruby/compare/google-cloud-bigquery-storage-v1/v0.9.0...google-cloud-bigquery-storage-v1/v0.9.1) (2022-01-06)
+---
+### Commits since last release:
+
+* [chore(google-cloud-bigquery-storage-v1): Fixes to Google::Api::Resource documentation](https://github.com/googleapis/google-cloud-ruby/commit/a019e2cd13d8bdb0b9f031365148f3a76180322e)
+
+### Files edited since last release:
+
+<pre><code>google-cloud-bigquery-storage-v1/proto_docs/google/api/resource.rb
+</code></pre>
+[Compare Changes](https://github.com/googleapis/google-cloud-ruby/compare/b24f58268c61b3dcb4bcc19f8a7dac288aa69698...HEAD)
+
+
 ### 0.9.0 / 2021-12-08
 
 #### Features
