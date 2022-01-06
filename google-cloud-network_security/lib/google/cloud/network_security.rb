@@ -55,6 +55,12 @@ module Google
       # supported by that API version, and the corresponding gem is available, the
       # appropriate versioned client will be returned.
       #
+      # ## About NetworkSecurity
+      #
+      # Network Security API provides resources to configure authentication and
+      # authorization policies. Refer to per API resource documentation for more
+      # information.
+      #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1beta1`.
       # @return [NetworkSecurity::Client] A client object for the specified version.
