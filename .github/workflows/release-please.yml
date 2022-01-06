@@ -25,12 +25,12 @@ jobs:
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "2.7"
-      - name: Install NodeJS 12.x
+      - name: Install NodeJS 16.x
         uses: actions/setup-node@v2
         with:
-          node-version: "12.x"
+          node-version: "16.x"
       - name: Install tools
-        run: "gem install --no-document toys && npm install release-please"
+        run: "gem install --no-document toys && toys release please --install"
       - name: execute
         run: |
           toys release please -v --fork \
