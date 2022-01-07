@@ -119,6 +119,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :boot_disk_type, :string, 3
       optional :boot_disk_size_gb, :int32, 1
       optional :num_local_ssds, :int32, 2
+      optional :local_ssd_interface, :string, 4
     end
     add_message "google.cloud.dataproc.v1.NodeInitializationAction" do
       optional :executable_file, :string, 1
