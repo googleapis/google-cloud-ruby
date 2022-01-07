@@ -710,16 +710,95 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request to create a view.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the view. Required. The location to create
+        #     a view for.
+        #     Format: `projects/<Project ID>/locations/<Location ID>` or
+        #     `projects/<Project Number>/locations/<Location ID>`
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::View]
+        #     Required. The view resource to create.
+        class CreateViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to get a view.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the view to get.
+        class GetViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to list views.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent resource of the views.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of views to return in the response. If this
+        #     value is zero, the service will select a default size. A call may return
+        #     fewer objects than requested. A non-empty `next_page_token` in the response
+        #     indicates that more data is available.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The value returned by the last `ListViewsResponse`; indicates
+        #     that this is a continuation of a prior `ListViews` call and
+        #     the system should return the next page of data.
+        class ListViewsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response of listing views.
+        # @!attribute [rw] views
+        #   @return [::Array<::Google::Cloud::ContactCenterInsights::V1::View>]
+        #     The views that match the request.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListViewsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to update a view.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::ContactCenterInsights::V1::View]
+        #     Required. The new view.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The list of fields to be updated.
+        class UpdateViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to delete a view.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the view to delete.
+        class DeleteViewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents the options for views of a conversation.
         module ConversationView
           # Not specified. Defaults to FULL on GetConversationRequest and BASIC for
           # ListConversationsRequest.
           CONVERSATION_VIEW_UNSPECIFIED = 0
 
-          # Transcript field is not populated in the response.
+          # Transcript field is not populated in the response for Insights
+          # conversation.
           BASIC = 1
 
-          # All fields are populated.
+          # All fields are populated for Insights conversation.
           FULL = 2
         end
       end

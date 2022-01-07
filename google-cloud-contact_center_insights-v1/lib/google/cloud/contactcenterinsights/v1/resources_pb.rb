@@ -5,7 +5,6 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -26,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :latest_analysis, :message, 12, "google.cloud.contactcenterinsights.v1.Analysis"
       repeated :runtime_annotations, :message, 13, "google.cloud.contactcenterinsights.v1.RuntimeAnnotation"
       map :dialogflow_intents, :string, :message, 18, "google.cloud.contactcenterinsights.v1.DialogflowIntent"
+      optional :obfuscated_user_id, :string, 21
       oneof :metadata do
         optional :call_metadata, :message, 7, "google.cloud.contactcenterinsights.v1.Conversation.CallMetadata"
       end
@@ -352,6 +352,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :END_USER, 3
       value :ANY_AGENT, 4
     end
+    add_message "google.cloud.contactcenterinsights.v1.View" do
+      optional :name, :string, 1
+      optional :display_name, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :update_time, :message, 4, "google.protobuf.Timestamp"
+      optional :value, :string, 5
+    end
   end
 end
 
@@ -414,6 +421,7 @@ module Google
         DialogflowInteractionData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.DialogflowInteractionData").msgclass
         ConversationParticipant = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationParticipant").msgclass
         ConversationParticipant::Role = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.ConversationParticipant.Role").enummodule
+        View = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.contactcenterinsights.v1.View").msgclass
       end
     end
   end
