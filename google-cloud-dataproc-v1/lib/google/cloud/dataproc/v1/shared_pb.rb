@@ -7,6 +7,8 @@ require 'google/protobuf'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataproc/v1/shared.proto", :syntax => :proto3) do
     add_message "google.cloud.dataproc.v1.RuntimeConfig" do
+      optional :version, :string, 1
+      optional :container_image, :string, 2
       map :properties, :string, :string, 3
     end
     add_message "google.cloud.dataproc.v1.EnvironmentConfig" do
@@ -32,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataproc.v1.RuntimeInfo" do
       map :endpoints, :string, :string, 1
       optional :output_uri, :string, 2
+      optional :diagnostic_output_uri, :string, 3
     end
     add_enum "google.cloud.dataproc.v1.Component" do
       value :COMPONENT_UNSPECIFIED, 0

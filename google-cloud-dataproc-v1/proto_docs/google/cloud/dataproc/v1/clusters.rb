@@ -32,8 +32,9 @@ module Google
         #     unique. Names of deleted clusters can be reused.
         # @!attribute [rw] config
         #   @return [::Google::Cloud::Dataproc::V1::ClusterConfig]
-        #     Required. The cluster config. Note that Dataproc may set
-        #     default values, and values may change when clusters are updated.
+        #     Optional. The cluster config for a cluster of Compute Engine Instances.
+        #     Note that Dataproc may set default values, and values may change
+        #     when clusters are updated.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this cluster.
@@ -588,6 +589,13 @@ module Google
         #     If one or more SSDs are attached, this runtime bulk
         #     data is spread across them, and the boot disk contains only basic
         #     config and installed binaries.
+        # @!attribute [rw] local_ssd_interface
+        #   @return [::String]
+        #     Optional. Interface type of local SSDs (default is "scsi").
+        #     Valid values: "scsi" (Small Computer System Interface),
+        #     "nvme" (Non-Volatile Memory Express).
+        #     See [SSD Interface
+        #     types](https://cloud.google.com/compute/docs/disks/local-ssd#performance).
         class DiskConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

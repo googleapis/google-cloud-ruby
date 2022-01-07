@@ -182,7 +182,8 @@ module Google
             #     Optional. The ID to use for the batch, which will become the final component of
             #     the batch's resource name.
             #
-            #     This value must be 4-63 characters. Valid characters are `/[a-z][0-9]-/`.
+            #     This value must be 4-63 characters. Valid characters
+            #     are /[a-z][0-9]-/.
             #   @param request_id [::String]
             #     Optional. A unique ID used to identify the request. If the service
             #     receives two
