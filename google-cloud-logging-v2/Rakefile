@@ -158,11 +158,6 @@ task :doctest do
   puts "The google-cloud-logging-v2 gem does not have doctest tests."
 end
 
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-cloud-logging-v2"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-cloud-logging-v2"

@@ -1,5 +1,5 @@
 --no-private
---title=Google IAM V1beta API
+--title="Google IAM V1beta API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

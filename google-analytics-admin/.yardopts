@@ -1,5 +1,5 @@
 --no-private
---title=Google Analytics Admin API
+--title="Google Analytics Admin API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

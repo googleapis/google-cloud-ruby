@@ -1,5 +1,5 @@
 --no-private
---title=Document AI V1beta3 API
+--title="Document AI V1beta3 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

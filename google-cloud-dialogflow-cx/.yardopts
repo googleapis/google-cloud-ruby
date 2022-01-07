@@ -1,5 +1,5 @@
 --no-private
---title=Dialogflow CX API
+--title="Dialogflow CX API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

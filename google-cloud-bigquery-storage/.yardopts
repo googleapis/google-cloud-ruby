@@ -1,5 +1,5 @@
 --no-private
---title=BigQuery Storage API
+--title="BigQuery Storage API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

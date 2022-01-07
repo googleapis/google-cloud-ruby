@@ -1,5 +1,5 @@
 --no-private
---title=Identity-Aware Proxy API
+--title="Identity-Aware Proxy API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

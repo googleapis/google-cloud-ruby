@@ -159,11 +159,6 @@ task :doctest do
   puts "The google-analytics-data gem does not have doctest tests."
 end
 
-task :cloudrad do
-  ENV["CLOUDRAD_GEM_NAME"] = "google-analytics-data"
-  sh "bundle exec yard doc --fail-on-warning --yardopts .yardopts-cloudrad"
-end
-
 desc "Run the CI build"
 task :ci do
   header "BUILDING google-analytics-data"

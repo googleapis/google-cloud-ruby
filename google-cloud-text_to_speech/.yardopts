@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Text-to-Speech API
+--title="Cloud Text-to-Speech API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
