@@ -22,6 +22,13 @@ module Google
     module Dataproc
       module V1
         # Runtime configuration for a workload.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Optional. Version of the batch runtime.
+        # @!attribute [rw] container_image
+        #   @return [::String]
+        #     Optional. Optional custom container image for the job runtime environment. If
+        #     not specified, a default container image will be used.
         # @!attribute [rw] properties
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. A mapping of property names to values, which are used to configure workload
@@ -111,6 +118,9 @@ module Google
         # @!attribute [r] output_uri
         #   @return [::String]
         #     Output only. A URI pointing to the location of the stdout and stderr of the workload.
+        # @!attribute [r] diagnostic_output_uri
+        #   @return [::String]
+        #     Output only. A URI pointing to the location of the diagnostics tarball.
         class RuntimeInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
