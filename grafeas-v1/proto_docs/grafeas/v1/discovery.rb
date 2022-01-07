@@ -49,6 +49,9 @@ module Grafeas
     # @!attribute [rw] last_scan_time
     #   @return [::Google::Protobuf::Timestamp]
     #     The last time this resource was scanned.
+    # @!attribute [r] archive_time
+    #   @return [::Google::Protobuf::Timestamp]
+    #     The time occurrences related to this discovery occurrence were archived.
     class DiscoveryOccurrence
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods
