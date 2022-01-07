@@ -2,9 +2,7 @@
 
 # Google Cloud Recaptcha Enterprise Ruby Samples
 
-This directory contains samples for google-cloud-recaptcha_enterprise. [Google Cloud Recaptcha Enterprise][recaptcha_docs]
-
-[recaptcha_docs]: https://cloud.google.com/recaptcha-enterprise
+This directory contains samples for google-cloud-recaptcha_enterprise. [Google Cloud Recaptcha Enterprise](https://cloud.google.com/recaptcha-enterprise)
 
 ## Setup
 
@@ -36,7 +34,7 @@ Next, set the `GOOGLE_CLOUD_PROJECT` environment variable to the project name
 set in the
 [Google Cloud Platform Developer Console](https://console.cloud.google.com):
 
-        export GOOGLE_CLOUD_PROJECT="YOUR-PROJECT-ID"
+    export GOOGLE_CLOUD_PROJECT="YOUR-PROJECT-ID"
 
 ### Install Dependencies
 
@@ -44,7 +42,7 @@ set in the
 
 1. Install dependencies using:
 
-    `bundle install`
+        bundle install
 
 ## Run tests
 
