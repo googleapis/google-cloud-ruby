@@ -52,6 +52,60 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IMPACT_LOW, 2
       value :IMPACT_NONE, 3
     end
+    add_message "grafeas.v1.CVSS" do
+      optional :base_score, :float, 1
+      optional :exploitability_score, :float, 2
+      optional :impact_score, :float, 3
+      optional :attack_vector, :enum, 4, "grafeas.v1.CVSS.AttackVector"
+      optional :attack_complexity, :enum, 5, "grafeas.v1.CVSS.AttackComplexity"
+      optional :authentication, :enum, 6, "grafeas.v1.CVSS.Authentication"
+      optional :privileges_required, :enum, 7, "grafeas.v1.CVSS.PrivilegesRequired"
+      optional :user_interaction, :enum, 8, "grafeas.v1.CVSS.UserInteraction"
+      optional :scope, :enum, 9, "grafeas.v1.CVSS.Scope"
+      optional :confidentiality_impact, :enum, 10, "grafeas.v1.CVSS.Impact"
+      optional :integrity_impact, :enum, 11, "grafeas.v1.CVSS.Impact"
+      optional :availability_impact, :enum, 12, "grafeas.v1.CVSS.Impact"
+    end
+    add_enum "grafeas.v1.CVSS.AttackVector" do
+      value :ATTACK_VECTOR_UNSPECIFIED, 0
+      value :ATTACK_VECTOR_NETWORK, 1
+      value :ATTACK_VECTOR_ADJACENT, 2
+      value :ATTACK_VECTOR_LOCAL, 3
+      value :ATTACK_VECTOR_PHYSICAL, 4
+    end
+    add_enum "grafeas.v1.CVSS.AttackComplexity" do
+      value :ATTACK_COMPLEXITY_UNSPECIFIED, 0
+      value :ATTACK_COMPLEXITY_LOW, 1
+      value :ATTACK_COMPLEXITY_HIGH, 2
+    end
+    add_enum "grafeas.v1.CVSS.Authentication" do
+      value :AUTHENTICATION_UNSPECIFIED, 0
+      value :AUTHENTICATION_MULTIPLE, 1
+      value :AUTHENTICATION_SINGLE, 2
+      value :AUTHENTICATION_NONE, 3
+    end
+    add_enum "grafeas.v1.CVSS.PrivilegesRequired" do
+      value :PRIVILEGES_REQUIRED_UNSPECIFIED, 0
+      value :PRIVILEGES_REQUIRED_NONE, 1
+      value :PRIVILEGES_REQUIRED_LOW, 2
+      value :PRIVILEGES_REQUIRED_HIGH, 3
+    end
+    add_enum "grafeas.v1.CVSS.UserInteraction" do
+      value :USER_INTERACTION_UNSPECIFIED, 0
+      value :USER_INTERACTION_NONE, 1
+      value :USER_INTERACTION_REQUIRED, 2
+    end
+    add_enum "grafeas.v1.CVSS.Scope" do
+      value :SCOPE_UNSPECIFIED, 0
+      value :SCOPE_UNCHANGED, 1
+      value :SCOPE_CHANGED, 2
+    end
+    add_enum "grafeas.v1.CVSS.Impact" do
+      value :IMPACT_UNSPECIFIED, 0
+      value :IMPACT_HIGH, 1
+      value :IMPACT_LOW, 2
+      value :IMPACT_NONE, 3
+    end
   end
 end
 
@@ -64,5 +118,13 @@ module Grafeas
     CVSSv3::UserInteraction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSSv3.UserInteraction").enummodule
     CVSSv3::Scope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSSv3.Scope").enummodule
     CVSSv3::Impact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSSv3.Impact").enummodule
+    CVSS = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS").msgclass
+    CVSS::AttackVector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.AttackVector").enummodule
+    CVSS::AttackComplexity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.AttackComplexity").enummodule
+    CVSS::Authentication = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.Authentication").enummodule
+    CVSS::PrivilegesRequired = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.PrivilegesRequired").enummodule
+    CVSS::UserInteraction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.UserInteraction").enummodule
+    CVSS::Scope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.Scope").enummodule
+    CVSS::Impact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.Impact").enummodule
   end
 end
