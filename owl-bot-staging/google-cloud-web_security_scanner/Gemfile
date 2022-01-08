@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-web_security_scanner-v1", path: "../google-cloud-web_security_scanner-v1"
+gem "google-cloud-web_security_scanner-v1beta", path: "../google-cloud-web_security_scanner-v1beta"
