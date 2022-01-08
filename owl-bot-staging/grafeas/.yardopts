@@ -1,0 +1,11 @@
+--no-private
+--title="Grafeas API"
+--exclude _pb\.rb$
+--markup markdown
+--markup-provider redcarpet
+
+./lib/**/*.rb
+-
+README.md
+MIGRATING.md
+LICENSE.md
