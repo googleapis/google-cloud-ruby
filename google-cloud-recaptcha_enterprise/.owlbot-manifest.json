@@ -20,6 +20,13 @@
   ],
   "static": [
     ".OwlBot.yaml",
-    "MIGRATING.md"
+    "MIGRATING.md",
+    "samples/.rubocop.yml",
+    "samples/Gemfile",
+    "samples/README.md",
+    "samples/Rakefile",
+    "samples/acceptance/create_assessment_test.rb",
+    "samples/acceptance/data/test_template.html",
+    "samples/recaptcha_enterprise_create_assessment.rb"
   ]
 }
