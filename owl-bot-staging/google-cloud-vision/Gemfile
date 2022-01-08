@@ -1,0 +1,6 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-vision-v1", path: "../google-cloud-vision-v1"
+gem "google-cloud-vision-v1p3beta1", path: "../google-cloud-vision-v1p3beta1"
