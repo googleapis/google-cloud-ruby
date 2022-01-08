@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-data_fusion-v1", path: "../google-cloud-data_fusion-v1"
