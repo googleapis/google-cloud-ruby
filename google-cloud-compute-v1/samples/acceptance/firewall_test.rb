@@ -52,7 +52,7 @@ class ComputeFirewallTest < Minitest::Test
     assert firewall.priority == 1000
     patch_firewall_priority project: project, name: firewall_name, priority: 500
     firewall = client.get project: project, firewall: firewall_name
-    assert firewall.priority = 500
+    assert firewall.priority == 500
     delete_firewall_rule project: project, name: firewall_name
   end
 end
