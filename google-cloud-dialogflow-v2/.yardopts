@@ -1,5 +1,5 @@
 --no-private
---title=Dialogflow V2 API
+--title="Dialogflow V2 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

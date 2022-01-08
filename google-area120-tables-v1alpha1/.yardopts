@@ -1,5 +1,5 @@
 --no-private
---title=Area 120 Tables V1alpha1 API
+--title="Area 120 Tables V1alpha1 API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Functions API
+--title="Cloud Functions API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

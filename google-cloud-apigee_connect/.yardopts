@@ -1,5 +1,5 @@
 --no-private
---title=Apigee Connect API
+--title="Apigee Connect API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

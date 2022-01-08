@@ -1,5 +1,5 @@
 --no-private
---title=Service Management API API
+--title="Service Management API API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

@@ -1,5 +1,5 @@
 --no-private
---title=Kubernetes Engine API
+--title="Kubernetes Engine API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

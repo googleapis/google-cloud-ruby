@@ -1,5 +1,5 @@
 --no-private
---title=Contact Center AI Insights API
+--title="Contact Center AI Insights API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

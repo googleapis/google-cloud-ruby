@@ -4,7 +4,6 @@
     ".repo-metadata.json",
     ".rubocop.yml",
     ".yardopts",
-    ".yardopts-cloudrad",
     "CHANGELOG.md",
     "Gemfile",
     "LICENSE.md",

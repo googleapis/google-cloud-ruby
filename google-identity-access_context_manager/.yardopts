@@ -1,5 +1,5 @@
 --no-private
---title=Access Context Manager API
+--title="Access Context Manager API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

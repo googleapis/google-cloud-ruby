@@ -1,5 +1,5 @@
 --no-private
---title=Migrate for Compute Engine API
+--title="Migrate for Compute Engine API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet

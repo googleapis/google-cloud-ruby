@@ -1,5 +1,5 @@
 --no-private
---title=Cloud Data Fusion API
+--title="Cloud Data Fusion API"
 --exclude _pb\.rb$
 --markup markdown
 --markup-provider redcarpet
