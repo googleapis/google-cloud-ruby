@@ -57,3 +57,10 @@ Run the tests for these samples by running `bundle exec rake test`.
 | File | Args | Description |
 | --- | --- | --- |
 | recaptcha_enterprise_create_assessment.rb | `site_key` `token` `project_id` `recaptcha_action` | Create an assessment to analyze the risk of a UI action. |
+| recaptcha_enterprise_create_site_key.rb | `project_id` `domain` | Create a site key by registering a domain/app to use recaptcha services. |
+| recaptcha_enterprise_delete_site_key.rb | `project_id` `site_key` | Delete site key registered to use recaptcha services. |
+| recaptcha_enterprise_get_metrics_site_key.rb | `project_id` `site_key` | Get metrics specific to a recaptcha site key. |
+| recaptcha_enterprise_get_site_key.rb | `project_id` `site_key` | Get details of site key registered to use recaptcha services. |
+| recaptcha_enterprise_list_site_keys.rb | `project_id` | List all site keys registered to use recaptcha services. |
+| recaptcha_enterprise_migrate_site_key.rb | `project_id` `site_key` | Migrate a key from reCAPTCHA (non-Enterprise) to reCAPTCHA Enterprise. |
+| recaptcha_enterprise_update_site_key.rb | `project_id` `site_key` `domain` | Update a site key registered for a domain/app to use recaptcha services. |
