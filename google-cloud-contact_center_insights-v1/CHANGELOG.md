@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.7.0 / 2022-01-11
+
+#### Features
+
+* Support for management of View resources
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.6.0 / 2021-12-07
 
 #### Features
