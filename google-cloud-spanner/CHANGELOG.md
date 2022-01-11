@@ -2,18 +2,16 @@
 
 ### 2.12.0 / 2022-01-11
 
-#### Features
-
-* Change spanner emulator port from 8080 to 9010. ([#16378](https://www.github.com/googleapis/google-cloud-ruby/issues/16378))
+No significant changes.
 
 ### 2.11.0 / 2021-12-10
 
 #### Features
 
-* add admin instance wrapper ([#16080](https://www.github.com/googleapis/google-cloud-ruby/issues/16080))
-* Updated benchwrapper and proto for spanner. ([#16152](https://www.github.com/googleapis/google-cloud-ruby/issues/16152))
-* use gRPC clients for instance/database management ([#13157](https://www.github.com/googleapis/google-cloud-ruby/issues/13157))
-* wrapper to create generated admin database client. ([#13456](https://www.github.com/googleapis/google-cloud-ruby/issues/13456))
+* add admin instance wrapper.
+* Updated benchwrapper and proto for spanner.
+* use gRPC clients for instance/database management.
+* wrapper to create generated admin database client.
 
 ### 2.10.1 / 2021-11-09
 
