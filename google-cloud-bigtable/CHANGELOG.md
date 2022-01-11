@@ -1,5 +1,12 @@
 # Release History
 
+### 2.6.5 / 2022-01-11
+
+#### Documentation
+
+* Update CONTRIBUTING.md
+  * Add samples/CONTRIBUTING.md
+
 ### 2.6.4 / 2021-10-21
 
 #### Documentation
