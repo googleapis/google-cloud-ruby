@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Memcache
-      VERSION = "1.1.2"
+      VERSION = "1.1.3"
     end
   end
 end
