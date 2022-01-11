@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Profiler
-      VERSION = "1.0.2"
+      VERSION = "1.0.3"
     end
   end
 end
