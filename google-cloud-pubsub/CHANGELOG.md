@@ -4,10 +4,8 @@
 
 #### Documentation
 
-* Update CONTRIBUTING.md
-  * Add samples/CONTRIBUTING.md
-* Update LOGGING.md
-  * Add section on gRPC interceptors.
+* Update contributing docs
+* Add section on gRPC interceptors to the logging docs
 
 ### 2.9.0 / 2021-10-28
 
