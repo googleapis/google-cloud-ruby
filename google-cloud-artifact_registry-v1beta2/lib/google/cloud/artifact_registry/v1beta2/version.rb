@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ArtifactRegistry
       module V1beta2
-        VERSION = "0.3.5"
+        VERSION = "0.3.6"
       end
     end
   end
