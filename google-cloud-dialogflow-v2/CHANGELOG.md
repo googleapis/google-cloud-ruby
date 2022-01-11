@@ -4,11 +4,10 @@
 
 #### Features
 
-* Numerous updates
-  * Added support for the export_document call
-  * Added support for passing filters to the list_documents and list_knowledge_bases calls
-  * Added support for importing custom metadata from Google Cloud Storage in the reload_document call
-  * Added support for applying partial update to the smart messaging allowlist in the reload_document call
+* Added support for the export_document call
+* Added support for passing filters to the list_documents and list_knowledge_bases calls
+* Added support for importing custom metadata from Google Cloud Storage in the reload_document call
+* Added support for applying partial update to the smart messaging allowlist in the reload_document call
 
 #### Bug Fixes
 
