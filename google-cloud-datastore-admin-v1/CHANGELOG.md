@@ -1,5 +1,20 @@
 # Release History
 
+### 0.5.0 / 2022-01-11
+
+#### Features
+
+* Provide data types for migration metadata
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.4.5 / 2021-11-08
 
 #### Documentation
