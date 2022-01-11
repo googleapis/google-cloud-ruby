@@ -4,13 +4,12 @@
 
 #### Features
 
-* Numerous updates
-  * [BREAKING CHANGE] Removed methods related to enhanced measurement settings
-  * Added support for the acknowledge_user_data_collection call
-  * Added support for data stream management calls
-  * Display Video 360 Advertiser Link resources may be returned from change history
-  * The parent account name is provided on Property resources
-  * Various clarifications in the reference documentation
+* BREAKING CHANGE: Removed methods related to enhanced measurement settings
+* Added support for the acknowledge_user_data_collection call
+* Added support for data stream management calls
+* Display Video 360 Advertiser Link resources may be returned from change history
+* The parent account name is provided on Property resources
+* Various clarifications in the reference documentation
 
 #### Documentation
 
