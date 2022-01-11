@@ -1,5 +1,12 @@
 # Release History
 
+### 2.9.1 / 2022-01-11
+
+#### Documentation
+
+* Update contributing docs
+* Add section on gRPC interceptors to the logging docs
+
 ### 2.9.0 / 2021-10-28
 
 #### Features
