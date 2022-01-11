@@ -1,5 +1,12 @@
 # Release History
 
+### 2.0.1 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 2.0.0 / 2021-09-28
 
 * BREAKING CHANGE: Support version V1 of the service and make it the default
