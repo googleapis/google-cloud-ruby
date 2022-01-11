@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Vision
       module V1p3beta1
-        VERSION = "0.5.4"
+        VERSION = "0.5.5"
       end
     end
   end
