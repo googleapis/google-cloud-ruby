@@ -24,15 +24,17 @@ def create_site_key project_id:, domain:
   # Create the reCAPTCHA client.
   client = ::Google::Cloud::RecaptchaEnterprise.recaptcha_enterprise_service
 
-  request = { parent: "projects/#{project_id}",
-      key: {
-        display_name: "any descriptive name for the key",
-        web_settings: {
-          allowed_domains: [domain],
-            allow_amp_traffic: false,
-            integration_type: 1
-        }
-      } }
+  request = {
+    parent: "projects/#{project_id}",
+    key: {
+      display_name: "any descriptive name for the key",
+      web_settings: {
+        allowed_domains: [domain],
+        allow_amp_traffic: false,
+        integration_type: 1
+      }
+    }
+  }
 
   # Get the name of the created reCAPTCHA site key.
   response = client.create_key request

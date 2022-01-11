@@ -31,18 +31,11 @@ def update_site_key project_id:, site_key:, domain:
 
   client.update_key key: request_key
 
-  sleep 2
-
   # Retrieve the key and check if the property is updated.
   response = client.get_key name: "projects/#{project_id}/keys/#{site_key}"
   web_settings = response.web_settings
 
-  # Get the changed property.
-  if web_settings.allow_amp_traffic
-    puts "reCAPTCHA Site key successfully updated !"
-  else
-    puts "Error! reCAPTCHA Site key property hasn't been updated. Please try again !"
-  end
+  puts "reCAPTCHA Site key successfully updated with allow_amp_traffic to #{web_settings.allow_amp_traffic}!"
 end
 # [END recaptcha_enterprise_update_site_key]
 

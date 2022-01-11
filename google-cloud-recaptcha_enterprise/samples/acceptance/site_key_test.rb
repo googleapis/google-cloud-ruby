@@ -39,10 +39,17 @@ describe "Site key lifecycle" do
   end
 
   def create_test_site_key
-    create_key_request = { parent: "projects/#{project_id}",
-        key:
-         { display_name: "test_key",
-          web_settings: { integration_type: 1, allowed_domains: ["localhost"], allow_amp_traffic: false } } }
+    create_key_request = {
+      parent: "projects/#{project_id}",
+      key: {
+        display_name: "test_key",
+        web_settings: {
+          integration_type: 1,
+          allowed_domains: ["localhost"],
+          allow_amp_traffic: false
+        }
+      }
+    }
     key = client.create_key create_key_request
     @site_keys.push key.name
     key
@@ -59,7 +66,7 @@ describe "Site key lifecycle" do
 
   it "updates site key" do
     site_key = create_test_site_key
-    assert_output "reCAPTCHA Site key successfully updated !\n" do
+    assert_output "reCAPTCHA Site key successfully updated with allow_amp_traffic to true!\n" do
       update_site_key project_id: project_id,
                       site_key: site_key.name.split("/").last,
                       domain: "localhost"
