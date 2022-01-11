@@ -1,5 +1,12 @@
 # Release History
 
+### 0.6.4 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.6.3 / 2021-11-08
 
 #### Documentation
