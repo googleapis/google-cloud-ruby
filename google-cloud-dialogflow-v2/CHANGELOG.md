@@ -1,5 +1,25 @@
 # Release History
 
+### 0.13.0 / 2022-01-11
+
+#### Features
+
+* Numerous updates
+  * Added support for the export_document call
+  * Added support for passing filters to the list_documents and list_knowledge_bases calls
+  * Added support for importing custom metadata from Google Cloud Storage in the reload_document call
+  * Added support for applying partial update to the smart messaging allowlist in the reload_document call
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Clarifications and formatting fixes in the reference documentation
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.12.0 / 2021-12-07
 
 #### Features
