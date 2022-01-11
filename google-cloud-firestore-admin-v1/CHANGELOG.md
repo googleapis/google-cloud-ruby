@@ -1,5 +1,20 @@
 # Release History
 
+### 0.4.0 / 2022-01-11
+
+#### Features
+
+* Support for get_database, list_databases, and update_database operations
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.3.5 / 2021-11-08
 
 #### Documentation
