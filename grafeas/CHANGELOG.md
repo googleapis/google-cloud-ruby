@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.2 / 2022-01-11
+
+#### Documentation
+
+* Fix titles of documentation pages
+
 ### 1.1.1 / 2021-06-30
 
 #### Bug Fixes
