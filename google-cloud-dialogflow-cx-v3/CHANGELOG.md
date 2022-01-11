@@ -1,5 +1,20 @@
 # Changelog
 
+### 0.5.0 / 2022-01-11
+
+#### Features
+
+* Added the display name of the current page in webhook requests
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.4.0 / 2021-12-07
 
 #### Features
