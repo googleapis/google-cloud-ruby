@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.1.2 / 2022-01-11
+
+#### Bug Fixes
+
+* Honor quota project in auxiliary operations clients
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Various updates to the reference documentation
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.1.1 / 2021-11-08
 
 #### Documentation
