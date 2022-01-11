@@ -1,5 +1,11 @@
 # Release History
 
+### 2.12.0 / 2022-01-11
+
+#### Features
+
+* Change spanner emulator port from 8080 to 9010. ([#16378](https://www.github.com/googleapis/google-cloud-ruby/issues/16378))
+
 ### 2.11.0 / 2021-12-10
 
 #### Features
