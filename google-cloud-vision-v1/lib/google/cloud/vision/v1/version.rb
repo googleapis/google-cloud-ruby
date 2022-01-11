@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Vision
       module V1
-        VERSION = "0.6.3"
+        VERSION = "0.6.4"
       end
     end
   end
