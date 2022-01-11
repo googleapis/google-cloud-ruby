@@ -1,5 +1,14 @@
 # Release History
 
+### 2.9.1 / 2022-01-11
+
+#### Documentation
+
+* Update CONTRIBUTING.md
+  * Add samples/CONTRIBUTING.md
+* Update LOGGING.md
+  * Add section on gRPC interceptors.
+
 ### 2.9.0 / 2021-10-28
 
 #### Features
