@@ -1,5 +1,21 @@
 # Release History
 
+### 0.10.0 / 2022-01-11
+
+#### Features
+
+* BREAKING CHANGE: Removed methods related to enhanced measurement settings
+* Added support for the acknowledge_user_data_collection call
+* Added support for data stream management calls
+* Display Video 360 Advertiser Link resources may be returned from change history
+* The parent account name is provided on Property resources
+* Various clarifications in the reference documentation
+
+#### Documentation
+
+* Fix titles of documentation pages
+* Remove some broken images and fix outdated content in authentication documentation
+
 ### 0.9.1 / 2021-11-08
 
 #### Documentation
