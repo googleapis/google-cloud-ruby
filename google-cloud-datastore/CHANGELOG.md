@@ -4,8 +4,7 @@
 
 #### Documentation
 
-* Update CONTRIBUTING.md
-  * Add samples/CONTRIBUTING.md
+* Update contributing docs
 
 ### 2.2.3 / 2021-10-21
 
