@@ -1,5 +1,12 @@
 # Release History
 
+### 2.6.6 / 2022-01-11
+
+#### Documentation
+
+* Fix samples/CONTRIBUTING.md
+* Update version managers list in CONTRIBUTING.md
+
 ### 2.6.5 / 2021-10-25
 
 #### Documentation
