@@ -8,7 +8,6 @@ require 'google/api/resource_pb'
 require 'google/cloud/automl/v1/annotation_payload_pb'
 require 'google/cloud/automl/v1/data_items_pb'
 require 'google/cloud/automl/v1/io_pb'
-require 'google/cloud/automl/v1/operations_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf'
 

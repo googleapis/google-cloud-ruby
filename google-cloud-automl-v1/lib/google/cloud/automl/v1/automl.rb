@@ -45,7 +45,7 @@ module Google
         # Currently the only supported `location_id` is "us-central1".
         #
         # On any input that is documented to expect a string parameter in
-        # snake_case or kebab-case, either of those cases is accepted.
+        # snake_case or dash-case, either of those cases is accepted.
         #
         # To load this service and instantiate a client:
         #

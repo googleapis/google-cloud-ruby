@@ -3,6 +3,11 @@
 
 require 'google/cloud/automl/v1/dataset_pb'
 require 'google/cloud/automl/v1/io_pb'
+require 'google/cloud/automl/v1/model_pb'
+require 'google/cloud/automl/v1/model_evaluation_pb'
+require 'google/cloud/automl/v1/prediction_service_pb'
+require 'google/cloud/automl/v1/service_pb'
+require 'google/protobuf/empty_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 require 'google/api/annotations_pb'
