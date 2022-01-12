@@ -18,22 +18,19 @@ def create_job_with_concatenated_inputs project_id:, location:,
                                         start_time_input2:, end_time_input2:,
                                         output_uri:
   # [START transcoder_create_job_with_concatenated_inputs]
-  # project_id        = "YOUR-GOOGLE-CLOUD-PROJECT" # (e.g. "my-project")
-  # location          = "YOUR-JOB-LOCATION" # (e.g. "us-central1")
-  # input1_uri        = "YOUR-GCS-INPUT-VIDEO1" # (e.g. "gs://my-bucket/
-  #                     my-video-file1")
-  # start_time_input1 = 0 # Start time in fractional seconds relative to the
-  #                     first input video timeline
-  # end_time_input1   = 8.125 # End time in fractional seconds relative to the
-  #                     first input video timeline
-  # input2_uri        = "YOUR-GCS-INPUT-VIDEO2" # (e.g. "gs://my-bucket/
-  #                     my-video-file2")
-  # start_time_input2 = 3.5 # Start time in fractional seconds relative to the
-  #                     second input video timeline
-  # end_time_input2   = 15 # End time in fractional seconds relative to the
-  #                     second input video timeline
-  # output_uri        = "YOUR-GCS-OUTPUT-FOLDER/" # (e.g. "gs://my-bucket/
-  #                     my-output-folder/")
+  # project_id        = # Your project ID, e.g. "my-project"
+  # location          = # Data location, e.g. "us-central1"
+  # input1_uri        = # First video, e.g. "gs://my-bucket/my-video-file1"
+  # start_time_input1 = # Start time in fractional seconds relative to the
+  #                     # first input video timeline, e.g. 0.0
+  # end_time_input1   = # End time in fractional seconds relative to the
+  #                     # first input video timeline, e.g. 8.125
+  # input2_uri        = # Second video, e.g. "gs://my-bucket/my-video-file2"
+  # start_time_input2 = # Start time in fractional seconds relative to the
+  #                     # second input video timeline, e.g. 3.5
+  # end_time_input2   = # End time in fractional seconds relative to the
+  #                     # second input video timeline, e.g. 15
+  # output_uri        = # Output folder, e.g. "gs://my-bucket/my-output-folder/"
 
   s1_sec = start_time_input1.to_i
   s1_nanos = (start_time_input1.to_f.remainder(1) * 1_000_000_000).round
