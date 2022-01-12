@@ -1036,7 +1036,7 @@ module Google
         alias public_access_prevention_unspecified? public_access_prevention_inherited?
 
         ##
-        # Recovery Point Objective (RPO) is another metdata of a bucket, it measures how long it takes for a set of
+        # Recovery Point Objective (RPO) is another attribute of a bucket, it measures how long it takes for a set of
         # updates to be asynchronously copied to the other region.
         # Currently, `DEFAULT` and `ASYNC_TURBO` are supported. When set to `ASYNC_TURBO`, Turbo Replication is enabled
         # for a bucket. `DEFAULT` is used to reset rpo on an existing bucket with rpo set to `ASYNC_TURBO`.
@@ -1087,7 +1087,7 @@ module Google
         #   bucket.rpo #=> "ASYNC_TURBO"
         #
         def rpo= new_rpo
-          @gapi.rpo = new_rpo.to_s
+          @gapi.rpo = new_rpo&.to_s
           patch_gapi! :rpo
         end
 

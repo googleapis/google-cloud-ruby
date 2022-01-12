@@ -244,7 +244,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
   it "creates new bucket with rpo DEFAULT then sets rpo to ASYNC_TURBO" do
     single_use_bucket_name = "single_use_#{bucket_name}"
 
-    # _(storage.bucket(single_use_bucket_name)).must_be :nil?
+    _(storage.bucket(single_use_bucket_name)).must_be :nil?
 
     single_use_bucket = safe_gcs_execute { storage.create_bucket single_use_bucket_name, location: "ASIA1" }
 
