@@ -17,7 +17,6 @@
 # [START compute_usage_report_set]
 # [START compute_usage_report_get]
 # [START compute_usage_report_disable]
-
 require "google/cloud/compute/v1"
 
 # [END compute_usage_report_disable]
@@ -51,11 +50,9 @@ def set_usage_export_bucket project:, bucket_name:, report_name_prefix: ""
                                                       usage_export_location_resource: export_location
   wait_until_done project: project, operation: operation.operation
 end
-
 # [END compute_usage_report_set]
 
 # [START compute_usage_report_get]
-
 # Retrieves Compute Engine usage export bucket for the Cloud project.
 # Replaces the empty value returned by the API with the default value used
 # to generate report file names.
@@ -74,11 +71,9 @@ def get_usage_export_bucket project:
   end
   export_location
 end
-
 # [END compute_usage_report_get]
 
 # [START compute_usage_report_disable]
-
 # Disables Compute Engine usage export bucket for the Cloud Project.
 #
 # @param [String] project project ID or project number of the project to update.
@@ -89,5 +84,4 @@ def disable_usage_export project:
   operation = projects_client.set_usage_export_bucket project: project
   wait_until_done project: project, operation: operation.operation
 end
-
 # [END compute_usage_report_disable]
