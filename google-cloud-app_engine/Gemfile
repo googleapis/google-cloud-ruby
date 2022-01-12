@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-app_engine-v1", path: "../google-cloud-app_engine-v1"

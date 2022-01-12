@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-translate-v2", path: "../google-cloud-translate-v2"
 gem "google-cloud-translate-v3", path: "../google-cloud-translate-v3"

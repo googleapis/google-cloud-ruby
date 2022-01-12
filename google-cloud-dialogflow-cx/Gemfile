@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-dialogflow-cx-v3", path: "../google-cloud-dialogflow-cx-v3"

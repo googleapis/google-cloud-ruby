@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-bigtable-admin-v2", path: "../google-cloud-bigtable-admin-v2"
 gem "google-cloud-bigtable-v2", path: "../google-cloud-bigtable-v2"

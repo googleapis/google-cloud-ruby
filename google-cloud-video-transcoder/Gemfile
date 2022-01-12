@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-video-transcoder-v1", path: "../google-cloud-video-transcoder-v1"
 gem "google-cloud-video-transcoder-v1beta1", path: "../google-cloud-video-transcoder-v1beta1"

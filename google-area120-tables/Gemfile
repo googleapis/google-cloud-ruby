@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-area120-tables-v1alpha1", path: "../google-area120-tables-v1alpha1"

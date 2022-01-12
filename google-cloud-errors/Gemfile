@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-apis-core", "~> 0.2"
 gem "google-gax", "~> 1.8"

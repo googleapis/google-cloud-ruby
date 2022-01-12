@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-core", path: "../google-cloud-core"
 gem "google-cloud-errors", path: "../google-cloud-errors"

@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-dataflow-v1beta3", path: "../google-cloud-dataflow-v1beta3"

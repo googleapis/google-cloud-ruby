@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-media_translation-v1beta1", path: "../google-cloud-media_translation-v1beta1"

@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-gke_connect-gateway-v1beta1", path: "../google-cloud-gke_connect-gateway-v1beta1"

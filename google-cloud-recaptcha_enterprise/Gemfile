@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-recaptcha_enterprise-v1", path: "../google-cloud-recaptcha_enterprise-v1"
 gem "google-cloud-recaptcha_enterprise-v1beta1", path: "../google-cloud-recaptcha_enterprise-v1beta1"

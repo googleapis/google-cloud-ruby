@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-analytics-admin-v1alpha", path: "../google-analytics-admin-v1alpha"

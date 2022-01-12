@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-analytics-data-v1alpha", path: "../google-analytics-data-v1alpha"
 gem "google-analytics-data-v1beta", path: "../google-analytics-data-v1beta"

@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-talent-v4", path: "../google-cloud-talent-v4"
 gem "google-cloud-talent-v4beta1", path: "../google-cloud-talent-v4beta1"

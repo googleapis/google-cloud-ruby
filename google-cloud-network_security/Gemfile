@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-network_security-v1beta1", path: "../google-cloud-network_security-v1beta1"

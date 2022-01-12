@@ -1,5 +1,6 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-life_sciences-v2beta", path: "../google-cloud-life_sciences-v2beta"

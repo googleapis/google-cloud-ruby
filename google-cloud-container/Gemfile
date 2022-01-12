@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-container-v1", path: "../google-cloud-container-v1"
 gem "google-cloud-container-v1beta1", path: "../google-cloud-container-v1beta1"

@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-speech-v1", path: "../google-cloud-speech-v1"
 gem "google-cloud-speech-v1p1beta1", path: "../google-cloud-speech-v1p1beta1"

@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gemspec
+gem "gapic-common", path: "../gapic-common/"
 
 gem "google-cloud-document_ai-v1", path: "../google-cloud-document_ai-v1"
 gem "google-cloud-document_ai-v1beta3", path: "../google-cloud-document_ai-v1beta3"
