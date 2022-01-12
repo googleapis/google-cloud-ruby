@@ -1,0 +1,49 @@
+# Copyright 2019 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+require "bundler/gem_tasks"
+require "rake/testtask"
+require "rubocop/rake_task"
+require "yard"
+require "yard/rake/yardoc_task"
+
+RuboCop::RakeTask.new # Configuration is in .rubocop.yml
+Rake::TestTask.new :test do |t|
+  t.libs << "test"
+  t.libs << "lib"
+  t.test_files = FileList["test/**/*_test.rb"]
+end
+
+YARD::Rake::YardocTask.new do |y|
+  # y.options << "--fail-on-warning"
+end
+
+desc "Run the CI build"
+task :ci do
+  puts "\ngapic-common rubocop\n"
+  Rake::Task[:rubocop].invoke
+  puts "\ngapic-common test\n"
+  Rake::Task[:test].invoke
+end
+
+task :release_gem do
+  Rake::Task["build"].invoke
+  Rake::Task["release:rubygem_push"].invoke
+end
+
+task default: :ci
+
+task :gen do
+  # no-op
+end

@@ -1,0 +1,30 @@
+inherit_gem:
+  google-style: google-style.yml
+
+AllCops:
+  Exclude:
+    - "test/**/*"
+
+Metrics/ClassLength:
+  Exclude:
+    - "lib/gapic/generic_lro/operation.rb"
+
+Metrics/CyclomaticComplexity:
+  Exclude:
+    - "lib/gapic/headers.rb"
+
+Metrics/PerceivedComplexity:
+  Exclude:
+    - "lib/gapic/headers.rb"
+
+Naming/FileName:
+  Exclude:
+    - "lib/gapic-common.rb"
+
+Style/Documentation:
+  Exclude:
+    - "lib/gapic/grpc/service_stub/rpc_call.rb"
+    - "lib/gapic/grpc/status_details.rb"
+Style/CaseEquality:
+  Exclude:
+    - "lib/gapic/config.rb"

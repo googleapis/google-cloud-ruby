@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+# Specify your gem's dependencies in gapic-common.gemspec
+gemspec
+gem "gapic-common", path: "../../../../../gapic-common/"
