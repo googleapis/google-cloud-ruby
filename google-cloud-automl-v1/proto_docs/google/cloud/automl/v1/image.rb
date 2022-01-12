@@ -46,7 +46,7 @@ module Google
         #     `model_type`.
         # @!attribute [rw] train_budget_milli_node_hours
         #   @return [::Integer]
-        #     The train budget of creating this model, expressed in milli node
+        #     Optional. The train budget of creating this model, expressed in milli node
         #     hours i.e. 1,000 value in this field means 1 node hour. The actual
         #     `train_cost` will be equal or less than this value. If further model
         #     training ceases to provide any improvements, it will stop without using
@@ -60,12 +60,12 @@ module Google
         #     `mobile-core-ml-high-accuracy-1`, the train budget must be between 1,000
         #     and 100,000 milli node hours, inclusive. The default value is 24, 000 which
         #     represents one day in wall time.
-        # @!attribute [rw] train_cost_milli_node_hours
+        # @!attribute [r] train_cost_milli_node_hours
         #   @return [::Integer]
         #     Output only. The actual train cost of creating this model, expressed in
         #     milli node hours, i.e. 1,000 value in this field means 1 node hour.
         #     Guaranteed to not exceed the train budget.
-        # @!attribute [rw] stop_reason
+        # @!attribute [r] stop_reason
         #   @return [::String]
         #     Output only. The reason that this create model operation stopped,
         #     e.g. `BUDGET_REACHED`, `MODEL_CONVERGED`.
@@ -104,11 +104,11 @@ module Google
         #                   Core ML afterwards.  Expected to have a higher latency, but
         #                   should also have a higher prediction quality than other
         #                   models.
-        # @!attribute [rw] node_qps
+        # @!attribute [r] node_qps
         #   @return [::Float]
         #     Output only. An approximate number of online prediction QPS that can
         #     be supported by this model per each node on which it is deployed.
-        # @!attribute [rw] node_count
+        # @!attribute [r] node_count
         #   @return [::Integer]
         #     Output only. The number of nodes this model is deployed on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
@@ -144,22 +144,22 @@ module Google
         #                   with TensorFlow afterwards.  Expected to have a higher
         #                   latency, but should also have a higher prediction quality
         #                   than other models.
-        # @!attribute [rw] node_count
+        # @!attribute [r] node_count
         #   @return [::Integer]
         #     Output only. The number of nodes this model is deployed on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the qps_per_node field.
-        # @!attribute [rw] node_qps
+        # @!attribute [r] node_qps
         #   @return [::Float]
         #     Output only. An approximate number of online prediction QPS that can
         #     be supported by this model per each node on which it is deployed.
-        # @!attribute [rw] stop_reason
+        # @!attribute [r] stop_reason
         #   @return [::String]
         #     Output only. The reason that this create model operation stopped,
         #     e.g. `BUDGET_REACHED`, `MODEL_CONVERGED`.
         # @!attribute [rw] train_budget_milli_node_hours
         #   @return [::Integer]
-        #     The train budget of creating this model, expressed in milli node
+        #     Optional. The train budget of creating this model, expressed in milli node
         #     hours i.e. 1,000 value in this field means 1 node hour. The actual
         #     `train_cost` will be equal or less than this value. If further model
         #     training ceases to provide any improvements, it will stop without using
@@ -174,7 +174,7 @@ module Google
         #     `mobile-core-ml-versatile-1`, `mobile-core-ml-high-accuracy-1`, the train
         #     budget must be between 1,000 and 100,000 milli node hours, inclusive.
         #     The default value is 24, 000 which represents one day in wall time.
-        # @!attribute [rw] train_cost_milli_node_hours
+        # @!attribute [r] train_cost_milli_node_hours
         #   @return [::Integer]
         #     Output only. The actual train cost of creating this model, expressed in
         #     milli node hours, i.e. 1,000 value in this field means 1 node hour.
@@ -190,7 +190,6 @@ module Google
         #     Input only. The number of nodes to deploy the model on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the model's
-        #
         #     {::Google::Cloud::AutoML::V1::ImageClassificationModelMetadata#node_qps node_qps}.
         #     Must be between 1 and 100, inclusive on both ends.
         class ImageClassificationModelDeploymentMetadata
@@ -204,7 +203,6 @@ module Google
         #     Input only. The number of nodes to deploy the model on. A node is an
         #     abstraction of a machine resource, which can handle online prediction QPS
         #     as given in the model's
-        #
         #     [qps_per_node][google.cloud.automl.v1.ImageObjectDetectionModelMetadata.qps_per_node].
         #     Must be between 1 and 100, inclusive on both ends.
         class ImageObjectDetectionModelDeploymentMetadata

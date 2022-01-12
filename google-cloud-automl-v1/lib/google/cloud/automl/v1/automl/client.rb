@@ -40,7 +40,7 @@ module Google
           # Currently the only supported `location_id` is "us-central1".
           #
           # On any input that is documented to expect a string parameter in
-          # snake_case or kebab-case, either of those cases is accepted.
+          # snake_case or dash-case, either of those cases is accepted.
           #
           class Client
             include Paths
@@ -437,8 +437,7 @@ module Google
             #     An expression for filtering the results of the request.
             #
             #       * `dataset_metadata` - for existence of the case (e.g.
-            #                 `image_classification_dataset_metadata:*`). Some examples of
-            #                 using the filter are:
+            #                 `image_classification_dataset_metadata:*`). Some examples of using the filter are:
             #
             #       * `translation_dataset_metadata:*` --> The dataset has
             #                                              `translation_dataset_metadata`.
@@ -1474,7 +1473,6 @@ module Google
             # Deploys a model. If a model is already deployed, deploying it with the
             # same parameters has no effect. Deploying with different parametrs
             # (as e.g. changing
-            #
             # [node_number][google.cloud.automl.v1p1beta.ImageObjectDetectionModelDeploymentMetadata.node_number])
             #  will reset the deployment state without pausing the model's availability.
             #
