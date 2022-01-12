@@ -398,6 +398,27 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket.default_event_based_hold?).must_equal true
   end
 
+  it "creates a bucket with rpo" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name
+    created_bucket.rpo = "ASYNC_TURBO"
+    resp_bucket = bucket_with_location created_bucket, location_type: "dual-region"
+
+    mock.expect :insert_bucket, resp_bucket, [project, created_bucket, predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil]
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name do |b|
+      b.rpo= :ASYNC_TURBO
+    end
+
+    mock.verify
+
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.rpo).wont_be :nil?
+    _(bucket.rpo).must_be_kind_of String
+    _(bucket.rpo).must_equal "ASYNC_TURBO"
+  end
+
   it "raises when creating a bucket with a blank name" do
     bucket_name = ""
 
@@ -784,15 +805,22 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket).must_be :lazy?
   end
 
-  def bucket_with_location created_bucket
+  def bucket_with_location created_bucket,
+                           location_type: bucket_location_type
     resp_bucket = created_bucket.dup
-    resp_bucket.location_type = bucket_location_type
+    resp_bucket.location_type = location_type
     resp_bucket
   end
 
-  def create_bucket_gapi name = nil, location: nil, storage_class: nil,
-                         versioning: nil, logging: nil, website: nil, cors: nil,
-                         billing: nil, lifecycle: nil
+  def create_bucket_gapi name = nil,
+                         location: nil,
+                         storage_class: nil,
+                         versioning: nil,
+                         logging: nil,
+                         website: nil,
+                         cors: nil,
+                         billing: nil,
+                         lifecycle: nil
     options = {
       name: name, location: location, storage_class: storage_class,
       versioning: versioning, logging: logging, website: website,
