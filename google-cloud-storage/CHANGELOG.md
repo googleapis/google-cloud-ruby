@@ -1,5 +1,11 @@
 # Release History
 
+### 1.36.0 / 2022-01-12
+
+#### Features
+
+* add support for RPO (turbo replication). ([#14407](https://www.github.com/googleapis/google-cloud-ruby/issues/14407))
+
 ### 1.35.0 / 2021-12-08
 
 #### Features
