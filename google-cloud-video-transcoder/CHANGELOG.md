@@ -1,5 +1,14 @@
 # Release History
 
+### 1.0.2 / 2022-01-12
+
+#### Documentation
+
+* add code sample and test for concatenating two inpu… ([#16191](https://www.github.com/googleapis/google-cloud-ruby/issues/16191))
+  * docs(transcoder): add code sample and test for concatenating two input videos
+  * Fix spacing and max width
+  * Update create_job_with_concatenated_inputs.rb
+
 ### 1.0.1 / 2022-01-11
 
 #### Documentation
