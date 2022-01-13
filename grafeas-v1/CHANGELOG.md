@@ -4,8 +4,8 @@
 
 #### Features
 
-* BREAKING CHANGE: Use a generalized CVSS Score data type for the VulnerabilityOccurrence#cvssv3 field
-* Added the DiscoveryOccurrence#archive_time field
+* BREAKING CHANGE: Changed the type of VulnerabilityOccurrence#cvssv3 to a generalized CVSS Score data type that can cover multiple CVSS versions.
+* Added DiscoveryOccurrence#archive_time, providing the time when occurrences were archived.
 
 ### 0.3.1 / 2022-01-11
 
