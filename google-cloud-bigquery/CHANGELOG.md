@@ -1,5 +1,17 @@
 # Release History
 
+### 1.38.1 / 2022-01-13
+
+#### Bug Fixes
+
+* Update Bigquery::Data#ddl? to support ALTER TABLE
+* Update Bigquery::QueryJob#ddl? to support ALTER TABLE
+* Remove newline character ('\n') from #ddl? statement types
+
+#### Documentation
+
+* Update Contributing docs
+
 ### 1.38.0 / 2021-11-16
 
 #### Features
