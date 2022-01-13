@@ -20,6 +20,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :version_number, :string, 1
       optional :default_version, :bool, 2
       repeated :available_features, :string, 3
+      optional :type, :enum, 4, "google.cloud.datafusion.v1.Version.Type"
+    end
+    add_enum "google.cloud.datafusion.v1.Version.Type" do
+      value :TYPE_UNSPECIFIED, 0
+      value :TYPE_PREVIEW, 1
+      value :TYPE_GENERAL_AVAILABILITY, 2
     end
     add_message "google.cloud.datafusion.v1.Accelerator" do
       optional :accelerator_type, :enum, 1, "google.cloud.datafusion.v1.Accelerator.AcceleratorType"
@@ -68,6 +74,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dataproc_service_account, :string, 25
       optional :enable_rbac, :bool, 27
       optional :crypto_key_config, :message, 28, "google.cloud.datafusion.v1.CryptoKeyConfig"
+      repeated :disabled_reason, :enum, 29, "google.cloud.datafusion.v1.Instance.DisabledReason"
     end
     add_enum "google.cloud.datafusion.v1.Instance.Type" do
       value :TYPE_UNSPECIFIED, 0
@@ -86,6 +93,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UPDATING, 7
       value :AUTO_UPDATING, 8
       value :AUTO_UPGRADING, 9
+      value :DISABLED, 10
+    end
+    add_enum "google.cloud.datafusion.v1.Instance.DisabledReason" do
+      value :DISABLED_REASON_UNSPECIFIED, 0
+      value :KMS_KEY_ISSUE, 1
     end
     add_message "google.cloud.datafusion.v1.ListInstancesRequest" do
       optional :parent, :string, 1
@@ -146,6 +158,7 @@ module Google
       module V1
         NetworkConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.NetworkConfig").msgclass
         Version = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Version").msgclass
+        Version::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Version.Type").enummodule
         Accelerator = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Accelerator").msgclass
         Accelerator::AcceleratorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Accelerator.AcceleratorType").enummodule
         Accelerator::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Accelerator.State").enummodule
@@ -153,6 +166,7 @@ module Google
         Instance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Instance").msgclass
         Instance::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Instance.Type").enummodule
         Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Instance.State").enummodule
+        Instance::DisabledReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.Instance.DisabledReason").enummodule
         ListInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.ListInstancesRequest").msgclass
         ListInstancesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.ListInstancesResponse").msgclass
         ListAvailableVersionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datafusion.v1.ListAvailableVersionsRequest").msgclass

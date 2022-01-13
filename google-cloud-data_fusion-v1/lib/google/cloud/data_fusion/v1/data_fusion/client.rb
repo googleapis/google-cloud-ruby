@@ -181,8 +181,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location for which to retrieve instance
-            #     information in the format projects/\\{project}/locations/\\{location}.
+            #     Required. The project and location for which to retrieve instance information
+            #     in the format projects/\\{project}/locations/\\{location}.
             #   @param page_size [::Integer]
             #     The maximum number of items to return.
             #   @param page_token [::String]
@@ -283,7 +283,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The project and location for which to retrieve instance information
+            #     Required. The project and location for which to retrieve instance information
             #     in the format projects/\\{project}/locations/\\{location}. If the location is
             #     specified as '-' (wildcard), then all regions available to the project
             #     are queried, and the results are aggregated.
@@ -387,7 +387,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The instance resource name in the format
+            #     Required. The instance resource name in the format
             #     projects/\\{project}/locations/\\{location}/instances/\\{instance}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -473,10 +473,10 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The instance's project and location in the format
+            #     Required. The instance's project and location in the format
             #     projects/\\{project}/locations/\\{location}.
             #   @param instance_id [::String]
-            #     The name of the instance to create.
+            #     Required. The name of the instance to create.
             #   @param instance [::Google::Cloud::DataFusion::V1::Instance, ::Hash]
             #     An instance resource.
             #
@@ -571,7 +571,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The instance resource name in the format
+            #     Required. The instance resource name in the format
             #     projects/\\{project}/locations/\\{location}/instances/\\{instance}
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -665,7 +665,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param instance [::Google::Cloud::DataFusion::V1::Instance, ::Hash]
-            #     The instance resource that replaces the resource on the server. Currently,
+            #     Required. The instance resource that replaces the resource on the server. Currently,
             #     Data Fusion only allows replacing labels, options, and stack driver
             #     settings. All other fields will be ignored.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -768,7 +768,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Name of the Data Fusion instance which need to be restarted in the form of
+            #     Required. Name of the Data Fusion instance which need to be restarted in the form of
             #     projects/\\{project}/locations/\\{location}/instances/\\{instance}
             #
             # @yield [response, operation] Access the result along with the RPC operation
