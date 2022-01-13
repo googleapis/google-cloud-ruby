@@ -31,7 +31,7 @@ def download_file bucket_name:, file_name:, local_file_path:
 
   file.download local_file_path
 
-  puts "Downloaded #{file_name} to #{local_file_path}"
+  puts "Downloaded #{file.name} to #{local_file_path}"
 end
 # [END storage_download_file]
 
