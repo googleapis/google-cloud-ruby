@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.4 / 2022-01-13
+
+#### Documentation
+
+* Minor updates to the reference documentation
+
 ### 1.1.3 / 2022-01-11
 
 #### Documentation
