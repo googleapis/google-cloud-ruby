@@ -4,15 +4,13 @@
 
 #### Bug Fixes
 
-* Update #ddl? to support ALTER TABLE
-  * Update Bigquery::Data#ddl? to support ALTER TABLE
-  * Update Bigquery::QueryJob#ddl? to support ALTER TABLE
-  * Remove newline character ('\n') from #ddl? statement types
+* Update Bigquery::Data#ddl? to support ALTER TABLE
+* Update Bigquery::QueryJob#ddl? to support ALTER TABLE
+* Remove newline character ('\n') from #ddl? statement types
 
 #### Documentation
 
-* Update CONTRIBUTING.md
-  * Add samples/CONTRIBUTING.md
+* Update Contributing docs
 
 ### 1.38.0 / 2021-11-16
 
