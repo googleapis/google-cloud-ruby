@@ -118,19 +118,21 @@ describe Google::Cloud::Bigquery::Dataset, :ddl_dml, :bigquery do
     alter_data = dataset.query "ALTER TABLE #{table_id_2} ADD COLUMN y STRING"
     assert_table_ref alter_data.ddl_target_table, dataset_id, table_id_2
     _(alter_data.statement_type).must_equal "ALTER_TABLE"
-    # _(alter_data.ddl?).must_equal true # Fails with false value. See https://github.com/googleapis/google-cloud-ruby/issues/16097
-    # _(alter_data.dml?).must_equal false # Fails with true value. See https://github.com/googleapis/google-cloud-ruby/issues/16097
-    # _(alter_data.ddl_operation_performed).must_equal "ALTER" # Fails with nil value. See https://github.com/googleapis/google-cloud-ruby/issues/16097#issuecomment-983961475
-    _(alter_data.num_dml_affected_rows).must_be :nil?
-    _(alter_data.deleted_row_count).must_be :nil?
-    _(alter_data.inserted_row_count).must_be :nil?
-    _(alter_data.updated_row_count).must_be :nil?
-    _(alter_data.total).must_equal 0
-    _(alter_data.next?).must_equal false
-    _(alter_data.next).must_be :nil?
-    _(alter_data.all).must_be_kind_of Enumerator
-    _(alter_data.count).must_equal 0
-    _(alter_data.to_a).must_equal []
+    if false # Alter data has incorrect info; see https://github.com/googleapis/google-cloud-ruby/issues/16097
+      _(alter_data.ddl?).must_equal true
+      _(alter_data.dml?).must_equal false
+      _(alter_data.ddl_operation_performed).must_equal "ALTER"
+      _(alter_data.num_dml_affected_rows).must_be :nil?
+      _(alter_data.deleted_row_count).must_be :nil?
+      _(alter_data.inserted_row_count).must_be :nil?
+      _(alter_data.updated_row_count).must_be :nil?
+      _(alter_data.total).must_equal 0
+      _(alter_data.next?).must_equal false
+      _(alter_data.next).must_be :nil?
+      _(alter_data.all).must_be_kind_of Enumerator
+      _(alter_data.count).must_equal 0
+      _(alter_data.to_a).must_equal []
+    end
 
     insert_data = dataset.query "INSERT #{table_id_2} (x) VALUES(101),(102)"
     _(insert_data.ddl_target_table).must_be :nil?
