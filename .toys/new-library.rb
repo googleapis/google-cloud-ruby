@@ -111,7 +111,7 @@ def call_owlbot
   cmd << "--pull" if pull
   cmd << "-#{'v' * verbosity}" if verbosity > 0
   cmd << "-#{'q' * (-verbosity)}" if verbosity < 0
-  cmd << "--proto-path" << protos_path if protos_path
+  cmd << "--protos-path" << protos_path if protos_path
   cmd << "--source-path" << source_path if source_path
   cmd << "--piper-client" << piper_client if piper_client
   exec_tool cmd
