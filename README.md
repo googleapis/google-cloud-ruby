@@ -48,6 +48,7 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Text-To-Speech](#cloud-text-to-speech)
 * [Cloud Trace](#cloud-trace)
 * [Cloud Translation API](#cloud-translation-api)
+* [Transcoder API](#transcoder-api)
 * [Video Intelligence API](#video-intelligence-api)
 * [Cloud Vision API](#cloud-vision-api)
 * [Web Risk API](#web-risk-api)
@@ -367,6 +368,13 @@ linked from the README documents listed below for each service.
 - [google-cloud-trace instrumentation documentation](./google-cloud-trace/INSTRUMENTATION.md)
 - [google-cloud-trace on RubyGems](https://rubygems.org/gems/google-cloud-trace)
 - [Google Cloud Trace documentation](https://cloud.google.com/trace/docs/)
+
+### Transcoder API
+
+- `gem install google-cloud-video-transcoder`
+- [google-cloud-video-transcoder README](google-cloud-video-transcoder/README.md)
+- [google-cloud-video-transcoder on RubyGems](https://rubygems.org/gems/google-cloud-video-transcoder)
+- [Google Cloud Transcoder API documentation](https://cloud.google.com/transcoder/docs/)
 
 ### Cloud Translation API
 
