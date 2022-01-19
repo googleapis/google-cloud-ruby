@@ -243,8 +243,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_enum "google.cloud.contactcenterinsights.v1.ConversationView" do
       value :CONVERSATION_VIEW_UNSPECIFIED, 0
-      value :BASIC, 1
       value :FULL, 2
+      value :BASIC, 1
     end
   end
 end
