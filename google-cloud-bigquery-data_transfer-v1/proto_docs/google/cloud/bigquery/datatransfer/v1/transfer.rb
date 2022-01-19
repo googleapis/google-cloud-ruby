@@ -57,6 +57,15 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # Information about a user.
+          # @!attribute [rw] email
+          #   @return [::String]
+          #     E-mail address of the user.
+          class UserInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Represents a data transfer configuration. A transfer configuration
           # contains all metadata needed to perform a data transfer. For example,
           # `destination_dataset_id` specifies where data should be stored.
@@ -99,7 +108,9 @@ module Google
           #     `first sunday of quarter 00:00`.
           #     See more explanation about the format here:
           #     https://cloud.google.com/appengine/docs/flexible/python/scheduling-jobs-with-cron-yaml#the_schedule_format
-          #     NOTE: the granularity should be at least 8 hours, or less frequent.
+          #
+          #     NOTE: The minimum interval time between recurring transfers depends on the
+          #     data source; refer to the documentation for your data source.
           # @!attribute [rw] schedule_options
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::ScheduleOptions]
           #     Options customizing the data transfer schedule.
@@ -141,6 +152,11 @@ module Google
           #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::EmailPreferences]
           #     Email notifications will be sent according to these preferences
           #     to the email address of the user who owns this transfer config.
+          # @!attribute [r] owner_info
+          #   @return [::Google::Cloud::Bigquery::DataTransfer::V1::UserInfo]
+          #     Output only. Information about the user whose credentials are used to transfer data.
+          #     Populated only for `transferConfigs.get` requests. In case the user
+          #     information is not available, this field will not be populated.
           class TransferConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
