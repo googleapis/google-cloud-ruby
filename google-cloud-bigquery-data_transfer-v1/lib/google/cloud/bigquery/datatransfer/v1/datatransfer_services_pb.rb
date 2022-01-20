@@ -25,10 +25,7 @@ module Google
       module DataTransfer
         module V1
           module DataTransferService
-            # The Google BigQuery Data Transfer Service API enables BigQuery users to
-            # configure the transfer of their data from other Google Products into
-            # BigQuery. This service contains methods that are end user exposed. It backs
-            # up the frontend.
+            # This API allows users to manage their data transfers into BigQuery.
             class Service
 
               include ::GRPC::GenericService
@@ -37,19 +34,17 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.cloud.bigquery.datatransfer.v1.DataTransferService'
 
-              # Retrieves a supported data source and returns its settings,
-              # which can be used for UI rendering.
+              # Retrieves a supported data source and returns its settings.
               rpc :GetDataSource, ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::DataSource
-              # Lists supported data sources and returns their settings,
-              # which can be used for UI rendering.
+              # Lists supported data sources and returns their settings.
               rpc :ListDataSources, ::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::ListDataSourcesResponse
               # Creates a new data transfer configuration.
               rpc :CreateTransferConfig, ::Google::Cloud::Bigquery::DataTransfer::V1::CreateTransferConfigRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig
               # Updates a data transfer configuration.
               # All fields must be set, even if they are not updated.
               rpc :UpdateTransferConfig, ::Google::Cloud::Bigquery::DataTransfer::V1::UpdateTransferConfigRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig
-              # Deletes a data transfer configuration,
-              # including any associated transfer runs and logs.
+              # Deletes a data transfer configuration, including any associated transfer
+              # runs and logs.
               rpc :DeleteTransferConfig, ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferConfigRequest, ::Google::Protobuf::Empty
               # Returns information about a data transfer config.
               rpc :GetTransferConfig, ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferConfigRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::TransferConfig
@@ -71,17 +66,20 @@ module Google
               rpc :GetTransferRun, ::Google::Cloud::Bigquery::DataTransfer::V1::GetTransferRunRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun
               # Deletes the specified transfer run.
               rpc :DeleteTransferRun, ::Google::Cloud::Bigquery::DataTransfer::V1::DeleteTransferRunRequest, ::Google::Protobuf::Empty
-              # Returns information about running and completed jobs.
+              # Returns information about running and completed transfer runs.
               rpc :ListTransferRuns, ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferRunsResponse
-              # Returns user facing log messages for the data transfer run.
+              # Returns log messages for the transfer run.
               rpc :ListTransferLogs, ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::ListTransferLogsResponse
               # Returns true if valid credentials exist for the given data source and
               # requesting user.
-              # Some data sources doesn't support service account, so we need to talk to
-              # them on behalf of the end user. This API just checks whether we have OAuth
-              # token for the particular user, which is a pre-requisite before user can
-              # create a transfer config.
               rpc :CheckValidCreds, ::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsRequest, ::Google::Cloud::Bigquery::DataTransfer::V1::CheckValidCredsResponse
+              # Enroll data sources in a user project. This allows users to create transfer
+              # configurations for these data sources. They will also appear in the
+              # ListDataSources RPC and as such, will appear in the BigQuery UI
+              # 'https://bigquery.cloud.google.com' (and the documents can be found at
+              # https://cloud.google.com/bigquery/bigquery-web-ui and
+              # https://cloud.google.com/bigquery/docs/working-with-transfers).
+              rpc :EnrollDataSources, ::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest, ::Google::Protobuf::Empty
             end
 
             Stub = Service.rpc_stub_class

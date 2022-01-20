@@ -22,12 +22,7 @@ module Google
     module Bigquery
       module DataTransfer
         module V1
-          # Represents a data source parameter with validation rules, so that
-          # parameters can be rendered in the UI. These parameters are given to us by
-          # supported data sources, and include all needed information for rendering
-          # and validation.
-          # Thus, whoever uses this api can decide to generate either generic ui,
-          # or custom data source specific forms.
+          # A parameter used to define custom fields in a data source definition.
           # @!attribute [rw] param_id
           #   @return [::String]
           #     Parameter identifier.
@@ -108,8 +103,7 @@ module Google
             end
           end
 
-          # Represents data source metadata. Metadata is sufficient to
-          # render UI and request proper OAuth tokens.
+          # Defines the properties and custom parameters for a data source.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. Data source resource name.
@@ -266,9 +260,9 @@ module Google
           # A request to create a data transfer configuration. If new credentials are
           # needed for this transfer configuration, an authorization code must be
           # provided. If an authorization code is provided, the transfer configuration
-          # will be associated with the user id corresponding to the
-          # authorization code. Otherwise, the transfer configuration will be associated
-          # with the calling user.
+          # will be associated with the user id corresponding to the authorization code.
+          # Otherwise, the transfer configuration will be associated with the calling
+          # user.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The BigQuery project id where the transfer configuration should be created.
@@ -445,9 +439,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A request to list data transfer runs. UI can use this method to show/filter
-          # specific data transfer runs. The data source can use this method to request
-          # all scheduled transfer runs.
+          # A request to list data transfer runs.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. Name of transfer configuration for which transfer runs should be retrieved.
@@ -634,6 +626,21 @@ module Google
           #   @return [::Array<::Google::Cloud::Bigquery::DataTransfer::V1::TransferRun>]
           #     The transfer runs that were created.
           class StartManualTransferRunsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A request to enroll a set of data sources so they are visible in the
+          # BigQuery UI's `Transfer` tab.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the project resource in the form:
+          #     `projects/{project_id}`
+          # @!attribute [rw] data_source_ids
+          #   @return [::Array<::String>]
+          #     Data sources that are enrolled. It is required to provide at least one
+          #     data source id.
+          class EnrollDataSourcesRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

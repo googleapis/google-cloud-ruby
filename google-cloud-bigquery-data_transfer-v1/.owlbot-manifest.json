@@ -40,6 +40,7 @@
     "snippets/data_transfer_service/create_transfer_config.rb",
     "snippets/data_transfer_service/delete_transfer_config.rb",
     "snippets/data_transfer_service/delete_transfer_run.rb",
+    "snippets/data_transfer_service/enroll_data_sources.rb",
     "snippets/data_transfer_service/get_data_source.rb",
     "snippets/data_transfer_service/get_transfer_config.rb",
     "snippets/data_transfer_service/get_transfer_run.rb",

@@ -19,6 +19,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 1, "google.protobuf.Timestamp"
       optional :end_time, :message, 2, "google.protobuf.Timestamp"
     end
+    add_message "google.cloud.bigquery.datatransfer.v1.UserInfo" do
+      proto3_optional :email, :string, 1
+    end
     add_message "google.cloud.bigquery.datatransfer.v1.TransferConfig" do
       optional :name, :string, 1
       optional :display_name, :string, 3
@@ -35,6 +38,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dataset_region, :string, 14
       optional :notification_pubsub_topic, :string, 15
       optional :email_preferences, :message, 18, "google.cloud.bigquery.datatransfer.v1.EmailPreferences"
+      proto3_optional :owner_info, :message, 27, "google.cloud.bigquery.datatransfer.v1.UserInfo"
       oneof :destination do
         optional :destination_dataset_id, :string, 2
       end
@@ -92,6 +96,7 @@ module Google
         module V1
           EmailPreferences = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.EmailPreferences").msgclass
           ScheduleOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.ScheduleOptions").msgclass
+          UserInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.UserInfo").msgclass
           TransferConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferConfig").msgclass
           TransferRun = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferRun").msgclass
           TransferMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.datatransfer.v1.TransferMessage").msgclass

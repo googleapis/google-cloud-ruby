@@ -926,6 +926,66 @@ class ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::ClientTe
     end
   end
 
+  def test_enroll_data_sources
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    data_source_ids = ["hello world"]
+
+    enroll_data_sources_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :enroll_data_sources, name
+      assert_kind_of ::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal ["hello world"], request["data_source_ids"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, enroll_data_sources_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::DataTransfer::V1::DataTransferService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.enroll_data_sources({ name: name, data_source_ids: data_source_ids }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.enroll_data_sources name: name, data_source_ids: data_source_ids do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.enroll_data_sources ::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.enroll_data_sources({ name: name, data_source_ids: data_source_ids }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.enroll_data_sources(::Google::Cloud::Bigquery::DataTransfer::V1::EnrollDataSourcesRequest.new(name: name, data_source_ids: data_source_ids), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, enroll_data_sources_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
