@@ -22,7 +22,7 @@ module Google
     module Bigquery
       module DataTransfer
         module V1
-          VERSION = "0.4.6"
+          VERSION = "0.5.0"
         end
       end
     end
