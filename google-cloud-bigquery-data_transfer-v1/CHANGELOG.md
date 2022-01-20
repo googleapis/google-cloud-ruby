@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2022-01-20
+
+#### Features
+
+* Support for allowing customer to enroll a datasource.
+
 ### 0.4.6 / 2022-01-11
 
 #### Documentation
