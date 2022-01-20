@@ -37,7 +37,7 @@ module Google
 
           # Enum to specify the institute type.
           module InstituteType
-            # Default value.  This state doesn't show unless an error occurs.
+            # Not used.
             INSTITUTE_TYPE_UNSPECIFIED = 0
 
             # Elementary/Secondary Schools & Districts
@@ -49,7 +49,7 @@ module Google
 
           # Number of students and staff the institute has.
           module InstituteSize
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             INSTITUTE_SIZE_UNSPECIFIED = 0
 
             # 1 - 100
@@ -110,7 +110,7 @@ module Google
 
           # CustomerType of the customer
           module CustomerType
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             CUSTOMER_TYPE_UNSPECIFIED = 0
 
             # Domain-owning customer which needs domain verification to use services.

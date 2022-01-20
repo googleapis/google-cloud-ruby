@@ -80,7 +80,7 @@ module Google
 
           # Indicates the current provisioning state of the entitlement.
           module ProvisioningState
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             PROVISIONING_STATE_UNSPECIFIED = 0
 
             # The entitlement is currently active.
@@ -92,7 +92,7 @@ module Google
 
           # Suspension reason for an entitlement if {::Google::Cloud::Channel::V1::Entitlement#provisioning_state provisioning_state} = SUSPENDED.
           module SuspensionReason
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             SUSPENSION_REASON_UNSPECIFIED = 0
 
             # Entitlement was manually suspended by the Reseller.
@@ -241,7 +241,7 @@ module Google
 
           # Reason of ineligibility.
           module Reason
-            # Reason is not available.
+            # Not used.
             REASON_UNSPECIFIED = 0
 
             # Reseller needs to accept TOS before transferring the SKU.
