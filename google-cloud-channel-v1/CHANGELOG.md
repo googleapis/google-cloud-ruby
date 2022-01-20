@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.4 / 2022-01-20
+
+#### Documentation
+
+* Updating reference documentation.
+
 ### 0.9.3 / 2022-01-11
 
 #### Bug Fixes
