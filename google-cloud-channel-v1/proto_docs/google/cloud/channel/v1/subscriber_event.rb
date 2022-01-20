@@ -35,7 +35,7 @@ module Google
 
           # Type of customer event.
           module Type
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             TYPE_UNSPECIFIED = 0
 
             # Primary domain for customer was changed.
@@ -60,7 +60,7 @@ module Google
 
           # Type of entitlement event.
           module Type
-            # Default value. This state doesn't show unless an error occurs.
+            # Not used.
             TYPE_UNSPECIFIED = 0
 
             # A new entitlement was created.
