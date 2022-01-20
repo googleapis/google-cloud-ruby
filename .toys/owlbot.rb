@@ -172,12 +172,30 @@ def ensure_source_path
   at_exit { FileUtils.rm_rf temp_dir }
   Dir.chdir temp_dir do
     exec ["git", "init"]
-    exec ["git", "remote", "add", "origin", "https://github.com/googleapis/googleapis-gen.git"]
+    if github_token
+      hostname = "#{github_token}@github.com"
+      log_hostname = "xxxxxxxx@github.com"
+    else
+      hostname = log_hostname = "github.com"
+    end
+    add_origin_cmd = ["git", "remote", "add", "origin", "https://#{hostname}/googleapis/googleapis-gen.git"]
+    add_origin_log = ["git", "remote", "add", "origin", "https://#{log_hostname}/googleapis/googleapis-gen.git"]
+    exec add_origin_cmd, log_cmd: add_origin_log.inspect
     exec ["git", "fetch", "--depth=1", "origin", "HEAD"]
     exec ["git", "branch", "github-head", "FETCH_HEAD"]
     exec ["git", "switch", "github-head"]
   end
   set :source_path, temp_dir
+end
+
+def github_token
+  @github_token ||= ENV["GITHUB_TOKEN"] || begin
+    result = exec ["gh", "auth", "status", "-t"], e: false, out: :capture, err: [:child, :out]
+    if result.success? && result.captured_out =~ /Token: (\w+)/
+      puts "**** found token of size #{Regexp.last_match[1].size}"
+      Regexp.last_match[1]
+    end
+  end
 end
 
 def run_owlbot gem_info
