@@ -788,18 +788,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents the options for views of a conversation.
+        # Represents the options for viewing a conversation.
         module ConversationView
-          # Not specified. Defaults to FULL on GetConversationRequest and BASIC for
-          # ListConversationsRequest.
+          # The conversation view is not specified.
+          #
+          # * Defaults to `FULL` in `GetConversationRequest`.
+          # * Defaults to `BASIC` in `ListConversationsRequest`.
           CONVERSATION_VIEW_UNSPECIFIED = 0
 
-          # Transcript field is not populated in the response for Insights
-          # conversation.
-          BASIC = 1
-
-          # All fields are populated for Insights conversation.
+          # Populates all fields in the conversation.
           FULL = 2
+
+          # Populates all fields in the conversation except the transcript.
+          BASIC = 1
         end
       end
     end
