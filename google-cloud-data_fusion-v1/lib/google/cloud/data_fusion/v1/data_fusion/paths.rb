@@ -25,6 +25,27 @@ module Google
           # Path helper methods for the DataFusion API.
           module Paths
             ##
+            # Create a fully-qualified CryptoKey resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param key_ring [String]
+            # @param crypto_key [String]
+            #
+            # @return [::String]
+            def crypto_key_path project:, location:, key_ring:, crypto_key:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "key_ring cannot contain /" if key_ring.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/keyRings/#{key_ring}/cryptoKeys/#{crypto_key}"
+            end
+
+            ##
             # Create a fully-qualified Instance resource string.
             #
             # The resource will be in the following format:
@@ -41,6 +62,23 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/instances/#{instance}"
+            end
+
+            ##
+            # Create a fully-qualified Location resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}`
+            #
+            # @param project [String]
+            # @param location [String]
+            #
+            # @return [::String]
+            def location_path project:, location:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}"
             end
 
             extend self
