@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2022-01-21
+
+#### Features
+
+* Add support for GetInstanceAuthString and RescheduleMaintenance
+
 ### 0.5.1 / 2022-01-11
 
 #### Bug Fixes
