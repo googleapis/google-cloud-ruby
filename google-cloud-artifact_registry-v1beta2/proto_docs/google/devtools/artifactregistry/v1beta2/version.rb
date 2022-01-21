@@ -28,6 +28,8 @@ module Google
         #   @return [::String]
         #     The name of the version, for example:
         #     "projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/art1".
+        #     If the package or version ID parts contain slashes, the slashes are
+        #     escaped.
         # @!attribute [rw] description
         #   @return [::String]
         #     Optional. Description of the version, as specified in its metadata.
@@ -41,6 +43,12 @@ module Google
         #   @return [::Array<::Google::Cloud::ArtifactRegistry::V1beta2::Tag>]
         #     Output only. A list of related tags. Will contain up to 100 tags that
         #     reference this version.
+        # @!attribute [r] metadata
+        #   @return [::Google::Protobuf::Struct]
+        #     Output only. Repository-specific Metadata stored against this version.
+        #     The fields returned are defined by the underlying repository-specific
+        #     resource. Currently, the only resource in use is
+        #     [DockerImage][google.devtools.artifactregistry.v1.DockerImage]
         class Version
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -52,14 +60,16 @@ module Google
         #     The name of the parent resource whose versions will be listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of versions to return.
-        #     Maximum page size is 10,000.
+        #     The maximum number of versions to return. Maximum page size is 1,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::ArtifactRegistry::V1beta2::VersionView]
         #     The view that should be returned in the response.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. The field to order the results by.
         class ListVersionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

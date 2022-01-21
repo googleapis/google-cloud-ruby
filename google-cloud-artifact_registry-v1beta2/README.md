@@ -33,8 +33,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/artifact_registry/v1beta2"
 
 client = ::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
-request = ::Google::Cloud::ArtifactRegistry::V1beta2::ListRepositoriesRequest.new # (request fields as keyword arguments...)
-response = client.list_repositories request
+request = ::Google::Cloud::ArtifactRegistry::V1beta2::ImportAptArtifactsRequest.new # (request fields as keyword arguments...)
+response = client.import_apt_artifacts request
 ```
 
 View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-artifact_registry-v1beta2/latest)

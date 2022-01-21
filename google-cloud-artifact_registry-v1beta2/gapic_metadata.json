@@ -10,6 +10,16 @@
         "grpc": {
           "libraryClient": "::Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client",
           "rpcs": {
+            "ImportAptArtifacts": {
+              "methods": [
+                "import_apt_artifacts"
+              ]
+            },
+            "ImportYumArtifacts": {
+              "methods": [
+                "import_yum_artifacts"
+              ]
+            },
             "ListRepositories": {
               "methods": [
                 "list_repositories"
@@ -113,6 +123,16 @@
             "TestIamPermissions": {
               "methods": [
                 "test_iam_permissions"
+              ]
+            },
+            "GetProjectSettings": {
+              "methods": [
+                "get_project_settings"
+              ]
+            },
+            "UpdateProjectSettings": {
+              "methods": [
+                "update_project_settings"
               ]
             }
           }
