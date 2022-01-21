@@ -22,6 +22,10 @@ module Google
     module ArtifactRegistry
       module V1beta2
         # A Repository for storing artifacts with a specific format.
+        # @!attribute [rw] maven_config
+        #   @return [::Google::Cloud::ArtifactRegistry::V1beta2::Repository::MavenRepositoryConfig]
+        #     Maven repository config contains repository level configuration
+        #     for the repositories of maven type.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the repository, for example:
@@ -55,6 +59,35 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # MavenRepositoryConfig is maven related repository details.
+          # Provides additional configuration details for repositories of the maven
+          # format type.
+          # @!attribute [rw] allow_snapshot_overwrites
+          #   @return [::Boolean]
+          #     The repository with this flag will allow publishing
+          #     the same snapshot versions.
+          # @!attribute [rw] version_policy
+          #   @return [::Google::Cloud::ArtifactRegistry::V1beta2::Repository::MavenRepositoryConfig::VersionPolicy]
+          #     Version policy defines the versions that the registry will accept.
+          class MavenRepositoryConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # VersionPolicy is the version policy for the repository.
+            module VersionPolicy
+              # VERSION_POLICY_UNSPECIFIED - the version policy is not defined.
+              # When the version policy is not defined, no validation is performed
+              # for the versions.
+              VERSION_POLICY_UNSPECIFIED = 0
+
+              # RELEASE - repository will accept only Release versions.
+              RELEASE = 1
+
+              # SNAPSHOT - repository will accept only Snapshot versions.
+              SNAPSHOT = 2
+            end
+          end
+
           # @!attribute [rw] key
           #   @return [::String]
           # @!attribute [rw] value
@@ -71,17 +104,31 @@ module Google
 
             # Docker package format.
             DOCKER = 1
+
+            # Maven package format.
+            MAVEN = 2
+
+            # NPM package format.
+            NPM = 3
+
+            # APT package format.
+            APT = 5
+
+            # YUM package format.
+            YUM = 6
+
+            # Python package format.
+            PYTHON = 8
           end
         end
 
         # The request to list repositories.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The name of the parent resource whose repositories will be listed.
+        #     Required. The name of the parent resource whose repositories will be listed.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     The maximum number of repositories to return.
-        #     Maximum page size is 10,000.
+        #     The maximum number of repositories to return. Maximum page size is 1,000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The next_page_token value returned from a previous list request, if any.
@@ -106,7 +153,7 @@ module Google
         # The request to retrieve a repository.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the repository to retrieve.
+        #     Required. The name of the repository to retrieve.
         class GetRepositoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -115,7 +162,7 @@ module Google
         # The request to create a new repository.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The name of the parent resource where the repository will be created.
+        #     Required. The name of the parent resource where the repository will be created.
         # @!attribute [rw] repository_id
         #   @return [::String]
         #     The repository id to use for this repository.
@@ -144,7 +191,7 @@ module Google
         # The request to delete a repository.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name of the repository to delete.
+        #     Required. The name of the repository to delete.
         class DeleteRepositoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
