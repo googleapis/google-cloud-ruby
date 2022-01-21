@@ -43,10 +43,8 @@ module Google
         #     Note: Redis instances are managed and addressed at regional level so
         #     location_id here refers to a GCP region; however, users may choose which
         #     specific zone (or collection of zones for cross-zone instances) an instance
-        #     should be provisioned in. Refer to
-        #     {::Google::Cloud::Redis::V1beta1::Instance#location_id location_id} and
-        #     {::Google::Cloud::Redis::V1beta1::Instance#alternative_location_id alternative_location_id}
-        #     fields for more details.
+        #     should be provisioned in. Refer to {::Google::Cloud::Redis::V1beta1::Instance#location_id location_id} and
+        #     {::Google::Cloud::Redis::V1beta1::Instance#alternative_location_id alternative_location_id} fields for more details.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     An arbitrary and optional user-provided name for the instance.
@@ -154,11 +152,33 @@ module Google
         #   @return [::Google::Cloud::Redis::V1beta1::Instance::ConnectMode]
         #     Optional. The network connect mode of the Redis instance.
         #     If not provided, the connect mode defaults to DIRECT_PEERING.
+        # @!attribute [rw] auth_enabled
+        #   @return [::Boolean]
+        #     Optional. Indicates whether OSS Redis AUTH is enabled for the instance. If set to
+        #     "true" AUTH is enabled on the instance. Default value is "false" meaning
+        #     AUTH is disabled.
+        # @!attribute [r] server_ca_certs
+        #   @return [::Array<::Google::Cloud::Redis::V1beta1::TlsCertificate>]
+        #     Output only. List of server CA certificates for the instance.
+        # @!attribute [rw] transit_encryption_mode
+        #   @return [::Google::Cloud::Redis::V1beta1::Instance::TransitEncryptionMode]
+        #     Optional. The TLS mode of the Redis instance.
+        #     If not provided, TLS is disabled for the instance.
+        # @!attribute [rw] maintenance_policy
+        #   @return [::Google::Cloud::Redis::V1beta1::MaintenancePolicy]
+        #     Optional. The maintenance policy for the instance. If not provided,
+        #     maintenance events can be performed at any time.
+        # @!attribute [r] maintenance_schedule
+        #   @return [::Google::Cloud::Redis::V1beta1::MaintenanceSchedule]
+        #     Output only. Date and time of upcoming maintenance events which have been
+        #     scheduled.
         # @!attribute [rw] replica_count
         #   @return [::Integer]
-        #     Optional. The number of replica nodes. Valid range for standard tier
-        #     is [1-5] and defaults to 1. Valid value for basic tier is 0 and defaults
-        #     to 0.
+        #     Optional. The number of replica nodes. The valid range for the Standard Tier with
+        #     read replicas enabled is [1-5] and defaults to 2. If read replicas are not
+        #     enabled for a Standard Tier instance, the only valid value is 1 and the
+        #     default is 1. The valid value for basic tier is 0 and the default is also
+        #     0.
         # @!attribute [r] nodes
         #   @return [::Array<::Google::Cloud::Redis::V1beta1::NodeInfo>]
         #     Output only. Info per node.
@@ -174,7 +194,8 @@ module Google
         #     endpoint. Standard tier only. Write requests should target 'port'.
         # @!attribute [rw] read_replicas_mode
         #   @return [::Google::Cloud::Redis::V1beta1::Instance::ReadReplicasMode]
-        #     Optional. Read replica mode.
+        #     Optional. Read replica mode. Can only be specified when trying to create the
+        #     instance.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -255,10 +276,22 @@ module Google
             PRIVATE_SERVICE_ACCESS = 2
           end
 
+          # Available TLS modes.
+          module TransitEncryptionMode
+            # Not set.
+            TRANSIT_ENCRYPTION_MODE_UNSPECIFIED = 0
+
+            # Client to Server traffic encryption enabled with server authentication.
+            SERVER_AUTHENTICATION = 1
+
+            # TLS is disabled for the instance.
+            DISABLED = 2
+          end
+
           # Read replicas mode.
           module ReadReplicasMode
-            # If not set, Memorystore for Redis backend will pick the mode based on
-            # other fields in the request.
+            # If not set, Memorystore Redis backend will default to
+            # READ_REPLICAS_DISABLED.
             READ_REPLICAS_MODE_UNSPECIFIED = 0
 
             # If disabled, read endpoint will not be provided and the instance cannot
@@ -266,13 +299,104 @@ module Google
             READ_REPLICAS_DISABLED = 1
 
             # If enabled, read endpoint will be provided and the instance can scale
-            # up and down the number of replicas.
+            # up and down the number of replicas. Not valid for basic tier.
             READ_REPLICAS_ENABLED = 2
           end
         end
 
-        # Request for
-        # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances}.
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#reschedule_maintenance RescheduleMaintenance}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        # @!attribute [rw] reschedule_type
+        #   @return [::Google::Cloud::Redis::V1beta1::RescheduleMaintenanceRequest::RescheduleType]
+        #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+        # @!attribute [rw] schedule_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp when the maintenance shall be rescheduled to if
+        #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+        #     example `2012-11-15T16:19:00.094Z`.
+        class RescheduleMaintenanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Reschedule options.
+          module RescheduleType
+            # Not set.
+            RESCHEDULE_TYPE_UNSPECIFIED = 0
+
+            # If the user wants to schedule the maintenance to happen now.
+            IMMEDIATE = 1
+
+            # If the user wants to use the existing maintenance policy to find the
+            # next available window.
+            NEXT_AVAILABLE_WINDOW = 2
+
+            # If the user wants to reschedule the maintenance to a specific time.
+            SPECIFIC_TIME = 3
+          end
+        end
+
+        # Maintenance policy for an instance.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was last updated.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of what this policy is for. Create/Update methods
+        #     return INVALID_ARGUMENT if the length is greater than 512.
+        # @!attribute [rw] weekly_maintenance_window
+        #   @return [::Array<::Google::Cloud::Redis::V1beta1::WeeklyMaintenanceWindow>]
+        #     Optional. Maintenance window that is applied to resources covered by this
+        #     policy. Minimum 1. For the current version, the maximum number of
+        #     weekly_window is expected to be one.
+        class MaintenancePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Time window in which disruptive maintenance updates occur. Non-disruptive
+        # updates can occur inside or outside this window.
+        # @!attribute [rw] day
+        #   @return [::Google::Type::DayOfWeek]
+        #     Required. The day of week that maintenance updates occur.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Type::TimeOfDay]
+        #     Required. Start time of the window in UTC time.
+        # @!attribute [r] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. Duration of the maintenance window. The current window is fixed at 1 hour.
+        class WeeklyMaintenanceWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Upcoming maintenance schedule. If no maintenance is scheduled, fields are not
+        # populated.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of any upcoming scheduled maintenance for this instance.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of any upcoming scheduled maintenance for this instance.
+        # @!attribute [rw] can_reschedule
+        #   @return [::Boolean]
+        #     If the scheduled maintenance can be rescheduled, default is true.
+        # @!attribute [r] schedule_deadline_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The deadline that the maintenance schedule start time can not go beyond,
+        #     including reschedule.
+        class MaintenanceSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the instance location using the form:
@@ -290,15 +414,13 @@ module Google
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The `next_page_token` value returned from a previous
-        #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances}
-        #     request, if any.
+        #     {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances} request, if any.
         class ListInstancesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response for
-        # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances}.
+        # Response for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#list_instances ListInstances}.
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::Redis::V1beta1::Instance>]
         #     A list of Redis instances in the project in the specified location,
@@ -335,8 +457,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for
-        # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#create_instance CreateInstance}.
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#get_instance_auth_string GetInstanceAuthString}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        class GetInstanceAuthStringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Instance AUTH string details.
+        # @!attribute [rw] auth_string
+        #   @return [::String]
+        #     AUTH string set on the instance.
+        class InstanceAuthString
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#create_instance CreateInstance}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the instance location using the form:
@@ -360,8 +501,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for
-        # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#update_instance UpdateInstance}.
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#update_instance UpdateInstance}.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update. At least one path must be supplied in
@@ -382,8 +522,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for
-        # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#upgrade_instance UpgradeInstance}.
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#upgrade_instance UpgradeInstance}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Redis instance resource name using the form:
@@ -397,8 +536,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for
-        # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#delete_instance DeleteInstance}.
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#delete_instance DeleteInstance}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Redis instance resource name using the form:
@@ -474,8 +612,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for
-        # {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#failover_instance Failover}.
+        # Request for {::Google::Cloud::Redis::V1beta1::CloudRedis::Client#failover_instance Failover}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Redis instance resource name using the form:
@@ -533,6 +670,31 @@ module Google
         # Defines specific information for a particular zone. Currently empty and
         # reserved for future use only.
         class ZoneMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # TlsCertificate Resource
+        # @!attribute [rw] serial_number
+        #   @return [::String]
+        #     Serial number, as extracted from the certificate.
+        # @!attribute [rw] cert
+        #   @return [::String]
+        #     PEM representation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the certificate was created in [RFC
+        #     3339](https://tools.ietf.org/html/rfc3339) format, for example
+        #     `2020-05-18T00:00:00.094Z`.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the certificate expires in [RFC
+        #     3339](https://tools.ietf.org/html/rfc3339) format, for example
+        #     `2020-05-18T00:00:00.094Z`.
+        # @!attribute [rw] sha1_fingerprint
+        #   @return [::String]
+        #     Sha1 Fingerprint of the certificate.
+        class TlsCertificate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
