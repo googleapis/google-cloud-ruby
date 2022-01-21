@@ -288,36 +288,6 @@ module Google
       end
 
       ##
-      # Create a new client object for Conversations.
-      #
-      # By default, this returns an instance of
-      # [Google::Cloud::Dialogflow::V2::Conversations::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/Conversations/Client.html)
-      # for version V2 of the API.
-      # However, you can specify specify a different API version by passing it in the
-      # `version` parameter. If the Conversations service is
-      # supported by that API version, and the corresponding gem is available, the
-      # appropriate versioned client will be returned.
-      #
-      # ## About Conversations
-      #
-      # Service for managing Conversations.
-      #
-      # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v2`.
-      # @return [Conversations::Client] A client object for the specified version.
-      #
-      def self.conversations version: :v2, &block
-        require "google/cloud/dialogflow/#{version.to_s.downcase}"
-
-        package_name = Google::Cloud::Dialogflow
-                       .constants
-                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                       .first
-        package_module = Google::Cloud::Dialogflow.const_get package_name
-        package_module.const_get(:Conversations).const_get(:Client).new(&block)
-      end
-
-      ##
       # Create a new client object for ConversationProfiles.
       #
       # By default, this returns an instance of
@@ -345,6 +315,36 @@ module Google
                        .first
         package_module = Google::Cloud::Dialogflow.const_get package_name
         package_module.const_get(:ConversationProfiles).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for Conversations.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dialogflow::V2::Conversations::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-v2/latest/Google/Cloud/Dialogflow/V2/Conversations/Client.html)
+      # for version V2 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the Conversations service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About Conversations
+      #
+      # Service for managing Conversations.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v2`.
+      # @return [Conversations::Client] A client object for the specified version.
+      #
+      def self.conversations version: :v2, &block
+        require "google/cloud/dialogflow/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dialogflow
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dialogflow.const_get package_name
+        package_module.const_get(:Conversations).const_get(:Client).new(&block)
       end
 
       ##
