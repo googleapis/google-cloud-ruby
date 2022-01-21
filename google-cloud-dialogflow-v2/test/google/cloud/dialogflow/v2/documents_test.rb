@@ -239,6 +239,76 @@ class ::Google::Cloud::Dialogflow::V2::Documents::ClientTest < Minitest::Test
     end
   end
 
+  def test_import_documents
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    gcs_source = {}
+    document_template = {}
+    import_gcs_custom_metadata = true
+
+    import_documents_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_documents, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::GcsSources), request["gcs_source"]
+      assert_equal :gcs_source, request.source
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::ImportDocumentTemplate), request["document_template"]
+      assert_equal true, request["import_gcs_custom_metadata"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_documents_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::Documents::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_documents parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_documents ::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_documents({ parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_documents(::Google::Cloud::Dialogflow::V2::ImportDocumentsRequest.new(parent: parent, gcs_source: gcs_source, document_template: document_template, import_gcs_custom_metadata: import_gcs_custom_metadata), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_documents_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_document
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new

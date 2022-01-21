@@ -74,6 +74,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :suggestion_trigger_settings, :message, 10, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionTriggerSettings"
       optional :query_config, :message, 6, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig"
       optional :conversation_model_config, :message, 7, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig"
+      optional :conversation_process_config, :message, 8, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig"
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionConfig" do
       repeated :feature_configs, :message, 2, "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionFeatureConfig"
@@ -105,6 +106,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig" do
       optional :model, :string, 1
+    end
+    add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig" do
+      optional :recent_sentences_count, :int32, 2
     end
     add_message "google.cloud.dialogflow.v2.HumanAgentAssistantConfig.MessageAnalysisConfig" do
       optional :enable_entity_extraction, :bool, 2
@@ -171,6 +175,7 @@ module Google
         HumanAgentAssistantConfig::SuggestionQueryConfig::DialogflowQuerySource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.DialogflowQuerySource").msgclass
         HumanAgentAssistantConfig::SuggestionQueryConfig::ContextFilterSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.SuggestionQueryConfig.ContextFilterSettings").msgclass
         HumanAgentAssistantConfig::ConversationModelConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationModelConfig").msgclass
+        HumanAgentAssistantConfig::ConversationProcessConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.ConversationProcessConfig").msgclass
         HumanAgentAssistantConfig::MessageAnalysisConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentAssistantConfig.MessageAnalysisConfig").msgclass
         HumanAgentHandoffConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentHandoffConfig").msgclass
         HumanAgentHandoffConfig::LivePersonConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.HumanAgentHandoffConfig.LivePersonConfig").msgclass

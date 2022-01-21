@@ -243,6 +243,9 @@ module Google
           # @!attribute [rw] conversation_model_config
           #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationModelConfig]
           #     Configs of custom conversation model.
+          # @!attribute [rw] conversation_process_config
+          #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::ConversationProcessConfig]
+          #     Configs for processing conversation.
           class SuggestionFeatureConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -383,6 +386,16 @@ module Google
           #     Conversation model resource name. Format: `projects/<Project
           #     ID>/conversationModels/<Model ID>`.
           class ConversationModelConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Config to process conversation.
+          # @!attribute [rw] recent_sentences_count
+          #   @return [::Integer]
+          #     Number of recent non-small-talk sentences to use as context for article
+          #     and FAQ suggestion
+          class ConversationProcessConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

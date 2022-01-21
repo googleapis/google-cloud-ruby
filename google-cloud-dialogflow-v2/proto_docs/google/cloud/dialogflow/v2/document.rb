@@ -218,6 +218,68 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::Dialogflow::V2::Documents::Client#import_documents Documents.ImportDocuments}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The knowledge base to import documents into.
+        #     Format: `projects/<Project ID>/locations/<Location
+        #     ID>/knowledgeBases/<Knowledge Base ID>`.
+        # @!attribute [rw] gcs_source
+        #   @return [::Google::Cloud::Dialogflow::V2::GcsSources]
+        #     The Google Cloud Storage location for the documents.
+        #     The path can include a wildcard.
+        #
+        #     These URIs may have the forms
+        #     `gs://<bucket-name>/<object-name>`.
+        #     `gs://<bucket-name>/<object-path>/*.<extension>`.
+        # @!attribute [rw] document_template
+        #   @return [::Google::Cloud::Dialogflow::V2::ImportDocumentTemplate]
+        #     Required. Document template used for importing all the documents.
+        # @!attribute [rw] import_gcs_custom_metadata
+        #   @return [::Boolean]
+        #     Whether to import custom metadata from Google Cloud Storage.
+        #     Only valid when the document source is Google Cloud Storage URI.
+        class ImportDocumentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The template used for importing documents.
+        # @!attribute [rw] mime_type
+        #   @return [::String]
+        #     Required. The MIME type of the document.
+        # @!attribute [rw] knowledge_types
+        #   @return [::Array<::Google::Cloud::Dialogflow::V2::Document::KnowledgeType>]
+        #     Required. The knowledge type of document content.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Metadata for the document. The metadata supports arbitrary
+        #     key-value pairs. Suggested use cases include storing a document's title,
+        #     an external URL distinct from the document's content_uri, etc.
+        #     The max size of a `key` or a `value` of the metadata is 1024 bytes.
+        class ImportDocumentTemplate
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadataEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response message for {::Google::Cloud::Dialogflow::V2::Documents::Client#import_documents Documents.ImportDocuments}.
+        # @!attribute [rw] warnings
+        #   @return [::Array<::Google::Rpc::Status>]
+        #     Includes details about skipped documents or any other warnings.
+        class ImportDocumentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::Dialogflow::V2::Documents::Client#delete_document Documents.DeleteDocument}.
         # @!attribute [rw] name
         #   @return [::String]
@@ -295,6 +357,9 @@ module Google
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata::State]
         #     Output only. The current state of this operation.
+        # @!attribute [rw] knowledge_base
+        #   @return [::String]
+        #     The name of the knowledge base interacted with during the operation.
         class KnowledgeOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
