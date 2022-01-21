@@ -78,7 +78,7 @@ module Google
             # @!attribute [rw] enable_continuous_run
             #   @return [::Boolean]
             #     Whether to run test cases in {::Google::Cloud::Dialogflow::CX::V3::Environment::TestCasesConfig#test_cases TestCasesConfig.test_cases} periodically.
-            #     Default false. If set to ture, run once a day.
+            #     Default false. If set to true, run once a day.
             # @!attribute [rw] enable_predeployment_run
             #   @return [::Boolean]
             #     Whether to run test cases in {::Google::Cloud::Dialogflow::CX::V3::Environment::TestCasesConfig#test_cases TestCasesConfig.test_cases} before
