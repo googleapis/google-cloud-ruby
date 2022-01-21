@@ -265,7 +265,14 @@ def find_changed_directories files
   dirs = Set.new
   files.each do |file|
     if file =~ %r{^([^/]+)/.+$}
-      dirs << Regexp.last_match[1]
+      dir = Regexp.last_match[1]
+      dirs << dir
+      if dir =~ %r{^(.+)-v\d[^-]*$}
+        wrapper_dir = Regexp.last_match[1]
+        if Dir.exists? wrapper_dir
+          dirs << wrapper_dir
+        end
+      end
     end
   end
   filter_gem_dirs dirs.to_a
