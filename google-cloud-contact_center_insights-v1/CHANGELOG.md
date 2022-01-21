@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.1 / 2022-01-21
+
+#### Documentation
+
+* Update to reference docs.
+
 ### 0.7.0 / 2022-01-11
 
 #### Features
