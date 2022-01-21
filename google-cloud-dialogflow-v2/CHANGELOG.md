@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 / 2022-01-21
+
+#### Features
+
+* Add support for ConversationProcessConfig, ImportDocument and SuggestSmarReplies.
+
 ### 0.13.0 / 2022-01-11
 
 #### Features
