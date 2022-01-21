@@ -188,7 +188,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Settings for exporting conversations to
-            # [Insights](https://cloud.google.com/dialogflow/priv/docs/insights).
+            # [Insights](https://cloud.google.com/contact-center/insights/docs).
             # @!attribute [rw] enable_insights_export
             #   @return [::Boolean]
             #     If enabled, we will automatically exports

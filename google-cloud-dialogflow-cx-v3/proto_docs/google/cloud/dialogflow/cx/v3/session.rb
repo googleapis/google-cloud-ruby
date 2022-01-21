@@ -624,8 +624,9 @@ module Google
           #     filled for {::Google::Cloud::Dialogflow::CX::V3::Match::MatchType `INTENT`} match type.
           # @!attribute [rw] event
           #   @return [::String]
-          #     The event that matched the query. Only filled for
-          #     {::Google::Cloud::Dialogflow::CX::V3::Match::MatchType `EVENT`} match type.
+          #     The event that matched the query. Filled for
+          #     {::Google::Cloud::Dialogflow::CX::V3::Match::MatchType `EVENT`}, {::Google::Cloud::Dialogflow::CX::V3::Match::MatchType `NO_MATCH`} and
+          #     {::Google::Cloud::Dialogflow::CX::V3::Match::MatchType `NO_INPUT`} match types.
           # @!attribute [rw] parameters
           #   @return [::Google::Protobuf::Struct]
           #     The collection of parameters extracted from the query.
