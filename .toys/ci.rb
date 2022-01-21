@@ -267,7 +267,7 @@ def find_changed_directories files
     if file =~ %r{^([^/]+)/.+$}
       dir = Regexp.last_match[1]
       dirs << dir
-      if dir =~ %r{^(.+)-v[^-]+$}
+      if dir =~ %r{^(.+)-v\d[^-]*$}
         wrapper_dir = Regexp.last_match[1]
         if Dir.exists? wrapper_dir
           dirs << wrapper_dir
@@ -295,7 +295,7 @@ def filter_gem_dirs dirs
     else
       false
     end
-  end.uniq.sort
+  end.sort
 end
 
 def run_in_dir dir
