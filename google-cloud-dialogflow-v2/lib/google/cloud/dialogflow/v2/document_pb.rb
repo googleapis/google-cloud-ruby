@@ -54,6 +54,22 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :document, :message, 2, "google.cloud.dialogflow.v2.Document"
     end
+    add_message "google.cloud.dialogflow.v2.ImportDocumentsRequest" do
+      optional :parent, :string, 1
+      optional :document_template, :message, 3, "google.cloud.dialogflow.v2.ImportDocumentTemplate"
+      optional :import_gcs_custom_metadata, :bool, 4
+      oneof :source do
+        optional :gcs_source, :message, 2, "google.cloud.dialogflow.v2.GcsSources"
+      end
+    end
+    add_message "google.cloud.dialogflow.v2.ImportDocumentTemplate" do
+      optional :mime_type, :string, 1
+      repeated :knowledge_types, :enum, 2, "google.cloud.dialogflow.v2.Document.KnowledgeType"
+      map :metadata, :string, :string, 3
+    end
+    add_message "google.cloud.dialogflow.v2.ImportDocumentsResponse" do
+      repeated :warnings, :message, 1, "google.rpc.Status"
+    end
     add_message "google.cloud.dialogflow.v2.DeleteDocumentRequest" do
       optional :name, :string, 1
     end
@@ -79,6 +95,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dialogflow.v2.KnowledgeOperationMetadata" do
       optional :state, :enum, 1, "google.cloud.dialogflow.v2.KnowledgeOperationMetadata.State"
+      optional :knowledge_base, :string, 3
     end
     add_enum "google.cloud.dialogflow.v2.KnowledgeOperationMetadata.State" do
       value :STATE_UNSPECIFIED, 0
@@ -100,6 +117,9 @@ module Google
         ListDocumentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListDocumentsRequest").msgclass
         ListDocumentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ListDocumentsResponse").msgclass
         CreateDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.CreateDocumentRequest").msgclass
+        ImportDocumentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ImportDocumentsRequest").msgclass
+        ImportDocumentTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ImportDocumentTemplate").msgclass
+        ImportDocumentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ImportDocumentsResponse").msgclass
         DeleteDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.DeleteDocumentRequest").msgclass
         UpdateDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.UpdateDocumentRequest").msgclass
         ReloadDocumentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.v2.ReloadDocumentRequest").msgclass

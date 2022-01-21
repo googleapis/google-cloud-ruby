@@ -293,6 +293,11 @@
               "methods": [
                 "suggest_faq_answers"
               ]
+            },
+            "SuggestSmartReplies": {
+              "methods": [
+                "suggest_smart_replies"
+              ]
             }
           }
         }
@@ -311,40 +316,6 @@
             "UpdateAnswerRecord": {
               "methods": [
                 "update_answer_record"
-              ]
-            }
-          }
-        }
-      }
-    },
-    "Conversations": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dialogflow::V2::Conversations::Client",
-          "rpcs": {
-            "CreateConversation": {
-              "methods": [
-                "create_conversation"
-              ]
-            },
-            "ListConversations": {
-              "methods": [
-                "list_conversations"
-              ]
-            },
-            "GetConversation": {
-              "methods": [
-                "get_conversation"
-              ]
-            },
-            "CompleteConversation": {
-              "methods": [
-                "complete_conversation"
-              ]
-            },
-            "ListMessages": {
-              "methods": [
-                "list_messages"
               ]
             }
           }
@@ -385,6 +356,40 @@
         }
       }
     },
+    "Conversations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Conversations::Client",
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "create_conversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "list_conversations"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "get_conversation"
+              ]
+            },
+            "CompleteConversation": {
+              "methods": [
+                "complete_conversation"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "list_messages"
+              ]
+            }
+          }
+        }
+      }
+    },
     "Documents": {
       "clients": {
         "grpc": {
@@ -403,6 +408,11 @@
             "CreateDocument": {
               "methods": [
                 "create_document"
+              ]
+            },
+            "ImportDocuments": {
+              "methods": [
+                "import_documents"
               ]
             },
             "DeleteDocument": {

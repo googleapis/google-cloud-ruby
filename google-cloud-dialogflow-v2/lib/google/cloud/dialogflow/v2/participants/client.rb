@@ -650,13 +650,13 @@ module Google
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
             #   @param latest_message [::String]
-            #     The name of the latest conversation message to compile suggestion
+            #     Optional. The name of the latest conversation message to compile suggestion
             #     for. If empty, it will be the latest message of the conversation.
             #
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
             #   @param context_size [::Integer]
-            #     Max number of messages prior to and including
+            #     Optional. Max number of messages prior to and including
             #     {::Google::Cloud::Dialogflow::V2::SuggestArticlesRequest#latest_message latest_message} to use as context
             #     when compiling the suggestion. By default 20 and at most 50.
             #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
@@ -750,13 +750,13 @@ module Google
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
             #   @param latest_message [::String]
-            #     The name of the latest conversation message to compile suggestion
+            #     Optional. The name of the latest conversation message to compile suggestion
             #     for. If empty, it will be the latest message of the conversation.
             #
             #     Format: `projects/<Project ID>/locations/<Location
             #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
             #   @param context_size [::Integer]
-            #     Max number of messages prior to and including
+            #     Optional. Max number of messages prior to and including
             #     [latest_message] to use as context when compiling the
             #     suggestion. By default 20 and at most 50.
             #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
@@ -819,6 +819,108 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @participants_stub.call_rpc :suggest_faq_answers, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets smart replies for a participant based on specific historical
+            # messages.
+            #
+            # @overload suggest_smart_replies(request, options = nil)
+            #   Pass arguments to `suggest_smart_replies` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload suggest_smart_replies(parent: nil, current_text_input: nil, latest_message: nil, context_size: nil)
+            #   Pass arguments to `suggest_smart_replies` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the participant to fetch suggestion for.
+            #     Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversations/<Conversation ID>/participants/<Participant ID>`.
+            #   @param current_text_input [::Google::Cloud::Dialogflow::V2::TextInput, ::Hash]
+            #     The current natural language text segment to compile suggestion
+            #     for. This provides a way for user to get follow up smart reply suggestion
+            #     after a smart reply selection, without sending a text message.
+            #   @param latest_message [::String]
+            #     The name of the latest conversation message to compile suggestion
+            #     for. If empty, it will be the latest message of the conversation.
+            #
+            #     Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversations/<Conversation ID>/messages/<Message ID>`.
+            #   @param context_size [::Integer]
+            #     Max number of messages prior to and including
+            #     [latest_message] to use as context when compiling the
+            #     suggestion. By default 20 and at most 50.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::Participants::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest.new
+            #
+            #   # Call the suggest_smart_replies method.
+            #   result = client.suggest_smart_replies request
+            #
+            #   # The returned object is of type Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse.
+            #   p result
+            #
+            def suggest_smart_replies request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.suggest_smart_replies.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.suggest_smart_replies.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.suggest_smart_replies.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @participants_stub.call_rpc :suggest_smart_replies, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -996,6 +1098,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :suggest_faq_answers
+                ##
+                # RPC-specific configuration for `suggest_smart_replies`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :suggest_smart_replies
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1013,6 +1120,8 @@ module Google
                   @suggest_articles = ::Gapic::Config::Method.new suggest_articles_config
                   suggest_faq_answers_config = parent_rpcs.suggest_faq_answers if parent_rpcs.respond_to? :suggest_faq_answers
                   @suggest_faq_answers = ::Gapic::Config::Method.new suggest_faq_answers_config
+                  suggest_smart_replies_config = parent_rpcs.suggest_smart_replies if parent_rpcs.respond_to? :suggest_smart_replies
+                  @suggest_smart_replies = ::Gapic::Config::Method.new suggest_smart_replies_config
 
                   yield self if block_given?
                 end

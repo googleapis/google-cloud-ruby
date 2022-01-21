@@ -54,6 +54,9 @@ module Google
             # Gets suggested faq answers for a participant based on specific historical
             # messages.
             rpc :SuggestFaqAnswers, ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersRequest, ::Google::Cloud::Dialogflow::V2::SuggestFaqAnswersResponse
+            # Gets smart replies for a participant based on specific historical
+            # messages.
+            rpc :SuggestSmartReplies, ::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest, ::Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse
           end
 
           Stub = Service.rpc_stub_class
