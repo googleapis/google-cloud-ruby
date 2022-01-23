@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.4 / 2022-01-23
+
+#### Documentation
+
+* Update reference documentation.
+
 ### 0.1.3 / 2022-01-11
 
 #### Bug Fixes
