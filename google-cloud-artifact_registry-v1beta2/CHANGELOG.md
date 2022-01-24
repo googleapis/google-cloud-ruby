@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2022-01-23
+
+#### Features
+
+* Add support for ImportAptArtifacts, ImportYumArtifacts, GetProjectSettings and UpdateProjectSettings
+
 ### 0.3.6 / 2022-01-11
 
 #### Bug Fixes
