@@ -3,11 +3,11 @@
 echo "Current working directory: "
 pwd
 
-echo "List all files."
-ls -lashR
+echo "Current Uer ID"
+id
 
-echo "Change directory to root"
-cd /
+echo "Change directory to /secrets"
+cd /secrets
 
 echo "List all files."
 ls -lashR
