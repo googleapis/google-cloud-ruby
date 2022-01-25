@@ -660,7 +660,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, gvnic: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, locations: nil, workload_metadata_config: nil, name: nil, upgrade_settings: nil, tags: nil, taints: nil, labels: nil, linux_node_config: nil, kubelet_config: nil, gcfs_config: nil, gvnic: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -724,6 +724,8 @@ module Google
             #     Parameters that can be configured on Linux nodes.
             #   @param kubelet_config [::Google::Cloud::Container::V1beta1::NodeKubeletConfig, ::Hash]
             #     Node kubelet configs.
+            #   @param gcfs_config [::Google::Cloud::Container::V1beta1::GcfsConfig, ::Hash]
+            #     GCFS config.
             #   @param gvnic [::Google::Cloud::Container::V1beta1::VirtualNIC, ::Hash]
             #     Enable or disable gvnic on the node pool.
             #
@@ -1146,8 +1148,8 @@ module Google
             #     Required. Deprecated. The name of the cluster to upgrade.
             #     This field has been deprecated and replaced by the name field.
             #   @param addons_config [::Google::Cloud::Container::V1beta1::AddonsConfig, ::Hash]
-            #     Required. The desired configurations for the various addons available to
-            #     run in the cluster.
+            #     Required. The desired configurations for the various addons available to run in the
+            #     cluster.
             #   @param name [::String]
             #     The name (project, location, cluster) of the cluster to set addons.
             #     Specified in the format `projects/*/locations/*/clusters/*`.
