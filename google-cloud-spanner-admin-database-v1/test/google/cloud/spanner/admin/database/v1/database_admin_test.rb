@@ -126,6 +126,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
     create_statement = "hello world"
     extra_statements = ["hello world"]
     encryption_config = {}
+    database_dialect = :DATABASE_DIALECT_UNSPECIFIED
 
     create_database_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_database, name
@@ -134,6 +135,7 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       assert_equal "hello world", request["create_statement"]
       assert_equal ["hello world"], request["extra_statements"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Spanner::Admin::Database::V1::EncryptionConfig), request["encryption_config"]
+      assert_equal :DATABASE_DIALECT_UNSPECIFIED, request["database_dialect"]
       refute_nil options
     end
 
@@ -144,35 +146,35 @@ class ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::ClientTest <
       end
 
       # Use hash object
-      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config }) do |response, operation|
+      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_database parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config do |response, operation|
+      client.create_database parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_database ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config) do |response, operation|
+      client.create_database ::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config }, grpc_options) do |response, operation|
+      client.create_database({ parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_database(::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config), grpc_options) do |response, operation|
+      client.create_database(::Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseRequest.new(parent: parent, create_statement: create_statement, extra_statements: extra_statements, encryption_config: encryption_config, database_dialect: database_dialect), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

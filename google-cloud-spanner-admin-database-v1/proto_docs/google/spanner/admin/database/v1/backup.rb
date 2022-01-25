@@ -83,6 +83,9 @@ module Google
             # @!attribute [r] encryption_info
             #   @return [::Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo]
             #     Output only. The encryption information for the backup.
+            # @!attribute [r] database_dialect
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
+            #     Output only. The database dialect information for the backup.
             class Backup
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -85,6 +85,19 @@ module Google
                 CUSTOMER_MANAGED_ENCRYPTION = 2
               end
             end
+
+            # Indicates the dialect type of a database.
+            module DatabaseDialect
+              # Default value. This value will create a database with the
+              # GOOGLE_STANDARD_SQL dialect.
+              DATABASE_DIALECT_UNSPECIFIED = 0
+
+              # Google standard SQL.
+              GOOGLE_STANDARD_SQL = 1
+
+              # PostgreSQL supported SQL.
+              POSTGRESQL = 2
+            end
           end
         end
       end
