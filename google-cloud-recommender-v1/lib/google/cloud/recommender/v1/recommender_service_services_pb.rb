@@ -36,8 +36,8 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.recommender.v1.Recommender'
 
-            # Lists insights for a Cloud project. Requires the recommender.*.list IAM
-            # permission for the specified insight type.
+            # Lists insights for the specified Cloud Resource. Requires the
+            # recommender.*.list IAM permission for the specified insight type.
             rpc :ListInsights, ::Google::Cloud::Recommender::V1::ListInsightsRequest, ::Google::Cloud::Recommender::V1::ListInsightsResponse
             # Gets the requested insight. Requires the recommender.*.get IAM permission
             # for the specified insight type.
@@ -49,8 +49,8 @@ module Google
             # MarkInsightAccepted can be applied to insights in ACTIVE state. Requires
             # the recommender.*.update IAM permission for the specified insight.
             rpc :MarkInsightAccepted, ::Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest, ::Google::Cloud::Recommender::V1::Insight
-            # Lists recommendations for a Cloud project. Requires the recommender.*.list
-            # IAM permission for the specified recommender.
+            # Lists recommendations for the specified Cloud Resource. Requires the
+            # recommender.*.list IAM permission for the specified recommender.
             rpc :ListRecommendations, ::Google::Cloud::Recommender::V1::ListRecommendationsRequest, ::Google::Cloud::Recommender::V1::ListRecommendationsResponse
             # Gets the requested recommendation. Requires the recommender.*.get
             # IAM permission for the specified recommender.

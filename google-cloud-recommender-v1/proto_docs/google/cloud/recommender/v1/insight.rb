@@ -54,6 +54,9 @@ module Google
         # @!attribute [rw] category
         #   @return [::Google::Cloud::Recommender::V1::Insight::Category]
         #     Category being targeted by the insight.
+        # @!attribute [rw] severity
+        #   @return [::Google::Cloud::Recommender::V1::Insight::Severity]
+        #     Insight's severity.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Fingerprint of the Insight. Provides optimistic locking when updating
@@ -91,6 +94,24 @@ module Google
 
             # This insight is related to manageability.
             MANAGEABILITY = 4
+          end
+
+          # Insight severity levels.
+          module Severity
+            # Insight has unspecified severity.
+            SEVERITY_UNSPECIFIED = 0
+
+            # Insight has low severity.
+            LOW = 1
+
+            # Insight has medium severity.
+            MEDIUM = 2
+
+            # Insight has high severity.
+            HIGH = 3
+
+            # Insight has critical severity.
+            CRITICAL = 4
           end
         end
 
