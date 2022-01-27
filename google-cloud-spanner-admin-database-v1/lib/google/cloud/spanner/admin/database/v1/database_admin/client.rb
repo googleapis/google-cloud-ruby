@@ -31,10 +31,11 @@ module Google
               #
               # Cloud Spanner Database Admin API
               #
-              # The Cloud Spanner Database Admin API can be used to create, drop, and
-              # list databases. It also enables updating the schema of pre-existing
-              # databases. It can be also used to create, delete and list backups for a
-              # database and to restore from an existing backup.
+              # The Cloud Spanner Database Admin API can be used to:
+              #   * create, drop, and list databases
+              #   * update the schema of pre-existing databases
+              #   * create, delete and list backups for a database
+              #   * restore a database from an existing backup
               #
               class Client
                 include Paths
@@ -354,7 +355,7 @@ module Google
                 #   @param options [::Gapic::CallOptions, ::Hash]
                 #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
                 #
-                # @overload create_database(parent: nil, create_statement: nil, extra_statements: nil, encryption_config: nil)
+                # @overload create_database(parent: nil, create_statement: nil, extra_statements: nil, encryption_config: nil, database_dialect: nil)
                 #   Pass arguments to `create_database` via keyword arguments. Note that at
                 #   least one keyword argument is required. To specify no parameters, or to keep all
                 #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -377,6 +378,8 @@ module Google
                 #     Optional. The encryption configuration for the database. If this field is not
                 #     specified, Cloud Spanner will encrypt/decrypt all data at rest using
                 #     Google default encryption.
+                #   @param database_dialect [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
+                #     Optional. The dialect of the Cloud Spanner Database.
                 #
                 # @yield [response, operation] Access the result along with the RPC operation
                 # @yieldparam response [::Gapic::Operation]
@@ -661,6 +664,8 @@ module Google
                 # Drops (aka deletes) a Cloud Spanner database.
                 # Completed backups for the database will be retained according to their
                 # `expire_time`.
+                # Note: Cloud Spanner might continue to accept requests for a few seconds
+                # after the database has been deleted.
                 #
                 # @overload drop_database(request, options = nil)
                 #   Pass arguments to `drop_database` via a request object, either of type

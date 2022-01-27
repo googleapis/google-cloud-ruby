@@ -9,6 +9,7 @@ require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/spanner/admin/database/v1/backup_pb'
 require 'google/spanner/admin/database/v1/common_pb'
@@ -32,6 +33,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :version_retention_period, :string, 6
       optional :earliest_version_time, :message, 7, "google.protobuf.Timestamp"
       optional :default_leader, :string, 9
+      optional :database_dialect, :enum, 10, "google.spanner.admin.database.v1.DatabaseDialect"
     end
     add_enum "google.spanner.admin.database.v1.Database.State" do
       value :STATE_UNSPECIFIED, 0
@@ -53,6 +55,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_statement, :string, 2
       repeated :extra_statements, :string, 3
       optional :encryption_config, :message, 4, "google.spanner.admin.database.v1.EncryptionConfig"
+      optional :database_dialect, :enum, 5, "google.spanner.admin.database.v1.DatabaseDialect"
     end
     add_message "google.spanner.admin.database.v1.CreateDatabaseMetadata" do
       optional :database, :string, 1

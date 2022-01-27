@@ -93,6 +93,9 @@ module Google
             #     This is the same as the value of default_leader
             #     database option set using DatabaseAdmin.CreateDatabase or
             #     DatabaseAdmin.UpdateDatabaseDdl. If not explicitly set, this is empty.
+            # @!attribute [r] database_dialect
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
+            #     Output only. The dialect of the Cloud Spanner Database.
             class Database
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,6 +180,9 @@ module Google
             #     Optional. The encryption configuration for the database. If this field is not
             #     specified, Cloud Spanner will encrypt/decrypt all data at rest using
             #     Google default encryption.
+            # @!attribute [rw] database_dialect
+            #   @return [::Google::Cloud::Spanner::Admin::Database::V1::DatabaseDialect]
+            #     Optional. The dialect of the Cloud Spanner Database.
             class CreateDatabaseRequest
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
