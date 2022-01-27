@@ -319,7 +319,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The parent (project and location) where the Features will be listed.
+            #     Required. The parent (project and location) where the Features will be listed.
             #     Specified in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
             #     When requesting a 'page' of resources, `page_size` specifies number of
@@ -526,7 +526,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The Feature resource name in the format
+            #     Required. The Feature resource name in the format
             #     `projects/*/locations/*/features/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -736,7 +736,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The parent (project and location) where the Feature will be created.
+            #     Required. The parent (project and location) where the Feature will be created.
             #     Specified in the format `projects/*/locations/*`.
             #   @param feature_id [::String]
             #     The ID of the feature to create.
@@ -960,7 +960,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The Feature resource name in the format
+            #     Required. The Feature resource name in the format
             #     `projects/*/locations/*/features/*`.
             #   @param force [::Boolean]
             #     If set to true, the delete will ignore any outstanding resources for
@@ -1191,7 +1191,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     The Feature resource name in the format
+            #     Required. The Feature resource name in the format
             #     `projects/*/locations/*/features/*`.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask of fields to update.

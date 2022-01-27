@@ -106,7 +106,95 @@ module Google
         # @!attribute [r] kubernetes_metadata
         #   @return [::Google::Cloud::GkeHub::V1::KubernetesMetadata]
         #     Output only. Useful Kubernetes-specific metadata.
+        # @!attribute [rw] kubernetes_resource
+        #   @return [::Google::Cloud::GkeHub::V1::KubernetesResource]
+        #     Optional. The in-cluster Kubernetes Resources that should be applied for a correctly
+        #     registered cluster, in the steady state. These resources:
+        #
+        #       * Ensure that the cluster is exclusively registered to one and only one
+        #         Hub Membership.
+        #       * Propagate Workload Pool Information available in the Membership
+        #         Authority field.
+        #       * Ensure proper initial configuration of default Hub Features.
         class MembershipEndpoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # KubernetesResource contains the YAML manifests and configuration for
+        # Membership Kubernetes resources in the cluster. After CreateMembership or
+        # UpdateMembership, these resources should be re-applied in the cluster.
+        # @!attribute [rw] membership_cr_manifest
+        #   @return [::String]
+        #     Input only. The YAML representation of the Membership CR. This field is ignored for GKE
+        #     clusters where Hub can read the CR directly.
+        #
+        #     Callers should provide the CR that is currently present in the cluster
+        #     during CreateMembership or UpdateMembership, or leave this field empty if
+        #     none exists. The CR manifest is used to validate the cluster has not been
+        #     registered with another Membership.
+        # @!attribute [r] membership_resources
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::ResourceManifest>]
+        #     Output only. Additional Kubernetes resources that need to be applied to the cluster
+        #     after Membership creation, and after every update.
+        #
+        #     This field is only populated in the Membership returned from a successful
+        #     long-running operation from CreateMembership or UpdateMembership. It is not
+        #     populated during normal GetMembership or ListMemberships requests. To get
+        #     the resource manifest after the initial registration, the caller should
+        #     make a UpdateMembership call with an empty field mask.
+        # @!attribute [r] connect_resources
+        #   @return [::Array<::Google::Cloud::GkeHub::V1::ResourceManifest>]
+        #     Output only. The Kubernetes resources for installing the GKE Connect agent
+        #
+        #     This field is only populated in the Membership returned from a successful
+        #     long-running operation from CreateMembership or UpdateMembership. It is not
+        #     populated during normal GetMembership or ListMemberships requests. To get
+        #     the resource manifest after the initial registration, the caller should
+        #     make a UpdateMembership call with an empty field mask.
+        # @!attribute [rw] resource_options
+        #   @return [::Google::Cloud::GkeHub::V1::ResourceOptions]
+        #     Optional. Options for Kubernetes resource generation.
+        class KubernetesResource
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ResourceOptions represent options for Kubernetes resource generation.
+        # @!attribute [rw] connect_version
+        #   @return [::String]
+        #     Optional. The Connect agent version to use for connect_resources. Defaults to the
+        #     latest GKE Connect version. The version must be a currently supported
+        #     version, obsolete versions will be rejected.
+        # @!attribute [rw] v1beta1_crd
+        #   @return [::Boolean]
+        #     Optional. Use `apiextensions/v1beta1` instead of `apiextensions/v1` for
+        #     CustomResourceDefinition resources.
+        #     This option should be set for clusters with Kubernetes apiserver versions
+        #     <1.16.
+        # @!attribute [rw] k8s_version
+        #   @return [::String]
+        #     Optional. Major version of the Kubernetes cluster. This is only used to determine
+        #     which version to use for the CustomResourceDefinition resources,
+        #     `apiextensions/v1beta1` or`apiextensions/v1`.
+        class ResourceOptions
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ResourceManifest represents a single Kubernetes resource to be applied to
+        # the cluster.
+        # @!attribute [rw] manifest
+        #   @return [::String]
+        #     YAML manifest of the resource.
+        # @!attribute [rw] cluster_scoped
+        #   @return [::Boolean]
+        #     Whether the resource provided in the manifest is `cluster_scoped`.
+        #     If unset, the manifest is assumed to be namespace scoped.
+        #
+        #     This field is used for REST mapping when applying the resource in a
+        #     cluster.
+        class ResourceManifest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -116,7 +204,7 @@ module Google
         #   @return [::String]
         #     Immutable. Self-link of the GCP resource for the GKE cluster. For example:
         #
-        #         //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster
+        #     //container.googleapis.com/projects/my-project/locations/us-west1-a/clusters/my-cluster
         #
         #     Zonal clusters are also supported.
         class GkeCluster

@@ -276,7 +276,7 @@ module Google
         # Request message for `GkeHub.ListFeatures` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent (project and location) where the Features will be listed.
+        #     Required. The parent (project and location) where the Features will be listed.
         #     Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -332,7 +332,7 @@ module Google
         # Request message for `GkeHub.GetFeature` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The Feature resource name in the format
+        #     Required. The Feature resource name in the format
         #     `projects/*/locations/*/features/*`
         class GetFeatureRequest
           include ::Google::Protobuf::MessageExts
@@ -342,7 +342,7 @@ module Google
         # Request message for the `GkeHub.CreateFeature` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent (project and location) where the Feature will be created.
+        #     Required. The parent (project and location) where the Feature will be created.
         #     Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] feature_id
         #   @return [::String]
@@ -373,7 +373,7 @@ module Google
         # Request message for `GkeHub.DeleteFeature` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The Feature resource name in the format
+        #     Required. The Feature resource name in the format
         #     `projects/*/locations/*/features/*`.
         # @!attribute [rw] force
         #   @return [::Boolean]
@@ -403,7 +403,7 @@ module Google
         # Request message for `GkeHub.UpdateFeature` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The Feature resource name in the format
+        #     Required. The Feature resource name in the format
         #     `projects/*/locations/*/features/*`.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
