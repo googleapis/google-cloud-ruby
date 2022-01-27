@@ -294,6 +294,10 @@ done
 TRAMPOLINE_BUILD_FILE="${TRAMPOLINE_BUILD_FILE#github/*/}"
 log_yellow "Using TRAMPOLINE_BUILD_FILE: ${TRAMPOLINE_BUILD_FILE}"
 
+# We need to make sure that the TRAMPOLINE_BUILD_FILE is executable.
+log_yellow "Setting the executable bit on the TRAMPOLINE_BUILD_FILE explicitly."
+chmod a+rx ${TRAMPOLINE_BUILD_FILE}
+
 # ignore error on docker operations and test execution
 set +e
 
