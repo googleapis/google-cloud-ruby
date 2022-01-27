@@ -34,6 +34,14 @@ module Google
         #   @return [::Google::Cloud::Spanner::V1::StructType]
         #     If {::Google::Cloud::Spanner::V1::Type#code code} == {::Google::Cloud::Spanner::V1::TypeCode::STRUCT STRUCT}, then `struct_type`
         #     provides type information for the struct's fields.
+        # @!attribute [rw] type_annotation
+        #   @return [::Google::Cloud::Spanner::V1::TypeAnnotationCode]
+        #     The {::Google::Cloud::Spanner::V1::TypeAnnotationCode TypeAnnotationCode} that disambiguates SQL type that Spanner will
+        #     use to represent values of this type during query processing. This is
+        #     necessary for some type codes because a single {::Google::Cloud::Spanner::V1::TypeCode TypeCode} can be mapped
+        #     to different SQL types depending on the SQL dialect. {::Google::Cloud::Spanner::V1::Type#type_annotation type_annotation}
+        #     typically is not needed to process the content of a value (it doesn't
+        #     affect serialization) and clients can ignore it on the read path.
         class Type
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -132,14 +140,33 @@ module Google
           # <br>(ExponentIndicator is `"e"` or `"E"`)
           NUMERIC = 10
 
-          # Encoded as a JSON-formatted 'string' as described in RFC 7159. The
-          # following rules will be applied when parsing JSON input:
-          # - Whitespace will be stripped from the document.
-          # - If a JSON object has duplicate keys, only the first key will be
-          #   preserved.
+          # Encoded as a JSON-formatted `string` as described in RFC 7159. The
+          # following rules are applied when parsing JSON input:
+          #
+          # - Whitespace characters are not preserved.
+          # - If a JSON object has duplicate keys, only the first key is preserved.
           # - Members of a JSON object are not guaranteed to have their order
-          #   preserved. JSON array elements will have their order preserved.
+          #   preserved.
+          # - JSON array elements will have their order preserved.
           JSON = 11
+        end
+
+        # `TypeAnnotationCode` is used as a part of {::Google::Cloud::Spanner::V1::Type Type} to
+        # disambiguate SQL types that should be used for a given Cloud Spanner value.
+        # Disambiguation is needed because the same Cloud Spanner type can be mapped to
+        # different SQL types depending on SQL dialect. TypeAnnotationCode doesn't
+        # affect the way value is serialized.
+        module TypeAnnotationCode
+          # Not specified.
+          TYPE_ANNOTATION_CODE_UNSPECIFIED = 0
+
+          # PostgreSQL compatible NUMERIC type. This annotation needs to be applied to
+          # {::Google::Cloud::Spanner::V1::Type Type} instances having {::Google::Cloud::Spanner::V1::TypeCode::NUMERIC NUMERIC}
+          # type code to specify that values of this type should be treated as
+          # PostgreSQL NUMERIC values. Currently this annotation is always needed for
+          # {::Google::Cloud::Spanner::V1::TypeCode::NUMERIC NUMERIC} when a client interacts with PostgreSQL-enabled
+          # Spanner databases.
+          PG_NUMERIC = 2
         end
       end
     end
