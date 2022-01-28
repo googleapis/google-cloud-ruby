@@ -87,6 +87,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.documentai.v1.ReviewDocumentOperationMetadata" do
       optional :common_metadata, :message, 5, "google.cloud.documentai.v1.CommonOperationMetadata"
+      optional :question_id, :string, 6
     end
   end
 end
