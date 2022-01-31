@@ -14,16 +14,16 @@
 
 require_relative "helper"
 require_relative "../acls"
-require_relative "../storage_acl_add_bucket_default_owner.rb"
-require_relative "../storage_acl_add_bucket_owner.rb"
-require_relative "../storage_acl_add_file_owner.rb"
-require_relative "../storage_acl_print_bucket_for_user.rb"
-require_relative "../storage_acl_print_bucket.rb"
-require_relative "../storage_acl_print_file_for_user.rb"
-require_relative "../storage_acl_print_file.rb"
-require_relative "../storage_acl_remove_bucket_default.rb"
-require_relative "../storage_acl_remove_bucket.rb"
-require_relative "../storage_acl_remove_file.rb"
+require_relative "../storage_add_bucket_default_owner.rb"
+require_relative "../storage_add_bucket_owner.rb"
+require_relative "../storage_add_file_owner.rb"
+require_relative "../storage_print_bucket_acl_for_user.rb"
+require_relative "../storage_print_bucket_acl.rb"
+require_relative "../storage_print_file_acl_for_user.rb"
+require_relative "../storage_print_file_acl.rb"
+require_relative "../storage_remove_bucket_acl.rb"
+require_relative "../storage_remove_bucket_default_acl.rb"
+require_relative "../storage_remove_file_acl.rb"
 
 describe "ACL Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
