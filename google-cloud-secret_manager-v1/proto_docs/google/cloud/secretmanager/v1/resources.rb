@@ -107,6 +107,11 @@ module Google
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. Etag of the currently stored {::Google::Cloud::SecretManager::V1::SecretVersion SecretVersion}.
+        # @!attribute [r] client_specified_payload_checksum
+        #   @return [::Boolean]
+        #     Output only. True if payload checksum specified in {::Google::Cloud::SecretManager::V1::SecretPayload SecretPayload} object has been
+        #     received by {::Google::Cloud::SecretManager::V1::SecretManagerService::Client SecretManagerService} on
+        #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#add_secret_version SecretManagerService.AddSecretVersion}.
         class SecretVersion
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -319,6 +324,18 @@ module Google
         # @!attribute [rw] data
         #   @return [::String]
         #     The secret data. Must be no larger than 64KiB.
+        # @!attribute [rw] data_crc32c
+        #   @return [::Integer]
+        #     Optional. If specified, {::Google::Cloud::SecretManager::V1::SecretManagerService::Client SecretManagerService} will verify the integrity of the
+        #     received {::Google::Cloud::SecretManager::V1::SecretPayload#data data} on {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#add_secret_version SecretManagerService.AddSecretVersion} calls using
+        #     the crc32c checksum and store it to include in future
+        #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#access_secret_version SecretManagerService.AccessSecretVersion} responses. If a checksum is
+        #     not provided in the {::Google::Cloud::SecretManager::V1::SecretManagerService::Client#add_secret_version SecretManagerService.AddSecretVersion} request, the
+        #     {::Google::Cloud::SecretManager::V1::SecretManagerService::Client SecretManagerService} will generate and store one for you.
+        #
+        #     The CRC32C value is encoded as a Int64 for compatibility, and can be
+        #     safely downconverted to uint32 in languages that support this type.
+        #     https://cloud.google.com/apis/design/design_patterns#integer_types
         class SecretPayload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
