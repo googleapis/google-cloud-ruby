@@ -31,4 +31,7 @@ def add_file_owner bucket_name:, file_name:, email:
   # [END storage_add_file_owner]
 end
 
-add_file_owner bucket_name: arguments.shift, file_name: arguments.shift, email: arguments.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  add_file_owner bucket_name: arguments.shift, file_name: arguments.shift,
+                 email: arguments.shift
+end

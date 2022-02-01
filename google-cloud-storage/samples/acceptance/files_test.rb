@@ -144,9 +144,9 @@ describe "Files Snippets" do
 
   it "upload_file_from_memory" do
     assert_output "Uploaded file #{remote_file_name} to bucket #{bucket.name} with content: #{file_content}\n" do
-        upload_file_from_memory bucket_name: bucket.name,
-                                file_name: remote_file_name,
-                                file_content: file_content
+      upload_file_from_memory bucket_name: bucket.name,
+                              file_name: remote_file_name,
+                              file_content: file_content
     end
   end
 

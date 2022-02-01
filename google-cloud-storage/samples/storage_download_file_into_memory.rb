@@ -14,27 +14,26 @@
 
 # [START storage_download_file_into_memory]
 def download_file_into_memory bucket_name:, file_name:
-    # The name of the bucket to access
-    # bucket_name = "my-bucket"
-  
-    # The name of the remote file to download
-    # file_name = "file.txt"
-  
-    require "google/cloud/storage"
-  
-    storage = Google::Cloud::Storage.new
-    bucket  = storage.bucket bucket_name, skip_lookup: true
-    file    = bucket.file file_name
-  
-    downloaded = file.download
-    downloaded.rewind # Optional - not needed on first read
-    contents = downloaded.read
-  
-    puts "Contents of storage object #{file.name} in bucket #{bucket_name} are: #{contents}"
-  end
-  # [END storage_download_file_into_memory]
-  
-  if $PROGRAM_NAME == __FILE__
-    download_file_into_memory bucket_name: ARGV.shift, file_name: ARGV.shift
-  end
-  
+  # The name of the bucket to access
+  # bucket_name = "my-bucket"
+
+  # The name of the remote file to download
+  # file_name = "file.txt"
+
+  require "google/cloud/storage"
+
+  storage = Google::Cloud::Storage.new
+  bucket  = storage.bucket bucket_name, skip_lookup: true
+  file    = bucket.file file_name
+
+  downloaded = file.download
+  downloaded.rewind # Optional - not needed on first read
+  contents = downloaded.read
+
+  puts "Contents of storage object #{file.name} in bucket #{bucket_name} are: #{contents}"
+end
+# [END storage_download_file_into_memory]
+
+if $PROGRAM_NAME == __FILE__
+  download_file_into_memory bucket_name: ARGV.shift, file_name: ARGV.shift
+end

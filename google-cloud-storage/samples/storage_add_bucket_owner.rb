@@ -29,4 +29,4 @@ def add_bucket_owner bucket_name:, email:
   # [END storage_add_bucket_owner]
 end
 
-add_bucket_owner bucket_name: arguments.shift, email: arguments.shift  if $PROGRAM_NAME == __FILE__
+add_bucket_owner bucket_name: arguments.shift, email: arguments.shift if $PROGRAM_NAME == __FILE__

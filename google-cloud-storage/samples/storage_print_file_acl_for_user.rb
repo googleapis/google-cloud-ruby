@@ -31,4 +31,7 @@ def print_file_acl_for_user bucket_name:, file_name:, email:
   # [END storage_print_file_acl_for_user]
 end
 
-print_file_acl_for_user bucket_name: arguments.shift, file_name: arguments.shift, email: arguments.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  print_file_acl_for_user bucket_name: arguments.shift, file_name: arguments.shift,
+                          email: arguments.shift
+end

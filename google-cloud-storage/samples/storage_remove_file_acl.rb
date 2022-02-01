@@ -31,4 +31,7 @@ def remove_file_acl bucket_name:, file_name:, email:
   # [END storage_remove_file_owner]
 end
 
-remove_file_acl bucket_name: arguments.shift, file_name: arguments.shift, email: arguments.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  remove_file_acl bucket_name: arguments.shift, file_name: arguments.shift,
+                  email: arguments.shift
+end

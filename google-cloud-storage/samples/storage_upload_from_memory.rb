@@ -14,25 +14,27 @@
 
 # [START storage_file_upload_from_memory]
 def upload_file_from_memory bucket_name:, file_name:, file_content:
-    # The ID of your GCS bucket
-    # bucket_name = "your-unique-bucket-name"
-  
-    # The ID of your GCS object
-    # file_name = "your-file-name"
-  
-    # The contents to upload to your file
-    # file_content = "Hello, world!"
-  
-    require "google/cloud/storage"
-  
-    storage = Google::Cloud::Storage.new
-    bucket  = storage.bucket bucket_name, skip_lookup: true
-  
-    file = bucket.create_file StringIO.new(file_content), file_name
-  
-    puts "Uploaded file #{file_name} to bucket #{bucket_name} with content: #{file_content}"
-  end
-  # [END storage_file_upload_from_memory]
-  
-  upload_file_from_memory bucket_name: ARGV.shift, file_name: ARGV.shift, file_content: ARGV.shift if $PROGRAM_NAME == __FILE__
-  
+  # The ID of your GCS bucket
+  # bucket_name = "your-unique-bucket-name"
+
+  # The ID of your GCS object
+  # file_name = "your-file-name"
+
+  # The contents to upload to your file
+  # file_content = "Hello, world!"
+
+  require "google/cloud/storage"
+
+  storage = Google::Cloud::Storage.new
+  bucket  = storage.bucket bucket_name, skip_lookup: true
+
+  file = bucket.create_file StringIO.new(file_content), file_name
+
+  puts "Uploaded file #{file.name} to bucket #{bucket_name} with content: #{file_content}"
+end
+# [END storage_file_upload_from_memory]
+
+if $PROGRAM_NAME == __FILE__
+  upload_file_from_memory bucket_name: ARGV.shift, file_name: ARGV.shift,
+                          file_content: ARGV.shift
+end
