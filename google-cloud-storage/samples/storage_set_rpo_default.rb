@@ -24,7 +24,7 @@ def set_rpo_default bucket_name:
 
   bucket.rpo = :DEFAULT
 
-  puts "Turbo replication is set to default for #{bucket_name}."
+  puts "The replication behavior or recovery point objective (RPO) for #{bucket_name} is set to default."
 end
 # [END storage_set_rpo_default]
 
