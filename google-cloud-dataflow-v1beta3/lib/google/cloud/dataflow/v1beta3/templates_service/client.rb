@@ -219,6 +219,14 @@ module Google
                 gapic_version: ::Google::Cloud::Dataflow::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.create_job_from_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.create_job_from_template.retry_policy
@@ -312,6 +320,14 @@ module Google
                 gapic_version: ::Google::Cloud::Dataflow::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.launch_template.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.launch_template.retry_policy
@@ -398,6 +414,14 @@ module Google
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataflow::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_template.timeout,
                                      metadata:     metadata,

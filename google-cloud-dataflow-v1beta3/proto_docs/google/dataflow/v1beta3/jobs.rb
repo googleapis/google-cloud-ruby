@@ -232,7 +232,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for a Cloud BigTable connector used by the job.
+        # Metadata for a Cloud Bigtable connector used by the job.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     ProjectId accessed in the connection.
@@ -327,10 +327,10 @@ module Google
         #     Identification of a BigQuery source used in the Dataflow job.
         # @!attribute [rw] big_table_details
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::BigTableIODetails>]
-        #     Identification of a Cloud BigTable source used in the Dataflow job.
+        #     Identification of a Cloud Bigtable source used in the Dataflow job.
         # @!attribute [rw] pubsub_details
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::PubSubIODetails>]
-        #     Identification of a PubSub source used in the Dataflow job.
+        #     Identification of a Pub/Sub source used in the Dataflow job.
         # @!attribute [rw] file_details
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::FileIODetails>]
         #     Identification of a File source used in the Dataflow job.
