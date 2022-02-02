@@ -204,12 +204,13 @@ module Google
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
             #   @param rows [::Google::Cloud::Bigtable::V2::RowSet, ::Hash]
-            #     The row keys and/or ranges to read. If not specified, reads from all rows.
+            #     The row keys and/or ranges to read sequentially. If not specified, reads
+            #     from all rows.
             #   @param filter [::Google::Cloud::Bigtable::V2::RowFilter, ::Hash]
             #     The filter to apply to the contents of the specified row(s). If unset,
             #     reads the entirety of each row.
             #   @param rows_limit [::Integer]
-            #     The read will terminate after committing to N rows' worth of results. The
+            #     The read will stop after committing to N rows' worth of results. The
             #     default (zero) is to return all results.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -256,11 +257,15 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.table_name
+              if request.table_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.read_rows.timeout,
@@ -352,11 +357,15 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.table_name
+              if request.table_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.sample_row_keys.timeout,
@@ -449,11 +458,15 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.table_name
+              if request.table_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.mutate_row.timeout,
@@ -548,11 +561,15 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.table_name
+              if request.table_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.mutate_rows.timeout,
@@ -658,11 +675,15 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.table_name
+              if request.table_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.check_and_mutate_row.timeout,
@@ -759,11 +780,15 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.table_name
+              if request.table_name &&
+                 %r{^projects/[^/]+/instances/[^/]+/tables/[^/]+/?$}.match?(request.table_name)
                 header_params["table_name"] = request.table_name
               end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.read_modify_write_row.timeout,
