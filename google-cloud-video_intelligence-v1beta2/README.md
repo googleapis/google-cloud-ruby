@@ -37,7 +37,7 @@ request = ::Google::Cloud::VideoIntelligence::V1beta2::AnnotateVideoRequest.new 
 response = client.annotate_video request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-video_intelligence-v1beta2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1beta2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/video-intelligence)

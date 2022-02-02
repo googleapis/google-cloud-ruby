@@ -37,7 +37,7 @@ request = ::Google::Cloud::VpcAccess::V1::CreateConnectorRequest.new # (request 
 response = client.create_connector request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-vpc_access-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-vpc_access-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/vpc/docs/serverless-vpc-access)

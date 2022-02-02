@@ -37,7 +37,7 @@ request = ::Google::Cloud::Memcache::V1beta2::ListInstancesRequest.new # (reques
 response = client.list_instances request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-memcache-v1beta2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-memcache-v1beta2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/memorystore/docs/memcached/)

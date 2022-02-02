@@ -37,7 +37,7 @@ request = ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new # (request fields a
 response = client.read_rows request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-bigtable-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/bigtable)

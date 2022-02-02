@@ -37,7 +37,7 @@ request = ::Google::Cloud::Billing::Budgets::V1::CreateBudgetRequest.new # (requ
 response = client.create_budget request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-billing-budgets-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-billing-budgets-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/billing/docs/how-to/budget-api-overview)

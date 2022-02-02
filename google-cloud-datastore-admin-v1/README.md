@@ -37,7 +37,7 @@ request = ::Google::Cloud::Datastore::Admin::V1::ExportEntitiesRequest.new # (re
 response = client.export_entities request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-datastore-admin-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-datastore-admin-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/datastore)

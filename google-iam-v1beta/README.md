@@ -37,7 +37,7 @@ request = ::Google::Iam::V1beta::ListWorkloadIdentityPoolsRequest.new # (request
 response = client.list_workload_identity_pools request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-iam-v1beta/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-iam-v1beta/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/iam/docs/manage-workload-identity-pools-providers)

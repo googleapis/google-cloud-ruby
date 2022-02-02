@@ -37,7 +37,7 @@ request = ::Google::Cloud::RecommendationEngine::V1beta1::CreateCatalogItemReque
 response = client.create_catalog_item request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-recommendation_engine-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/recommendations-ai/)

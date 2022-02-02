@@ -37,7 +37,7 @@ request = ::Google::Cloud::OsConfig::V1::ExecutePatchJobRequest.new # (request f
 response = client.execute_patch_job request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-os_config-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-os_config-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/compute/docs/manage-os)

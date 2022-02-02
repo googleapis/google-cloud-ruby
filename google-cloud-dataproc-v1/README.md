@@ -37,7 +37,7 @@ request = ::Google::Cloud::Dataproc::V1::CreateAutoscalingPolicyRequest.new # (r
 response = client.create_autoscaling_policy request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-dataproc-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataproc-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/dataproc)

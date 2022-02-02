@@ -37,7 +37,7 @@ request = ::Google::Cloud::Container::V1::ListClustersRequest.new # (request fie
 response = client.list_clusters request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-container-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-container-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/kubernetes-engine)

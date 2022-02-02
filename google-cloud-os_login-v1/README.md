@@ -37,7 +37,7 @@ request = ::Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new # (request
 response = client.delete_posix_account request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-os_login-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/compute/docs/oslogin)

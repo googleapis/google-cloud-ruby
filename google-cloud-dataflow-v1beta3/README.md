@@ -37,7 +37,7 @@ request = ::Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new # (request 
 response = client.get_snapshot request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-dataflow-v1beta3/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataflow-v1beta3/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/dataflow)

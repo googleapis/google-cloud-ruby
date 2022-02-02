@@ -37,7 +37,7 @@ request = ::Google::Analytics::Admin::V1alpha::GetAccountRequest.new # (request 
 response = client.get_account request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-analytics-admin-v1alpha/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-analytics-admin-v1alpha/latest)
 for class and method documentation.
 
 ## Enabling Logging

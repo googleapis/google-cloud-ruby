@@ -37,7 +37,7 @@ request = ::Google::Iam::V1::SetIamPolicyRequest.new # (request fields as keywor
 response = client.set_iam_policy request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-iap-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-iap-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/iap/)

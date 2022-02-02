@@ -37,7 +37,7 @@ request = ::Google::Cloud::Firestore::V1::GetDocumentRequest.new # (request fiel
 response = client.get_document request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-firestore-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/firestore)

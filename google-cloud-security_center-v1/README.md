@@ -37,7 +37,7 @@ request = ::Google::Cloud::SecurityCenter::V1::BulkMuteFindingsRequest.new # (re
 response = client.bulk_mute_findings request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-security_center-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/security-command-center)

@@ -37,7 +37,7 @@ request = ::Google::Area120::Tables::V1alpha1::GetTableRequest.new # (request fi
 response = client.get_table request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-area120-tables-v1alpha1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-area120-tables-v1alpha1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://tables.area120.google.com/u/0/about#/)

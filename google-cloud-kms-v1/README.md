@@ -37,7 +37,7 @@ request = ::Google::Cloud::Kms::V1::ListKeyRingsRequest.new # (request fields as
 response = client.list_key_rings request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-kms-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-kms-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/kms)

@@ -37,7 +37,7 @@ request = ::Google::Cloud::Datastore::V1::LookupRequest.new # (request fields as
 response = client.lookup request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-datastore-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-datastore-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/datastore)

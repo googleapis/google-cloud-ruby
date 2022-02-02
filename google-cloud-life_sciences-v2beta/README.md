@@ -37,7 +37,7 @@ request = ::Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new # (reque
 response = client.run_pipeline request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-life_sciences-v2beta/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences-v2beta/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/life-sciences/)

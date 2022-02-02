@@ -37,7 +37,7 @@ request = ::Google::Cloud::ArtifactRegistry::V1beta2::ImportAptArtifactsRequest.
 response = client.import_apt_artifacts request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-artifact_registry-v1beta2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-artifact_registry-v1beta2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/artifact-registry/)

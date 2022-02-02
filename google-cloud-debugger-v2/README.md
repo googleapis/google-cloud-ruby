@@ -37,7 +37,7 @@ request = ::Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new # (request 
 response = client.register_debuggee request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-debugger-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-debugger-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/debugger)

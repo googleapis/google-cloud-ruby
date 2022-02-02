@@ -37,7 +37,7 @@ request = ::Google::Cloud::Tpu::V1::ListNodesRequest.new # (request fields as ke
 response = client.list_nodes request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-tpu-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-tpu-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/tpu/)

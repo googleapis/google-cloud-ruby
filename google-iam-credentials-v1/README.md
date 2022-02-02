@@ -37,7 +37,7 @@ request = ::Google::Iam::Credentials::V1::GenerateAccessTokenRequest.new # (requ
 response = client.generate_access_token request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-iam-credentials-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-iam-credentials-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/iam)

@@ -37,7 +37,7 @@ request = ::Google::Analytics::Data::V1beta::RunReportRequest.new # (request fie
 response = client.run_report request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-analytics-data-v1beta/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-analytics-data-v1beta/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://developers.google.com/analytics/devguides/reporting/data/v1)

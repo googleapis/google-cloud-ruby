@@ -37,7 +37,7 @@ request = ::Google::Identity::AccessContextManager::V1::ListAccessPoliciesReques
 response = client.list_access_policies request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-identity-access_context_manager-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-identity-access_context_manager-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/access-context-manager/)

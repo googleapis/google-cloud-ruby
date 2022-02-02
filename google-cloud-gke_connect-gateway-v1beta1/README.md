@@ -37,7 +37,7 @@ request = ::Google::Api::HttpBody.new # (request fields as keyword arguments...)
 response = client.get_resource request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-gke_connect-gateway-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_connect-gateway-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/anthos/multicluster-management/gateway/)

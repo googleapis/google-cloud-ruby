@@ -37,7 +37,7 @@ request = ::Google::Cloud::Domains::V1beta1::SearchDomainsRequest.new # (request
 response = client.search_domains request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-domains-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-domains-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/domains)

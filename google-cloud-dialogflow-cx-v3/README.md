@@ -37,7 +37,7 @@ request = ::Google::Cloud::Dialogflow::CX::V3::ListPagesRequest.new # (request f
 response = client.list_pages request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow-cx-v3/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/dialogflow)

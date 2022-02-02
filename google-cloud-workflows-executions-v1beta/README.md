@@ -37,7 +37,7 @@ request = ::Google::Cloud::Workflows::Executions::V1beta::ListExecutionsRequest.
 response = client.list_executions request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-workflows-executions-v1beta/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-executions-v1beta/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/workflows/)

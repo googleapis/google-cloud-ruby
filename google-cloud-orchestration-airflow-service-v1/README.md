@@ -37,7 +37,7 @@ request = ::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmen
 response = client.create_environment request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-orchestration-airflow-service-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-orchestration-airflow-service-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/composer)

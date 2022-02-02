@@ -37,7 +37,7 @@ request = ::Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new # 
 response = client.compute_threat_list_diff request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-web_risk-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-web_risk-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/web-risk)

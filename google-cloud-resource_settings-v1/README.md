@@ -37,7 +37,7 @@ request = ::Google::Cloud::ResourceSettings::V1::ListSettingsRequest.new # (requ
 response = client.list_settings request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-resource_settings-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-resource_settings-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/resource-manager/docs/resource-settings/overview)

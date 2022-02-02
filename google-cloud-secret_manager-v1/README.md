@@ -37,7 +37,7 @@ request = ::Google::Cloud::SecretManager::V1::ListSecretsRequest.new # (request 
 response = client.list_secrets request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-secret_manager-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-secret_manager-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/secret-manager)

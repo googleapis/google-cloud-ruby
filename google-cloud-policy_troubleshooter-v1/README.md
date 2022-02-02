@@ -37,7 +37,7 @@ request = ::Google::Cloud::PolicyTroubleshooter::V1::TroubleshootIamPolicyReques
 response = client.troubleshoot_iam_policy request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-policy_troubleshooter-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-policy_troubleshooter-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/iam/docs/troubleshooting-access)

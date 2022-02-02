@@ -37,7 +37,7 @@ request = ::Google::Cloud::VMMigration::V1::ListSourcesRequest.new # (request fi
 response = client.list_sources request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-vm_migration-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-vm_migration-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/migrate/compute-engine/)

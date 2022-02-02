@@ -2,6 +2,7 @@
     "name": "storage",
     "language": "ruby",
     "distribution_name": "google-cloud-storage",
-    "client_documentation": "https://googleapis.dev/ruby/google-cloud-storage/latest",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-storage/latest",
+    "release_level": "unknown",
     "library_type": "GAPIC_MANUAL"
 }
