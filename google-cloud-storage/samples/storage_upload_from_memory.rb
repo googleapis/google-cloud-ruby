@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_file_upload_from_memory]
 def upload_file_from_memory bucket_name:, file_name:, file_content:
+  # [START storage_file_upload_from_memory]
   # The ID of your GCS bucket
   # bucket_name = "your-unique-bucket-name"
 
@@ -31,8 +31,8 @@ def upload_file_from_memory bucket_name:, file_name:, file_content:
   file = bucket.create_file StringIO.new(file_content), file_name
 
   puts "Uploaded file #{file.name} to bucket #{bucket_name} with content: #{file_content}"
+  # [END storage_file_upload_from_memory]
 end
-# [END storage_file_upload_from_memory]
 
 if $PROGRAM_NAME == __FILE__
   upload_file_from_memory bucket_name: ARGV.shift, file_name: ARGV.shift,

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_download_file_into_memory]
 def download_file_into_memory bucket_name:, file_name:
+  # [START storage_download_file_into_memory]
   # The name of the bucket to access
   # bucket_name = "my-bucket"
 
@@ -31,8 +31,8 @@ def download_file_into_memory bucket_name:, file_name:
   contents = downloaded.read
 
   puts "Contents of storage object #{file.name} in bucket #{bucket_name} are: #{contents}"
+  # [END storage_download_file_into_memory]
 end
-# [END storage_download_file_into_memory]
 
 if $PROGRAM_NAME == __FILE__
   download_file_into_memory bucket_name: ARGV.shift, file_name: ARGV.shift
