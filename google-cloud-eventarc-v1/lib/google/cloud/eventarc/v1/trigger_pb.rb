@@ -19,15 +19,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :destination, :message, 10, "google.cloud.eventarc.v1.Destination"
       optional :transport, :message, 11, "google.cloud.eventarc.v1.Transport"
       map :labels, :string, :string, 12
+      optional :channel, :string, 13
       optional :etag, :string, 99
     end
     add_message "google.cloud.eventarc.v1.EventFilter" do
       optional :attribute, :string, 1
       optional :value, :string, 2
+      optional :operator, :string, 3
     end
     add_message "google.cloud.eventarc.v1.Destination" do
       oneof :descriptor do
         optional :cloud_run, :message, 1, "google.cloud.eventarc.v1.CloudRun"
+        optional :cloud_function, :string, 2
+        optional :gke, :message, 3, "google.cloud.eventarc.v1.GKE"
       end
     end
     add_message "google.cloud.eventarc.v1.Transport" do
@@ -39,6 +43,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service, :string, 1
       optional :path, :string, 2
       optional :region, :string, 3
+    end
+    add_message "google.cloud.eventarc.v1.GKE" do
+      optional :cluster, :string, 1
+      optional :location, :string, 2
+      optional :namespace, :string, 3
+      optional :service, :string, 4
+      optional :path, :string, 5
     end
     add_message "google.cloud.eventarc.v1.Pubsub" do
       optional :topic, :string, 1
@@ -56,6 +67,7 @@ module Google
         Destination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.Destination").msgclass
         Transport = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.Transport").msgclass
         CloudRun = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.CloudRun").msgclass
+        GKE = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.GKE").msgclass
         Pubsub = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.Pubsub").msgclass
       end
     end
