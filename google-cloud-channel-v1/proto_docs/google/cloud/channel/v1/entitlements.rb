@@ -143,7 +143,8 @@ module Google
         # @!attribute [r] provisioning_id
         #   @return [::String]
         #     Output only. Provisioning ID of the entitlement. For Google Workspace, this would be the
-        #     underlying Subscription ID.
+        #     underlying Subscription ID. For Google Cloud Platform, this would be the
+        #     Billing Account ID of the billing subaccount."
         # @!attribute [r] product_id
         #   @return [::String]
         #     Output only. The product pertaining to the provisioning resource as specified in the
