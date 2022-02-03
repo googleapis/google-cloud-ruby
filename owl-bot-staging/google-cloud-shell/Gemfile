@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-shell-v1", path: "../google-cloud-shell-v1"
