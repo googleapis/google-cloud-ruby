@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-iam-credentials-v1", path: "../google-iam-credentials-v1"
