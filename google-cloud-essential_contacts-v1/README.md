@@ -37,7 +37,7 @@ request = ::Google::Cloud::EssentialContacts::V1::CreateContactRequest.new # (re
 response = client.create_contact request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-essential_contacts-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-essential_contacts-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/resource-manager/docs/managing-notification-contacts/)

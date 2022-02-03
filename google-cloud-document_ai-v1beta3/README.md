@@ -37,7 +37,7 @@ request = ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new # (request fi
 response = client.process_document request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-document_ai-v1beta3/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-document_ai-v1beta3/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/document-ai/)

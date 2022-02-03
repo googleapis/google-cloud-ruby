@@ -37,7 +37,7 @@ request = ::Google::Cloud::Profiler::V2::CreateProfileRequest.new # (request fie
 response = client.create_profile request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-profiler-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-profiler-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/profiler/)

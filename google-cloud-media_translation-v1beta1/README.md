@@ -33,7 +33,7 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/media_translation/v1beta1"
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-media_translation-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-media_translation-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/media-translation/)

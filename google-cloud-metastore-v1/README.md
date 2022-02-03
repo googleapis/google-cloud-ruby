@@ -37,7 +37,7 @@ request = ::Google::Cloud::Metastore::V1::ListServicesRequest.new # (request fie
 response = client.list_services request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-metastore-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-metastore-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/dataproc-metastore/)

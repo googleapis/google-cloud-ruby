@@ -37,7 +37,7 @@ request = ::Google::Cloud::Gaming::V1::ListGameServerClustersRequest.new # (requ
 response = client.list_game_server_clusters request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-gaming-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gaming-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/game-servers)

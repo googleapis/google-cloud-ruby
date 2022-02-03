@@ -37,7 +37,7 @@ request = ::Google::Cloud::ServiceUsage::V1::EnableServiceRequest.new # (request
 response = client.enable_service request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-service_usage-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-service_usage-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/service-usage/)

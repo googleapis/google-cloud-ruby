@@ -37,7 +37,7 @@ request = ::Google::Cloud::SecurityCenter::V1p1beta1::CreateSourceRequest.new # 
 response = client.create_source request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-security_center-v1p1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1p1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/security-command-center)

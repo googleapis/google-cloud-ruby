@@ -37,7 +37,7 @@ request = ::Google::Cloud::PubSub::V1::CreateSchemaRequest.new # (request fields
 response = client.create_schema request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-pubsub-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-pubsub-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/pubsub)

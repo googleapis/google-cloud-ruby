@@ -37,7 +37,7 @@ request = ::Google::Cloud::Scheduler::V1::ListJobsRequest.new # (request fields 
 response = client.list_jobs request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-scheduler-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/scheduler)

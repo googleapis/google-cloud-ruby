@@ -37,7 +37,7 @@ request = ::Google::Cloud::Retail::V2::ListCatalogsRequest.new # (request fields
 response = client.list_catalogs request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-retail-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-retail-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/retail/docs/apis)

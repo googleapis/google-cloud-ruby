@@ -37,7 +37,7 @@ request = ::Google::Cloud::Bigtable::Admin::V2::CreateInstanceRequest.new # (req
 response = client.create_instance request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-bigtable-admin-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable-admin-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/bigtable)

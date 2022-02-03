@@ -37,7 +37,7 @@ request = ::Google::Cloud::IDS::V1::ListEndpointsRequest.new # (request fields a
 response = client.list_endpoints request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-ids-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-ids-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/intrusion-detection-system/)

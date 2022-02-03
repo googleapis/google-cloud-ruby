@@ -37,7 +37,7 @@ request = ::Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new #
 response = client.create_scan_config request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-web_security_scanner-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/security-command-center/docs/concepts-web-security-scanner-overview/)

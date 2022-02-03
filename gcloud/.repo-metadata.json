@@ -1,6 +1,5 @@
 {
     "name": "gcloud",
     "language": "ruby",
-    "distribution_name": "gcloud",
-    "client_documentation": "https://googleapis.dev/ruby/gcloud/latest"
+    "distribution_name": "gcloud"
 }

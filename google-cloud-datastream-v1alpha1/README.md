@@ -37,7 +37,7 @@ request = ::Google::Cloud::Datastream::V1alpha1::ListConnectionProfilesRequest.n
 response = client.list_connection_profiles request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-datastream-v1alpha1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-datastream-v1alpha1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/datastream/)

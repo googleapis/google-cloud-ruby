@@ -37,7 +37,7 @@ request = ::Google::Cloud::OsConfig::V1alpha::CreateOSPolicyAssignmentRequest.ne
 response = client.create_os_policy_assignment request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-os_config-v1alpha/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-os_config-v1alpha/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/compute/docs/manage-os)

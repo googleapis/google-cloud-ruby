@@ -37,7 +37,7 @@ request = ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new #
 response = client.create_read_session request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-bigquery-storage-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-storage-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/bigquery/docs/reference/storage)

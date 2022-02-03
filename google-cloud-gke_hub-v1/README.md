@@ -37,7 +37,7 @@ request = ::Google::Cloud::GkeHub::V1::ListMembershipsRequest.new # (request fie
 response = client.list_memberships request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-gke_hub-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-gke_hub-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/anthos/clusters/docs)

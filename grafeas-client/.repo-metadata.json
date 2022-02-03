@@ -4,6 +4,5 @@
   "distribution_name": "grafeas-client",
   "module_name": "Grafeas",
   "module_name_credentials": "Grafeas::V1",
-  "env_var_prefix": "GRAFEAS",
-  "client_documentation": "https://googleapis.dev/ruby/grafeas-client/latest"
+  "env_var_prefix": "GRAFEAS"
 }

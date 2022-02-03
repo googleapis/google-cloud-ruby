@@ -37,7 +37,7 @@ request = ::Google::Cloud::AppEngine::V1::GetApplicationRequest.new # (request f
 response = client.get_application request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-app_engine-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/appengine/docs/admin-api/)

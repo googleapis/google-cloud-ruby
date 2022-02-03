@@ -37,7 +37,7 @@ request = ::Google::Cloud::AssuredWorkloads::V1::CreateWorkloadRequest.new # (re
 response = client.create_workload request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-assured_workloads-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-assured_workloads-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/assured-workloads/)

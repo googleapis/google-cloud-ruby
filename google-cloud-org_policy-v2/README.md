@@ -37,7 +37,7 @@ request = ::Google::Cloud::OrgPolicy::V2::ListConstraintsRequest.new # (request 
 response = client.list_constraints request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-org_policy-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-org_policy-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/resource-manager/docs/organization-policy/overview)

@@ -37,7 +37,7 @@ request = ::Google::Cloud::RecaptchaEnterprise::V1::CreateAssessmentRequest.new 
 response = client.create_assessment request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-recaptcha_enterprise-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-recaptcha_enterprise-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/recaptcha-enterprise)

@@ -37,7 +37,7 @@ request = ::Google::Cloud::PhishingProtection::V1beta1::ReportPhishingRequest.ne
 response = client.report_phishing request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-phishing_protection-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-phishing_protection-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/phishing-protection)

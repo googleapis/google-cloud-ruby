@@ -37,7 +37,7 @@ request = ::Google::Cloud::Firestore::Admin::V1::CreateIndexRequest.new # (reque
 response = client.create_index request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-firestore-admin-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-admin-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/firestore)

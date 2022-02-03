@@ -37,7 +37,7 @@ request = ::Google::Cloud::Bigquery::DataTransfer::V1::GetDataSourceRequest.new 
 response = client.get_data_source request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-bigquery-data_transfer-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-data_transfer-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/bigquery/transfer)

@@ -37,7 +37,7 @@ request = ::Google::Cloud::Tasks::V2beta2::ListQueuesRequest.new # (request fiel
 response = client.list_queues request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-tasks-v2beta2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-tasks-v2beta2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/tasks)

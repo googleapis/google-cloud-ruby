@@ -30,14 +30,14 @@ In order to use this library, you first need to go through the following steps:
 ## Quick Start
 
 ```ruby
-require "google/cloud/security/private_ca/v1"
+require "google/cloud/location"
 
 client = ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
 request = ::Google::Cloud::Security::PrivateCA::V1::CreateCertificateRequest.new # (request fields as keyword arguments...)
 response = client.create_certificate request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-security-private_ca-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-security-private_ca-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/certificate-authority-service/)

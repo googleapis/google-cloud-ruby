@@ -37,7 +37,7 @@ request = ::Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest.new # (r
 response = client.list_available_versions request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-data_fusion-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-data_fusion-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/data-fusion)

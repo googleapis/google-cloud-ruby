@@ -28,7 +28,7 @@ request = ::Grafeas::V1::GetOccurrenceRequest.new # (request fields as keyword a
 response = client.get_occurrence request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/grafeas-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/grafeas-v1/latest)
 for class and method documentation.
 
 ## Enabling Logging

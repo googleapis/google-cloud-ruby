@@ -37,7 +37,7 @@ request = ::Google::Cloud::BinaryAuthorization::V1beta1::GetPolicyRequest.new # 
 response = client.get_policy request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-binary_authorization-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-binary_authorization-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/binary-authorization/)

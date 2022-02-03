@@ -37,7 +37,7 @@ request = ::Google::Cloud::Monitoring::V3::ListAlertPoliciesRequest.new # (reque
 response = client.list_alert_policies request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-monitoring-v3/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/monitoring)

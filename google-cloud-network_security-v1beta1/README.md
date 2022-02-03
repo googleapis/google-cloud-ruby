@@ -37,7 +37,7 @@ request = ::Google::Cloud::NetworkSecurity::V1beta1::ListAuthorizationPoliciesRe
 response = client.list_authorization_policies request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-network_security-v1beta1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-network_security-v1beta1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/traffic-director/docs/reference/network-security/rest/)

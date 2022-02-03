@@ -37,7 +37,7 @@ request = ::Google::Cloud::Functions::V1::ListFunctionsRequest.new # (request fi
 response = client.list_functions request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-functions-v1/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-functions-v1/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/functions)

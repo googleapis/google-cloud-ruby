@@ -37,7 +37,7 @@ request = ::Google::Cloud::Logging::V2::ListBucketsRequest.new # (request fields
 response = client.list_buckets request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-logging-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-logging-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/logging)

@@ -37,7 +37,7 @@ request = ::Google::Cloud::DataQnA::V1alpha::SuggestQueriesRequest.new # (reques
 response = client.suggest_queries request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-dataqna-v1alpha/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataqna-v1alpha/latest)
 for class and method documentation.
 
 ## Enabling Logging

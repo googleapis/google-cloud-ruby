@@ -37,7 +37,7 @@ request = ::Google::Cloud::Trace::V2::BatchWriteSpansRequest.new # (request fiel
 response = client.batch_write_spans request
 ```
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-cloud-trace-v2/latest)
+View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-trace-v2/latest)
 for class and method documentation.
 
 See also the [Product Documentation](https://cloud.google.com/trace)
