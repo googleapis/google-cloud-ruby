@@ -36,7 +36,7 @@ module Google
           #     Required. Immutable. The config used to create a self-signed X.509 certificate or CSR.
           # @!attribute [rw] lifetime
           #   @return [::Google::Protobuf::Duration]
-          #     Required. The desired lifetime of the CA certificate. Used to create the
+          #     Required. Immutable. The desired lifetime of the CA certificate. Used to create the
           #     "not_before_time" and "not_after_time" fields inside an X.509
           #     certificate.
           # @!attribute [rw] key_spec
@@ -195,7 +195,7 @@ module Google
             # [CryptoKeyVersionAlgorithm][google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm]
             # values. For RSA signing algorithms, the PSS algorithms should be preferred,
             # use PKCS1 algorithms if required for compatibility. For further
-            # recommandations, see
+            # recommendations, see
             # https://cloud.google.com/kms/docs/algorithms#algorithm_recommendations.
             module SignHashAlgorithm
               # Not specified.
@@ -346,14 +346,14 @@ module Google
                 # a {::Google::Cloud::Security::PrivateCA::V1::CaPool CaPool}.
                 # @!attribute [rw] min_modulus_size
                 #   @return [::Integer]
-                #     Optional. The minimum allowed RSA modulus size, in bits. If this is not set,
-                #     or if set to zero, the service-level min RSA modulus size will
-                #     continue to apply.
+                #     Optional. The minimum allowed RSA modulus size (inclusive), in bits. If this is
+                #     not set, or if set to zero, the service-level min RSA modulus size
+                #     will continue to apply.
                 # @!attribute [rw] max_modulus_size
                 #   @return [::Integer]
-                #     Optional. The maximum allowed RSA modulus size, in bits. If this is not set,
-                #     or if set to zero, the service will not enforce an explicit upper
-                #     bound on RSA modulus sizes.
+                #     Optional. The maximum allowed RSA modulus size (inclusive), in bits. If this is
+                #     not set, or if set to zero, the service will not enforce an explicit
+                #     upper bound on RSA modulus sizes.
                 class RsaKeyType
                   include ::Google::Protobuf::MessageExts
                   extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -701,10 +701,9 @@ module Google
           # known issuing {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}, or a PEM issuer certificate chain.
           # @!attribute [rw] certificate_authority
           #   @return [::String]
-          #     Required. This can refer to a {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority} in the same project that
-          #     was used to create a subordinate {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}. This field
-          #     is used for information and usability purposes only. The resource name
-          #     is in the format
+          #     Required. This can refer to a {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority} that was used to create a
+          #     subordinate {::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority CertificateAuthority}. This field is used for information
+          #     and usability purposes only. The resource name is in the format
           #     `projects/*/locations/*/caPools/*/certificateAuthorities/*`.
           # @!attribute [rw] pem_issuer_chain
           #   @return [::Google::Cloud::Security::PrivateCA::V1::SubordinateConfig::SubordinateConfigChain]
@@ -1041,6 +1040,8 @@ module Google
           # @!attribute [rw] custom_sans
           #   @return [::Array<::Google::Cloud::Security::PrivateCA::V1::X509Extension>]
           #     Contains additional subject alternative name values.
+          #     For each custom_san, the `value` field must contain an ASN.1 encoded
+          #     UTF8String.
           class SubjectAltNames
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
