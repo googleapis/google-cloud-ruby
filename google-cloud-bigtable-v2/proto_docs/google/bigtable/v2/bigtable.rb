@@ -33,14 +33,15 @@ module Google
         #     "default" application profile will be used.
         # @!attribute [rw] rows
         #   @return [::Google::Cloud::Bigtable::V2::RowSet]
-        #     The row keys and/or ranges to read. If not specified, reads from all rows.
+        #     The row keys and/or ranges to read sequentially. If not specified, reads
+        #     from all rows.
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::Bigtable::V2::RowFilter]
         #     The filter to apply to the contents of the specified row(s). If unset,
         #     reads the entirety of each row.
         # @!attribute [rw] rows_limit
         #   @return [::Integer]
-        #     The read will terminate after committing to N rows' worth of results. The
+        #     The read will stop after committing to N rows' worth of results. The
         #     default (zero) is to return all results.
         class ReadRowsRequest
           include ::Google::Protobuf::MessageExts
