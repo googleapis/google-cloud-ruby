@@ -75,11 +75,12 @@ module Google
         #     to the finding.
         # @!attribute [rw] event_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which the event took place, or when an update to the finding
-        #     occurred. For example, if the finding represents an open firewall it would
-        #     capture the time the detector believes the firewall became open. The
-        #     accuracy is determined by the detector. If the finding were to be resolved
-        #     afterward, this time would reflect when the finding was resolved. Must not
+        #     The time the finding was first detected. If an existing finding is updated,
+        #     then this is the time the update occurred.
+        #     For example, if the finding represents an open firewall, this property
+        #     captures the time the detector believes the firewall became open. The
+        #     accuracy is determined by the detector. If the finding is later resolved,
+        #     then this time reflects when the finding was resolved. This must not
         #     be set to a value greater than the current timestamp.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -122,6 +123,10 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
         #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
         #     information and external system finding fields.
+        # @!attribute [rw] access
+        #   @return [::Google::Cloud::SecurityCenter::V1::Access]
+        #     Access details associated to the Finding, such as more information on the
+        #     caller, which method was accessed, from where, etc.
         # @!attribute [rw] mute_initiator
         #   @return [::String]
         #     First known as mute_annotation. Records additional information about the

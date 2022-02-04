@@ -3571,7 +3571,8 @@ module Google
             #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
             #     The time at which the updated SecurityMarks take effect.
             #     If not set uses current server time.  Updates will be applied to the
-            #     SecurityMarks that are active immediately preceding this time.
+            #     SecurityMarks that are active immediately preceding this time. Must be
+            #     smaller or equal to the server time.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::SecurityMarks]
