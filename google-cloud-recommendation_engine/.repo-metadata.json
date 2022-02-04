@@ -7,7 +7,7 @@
     "name": "recommendationengine",
     "name_pretty": "Recommendations AI API",
     "product_documentation": "https://cloud.google.com/recommendations-ai/",
-    "release_level": "unknown",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Recommendations AI enables you to build an end-to-end personalized recommendation system based on state-of-the-art deep learning ML models, without a need for expertise in ML or recommendation systems.",

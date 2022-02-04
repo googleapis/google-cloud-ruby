@@ -3,6 +3,6 @@
     "language": "ruby",
     "distribution_name": "stackdriver-core",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/stackdriver-core/latest",
-    "release_level": "unknown",
+    "release_level": "stable",
     "library_type": "CORE"
 }

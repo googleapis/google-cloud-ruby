@@ -7,7 +7,7 @@
     "name": "bigquerystorage",
     "name_pretty": "BigQuery Storage API",
     "product_documentation": "https://cloud.google.com/bigquery/docs/reference/storage",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "The BigQuery Storage API provides fast access to BigQuery managed storage.",

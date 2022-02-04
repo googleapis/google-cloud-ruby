@@ -3,7 +3,7 @@
     "distribution_name": "google-cloud-location",
     "language": "ruby",
     "name_pretty": "Locations API",
-    "release_level": "unknown",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "An add-on interface used by some Google API clients to provide location management calls.",

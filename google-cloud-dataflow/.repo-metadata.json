@@ -7,7 +7,7 @@
     "name": "dataflow",
     "name_pretty": "Dataflow API",
     "product_documentation": "https://cloud.google.com/dataflow",
-    "release_level": "unknown",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Dataflow is a managed service for executing a wide variety of data processing patterns.",

@@ -7,7 +7,7 @@
     "name": "texttospeech",
     "name_pretty": "Cloud Text-to-Speech API",
     "product_documentation": "https://cloud.google.com/text-to-speech",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Text-to-Speech converts text or Speech Synthesis Markup Language (SSML) input into audio data of natural human speech.",

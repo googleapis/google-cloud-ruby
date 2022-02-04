@@ -7,7 +7,7 @@
     "name": "area120tables",
     "name_pretty": "Area 120 Tables API",
     "product_documentation": "https://tables.area120.google.com/u/0/about#/",
-    "release_level": "unknown",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Using the Area 120 Tables API, you can query for tables, and update/create/delete rows within tables programmatically.",

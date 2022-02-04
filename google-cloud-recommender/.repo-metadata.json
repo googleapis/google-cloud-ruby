@@ -7,7 +7,7 @@
     "name": "recommender",
     "name_pretty": "Recommender API",
     "product_documentation": "https://cloud.google.com/recommender",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Recommender is a service on Google Cloud that provides usage recommendations for Cloud products and services.",

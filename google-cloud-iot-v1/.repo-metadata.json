@@ -7,7 +7,7 @@
     "name": "cloudiot",
     "name_pretty": "Cloud IoT V1 API",
     "product_documentation": "https://cloud.google.com/iot",
-    "release_level": "unknown",
+    "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Registers and manages IoT (Internet of Things) devices that connect to the Google Cloud Platform. Note that google-cloud-iot-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-iot instead. See the readme for more details.",

@@ -3,6 +3,6 @@
     "language": "ruby",
     "distribution_name": "google-cloud-bigquery",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery/latest",
-    "release_level": "unknown",
+    "release_level": "stable",
     "library_type": "GAPIC_MANUAL"
 }
