@@ -30,6 +30,8 @@ module Google
           # Google Kubernetes Engine Cluster Manager v1
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :cluster_manager_stub
 
@@ -648,7 +650,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil)
+            # @overload update_node_pool(project_id: nil, zone: nil, cluster_id: nil, node_pool_id: nil, node_version: nil, image_type: nil, name: nil, locations: nil, workload_metadata_config: nil, upgrade_settings: nil, linux_node_config: nil, kubelet_config: nil, gcfs_config: nil, gvnic: nil)
             #   Pass arguments to `update_node_pool` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -696,6 +698,14 @@ module Google
             #     The desired workload metadata config for the node pool.
             #   @param upgrade_settings [::Google::Cloud::Container::V1::NodePool::UpgradeSettings, ::Hash]
             #     Upgrade settings control disruption and speed of the upgrade.
+            #   @param linux_node_config [::Google::Cloud::Container::V1::LinuxNodeConfig, ::Hash]
+            #     Parameters that can be configured on Linux nodes.
+            #   @param kubelet_config [::Google::Cloud::Container::V1::NodeKubeletConfig, ::Hash]
+            #     Node kubelet configs.
+            #   @param gcfs_config [::Google::Cloud::Container::V1::GcfsConfig, ::Hash]
+            #     GCFS config.
+            #   @param gvnic [::Google::Cloud::Container::V1::VirtualNIC, ::Hash]
+            #     Enable or disable gvnic on the node pool.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Container::V1::Operation]
@@ -3108,7 +3118,9 @@ module Google
             end
 
             ##
-            # Sets the size for a specific node pool.
+            # Sets the size for a specific node pool. The new size will be used for all
+            # replicas, including future replicas created by modifying
+            # {::Google::Cloud::Container::V1::NodePool#locations NodePool.locations}.
             #
             # @overload set_node_pool_size(request, options = nil)
             #   Pass arguments to `set_node_pool_size` via a request object, either of type
