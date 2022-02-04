@@ -201,6 +201,27 @@ module Google
         #     Docker registry location of container image to use for the 'worker harness.
         #     Default is the container for the version of the SDK. Note this field is
         #     only valid for portable pipelines.
+        # @!attribute [rw] disk_size_gb
+        #   @return [::Integer]
+        #     Worker disk size, in gigabytes.
+        # @!attribute [rw] autoscaling_algorithm
+        #   @return [::Google::Cloud::Dataflow::V1beta3::AutoscalingAlgorithm]
+        #     The algorithm to use for autoscaling
+        # @!attribute [rw] dump_heap_on_oom
+        #   @return [::Boolean]
+        #     If true, save a heap dump before killing a thread or process which is GC
+        #     thrashing or out of memory. The location of the heap file will either be
+        #     echoed back to the user, or the user will be given the opportunity to
+        #     download the heap file.
+        # @!attribute [rw] save_heap_dumps_to_gcs_path
+        #   @return [::String]
+        #     Cloud Storage bucket (directory) to upload heap dumps to the given
+        #     location. Enabling this implies that heap dumps should be generated on OOM
+        #     (dump_heap_on_oom is set to true).
+        # @!attribute [rw] launcher_machine_type
+        #   @return [::String]
+        #     The machine type to use for launching the job. The default is
+        #     n1-standard-1.
         class FlexTemplateRuntimeEnvironment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -267,7 +288,8 @@ module Google
         #     template if not specified.
         # @!attribute [rw] additional_experiments
         #   @return [::Array<::String>]
-        #     Additional experiment flags for the job.
+        #     Additional experiment flags for the job, specified with the
+        #     `--experiments` option.
         # @!attribute [rw] network
         #   @return [::String]
         #     Network to which VMs will be assigned.  If empty or unspecified,

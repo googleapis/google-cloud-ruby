@@ -2,12 +2,12 @@
 # source: google/dataflow/v1beta3/jobs.proto
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/dataflow/v1beta3/environment_pb'
 require 'google/dataflow/v1beta3/snapshots_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/client_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

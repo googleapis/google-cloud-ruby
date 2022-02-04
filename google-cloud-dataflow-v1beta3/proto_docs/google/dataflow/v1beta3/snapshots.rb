@@ -57,7 +57,7 @@ module Google
         #     State of the snapshot.
         # @!attribute [rw] pubsub_metadata
         #   @return [::Array<::Google::Cloud::Dataflow::V1beta3::PubsubSnapshotMetadata>]
-        #     PubSub snapshot metadata.
+        #     Pub/Sub snapshot metadata.
         # @!attribute [rw] description
         #   @return [::String]
         #     User specified description of the snapshot. Maybe empty.
