@@ -37,13 +37,17 @@ flag :protos_path, "--protos-path=PATH" do
   desc "Path to the googleapis protos repo or third_party directory"
 end
 flag :piper_client, "--piper-client=NAME" do
-  desc "Generate by running Bazel from the given piper clinet rather than using googleapis-gen"
+  desc "Generate by running Bazel from the given piper client rather than using googleapis-gen"
 end
 flag :combined_prs do
   desc "Combine all changes into a single pull request"
 end
 flag :enable_tests, "--test" do
   desc "Run CI on each library"
+end
+flag :googleapis_gen_github_token, "--googleapis-gen-github-token=TOKEN" do
+  default(ENV["GOOGLEAPIS_GEN_GITHUB_TOKEN"] || ENV["GITHUB_TOKEN"])
+  desc "GitHub token for cloning the googleapis-gen repository"
 end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
@@ -65,6 +69,7 @@ def run
   ensure_docker
 
   set :source_path, File.expand_path(source_path) if source_path
+  ensure_source_path
   gems = choose_gems
   Dir.chdir context_directory
   gem_info = collect_gem_info gems
@@ -153,7 +158,6 @@ def determine_bazel_target library_path
 end
 
 def run_bazel gem_info
-  ensure_source_path
   gem_info.each do |name, info|
     info[:bazel_targets].each do |library_path, bazel_target|
       exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
@@ -172,8 +176,8 @@ def ensure_source_path
   at_exit { FileUtils.rm_rf temp_dir }
   Dir.chdir temp_dir do
     exec ["git", "init"]
-    if github_token
-      hostname = "#{github_token}@github.com"
+    if ensure_googleapis_gen_github_token
+      hostname = "#{ensure_googleapis_gen_github_token}@github.com"
       log_hostname = "xxxxxxxx@github.com"
     else
       hostname = log_hostname = "github.com"
@@ -188,14 +192,18 @@ def ensure_source_path
   set :source_path, temp_dir
 end
 
-def github_token
-  @github_token ||= ENV["GITHUB_TOKEN"] || begin
+def environment_github_token
+  @environment_github_token ||= begin
     result = exec ["gh", "auth", "status", "-t"], e: false, out: :capture, err: [:child, :out]
     if result.success? && result.captured_out =~ /Token: (\w+)/
       puts "**** found token of size #{Regexp.last_match[1].size}"
       Regexp.last_match[1]
     end
   end
+end
+
+def ensure_googleapis_gen_github_token
+  @googleapis_gen_github_token ||= googleapis_gen_github_token || environment_github_token
 end
 
 def run_owlbot gem_info
@@ -207,10 +215,12 @@ def run_owlbot gem_info
   File.open temp_config, "w" do |file|
     file.puts Psych.dump combined_config
   end
-  cmd = ["#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code", "--config-file", temp_config]
-  if source_path
-    cmd = ["-v", "#{source_path}:/googleapis-gen"] + cmd + ["--source-repo", "/googleapis-gen"]
-  end
+  cmd = [
+    "-v", "#{source_path}:/googleapis-gen",
+    "#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code",
+    "--config-file", temp_config,
+    "--source-repo", "/googleapis-gen"
+  ]
   docker_run(*cmd)
 end
 
@@ -255,8 +265,7 @@ def process_gems_combined_pr gems, temp_staging_dir
   timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
   branch_name = "owlbot/all-#{timestamp}"
   message = build_commit_message "all gems"
-  result = generate_pull_request gem_name: name,
-                                 git_remote: git_remote,
+  result = generate_pull_request git_remote: git_remote,
                                  branch_name: branch_name,
                                  commit_message: message do
     gems.each_with_index do |name, index|
