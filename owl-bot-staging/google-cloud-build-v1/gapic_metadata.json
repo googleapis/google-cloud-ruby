@@ -1,0 +1,108 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.devtools.cloudbuild.v1",
+  "libraryPackage": "::Google::Cloud::Build::V1",
+  "services": {
+    "CloudBuild": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Build::V1::CloudBuild::Client",
+          "rpcs": {
+            "CreateBuild": {
+              "methods": [
+                "create_build"
+              ]
+            },
+            "GetBuild": {
+              "methods": [
+                "get_build"
+              ]
+            },
+            "ListBuilds": {
+              "methods": [
+                "list_builds"
+              ]
+            },
+            "CancelBuild": {
+              "methods": [
+                "cancel_build"
+              ]
+            },
+            "RetryBuild": {
+              "methods": [
+                "retry_build"
+              ]
+            },
+            "ApproveBuild": {
+              "methods": [
+                "approve_build"
+              ]
+            },
+            "CreateBuildTrigger": {
+              "methods": [
+                "create_build_trigger"
+              ]
+            },
+            "GetBuildTrigger": {
+              "methods": [
+                "get_build_trigger"
+              ]
+            },
+            "ListBuildTriggers": {
+              "methods": [
+                "list_build_triggers"
+              ]
+            },
+            "DeleteBuildTrigger": {
+              "methods": [
+                "delete_build_trigger"
+              ]
+            },
+            "UpdateBuildTrigger": {
+              "methods": [
+                "update_build_trigger"
+              ]
+            },
+            "RunBuildTrigger": {
+              "methods": [
+                "run_build_trigger"
+              ]
+            },
+            "ReceiveTriggerWebhook": {
+              "methods": [
+                "receive_trigger_webhook"
+              ]
+            },
+            "CreateWorkerPool": {
+              "methods": [
+                "create_worker_pool"
+              ]
+            },
+            "GetWorkerPool": {
+              "methods": [
+                "get_worker_pool"
+              ]
+            },
+            "DeleteWorkerPool": {
+              "methods": [
+                "delete_worker_pool"
+              ]
+            },
+            "UpdateWorkerPool": {
+              "methods": [
+                "update_worker_pool"
+              ]
+            },
+            "ListWorkerPools": {
+              "methods": [
+                "list_worker_pools"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
