@@ -27,7 +27,7 @@ export KMS_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/kms"
 
-client = Google::Cloud::Kms.key_management_service
+client = Google::Cloud::Kms.ekm_service
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-kms
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Kms::V1::KeyManagementService::Credentials`):
+`::Google::Cloud::Kms::V1::EkmService::Credentials`):
 
 * `KMS_CREDENTIALS` - Path to JSON file, or JSON contents
 * `KMS_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/kms"
 
 ENV["KMS_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Kms.key_management_service
+client = Google::Cloud::Kms.ekm_service
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/kms"
 
-client = Google::Cloud::Kms.key_management_service do |config|
+client = Google::Cloud::Kms.ekm_service do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -102,7 +102,7 @@ Google::Cloud::Kms.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Kms.key_management_service
+client = Google::Cloud::Kms.ekm_service
 ```
 
 ### Cloud SDK
