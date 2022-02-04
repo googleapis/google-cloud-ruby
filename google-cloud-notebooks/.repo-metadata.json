@@ -7,7 +7,7 @@
     "name": "notebooks",
     "name_pretty": "AI Platform Notebooks API",
     "product_documentation": "https://cloud.google.com/ai-platform-notebooks",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "AI Platform Notebooks makes it easy to manage JupyterLab instances through a protected, publicly available notebook instance URL. A JupyterLab instance is a Deep Learning virtual machine instance with the latest machine learning and data science libraries pre-installed.",

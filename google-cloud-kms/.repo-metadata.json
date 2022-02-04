@@ -7,7 +7,7 @@
     "name": "cloudkms",
     "name_pretty": "Cloud Key Management Service (KMS) API",
     "product_documentation": "https://cloud.google.com/kms",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Manages keys and performs cryptographic operations in a central cloud service, for direct use by other cloud resources and applications.",

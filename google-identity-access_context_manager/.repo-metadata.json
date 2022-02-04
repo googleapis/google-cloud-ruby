@@ -7,7 +7,7 @@
     "name": "accesscontextmanager",
     "name_pretty": "Access Context Manager API",
     "product_documentation": "https://cloud.google.com/access-context-manager/",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Access Context Manager allows enterprises to configure access levels which map to a policy defined on request attributes.",
