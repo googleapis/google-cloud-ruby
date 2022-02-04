@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-channel-v1", path: "../google-cloud-channel-v1"
