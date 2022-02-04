@@ -147,6 +147,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
       optional :common_metadata, :message, 5, "google.cloud.documentai.v1beta3.CommonOperationMetadata"
+      optional :question_id, :string, 6
     end
     add_enum "google.cloud.documentai.v1beta3.ReviewDocumentOperationMetadata.State" do
       value :STATE_UNSPECIFIED, 0

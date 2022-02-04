@@ -420,6 +420,9 @@ module Google
         # @!attribute [rw] common_metadata
         #   @return [::Google::Cloud::DocumentAI::V1beta3::CommonOperationMetadata]
         #     The basic metadata of the long running operation.
+        # @!attribute [rw] question_id
+        #   @return [::String]
+        #     The question ID.
         class ReviewDocumentOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
