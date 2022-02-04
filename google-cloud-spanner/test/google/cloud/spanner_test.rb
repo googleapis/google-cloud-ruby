@@ -276,7 +276,7 @@ describe Google::Cloud do
         _(project).must_equal "project-id"
         _(credentials).must_be_kind_of OpenStruct
         _(timeout).must_be :nil?
-        _(quota_project).must_equal "quota_project"
+        _(credentials.quota_project_id).must_equal "quota_project_id"
         _(keyword_args.key?(:lib_name)).must_equal true
         _(keyword_args.key?(:lib_version)).must_equal true
         _(keyword_args[:lib_name]).must_be :nil?
