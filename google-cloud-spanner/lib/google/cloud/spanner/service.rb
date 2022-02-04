@@ -37,10 +37,11 @@ module Google
 
         ##
         # Creates a new Service instance.
-        def initialize project, credentials,
+        def initialize project, credentials, quota_project: nil,
                        host: nil, timeout: nil, lib_name: nil, lib_version: nil
           @project = project
           @credentials = credentials
+          @quota_project_id = quota_project || credentials.quota_project_id if credentials.respond_to? :quota_project_id
           @host = host
           @timeout = timeout
           @lib_name = lib_name
@@ -68,6 +69,7 @@ module Google
           @service ||= \
             V1::Spanner::Client.new do |config|
               config.credentials = channel
+              config.quota_project = @quota_project_id
               config.timeout = timeout if timeout
               config.endpoint = host if host
               config.lib_name = lib_name_with_prefix
@@ -82,6 +84,7 @@ module Google
           @instances ||= \
             Admin::Instance::V1::InstanceAdmin::Client.new do |config|
               config.credentials = channel
+              config.quota_project = @quota_project_id
               config.timeout = timeout if timeout
               config.endpoint = host if host
               config.lib_name = lib_name_with_prefix
@@ -96,6 +99,7 @@ module Google
           @databases ||= \
             Admin::Database::V1::DatabaseAdmin::Client.new do |config|
               config.credentials = channel
+              config.quota_project = @quota_project_id
               config.timeout = timeout if timeout
               config.endpoint = host if host
               config.lib_name = lib_name_with_prefix
