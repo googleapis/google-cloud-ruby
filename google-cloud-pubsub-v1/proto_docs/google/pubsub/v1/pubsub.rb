@@ -434,6 +434,19 @@ module Google
         #     backlog. `Pull` and `StreamingPull` requests will return
         #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
         #     the endpoint will not be made.
+        # @!attribute [rw] enable_exactly_once_delivery
+        #   @return [::Boolean]
+        #     If true, Pub/Sub provides the following guarantees for the delivery of
+        #     a message with a given value of `message_id` on this subscription:
+        #
+        #     * The message sent to a subscriber is guaranteed not to be resent
+        #     before the message's acknowledgement deadline expires.
+        #     * An acknowledged message will not be resent to a subscriber.
+        #
+        #     Note that subscribers may still receive multiple copies of a message
+        #     when `enable_exactly_once_delivery` is true if the message was published
+        #     multiple times by a publisher client. These copies are  considered distinct
+        #     by Pub/Sub and have distinct `message_id` values.
         # @!attribute [r] topic_message_retention_duration
         #   @return [::Google::Protobuf::Duration]
         #     Output only. Indicates the minimum duration for which a message is retained
@@ -869,6 +882,14 @@ module Google
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
         #     Received Pub/Sub messages. This will not be empty.
+        # @!attribute [rw] acknowlege_confirmation
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::AcknowledgeConfirmation]
+        #     This field will only be set if `enable_exactly_once_delivery` is set to
+        #     `true`.
+        # @!attribute [rw] modify_ack_deadline_confirmation
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::ModifyAckDeadlineConfirmation]
+        #     This field will only be set if `enable_exactly_once_delivery` is set to
+        #     `true`.
         # @!attribute [rw] subscription_properties
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::SubscriptionProperties]
         #     Properties associated with this subscription.
@@ -876,7 +897,41 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Acknowledgement IDs sent in one or more previous requests to acknowledge a
+          # previously received message.
+          # @!attribute [rw] ack_ids
+          #   @return [::Array<::String>]
+          #     Successfully processed acknowledgement IDs.
+          # @!attribute [rw] invalid_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were malformed or whose acknowledgement
+          #     deadline has expired.
+          # @!attribute [rw] unordered_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were out of order.
+          class AcknowledgeConfirmation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Acknowledgement IDs sent in one or more previous requests to modify the
+          # deadline for a specific message.
+          # @!attribute [rw] ack_ids
+          #   @return [::Array<::String>]
+          #     Successfully processed acknowledgement IDs.
+          # @!attribute [rw] invalid_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were malformed or whose acknowledgement
+          #     deadline has expired.
+          class ModifyAckDeadlineConfirmation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Subscription properties sent as part of the response.
+          # @!attribute [rw] exactly_once_delivery_enabled
+          #   @return [::Boolean]
+          #     True iff exactly once delivery is enabled for this subscription.
           # @!attribute [rw] message_ordering_enabled
           #   @return [::Boolean]
           #     True iff message ordering is enabled for this subscription.
