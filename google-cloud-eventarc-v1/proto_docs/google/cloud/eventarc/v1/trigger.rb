@@ -24,14 +24,13 @@ module Google
         # A representation of the trigger resource.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the trigger. Must be unique within the
-        #     location on the project and must be in
+        #     Required. The resource name of the trigger. Must be unique within the location of the
+        #     project and must be in
         #     `projects/{project}/locations/{location}/triggers/{trigger}` format.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the trigger. The value
-        #     is a UUID4 string and guaranteed to remain unchanged until the resource is
-        #     deleted.
+        #     Output only. Server-assigned unique identifier for the trigger. The value is a UUID4
+        #     string and guaranteed to remain unchanged until the resource is deleted.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time.
@@ -40,14 +39,14 @@ module Google
         #     Output only. The last-modified time.
         # @!attribute [rw] event_filters
         #   @return [::Array<::Google::Cloud::Eventarc::V1::EventFilter>]
-        #     Required. null The list of filters that applies to event attributes. Only
-        #     events that match all the provided filters will be sent to the destination.
+        #     Required. null The list of filters that applies to event attributes. Only events that
+        #     match all the provided filters are sent to the destination.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     Optional. The IAM service account email associated with the trigger. The
         #     service account represents the identity of the trigger.
         #
-        #     The principal who calls this API must have `iam.serviceAccounts.actAs`
+        #     The principal who calls this API must have the `iam.serviceAccounts.actAs`
         #     permission in the service account. See
         #     https://cloud.google.com/iam/docs/understanding-service-accounts?hl=en#sa_common
         #     for more information.
@@ -56,26 +55,30 @@ module Google
         #     identity tokens when invoking the service. See
         #     https://cloud.google.com/run/docs/triggering/pubsub-push#create-service-account
         #     for information on how to invoke authenticated Cloud Run services.
-        #     In order to create Audit Log triggers, the service account should also
-        #     have `roles/eventarc.eventReceiver` IAM role.
+        #     To create Audit Log triggers, the service account should also
+        #     have the `roles/eventarc.eventReceiver` IAM role.
         # @!attribute [rw] destination
         #   @return [::Google::Cloud::Eventarc::V1::Destination]
         #     Required. Destination specifies where the events should be sent to.
         # @!attribute [rw] transport
         #   @return [::Google::Cloud::Eventarc::V1::Transport]
-        #     Optional. In order to deliver messages, Eventarc may use other GCP
-        #     products as transport intermediary. This field contains a reference to that
-        #     transport intermediary. This information can be used for debugging
+        #     Optional. To deliver messages, Eventarc might use other GCP
+        #     products as a transport intermediary. This field contains a reference to
+        #     that transport intermediary. This information can be used for debugging
         #     purposes.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Optional. User labels attached to the triggers that can be used to group
-        #     resources.
+        #     Optional. User labels attached to the triggers that can be used to group resources.
+        # @!attribute [rw] channel
+        #   @return [::String]
+        #     Optional. The name of the channel associated with the trigger in
+        #     `projects/{project}/locations/{location}/channels/{channel}` format.
+        #     You must provide a channel to receive events from Eventarc SaaS partners.
         # @!attribute [r] etag
         #   @return [::String]
-        #     Output only. This checksum is computed by the server based on the value of
-        #     other fields, and may be sent only on create requests to ensure the client
-        #     has an up-to-date value before proceeding.
+        #     Output only. This checksum is computed by the server based on the value of other
+        #     fields, and might be sent only on create requests to ensure that the
+        #     client has an up-to-date value before proceeding.
         class Trigger
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -93,13 +96,19 @@ module Google
         # Filters events based on exact matches on the CloudEvents attributes.
         # @!attribute [rw] attribute
         #   @return [::String]
-        #     Required. The name of a CloudEvents attribute. Currently, only a subset of
-        #     attributes are supported for filtering.
+        #     Required. The name of a CloudEvents attribute. Currently, only a subset of attributes
+        #     are supported for filtering.
         #
         #     All triggers MUST provide a filter for the 'type' attribute.
         # @!attribute [rw] value
         #   @return [::String]
         #     Required. The value for the attribute.
+        # @!attribute [rw] operator
+        #   @return [::String]
+        #     Optional. The operator used for matching the events with the value of the
+        #     filter. If not specified, only events that have an exact key-value pair
+        #     specified in the filter are matched. The only allowed value is
+        #     `match-path-pattern`.
         class EventFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,18 +117,26 @@ module Google
         # Represents a target of an invocation over HTTP.
         # @!attribute [rw] cloud_run
         #   @return [::Google::Cloud::Eventarc::V1::CloudRun]
-        #     Cloud Run fully-managed service that receives the events. The service
-        #     should be running in the same project of the trigger.
+        #     Cloud Run fully-managed resource that receives the events. The resource
+        #     should be in the same project as the trigger.
+        # @!attribute [rw] cloud_function
+        #   @return [::String]
+        #     The Cloud Function resource name. Only Cloud Functions V2 is supported.
+        #     Format: `projects/{project}/locations/{location}/functions/{function}`
+        # @!attribute [rw] gke
+        #   @return [::Google::Cloud::Eventarc::V1::GKE]
+        #     A GKE service capable of receiving events. The service should be running
+        #     in the same project as the trigger.
         class Destination
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Represents the transport intermediaries created for the trigger in order to
+        # Represents the transport intermediaries created for the trigger to
         # deliver events.
         # @!attribute [rw] pubsub
         #   @return [::Google::Cloud::Eventarc::V1::Pubsub]
-        #     The Pub/Sub topic and subscription used by Eventarc as delivery
+        #     The Pub/Sub topic and subscription used by Eventarc as a transport
         #     intermediary.
         class Transport
           include ::Google::Protobuf::MessageExts
@@ -132,14 +149,13 @@ module Google
         #     Required. The name of the Cloud Run service being addressed. See
         #     https://cloud.google.com/run/docs/reference/rest/v1/namespaces.services.
         #
-        #     Only services located in the same project of the trigger object
+        #     Only services located in the same project as the trigger object
         #     can be addressed.
         # @!attribute [rw] path
         #   @return [::String]
-        #     Optional. The relative path on the Cloud Run service the events should be
-        #     sent to.
+        #     Optional. The relative path on the Cloud Run service the events should be sent to.
         #
-        #     The value must conform to the definition of URI path segment (section 3.3
+        #     The value must conform to the definition of a URI path segment (section 3.3
         #     of RFC2396). Examples: "/route", "route", "route/subroute".
         # @!attribute [rw] region
         #   @return [::String]
@@ -149,20 +165,47 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Represents a GKE destination.
+        # @!attribute [rw] cluster
+        #   @return [::String]
+        #     Required. The name of the cluster the GKE service is running in. The cluster must be
+        #     running in the same project as the trigger being created.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Required. The name of the Google Compute Engine in which the cluster resides, which
+        #     can either be compute zone (for example, us-central1-a) for the zonal
+        #     clusters or region (for example, us-central1) for regional clusters.
+        # @!attribute [rw] namespace
+        #   @return [::String]
+        #     Required. The namespace the GKE service is running in.
+        # @!attribute [rw] service
+        #   @return [::String]
+        #     Required. Name of the GKE service.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Optional. The relative path on the GKE service the events should be sent to.
+        #
+        #     The value must conform to the definition of a URI path segment (section 3.3
+        #     of RFC2396). Examples: "/route", "route", "route/subroute".
+        class GKE
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Represents a Pub/Sub transport.
         # @!attribute [rw] topic
         #   @return [::String]
-        #     Optional. The name of the Pub/Sub topic created and managed by Eventarc
-        #     system as a transport for the event delivery. Format:
+        #     Optional. The name of the Pub/Sub topic created and managed by Eventarc as
+        #     a transport for the event delivery. Format:
         #     `projects/{PROJECT_ID}/topics/{TOPIC_NAME}`.
         #
-        #     You may set an existing topic for triggers of the type
-        #     `google.cloud.pubsub.topic.v1.messagePublished` only. The topic you provide
-        #     here will not be deleted by Eventarc at trigger deletion.
+        #     You can set an existing topic for triggers of the type
+        #     `google.cloud.pubsub.topic.v1.messagePublished`. The topic you provide
+        #     here is not deleted by Eventarc at trigger deletion.
         # @!attribute [r] subscription
         #   @return [::String]
-        #     Output only. The name of the Pub/Sub subscription created and managed by
-        #     Eventarc system as a transport for the event delivery. Format:
+        #     Output only. The name of the Pub/Sub subscription created and managed by Eventarc
+        #     as a transport for the event delivery. Format:
         #     `projects/{PROJECT_ID}/subscriptions/{SUBSCRIPTION_NAME}`.
         class Pubsub
           include ::Google::Protobuf::MessageExts
