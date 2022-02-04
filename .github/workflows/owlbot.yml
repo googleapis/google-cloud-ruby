@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       GITHUB_TOKEN: ${{ secrets.YOSHI_CODE_BOT_TOKEN }}
+      GOOGLEAPIS_GEN_GITHUB_TOKEN: ${{ secrets.YOSHI_APPROVER_TOKEN }}
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
