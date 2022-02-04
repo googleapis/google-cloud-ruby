@@ -249,7 +249,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -348,6 +348,18 @@ module Google
             #     backlog. `Pull` and `StreamingPull` requests will return
             #     FAILED_PRECONDITION. If the subscription is a push subscription, pushes to
             #     the endpoint will not be made.
+            #   @param enable_exactly_once_delivery [::Boolean]
+            #     If true, Pub/Sub provides the following guarantees for the delivery of
+            #     a message with a given value of `message_id` on this subscription:
+            #
+            #     * The message sent to a subscriber is guaranteed not to be resent
+            #     before the message's acknowledgement deadline expires.
+            #     * An acknowledged message will not be resent to a subscriber.
+            #
+            #     Note that subscribers may still receive multiple copies of a message
+            #     when `enable_exactly_once_delivery` is true if the message was published
+            #     multiple times by a publisher client. These copies are  considered distinct
+            #     by Pub/Sub and have distinct `message_id` values.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::PubSub::V1::Subscription]

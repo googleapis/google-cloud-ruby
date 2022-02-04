@@ -100,6 +100,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dead_letter_policy, :message, 13, "google.pubsub.v1.DeadLetterPolicy"
       optional :retry_policy, :message, 14, "google.pubsub.v1.RetryPolicy"
       optional :detached, :bool, 15
+      optional :enable_exactly_once_delivery, :bool, 16
       optional :topic_message_retention_duration, :message, 17, "google.protobuf.Duration"
     end
     add_message "google.pubsub.v1.RetryPolicy" do
