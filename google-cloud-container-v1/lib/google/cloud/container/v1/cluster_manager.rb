@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/container/v1/version"
 
 require "google/cloud/container/v1/cluster_manager/credentials"
+require "google/cloud/container/v1/cluster_manager/paths"
 require "google/cloud/container/v1/cluster_manager/client"
 
 module Google
