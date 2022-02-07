@@ -13,7 +13,7 @@
 # limitations under the License.
 
 def download_file_into_memory bucket_name:, file_name:
-  # [START storage_download_file_into_memory]
+  # [START storage_file_download_into_memory]
   # The name of the bucket to access
   # bucket_name = "my-bucket"
 
@@ -31,7 +31,7 @@ def download_file_into_memory bucket_name:, file_name:
   contents = downloaded.read
 
   puts "Contents of storage object #{file.name} in bucket #{bucket_name} are: #{contents}"
-  # [END storage_download_file_into_memory]
+  # [END storage_file_download_into_memory]
 end
 
 if $PROGRAM_NAME == __FILE__
