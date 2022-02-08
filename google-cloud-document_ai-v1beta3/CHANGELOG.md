@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2022-02-08
+
+#### Features
+
+* Add the ReviewDocumentOperationMetadata#question_id field
+
 ### 0.9.4 / 2022-01-11
 
 #### Bug Fixes
