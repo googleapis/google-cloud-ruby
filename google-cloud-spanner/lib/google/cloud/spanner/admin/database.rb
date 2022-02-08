@@ -117,8 +117,11 @@ module Google
             project_id = project_id.to_s # Always cast to a string
             raise ArgumentError, "project_id is missing" if project_id.empty?
 
+            configure.quota_project ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
+
             Admin::Database::V1::DatabaseAdmin::Client.new do |config|
               config.credentials = channel endpoint, credentials
+              config.quota_project = configure.quota_project
               config.timeout = timeout if timeout
               config.endpoint = endpoint if endpoint
               config.lib_name = lib_name_with_prefix lib_name, lib_version
