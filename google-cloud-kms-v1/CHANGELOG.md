@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 / 2022-02-08
+
+#### Features
+
+* Support for managing EKM connections
+
 ### 0.10.2 / 2022-01-11
 
 #### Documentation
