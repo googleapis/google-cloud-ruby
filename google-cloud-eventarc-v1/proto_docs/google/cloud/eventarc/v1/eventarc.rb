@@ -47,16 +47,16 @@ module Google
         #     the call that provided the page token.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     The sorting order of the resources returned. Value should be a comma
-        #     separated list of fields. The default sorting oder is ascending. To specify
-        #     descending order for a field, append a ` desc` suffix; for example:
+        #     The sorting order of the resources returned. Value should be a
+        #     comma-separated list of fields. The default sorting order is ascending. To
+        #     specify descending order for a field, append a `desc` suffix; for example:
         #     `name desc, trigger_id`.
         class ListTriggersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The response message for the ListTriggers method.
+        # The response message for the `ListTriggers` method.
         # @!attribute [rw] triggers
         #   @return [::Array<::Google::Cloud::Eventarc::V1::Trigger>]
         #     The requested triggers, up to the number specified in `page_size`.
@@ -84,7 +84,7 @@ module Google
         #     Required. The user-provided ID to be assigned to the trigger.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not actually
+        #     Required. If set, validate the request and preview the review, but do not
         #     post it.
         class CreateTriggerRequest
           include ::Google::Protobuf::MessageExts
@@ -97,8 +97,8 @@ module Google
         #     The trigger to be updated.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     The fields to be updated; only fields explicitly provided will be updated.
-        #     If no field mask is provided, all provided fields in the request will be
+        #     The fields to be updated; only fields explicitly provided are updated.
+        #     If no field mask is provided, all provided fields in the request are
         #     updated. To update all fields, provide a field mask of "*".
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
@@ -106,7 +106,7 @@ module Google
         #     created. In this situation, `update_mask` is ignored.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not actually
+        #     Required. If set, validate the request and preview the review, but do not
         #     post it.
         class UpdateTriggerRequest
           include ::Google::Protobuf::MessageExts
@@ -127,9 +127,181 @@ module Google
         #     but no action will be taken on the server.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
-        #     Required. If set, validate the request and preview the review, but do not actually
+        #     Required. If set, validate the request and preview the review, but do not
         #     post it.
         class DeleteTriggerRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetChannel method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the channel to get.
+        class GetChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListChannels method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection to list channels on.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of channels to return on each page.
+        #     Note: The service may send fewer.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token; provide the value from the `next_page_token` field in a
+        #     previous `ListChannels` call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListChannels` must
+        #     match the call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     The sorting order of the resources returned. Value should be a
+        #     comma-separated list of fields. The default sorting order is ascending. To
+        #     specify descending order for a field, append a `desc` suffix; for example:
+        #     `name desc, channel_id`.
+        class ListChannelsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListChannels` method.
+        # @!attribute [rw] channels
+        #   @return [::Array<::Google::Cloud::Eventarc::V1::Channel>]
+        #     The requested channels, up to the number specified in `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to ListChannels to request the next page.
+        #     If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListChannelsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the CreateChannel method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which to add this channel.
+        # @!attribute [rw] channel
+        #   @return [::Google::Cloud::Eventarc::V1::Channel]
+        #     Required. The channel to create.
+        # @!attribute [rw] channel_id
+        #   @return [::String]
+        #     Required. The user-provided ID to be assigned to the channel.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Required. If set, validate the request and preview the review, but do not
+        #     post it.
+        class CreateChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the UpdateChannel method.
+        # @!attribute [rw] channel
+        #   @return [::Google::Cloud::Eventarc::V1::Channel]
+        #     The channel to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The fields to be updated; only fields explicitly provided are updated.
+        #     If no field mask is provided, all provided fields in the request are
+        #     updated. To update all fields, provide a field mask of "*".
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Required. If set, validate the request and preview the review, but do not
+        #     post it.
+        class UpdateChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the DeleteChannel method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the channel to be deleted.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Required. If set, validate the request and preview the review, but do not
+        #     post it.
+        class DeleteChannelRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the GetChannelConnection method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the channel connection to get.
+        class GetChannelConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListChannelConnections method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection from which to list channel connections.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of channel connections to return on each page.
+        #     Note: The service may send fewer responses.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token; provide the value from the `next_page_token` field in a
+        #     previous `ListChannelConnections` call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListChannelConnetions`
+        #     match the call that provided the page token.
+        class ListChannelConnectionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListChannelConnections` method.
+        # @!attribute [rw] channel_connections
+        #   @return [::Array<::Google::Cloud::Eventarc::V1::ChannelConnection>]
+        #     The requested channel connections, up to the number specified in
+        #     `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to ListChannelConnections to request the
+        #     next page.
+        #     If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListChannelConnectionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the CreateChannelConnection method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent collection in which to add this channel connection.
+        # @!attribute [rw] channel_connection
+        #   @return [::Google::Cloud::Eventarc::V1::ChannelConnection]
+        #     Required. Channel connection to create.
+        # @!attribute [rw] channel_connection_id
+        #   @return [::String]
+        #     Required. The user-provided ID to be assigned to the channel connection.
+        class CreateChannelConnectionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the DeleteChannelConnection method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the channel connection to delete.
+        class DeleteChannelConnectionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

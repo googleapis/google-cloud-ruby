@@ -273,9 +273,9 @@ module Google
             #     When paginating, all other parameters provided to `ListTriggers` must match
             #     the call that provided the page token.
             #   @param order_by [::String]
-            #     The sorting order of the resources returned. Value should be a comma
-            #     separated list of fields. The default sorting oder is ascending. To specify
-            #     descending order for a field, append a ` desc` suffix; for example:
+            #     The sorting order of the resources returned. Value should be a
+            #     comma-separated list of fields. The default sorting order is ascending. To
+            #     specify descending order for a field, append a `desc` suffix; for example:
             #     `name desc, trigger_id`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -374,7 +374,7 @@ module Google
             #   @param trigger_id [::String]
             #     Required. The user-provided ID to be assigned to the trigger.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not actually
+            #     Required. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -470,14 +470,14 @@ module Google
             #   @param trigger [::Google::Cloud::Eventarc::V1::Trigger, ::Hash]
             #     The trigger to be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The fields to be updated; only fields explicitly provided will be updated.
-            #     If no field mask is provided, all provided fields in the request will be
+            #     The fields to be updated; only fields explicitly provided are updated.
+            #     If no field mask is provided, all provided fields in the request are
             #     updated. To update all fields, provide a field mask of "*".
             #   @param allow_missing [::Boolean]
             #     If set to true, and the trigger is not found, a new trigger will be
             #     created. In this situation, `update_mask` is ignored.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not actually
+            #     Required. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -579,7 +579,7 @@ module Google
             #     If set to true, and the trigger is not found, the request will succeed
             #     but no action will be taken on the server.
             #   @param validate_only [::Boolean]
-            #     Required. If set, validate the request and preview the review, but do not actually
+            #     Required. If set, validate the request and preview the review, but do not
             #     post it.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -646,6 +646,869 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @eventarc_stub.call_rpc :delete_trigger, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a single Channel.
+            #
+            # @overload get_channel(request, options = nil)
+            #   Pass arguments to `get_channel` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::GetChannelRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::GetChannelRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_channel(name: nil)
+            #   Pass arguments to `get_channel` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the channel to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::Channel]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::Channel]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::GetChannelRequest.new
+            #
+            #   # Call the get_channel method.
+            #   result = client.get_channel request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::Channel.
+            #   p result
+            #
+            def get_channel request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::GetChannelRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_channel.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_channel.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_channel.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :get_channel, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List channels.
+            #
+            # @overload list_channels(request, options = nil)
+            #   Pass arguments to `list_channels` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListChannelsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListChannelsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_channels(parent: nil, page_size: nil, page_token: nil, order_by: nil)
+            #   Pass arguments to `list_channels` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection to list channels on.
+            #   @param page_size [::Integer]
+            #     The maximum number of channels to return on each page.
+            #     Note: The service may send fewer.
+            #   @param page_token [::String]
+            #     The page token; provide the value from the `next_page_token` field in a
+            #     previous `ListChannels` call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListChannels` must
+            #     match the call that provided the page token.
+            #   @param order_by [::String]
+            #     The sorting order of the resources returned. Value should be a
+            #     comma-separated list of fields. The default sorting order is ascending. To
+            #     specify descending order for a field, append a `desc` suffix; for example:
+            #     `name desc, channel_id`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Channel>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Channel>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListChannelsRequest.new
+            #
+            #   # Call the list_channels method.
+            #   result = client.list_channels request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Eventarc::V1::Channel.
+            #     p response
+            #   end
+            #
+            def list_channels request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListChannelsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_channels.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_channels.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_channels.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_channels, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @eventarc_stub, :list_channels, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Create a new channel in a particular project and location.
+            #
+            # @overload create_channel(request, options = nil)
+            #   Pass arguments to `create_channel` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::CreateChannelRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::CreateChannelRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_channel(parent: nil, channel: nil, channel_id: nil, validate_only: nil)
+            #   Pass arguments to `create_channel` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection in which to add this channel.
+            #   @param channel [::Google::Cloud::Eventarc::V1::Channel, ::Hash]
+            #     Required. The channel to create.
+            #   @param channel_id [::String]
+            #     Required. The user-provided ID to be assigned to the channel.
+            #   @param validate_only [::Boolean]
+            #     Required. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::CreateChannelRequest.new
+            #
+            #   # Call the create_channel method.
+            #   result = client.create_channel request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def create_channel request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::CreateChannelRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_channel.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_channel.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_channel.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :create_channel, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update a single channel.
+            #
+            # @overload update_channel(request, options = nil)
+            #   Pass arguments to `update_channel` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::UpdateChannelRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::UpdateChannelRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_channel(channel: nil, update_mask: nil, validate_only: nil)
+            #   Pass arguments to `update_channel` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param channel [::Google::Cloud::Eventarc::V1::Channel, ::Hash]
+            #     The channel to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The fields to be updated; only fields explicitly provided are updated.
+            #     If no field mask is provided, all provided fields in the request are
+            #     updated. To update all fields, provide a field mask of "*".
+            #   @param validate_only [::Boolean]
+            #     Required. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::UpdateChannelRequest.new
+            #
+            #   # Call the update_channel method.
+            #   result = client.update_channel request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def update_channel request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::UpdateChannelRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_channel.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.channel&.name
+                header_params["channel.name"] = request.channel.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_channel.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_channel.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :update_channel, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a single channel.
+            #
+            # @overload delete_channel(request, options = nil)
+            #   Pass arguments to `delete_channel` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::DeleteChannelRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::DeleteChannelRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_channel(name: nil, validate_only: nil)
+            #   Pass arguments to `delete_channel` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the channel to be deleted.
+            #   @param validate_only [::Boolean]
+            #     Required. If set, validate the request and preview the review, but do not
+            #     post it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::DeleteChannelRequest.new
+            #
+            #   # Call the delete_channel method.
+            #   result = client.delete_channel request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_channel request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::DeleteChannelRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_channel.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_channel.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_channel.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :delete_channel, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get a single ChannelConnection.
+            #
+            # @overload get_channel_connection(request, options = nil)
+            #   Pass arguments to `get_channel_connection` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::GetChannelConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::GetChannelConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_channel_connection(name: nil)
+            #   Pass arguments to `get_channel_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the channel connection to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::ChannelConnection]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::ChannelConnection]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::GetChannelConnectionRequest.new
+            #
+            #   # Call the get_channel_connection method.
+            #   result = client.get_channel_connection request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::ChannelConnection.
+            #   p result
+            #
+            def get_channel_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::GetChannelConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_channel_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_channel_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_channel_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :get_channel_connection, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List channel connections.
+            #
+            # @overload list_channel_connections(request, options = nil)
+            #   Pass arguments to `list_channel_connections` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListChannelConnectionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListChannelConnectionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_channel_connections(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_channel_connections` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection from which to list channel connections.
+            #   @param page_size [::Integer]
+            #     The maximum number of channel connections to return on each page.
+            #     Note: The service may send fewer responses.
+            #   @param page_token [::String]
+            #     The page token; provide the value from the `next_page_token` field in a
+            #     previous `ListChannelConnections` call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListChannelConnetions`
+            #     match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::ChannelConnection>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::ChannelConnection>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListChannelConnectionsRequest.new
+            #
+            #   # Call the list_channel_connections method.
+            #   result = client.list_channel_connections request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Eventarc::V1::ChannelConnection.
+            #     p response
+            #   end
+            #
+            def list_channel_connections request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListChannelConnectionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_channel_connections.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_channel_connections.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_channel_connections.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_channel_connections, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @eventarc_stub, :list_channel_connections, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Create a new ChannelConnection in a particular project and location.
+            #
+            # @overload create_channel_connection(request, options = nil)
+            #   Pass arguments to `create_channel_connection` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_channel_connection(parent: nil, channel_connection: nil, channel_connection_id: nil)
+            #   Pass arguments to `create_channel_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent collection in which to add this channel connection.
+            #   @param channel_connection [::Google::Cloud::Eventarc::V1::ChannelConnection, ::Hash]
+            #     Required. Channel connection to create.
+            #   @param channel_connection_id [::String]
+            #     Required. The user-provided ID to be assigned to the channel connection.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest.new
+            #
+            #   # Call the create_channel_connection method.
+            #   result = client.create_channel_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def create_channel_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_channel_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_channel_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_channel_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :create_channel_connection, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a single ChannelConnection.
+            #
+            # @overload delete_channel_connection(request, options = nil)
+            #   Pass arguments to `delete_channel_connection` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_channel_connection(name: nil)
+            #   Pass arguments to `delete_channel_connection` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the channel connection to delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest.new
+            #
+            #   # Call the delete_channel_connection method.
+            #   result = client.delete_channel_connection request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_channel_connection request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_channel_connection.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_channel_connection.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_channel_connection.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :delete_channel_connection, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -814,6 +1677,51 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_trigger
+                ##
+                # RPC-specific configuration for `get_channel`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_channel
+                ##
+                # RPC-specific configuration for `list_channels`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_channels
+                ##
+                # RPC-specific configuration for `create_channel`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_channel
+                ##
+                # RPC-specific configuration for `update_channel`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_channel
+                ##
+                # RPC-specific configuration for `delete_channel`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_channel
+                ##
+                # RPC-specific configuration for `get_channel_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_channel_connection
+                ##
+                # RPC-specific configuration for `list_channel_connections`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_channel_connections
+                ##
+                # RPC-specific configuration for `create_channel_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_channel_connection
+                ##
+                # RPC-specific configuration for `delete_channel_connection`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_channel_connection
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -827,6 +1735,24 @@ module Google
                   @update_trigger = ::Gapic::Config::Method.new update_trigger_config
                   delete_trigger_config = parent_rpcs.delete_trigger if parent_rpcs.respond_to? :delete_trigger
                   @delete_trigger = ::Gapic::Config::Method.new delete_trigger_config
+                  get_channel_config = parent_rpcs.get_channel if parent_rpcs.respond_to? :get_channel
+                  @get_channel = ::Gapic::Config::Method.new get_channel_config
+                  list_channels_config = parent_rpcs.list_channels if parent_rpcs.respond_to? :list_channels
+                  @list_channels = ::Gapic::Config::Method.new list_channels_config
+                  create_channel_config = parent_rpcs.create_channel if parent_rpcs.respond_to? :create_channel
+                  @create_channel = ::Gapic::Config::Method.new create_channel_config
+                  update_channel_config = parent_rpcs.update_channel if parent_rpcs.respond_to? :update_channel
+                  @update_channel = ::Gapic::Config::Method.new update_channel_config
+                  delete_channel_config = parent_rpcs.delete_channel if parent_rpcs.respond_to? :delete_channel
+                  @delete_channel = ::Gapic::Config::Method.new delete_channel_config
+                  get_channel_connection_config = parent_rpcs.get_channel_connection if parent_rpcs.respond_to? :get_channel_connection
+                  @get_channel_connection = ::Gapic::Config::Method.new get_channel_connection_config
+                  list_channel_connections_config = parent_rpcs.list_channel_connections if parent_rpcs.respond_to? :list_channel_connections
+                  @list_channel_connections = ::Gapic::Config::Method.new list_channel_connections_config
+                  create_channel_connection_config = parent_rpcs.create_channel_connection if parent_rpcs.respond_to? :create_channel_connection
+                  @create_channel_connection = ::Gapic::Config::Method.new create_channel_connection_config
+                  delete_channel_connection_config = parent_rpcs.delete_channel_connection if parent_rpcs.respond_to? :delete_channel_connection
+                  @delete_channel_connection = ::Gapic::Config::Method.new delete_channel_connection_config
 
                   yield self if block_given?
                 end

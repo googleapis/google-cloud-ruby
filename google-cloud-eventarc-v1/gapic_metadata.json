@@ -34,6 +34,51 @@
               "methods": [
                 "delete_trigger"
               ]
+            },
+            "GetChannel": {
+              "methods": [
+                "get_channel"
+              ]
+            },
+            "ListChannels": {
+              "methods": [
+                "list_channels"
+              ]
+            },
+            "CreateChannel": {
+              "methods": [
+                "create_channel"
+              ]
+            },
+            "UpdateChannel": {
+              "methods": [
+                "update_channel"
+              ]
+            },
+            "DeleteChannel": {
+              "methods": [
+                "delete_channel"
+              ]
+            },
+            "GetChannelConnection": {
+              "methods": [
+                "get_channel_connection"
+              ]
+            },
+            "ListChannelConnections": {
+              "methods": [
+                "list_channel_connections"
+              ]
+            },
+            "CreateChannelConnection": {
+              "methods": [
+                "create_channel_connection"
+              ]
+            },
+            "DeleteChannelConnection": {
+              "methods": [
+                "delete_channel_connection"
+              ]
             }
           }
         }

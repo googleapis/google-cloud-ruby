@@ -44,6 +44,24 @@ module Google
             rpc :UpdateTrigger, ::Google::Cloud::Eventarc::V1::UpdateTriggerRequest, ::Google::Longrunning::Operation
             # Delete a single trigger.
             rpc :DeleteTrigger, ::Google::Cloud::Eventarc::V1::DeleteTriggerRequest, ::Google::Longrunning::Operation
+            # Get a single Channel.
+            rpc :GetChannel, ::Google::Cloud::Eventarc::V1::GetChannelRequest, ::Google::Cloud::Eventarc::V1::Channel
+            # List channels.
+            rpc :ListChannels, ::Google::Cloud::Eventarc::V1::ListChannelsRequest, ::Google::Cloud::Eventarc::V1::ListChannelsResponse
+            # Create a new channel in a particular project and location.
+            rpc :CreateChannel, ::Google::Cloud::Eventarc::V1::CreateChannelRequest, ::Google::Longrunning::Operation
+            # Update a single channel.
+            rpc :UpdateChannel, ::Google::Cloud::Eventarc::V1::UpdateChannelRequest, ::Google::Longrunning::Operation
+            # Delete a single channel.
+            rpc :DeleteChannel, ::Google::Cloud::Eventarc::V1::DeleteChannelRequest, ::Google::Longrunning::Operation
+            # Get a single ChannelConnection.
+            rpc :GetChannelConnection, ::Google::Cloud::Eventarc::V1::GetChannelConnectionRequest, ::Google::Cloud::Eventarc::V1::ChannelConnection
+            # List channel connections.
+            rpc :ListChannelConnections, ::Google::Cloud::Eventarc::V1::ListChannelConnectionsRequest, ::Google::Cloud::Eventarc::V1::ListChannelConnectionsResponse
+            # Create a new ChannelConnection in a particular project and location.
+            rpc :CreateChannelConnection, ::Google::Cloud::Eventarc::V1::CreateChannelConnectionRequest, ::Google::Longrunning::Operation
+            # Delete a single ChannelConnection.
+            rpc :DeleteChannelConnection, ::Google::Cloud::Eventarc::V1::DeleteChannelConnectionRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
