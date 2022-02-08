@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 / 2022-02-08
+
+#### Features
+
+* Support for payload checksums
+
 ### 0.11.3 / 2022-01-11
 
 #### Documentation
