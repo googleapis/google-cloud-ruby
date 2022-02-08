@@ -882,6 +882,14 @@ module Google
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
         #     Received Pub/Sub messages. This will not be empty.
+        # @!attribute [rw] acknowlege_confirmation
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::AcknowledgeConfirmation]
+        #     This field will only be set if `enable_exactly_once_delivery` is set to
+        #     `true`.
+        # @!attribute [rw] modify_ack_deadline_confirmation
+        #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::ModifyAckDeadlineConfirmation]
+        #     This field will only be set if `enable_exactly_once_delivery` is set to
+        #     `true`.
         # @!attribute [rw] subscription_properties
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::SubscriptionProperties]
         #     Properties associated with this subscription.
@@ -889,7 +897,41 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # Acknowledgement IDs sent in one or more previous requests to acknowledge a
+          # previously received message.
+          # @!attribute [rw] ack_ids
+          #   @return [::Array<::String>]
+          #     Successfully processed acknowledgement IDs.
+          # @!attribute [rw] invalid_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were malformed or whose acknowledgement
+          #     deadline has expired.
+          # @!attribute [rw] unordered_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were out of order.
+          class AcknowledgeConfirmation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Acknowledgement IDs sent in one or more previous requests to modify the
+          # deadline for a specific message.
+          # @!attribute [rw] ack_ids
+          #   @return [::Array<::String>]
+          #     Successfully processed acknowledgement IDs.
+          # @!attribute [rw] invalid_ack_ids
+          #   @return [::Array<::String>]
+          #     List of acknowledgement IDs that were malformed or whose acknowledgement
+          #     deadline has expired.
+          class ModifyAckDeadlineConfirmation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Subscription properties sent as part of the response.
+          # @!attribute [rw] exactly_once_delivery_enabled
+          #   @return [::Boolean]
+          #     True iff exactly once delivery is enabled for this subscription.
           # @!attribute [rw] message_ordering_enabled
           #   @return [::Boolean]
           #     True iff message ordering is enabled for this subscription.
