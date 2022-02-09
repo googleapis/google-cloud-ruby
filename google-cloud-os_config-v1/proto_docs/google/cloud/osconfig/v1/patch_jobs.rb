@@ -337,6 +337,9 @@ module Google
         # @!attribute [rw] post_step
         #   @return [::Google::Cloud::OsConfig::V1::ExecStep]
         #     The `ExecStep` to run after the patch update.
+        # @!attribute [rw] mig_instances_allowed
+        #   @return [::Boolean]
+        #     Allows the patch job to run on Managed instance groups (MIGs).
         class PatchConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

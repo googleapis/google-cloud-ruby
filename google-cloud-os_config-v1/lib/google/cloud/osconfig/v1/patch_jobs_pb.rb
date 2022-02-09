@@ -103,6 +103,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :windows_update, :message, 7, "google.cloud.osconfig.v1.WindowsUpdateSettings"
       optional :pre_step, :message, 8, "google.cloud.osconfig.v1.ExecStep"
       optional :post_step, :message, 9, "google.cloud.osconfig.v1.ExecStep"
+      optional :mig_instances_allowed, :bool, 10
     end
     add_enum "google.cloud.osconfig.v1.PatchConfig.RebootConfig" do
       value :REBOOT_CONFIG_UNSPECIFIED, 0

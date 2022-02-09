@@ -5,6 +5,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/osconfig/v1/patch_jobs_pb'
 require 'google/protobuf/duration_pb'
+require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/datetime_pb'
 require 'google/type/dayofweek_pb'
@@ -23,10 +24,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_time, :message, 9, "google.protobuf.Timestamp"
       optional :last_execute_time, :message, 10, "google.protobuf.Timestamp"
       optional :rollout, :message, 11, "google.cloud.osconfig.v1.PatchRollout"
+      optional :state, :enum, 12, "google.cloud.osconfig.v1.PatchDeployment.State"
       oneof :schedule do
         optional :one_time_schedule, :message, 6, "google.cloud.osconfig.v1.OneTimeSchedule"
         optional :recurring_schedule, :message, 7, "google.cloud.osconfig.v1.RecurringSchedule"
       end
+    end
+    add_enum "google.cloud.osconfig.v1.PatchDeployment.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :ACTIVE, 1
+      value :PAUSED, 2
     end
     add_message "google.cloud.osconfig.v1.OneTimeSchedule" do
       optional :execute_time, :message, 1, "google.protobuf.Timestamp"
@@ -62,6 +69,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.osconfig.v1.WeekDayOfMonth" do
       optional :week_ordinal, :int32, 1
       optional :day_of_week, :enum, 2, "google.type.DayOfWeek"
+      optional :day_offset, :int32, 3
     end
     add_message "google.cloud.osconfig.v1.CreatePatchDeploymentRequest" do
       optional :parent, :string, 1
@@ -83,6 +91,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.osconfig.v1.DeletePatchDeploymentRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.osconfig.v1.UpdatePatchDeploymentRequest" do
+      optional :patch_deployment, :message, 1, "google.cloud.osconfig.v1.PatchDeployment"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.osconfig.v1.PausePatchDeploymentRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.osconfig.v1.ResumePatchDeploymentRequest" do
+      optional :name, :string, 1
+    end
   end
 end
 
@@ -91,6 +109,7 @@ module Google
     module OsConfig
       module V1
         PatchDeployment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.PatchDeployment").msgclass
+        PatchDeployment::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.PatchDeployment.State").enummodule
         OneTimeSchedule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.OneTimeSchedule").msgclass
         RecurringSchedule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.RecurringSchedule").msgclass
         RecurringSchedule::Frequency = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.RecurringSchedule.Frequency").enummodule
@@ -102,6 +121,9 @@ module Google
         ListPatchDeploymentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.ListPatchDeploymentsRequest").msgclass
         ListPatchDeploymentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.ListPatchDeploymentsResponse").msgclass
         DeletePatchDeploymentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.DeletePatchDeploymentRequest").msgclass
+        UpdatePatchDeploymentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.UpdatePatchDeploymentRequest").msgclass
+        PausePatchDeploymentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.PausePatchDeploymentRequest").msgclass
+        ResumePatchDeploymentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.osconfig.v1.ResumePatchDeploymentRequest").msgclass
       end
     end
   end
