@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2022-02-10
+
+#### Features
+
+* Support for pause patch deployment, resume patch deployment, update patch deployment
+
 ### 0.9.1 / 2022-01-11
 
 #### Bug Fixes
