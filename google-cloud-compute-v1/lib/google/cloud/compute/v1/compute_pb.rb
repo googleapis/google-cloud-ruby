@@ -5397,6 +5397,31 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :preserved_state_from_policy, :message, 470783954, "google.cloud.compute.v1.PreservedState"
       proto3_optional :version, :message, 351608024, "google.cloud.compute.v1.ManagedInstanceVersion"
     end
+    add_enum "google.cloud.compute.v1.ManagedInstance.CurrentAction" do
+      value :UNDEFINED_CURRENT_ACTION, 0
+      value :ABANDONING, 388244813
+      value :CREATING, 455564985
+      value :CREATING_WITHOUT_RETRIES, 428843785
+      value :DELETING, 528602024
+      value :NONE, 2402104
+      value :RECREATING, 287278572
+      value :REFRESHING, 163266343
+      value :RESTARTING, 320534387
+      value :VERIFYING, 16982185
+    end
+    add_enum "google.cloud.compute.v1.ManagedInstance.InstanceStatus" do
+      value :UNDEFINED_INSTANCE_STATUS, 0
+      value :DEPROVISIONING, 428935662
+      value :PROVISIONING, 290896621
+      value :REPAIRING, 413483285
+      value :RUNNING, 121282975
+      value :STAGING, 431072283
+      value :STOPPED, 444276141
+      value :STOPPING, 350791796
+      value :SUSPENDED, 51223995
+      value :SUSPENDING, 514206246
+      value :TERMINATED, 250018339
+    end
     add_message "google.cloud.compute.v1.ManagedInstanceInstanceHealth" do
       proto3_optional :detailed_health_state, :string, 510470173
       proto3_optional :health_check, :string, 308876645
@@ -6334,6 +6359,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :audit_configs, :message, 328080653, "google.cloud.compute.v1.AuditConfig"
       repeated :bindings, :message, 403251854, "google.cloud.compute.v1.Binding"
       proto3_optional :etag, :string, 3123477
+      proto3_optional :iam_owned, :bool, 450566203
       repeated :rules, :message, 108873975, "google.cloud.compute.v1.Rule"
       proto3_optional :version, :int32, 351608024
     end
@@ -10395,6 +10421,8 @@ module Google
         MachineTypeList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.MachineTypeList").msgclass
         MachineTypesScopedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.MachineTypesScopedList").msgclass
         ManagedInstance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ManagedInstance").msgclass
+        ManagedInstance::CurrentAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ManagedInstance.CurrentAction").enummodule
+        ManagedInstance::InstanceStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ManagedInstance.InstanceStatus").enummodule
         ManagedInstanceInstanceHealth = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ManagedInstanceInstanceHealth").msgclass
         ManagedInstanceInstanceHealth::DetailedHealthState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ManagedInstanceInstanceHealth.DetailedHealthState").enummodule
         ManagedInstanceLastAttempt = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ManagedInstanceLastAttempt").msgclass

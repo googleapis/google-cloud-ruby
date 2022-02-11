@@ -15921,6 +15921,7 @@ module Google
         # @!attribute [rw] current_action
         #   @return [::String]
         #     [Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: - NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. - CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. - CREATING_WITHOUT_RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased instead. - RECREATING The managed instance group is recreating this instance. - DELETING The managed instance group is permanently deleting this instance. - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. - RESTARTING The managed instance group is restarting the instance. - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance. - VERIFYING The managed instance group has created the instance and it is in the process of being verified.
+        #     Check the CurrentAction enum for the list of possible values.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output only] The unique identifier for this resource. This field is empty when instance does not exist.
@@ -15948,6 +15949,75 @@ module Google
         class ManagedInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: - NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. - CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. - CREATING_WITHOUT_RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased instead. - RECREATING The managed instance group is recreating this instance. - DELETING The managed instance group is permanently deleting this instance. - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. - RESTARTING The managed instance group is restarting the instance. - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance. - VERIFYING The managed instance group has created the instance and it is in the process of being verified.
+          module CurrentAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_CURRENT_ACTION = 0
+
+            # The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group.
+            ABANDONING = 388244813
+
+            # The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful.
+            CREATING = 455564985
+
+            # The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased.
+            CREATING_WITHOUT_RETRIES = 428843785
+
+            # The managed instance group is permanently deleting this instance.
+            DELETING = 528602024
+
+            # The managed instance group has not scheduled any actions for this instance.
+            NONE = 2402104
+
+            # The managed instance group is recreating this instance.
+            RECREATING = 287278572
+
+            # The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance.
+            REFRESHING = 163266343
+
+            # The managed instance group is restarting this instance.
+            RESTARTING = 320534387
+
+            # The managed instance group is verifying this already created instance. Verification happens every time the instance is (re)created or restarted and consists of: 1. Waiting until health check specified as part of this managed instance group's autohealing policy reports HEALTHY. Note: Applies only if autohealing policy has a health check specified 2. Waiting for addition verification steps performed as post-instance creation (subject to future extensions).
+            VERIFYING = 16982185
+          end
+
+          # [Output Only] The status of the instance. This field is empty when the instance does not exist.
+          module InstanceStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_INSTANCE_STATUS = 0
+
+            # The Nanny is halted and we are performing tear down tasks like network deprogramming, releasing quota, IP, tearing down disks etc.
+            DEPROVISIONING = 428935662
+
+            # Resources are being allocated for the instance.
+            PROVISIONING = 290896621
+
+            # The instance is in repair.
+            REPAIRING = 413483285
+
+            # The instance is running.
+            RUNNING = 121282975
+
+            # All required resources have been allocated and the instance is being started.
+            STAGING = 431072283
+
+            # The instance has stopped successfully.
+            STOPPED = 444276141
+
+            # The instance is currently stopping (either being deleted or killed).
+            STOPPING = 350791796
+
+            # The instance has suspended.
+            SUSPENDED = 51223995
+
+            # The instance is suspending.
+            SUSPENDING = 514206246
+
+            # The instance has stopped (either by explicit action or underlying failure).
+            TERMINATED = 250018339
+          end
         end
 
         # @!attribute [rw] detailed_health_state
@@ -18703,6 +18773,9 @@ module Google
         # @!attribute [rw] etag
         #   @return [::String]
         #     `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
+        # @!attribute [rw] iam_owned
+        #   @return [::Boolean]
+        #     This is deprecated and has no effect. Do not use.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::Rule>]
         #     This is deprecated and has no effect. Do not use.
