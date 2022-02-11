@@ -1,5 +1,11 @@
 # Release History
 
+### 1.36.1 / 2022-02-08
+
+#### Documentation
+
+* Update the RPO sample output. ([#17277](https://www.github.com/googleapis/google-cloud-ruby/issues/17277))
+
 ### 1.36.0 / 2022-01-12
 
 #### Features
