@@ -490,7 +490,7 @@ module Google
 
                 # The interpreter to use.
                 module Interpreter
-                  # Defaults to NONE.
+                  # Invalid value, the request will return validation error.
                   INTERPRETER_UNSPECIFIED = 0
 
                   # If an interpreter is not specified, the
