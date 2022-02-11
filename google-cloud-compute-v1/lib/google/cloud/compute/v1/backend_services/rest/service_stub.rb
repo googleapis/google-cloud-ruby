@@ -454,6 +454,52 @@ module Google
               end
 
               ##
+              # Baseline implementation for the set_edge_security_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def set_edge_security_policy request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                uri, body, query_string_params = transcode_set_edge_security_policy_request request_pb
+                response = @client_stub.make_post_request(
+                  uri:     uri,
+                  body:    body,
+                  params:  query_string_params,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              end
+
+              ##
+              # GRPC transcoding helper method for the set_edge_security_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_edge_security_policy_request request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/global/backendServices/#{request_pb.backend_service}/setEdgeSecurityPolicy"
+                body = request_pb.security_policy_reference_resource.to_json
+                query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+
+                [uri, body, query_string_params]
+              end
+
+              ##
               # Baseline implementation for the set_security_policy REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest]

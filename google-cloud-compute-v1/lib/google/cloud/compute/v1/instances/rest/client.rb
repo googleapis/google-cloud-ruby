@@ -134,6 +134,8 @@ module Google
 
                   default_config.rpcs.reset.timeout = 600.0
 
+                  default_config.rpcs.resume.timeout = 600.0
+
                   default_config.rpcs.send_diagnostic_interrupt.timeout = 600.0
 
                   default_config.rpcs.set_deletion_protection.timeout = 600.0
@@ -167,6 +169,8 @@ module Google
                   default_config.rpcs.start_with_encryption_key.timeout = 600.0
 
                   default_config.rpcs.stop.timeout = 600.0
+
+                  default_config.rpcs.suspend.timeout = 600.0
 
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
 
@@ -404,7 +408,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+              #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
               #   @param include_all_scopes [::Boolean]
               #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
               #   @param max_results [::Integer]
@@ -1289,7 +1293,7 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload insert(instance_resource: nil, project: nil, request_id: nil, source_instance_template: nil, zone: nil)
+              # @overload insert(instance_resource: nil, project: nil, request_id: nil, source_instance_template: nil, source_machine_image: nil, zone: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1302,6 +1306,8 @@ module Google
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               #   @param source_instance_template [::String]
               #     Specifies instance template to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to an instance template: - https://www.googleapis.com/compute/v1/projects/project /global/instanceTemplates/instanceTemplate - projects/project/global/instanceTemplates/instanceTemplate - global/instanceTemplates/instanceTemplate
+              #   @param source_machine_image [::String]
+              #     Specifies the machine image to use to create the instance. This field is optional. It can be a full or partial URL. For example, the following are all valid URLs to a machine image: - https://www.googleapis.com/compute/v1/projects/project/global/global /machineImages/machineImage - projects/project/global/global/machineImages/machineImage - global/machineImages/machineImage
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
@@ -1365,7 +1371,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+              #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
               #   @param max_results [::Integer]
               #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
               #   @param order_by [::String]
@@ -1439,7 +1445,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, a comparison operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The comparison operator must be either `=`, `!=`, `>`, or `<`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+              #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
               #   @param instance [::String]
               #     Name of the target instance scoping this request, or '-' if the request should span over all instances in the container.
               #   @param max_results [::Integer]
@@ -1623,6 +1629,74 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.reset request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Resumes an instance that was suspended using the instances().suspend method.
+              #
+              # @overload resume(request, options = nil)
+              #   Pass arguments to `resume` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::ResumeInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::ResumeInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload resume(instance: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `resume` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Name of the instance resource to resume.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Gapic::Rest::BaseOperation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def resume request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ResumeInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.resume.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.resume.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @instances_stub.resume request, options do |result, response|
                   result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
@@ -2257,7 +2331,7 @@ module Google
               end
 
               ##
-              # Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states.
+              # Sets an instance's scheduling options. You can only call this method on a stopped instance, that is, a VM instance that is in a `TERMINATED` state. See Instance Life Cycle for more information on the possible instance states. For more information about setting scheduling options for a VM, see Set VM availability policies.
               #
               # @overload set_scheduling(request, options = nil)
               #   Pass arguments to `set_scheduling` via a request object, either of type
@@ -2537,7 +2611,7 @@ module Google
               end
 
               ##
-              # Simulates a maintenance event on the instance.
+              # Simulates a host maintenance event on a VM. For more information, see Simulate a host maintenance event.
               #
               # @overload simulate_maintenance_event(request, options = nil)
               #   Pass arguments to `simulate_maintenance_event` via a request object, either of type
@@ -2799,6 +2873,74 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.stop request, options do |result, response|
+                  result = ::Gapic::Rest::BaseOperation.new result
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # This method suspends a running instance, saving its state to persistent storage, and allows you to resume the instance at a later time. Suspended instances have no compute costs (cores or RAM), and incur only storage charges for the saved VM memory and localSSD data. Any charged resources the virtual machine was using, such as persistent disks and static IP addresses, will continue to be charged while the instance is suspended. For more information, see Suspending and resuming an instance.
+              #
+              # @overload suspend(request, options = nil)
+              #   Pass arguments to `suspend` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SuspendInstanceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SuspendInstanceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload suspend(instance: nil, project: nil, request_id: nil, zone: nil)
+              #   Pass arguments to `suspend` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param instance [::String]
+              #     Name of the instance resource to suspend.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param zone [::String]
+              #     The name of the zone for this request.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Gapic::Rest::BaseOperation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def suspend request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SuspendInstanceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.suspend.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.suspend.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @instances_stub.suspend request, options do |result, response|
                   result = ::Gapic::Rest::BaseOperation.new result
                   yield result, response if block_given?
                   return result
@@ -3433,6 +3575,11 @@ module Google
                   #
                   attr_reader :reset
                   ##
+                  # RPC-specific configuration for `resume`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :resume
+                  ##
                   # RPC-specific configuration for `send_diagnostic_interrupt`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3518,6 +3665,11 @@ module Google
                   #
                   attr_reader :stop
                   ##
+                  # RPC-specific configuration for `suspend`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :suspend
+                  ##
                   # RPC-specific configuration for `test_iam_permissions`
                   # @return [::Gapic::Config::Method]
                   #
@@ -3590,6 +3742,8 @@ module Google
                     @remove_resource_policies = ::Gapic::Config::Method.new remove_resource_policies_config
                     reset_config = parent_rpcs.reset if parent_rpcs.respond_to? :reset
                     @reset = ::Gapic::Config::Method.new reset_config
+                    resume_config = parent_rpcs.resume if parent_rpcs.respond_to? :resume
+                    @resume = ::Gapic::Config::Method.new resume_config
                     send_diagnostic_interrupt_config = parent_rpcs.send_diagnostic_interrupt if parent_rpcs.respond_to? :send_diagnostic_interrupt
                     @send_diagnostic_interrupt = ::Gapic::Config::Method.new send_diagnostic_interrupt_config
                     set_deletion_protection_config = parent_rpcs.set_deletion_protection if parent_rpcs.respond_to? :set_deletion_protection
@@ -3624,6 +3778,8 @@ module Google
                     @start_with_encryption_key = ::Gapic::Config::Method.new start_with_encryption_key_config
                     stop_config = parent_rpcs.stop if parent_rpcs.respond_to? :stop
                     @stop = ::Gapic::Config::Method.new stop_config
+                    suspend_config = parent_rpcs.suspend if parent_rpcs.respond_to? :suspend
+                    @suspend = ::Gapic::Config::Method.new suspend_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                     update_config = parent_rpcs.update if parent_rpcs.respond_to? :update
