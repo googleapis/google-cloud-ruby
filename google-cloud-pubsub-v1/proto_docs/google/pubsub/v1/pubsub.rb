@@ -882,7 +882,7 @@ module Google
         # @!attribute [rw] received_messages
         #   @return [::Array<::Google::Cloud::PubSub::V1::ReceivedMessage>]
         #     Received Pub/Sub messages. This will not be empty.
-        # @!attribute [rw] acknowlege_confirmation
+        # @!attribute [rw] acknowledge_confirmation
         #   @return [::Google::Cloud::PubSub::V1::StreamingPullResponse::AcknowledgeConfirmation]
         #     This field will only be set if `enable_exactly_once_delivery` is set to
         #     `true`.
