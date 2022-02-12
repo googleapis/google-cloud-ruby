@@ -59,19 +59,18 @@ TMP_DIR_NAME = "tmp"
 include :exec, e: true
 include :terminal
 include :fileutils
+include "yoshi-pr-generator"
 
 def run
   require "psych"
   require "fileutils"
   require "tmpdir"
-  require "pull_request_generator"
-  extend PullRequestGenerator
-  ensure_docker
 
   set :source_path, File.expand_path(source_path) if source_path
   ensure_source_path
   gems = choose_gems
   Dir.chdir context_directory
+  yoshi_utils.git_ensure_identity
   gem_info = collect_gem_info gems
 
   pull_images
@@ -249,10 +248,10 @@ def process_gems_separate_prs gems, temp_staging_dir
     timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
     branch_name = "owlbot/#{name}-#{timestamp}"
     message = build_commit_message name
-    result = generate_pull_request gem_name: name,
-                                   git_remote: git_remote,
-                                   branch_name: branch_name,
-                                   commit_message: message do
+    result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
+                                        remote: git_remote,
+                                        branch_name: branch_name,
+                                        commit_message: message do
       process_single_gem name, temp_staging_dir
     end
     puts "Results for #{name} (#{index}/#{gems.size})..."
@@ -265,9 +264,10 @@ def process_gems_combined_pr gems, temp_staging_dir
   timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
   branch_name = "owlbot/all-#{timestamp}"
   message = build_commit_message "all gems"
-  result = generate_pull_request git_remote: git_remote,
-                                 branch_name: branch_name,
-                                 commit_message: message do
+  result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
+                                      remote: git_remote,
+                                      branch_name: branch_name,
+                                      commit_message: message do
     gems.each_with_index do |name, index|
       process_single_gem name, temp_staging_dir
       puts "Completed #{name} (#{index}/#{gems.size})..."
@@ -310,14 +310,12 @@ end
 
 def output_result name, result, *style
   case result
-  when :opened
-    puts "#{name}: Created pull request", *style
+  when Integer
+    puts "#{name}: Created pull request #{result}", *style
   when :unchanged
     puts "#{name}: No pull request created because nothing changed", *style
-  when :disabled
-    puts "#{name}: Results left in the local directory", *style
   else
-    puts "#{name}: Unknown result #{result.inspect}", *style
+    puts "#{name}: Results left in the local directory", *style
   end
   result
 end

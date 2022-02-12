@@ -21,12 +21,12 @@ flag :git_remote, "--remote=NAME" do
 end
 
 include :exec, e: true
+include "yoshi-pr-generator"
 
 def run
   require "json"
-  require "pull_request_generator"
-  extend PullRequestGenerator
 
+  yoshi_utils.git_ensure_identity
   updated, pr_result = update_release_levels
   output_result updated, pr_result
 end
@@ -35,9 +35,10 @@ def update_release_levels
   timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
   branch_name = "pr/update-release-levels-#{timestamp}"
   updated = []
-  pr_result = generate_pull_request git_remote: git_remote,
-                                    branch_name: branch_name,
-                                    commit_message: "chore: Update release levels in repo-metadata" do
+  pr_result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
+                                         remote: git_remote,
+                                         branch_name: branch_name,
+                                         commit_message: "chore: Update release levels in repo-metadata" do
     selected_gems.each do |gem_name|
       updated << gem_name if update_gem gem_name
     end
@@ -48,14 +49,12 @@ end
 def output_result updated, pr_result, *style
   puts "Updated: #{updated.inspect}", *style
   case pr_result
-  when :opened
-    puts "Created pull request", *style
+  when Integer
+    puts "Created pull request #{pr_request}", *style
   when :unchanged
     puts "No pull request created because nothing changed", *style
-  when :disabled
-    puts "Results left in the local directory", *style
   else
-    puts "Unknown result #{result.inspect}", *style
+    puts "Results left in the local directory", *style
   end
 end
 

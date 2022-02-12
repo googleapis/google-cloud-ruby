@@ -51,13 +51,16 @@ include :exec, e: true
 include :fileutils
 include :terminal
 include :git_cache
+include "yoshi-pr-generator"
 
 def run
   setup
-  generate_pull_request gem_name: gem_name,
-                        git_remote: git_remote,
-                        branch_name: branch_name || "gen/#{gem_name}",
-                        commit_message: "feat: Initial generation of #{gem_name}" do
+  set :branch_name, "gen/#{gem_name}" unless branch_name
+  commit_message = "feat: Initial generation of #{gem_name}"
+  yoshi_pr_generator.capture enabled: !git_remote.nil?,
+                             remote: git_remote,
+                             branch_name: branch_name,
+                             commit_message: commit_message do
     write_owlbot_config
     write_owlbot_script
     call_owlbot
@@ -67,12 +70,10 @@ end
 
 def setup
   require "erb"
-  require "pull_request_generator"
-  extend PullRequestGenerator
-  ensure_docker
 
   Dir.chdir context_directory
   error "#{owlbot_config_path} already exists" if File.file? owlbot_config_path
+  yoshi_utils.git_ensure_identity
   mkdir_p gem_name
 end
 
