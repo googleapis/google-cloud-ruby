@@ -175,34 +175,21 @@ def ensure_source_path
   at_exit { FileUtils.rm_rf temp_dir }
   Dir.chdir temp_dir do
     exec ["git", "init"]
-    if ensure_googleapis_gen_github_token
-      hostname = "#{ensure_googleapis_gen_github_token}@github.com"
-      log_hostname = "xxxxxxxx@github.com"
-    else
-      hostname = log_hostname = "github.com"
+    token = googleapis_gen_github_token || yoshi_utils.gh_cur_token
+    error "No github token found to load googleapis-gen" unless token
+    username = yoshi_utils.gh_with_token(token) { yoshi_utils.gh_username }
+    add_origin_cmd = ["git", "remote", "add", "origin",
+                      "https://#{username}:#{token}@github.com/googleapis/googleapis-gen.git"]
+    add_origin_log = ["git", "remote", "add", "origin",
+                      "https://xxxxxxxx@github.com/googleapis/googleapis-gen.git"]
+    exec add_origin_cmd, log_cmd: "exec: #{add_origin_log.inspect}"
+    yoshi_utils.gh_without_standard_git_auth do
+      exec ["git", "fetch", "--depth=1", "origin", "HEAD"]
     end
-    add_origin_cmd = ["git", "remote", "add", "origin", "https://#{hostname}/googleapis/googleapis-gen.git"]
-    add_origin_log = ["git", "remote", "add", "origin", "https://#{log_hostname}/googleapis/googleapis-gen.git"]
-    exec add_origin_cmd, log_cmd: add_origin_log.inspect
-    exec ["git", "fetch", "--depth=1", "origin", "HEAD"]
     exec ["git", "branch", "github-head", "FETCH_HEAD"]
     exec ["git", "switch", "github-head"]
   end
   set :source_path, temp_dir
-end
-
-def environment_github_token
-  @environment_github_token ||= begin
-    result = exec ["gh", "auth", "status", "-t"], e: false, out: :capture, err: [:child, :out]
-    if result.success? && result.captured_out =~ /Token: (\w+)/
-      puts "**** found token of size #{Regexp.last_match[1].size}"
-      Regexp.last_match[1]
-    end
-  end
-end
-
-def ensure_googleapis_gen_github_token
-  @googleapis_gen_github_token ||= googleapis_gen_github_token || environment_github_token
 end
 
 def run_owlbot gem_info
