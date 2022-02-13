@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../acls"
 require_relative "../storage_add_bucket_default_owner"
 require_relative "../storage_add_bucket_owner"
 require_relative "../storage_add_file_owner"
