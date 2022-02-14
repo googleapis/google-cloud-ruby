@@ -91,8 +91,8 @@ describe "ACL Snippets" do
 
   it "add_bucket_default_owner" do
     assert_output "Added default OWNER permission for #{email} to #{bucket.name}\n" do
-      add_bucket_default_owner bucket_name: bucket.name,
-                               email:       email
+      StorageAddBucketDefaultOwner.new.add_bucket_default_owner bucket_name: bucket.name,
+                                                                email:       email
     end
     assert_includes bucket.default_acl.owners, email
   end
