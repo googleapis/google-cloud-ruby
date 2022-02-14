@@ -138,6 +138,18 @@ module Google
             # To get a list of both custom and automatically created entries, use
             # [SearchCatalog][google.cloud.datacatalog.v1.DataCatalog.SearchCatalog].
             rpc :ListEntries, ::Google::Cloud::DataCatalog::V1::ListEntriesRequest, ::Google::Cloud::DataCatalog::V1::ListEntriesResponse
+            # Modifies entry overview, part of the business context of an
+            # [Entry][google.cloud.datacatalog.v1.Entry].
+            #
+            # To call this method, you must have the `datacatalog.entries.updateOverview`
+            # IAM permission on the corresponding project.
+            rpc :ModifyEntryOverview, ::Google::Cloud::DataCatalog::V1::ModifyEntryOverviewRequest, ::Google::Cloud::DataCatalog::V1::EntryOverview
+            # Modifies contacts, part of the business context of an
+            # [Entry][google.cloud.datacatalog.v1.Entry].
+            #
+            # To call this method, you must have the `datacatalog.entries.updateContacts`
+            # IAM permission on the corresponding project.
+            rpc :ModifyEntryContacts, ::Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest, ::Google::Cloud::DataCatalog::V1::Contacts
             # Creates a tag template.
             #
             # You must enable the Data Catalog API in the project identified by the
@@ -213,7 +225,15 @@ module Google
             # Deletes a tag.
             rpc :DeleteTag, ::Google::Cloud::DataCatalog::V1::DeleteTagRequest, ::Google::Protobuf::Empty
             # Lists tags assigned to an [Entry][google.cloud.datacatalog.v1.Entry].
+            # The [columns][google.cloud.datacatalog.v1.Tag.column] in the response are
+            # lowercased.
             rpc :ListTags, ::Google::Cloud::DataCatalog::V1::ListTagsRequest, ::Google::Cloud::DataCatalog::V1::ListTagsResponse
+            # Marks an [Entry][google.cloud.datacatalog.v1.Entry] as starred by
+            # the current user. Starring information is private to each user.
+            rpc :StarEntry, ::Google::Cloud::DataCatalog::V1::StarEntryRequest, ::Google::Cloud::DataCatalog::V1::StarEntryResponse
+            # Marks an [Entry][google.cloud.datacatalog.v1.Entry] as NOT starred by
+            # the current user. Starring information is private to each user.
+            rpc :UnstarEntry, ::Google::Cloud::DataCatalog::V1::UnstarEntryRequest, ::Google::Cloud::DataCatalog::V1::UnstarEntryResponse
             # Sets an access control policy for a resource. Replaces any existing
             # policy.
             #

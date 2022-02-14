@@ -6,6 +6,10 @@ require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datacatalog/v1/common.proto", :syntax => :proto3) do
+    add_message "google.cloud.datacatalog.v1.PersonalDetails" do
+      optional :starred, :bool, 1
+      optional :star_time, :message, 2, "google.protobuf.Timestamp"
+    end
     add_enum "google.cloud.datacatalog.v1.IntegratedSystem" do
       value :INTEGRATED_SYSTEM_UNSPECIFIED, 0
       value :BIGQUERY, 1
@@ -19,6 +23,7 @@ module Google
   module Cloud
     module DataCatalog
       module V1
+        PersonalDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.PersonalDetails").msgclass
         IntegratedSystem = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.IntegratedSystem").enummodule
       end
     end
