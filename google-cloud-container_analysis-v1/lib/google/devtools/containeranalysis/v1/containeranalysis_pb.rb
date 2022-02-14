@@ -8,7 +8,9 @@ require 'google/api/resource_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/timestamp_pb'
-require 'grafeas/v1/vulnerability_pb'
+require 'grafeas/v1/common_pb'
+require 'grafeas/v1/grafeas_pb'
+require 'grafeas/v1/severity_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
