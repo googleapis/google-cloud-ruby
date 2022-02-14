@@ -16,122 +16,145 @@ require "spanner_helper"
 require "concurrent"
 
 describe "Spanner Client", :dml, :spanner do
-  let(:db) { spanner_client }
+  let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
+  let(:insert_dml) {{gsql:"INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
+                     pg:"INSERT INTO accounts (account_id, username, active, reputation) VALUES ($1, $2, $3, $4)" 
+                    }}
+  let(:update_dml) {{ gsql: "UPDATE accounts SET username = @username, active = @active WHERE account_id = @account_id",
+                      pg: "UPDATE accounts SET username = $2, active = $3 WHERE account_id = $1", 
+                    }}
+  let(:select_dql) {{ gsql: "SELECT username FROM accounts WHERE account_id = @account_id",
+                      pg: "SELECT username FROM accounts WHERE account_id = $1"
+                    }}
+  let(:insert_params) {{ gsql: { account_id: 4, username: "inserted", active: true, reputation: 88.8 },
+                         pg: { p1: 4, p2: "inserted", p3: true, p4: 88.8 }
+                      }}
+  let(:update_params) {{ gsql: { account_id: 4, username: "updated", active: false },
+                         pg:  { p1: 4, p2: "updated", p3: false } 
+                      }}
+  let(:select_params) { { gsql: { account_id: 4 }, pg: { p1: 4 }  } }                     
 
   before do
-    db.commit do |c|
+    db[:gsql].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_account_rows
+    end
+    db[:pg].commit do |c|
+      c.delete "accounts"
+      c.insert "accounts", default_pg_account_rows
     end
   end
 
   after do
-    db.delete "accounts"
+    db[:pg].delete "accounts"
+    db[:gsql].delete "accounts"
   end
 
-  it "executes multiple DML statements in a transaction" do
-    prior_results = db.execute_sql "SELECT * FROM accounts"
-    _(prior_results.rows.count).must_equal 3
+  [:gsql, :pg].each do |dialect|
+    it "executes multiple DML statements in a transaction" do
+      prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
+      _(prior_results.rows.count).must_equal 3
 
-    timestamp = db.transaction do |tx|
-      _(tx.transaction_id).wont_be :nil?
+      timestamp = db[dialect].transaction do |tx|
+        _(tx.transaction_id).wont_be :nil?
 
-      # Execute a DML using execute_update and make sure data is updated and correct count is returned.
-      insert_row_count = tx.execute_update \
-        "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
-        params: { account_id: 4, username: "inserted", active: true, reputation: 88.8 }
-      _(insert_row_count).must_equal 1
-
-      insert_results = tx.execute_sql \
-        "SELECT username FROM accounts WHERE account_id = @account_id",
-        params: { account_id: 4 }
-      insert_rows = insert_results.rows.to_a
-      _(insert_rows.count).must_equal 1
-      _(insert_rows.first[:username]).must_equal "inserted"
-
-      # Execute a DML using execute_sql and make sure data is updated and correct count is returned.
-      update_results = tx.execute_sql \
-        "UPDATE accounts SET username = @username, active = @active WHERE account_id = @account_id",
-        params: { account_id: 4, username: "updated", active: false }
-      update_results.rows.to_a # fetch all the results
-      _(update_results).must_be :row_count_exact?
-      _(update_results.row_count).must_equal 1
-
-      update_results = tx.execute_sql \
-        "SELECT username FROM accounts WHERE account_id = @account_id",
-        params: { account_id: 4 }
-      update_rows = update_results.rows.to_a
-      _(update_rows.count).must_equal 1
-      _(update_rows.first[:username]).must_equal "updated"
-    end
-    _(timestamp).must_be_kind_of Time
-
-    post_results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: timestamp }
-    _(post_results.rows.count).must_equal 4
-  end
-
-  it "executes a DML statement, then rollback the transaction" do
-    prior_results = db.execute_sql "SELECT * FROM accounts"
-    _(prior_results.rows.count).must_equal 3
-
-    timestamp = db.transaction do |tx|
-      _(tx.transaction_id).wont_be :nil?
-
-      # Execute a DML using execute_update and make sure data is updated and correct count is returned.
-      insert_row_count = tx.execute_update \
-        "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
-        params: { account_id: 4, username: "inserted", active: true, reputation: 88.8 }
-      _(insert_row_count).must_equal 1
-
-      insert_results = tx.execute_sql \
-        "SELECT username FROM accounts WHERE account_id = @account_id",
-        params: { account_id: 4 }
-      insert_rows = insert_results.rows.to_a
-      _(insert_rows.count).must_equal 1
-      _(insert_rows.first[:username]).must_equal "inserted"
-
-      # Execute a DML statement, then rollback the transaction and assert that data is not updated.
-      raise Google::Cloud::Spanner::Rollback
-    end
-    _(timestamp).must_be :nil? # because the transaction was rolled back
-
-    post_results = db.execute_sql "SELECT * FROM accounts"
-    _(post_results.rows.count).must_equal 3
-  end
-
-  it "executes a DML statement, then a mutation" do
-    prior_results = db.execute_sql "SELECT * FROM accounts"
-    _(prior_results.rows.count).must_equal 3
-
-    timestamp = db.transaction do |tx|
-      _(tx.transaction_id).wont_be :nil?
-
-      # Execute a DML statement, followed by calling existing insert method, commit the transaction and assert that both the updates are present.
-      insert_row_count = tx.execute_update \
-        "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
-        params: { account_id: 4, username: "inserted by DML", active: true, reputation: 88.8 }
-      _(insert_row_count).must_equal 1
-
-      insert_mut_rows = tx.insert "accounts", { account_id: 5, username: "inserted by mutation", active: true, reputation: 99.9 }
-      _(insert_mut_rows.count).must_equal 1
-    end
-    _(timestamp).must_be_kind_of Time
-
-    post_results = db.execute_sql "SELECT * FROM accounts", single_use: { timestamp: timestamp }
-    _(post_results.rows.count).must_equal 5
-  end
-
-  describe "request options" do
-    it "execute DML statement with priority options" do
-      request_options = { priority: :PRIORITY_MEDIUM }
-
-      db.transaction request_options: request_options do |tx|
+        # Execute a DML using execute_update and make sure data is updated and correct count is returned.
         insert_row_count = tx.execute_update \
-            "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
-            params: { account_id: 4, username: "inserted", active: true, reputation: 88.8 },
-            request_options: request_options
+          insert_dml[dialect],
+          params: insert_params[dialect]
         _(insert_row_count).must_equal 1
+
+        insert_results = tx.execute_sql \
+          select_dql[dialect],
+          params: select_params[dialect]
+        insert_rows = insert_results.rows.to_a
+        _(insert_rows.count).must_equal 1
+        _(insert_rows.first[:username]).must_equal "inserted"
+
+        # Execute a DML using execute_sql and make sure data is updated and correct count is returned.
+        update_results = tx.execute_sql \
+          update_dml[dialect],
+          params: update_params[dialect]
+        update_results.rows.to_a # fetch all the results
+        _(update_results).must_be :row_count_exact?
+        _(update_results.row_count).must_equal 1
+
+        update_results = tx.execute_sql \
+          select_dql[dialect],
+          params: select_params[dialect]
+        update_rows = update_results.rows.to_a
+        _(update_rows.count).must_equal 1
+        _(update_rows.first[:username]).must_equal "updated"
+      end
+      _(timestamp).must_be_kind_of Time
+
+      post_results = db[dialect].execute_sql "SELECT * FROM accounts", single_use: { timestamp: timestamp }
+      _(post_results.rows.count).must_equal 4
+    end
+
+    it "executes a DML statement, then rollback the transaction" do
+      prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
+      _(prior_results.rows.count).must_equal 3
+
+      timestamp = db[dialect].transaction do |tx|
+        _(tx.transaction_id).wont_be :nil?
+
+        # Execute a DML using execute_update and make sure data is updated and correct count is returned.
+        insert_row_count = tx.execute_update \
+          insert_dml[dialect],
+          params: insert_params[dialect]
+        _(insert_row_count).must_equal 1
+
+        insert_results = tx.execute_sql \
+          select_dql[dialect],
+          params: select_params[dialect]
+        insert_rows = insert_results.rows.to_a
+        _(insert_rows.count).must_equal 1
+        _(insert_rows.first[:username]).must_equal "inserted"
+
+        # Execute a DML statement, then rollback the transaction and assert that data is not updated.
+        raise Google::Cloud::Spanner::Rollback
+      end
+      _(timestamp).must_be :nil? # because the transaction was rolled back
+
+      post_results = db[dialect].execute_sql "SELECT * FROM accounts"
+      _(post_results.rows.count).must_equal 3
+    end
+
+    it "executes a DML statement, then a mutation" do
+      prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
+      _(prior_results.rows.count).must_equal 3
+
+      timestamp = db[dialect].transaction do |tx|
+        _(tx.transaction_id).wont_be :nil?
+
+        # Execute a DML statement, followed by calling existing insert method, commit the transaction and assert that both the updates are present.
+        insert_row_count = tx.execute_update \
+         insert_dml[dialect],
+          params: insert_params[dialect]
+        _(insert_row_count).must_equal 1
+
+        insert_mut_rows = tx.insert "accounts", { account_id: 5, username: "inserted by mutation", active: true, reputation: 99.9 }
+        _(insert_mut_rows.count).must_equal 1
+      end
+      _(timestamp).must_be_kind_of Time
+
+      post_results = db[dialect].execute_sql "SELECT * FROM accounts", single_use: { timestamp: timestamp }
+      _(post_results.rows.count).must_equal 5
+    end
+
+    describe "request options" do
+      it "execute DML statement with priority options" do
+        request_options = { priority: :PRIORITY_MEDIUM }
+
+        db[dialect].transaction request_options: request_options do |tx|
+          insert_row_count = tx.execute_update \
+             insert_dml[dialect],
+              params: insert_params[dialect],
+              request_options: request_options
+          _(insert_row_count).must_equal 1
+        end
       end
     end
-  end
+  end  
 end
