@@ -12,12 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "google/cloud/spanner/admin/database"
 require "spanner_helper"
+require "google/cloud/spanner/admin/database"
 
 describe "Spanner Databases Client", :spanner do
   let(:instance_id) { $spanner_instance_id }
   let(:database_id) { "#{$spanner_database_id}-crud" }
+  let(:pg_database_id) { "#{$spanner_pg_database_id}-crud" }
 
   it "creates, gets, updates, and drops a database" do
     client = Google::Cloud::Spanner::Admin::Database.database_admin project_id: spanner.project
@@ -47,6 +48,49 @@ describe "Spanner Databases Client", :spanner do
     _(database).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::Database
 
     add_users_table_sql = "CREATE TABLE users (id INT64 NOT NULL) PRIMARY KEY(id)"
+    job2 = client.update_database_ddl database: db_path,
+                                      statements: [add_users_table_sql]
+
+    _(job2).wont_be :done? unless emulator_enabled?
+    job2.wait_until_done!
+
+    _(job2).must_be :done?
+
+    client.drop_database database: db_path
+    assert_raises Google::Cloud::NotFoundError do
+      client.get_database name: db_path
+    end
+  end
+
+  it "creates, gets, updates, and drops a database with pg dialect" do
+    client = Google::Cloud::Spanner::Admin::Database.database_admin project_id: spanner.project
+
+    instance_path = \
+      client.instance_path project: spanner.project, instance: instance_id
+
+    db_path = client.database_path project: spanner.project,
+                                   instance: instance_id,
+                                   database: pg_database_id
+
+    job = client.create_database parent: instance_path,
+                                 create_statement: "CREATE DATABASE \"#{pg_database_id}\"",
+                                 database_dialect: :POSTGRESQL
+    _(job).wont_be :done? unless emulator_enabled?
+    job.wait_until_done!
+
+    _(job).must_be :done?
+    raise Google::Cloud::Error.from_error(job.error) if job.error?
+    database = job.results
+    _(database).wont_be :nil?
+    _(database).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::Database
+    _(database.name).must_equal db_path
+    _(database.encryption_config).must_be :nil?
+    _(database.encryption_info).must_be_kind_of Google::Protobuf::RepeatedField
+
+    database = client.get_database name: db_path
+    _(database).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::Database
+
+    add_users_table_sql = "CREATE TABLE users (id INT NOT NULL) PRIMARY KEY(id)"
     job2 = client.update_database_ddl database: db_path,
                                       statements: [add_users_table_sql]
 

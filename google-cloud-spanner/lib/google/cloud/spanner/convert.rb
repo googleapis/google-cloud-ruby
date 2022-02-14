@@ -179,6 +179,8 @@ module Google
                 code: :ARRAY,
                 array_element_type: grpc_type_for_field(field.first)
               )
+            elsif :PG_NUMERIC === field
+              V1::Type.new(code: :NUMERIC, type_annotation: :PG_NUMERIC)
             else
               V1::Type.new(code: field)
             end
