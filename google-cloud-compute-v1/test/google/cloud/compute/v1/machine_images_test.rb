@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/snapshots"
+require "google/cloud/compute/v1/machine_images"
 
 
-class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::MachineImages::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -70,9 +70,9 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
+    machine_image = "hello world"
     project = "hello world"
     request_id = "hello world"
-    snapshot = "hello world"
 
     delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
       assert_equal :delete, verb
@@ -87,32 +87,32 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, delete_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.delete({ project: project, request_id: request_id, snapshot: snapshot }) do |result, response|
+      client.delete({ machine_image: machine_image, project: project, request_id: request_id }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, request_id: request_id, snapshot: snapshot do |result, response|
+      client.delete machine_image: machine_image, project: project, request_id: request_id do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteSnapshotRequest.new(project: project, request_id: request_id, snapshot: snapshot) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteMachineImageRequest.new(machine_image: machine_image, project: project, request_id: request_id) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, request_id: request_id, snapshot: snapshot }, call_options) do |result, response|
+      client.delete({ machine_image: machine_image, project: project, request_id: request_id }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteSnapshotRequest.new(project: project, request_id: request_id, snapshot: snapshot), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteMachineImageRequest.new(machine_image: machine_image, project: project, request_id: request_id), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -123,14 +123,14 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
   def test_get
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Snapshot.new
+    client_result = ::Google::Cloud::Compute::V1::MachineImage.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
 
     # Create request parameters for a unary method.
+    machine_image = "hello world"
     project = "hello world"
-    snapshot = "hello world"
 
     get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
       assert_equal :get, verb
@@ -144,32 +144,32 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, get_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.get({ project: project, snapshot: snapshot }) do |result, response|
+      client.get({ machine_image: machine_image, project: project }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, snapshot: snapshot do |result, response|
+      client.get machine_image: machine_image, project: project do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetSnapshotRequest.new(project: project, snapshot: snapshot) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetMachineImageRequest.new(machine_image: machine_image, project: project) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, snapshot: snapshot }, call_options) do |result, response|
+      client.get({ machine_image: machine_image, project: project }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetSnapshotRequest.new(project: project, snapshot: snapshot), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetMachineImageRequest.new(machine_image: machine_image, project: project), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -203,7 +203,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
@@ -218,7 +218,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicySnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource) do |result, response|
+      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyMachineImageRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource) do |result, response|
         assert_equal http_response, response
       end
 
@@ -228,7 +228,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicySnapshotRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource), call_options) do |result, response|
+      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyMachineImageRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -245,9 +245,10 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
+    machine_image_resource = {}
     project = "hello world"
     request_id = "hello world"
-    snapshot_resource = {}
+    source_instance = "hello world"
 
     insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
       assert_equal :post, verb
@@ -257,37 +258,38 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
 
       assert params.key? "requestId"
+      assert params.key? "sourceInstance"
       refute_nil body
     end
 
     Gapic::Rest::ClientStub.stub :new, insert_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.insert({ project: project, request_id: request_id, snapshot_resource: snapshot_resource }) do |result, response|
+      client.insert({ machine_image_resource: machine_image_resource, project: project, request_id: request_id, source_instance: source_instance }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, request_id: request_id, snapshot_resource: snapshot_resource do |result, response|
+      client.insert machine_image_resource: machine_image_resource, project: project, request_id: request_id, source_instance: source_instance do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertSnapshotRequest.new(project: project, request_id: request_id, snapshot_resource: snapshot_resource) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertMachineImageRequest.new(machine_image_resource: machine_image_resource, project: project, request_id: request_id, source_instance: source_instance) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, request_id: request_id, snapshot_resource: snapshot_resource }, call_options) do |result, response|
+      client.insert({ machine_image_resource: machine_image_resource, project: project, request_id: request_id, source_instance: source_instance }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertSnapshotRequest.new(project: project, request_id: request_id, snapshot_resource: snapshot_resource), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertMachineImageRequest.new(machine_image_resource: machine_image_resource, project: project, request_id: request_id, source_instance: source_instance), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -298,7 +300,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
   def test_list
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::SnapshotList.new
+    client_result = ::Google::Cloud::Compute::V1::MachineImageList.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
@@ -328,7 +330,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, list_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
@@ -343,7 +345,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListMachineImagesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
         assert_equal http_response, response
       end
 
@@ -353,7 +355,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListSnapshotsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListMachineImagesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -386,7 +388,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
@@ -401,7 +403,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicySnapshotRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource) do |result, response|
+      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyMachineImageRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource) do |result, response|
         assert_equal http_response, response
       end
 
@@ -411,70 +413,12 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicySnapshotRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource), call_options) do |result, response|
+      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyMachineImageRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource), call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Verify method calls
       assert_equal 5, set_iam_policy_client_stub.call_count
-    end
-  end
-
-  def test_set_labels
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    global_set_labels_request_resource = {}
-    project = "hello world"
-    resource = "hello world"
-
-    set_labels_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-
-      refute_nil body
-    end
-
-    Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
-
-      # Use hash object
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use named arguments
-      client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object
-      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsSnapshotRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use hash object with options
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object with options
-      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsSnapshotRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |result, response|
-        assert_equal http_response, response
-      end
-
-      # Verify method calls
-      assert_equal 5, set_labels_client_stub.call_count
     end
   end
 
@@ -502,7 +446,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, test_iam_permissions_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
@@ -517,7 +461,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsSnapshotRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |result, response|
+      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsMachineImageRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |result, response|
         assert_equal http_response, response
       end
 
@@ -527,7 +471,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsSnapshotRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |result, response|
+      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsMachineImageRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -541,7 +485,7 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
 
     client = block_config = config = nil
     Gapic::Rest::ClientStub.stub :new, nil do
-      client = ::Google::Cloud::Compute::V1::Snapshots::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::MachineImages::Rest::Client.new do |config|
         config.credentials = credentials_token
       end
     end
@@ -551,6 +495,6 @@ class ::Google::Cloud::Compute::V1::Snapshots::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Cloud::Compute::V1::Snapshots::Rest::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Compute::V1::MachineImages::Rest::Client::Configuration, config
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ module Google
   module Cloud
     module Compute
       module V1
-        module Snapshots
+        module MachineImages
           module Rest
             ##
-            # REST service stub for the Snapshots service.
+            # REST service stub for the MachineImages service.
             # service stub contains baseline method implementations
             # including transcoding, making the REST call and deserialing the response
             #
@@ -41,7 +41,7 @@ module Google
               ##
               # Baseline implementation for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -70,12 +70,12 @@ module Google
               ##
               # GRPC transcoding helper method for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_delete_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots/#{request_pb.snapshot}"
+                uri = "/compute/v1/projects/#{request_pb.project}/global/machineImages/#{request_pb.machine_image}"
                 body = nil
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
@@ -86,16 +86,16 @@ module Google
               ##
               # Baseline implementation for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Snapshot]
+              # @yieldparam result [::Google::Cloud::Compute::V1::MachineImage]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Snapshot]
+              # @return [::Google::Cloud::Compute::V1::MachineImage]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -105,7 +105,7 @@ module Google
                   uri:     uri,
                   options: options
                 )
-                result = ::Google::Cloud::Compute::V1::Snapshot.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::MachineImage.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -114,12 +114,12 @@ module Google
               ##
               # GRPC transcoding helper method for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_get_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots/#{request_pb.snapshot}"
+                uri = "/compute/v1/projects/#{request_pb.project}/global/machineImages/#{request_pb.machine_image}"
                 body = nil
                 query_string_params = {}
 
@@ -129,7 +129,7 @@ module Google
               ##
               # Baseline implementation for the get_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicySnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -158,12 +158,12 @@ module Google
               ##
               # GRPC transcoding helper method for the get_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicySnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_get_iam_policy_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots/#{request_pb.resource}/getIamPolicy"
+                uri = "/compute/v1/projects/#{request_pb.project}/global/machineImages/#{request_pb.resource}/getIamPolicy"
                 body = nil
                 query_string_params = {}
                 query_string_params["optionsRequestedPolicyVersion"] = request_pb.options_requested_policy_version.to_s if request_pb.has_options_requested_policy_version?
@@ -174,7 +174,7 @@ module Google
               ##
               # Baseline implementation for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -204,15 +204,16 @@ module Google
               ##
               # GRPC transcoding helper method for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_insert_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots"
-                body = request_pb.snapshot_resource.to_json
+                uri = "/compute/v1/projects/#{request_pb.project}/global/machineImages"
+                body = request_pb.machine_image_resource.to_json
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+                query_string_params["sourceInstance"] = request_pb.source_instance.to_s if request_pb.has_source_instance?
 
                 [uri, body, query_string_params]
               end
@@ -220,16 +221,16 @@ module Google
               ##
               # Baseline implementation for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListSnapshotsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListMachineImagesRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::SnapshotList]
+              # @yieldparam result [::Google::Cloud::Compute::V1::MachineImageList]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::SnapshotList]
+              # @return [::Google::Cloud::Compute::V1::MachineImageList]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -240,7 +241,7 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
-                result = ::Google::Cloud::Compute::V1::SnapshotList.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::MachineImageList.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -249,12 +250,12 @@ module Google
               ##
               # GRPC transcoding helper method for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListSnapshotsRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListMachineImagesRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_list_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots"
+                uri = "/compute/v1/projects/#{request_pb.project}/global/machineImages"
                 body = nil
                 query_string_params = {}
                 query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
@@ -269,7 +270,7 @@ module Google
               ##
               # Baseline implementation for the set_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicySnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -298,57 +299,13 @@ module Google
               ##
               # GRPC transcoding helper method for the set_iam_policy REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicySnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_set_iam_policy_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots/#{request_pb.resource}/setIamPolicy"
+                uri = "/compute/v1/projects/#{request_pb.project}/global/machineImages/#{request_pb.resource}/setIamPolicy"
                 body = request_pb.global_set_policy_request_resource.to_json
-                query_string_params = {}
-
-                [uri, body, query_string_params]
-              end
-
-              ##
-              # Baseline implementation for the set_labels REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsSnapshotRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def set_labels request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                uri, body, _query_string_params = transcode_set_labels_request request_pb
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_labels REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsSnapshotRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_labels_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots/#{request_pb.resource}/setLabels"
-                body = request_pb.global_set_labels_request_resource.to_json
                 query_string_params = {}
 
                 [uri, body, query_string_params]
@@ -357,7 +314,7 @@ module Google
               ##
               # Baseline implementation for the test_iam_permissions REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -386,12 +343,12 @@ module Google
               ##
               # GRPC transcoding helper method for the test_iam_permissions REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsSnapshotRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsMachineImageRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_test_iam_permissions_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/snapshots/#{request_pb.resource}/testIamPermissions"
+                uri = "/compute/v1/projects/#{request_pb.project}/global/machineImages/#{request_pb.resource}/testIamPermissions"
                 body = request_pb.test_permissions_request_resource.to_json
                 query_string_params = {}
 
