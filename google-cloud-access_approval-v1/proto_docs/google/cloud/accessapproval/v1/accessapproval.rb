@@ -30,14 +30,14 @@ module Google
         #     of a country code.
         #     Possible Region Codes:
         #
-        #     - ASI: Asia
-        #     - EUR: Europe
-        #     - OCE: Oceania
-        #     - AFR: Africa
-        #     - NAM: North America
-        #     - SAM: South America
-        #     - ANT: Antarctica
-        #     - ANY: Any location
+        #       * ASI: Asia
+        #       * EUR: Europe
+        #       * OCE: Oceania
+        #       * AFR: Africa
+        #       * NAM: North America
+        #       * SAM: South America
+        #       * ANT: Antarctica
+        #       * ANY: Any location
         # @!attribute [rw] principal_physical_location_country
         #   @return [::String]
         #     Physical location of the principal at the time of the access. A
@@ -46,14 +46,14 @@ module Google
         #     a region code instead of a country code.
         #     Possible Region Codes:
         #
-        #     - ASI: Asia
-        #     - EUR: Europe
-        #     - OCE: Oceania
-        #     - AFR: Africa
-        #     - NAM: North America
-        #     - SAM: South America
-        #     - ANT: Antarctica
-        #     - ANY: Any location
+        #       * ASI: Asia
+        #       * EUR: Europe
+        #       * OCE: Oceania
+        #       * AFR: Africa
+        #       * NAM: North America
+        #       * SAM: South America
+        #       * ANT: Antarctica
+        #       * ANY: Any location
         class AccessLocations
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -77,12 +77,12 @@ module Google
             # Customer made a request or raised an issue that required the principal to
             # access customer data. `detail` is of the form ("#####" is the issue ID):
             #
-            # - "Feedback Report: #####"
-            # - "Case Number: #####"
-            # - "Case ID: #####"
-            # - "E-PIN Reference: #####"
-            # - "Google-#####"
-            # - "T-#####"
+            #   * "Feedback Report: #####"
+            #   * "Case Number: #####"
+            #   * "Case ID: #####"
+            #   * "E-PIN Reference: #####"
+            #   * "Google-#####"
+            #   * "T-#####"
             CUSTOMER_INITIATED_SUPPORT = 1
 
             # The principal accessed customer data in order to diagnose or resolve a
@@ -113,6 +113,11 @@ module Google
         # @!attribute [rw] dismiss_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the approval request was dismissed.
+        # @!attribute [rw] implicit
+        #   @return [::Boolean]
+        #     This field will be true if the ApprovalRequest was implcitly dismissed
+        #     due to inaction by the access approval approvers (the request is not acted
+        #     on by the approvers before the exiration time).
         class DismissDecision
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -132,7 +137,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the request. Format is
-        #     "\\{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request_id}".
+        #     "\\{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request}".
         # @!attribute [rw] requested_resource_name
         #   @return [::String]
         #     The resource for which approval is being requested. The format of the
@@ -175,16 +180,61 @@ module Google
         #     The product for which Access Approval will be enrolled. Allowed values are
         #     listed below (case-sensitive):
         #
-        #     - all
-        #     - appengine.googleapis.com
-        #     - bigquery.googleapis.com
-        #     - bigtable.googleapis.com
-        #     - cloudkms.googleapis.com
-        #     - compute.googleapis.com
-        #     - dataflow.googleapis.com
-        #     - iam.googleapis.com
-        #     - pubsub.googleapis.com
-        #     - storage.googleapis.com
+        #       * all
+        #       * GA
+        #       * App Engine
+        #       * BigQuery
+        #       * Cloud Bigtable
+        #       * Cloud Key Management Service
+        #       * Compute Engine
+        #       * Cloud Dataflow
+        #       * Cloud DLP
+        #       * Cloud EKM
+        #       * Cloud HSM
+        #       * Cloud Identity and Access Management
+        #       * Cloud Logging
+        #       * Cloud Pub/Sub
+        #       * Cloud Spanner
+        #       * Cloud SQL
+        #       * Cloud Storage
+        #       * Google Kubernetes Engine
+        #       * Organization Policy Serivice
+        #       * Persistent Disk
+        #       * Resource Manager
+        #       * Speaker ID
+        #
+        #     Note: These values are supported as input for legacy purposes, but will not
+        #     be returned from the API.
+        #
+        #       * all
+        #       * ga-only
+        #       * appengine.googleapis.com
+        #       * bigquery.googleapis.com
+        #       * bigtable.googleapis.com
+        #       * container.googleapis.com
+        #       * cloudkms.googleapis.com
+        #       * cloudresourcemanager.googleapis.com
+        #       * cloudsql.googleapis.com
+        #       * compute.googleapis.com
+        #       * dataflow.googleapis.com
+        #       * dlp.googleapis.com
+        #       * iam.googleapis.com
+        #       * logging.googleapis.com
+        #       * orgpolicy.googleapis.com
+        #       * pubsub.googleapis.com
+        #       * spanner.googleapis.com
+        #       * speakerid.googleapis.com
+        #       * storage.googleapis.com
+        #
+        #     Calls to UpdateAccessApprovalSettings using 'all' or any of the
+        #     XXX.googleapis.com will be translated to the associated product name
+        #     ('all', 'App Engine', etc.).
+        #
+        #     Note: 'all' will enroll the resource in all products supported at both 'GA'
+        #     and 'Preview' levels.
+        #
+        #     More information about levels of support is available at
+        #     https://cloud.google.com/access-approval/docs/supported-services
         # @!attribute [rw] enrollment_level
         #   @return [::Google::Cloud::AccessApproval::V1::EnrollmentLevel]
         #     The enrollment level of the service.
@@ -198,9 +248,9 @@ module Google
         #   @return [::String]
         #     The resource name of the settings. Format is one of:
         #
-        #     - "projects/\\{project_id}/accessApprovalSettings"
-        #     - "folders/\\{folder_id}/accessApprovalSettings"
-        #     - "organizations/\\{organization_id}/accessApprovalSettings"
+        #       * "projects/\\{project}/accessApprovalSettings"
+        #       * "folders/\\{folder}/accessApprovalSettings"
+        #       * "organizations/\\{organization}/accessApprovalSettings"
         # @!attribute [rw] notification_emails
         #   @return [::Array<::String>]
         #     A list of email addresses to which notifications relating to approval
@@ -223,7 +273,7 @@ module Google
         # @!attribute [r] enrolled_ancestor
         #   @return [::Boolean]
         #     Output only. This field is read only (not settable via
-        #     UpdateAccessAccessApprovalSettings method). If the field is true, that
+        #     UpdateAccessApprovalSettings method). If the field is true, that
         #     indicates that at least one service is enrolled for Access Approval in one
         #     or more ancestors of the Project or Folder (this field will always be
         #     unset for the organization since organizations do not have ancestors).
@@ -235,18 +285,22 @@ module Google
         # Request to list approval requests.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent resource. This may be "projects/\\{project_id}",
-        #     "folders/\\{folder_id}", or "organizations/\\{organization_id}".
+        #     The parent resource. This may be "projects/\\{project}",
+        #     "folders/\\{folder}", or "organizations/\\{organization}".
         # @!attribute [rw] filter
         #   @return [::String]
         #     A filter on the type of approval requests to retrieve. Must be one of the
         #     following values:
         #
-        #     - [not set]: Requests that are pending or have active approvals.
-        #     - ALL: All requests.
-        #     - PENDING: Only pending requests.
-        #     - ACTIVE: Only active (i.e. currently approved) requests.
-        #     - DISMISSED: Only dismissed (including expired) requests.
+        #       * [not set]: Requests that are pending or have active approvals.
+        #       * ALL: All requests.
+        #       * PENDING: Only pending requests.
+        #       * ACTIVE: Only active (i.e. currently approved) requests.
+        #       * DISMISSED: Only requests that have been dismissed, or requests that
+        #         are not approved and past expiration.
+        #       * EXPIRED: Only requests that have been approved, and the approval has
+        #         expired.
+        #       * HISTORY: Active, dismissed and expired requests.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Requested page size.
@@ -273,7 +327,9 @@ module Google
         # Request to get an approval request.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the approval request to retrieve.
+        #     The name of the approval request to retrieve.
+        #     Format:
+        #     "\\{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request}"
         class GetApprovalRequestMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -303,7 +359,8 @@ module Google
         # Request to get access approval settings.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Name of the AccessApprovalSettings to retrieve.
+        #     The name of the AccessApprovalSettings to retrieve.
+        #     Format: "\\{projects|folders|organizations}/\\{id}/accessApprovalSettings"
         class GetAccessApprovalSettingsMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
