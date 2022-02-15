@@ -1,5 +1,13 @@
 # Release History
 
+### 0.8.0 / 2022-02-15
+
+#### Features
+
+* add database dialect ([#17255](https://www.github.com/googleapis/google-cloud-ruby/issues/17255))
+  * feat: add database dialect
+  * 🦉 Updates from OwlBot
+
 ### 0.7.4 / 2022-01-11
 
 #### Documentation
