@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2022-02-15
+
+#### Features
+
+* Provided several additional path helpers
+
 ### 0.4.5 / 2022-01-11
 
 #### Documentation
