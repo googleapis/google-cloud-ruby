@@ -4,9 +4,7 @@
 
 #### Features
 
-* add database dialect ([#17255](https://www.github.com/googleapis/google-cloud-ruby/issues/17255))
-  * feat: add database dialect
-  * 🦉 Updates from OwlBot
+* Support for database dialects
 
 ### 0.7.4 / 2022-01-11
 
