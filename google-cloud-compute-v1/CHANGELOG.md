@@ -1,5 +1,19 @@
 # Release History
 
+### 1.1.0 / 2022-02-15
+
+#### Features
+
+* Numerous updates
+  * Support for machine image management
+  * Support for source machine images when creating an instance
+  * Support for enabling UEFI networking when creating an instance
+  * Support for instance suspend and resume
+  * Support for edge security policy, cache key policy, and connection tracking policy for backends
+  * Support for updating region commitments
+  * Support for updating reservations
+  * Support for creating snapshots
+
 ### 1.0.0 / 2022-01-11
 
 #### Features
