@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.5 / 2022-02-15
+
+#### Documentation
+
+* Various improvements to reference documentation
+
 ### 0.6.4 / 2022-01-11
 
 #### Documentation
