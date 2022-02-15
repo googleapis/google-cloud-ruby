@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 / 2022-02-15
+
+#### Features
+
+* Added support for the ping_and_warm call
+
 ### 0.4.0 / 2022-02-08
 
 #### Features
