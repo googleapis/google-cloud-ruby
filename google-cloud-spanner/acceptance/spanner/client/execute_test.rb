@@ -18,7 +18,7 @@ describe "Spanner Client", :execute_sql, :spanner do
   let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
 
   [:gsql, :pg].each do |dialect|
-    it "runs SELECT 1for #{dialect}" do
+    it "runs SELECT 1 for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 1"
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -33,7 +33,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[0]).must_equal 1
     end
 
-    it "runs a simple queryfor #{dialect}" do
+    it "runs a simple query for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 42 AS num"
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -49,7 +49,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    it "runs a simple query using a single-use strong optionfor #{dialect}" do
+    it "runs a simple query using a single-use strong option for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 42 AS num", single_use: { strong: true }
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -65,7 +65,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    it "runs a simple query using a single-use timestamp optionfor #{dialect}" do
+    it "runs a simple query using a single-use timestamp option for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 42 AS num", single_use: { timestamp: (Time.now - 60) }
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -81,7 +81,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    it "runs a simple query using a single-use staleness optionfor #{dialect}" do
+    it "runs a simple query using a single-use staleness option for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 42 AS num", single_use: { staleness: 60 }
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -97,7 +97,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    it "runs a simple query using a single-use bounded_timestamp optionfor #{dialect}" do
+    it "runs a simple query using a single-use bounded_timestamp option for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 42 AS num", single_use: { bounded_timestamp: (Time.now - 60) }
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -113,7 +113,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    it "runs a simple query using a single-use bounded_staleness optionfor #{dialect}" do
+    it "runs a simple query using a single-use bounded_staleness option for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 42 AS num", single_use: { bounded_staleness: 60 }
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
 
@@ -129,7 +129,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    it "runs a simple query with query optionsfor #{dialect}" do
+    it "runs a simple query with query options for #{dialect}" do
       query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
       results = db[dialect].execute_sql "SELECT 42 AS num", query_options: query_options
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -146,7 +146,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    it "runs a simple query when the client-level config of query options is setfor #{dialect}" do
+    it "runs a simple query when the client-level config of query options is set for #{dialect}" do
       query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
       new_spanner = Google::Cloud::Spanner.new
       new_db = new_spanner.client db[dialect].instance_id, db[dialect].database_id, query_options: query_options
@@ -167,7 +167,7 @@ describe "Spanner Client", :execute_sql, :spanner do
       _(row[:num]).must_equal 42
     end
 
-    describe "when the environment variable of query options is setfor #{dialect}" do
+    describe "when the environment variable of query options is set for #{dialect}" do
       let(:origin_opt_version) { nil }
       let(:origin_opt_stats_pkg) { nil }
 
@@ -183,7 +183,7 @@ describe "Spanner Client", :execute_sql, :spanner do
         ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"] = origin_opt_stats_pkg
       end
 
-      it "runs a simple query for #{dialect}" do
+      it "runs a simple query  for #{dialect}" do
         new_spanner = Google::Cloud::Spanner.new
         new_db = new_spanner.client db[dialect].instance_id, db[dialect].database_id
         _(new_db.project.query_options).must_equal({ optimizer_version: "3", optimizer_statistics_package: "latest" })
@@ -204,8 +204,8 @@ describe "Spanner Client", :execute_sql, :spanner do
       end
     end
 
-    describe "request optionsfor #{dialect}" do
-      it "run sample query with priorityfor #{dialect}" do
+    describe "request options for #{dialect}" do
+      it "run sample query with priority for #{dialect}" do
         results = db[dialect].execute_sql "SELECT 1", request_options: { priority: :PRIORITY_MEDIUM }
         _(results).must_be_kind_of Google::Cloud::Spanner::Results
 

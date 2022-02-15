@@ -13,55 +13,33 @@
 # limitations under the License.
 
 require "spanner_helper"
+require "bigdecimal"
 
 describe "Spanner Client", :params, :bool, :spanner do
-  let(:db) { spanner_client }
+  let(:db) { spanner_pg_client }
 
-  it "queries and returns a bool parameter" do
-    results = db.execute_query "SELECT @value AS value", params: { value: true }
+  it "queries and returns a BigDecimal parameter" do
+    results = db.execute_query "SELECT $1 AS value", params: { p1: BigDecimal(1) }, types: { p1: :PG_NUMERIC }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal :BOOL
-    _(results.rows.first[:value]).must_equal true
+    _(results.fields[:value]).must_equal :NUMERIC
+    _(results.rows.first[:value]).must_equal BigDecimal(1)
   end
 
-  it "queries and returns a NULL bool parameter" do
-    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :BOOL }
+  it "queries and returns a NULL parameter" do
+    results = db.execute_query "SELECT $1 AS value", params: { p1: nil }, types: { p1: :PG_NUMERIC }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal :BOOL
+    _(results.fields[:value]).must_equal :NUMERIC
     _(results.rows.first[:value]).must_be :nil?
   end
 
-  it "queries and returns an array of bool parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [false, true, false] }
+  it "queries and returns a NAN BigDecimal parameter" do
+    results = db.execute_query "SELECT $1 AS value", params: { p1: BigDecimal('NaN') }, types: { p1: :PG_NUMERIC }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:BOOL]
-    _(results.rows.first[:value]).must_equal [false, true, false]
+    _(results.fields[:value]).must_equal :NUMERIC
+    _(results.rows.first[:value]).must_be :nan?
   end
 
-  it "queries and returns an array of bool parameters with a nil value" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [nil, false, true, false] }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:BOOL]
-    _(results.rows.first[:value]).must_equal [nil, false, true, false]
-  end
-
-  it "queries and returns an empty array of bool parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:BOOL] }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:BOOL]
-    _(results.rows.first[:value]).must_equal []
-  end
-
-  it "queries and returns a NULL array of bool parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:BOOL] }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:BOOL]
-    _(results.rows.first[:value]).must_be :nil?
-  end
 end

@@ -35,7 +35,7 @@ describe "Spanner Client", :pdml, :spanner do
   end
 
   [:gsql, :pg].each do |dialect|
-    it "executes a simple Partitioned DML statementfor #{dialect}" do
+    it "executes a simple Partitioned DML statement for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts WHERE active = TRUE"
       _(prior_results.rows.count).must_equal 2
 
@@ -46,7 +46,7 @@ describe "Spanner Client", :pdml, :spanner do
       _(post_results.rows.count).must_equal 3
     end
 
-    it "executes a simple Partitioned DML statement with query optionsfor #{dialect}" do
+    it "executes a simple Partitioned DML statement with query options for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts WHERE active = TRUE"
       _(prior_results.rows.count).must_equal 2
 
@@ -58,8 +58,8 @@ describe "Spanner Client", :pdml, :spanner do
       _(post_results.rows.count).must_equal 3
     end
 
-    describe "request optionsfor #{dialect}" do
-      it "execute Partitioned DML statement with priority optionsfor #{dialect}" do
+    describe "request options for #{dialect}" do
+      it "execute Partitioned DML statement with priority options for #{dialect}" do
         pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts SET active = TRUE WHERE active = FALSE",
                                                     request_options: { priority: :PRIORITY_MEDIUM }
 
@@ -67,7 +67,7 @@ describe "Spanner Client", :pdml, :spanner do
       end
     end
 
-    it "executes a Partitioned DML statement with request tagging optionfor #{dialect}" do
+    it "executes a Partitioned DML statement with request tagging option for #{dialect}" do
       pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts  SET active = TRUE WHERE active = FALSE",
                                                   request_options: { tag: "Tag-P-1" }
       _(pdml_row_count).must_equal 1

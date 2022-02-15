@@ -25,7 +25,7 @@ describe "Spanner Client", :crud, :spanner do
   end
 
   [:gsql, :pg].each do |dialect|
-    it "inserts, updates, upserts, reads, and deletes recordsfor #{dialect}" do
+    it "inserts, updates, upserts, reads, and deletes records for #{dialect}" do
       results = db[dialect].read "accounts", ["account_id"], single_use: { timestamp: @setup_timestamp[dialect] }
       _(results.rows.count).must_equal 0
       _(results.timestamp).wont_be :nil?
@@ -59,7 +59,7 @@ describe "Spanner Client", :crud, :spanner do
       _(results.timestamp).wont_be :nil?
     end
 
-    it "inserts, updates, upserts, reads, and deletes records using commitfor #{dialect}" do
+    it "inserts, updates, upserts, reads, and deletes records using commit for #{dialect}" do
       results = db[dialect].read "accounts", ["account_id"], single_use: { timestamp: @setup_timestamp[dialect] }
       _(results.rows.count).must_equal 0
       _(results.timestamp).wont_be :nil?
@@ -99,7 +99,7 @@ describe "Spanner Client", :crud, :spanner do
       _(results.timestamp).wont_be :nil?
     end
 
-    it "inserts, updates, upserts, reads, and deletes records using commit and return commit statsfor #{dialect}" do
+    it "inserts, updates, upserts, reads, and deletes records using commit and return commit stats for #{dialect}" do
       skip if emulator_enabled?
 
       commit_options = { return_commit_stats: true }
@@ -130,7 +130,7 @@ describe "Spanner Client", :crud, :spanner do
       _(results.timestamp).wont_be :nil?
     end
 
-    it "inserts, updates, upserts, reads, and deletes records in a transactionfor #{dialect}" do
+    it "inserts, updates, upserts, reads, and deletes records in a transaction for #{dialect}" do
       timestamp = @setup_timestamp[dialect]
       active_count_sql = "SELECT COUNT(*) AS count FROM accounts WHERE active = true"
 
@@ -163,8 +163,8 @@ describe "Spanner Client", :crud, :spanner do
       _(results.timestamp).wont_be :nil?
     end
 
-    describe "request optionsfor #{dialect}" do
-      it "execute CRUD statement with priority optionsfor #{dialect}" do
+    describe "request options for #{dialect}" do
+      it "execute CRUD statement with priority options for #{dialect}" do
         request_options = { priority: :PRIORITY_MEDIUM }
         results = db[dialect].read "accounts", ["account_id"], request_options: request_options
         _(results.rows.count).must_equal 0
@@ -183,7 +183,7 @@ describe "Spanner Client", :crud, :spanner do
       end
     end
 
-    it "inserts, updates, upserts, reads, and deletes records with request tagging optionsfor #{dialect}" do
+    it "inserts, updates, upserts, reads, and deletes records with request tagging options for #{dialect}" do
       timestamp = db[dialect].insert "accounts", @default_rows[dialect][0],
                             request_options: { tag: "Tag-CRUD-1" }
       _(timestamp).wont_be :nil?

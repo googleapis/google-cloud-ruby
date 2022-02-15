@@ -55,6 +55,7 @@ module Acceptance
                     id bigint NOT NULL,
                     "int" bigint,
                     "float" double precision,
+                    "numeric" NUMERIC,
                     bool boolean,
                     string character varying,
                     byte bytea,

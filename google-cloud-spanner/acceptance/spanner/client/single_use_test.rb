@@ -15,151 +15,164 @@
 require "spanner_helper"
 
 describe "Spanner Client", :single_use, :spanner do
-  let(:db) { spanner_client }
-  let(:columns) { [:account_id, :username, :friends, :active, :reputation, :avatar] }
-  let(:fields_hash) { { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
+  let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
+  let(:columns) {{ gsql: [:account_id, :username, :friends, :active, :reputation, :avatar], 
+                   pg: [:account_id, :username, :active, :reputation, :avatar]
+                }}
+  let(:fields_hash) {{ gsql: { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES }, 
+                       pg: { account_id: :INT64, username: :STRING, active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } 
+                    }}
 
   before do
-    @setup_timestamp = db.commit do |c|
+    setup_timestamp_gsql =  db[:gsql].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_account_rows
     end
+    setup_timestamp_pg = db[:pg].commit do |c|
+      c.delete "accounts"
+      c.insert "accounts", default_pg_account_rows
+    end
+    @setup_timestamp = {gsql: setup_timestamp_gsql, pg: setup_timestamp_pg}
+    @default_rows = {gsql: default_account_rows, pg: default_pg_account_rows}
   end
 
   after do
-    db.delete "accounts"
+    db[:gsql].delete "accounts"
+    db[:pg].delete "accounts"
   end
 
-  it "runs a query with strong option" do
-    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { strong: true }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  [:gsql, :pg].each do |dialect|
+    it "runs a query with strong option for #{dialect}" do
+      results = db[dialect].execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { strong: true }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
-  end
-
-  it "runs a read with strong option" do
-    results = db.read "accounts", columns, single_use: { strong: true }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a read with strong option for #{dialect}" do
+      results = db[dialect].read "accounts", columns[dialect], single_use: { strong: true }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
-  end
-
-  it "runs a query with timestamp option" do
-    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { timestamp: @setup_timestamp }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a query with timestamp option for #{dialect}" do
+      results = db[dialect].execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { timestamp: @setup_timestamp[dialect] }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 1
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 1
-  end
-
-  it "runs a read with timestamp option" do
-    results = db.read "accounts", columns, single_use: { timestamp: @setup_timestamp }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a read with timestamp option for #{dialect}" do
+      results = db[dialect].read "accounts", columns[dialect], single_use: { timestamp: @setup_timestamp[dialect] }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 1
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 1
-  end
-
-  it "runs a query with staleness option" do
-    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { staleness: 0.0001 }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a query with staleness option for #{dialect}" do
+      results = db[dialect].execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { staleness: 0.0001 }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
-  end
-
-  it "runs a read with staleness option" do
-    results = db.read "accounts", columns, single_use: { staleness: 0.0001 }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a read with staleness option for #{dialect}" do
+      results = db[dialect].read "accounts", columns[dialect], single_use: { staleness: 0.0001 }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
-  end
-
-  it "runs a query with bounded_timestamp option" do
-    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { bounded_timestamp: @setup_timestamp }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a query with bounded_timestamp option for #{dialect}" do
+      results = db[dialect].execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { bounded_timestamp: @setup_timestamp[dialect] }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
-  end
-
-  it "runs a read with bounded_timestamp option" do
-    results = db.read "accounts", columns, single_use: { bounded_timestamp: @setup_timestamp }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a read with bounded_timestamp option for #{dialect}" do
+      results = db[dialect].read "accounts", columns[dialect], single_use: { bounded_timestamp: @setup_timestamp[dialect] }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
-  end
-
-  it "runs a query with bounded_staleness option" do
-    results = db.execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { bounded_staleness: 0.0001 }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a query with bounded_staleness option for #{dialect}" do
+      results = db[dialect].execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { bounded_staleness: 0.0001 }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
-  end
-
-  it "runs a read with bounded_staleness option" do
-    results = db.read "accounts", columns, single_use: { bounded_staleness: 0.0001 }
-
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal fields_hash
-    results.rows.zip(default_account_rows).each do |expected, actual|
-      assert_accounts_equal expected, actual
+  
+    it "runs a read with bounded_staleness option for #{dialect}" do
+      results = db[dialect].read "accounts", columns[dialect], single_use: { bounded_staleness: 0.0001 }
+  
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal fields_hash[dialect]
+      results.rows.zip(@default_rows[dialect]).each do |expected, actual|
+        assert_accounts_equal expected, actual
+      end
+  
+      _(results.timestamp).wont_be :nil?
+      _(results.timestamp).must_be_close_to @setup_timestamp[dialect], 3 # within 3 seconds?
     end
-
-    _(results.timestamp).wont_be :nil?
-    _(results.timestamp).must_be_close_to @setup_timestamp, 3 # within 3 seconds?
   end
-
+  
   def assert_accounts_equal expected, actual
     if actual[:account_id].nil?
       _(expected[:account_id]).must_be :nil?
@@ -194,5 +207,5 @@ describe "Spanner Client", :single_use, :spanner do
     else
       _(expected[:friends]).must_equal actual[:friends]
     end
-  end
+  end  
 end

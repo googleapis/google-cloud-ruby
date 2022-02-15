@@ -51,7 +51,7 @@ describe "Spanner Client", :dml, :spanner do
   end
 
   [:gsql, :pg].each do |dialect|
-    it "executes multiple DML statements in a transactionfor #{dialect}" do
+    it "executes multiple DML statements in a transaction for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
       _(prior_results.rows.count).must_equal 3
 
@@ -92,7 +92,7 @@ describe "Spanner Client", :dml, :spanner do
       _(post_results.rows.count).must_equal 4
     end
 
-    it "executes a DML statement, then rollback the transactionfor #{dialect}" do
+    it "executes a DML statement, then rollback the transaction for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
       _(prior_results.rows.count).must_equal 3
 
@@ -121,7 +121,7 @@ describe "Spanner Client", :dml, :spanner do
       _(post_results.rows.count).must_equal 3
     end
 
-    it "executes a DML statement, then a mutationfor #{dialect}" do
+    it "executes a DML statement, then a mutation for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
       _(prior_results.rows.count).must_equal 3
 
@@ -143,8 +143,8 @@ describe "Spanner Client", :dml, :spanner do
       _(post_results.rows.count).must_equal 5
     end
 
-    describe "request optionsfor #{dialect}" do
-      it "execute DML statement with priority optionsfor #{dialect}" do
+    describe "request options for #{dialect}" do
+      it "execute DML statement with priority options for #{dialect}" do
         request_options = { priority: :PRIORITY_MEDIUM }
 
         db[dialect].transaction request_options: request_options do |tx|
