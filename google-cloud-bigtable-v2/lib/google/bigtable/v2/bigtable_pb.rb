@@ -80,6 +80,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.bigtable.v2.CheckAndMutateRowResponse" do
       optional :predicate_matched, :bool, 1
     end
+    add_message "google.bigtable.v2.PingAndWarmRequest" do
+      optional :name, :string, 1
+      optional :app_profile_id, :string, 2
+    end
+    add_message "google.bigtable.v2.PingAndWarmResponse" do
+    end
     add_message "google.bigtable.v2.ReadModifyWriteRowRequest" do
       optional :table_name, :string, 1
       optional :app_profile_id, :string, 4
@@ -109,6 +115,8 @@ module Google
         MutateRowsResponse::Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.MutateRowsResponse.Entry").msgclass
         CheckAndMutateRowRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowRequest").msgclass
         CheckAndMutateRowResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.CheckAndMutateRowResponse").msgclass
+        PingAndWarmRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.PingAndWarmRequest").msgclass
+        PingAndWarmResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.PingAndWarmResponse").msgclass
         ReadModifyWriteRowRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowRequest").msgclass
         ReadModifyWriteRowResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadModifyWriteRowResponse").msgclass
       end

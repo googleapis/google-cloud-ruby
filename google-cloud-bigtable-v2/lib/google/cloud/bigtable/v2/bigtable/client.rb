@@ -65,14 +65,8 @@ module Google
                 default_config = Client::Configuration.new parent_config
 
                 default_config.rpcs.read_rows.timeout = 43_200.0
-                default_config.rpcs.read_rows.retry_policy = {
-                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: []
-                }
 
                 default_config.rpcs.sample_row_keys.timeout = 60.0
-                default_config.rpcs.sample_row_keys.retry_policy = {
-                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: []
-                }
 
                 default_config.rpcs.mutate_row.timeout = 60.0
                 default_config.rpcs.mutate_row.retry_policy = {
@@ -80,19 +74,10 @@ module Google
                 }
 
                 default_config.rpcs.mutate_rows.timeout = 600.0
-                default_config.rpcs.mutate_rows.retry_policy = {
-                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: []
-                }
 
                 default_config.rpcs.check_and_mutate_row.timeout = 20.0
-                default_config.rpcs.check_and_mutate_row.retry_policy = {
-                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: []
-                }
 
                 default_config.rpcs.read_modify_write_row.timeout = 20.0
-                default_config.rpcs.read_modify_write_row.retry_policy = {
-                  initial_delay: 0.01, max_delay: 60.0, multiplier: 2, retry_codes: []
-                }
 
                 default_config
               end
@@ -703,6 +688,100 @@ module Google
             end
 
             ##
+            # Warm up associated instance metadata for this connection.
+            # This call is not required but may be useful for connection keep-alive.
+            #
+            # @overload ping_and_warm(request, options = nil)
+            #   Pass arguments to `ping_and_warm` via a request object, either of type
+            #   {::Google::Cloud::Bigtable::V2::PingAndWarmRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Bigtable::V2::PingAndWarmRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload ping_and_warm(name: nil, app_profile_id: nil)
+            #   Pass arguments to `ping_and_warm` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The unique name of the instance to check permissions for as well as
+            #     respond. Values are of the form `projects/<project>/instances/<instance>`.
+            #   @param app_profile_id [::String]
+            #     This value specifies routing for replication. If not specified, the
+            #     "default" application profile will be used.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Bigtable::V2::PingAndWarmResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Bigtable::V2::PingAndWarmResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/bigtable/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Bigtable::V2::PingAndWarmRequest.new
+            #
+            #   # Call the ping_and_warm method.
+            #   result = client.ping_and_warm request
+            #
+            #   # The returned object is of type Google::Cloud::Bigtable::V2::PingAndWarmResponse.
+            #   p result
+            #
+            def ping_and_warm request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::V2::PingAndWarmRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.ping_and_warm.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Bigtable::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name &&
+                 %r{^projects/[^/]+/instances/[^/]+/?$}.match?(request.name)
+                header_params["name"] = request.name
+              end
+              if request.app_profile_id && !request.app_profile_id.empty?
+                header_params["app_profile_id"] = request.app_profile_id
+              end
+
+              request_params_header = URI.encode_www_form header_params
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.ping_and_warm.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.ping_and_warm.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @bigtable_stub.call_rpc :ping_and_warm, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Modifies a row atomically on the server. The method reads the latest
             # existing timestamp and value from the specified columns and writes a new
             # entry based on pre-defined read/modify/write rules. The new value for the
@@ -968,6 +1047,11 @@ module Google
                 #
                 attr_reader :check_and_mutate_row
                 ##
+                # RPC-specific configuration for `ping_and_warm`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :ping_and_warm
+                ##
                 # RPC-specific configuration for `read_modify_write_row`
                 # @return [::Gapic::Config::Method]
                 #
@@ -985,6 +1069,8 @@ module Google
                   @mutate_rows = ::Gapic::Config::Method.new mutate_rows_config
                   check_and_mutate_row_config = parent_rpcs.check_and_mutate_row if parent_rpcs.respond_to? :check_and_mutate_row
                   @check_and_mutate_row = ::Gapic::Config::Method.new check_and_mutate_row_config
+                  ping_and_warm_config = parent_rpcs.ping_and_warm if parent_rpcs.respond_to? :ping_and_warm
+                  @ping_and_warm = ::Gapic::Config::Method.new ping_and_warm_config
                   read_modify_write_row_config = parent_rpcs.read_modify_write_row if parent_rpcs.respond_to? :read_modify_write_row
                   @read_modify_write_row = ::Gapic::Config::Method.new read_modify_write_row_config
 

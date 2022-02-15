@@ -53,6 +53,9 @@ module Google
             rpc :MutateRows, ::Google::Cloud::Bigtable::V2::MutateRowsRequest, stream(::Google::Cloud::Bigtable::V2::MutateRowsResponse)
             # Mutates a row atomically based on the output of a predicate Reader filter.
             rpc :CheckAndMutateRow, ::Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest, ::Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse
+            # Warm up associated instance metadata for this connection.
+            # This call is not required but may be useful for connection keep-alive.
+            rpc :PingAndWarm, ::Google::Cloud::Bigtable::V2::PingAndWarmRequest, ::Google::Cloud::Bigtable::V2::PingAndWarmResponse
             # Modifies a row atomically on the server. The method reads the latest
             # existing timestamp and value from the specified columns and writes a new
             # entry based on pre-defined read/modify/write rules. The new value for the
