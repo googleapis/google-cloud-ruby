@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/dataplex/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-dataplex/$1
