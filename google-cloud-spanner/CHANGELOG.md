@@ -4,10 +4,7 @@
 
 #### Bug Fixes
 
-* pass quota_project_id from credentials ([#17549](https://www.github.com/googleapis/google-cloud-ruby/issues/17549))
-  * fix(spanner): pass quota_project_id from credentials
-  * fix the failing test case
-  * fix setting quota_project in service
+* pass quota_project_id from credentials
 
 ### 2.12.0 / 2022-01-11
 
