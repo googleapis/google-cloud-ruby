@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 / 2022-02-16
+
+#### Features
+
+* Add access details to the Finding type
+
 ### 0.11.1 / 2022-01-11
 
 #### Bug Fixes
