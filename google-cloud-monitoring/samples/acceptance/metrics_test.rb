@@ -64,7 +64,7 @@ describe "metrics", :monitoring do
       out, _err = capture_io do
         get_metric_descriptor project_id: project_id, metric_type: type
       end
-      assert_match(/Number of bytes in all log entries ingested/, out)
+      assert_match(/Number of bytes in ingested log entries. Excluded logs are not counted./, out)
     end
   end
 
@@ -82,7 +82,7 @@ describe "metrics", :monitoring do
       out, _err = capture_io do
         get_monitored_resource_descriptor project_id: project_id, resource_type: "gce_instance"
       end
-      assert_match(/GCE VM Instance/, out)
+      assert_match(/VM Instance/, out)
     end
   end
 
