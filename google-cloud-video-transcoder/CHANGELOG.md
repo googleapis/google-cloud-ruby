@@ -1,5 +1,11 @@
 # Release History
 
+### 1.1.0 / 2022-02-16
+
+#### Features
+
+* Removed the obsolete v1beta1 client from the dependencies
+
 ### 1.0.2 / 2022-01-12
 
 * No significant changes
