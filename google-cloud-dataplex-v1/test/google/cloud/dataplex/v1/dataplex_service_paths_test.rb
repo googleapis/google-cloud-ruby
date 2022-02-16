@@ -35,6 +35,18 @@ class ::Google::Cloud::Dataplex::V1::DataplexService::ClientPathsTest < Minitest
     end
   end
 
+  def test_environment_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dataplex::V1::DataplexService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.environment_path project: "value0", location: "value1", lake: "value2", environment: "value3"
+      assert_equal "projects/value0/locations/value1/lakes/value2/environments/value3", path
+    end
+  end
+
   def test_job_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

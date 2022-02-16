@@ -47,6 +47,188 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::ClientTest < Minitest::Tes
     end
   end
 
+  def test_create_entity
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataplex::V1::Entity.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    entity = {}
+    validate_only = true
+
+    create_entity_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_entity, name
+      assert_kind_of ::Google::Cloud::Dataplex::V1::CreateEntityRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataplex::V1::Entity), request["entity"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_entity_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_entity({ parent: parent, entity: entity, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_entity parent: parent, entity: entity, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_entity ::Google::Cloud::Dataplex::V1::CreateEntityRequest.new(parent: parent, entity: entity, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_entity({ parent: parent, entity: entity, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_entity(::Google::Cloud::Dataplex::V1::CreateEntityRequest.new(parent: parent, entity: entity, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_entity_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_entity
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataplex::V1::Entity.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    entity = {}
+    validate_only = true
+
+    update_entity_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_entity, name
+      assert_kind_of ::Google::Cloud::Dataplex::V1::UpdateEntityRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataplex::V1::Entity), request["entity"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_entity_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_entity({ entity: entity, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_entity entity: entity, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_entity ::Google::Cloud::Dataplex::V1::UpdateEntityRequest.new(entity: entity, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_entity({ entity: entity, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_entity(::Google::Cloud::Dataplex::V1::UpdateEntityRequest.new(entity: entity, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_entity_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_entity
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    delete_entity_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_entity, name
+      assert_kind_of ::Google::Cloud::Dataplex::V1::DeleteEntityRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_entity_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_entity({ name: name, etag: etag }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_entity name: name, etag: etag do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_entity ::Google::Cloud::Dataplex::V1::DeleteEntityRequest.new(name: name, etag: etag) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_entity({ name: name, etag: etag }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_entity(::Google::Cloud::Dataplex::V1::DeleteEntityRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_entity_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_entity
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Dataplex::V1::Entity.new
@@ -175,6 +357,128 @@ class ::Google::Cloud::Dataplex::V1::MetadataService::ClientTest < Minitest::Tes
 
       # Verify method calls
       assert_equal 5, list_entities_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_partition
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Dataplex::V1::Partition.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    partition = {}
+    validate_only = true
+
+    create_partition_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_partition, name
+      assert_kind_of ::Google::Cloud::Dataplex::V1::CreatePartitionRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dataplex::V1::Partition), request["partition"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_partition_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_partition({ parent: parent, partition: partition, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_partition parent: parent, partition: partition, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_partition ::Google::Cloud::Dataplex::V1::CreatePartitionRequest.new(parent: parent, partition: partition, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_partition({ parent: parent, partition: partition, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_partition(::Google::Cloud::Dataplex::V1::CreatePartitionRequest.new(parent: parent, partition: partition, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_partition_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_partition
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    etag = "hello world"
+
+    delete_partition_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_partition, name
+      assert_kind_of ::Google::Cloud::Dataplex::V1::DeletePartitionRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["etag"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_partition_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_partition({ name: name, etag: etag }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_partition name: name, etag: etag do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_partition ::Google::Cloud::Dataplex::V1::DeletePartitionRequest.new(name: name, etag: etag) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_partition({ name: name, etag: etag }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_partition(::Google::Cloud::Dataplex::V1::DeletePartitionRequest.new(name: name, etag: etag), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_partition_client_stub.call_rpc_count
     end
   end
 

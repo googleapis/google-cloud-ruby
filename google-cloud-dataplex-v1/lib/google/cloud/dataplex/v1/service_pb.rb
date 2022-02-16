@@ -5,6 +5,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/dataplex/v1/analyze_pb'
 require 'google/cloud/dataplex/v1/resources_pb'
 require 'google/cloud/dataplex/v1/tasks_pb'
 require 'google/longrunning/operations_pb'
@@ -172,6 +173,43 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataplex.v1.CancelJobRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.dataplex.v1.CreateEnvironmentRequest" do
+      optional :parent, :string, 1
+      optional :environment_id, :string, 2
+      optional :environment, :message, 3, "google.cloud.dataplex.v1.Environment"
+      optional :validate_only, :bool, 4
+    end
+    add_message "google.cloud.dataplex.v1.UpdateEnvironmentRequest" do
+      optional :update_mask, :message, 1, "google.protobuf.FieldMask"
+      optional :environment, :message, 2, "google.cloud.dataplex.v1.Environment"
+      optional :validate_only, :bool, 3
+    end
+    add_message "google.cloud.dataplex.v1.DeleteEnvironmentRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.dataplex.v1.ListEnvironmentsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+      optional :order_by, :string, 5
+    end
+    add_message "google.cloud.dataplex.v1.ListEnvironmentsResponse" do
+      repeated :environments, :message, 1, "google.cloud.dataplex.v1.Environment"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.dataplex.v1.GetEnvironmentRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.dataplex.v1.ListSessionsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.dataplex.v1.ListSessionsResponse" do
+      repeated :sessions, :message, 1, "google.cloud.dataplex.v1.Session"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -212,6 +250,14 @@ module Google
         ListJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListJobsRequest").msgclass
         ListJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListJobsResponse").msgclass
         CancelJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.CancelJobRequest").msgclass
+        CreateEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.CreateEnvironmentRequest").msgclass
+        UpdateEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.UpdateEnvironmentRequest").msgclass
+        DeleteEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DeleteEnvironmentRequest").msgclass
+        ListEnvironmentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListEnvironmentsRequest").msgclass
+        ListEnvironmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListEnvironmentsResponse").msgclass
+        GetEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.GetEnvironmentRequest").msgclass
+        ListSessionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListSessionsRequest").msgclass
+        ListSessionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListSessionsResponse").msgclass
       end
     end
   end

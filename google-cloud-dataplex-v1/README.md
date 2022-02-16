@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/dataplex/v1"
 
-client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new
-request = ::Google::Cloud::Dataplex::V1::GetEntityRequest.new # (request fields as keyword arguments...)
-response = client.get_entity request
+client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new
+request = ::Google::Cloud::Dataplex::V1::CreateContentRequest.new # (request fields as keyword arguments...)
+response = client.create_content request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-dataplex-v1/latest)

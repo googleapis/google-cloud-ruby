@@ -92,6 +92,19 @@ module Google
             rpc :GetJob, ::Google::Cloud::Dataplex::V1::GetJobRequest, ::Google::Cloud::Dataplex::V1::Job
             # Cancel jobs running for the task resource.
             rpc :CancelJob, ::Google::Cloud::Dataplex::V1::CancelJobRequest, ::Google::Protobuf::Empty
+            # Create an environment resource.
+            rpc :CreateEnvironment, ::Google::Cloud::Dataplex::V1::CreateEnvironmentRequest, ::Google::Longrunning::Operation
+            # Update the environment resource.
+            rpc :UpdateEnvironment, ::Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest, ::Google::Longrunning::Operation
+            # Delete the environment resource. All the child resources must have been
+            # deleted before environment deletion can be initiated.
+            rpc :DeleteEnvironment, ::Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest, ::Google::Longrunning::Operation
+            # Lists environments under the given lake.
+            rpc :ListEnvironments, ::Google::Cloud::Dataplex::V1::ListEnvironmentsRequest, ::Google::Cloud::Dataplex::V1::ListEnvironmentsResponse
+            # Get environment resource.
+            rpc :GetEnvironment, ::Google::Cloud::Dataplex::V1::GetEnvironmentRequest, ::Google::Cloud::Dataplex::V1::Environment
+            # Lists session resources in an environment.
+            rpc :ListSessions, ::Google::Cloud::Dataplex::V1::ListSessionsRequest, ::Google::Cloud::Dataplex::V1::ListSessionsResponse
           end
 
           Stub = Service.rpc_stub_class
