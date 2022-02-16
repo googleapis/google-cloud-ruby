@@ -1,5 +1,14 @@
 # Release History
 
+### 2.12.1 / 2022-02-16
+
+#### Bug Fixes
+
+* pass quota_project_id from credentials ([#17549](https://www.github.com/googleapis/google-cloud-ruby/issues/17549))
+  * fix(spanner): pass quota_project_id from credentials
+  * fix the failing test case
+  * fix setting quota_project in service
+
 ### 2.12.0 / 2022-01-11
 
 No significant changes.
