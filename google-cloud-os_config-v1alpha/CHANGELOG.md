@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 / 2022-02-16
+
+#### Features
+
+* Support management of OS policy assignment reports
+
 ### 0.2.2 / 2022-01-11
 
 #### Bug Fixes
