@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 / 2022-02-16
+
+#### Features
+
+* Add RoutingVPC#required_for_new_site_to_site_data_transfer_spokes field
+
 ### 0.1.4 / 2022-01-11
 
 #### Bug Fixes
