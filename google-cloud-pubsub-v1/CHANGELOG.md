@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 / 2022-02-16
+
+#### Bug Fixes
+
+* Fix misspelled field name StreamingPullResponse#acknowledge_confirmation (was acknowlege_confirmation)
+
 ### 0.7.1 / 2022-02-15
 
 #### Bug Fixes
