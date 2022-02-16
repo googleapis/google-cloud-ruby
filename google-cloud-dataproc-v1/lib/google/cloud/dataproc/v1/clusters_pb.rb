@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :project_id, :string, 1
       optional :cluster_name, :string, 2
       optional :config, :message, 3, "google.cloud.dataproc.v1.ClusterConfig"
+      optional :virtual_cluster_config, :message, 10, "google.cloud.dataproc.v1.VirtualClusterConfig"
       map :labels, :string, :string, 8
       optional :status, :message, 4, "google.cloud.dataproc.v1.ClusterStatus"
       repeated :status_history, :message, 7, "google.cloud.dataproc.v1.ClusterStatus"
@@ -39,14 +40,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :lifecycle_config, :message, 17, "google.cloud.dataproc.v1.LifecycleConfig"
       optional :endpoint_config, :message, 19, "google.cloud.dataproc.v1.EndpointConfig"
       optional :metastore_config, :message, 20, "google.cloud.dataproc.v1.MetastoreConfig"
-      optional :gke_cluster_config, :message, 21, "google.cloud.dataproc.v1.GkeClusterConfig"
     end
-    add_message "google.cloud.dataproc.v1.GkeClusterConfig" do
-      optional :namespaced_gke_deployment_target, :message, 1, "google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget"
+    add_message "google.cloud.dataproc.v1.VirtualClusterConfig" do
+      optional :staging_bucket, :string, 1
+      optional :temp_bucket, :string, 2
+      optional :auxiliary_services_config, :message, 7, "google.cloud.dataproc.v1.AuxiliaryServicesConfig"
+      oneof :infrastructure_config do
+        optional :kubernetes_cluster_config, :message, 6, "google.cloud.dataproc.v1.KubernetesClusterConfig"
+      end
     end
-    add_message "google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget" do
-      optional :target_gke_cluster, :string, 1
-      optional :cluster_namespace, :string, 2
+    add_message "google.cloud.dataproc.v1.AuxiliaryServicesConfig" do
+      optional :metastore_config, :message, 1, "google.cloud.dataproc.v1.MetastoreConfig"
+      optional :spark_history_server_config, :message, 2, "google.cloud.dataproc.v1.SparkHistoryServerConfig"
     end
     add_message "google.cloud.dataproc.v1.EndpointConfig" do
       map :http_ports, :string, :string, 1
@@ -273,8 +278,8 @@ module Google
       module V1
         Cluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Cluster").msgclass
         ClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterConfig").msgclass
-        GkeClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeClusterConfig").msgclass
-        GkeClusterConfig::NamespacedGkeDeploymentTarget = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeClusterConfig.NamespacedGkeDeploymentTarget").msgclass
+        VirtualClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.VirtualClusterConfig").msgclass
+        AuxiliaryServicesConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.AuxiliaryServicesConfig").msgclass
         EndpointConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.EndpointConfig").msgclass
         AutoscalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.AutoscalingConfig").msgclass
         EncryptionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.EncryptionConfig").msgclass

@@ -35,6 +35,15 @@ module Google
         #     Optional. The cluster config for a cluster of Compute Engine Instances.
         #     Note that Dataproc may set default values, and values may change
         #     when clusters are updated.
+        # @!attribute [rw] virtual_cluster_config
+        #   @return [::Google::Cloud::Dataproc::V1::VirtualClusterConfig]
+        #     Optional. The virtual cluster config, used when creating a Dataproc cluster that
+        #     does not directly control the underlying compute resources, for example,
+        #     when creating a [Dataproc-on-GKE
+        #     cluster](https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster).
+        #     Note that Dataproc may set default values, and values may change when
+        #     clusters are updated. Exactly one of config or virtualClusterConfig must be
+        #     specified.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. The labels to associate with this cluster.
@@ -156,37 +165,63 @@ module Google
         # @!attribute [rw] metastore_config
         #   @return [::Google::Cloud::Dataproc::V1::MetastoreConfig]
         #     Optional. Metastore configuration.
-        # @!attribute [rw] gke_cluster_config
-        #   @return [::Google::Cloud::Dataproc::V1::GkeClusterConfig]
-        #     Optional. BETA. The Kubernetes Engine config for Dataproc clusters deployed to
-        #     Kubernetes. Setting this is considered mutually exclusive with Compute
-        #     Engine-based options such as `gce_cluster_config`, `master_config`,
-        #     `worker_config`, `secondary_worker_config`, and `autoscaling_config`.
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The GKE config for this cluster.
-        # @!attribute [rw] namespaced_gke_deployment_target
-        #   @return [::Google::Cloud::Dataproc::V1::GkeClusterConfig::NamespacedGkeDeploymentTarget]
-        #     Optional. A target for the deployment.
-        class GkeClusterConfig
+        # Dataproc cluster config for a cluster that does not directly control the
+        # underlying compute resources, such as a [Dataproc-on-GKE
+        # cluster](https://cloud.google.com/dataproc/docs/concepts/jobs/dataproc-gke#create-a-dataproc-on-gke-cluster).
+        # @!attribute [rw] staging_bucket
+        #   @return [::String]
+        #     Optional. A Storage bucket used to stage job
+        #     dependencies, config files, and job driver console output.
+        #     If you do not specify a staging bucket, Cloud
+        #     Dataproc will determine a Cloud Storage location (US,
+        #     ASIA, or EU) for your cluster's staging bucket according to the
+        #     Compute Engine zone where your cluster is deployed, and then create
+        #     and manage this project-level, per-location bucket (see
+        #     [Dataproc staging and temp
+        #     buckets](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
+        #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
+        #     a Cloud Storage bucket.**
+        # @!attribute [rw] temp_bucket
+        #   @return [::String]
+        #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs data,
+        #     such as Spark and MapReduce history files.
+        #     If you do not specify a temp bucket,
+        #     Dataproc will determine a Cloud Storage location (US,
+        #     ASIA, or EU) for your cluster's temp bucket according to the
+        #     Compute Engine zone where your cluster is deployed, and then create
+        #     and manage this project-level, per-location bucket. The default bucket has
+        #     a TTL of 90 days, but you can use any TTL (or none) if you specify a
+        #     bucket (see
+        #     [Dataproc staging and temp
+        #     buckets](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
+        #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
+        #     a Cloud Storage bucket.**
+        # @!attribute [rw] kubernetes_cluster_config
+        #   @return [::Google::Cloud::Dataproc::V1::KubernetesClusterConfig]
+        #     Required. The configuration for running the Dataproc cluster on Kubernetes.
+        # @!attribute [rw] auxiliary_services_config
+        #   @return [::Google::Cloud::Dataproc::V1::AuxiliaryServicesConfig]
+        #     Optional. Configuration of auxiliary services used by this cluster.
+        class VirtualClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
 
-          # A full, namespace-isolated deployment target for an existing GKE cluster.
-          # @!attribute [rw] target_gke_cluster
-          #   @return [::String]
-          #     Optional. The target GKE cluster to deploy to.
-          #     Format: 'projects/\\{project}/locations/\\{location}/clusters/\\{cluster_id}'
-          # @!attribute [rw] cluster_namespace
-          #   @return [::String]
-          #     Optional. A namespace within the GKE cluster to deploy into.
-          class NamespacedGkeDeploymentTarget
-            include ::Google::Protobuf::MessageExts
-            extend ::Google::Protobuf::MessageExts::ClassMethods
-          end
+        # Auxiliary services configuration for a Cluster.
+        # @!attribute [rw] metastore_config
+        #   @return [::Google::Cloud::Dataproc::V1::MetastoreConfig]
+        #     Optional. The Hive Metastore configuration for this workload.
+        # @!attribute [rw] spark_history_server_config
+        #   @return [::Google::Cloud::Dataproc::V1::SparkHistoryServerConfig]
+        #     Optional. The Spark History Server configuration for the workload.
+        class AuxiliaryServicesConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Endpoint config for this cluster
@@ -594,8 +629,8 @@ module Google
         #     Optional. Interface type of local SSDs (default is "scsi").
         #     Valid values: "scsi" (Small Computer System Interface),
         #     "nvme" (Non-Volatile Memory Express).
-        #     See [SSD Interface
-        #     types](https://cloud.google.com/compute/docs/disks/local-ssd#performance).
+        #     See [local SSD
+        #     performance](https://cloud.google.com/compute/docs/disks/local-ssd#performance).
         class DiskConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -648,6 +683,10 @@ module Google
             CREATING = 1
 
             # The cluster is currently running and healthy. It is ready for use.
+            #
+            # **Note:** The cluster state changes from "creating" to "running" status
+            # after the master node(s), first two primary worker nodes (and the last
+            # primary worker node if primary workers > 2) are running.
             RUNNING = 2
 
             # The cluster encountered an error. It is not ready for use.
