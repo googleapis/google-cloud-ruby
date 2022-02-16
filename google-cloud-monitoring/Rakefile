@@ -115,7 +115,7 @@ namespace :acceptance do
 end
 
 task :samples do
-  Rake::Task["samples:latest"].invoke 
+  Rake::Task["samples:latest"].invoke
 end
 
 namespace :samples do
