@@ -1,5 +1,11 @@
 # Release History
 
+### 2.12.1 / 2022-02-16
+
+#### Bug Fixes
+
+* pass quota_project_id from credentials
+
 ### 2.12.0 / 2022-01-11
 
 No significant changes.
