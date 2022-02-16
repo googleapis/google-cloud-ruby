@@ -31,7 +31,7 @@ module Google
         #     The full resource name of project that the resource belongs to.
         # @!attribute [rw] project_display_name
         #   @return [::String]
-        #     The human readable name of project that the resource belongs to.
+        #     The project id that the resource belongs to.
         # @!attribute [rw] parent
         #   @return [::String]
         #     The full resource name of resource's parent.
