@@ -4,20 +4,19 @@
 
 #### Features
 
-* Various updates
-  * Support for Linux kernel configuration
-  * Support for node Kubelet configuration
-  * Support for Google Container File System configuration
-  * Support for enabling Virtual NIC on node pools
-  * Support for several advanced machine features
-  * Support for node pool-level network configuration
-  * Support for additional CSI driver add-on configurations
-  * Support for mesh certificates
-  * Support for cluster logging, monitoring, and notifications
-  * Support for configuring the cluster autoscaling profile
-  * Support for Autopilot
-  * Support for confidential nodes
-  * Various additional cluster-level networking configurations
+* Support for Linux kernel configuration
+* Support for node Kubelet configuration
+* Support for Google Container File System configuration
+* Support for enabling Virtual NIC on node pools
+* Support for several advanced machine features
+* Support for node pool-level network configuration
+* Support for additional CSI driver add-on configurations
+* Support for mesh certificates
+* Support for cluster logging, monitoring, and notifications
+* Support for configuring the cluster autoscaling profile
+* Support for Autopilot
+* Support for confidential nodes
+* Various additional cluster-level networking configurations
 
 ### 0.7.3 / 2022-01-11
 
