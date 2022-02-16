@@ -27,7 +27,7 @@ module Google
         #     Required. The database in which the new session is created.
         # @!attribute [rw] session
         #   @return [::Google::Cloud::Spanner::V1::Session]
-        #     The session to create.
+        #     Required. The session to create.
         class CreateSessionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
