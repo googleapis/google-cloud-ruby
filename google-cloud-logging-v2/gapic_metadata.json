@@ -124,6 +124,21 @@
               "methods": [
                 "update_cmek_settings"
               ]
+            },
+            "GetSettings": {
+              "methods": [
+                "get_settings"
+              ]
+            },
+            "UpdateSettings": {
+              "methods": [
+                "update_settings"
+              ]
+            },
+            "CopyLogEntries": {
+              "methods": [
+                "copy_log_entries"
+              ]
             }
           }
         }

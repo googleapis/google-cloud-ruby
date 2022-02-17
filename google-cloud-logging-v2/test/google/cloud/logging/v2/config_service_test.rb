@@ -1453,6 +1453,193 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::Settings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_settings, name
+      assert_kind_of ::Google::Cloud::Logging::V2::GetSettingsRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_settings_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_settings({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_settings name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_settings ::Google::Cloud::Logging::V2::GetSettingsRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_settings({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_settings(::Google::Cloud::Logging::V2::GetSettingsRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_settings
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Logging::V2::Settings.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    settings = {}
+    update_mask = {}
+
+    update_settings_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_settings, name
+      assert_kind_of ::Google::Cloud::Logging::V2::UpdateSettingsRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Logging::V2::Settings), request["settings"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_settings_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_settings({ name: name, settings: settings, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_settings name: name, settings: settings, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_settings ::Google::Cloud::Logging::V2::UpdateSettingsRequest.new(name: name, settings: settings, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_settings({ name: name, settings: settings, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_settings(::Google::Cloud::Logging::V2::UpdateSettingsRequest.new(name: name, settings: settings, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_settings_client_stub.call_rpc_count
+    end
+  end
+
+  def test_copy_log_entries
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    filter = "hello world"
+    destination = "hello world"
+
+    copy_log_entries_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :copy_log_entries, name
+      assert_kind_of ::Google::Cloud::Logging::V2::CopyLogEntriesRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["destination"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, copy_log_entries_client_stub do
+      # Create client
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.copy_log_entries({ name: name, filter: filter, destination: destination }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.copy_log_entries name: name, filter: filter, destination: destination do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.copy_log_entries ::Google::Cloud::Logging::V2::CopyLogEntriesRequest.new(name: name, filter: filter, destination: destination) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.copy_log_entries({ name: name, filter: filter, destination: destination }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.copy_log_entries(::Google::Cloud::Logging::V2::CopyLogEntriesRequest.new(name: name, filter: filter, destination: destination), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, copy_log_entries_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -1469,5 +1656,18 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientTest < Minitest::Test
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Logging::V2::ConfigService::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Logging::V2::ConfigService::Operations, client.operations_client
   end
 end
