@@ -18,8 +18,8 @@ describe "Spanner Client", :crud, :spanner do
   let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
 
   before do
-    setup_timestamp_pg = db[:pg].delete "accounts"
-    setup_timestamp_gsql = db[:pg].delete "accounts" unless emulator_enabled?
+    setup_timestamp_gsql = db[:gsql].delete "accounts"
+    setup_timestamp_pg = db[:pg].delete "accounts" unless emulator_enabled?
     @setup_timestamp = {gsql: setup_timestamp_gsql, pg: setup_timestamp_pg}
     @default_rows = {gsql: default_account_rows, pg: default_pg_account_rows}
   end

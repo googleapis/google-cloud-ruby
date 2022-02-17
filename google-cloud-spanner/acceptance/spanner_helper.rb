@@ -159,11 +159,11 @@ $spanner_pg_client = $spanner.client $spanner_instance_id, $spanner_pg_database_
 def clean_up_spanner_objects
   puts "Cleaning up instances and databases after spanner tests."
   $spanner.instance($spanner_instance_id).database($spanner_database_id).drop
-  $spanner.instance($spanner_instance_id).database($spanner_pg_database_id).drop
+  $spanner.instance($spanner_instance_id).database($spanner_pg_database_id).drop unless emulator_enabled?
 
   puts "Closing the Spanner Client."
   $spanner_client.close
-  $spanner_pg_client.close
+  $spanner_pg_client.close unless emulator_enabled?
 
   puts "Cleaning up instances databases and backups after spanner tests."
   instance = $spanner.instance($spanner_instance_id)
