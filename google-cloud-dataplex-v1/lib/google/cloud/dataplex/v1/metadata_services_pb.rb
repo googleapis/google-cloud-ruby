@@ -34,10 +34,20 @@ module Google
             self.unmarshal_class_method = :decode
             self.service_name = 'google.cloud.dataplex.v1.MetadataService'
 
+            # Create a metadata entity.
+            rpc :CreateEntity, ::Google::Cloud::Dataplex::V1::CreateEntityRequest, ::Google::Cloud::Dataplex::V1::Entity
+            # Update a metadata entity. Only supports full resource update.
+            rpc :UpdateEntity, ::Google::Cloud::Dataplex::V1::UpdateEntityRequest, ::Google::Cloud::Dataplex::V1::Entity
+            # Delete a metadata entity.
+            rpc :DeleteEntity, ::Google::Cloud::Dataplex::V1::DeleteEntityRequest, ::Google::Protobuf::Empty
             # Get a metadata entity.
             rpc :GetEntity, ::Google::Cloud::Dataplex::V1::GetEntityRequest, ::Google::Cloud::Dataplex::V1::Entity
             # List metadata entities in a zone.
             rpc :ListEntities, ::Google::Cloud::Dataplex::V1::ListEntitiesRequest, ::Google::Cloud::Dataplex::V1::ListEntitiesResponse
+            # Create a metadata partition.
+            rpc :CreatePartition, ::Google::Cloud::Dataplex::V1::CreatePartitionRequest, ::Google::Cloud::Dataplex::V1::Partition
+            # Delete a metadata partition.
+            rpc :DeletePartition, ::Google::Cloud::Dataplex::V1::DeletePartitionRequest, ::Google::Protobuf::Empty
             # Get a metadata partition of an entity.
             rpc :GetPartition, ::Google::Cloud::Dataplex::V1::GetPartitionRequest, ::Google::Cloud::Dataplex::V1::Partition
             # List metadata partitions of an entity.

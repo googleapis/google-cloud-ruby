@@ -5,11 +5,60 @@
   "protoPackage": "google.cloud.dataplex.v1",
   "libraryPackage": "::Google::Cloud::Dataplex::V1",
   "services": {
+    "ContentService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dataplex::V1::ContentService::Client",
+          "rpcs": {
+            "CreateContent": {
+              "methods": [
+                "create_content"
+              ]
+            },
+            "UpdateContent": {
+              "methods": [
+                "update_content"
+              ]
+            },
+            "DeleteContent": {
+              "methods": [
+                "delete_content"
+              ]
+            },
+            "GetContent": {
+              "methods": [
+                "get_content"
+              ]
+            },
+            "ListContent": {
+              "methods": [
+                "list_content"
+              ]
+            }
+          }
+        }
+      }
+    },
     "MetadataService": {
       "clients": {
         "grpc": {
           "libraryClient": "::Google::Cloud::Dataplex::V1::MetadataService::Client",
           "rpcs": {
+            "CreateEntity": {
+              "methods": [
+                "create_entity"
+              ]
+            },
+            "UpdateEntity": {
+              "methods": [
+                "update_entity"
+              ]
+            },
+            "DeleteEntity": {
+              "methods": [
+                "delete_entity"
+              ]
+            },
             "GetEntity": {
               "methods": [
                 "get_entity"
@@ -18,6 +67,16 @@
             "ListEntities": {
               "methods": [
                 "list_entities"
+              ]
+            },
+            "CreatePartition": {
+              "methods": [
+                "create_partition"
+              ]
+            },
+            "DeletePartition": {
+              "methods": [
+                "delete_partition"
               ]
             },
             "GetPartition": {
@@ -167,6 +226,36 @@
             "CancelJob": {
               "methods": [
                 "cancel_job"
+              ]
+            },
+            "CreateEnvironment": {
+              "methods": [
+                "create_environment"
+              ]
+            },
+            "UpdateEnvironment": {
+              "methods": [
+                "update_environment"
+              ]
+            },
+            "DeleteEnvironment": {
+              "methods": [
+                "delete_environment"
+              ]
+            },
+            "ListEnvironments": {
+              "methods": [
+                "list_environments"
+              ]
+            },
+            "GetEnvironment": {
+              "methods": [
+                "get_environment"
+              ]
+            },
+            "ListSessions": {
+              "methods": [
+                "list_sessions"
               ]
             }
           }

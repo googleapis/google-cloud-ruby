@@ -6,12 +6,24 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
-require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/dataplex/v1/metadata.proto", :syntax => :proto3) do
+    add_message "google.cloud.dataplex.v1.CreateEntityRequest" do
+      optional :parent, :string, 1
+      optional :entity, :message, 3, "google.cloud.dataplex.v1.Entity"
+      optional :validate_only, :bool, 4
+    end
+    add_message "google.cloud.dataplex.v1.UpdateEntityRequest" do
+      optional :entity, :message, 2, "google.cloud.dataplex.v1.Entity"
+      optional :validate_only, :bool, 3
+    end
+    add_message "google.cloud.dataplex.v1.DeleteEntityRequest" do
+      optional :name, :string, 1
+      optional :etag, :string, 2
+    end
     add_message "google.cloud.dataplex.v1.ListEntitiesRequest" do
       optional :parent, :string, 1
       optional :view, :enum, 2, "google.cloud.dataplex.v1.ListEntitiesRequest.EntityView"
@@ -43,6 +55,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
       optional :filter, :string, 4
+    end
+    add_message "google.cloud.dataplex.v1.CreatePartitionRequest" do
+      optional :parent, :string, 1
+      optional :partition, :message, 3, "google.cloud.dataplex.v1.Partition"
+      optional :validate_only, :bool, 4
+    end
+    add_message "google.cloud.dataplex.v1.DeletePartitionRequest" do
+      optional :name, :string, 1
+      optional :etag, :string, 2
     end
     add_message "google.cloud.dataplex.v1.ListPartitionsResponse" do
       repeated :partitions, :message, 1, "google.cloud.dataplex.v1.Partition"
@@ -183,12 +204,17 @@ module Google
   module Cloud
     module Dataplex
       module V1
+        CreateEntityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.CreateEntityRequest").msgclass
+        UpdateEntityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.UpdateEntityRequest").msgclass
+        DeleteEntityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DeleteEntityRequest").msgclass
         ListEntitiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListEntitiesRequest").msgclass
         ListEntitiesRequest::EntityView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListEntitiesRequest.EntityView").enummodule
         ListEntitiesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListEntitiesResponse").msgclass
         GetEntityRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.GetEntityRequest").msgclass
         GetEntityRequest::EntityView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.GetEntityRequest.EntityView").enummodule
         ListPartitionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListPartitionsRequest").msgclass
+        CreatePartitionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.CreatePartitionRequest").msgclass
+        DeletePartitionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.DeletePartitionRequest").msgclass
         ListPartitionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.ListPartitionsResponse").msgclass
         GetPartitionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.GetPartitionRequest").msgclass
         Entity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Entity").msgclass

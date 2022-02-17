@@ -272,7 +272,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the lake location, of the form:
-            #     `projects/{project_number}/locations/{location_id}`
+            #     projects/\\{project_number}/locations/\\{location_id}
             #     where `location_id` refers to a GCP region.
             #   @param lake_id [::String]
             #     Required. Lake identifier.
@@ -2801,6 +2801,600 @@ module Google
             end
 
             ##
+            # Create an environment resource.
+            #
+            # @overload create_environment(request, options = nil)
+            #   Pass arguments to `create_environment` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::CreateEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::CreateEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_environment(parent: nil, environment_id: nil, environment: nil, validate_only: nil)
+            #   Pass arguments to `create_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the parent lake:
+            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+            #   @param environment_id [::String]
+            #     Required. Environment identifier.
+            #     * Must contain only lowercase letters, numbers and hyphens.
+            #     * Must start with a letter.
+            #     * Must be between 1-63 characters.
+            #     * Must end with a number or a letter.
+            #     * Must be unique within the lake.
+            #   @param environment [::Google::Cloud::Dataplex::V1::Environment, ::Hash]
+            #     Required. Environment resource.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is false.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::CreateEnvironmentRequest.new
+            #
+            #   # Call the create_environment method.
+            #   result = client.create_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def create_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CreateEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_environment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataplex_service_stub.call_rpc :create_environment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update the environment resource.
+            #
+            # @overload update_environment(request, options = nil)
+            #   Pass arguments to `update_environment` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_environment(update_mask: nil, environment: nil, validate_only: nil)
+            #   Pass arguments to `update_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Mask of fields to update.
+            #   @param environment [::Google::Cloud::Dataplex::V1::Environment, ::Hash]
+            #     Required. Update description.
+            #     Only fields specified in `update_mask` are updated.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is false.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest.new
+            #
+            #   # Call the update_environment method.
+            #   result = client.update_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def update_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::UpdateEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.environment&.name
+                header_params["environment.name"] = request.environment.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_environment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataplex_service_stub.call_rpc :update_environment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete the environment resource. All the child resources must have been
+            # deleted before environment deletion can be initiated.
+            #
+            # @overload delete_environment(request, options = nil)
+            #   Pass arguments to `delete_environment` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_environment(name: nil)
+            #   Pass arguments to `delete_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the environment:
+            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest.new
+            #
+            #   # Call the delete_environment method.
+            #   result = client.delete_environment request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::DeleteEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_environment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataplex_service_stub.call_rpc :delete_environment, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists environments under the given lake.
+            #
+            # @overload list_environments(request, options = nil)
+            #   Pass arguments to `list_environments` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::ListEnvironmentsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::ListEnvironmentsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_environments(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_environments` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the parent lake:
+            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of environments to return. The service may return fewer than
+            #     this value. If unspecified, at most 10 environments will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. Page token received from a previous `ListEnvironments` call. Provide this
+            #     to retrieve the subsequent page. When paginating, all other parameters
+            #     provided to `ListEnvironments` must match the call that provided the page
+            #     token.
+            #   @param filter [::String]
+            #     Optional. Filter request.
+            #   @param order_by [::String]
+            #     Optional. Order by fields for the result.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Environment>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Environment>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::ListEnvironmentsRequest.new
+            #
+            #   # Call the list_environments method.
+            #   result = client.list_environments request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dataplex::V1::Environment.
+            #     p response
+            #   end
+            #
+            def list_environments request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::ListEnvironmentsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_environments.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_environments.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_environments.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataplex_service_stub.call_rpc :list_environments, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataplex_service_stub, :list_environments, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Get environment resource.
+            #
+            # @overload get_environment(request, options = nil)
+            #   Pass arguments to `get_environment` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::GetEnvironmentRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::GetEnvironmentRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_environment(name: nil)
+            #   Pass arguments to `get_environment` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the environment:
+            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::Environment]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::Environment]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::GetEnvironmentRequest.new
+            #
+            #   # Call the get_environment method.
+            #   result = client.get_environment request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::Environment.
+            #   p result
+            #
+            def get_environment request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::GetEnvironmentRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_environment.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_environment.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_environment.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataplex_service_stub.call_rpc :get_environment, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists session resources in an environment.
+            #
+            # @overload list_sessions(request, options = nil)
+            #   Pass arguments to `list_sessions` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::ListSessionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::ListSessionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_sessions(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_sessions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the parent environment:
+            #     projects/\\{project_number}/locations/\\{location_id}/lakes/\\{lake_id}/environment/\\{environment_id}
+            #   @param page_size [::Integer]
+            #     Optional. Maximum number of sessions to return. The service may return fewer than
+            #     this value. If unspecified, at most 10 sessions will be returned. The
+            #     maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     Optional. Page token received from a previous `ListSessions` call. Provide this to
+            #     retrieve the subsequent page. When paginating, all other parameters
+            #     provided to `ListSessions` must match the call that provided the page
+            #     token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Session>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Session>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::ListSessionsRequest.new
+            #
+            #   # Call the list_sessions method.
+            #   result = client.list_sessions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Dataplex::V1::Session.
+            #     p response
+            #   end
+            #
+            def list_sessions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::ListSessionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_sessions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_sessions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_sessions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataplex_service_stub.call_rpc :list_sessions, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataplex_service_stub, :list_sessions, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the DataplexService API.
             #
             # This class represents the configuration for DataplexService,
@@ -3065,6 +3659,36 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :cancel_job
+                ##
+                # RPC-specific configuration for `create_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_environment
+                ##
+                # RPC-specific configuration for `update_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_environment
+                ##
+                # RPC-specific configuration for `delete_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_environment
+                ##
+                # RPC-specific configuration for `list_environments`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_environments
+                ##
+                # RPC-specific configuration for `get_environment`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_environment
+                ##
+                # RPC-specific configuration for `list_sessions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_sessions
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3120,6 +3744,18 @@ module Google
                   @get_job = ::Gapic::Config::Method.new get_job_config
                   cancel_job_config = parent_rpcs.cancel_job if parent_rpcs.respond_to? :cancel_job
                   @cancel_job = ::Gapic::Config::Method.new cancel_job_config
+                  create_environment_config = parent_rpcs.create_environment if parent_rpcs.respond_to? :create_environment
+                  @create_environment = ::Gapic::Config::Method.new create_environment_config
+                  update_environment_config = parent_rpcs.update_environment if parent_rpcs.respond_to? :update_environment
+                  @update_environment = ::Gapic::Config::Method.new update_environment_config
+                  delete_environment_config = parent_rpcs.delete_environment if parent_rpcs.respond_to? :delete_environment
+                  @delete_environment = ::Gapic::Config::Method.new delete_environment_config
+                  list_environments_config = parent_rpcs.list_environments if parent_rpcs.respond_to? :list_environments
+                  @list_environments = ::Gapic::Config::Method.new list_environments_config
+                  get_environment_config = parent_rpcs.get_environment if parent_rpcs.respond_to? :get_environment
+                  @get_environment = ::Gapic::Config::Method.new get_environment_config
+                  list_sessions_config = parent_rpcs.list_sessions if parent_rpcs.respond_to? :list_sessions
+                  @list_sessions = ::Gapic::Config::Method.new list_sessions_config
 
                   yield self if block_given?
                 end

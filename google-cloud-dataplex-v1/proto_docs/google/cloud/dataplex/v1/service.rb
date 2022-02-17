@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the lake location, of the form:
-        #     `projects/{project_number}/locations/{location_id}`
+        #     projects/\\{project_number}/locations/\\{location_id}
         #     where `location_id` refers to a GCP region.
         # @!attribute [rw] lake_id
         #   @return [::String]
@@ -592,6 +592,142 @@ module Google
         #     Required. The resource name of the job:
         #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/task/{task_id}/job/{job_id}`.
         class CancelJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Create environment request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent lake:
+        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+        # @!attribute [rw] environment_id
+        #   @return [::String]
+        #     Required. Environment identifier.
+        #     * Must contain only lowercase letters, numbers and hyphens.
+        #     * Must start with a letter.
+        #     * Must be between 1-63 characters.
+        #     * Must end with a number or a letter.
+        #     * Must be unique within the lake.
+        # @!attribute [rw] environment
+        #   @return [::Google::Cloud::Dataplex::V1::Environment]
+        #     Required. Environment resource.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the request, but do not perform mutations.
+        #     The default is false.
+        class CreateEnvironmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Update environment request.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. Mask of fields to update.
+        # @!attribute [rw] environment
+        #   @return [::Google::Cloud::Dataplex::V1::Environment]
+        #     Required. Update description.
+        #     Only fields specified in `update_mask` are updated.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Optional. Only validate the request, but do not perform mutations.
+        #     The default is false.
+        class UpdateEnvironmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Delete environment request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the environment:
+        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}`
+        class DeleteEnvironmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List environments request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent lake:
+        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of environments to return. The service may return fewer than
+        #     this value. If unspecified, at most 10 environments will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `ListEnvironments` call. Provide this
+        #     to retrieve the subsequent page. When paginating, all other parameters
+        #     provided to `ListEnvironments` must match the call that provided the page
+        #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter request.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Order by fields for the result.
+        class ListEnvironmentsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List environments response.
+        # @!attribute [rw] environments
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::Environment>]
+        #     Environments under the given parent lake.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        class ListEnvironmentsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Get environment request.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the environment:
+        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}
+        class GetEnvironmentRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List sessions request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the parent environment:
+        #     projects/\\{project_number}/locations/\\{location_id}/lakes/\\{lake_id}/environment/\\{environment_id}
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Maximum number of sessions to return. The service may return fewer than
+        #     this value. If unspecified, at most 10 sessions will be returned. The
+        #     maximum value is 1000; values above 1000 will be coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token received from a previous `ListSessions` call. Provide this to
+        #     retrieve the subsequent page. When paginating, all other parameters
+        #     provided to `ListSessions` must match the call that provided the page
+        #     token.
+        class ListSessionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # List sessions response.
+        # @!attribute [rw] sessions
+        #   @return [::Array<::Google::Cloud::Dataplex::V1::Session>]
+        #     Sessions under a given environment.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of results, or empty if there are no more
+        #     results in the list.
+        class ListSessionsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -65,6 +65,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
+                default_config.rpcs.create_entity.timeout = 60.0
+
+                default_config.rpcs.update_entity.timeout = 60.0
+
+                default_config.rpcs.delete_entity.timeout = 60.0
+
                 default_config.rpcs.get_entity.timeout = 60.0
                 default_config.rpcs.get_entity.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
@@ -74,6 +80,10 @@ module Google
                 default_config.rpcs.list_entities.retry_policy = {
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
+
+                default_config.rpcs.create_partition.timeout = 60.0
+
+                default_config.rpcs.delete_partition.timeout = 60.0
 
                 default_config.rpcs.get_partition.timeout = 60.0
                 default_config.rpcs.get_partition.retry_policy = {
@@ -164,6 +174,273 @@ module Google
             end
 
             # Service calls
+
+            ##
+            # Create a metadata entity.
+            #
+            # @overload create_entity(request, options = nil)
+            #   Pass arguments to `create_entity` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::CreateEntityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::CreateEntityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_entity(parent: nil, entity: nil, validate_only: nil)
+            #   Pass arguments to `create_entity` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the parent zone:
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
+            #   @param entity [::Google::Cloud::Dataplex::V1::Entity, ::Hash]
+            #     Required. Entity resource.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is false.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::Entity]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::Entity]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::CreateEntityRequest.new
+            #
+            #   # Call the create_entity method.
+            #   result = client.create_entity request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::Entity.
+            #   p result
+            #
+            def create_entity request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CreateEntityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_entity.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_entity.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_entity.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @metadata_service_stub.call_rpc :create_entity, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update a metadata entity. Only supports full resource update.
+            #
+            # @overload update_entity(request, options = nil)
+            #   Pass arguments to `update_entity` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::UpdateEntityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::UpdateEntityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_entity(entity: nil, validate_only: nil)
+            #   Pass arguments to `update_entity` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param entity [::Google::Cloud::Dataplex::V1::Entity, ::Hash]
+            #     Required. Update description.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is false.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::Entity]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::Entity]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::UpdateEntityRequest.new
+            #
+            #   # Call the update_entity method.
+            #   result = client.update_entity request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::Entity.
+            #   p result
+            #
+            def update_entity request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::UpdateEntityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_entity.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.entity&.name
+                header_params["entity.name"] = request.entity.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_entity.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_entity.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @metadata_service_stub.call_rpc :update_entity, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a metadata entity.
+            #
+            # @overload delete_entity(request, options = nil)
+            #   Pass arguments to `delete_entity` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::DeleteEntityRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::DeleteEntityRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_entity(name: nil, etag: nil)
+            #   Pass arguments to `delete_entity` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the entity:
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+            #   @param etag [::String]
+            #     Required. The etag associated with the partition if it was previously retrieved.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::DeleteEntityRequest.new
+            #
+            #   # Call the delete_entity method.
+            #   result = client.delete_entity request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_entity request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::DeleteEntityRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_entity.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_entity.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_entity.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @metadata_service_stub.call_rpc :delete_entity, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
 
             ##
             # Get a metadata entity.
@@ -279,15 +556,22 @@ module Google
             #     Required. Specify the entity view to make a partial list request.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of entities to return. The service may return fewer than
-            #     this value. If unspecified, at most 10 entities will be returned. The
-            #     maximum value is 1000; values above 1000 are set to 1000.
+            #     this value. If unspecified, 100 entities will be returned by default. The
+            #     maximum value is 500; larger values will will be truncated to 500.
             #   @param page_token [::String]
             #     Optional. Page token received from a previous `ListEntities` call. Provide
             #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListEntities` must match the call that provided the
             #     page token.
             #   @param filter [::String]
-            #     Optional. Filter request by name prefix.
+            #     Optional. The following filter parameters can be added to the URL to limit the
+            #     entities returned by the API:
+            #
+            #     - Entity ID: ?filter="id=entityID"
+            #     - Asset ID: ?filter="asset=assetID"
+            #     - Data path ?filter="data_path=gs://my-bucket"
+            #     - Is HIVE compatible: ?filter=”hive_compatible=true”
+            #     - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Entity>]
@@ -361,6 +645,188 @@ module Google
             end
 
             ##
+            # Create a metadata partition.
+            #
+            # @overload create_partition(request, options = nil)
+            #   Pass arguments to `create_partition` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::CreatePartitionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::CreatePartitionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_partition(parent: nil, partition: nil, validate_only: nil)
+            #   Pass arguments to `create_partition` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the parent zone:
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
+            #   @param partition [::Google::Cloud::Dataplex::V1::Partition, ::Hash]
+            #     Required. Partition resource.
+            #   @param validate_only [::Boolean]
+            #     Optional. Only validate the request, but do not perform mutations.
+            #     The default is false.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Dataplex::V1::Partition]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Dataplex::V1::Partition]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::CreatePartitionRequest.new
+            #
+            #   # Call the create_partition method.
+            #   result = client.create_partition request
+            #
+            #   # The returned object is of type Google::Cloud::Dataplex::V1::Partition.
+            #   p result
+            #
+            def create_partition request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::CreatePartitionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_partition.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_partition.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_partition.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @metadata_service_stub.call_rpc :create_partition, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Delete a metadata partition.
+            #
+            # @overload delete_partition(request, options = nil)
+            #   Pass arguments to `delete_partition` via a request object, either of type
+            #   {::Google::Cloud::Dataplex::V1::DeletePartitionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dataplex::V1::DeletePartitionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_partition(name: nil, etag: nil)
+            #   Pass arguments to `delete_partition` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the partition.
+            #     format:
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
+            #     The \\{partition_value_path} segment consists of an ordered sequence of
+            #     partition values separated by "/". All values must be provided.
+            #   @param etag [::String]
+            #     Optional. The etag associated with the partition if it was previously retrieved.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dataplex::V1::DeletePartitionRequest.new
+            #
+            #   # Call the delete_partition method.
+            #   result = client.delete_partition request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_partition request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dataplex::V1::DeletePartitionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_partition.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_partition.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_partition.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @metadata_service_stub.call_rpc :delete_partition, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Get a metadata partition of an entity.
             #
             # @overload get_partition(request, options = nil)
@@ -380,7 +846,9 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the partition:
-            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_id}`.
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}/partitions/{partition_value_path}`.
+            #     The \\{partition_value_path} segment consists of an ordered sequence of
+            #     partition values separated by "/". All values must be provided.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::Partition]
@@ -469,15 +937,33 @@ module Google
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of partitions to return. The service may return fewer than
-            #     this value. If unspecified, at most 10 partitions will be returned. The
-            #     maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     this value. If unspecified, 100 partitions will be returned by default. The
+            #     maximum page size is 500; larger values will will be truncated to 500.
             #   @param page_token [::String]
             #     Optional. Page token received from a previous `ListPartitions` call. Provide
             #     this to retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListPartitions` must match the call that provided the
             #     page token.
             #   @param filter [::String]
-            #     Optional. Filter request.
+            #     Optional. Filter the partitions returned to the caller using a key vslue pair
+            #     expression. The filter expression supports:
+            #
+            #     - logical operators: AND, OR
+            #     - comparison operators: <, >, >=, <= ,=, !=
+            #     - LIKE operators:
+            #         - The right hand of a LIKE operator supports “.” and
+            #           “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
+            #     - parenthetical grouping: ( )
+            #
+            #     Sample filter expression: `?filter="key1 < value1 OR key2 > value2"
+            #
+            #     **Notes:**
+            #
+            #     - Keys to the left of operators are case insensitive.
+            #     - Partition results are sorted first by creation time, then by
+            #       lexicographic order.
+            #     - Up to 20 key value filter pairs are allowed, but due to performance
+            #       considerations, only the first 10 will be used as a filter.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Partition>]
@@ -566,17 +1052,17 @@ module Google
             # @example
             #
             #   # Modify the global config, setting the timeout for
-            #   # get_entity to 20 seconds,
+            #   # create_entity to 20 seconds,
             #   # and all remaining timeouts to 10 seconds.
             #   ::Google::Cloud::Dataplex::V1::MetadataService::Client.configure do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.get_entity.timeout = 20.0
+            #     config.rpcs.create_entity.timeout = 20.0
             #   end
             #
             #   # Apply the above configuration only to a new client.
             #   client = ::Google::Cloud::Dataplex::V1::MetadataService::Client.new do |config|
             #     config.timeout = 10.0
-            #     config.rpcs.get_entity.timeout = 20.0
+            #     config.rpcs.create_entity.timeout = 20.0
             #   end
             #
             # @!attribute [rw] endpoint
@@ -686,6 +1172,21 @@ module Google
               #
               class Rpcs
                 ##
+                # RPC-specific configuration for `create_entity`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_entity
+                ##
+                # RPC-specific configuration for `update_entity`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_entity
+                ##
+                # RPC-specific configuration for `delete_entity`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_entity
+                ##
                 # RPC-specific configuration for `get_entity`
                 # @return [::Gapic::Config::Method]
                 #
@@ -695,6 +1196,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_entities
+                ##
+                # RPC-specific configuration for `create_partition`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_partition
+                ##
+                # RPC-specific configuration for `delete_partition`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_partition
                 ##
                 # RPC-specific configuration for `get_partition`
                 # @return [::Gapic::Config::Method]
@@ -708,10 +1219,20 @@ module Google
 
                 # @private
                 def initialize parent_rpcs = nil
+                  create_entity_config = parent_rpcs.create_entity if parent_rpcs.respond_to? :create_entity
+                  @create_entity = ::Gapic::Config::Method.new create_entity_config
+                  update_entity_config = parent_rpcs.update_entity if parent_rpcs.respond_to? :update_entity
+                  @update_entity = ::Gapic::Config::Method.new update_entity_config
+                  delete_entity_config = parent_rpcs.delete_entity if parent_rpcs.respond_to? :delete_entity
+                  @delete_entity = ::Gapic::Config::Method.new delete_entity_config
                   get_entity_config = parent_rpcs.get_entity if parent_rpcs.respond_to? :get_entity
                   @get_entity = ::Gapic::Config::Method.new get_entity_config
                   list_entities_config = parent_rpcs.list_entities if parent_rpcs.respond_to? :list_entities
                   @list_entities = ::Gapic::Config::Method.new list_entities_config
+                  create_partition_config = parent_rpcs.create_partition if parent_rpcs.respond_to? :create_partition
+                  @create_partition = ::Gapic::Config::Method.new create_partition_config
+                  delete_partition_config = parent_rpcs.delete_partition if parent_rpcs.respond_to? :delete_partition
+                  @delete_partition = ::Gapic::Config::Method.new delete_partition_config
                   get_partition_config = parent_rpcs.get_partition if parent_rpcs.respond_to? :get_partition
                   @get_partition = ::Gapic::Config::Method.new get_partition_config
                   list_partitions_config = parent_rpcs.list_partitions if parent_rpcs.respond_to? :list_partitions
