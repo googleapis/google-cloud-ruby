@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2022-02-17
+
+#### Features
+
+* **BREAKING CHANGE:** Replaced the temporary gke_cluster_config field with the permanent virtual_cluster_config
+
 ### 0.8.0 / 2022-01-11
 
 #### Features
