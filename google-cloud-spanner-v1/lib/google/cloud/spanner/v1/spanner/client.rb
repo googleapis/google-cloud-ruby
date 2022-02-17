@@ -255,7 +255,7 @@ module Google
             #   @param database [::String]
             #     Required. The database in which the new session is created.
             #   @param session [::Google::Cloud::Spanner::V1::Session, ::Hash]
-            #     The session to create.
+            #     Required. The session to create.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Spanner::V1::Session]
