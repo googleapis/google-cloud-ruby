@@ -97,6 +97,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "reads all by default in pg" do
+    skip if emulator_enabled?
     skip("Skipped due to https://b.corp.google.com/issues/216209306")
     _(pg_batch_snapshot.timestamp).must_be_kind_of Time
     serialized_snapshot = pg_batch_snapshot.dump
@@ -158,6 +159,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "queries all by default in pg" do
+    skip if emulator_enabled?
     pg_batch_snapshot = pg_batch_client.batch_snapshot
     serialized_snapshot = pg_batch_snapshot.dump
 
@@ -215,6 +217,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   end
 
   it "queries all by default with query options pg" do
+    skip if emulator_enabled?
     pg_batch_snapshot = pg_batch_client.batch_snapshot
     serialized_snapshot = pg_batch_snapshot.dump
 
