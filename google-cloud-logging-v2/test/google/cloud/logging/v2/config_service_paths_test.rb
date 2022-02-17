@@ -223,4 +223,25 @@ class ::Google::Cloud::Logging::V2::ConfigService::ClientPathsTest < Minitest::T
       assert_equal "projects/value0", path
     end
   end
+
+  def test_settings_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.settings_path project: "value0"
+      assert_equal "projects/value0/settings", path
+
+      path = client.settings_path organization: "value0"
+      assert_equal "organizations/value0/settings", path
+
+      path = client.settings_path folder: "value0"
+      assert_equal "folders/value0/settings", path
+
+      path = client.settings_path billing_account: "value0"
+      assert_equal "billingAccounts/value0/settings", path
+    end
+  end
 end
