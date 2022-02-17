@@ -11,22 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-# [START bigquery_query_legacy]
-require "google/cloud/bigquery"
 
-def query_legacy_sql
-  bigquery = Google::Cloud::Bigquery.new
-  sql = "SELECT name FROM [bigquery-public-data:usa_names.usa_1910_2013] " \
-        "WHERE state = 'TX' " \
-        "LIMIT 100"
+require_relative "../query_legacy"
+require_relative "helper"
 
-  results = bigquery.query sql, legacy_sql: true do |config|
-    # Location must match that of the dataset(s) referenced in the query.
-    config.location = "US"
-  end
 
-  results.each do |row|
-    puts row.inspect
+describe "Query Legacy SQL" do
+  it "runs a legacy SQL query" do
+    output = capture_io { query_legacy }
+    rows = output.first.split "\n"
+    assert_equal 100, rows.length
   end
 end
-# [END bigquery_query_legacy]
