@@ -3,10 +3,8 @@
 
 require 'google/appengine/v1/app_yaml_pb'
 require 'google/appengine/v1/deploy_pb'
-require 'google/appengine/v1/network_settings_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

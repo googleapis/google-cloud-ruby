@@ -2,7 +2,6 @@
 # source: google/appengine/v1/service.proto
 
 require 'google/appengine/v1/network_settings_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
