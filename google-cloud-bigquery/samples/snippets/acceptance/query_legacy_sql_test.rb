@@ -18,7 +18,7 @@ require_relative "helper"
 
 describe "Query Legacy SQL" do
   it "runs a legacy SQL query" do
-    output = capture_io { query }
+    output = capture_io { query_legacy_sql }
     rows = output.first.split "\n"
     assert_equal 100, rows.length
   end
