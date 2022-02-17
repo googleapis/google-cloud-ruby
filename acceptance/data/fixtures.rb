@@ -101,14 +101,14 @@ module Acceptance
         end
 
         def lists_ddl_statement
-        <<-LISTS
-            CREATE TABLE task_lists (
-            account_id INT64 NOT NULL,
-            task_list_id INT64 NOT NULL,
-            description STRING(1024) NOT NULL
-            ) PRIMARY KEY (account_id, task_list_id),
-            INTERLEAVE IN PARENT accounts ON DELETE CASCADE
-        LISTS
+            <<-LISTS
+                CREATE TABLE task_lists (
+                account_id INT64 NOT NULL,
+                task_list_id INT64 NOT NULL,
+                description STRING(1024) NOT NULL
+                ) PRIMARY KEY (account_id, task_list_id),
+                INTERLEAVE IN PARENT accounts ON DELETE CASCADE
+            LISTS
         end
 
         def lists_pg_ddl_statement
@@ -123,39 +123,43 @@ module Acceptance
         end
 
         def items_ddl_statement
-        <<-ITEMS
-            CREATE TABLE task_items (
-            account_id INT64 NOT NULL,
-            task_list_id INT64 NOT NULL,
-            task_item_id INT64 NOT NULL,
-            description STRING(1024) NOT NULL,
-            active BOOL NOT NULL,
-            priority INT64 NOT NULL,
-            due_date DATE,
-            created_at TIMESTAMP,
-            updated_at TIMESTAMP
-            ) PRIMARY KEY (account_id, task_list_id, task_item_id),
-            INTERLEAVE IN PARENT task_lists ON DELETE CASCADE
-        ITEMS
+            <<-ITEMS
+                CREATE TABLE task_items (
+                account_id INT64 NOT NULL,
+                task_list_id INT64 NOT NULL,
+                task_item_id INT64 NOT NULL,
+                description STRING(1024) NOT NULL,
+                active BOOL NOT NULL,
+                priority INT64 NOT NULL,
+                due_date DATE,
+                created_at TIMESTAMP,
+                updated_at TIMESTAMP
+                ) PRIMARY KEY (account_id, task_list_id, task_item_id),
+                INTERLEAVE IN PARENT task_lists ON DELETE CASCADE
+            ITEMS
         end
 
         def numeric_pk_ddl_statement
-        <<-BOXES
-            CREATE TABLE boxes (
-            id NUMERIC NOT NULL,
-            name STRING(256) NOT NULL,
-            ) PRIMARY KEY (id)
-        BOXES
+            return
+
+            <<-BOXES
+                CREATE TABLE boxes (
+                id NUMERIC NOT NULL,
+                name STRING(256) NOT NULL,
+                ) PRIMARY KEY (id)
+            BOXES
         end
 
         def numeric_composite_pk_ddl_statement
-        <<-BOX_ITEMS
-            CREATE TABLE box_items (
-            id INT64 NOT NULL,
-            box_id NUMERIC NOT NULL,
-            name STRING(256) NOT NULL
-            ) PRIMARY KEY (id, box_id)
-        BOX_ITEMS
+            return
+
+            <<-BOX_ITEMS
+                CREATE TABLE box_items (
+                id INT64 NOT NULL,
+                box_id NUMERIC NOT NULL,
+                name STRING(256) NOT NULL
+                ) PRIMARY KEY (id, box_id)
+            BOX_ITEMS
         end
 
         def schema_pg_ddl_statements
