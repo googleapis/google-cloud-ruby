@@ -74,8 +74,6 @@ module Acceptance
 
       @spanner_pg_client = $spanner_pg_client
 
-      refute_nil @spanner_pg_client, "You do not have an active client to run the tests."
-
       super
     end
 
@@ -138,15 +136,13 @@ db_job = instance.create_database $spanner_database_id, statements: fixture.sche
 db_job.wait_until_done!
 fail GRPC::BadStatus.new(db_job.error.code, db_job.error.message) if db_job.error?
 
-
-instance_path = $spanner_db_admin.instance_path project: $spanner.project_id, instance: $spanner_instance_id
-db_job = $spanner_db_admin.create_database parent: instance_path, 
+unless emulator_enabled?
+  instance_path = $spanner_db_admin.instance_path project: $spanner.project_id, instance: $spanner_instance_id
+  db_job = $spanner_db_admin.create_database parent: instance_path, 
                                            create_statement: "CREATE DATABASE \"#{$spanner_pg_database_id}\"",
                                            database_dialect: :POSTGRESQL
-db_job.wait_until_done!
-fail GRPC::BadStatus.new(db_job.error.code, db_job.error.message) if db_job.error?
-
-unless emulator_enabled?
+  db_job.wait_until_done!
+  fail GRPC::BadStatus.new(db_job.error.code, db_job.error.message) if db_job.error?
   db_path = $spanner_db_admin.database_path project: $spanner.project_id,
                                                   instance: $spanner_instance_id,
                                                   database: $spanner_pg_database_id
