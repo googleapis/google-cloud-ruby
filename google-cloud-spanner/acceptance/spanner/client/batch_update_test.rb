@@ -46,15 +46,18 @@ describe "Spanner Client", :batch_update, :spanner do
     db[:pg].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_pg_account_rows
-    end
+    end unless emulator_enabled?
   end
 
   after do
     db[:gsql].delete "accounts"
-    db[:pg].delete "accounts"
+    db[:pg].delete "accounts" unless emulator_enabled?
   end
 
-  [:gsql, :pg].each do |dialect|
+  dialects = [:gsql]
+  dialects.push(:pg) unless emulator_enabled?
+
+  dialects.each do |dialect|
 
     it "executes multiple DML statements in a batch for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts"

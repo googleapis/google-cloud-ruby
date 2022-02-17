@@ -17,7 +17,10 @@ require "spanner_helper"
 describe "Spanner Client", :execute_sql, :spanner do
   let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
 
-  [:gsql, :pg].each do |dialect|
+  dialects = [:gsql]
+  dialects.push(:pg) unless emulator_enabled?
+
+  dialects.each do |dialect|
     it "runs SELECT 1 for #{dialect}" do
       results = db[dialect].execute_sql "SELECT 1"
       _(results).must_be_kind_of Google::Cloud::Spanner::Results

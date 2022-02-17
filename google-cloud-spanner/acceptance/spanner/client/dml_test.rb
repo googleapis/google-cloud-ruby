@@ -42,15 +42,18 @@ describe "Spanner Client", :dml, :spanner do
     db[:pg].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_pg_account_rows
-    end
+    end unless emulator_enabled?
   end
 
   after do
-    db[:pg].delete "accounts"
+    db[:pg].delete "accounts" unless emulator_enabled?
     db[:gsql].delete "accounts"
   end
 
-  [:gsql, :pg].each do |dialect|
+  dialects = [:gsql]
+  dialects.push(:pg) unless emulator_enabled?
+
+  dialects.each do |dialect|
     it "executes multiple DML statements in a transaction for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
       _(prior_results.rows.count).must_equal 3

@@ -19,12 +19,15 @@ describe "Spanner Client", :crud, :spanner do
 
   before do
     setup_timestamp_pg = db[:pg].delete "accounts"
-    setup_timestamp_gsql = db[:pg].delete "accounts"
+    setup_timestamp_gsql = db[:pg].delete "accounts" unless emulator_enabled?
     @setup_timestamp = {gsql: setup_timestamp_gsql, pg: setup_timestamp_pg}
     @default_rows = {gsql: default_account_rows, pg: default_pg_account_rows}
   end
+ 
+  dialects = [:gsql]
+  dialects.push(:pg) unless emulator_enabled?
 
-  [:gsql, :pg].each do |dialect|
+  dialects.each do |dialect|
     it "inserts, updates, upserts, reads, and deletes records for #{dialect}" do
       results = db[dialect].read "accounts", ["account_id"], single_use: { timestamp: @setup_timestamp[dialect] }
       _(results.rows.count).must_equal 0

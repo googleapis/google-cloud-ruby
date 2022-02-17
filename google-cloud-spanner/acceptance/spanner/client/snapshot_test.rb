@@ -36,18 +36,20 @@ describe "Spanner Client", :snapshot, :spanner do
     setup_timestamp_pg = db[:pg].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_pg_account_rows
-    end
+    end unless emulator_enabled?
     @setup_timestamp = {gsql: setup_timestamp_gsql, pg: setup_timestamp_pg}
     @default_rows = {gsql: default_account_rows, pg: default_pg_account_rows}
   end
 
   after do
     db[:gsql].delete "accounts"
-    db[:pg].delete "accounts"
+    db[:pg].delete "accounts" unless emulator_enabled?
   end
 
-  [:gsql, :pg].each do |dialect|
+  dialects = [:gsql]
+  dialects.push(:pg) unless emulator_enabled?
 
+  dialects.each do |dialect|
     it "runs a query for #{dialect}" do
       results = nil
        db[dialect].snapshot do |snp|

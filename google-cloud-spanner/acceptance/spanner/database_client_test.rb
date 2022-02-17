@@ -63,6 +63,7 @@ describe "Spanner Databases Client", :spanner do
   end
 
   it "creates, gets, updates, and drops a database with pg dialect" do
+    skip if emulator_enabled?
     client = Google::Cloud::Spanner::Admin::Database.database_admin project_id: spanner.project
 
     instance_path = \
