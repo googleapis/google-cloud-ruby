@@ -108,11 +108,11 @@ limit: 5).rows.map(&:to_h)).must_equal [{ id: 1, bool: false }, { id: 2, bool: f
               keys: [7]..[]).rows.map(&:to_h)).must_equal [{ id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 },
                                                            { id: 12 }]
     _(db.read(table_name, [:id],
-              keys: db.range([7], [], exclude_begin: true)).rows.map(&:to_h)).must_equal[{ id: 8 },
-                                                                                         { id: 9 },
-                                                                                         { id: 10 },
-                                                                                         { id: 11 },
-                                                                                         { id: 12 }]
+              keys: db.range([7], [], exclude_begin: true)).rows.map(&:to_h)).must_equal [{ id: 8 },
+                                                                                          { id: 9 },
+                                                                                          { id: 10 },
+                                                                                          { id: 11 },
+                                                                                          { id: 12 }]
     _(db.read(table_name, [:id],
               keys: []..[5]).rows.map(&:to_h)).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }]
     _(db.read(table_name, [:id],
