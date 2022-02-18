@@ -175,12 +175,12 @@ module Google
             return field.to_grpc_type if field.respond_to? :to_grpc_type
 
             case field
-            when Array === field
+            when Array
               V1::Type.new(
                 code: :ARRAY,
                 array_element_type: grpc_type_for_field(field.first)
               )
-            when :PG_NUMERIC == field
+            when :PG_NUMERIC
               V1::Type.new(code: :NUMERIC, type_annotation: :PG_NUMERIC)
             else
               V1::Type.new(code: field)
