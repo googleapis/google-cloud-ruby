@@ -153,9 +153,7 @@ module Acceptance
         accounts_ddl_statement,
         lists_ddl_statement,
         items_ddl_statement,
-        commit_timestamp_test_ddl_statement,
-        numeric_pk_ddl_statement,
-        numeric_composite_pk_ddl_statement
+        commit_timestamp_test_ddl_statement
       ].compact
     end
 
