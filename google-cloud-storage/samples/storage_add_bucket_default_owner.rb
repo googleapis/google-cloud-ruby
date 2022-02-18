@@ -12,21 +12,27 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def add_bucket_default_owner bucket_name:, email:
-  # [START storage_add_bucket_default_owner]
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-  # email       = "Google Cloud Storage ACL Entity email"
+# Sample for add default owner to bucket
+class StorageAddBucketDefaultOwner
+  def add_bucket_default_owner bucket_name:, email:
+    # [START storage_add_bucket_default_owner]
+    # The ID of your GCS bucket
+    # bucket_name = "your-unique-bucket-name"
+    # email       = "Google Cloud Storage ACL Entity email"
 
-  require "google/cloud/storage"
+    require "google/cloud/storage"
 
-  storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+    storage = Google::Cloud::Storage.new
+    bucket  = storage.bucket bucket_name
 
-  bucket.default_acl.add_owner email
+    bucket.default_acl.add_owner email
 
-  puts "Added default OWNER permission for #{email} to #{bucket_name}"
-  # [END storage_add_bucket_default_owner]
+    puts "Added default OWNER permission for #{email} to #{bucket_name}"
+    # [END storage_add_bucket_default_owner]
+  end
 end
 
-add_bucket_default_owner bucket_name: arguments.shift, email: arguments.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  StorageAddBucketDefaultOwner.new.add_bucket_default_owner bucket_name: arguments.shift,
+                                                            email: arguments.shift
+end
