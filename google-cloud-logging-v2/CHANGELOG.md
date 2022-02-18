@@ -4,14 +4,13 @@
 
 #### Features
 
-* Numerous updates
-  * Support for get_settings and update_settings
-  * Support for copy_log_entries
-  * Support for splitting log entries and sending as a sequence of parts
-  * Support for restricted fields in a log bucket
-  * Support for CMEK settings for a log bucket
-  * Support for disabling metrics
-  * Various clarifications and formatting fixes in the reference documentation
+* Support for get_settings and update_settings
+* Support for copy_log_entries
+* Support for splitting log entries and sending as a sequence of parts
+* Support for restricted fields in a log bucket
+* Support for CMEK settings for a log bucket
+* Support for disabling metrics
+* Various clarifications and formatting fixes in the reference documentation
 
 ### 0.5.6 / 2022-01-11
 
