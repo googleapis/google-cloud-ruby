@@ -16,37 +16,54 @@ require "spanner_helper"
 require "concurrent"
 
 describe "Spanner Client", :batch_update, :spanner do
-  let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
-  let(:insert_dml) {{ gsql: "INSERT INTO accounts (account_id, username, active, reputation) VALUES (@account_id, @username, @active, @reputation)",
-                      pg: "INSERT INTO accounts (account_id, username, active, reputation) VALUES ($1, $2, $3, $4)"                    
-                    }}
-  let(:update_dml) {{ gsql: "UPDATE accounts SET username = @username, active = @active WHERE account_id = @account_id",
-                      pg: "UPDATE accounts SET username = $2, active = $3 WHERE account_id = $1", 
-                    }}
-  let(:select_dql) {{ gsql: "SELECT username FROM accounts WHERE account_id = @account_id",
-                      pg: "SELECT username FROM accounts WHERE account_id = $1"
-                    }}
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
+
+  let :insert_dml do
+    { gsql: "INSERT INTO accounts (account_id, username, active, reputation) \
+             VALUES (@account_id, @username, @active, @reputation)",
+      pg: "INSERT INTO accounts (account_id, username, active, reputation) VALUES ($1, $2, $3, $4)" }
+  end
+
+  let :update_dml do
+    { gsql: "UPDATE accounts SET username = @username, active = @active WHERE account_id = @account_id",
+      pg: "UPDATE accounts SET username = $2, active = $3 WHERE account_id = $1" }
+  end
+
+  let :select_dql do
+    { gsql: "SELECT username FROM accounts WHERE account_id = @account_id",
+      pg: "SELECT username FROM accounts WHERE account_id = $1" }
+  end
+
   let(:update_dml_syntax_error) { "UPDDDD accounts" }
-  let(:delete_dml) {{ gsql:"DELETE FROM accounts WHERE account_id = @account_id",
-                       pg: "DELETE FROM accounts WHERE account_id = $1" 
-                    }}
-  let(:insert_params) {{ gsql: { account_id: 4, username: "inserted", active: true, reputation: 88.8 },
-                         pg: { p1: 4, p2: "inserted", p3: true, p4: 88.8 }
-                      }}
-  let(:update_params) {{ gsql: { account_id: 4, username: "updated", active: false },
-                         pg:  { p1: 4, p2: "updated", p3: false } 
-                      }}
-  let(:delete_params) { { gsql: { account_id: 4 }, pg: { p1: 4 }  } }
+  let :delete_dml do
+    { gsql: "DELETE FROM accounts WHERE account_id = @account_id",
+      pg: "DELETE FROM accounts WHERE account_id = $1" }
+  end
+  let :insert_params do
+    { gsql: { account_id: 4, username: "inserted", active: true, reputation: 88.8 },
+      pg: { p1: 4, p2: "inserted", p3: true, p4: 88.8 } }
+  end
+  let :update_params do
+    { gsql: { account_id: 4, username: "updated", active: false },
+      pg:  { p1: 4, p2: "updated", p3: false } }
+  end
+  let :delete_params do
+    { gsql: { account_id: 4 }, pg: { p1: 4 } }
+  end
 
   before do
     db[:gsql].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_account_rows
     end
-    db[:pg].commit do |c|
-      c.delete "accounts"
-      c.insert "accounts", default_pg_account_rows
-    end unless emulator_enabled?
+    unless emulator_enabled?
+      db[:pg].commit do |c|
+        c.delete "accounts"
+        c.insert "accounts", default_pg_account_rows
+      end
+    end
   end
 
   after do
@@ -55,10 +72,9 @@ describe "Spanner Client", :batch_update, :spanner do
   end
 
   dialects = [:gsql]
-  dialects.push(:pg) unless emulator_enabled?
+  dialects.push :pg unless emulator_enabled?
 
   dialects.each do |dialect|
-
     it "executes multiple DML statements in a batch for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
       _(prior_results.rows.count).must_equal 3
@@ -94,9 +110,11 @@ describe "Spanner Client", :batch_update, :spanner do
         _(tx.transaction_id).wont_be :nil?
 
         err = expect do
-          tx.batch_update do |b| end
+          tx.batch_update { |b| } # rubocop:disable Lint/EmptyBlock
         end.must_raise Google::Cloud::InvalidArgumentError
-          _(err.message).must_match /3:(No statements in batch DML request|Request must contain at least one DML statement)/
+        _(err.message).must_match(
+          /3:(No statements in batch DML request|Request must contain at least one DML statement)/
+        )
       end
       _(timestamp).must_be_kind_of Time
     end
@@ -114,11 +132,11 @@ describe "Spanner Client", :batch_update, :spanner do
             b.batch_update update_dml_syntax_error, params: update_params[dialect]
             b.batch_update delete_dml[dialect], params: delete_params[dialect]
           end
-        rescue Google::Cloud::Spanner::BatchUpdateError => batch_update_error
-          _(batch_update_error.cause).must_be_kind_of Google::Cloud::InvalidArgumentError
-          _(batch_update_error.cause.message).must_equal "Statement 1: 'UPDDDD accounts' is not valid DML."
+        rescue Google::Cloud::Spanner::BatchUpdateError => e
+          _(e.cause).must_be_kind_of Google::Cloud::InvalidArgumentError
+          _(e.cause.message).must_equal "Statement 1: 'UPDDDD accounts' is not valid DML."
 
-          row_counts = batch_update_error.row_counts
+          row_counts = e.row_counts
           _(row_counts).must_be_kind_of Array
           _(row_counts.count).must_equal 1
           _(row_counts[0]).must_equal 1
@@ -162,7 +180,7 @@ describe "Spanner Client", :batch_update, :spanner do
 
     describe "request options for #{dialect}" do
       it "execute batch update with priority options for #{dialect}" do
-        timestamp = db[dialect].transaction do |tx|
+        db[dialect].transaction do |tx|
           row_counts = tx.batch_update request_options: { priority: :PRIORITY_HIGH } do |b|
             b.batch_update insert_dml[dialect], params: insert_params[dialect]
             b.batch_update update_dml[dialect], params: update_params[dialect]

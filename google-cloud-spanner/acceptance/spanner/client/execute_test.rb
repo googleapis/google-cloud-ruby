@@ -15,10 +15,12 @@
 require "spanner_helper"
 
 describe "Spanner Client", :execute_sql, :spanner do
-  let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
 
   dialects = [:gsql]
-  dialects.push(:pg) unless emulator_enabled?
+  dialects.push :pg unless emulator_enabled?
 
   dialects.each do |dialect|
     it "runs SELECT 1 for #{dialect}" do
@@ -175,9 +177,9 @@ describe "Spanner Client", :execute_sql, :spanner do
       let(:origin_opt_stats_pkg) { nil }
 
       before do
-        origin_opt_version = ENV["SPANNER_OPTIMIZER_VERSION"]
+        origin_opt_version = ENV["SPANNER_OPTIMIZER_VERSION"] # rubocop:disable Lint/UselessAssignment
         ENV["SPANNER_OPTIMIZER_VERSION"] = "3"
-        origin_opt_stats_pkg = ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"]
+        origin_opt_stats_pkg = ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"] # rubocop:disable Lint/UselessAssignment
         ENV["SPANNER_OPTIMIZER_STATISTICS_PACKAGE"] = "latest"
       end
 
@@ -215,5 +217,5 @@ describe "Spanner Client", :execute_sql, :spanner do
         _(results.rows.count).must_equal 1
       end
     end
-  end  
+  end
 end

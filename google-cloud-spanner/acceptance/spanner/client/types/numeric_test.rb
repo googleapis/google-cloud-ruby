@@ -48,7 +48,6 @@ describe "Spanner Client", :types, :numeric, :spanner do
   it "writes and reads NULL numeric" do
     skip if emulator_enabled?
 
-    num = BigDecimal("0.123456789")
     id = SecureRandom.int64
     db.upsert table_name, { id: id, numeric: nil }
     results = db.read table_name, [:id, :numeric], keys: id
@@ -61,7 +60,6 @@ describe "Spanner Client", :types, :numeric, :spanner do
   it "writes and queries NULL numeric" do
     skip if emulator_enabled?
 
-    num = BigDecimal("0.123456789")
     id = SecureRandom.int64
     db.upsert table_name, { id: id, numeric: nil }
     results = db.execute_sql "SELECT id, numeric FROM #{table_name} WHERE id = @id", params: { id: id }

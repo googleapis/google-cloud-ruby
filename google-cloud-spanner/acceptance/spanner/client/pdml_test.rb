@@ -16,17 +16,21 @@ require "spanner_helper"
 require "concurrent"
 
 describe "Spanner Client", :pdml, :spanner do
-  let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
 
   before do
     db[:gsql].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_account_rows
     end
-    db[:pg].commit do |c|
-      c.delete "accounts"
-      c.insert "accounts", default_pg_account_rows
-    end unless emulator_enabled?
+    unless emulator_enabled?
+      db[:pg].commit do |c|
+        c.delete "accounts"
+        c.insert "accounts", default_pg_account_rows
+      end
+    end
   end
 
   after do
@@ -35,7 +39,7 @@ describe "Spanner Client", :pdml, :spanner do
   end
 
   dialects = [:gsql]
-  dialects.push(:pg) unless emulator_enabled?
+  dialects.push :pg unless emulator_enabled?
 
   dialects.each do |dialect|
     it "executes a simple Partitioned DML statement for #{dialect}" do
@@ -54,7 +58,8 @@ describe "Spanner Client", :pdml, :spanner do
       _(prior_results.rows.count).must_equal 2
 
       query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
-      pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts SET active = TRUE WHERE active = FALSE", query_options: query_options
+      pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts SET active = TRUE WHERE active = FALSE",
+                                                            query_options: query_options
       _(pdml_row_count).must_equal 1
 
       post_results = db[dialect].execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
@@ -64,7 +69,7 @@ describe "Spanner Client", :pdml, :spanner do
     describe "request options for #{dialect}" do
       it "execute Partitioned DML statement with priority options for #{dialect}" do
         pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts SET active = TRUE WHERE active = FALSE",
-                                                    request_options: { priority: :PRIORITY_MEDIUM }
+                                                              request_options: { priority: :PRIORITY_MEDIUM }
 
         _(pdml_row_count).must_equal 1
       end
@@ -72,8 +77,8 @@ describe "Spanner Client", :pdml, :spanner do
 
     it "executes a Partitioned DML statement with request tagging option for #{dialect}" do
       pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts  SET active = TRUE WHERE active = FALSE",
-                                                  request_options: { tag: "Tag-P-1" }
+                                                            request_options: { tag: "Tag-P-1" }
       _(pdml_row_count).must_equal 1
     end
-  end  
+  end
 end

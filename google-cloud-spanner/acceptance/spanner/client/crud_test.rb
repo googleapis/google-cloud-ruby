@@ -15,17 +15,19 @@
 require "spanner_helper"
 
 describe "Spanner Client", :crud, :spanner do
-  let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
 
   before do
     setup_timestamp_gsql = db[:gsql].delete "accounts"
     setup_timestamp_pg = db[:pg].delete "accounts" unless emulator_enabled?
-    @setup_timestamp = {gsql: setup_timestamp_gsql, pg: setup_timestamp_pg}
-    @default_rows = {gsql: default_account_rows, pg: default_pg_account_rows}
+    @setup_timestamp = { gsql: setup_timestamp_gsql, pg: setup_timestamp_pg }
+    @default_rows = { gsql: default_account_rows, pg: default_pg_account_rows }
   end
- 
+
   dialects = [:gsql]
-  dialects.push(:pg) unless emulator_enabled?
+  dialects.push :pg unless emulator_enabled?
 
   dialects.each do |dialect|
     it "inserts, updates, upserts, reads, and deletes records for #{dialect}" do
@@ -134,7 +136,7 @@ describe "Spanner Client", :crud, :spanner do
     end
 
     it "inserts, updates, upserts, reads, and deletes records in a transaction for #{dialect}" do
-      timestamp = @setup_timestamp[dialect]
+      @setup_timestamp[dialect]
       active_count_sql = "SELECT COUNT(*) AS count FROM accounts WHERE active = true"
 
       db[dialect].transaction do |tx|
@@ -145,7 +147,7 @@ describe "Spanner Client", :crud, :spanner do
         tx.insert "accounts", @default_rows[dialect][2]
       end
 
-      timestamp = db[dialect].transaction do |tx|
+      db[dialect].transaction do |tx|
         _(db[dialect].read("accounts", ["account_id"]).rows.count).must_equal 3
 
         _(tx.execute_query(active_count_sql).rows.first[:count]).must_equal 2
@@ -188,7 +190,7 @@ describe "Spanner Client", :crud, :spanner do
 
     it "inserts, updates, upserts, reads, and deletes records with request tagging options for #{dialect}" do
       timestamp = db[dialect].insert "accounts", @default_rows[dialect][0],
-                            request_options: { tag: "Tag-CRUD-1" }
+                                     request_options: { tag: "Tag-CRUD-1" }
       _(timestamp).wont_be :nil?
 
       results = db[dialect].read "accounts", ["account_id"], single_use: { timestamp: @setup_timestamp[dialect] },
@@ -196,16 +198,16 @@ describe "Spanner Client", :crud, :spanner do
       _(results.timestamp).wont_be :nil?
 
       timestamp = db[dialect].update "accounts", @default_rows[dialect][0],
-                            request_options: { tag: "Tag-CRUD-2" }
+                                     request_options: { tag: "Tag-CRUD-2" }
       _(timestamp).wont_be :nil?
 
       timestamp = db[dialect].upsert "accounts", @default_rows[dialect][1],
-                            request_options: { tag: "Tag-CRUD-4" }
+                                     request_options: { tag: "Tag-CRUD-4" }
       _(timestamp).wont_be :nil?
 
       timestamp = db[dialect].delete "accounts", [1, 2, 3],
-                            request_options: { tag: "Tag-CRUD-5" }
+                                     request_options: { tag: "Tag-CRUD-5" }
       _(timestamp).wont_be :nil?
     end
-  end  
+  end
 end

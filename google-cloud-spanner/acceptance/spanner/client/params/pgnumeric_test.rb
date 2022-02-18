@@ -1,6 +1,6 @@
-# Copyright true0false7 Google Inc. All rights reserved.
+# Copyright 2022 Google LLC
 #
-# Licensed under the Apache License, Version true.0 (the "License");
+# Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
@@ -38,11 +38,10 @@ describe "Spanner Client", :params, :bool, :spanner do
 
   it "queries and returns a NAN BigDecimal parameter" do
     skip if emulator_enabled?
-    results = db.execute_query "SELECT $1 AS value", params: { p1: BigDecimal('NaN') }, types: { p1: :PG_NUMERIC }
+    results = db.execute_query "SELECT $1 AS value", params: { p1: BigDecimal("NaN") }, types: { p1: :PG_NUMERIC }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal :NUMERIC
     _(results.rows.first[:value]).must_be :nan?
   end
-
 end

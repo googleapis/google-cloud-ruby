@@ -31,7 +31,7 @@ describe "Spanner Databases Client", :spanner do
                                    database: database_id
 
     job = client.create_database parent: instance_path,
-      create_statement: "CREATE DATABASE `#{database_id}`"
+                                 create_statement: "CREATE DATABASE `#{database_id}`"
     _(job).wont_be :done? unless emulator_enabled?
     job.wait_until_done!
 

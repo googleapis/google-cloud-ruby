@@ -34,7 +34,7 @@ describe "Spanner Client", :params, :struct, :spanner do
     # [parameters=CAST(NULL AS STRUCT<threadf INT64, userf STRING>) AS struct_param]
     # SELECT @struct_param.userf;
     it "Simple field access on NULL struct value" do
-      struct_type = db.fields(threadf: :INT64, userf: :STRING)
+      struct_type = db.fields threadf: :INT64, userf: :STRING
       results = db.execute "SELECT @struct_param.userf",
                            params: { struct_param: nil },
                            types:  { struct_param: struct_type }
@@ -60,7 +60,7 @@ describe "Spanner Client", :params, :struct, :spanner do
     # [parameters=CAST(STRUCT(null) AS STRUCT<structf STRUCT<nestedf STRING>>) AS  struct_param]
     # SELECT @struct_param.structf.nestedf;
     it "Nested struct field access on NULL struct value" do
-      struct_type = db.fields(structf: db.fields(nestedf: :STRING))
+      struct_type = db.fields structf: db.fields(nestedf: :STRING)
       results = db.execute "SELECT @struct_param.structf.nestedf",
                            params: { struct_param: nil },
                            types:  { struct_param: struct_type }
@@ -100,7 +100,7 @@ describe "Spanner Client", :params, :struct, :spanner do
     # [parameters=STRUCT<f1 INT64>(NULL) AS struct_param]
     # SELECT @struct_param.f1;
     it "Struct with single NULL field" do
-      struct_type = db.fields(f1: :INT64)
+      struct_type = db.fields f1: :INT64
       results = db.execute "SELECT @struct_param.f1",
                            params: { struct_param: { f1: nil } },
                            types:  { struct_param: struct_type }
@@ -137,7 +137,8 @@ describe "Spanner Client", :params, :struct, :spanner do
     end
 
     # # Null array of struct field.
-    # [parameters=STRUCT<intf INT64, arraysf ARRAY<STRUCT<threadid INT64>>> (10,CAST(NULL AS ARRAY<STRUCT<threadid INT64>>)) AS struct_param]
+    # [parameters=STRUCT<intf INT64, arraysf ARRAY<STRUCT<threadid INT64>>>\
+    # (10,CAST(NULL AS ARRAY<STRUCT<threadid INT64>>)) AS struct_param]
     # SELECT a.threadid FROM UNNEST(@struct_param.arraysf) a;
     it "Null array of struct field" do
       struct_value = db.fields(intf: :INT64, arraysf: [db.fields(threadid: :INT64)]).struct([10, nil])
@@ -153,7 +154,7 @@ describe "Spanner Client", :params, :struct, :spanner do
     # [parameters=CAST(NULL AS ARRAY<STRUCT<threadid INT64>>) as struct_arr_param]
     # SELECT a.threadid FROM UNNEST(@struct_arr_param) a;
     it "Null array of struct" do
-      struct_type = db.fields(threadid: :INT64)
+      struct_type = db.fields threadid: :INT64
       results = db.execute_query "SELECT a.threadid FROM UNNEST(@struct_arr_param) a",
                                  params: { struct_arr_param: nil },
                                  types:  { struct_arr_param: [struct_type] }
@@ -165,7 +166,9 @@ describe "Spanner Client", :params, :struct, :spanner do
   end
 
   it "queries and returns a struct parameter" do
-    results = db.execute "SELECT ARRAY(SELECT AS STRUCT message, repeat FROM (SELECT @value.message AS message, @value.repeat AS repeat)) AS value", params: { value: { message: "hello", repeat: 1 } }
+    results = db.execute "SELECT ARRAY(SELECT AS STRUCT message, repeat \
+                          FROM (SELECT @value.message AS message, @value.repeat AS repeat)) AS value",
+                         params: { value: { message: "hello", repeat: 1 } }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ value: [db.fields(message: :STRING, repeat: :INT64)] })
@@ -173,7 +176,8 @@ describe "Spanner Client", :params, :struct, :spanner do
   end
 
   it "queries a struct parameter and returns string and integer" do
-    results = db.execute_query "SELECT @value.message AS message, @value.repeat AS repeat", params: { value: { message: "hello", repeat: 1 } }
+    results = db.execute_query "SELECT @value.message AS message, @value.repeat AS repeat",
+                               params: { value: { message: "hello", repeat: 1 } }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ message: :STRING, repeat: :INT64 })
@@ -181,7 +185,9 @@ describe "Spanner Client", :params, :struct, :spanner do
   end
 
   it "queries and returns a struct array" do
-    struct_sql = "SELECT ARRAY(SELECT AS STRUCT message, repeat FROM (SELECT 'hello' AS message, 1 AS repeat UNION ALL SELECT 'hola' AS message, 2 AS repeat) ORDER BY repeat ASC)"
+    struct_sql = "SELECT ARRAY(SELECT AS STRUCT message, repeat \
+                  FROM (SELECT 'hello' AS message, 1 AS repeat UNION ALL \
+                  SELECT 'hola' AS message, 2 AS repeat) ORDER BY repeat ASC)"
     results = db.execute_query struct_sql
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results

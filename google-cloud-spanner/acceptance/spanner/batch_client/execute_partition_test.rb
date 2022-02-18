@@ -18,7 +18,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
   let(:db) { spanner_client }
   let(:pg_db) { spanner_pg_client }
   let(:batch_client) { $spanner.batch_client $spanner_instance_id, $spanner_database_id }
-  let(:pg_batch_client) { $spanner.batch_client $spanner_instance_id, $spanner_pg_database_id unless emulator_enabled?}
+  let(:pg_batch_client) { $spanner.batch_client $spanner_instance_id, $spanner_pg_database_id unless emulator_enabled? }
   let(:table_name) { "stuffs" }
   let(:table_index) { "IsStuffsIdPrime" }
   let(:batch_snapshot) { batch_client.batch_snapshot }
@@ -41,20 +41,22 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       { id: 12, bool: false }
     ]
     pg_db.delete table_name unless emulator_enabled?
-    pg_db.insert table_name, [
-      { id: 1, bool: false },
-      { id: 2, bool: false },
-      { id: 3, bool: true },
-      { id: 4, bool: false },
-      { id: 5, bool: true },
-      { id: 6, bool: false },
-      { id: 7, bool: true },
-      { id: 8, bool: false },
-      { id: 9, bool: false },
-      { id: 10, bool: false },
-      { id: 11, bool: true },
-      { id: 12, bool: false }
-    ] unless emulator_enabled?
+    unless emulator_enabled?
+      pg_db.insert table_name, [
+        { id: 1, bool: false },
+        { id: 2, bool: false },
+        { id: 3, bool: true },
+        { id: 4, bool: false },
+        { id: 5, bool: true },
+        { id: 6, bool: false },
+        { id: 7, bool: true },
+        { id: 8, bool: false },
+        { id: 9, bool: false },
+        { id: 10, bool: false },
+        { id: 11, bool: true },
+        { id: 12, bool: false }
+      ]
+    end
   end
 
   after do
@@ -92,13 +94,14 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       end
     end
 
-    _(rows).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
+    _(rows).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 },
+                        { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
     batch_snapshot.close
   end
 
   it "reads all by default in pg" do
     skip if emulator_enabled?
-    skip("Skipped due to https://b.corp.google.com/issues/216209306")
+    skip "Skipped due to https://b.corp.google.com/issues/216209306"
     _(pg_batch_snapshot.timestamp).must_be_kind_of Time
     serialized_snapshot = pg_batch_snapshot.dump
 
@@ -126,7 +129,8 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       end
     end
 
-    _(rows).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
+    _(rows).must_equal [{ id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 },
+                        { id: 9 }, { id: 10 }, { id: 11 }, { id: 12 }]
     pg_batch_snapshot.close
   end
 
@@ -154,7 +158,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       end
     end
 
-    _(rows).must_equal [{:id=>2, :bool=>false}]
+    _(rows).must_equal [{ id: 2, bool: false }]
     batch_snapshot.close
   end
 
@@ -183,7 +187,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       end
     end
 
-    _(rows).must_equal [{:id=>2, :bool=>false}]
+    _(rows).must_equal [{ id: 2, bool: false }]
     pg_batch_snapshot.close
   end
 
@@ -212,7 +216,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       end
     end
 
-    _(rows).must_equal [{:id=>2, :bool=>false}]
+    _(rows).must_equal [{ id: 2, bool: false }]
     batch_snapshot.close
   end
 
@@ -242,7 +246,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
       end
     end
 
-    _(rows).must_equal [{:id=>2, :bool=>false}]
+    _(rows).must_equal [{ id: 2, bool: false }]
     pg_batch_snapshot.close
   end
 end

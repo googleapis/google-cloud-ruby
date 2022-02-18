@@ -15,30 +15,40 @@
 require "spanner_helper"
 
 describe "Spanner Client", :snapshot, :spanner do
-  let(:db) { {gsql: spanner_client, pg: spanner_pg_client} }
-  let(:columns) {{ gsql: [:account_id, :username, :friends, :active, :reputation, :avatar], 
-                   pg: [:account_id, :username, :active, :reputation, :avatar]
-                }}
-  let(:fields_hash) {{ gsql: { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES }, 
-                     pg: { account_id: :INT64, username: :STRING, active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } 
-                  }}
-  let(:select_dql) {{ gsql: "SELECT account_id, username FROM accounts WHERE account_id = @id",
-                      pg: "SELECT account_id, username FROM accounts WHERE account_id = $1"    
-                   }}    
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
+  let :columns do
+    { gsql: [:account_id, :username, :friends, :active, :reputation, :avatar],
+      pg: [:account_id, :username, :active, :reputation, :avatar] }
+  end
+  let :fields_hash do
+    { gsql: { account_id: :INT64, username: :STRING, friends: [:INT64],
+              active: :BOOL, reputation: :FLOAT64, avatar: :BYTES },
+      pg: { account_id: :INT64, username: :STRING, active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
+  end
+  let :select_dql do
+    { gsql: "SELECT account_id, username FROM accounts WHERE account_id = @id",
+      pg: "SELECT account_id, username FROM accounts WHERE account_id = $1" }
+  end
 
-  let(:select_params) { { gsql: { id: 1 }, pg: { p1: 1 }  } }                    
+  let :select_params do
+    { gsql: { id: 1 }, pg: { p1: 1 } }
+  end
 
   before do
-    setup_timestamp_gsql =  db[:gsql].commit do |c|
+    setup_timestamp_gsql = db[:gsql].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_account_rows
     end
-    setup_timestamp_pg = db[:pg].commit do |c|
-      c.delete "accounts"
-      c.insert "accounts", default_pg_account_rows
-    end unless emulator_enabled?
-    @setup_timestamp = {gsql: setup_timestamp_gsql, pg: setup_timestamp_pg}
-    @default_rows = {gsql: default_account_rows, pg: default_pg_account_rows}
+    unless emulator_enabled?
+      setup_timestamp_pg = db[:pg].commit do |c|
+        c.delete "accounts"
+        c.insert "accounts", default_pg_account_rows
+      end
+    end
+    @setup_timestamp = { gsql: setup_timestamp_gsql, pg: setup_timestamp_pg }
+    @default_rows = { gsql: default_account_rows, pg: default_pg_account_rows }
   end
 
   after do
@@ -47,12 +57,12 @@ describe "Spanner Client", :snapshot, :spanner do
   end
 
   dialects = [:gsql]
-  dialects.push(:pg) unless emulator_enabled?
+  dialects.push :pg unless emulator_enabled?
 
   dialects.each do |dialect|
     it "runs a query for #{dialect}" do
       results = nil
-       db[dialect].snapshot do |snp|
+      db[dialect].snapshot do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -69,7 +79,7 @@ describe "Spanner Client", :snapshot, :spanner do
     it "runs a query with query options for #{dialect}" do
       query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
       results = nil
-       db[dialect].snapshot do |snp|
+      db[dialect].snapshot do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -85,7 +95,7 @@ describe "Spanner Client", :snapshot, :spanner do
 
     it "runs a read for #{dialect}" do
       results = nil
-       db[dialect].snapshot do |snp|
+      db[dialect].snapshot do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -101,7 +111,7 @@ describe "Spanner Client", :snapshot, :spanner do
 
     it "runs a query with strong option for #{dialect}" do
       results = nil
-       db[dialect].snapshot strong: true do |snp|
+      db[dialect].snapshot strong: true do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -117,7 +127,7 @@ describe "Spanner Client", :snapshot, :spanner do
 
     it "runs a read with strong option for #{dialect}" do
       results = nil
-       db[dialect].snapshot strong: true do |snp|
+      db[dialect].snapshot strong: true do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -133,7 +143,7 @@ describe "Spanner Client", :snapshot, :spanner do
 
     it "runs a query with timestamp option for #{dialect}" do
       results = nil
-       db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
+      db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -149,7 +159,7 @@ describe "Spanner Client", :snapshot, :spanner do
 
     it "runs a read with timestamp option for #{dialect}" do
       results = nil
-       db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
+      db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -165,7 +175,7 @@ describe "Spanner Client", :snapshot, :spanner do
 
     it "runs a query with staleness option for #{dialect}" do
       results = nil
-       db[dialect].snapshot staleness: 0.0001 do |snp|
+      db[dialect].snapshot staleness: 0.0001 do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -181,7 +191,7 @@ describe "Spanner Client", :snapshot, :spanner do
 
     it "runs a read with staleness option for #{dialect}" do
       results = nil
-       db[dialect].snapshot staleness: 0.0001 do |snp|
+      db[dialect].snapshot staleness: 0.0001 do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -201,7 +211,7 @@ describe "Spanner Client", :snapshot, :spanner do
       sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
       modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-       db[dialect].snapshot strong: true do |snp|
+      db[dialect].snapshot strong: true do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -210,7 +220,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(results.rows.first.to_h).must_equal sample_row
 
         # outside of the snapshot, update the row!
-         db[dialect].update "accounts", modified_row
+        db[dialect].update "accounts", modified_row
 
         results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
         # verify we got the previous row, not the modified row
@@ -223,7 +233,7 @@ describe "Spanner Client", :snapshot, :spanner do
       sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
       modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-       db[dialect].snapshot strong: true do |snp|
+      db[dialect].snapshot strong: true do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -232,7 +242,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(results.rows.first.to_h).must_equal sample_row
 
         # outside of the snapshot, update the row!
-         db[dialect].update "accounts", modified_row
+        db[dialect].update "accounts", modified_row
 
         results2 = snp.execute_sql select_dql[dialect], params: select_params[dialect]
         # verify we got the previous row, not the modified row
@@ -245,7 +255,7 @@ describe "Spanner Client", :snapshot, :spanner do
       sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
       modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-       db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
+      db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -254,7 +264,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(results.rows.first.to_h).must_equal sample_row
 
         # outside of the snapshot, update the row!
-         db[dialect].update "accounts", modified_row
+        db[dialect].update "accounts", modified_row
 
         results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
         # verify we got the previous row, not the modified row
@@ -267,7 +277,7 @@ describe "Spanner Client", :snapshot, :spanner do
       sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
       modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-       db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
+      db[dialect].snapshot timestamp: @setup_timestamp[dialect] do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -276,7 +286,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(results.rows.first.to_h).must_equal sample_row
 
         # outside of the snapshot, update the row!
-         db[dialect].update "accounts", modified_row
+        db[dialect].update "accounts", modified_row
 
         results2 = snp.execute_sql select_dql[dialect], params: select_params[dialect]
         # verify we got the previous row, not the modified row
@@ -289,7 +299,7 @@ describe "Spanner Client", :snapshot, :spanner do
       sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
       modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-       db[dialect].snapshot staleness: 0.0001 do |snp|
+      db[dialect].snapshot staleness: 0.0001 do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -298,7 +308,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(results.rows.first.to_h).must_equal sample_row
 
         # outside of the snapshot, update the row!
-         db[dialect].update "accounts", modified_row
+        db[dialect].update "accounts", modified_row
 
         results2 = snp.read "accounts", [:account_id, :username], keys: modified_row[:account_id]
         # verify we got the previous row, not the modified row
@@ -311,7 +321,7 @@ describe "Spanner Client", :snapshot, :spanner do
       sample_row = { account_id: first_row[:account_id], username: first_row[:username] }
       modified_row = { account_id: first_row[:account_id], username: first_row[:username].reverse }
 
-       db[dialect].snapshot staleness: 0.0001 do |snp|
+      db[dialect].snapshot staleness: 0.0001 do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -320,7 +330,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(results.rows.first.to_h).must_equal sample_row
 
         # outside of the snapshot, update the row!
-         db[dialect].update "accounts", modified_row
+        db[dialect].update "accounts", modified_row
 
         results2 = snp.execute_sql select_dql[dialect], params: select_params[dialect]
         # verify we got the previous row, not the modified row
@@ -329,9 +339,9 @@ describe "Spanner Client", :snapshot, :spanner do
     end
 
     it "multiuse snapshot reads are consistent even when delete happen for #{dialect}" do
-      keys = @default_rows[dialect].map{|row| row[:account_id] }
+      keys = @default_rows[dialect].map { |row| row[:account_id] }
 
-       db[dialect].snapshot do |snp|
+      db[dialect].snapshot do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -346,7 +356,7 @@ describe "Spanner Client", :snapshot, :spanner do
         end
 
         # outside of the snapshot, delete rows
-         db[dialect].delete "accounts", keys
+        db[dialect].delete "accounts", keys
 
         # read rows and from snaphot and verify rows got from the snapshot
         results2 = snp.read "accounts", [:account_id, :username], keys: keys
@@ -361,14 +371,14 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       # outside of snapshot check all rows are deleted
-      rows3 =  db[dialect].execute_sql("SELECT * FROM accounts").rows.to_a
+      rows3 = db[dialect].execute_sql("SELECT * FROM accounts").rows.to_a
       _(rows3.count).must_equal 0
     end
 
     it "multiuse snapshot reads with read timestamp are consistent even when delete happen for #{dialect}" do
-      keys = @default_rows[dialect].map{|row| row[:account_id] }
+      keys = @default_rows[dialect].map { |row| row[:account_id] }
 
-       db[dialect].snapshot read_timestamp: @setup_timestamp[dialect] do |snp|
+      db[dialect].snapshot read_timestamp: @setup_timestamp[dialect] do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -383,7 +393,7 @@ describe "Spanner Client", :snapshot, :spanner do
         end
 
         # outside of the snapshot, delete rows
-         db[dialect].delete "accounts", keys
+        db[dialect].delete "accounts", keys
 
         # read rows and from snaphot and verify rows got from the snapshot
         results2 = snp.read "accounts", [:account_id, :username], keys: keys
@@ -397,17 +407,17 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       # outside of snapshot check all rows are deleted
-      rows3 =  db[dialect].execute_sql("SELECT * FROM accounts").rows.to_a
+      rows3 = db[dialect].execute_sql("SELECT * FROM accounts").rows.to_a
       _(rows3.count).must_equal 0
     end
 
     it "multiuse snapshot reads with exact staleness are consistent even when delete happen for #{dialect}" do
-      keys = @default_rows[dialect].map{|row| row[:account_id] }
+      keys = @default_rows[dialect].map { |row| row[:account_id] }
 
       sleep 1
       delta = 0.001
 
-       db[dialect].snapshot exact_staleness: delta do |snp|
+      db[dialect].snapshot exact_staleness: delta do |snp|
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
@@ -422,7 +432,7 @@ describe "Spanner Client", :snapshot, :spanner do
         end
 
         # outside of the snapshot, delete rows
-         db[dialect].delete "accounts", keys
+        db[dialect].delete "accounts", keys
 
         # read rows and from snaphot and verify rows got from the snapshot
         results2 = snp.read "accounts", [:account_id, :username], keys: keys
@@ -436,11 +446,11 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       # outside of snapshot check all rows are deleted
-      rows3 =  db[dialect].execute_sql("SELECT * FROM accounts").rows.to_a
+      rows3 = db[dialect].execute_sql("SELECT * FROM accounts").rows.to_a
       _(rows3.count).must_equal 0
     end
-  end 
-    
+  end
+
 
   def assert_accounts_equal expected, actual
     if actual[:account_id].nil?
