@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.2 / 2022-02-18
+
+#### Bug Fixes
+
+* We no longer request the unnecessary bigquery.readonly scope
+
 ### 0.9.1 / 2022-01-11
 
 #### Documentation
