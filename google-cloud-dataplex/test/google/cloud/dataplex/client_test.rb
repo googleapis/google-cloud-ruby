@@ -22,6 +22,16 @@ require "gapic/common"
 require "gapic/grpc"
 
 class Google::Cloud::Dataplex::ClientConstructionMinitest < Minitest::Test
+  def test_content_service
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Dataplex.content_service do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Dataplex::V1::ContentService::Client, client
+    end
+  end
+
   def test_metadata_service
     Gapic::ServiceStub.stub :new, :stub do
       grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure

@@ -45,6 +45,36 @@ module Google
   module Cloud
     module Dataplex
       ##
+      # Create a new client object for ContentService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Dataplex::V1::ContentService::Client](https://googleapis.dev/ruby/google-cloud-dataplex-v1/latest/Google/Cloud/Dataplex/V1/ContentService/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the ContentService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About ContentService
+      #
+      # ContentService manages Notebook and SQL Scripts for Dataplex.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [ContentService::Client] A client object for the specified version.
+      #
+      def self.content_service version: :v1, &block
+        require "google/cloud/dataplex/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Dataplex
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Dataplex.const_get package_name
+        package_module.const_get(:ContentService).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for MetadataService.
       #
       # By default, this returns an instance of
