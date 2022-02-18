@@ -16,7 +16,7 @@ require_relative "../query_legacy"
 require_relative "helper"
 
 
-describe "Query Legacy SQL" do
+describe "Query Legacy" do
   it "runs a legacy SQL query" do
     output = capture_io { query_legacy }
     rows = output.first.split "\n"
