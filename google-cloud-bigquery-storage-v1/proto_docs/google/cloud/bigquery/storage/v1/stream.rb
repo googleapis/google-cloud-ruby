@@ -64,6 +64,14 @@ module Google
           #     Output only. An estimate on the number of bytes this session will scan when
           #     all streams are completely consumed. This estimate is based on
           #     metadata from the table which might be incomplete or stale.
+          # @!attribute [rw] trace_id
+          #   @return [::String]
+          #     Optional. ID set by client to annotate a session identity.  This does not need
+          #     to be strictly unique, but instead the same ID should be used to group
+          #     logically connected sessions (e.g. All using the same ID for all sessions
+          #     needed to complete a Spark SQL query is reasonable).
+          #
+          #     Maximum length is 256 bytes.
           class ReadSession
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
