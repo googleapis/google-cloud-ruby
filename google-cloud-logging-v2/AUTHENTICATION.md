@@ -27,7 +27,7 @@ export LOGGING_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/logging/v2"
 
-client = ::Google::Cloud::Logging::V2::ConfigService::Client.new
+client = ::Google::Cloud::Logging::V2::LoggingService::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-logging-v2
 checks for credentials are configured on the service Credentials class (such as
-{::Google::Cloud::Logging::V2::ConfigService::Credentials}):
+{::Google::Cloud::Logging::V2::LoggingService::Credentials}):
 
 * `LOGGING_CREDENTIALS` - Path to JSON file, or JSON contents
 * `LOGGING_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/logging/v2"
 
 ENV["LOGGING_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = ::Google::Cloud::Logging::V2::ConfigService::Client.new
+client = ::Google::Cloud::Logging::V2::LoggingService::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/logging/v2"
 
-client = ::Google::Cloud::Logging::V2::ConfigService::Client.new do |config|
+client = ::Google::Cloud::Logging::V2::LoggingService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or globally for all clients:
 ```ruby
 require "google/cloud/logging/v2"
 
-::Google::Cloud::Logging::V2::ConfigService::Client.configure do |config|
+::Google::Cloud::Logging::V2::LoggingService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = ::Google::Cloud::Logging::V2::ConfigService::Client.new
+client = ::Google::Cloud::Logging::V2::LoggingService::Client.new
 ```
 
 ### Cloud SDK

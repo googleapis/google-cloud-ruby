@@ -6,7 +6,6 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -191,6 +190,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.logging.v2.Settings" do
       optional :name, :string, 1
+      optional :kms_key_name, :string, 2
+      optional :kms_service_account_id, :string, 3
       optional :storage_location, :string, 4
       optional :disable_default_sink, :bool, 5
     end
