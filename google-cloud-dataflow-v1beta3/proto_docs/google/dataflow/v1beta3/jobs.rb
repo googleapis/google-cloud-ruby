@@ -22,7 +22,6 @@ module Google
     module Dataflow
       module V1beta3
         # Defines a job to be run by the Cloud Dataflow service.
-        # nextID: 26
         # @!attribute [rw] id
         #   @return [::String]
         #     The unique ID of this job.
