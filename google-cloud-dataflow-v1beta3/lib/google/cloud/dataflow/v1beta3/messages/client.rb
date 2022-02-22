@@ -244,6 +244,9 @@ module Google
               if request.project_id
                 header_params["project_id"] = request.project_id
               end
+              if request.location
+                header_params["location"] = request.location
+              end
               if request.job_id
                 header_params["job_id"] = request.job_id
               end
