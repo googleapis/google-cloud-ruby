@@ -112,7 +112,7 @@ describe "ACL Snippets" do
     readers = bucket.file(remote_file_name).acl.readers
 
     out, _err = capture_io do
-      StoragePrintFileACL.new print_file_acl bucket_name: bucket.name,
+      StoragePrintFileACL.new.print_file_acl bucket_name: bucket.name,
                                              file_name:   remote_file_name
     end
 
