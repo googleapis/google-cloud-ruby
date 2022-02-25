@@ -88,6 +88,9 @@ module Google
         #     key-value pairs. Suggested use cases include storing a document's title,
         #     an external URL distinct from the document's content_uri, etc.
         #     The max size of a `key` or a `value` of the metadata is 1024 bytes.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Dialogflow::V2::Document::State]
+        #     Output only. The current state of the document.
         class Document
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -136,6 +139,30 @@ module Google
             # The entire document content as a whole can be used for query results.
             # Only for Contact Center Solutions on Dialogflow.
             ARTICLE_SUGGESTION = 3
+
+            # The document contains agent-facing Smart Reply entries.
+            AGENT_FACING_SMART_REPLY = 4
+          end
+
+          # Possible states of the document
+          module State
+            # The document state is unspecified.
+            STATE_UNSPECIFIED = 0
+
+            # The document creation is in progress.
+            CREATING = 1
+
+            # The document is active and ready to use.
+            ACTIVE = 2
+
+            # The document updation is in progress.
+            UPDATING = 3
+
+            # The document is reloading.
+            RELOADING = 4
+
+            # The document deletion is in progress.
+            DELETING = 5
           end
         end
 
@@ -353,6 +380,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Metadata related to the Export Data Operations (e.g. ExportDocument).
+        # @!attribute [rw] exported_gcs_destination
+        #   @return [::Google::Cloud::Dialogflow::V2::GcsDestination]
+        #     Cloud Storage file path of the exported data.
+        class ExportOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Metadata in google::longrunning::Operation for Knowledge operations.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Dialogflow::V2::KnowledgeOperationMetadata::State]
@@ -360,6 +396,9 @@ module Google
         # @!attribute [rw] knowledge_base
         #   @return [::String]
         #     The name of the knowledge base interacted with during the operation.
+        # @!attribute [rw] export_operation_metadata
+        #   @return [::Google::Cloud::Dialogflow::V2::ExportOperationMetadata]
+        #     Metadata for the Export Data Operation such as the destination of export.
         class KnowledgeOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
