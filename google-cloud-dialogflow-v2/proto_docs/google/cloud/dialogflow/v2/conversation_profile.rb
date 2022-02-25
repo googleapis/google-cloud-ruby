@@ -486,10 +486,14 @@ module Google
         #     {::Google::Cloud::Dialogflow::V2::ConversationEvent::Type::CONVERSATION_STARTED CONVERSATION_STARTED} as
         #     serialized {::Google::Cloud::Dialogflow::V2::ConversationEvent ConversationEvent} protos.
         #
-        #     Notification works for phone calls, if this topic either is in the same
-        #     project as the conversation or you grant `service-<Conversation Project
+        #     For telephony integration to receive notification, make sure either this
+        #     topic is in the same project as the conversation or you grant
+        #     `service-<Conversation Project
         #     Number>@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Dialogflow Service
         #     Agent` role in the topic project.
+        #
+        #     For chat integration to receive notification, make sure API caller has been
+        #     granted the `Dialogflow Service Agent` role for the topic.
         #
         #     Format: `projects/<Project ID>/locations/<Location ID>/topics/<Topic ID>`.
         # @!attribute [rw] message_format
@@ -548,6 +552,87 @@ module Google
             # Run smart reply model.
             SMART_REPLY = 3
           end
+        end
+
+        # The request message for
+        # [ConversationProfiles.SetSuggestionFeature][].
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     Required. The Conversation Profile to add or update the suggestion feature
+        #     config. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`.
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to add or update the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_config
+        #   @return [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionFeatureConfig]
+        #     Required. The suggestion feature config to add or update.
+        class SetSuggestionFeatureConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for [ConversationProfiles.ClearFeature][].
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     Required. The Conversation Profile to add or update the suggestion feature
+        #     config. Format: `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`.
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to remove the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_type
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionFeature::Type]
+        #     Required. The type of the suggestion feature to remove.
+        class ClearSuggestionFeatureConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for a [ConversationProfile.SetSuggestionFeatureConfig][]
+        # operation.
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     The resource name of the conversation profile. Format:
+        #     `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to add or update the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_type
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionFeature::Type]
+        #     Required. The type of the suggestion feature to add or update.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp whe the request was created. The time is measured on server side.
+        class SetSuggestionFeatureConfigOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Metadata for a [ConversationProfile.ClearSuggestionFeatureConfig][]
+        # operation.
+        # @!attribute [rw] conversation_profile
+        #   @return [::String]
+        #     The resource name of the conversation profile. Format:
+        #     `projects/<Project ID>/locations/<Location
+        #     ID>/conversationProfiles/<Conversation Profile ID>`
+        # @!attribute [rw] participant_role
+        #   @return [::Google::Cloud::Dialogflow::V2::Participant::Role]
+        #     Required. The participant role to remove the suggestion feature
+        #     config. Only HUMAN_AGENT or END_USER can be used.
+        # @!attribute [rw] suggestion_feature_type
+        #   @return [::Google::Cloud::Dialogflow::V2::SuggestionFeature::Type]
+        #     Required. The type of the suggestion feature to remove.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp whe the request was created. The time is measured on server side.
+        class ClearSuggestionFeatureConfigOperationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
