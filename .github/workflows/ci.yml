@@ -54,7 +54,7 @@ jobs:
       with:
         ruby-version: "${{ matrix.ruby }}"
     - name: Install NodeJS 12.x
-      uses: actions/setup-node@v2
+      uses: actions/setup-node@v3
       with:
         node-version: "12.x"
     - name: Install tools
