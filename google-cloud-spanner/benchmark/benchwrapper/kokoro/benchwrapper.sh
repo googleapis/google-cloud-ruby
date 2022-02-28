@@ -15,7 +15,7 @@ export PATH=$GEM_HOME/bin:$PATH
 gem install --no-document bundler
 
 export SPANNER_EMULATOR_HOST=localhost:9010
-cd "${KOKORO_ARTIFACTS_DIR}"/github/google-cloud-ruby/google-cloud-spanner/benchmark/benchwrapper
+cd ../
 bundle install
 bundle exec benchwrapper.rb --port=8081 &
 docker pull gcr.io/cloud-spanner-emulator/emulator
