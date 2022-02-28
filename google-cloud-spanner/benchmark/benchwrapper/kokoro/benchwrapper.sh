@@ -16,13 +16,16 @@ gem install --no-document bundler
 
 export SPANNER_EMULATOR_HOST=localhost:9010
 
-# print current working directory
-pwd
+# list all files in /secrets
+ls -lashR /secrets
+
+# list all files in /tmp
+ls -lashR /tmp
+
+# list all files in /workspace
+ls -lashR /workspace
 
 cd ../
-
-# list all files in the pwd
-ls -lash
 
 bundle install
 bundle exec benchwrapper.rb --port=8081 &
