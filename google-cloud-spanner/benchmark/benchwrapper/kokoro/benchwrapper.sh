@@ -15,15 +15,7 @@ export PATH=$GEM_HOME/bin:$PATH
 gem install --no-document bundler
 
 export SPANNER_EMULATOR_HOST=localhost:9010
-
-# print value of env variable PROJECT_ROOT
-echo $PROJECT_ROOT
-
-# list all files in /workspace
-ls -lashR /workspace
-
-cd ../
-
+cd $PROJECT_ROOT/google-cloud-spanner/benchmark/benchwrapper
 bundle install
 bundle exec benchwrapper.rb --port=8081 &
 docker pull gcr.io/cloud-spanner-emulator/emulator
