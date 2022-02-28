@@ -16,11 +16,8 @@ gem install --no-document bundler
 
 export SPANNER_EMULATOR_HOST=localhost:9010
 
-# list all files in /secrets
-ls -lashR /secrets
-
-# list all files in /tmp
-ls -lashR /tmp
+# print value of env variable PROJECT_ROOT
+echo $PROJECT_ROOT
 
 # list all files in /workspace
 ls -lashR /workspace
