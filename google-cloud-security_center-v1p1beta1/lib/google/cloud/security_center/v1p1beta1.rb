@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/security_center/v1p1beta1"
       #     client = ::Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
       #
