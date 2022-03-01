@@ -26,6 +26,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/debugger/v2"
       #     client = ::Google::Cloud::Debugger::V2::Controller::Client.new
       #
