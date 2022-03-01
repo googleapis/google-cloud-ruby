@@ -26,6 +26,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/security/private_ca/v1beta1"
         #     client = ::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
         #
