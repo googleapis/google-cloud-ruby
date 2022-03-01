@@ -29,6 +29,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/talent/v4"
       #     client = ::Google::Cloud::Talent::V4::CompanyService::Client.new
       #
