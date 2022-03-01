@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/essential_contacts/v1"
       #     client = ::Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
       #
