@@ -26,6 +26,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/service_directory/v1"
       #     client = ::Google::Cloud::ServiceDirectory::V1::LookupService::Client.new
       #
