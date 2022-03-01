@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/area120/tables/v1alpha1"
       #     client = ::Google::Area120::Tables::V1alpha1::TablesService::Client.new
       #
