@@ -106,36 +106,6 @@ module Google
         end
 
         ##
-        # Create a new client object for SecuritySettingsService.
-        #
-        # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/SecuritySettingsService/Client.html)
-        # for version V3 of the API.
-        # However, you can specify specify a different API version by passing it in the
-        # `version` parameter. If the SecuritySettingsService service is
-        # supported by that API version, and the corresponding gem is available, the
-        # appropriate versioned client will be returned.
-        #
-        # ## About SecuritySettingsService
-        #
-        # Service for managing security settings for Dialogflow.
-        #
-        # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v3`.
-        # @return [SecuritySettingsService::Client] A client object for the specified version.
-        #
-        def self.security_settings_service version: :v3, &block
-          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
-
-          package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
-          package_module = Google::Cloud::Dialogflow::CX.const_get package_name
-          package_module.const_get(:SecuritySettingsService).const_get(:Client).new(&block)
-        end
-
-        ##
         # Create a new client object for Agents.
         #
         # By default, this returns an instance of
@@ -409,36 +379,6 @@ module Google
         end
 
         ##
-        # Create a new client object for Webhooks.
-        #
-        # By default, this returns an instance of
-        # [Google::Cloud::Dialogflow::CX::V3::Webhooks::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Webhooks/Client.html)
-        # for version V3 of the API.
-        # However, you can specify specify a different API version by passing it in the
-        # `version` parameter. If the Webhooks service is
-        # supported by that API version, and the corresponding gem is available, the
-        # appropriate versioned client will be returned.
-        #
-        # ## About Webhooks
-        #
-        # Service for managing Webhooks.
-        #
-        # @param version [::String, ::Symbol] The API version to connect to. Optional.
-        #   Defaults to `:v3`.
-        # @return [Webhooks::Client] A client object for the specified version.
-        #
-        def self.webhooks version: :v3, &block
-          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
-
-          package_name = Google::Cloud::Dialogflow::CX
-                         .constants
-                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
-                         .first
-          package_module = Google::Cloud::Dialogflow::CX.const_get package_name
-          package_module.const_get(:Webhooks).const_get(:Client).new(&block)
-        end
-
-        ##
         # Create a new client object for Environments.
         #
         # By default, this returns an instance of
@@ -499,6 +439,36 @@ module Google
         end
 
         ##
+        # Create a new client object for SecuritySettingsService.
+        #
+        # By default, this returns an instance of
+        # [Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/SecuritySettingsService/Client.html)
+        # for version V3 of the API.
+        # However, you can specify specify a different API version by passing it in the
+        # `version` parameter. If the SecuritySettingsService service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        #
+        # ## About SecuritySettingsService
+        #
+        # Service for managing security settings for Dialogflow.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @return [SecuritySettingsService::Client] A client object for the specified version.
+        #
+        def self.security_settings_service version: :v3, &block
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          package_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          package_module.const_get(:SecuritySettingsService).const_get(:Client).new(&block)
+        end
+
+        ##
         # Create a new client object for Versions.
         #
         # By default, this returns an instance of
@@ -526,6 +496,36 @@ module Google
                          .first
           package_module = Google::Cloud::Dialogflow::CX.const_get package_name
           package_module.const_get(:Versions).const_get(:Client).new(&block)
+        end
+
+        ##
+        # Create a new client object for Webhooks.
+        #
+        # By default, this returns an instance of
+        # [Google::Cloud::Dialogflow::CX::V3::Webhooks::Client](https://googleapis.dev/ruby/google-cloud-dialogflow-cx-v3/latest/Google/Cloud/Dialogflow/CX/V3/Webhooks/Client.html)
+        # for version V3 of the API.
+        # However, you can specify specify a different API version by passing it in the
+        # `version` parameter. If the Webhooks service is
+        # supported by that API version, and the corresponding gem is available, the
+        # appropriate versioned client will be returned.
+        #
+        # ## About Webhooks
+        #
+        # Service for managing Webhooks.
+        #
+        # @param version [::String, ::Symbol] The API version to connect to. Optional.
+        #   Defaults to `:v3`.
+        # @return [Webhooks::Client] A client object for the specified version.
+        #
+        def self.webhooks version: :v3, &block
+          require "google/cloud/dialogflow/cx/#{version.to_s.downcase}"
+
+          package_name = Google::Cloud::Dialogflow::CX
+                         .constants
+                         .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                         .first
+          package_module = Google::Cloud::Dialogflow::CX.const_get package_name
+          package_module.const_get(:Webhooks).const_get(:Client).new(&block)
         end
 
         ##
