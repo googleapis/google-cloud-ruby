@@ -27,6 +27,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/dataplex/v1"
       #     client = ::Google::Cloud::Dataplex::V1::ContentService::Client.new
       #
