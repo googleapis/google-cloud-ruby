@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/iot/v1"
       #     client = ::Google::Cloud::Iot::V1::DeviceManager::Client.new
       #
