@@ -26,6 +26,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/gke_connect/gateway/v1beta1"
         #     client = ::Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
         #
