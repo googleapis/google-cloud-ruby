@@ -27,6 +27,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/logging/v2"
       #     client = ::Google::Cloud::Logging::V2::LoggingService::Client.new
       #
