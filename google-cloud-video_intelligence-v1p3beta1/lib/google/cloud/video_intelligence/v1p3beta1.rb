@@ -26,6 +26,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/video_intelligence/v1p3beta1"
       #     client = ::Google::Cloud::VideoIntelligence::V1p3beta1::VideoIntelligenceService::Client.new
       #
