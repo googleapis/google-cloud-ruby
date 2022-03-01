@@ -30,6 +30,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/resource_manager/v3"
       #     client = ::Google::Cloud::ResourceManager::V3::Folders::Client.new
       #
