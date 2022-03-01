@@ -26,6 +26,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/eventarc/publishing/v1"
         #     client = ::Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new
         #
