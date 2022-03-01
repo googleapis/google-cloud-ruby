@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/storage_transfer/v1"
       #     client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
       #
