@@ -41,6 +41,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/dialogflow/cx/v3"
         #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new
         #
