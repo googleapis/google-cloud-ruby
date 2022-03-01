@@ -32,6 +32,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/app_engine/v1"
       #     client = ::Google::Cloud::AppEngine::V1::Applications::Client.new
       #
