@@ -2,8 +2,6 @@
 # source: google/monitoring/v3/query_service.proto
 
 require 'google/api/annotations_pb'
-require 'google/api/label_pb'
-require 'google/monitoring/v3/metric_pb'
 require 'google/monitoring/v3/metric_service_pb'
 require 'google/api/client_pb'
 require 'google/protobuf'

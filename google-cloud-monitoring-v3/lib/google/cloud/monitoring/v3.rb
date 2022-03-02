@@ -31,6 +31,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/monitoring/v3"
       #     client = ::Google::Cloud::Monitoring::V3::AlertPolicyService::Client.new
       #
