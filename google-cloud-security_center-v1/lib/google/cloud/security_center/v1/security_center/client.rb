@@ -257,8 +257,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, at which bulk action needs to be applied. Its format is
-            #     "organizations/[organization_id]", "folders/[folder_id]",
+            #     Required. The parent, at which bulk action needs to be applied. Its format
+            #     is "organizations/[organization_id]", "folders/[folder_id]",
             #     "projects/[project_id]".
             #   @param filter [::String]
             #     Expression that identifies findings that should be updated.
@@ -379,8 +379,8 @@ module Google
             #     Required. Resource name of the new source's parent. Its format should be
             #     "organizations/[organization_id]".
             #   @param source [::Google::Cloud::SecurityCenter::V1::Source, ::Hash]
-            #     Required. The Source being created, only the display_name and description will be
-            #     used. All other fields will be ignored.
+            #     Required. The Source being created, only the display_name and description
+            #     will be used. All other fields will be ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::Source]
@@ -473,8 +473,8 @@ module Google
             #     It must be alphanumeric and less than or equal to 32 characters and
             #     greater than 0 characters in length.
             #   @param finding [::Google::Cloud::SecurityCenter::V1::Finding, ::Hash]
-            #     Required. The Finding being created. The name and security_marks will be ignored as
-            #     they are both output only fields on this resource.
+            #     Required. The Finding being created. The name and security_marks will be
+            #     ignored as they are both output only fields on this resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::Finding]
@@ -653,16 +653,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the new notification config's parent. Its format is
-            #     "organizations/[organization_id]".
+            #     Required. Resource name of the new notification config's parent. Its format
+            #     is "organizations/[organization_id]".
             #   @param config_id [::String]
             #     Required.
             #     Unique identifier provided by the client within the parent scope.
             #     It must be between 1 and 128 characters, and contains alphanumeric
             #     characters, underscores or hyphens only.
             #   @param notification_config [::Google::Cloud::SecurityCenter::V1::NotificationConfig, ::Hash]
-            #     Required. The notification config being created. The name and the service account
-            #     will be ignored as they are both output only fields on this resource.
+            #     Required. The notification config being created. The name and the service
+            #     account will be ignored as they are both output only fields on this
+            #     resource.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::NotificationConfig]
@@ -895,6 +896,94 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @security_center_stub.call_rpc :delete_notification_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a big query export.
+            #
+            # @overload get_big_query_export(request, options = nil)
+            #   Pass arguments to `get_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_big_query_export(name: nil)
+            #   Pass arguments to `get_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the big query export to retrieve. Its format is
+            #     organizations/\\{organization}/bigQueryExports/\\{export_id},
+            #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
+            #     projects/\\{project}/bigQueryExports/\\{export_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new
+            #
+            #   # Call the get_big_query_export method.
+            #   result = client.get_big_query_export request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #   p result
+            #
+            def get_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :get_big_query_export, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1184,8 +1273,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. Name of the organization to get organization settings for. Its format is
-            #     "organizations/[organization_id]/organizationSettings".
+            #     Required. Name of the organization to get organization settings for. Its
+            #     format is "organizations/[organization_id]/organizationSettings".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::SecurityCenter::V1::OrganizationSettings]
@@ -1424,9 +1513,9 @@ module Google
             #     Use a negated partial match on the empty string to filter based on a
             #     property not existing: `-resource_properties.my_property : ""`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping. The string
-            #     value should follow SQL syntax: comma separated list of fields. For
-            #     example:
+            #     Required. Expression that defines what assets fields to use for grouping.
+            #     The string value should follow SQL syntax: comma separated list of fields.
+            #     For example:
             #     "security_center_properties.resource_project,security_center_properties.project".
             #
             #     The following fields are supported when compare_duration is not set:
@@ -1647,9 +1736,9 @@ module Google
             #       * resource.project_display_name: `=`, `:`
             #       * resource.type: `=`, `:`
             #   @param group_by [::String]
-            #     Required. Expression that defines what assets fields to use for grouping (including
-            #     `state_change`). The string value should follow SQL syntax: comma separated
-            #     list of fields. For example: "parent,resource_name".
+            #     Required. Expression that defines what assets fields to use for grouping
+            #     (including `state_change`). The string value should follow SQL syntax:
+            #     comma separated list of fields. For example: "parent,resource_name".
             #
             #     The following fields are supported:
             #
@@ -2246,8 +2335,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent, which owns the collection of mute configs. Its format is
-            #     "organizations/[organization_id]", "folders/[folder_id]",
+            #     Required. The parent, which owns the collection of mute configs. Its format
+            #     is "organizations/[organization_id]", "folders/[folder_id]",
             #     "projects/[project_id]".
             #   @param page_size [::Integer]
             #     The maximum number of configs to return. The service may return fewer than
@@ -2451,8 +2540,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Resource name of the parent of sources to list. Its format should be
-            #     "organizations/[organization_id], folders/[folder_id], or
+            #     Required. Resource name of the parent of sources to list. Its format should
+            #     be "organizations/[organization_id], folders/[folder_id], or
             #     projects/[project_id]".
             #   @param page_token [::String]
             #     The value returned by the last `ListSourcesResponse`; indicates
@@ -2557,8 +2646,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization to run asset discovery for. Its format is
-            #     "organizations/[organization_id]".
+            #     Required. Name of the organization to run asset discovery for. Its format
+            #     is "organizations/[organization_id]".
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -3107,8 +3196,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param finding [::Google::Cloud::SecurityCenter::V1::Finding, ::Hash]
-            #     Required. The finding resource to update or create if it does not already exist.
-            #     parent, security_marks, and update_time will be ignored.
+            #     Required. The finding resource to update or create if it does not already
+            #     exist. parent, security_marks, and update_time will be ignored.
             #
             #     In the case of creation, the finding id portion of the name must be
             #     alphanumeric and less than or equal to 32 characters and greater than 0
@@ -3639,6 +3728,384 @@ module Google
             end
 
             ##
+            # Creates a big query export.
+            #
+            # @overload create_big_query_export(request, options = nil)
+            #   Pass arguments to `create_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_big_query_export(parent: nil, big_query_export: nil, big_query_export_id: nil)
+            #   Pass arguments to `create_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Resource name of the new big query export's parent. Its format is
+            #     "organizations/[organization_id]", "folders/[folder_id]", or
+            #     "projects/[project_id]".
+            #   @param big_query_export [::Google::Cloud::SecurityCenter::V1::BigQueryExport, ::Hash]
+            #     Required. The big query export being created.
+            #   @param big_query_export_id [::String]
+            #     Required. Unique identifier provided by the client within the parent scope.
+            #     It must consist of lower case letters, numbers, and hyphen, with the first
+            #     character a letter, the last a letter or a number, and a 63 character
+            #     maximum.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new
+            #
+            #   # Call the create_big_query_export method.
+            #   result = client.create_big_query_export request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #   p result
+            #
+            def create_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :create_big_query_export, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an existing big query export.
+            #
+            # @overload delete_big_query_export(request, options = nil)
+            #   Pass arguments to `delete_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_big_query_export(name: nil)
+            #   Pass arguments to `delete_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the big query export to delete. Its format is
+            #     organizations/\\{organization}/bigQueryExports/\\{export_id},
+            #     folders/\\{folder}/bigQueryExports/\\{export_id}, or
+            #     projects/\\{project}/bigQueryExports/\\{export_id}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new
+            #
+            #   # Call the delete_big_query_export method.
+            #   result = client.delete_big_query_export request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :delete_big_query_export, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a BigQuery export.
+            #
+            # @overload update_big_query_export(request, options = nil)
+            #   Pass arguments to `update_big_query_export` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_big_query_export(big_query_export: nil, update_mask: nil)
+            #   Pass arguments to `update_big_query_export` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param big_query_export [::Google::Cloud::SecurityCenter::V1::BigQueryExport, ::Hash]
+            #     Required. The BigQuery export being updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #     If empty all mutable fields will be updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::SecurityCenter::V1::BigQueryExport]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new
+            #
+            #   # Call the update_big_query_export method.
+            #   result = client.update_big_query_export request
+            #
+            #   # The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #   p result
+            #
+            def update_big_query_export request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_big_query_export.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.big_query_export&.name
+                header_params["big_query_export.name"] = request.big_query_export.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_big_query_export.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_big_query_export.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :update_big_query_export, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists BigQuery exports. Note that when requesting BigQuery exports at a
+            # given level all exports under that level are also returned e.g. if
+            # requesting BigQuery exports under a folder, then all BigQuery exports
+            # immediately under the folder plus the ones created under the projects
+            # within the folder are returned.
+            #
+            # @overload list_big_query_exports(request, options = nil)
+            #   Pass arguments to `list_big_query_exports` via a request object, either of type
+            #   {::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_big_query_exports(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_big_query_exports` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent, which owns the collection of BigQuery exports. Its
+            #     format is "organizations/[organization_id]", "folders/[folder_id]",
+            #     "projects/[project_id]".
+            #   @param page_size [::Integer]
+            #     The maximum number of configs to return. The service may return fewer than
+            #     this value.
+            #     If unspecified, at most 10 configs will be returned.
+            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListBigQueryExports` call.
+            #     Provide this to retrieve the subsequent page.
+            #     When paginating, all other parameters provided to `ListBigQueryExports`
+            #     must match the call that provided the page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1::BigQueryExport>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::SecurityCenter::V1::BigQueryExport>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/security_center/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new
+            #
+            #   # Call the list_big_query_exports method.
+            #   result = client.list_big_query_exports request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::SecurityCenter::V1::BigQueryExport.
+            #     p response
+            #   end
+            #
+            def list_big_query_exports request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_big_query_exports.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::SecurityCenter::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_big_query_exports.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_big_query_exports.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @security_center_stub.call_rpc :list_big_query_exports, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @security_center_stub, :list_big_query_exports, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the SecurityCenter API.
             #
             # This class represents the configuration for SecurityCenter,
@@ -3809,6 +4276,11 @@ module Google
                 #
                 attr_reader :delete_notification_config
                 ##
+                # RPC-specific configuration for `get_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_big_query_export
+                ##
                 # RPC-specific configuration for `get_iam_policy`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3928,6 +4400,26 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_security_marks
+                ##
+                # RPC-specific configuration for `create_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_big_query_export
+                ##
+                # RPC-specific configuration for `delete_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_big_query_export
+                ##
+                # RPC-specific configuration for `update_big_query_export`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_big_query_export
+                ##
+                # RPC-specific configuration for `list_big_query_exports`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_big_query_exports
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -3945,6 +4437,8 @@ module Google
                   @delete_mute_config = ::Gapic::Config::Method.new delete_mute_config_config
                   delete_notification_config_config = parent_rpcs.delete_notification_config if parent_rpcs.respond_to? :delete_notification_config
                   @delete_notification_config = ::Gapic::Config::Method.new delete_notification_config_config
+                  get_big_query_export_config = parent_rpcs.get_big_query_export if parent_rpcs.respond_to? :get_big_query_export
+                  @get_big_query_export = ::Gapic::Config::Method.new get_big_query_export_config
                   get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                   @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                   get_mute_config_config = parent_rpcs.get_mute_config if parent_rpcs.respond_to? :get_mute_config
@@ -3993,6 +4487,14 @@ module Google
                   @update_source = ::Gapic::Config::Method.new update_source_config
                   update_security_marks_config = parent_rpcs.update_security_marks if parent_rpcs.respond_to? :update_security_marks
                   @update_security_marks = ::Gapic::Config::Method.new update_security_marks_config
+                  create_big_query_export_config = parent_rpcs.create_big_query_export if parent_rpcs.respond_to? :create_big_query_export
+                  @create_big_query_export = ::Gapic::Config::Method.new create_big_query_export_config
+                  delete_big_query_export_config = parent_rpcs.delete_big_query_export if parent_rpcs.respond_to? :delete_big_query_export
+                  @delete_big_query_export = ::Gapic::Config::Method.new delete_big_query_export_config
+                  update_big_query_export_config = parent_rpcs.update_big_query_export if parent_rpcs.respond_to? :update_big_query_export
+                  @update_big_query_export = ::Gapic::Config::Method.new update_big_query_export_config
+                  list_big_query_exports_config = parent_rpcs.list_big_query_exports if parent_rpcs.respond_to? :list_big_query_exports
+                  @list_big_query_exports = ::Gapic::Config::Method.new list_big_query_exports_config
 
                   yield self if block_given?
                 end

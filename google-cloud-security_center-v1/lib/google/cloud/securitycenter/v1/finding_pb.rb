@@ -6,6 +6,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/access_pb'
 require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/indicator_pb'
+require 'google/cloud/securitycenter/v1/mitre_attack_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
 require 'google/cloud/securitycenter/v1/vulnerability_pb'
 require 'google/protobuf/struct_pb'
@@ -33,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :vulnerability, :message, 20, "google.cloud.securitycenter.v1.Vulnerability"
       optional :mute_update_time, :message, 21, "google.protobuf.Timestamp"
       map :external_systems, :string, :message, 22, "google.cloud.securitycenter.v1.ExternalSystem"
+      optional :mitre_attack, :message, 25, "google.cloud.securitycenter.v1.MitreAttack"
       optional :access, :message, 26, "google.cloud.securitycenter.v1.Access"
       optional :mute_initiator, :string, 28
     end
@@ -60,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :VULNERABILITY, 2
       value :MISCONFIGURATION, 3
       value :OBSERVATION, 4
+      value :SCC_ERROR, 5
     end
   end
 end
