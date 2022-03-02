@@ -74,7 +74,8 @@ module Google
         # The request to list files.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The name of the parent resource whose files will be listed.
+        #     The name of the repository whose files will be listed. For example:
+        #     "projects/p1/locations/us-central1/repositories/repo1
         # @!attribute [rw] filter
         #   @return [::String]
         #     An expression for filtering the results of the request. Filter rules are
