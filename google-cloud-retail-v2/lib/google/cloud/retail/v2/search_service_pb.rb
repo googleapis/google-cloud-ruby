@@ -9,8 +9,6 @@ require 'google/cloud/retail/v2/common_pb'
 require 'google/cloud/retail/v2/product_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/struct_pb'
-require 'google/protobuf/timestamp_pb'
-require 'google/protobuf/wrappers_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
