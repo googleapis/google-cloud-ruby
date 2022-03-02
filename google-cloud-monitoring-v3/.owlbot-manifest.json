@@ -74,7 +74,6 @@
     "proto_docs/google/api/metric.rb",
     "proto_docs/google/api/monitored_resource.rb",
     "proto_docs/google/api/resource.rb",
-    "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/monitoring/v3/alert.rb",
     "proto_docs/google/monitoring/v3/alert_service.rb",
     "proto_docs/google/monitoring/v3/common.rb",
