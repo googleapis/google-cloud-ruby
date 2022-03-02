@@ -45,6 +45,11 @@
                 "delete_notification_config"
               ]
             },
+            "GetBigQueryExport": {
+              "methods": [
+                "get_big_query_export"
+              ]
+            },
             "GetIamPolicy": {
               "methods": [
                 "get_iam_policy"
@@ -163,6 +168,26 @@
             "UpdateSecurityMarks": {
               "methods": [
                 "update_security_marks"
+              ]
+            },
+            "CreateBigQueryExport": {
+              "methods": [
+                "create_big_query_export"
+              ]
+            },
+            "DeleteBigQueryExport": {
+              "methods": [
+                "delete_big_query_export"
+              ]
+            },
+            "UpdateBigQueryExport": {
+              "methods": [
+                "update_big_query_export"
+              ]
+            },
+            "ListBigQueryExports": {
+              "methods": [
+                "list_big_query_exports"
               ]
             }
           }

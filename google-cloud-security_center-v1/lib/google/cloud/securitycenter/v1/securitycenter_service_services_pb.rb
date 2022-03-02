@@ -50,6 +50,8 @@ module Google
             rpc :DeleteMuteConfig, ::Google::Cloud::SecurityCenter::V1::DeleteMuteConfigRequest, ::Google::Protobuf::Empty
             # Deletes a notification config.
             rpc :DeleteNotificationConfig, ::Google::Cloud::SecurityCenter::V1::DeleteNotificationConfigRequest, ::Google::Protobuf::Empty
+            # Gets a big query export.
+            rpc :GetBigQueryExport, ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest, ::Google::Cloud::SecurityCenter::V1::BigQueryExport
             # Gets the access control policy on the specified Source.
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Gets a mute config.
@@ -116,6 +118,18 @@ module Google
             rpc :UpdateSource, ::Google::Cloud::SecurityCenter::V1::UpdateSourceRequest, ::Google::Cloud::SecurityCenter::V1::Source
             # Updates security marks.
             rpc :UpdateSecurityMarks, ::Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest, ::Google::Cloud::SecurityCenter::V1::SecurityMarks
+            # Creates a big query export.
+            rpc :CreateBigQueryExport, ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest, ::Google::Cloud::SecurityCenter::V1::BigQueryExport
+            # Deletes an existing big query export.
+            rpc :DeleteBigQueryExport, ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest, ::Google::Protobuf::Empty
+            # Updates a BigQuery export.
+            rpc :UpdateBigQueryExport, ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest, ::Google::Cloud::SecurityCenter::V1::BigQueryExport
+            # Lists BigQuery exports. Note that when requesting BigQuery exports at a
+            # given level all exports under that level are also returned e.g. if
+            # requesting BigQuery exports under a folder, then all BigQuery exports
+            # immediately under the folder plus the ones created under the projects
+            # within the folder are returned.
+            rpc :ListBigQueryExports, ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest, ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsResponse
           end
 
           Stub = Service.rpc_stub_class
