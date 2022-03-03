@@ -27,6 +27,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/bigquery/storage/v1"
         #     client = ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
         #
