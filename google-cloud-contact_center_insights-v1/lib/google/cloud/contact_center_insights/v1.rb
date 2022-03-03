@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/contact_center_insights/v1"
       #     client = ::Google::Cloud::ContactCenterInsights::V1::ContactCenterInsights::Client.new
       #

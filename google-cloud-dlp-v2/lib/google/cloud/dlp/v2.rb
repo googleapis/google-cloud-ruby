@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/dlp/v2"
       #     client = ::Google::Cloud::Dlp::V2::DlpService::Client.new
       #
