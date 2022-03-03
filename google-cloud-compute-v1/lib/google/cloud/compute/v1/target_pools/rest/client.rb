@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
 require "google/cloud/compute/v1/target_pools/rest/service_stub"
+require "google/cloud/compute/v1/region_operations/rest"
 
 module Google
   module Cloud
@@ -151,8 +152,20 @@ module Google
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
+                @region_operations = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.endpoint = @config.endpoint
+                end
+
                 @target_pools_stub = ::Google::Cloud::Compute::V1::TargetPools::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations via RegionOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::RegionOperations::Rest::Client]
+              #
+              attr_reader :region_operations
 
               # Service calls
 
@@ -187,10 +200,10 @@ module Google
               #   @param target_pools_add_health_check_request_resource [::Google::Cloud::Compute::V1::TargetPoolsAddHealthCheckRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_health_check request, options = nil
@@ -217,7 +230,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.add_health_check request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -257,10 +278,10 @@ module Google
               #   @param target_pools_add_instance_request_resource [::Google::Cloud::Compute::V1::TargetPoolsAddInstanceRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_instance request, options = nil
@@ -287,7 +308,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.add_instance request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -399,10 +428,10 @@ module Google
               #   @param target_pool [::String]
               #     Name of the TargetPool resource to delete.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -429,7 +458,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.delete request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -599,10 +636,10 @@ module Google
               #   @param target_pool_resource [::Google::Cloud::Compute::V1::TargetPool, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -629,7 +666,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.insert request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -743,10 +788,10 @@ module Google
               #   @param target_pools_remove_health_check_request_resource [::Google::Cloud::Compute::V1::TargetPoolsRemoveHealthCheckRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_health_check request, options = nil
@@ -773,7 +818,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.remove_health_check request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -813,10 +866,10 @@ module Google
               #   @param target_pools_remove_instance_request_resource [::Google::Cloud::Compute::V1::TargetPoolsRemoveInstanceRequest, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_instance request, options = nil
@@ -843,7 +896,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.remove_instance request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -885,10 +946,10 @@ module Google
               #   @param target_reference_resource [::Google::Cloud::Compute::V1::TargetReference, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_backup request, options = nil
@@ -915,7 +976,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_pools_stub.set_backup request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: region_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "region" => request.region
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end

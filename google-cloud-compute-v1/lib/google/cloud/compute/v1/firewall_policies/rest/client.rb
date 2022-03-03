@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
 require "google/cloud/compute/v1/firewall_policies/rest/service_stub"
+require "google/cloud/compute/v1/global_organization_operations/rest"
 
 module Google
   module Cloud
@@ -174,8 +175,20 @@ module Google
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
+                @global_organization_operations = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.endpoint = @config.endpoint
+                end
+
                 @firewall_policies_stub = ::Google::Cloud::Compute::V1::FirewallPolicies::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations via GlobalOrganizationOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::Client]
+              #
+              attr_reader :global_organization_operations
 
               # Service calls
 
@@ -208,10 +221,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_association request, options = nil
@@ -238,7 +251,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.add_association request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -274,10 +292,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_rule request, options = nil
@@ -304,7 +322,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.add_rule request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -340,10 +363,10 @@ module Google
               #   @param source_firewall_policy [::String]
               #     The firewall policy from which to copy rules.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def clone_rules request, options = nil
@@ -370,7 +393,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.clone_rules request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -404,10 +432,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -434,7 +462,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.delete request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -720,10 +753,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -750,7 +783,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.insert request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {
+                      "parent_id" => request.parent_id
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -919,10 +959,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def move request, options = nil
@@ -949,7 +989,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.move request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {
+                      "parent_id" => request.parent_id
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -985,10 +1032,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch request, options = nil
@@ -1015,7 +1062,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.patch request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1053,10 +1105,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def patch_rule request, options = nil
@@ -1083,7 +1135,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.patch_rule request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1119,10 +1176,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_association request, options = nil
@@ -1149,7 +1206,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.remove_association request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1185,10 +1247,10 @@ module Google
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_rule request, options = nil
@@ -1215,7 +1277,12 @@ module Google
                                        metadata:     @config.metadata
 
                 @firewall_policies_stub.remove_rule request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOrganizationOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_organization_operations,
+                    request_values: {},
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end

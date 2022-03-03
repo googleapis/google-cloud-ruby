@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
 require "google/cloud/compute/v1/target_ssl_proxies/rest/service_stub"
+require "google/cloud/compute/v1/global_operations/rest"
 
 module Google
   module Cloud
@@ -142,8 +143,20 @@ module Google
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
+                @global_operations = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.endpoint = @config.endpoint
+                end
+
                 @target_ssl_proxies_stub = ::Google::Cloud::Compute::V1::TargetSslProxies::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations via GlobalOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client]
+              #
+              attr_reader :global_operations
 
               # Service calls
 
@@ -174,10 +187,10 @@ module Google
               #   @param target_ssl_proxy [::String]
               #     Name of the TargetSslProxy resource to delete.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -204,7 +217,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_ssl_proxies_stub.delete request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -303,10 +323,10 @@ module Google
               #   @param target_ssl_proxy_resource [::Google::Cloud::Compute::V1::TargetSslProxy, ::Hash]
               #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -333,7 +353,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_ssl_proxies_stub.insert request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -443,10 +470,10 @@ module Google
               #   @param target_ssl_proxy [::String]
               #     Name of the TargetSslProxy resource whose BackendService resource is to be set.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_backend_service request, options = nil
@@ -473,7 +500,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_ssl_proxies_stub.set_backend_service request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -511,10 +545,10 @@ module Google
               #   @param target_ssl_proxy [::String]
               #     Name of the TargetSslProxy resource whose ProxyHeader is to be set.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_proxy_header request, options = nil
@@ -541,7 +575,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_ssl_proxies_stub.set_proxy_header request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -579,10 +620,10 @@ module Google
               #   @param target_ssl_proxy [::String]
               #     Name of the TargetSslProxy resource whose SslCertificate resource is to be set.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_ssl_certificates request, options = nil
@@ -609,7 +650,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_ssl_proxies_stub.set_ssl_certificates request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -647,10 +695,10 @@ module Google
               #   @param target_ssl_proxy [::String]
               #     Name of the TargetSslProxy resource whose SSL policy is to be set. The name must be 1-63 characters long, and comply with RFC1035.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_ssl_policy request, options = nil
@@ -677,7 +725,14 @@ module Google
                                        metadata:     @config.metadata
 
                 @target_ssl_proxies_stub.set_ssl_policy request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end

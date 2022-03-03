@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
 require "google/cloud/compute/v1/instances/rest/service_stub"
+require "google/cloud/compute/v1/zone_operations/rest"
 
 module Google
   module Cloud
@@ -240,8 +241,20 @@ module Google
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
+                @zone_operations = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new do |config|
+                  config.credentials = credentials
+                  config.endpoint = @config.endpoint
+                end
+
                 @instances_stub = ::Google::Cloud::Compute::V1::Instances::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
+
+              ##
+              # Get the associated client for long-running operations via ZoneOperations.
+              #
+              # @return [::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client]
+              #
+              attr_reader :zone_operations
 
               # Service calls
 
@@ -278,10 +291,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_access_config request, options = nil
@@ -308,7 +321,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.add_access_config request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -348,10 +369,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def add_resource_policies request, options = nil
@@ -378,7 +399,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.add_resource_policies request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -494,10 +523,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def attach_disk request, options = nil
@@ -524,7 +553,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.attach_disk request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -562,10 +599,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def bulk_insert request, options = nil
@@ -592,7 +629,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.bulk_insert request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -630,10 +675,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete request, options = nil
@@ -660,7 +705,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.delete request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -702,10 +755,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def delete_access_config request, options = nil
@@ -732,7 +785,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.delete_access_config request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -772,10 +833,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def detach_disk request, options = nil
@@ -802,7 +863,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.detach_disk request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1311,10 +1380,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def insert request, options = nil
@@ -1341,7 +1410,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.insert request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1531,10 +1608,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def remove_resource_policies request, options = nil
@@ -1561,7 +1638,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.remove_resource_policies request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1599,10 +1684,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def reset request, options = nil
@@ -1629,7 +1714,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.reset request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1667,10 +1760,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def resume request, options = nil
@@ -1697,7 +1790,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.resume request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1802,10 +1903,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_deletion_protection request, options = nil
@@ -1832,7 +1933,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_deletion_protection request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -1874,10 +1983,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_disk_auto_delete request, options = nil
@@ -1904,7 +2013,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_disk_auto_delete request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2011,10 +2128,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_labels request, options = nil
@@ -2041,7 +2158,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_labels request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2081,10 +2206,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_machine_resources request, options = nil
@@ -2111,7 +2236,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_machine_resources request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2151,10 +2284,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_machine_type request, options = nil
@@ -2181,7 +2314,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_machine_type request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2221,10 +2362,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_metadata request, options = nil
@@ -2251,7 +2392,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_metadata request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2291,10 +2440,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_min_cpu_platform request, options = nil
@@ -2321,7 +2470,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_min_cpu_platform request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2361,10 +2518,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_scheduling request, options = nil
@@ -2391,7 +2548,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_scheduling request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2431,10 +2596,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_service_account request, options = nil
@@ -2461,7 +2626,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_service_account request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2501,10 +2674,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_shielded_instance_integrity_policy request, options = nil
@@ -2531,7 +2704,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_shielded_instance_integrity_policy request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2571,10 +2752,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def set_tags request, options = nil
@@ -2601,7 +2782,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.set_tags request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2637,10 +2826,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def simulate_maintenance_event request, options = nil
@@ -2667,7 +2856,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.simulate_maintenance_event request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2705,10 +2902,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def start request, options = nil
@@ -2735,7 +2932,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.start request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2775,10 +2980,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def start_with_encryption_key request, options = nil
@@ -2805,7 +3010,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.start_with_encryption_key request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2843,10 +3056,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def stop request, options = nil
@@ -2873,7 +3086,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.stop request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -2911,10 +3132,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def suspend request, options = nil
@@ -2941,7 +3162,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.suspend request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -3052,10 +3281,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def update request, options = nil
@@ -3082,7 +3311,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.update request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -3124,10 +3361,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def update_access_config request, options = nil
@@ -3154,7 +3391,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.update_access_config request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -3194,10 +3439,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def update_display_device request, options = nil
@@ -3224,7 +3469,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.update_display_device request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -3266,10 +3519,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def update_network_interface request, options = nil
@@ -3296,7 +3549,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.update_network_interface request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
@@ -3336,10 +3597,10 @@ module Google
               #   @param zone [::String]
               #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::BaseOperation]
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::BaseOperation]
+              # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def update_shielded_instance_config request, options = nil
@@ -3366,7 +3627,15 @@ module Google
                                        metadata:     @config.metadata
 
                 @instances_stub.update_shielded_instance_config request, options do |result, response|
-                  result = ::Gapic::Rest::BaseOperation.new result
+                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: zone_operations,
+                    request_values: {
+                      "project" => request.project,
+                      "zone" => request.zone
+                    },
+                    options: options
+                  )
                   yield result, response if block_given?
                   return result
                 end
