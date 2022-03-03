@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/managed_identities/v1"
       #     client = ::Google::Cloud::ManagedIdentities::V1::ManagedIdentitiesService::Client.new
       #
