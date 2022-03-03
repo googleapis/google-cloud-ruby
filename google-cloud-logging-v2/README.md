@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/logging/v2"
 
-client = ::Google::Cloud::Logging::V2::ConfigService::Client.new
-request = ::Google::Cloud::Logging::V2::ListBucketsRequest.new # (request fields as keyword arguments...)
-response = client.list_buckets request
+client = ::Google::Cloud::Logging::V2::LoggingService::Client.new
+request = ::Google::Cloud::Logging::V2::DeleteLogRequest.new # (request fields as keyword arguments...)
+response = client.delete_log request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-logging-v2/latest)
