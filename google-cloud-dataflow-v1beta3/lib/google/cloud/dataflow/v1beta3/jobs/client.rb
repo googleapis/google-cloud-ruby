@@ -226,6 +226,9 @@ module Google
               if request.project_id
                 header_params["project_id"] = request.project_id
               end
+              if request.location
+                header_params["location"] = request.location
+              end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
               metadata[:"x-goog-request-params"] ||= request_params_header
@@ -324,6 +327,9 @@ module Google
               header_params = {}
               if request.project_id
                 header_params["project_id"] = request.project_id
+              end
+              if request.location
+                header_params["location"] = request.location
               end
               if request.job_id
                 header_params["job_id"] = request.job_id
@@ -427,6 +433,9 @@ module Google
               header_params = {}
               if request.project_id
                 header_params["project_id"] = request.project_id
+              end
+              if request.location
+                header_params["location"] = request.location
               end
               if request.job_id
                 header_params["job_id"] = request.job_id
@@ -544,6 +553,9 @@ module Google
               header_params = {}
               if request.project_id
                 header_params["project_id"] = request.project_id
+              end
+              if request.location
+                header_params["location"] = request.location
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
@@ -825,6 +837,9 @@ module Google
               header_params = {}
               if request.project_id
                 header_params["project_id"] = request.project_id
+              end
+              if request.location
+                header_params["location"] = request.location
               end
               if request.job_id
                 header_params["job_id"] = request.job_id
