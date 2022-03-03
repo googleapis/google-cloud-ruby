@@ -30,6 +30,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/retail/v2"
       #     client = ::Google::Cloud::Retail::V2::CatalogService::Client.new
       #
