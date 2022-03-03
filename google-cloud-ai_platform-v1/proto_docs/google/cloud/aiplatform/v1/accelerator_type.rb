@@ -43,6 +43,12 @@ module Google
 
           # Nvidia Tesla A100 GPU.
           NVIDIA_TESLA_A100 = 8
+
+          # TPU v2.
+          TPU_V2 = 6
+
+          # TPU v3.
+          TPU_V3 = 7
         end
       end
     end
