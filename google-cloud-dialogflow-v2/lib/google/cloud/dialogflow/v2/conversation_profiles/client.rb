@@ -138,6 +138,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @conversation_profiles_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Stub,
                 credentials:  credentials,
@@ -146,6 +152,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [::Google::Cloud::Dialogflow::V2::ConversationProfiles::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 
@@ -605,6 +618,229 @@ module Google
             end
 
             ##
+            # Adds or updates a suggestion feature in a conversation profile.
+            # If the conversation profile contains the type of suggestion feature for
+            # the participant role, it will update it. Otherwise it will insert the
+            # suggestion feature.
+            #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: {::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigOperationMetadata SetSuggestionFeatureConfigOperationMetadata}
+            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
+            #
+            # If a long running operation to add or update suggestion feature
+            # config for the same conversation profile, participant role and suggestion
+            # feature type exists, please cancel the existing long running operation
+            # before sending such request, otherwise the request will be rejected.
+            #
+            # @overload set_suggestion_feature_config(request, options = nil)
+            #   Pass arguments to `set_suggestion_feature_config` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_suggestion_feature_config(conversation_profile: nil, participant_role: nil, suggestion_feature_config: nil)
+            #   Pass arguments to `set_suggestion_feature_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversation_profile [::String]
+            #     Required. The Conversation Profile to add or update the suggestion feature
+            #     config. Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversationProfiles/<Conversation Profile ID>`.
+            #   @param participant_role [::Google::Cloud::Dialogflow::V2::Participant::Role]
+            #     Required. The participant role to add or update the suggestion feature
+            #     config. Only HUMAN_AGENT or END_USER can be used.
+            #   @param suggestion_feature_config [::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionFeatureConfig, ::Hash]
+            #     Required. The suggestion feature config to add or update.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest.new
+            #
+            #   # Call the set_suggestion_feature_config method.
+            #   result = client.set_suggestion_feature_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def set_suggestion_feature_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_suggestion_feature_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversation_profile
+                header_params["conversation_profile"] = request.conversation_profile
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_suggestion_feature_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_suggestion_feature_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conversation_profiles_stub.call_rpc :set_suggestion_feature_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Clears a suggestion feature from a conversation profile for the given
+            # participant role.
+            #
+            # This method is a [long-running
+            # operation](https://cloud.google.com/dialogflow/es/docs/how/long-running-operations).
+            # The returned `Operation` type has the following method-specific fields:
+            #
+            # - `metadata`: {::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigOperationMetadata ClearSuggestionFeatureConfigOperationMetadata}
+            # - `response`: {::Google::Cloud::Dialogflow::V2::ConversationProfile ConversationProfile}
+            #
+            # @overload clear_suggestion_feature_config(request, options = nil)
+            #   Pass arguments to `clear_suggestion_feature_config` via a request object, either of type
+            #   {::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload clear_suggestion_feature_config(conversation_profile: nil, participant_role: nil, suggestion_feature_type: nil)
+            #   Pass arguments to `clear_suggestion_feature_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param conversation_profile [::String]
+            #     Required. The Conversation Profile to add or update the suggestion feature
+            #     config. Format: `projects/<Project ID>/locations/<Location
+            #     ID>/conversationProfiles/<Conversation Profile ID>`.
+            #   @param participant_role [::Google::Cloud::Dialogflow::V2::Participant::Role]
+            #     Required. The participant role to remove the suggestion feature
+            #     config. Only HUMAN_AGENT or END_USER can be used.
+            #   @param suggestion_feature_type [::Google::Cloud::Dialogflow::V2::SuggestionFeature::Type]
+            #     Required. The type of the suggestion feature to remove.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dialogflow/v2"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest.new
+            #
+            #   # Call the clear_suggestion_feature_config method.
+            #   result = client.clear_suggestion_feature_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def clear_suggestion_feature_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.clear_suggestion_feature_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dialogflow::V2::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.conversation_profile
+                header_params["conversation_profile"] = request.conversation_profile
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.clear_suggestion_feature_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.clear_suggestion_feature_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @conversation_profiles_stub.call_rpc :clear_suggestion_feature_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ConversationProfiles API.
             #
             # This class represents the configuration for ConversationProfiles,
@@ -764,6 +1000,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_conversation_profile
+                ##
+                # RPC-specific configuration for `set_suggestion_feature_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_suggestion_feature_config
+                ##
+                # RPC-specific configuration for `clear_suggestion_feature_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :clear_suggestion_feature_config
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -777,6 +1023,10 @@ module Google
                   @update_conversation_profile = ::Gapic::Config::Method.new update_conversation_profile_config
                   delete_conversation_profile_config = parent_rpcs.delete_conversation_profile if parent_rpcs.respond_to? :delete_conversation_profile
                   @delete_conversation_profile = ::Gapic::Config::Method.new delete_conversation_profile_config
+                  set_suggestion_feature_config_config = parent_rpcs.set_suggestion_feature_config if parent_rpcs.respond_to? :set_suggestion_feature_config
+                  @set_suggestion_feature_config = ::Gapic::Config::Method.new set_suggestion_feature_config_config
+                  clear_suggestion_feature_config_config = parent_rpcs.clear_suggestion_feature_config if parent_rpcs.respond_to? :clear_suggestion_feature_config
+                  @clear_suggestion_feature_config = ::Gapic::Config::Method.new clear_suggestion_feature_config_config
 
                   yield self if block_given?
                 end

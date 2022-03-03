@@ -24,6 +24,7 @@ require "google/cloud/dialogflow/v2/version"
 
 require "google/cloud/dialogflow/v2/conversation_profiles/credentials"
 require "google/cloud/dialogflow/v2/conversation_profiles/paths"
+require "google/cloud/dialogflow/v2/conversation_profiles/operations"
 require "google/cloud/dialogflow/v2/conversation_profiles/client"
 
 module Google

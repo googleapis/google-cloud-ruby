@@ -350,6 +350,140 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
     end
   end
 
+  def test_set_suggestion_feature_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    conversation_profile = "hello world"
+    participant_role = :ROLE_UNSPECIFIED
+    suggestion_feature_config = {}
+
+    set_suggestion_feature_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_suggestion_feature_config, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest, request
+      assert_equal "hello world", request["conversation_profile"]
+      assert_equal :ROLE_UNSPECIFIED, request["participant_role"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionFeatureConfig), request["suggestion_feature_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_suggestion_feature_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.set_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.set_suggestion_feature_config conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.set_suggestion_feature_config ::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.set_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.set_suggestion_feature_config(::Google::Cloud::Dialogflow::V2::SetSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_config: suggestion_feature_config), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_suggestion_feature_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_clear_suggestion_feature_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    conversation_profile = "hello world"
+    participant_role = :ROLE_UNSPECIFIED
+    suggestion_feature_type = :TYPE_UNSPECIFIED
+
+    clear_suggestion_feature_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :clear_suggestion_feature_config, name
+      assert_kind_of ::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest, request
+      assert_equal "hello world", request["conversation_profile"]
+      assert_equal :ROLE_UNSPECIFIED, request["participant_role"]
+      assert_equal :TYPE_UNSPECIFIED, request["suggestion_feature_type"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, clear_suggestion_feature_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.clear_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.clear_suggestion_feature_config conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.clear_suggestion_feature_config ::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.clear_suggestion_feature_config({ conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.clear_suggestion_feature_config(::Google::Cloud::Dialogflow::V2::ClearSuggestionFeatureConfigRequest.new(conversation_profile: conversation_profile, participant_role: participant_role, suggestion_feature_type: suggestion_feature_type), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, clear_suggestion_feature_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 
@@ -366,5 +500,18 @@ class ::Google::Cloud::Dialogflow::V2::ConversationProfiles::ClientTest < Minite
 
     assert_same block_config, config
     assert_kind_of ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client::Configuration, config
+  end
+
+  def test_operations_client
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+
+    client = nil
+    Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+    end
+
+    assert_kind_of ::Google::Cloud::Dialogflow::V2::ConversationProfiles::Operations, client.operations_client
   end
 end
