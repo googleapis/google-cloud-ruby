@@ -25,7 +25,7 @@ def set_bucket_default_kms_key bucket_name:, default_kms_key:
   storage = Google::Cloud::Storage.new
   bucket  = storage.bucket bucket_name
 
-  bucket.default_kms_key = default_kms_key
+  bucket.default_kms_key = default_kms_key, skip_lookup: true
 
   puts "Default KMS key for #{bucket.name} was set to #{bucket.default_kms_key}"
 end
