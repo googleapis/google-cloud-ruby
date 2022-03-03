@@ -26,6 +26,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/iap/v1"
       #     client = ::Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
       #
