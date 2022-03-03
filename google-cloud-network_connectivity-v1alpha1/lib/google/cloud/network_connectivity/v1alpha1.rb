@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/network_connectivity/v1alpha1"
       #     client = ::Google::Cloud::NetworkConnectivity::V1alpha1::HubService::Client.new
       #

@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/assured_workloads/v1"
       #     client = ::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
       #

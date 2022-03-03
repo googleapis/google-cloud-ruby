@@ -105,6 +105,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a REST client:
       #
+      # @example
+      #
       #     require "google/cloud/compute/v1"
       #     client = ::Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client.new
       #

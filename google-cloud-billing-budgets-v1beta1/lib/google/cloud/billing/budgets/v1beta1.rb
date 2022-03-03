@@ -26,6 +26,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/billing/budgets/v1beta1"
         #     client = ::Google::Cloud::Billing::Budgets::V1beta1::BudgetService::Client.new
         #

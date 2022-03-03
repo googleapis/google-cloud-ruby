@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/trace/v1"
       #     client = ::Google::Cloud::Trace::V1::TraceService::Client.new
       #
