@@ -27,6 +27,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/kms/v1"
       #     client = ::Google::Cloud::Kms::V1::EkmService::Client.new
       #
