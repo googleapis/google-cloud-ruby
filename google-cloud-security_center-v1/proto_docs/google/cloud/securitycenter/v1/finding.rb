@@ -122,8 +122,12 @@ module Google
         #     Output only. The most recent time this finding was muted or unmuted.
         # @!attribute [r] external_systems
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
-        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
-        #     information and external system finding fields.
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external
+        #     system information and external system finding fields.
+        # @!attribute [rw] mitre_attack
+        #   @return [::Google::Cloud::SecurityCenter::V1::MitreAttack]
+        #     MITRE ATT&CK tactics and techniques related to this finding.
+        #     See: https://attack.mitre.org
         # @!attribute [rw] access
         #   @return [::Google::Cloud::SecurityCenter::V1::Access]
         #     Access details associated to the Finding, such as more information on the
@@ -261,6 +265,9 @@ module Google
 
             # Describes a security observation that is for informational purposes.
             OBSERVATION = 4
+
+            # Describes an error that prevents some SCC functionality.
+            SCC_ERROR = 5
           end
         end
       end

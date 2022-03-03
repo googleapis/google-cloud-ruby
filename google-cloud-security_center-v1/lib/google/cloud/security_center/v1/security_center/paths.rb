@@ -25,6 +25,58 @@ module Google
           # Path helper methods for the SecurityCenter API.
           module Paths
             ##
+            # Create a fully-qualified BigQueryExport resource string.
+            #
+            # @overload big_query_export_path(organization:, export:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/bigQueryExports/{export}`
+            #
+            #   @param organization [String]
+            #   @param export [String]
+            #
+            # @overload big_query_export_path(folder:, export:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/bigQueryExports/{export}`
+            #
+            #   @param folder [String]
+            #   @param export [String]
+            #
+            # @overload big_query_export_path(project:, export:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/bigQueryExports/{export}`
+            #
+            #   @param project [String]
+            #   @param export [String]
+            #
+            # @return [::String]
+            def big_query_export_path **args
+              resources = {
+                "export:organization" => (proc do |organization:, export:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/bigQueryExports/#{export}"
+                end),
+                "export:folder" => (proc do |folder:, export:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/bigQueryExports/#{export}"
+                end),
+                "export:project" => (proc do |project:, export:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/bigQueryExports/#{export}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
+            ##
             # Create a fully-qualified ExternalSystem resource string.
             #
             # @overload external_system_path(organization:, source:, finding:, externalsystem:)

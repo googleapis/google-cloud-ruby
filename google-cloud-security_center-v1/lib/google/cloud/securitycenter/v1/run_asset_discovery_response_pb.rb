@@ -2,7 +2,6 @@
 # source: google/cloud/securitycenter/v1/run_asset_discovery_response.proto
 
 require 'google/protobuf/duration_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
