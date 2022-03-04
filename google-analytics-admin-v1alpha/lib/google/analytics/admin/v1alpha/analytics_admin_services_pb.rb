@@ -119,41 +119,6 @@ module Google
             rpc :DeleteUserLink, ::Google::Analytics::Admin::V1alpha::DeleteUserLinkRequest, ::Google::Protobuf::Empty
             # Deletes information about multiple users' links to an account or property.
             rpc :BatchDeleteUserLinks, ::Google::Analytics::Admin::V1alpha::BatchDeleteUserLinksRequest, ::Google::Protobuf::Empty
-            # Lookup for a single WebDataStream
-            rpc :GetWebDataStream, ::Google::Analytics::Admin::V1alpha::GetWebDataStreamRequest, ::Google::Analytics::Admin::V1alpha::WebDataStream
-            # Deletes a web stream on a property.
-            rpc :DeleteWebDataStream, ::Google::Analytics::Admin::V1alpha::DeleteWebDataStreamRequest, ::Google::Protobuf::Empty
-            # Updates a web stream on a property.
-            rpc :UpdateWebDataStream, ::Google::Analytics::Admin::V1alpha::UpdateWebDataStreamRequest, ::Google::Analytics::Admin::V1alpha::WebDataStream
-            # Creates a web stream with the specified location and attributes.
-            rpc :CreateWebDataStream, ::Google::Analytics::Admin::V1alpha::CreateWebDataStreamRequest, ::Google::Analytics::Admin::V1alpha::WebDataStream
-            # Returns child web data streams under the specified parent property.
-            #
-            # Web data streams will be excluded if the caller does not have access.
-            # Returns an empty list if no relevant web data streams are found.
-            rpc :ListWebDataStreams, ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListWebDataStreamsResponse
-            # Lookup for a single IosAppDataStream
-            rpc :GetIosAppDataStream, ::Google::Analytics::Admin::V1alpha::GetIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
-            # Deletes an iOS app stream on a property.
-            rpc :DeleteIosAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteIosAppDataStreamRequest, ::Google::Protobuf::Empty
-            # Updates an iOS app stream on a property.
-            rpc :UpdateIosAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateIosAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::IosAppDataStream
-            # Returns child iOS app data streams under the specified parent property.
-            #
-            # iOS app data streams will be excluded if the caller does not have access.
-            # Returns an empty list if no relevant iOS app data streams are found.
-            rpc :ListIosAppDataStreams, ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListIosAppDataStreamsResponse
-            # Lookup for a single AndroidAppDataStream
-            rpc :GetAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::GetAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
-            # Deletes an android app stream on a property.
-            rpc :DeleteAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::DeleteAndroidAppDataStreamRequest, ::Google::Protobuf::Empty
-            # Updates an android app stream on a property.
-            rpc :UpdateAndroidAppDataStream, ::Google::Analytics::Admin::V1alpha::UpdateAndroidAppDataStreamRequest, ::Google::Analytics::Admin::V1alpha::AndroidAppDataStream
-            # Returns child android app streams under the specified parent property.
-            #
-            # Android app streams will be excluded if the caller does not have access.
-            # Returns an empty list if no relevant android app streams are found.
-            rpc :ListAndroidAppDataStreams, ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListAndroidAppDataStreamsResponse
             # Creates a FirebaseLink.
             #
             # Properties can have at most one FirebaseLink.

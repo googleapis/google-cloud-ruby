@@ -132,14 +132,17 @@ module Google
         #   @return [::String]
         #     Required. An expression for filtering the results of the request.
         #     Fields eligible for filtering are:
-        #     `parent:`(The resource name of the parent account) or
+        #     `parent:`(The resource name of the parent account/property) or
+        #     `ancestor:`(The resource name of the parent account) or
         #     `firebase_project:`(The id or number of the linked firebase project).
         #     Some examples of filters:
         #
         #     ```
         #     | Filter                      | Description                               |
         #     |-----------------------------|-------------------------------------------|
-        #     | parent:accounts/123         | The account with account id: 123.         |
+        #     | parent:accounts/123         | The account with account id: 123.       |
+        #     | parent:properties/123       | The property with property id: 123.       |
+        #     | ancestor:accounts/123       | The account with account id: 123.         |
         #     | firebase_project:project-id | The firebase project with id: project-id. |
         #     | firebase_project:123        | The firebase project with number: 123.    |
         #     ```
@@ -431,237 +434,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for GetWebDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the web data stream to lookup.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}
-        #     Example: "properties/123/webDataStreams/456"
-        class GetWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteWebDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the web data stream to delete.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}
-        #     Example: "properties/123/webDataStreams/456"
-        class DeleteWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateWebDataStream RPC.
-        # @!attribute [rw] web_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::WebDataStream]
-        #     Required. The web stream to update.
-        #     The `name` field is used to identify the web stream to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for CreateWebDataStream RPC.
-        # @!attribute [rw] web_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::WebDataStream]
-        #     Required. The web stream to create.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The parent resource where this web data stream will be created.
-        #     Format: properties/123
-        class CreateWebDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListWebDataStreams RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the parent property.
-        #     For example, to list results of web streams under the property with Id
-        #     123: "properties/123"
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of resources to return.
-        #     If unspecified, at most 50 resources will be returned.
-        #     The maximum value is 200; (higher values will be coerced to the maximum)
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous `ListWebDataStreams` call.
-        #     Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListWebDataStreams` must
-        #     match the call that provided the page token.
-        class ListWebDataStreamsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListWebDataStreams RPC.
-        # @!attribute [rw] web_data_streams
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::WebDataStream>]
-        #     Results that matched the filter criteria and were accessible to the caller.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class ListWebDataStreamsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for GetIosAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the iOS app data stream to lookup.
-        #     Format: properties/\\{property_id}/iosAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/iosAppDataStreams/456"
-        class GetIosAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteIosAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the iOS app data stream to delete.
-        #     Format: properties/\\{property_id}/iosAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/iosAppDataStreams/456"
-        class DeleteIosAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateIosAppDataStream RPC.
-        # @!attribute [rw] ios_app_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
-        #     Required. The iOS app stream to update.
-        #     The `name` field is used to identify the iOS app stream to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateIosAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListIosAppDataStreams RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the parent property.
-        #     For example, to list results of app streams under the property with Id
-        #     123: "properties/123"
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of resources to return.
-        #     If unspecified, at most 50 resources will be returned.
-        #     The maximum value is 200; (higher values will be coerced to the maximum)
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous `ListIosAppDataStreams`
-        #     call. Provide this to retrieve the subsequent page.
-        #     When paginating, all other parameters provided to `ListIosAppDataStreams`
-        #     must match the call that provided the page token.
-        class ListIosAppDataStreamsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListIosAppDataStreams RPC.
-        # @!attribute [rw] ios_app_data_streams
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::IosAppDataStream>]
-        #     Results that matched the filter criteria and were accessible to the caller.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class ListIosAppDataStreamsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for GetAndroidAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the android app data stream to lookup.
-        #     Format: properties/\\{property_id}/androidAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/androidAppDataStreams/456"
-        class GetAndroidAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DeleteAndroidAppDataStream RPC.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The name of the android app data stream to delete.
-        #     Format: properties/\\{property_id}/androidAppDataStreams/\\{stream_id}
-        #     Example: "properties/123/androidAppDataStreams/456"
-        class DeleteAndroidAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for UpdateAndroidAppDataStream RPC.
-        # @!attribute [rw] android_app_data_stream
-        #   @return [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
-        #     Required. The android app stream to update.
-        #     The `name` field is used to identify the android app stream to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The list of fields to be updated. Field names must be in snake case
-        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
-        #     the entire entity, use one path with the string "*" to match all fields.
-        class UpdateAndroidAppDataStreamRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListAndroidAppDataStreams RPC.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The name of the parent property.
-        #     For example, to limit results to app streams under the property with Id
-        #     123: "properties/123"
-        # @!attribute [rw] page_size
-        #   @return [::Integer]
-        #     The maximum number of resources to return.
-        #
-        #     If unspecified, at most 50 resources will be returned.
-        #     The maximum value is 200; (higher values will be coerced to the maximum)
-        # @!attribute [rw] page_token
-        #   @return [::String]
-        #     A page token, received from a previous call. Provide this to
-        #     retrieve the subsequent page.
-        #     When paginating, all other parameters provided to
-        #     `ListAndroidAppDataStreams` must match the call that provided the page
-        #     token.
-        class ListAndroidAppDataStreamsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for ListAndroidDataStreams RPC.
-        # @!attribute [rw] android_app_data_streams
-        #   @return [::Array<::Google::Analytics::Admin::V1alpha::AndroidAppDataStream>]
-        #     Results that matched the filter criteria and were accessible to the caller.
-        # @!attribute [rw] next_page_token
-        #   @return [::String]
-        #     A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
-        class ListAndroidAppDataStreamsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request message for CreateFirebaseLink RPC
         # @!attribute [rw] parent
         #   @return [::String]
@@ -727,8 +499,8 @@ module Google
         #   @return [::String]
         #     Required. The name of the site tag to lookup.
         #     Note that site tags are singletons and do not have unique IDs.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}/globalSiteTag
-        #     Example: "properties/123/webDataStreams/456/globalSiteTag"
+        #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}/globalSiteTag
+        #     Example: "properties/123/dataStreams/456/globalSiteTag"
         class GetGlobalSiteTagRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -930,9 +702,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the measurement protocol secret to lookup.
         #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
-        #     Note: Any type of stream (WebDataStream, IosAppDataStream,
-        #     AndroidAppDataStream) may be a parent.
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
         class GetMeasurementProtocolSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -942,9 +712,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent resource where this secret will be created.
-        #     Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
-        #     may be a parent.
-        #     Format: properties/\\{property}/webDataStreams/\\{webDataStream}
+        #     Format: properties/\\{property}/dataStreams/\\{dataStream}
         # @!attribute [rw] measurement_protocol_secret
         #   @return [::Google::Analytics::Admin::V1alpha::MeasurementProtocolSecret]
         #     Required. The measurement protocol secret to create.
@@ -958,9 +726,7 @@ module Google
         #   @return [::String]
         #     Required. The name of the MeasurementProtocolSecret to delete.
         #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
-        #     Note: Any type of stream (WebDataStream, IosAppDataStream,
-        #     AndroidAppDataStream) may be a parent.
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
         class DeleteMeasurementProtocolSecretRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -982,10 +748,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent stream.
-        #     Any type of stream (WebDataStream, IosAppDataStream, AndroidAppDataStream)
-        #     may be a parent.
         #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of resources to return.
