@@ -20,7 +20,7 @@ jobs:
       RELEASE_PLEASE_DISABLE: ${{ secrets.RELEASE_PLEASE_DISABLE }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Ruby 2.7
         uses: ruby/setup-ruby@v1
         with:
