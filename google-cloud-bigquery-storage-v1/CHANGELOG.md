@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2022-03-03
+
+#### Features
+
+* Add trace_id to ReadSession ([#17679](https://www.github.com/googleapis/google-cloud-ruby/issues/17679))
+
 ### 0.9.2 / 2022-02-18
 
 #### Bug Fixes
