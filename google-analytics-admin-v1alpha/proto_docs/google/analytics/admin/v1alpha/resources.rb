@@ -116,100 +116,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A resource message representing a Google Analytics Android app stream.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
-        #     Format: properties/\\{property_id}/androidAppDataStreams/\\{stream_id}
-        #     Example: "properties/1000/androidAppDataStreams/2000"
-        # @!attribute [r] firebase_app_id
-        #   @return [::String]
-        #     Output only. ID of the corresponding Android app in Firebase, if any.
-        #     This ID can change if the Android app is deleted and recreated.
-        # @!attribute [r] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when this stream was originally created.
-        # @!attribute [r] update_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when stream payload fields were last updated.
-        # @!attribute [rw] package_name
-        #   @return [::String]
-        #     Immutable. The package name for the app being measured.
-        #     Example: "com.example.myandroidapp"
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Human-readable display name for the Data Stream.
-        #
-        #     The max allowed display name length is 255 UTF-16 code units.
-        class AndroidAppDataStream
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A resource message representing a Google Analytics IOS app stream.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
-        #     Format: properties/\\{property_id}/iosAppDataStreams/\\{stream_id}
-        #     Example: "properties/1000/iosAppDataStreams/2000"
-        # @!attribute [r] firebase_app_id
-        #   @return [::String]
-        #     Output only. ID of the corresponding iOS app in Firebase, if any.
-        #     This ID can change if the iOS app is deleted and recreated.
-        # @!attribute [r] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when this stream was originally created.
-        # @!attribute [r] update_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when stream payload fields were last updated.
-        # @!attribute [rw] bundle_id
-        #   @return [::String]
-        #     Required. Immutable. The Apple App Store Bundle ID for the app
-        #     Example: "com.example.myiosapp"
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Human-readable display name for the Data Stream.
-        #
-        #     The max allowed display name length is 255 UTF-16 code units.
-        class IosAppDataStream
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # A resource message representing a Google Analytics web stream.
-        # @!attribute [r] name
-        #   @return [::String]
-        #     Output only. Resource name of this Data Stream.
-        #     Format: properties/\\{property_id}/webDataStreams/\\{stream_id}
-        #     Example: "properties/1000/webDataStreams/2000"
-        # @!attribute [r] measurement_id
-        #   @return [::String]
-        #     Output only. Analytics "Measurement ID", without the "G-" prefix.
-        #     Example: "G-1A2BCD345E" would just be "1A2BCD345E"
-        # @!attribute [r] firebase_app_id
-        #   @return [::String]
-        #     Output only. ID of the corresponding web app in Firebase, if any.
-        #     This ID can change if the web app is deleted and recreated.
-        # @!attribute [r] create_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when this stream was originally created.
-        # @!attribute [r] update_time
-        #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Time when stream payload fields were last updated.
-        # @!attribute [rw] default_uri
-        #   @return [::String]
-        #     Immutable. Domain name of the web app being measured, or empty.
-        #     Example: "http://www.google.com", "https://www.google.com"
-        # @!attribute [rw] display_name
-        #   @return [::String]
-        #     Required. Human-readable display name for the Data Stream.
-        #
-        #     The max allowed display name length is 255 UTF-16 code units.
-        class WebDataStream
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # A resource message representing a data stream.
         # @!attribute [rw] web_stream_data
         #   @return [::Google::Analytics::Admin::V1alpha::DataStream::WebStreamData]
@@ -388,11 +294,12 @@ module Google
         end
 
         # Read-only resource with the tag for sending data from a website to a
-        # WebDataStream.
+        # DataStream. Only present for web DataStream resources.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. Resource name for this GlobalSiteTag resource.
-        #     Format: properties/\\{propertyId}/globalSiteTag
+        #     Format: properties/\\{property_id}/dataStreams/\\{stream_id}/globalSiteTag
+        #     Example: "properties/123/dataStreams/456/globalSiteTag"
         # @!attribute [rw] snippet
         #   @return [::String]
         #     Immutable. JavaScript code snippet to be pasted as the first item into the head tag of
@@ -581,15 +488,6 @@ module Google
           # @!attribute [rw] property
           #   @return [::Google::Analytics::Admin::V1alpha::Property]
           #     A snapshot of a Property resource in change history.
-          # @!attribute [rw] web_data_stream
-          #   @return [::Google::Analytics::Admin::V1alpha::WebDataStream]
-          #     A snapshot of a WebDataStream resource in change history.
-          # @!attribute [rw] android_app_data_stream
-          #   @return [::Google::Analytics::Admin::V1alpha::AndroidAppDataStream]
-          #     A snapshot of an AndroidAppDataStream resource in change history.
-          # @!attribute [rw] ios_app_data_stream
-          #   @return [::Google::Analytics::Admin::V1alpha::IosAppDataStream]
-          #     A snapshot of an IosAppDataStream resource in change history.
           # @!attribute [rw] firebase_link
           #   @return [::Google::Analytics::Admin::V1alpha::FirebaseLink]
           #     A snapshot of a FirebaseLink resource in change history.
@@ -622,6 +520,9 @@ module Google
           # @!attribute [rw] data_retention_settings
           #   @return [::Google::Analytics::Admin::V1alpha::DataRetentionSettings]
           #     A snapshot of a data retention settings resource in change history.
+          # @!attribute [rw] data_stream
+          #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
+          #     A snapshot of a DataStream resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -855,6 +756,11 @@ module Google
         # @!attribute [rw] scope
         #   @return [::Google::Analytics::Admin::V1alpha::CustomMetric::MetricScope]
         #     Required. Immutable. The scope of this custom metric.
+        # @!attribute [rw] restricted_metric_type
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::CustomMetric::RestrictedMetricType>]
+        #     Optional. Types of restricted data that this metric may contain. Required for metrics
+        #     with CURRENCY measurement unit. Must be empty for metrics with a
+        #     non-CURRENCY measurement unit.
         class CustomMetric
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -905,6 +811,19 @@ module Google
 
             # Metric scoped to an event.
             EVENT = 1
+          end
+
+          # Labels that mark the data in this custom metric as data that should be
+          # restricted to specific users.
+          module RestrictedMetricType
+            # Type unknown or unspecified.
+            RESTRICTED_METRIC_TYPE_UNSPECIFIED = 0
+
+            # Metric reports cost data.
+            COST_DATA = 1
+
+            # Metric reports revenue data.
+            REVENUE_DATA = 2
           end
         end
 
@@ -1087,15 +1006,6 @@ module Google
           # Property resource
           PROPERTY = 2
 
-          # WebDataStream resource
-          WEB_DATA_STREAM = 3
-
-          # AndroidAppDataStream resource
-          ANDROID_APP_DATA_STREAM = 4
-
-          # IosAppDataStream resource
-          IOS_APP_DATA_STREAM = 5
-
           # FirebaseLink resource
           FIREBASE_LINK = 6
 
@@ -1125,6 +1035,9 @@ module Google
 
           # DisplayVideo360AdvertiserLinkProposal resource
           DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL = 15
+
+          # DataStream resource
+          DATA_STREAM = 18
         end
 
         # Status of the Google Signals settings (i.e., whether this feature has been

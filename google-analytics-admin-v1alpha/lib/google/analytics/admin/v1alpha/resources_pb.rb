@@ -31,31 +31,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :expire_time, :message, 12, "google.protobuf.Timestamp"
       optional :account, :string, 13
     end
-    add_message "google.analytics.admin.v1alpha.AndroidAppDataStream" do
-      optional :name, :string, 1
-      optional :firebase_app_id, :string, 2
-      optional :create_time, :message, 3, "google.protobuf.Timestamp"
-      optional :update_time, :message, 4, "google.protobuf.Timestamp"
-      optional :package_name, :string, 5
-      optional :display_name, :string, 6
-    end
-    add_message "google.analytics.admin.v1alpha.IosAppDataStream" do
-      optional :name, :string, 1
-      optional :firebase_app_id, :string, 2
-      optional :create_time, :message, 3, "google.protobuf.Timestamp"
-      optional :update_time, :message, 4, "google.protobuf.Timestamp"
-      optional :bundle_id, :string, 5
-      optional :display_name, :string, 6
-    end
-    add_message "google.analytics.admin.v1alpha.WebDataStream" do
-      optional :name, :string, 1
-      optional :measurement_id, :string, 2
-      optional :firebase_app_id, :string, 3
-      optional :create_time, :message, 4, "google.protobuf.Timestamp"
-      optional :update_time, :message, 5, "google.protobuf.Timestamp"
-      optional :default_uri, :string, 6
-      optional :display_name, :string, 7
-    end
     add_message "google.analytics.admin.v1alpha.DataStream" do
       optional :name, :string, 1
       optional :type, :enum, 2, "google.analytics.admin.v1alpha.DataStream.DataStreamType"
@@ -157,9 +132,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :resource do
         optional :account, :message, 1, "google.analytics.admin.v1alpha.Account"
         optional :property, :message, 2, "google.analytics.admin.v1alpha.Property"
-        optional :web_data_stream, :message, 3, "google.analytics.admin.v1alpha.WebDataStream"
-        optional :android_app_data_stream, :message, 4, "google.analytics.admin.v1alpha.AndroidAppDataStream"
-        optional :ios_app_data_stream, :message, 5, "google.analytics.admin.v1alpha.IosAppDataStream"
         optional :firebase_link, :message, 6, "google.analytics.admin.v1alpha.FirebaseLink"
         optional :google_ads_link, :message, 7, "google.analytics.admin.v1alpha.GoogleAdsLink"
         optional :google_signals_settings, :message, 8, "google.analytics.admin.v1alpha.GoogleSignalsSettings"
@@ -170,6 +142,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :custom_dimension, :message, 13, "google.analytics.admin.v1alpha.CustomDimension"
         optional :custom_metric, :message, 14, "google.analytics.admin.v1alpha.CustomMetric"
         optional :data_retention_settings, :message, 15, "google.analytics.admin.v1alpha.DataRetentionSettings"
+        optional :data_stream, :message, 18, "google.analytics.admin.v1alpha.DataStream"
       end
     end
     add_message "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink" do
@@ -227,6 +200,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 4
       optional :measurement_unit, :enum, 5, "google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit"
       optional :scope, :enum, 6, "google.analytics.admin.v1alpha.CustomMetric.MetricScope"
+      repeated :restricted_metric_type, :enum, 8, "google.analytics.admin.v1alpha.CustomMetric.RestrictedMetricType"
     end
     add_enum "google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit" do
       value :MEASUREMENT_UNIT_UNSPECIFIED, 0
@@ -244,6 +218,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.analytics.admin.v1alpha.CustomMetric.MetricScope" do
       value :METRIC_SCOPE_UNSPECIFIED, 0
       value :EVENT, 1
+    end
+    add_enum "google.analytics.admin.v1alpha.CustomMetric.RestrictedMetricType" do
+      value :RESTRICTED_METRIC_TYPE_UNSPECIFIED, 0
+      value :COST_DATA, 1
+      value :REVENUE_DATA, 2
     end
     add_message "google.analytics.admin.v1alpha.DataRetentionSettings" do
       optional :name, :string, 1
@@ -308,9 +287,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CHANGE_HISTORY_RESOURCE_TYPE_UNSPECIFIED, 0
       value :ACCOUNT, 1
       value :PROPERTY, 2
-      value :WEB_DATA_STREAM, 3
-      value :ANDROID_APP_DATA_STREAM, 4
-      value :IOS_APP_DATA_STREAM, 5
       value :FIREBASE_LINK, 6
       value :GOOGLE_ADS_LINK, 7
       value :GOOGLE_SIGNALS_SETTINGS, 8
@@ -321,6 +297,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DATA_RETENTION_SETTINGS, 13
       value :DISPLAY_VIDEO_360_ADVERTISER_LINK, 14
       value :DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL, 15
+      value :DATA_STREAM, 18
     end
     add_enum "google.analytics.admin.v1alpha.GoogleSignalsState" do
       value :GOOGLE_SIGNALS_STATE_UNSPECIFIED, 0
@@ -355,9 +332,6 @@ module Google
       module V1alpha
         Account = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.Account").msgclass
         Property = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.Property").msgclass
-        AndroidAppDataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AndroidAppDataStream").msgclass
-        IosAppDataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IosAppDataStream").msgclass
-        WebDataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.WebDataStream").msgclass
         DataStream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream").msgclass
         DataStream::WebStreamData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream.WebStreamData").msgclass
         DataStream::AndroidAppStreamData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataStream.AndroidAppStreamData").msgclass
@@ -385,6 +359,7 @@ module Google
         CustomMetric = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric").msgclass
         CustomMetric::MeasurementUnit = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric.MeasurementUnit").enummodule
         CustomMetric::MetricScope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric.MetricScope").enummodule
+        CustomMetric::RestrictedMetricType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric.RestrictedMetricType").enummodule
         DataRetentionSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataRetentionSettings").msgclass
         DataRetentionSettings::RetentionDuration = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration").enummodule
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
