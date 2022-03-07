@@ -41,6 +41,6 @@ class StoragePrintFileACL
 end
 
 if $PROGRAM_NAME == __FILE__
-  StoragePrintFileACL.new print_file_acl bucket_name: arguments.shift,
+  StoragePrintFileACL.new.print_file_acl bucket_name: arguments.shift,
                                          file_name: arguments.shift
 end
