@@ -671,6 +671,12 @@ module Google
             #     The format of this URI must be `gs://<bucket-name>/<object-name>`.
             #     If left unspecified, the serialized agent is returned inline.
             #
+            #     Dialogflow performs a write operation for the Cloud Storage object
+            #     on the caller's behalf, so your request authentication must
+            #     have write permissions for the object. For more information, see
+            #     [Dialogflow access
+            #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+            #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
             # @yieldparam operation [::GRPC::ActiveCall::Operation]
@@ -791,6 +797,12 @@ module Google
             #   @param agent_uri [::String]
             #     The URI to a Google Cloud Storage file containing the agent to import.
             #     Note: The URI must start with "gs://".
+            #
+            #     Dialogflow performs a read operation for the Cloud Storage object
+            #     on the caller's behalf, so your request authentication must
+            #     have read permissions for the object. For more information, see
+            #     [Dialogflow access
+            #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
             #   @param agent_content [::String]
             #     Zip compressed raw byte content for agent.
             #
@@ -913,6 +925,12 @@ module Google
             #   @param agent_uri [::String]
             #     The URI to a Google Cloud Storage file containing the agent to restore.
             #     Note: The URI must start with "gs://".
+            #
+            #     Dialogflow performs a read operation for the Cloud Storage object
+            #     on the caller's behalf, so your request authentication must
+            #     have read permissions for the object. For more information, see
+            #     [Dialogflow access
+            #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
             #   @param agent_content [::String]
             #     Zip compressed raw byte content for agent.
             #
