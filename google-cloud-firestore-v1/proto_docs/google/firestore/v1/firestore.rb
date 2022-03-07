@@ -319,7 +319,9 @@ module Google
         #     A structured query.
         # @!attribute [rw] transaction
         #   @return [::String]
-        #     Reads documents in a transaction.
+        #     Run the query within an already active transaction.
+        #
+        #     The value here is the opaque transaction ID to execute the query in.
         # @!attribute [rw] new_transaction
         #   @return [::Google::Cloud::Firestore::V1::TransactionOptions]
         #     Starts a new transaction and reads the documents.
@@ -344,8 +346,7 @@ module Google
         #     If set, no other fields will be set in this response.
         # @!attribute [rw] document
         #   @return [::Google::Cloud::Firestore::V1::Document]
-        #     A query result.
-        #     Not set when reporting partial progress.
+        #     A query result, not set when reporting partial progress.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the document was read. This may be monotonically
