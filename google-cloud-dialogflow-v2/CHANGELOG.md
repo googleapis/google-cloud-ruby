@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 / 2022-03-07
+
+#### Features
+
+* Add ConversationDataset and ConversationModel ([#17688](https://www.github.com/googleapis/google-cloud-ruby/issues/17688))
+
 ### 0.14.0 / 2022-01-21
 
 #### Features
