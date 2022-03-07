@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 / 2022-03-07
+
+#### Features
+
+* Add KMS configuration in settings ([#17682](https://www.github.com/googleapis/google-cloud-ruby/issues/17682))
+
 ### 0.7.0 / 2022-03-06
 
 #### Features
