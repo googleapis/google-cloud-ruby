@@ -53,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.gkehub.v1beta1.ResourceOptions" do
       optional :connect_version, :string, 1
       optional :v1beta1_crd, :bool, 2
+      optional :k8s_version, :string, 3
     end
     add_message "google.cloud.gkehub.v1beta1.ResourceManifest" do
       optional :manifest, :string, 1

@@ -614,6 +614,71 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     end
   end
 
+  def test_update
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    paths = "hello world"
+    project = "hello world"
+    request_id = "hello world"
+    reservation = "hello world"
+    reservation_resource = {}
+    update_mask = "hello world"
+    zone = "hello world"
+
+    update_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
+      assert_equal :patch, verb
+
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+
+      assert params.key? "paths"
+      assert params.key? "requestId"
+      assert params.key? "updateMask"
+      refute_nil body
+    end
+
+    Gapic::Rest::ClientStub.stub :new, update_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::Reservations::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.update({ paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone }) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.update paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.update ::Google::Cloud::Compute::V1::UpdateReservationRequest.new(paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.update({ paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone }, call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.update(::Google::Cloud::Compute::V1::UpdateReservationRequest.new(paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone), call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, update_client_stub.call_count
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

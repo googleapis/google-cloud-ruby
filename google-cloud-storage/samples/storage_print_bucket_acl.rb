@@ -12,30 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def print_bucket_acl bucket_name:
-  # [START storage_print_bucket_acl]
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
+# Sample for storage_print_bucket_acl
+class StoragePrintBucketACL
+  def print_bucket_acl bucket_name:
+    # [START storage_print_bucket_acl]
+    # The ID of your GCS bucket
+    # bucket_name = "your-unique-bucket-name"
 
-  require "google/cloud/storage"
+    require "google/cloud/storage"
 
-  storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+    storage = Google::Cloud::Storage.new
+    bucket  = storage.bucket bucket_name
 
-  puts "ACL for #{bucket_name}:"
+    puts "ACL for #{bucket_name}:"
 
-  bucket.acl.owners.each do |owner|
-    puts "OWNER #{owner}"
+    bucket.acl.owners.each do |owner|
+      puts "OWNER #{owner}"
+    end
+
+    bucket.acl.writers.each do |writer|
+      puts "WRITER #{writer}"
+    end
+
+    bucket.acl.readers.each do |reader|
+      puts "READER #{reader}"
+    end
+    # [END storage_print_bucket_acl]
   end
-
-  bucket.acl.writers.each do |writer|
-    puts "WRITER #{writer}"
-  end
-
-  bucket.acl.readers.each do |reader|
-    puts "READER #{reader}"
-  end
-  # [END storage_print_bucket_acl]
 end
 
-print_bucket_acl bucket_name: arguments.shift if $PROGRAM_NAME == __FILE__
+StoragePrintBucketACL.new.print_bucket_acl bucket_name: arguments.shift if $PROGRAM_NAME == __FILE__

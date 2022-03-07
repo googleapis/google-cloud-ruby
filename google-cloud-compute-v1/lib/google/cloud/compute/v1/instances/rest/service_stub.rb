@@ -766,6 +766,7 @@ module Google
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
                 query_string_params["sourceInstanceTemplate"] = request_pb.source_instance_template.to_s if request_pb.has_source_instance_template?
+                query_string_params["sourceMachineImage"] = request_pb.source_machine_image.to_s if request_pb.has_source_machine_image?
 
                 [uri, body, query_string_params]
               end
@@ -952,6 +953,51 @@ module Google
               #   Uri, Body, Query string parameters
               def transcode_reset_request request_pb
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/reset"
+                body = nil
+                query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+
+                [uri, body, query_string_params]
+              end
+
+              ##
+              # Baseline implementation for the resume REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ResumeInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def resume request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                uri, _body, query_string_params = transcode_resume_request request_pb
+                response = @client_stub.make_post_request(
+                  uri:     uri,
+                  params:  query_string_params,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              end
+
+              ##
+              # GRPC transcoding helper method for the resume REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ResumeInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_resume_request request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/resume"
                 body = nil
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
@@ -1725,6 +1771,51 @@ module Google
               #   Uri, Body, Query string parameters
               def transcode_stop_request request_pb
                 uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/stop"
+                body = nil
+                query_string_params = {}
+                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+
+                [uri, body, query_string_params]
+              end
+
+              ##
+              # Baseline implementation for the suspend REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SuspendInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::Operation]
+              #   A result object deserialized from the server's reply
+              def suspend request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                uri, _body, query_string_params = transcode_suspend_request request_pb
+                response = @client_stub.make_post_request(
+                  uri:     uri,
+                  params:  query_string_params,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              end
+
+              ##
+              # GRPC transcoding helper method for the suspend REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SuspendInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_suspend_request request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/suspend"
                 body = nil
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?

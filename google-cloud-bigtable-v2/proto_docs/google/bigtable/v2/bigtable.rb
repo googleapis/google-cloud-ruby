@@ -304,6 +304,26 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for client connection keep-alive and warming.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The unique name of the instance to check permissions for as well as
+        #     respond. Values are of the form `projects/<project>/instances/<instance>`.
+        # @!attribute [rw] app_profile_id
+        #   @return [::String]
+        #     This value specifies routing for replication. If not specified, the
+        #     "default" application profile will be used.
+        class PingAndWarmRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for Bigtable.PingAndWarm connection keepalive and warming.
+        class PingAndWarmResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for Bigtable.ReadModifyWriteRow.
         # @!attribute [rw] table_name
         #   @return [::String]

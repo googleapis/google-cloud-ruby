@@ -1,5 +1,12 @@
 # Release History
 
+### 0.9.5 / 2022-02-15
+
+#### Documentation
+
+* Clarification of the provisioning_id description
+* Minor updates to reference documentation
+
 ### 0.9.4 / 2022-01-20
 
 #### Documentation

@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/org_policy/v2"
       #     client = ::Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
       #

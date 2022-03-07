@@ -1,5 +1,15 @@
 # Release History
 
+### 0.3.7 / 2022-02-17
+
+#### Bug Fixes
+
+* **BREAKING CHANGE:** Removed enable_service and disable_service client methods because those calls are no longer part of the API
+
+#### Performance Improvements
+
+* Removed some unused requires
+
 ### 0.3.6 / 2022-01-11
 
 #### Bug Fixes

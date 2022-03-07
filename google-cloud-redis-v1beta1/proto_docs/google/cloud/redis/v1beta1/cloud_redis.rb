@@ -33,7 +33,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Google Cloud Redis instance.
+        # A Memorystore for Redis instance.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the resource in this scope including project and
@@ -85,6 +85,13 @@ module Google
         #     If not provided, the service will choose an unused /29 block, for
         #     example, 10.0.0.0/29 or 192.168.0.0/29. For READ_REPLICAS_ENABLED
         #     the default block size is /28.
+        # @!attribute [rw] secondary_ip_range
+        #   @return [::String]
+        #     Optional. Additional IP range for node placement. Required when enabling read
+        #     replicas on an existing instance. For DIRECT_PEERING mode value must be a
+        #     CIDR range of size /28, or "auto". For PRIVATE_SERVICE_ACCESS mode value
+        #     must be the name of an allocated address range associated with the private
+        #     service access connection, or "auto".
         # @!attribute [r] host
         #   @return [::String]
         #     Output only. Hostname or IP address of the exposed Redis endpoint used by
@@ -194,8 +201,7 @@ module Google
         #     endpoint. Standard tier only. Write requests should target 'port'.
         # @!attribute [rw] read_replicas_mode
         #   @return [::Google::Cloud::Redis::V1beta1::Instance::ReadReplicasMode]
-        #     Optional. Read replica mode. Can only be specified when trying to create the
-        #     instance.
+        #     Optional. Read replicas mode for the instance. Defaults to READ_REPLICAS_DISABLED.
         # @!attribute [rw] persistence_config
         #   @return [::Google::Cloud::Redis::V1beta1::PersistenceConfig]
         #     Optional. Persistence configuration parameters

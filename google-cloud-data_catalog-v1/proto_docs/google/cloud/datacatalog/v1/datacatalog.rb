@@ -69,6 +69,7 @@ module Google
         #
         #     * `relevance` that can only be descending
         #     * `last_modified_timestamp [asc|desc]` with descending (`desc`) as default
+        #     * `default` that can only be descending
         #
         #     If this parameter is omitted, it defaults to the descending `relevance`.
         class SearchCatalogRequest
@@ -108,17 +109,15 @@ module Google
           #     `SearchCatalogResponse.unreachable` field. To get additional information
           #     on the error, repeat the search request and set the location name as the
           #     value of this parameter.
+          # @!attribute [rw] starred_only
+          #   @return [::Boolean]
+          #     Optional. If `true`, search only among starred entries.
+          #
+          #     By default, all results are returned, starred or not.
           # @!attribute [rw] include_public_tag_templates
           #   @return [::Boolean]
-          #     Optional. If `true`, include [public tag
-          #     templates][google.cloud.datacatalog.v1.TagTemplate.is_publicly_readable]
-          #     in the search results. By default, they are included only if you have
-          #     explicit permissions on them to view them. For example, if you are the
-          #     owner.
-          #
-          #     Other scope fields, for example, `include_org_ids`,
-          #     still restrict the returned public tag templates and at least one of
-          #     them is required.
+          #     Optional. This field is deprecated. The search mechanism for public and private tag
+          #     templates is the same.
           class Scope
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -521,6 +520,9 @@ module Google
         #     (CR), and page breaks (FF).
         #     The maximum size is 2000 bytes when encoded in UTF-8.
         #     Default value is an empty string.
+        # @!attribute [rw] business_context
+        #   @return [::Google::Cloud::DataCatalog::V1::BusinessContext]
+        #     Business Context of the entry. Not supported for BigQuery datasets.
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::DataCatalog::V1::Schema]
         #     Schema of the entry. An entry might not have any schema attached to it.
@@ -545,6 +547,9 @@ module Google
         # @!attribute [r] data_source
         #   @return [::Google::Cloud::DataCatalog::V1::DataSource]
         #     Output only. Physical location of the entry.
+        # @!attribute [r] personal_details
+        #   @return [::Google::Cloud::DataCatalog::V1::PersonalDetails]
+        #     Output only. Additional information related to the entry. Private to the current user.
         class Entry
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -665,6 +670,55 @@ module Google
           end
         end
 
+        # Business Context of the entry.
+        # @!attribute [rw] entry_overview
+        #   @return [::Google::Cloud::DataCatalog::V1::EntryOverview]
+        #     Entry overview fields for rich text descriptions of entries.
+        # @!attribute [rw] contacts
+        #   @return [::Google::Cloud::DataCatalog::V1::Contacts]
+        #     Contact people for the entry.
+        class BusinessContext
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Entry overview fields for rich text descriptions of entries.
+        # @!attribute [rw] overview
+        #   @return [::String]
+        #     Entry overview with support for rich text.
+        #
+        #     The overview must only contain Unicode characters, and should be
+        #     formatted using HTML.
+        #     The maximum length is 10 MiB as this value holds HTML descriptions
+        #     including encoded images. The maximum length of the text without images
+        #     is 100 KiB.
+        class EntryOverview
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contact people for the entry.
+        # @!attribute [rw] people
+        #   @return [::Array<::Google::Cloud::DataCatalog::V1::Contacts::Person>]
+        #     The list of contact people for the entry.
+        class Contacts
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A contact person for the entry.
+          # @!attribute [rw] designation
+          #   @return [::String]
+          #     Designation of the person, for example, Data Steward.
+          # @!attribute [rw] email
+          #   @return [::String]
+          #     Email of the person in the format of `john.doe@example.com`,
+          #     `<john.doe@example.com>`, or `John Doe<john.doe@example.com>`.
+          class Person
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Entry group metadata.
         #
         # An `EntryGroup` resource represents a logical grouping of zero or more
@@ -738,9 +792,7 @@ module Google
         #     request body, their values are emptied.
         #
         #     Note: Updating the `is_publicly_readable` field may require up to 12
-        #     hours to take effect in search results. Additionally, it also requires
-        #     the `tagTemplates.getIamPolicy` and `tagTemplates.setIamPolicy`
-        #     permissions.
+        #     hours to take effect in search results.
         class UpdateTagTemplateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -976,6 +1028,68 @@ module Google
         #     Pagination token of the next results page. Empty if there are no more items
         #     in results.
         class ListEntriesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#star_entry StarEntry}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the entry to mark as starred.
+        class StarEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#star_entry StarEntry}.
+        # Empty for now
+        class StarEntryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#unstar_entry UnstarEntry}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the entry to mark as **not** starred.
+        class UnstarEntryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#unstar_entry UnstarEntry}.
+        # Empty for now
+        class UnstarEntryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_overview ModifyEntryOverview}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the entry.
+        # @!attribute [rw] entry_overview
+        #   @return [::Google::Cloud::DataCatalog::V1::EntryOverview]
+        #     Required. The new value for the Entry Overview.
+        class ModifyEntryOverviewRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_contacts ModifyEntryContacts}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full resource name of the entry.
+        # @!attribute [rw] contacts
+        #   @return [::Google::Cloud::DataCatalog::V1::Contacts]
+        #     Required. The new value for the Contacts.
+        class ModifyEntryContactsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

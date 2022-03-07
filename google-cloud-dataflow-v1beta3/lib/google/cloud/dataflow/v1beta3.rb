@@ -30,6 +30,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/dataflow/v1beta3"
       #     client = ::Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new
       #

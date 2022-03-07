@@ -322,6 +322,128 @@
         }
       }
     },
+    "Conversations": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::Conversations::Client",
+          "rpcs": {
+            "CreateConversation": {
+              "methods": [
+                "create_conversation"
+              ]
+            },
+            "ListConversations": {
+              "methods": [
+                "list_conversations"
+              ]
+            },
+            "GetConversation": {
+              "methods": [
+                "get_conversation"
+              ]
+            },
+            "CompleteConversation": {
+              "methods": [
+                "complete_conversation"
+              ]
+            },
+            "ListMessages": {
+              "methods": [
+                "list_messages"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ConversationDatasets": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::ConversationDatasets::Client",
+          "rpcs": {
+            "CreateConversationDataset": {
+              "methods": [
+                "create_conversation_dataset"
+              ]
+            },
+            "GetConversationDataset": {
+              "methods": [
+                "get_conversation_dataset"
+              ]
+            },
+            "ListConversationDatasets": {
+              "methods": [
+                "list_conversation_datasets"
+              ]
+            },
+            "DeleteConversationDataset": {
+              "methods": [
+                "delete_conversation_dataset"
+              ]
+            },
+            "ImportConversationData": {
+              "methods": [
+                "import_conversation_data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ConversationModels": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Dialogflow::V2::ConversationModels::Client",
+          "rpcs": {
+            "CreateConversationModel": {
+              "methods": [
+                "create_conversation_model"
+              ]
+            },
+            "GetConversationModel": {
+              "methods": [
+                "get_conversation_model"
+              ]
+            },
+            "ListConversationModels": {
+              "methods": [
+                "list_conversation_models"
+              ]
+            },
+            "DeleteConversationModel": {
+              "methods": [
+                "delete_conversation_model"
+              ]
+            },
+            "DeployConversationModel": {
+              "methods": [
+                "deploy_conversation_model"
+              ]
+            },
+            "UndeployConversationModel": {
+              "methods": [
+                "undeploy_conversation_model"
+              ]
+            },
+            "GetConversationModelEvaluation": {
+              "methods": [
+                "get_conversation_model_evaluation"
+              ]
+            },
+            "ListConversationModelEvaluations": {
+              "methods": [
+                "list_conversation_model_evaluations"
+              ]
+            },
+            "CreateConversationModelEvaluation": {
+              "methods": [
+                "create_conversation_model_evaluation"
+              ]
+            }
+          }
+        }
+      }
+    },
     "ConversationProfiles": {
       "clients": {
         "grpc": {
@@ -351,39 +473,15 @@
               "methods": [
                 "delete_conversation_profile"
               ]
-            }
-          }
-        }
-      }
-    },
-    "Conversations": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::Dialogflow::V2::Conversations::Client",
-          "rpcs": {
-            "CreateConversation": {
+            },
+            "SetSuggestionFeatureConfig": {
               "methods": [
-                "create_conversation"
+                "set_suggestion_feature_config"
               ]
             },
-            "ListConversations": {
+            "ClearSuggestionFeatureConfig": {
               "methods": [
-                "list_conversations"
-              ]
-            },
-            "GetConversation": {
-              "methods": [
-                "get_conversation"
-              ]
-            },
-            "CompleteConversation": {
-              "methods": [
-                "complete_conversation"
-              ]
-            },
-            "ListMessages": {
-              "methods": [
-                "list_messages"
+                "clear_suggestion_feature_config"
               ]
             }
           }

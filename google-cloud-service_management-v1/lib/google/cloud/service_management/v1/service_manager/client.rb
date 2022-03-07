@@ -27,7 +27,7 @@ module Google
           ##
           # Client for the ServiceManager service.
           #
-          # [Google Service Management API](https://cloud.google.com/service-management/overview)
+          # [Google Service Management API](/service-management/overview)
           #
           class Client
             # @private
@@ -61,6 +61,8 @@ module Google
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
+
+                default_config.timeout = 10.0
 
                 default_config
               end
@@ -161,10 +163,6 @@ module Google
             # Returns all public services. For authenticated users, also returns all
             # services the calling user has "servicemanagement.services.get" permission
             # for.
-            #
-            # **BETA:** If the caller specifies the `consumer_id`, it returns only the
-            # services enabled on the consumer. The `consumer_id` must have the format
-            # of "project:\\{PROJECT-ID}".
             #
             # @overload list_services(request, options = nil)
             #   Pass arguments to `list_services` via a request object, either of type
@@ -348,7 +346,14 @@ module Google
 
             ##
             # Creates a new managed service.
-            # Please note one producer project can own no more than 20 services.
+            #
+            # A managed service is immutable, and is subject to mandatory 30-day
+            # data retention. You cannot move a service or recreate it within 30 days
+            # after deletion.
+            #
+            # One producer project can own no more than 500 services. For security and
+            # reliability purposes, a production service should be hosted in a
+            # dedicated producer project.
             #
             # Operation<response: ManagedService>
             #
@@ -458,7 +463,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -557,7 +562,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service. See the [overview](/service-management/overview)
             #     for naming requirements. For example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -652,7 +657,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
@@ -750,7 +755,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param config_id [::String]
             #     Required. The id of the service configuration resource.
@@ -854,7 +859,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param service_config [::Google::Api::Service, ::Hash]
             #     Required. The service configuration resource.
@@ -954,7 +959,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param config_source [::Google::Cloud::ServiceManagement::V1::ConfigSource, ::Hash]
             #     Required. The source configuration for the service.
@@ -1055,7 +1060,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
@@ -1066,10 +1071,10 @@ module Google
             #     Required. Use `filter` to return subset of rollouts.
             #     The following filters are supported:
             #       -- To limit the results to only those in
-            #          status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+            #          [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
             #          use filter='status=SUCCESS'
             #       -- To limit the results to those in
-            #          status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+            #          [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
             #          or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1162,7 +1167,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param rollout_id [::String]
             #     Required. The id of the rollout resource.
@@ -1266,7 +1271,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+            #     Required. The name of the service.  See the [overview](/service-management/overview)
             #     for naming requirements.  For example: `example.googleapis.com`.
             #   @param rollout [::Google::Cloud::ServiceManagement::V1::Rollout, ::Hash]
             #     Required. The rollout resource. The `service_name` field is output only.
@@ -1433,227 +1438,6 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @service_manager_stub.call_rpc :generate_config_report, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Enables a {::Google::Cloud::ServiceManagement::V1::ManagedService service} for a project, so it can be used
-            # for the project. See
-            # [Cloud Auth Guide](https://cloud.google.com/docs/authentication) for
-            # more information.
-            #
-            # Operation<response: EnableServiceResponse>
-            #
-            # @deprecated This method is deprecated and may be removed in the next major version update.
-            #
-            # @overload enable_service(request, options = nil)
-            #   Pass arguments to `enable_service` via a request object, either of type
-            #   {::Google::Cloud::ServiceManagement::V1::EnableServiceRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::ServiceManagement::V1::EnableServiceRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload enable_service(service_name: nil, consumer_id: nil)
-            #   Pass arguments to `enable_service` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param service_name [::String]
-            #     Required. Name of the service to enable. Specifying an unknown service name will
-            #     cause the request to fail.
-            #   @param consumer_id [::String]
-            #     Required. The identity of consumer resource which service enablement will be
-            #     applied to.
-            #
-            #     The Google Service Management implementation accepts the following
-            #     forms:
-            #     - "project:<project_id>"
-            #
-            #     Note: this is made compatible with
-            #     google.api.servicecontrol.v1.Operation.consumer_id.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::Operation]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::Operation]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/cloud/service_management/v1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::ServiceManagement::V1::EnableServiceRequest.new
-            #
-            #   # Call the enable_service method.
-            #   result = client.enable_service request
-            #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
-            #   result.wait_until_done! timeout: 60
-            #   if result.response?
-            #     p result.response
-            #   else
-            #     puts "Error!"
-            #   end
-            #
-            def enable_service request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceManagement::V1::EnableServiceRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.enable_service.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.service_name
-                header_params["service_name"] = request.service_name
-              end
-
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.enable_service.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.enable_service.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @service_manager_stub.call_rpc :enable_service, request, options: options do |response, operation|
-                response = ::Gapic::Operation.new response, @operations_client, options: options
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Disables a {::Google::Cloud::ServiceManagement::V1::ManagedService service} for a project, so it can no longer be
-            # be used for the project. It prevents accidental usage that may cause
-            # unexpected billing charges or security leaks.
-            #
-            # Operation<response: DisableServiceResponse>
-            #
-            # @deprecated This method is deprecated and may be removed in the next major version update.
-            #
-            # @overload disable_service(request, options = nil)
-            #   Pass arguments to `disable_service` via a request object, either of type
-            #   {::Google::Cloud::ServiceManagement::V1::DisableServiceRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::ServiceManagement::V1::DisableServiceRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload disable_service(service_name: nil, consumer_id: nil)
-            #   Pass arguments to `disable_service` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param service_name [::String]
-            #     Required. Name of the service to disable. Specifying an unknown service name
-            #     will cause the request to fail.
-            #   @param consumer_id [::String]
-            #     Required. The identity of consumer resource which service disablement will be
-            #     applied to.
-            #
-            #     The Google Service Management implementation accepts the following
-            #     forms:
-            #     - "project:<project_id>"
-            #
-            #     Note: this is made compatible with
-            #     google.api.servicecontrol.v1.Operation.consumer_id.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::Operation]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::Operation]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/cloud/service_management/v1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::ServiceManagement::V1::DisableServiceRequest.new
-            #
-            #   # Call the disable_service method.
-            #   result = client.disable_service request
-            #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
-            #   result.wait_until_done! timeout: 60
-            #   if result.response?
-            #     p result.response
-            #   else
-            #     puts "Error!"
-            #   end
-            #
-            def disable_service request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ServiceManagement::V1::DisableServiceRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.disable_service.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::ServiceManagement::V1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.service_name
-                header_params["service_name"] = request.service_name
-              end
-
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.disable_service.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.disable_service.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @service_manager_stub.call_rpc :disable_service, request, options: options do |response, operation|
-                response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
               end
@@ -1861,16 +1645,6 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :generate_config_report
-                ##
-                # RPC-specific configuration for `enable_service`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :enable_service
-                ##
-                # RPC-specific configuration for `disable_service`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :disable_service
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1900,10 +1674,6 @@ module Google
                   @create_service_rollout = ::Gapic::Config::Method.new create_service_rollout_config
                   generate_config_report_config = parent_rpcs.generate_config_report if parent_rpcs.respond_to? :generate_config_report
                   @generate_config_report = ::Gapic::Config::Method.new generate_config_report_config
-                  enable_service_config = parent_rpcs.enable_service if parent_rpcs.respond_to? :enable_service
-                  @enable_service = ::Gapic::Config::Method.new enable_service_config
-                  disable_service_config = parent_rpcs.disable_service if parent_rpcs.respond_to? :disable_service
-                  @disable_service = ::Gapic::Config::Method.new disable_service_config
 
                   yield self if block_given?
                 end

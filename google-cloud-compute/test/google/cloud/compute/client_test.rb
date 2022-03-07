@@ -283,6 +283,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_machine_images
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::Compute.machine_images do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::MachineImages::Rest::Client, client
+    end
+  end
+
   def test_machine_types
     Gapic::ServiceStub.stub :new, :stub do
       client = Google::Cloud::Compute.machine_types do |config|

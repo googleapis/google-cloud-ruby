@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :alternative_location_id, :string, 5
       optional :redis_version, :string, 7
       optional :reserved_ip_range, :string, 9
+      optional :secondary_ip_range, :string, 30
       optional :host, :string, 10
       optional :port, :int32, 11
       optional :current_location_id, :string, 12

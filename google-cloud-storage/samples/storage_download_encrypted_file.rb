@@ -30,7 +30,7 @@ def download_encrypted_file bucket_name:, file_name:, local_file_path:, encrypti
 
   storage = Google::Cloud::Storage.new
 
-  bucket = storage.bucket bucket_name
+  bucket = storage.bucket bucket_name, skip_lookup: true
 
   file = bucket.file file_name, encryption_key: encryption_key
   file.download local_file_path, encryption_key: encryption_key

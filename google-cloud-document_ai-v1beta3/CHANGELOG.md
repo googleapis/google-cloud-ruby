@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 / 2022-02-16
+
+#### Features
+
+* Report the detected symbols in a page
+
 ### 0.10.0 / 2022-02-08
 
 #### Features

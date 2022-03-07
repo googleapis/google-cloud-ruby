@@ -472,7 +472,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The name of the project to get a vulnerability summary for in the form of
+            #     Required. The name of the project to get a vulnerability summary for in the form of
             #     `projects/[PROJECT_ID]`.
             #   @param filter [::String]
             #     The filter expression.

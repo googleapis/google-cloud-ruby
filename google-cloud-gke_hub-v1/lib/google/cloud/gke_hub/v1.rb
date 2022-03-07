@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/gke_hub/v1"
       #     client = ::Google::Cloud::GkeHub::V1::GkeHub::Client.new
       #

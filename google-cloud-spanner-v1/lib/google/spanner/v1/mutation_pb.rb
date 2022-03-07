@@ -2,6 +2,7 @@
 # source: google/spanner/v1/mutation.proto
 
 require 'google/api/annotations_pb'
+require 'google/api/field_behavior_pb'
 require 'google/protobuf/struct_pb'
 require 'google/spanner/v1/keys_pb'
 require 'google/protobuf'

@@ -29,7 +29,7 @@ def copy_file source_bucket_name:, source_file_name:, destination_bucket_name:, 
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket source_bucket_name
+  bucket  = storage.bucket source_bucket_name, skip_lookup: true
   file    = bucket.file source_file_name
 
   destination_bucket = storage.bucket destination_bucket_name

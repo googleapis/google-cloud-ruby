@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/vm_migration/v1"
       #     client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new
       #

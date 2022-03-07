@@ -74,16 +74,6 @@
               "methods": [
                 "generate_config_report"
               ]
-            },
-            "EnableService": {
-              "methods": [
-                "enable_service"
-              ]
-            },
-            "DisableService": {
-              "methods": [
-                "disable_service"
-              ]
             }
           }
         }

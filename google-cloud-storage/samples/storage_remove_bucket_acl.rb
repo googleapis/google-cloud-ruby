@@ -12,22 +12,28 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def remove_bucket_acl bucket_name:, email:
-  # [START storage_remove_bucket_owner]
-  # project_id  = "Your Google Cloud project ID"
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-  # email       = "Google Cloud Storage ACL Entity email"
+# Sample for storage_remove_bucket_owner
+class StorageRemoveBucketACL
+  def remove_bucket_acl bucket_name:, email:
+    # [START storage_remove_bucket_owner]
+    # project_id  = "Your Google Cloud project ID"
+    # The ID of your GCS bucket
+    # bucket_name = "your-unique-bucket-name"
+    # email       = "Google Cloud Storage ACL Entity email"
 
-  require "google/cloud/storage"
+    require "google/cloud/storage"
 
-  storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name
+    storage = Google::Cloud::Storage.new
+    bucket  = storage.bucket bucket_name
 
-  bucket.acl.delete email
+    bucket.acl.delete email
 
-  puts "Removed ACL permissions for #{email} from #{bucket_name}"
-  # [END storage_remove_bucket_owner]
+    puts "Removed ACL permissions for #{email} from #{bucket_name}"
+    # [END storage_remove_bucket_owner]
+  end
 end
 
-remove_bucket_acl bucket_name: arguments.shift, email: arguments.shift if $PROGRAM_NAME == __FILE__
+if $PROGRAM_NAME == __FILE__
+  StorageRemoveBucketACL.new.remove_bucket_acl bucket_name: arguments.shift,
+                                               email: arguments.shift
+end

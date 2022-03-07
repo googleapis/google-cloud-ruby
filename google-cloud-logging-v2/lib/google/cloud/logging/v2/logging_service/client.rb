@@ -175,10 +175,10 @@ module Google
             # Service calls
 
             ##
-            # Deletes all the log entries in a log. The log reappears if it receives new
-            # entries. Log entries written shortly before the delete operation might not
-            # be deleted. Entries received after the delete operation with a timestamp
-            # before the operation will be deleted.
+            # Deletes all the log entries in a log for the _Default Log Bucket. The log
+            # reappears if it receives new entries. Log entries written shortly before
+            # the delete operation might not be deleted. Entries received after the
+            # delete operation with a timestamp before the operation will be deleted.
             #
             # @overload delete_log(request, options = nil)
             #   Pass arguments to `delete_log` via a request object, either of type
@@ -198,14 +198,15 @@ module Google
             #   @param log_name [::String]
             #     Required. The resource name of the log to delete:
             #
-            #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
-            #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-            #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+            #     * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+            #     * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+            #     * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+            #     * `folders/[FOLDER_ID]/logs/[LOG_ID]`
             #
             #     `[LOG_ID]` must be URL-encoded. For example,
             #     `"projects/my-project-id/logs/syslog"`,
-            #     `"organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"`.
+            #     `"organizations/123/logs/cloudaudit.googleapis.com%2Factivity"`.
+            #
             #     For more information about log names, see
             #     {::Google::Cloud::Logging::V2::LogEntry LogEntry}.
             #
@@ -301,15 +302,15 @@ module Google
             #     Optional. A default log resource name that is assigned to all log entries
             #     in `entries` that do not specify a value for `log_name`:
             #
-            #         "projects/[PROJECT_ID]/logs/[LOG_ID]"
-            #         "organizations/[ORGANIZATION_ID]/logs/[LOG_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]"
-            #         "folders/[FOLDER_ID]/logs/[LOG_ID]"
+            #     * `projects/[PROJECT_ID]/logs/[LOG_ID]`
+            #     * `organizations/[ORGANIZATION_ID]/logs/[LOG_ID]`
+            #     * `billingAccounts/[BILLING_ACCOUNT_ID]/logs/[LOG_ID]`
+            #     * `folders/[FOLDER_ID]/logs/[LOG_ID]`
             #
             #     `[LOG_ID]` must be URL-encoded. For example:
             #
             #         "projects/my-project-id/logs/syslog"
-            #         "organizations/1234567890/logs/cloudresourcemanager.googleapis.com%2Factivity"
+            #         "organizations/123/logs/cloudaudit.googleapis.com%2Factivity"
             #
             #     The permission `logging.logEntries.create` is needed on each project,
             #     organization, billing account, or folder that is receiving new log
@@ -344,14 +345,14 @@ module Google
             #     the entries later in the list. See the `entries.list` method.
             #
             #     Log entries with timestamps that are more than the
-            #     [logs retention period](https://cloud.google.com/logging/quota-policy) in
+            #     [logs retention period](https://cloud.google.com/logging/quotas) in
             #     the past or more than 24 hours in the future will not be available when
             #     calling `entries.list`. However, those log entries can still be [exported
             #     with
             #     LogSinks](https://cloud.google.com/logging/docs/api/tasks/exporting-logs).
             #
             #     To improve throughput and to avoid exceeding the
-            #     [quota limit](https://cloud.google.com/logging/quota-policy) for calls to
+            #     [quota limit](https://cloud.google.com/logging/quotas) for calls to
             #     `entries.write`, you should try to include several log entries in this
             #     list, rather than calling this method for each individual log entry.
             #   @param partial_success [::Boolean]
@@ -446,16 +447,17 @@ module Google
             #     Required. Names of one or more parent resources from which to
             #     retrieve log entries:
             #
-            #         "projects/[PROJECT_ID]"
-            #         "organizations/[ORGANIZATION_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-            #         "folders/[FOLDER_ID]"
+            #     *  `projects/[PROJECT_ID]`
+            #     *  `organizations/[ORGANIZATION_ID]`
+            #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+            #     *  `folders/[FOLDER_ID]`
             #
-            #     May alternatively be one or more views
-            #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #     May alternatively be one or more views:
+            #
+            #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
             #
             #     Projects listed in the `project_ids` field are added to this list.
             #   @param filter [::String]
@@ -474,10 +476,10 @@ module Google
             #     in order of decreasing timestamps (newest first).  Entries with equal
             #     timestamps are returned in order of their `insert_id` values.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of results to return from this request.
-            #     Default is 50. If the value is negative or exceeds 1000,
-            #     the request is rejected. The presence of `next_page_token` in the
-            #     response indicates that more results might be available.
+            #     Optional. The maximum number of results to return from this request. Default is 50.
+            #     If the value is negative or exceeds 1000, the request is rejected. The
+            #     presence of `next_page_token` in the response indicates that more results
+            #     might be available.
             #   @param page_token [::String]
             #     Optional. If present, then retrieve the next batch of results from the
             #     preceding call to this method.  `page_token` must be the value of
@@ -660,10 +662,10 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name that owns the logs:
             #
-            #         "projects/[PROJECT_ID]"
-            #         "organizations/[ORGANIZATION_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-            #         "folders/[FOLDER_ID]"
+            #     *  `projects/[PROJECT_ID]`
+            #     *  `organizations/[ORGANIZATION_ID]`
+            #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+            #     *  `folders/[FOLDER_ID]`
             #   @param page_size [::Integer]
             #     Optional. The maximum number of results to return from this request.
             #     Non-positive values are ignored.  The presence of `nextPageToken` in the
@@ -675,16 +677,18 @@ module Google
             #     parameters should be identical to those in the previous call.
             #   @param resource_names [::Array<::String>]
             #     Optional. The resource name that owns the logs:
-            #       projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       organization/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
-            #       folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]
+            #
+            #      * `projects/[PROJECT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `organizations/[ORGANIZATION_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `billingAccounts/[BILLING_ACCOUNT_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
+            #      * `folders/[FOLDER_ID]/locations/[LOCATION_ID]/buckets/[BUCKET_ID]/views/[VIEW_ID]`
             #
             #     To support legacy queries, it could also be:
-            #         "projects/[PROJECT_ID]"
-            #         "organizations/[ORGANIZATION_ID]"
-            #         "billingAccounts/[BILLING_ACCOUNT_ID]"
-            #         "folders/[FOLDER_ID]"
+            #
+            #     *  `projects/[PROJECT_ID]`
+            #     *  `organizations/[ORGANIZATION_ID]`
+            #     *  `billingAccounts/[BILLING_ACCOUNT_ID]`
+            #     *  `folders/[FOLDER_ID]`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Logging::V2::ListLogsResponse]

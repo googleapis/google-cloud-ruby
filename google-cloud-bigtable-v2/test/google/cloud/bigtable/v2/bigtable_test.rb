@@ -412,6 +412,66 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     end
   end
 
+  def test_ping_and_warm
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigtable::V2::PingAndWarmResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    app_profile_id = "hello world"
+
+    ping_and_warm_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :ping_and_warm, name
+      assert_kind_of ::Google::Cloud::Bigtable::V2::PingAndWarmRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal "hello world", request["app_profile_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, ping_and_warm_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::V2::Bigtable::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.ping_and_warm({ name: name, app_profile_id: app_profile_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.ping_and_warm name: name, app_profile_id: app_profile_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.ping_and_warm ::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.ping_and_warm({ name: name, app_profile_id: app_profile_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.ping_and_warm(::Google::Cloud::Bigtable::V2::PingAndWarmRequest.new(name: name, app_profile_id: app_profile_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, ping_and_warm_client_stub.call_rpc_count
+    end
+  end
+
   def test_read_modify_write_row
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse.new

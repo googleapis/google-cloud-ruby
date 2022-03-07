@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/memcache/v1beta2"
       #     client = ::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client.new
       #

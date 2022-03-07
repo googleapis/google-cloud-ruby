@@ -1,5 +1,29 @@
 # Release History
 
+### 0.7.0 / 2022-03-07
+
+#### Features
+
+* Add KMS configuration in settings ([#17682](https://www.github.com/googleapis/google-cloud-ruby/issues/17682))
+
+### 0.7.0 / 2022-03-06
+
+#### Features
+
+* Add KMS configuration in settings ([#17682](https://www.github.com/googleapis/google-cloud-ruby/issues/17682))
+
+### 0.6.0 / 2022-02-18
+
+#### Features
+
+* Support for get_settings and update_settings
+* Support for copy_log_entries
+* Support for splitting log entries and sending as a sequence of parts
+* Support for restricted fields in a log bucket
+* Support for CMEK settings for a log bucket
+* Support for disabling metrics
+* Various clarifications and formatting fixes in the reference documentation
+
 ### 0.5.6 / 2022-01-11
 
 #### Documentation

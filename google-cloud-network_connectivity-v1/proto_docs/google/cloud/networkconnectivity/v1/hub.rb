@@ -22,8 +22,10 @@ module Google
     module NetworkConnectivity
       module V1
         # A hub is a collection of spokes. A single hub can contain spokes from
-        # multiple regions. However, all of a hub's spokes must be associated with
-        # resources that reside in the same VPC network.
+        # multiple regions. However, if any of a hub's spokes use the data transfer
+        # feature, the resources associated with those spokes must all reside in the
+        # same VPC network. Spokes that do not use data transfer can be associated
+        # with any VPC network in your project.
         # @!attribute [rw] name
         #   @return [::String]
         #     Immutable. The name of the hub. Hub names must be unique. They use the
@@ -53,9 +55,7 @@ module Google
         #     Output only. The current lifecycle state of this hub.
         # @!attribute [rw] routing_vpcs
         #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::RoutingVPC>]
-        #     The VPC network associated with this hub's spokes. All of the VPN tunnels,
-        #     VLAN attachments, and router appliance instances referenced by this hub's
-        #     spokes must belong to this VPC network.
+        #     The VPC networks associated with this hub's spokes.
         #
         #     This field is read-only. Network Connectivity Center automatically
         #     populates it based on the set of spokes attached to the hub.
@@ -73,11 +73,18 @@ module Google
           end
         end
 
-        # RoutingVPC contains information about the VPC network that is associated with
-        # a hub's spokes.
+        # RoutingVPC contains information about the VPC networks that are associated
+        # with a hub's spokes.
         # @!attribute [rw] uri
         #   @return [::String]
         #     The URI of the VPC network.
+        # @!attribute [r] required_for_new_site_to_site_data_transfer_spokes
+        #   @return [::Boolean]
+        #     Output only. If true, indicates that this VPC network is currently associated with
+        #     spokes that use the data transfer feature (spokes where the
+        #     site_to_site_data_transfer field is set to true). If you create new spokes
+        #     that use data transfer, they must be associated with this VPC network. At
+        #     most, one VPC network will have this field set to true.
         class RoutingVPC
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -423,8 +430,8 @@ module Google
         # @!attribute [rw] site_to_site_data_transfer
         #   @return [::Boolean]
         #     A value that controls whether site-to-site data transfer is enabled for
-        #     these resources. This field is set to false by default, but you must set it
-        #     to true. Note that data transfer is available only in supported locations.
+        #     these resources. Data transfer is available only in [supported
+        #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
         class LinkedVpnTunnels
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -440,24 +447,25 @@ module Google
         # @!attribute [rw] site_to_site_data_transfer
         #   @return [::Boolean]
         #     A value that controls whether site-to-site data transfer is enabled for
-        #     these resources. This field is set to false by default, but you must set it
-        #     to true. Note that data transfer is available only in supported locations.
+        #     these resources. Data transfer is available only in [supported
+        #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
         class LinkedInterconnectAttachments
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A collection of router appliance instances. If you have multiple router
-        # appliance instances connected to the same site, they should all be attached
-        # to the same spoke.
+        # A collection of router appliance instances. If you configure multiple router
+        # appliance instances to receive data from the same set of sites outside of
+        # Google Cloud, we recommend that you associate those instances with the same
+        # spoke.
         # @!attribute [rw] instances
         #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::RouterApplianceInstance>]
         #     The list of router appliance instances.
         # @!attribute [rw] site_to_site_data_transfer
         #   @return [::Boolean]
         #     A value that controls whether site-to-site data transfer is enabled for
-        #     these resources. This field is set to false by default, but you must set it
-        #     to true. Note that data transfer is available only in supported locations.
+        #     these resources. Data transfer is available only in [supported
+        #     locations](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/locations).
         class LinkedRouterApplianceInstances
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -478,6 +486,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Metadata about locations
+        # @!attribute [rw] location_features
+        #   @return [::Array<::Google::Cloud::NetworkConnectivity::V1::LocationFeature>]
+        #     List of supported features
+        class LocationMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The State enum represents the lifecycle stage of a Network Connectivity
         # Center resource.
         module State
@@ -492,6 +509,18 @@ module Google
 
           # The resource's Delete operation is in progress
           DELETING = 3
+        end
+
+        # Supported features for a location
+        module LocationFeature
+          # No publicly supported feature in this location
+          LOCATION_FEATURE_UNSPECIFIED = 0
+
+          # Site-to-cloud spokes are supported in this location
+          SITE_TO_CLOUD_SPOKES = 1
+
+          # Site-to-site spokes are supported in this location
+          SITE_TO_SITE_SPOKES = 2
         end
       end
     end

@@ -1,5 +1,23 @@
 # Release History
 
+### 0.13.0 / 2022-03-03
+
+#### Features
+
+* Add CRUD operation of BigQueryExport
+
+### 0.12.1 / 2022-02-20
+
+#### Documentation
+
+* Minor updates to reference documentation
+
+### 0.12.0 / 2022-02-16
+
+#### Features
+
+* Add access details to the Finding type
+
 ### 0.11.1 / 2022-01-11
 
 #### Bug Fixes

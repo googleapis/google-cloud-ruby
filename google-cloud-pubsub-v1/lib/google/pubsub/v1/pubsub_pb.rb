@@ -182,7 +182,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.pubsub.v1.StreamingPullResponse" do
       repeated :received_messages, :message, 1, "google.pubsub.v1.ReceivedMessage"
-      optional :acknowlege_confirmation, :message, 2, "google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation"
+      optional :acknowledge_confirmation, :message, 5, "google.pubsub.v1.StreamingPullResponse.AcknowledgeConfirmation"
       optional :modify_ack_deadline_confirmation, :message, 3, "google.pubsub.v1.StreamingPullResponse.ModifyAckDeadlineConfirmation"
       optional :subscription_properties, :message, 4, "google.pubsub.v1.StreamingPullResponse.SubscriptionProperties"
     end

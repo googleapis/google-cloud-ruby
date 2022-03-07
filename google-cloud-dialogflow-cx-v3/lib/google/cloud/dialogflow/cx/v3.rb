@@ -18,7 +18,6 @@
 
 require "google/cloud/dialogflow/cx/v3/pages"
 require "google/cloud/dialogflow/cx/v3/flows"
-require "google/cloud/dialogflow/cx/v3/security_settings_service"
 require "google/cloud/dialogflow/cx/v3/agents"
 require "google/cloud/dialogflow/cx/v3/changelogs"
 require "google/cloud/dialogflow/cx/v3/deployments"
@@ -28,10 +27,11 @@ require "google/cloud/dialogflow/cx/v3/session_entity_types"
 require "google/cloud/dialogflow/cx/v3/sessions"
 require "google/cloud/dialogflow/cx/v3/transition_route_groups"
 require "google/cloud/dialogflow/cx/v3/test_cases"
-require "google/cloud/dialogflow/cx/v3/webhooks"
 require "google/cloud/dialogflow/cx/v3/environments"
 require "google/cloud/dialogflow/cx/v3/experiments"
+require "google/cloud/dialogflow/cx/v3/security_settings_service"
 require "google/cloud/dialogflow/cx/v3/versions"
+require "google/cloud/dialogflow/cx/v3/webhooks"
 require "google/cloud/dialogflow/cx/v3/version"
 
 module Google
@@ -40,6 +40,8 @@ module Google
       module CX
         ##
         # To load this package, including all its services, and instantiate a client:
+        #
+        # @example
         #
         #     require "google/cloud/dialogflow/cx/v3"
         #     client = ::Google::Cloud::Dialogflow::CX::V3::Pages::Client.new

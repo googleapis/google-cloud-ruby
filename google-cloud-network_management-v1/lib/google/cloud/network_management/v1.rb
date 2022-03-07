@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/network_management/v1"
       #     client = ::Google::Cloud::NetworkManagement::V1::ReachabilityService::Client.new
       #

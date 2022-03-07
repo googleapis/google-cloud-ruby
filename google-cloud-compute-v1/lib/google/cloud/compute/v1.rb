@@ -45,6 +45,7 @@ require "google/cloud/compute/v1/interconnect_locations"
 require "google/cloud/compute/v1/interconnects"
 require "google/cloud/compute/v1/license_codes"
 require "google/cloud/compute/v1/licenses"
+require "google/cloud/compute/v1/machine_images"
 require "google/cloud/compute/v1/machine_types"
 require "google/cloud/compute/v1/network_endpoint_groups"
 require "google/cloud/compute/v1/networks"
@@ -103,6 +104,8 @@ module Google
     module Compute
       ##
       # To load this package, including all its services, and instantiate a REST client:
+      #
+      # @example
       #
       #     require "google/cloud/compute/v1"
       #     client = ::Google::Cloud::Compute::V1::AcceleratorTypes::Rest::Client.new

@@ -3,7 +3,6 @@
 
 require 'google/api/field_behavior_pb'
 require 'google/cloud/securitycenter/v1/folder_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

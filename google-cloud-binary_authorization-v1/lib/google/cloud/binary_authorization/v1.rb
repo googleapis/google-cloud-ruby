@@ -27,6 +27,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/binary_authorization/v1"
       #     client = ::Google::Cloud::BinaryAuthorization::V1::BinauthzManagementService::Client.new
       #

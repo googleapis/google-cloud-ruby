@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/video/livestream/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-video-live_stream/$1

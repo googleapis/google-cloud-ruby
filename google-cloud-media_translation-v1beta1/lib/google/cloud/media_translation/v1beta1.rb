@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/media_translation/v1beta1"
       #     client = ::Google::Cloud::MediaTranslation::V1beta1::SpeechTranslationService::Client.new
       #

@@ -4,6 +4,7 @@
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -31,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.accessapproval.v1.DismissDecision" do
       optional :dismiss_time, :message, 1, "google.protobuf.Timestamp"
+      optional :implicit, :bool, 2
     end
     add_message "google.cloud.accessapproval.v1.ResourceProperties" do
       optional :excludes_descendants, :bool, 1

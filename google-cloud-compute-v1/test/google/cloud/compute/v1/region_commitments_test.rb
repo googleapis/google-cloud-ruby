@@ -315,6 +315,71 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
     end
   end
 
+  def test_update
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    commitment = "hello world"
+    commitment_resource = {}
+    paths = "hello world"
+    project = "hello world"
+    region = "hello world"
+    request_id = "hello world"
+    update_mask = "hello world"
+
+    update_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
+      assert_equal :patch, verb
+
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+
+      assert params.key? "paths"
+      assert params.key? "requestId"
+      assert params.key? "updateMask"
+      refute_nil body
+    end
+
+    Gapic::Rest::ClientStub.stub :new, update_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::RegionCommitments::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.update({ commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.update commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.update ::Google::Cloud::Compute::V1::UpdateRegionCommitmentRequest.new(commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.update({ commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }, call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.update(::Google::Cloud::Compute::V1::UpdateRegionCommitmentRequest.new(commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask), call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, update_client_stub.call_count
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

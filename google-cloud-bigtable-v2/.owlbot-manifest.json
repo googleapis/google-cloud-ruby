@@ -35,6 +35,7 @@
     "snippets/bigtable/check_and_mutate_row.rb",
     "snippets/bigtable/mutate_row.rb",
     "snippets/bigtable/mutate_rows.rb",
+    "snippets/bigtable/ping_and_warm.rb",
     "snippets/bigtable/read_modify_write_row.rb",
     "snippets/bigtable/read_rows.rb",
     "snippets/bigtable/sample_row_keys.rb",

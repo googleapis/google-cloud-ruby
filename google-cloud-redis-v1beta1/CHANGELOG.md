@@ -1,5 +1,12 @@
 # Release History
 
+### 0.7.0 / 2022-02-15
+
+#### Features
+
+* Support for secondary IP range
+* Support instance persistence configuration
+
 ### 0.6.0 / 2022-01-21
 
 #### Features

@@ -79,7 +79,7 @@ module Google
         # Request message for DeleteService method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         class DeleteServiceRequest
           include ::Google::Protobuf::MessageExts
@@ -89,7 +89,7 @@ module Google
         # Request message for UndeleteService method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service. See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service. See the [overview](/service-management/overview)
         #     for naming requirements. For example: `example.googleapis.com`.
         class UndeleteServiceRequest
           include ::Google::Protobuf::MessageExts
@@ -108,7 +108,7 @@ module Google
         # Request message for GetServiceConfig method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] config_id
         #   @return [::String]
@@ -139,7 +139,7 @@ module Google
         # Request message for ListServiceConfigs method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -168,7 +168,7 @@ module Google
         # Request message for CreateServiceConfig method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] service_config
         #   @return [::Google::Api::Service]
@@ -181,7 +181,7 @@ module Google
         # Request message for SubmitConfigSource method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] config_source
         #   @return [::Google::Cloud::ServiceManagement::V1::ConfigSource]
@@ -208,7 +208,7 @@ module Google
         # Request message for 'CreateServiceRollout'
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] rollout
         #   @return [::Google::Cloud::ServiceManagement::V1::Rollout]
@@ -221,7 +221,7 @@ module Google
         # Request message for 'ListServiceRollouts'
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -235,10 +235,10 @@ module Google
         #     Required. Use `filter` to return subset of rollouts.
         #     The following filters are supported:
         #       -- To limit the results to only those in
-        #          status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+        #          [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
         #          use filter='status=SUCCESS'
         #       -- To limit the results to those in
-        #          status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+        #          [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
         #          or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
         class ListServiceRolloutsRequest
           include ::Google::Protobuf::MessageExts
@@ -260,66 +260,12 @@ module Google
         # Request message for GetServiceRollout method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](https://cloud.google.com/service-management/overview)
+        #     Required. The name of the service.  See the [overview](/service-management/overview)
         #     for naming requirements.  For example: `example.googleapis.com`.
         # @!attribute [rw] rollout_id
         #   @return [::String]
         #     Required. The id of the rollout resource.
         class GetServiceRolloutRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for EnableService method.
-        # @!attribute [rw] service_name
-        #   @return [::String]
-        #     Required. Name of the service to enable. Specifying an unknown service name will
-        #     cause the request to fail.
-        # @!attribute [rw] consumer_id
-        #   @return [::String]
-        #     Required. The identity of consumer resource which service enablement will be
-        #     applied to.
-        #
-        #     The Google Service Management implementation accepts the following
-        #     forms:
-        #     - "project:<project_id>"
-        #
-        #     Note: this is made compatible with
-        #     google.api.servicecontrol.v1.Operation.consumer_id.
-        class EnableServiceRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Operation payload for EnableService method.
-        class EnableServiceResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message for DisableService method.
-        # @!attribute [rw] service_name
-        #   @return [::String]
-        #     Required. Name of the service to disable. Specifying an unknown service name
-        #     will cause the request to fail.
-        # @!attribute [rw] consumer_id
-        #   @return [::String]
-        #     Required. The identity of consumer resource which service disablement will be
-        #     applied to.
-        #
-        #     The Google Service Management implementation accepts the following
-        #     forms:
-        #     - "project:<project_id>"
-        #
-        #     Note: this is made compatible with
-        #     google.api.servicecontrol.v1.Operation.consumer_id.
-        class DisableServiceRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Operation payload for DisableService method.
-        class DisableServiceResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
