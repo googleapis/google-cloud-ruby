@@ -1,5 +1,13 @@
 # Release History
 
+### 0.6.0 / 2022-03-08
+
+#### Features
+
+* remove wrapper and add cloud_resource properties in connections
+  * feat: Add Cloud_Resource Connection Support
+  * 🦉 Updates from OwlBot post-processor
+
 ### 0.5.3 / 2022-01-11
 
 #### Documentation
