@@ -42,11 +42,11 @@ class ::Google::Cloud::Dialogflow::V2::ConversationModels::ClientPathsTest < Min
         config.credentials = grpc_channel
       end
 
-      path = client.conversation_model_path project: "value0", conversation_model: "value1"
-      assert_equal "projects/value0/conversationModels/value1", path
-
       path = client.conversation_model_path project: "value0", location: "value1", conversation_model: "value2"
       assert_equal "projects/value0/locations/value1/conversationModels/value2", path
+
+      path = client.conversation_model_path project: "value0", conversation_model: "value1"
+      assert_equal "projects/value0/conversationModels/value1", path
     end
   end
 

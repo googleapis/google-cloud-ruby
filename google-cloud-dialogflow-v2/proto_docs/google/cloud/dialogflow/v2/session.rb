@@ -589,6 +589,11 @@ module Google
         #     Support](https://cloud.google.com/dialogflow/docs/reference/language)
         #     for a list of the currently supported language codes. Note that queries in
         #     the same session do not necessarily need to specify the same language.
+        #
+        #     This field is ignored when used in the context of a
+        #     {::Google::Cloud::Dialogflow::V2::WebhookResponse#followup_event_input WebhookResponse.followup_event_input} field,
+        #     because the language was already defined in the originating detect
+        #     intent request.
         class EventInput
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
