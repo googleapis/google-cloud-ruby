@@ -123,6 +123,9 @@ module Google
           # @!attribute [rw] cloud_spanner
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSpannerProperties]
           #     Cloud Spanner properties.
+          # @!attribute [rw] cloud_resource
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudResourceProperties]
+          #     Cloud Resource properties.
           # @!attribute [r] creation_time
           #   @return [::Integer]
           #     Output only. The creation timestamp of the connection.
@@ -235,6 +238,25 @@ module Google
           #     A unique Google-owned and Google-generated identity for the Connection.
           #     This identity will be used to access the user's AWS IAM Role.
           class AwsAccessRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Container for connection properties for delegation of access to GCP
+          # resources.
+          # @!attribute [r] service_account_id
+          #   @return [::String]
+          #     Output only. The account ID of the service created for the purpose of this connection.
+          #
+          #     The service account does not have any permissions associated with it
+          #     when it is created. After creation, customers delegate permissions
+          #     to the service account. When the connection is used in the context of an
+          #     operation in BigQuery, the service account will be used to connect to the
+          #     desired resources in GCP.
+          #
+          #     The account ID is in the form of:
+          #       <service-1234>@gcp-sa-bigquery-cloudresource.iam.gserviceaccount.com
+          class CloudResourceProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
