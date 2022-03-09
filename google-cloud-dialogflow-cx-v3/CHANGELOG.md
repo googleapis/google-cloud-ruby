@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.6.0 / 2022-03-09
+
+#### Features
+
+* provide option to add page in test config
+  * feat: added page in TestConfig
+  docs: clarified wording around Cloud Storage usage
+  * 🦉 Updates from OwlBot post-processor
+
 ### 0.5.0 / 2022-01-11
 
 #### Features
