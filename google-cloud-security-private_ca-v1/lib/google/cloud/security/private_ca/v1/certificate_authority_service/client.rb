@@ -1546,7 +1546,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload delete_certificate_authority(name: nil, request_id: nil, ignore_active_certificates: nil)
+              # @overload delete_certificate_authority(name: nil, request_id: nil, ignore_active_certificates: nil, skip_grace_period: nil)
               #   Pass arguments to `delete_certificate_authority` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1571,6 +1571,10 @@ module Google
               #   @param ignore_active_certificates [::Boolean]
               #     Optional. This field allows the CA to be deleted even if the CA has
               #     active certs. Active certs include both unrevoked and unexpired certs.
+              #   @param skip_grace_period [::Boolean]
+              #     Optional. If this flag is set, the Certificate Authority will be deleted as soon as
+              #     possible without a 30-day grace period where undeletion would have been
+              #     allowed. If you proceed, there will be no way to recover this CA.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Gapic::Operation]
