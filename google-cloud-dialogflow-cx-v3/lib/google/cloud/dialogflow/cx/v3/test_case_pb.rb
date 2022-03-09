@@ -41,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dialogflow.cx.v3.TestConfig" do
       repeated :tracking_parameters, :string, 1
       optional :flow, :string, 2
+      optional :page, :string, 3
     end
     add_message "google.cloud.dialogflow.cx.v3.ConversationTurn" do
       optional :user_input, :message, 1, "google.cloud.dialogflow.cx.v3.ConversationTurn.UserInput"
