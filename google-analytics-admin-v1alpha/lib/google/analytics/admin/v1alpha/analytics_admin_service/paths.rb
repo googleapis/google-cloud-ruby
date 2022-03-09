@@ -39,23 +39,6 @@ module Google
             end
 
             ##
-            # Create a fully-qualified AndroidAppDataStream resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `properties/{property}/androidAppDataStreams/{android_app_data_stream}`
-            #
-            # @param property [String]
-            # @param android_app_data_stream [String]
-            #
-            # @return [::String]
-            def android_app_data_stream_path property:, android_app_data_stream:
-              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
-
-              "properties/#{property}/androidAppDataStreams/#{android_app_data_stream}"
-            end
-
-            ##
             # Create a fully-qualified ConversionEvent resource string.
             #
             # The resource will be in the following format:
@@ -201,13 +184,16 @@ module Google
             #
             # The resource will be in the following format:
             #
-            # `properties/{property}/globalSiteTag`
+            # `properties/{property}/dataStreams/{data_stream}/globalSiteTag`
             #
             # @param property [String]
+            # @param data_stream [String]
             #
             # @return [::String]
-            def global_site_tag_path property:
-              "properties/#{property}/globalSiteTag"
+            def global_site_tag_path property:, data_stream:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/dataStreams/#{data_stream}/globalSiteTag"
             end
 
             ##
@@ -242,39 +228,22 @@ module Google
             end
 
             ##
-            # Create a fully-qualified IosAppDataStream resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `properties/{property}/iosAppDataStreams/{ios_app_data_stream}`
-            #
-            # @param property [String]
-            # @param ios_app_data_stream [String]
-            #
-            # @return [::String]
-            def ios_app_data_stream_path property:, ios_app_data_stream:
-              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
-
-              "properties/#{property}/iosAppDataStreams/#{ios_app_data_stream}"
-            end
-
-            ##
             # Create a fully-qualified MeasurementProtocolSecret resource string.
             #
             # The resource will be in the following format:
             #
-            # `properties/{property}/webDataStreams/{web_data_stream}/measurementProtocolSecrets/{measurement_protocol_secret}`
+            # `properties/{property}/dataStreams/{data_stream}/measurementProtocolSecrets/{measurement_protocol_secret}`
             #
             # @param property [String]
-            # @param web_data_stream [String]
+            # @param data_stream [String]
             # @param measurement_protocol_secret [String]
             #
             # @return [::String]
-            def measurement_protocol_secret_path property:, web_data_stream:, measurement_protocol_secret:
+            def measurement_protocol_secret_path property:, data_stream:, measurement_protocol_secret:
               raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
-              raise ::ArgumentError, "web_data_stream cannot contain /" if web_data_stream.to_s.include? "/"
+              raise ::ArgumentError, "data_stream cannot contain /" if data_stream.to_s.include? "/"
 
-              "properties/#{property}/webDataStreams/#{web_data_stream}/measurementProtocolSecrets/#{measurement_protocol_secret}"
+              "properties/#{property}/dataStreams/#{data_stream}/measurementProtocolSecrets/#{measurement_protocol_secret}"
             end
 
             ##
@@ -328,23 +297,6 @@ module Google
               resource = resources[args.keys.sort.join(":")]
               raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
               resource.call(**args)
-            end
-
-            ##
-            # Create a fully-qualified WebDataStream resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `properties/{property}/webDataStreams/{web_data_stream}`
-            #
-            # @param property [String]
-            # @param web_data_stream [String]
-            #
-            # @return [::String]
-            def web_data_stream_path property:, web_data_stream:
-              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
-
-              "properties/#{property}/webDataStreams/#{web_data_stream}"
             end
 
             extend self
