@@ -67,12 +67,7 @@ class AddressesSmokeTest < Minitest::Test
   end
 
   def wait_for_regional_op operation, op_type
-    operation = operation.operation
     $stdout.puts "Waiting for regional #{op_type} operation #{operation.name}."
-    starttime = Time.now
-    while (operation.status != :DONE) && (Time.now < starttime + 60)
-      operation = @client_ops.get operation: operation.name, project: @default_project, region: @default_region
-      sleep 3
-    end
+    operation.wait_until_done!
   end
 end
