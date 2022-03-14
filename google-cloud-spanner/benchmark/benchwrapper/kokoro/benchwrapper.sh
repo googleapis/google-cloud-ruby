@@ -17,6 +17,4 @@ gem install --no-document bundler
 export SPANNER_EMULATOR_HOST=localhost:9010
 cd $PROJECT_ROOT/google-cloud-spanner/benchmark/benchwrapper
 bundle install
-docker pull gcr.io/cloud-spanner-emulator/emulator
-docker run -p 9010:9010 -p 9020:9020 gcr.io/cloud-spanner-emulator/emulator &
 bundle exec benchwrapper.rb --port=8081
