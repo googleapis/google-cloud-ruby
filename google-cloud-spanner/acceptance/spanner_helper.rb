@@ -39,9 +39,6 @@ def emulator_enabled?
 end
 
 # Create shared spanner object so we don't create new for each test
-Google::Cloud::Spanner.configure do |config|
-  config.quota_project = "span-cloud-testing"
-end
 $spanner = Google::Cloud::Spanner.new
 $spanner_db_admin = Google::Cloud::Spanner::Admin::Database.database_admin
 
