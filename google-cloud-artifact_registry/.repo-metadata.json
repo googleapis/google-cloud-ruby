@@ -7,7 +7,7 @@
     "name": "artifactregistry",
     "name_pretty": "Artifact Registry API",
     "product_documentation": "https://cloud.google.com/artifact-registry/",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Artifact Registry stores and manages build artifacts in a scalable and integrated service built on Google infrastructure.",

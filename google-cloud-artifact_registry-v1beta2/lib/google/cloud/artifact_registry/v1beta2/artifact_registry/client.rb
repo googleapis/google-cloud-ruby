@@ -1492,7 +1492,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The name of the parent resource whose files will be listed.
+            #     The name of the repository whose files will be listed. For example:
+            #     "projects/p1/locations/us-central1/repositories/repo1
             #   @param filter [::String]
             #     An expression for filtering the results of the request. Filter rules are
             #     case insensitive. The fields eligible for filtering are:

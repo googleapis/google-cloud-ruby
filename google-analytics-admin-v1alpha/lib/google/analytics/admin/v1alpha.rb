@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/analytics/admin/v1alpha"
       #     client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
       #

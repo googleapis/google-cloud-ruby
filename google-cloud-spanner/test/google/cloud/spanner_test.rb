@@ -244,6 +244,61 @@ describe Google::Cloud do
       end
     end
 
+    it "uses quota_project from config" do
+      stubbed_service = ->(project, credentials, quota_project: nil, timeout: nil, **keyword_args) {
+        _(project).must_equal "project-id"
+        _(credentials).must_equal default_credentials
+        _(timeout).must_be :nil?
+        _(quota_project).must_equal "quota_project"
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::Spanner::Service.stub :new, stubbed_service do
+          Google::Cloud::Spanner.configure do |config|
+              config.quota_project  = "quota_project"
+          end
+          spanner = Google::Cloud::Spanner.new project: "project-id", credentials: default_credentials
+          _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+          _(spanner.project).must_equal "project-id"
+          _(spanner.service).must_be_kind_of OpenStruct
+        end
+      end
+    end
+
+    it "uses quota_project from credentials" do
+      stubbed_service = ->(project, credentials, quota_project: nil, timeout: nil, **keyword_args) {
+        _(project).must_equal "project-id"
+        _(credentials).must_be_kind_of OpenStruct
+        _(timeout).must_be :nil?
+        _(credentials.quota_project_id).must_equal "quota_project_id"
+        _(keyword_args.key?(:lib_name)).must_equal true
+        _(keyword_args.key?(:lib_version)).must_equal true
+        _(keyword_args[:lib_name]).must_be :nil?
+        _(keyword_args[:lib_version]).must_be :nil?
+        OpenStruct.new project: project
+      }
+
+      # Clear all environment variables
+      ENV.stub :[], nil do
+        Google::Cloud::Spanner::Service.stub :new, stubbed_service do
+          quota_project_credentials = OpenStruct.new(quota_project_id: "quota_project_id")
+          def quota_project_credentials.is_a? target
+              target == Google::Auth::Credentials
+          end
+          spanner = Google::Cloud::Spanner.new project: "project-id", credentials: quota_project_credentials
+          _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
+          _(spanner.project).must_equal "project-id"
+          _(spanner.service).must_be_kind_of OpenStruct
+        end
+      end
+    end
+
     it "uses provided project and keyfile aliases" do
       stubbed_credentials = ->(keyfile, scope: nil) {
         _(keyfile).must_equal "path/to/keyfile.json"

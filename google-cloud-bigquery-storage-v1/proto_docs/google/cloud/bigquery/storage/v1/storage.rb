@@ -189,10 +189,12 @@ module Google
           #     request.
           #
           #     For explicitly created write streams, the format is:
-          #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{id}`
+          #
+          #     * `projects/{project}/datasets/{dataset}/tables/{table}/streams/{id}`
           #
           #     For the special default stream, the format is:
-          #     `projects/{project}/datasets/{dataset}/tables/{table}/_default`.
+          #
+          #     * `projects/{project}/datasets/{dataset}/tables/{table}/streams/_default`.
           # @!attribute [rw] offset
           #   @return [::Google::Protobuf::Int64Value]
           #     If present, the write is only performed if the next append offset is same
@@ -403,6 +405,12 @@ module Google
               # There is a schema mismatch and it is caused by user schema has extra
               # field than bigquery schema.
               SCHEMA_MISMATCH_EXTRA_FIELDS = 7
+
+              # Offset already exists.
+              OFFSET_ALREADY_EXISTS = 8
+
+              # Offset out of range.
+              OFFSET_OUT_OF_RANGE = 9
             end
           end
         end

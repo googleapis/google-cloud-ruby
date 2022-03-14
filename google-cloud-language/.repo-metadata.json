@@ -7,7 +7,7 @@
     "name": "language",
     "name_pretty": "Cloud Natural Language API",
     "product_documentation": "https://cloud.google.com/natural-language",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Provides natural language understanding technologies, such as sentiment analysis, entity recognition, entity sentiment analysis, and other text annotations.",

@@ -39,10 +39,10 @@ module Google
         #     Output only. Base level operating system information for the VM.
         # @!attribute [r] items
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::OsConfig::V1alpha::Inventory::Item}]
-        #     Output only. Inventory items related to the VM keyed by an opaque unique
-        #     identifier for each inventory item. The identifier is unique to each
-        #     distinct and addressable inventory item and will change, when there is a
-        #     new package version.
+        #     Output only. Inventory items related to the VM keyed by an opaque unique identifier for
+        #     each inventory item. The identifier is unique to each distinct and
+        #     addressable inventory item and will change, when there is a new package
+        #     version.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Timestamp of the last reported inventory for the VM.
@@ -287,12 +287,9 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Contains information about a Windows application as retrieved from the
-          # Windows Registry. For more information about these fields, see
-          #
-          # [Windows Installer Properties for the Uninstall
-          # Registry](https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key){:
-          # class="external" }
+          # Contains information about a Windows application that is retrieved from the
+          # Windows Registry. For more information about these fields, see:
+          # https://docs.microsoft.com/en-us/windows/win32/msi/uninstall-registry-key
           # @!attribute [rw] display_name
           #   @return [::String]
           #     The name of the application or product.
@@ -351,11 +348,9 @@ module Google
         #   @return [::String]
         #     Required. The parent resource name.
         #
-        #     Format: `projects/{project}/locations/{location}/instances/{instance}`
+        #     Format: `projects/{project}/locations/{location}/instances/-`
         #
-        #     For `{project}`, either `project-number` or `project-id` can be
-        #     provided. For `{instance}`, only hyphen or dash character is supported to
-        #     list inventories across VMs.
+        #     For `{project}`, either `project-number` or `project-id` can be provided.
         # @!attribute [rw] view
         #   @return [::Google::Cloud::OsConfig::V1alpha::InventoryView]
         #     Inventory view indicating what information should be included in the

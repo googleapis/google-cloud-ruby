@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.6 / 2022-02-15
+
+#### Bug Fixes
+
+* Set quota project on long-running operations calls
+
 ### 0.1.5 / 2022-01-11
 
 #### Documentation

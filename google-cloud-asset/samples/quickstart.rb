@@ -197,7 +197,7 @@ def analyze_iam_policy scope: "", full_resource_name: ""
 end
 
 def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: ""
-  # [START asset_quickstart_analyze_iam_policy_lognrunning_gcs]
+  # [START asset_quickstart_analyze_iam_policy_longrunning_gcs]
   require "google/cloud/asset"
 
   # scope = 'SCOPE_OF_THE_QUERY'
@@ -229,7 +229,7 @@ def analyze_iam_policy_longrunning_gcs scope: "", full_resource_name: "", uri: "
   operation.wait_until_done!
   puts "Wrote analysis results to: #{uri}"
   # Do things with the result
-  # [END asset_quickstart_analyze_iam_policy_lognrunning_gcs]
+  # [END asset_quickstart_analyze_iam_policy_longrunning_gcs]
 end
 
 def analyze_iam_policy_longrunning_bigquery scope: "", full_resource_name: "", dataset: "", table_prefix: ""

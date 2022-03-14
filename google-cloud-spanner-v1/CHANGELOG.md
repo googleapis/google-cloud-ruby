@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2022-02-15
+
+#### Features
+
+* Support for database dialects
+
 ### 0.7.4 / 2022-01-11
 
 #### Documentation

@@ -32,17 +32,17 @@ module Google
           #
           # - The API has a collection of
           #   {::Google::Cloud::AccessApproval::V1::ApprovalRequest ApprovalRequest}
-          #   resources, named `approvalRequests/{approval_request_id}`
+          #   resources, named `approvalRequests/{approval_request}`
           # - The API has top-level settings per Project/Folder/Organization, named
           #   `accessApprovalSettings`
           #
           # The service also periodically emails a list of recipients, defined at the
           # Project/Folder/Organization level in the accessApprovalSettings, when there
           # is a pending ApprovalRequest for them to act on. The ApprovalRequests can
-          # also optionally be published to a Cloud Pub/Sub topic owned by the customer
-          # (for Beta, the Pub/Sub setup is managed manually).
+          # also optionally be published to a Pub/Sub topic owned by the customer
+          # (contact support if you would like to enable Pub/Sub notifications).
           #
-          # ApprovalRequests can be approved or dismissed. Google personel can only
+          # ApprovalRequests can be approved or dismissed. Google personnel can only
           # access the indicated resource or resources if the request is approved
           # (subject to some exclusions:
           # https://cloud.google.com/access-approval/docs/overview#exclusions).
@@ -62,6 +62,8 @@ module Google
           # If a request is not approved or dismissed, we call it pending.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :access_approval_stub
 
@@ -218,17 +220,21 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The parent resource. This may be "projects/\\{project_id}",
-            #     "folders/\\{folder_id}", or "organizations/\\{organization_id}".
+            #     The parent resource. This may be "projects/\\{project}",
+            #     "folders/\\{folder}", or "organizations/\\{organization}".
             #   @param filter [::String]
             #     A filter on the type of approval requests to retrieve. Must be one of the
             #     following values:
             #
-            #     - [not set]: Requests that are pending or have active approvals.
-            #     - ALL: All requests.
-            #     - PENDING: Only pending requests.
-            #     - ACTIVE: Only active (i.e. currently approved) requests.
-            #     - DISMISSED: Only dismissed (including expired) requests.
+            #       * [not set]: Requests that are pending or have active approvals.
+            #       * ALL: All requests.
+            #       * PENDING: Only pending requests.
+            #       * ACTIVE: Only active (i.e. currently approved) requests.
+            #       * DISMISSED: Only requests that have been dismissed, or requests that
+            #         are not approved and past expiration.
+            #       * EXPIRED: Only requests that have been approved, and the approval has
+            #         expired.
+            #       * HISTORY: Active, dismissed and expired requests.
             #   @param page_size [::Integer]
             #     Requested page size.
             #   @param page_token [::String]
@@ -324,7 +330,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Name of the approval request to retrieve.
+            #     The name of the approval request to retrieve.
+            #     Format:
+            #     "\\{projects|folders|organizations}/\\{id}/approvalRequests/\\{approval_request}"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AccessApproval::V1::ApprovalRequest]
@@ -593,7 +601,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Name of the AccessApprovalSettings to retrieve.
+            #     The name of the AccessApprovalSettings to retrieve.
+            #     Format: "\\{projects|folders|organizations}/\\{id}/accessApprovalSettings"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AccessApproval::V1::AccessApprovalSettings]

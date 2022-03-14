@@ -120,67 +120,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       repeated :requests, :message, 2, "google.analytics.admin.v1alpha.DeleteUserLinkRequest"
     end
-    add_message "google.analytics.admin.v1alpha.GetWebDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.DeleteWebDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateWebDataStreamRequest" do
-      optional :web_data_stream, :message, 1, "google.analytics.admin.v1alpha.WebDataStream"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
-    add_message "google.analytics.admin.v1alpha.CreateWebDataStreamRequest" do
-      optional :web_data_stream, :message, 1, "google.analytics.admin.v1alpha.WebDataStream"
-      optional :parent, :string, 2
-    end
-    add_message "google.analytics.admin.v1alpha.ListWebDataStreamsRequest" do
-      optional :parent, :string, 1
-      optional :page_size, :int32, 2
-      optional :page_token, :string, 3
-    end
-    add_message "google.analytics.admin.v1alpha.ListWebDataStreamsResponse" do
-      repeated :web_data_streams, :message, 1, "google.analytics.admin.v1alpha.WebDataStream"
-      optional :next_page_token, :string, 2
-    end
-    add_message "google.analytics.admin.v1alpha.GetIosAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.DeleteIosAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateIosAppDataStreamRequest" do
-      optional :ios_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.IosAppDataStream"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
-    add_message "google.analytics.admin.v1alpha.ListIosAppDataStreamsRequest" do
-      optional :parent, :string, 1
-      optional :page_size, :int32, 2
-      optional :page_token, :string, 3
-    end
-    add_message "google.analytics.admin.v1alpha.ListIosAppDataStreamsResponse" do
-      repeated :ios_app_data_streams, :message, 1, "google.analytics.admin.v1alpha.IosAppDataStream"
-      optional :next_page_token, :string, 2
-    end
-    add_message "google.analytics.admin.v1alpha.GetAndroidAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.DeleteAndroidAppDataStreamRequest" do
-      optional :name, :string, 1
-    end
-    add_message "google.analytics.admin.v1alpha.UpdateAndroidAppDataStreamRequest" do
-      optional :android_app_data_stream, :message, 1, "google.analytics.admin.v1alpha.AndroidAppDataStream"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
-    end
-    add_message "google.analytics.admin.v1alpha.ListAndroidAppDataStreamsRequest" do
-      optional :parent, :string, 1
-      optional :page_size, :int32, 2
-      optional :page_token, :string, 3
-    end
-    add_message "google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse" do
-      repeated :android_app_data_streams, :message, 1, "google.analytics.admin.v1alpha.AndroidAppDataStream"
-      optional :next_page_token, :string, 2
-    end
     add_message "google.analytics.admin.v1alpha.CreateFirebaseLinkRequest" do
       optional :parent, :string, 1
       optional :firebase_link, :message, 2, "google.analytics.admin.v1alpha.FirebaseLink"
@@ -463,22 +402,6 @@ module Google
         BatchUpdateUserLinksResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchUpdateUserLinksResponse").msgclass
         DeleteUserLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteUserLinkRequest").msgclass
         BatchDeleteUserLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.BatchDeleteUserLinksRequest").msgclass
-        GetWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetWebDataStreamRequest").msgclass
-        DeleteWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteWebDataStreamRequest").msgclass
-        UpdateWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateWebDataStreamRequest").msgclass
-        CreateWebDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateWebDataStreamRequest").msgclass
-        ListWebDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListWebDataStreamsRequest").msgclass
-        ListWebDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListWebDataStreamsResponse").msgclass
-        GetIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetIosAppDataStreamRequest").msgclass
-        DeleteIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteIosAppDataStreamRequest").msgclass
-        UpdateIosAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateIosAppDataStreamRequest").msgclass
-        ListIosAppDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListIosAppDataStreamsRequest").msgclass
-        ListIosAppDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListIosAppDataStreamsResponse").msgclass
-        GetAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAndroidAppDataStreamRequest").msgclass
-        DeleteAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteAndroidAppDataStreamRequest").msgclass
-        UpdateAndroidAppDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAndroidAppDataStreamRequest").msgclass
-        ListAndroidAppDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsRequest").msgclass
-        ListAndroidAppDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAndroidAppDataStreamsResponse").msgclass
         CreateFirebaseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateFirebaseLinkRequest").msgclass
         DeleteFirebaseLinkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DeleteFirebaseLinkRequest").msgclass
         ListFirebaseLinksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListFirebaseLinksRequest").msgclass

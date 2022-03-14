@@ -1,5 +1,18 @@
 # Release History
 
+### 0.7.1 / 2022-02-15
+
+#### Bug Fixes
+
+* Fix misspelled field name StreamingPullResponse#acknowledge_confirmation (was acknowlege_confirmation)
+
+### 0.7.0 / 2022-02-08
+
+#### Features
+
+* Support acknowledgment confirmations when exactly-once delivery is enabled
+* Support exactly-once delivery when creating a subscription
+
 ### 0.6.2 / 2022-01-11
 
 #### Documentation

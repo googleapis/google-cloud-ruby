@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/datastream/v1alpha1"
       #     client = ::Google::Cloud::Datastream::V1alpha1::Datastream::Client.new
       #

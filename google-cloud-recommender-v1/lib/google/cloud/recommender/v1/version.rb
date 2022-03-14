@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Recommender
       module V1
-        VERSION = "0.8.6"
+        VERSION = "0.9.0"
       end
     end
   end

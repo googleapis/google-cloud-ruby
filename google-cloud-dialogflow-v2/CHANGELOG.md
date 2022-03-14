@@ -1,5 +1,21 @@
 # Release History
 
+### 0.15.1 / 2022-03-09
+
+#### Documentation
+
+* update docs to clarify the permissions needed on Cloud storage object
+  * docs: clarified the behavior of language_code in EventInput in the context of a followup event input
+  docs: clarified wording around Cloud Storage usage
+  docs: added a new resource name pattern for ConversationModel
+  * 🦉 Updates from OwlBot post-processor
+
+### 0.15.0 / 2022-03-07
+
+#### Features
+
+* Add ConversationDataset and ConversationModel ([#17688](https://www.github.com/googleapis/google-cloud-ruby/issues/17688))
+
 ### 0.14.0 / 2022-01-21
 
 #### Features

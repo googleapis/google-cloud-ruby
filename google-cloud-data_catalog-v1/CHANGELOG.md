@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 / 2022-02-16
+
+#### Features
+
+* Support for modifications to business context and starring.
+
 ### 0.9.1 / 2022-01-11
 
 #### Documentation

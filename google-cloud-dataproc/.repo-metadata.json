@@ -7,7 +7,7 @@
     "name": "dataproc",
     "name_pretty": "Cloud Dataproc API",
     "product_documentation": "https://cloud.google.com/dataproc",
-    "release_level": "unknown",
+    "release_level": "stable",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
     "ruby-cloud-description": "Manages Hadoop-based clusters and jobs on Google Cloud Platform.",

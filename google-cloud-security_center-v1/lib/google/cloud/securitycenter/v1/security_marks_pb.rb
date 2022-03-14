@@ -2,7 +2,6 @@
 # source: google/cloud/securitycenter/v1/security_marks.proto
 
 require 'google/api/resource_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

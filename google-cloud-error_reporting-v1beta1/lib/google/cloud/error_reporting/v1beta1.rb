@@ -27,6 +27,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/error_reporting/v1beta1"
       #     client = ::Google::Cloud::ErrorReporting::V1beta1::ErrorGroupService::Client.new
       #

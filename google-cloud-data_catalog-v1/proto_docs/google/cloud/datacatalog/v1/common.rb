@@ -21,6 +21,18 @@ module Google
   module Cloud
     module DataCatalog
       module V1
+        # Entry metadata relevant only to the user and private to them.
+        # @!attribute [rw] starred
+        #   @return [::Boolean]
+        #     True if the entry is starred by the user; false otherwise.
+        # @!attribute [rw] star_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Set if the entry is starred; unset otherwise.
+        class PersonalDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # This enum lists all the systems that Data Catalog integrates with.
         module IntegratedSystem
           # Default unknown system.

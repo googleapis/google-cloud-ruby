@@ -121,6 +121,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :INVALID_STREAM_STATE, 5
       value :STREAM_FINALIZED, 6
       value :SCHEMA_MISMATCH_EXTRA_FIELDS, 7
+      value :OFFSET_ALREADY_EXISTS, 8
+      value :OFFSET_OUT_OF_RANGE, 9
     end
   end
 end

@@ -195,8 +195,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name)
-            #     whose Uptime check configurations are listed. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) whose
+            #     Uptime check configurations are listed. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param page_size [::Integer]
@@ -386,8 +387,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The [project](https://cloud.google.com/monitoring/api/v3#project_name) in
-            #     which to create the Uptime check. The format is:
+            #     Required. The
+            #     [project](https://cloud.google.com/monitoring/api/v3#project_name) in which
+            #     to create the Uptime check. The format is:
             #
             #         projects/[PROJECT_ID_OR_NUMBER]
             #   @param uptime_check_config [::Google::Cloud::Monitoring::V3::UptimeCheckConfig, ::Hash]

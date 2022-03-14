@@ -2,10 +2,10 @@
 # source: google/dataflow/v1beta3/templates.proto
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/dataflow/v1beta3/environment_pb'
 require 'google/dataflow/v1beta3/jobs_pb'
 require 'google/rpc/status_pb'
-require 'google/api/client_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -50,6 +50,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :flexrs_goal, :enum, 16, "google.dataflow.v1beta3.FlexResourceSchedulingGoal"
       optional :staging_location, :string, 17
       optional :sdk_container_image, :string, 18
+      optional :disk_size_gb, :int32, 20
+      optional :autoscaling_algorithm, :enum, 21, "google.dataflow.v1beta3.AutoscalingAlgorithm"
+      optional :dump_heap_on_oom, :bool, 22
+      optional :save_heap_dumps_to_gcs_path, :string, 23
+      optional :launcher_machine_type, :string, 24
     end
     add_message "google.dataflow.v1beta3.LaunchFlexTemplateRequest" do
       optional :project_id, :string, 1

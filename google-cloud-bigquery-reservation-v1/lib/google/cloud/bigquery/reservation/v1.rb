@@ -26,6 +26,8 @@ module Google
         ##
         # To load this package, including all its services, and instantiate a client:
         #
+        # @example
+        #
         #     require "google/cloud/bigquery/reservation/v1"
         #     client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
         #

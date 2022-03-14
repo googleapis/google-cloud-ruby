@@ -476,6 +476,64 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
     end
   end
 
+  def test_get_big_query_export
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::BigQueryExport.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_big_query_export_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_big_query_export, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_big_query_export_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_big_query_export({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_big_query_export name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_big_query_export ::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_big_query_export({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_big_query_export(::Google::Cloud::SecurityCenter::V1::GetBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_big_query_export_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_iam_policy
     # Create GRPC objects.
     grpc_response = ::Google::Iam::V1::Policy.new
@@ -1997,6 +2055,253 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientTest < Minitest
 
       # Verify method calls
       assert_equal 5, update_security_marks_client_stub.call_rpc_count
+    end
+  end
+
+  def test_create_big_query_export
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::BigQueryExport.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    big_query_export = {}
+    big_query_export_id = "hello world"
+
+    create_big_query_export_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :create_big_query_export, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::BigQueryExport), request["big_query_export"]
+      assert_equal "hello world", request["big_query_export_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, create_big_query_export_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.create_big_query_export({ parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.create_big_query_export parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.create_big_query_export ::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new(parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.create_big_query_export({ parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.create_big_query_export(::Google::Cloud::SecurityCenter::V1::CreateBigQueryExportRequest.new(parent: parent, big_query_export: big_query_export, big_query_export_id: big_query_export_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, create_big_query_export_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_big_query_export
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_big_query_export_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_big_query_export, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_big_query_export_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_big_query_export({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_big_query_export name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_big_query_export ::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_big_query_export({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_big_query_export(::Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_big_query_export_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_big_query_export
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::BigQueryExport.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    big_query_export = {}
+    update_mask = {}
+
+    update_big_query_export_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_big_query_export, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::SecurityCenter::V1::BigQueryExport), request["big_query_export"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_big_query_export_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_big_query_export big_query_export: big_query_export, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_big_query_export ::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_big_query_export({ big_query_export: big_query_export, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_big_query_export(::Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new(big_query_export: big_query_export, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_big_query_export_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_big_query_exports
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_big_query_exports_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_big_query_exports, name
+      assert_kind_of ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_big_query_exports_client_stub do
+      # Create client
+      client = ::Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_big_query_exports({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_big_query_exports parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_big_query_exports ::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_big_query_exports({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_big_query_exports(::Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_big_query_exports_client_stub.call_rpc_count
     end
   end
 

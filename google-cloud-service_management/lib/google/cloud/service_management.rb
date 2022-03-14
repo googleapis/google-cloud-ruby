@@ -57,7 +57,7 @@ module Google
       #
       # ## About ServiceManager
       #
-      # [Google Service Management API](https://cloud.google.com/service-management/overview)
+      # [Google Service Management API](/service-management/overview)
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.

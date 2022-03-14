@@ -2,7 +2,6 @@
 # source: google/appengine/v1/audit_data.proto
 
 require 'google/appengine/v1/appengine_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

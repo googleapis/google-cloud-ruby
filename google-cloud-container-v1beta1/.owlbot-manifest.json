@@ -42,7 +42,6 @@
     "snippets/cluster_manager/get_cluster.rb",
     "snippets/cluster_manager/get_json_web_keys.rb",
     "snippets/cluster_manager/get_node_pool.rb",
-    "snippets/cluster_manager/get_open_id_config.rb",
     "snippets/cluster_manager/get_operation.rb",
     "snippets/cluster_manager/get_server_config.rb",
     "snippets/cluster_manager/list_clusters.rb",

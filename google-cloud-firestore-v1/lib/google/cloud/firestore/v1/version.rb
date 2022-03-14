@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Firestore
       module V1
-        VERSION = "0.4.6"
+        VERSION = "0.4.7"
       end
     end
   end

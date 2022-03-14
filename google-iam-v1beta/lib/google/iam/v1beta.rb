@@ -24,6 +24,8 @@ module Google
     ##
     # To load this package, including all its services, and instantiate a client:
     #
+    # @example
+    #
     #     require "google/iam/v1beta"
     #     client = ::Google::Iam::V1beta::WorkloadIdentityPools::Client.new
     #

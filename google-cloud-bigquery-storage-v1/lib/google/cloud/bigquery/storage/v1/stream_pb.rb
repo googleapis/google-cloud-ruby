@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :read_options, :message, 8, "google.cloud.bigquery.storage.v1.ReadSession.TableReadOptions"
       repeated :streams, :message, 10, "google.cloud.bigquery.storage.v1.ReadStream"
       optional :estimated_total_bytes_scanned, :int64, 12
+      optional :trace_id, :string, 13
       oneof :schema do
         optional :avro_schema, :message, 4, "google.cloud.bigquery.storage.v1.AvroSchema"
         optional :arrow_schema, :message, 5, "google.cloud.bigquery.storage.v1.ArrowSchema"

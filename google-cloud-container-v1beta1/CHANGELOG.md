@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2022-02-16
+
+#### Features
+
+* Support for additional node configs, including GCFS, Spot VMs, and placement policy
+
 ### 0.8.3 / 2022-01-11
 
 #### Documentation

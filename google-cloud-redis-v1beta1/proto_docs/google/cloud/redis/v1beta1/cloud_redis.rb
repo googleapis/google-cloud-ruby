@@ -33,7 +33,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Google Cloud Redis instance.
+        # A Memorystore for Redis instance.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the resource in this scope including project and
@@ -85,6 +85,13 @@ module Google
         #     If not provided, the service will choose an unused /29 block, for
         #     example, 10.0.0.0/29 or 192.168.0.0/29. For READ_REPLICAS_ENABLED
         #     the default block size is /28.
+        # @!attribute [rw] secondary_ip_range
+        #   @return [::String]
+        #     Optional. Additional IP range for node placement. Required when enabling read
+        #     replicas on an existing instance. For DIRECT_PEERING mode value must be a
+        #     CIDR range of size /28, or "auto". For PRIVATE_SERVICE_ACCESS mode value
+        #     must be the name of an allocated address range associated with the private
+        #     service access connection, or "auto".
         # @!attribute [r] host
         #   @return [::String]
         #     Output only. Hostname or IP address of the exposed Redis endpoint used by
@@ -194,8 +201,10 @@ module Google
         #     endpoint. Standard tier only. Write requests should target 'port'.
         # @!attribute [rw] read_replicas_mode
         #   @return [::Google::Cloud::Redis::V1beta1::Instance::ReadReplicasMode]
-        #     Optional. Read replica mode. Can only be specified when trying to create the
-        #     instance.
+        #     Optional. Read replicas mode for the instance. Defaults to READ_REPLICAS_DISABLED.
+        # @!attribute [rw] persistence_config
+        #   @return [::Google::Cloud::Redis::V1beta1::PersistenceConfig]
+        #     Optional. Persistence configuration parameters
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -301,6 +310,63 @@ module Google
             # If enabled, read endpoint will be provided and the instance can scale
             # up and down the number of replicas. Not valid for basic tier.
             READ_REPLICAS_ENABLED = 2
+          end
+        end
+
+        # Configuration of the persistence functionality.
+        # @!attribute [rw] persistence_mode
+        #   @return [::Google::Cloud::Redis::V1beta1::PersistenceConfig::PersistenceMode]
+        #     Optional. Controls whether Persistence features are enabled.
+        #     If not provided, the existing value will be used.
+        # @!attribute [rw] rdb_snapshot_period
+        #   @return [::Google::Cloud::Redis::V1beta1::PersistenceConfig::SnapshotPeriod]
+        #     Optional. Period between RDB snapshots. Snapshots will be attempted every period
+        #     starting from the provided snapshot start time. For example, a start time
+        #     of 01/01/2033 06:45 and SIX_HOURS snapshot period will do nothing until
+        #     01/01/2033, and then trigger snapshots every day at 06:45, 12:45, 18:45,
+        #     and 00:45 the next day, and so on.
+        #     If not provided, TWENTY_FOUR_HOURS will be used as default.
+        # @!attribute [r] rdb_next_snapshot_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The next time that a snapshot attempt is scheduled to occur.
+        # @!attribute [rw] rdb_snapshot_start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Date and time that the first snapshot was/will be attempted, and to which
+        #     future snapshots will be aligned.
+        #     If not provided, the current time will be used.
+        class PersistenceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Available Persistence modes.
+          module PersistenceMode
+            # Not set.
+            PERSISTENCE_MODE_UNSPECIFIED = 0
+
+            # Persistence is disabled for the instance,
+            # and any existing snapshots are deleted.
+            DISABLED = 1
+
+            # RDB based Persistence is enabled.
+            RDB = 2
+          end
+
+          # Available snapshot periods for scheduling.
+          module SnapshotPeriod
+            # Not set.
+            SNAPSHOT_PERIOD_UNSPECIFIED = 0
+
+            # Snapshot every 1 hour.
+            ONE_HOUR = 3
+
+            # Snapshot every 6 hours.
+            SIX_HOURS = 4
+
+            # Snapshot every 12 hours.
+            TWELVE_HOURS = 5
+
+            # Snapshot every 24 hours.
+            TWENTY_FOUR_HOURS = 6
           end
         end
 

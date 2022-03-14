@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/web_security_scanner/v1beta"
       #     client = ::Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
       #

@@ -37,13 +37,17 @@ flag :protos_path, "--protos-path=PATH" do
   desc "Path to the googleapis protos repo or third_party directory"
 end
 flag :piper_client, "--piper-client=NAME" do
-  desc "Generate by running Bazel from the given piper clinet rather than using googleapis-gen"
+  desc "Generate by running Bazel from the given piper client rather than using googleapis-gen"
 end
 flag :combined_prs do
   desc "Combine all changes into a single pull request"
 end
 flag :enable_tests, "--test" do
   desc "Run CI on each library"
+end
+flag :googleapis_gen_github_token, "--googleapis-gen-github-token=TOKEN" do
+  default(ENV["GOOGLEAPIS_GEN_GITHUB_TOKEN"] || ENV["GITHUB_TOKEN"])
+  desc "GitHub token for cloning the googleapis-gen repository"
 end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
@@ -55,18 +59,18 @@ TMP_DIR_NAME = "tmp"
 include :exec, e: true
 include :terminal
 include :fileutils
+include "yoshi-pr-generator"
 
 def run
   require "psych"
   require "fileutils"
   require "tmpdir"
-  require "pull_request_generator"
-  extend PullRequestGenerator
-  ensure_docker
 
   set :source_path, File.expand_path(source_path) if source_path
+  ensure_source_path
   gems = choose_gems
   Dir.chdir context_directory
+  yoshi_utils.git_ensure_identity
   gem_info = collect_gem_info gems
 
   pull_images
@@ -153,7 +157,6 @@ def determine_bazel_target library_path
 end
 
 def run_bazel gem_info
-  ensure_source_path
   gem_info.each do |name, info|
     info[:bazel_targets].each do |library_path, bazel_target|
       exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
@@ -172,30 +175,21 @@ def ensure_source_path
   at_exit { FileUtils.rm_rf temp_dir }
   Dir.chdir temp_dir do
     exec ["git", "init"]
-    if github_token
-      hostname = "#{github_token}@github.com"
-      log_hostname = "xxxxxxxx@github.com"
-    else
-      hostname = log_hostname = "github.com"
+    token = googleapis_gen_github_token || yoshi_utils.gh_cur_token
+    error "No github token found to load googleapis-gen" unless token
+    username = yoshi_utils.gh_with_token(token) { yoshi_utils.gh_username }
+    add_origin_cmd = ["git", "remote", "add", "origin",
+                      "https://#{username}:#{token}@github.com/googleapis/googleapis-gen.git"]
+    add_origin_log = ["git", "remote", "add", "origin",
+                      "https://xxxxxxxx@github.com/googleapis/googleapis-gen.git"]
+    exec add_origin_cmd, log_cmd: "exec: #{add_origin_log.inspect}"
+    yoshi_utils.gh_without_standard_git_auth do
+      exec ["git", "fetch", "--depth=1", "origin", "HEAD"]
     end
-    add_origin_cmd = ["git", "remote", "add", "origin", "https://#{hostname}/googleapis/googleapis-gen.git"]
-    add_origin_log = ["git", "remote", "add", "origin", "https://#{log_hostname}/googleapis/googleapis-gen.git"]
-    exec add_origin_cmd, log_cmd: add_origin_log.inspect
-    exec ["git", "fetch", "--depth=1", "origin", "HEAD"]
     exec ["git", "branch", "github-head", "FETCH_HEAD"]
     exec ["git", "switch", "github-head"]
   end
   set :source_path, temp_dir
-end
-
-def github_token
-  @github_token ||= ENV["GITHUB_TOKEN"] || begin
-    result = exec ["gh", "auth", "status", "-t"], e: false, out: :capture, err: [:child, :out]
-    if result.success? && result.captured_out =~ /Token: (\w+)/
-      puts "**** found token of size #{Regexp.last_match[1].size}"
-      Regexp.last_match[1]
-    end
-  end
 end
 
 def run_owlbot gem_info
@@ -207,10 +201,12 @@ def run_owlbot gem_info
   File.open temp_config, "w" do |file|
     file.puts Psych.dump combined_config
   end
-  cmd = ["#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code", "--config-file", temp_config]
-  if source_path
-    cmd = ["-v", "#{source_path}:/googleapis-gen"] + cmd + ["--source-repo", "/googleapis-gen"]
-  end
+  cmd = [
+    "-v", "#{source_path}:/googleapis-gen",
+    "#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code",
+    "--config-file", temp_config,
+    "--source-repo", "/googleapis-gen"
+  ]
   docker_run(*cmd)
 end
 
@@ -239,10 +235,10 @@ def process_gems_separate_prs gems, temp_staging_dir
     timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
     branch_name = "owlbot/#{name}-#{timestamp}"
     message = build_commit_message name
-    result = generate_pull_request gem_name: name,
-                                   git_remote: git_remote,
-                                   branch_name: branch_name,
-                                   commit_message: message do
+    result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
+                                        remote: git_remote,
+                                        branch_name: branch_name,
+                                        commit_message: message do
       process_single_gem name, temp_staging_dir
     end
     puts "Results for #{name} (#{index}/#{gems.size})..."
@@ -255,10 +251,10 @@ def process_gems_combined_pr gems, temp_staging_dir
   timestamp = Time.now.utc.strftime("%Y%m%d-%H%M%S")
   branch_name = "owlbot/all-#{timestamp}"
   message = build_commit_message "all gems"
-  result = generate_pull_request gem_name: name,
-                                 git_remote: git_remote,
-                                 branch_name: branch_name,
-                                 commit_message: message do
+  result = yoshi_pr_generator.capture enabled: !git_remote.nil?,
+                                      remote: git_remote,
+                                      branch_name: branch_name,
+                                      commit_message: message do
     gems.each_with_index do |name, index|
       process_single_gem name, temp_staging_dir
       puts "Completed #{name} (#{index}/#{gems.size})..."
@@ -301,14 +297,12 @@ end
 
 def output_result name, result, *style
   case result
-  when :opened
-    puts "#{name}: Created pull request", *style
+  when Integer
+    puts "#{name}: Created pull request #{result}", *style
   when :unchanged
     puts "#{name}: No pull request created because nothing changed", *style
-  when :disabled
-    puts "#{name}: Results left in the local directory", *style
   else
-    puts "#{name}: Unknown result #{result.inspect}", *style
+    puts "#{name}: Results left in the local directory", *style
   end
   result
 end

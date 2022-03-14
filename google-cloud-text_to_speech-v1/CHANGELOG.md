@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.2 / 2022-02-15
+
+#### Documentation
+
+* Minor updates to language_code description
+
 ### 0.5.1 / 2022-01-11
 
 #### Documentation

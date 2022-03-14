@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/artifact_registry/v1"
       #     client = ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
       #

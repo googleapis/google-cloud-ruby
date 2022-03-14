@@ -33,14 +33,15 @@ module Google
         #     "default" application profile will be used.
         # @!attribute [rw] rows
         #   @return [::Google::Cloud::Bigtable::V2::RowSet]
-        #     The row keys and/or ranges to read. If not specified, reads from all rows.
+        #     The row keys and/or ranges to read sequentially. If not specified, reads
+        #     from all rows.
         # @!attribute [rw] filter
         #   @return [::Google::Cloud::Bigtable::V2::RowFilter]
         #     The filter to apply to the contents of the specified row(s). If unset,
         #     reads the entirety of each row.
         # @!attribute [rw] rows_limit
         #   @return [::Integer]
-        #     The read will terminate after committing to N rows' worth of results. The
+        #     The read will stop after committing to N rows' worth of results. The
         #     default (zero) is to return all results.
         class ReadRowsRequest
           include ::Google::Protobuf::MessageExts
@@ -299,6 +300,26 @@ module Google
         #     Whether or not the request's `predicate_filter` yielded any results for
         #     the specified row.
         class CheckAndMutateRowResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for client connection keep-alive and warming.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The unique name of the instance to check permissions for as well as
+        #     respond. Values are of the form `projects/<project>/instances/<instance>`.
+        # @!attribute [rw] app_profile_id
+        #   @return [::String]
+        #     This value specifies routing for replication. If not specified, the
+        #     "default" application profile will be used.
+        class PingAndWarmRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for Bigtable.PingAndWarm connection keepalive and warming.
+        class PingAndWarmResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

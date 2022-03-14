@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.0 / 2022-02-16
+
+#### Features
+
+* Add ReviewDocumentOperationMetadata#question_id field
+* Report the detected symbols in a page
+
 ### 0.2.4 / 2022-01-11
 
 #### Bug Fixes

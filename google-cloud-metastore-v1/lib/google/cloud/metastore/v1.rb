@@ -25,6 +25,8 @@ module Google
       ##
       # To load this package, including all its services, and instantiate a client:
       #
+      # @example
+      #
       #     require "google/cloud/metastore/v1"
       #     client = ::Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
       #

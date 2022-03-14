@@ -75,11 +75,12 @@ module Google
         #     to the finding.
         # @!attribute [rw] event_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     The time at which the event took place, or when an update to the finding
-        #     occurred. For example, if the finding represents an open firewall it would
-        #     capture the time the detector believes the firewall became open. The
-        #     accuracy is determined by the detector. If the finding were to be resolved
-        #     afterward, this time would reflect when the finding was resolved. Must not
+        #     The time the finding was first detected. If an existing finding is updated,
+        #     then this is the time the update occurred.
+        #     For example, if the finding represents an open firewall, this property
+        #     captures the time the detector believes the firewall became open. The
+        #     accuracy is determined by the detector. If the finding is later resolved,
+        #     then this time reflects when the finding was resolved. This must not
         #     be set to a value greater than the current timestamp.
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
@@ -99,7 +100,8 @@ module Google
         # @!attribute [rw] mute
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::Mute]
         #     Indicates the mute state of a finding (either unspecified, muted, unmuted
-        #     or undefined).
+        #     or undefined). Unlike other attributes of a finding, a finding provider
+        #     shouldn't set the value of mute.
         # @!attribute [rw] finding_class
         #   @return [::Google::Cloud::SecurityCenter::V1::Finding::FindingClass]
         #     The class of the finding.
@@ -120,13 +122,22 @@ module Google
         #     Output only. The most recent time this finding was muted or unmuted.
         # @!attribute [r] external_systems
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
-        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
-        #     information and external system finding fields.
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external
+        #     system information and external system finding fields.
+        # @!attribute [rw] mitre_attack
+        #   @return [::Google::Cloud::SecurityCenter::V1::MitreAttack]
+        #     MITRE ATT&CK tactics and techniques related to this finding.
+        #     See: https://attack.mitre.org
+        # @!attribute [rw] access
+        #   @return [::Google::Cloud::SecurityCenter::V1::Access]
+        #     Access details associated to the Finding, such as more information on the
+        #     caller, which method was accessed, from where, etc.
         # @!attribute [rw] mute_initiator
         #   @return [::String]
         #     First known as mute_annotation. Records additional information about the
         #     mute operation e.g. mute config that muted the finding, user who muted the
-        #     finding, etc.
+        #     finding, etc. Unlike other attributes of a finding, a finding provider
+        #     shouldn't set the value of mute.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -254,6 +265,9 @@ module Google
 
             # Describes a security observation that is for informational purposes.
             OBSERVATION = 4
+
+            # Describes an error that prevents some SCC functionality.
+            SCC_ERROR = 5
           end
         end
       end

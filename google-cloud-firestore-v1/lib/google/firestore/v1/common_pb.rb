@@ -2,7 +2,6 @@
 # source: google/firestore/v1/common.proto
 
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 / 2022-02-09
+
+#### Features
+
+* Support for managing Channel and ChannelConnection resources
+
 ### 0.1.4 / 2022-01-11
 
 #### Bug Fixes

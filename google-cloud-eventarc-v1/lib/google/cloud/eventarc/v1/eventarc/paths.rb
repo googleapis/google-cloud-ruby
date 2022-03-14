@@ -25,6 +25,63 @@ module Google
           # Path helper methods for the Eventarc API.
           module Paths
             ##
+            # Create a fully-qualified Channel resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/channels/{channel}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param channel [String]
+            #
+            # @return [::String]
+            def channel_path project:, location:, channel:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/channels/#{channel}"
+            end
+
+            ##
+            # Create a fully-qualified ChannelConnection resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/channelConnections/{channel_connection}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param channel_connection [String]
+            #
+            # @return [::String]
+            def channel_connection_path project:, location:, channel_connection:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/channelConnections/#{channel_connection}"
+            end
+
+            ##
+            # Create a fully-qualified CloudFunction resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/functions/{function}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param function [String]
+            #
+            # @return [::String]
+            def cloud_function_path project:, location:, function:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/functions/#{function}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:

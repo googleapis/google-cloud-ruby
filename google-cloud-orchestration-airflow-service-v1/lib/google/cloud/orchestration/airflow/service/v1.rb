@@ -28,6 +28,8 @@ module Google
           ##
           # To load this package, including all its services, and instantiate a client:
           #
+          # @example
+          #
           #     require "google/cloud/orchestration/airflow/service/v1"
           #     client = ::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client.new
           #

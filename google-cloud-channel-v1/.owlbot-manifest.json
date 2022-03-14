@@ -48,7 +48,6 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
-    "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
     "proto_docs/google/type/money.rb",
     "proto_docs/google/type/postal_address.rb",

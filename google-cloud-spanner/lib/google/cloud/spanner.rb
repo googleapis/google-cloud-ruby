@@ -120,7 +120,7 @@ module Google
 
         Spanner::Project.new(
           Spanner::Service.new(
-            project_id, credentials,
+            project_id, credentials, quota_project: configure.quota_project,
             host: endpoint, timeout: timeout, lib_name: lib_name,
             lib_version: lib_version
           ),

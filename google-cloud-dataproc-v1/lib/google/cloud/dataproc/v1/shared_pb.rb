@@ -36,6 +36,53 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :output_uri, :string, 2
       optional :diagnostic_output_uri, :string, 3
     end
+    add_message "google.cloud.dataproc.v1.GkeClusterConfig" do
+      optional :gke_cluster_target, :string, 2
+      repeated :node_pool_target, :message, 3, "google.cloud.dataproc.v1.GkeNodePoolTarget"
+    end
+    add_message "google.cloud.dataproc.v1.KubernetesClusterConfig" do
+      optional :kubernetes_namespace, :string, 1
+      optional :kubernetes_software_config, :message, 3, "google.cloud.dataproc.v1.KubernetesSoftwareConfig"
+      oneof :config do
+        optional :gke_cluster_config, :message, 2, "google.cloud.dataproc.v1.GkeClusterConfig"
+      end
+    end
+    add_message "google.cloud.dataproc.v1.KubernetesSoftwareConfig" do
+      map :component_version, :string, :string, 1
+      map :properties, :string, :string, 2
+    end
+    add_message "google.cloud.dataproc.v1.GkeNodePoolTarget" do
+      optional :node_pool, :string, 1
+      repeated :roles, :enum, 2, "google.cloud.dataproc.v1.GkeNodePoolTarget.Role"
+      optional :node_pool_config, :message, 3, "google.cloud.dataproc.v1.GkeNodePoolConfig"
+    end
+    add_enum "google.cloud.dataproc.v1.GkeNodePoolTarget.Role" do
+      value :ROLE_UNSPECIFIED, 0
+      value :DEFAULT, 1
+      value :CONTROLLER, 2
+      value :SPARK_DRIVER, 3
+      value :SPARK_EXECUTOR, 4
+    end
+    add_message "google.cloud.dataproc.v1.GkeNodePoolConfig" do
+      optional :config, :message, 2, "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig"
+      repeated :locations, :string, 13
+      optional :autoscaling, :message, 4, "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig"
+    end
+    add_message "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig" do
+      optional :machine_type, :string, 1
+      optional :preemptible, :bool, 10
+      optional :local_ssd_count, :int32, 7
+      repeated :accelerators, :message, 11, "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig"
+      optional :min_cpu_platform, :string, 13
+    end
+    add_message "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig" do
+      optional :accelerator_count, :int64, 1
+      optional :accelerator_type, :string, 2
+    end
+    add_message "google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig" do
+      optional :min_node_count, :int32, 2
+      optional :max_node_count, :int32, 3
+    end
     add_enum "google.cloud.dataproc.v1.Component" do
       value :COMPONENT_UNSPECIFIED, 0
       value :ANACONDA, 5
@@ -69,6 +116,15 @@ module Google
         SparkHistoryServerConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SparkHistoryServerConfig").msgclass
         PeripheralsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.PeripheralsConfig").msgclass
         RuntimeInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.RuntimeInfo").msgclass
+        GkeClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeClusterConfig").msgclass
+        KubernetesClusterConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.KubernetesClusterConfig").msgclass
+        KubernetesSoftwareConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.KubernetesSoftwareConfig").msgclass
+        GkeNodePoolTarget = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeNodePoolTarget").msgclass
+        GkeNodePoolTarget::Role = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeNodePoolTarget.Role").enummodule
+        GkeNodePoolConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeNodePoolConfig").msgclass
+        GkeNodePoolConfig::GkeNodeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodeConfig").msgclass
+        GkeNodePoolConfig::GkeNodePoolAcceleratorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAcceleratorConfig").msgclass
+        GkeNodePoolConfig::GkeNodePoolAutoscalingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.GkeNodePoolConfig.GkeNodePoolAutoscalingConfig").msgclass
         Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Component").enummodule
         FailureAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.FailureAction").enummodule
       end

@@ -361,6 +361,12 @@ module Google
           #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
           #     to import flow from. The format of this URI must be
           #     `gs://<bucket-name>/<object-name>`.
+          #
+          #     Dialogflow performs a read operation for the Cloud Storage object
+          #     on the caller's behalf, so your request authentication must
+          #     have read permissions for the object. For more information, see
+          #     [Dialogflow access
+          #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           # @!attribute [rw] flow_content
           #   @return [::String]
           #     Uncompressed raw byte content for flow.
@@ -411,6 +417,12 @@ module Google
           #     export the flow to. The format of this URI must be
           #     `gs://<bucket-name>/<object-name>`.
           #     If left unspecified, the serialized flow is returned inline.
+          #
+          #     Dialogflow performs a write operation for the Cloud Storage object
+          #     on the caller's behalf, so your request authentication must
+          #     have write permissions for the object. For more information, see
+          #     [Dialogflow access
+          #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           # @!attribute [rw] include_referenced_flows
           #   @return [::Boolean]
           #     Optional. Whether to export flows referenced by the specified flow.

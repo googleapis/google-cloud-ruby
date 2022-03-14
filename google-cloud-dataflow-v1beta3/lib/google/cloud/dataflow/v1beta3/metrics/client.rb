@@ -221,6 +221,20 @@ module Google
                 gapic_version: ::Google::Cloud::Dataflow::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.location
+                header_params["location"] = request.location
+              end
+              if request.job_id
+                header_params["job_id"] = request.job_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
               options.apply_defaults timeout:      @config.rpcs.get_job_metrics.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.get_job_metrics.retry_policy
@@ -319,6 +333,20 @@ module Google
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataflow::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.location
+                header_params["location"] = request.location
+              end
+              if request.job_id
+                header_params["job_id"] = request.job_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_job_execution_details.timeout,
                                      metadata:     metadata,
@@ -426,6 +454,23 @@ module Google
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::Dataflow::V1beta3::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+              if request.location
+                header_params["location"] = request.location
+              end
+              if request.job_id
+                header_params["job_id"] = request.job_id
+              end
+              if request.stage_id
+                header_params["stage_id"] = request.stage_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_stage_execution_details.timeout,
                                      metadata:     metadata,
