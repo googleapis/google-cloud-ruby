@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 / 2022-03-15
+
+#### Features
+
+* use the new nonstandard LRO helpers ([#17827](https://www.github.com/googleapis/google-cloud-ruby/issues/17827))
+
 ### 1.1.0 / 2022-02-15
 
 #### Features
