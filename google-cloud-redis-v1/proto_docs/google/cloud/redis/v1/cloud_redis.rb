@@ -33,7 +33,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Google Cloud Redis instance.
+        # A Memorystore for Redis instance.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Unique name of the resource in this scope including project and
@@ -85,6 +85,13 @@ module Google
         #     If not provided, the service will choose an unused /29 block, for
         #     example, 10.0.0.0/29 or 192.168.0.0/29.  For READ_REPLICAS_ENABLED
         #     the default block size is /28.
+        # @!attribute [rw] secondary_ip_range
+        #   @return [::String]
+        #     Optional. Additional IP range for node placement. Required when enabling read
+        #     replicas on an existing instance. For DIRECT_PEERING mode value must be a
+        #     CIDR range of size /28, or "auto". For PRIVATE_SERVICE_ACCESS mode value
+        #     must be the name of an allocated address range associated with the private
+        #     service access connection, or "auto".
         # @!attribute [r] host
         #   @return [::String]
         #     Output only. Hostname or IP address of the exposed Redis endpoint used by
@@ -152,11 +159,25 @@ module Google
         #   @return [::Google::Cloud::Redis::V1::Instance::ConnectMode]
         #     Optional. The network connect mode of the Redis instance.
         #     If not provided, the connect mode defaults to DIRECT_PEERING.
+        # @!attribute [rw] auth_enabled
+        #   @return [::Boolean]
+        #     Optional. Indicates whether OSS Redis AUTH is enabled for the instance. If set to
+        #     "true" AUTH is enabled on the instance. Default value is "false" meaning
+        #     AUTH is disabled.
+        # @!attribute [r] server_ca_certs
+        #   @return [::Array<::Google::Cloud::Redis::V1::TlsCertificate>]
+        #     Output only. List of server CA certificates for the instance.
+        # @!attribute [rw] transit_encryption_mode
+        #   @return [::Google::Cloud::Redis::V1::Instance::TransitEncryptionMode]
+        #     Optional. The TLS mode of the Redis instance.
+        #     If not provided, TLS is disabled for the instance.
         # @!attribute [rw] replica_count
         #   @return [::Integer]
-        #     Optional. The number of replica nodes. Valid range for standard tier
-        #     is [1-5] and defaults to 1. Valid value for basic tier is 0 and defaults
-        #     to 0.
+        #     Optional. The number of replica nodes. The valid range for the Standard Tier with
+        #     read replicas enabled is [1-5] and defaults to 2. If read replicas are not
+        #     enabled for a Standard Tier instance, the only valid value is 1 and the
+        #     default is 1. The valid value for basic tier is 0 and the default is also
+        #     0.
         # @!attribute [r] nodes
         #   @return [::Array<::Google::Cloud::Redis::V1::NodeInfo>]
         #     Output only. Info per node.
@@ -172,7 +193,7 @@ module Google
         #     endpoint. Standard tier only. Write requests should target 'port'.
         # @!attribute [rw] read_replicas_mode
         #   @return [::Google::Cloud::Redis::V1::Instance::ReadReplicasMode]
-        #     Optional. Read replica mode.
+        #     Optional. Read replicas mode for the instance. Defaults to READ_REPLICAS_DISABLED.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -253,10 +274,22 @@ module Google
             PRIVATE_SERVICE_ACCESS = 2
           end
 
+          # Available TLS modes.
+          module TransitEncryptionMode
+            # Not set.
+            TRANSIT_ENCRYPTION_MODE_UNSPECIFIED = 0
+
+            # Client to Server traffic encryption enabled with server authentication.
+            SERVER_AUTHENTICATION = 1
+
+            # TLS is disabled for the instance.
+            DISABLED = 2
+          end
+
           # Read replicas mode.
           module ReadReplicasMode
-            # If not set, Memorystore Redis backend will pick the mode based on other fields in
-            # the request.
+            # If not set, Memorystore Redis backend will default to
+            # READ_REPLICAS_DISABLED.
             READ_REPLICAS_MODE_UNSPECIFIED = 0
 
             # If disabled, read endpoint will not be provided and the instance cannot
@@ -264,7 +297,7 @@ module Google
             READ_REPLICAS_DISABLED = 1
 
             # If enabled, read endpoint will be provided and the instance can scale
-            # up and down the number of replicas.
+            # up and down the number of replicas. Not valid for basic tier.
             READ_REPLICAS_ENABLED = 2
           end
         end
@@ -326,6 +359,26 @@ module Google
         #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
         #     where `location_id` refers to a GCP region.
         class GetInstanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#get_instance_auth_string GetInstanceAuthString}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        class GetInstanceAuthStringRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Instance AUTH string details.
+        # @!attribute [rw] auth_string
+        #   @return [::String]
+        #     AUTH string set on the instance.
+        class InstanceAuthString
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -550,6 +603,31 @@ module Google
         # Defines specific information for a particular zone. Currently empty and
         # reserved for future use only.
         class ZoneMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # TlsCertificate Resource
+        # @!attribute [rw] serial_number
+        #   @return [::String]
+        #     Serial number, as extracted from the certificate.
+        # @!attribute [rw] cert
+        #   @return [::String]
+        #     PEM representation.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the certificate was created in [RFC
+        #     3339](https://tools.ietf.org/html/rfc3339) format, for example
+        #     `2020-05-18T00:00:00.094Z`.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the certificate expires in [RFC
+        #     3339](https://tools.ietf.org/html/rfc3339) format, for example
+        #     `2020-05-18T00:00:00.094Z`.
+        # @!attribute [rw] sha1_fingerprint
+        #   @return [::String]
+        #     Sha1 Fingerprint of the certificate.
+        class TlsCertificate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

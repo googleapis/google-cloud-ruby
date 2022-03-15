@@ -82,6 +82,8 @@ module Google
 
                 default_config.rpcs.get_instance.timeout = 600.0
 
+                default_config.rpcs.get_instance_auth_string.timeout = 600.0
+
                 default_config.rpcs.create_instance.timeout = 600.0
 
                 default_config.rpcs.update_instance.timeout = 600.0
@@ -382,6 +384,95 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @cloud_redis_stub.call_rpc :get_instance, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the AUTH string for a Redis instance. If AUTH is not enabled for the
+            # instance the response will be empty. This information is not included in
+            # the details returned to GetInstance.
+            #
+            # @overload get_instance_auth_string(request, options = nil)
+            #   Pass arguments to `get_instance_auth_string` via a request object, either of type
+            #   {::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_instance_auth_string(name: nil)
+            #   Pass arguments to `get_instance_auth_string` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Redis instance resource name using the form:
+            #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+            #     where `location_id` refers to a GCP region.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Redis::V1::InstanceAuthString]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Redis::V1::InstanceAuthString]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/redis/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Redis::V1::CloudRedis::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Redis::V1::GetInstanceAuthStringRequest.new
+            #
+            #   # Call the get_instance_auth_string method.
+            #   result = client.get_instance_auth_string request
+            #
+            #   # The returned object is of type Google::Cloud::Redis::V1::InstanceAuthString.
+            #   p result
+            #
+            def get_instance_auth_string request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_instance_auth_string.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Redis::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_instance_auth_string.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_instance_auth_string.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_redis_stub.call_rpc :get_instance_auth_string, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1259,6 +1350,11 @@ module Google
                 #
                 attr_reader :get_instance
                 ##
+                # RPC-specific configuration for `get_instance_auth_string`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_instance_auth_string
+                ##
                 # RPC-specific configuration for `create_instance`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1300,6 +1396,8 @@ module Google
                   @list_instances = ::Gapic::Config::Method.new list_instances_config
                   get_instance_config = parent_rpcs.get_instance if parent_rpcs.respond_to? :get_instance
                   @get_instance = ::Gapic::Config::Method.new get_instance_config
+                  get_instance_auth_string_config = parent_rpcs.get_instance_auth_string if parent_rpcs.respond_to? :get_instance_auth_string
+                  @get_instance_auth_string = ::Gapic::Config::Method.new get_instance_auth_string_config
                   create_instance_config = parent_rpcs.create_instance if parent_rpcs.respond_to? :create_instance
                   @create_instance = ::Gapic::Config::Method.new create_instance_config
                   update_instance_config = parent_rpcs.update_instance if parent_rpcs.respond_to? :update_instance
