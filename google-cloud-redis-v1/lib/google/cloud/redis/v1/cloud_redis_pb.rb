@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :alternative_location_id, :string, 5
       optional :redis_version, :string, 7
       optional :reserved_ip_range, :string, 9
+      optional :secondary_ip_range, :string, 30
       optional :host, :string, 10
       optional :port, :int32, 11
       optional :current_location_id, :string, 12
@@ -36,6 +37,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :authorized_network, :string, 20
       optional :persistence_iam_identity, :string, 21
       optional :connect_mode, :enum, 22, "google.cloud.redis.v1.Instance.ConnectMode"
+      optional :auth_enabled, :bool, 23
+      repeated :server_ca_certs, :message, 25, "google.cloud.redis.v1.TlsCertificate"
+      optional :transit_encryption_mode, :enum, 26, "google.cloud.redis.v1.Instance.TransitEncryptionMode"
       optional :replica_count, :int32, 31
       repeated :nodes, :message, 32, "google.cloud.redis.v1.NodeInfo"
       optional :read_endpoint, :string, 33
@@ -63,6 +67,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DIRECT_PEERING, 1
       value :PRIVATE_SERVICE_ACCESS, 2
     end
+    add_enum "google.cloud.redis.v1.Instance.TransitEncryptionMode" do
+      value :TRANSIT_ENCRYPTION_MODE_UNSPECIFIED, 0
+      value :SERVER_AUTHENTICATION, 1
+      value :DISABLED, 2
+    end
     add_enum "google.cloud.redis.v1.Instance.ReadReplicasMode" do
       value :READ_REPLICAS_MODE_UNSPECIFIED, 0
       value :READ_REPLICAS_DISABLED, 1
@@ -80,6 +89,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.redis.v1.GetInstanceRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.redis.v1.GetInstanceAuthStringRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.redis.v1.InstanceAuthString" do
+      optional :auth_string, :string, 1
     end
     add_message "google.cloud.redis.v1.CreateInstanceRequest" do
       optional :parent, :string, 1
@@ -144,6 +159,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.redis.v1.ZoneMetadata" do
     end
+    add_message "google.cloud.redis.v1.TlsCertificate" do
+      optional :serial_number, :string, 1
+      optional :cert, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :expire_time, :message, 4, "google.protobuf.Timestamp"
+      optional :sha1_fingerprint, :string, 5
+    end
   end
 end
 
@@ -156,10 +178,13 @@ module Google
         Instance::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.State").enummodule
         Instance::Tier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.Tier").enummodule
         Instance::ConnectMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.ConnectMode").enummodule
+        Instance::TransitEncryptionMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.TransitEncryptionMode").enummodule
         Instance::ReadReplicasMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.ReadReplicasMode").enummodule
         ListInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ListInstancesRequest").msgclass
         ListInstancesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ListInstancesResponse").msgclass
         GetInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GetInstanceRequest").msgclass
+        GetInstanceAuthStringRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GetInstanceAuthStringRequest").msgclass
+        InstanceAuthString = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.InstanceAuthString").msgclass
         CreateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.CreateInstanceRequest").msgclass
         UpdateInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.UpdateInstanceRequest").msgclass
         UpgradeInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.UpgradeInstanceRequest").msgclass
@@ -175,6 +200,7 @@ module Google
         OperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.OperationMetadata").msgclass
         LocationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.LocationMetadata").msgclass
         ZoneMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ZoneMetadata").msgclass
+        TlsCertificate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.TlsCertificate").msgclass
       end
     end
   end

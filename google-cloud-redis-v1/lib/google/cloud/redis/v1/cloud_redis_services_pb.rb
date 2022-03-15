@@ -59,6 +59,10 @@ module Google
             rpc :ListInstances, ::Google::Cloud::Redis::V1::ListInstancesRequest, ::Google::Cloud::Redis::V1::ListInstancesResponse
             # Gets the details of a specific Redis instance.
             rpc :GetInstance, ::Google::Cloud::Redis::V1::GetInstanceRequest, ::Google::Cloud::Redis::V1::Instance
+            # Gets the AUTH string for a Redis instance. If AUTH is not enabled for the
+            # instance the response will be empty. This information is not included in
+            # the details returned to GetInstance.
+            rpc :GetInstanceAuthString, ::Google::Cloud::Redis::V1::GetInstanceAuthStringRequest, ::Google::Cloud::Redis::V1::InstanceAuthString
             # Creates a Redis instance based on the specified tier and memory size.
             #
             # By default, the instance is accessible from the project's
