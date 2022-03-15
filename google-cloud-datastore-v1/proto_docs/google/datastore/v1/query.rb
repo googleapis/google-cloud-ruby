@@ -215,23 +215,68 @@ module Google
             # Unspecified. This value must not be used.
             OPERATOR_UNSPECIFIED = 0
 
-            # Less than.
+            # The given `property` is less than the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             LESS_THAN = 1
 
-            # Less than or equal.
+            # The given `property` is less than or equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             LESS_THAN_OR_EQUAL = 2
 
-            # Greater than.
+            # The given `property` is greater than the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             GREATER_THAN = 3
 
-            # Greater than or equal.
+            # The given `property` is greater than or equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * That `property` comes first in `order_by`.
             GREATER_THAN_OR_EQUAL = 4
 
-            # Equal.
+            # The given `property` is equal to the given `value`.
             EQUAL = 5
 
-            # Has ancestor.
+            # The given `property` is equal to at least one value in the given array.
+            #
+            # Requires:
+            #
+            # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+            # * No other `IN` or `NOT_IN` is in the same query.
+            IN = 6
+
+            # The given `property` is not equal to the given `value`.
+            #
+            # Requires:
+            #
+            # * No other `NOT_EQUAL` or `NOT_IN` is in the same query.
+            # * That `property` comes first in the `order_by`.
+            NOT_EQUAL = 9
+
+            # Limit the result set to the given entity and its descendants.
+            #
+            # Requires:
+            #
+            # * That `value` is an entity key.
             HAS_ANCESTOR = 11
+
+            # The value of the `property` is not in the given array.
+            #
+            # Requires:
+            #
+            # * That `value` is a non-empty `ArrayValue` with at most 10 values.
+            # * No other `IN`, `NOT_IN`, `NOT_EQUAL` is in the same query.
+            # * That `field` comes first in the `order_by`.
+            NOT_IN = 13
           end
         end
 
