@@ -59,6 +59,11 @@
               "methods": [
                 "delete_instance"
               ]
+            },
+            "RescheduleMaintenance": {
+              "methods": [
+                "reschedule_maintenance"
+              ]
             }
           }
         }

@@ -171,6 +171,14 @@ module Google
         #   @return [::Google::Cloud::Redis::V1::Instance::TransitEncryptionMode]
         #     Optional. The TLS mode of the Redis instance.
         #     If not provided, TLS is disabled for the instance.
+        # @!attribute [rw] maintenance_policy
+        #   @return [::Google::Cloud::Redis::V1::MaintenancePolicy]
+        #     Optional. The maintenance policy for the instance. If not provided,
+        #     maintenance events can be performed at any time.
+        # @!attribute [r] maintenance_schedule
+        #   @return [::Google::Cloud::Redis::V1::MaintenanceSchedule]
+        #     Output only. Date and time of upcoming maintenance events which have been
+        #     scheduled.
         # @!attribute [rw] replica_count
         #   @return [::Integer]
         #     Optional. The number of replica nodes. The valid range for the Standard Tier with
@@ -300,6 +308,98 @@ module Google
             # up and down the number of replicas. Not valid for basic tier.
             READ_REPLICAS_ENABLED = 2
           end
+        end
+
+        # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#reschedule_maintenance RescheduleMaintenance}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Redis instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        # @!attribute [rw] reschedule_type
+        #   @return [::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest::RescheduleType]
+        #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+        # @!attribute [rw] schedule_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp when the maintenance shall be rescheduled to if
+        #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+        #     example `2012-11-15T16:19:00.094Z`.
+        class RescheduleMaintenanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Reschedule options.
+          module RescheduleType
+            # Not set.
+            RESCHEDULE_TYPE_UNSPECIFIED = 0
+
+            # If the user wants to schedule the maintenance to happen now.
+            IMMEDIATE = 1
+
+            # If the user wants to use the existing maintenance policy to find the
+            # next available window.
+            NEXT_AVAILABLE_WINDOW = 2
+
+            # If the user wants to reschedule the maintenance to a specific time.
+            SPECIFIC_TIME = 3
+          end
+        end
+
+        # Maintenance policy for an instance.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was last updated.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Optional. Description of what this policy is for. Create/Update methods
+        #     return INVALID_ARGUMENT if the length is greater than 512.
+        # @!attribute [rw] weekly_maintenance_window
+        #   @return [::Array<::Google::Cloud::Redis::V1::WeeklyMaintenanceWindow>]
+        #     Optional. Maintenance window that is applied to resources covered by this
+        #     policy. Minimum 1. For the current version, the maximum number of
+        #     weekly_window is expected to be one.
+        class MaintenancePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Time window in which disruptive maintenance updates occur. Non-disruptive
+        # updates can occur inside or outside this window.
+        # @!attribute [rw] day
+        #   @return [::Google::Type::DayOfWeek]
+        #     Required. The day of week that maintenance updates occur.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Type::TimeOfDay]
+        #     Required. Start time of the window in UTC time.
+        # @!attribute [r] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Output only. Duration of the maintenance window. The current window is fixed at 1 hour.
+        class WeeklyMaintenanceWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Upcoming maintenance schedule. If no maintenance is scheduled, fields are not
+        # populated.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of any upcoming scheduled maintenance for this instance.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of any upcoming scheduled maintenance for this instance.
+        # @!attribute [rw] can_reschedule
+        #   @return [::Boolean]
+        #     If the scheduled maintenance can be rescheduled, default is true.
+        # @!attribute [r] schedule_deadline_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The deadline that the maintenance schedule start time can not go beyond,
+        #     including reschedule.
+        class MaintenanceSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for {::Google::Cloud::Redis::V1::CloudRedis::Client#list_instances ListInstances}.

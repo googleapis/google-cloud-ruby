@@ -6,8 +6,11 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
+require 'google/type/dayofweek_pb'
+require 'google/type/timeofday_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -40,6 +43,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :auth_enabled, :bool, 23
       repeated :server_ca_certs, :message, 25, "google.cloud.redis.v1.TlsCertificate"
       optional :transit_encryption_mode, :enum, 26, "google.cloud.redis.v1.Instance.TransitEncryptionMode"
+      optional :maintenance_policy, :message, 27, "google.cloud.redis.v1.MaintenancePolicy"
+      optional :maintenance_schedule, :message, 28, "google.cloud.redis.v1.MaintenanceSchedule"
       optional :replica_count, :int32, 31
       repeated :nodes, :message, 32, "google.cloud.redis.v1.NodeInfo"
       optional :read_endpoint, :string, 33
@@ -76,6 +81,34 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :READ_REPLICAS_MODE_UNSPECIFIED, 0
       value :READ_REPLICAS_DISABLED, 1
       value :READ_REPLICAS_ENABLED, 2
+    end
+    add_message "google.cloud.redis.v1.RescheduleMaintenanceRequest" do
+      optional :name, :string, 1
+      optional :reschedule_type, :enum, 2, "google.cloud.redis.v1.RescheduleMaintenanceRequest.RescheduleType"
+      optional :schedule_time, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_enum "google.cloud.redis.v1.RescheduleMaintenanceRequest.RescheduleType" do
+      value :RESCHEDULE_TYPE_UNSPECIFIED, 0
+      value :IMMEDIATE, 1
+      value :NEXT_AVAILABLE_WINDOW, 2
+      value :SPECIFIC_TIME, 3
+    end
+    add_message "google.cloud.redis.v1.MaintenancePolicy" do
+      optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :update_time, :message, 2, "google.protobuf.Timestamp"
+      optional :description, :string, 3
+      repeated :weekly_maintenance_window, :message, 4, "google.cloud.redis.v1.WeeklyMaintenanceWindow"
+    end
+    add_message "google.cloud.redis.v1.WeeklyMaintenanceWindow" do
+      optional :day, :enum, 1, "google.type.DayOfWeek"
+      optional :start_time, :message, 2, "google.type.TimeOfDay"
+      optional :duration, :message, 3, "google.protobuf.Duration"
+    end
+    add_message "google.cloud.redis.v1.MaintenanceSchedule" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+      optional :can_reschedule, :bool, 3
+      optional :schedule_deadline_time, :message, 5, "google.protobuf.Timestamp"
     end
     add_message "google.cloud.redis.v1.ListInstancesRequest" do
       optional :parent, :string, 1
@@ -180,6 +213,11 @@ module Google
         Instance::ConnectMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.ConnectMode").enummodule
         Instance::TransitEncryptionMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.TransitEncryptionMode").enummodule
         Instance::ReadReplicasMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.Instance.ReadReplicasMode").enummodule
+        RescheduleMaintenanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.RescheduleMaintenanceRequest").msgclass
+        RescheduleMaintenanceRequest::RescheduleType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.RescheduleMaintenanceRequest.RescheduleType").enummodule
+        MaintenancePolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.MaintenancePolicy").msgclass
+        WeeklyMaintenanceWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.WeeklyMaintenanceWindow").msgclass
+        MaintenanceSchedule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.MaintenanceSchedule").msgclass
         ListInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ListInstancesRequest").msgclass
         ListInstancesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.ListInstancesResponse").msgclass
         GetInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.redis.v1.GetInstanceRequest").msgclass

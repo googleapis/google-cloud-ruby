@@ -107,6 +107,9 @@ module Google
             # Deletes a specific Redis instance.  Instance stops serving and data is
             # deleted.
             rpc :DeleteInstance, ::Google::Cloud::Redis::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
+            # Reschedule maintenance for a given instance in a given project and
+            # location.
+            rpc :RescheduleMaintenance, ::Google::Cloud::Redis::V1::RescheduleMaintenanceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
