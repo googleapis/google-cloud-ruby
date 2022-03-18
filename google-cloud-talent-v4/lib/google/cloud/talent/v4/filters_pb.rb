@@ -6,7 +6,6 @@ require 'google/cloud/talent/v4/common_pb'
 require 'google/protobuf/duration_pb'
 require 'google/type/latlng_pb'
 require 'google/type/timeofday_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
