@@ -7,7 +7,6 @@ require 'google/protobuf/wrappers_pb'
 require 'google/type/latlng_pb'
 require 'google/type/money_pb'
 require 'google/type/postal_address_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
