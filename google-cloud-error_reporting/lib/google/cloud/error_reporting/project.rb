@@ -111,7 +111,7 @@ module Google
         alias project project_id
 
         ##
-        # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to 
+        # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to
         # Error Reporting service.
         #
         # @example
