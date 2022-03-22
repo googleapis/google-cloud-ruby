@@ -21,7 +21,7 @@ module Google
       #
       # Google::Cloud::ErrorReporting::Middleware defines a Rack Middleware
       # that can automatically catch upstream exceptions and report them
-      # to Stackdriver Error Reporting.
+      # to Error Reporting.
       #
       class Middleware
         EXCEPTION_KEYS = ["sinatra.error", "rack.exception"].freeze
@@ -65,7 +65,7 @@ module Google
         ##
         # Implements the mandatory Rack Middleware call method.
         #
-        # Catch all Exceptions from upstream and report them to Stackdriver
+        # Catch all Exceptions from upstream and report them to
         # Error Reporting. Unless the exception's class is defined to be ignored
         # by this Middleware.
         #
@@ -94,7 +94,7 @@ module Google
         end
 
         ##
-        # Report an given exception to Stackdriver Error Reporting.
+        # Report an given exception to Error Reporting.
         #
         # While it reports most of the exceptions. Certain Rails exceptions that
         # maps to a HTTP status code less than 500 will be treated as not the

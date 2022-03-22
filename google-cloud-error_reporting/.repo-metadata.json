@@ -5,7 +5,7 @@
     "distribution_name": "google-cloud-error_reporting",
     "language": "ruby",
     "name": "clouderrorreporting",
-    "name_pretty": "Cloud Error Reporting API",
+    "name_pretty": "Error Reporting API",
     "product_documentation": "https://cloud.google.com/error-reporting",
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
