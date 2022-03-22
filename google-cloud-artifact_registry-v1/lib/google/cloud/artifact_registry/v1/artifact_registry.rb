@@ -24,6 +24,7 @@ require "google/cloud/artifact_registry/v1/version"
 
 require "google/cloud/artifact_registry/v1/artifact_registry/credentials"
 require "google/cloud/artifact_registry/v1/artifact_registry/paths"
+require "google/cloud/artifact_registry/v1/artifact_registry/operations"
 require "google/cloud/artifact_registry/v1/artifact_registry/client"
 
 module Google

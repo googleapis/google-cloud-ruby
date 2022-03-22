@@ -47,10 +47,69 @@ module Google
 
             # Lists docker images.
             rpc :ListDockerImages, ::Google::Cloud::ArtifactRegistry::V1::ListDockerImagesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListDockerImagesResponse
+            # Gets a docker image.
+            rpc :GetDockerImage, ::Google::Cloud::ArtifactRegistry::V1::GetDockerImageRequest, ::Google::Cloud::ArtifactRegistry::V1::DockerImage
+            # Imports Apt artifacts. The returned Operation will complete once the
+            # resources are imported. Package, Version, and File resources are created
+            # based on the imported artifacts. Imported artifacts that conflict with
+            # existing resources are ignored.
+            rpc :ImportAptArtifacts, ::Google::Cloud::ArtifactRegistry::V1::ImportAptArtifactsRequest, ::Google::Longrunning::Operation
+            # Imports Yum (RPM) artifacts. The returned Operation will complete once the
+            # resources are imported. Package, Version, and File resources are created
+            # based on the imported artifacts. Imported artifacts that conflict with
+            # existing resources are ignored.
+            rpc :ImportYumArtifacts, ::Google::Cloud::ArtifactRegistry::V1::ImportYumArtifactsRequest, ::Google::Longrunning::Operation
             # Lists repositories.
             rpc :ListRepositories, ::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListRepositoriesResponse
             # Gets a repository.
             rpc :GetRepository, ::Google::Cloud::ArtifactRegistry::V1::GetRepositoryRequest, ::Google::Cloud::ArtifactRegistry::V1::Repository
+            # Creates a repository. The returned Operation will finish once the
+            # repository has been created. Its response will be the created Repository.
+            rpc :CreateRepository, ::Google::Cloud::ArtifactRegistry::V1::CreateRepositoryRequest, ::Google::Longrunning::Operation
+            # Updates a repository.
+            rpc :UpdateRepository, ::Google::Cloud::ArtifactRegistry::V1::UpdateRepositoryRequest, ::Google::Cloud::ArtifactRegistry::V1::Repository
+            # Deletes a repository and all of its contents. The returned Operation will
+            # finish once the repository has been deleted. It will not have any Operation
+            # metadata and will return a google.protobuf.Empty response.
+            rpc :DeleteRepository, ::Google::Cloud::ArtifactRegistry::V1::DeleteRepositoryRequest, ::Google::Longrunning::Operation
+            # Lists packages.
+            rpc :ListPackages, ::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListPackagesResponse
+            # Gets a package.
+            rpc :GetPackage, ::Google::Cloud::ArtifactRegistry::V1::GetPackageRequest, ::Google::Cloud::ArtifactRegistry::V1::Package
+            # Deletes a package and all of its versions and tags. The returned operation
+            # will complete once the package has been deleted.
+            rpc :DeletePackage, ::Google::Cloud::ArtifactRegistry::V1::DeletePackageRequest, ::Google::Longrunning::Operation
+            # Lists versions.
+            rpc :ListVersions, ::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest, ::Google::Cloud::ArtifactRegistry::V1::ListVersionsResponse
+            # Gets a version
+            rpc :GetVersion, ::Google::Cloud::ArtifactRegistry::V1::GetVersionRequest, ::Google::Cloud::ArtifactRegistry::V1::Version
+            # Deletes a version and all of its content. The returned operation will
+            # complete once the version has been deleted.
+            rpc :DeleteVersion, ::Google::Cloud::ArtifactRegistry::V1::DeleteVersionRequest, ::Google::Longrunning::Operation
+            # Lists files.
+            rpc :ListFiles, ::Google::Cloud::ArtifactRegistry::V1::ListFilesRequest, ::Google::Cloud::ArtifactRegistry::V1::ListFilesResponse
+            # Gets a file.
+            rpc :GetFile, ::Google::Cloud::ArtifactRegistry::V1::GetFileRequest, ::Google::Cloud::ArtifactRegistry::V1::File
+            # Lists tags.
+            rpc :ListTags, ::Google::Cloud::ArtifactRegistry::V1::ListTagsRequest, ::Google::Cloud::ArtifactRegistry::V1::ListTagsResponse
+            # Gets a tag.
+            rpc :GetTag, ::Google::Cloud::ArtifactRegistry::V1::GetTagRequest, ::Google::Cloud::ArtifactRegistry::V1::Tag
+            # Creates a tag.
+            rpc :CreateTag, ::Google::Cloud::ArtifactRegistry::V1::CreateTagRequest, ::Google::Cloud::ArtifactRegistry::V1::Tag
+            # Updates a tag.
+            rpc :UpdateTag, ::Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest, ::Google::Cloud::ArtifactRegistry::V1::Tag
+            # Deletes a tag.
+            rpc :DeleteTag, ::Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest, ::Google::Protobuf::Empty
+            # Updates the IAM policy for a given resource.
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Gets the IAM policy for a given resource.
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Tests if the caller has a list of permissions on a resource.
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+            # Retrieves the Settings for the Project.
+            rpc :GetProjectSettings, ::Google::Cloud::ArtifactRegistry::V1::GetProjectSettingsRequest, ::Google::Cloud::ArtifactRegistry::V1::ProjectSettings
+            # Updates the Settings for the Project.
+            rpc :UpdateProjectSettings, ::Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest, ::Google::Cloud::ArtifactRegistry::V1::ProjectSettings
           end
 
           Stub = Service.rpc_stub_class
