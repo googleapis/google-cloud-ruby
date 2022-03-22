@@ -1,5 +1,13 @@
 # Release History
 
+### 0.8.1 / 2022-03-21
+
+#### Bug Fixes
+
+* remove unused imports from google/spanner/* ([#17893](https://www.github.com/googleapis/google-cloud-ruby/issues/17893))
+  * fix: remove unused imports from google/spanner/*
+  * 🦉 Updates from OwlBot post-processor
+
 ### 0.8.0 / 2022-02-15
 
 #### Features
