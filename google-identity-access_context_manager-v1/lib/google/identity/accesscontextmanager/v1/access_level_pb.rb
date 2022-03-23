@@ -5,7 +5,6 @@ require 'google/api/resource_pb'
 require 'google/identity/accesscontextmanager/type/device_resources_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/expr_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
