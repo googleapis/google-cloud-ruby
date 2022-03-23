@@ -292,6 +292,42 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
           end
+
+          # A tablet is a defined by a start and end key and is explained in
+          # https://cloud.google.com/bigtable/docs/overview#architecture and
+          # https://cloud.google.com/bigtable/docs/performance#optimization.
+          # A Hot tablet is a tablet that exhibits high average cpu usage during the time
+          # interval from start time to end time.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The unique name of the hot tablet. Values are of the form
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}/hotTablets/[a-zA-Z0-9_-]*`.
+          # @!attribute [rw] table_name
+          #   @return [::String]
+          #     Name of the table that contains the tablet. Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
+          # @!attribute [r] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The start time of the hot tablet.
+          # @!attribute [r] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. The end time of the hot tablet.
+          # @!attribute [rw] start_key
+          #   @return [::String]
+          #     Tablet Start Key (inclusive).
+          # @!attribute [rw] end_key
+          #   @return [::String]
+          #     Tablet End Key (inclusive).
+          # @!attribute [r] node_cpu_usage_percent
+          #   @return [::Float]
+          #     Output only. The average CPU usage spent by a node on this tablet over the start_time to
+          #     end_time time range. The percentage is the amount of CPU used by the node
+          #     to serve the tablet, from 0% (tablet was not interacted with) to 100% (the
+          #     node spent all cycles serving the hot tablet).
+          class HotTablet
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

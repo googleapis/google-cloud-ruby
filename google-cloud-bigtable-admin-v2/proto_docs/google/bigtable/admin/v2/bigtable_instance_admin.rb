@@ -399,6 +399,60 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Request message for BigtableInstanceAdmin.ListHotTablets.
+          # @!attribute [rw] parent
+          #   @return [::String]
+          #     Required. The cluster name to list hot tablets.
+          #     Value is in the following form:
+          #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The start time to list hot tablets. The hot tablets in the response will
+          #     have start times between the requested start time and end time. Start time
+          #     defaults to Now if it is unset, and end time defaults to Now - 24 hours if
+          #     it is unset. The start time should be less than the end time, and the
+          #     maximum allowed time range between start time and end time is 48 hours.
+          #     Start time and end time should have values between Now and Now - 14 days.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The end time to list hot tablets.
+          # @!attribute [rw] page_size
+          #   @return [::Integer]
+          #     Maximum number of results per page.
+          #
+          #     A page_size that is empty or zero lets the server choose the number of
+          #     items to return. A page_size which is strictly positive will return at most
+          #     that many items. A negative page_size will cause an error.
+          #
+          #     Following the first request, subsequent paginated calls do not need a
+          #     page_size field. If a page_size is set in subsequent calls, it must match
+          #     the page_size given in the first request.
+          # @!attribute [rw] page_token
+          #   @return [::String]
+          #     The value of `next_page_token` returned by a previous call.
+          class ListHotTabletsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Response message for BigtableInstanceAdmin.ListHotTablets.
+          # @!attribute [rw] hot_tablets
+          #   @return [::Array<::Google::Cloud::Bigtable::Admin::V2::HotTablet>]
+          #     List of hot tablets in the tables of the requested cluster that fall
+          #     within the requested time range. Hot tablets are ordered by node cpu usage
+          #     percent. If there are multiple hot tablets that correspond to the same
+          #     tablet within a 15-minute interval, only the hot tablet with the highest
+          #     node cpu usage will be included in the response.
+          # @!attribute [rw] next_page_token
+          #   @return [::String]
+          #     Set if not all hot tablets could be returned in a single response.
+          #     Pass this value to `page_token` in another request to get the next
+          #     page of results.
+          class ListHotTabletsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

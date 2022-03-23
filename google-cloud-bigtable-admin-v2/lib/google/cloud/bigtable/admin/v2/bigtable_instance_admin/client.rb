@@ -146,6 +146,11 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
 
+                  default_config.rpcs.list_hot_tablets.timeout = 60.0
+                  default_config.rpcs.list_hot_tablets.retry_policy = {
+                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
+                  }
+
                   default_config
                 end
                 yield @configure if block_given?
@@ -2154,6 +2159,122 @@ module Google
               end
 
               ##
+              # Lists hot tablets in a cluster, within the time range provided. Hot
+              # tablets are ordered based on CPU usage.
+              #
+              # @overload list_hot_tablets(request, options = nil)
+              #   Pass arguments to `list_hot_tablets` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload list_hot_tablets(parent: nil, start_time: nil, end_time: nil, page_size: nil, page_token: nil)
+              #   Pass arguments to `list_hot_tablets` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param parent [::String]
+              #     Required. The cluster name to list hot tablets.
+              #     Value is in the following form:
+              #     `projects/{project}/instances/{instance}/clusters/{cluster}`.
+              #   @param start_time [::Google::Protobuf::Timestamp, ::Hash]
+              #     The start time to list hot tablets. The hot tablets in the response will
+              #     have start times between the requested start time and end time. Start time
+              #     defaults to Now if it is unset, and end time defaults to Now - 24 hours if
+              #     it is unset. The start time should be less than the end time, and the
+              #     maximum allowed time range between start time and end time is 48 hours.
+              #     Start time and end time should have values between Now and Now - 14 days.
+              #   @param end_time [::Google::Protobuf::Timestamp, ::Hash]
+              #     The end time to list hot tablets.
+              #   @param page_size [::Integer]
+              #     Maximum number of results per page.
+              #
+              #     A page_size that is empty or zero lets the server choose the number of
+              #     items to return. A page_size which is strictly positive will return at most
+              #     that many items. A negative page_size will cause an error.
+              #
+              #     Following the first request, subsequent paginated calls do not need a
+              #     page_size field. If a page_size is set in subsequent calls, it must match
+              #     the page_size given in the first request.
+              #   @param page_token [::String]
+              #     The value of `next_page_token` returned by a previous call.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::HotTablet>]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::PagedEnumerable<::Google::Cloud::Bigtable::Admin::V2::HotTablet>]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest.new
+              #
+              #   # Call the list_hot_tablets method.
+              #   result = client.list_hot_tablets request
+              #
+              #   # The returned object is of type Gapic::PagedEnumerable. You can
+              #   # iterate over all elements by calling #each, and the enumerable
+              #   # will lazily make API calls to fetch subsequent pages. Other
+              #   # methods are also available for managing paging directly.
+              #   result.each do |response|
+              #     # Each element is of type ::Google::Cloud::Bigtable::Admin::V2::HotTablet.
+              #     p response
+              #   end
+              #
+              def list_hot_tablets request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.list_hot_tablets.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.parent
+                  header_params["parent"] = request.parent
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.list_hot_tablets.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.list_hot_tablets.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_instance_admin_stub.call_rpc :list_hot_tablets, request, options: options do |response, operation|
+                  response = ::Gapic::PagedEnumerable.new @bigtable_instance_admin_stub, :list_hot_tablets, request, response, operation, options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the BigtableInstanceAdmin API.
               #
               # This class represents the configuration for BigtableInstanceAdmin,
@@ -2388,6 +2509,11 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :test_iam_permissions
+                  ##
+                  # RPC-specific configuration for `list_hot_tablets`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :list_hot_tablets
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -2431,6 +2557,8 @@ module Google
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                    list_hot_tablets_config = parent_rpcs.list_hot_tablets if parent_rpcs.respond_to? :list_hot_tablets
+                    @list_hot_tablets = ::Gapic::Config::Method.new list_hot_tablets_config
 
                     yield self if block_given?
                   end
