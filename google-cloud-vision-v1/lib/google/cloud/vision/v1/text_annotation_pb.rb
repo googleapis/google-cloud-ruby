@@ -2,7 +2,6 @@
 # source: google/cloud/vision/v1/text_annotation.proto
 
 require 'google/cloud/vision/v1/geometry_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
