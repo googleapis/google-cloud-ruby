@@ -5,7 +5,6 @@ require 'google/api/resource_pb'
 require 'google/cloud/vision/v1/geometry_pb'
 require 'google/cloud/vision/v1/product_search_service_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
