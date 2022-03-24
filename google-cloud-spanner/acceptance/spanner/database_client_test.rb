@@ -91,7 +91,7 @@ describe "Spanner Databases Client", :spanner do
     database = client.get_database name: db_path
     _(database).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::Database
 
-    add_users_table_sql = "CREATE TABLE users (id INT NOT NULL) PRIMARY KEY(id)"
+    add_users_table_sql = "CREATE TABLE users (id bigint NOT NULL, PRIMARY KEY(id));"
     job2 = client.update_database_ddl database: db_path,
                                       statements: [add_users_table_sql]
 
