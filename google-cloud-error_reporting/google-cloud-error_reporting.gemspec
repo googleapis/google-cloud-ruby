@@ -7,8 +7,8 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google Inc"]
   gem.email         = ["googleapis-packages@google.com"]
-  gem.description   = "google-cloud-error_reporting is the official library for Stackdriver Error Reporting."
-  gem.summary       = "API Client library for Stackdriver Error Reporting"
+  gem.description   = "google-cloud-error_reporting is the official library for Error Reporting."
+  gem.summary       = "API Client library for Error Reporting"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby/tree/master/google-cloud-error_reporting"
   gem.license       = "Apache-2.0"
 
