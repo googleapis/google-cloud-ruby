@@ -686,6 +686,11 @@
                 "export_model"
               ]
             },
+            "ImportModelEvaluation": {
+              "methods": [
+                "import_model_evaluation"
+              ]
+            },
             "GetModelEvaluation": {
               "methods": [
                 "get_model_evaluation"

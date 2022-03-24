@@ -51,6 +51,8 @@ module Google
             # user. A Model is considered to be exportable if it has at least one
             # [supported export format][google.cloud.aiplatform.v1.Model.supported_export_formats].
             rpc :ExportModel, ::Google::Cloud::AIPlatform::V1::ExportModelRequest, ::Google::Longrunning::Operation
+            # Imports an externally generated ModelEvaluation.
+            rpc :ImportModelEvaluation, ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Gets a ModelEvaluation.
             rpc :GetModelEvaluation, ::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Lists ModelEvaluations in a Model.

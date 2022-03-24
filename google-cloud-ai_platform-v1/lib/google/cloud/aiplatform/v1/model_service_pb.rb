@@ -67,6 +67,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.ExportModelResponse" do
     end
+    add_message "google.cloud.aiplatform.v1.ImportModelEvaluationRequest" do
+      optional :parent, :string, 1
+      optional :model_evaluation, :message, 2, "google.cloud.aiplatform.v1.ModelEvaluation"
+    end
     add_message "google.cloud.aiplatform.v1.GetModelEvaluationRequest" do
       optional :name, :string, 1
     end
@@ -115,6 +119,7 @@ module Google
         ExportModelOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelOperationMetadata").msgclass
         ExportModelOperationMetadata::OutputInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelOperationMetadata.OutputInfo").msgclass
         ExportModelResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelResponse").msgclass
+        ImportModelEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ImportModelEvaluationRequest").msgclass
         GetModelEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetModelEvaluationRequest").msgclass
         ListModelEvaluationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelEvaluationsRequest").msgclass
         ListModelEvaluationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelEvaluationsResponse").msgclass
