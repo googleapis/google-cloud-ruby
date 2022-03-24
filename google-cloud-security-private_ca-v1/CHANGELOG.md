@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 / 2022-03-24
+
+#### Features
+
+* Support to skip grace period to delete Certificate Authority
+
 ### 0.1.6 / 2022-02-15
 
 #### Bug Fixes
