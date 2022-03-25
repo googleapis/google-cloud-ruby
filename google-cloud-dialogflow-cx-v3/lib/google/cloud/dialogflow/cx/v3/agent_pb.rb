@@ -30,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :security_settings, :string, 17
       optional :enable_stackdriver_logging, :bool, 18
       optional :enable_spell_correction, :bool, 20
+      optional :locked, :bool, 27
       optional :advanced_settings, :message, 22, "google.cloud.dialogflow.cx.v3.AdvancedSettings"
     end
     add_message "google.cloud.dialogflow.cx.v3.ListAgentsRequest" do
@@ -58,7 +59,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dialogflow.cx.v3.ExportAgentRequest" do
       optional :name, :string, 1
       optional :agent_uri, :string, 2
+      optional :data_format, :enum, 3, "google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat"
       optional :environment, :string, 5
+    end
+    add_enum "google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat" do
+      value :DATA_FORMAT_UNSPECIFIED, 0
+      value :BLOB, 1
     end
     add_message "google.cloud.dialogflow.cx.v3.ExportAgentResponse" do
       oneof :agent do
@@ -108,6 +114,7 @@ module Google
           UpdateAgentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.UpdateAgentRequest").msgclass
           DeleteAgentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.DeleteAgentRequest").msgclass
           ExportAgentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ExportAgentRequest").msgclass
+          ExportAgentRequest::DataFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ExportAgentRequest.DataFormat").enummodule
           ExportAgentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ExportAgentResponse").msgclass
           RestoreAgentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.RestoreAgentRequest").msgclass
           RestoreAgentRequest::RestoreOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.RestoreAgentRequest.RestoreOption").enummodule
