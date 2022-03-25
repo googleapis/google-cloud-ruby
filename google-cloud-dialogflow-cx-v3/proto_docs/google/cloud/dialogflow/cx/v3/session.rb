@@ -356,16 +356,14 @@ module Google
           #     map, associative array, symbol table, dictionary, or JSON object
           #     composed of a collection of (MapKey, MapValue) pairs:
           #
-          #     -   MapKey type: string
-          #     -   MapKey value: parameter name
-          #     -   MapValue type:
-          #         -   If parameter's entity type is a composite entity: map
-          #         -   Else: depending on parameter value type, could be one of string,
-          #             number, boolean, null, list or map
-          #     -   MapValue value:
-          #         -   If parameter's entity type is a composite entity:
-          #             map from composite entity property names to property values
-          #         -   Else: parameter value
+          #     * MapKey type: string
+          #     * MapKey value: parameter name
+          #     * MapValue type: If parameter's entity type is a composite entity then use
+          #     map, otherwise, depending on the parameter value type, it could be one of
+          #     string, number, boolean, null, list or map.
+          #     * MapValue value: If parameter's entity type is a composite entity then use
+          #     map from composite entity property names to property values, otherwise,
+          #     use parameter value.
           # @!attribute [rw] current_page
           #   @return [::String]
           #     The unique identifier of the {::Google::Cloud::Dialogflow::CX::V3::Page page} to override the [current
@@ -493,16 +491,14 @@ module Google
           #     map, associative array, symbol table, dictionary, or JSON object
           #     composed of a collection of (MapKey, MapValue) pairs:
           #
-          #     -   MapKey type: string
-          #     -   MapKey value: parameter name
-          #     -   MapValue type:
-          #         -   If parameter's entity type is a composite entity: map
-          #         -   Else: depending on parameter value type, could be one of string,
-          #             number, boolean, null, list or map
-          #     -   MapValue value:
-          #         -   If parameter's entity type is a composite entity:
-          #             map from composite entity property names to property values
-          #         -   Else: parameter value
+          #     * MapKey type: string
+          #     * MapKey value: parameter name
+          #     * MapValue type: If parameter's entity type is a composite entity then use
+          #     map, otherwise, depending on the parameter value type, it could be one of
+          #     string, number, boolean, null, list or map.
+          #     * MapValue value: If parameter's entity type is a composite entity then use
+          #     map from composite entity property names to property values, otherwise,
+          #     use parameter value.
           # @!attribute [rw] response_messages
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::ResponseMessage>]
           #     The list of rich messages returned to the client. Responses vary from
@@ -635,16 +631,14 @@ module Google
           #     map, associative array, symbol table, dictionary, or JSON object
           #     composed of a collection of (MapKey, MapValue) pairs:
           #
-          #     -   MapKey type: string
-          #     -   MapKey value: parameter name
-          #     -   MapValue type:
-          #         -   If parameter's entity type is a composite entity: map
-          #         -   Else: depending on parameter value type, could be one of string,
-          #             number, boolean, null, list or map
-          #     -   MapValue value:
-          #         -   If parameter's entity type is a composite entity:
-          #             map from composite entity property names to property values
-          #         -   Else: parameter value
+          #     * MapKey type: string
+          #     * MapKey value: parameter name
+          #     * MapValue type: If parameter's entity type is a composite entity then use
+          #     map, otherwise, depending on the parameter value type, it could be one of
+          #     string, number, boolean, null, list or map.
+          #     * MapValue value: If parameter's entity type is a composite entity then use
+          #     map from composite entity property names to property values, otherwise,
+          #     use parameter value.
           # @!attribute [rw] resolved_input
           #   @return [::String]
           #     Final text input which was matched during MatchIntent. This value can be
