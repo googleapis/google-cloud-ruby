@@ -106,21 +106,23 @@ module Google
         # @!attribute [rw] limits
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig::FindingLimits]
         #     Configuration to control the number of findings returned.
+        #     This is not used for data profiling.
         # @!attribute [rw] include_quote
         #   @return [::Boolean]
         #     When true, a contextual quote from the data that triggered a finding is
         #     included in the response; see Finding.quote.
+        #     This is not used for data profiling.
         # @!attribute [rw] exclude_info_types
         #   @return [::Boolean]
         #     When true, excludes type information of the findings.
+        #     This is not used for data profiling.
         # @!attribute [rw] custom_info_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::CustomInfoType>]
         #     CustomInfoTypes provided by the user. See
         #     https://cloud.google.com/dlp/docs/creating-custom-infotypes to learn more.
         # @!attribute [rw] content_options
         #   @return [::Array<::Google::Cloud::Dlp::V2::ContentOption>]
-        #     List of options defining data content to scan.
-        #     If empty, text, images, and other content will be included.
+        #     Deprecated and unused.
         # @!attribute [rw] rule_set
         #   @return [::Array<::Google::Cloud::Dlp::V2::InspectionRuleSet>]
         #     Set of rules to apply to the findings for this InspectConfig.
@@ -130,8 +132,8 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Configuration to control the number of findings returned. Cannot be set if
-          # de-identification is requested.
+          # Configuration to control the number of findings returned for inspection.
+          # This is not used for de-identification or data profiling.
           # @!attribute [rw] max_findings_per_item
           #   @return [::Integer]
           #     Max number of findings that will be returned for each item scanned.
@@ -209,6 +211,12 @@ module Google
 
             # pdf
             PDF = 8
+
+            # pptx, pptm, potx, potm, pot
+            POWERPOINT_DOCUMENT = 9
+
+            # xlsx, xlsm, xltx, xltm
+            EXCEL_DOCUMENT = 10
 
             # avro
             AVRO = 11
@@ -3934,7 +3942,7 @@ module Google
           MATCHING_TYPE_INVERSE_MATCH = 3
         end
 
-        # Options describing which parts of the provided content should be scanned.
+        # Deprecated and unused.
         module ContentOption
           # Includes entire content of a file or a data stream.
           CONTENT_UNSPECIFIED = 0

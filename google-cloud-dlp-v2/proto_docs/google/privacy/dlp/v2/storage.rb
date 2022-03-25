@@ -103,7 +103,7 @@ module Google
           # Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
           # will be replaced with whitespace when scanning for matches, so the
           # dictionary phrase "Sam Johnson" will match all three phrases "sam johnson",
-          # Plane](https://en.wikipedia.org/wiki/Plane_%28Unicode%29#Basic_Multilingual_Plane)
+          # "Sam, Johnson", and "Sam (Johnson)". Additionally, the characters
           # surrounding any match must be of a different type than the adjacent
           # characters within the word, so letters must be next to non-letters and
           # digits next to non-digits. For example, the dictionary word "jen" will
@@ -116,7 +116,7 @@ module Google
           # [limits](https://cloud.google.com/dlp/limits) page contains details about
           # the size limits of dictionaries. For dictionaries that do not fit within
           # these constraints, consider using `LargeCustomDictionaryConfig` in the
-          # [limits](https://cloud.google.com/dlp/limits) page contains details about
+          # `StoredInfoType` API.
           # @!attribute [rw] word_list
           #   @return [::Google::Cloud::Dlp::V2::CustomInfoType::Dictionary::WordList]
           #     List of words or phrases to search for.
@@ -148,7 +148,6 @@ module Google
           #     google/re2 repository on GitHub.
           # @!attribute [rw] group_indexes
           #   @return [::Array<::Integer>]
-          #     (https://github.com/google/re2/wiki/Syntax) can be found under the
           #     The index of the submatch to extract as findings. When not
           #     specified, the entire match is returned. No more than 3 may be included.
           class Regex
@@ -161,7 +160,7 @@ module Google
           # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
           # These types of transformations are
           # those that perform pseudonymization, thereby producing a "surrogate" as
-          # [`CryptoReplaceFfxFpeConfig`](https://cloud.google.com/dlp/docs/reference/rest/v2/organizations.deidentifyTemplates#cryptoreplaceffxfpeconfig).
+          # output. This should be used in conjunction with a field on the
           # transformation such as `surrogate_info_type`. This CustomInfoType does
           # not support the use of `detection_rules`.
           class SurrogateType
@@ -343,7 +342,6 @@ module Google
         #     under the google/re2 repository on GitHub.
         # @!attribute [rw] exclude_regex
         #   @return [::Array<::String>]
-        #     [syntax](https://github.com/google/re2/wiki/Syntax); a guide can be found
         #     A list of regular expressions matching file paths to exclude. All files in
         #     the bucket that match at least one of these regular expressions will be
         #     excluded from the scan.
@@ -829,6 +827,16 @@ module Google
           # Included file extensions:
           #   tsv
           TSV = 9
+
+          # Powerpoint files >30 MB will be scanned as binary files.
+          # Included file extensions:
+          #   pptx, pptm, potx, potm, pot
+          POWERPOINT = 11
+
+          # Excel files >30 MB will be scanned as binary files.
+          # Included file extensions:
+          #   xlsx, xlsm, xltx, xltm
+          EXCEL = 12
         end
       end
     end
