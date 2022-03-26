@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] placement
         #   @return [::String]
         #     Required. The resource name of the search engine placement, such as
-        #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
+        #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`
         #     This field is used to identify the serving configuration name and the set
         #     of models that will be used to make the search.
         # @!attribute [rw] branch
@@ -45,6 +45,9 @@ module Google
         #     could be implemented with an HTTP cookie, which should be able to uniquely
         #     identify a visitor on a single device. This unique identifier should not
         #     change if the visitor logs in or out of the website.
+        #
+        #     This should be the same identifier as
+        #     {::Google::Cloud::Retail::V2::UserEvent#visitor_id UserEvent.visitor_id}.
         #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -89,6 +92,9 @@ module Google
         #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
         # @!attribute [rw] canonical_filter
         #   @return [::String]
+        #     The default filter that is applied when a user performs a search without
+        #     checking any filters on the search page.
+        #
         #     The filter applied to every search request when quality improvement such as
         #     query expansion is needed. For example, if a query does not have enough
         #     results, an expanded query with
@@ -115,11 +121,11 @@ module Google
         #     is returned.
         # @!attribute [rw] dynamic_facet_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::DynamicFacetSpec]
+        #     Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+        #     to enable dynamic facets. Do not set this field.
+        #
         #     The specification for dynamically generated facets. Notice that only
         #     textual facets can be dynamically generated.
-        #
-        #     This feature requires additional allowlisting. Contact Retail Search
-        #     support team if you are interested in using dynamic facet feature.
         # @!attribute [rw] boost_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::BoostSpec]
         #     Boost specification to boost certain products. See more details at this
@@ -139,12 +145,15 @@ module Google
         #   @return [::Array<::String>]
         #     The keys to fetch and rollup the matching
         #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
-        #     {::Google::Cloud::Retail::V2::Product Product}s attributes. The attributes from
-        #     all the matching {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
-        #     {::Google::Cloud::Retail::V2::Product Product}s are merged and de-duplicated.
-        #     Notice that rollup {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
-        #     {::Google::Cloud::Retail::V2::Product Product}s attributes will lead to extra
-        #     query latency. Maximum number of keys is 10.
+        #     {::Google::Cloud::Retail::V2::Product Product}s attributes,
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo FulfillmentInfo} or
+        #     {::Google::Cloud::Retail::V2::LocalInventory LocalInventory}s attributes. The
+        #     attributes from all the matching
+        #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
+        #     {::Google::Cloud::Retail::V2::Product Product}s or
+        #     {::Google::Cloud::Retail::V2::LocalInventory LocalInventory}s are merged and
+        #     de-duplicated. Notice that rollup attributes will lead to extra query
+        #     latency. Maximum number of keys is 30.
         #
         #     For {::Google::Cloud::Retail::V2::FulfillmentInfo FulfillmentInfo}, a
         #     fulfillment type and a fulfillment ID must be provided in the format of
@@ -159,6 +168,7 @@ module Google
         #     * discount
         #     * variantId
         #     * inventory(place_id,price)
+        #     * inventory(place_id,original_price)
         #     * inventory(place_id,attributes.key), where key is any key in the
         #       [Product.inventories.attributes][] map.
         #     * attributes.key, where key is any key in the
@@ -220,6 +230,9 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::SearchMode]
         #     The search mode of the search request. If not specified, a single search
         #     request triggers both product search and faceted search.
+        # @!attribute [rw] personalization_spec
+        #   @return [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec]
+        #     The specification for personalization.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -331,6 +344,7 @@ module Google
             #         * "ratingCount"
             #         * "attributes.key"
             #         * "inventory(place_id,price)"
+            #         * "inventory(place_id,original_price)"
             #         * "inventory(place_id,attributes.key)"
             # @!attribute [rw] intervals
             #   @return [::Array<::Google::Cloud::Retail::V2::Interval>]
@@ -457,6 +471,14 @@ module Google
           #     in the specifictions, boost scores from these specifications are all
           #     applied and combined in a non-linear way. Maximum number of
           #     specifications is 10.
+          # @!attribute [rw] skip_boost_spec_validation
+          #   @return [::Boolean]
+          #     Whether to skip boostspec validation. If this field is set to true,
+          #     invalid
+          #     {::Google::Cloud::Retail::V2::SearchRequest::BoostSpec#condition_boost_specs BoostSpec.condition_boost_specs}
+          #     will be ignored and valid
+          #     {::Google::Cloud::Retail::V2::SearchRequest::BoostSpec#condition_boost_specs BoostSpec.condition_boost_specs}
+          #     will still be applied.
           class BoostSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -532,6 +554,29 @@ module Google
             end
           end
 
+          # The specification for personalization.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode]
+          #     Defaults to
+          #     {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode::AUTO Mode.AUTO}.
+          class PersonalizationSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The personalization mode of each search request.
+            module Mode
+              # Default value. Defaults to
+              # {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode::AUTO Mode.AUTO}.
+              MODE_UNSPECIFIED = 0
+
+              # Let CRS decide whether to use personalization.
+              AUTO = 1
+
+              # Disable personalization.
+              DISABLED = 2
+            end
+          end
+
           # The search mode of each search request.
           module SearchMode
             # Default value. In this case both product search and faceted search will
@@ -601,6 +646,15 @@ module Google
         #     {::Google::Cloud::Retail::V2::SearchResponse#redirect_uri redirect_uri} and
         #     {::Google::Cloud::Retail::V2::SearchResponse#attribution_token attribution_token}
         #     will be set in the response.
+        # @!attribute [rw] applied_controls
+        #   @return [::Array<::String>]
+        #     The fully qualified resource name of applied
+        #     [controls](https://cloud.google.com/retail/docs/serving-control-rules).
+        # @!attribute [rw] invalid_condition_boost_specs
+        #   @return [::Array<::Google::Cloud::Retail::V2::SearchRequest::BoostSpec::ConditionBoostSpec>]
+        #     The invalid
+        #     {::Google::Cloud::Retail::V2::SearchRequest::BoostSpec#condition_boost_specs SearchRequest.BoostSpec.condition_boost_specs}
+        #     that are not applied during serving.
         class SearchResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

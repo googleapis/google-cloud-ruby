@@ -30,8 +30,7 @@ module Google
           # Auto-completion service for retail.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Please submit a form [here](https://cloud.google.com/contact) to contact
-          # cloud sales if you are interested in using Retail Search.
+          # Please enable Retail Search on Cloud Console before using this feature.
           #
           class Client
             include Paths
@@ -170,8 +169,7 @@ module Google
             # Completes the specified prefix with keyword suggestions.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please submit a form [here](https://cloud.google.com/contact) to contact
-            # cloud sales if you are interested in using Retail Search.
+            # Please enable Retail Search on Cloud Console before using this feature.
             #
             # @overload complete_query(request, options = nil)
             #   Pass arguments to `complete_query` via a request object, either of type
@@ -198,21 +196,20 @@ module Google
             #
             #     The maximum number of allowed characters is 255.
             #   @param visitor_id [::String]
-            #     A unique identifier for tracking visitors. For example, this could be
-            #     implemented with an HTTP cookie, which should be able to uniquely identify
-            #     a visitor on a single device. This unique identifier should not change if
-            #     the visitor logs in or out of the website.
+            #     Required field. A unique identifier for tracking visitors. For example,
+            #     this could be implemented with an HTTP cookie, which should be able to
+            #     uniquely identify a visitor on a single device. This unique identifier
+            #     should not change if the visitor logs in or out of the website.
             #
             #     The field must be a UTF-8 encoded string with a length limit of 128
             #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
             #   @param language_codes [::Array<::String>]
-            #     The list of languages of the query. This is
-            #     the BCP-47 language code, such as "en-US" or "sr-Latn".
-            #     For more information, see
-            #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
-            #
-            #     The maximum number of allowed characters is 255.
-            #     Only "en-US" is currently supported.
+            #     The language filters applied to the output suggestions. If set, it should
+            #     contain the language of the query. If not set, suggestions are returned
+            #     without considering language restrictions. This is the BCP-47 language
+            #     code, such as "en-US" or "sr-Latn". For more information, see [Tags for
+            #     Identifying Languages](https://tools.ietf.org/html/bcp47). The maximum
+            #     number of language codes is 3.
             #   @param device_type [::String]
             #     The device type context for completion suggestions.
             #     It is useful to apply different suggestions on different device types, e.g.
@@ -316,11 +313,13 @@ module Google
             ##
             # Bulk import of processed completion dataset.
             #
-            # Request processing may be synchronous. Partial updating is not supported.
+            # Request processing is asynchronous. Partial updating is not supported.
+            #
+            # The operation is successfully finished only after the imported suggestions
+            # are indexed successfully and ready for serving. The process takes hours.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please submit a form [here](https://cloud.google.com/contact) to contact
-            # cloud sales if you are interested in using Retail Search.
+            # Please enable Retail Search on Cloud Console before using this feature.
             #
             # @overload import_completion_data(request, options = nil)
             #   Pass arguments to `import_completion_data` via a request object, either of type

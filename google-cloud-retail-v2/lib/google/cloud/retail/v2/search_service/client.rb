@@ -30,8 +30,7 @@ module Google
           # Service for search.
           #
           # This feature is only available for users who have Retail Search enabled.
-          # Please submit a form [here](https://cloud.google.com/contact) to contact
-          # cloud sales if you are interested in using Retail Search.
+          # Please enable Retail Search on Cloud Console before using this feature.
           #
           class Client
             include Paths
@@ -157,8 +156,7 @@ module Google
             # Performs a search.
             #
             # This feature is only available for users who have Retail Search enabled.
-            # Please submit a form [here](https://cloud.google.com/contact) to contact
-            # cloud sales if you are interested in using Retail Search.
+            # Please enable Retail Search on Cloud Console before using this feature.
             #
             # @overload search(request, options = nil)
             #   Pass arguments to `search` via a request object, either of type
@@ -170,14 +168,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil)
+            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param placement [::String]
             #     Required. The resource name of the search engine placement, such as
-            #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
+            #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`
             #     This field is used to identify the serving configuration name and the set
             #     of models that will be used to make the search.
             #   @param branch [::String]
@@ -193,6 +191,9 @@ module Google
             #     could be implemented with an HTTP cookie, which should be able to uniquely
             #     identify a visitor on a single device. This unique identifier should not
             #     change if the visitor logs in or out of the website.
+            #
+            #     This should be the same identifier as
+            #     {::Google::Cloud::Retail::V2::UserEvent#visitor_id UserEvent.visitor_id}.
             #
             #     The field must be a UTF-8 encoded string with a length limit of 128
             #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
@@ -231,6 +232,9 @@ module Google
             #
             #     If this field is unrecognizable, an INVALID_ARGUMENT is returned.
             #   @param canonical_filter [::String]
+            #     The default filter that is applied when a user performs a search without
+            #     checking any filters on the search page.
+            #
             #     The filter applied to every search request when quality improvement such as
             #     query expansion is needed. For example, if a query does not have enough
             #     results, an expanded query with
@@ -254,11 +258,11 @@ module Google
             #     A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
             #     is returned.
             #   @param dynamic_facet_spec [::Google::Cloud::Retail::V2::SearchRequest::DynamicFacetSpec, ::Hash]
+            #     Deprecated. Refer to https://cloud.google.com/retail/docs/configs#dynamic
+            #     to enable dynamic facets. Do not set this field.
+            #
             #     The specification for dynamically generated facets. Notice that only
             #     textual facets can be dynamically generated.
-            #
-            #     This feature requires additional allowlisting. Contact Retail Search
-            #     support team if you are interested in using dynamic facet feature.
             #   @param boost_spec [::Google::Cloud::Retail::V2::SearchRequest::BoostSpec, ::Hash]
             #     Boost specification to boost certain products. See more details at this
             #     [user guide](https://cloud.google.com/retail/docs/boosting).
@@ -275,12 +279,15 @@ module Google
             #   @param variant_rollup_keys [::Array<::String>]
             #     The keys to fetch and rollup the matching
             #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
-            #     {::Google::Cloud::Retail::V2::Product Product}s attributes. The attributes from
-            #     all the matching {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
-            #     {::Google::Cloud::Retail::V2::Product Product}s are merged and de-duplicated.
-            #     Notice that rollup {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
-            #     {::Google::Cloud::Retail::V2::Product Product}s attributes will lead to extra
-            #     query latency. Maximum number of keys is 10.
+            #     {::Google::Cloud::Retail::V2::Product Product}s attributes,
+            #     {::Google::Cloud::Retail::V2::FulfillmentInfo FulfillmentInfo} or
+            #     {::Google::Cloud::Retail::V2::LocalInventory LocalInventory}s attributes. The
+            #     attributes from all the matching
+            #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT variant}
+            #     {::Google::Cloud::Retail::V2::Product Product}s or
+            #     {::Google::Cloud::Retail::V2::LocalInventory LocalInventory}s are merged and
+            #     de-duplicated. Notice that rollup attributes will lead to extra query
+            #     latency. Maximum number of keys is 30.
             #
             #     For {::Google::Cloud::Retail::V2::FulfillmentInfo FulfillmentInfo}, a
             #     fulfillment type and a fulfillment ID must be provided in the format of
@@ -295,6 +302,7 @@ module Google
             #     * discount
             #     * variantId
             #     * inventory(place_id,price)
+            #     * inventory(place_id,original_price)
             #     * inventory(place_id,attributes.key), where key is any key in the
             #       [Product.inventories.attributes][] map.
             #     * attributes.key, where key is any key in the
@@ -354,6 +362,8 @@ module Google
             #   @param search_mode [::Google::Cloud::Retail::V2::SearchRequest::SearchMode]
             #     The search mode of the search request. If not specified, a single search
             #     request triggers both product search and faceted search.
+            #   @param personalization_spec [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec, ::Hash]
+            #     The specification for personalization.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]

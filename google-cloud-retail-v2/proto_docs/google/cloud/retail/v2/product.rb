@@ -42,7 +42,7 @@ module Google
         #     {::Google::Cloud::Retail::V2::Product#publish_time publish_time}, otherwise an
         #     INVALID_ARGUMENT error is thrown.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [expiration_date](https://support.google.com/merchants/answer/6324499).
         # @!attribute [rw] ttl
         #   @return [::Google::Protobuf::Duration]
@@ -77,9 +77,9 @@ module Google
         #     This field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [id](https://support.google.com/merchants/answer/6324405). Schema.org
-        #     Property [Product.sku](https://schema.org/sku).
+        #     property [Product.sku](https://schema.org/sku).
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Retail::V2::Product::Type]
         #     Immutable. The type of the product. Default to
@@ -101,21 +101,23 @@ module Google
         #     {::Google::Cloud::Retail::V2::Product Product}. Otherwise, an INVALID_ARGUMENT
         #     error is returned.
         #
-        #     Google Merchant Center Property
+        #     Corresponding properties: Google Merchant Center property
         #     [item_group_id](https://support.google.com/merchants/answer/6324507).
-        #     Schema.org Property
+        #     Schema.org property
         #     [Product.inProductGroupWithID](https://schema.org/inProductGroupWithID).
-        #
-        #     This field must be enabled before it can be used. [Learn
-        #     more](/recommendations-ai/docs/catalog#item-group-id).
         # @!attribute [rw] collection_member_ids
         #   @return [::Array<::String>]
         #     The {::Google::Cloud::Retail::V2::Product#id id} of the collection members when
         #     {::Google::Cloud::Retail::V2::Product#type type} is
         #     {::Google::Cloud::Retail::V2::Product::Type::COLLECTION Type.COLLECTION}.
         #
-        #     Should not set it for other types. A maximum of 1000 values are allowed.
-        #     Otherwise, an INVALID_ARGUMENT error is return.
+        #     Non-existent product ids are allowed.
+        #     The {::Google::Cloud::Retail::V2::Product#type type} of the members must be
+        #     either {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} or
+        #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT} otherwise and
+        #     INVALID_ARGUMENT error is thrown. Should not set it for other types. A
+        #     maximum of 1000 values are allowed. Otherwise, an INVALID_ARGUMENT error is
+        #     return.
         # @!attribute [rw] gtin
         #   @return [::String]
         #     The Global Trade Item Number (GTIN) of the product.
@@ -126,13 +128,13 @@ module Google
         #     This field must be a Unigram. Otherwise, an INVALID_ARGUMENT error is
         #     returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [gtin](https://support.google.com/merchants/answer/6324461).
         #     Schema.org property
-        #     [Product.isbn](https://schema.org/isbn) or
-        #     [Product.gtin8](https://schema.org/gtin8) or
-        #     [Product.gtin12](https://schema.org/gtin12) or
-        #     [Product.gtin13](https://schema.org/gtin13) or
+        #     [Product.isbn](https://schema.org/isbn),
+        #     [Product.gtin8](https://schema.org/gtin8),
+        #     [Product.gtin12](https://schema.org/gtin12),
+        #     [Product.gtin13](https://schema.org/gtin13), or
         #     [Product.gtin14](https://schema.org/gtin14).
         #
         #     If the value is not a valid GTIN, an INVALID_ARGUMENT error is returned.
@@ -166,7 +168,7 @@ module Google
         #     Each value must be a UTF-8 encoded string with a length limit of 5,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [google_product_category][mc_google_product_category]. Schema.org property
         #     [Product.category] (https://schema.org/category).
         #
@@ -179,7 +181,7 @@ module Google
         #     This field must be a UTF-8 encoded string with a length limit of 1,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [title](https://support.google.com/merchants/answer/6324415). Schema.org
         #     property [Product.name](https://schema.org/name).
         # @!attribute [rw] brands
@@ -190,7 +192,7 @@ module Google
         #     string with a length limit of 1,000 characters. Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [brand](https://support.google.com/merchants/answer/6324351). Schema.org
         #     property [Product.brand](https://schema.org/brand).
         # @!attribute [rw] description
@@ -200,13 +202,13 @@ module Google
         #     This field must be a UTF-8 encoded string with a length limit of 5,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [description](https://support.google.com/merchants/answer/6324468).
-        #     schema.org property [Product.description](https://schema.org/description).
+        #     Schema.org property [Product.description](https://schema.org/description).
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Language of the title/description and other string attributes. Use language
-        #     tags defined by [BCP 47][https://www.rfc-editor.org/rfc/bcp/bcp47.txt].
+        #     tags defined by [BCP 47](https://www.rfc-editor.org/rfc/bcp/bcp47.txt).
         #
         #     For product prediction, this field is ignored and the model automatically
         #     detects the text language. The {::Google::Cloud::Retail::V2::Product Product}
@@ -240,7 +242,12 @@ module Google
         #     * The key must be a UTF-8 encoded string with a length limit of 128
         #       characters.
         #     * For indexable attribute, the key must match the pattern:
-        #       `[a-zA-Z0-9][a-zA-Z0-9_]*`. For example, key0LikeThis or KEY_1_LIKE_THIS.
+        #       `[a-zA-Z0-9][a-zA-Z0-9_]*`. For example, `key0LikeThis` or
+        #       `KEY_1_LIKE_THIS`.
+        #     * For text attributes, at most 400 values are allowed. Empty values are not
+        #       allowed. Each value must be a non-empty UTF-8 encoded string with a
+        #       length limit of 256 characters.
+        #     * For number attributes, at most 400 values are allowed.
         # @!attribute [rw] tags
         #   @return [::Array<::String>]
         #     Custom tags associated with the product.
@@ -254,13 +261,13 @@ module Google
         #     tag as part of the
         #     {::Google::Cloud::Retail::V2::PredictRequest#filter PredictRequest.filter}.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [custom_label_0–4](https://support.google.com/merchants/answer/6324473).
         # @!attribute [rw] price_info
         #   @return [::Google::Cloud::Retail::V2::PriceInfo]
         #     Product price and cost information.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [price](https://support.google.com/merchants/answer/6324371).
         # @!attribute [rw] rating
         #   @return [::Google::Cloud::Retail::V2::Rating]
@@ -276,9 +283,9 @@ module Google
         #     Default to
         #     {::Google::Cloud::Retail::V2::Product::Availability::IN_STOCK Availability.IN_STOCK}.
         #
-        #     Google Merchant Center Property
+        #     Corresponding properties: Google Merchant Center property
         #     [availability](https://support.google.com/merchants/answer/6324448).
-        #     Schema.org Property [Offer.availability](https://schema.org/availability).
+        #     Schema.org property [Offer.availability](https://schema.org/availability).
         # @!attribute [rw] available_quantity
         #   @return [::Google::Protobuf::Int32Value]
         #     The available quantity of the item.
@@ -300,17 +307,17 @@ module Google
         #     This field must be a UTF-8 encoded string with a length limit of 5,000
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [link](https://support.google.com/merchants/answer/6324416). Schema.org
         #     property [Offer.url](https://schema.org/url).
         # @!attribute [rw] images
         #   @return [::Array<::Google::Cloud::Retail::V2::Image>]
-        #     Product images for the product.Highly recommended to put the main image
-        #     to the first.
+        #     Product images for the product. We highly recommend putting the main
+        #     image first.
         #
         #     A maximum of 300 images are allowed.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [image_link](https://support.google.com/merchants/answer/6324350).
         #     Schema.org property [Product.image](https://schema.org/image).
         # @!attribute [rw] audience
@@ -321,7 +328,7 @@ module Google
         #   @return [::Google::Cloud::Retail::V2::ColorInfo]
         #     The color of the product.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [color](https://support.google.com/merchants/answer/6324487). Schema.org
         #     property [Product.color](https://schema.org/color).
         # @!attribute [rw] sizes
@@ -339,9 +346,9 @@ module Google
         #     encoded string with a length limit of 128 characters. Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [size](https://support.google.com/merchants/answer/6324492),
-        #     [size_type](https://support.google.com/merchants/answer/6324497) and
+        #     [size_type](https://support.google.com/merchants/answer/6324497), and
         #     [size_system](https://support.google.com/merchants/answer/6324502).
         #     Schema.org property [Product.size](https://schema.org/size).
         # @!attribute [rw] materials
@@ -349,10 +356,10 @@ module Google
         #     The material of the product. For example, "leather", "wooden".
         #
         #     A maximum of 20 values are allowed. Each value must be a UTF-8 encoded
-        #     string with a length limit of 128 characters. Otherwise, an
+        #     string with a length limit of 200 characters. Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [material](https://support.google.com/merchants/answer/6324410). Schema.org
         #     property [Product.material](https://schema.org/material).
         # @!attribute [rw] patterns
@@ -365,7 +372,7 @@ module Google
         #     encoded string with a length limit of 128 characters. Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [pattern](https://support.google.com/merchants/answer/6324483). Schema.org
         #     property [Product.pattern](https://schema.org/pattern).
         # @!attribute [rw] conditions
@@ -373,19 +380,21 @@ module Google
         #     The condition of the product. Strongly encouraged to use the standard
         #     values: "new", "refurbished", "used".
         #
-        #     A maximum of 5 values are allowed per
+        #     A maximum of 1 value is allowed per
         #     {::Google::Cloud::Retail::V2::Product Product}. Each value must be a UTF-8
         #     encoded string with a length limit of 128 characters. Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     Google Merchant Center property
+        #     Corresponding properties: Google Merchant Center property
         #     [condition](https://support.google.com/merchants/answer/6324469).
         #     Schema.org property
         #     [Offer.itemCondition](https://schema.org/itemCondition).
         # @!attribute [rw] promotions
         #   @return [::Array<::Google::Cloud::Retail::V2::Promotion>]
         #     The promotions applied to the product. A maximum of 10 values are allowed
-        #     per {::Google::Cloud::Retail::V2::Product Product}.
+        #     per {::Google::Cloud::Retail::V2::Product Product}. Only
+        #     {::Google::Cloud::Retail::V2::Promotion#promotion_id Promotion.promotion_id}
+        #     will be used, other fields will be ignored if set.
         # @!attribute [rw] publish_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The timestamp when the product is published by the retailer for the first

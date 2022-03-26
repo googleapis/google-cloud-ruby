@@ -32,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :variant_rollup_keys, :string, 17
       repeated :page_categories, :string, 23
       optional :search_mode, :enum, 31, "google.cloud.retail.v2.SearchRequest.SearchMode"
+      optional :personalization_spec, :message, 32, "google.cloud.retail.v2.SearchRequest.PersonalizationSpec"
     end
     add_message "google.cloud.retail.v2.SearchRequest.FacetSpec" do
       optional :facet_key, :message, 1, "google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey"
@@ -58,6 +59,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.retail.v2.SearchRequest.BoostSpec" do
       repeated :condition_boost_specs, :message, 1, "google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec"
+      proto3_optional :skip_boost_spec_validation, :bool, 2
     end
     add_message "google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec" do
       optional :condition, :string, 1
@@ -71,6 +73,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CONDITION_UNSPECIFIED, 0
       value :DISABLED, 1
       value :AUTO, 3
+    end
+    add_message "google.cloud.retail.v2.SearchRequest.PersonalizationSpec" do
+      optional :mode, :enum, 1, "google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode"
+    end
+    add_enum "google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode" do
+      value :MODE_UNSPECIFIED, 0
+      value :AUTO, 1
+      value :DISABLED, 2
     end
     add_enum "google.cloud.retail.v2.SearchRequest.SearchMode" do
       value :SEARCH_MODE_UNSPECIFIED, 0
@@ -86,6 +96,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :next_page_token, :string, 6
       optional :query_expansion_info, :message, 7, "google.cloud.retail.v2.SearchResponse.QueryExpansionInfo"
       optional :redirect_uri, :string, 10
+      repeated :applied_controls, :string, 12
+      repeated :invalid_condition_boost_specs, :message, 14, "google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec"
     end
     add_message "google.cloud.retail.v2.SearchResponse.SearchResult" do
       optional :id, :string, 1
@@ -126,6 +138,8 @@ module Google
         SearchRequest::BoostSpec::ConditionBoostSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.BoostSpec.ConditionBoostSpec").msgclass
         SearchRequest::QueryExpansionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.QueryExpansionSpec").msgclass
         SearchRequest::QueryExpansionSpec::Condition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition").enummodule
+        SearchRequest::PersonalizationSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.PersonalizationSpec").msgclass
+        SearchRequest::PersonalizationSpec::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode").enummodule
         SearchRequest::SearchMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.SearchMode").enummodule
         SearchResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchResponse").msgclass
         SearchResponse::SearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchResponse.SearchResult").msgclass

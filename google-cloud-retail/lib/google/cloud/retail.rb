@@ -90,8 +90,7 @@ module Google
       # Auto-completion service for retail.
       #
       # This feature is only available for users who have Retail Search enabled.
-      # Please submit a form [here](https://cloud.google.com/contact) to contact
-      # cloud sales if you are interested in using Retail Search.
+      # Please enable Retail Search on Cloud Console before using this feature.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.
@@ -185,8 +184,7 @@ module Google
       # Service for search.
       #
       # This feature is only available for users who have Retail Search enabled.
-      # Please submit a form [here](https://cloud.google.com/contact) to contact
-      # cloud sales if you are interested in using Retail Search.
+      # Please enable Retail Search on Cloud Console before using this feature.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v2`.

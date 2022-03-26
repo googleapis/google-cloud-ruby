@@ -64,8 +64,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :user_agent, :string, 3
       optional :direct_user_request, :bool, 4
     end
-    add_message "google.cloud.retail.v2.Promotion" do
-      optional :promotion_id, :string, 1
+    add_message "google.cloud.retail.v2.LocalInventory" do
+      optional :place_id, :string, 1
+      optional :price_info, :message, 2, "google.cloud.retail.v2.PriceInfo"
+      map :attributes, :string, :message, 3, "google.cloud.retail.v2.CustomAttribute"
+      repeated :fulfillment_types, :string, 4
     end
   end
 end
@@ -84,7 +87,7 @@ module Google
         PriceInfo::PriceRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.PriceInfo.PriceRange").msgclass
         Rating = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Rating").msgclass
         UserInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UserInfo").msgclass
-        Promotion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.Promotion").msgclass
+        LocalInventory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.LocalInventory").msgclass
       end
     end
   end
