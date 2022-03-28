@@ -258,8 +258,9 @@ module Google
         #     Must have a complete key path and must not be reserved/read-only.
         # @!attribute [rw] base_version
         #   @return [::Integer]
-        #     The version of the entity that this mutation is being applied to. If this
-        #     does not match the current version on the server, the mutation conflicts.
+        #     The version of the entity that this mutation is being applied
+        #     to. If this does not match the current version on the server, the
+        #     mutation conflicts.
         class Mutation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
