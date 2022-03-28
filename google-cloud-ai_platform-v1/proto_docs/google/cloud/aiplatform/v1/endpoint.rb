@@ -103,6 +103,9 @@ module Google
         #     if monitoring is enabled by [CreateModelDeploymentMonitoringJob][].
         #     Format:
         #     `projects/{project}/locations/{location}/modelDeploymentMonitoringJobs/{model_deployment_monitoring_job}`
+        # @!attribute [rw] predict_request_response_logging_config
+        #   @return [::Google::Cloud::AIPlatform::V1::PredictRequestResponseLoggingConfig]
+        #     Configures the request-response logging for online prediction.
         class Endpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -218,6 +221,27 @@ module Google
         #     Output only. The name of the service attachment resource. Populated if private service
         #     connect is enabled.
         class PrivateEndpoints
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for logging request-response to a BigQuery table.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     If logging is enabled or not.
+        # @!attribute [rw] sampling_rate
+        #   @return [::Float]
+        #     Percentage of requests to be logged, expressed as a fraction in
+        #     range(0,1].
+        # @!attribute [rw] bigquery_destination
+        #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
+        #     BigQuery table for logging.
+        #     If only given project, a new dataset will be created with name
+        #     `logging_<endpoint-display-name>_<endpoint-id>` where
+        #     <endpoint-display-name> will be made BigQuery-dataset-name compatible (e.g.
+        #     most special characters will become underscores). If no table name is
+        #     given, a new table will be created with name `request_response_logging`
+        class PredictRequestResponseLoggingConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

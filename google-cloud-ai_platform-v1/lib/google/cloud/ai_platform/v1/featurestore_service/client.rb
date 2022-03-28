@@ -1059,7 +1059,12 @@ module Google
             #       * `description`
             #       * `labels`
             #       * `monitoring_config.snapshot_analysis.disabled`
-            #       * `monitoring_config.snapshot_analysis.monitoring_interval`
+            #       * `monitoring_config.snapshot_analysis.monitoring_interval_days`
+            #       * `monitoring_config.snapshot_analysis.staleness_days`
+            #       * `monitoring_config.import_features_analysis.state`
+            #       * `monitoring_config.import_features_analysis.anomaly_detection_baseline`
+            #       * `monitoring_config.numerical_threshold_config.value`
+            #       * `monitoring_config.categorical_threshold_config.value`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::EntityType]
@@ -1696,8 +1701,7 @@ module Google
             #
             #       * `description`
             #       * `labels`
-            #       * `monitoring_config.snapshot_analysis.disabled`
-            #       * `monitoring_config.snapshot_analysis.monitoring_interval`
+            #       * `disable_monitoring`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Feature]
@@ -1890,7 +1894,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_feature_values(avro_source: nil, bigquery_source: nil, csv_source: nil, feature_time_field: nil, feature_time: nil, entity_type: nil, entity_id_field: nil, feature_specs: nil, disable_online_serving: nil, worker_count: nil)
+            # @overload import_feature_values(avro_source: nil, bigquery_source: nil, csv_source: nil, feature_time_field: nil, feature_time: nil, entity_type: nil, entity_id_field: nil, feature_specs: nil, disable_online_serving: nil, worker_count: nil, disable_ingestion_analysis: nil)
             #   Pass arguments to `import_feature_values` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1926,6 +1930,8 @@ module Google
             #     serving. The value must be positive, and less than or equal to 100.
             #     If not set, defaults to using 1 worker. The low count ensures minimal
             #     impact on online serving performance.
+            #   @param disable_ingestion_analysis [::Boolean]
+            #     If true, API doesn't start ingestion analysis pipeline.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

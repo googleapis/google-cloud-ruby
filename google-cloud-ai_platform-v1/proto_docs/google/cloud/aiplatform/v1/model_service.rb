@@ -222,6 +222,19 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#import_model_evaluation ModelService.ImportModelEvaluation}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent model resource.
+        #     Format: `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [rw] model_evaluation
+        #   @return [::Google::Cloud::AIPlatform::V1::ModelEvaluation]
+        #     Required. Model evaluation resource to be imported.
+        class ImportModelEvaluationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation ModelService.GetModelEvaluation}.
         # @!attribute [rw] name
         #   @return [::String]

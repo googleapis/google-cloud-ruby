@@ -7,10 +7,8 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/aiplatform/v1/entity_type_pb'
 require 'google/cloud/aiplatform/v1/feature_pb'
-require 'google/cloud/aiplatform/v1/feature_monitoring_stats_pb'
 require 'google/cloud/aiplatform/v1/feature_selector_pb'
 require 'google/cloud/aiplatform/v1/featurestore_pb'
-require 'google/cloud/aiplatform/v1/featurestore_online_service_pb'
 require 'google/cloud/aiplatform/v1/io_pb'
 require 'google/cloud/aiplatform/v1/operation_pb'
 require 'google/longrunning/operations_pb'
@@ -54,6 +52,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :feature_specs, :message, 8, "google.cloud.aiplatform.v1.ImportFeatureValuesRequest.FeatureSpec"
       optional :disable_online_serving, :bool, 9
       optional :worker_count, :int32, 11
+      optional :disable_ingestion_analysis, :bool, 12
       oneof :source do
         optional :avro_source, :message, 2, "google.cloud.aiplatform.v1.AvroSource"
         optional :bigquery_source, :message, 3, "google.cloud.aiplatform.v1.BigQuerySource"
