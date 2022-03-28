@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.6.1 / 2022-03-28
+
+#### Documentation
+
+* Change documentation format
+
 ### 0.6.0 / 2022-03-09
 
 #### Features
