@@ -88,8 +88,16 @@ module Google
         #      Currently we don't support sorting by commute time.
         # @!attribute [rw] company_display_names
         #   @return [::Array<::String>]
-        #     This filter specifies the exact company {::Google::Cloud::Talent::V4::Company#display_name Company.display_name}
-        #     of the jobs to search against.
+        #     This filter specifies the company {::Google::Cloud::Talent::V4::Company#display_name Company.display_name}
+        #     of the jobs to search against. The company name must match the value
+        #     exactly (case sensitive).
+        #
+        #     Alternatively, if the value being searched for is wrapped in
+        #     `SUBSTRING_MATCH([value])`, the company name must contain a case
+        #     insensitive substring match of the value. Using this function may increase
+        #     latency.
+        #
+        #     Sample Values: `["Google LLC", "SUBSTRING_MATCH(google)"]`
         #
         #     If a value isn't specified, jobs within the search results are
         #     associated with any company.
@@ -213,8 +221,10 @@ module Google
         #     If this field is set to {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_ALLOWED TelecommutePreference.TELECOMMUTE_ALLOWED},
         #     telecommuting jobs are searched, and {::Google::Cloud::Talent::V4::LocationFilter#address address} and {::Google::Cloud::Talent::V4::LocationFilter#lat_lng lat_lng} are
         #     ignored. If not set or set to
-        #     {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_EXCLUDED TelecommutePreference.TELECOMMUTE_EXCLUDED}, telecommute job are not
-        #     searched.
+        #     {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_EXCLUDED TelecommutePreference.TELECOMMUTE_EXCLUDED}, the telecommute status of
+        #     the jobs is ignored. Jobs that have {::Google::Cloud::Talent::V4::PostingRegion::TELECOMMUTE PostingRegion.TELECOMMUTE} and have
+        #     additional {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} may still be matched based on other location
+        #     filters using {::Google::Cloud::Talent::V4::LocationFilter#address address} or [latlng][].
         #
         #     This filter can be used by itself to search exclusively for telecommuting
         #     jobs, or it can be combined with another location
