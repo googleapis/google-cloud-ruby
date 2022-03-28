@@ -345,6 +345,8 @@ module Google
             #          for {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata} is
             #          `type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata`.
             #       * `metadata.<field_name>` - any field in metadata.value.
+            #          `metadata.@type` must be specified first, if filtering on metadata
+            #          fields.
             #       * `error` - Error associated with the long-running operation.
             #       * `response.@type` - the type of response.
             #       * `response.<field_name>` - any field in response.value.
