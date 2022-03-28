@@ -336,6 +336,10 @@ module Google
         #   @return [::String]
         #     Environment ID for the Beam runner API proto Environment that corresponds
         #     to the current SDK Harness.
+        # @!attribute [rw] capabilities
+        #   @return [::Array<::String>]
+        #     The set of capabilities enumerated in the above Environment proto. See also
+        #     https://github.com/apache/beam/blob/master/model/pipeline/src/main/proto/beam_runner_api.proto
         class SdkHarnessContainerImage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
