@@ -4,7 +4,6 @@
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -27,6 +26,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :docker_images, :message, 1, "google.devtools.artifactregistry.v1.DockerImage"
       optional :next_page_token, :string, 2
     end
+    add_message "google.devtools.artifactregistry.v1.GetDockerImageRequest" do
+      optional :name, :string, 1
+    end
   end
 end
 
@@ -37,6 +39,7 @@ module Google
         DockerImage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.DockerImage").msgclass
         ListDockerImagesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.ListDockerImagesRequest").msgclass
         ListDockerImagesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.ListDockerImagesResponse").msgclass
+        GetDockerImageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.devtools.artifactregistry.v1.GetDockerImageRequest").msgclass
       end
     end
   end
