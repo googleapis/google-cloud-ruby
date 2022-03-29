@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2022-03-28
+
+#### Features
+
+* Add support for copy_backup
+
 ### 0.7.6 / 2022-03-17
 
 #### Bug Fixes
