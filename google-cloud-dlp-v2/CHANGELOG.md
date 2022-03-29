@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2022-03-29
+
+#### Features
+
+* Support for PowerPoint and Excel document types
+
 ### 0.8.1 / 2022-01-11
 
 #### Documentation
