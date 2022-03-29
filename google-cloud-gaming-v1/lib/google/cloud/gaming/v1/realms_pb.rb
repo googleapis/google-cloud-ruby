@@ -6,7 +6,6 @@ require 'google/api/resource_pb'
 require 'google/cloud/gaming/v1/common_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
