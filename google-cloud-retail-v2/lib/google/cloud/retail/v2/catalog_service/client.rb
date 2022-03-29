@@ -397,10 +397,6 @@ module Google
             # * UserEventService will only join events with products from branch
             #   \\{newBranch}.
             #
-            # This feature is only available for users who have Retail Search enabled.
-            # Please submit a form [here](https://cloud.google.com/contact) to contact
-            # cloud sales if you are interested in using Retail Search.
-            #
             # @overload set_default_branch(request, options = nil)
             #   Pass arguments to `set_default_branch` via a request object, either of type
             #   {::Google::Cloud::Retail::V2::SetDefaultBranchRequest} or an equivalent Hash.
@@ -411,7 +407,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload set_default_branch(catalog: nil, branch_id: nil, note: nil)
+            # @overload set_default_branch(catalog: nil, branch_id: nil, note: nil, force: nil)
             #   Pass arguments to `set_default_branch` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -424,6 +420,10 @@ module Google
             #
             #     This field must be one of "0", "1" or "2". Otherwise, an INVALID_ARGUMENT
             #     error is returned.
+            #
+            #     If there are no sufficient active products in the targeted branch and
+            #     {::Google::Cloud::Retail::V2::SetDefaultBranchRequest#force force} is not set, a
+            #     FAILED_PRECONDITION error is returned.
             #   @param note [::String]
             #     Some note on this request, this can be retrieved by
             #     {::Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch CatalogService.GetDefaultBranch}
@@ -431,6 +431,10 @@ module Google
             #
             #     This field must be a UTF-8 encoded string with a length limit of 1,000
             #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+            #   @param force [::Boolean]
+            #     If set to true, it permits switching to a branch with
+            #     {::Google::Cloud::Retail::V2::SetDefaultBranchRequest#branch_id branch_id} even
+            #     if it has no sufficient active products.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -500,10 +504,6 @@ module Google
             # Get which branch is currently default branch set by
             # {::Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch CatalogService.SetDefaultBranch}
             # method under a specified parent catalog.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Please submit a form [here](https://cloud.google.com/contact) to contact
-            # cloud sales if you are interested in using Retail Search.
             #
             # @overload get_default_branch(request, options = nil)
             #   Pass arguments to `get_default_branch` via a request object, either of type

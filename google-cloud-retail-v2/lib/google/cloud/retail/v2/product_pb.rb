@@ -4,6 +4,7 @@
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/retail/v2/common_pb'
+require 'google/cloud/retail/v2/promotion_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'

@@ -73,9 +73,12 @@ module Google
         #      * filterOutOfStockItems  tag=(-"promotional")
         #      * filterOutOfStockItems
         #
-        #     If your filter blocks all prediction results, nothing will be returned. If
-        #     you want generic (unfiltered) popular products to be returned instead, set
-        #     `strictFiltering` to false in `PredictRequest.params`.
+        #     If your filter blocks all prediction results, the API will return generic
+        #     (unfiltered) popular products. If you only want results strictly matching
+        #     the filters, set `strictFiltering` to True in `PredictRequest.params` to
+        #     receive empty results instead.
+        #     Note that the API will never return items with storageStatus of "EXPIRED"
+        #     or "DELETED" regardless of filter choices.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Use validate only mode for this prediction query. If set to true, a

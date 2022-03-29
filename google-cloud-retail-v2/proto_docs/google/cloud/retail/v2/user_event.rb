@@ -30,7 +30,6 @@ module Google
         #     * `add-to-cart`: Products being added to cart.
         #     * `category-page-view`: Special pages such as sale or promotion pages
         #       viewed.
-        #     * `completion`: Completion query result showed/clicked.
         #     * `detail-page-view`: Products detail page viewed.
         #     * `home-page-view`: Homepage viewed.
         #     * `promotion-offered`: Promotion is offered to a user.
@@ -108,6 +107,7 @@ module Google
         #     * `add-to-cart`
         #     * `detail-page-view`
         #     * `purchase-complete`
+        #     * `search`
         #
         #     In a `search` event, this field represents the products returned to the end
         #     user on the current page (the end user may have not finished browsing the
@@ -118,22 +118,35 @@ module Google
         #     desired. The end user may have not finished browsing the whole page yet.
         # @!attribute [rw] completion_detail
         #   @return [::Google::Cloud::Retail::V2::CompletionDetail]
-        #     The main completion details related to the event.
+        #     The main auto-completion details related to the event.
         #
-        #     In a `completion` event, this field represents the completions returned to
-        #     the end user and the clicked completion by the end user. In a `search`
-        #     event, it represents the search event happens after clicking completion.
+        #     This field should be set for `search` event when autocomplete function is
+        #     enabled and the user clicks a suggestion for search.
         # @!attribute [rw] attributes
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CustomAttribute}]
         #     Extra user event features to include in the recommendation model.
         #
-        #     The key must be a UTF-8 encoded string with a length limit of 5,000
-        #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
+        #     If you provide custom attributes for ingested user events, also include
+        #     them in the user events that you associate with prediction requests. Custom
+        #     attribute formatting must be consistent between imported events and events
+        #     provided with prediction requests. This lets the Retail API use
+        #     those custom attributes when training models and serving predictions, which
+        #     helps improve recommendation quality.
         #
-        #     For product recommendation, an example of extra user information is
-        #     traffic_channel, i.e. how user arrives at the site. Users can arrive
-        #     at the site by coming to the site directly, or coming through Google
-        #     search, and etc.
+        #     This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT
+        #     error is returned:
+        #
+        #     * The key must be a UTF-8 encoded string with a length limit of 5,000
+        #       characters.
+        #     * For text attributes, at most 400 values are allowed. Empty values are not
+        #       allowed. Each value must be a UTF-8 encoded string with a length limit of
+        #       256 characters.
+        #     * For number attributes, at most 400 values are allowed.
+        #
+        #     For product recommendations, an example of extra user information is
+        #     traffic_channel, which is how a user arrives at the site. Users can arrive
+        #     at the site by coming to the site directly, coming through Google
+        #     search, or in other ways.
         # @!attribute [rw] cart_id
         #   @return [::String]
         #     The ID or name of the associated shopping cart. This ID is used
