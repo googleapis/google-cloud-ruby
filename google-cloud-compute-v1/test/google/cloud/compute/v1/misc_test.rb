@@ -37,11 +37,13 @@ class MiscTest < Minitest::Test
     ds_decoded = ::Google::Cloud::Compute::V1::DeprecationStatus.decode_json deprecation_status_json, ignore_unknown_fields: true
     assert_equal "OBSOLETE", ds_decoded.state
     
-    unknown_enum_json = deprecation_status_json.gsub "OBSOLETE", "57"
-    ds_decoded = ::Google::Cloud::Compute::V1::DeprecationStatus.decode_json unknown_enum_json, ignore_unknown_fields: true
-    assert_equal "57", ds_decoded.state
+    unknown_enum_json = deprecation_status_json.gsub "\"OBSOLETE\"", "57"
+    
+    err = assert_raises ::Google::Protobuf::ParseError do 
+      ds_decoded = ::Google::Cloud::Compute::V1::DeprecationStatus.decode_json unknown_enum_json, ignore_unknown_fields: true
+    end
 
-    re_encoded_json = ds_decoded.to_json
-    assert_includes re_encoded_json, "57"
+    assert_match /Error parsing JSON/, err.message
+    assert_match /Expected string/, err.message
   end
 end
