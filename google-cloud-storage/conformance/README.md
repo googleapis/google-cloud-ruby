@@ -15,3 +15,5 @@ The output directory is the same is the input directory, so after successful com
 ## Running the tests
 
 The conformance tests are included in the ordinary unit test suite. In the `google-cloud-storage` directory, run `rake test`.
+
+Because the conformance tests are dynamically generated at run time, working with them is more difficult than working with hand-written tests. If you need to execute one or more of these tests in isolation, you can do so by placing the `focus` keyword just above one of the calls to `define_method`. This will isolate a subset of the conformance tests.
