@@ -79,6 +79,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :cluster_id, :string, 1
       optional :allow_transactional_writes, :bool, 2
     end
+    add_message "google.bigtable.admin.v2.HotTablet" do
+      optional :name, :string, 1
+      optional :table_name, :string, 2
+      optional :start_time, :message, 3, "google.protobuf.Timestamp"
+      optional :end_time, :message, 4, "google.protobuf.Timestamp"
+      optional :start_key, :string, 5
+      optional :end_key, :string, 6
+      optional :node_cpu_usage_percent, :float, 7
+    end
   end
 end
 
@@ -100,6 +109,7 @@ module Google
           AppProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile").msgclass
           AppProfile::MultiClusterRoutingUseAny = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.MultiClusterRoutingUseAny").msgclass
           AppProfile::SingleClusterRouting = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.AppProfile.SingleClusterRouting").msgclass
+          HotTablet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.HotTablet").msgclass
         end
       end
     end

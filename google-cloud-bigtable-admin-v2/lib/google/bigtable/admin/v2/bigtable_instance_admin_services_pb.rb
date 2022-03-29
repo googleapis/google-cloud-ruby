@@ -108,6 +108,9 @@ module Google
               rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
               # Returns permissions that the caller has on the specified instance resource.
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
+              # Lists hot tablets in a cluster, within the time range provided. Hot
+              # tablets are ordered based on CPU usage.
+              rpc :ListHotTablets, ::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsRequest, ::Google::Cloud::Bigtable::Admin::V2::ListHotTabletsResponse
             end
 
             Stub = Service.rpc_stub_class
