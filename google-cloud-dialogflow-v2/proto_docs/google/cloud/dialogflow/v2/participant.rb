@@ -267,11 +267,21 @@ module Google
         #     The suggestions for most recent human agent. The order is the same as
         #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig#feature_configs HumanAgentAssistantConfig.SuggestionConfig.feature_configs} of
         #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig#human_agent_suggestion_config HumanAgentAssistantConfig.human_agent_suggestion_config}.
+        #
+        #     Note that any failure of Agent Assist features will not lead to the overall
+        #     failure of an AnalyzeContent API call. Instead, the features will
+        #     fail silently with the error field set in the corresponding
+        #     SuggestionResult.
         # @!attribute [rw] end_user_suggestion_results
         #   @return [::Array<::Google::Cloud::Dialogflow::V2::SuggestionResult>]
         #     The suggestions for end user. The order is the same as
         #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig::SuggestionConfig#feature_configs HumanAgentAssistantConfig.SuggestionConfig.feature_configs} of
         #     {::Google::Cloud::Dialogflow::V2::HumanAgentAssistantConfig#end_user_suggestion_config HumanAgentAssistantConfig.end_user_suggestion_config}.
+        #
+        #     Same as human_agent_suggestion_results, any failure of Agent Assist
+        #     features will not lead to the overall failure of an AnalyzeContent API
+        #     call. Instead, the features will fail silently with the error field set in
+        #     the corresponding SuggestionResult.
         # @!attribute [rw] dtmf_parameters
         #   @return [::Google::Cloud::Dialogflow::V2::DtmfParameters]
         #     Indicates the parameters of DTMF.
