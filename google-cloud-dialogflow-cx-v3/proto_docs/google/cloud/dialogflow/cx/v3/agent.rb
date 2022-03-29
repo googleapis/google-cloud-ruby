@@ -98,6 +98,10 @@ module Google
           #   @return [::Boolean]
           #     Indicates if automatic spell correction is enabled in detect intent
           #     requests.
+          # @!attribute [rw] locked
+          #   @return [::Boolean]
+          #     Indiciates whether the agent is locked for changes. If the agent is locked,
+          #     modifications to the agent will be rejected except for [RestoreAgent][].
           # @!attribute [rw] advanced_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
           #     Hierarchical advanced settings for this agent. The settings exposed at the
@@ -201,6 +205,9 @@ module Google
           #     have write permissions for the object. For more information, see
           #     [Dialogflow access
           #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          # @!attribute [rw] data_format
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::DataFormat]
+          #     Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
           # @!attribute [rw] environment
           #   @return [::String]
           #     Optional. Environment name. If not set, draft environment is assumed.
@@ -209,6 +216,15 @@ module Google
           class ExportAgentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Data format of the exported agent.
+            module DataFormat
+              # Unspecified format.
+              DATA_FORMAT_UNSPECIFIED = 0
+
+              # Agent content will be exported as raw bytes.
+              BLOB = 1
+            end
           end
 
           # The response message for {::Google::Cloud::Dialogflow::CX::V3::Agents::Client#export_agent Agents.ExportAgent}.
