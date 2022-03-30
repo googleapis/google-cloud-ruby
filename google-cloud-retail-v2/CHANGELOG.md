@@ -4,13 +4,12 @@
 
 #### Features
 
-* Various updates
-  * Support for adding and removing local inventories
-  * Support for fulfillment types and other attributes in local inventory
-  * Support for force-switching default branches
-  * Support for setting personalization spec when searching
-  * Deprecated the request ID when importing products, as the field no longer has any effect
-  * Return the applied controls and invalid condition boost specs with search results
+* Support for adding and removing local inventories
+* Support for fulfillment types and other attributes in local inventory
+* Support for force-switching default branches
+* Support for setting personalization spec when searching
+* Deprecated the request ID when importing products, as the field no longer has any effect
+* Return the applied controls and invalid condition boost specs with search results
 
 ### 0.6.4 / 2022-01-11
 
