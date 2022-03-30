@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.7.0 / 2022-03-30
+
+#### Features
+
+* Support for locking an agent for changes and setting the data format of an exported agent
+
+#### Documentation
+
+* Change documentation format
+
 ### 0.6.0 / 2022-03-09
 
 #### Features
