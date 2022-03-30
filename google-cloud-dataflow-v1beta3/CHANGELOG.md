@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 / 2022-03-30
+
+#### Features
+
+* Support for environment capabilities
+
 ### 0.2.0 / 2022-02-16
 
 #### Features
