@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.4 / 2022-03-30
+
+#### Documentation
+
+* Document fuzzy matching in company_display_names
+
 ### 0.6.3 / 2022-01-11
 
 #### Bug Fixes
