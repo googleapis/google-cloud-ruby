@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.4 / 2022-03-30
+
+#### Bug Fixes
+
+* Remove some unused requires
+
 ### 0.4.3 / 2022-01-11
 
 #### Bug Fixes
