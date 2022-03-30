@@ -1,0 +1,3 @@
+deep-copy-regex:
+  - source: /google/cloud/certificatemanager/[^/]+-ruby/(.*)
+    dest: /owl-bot-staging/google-cloud-certificate_manager/$1
