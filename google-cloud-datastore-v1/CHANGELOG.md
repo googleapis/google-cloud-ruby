@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 / 2022-03-30
+
+#### Features
+
+* Support for IN, NOT_IN, and NOT_EQUAL operators
+
 ### 0.3.5 / 2022-01-11
 
 #### Documentation
