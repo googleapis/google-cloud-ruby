@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 / 2022-03-30
+
+#### Features
+
+* Support for listing hot tablets
+
 ### 0.8.1 / 2022-01-11
 
 #### Bug Fixes
