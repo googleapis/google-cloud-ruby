@@ -38,7 +38,7 @@ describe "Spanner Client", :params, :float64, :spanner do
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal :FLOAT64
-    _(results.rows.first[:value]).must_equal -Float::INFINITY
+    _(results.rows.first[:value]).must_equal(-Float::INFINITY)
   end
 
   it "queries and returns a float64 parameter (-NaN)" do
@@ -68,14 +68,15 @@ describe "Spanner Client", :params, :float64, :spanner do
   end
 
   it "queries and returns an array of special float64 parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [Float::INFINITY, -Float::INFINITY, -Float::NAN] }
+    results = db.execute_query "SELECT @value AS value",
+                               params: { value: [Float::INFINITY, -Float::INFINITY, -Float::NAN] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:FLOAT64]
     float_array = results.rows.first[:value]
     _(float_array.size).must_equal 3
     _(float_array[0]).must_equal Float::INFINITY
-    _(float_array[1]).must_equal -Float::INFINITY
+    _(float_array[1]).must_equal(-Float::INFINITY)
     _(float_array[2]).must_be :nan?
   end
 

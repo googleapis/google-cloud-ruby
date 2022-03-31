@@ -72,12 +72,16 @@ describe "Spanner Databases", :spanner do
     # Invalid
     retention_period = "0d"
     assert_raises Google::Cloud::InvalidArgumentError do
-      spanner.create_database instance_id, database_id, statements: ["ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"]
+      spanner.create_database instance_id, database_id,
+                              statements: ["ALTER DATABASE `#{database_id}` SET OPTIONS \
+                                            (version_retention_period = '#{retention_period}')"]
     end
 
     # Success
     retention_period = "7d"
-    job = spanner.create_database instance_id, database_id, statements: ["ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"]
+    job = spanner.create_database instance_id, database_id,
+                                  statements: ["ALTER DATABASE `#{database_id}` SET OPTIONS \
+                                               (version_retention_period = '#{retention_period}')"]
     _(job).must_be_kind_of Google::Cloud::Spanner::Database::Job
     _(job).wont_be :done? unless emulator_enabled?
     job.wait_until_done!
@@ -108,12 +112,14 @@ describe "Spanner Databases", :spanner do
     # Invalid
     retention_period = "0d"
     assert_raises Google::Cloud::InvalidArgumentError do
-      database.update statements: "ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"
+      database.update statements: "ALTER DATABASE `#{database_id}` SET OPTIONS \
+                                   (version_retention_period = '#{retention_period}')"
     end
 
     # Success
     retention_period = "7d"
-    job2 = database.update statements: "ALTER DATABASE `#{database_id}` SET OPTIONS (version_retention_period = '#{retention_period}')"
+    job2 = database.update statements: "ALTER DATABASE `#{database_id}` SET OPTIONS \
+                                         (version_retention_period = '#{retention_period}')"
     _(job2).must_be_kind_of Google::Cloud::Spanner::Database::Job
     _(job2).wont_be :done? unless emulator_enabled?
     job2_result = job2.wait_until_done!

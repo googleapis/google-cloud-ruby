@@ -19,7 +19,7 @@ describe "Spanner Client", :large_data, :spanner do
   let(:table_name) { "stuffs" }
 
   def generate_bytes count = 2048
-    StringIO.new(SecureRandom.random_bytes(count))
+    StringIO.new SecureRandom.random_bytes(count)
   end
 
   def generate_string count = 50
@@ -27,23 +27,23 @@ describe "Spanner Client", :large_data, :spanner do
   end
 
   def random_small_bytes count = rand(1024..4096)
-    generate_bytes(count)
+    generate_bytes count
   end
 
   def random_small_string count = rand(25..100)
-    generate_string(count)
+    generate_string count
   end
 
   ##
   # Guarenteed to be at least 1 MB
   def random_big_bytes offset = rand(1..2048)
-    generate_bytes(1024*1024 + offset)
+    generate_bytes 1024 * 1024 + offset
   end
 
   ##
   # Guarenteed to be at least 1 MB
   def random_big_string offset = rand(1..500)
-    generate_string(25000 + offset)
+    generate_string 25_000 + offset
   end
 
   def random_row
@@ -62,7 +62,8 @@ describe "Spanner Client", :large_data, :spanner do
     results = db.read table_name, [:id, :string, :byte, :strings, :bytes], keys: my_row[:id]
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] })
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING],
+bytes: [:BYTES] })
     returned_row = results.rows.first
 
     _(returned_row[:string]).must_equal my_row[:string]
@@ -85,10 +86,12 @@ describe "Spanner Client", :large_data, :spanner do
   it "writes and queries bytes" do
     my_row = random_row
     db.upsert table_name, my_row
-    results = db.execute_sql "SELECT id, string, byte, strings, bytes FROM #{table_name} WHERE id = @id", params: { id: my_row[:id] }
+    results = db.execute_sql "SELECT id, string, byte, strings, bytes FROM #{table_name} WHERE id = @id",
+                             params: { id: my_row[:id] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] })
+    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING],
+bytes: [:BYTES] })
     returned_row = results.rows.first
 
     _(returned_row[:string]).must_equal my_row[:string]

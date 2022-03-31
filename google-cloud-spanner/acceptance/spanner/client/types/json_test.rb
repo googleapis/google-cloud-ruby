@@ -19,7 +19,7 @@ describe "Spanner Client", :types, :json, :spanner do
   let(:table_name) { "stuffs" }
   let(:table_types) { stuffs_table_types }
   let(:json_params) { { "venue" => "abc", "rating" => 10 } }
-  let(:json_array_params) do
+  let :json_array_params do
     3.times.map do |i|
       { "venue" => "abc-#{i}", "rating" => 10 + i }
     end
@@ -101,7 +101,7 @@ describe "Spanner Client", :types, :json, :spanner do
     skip if emulator_enabled?
 
     id = SecureRandom.int64
-    params = [nil].concat(json_array_params)
+    params = [nil].concat json_array_params
     db.upsert table_name, { id: id, json_array: params }
     results = db.read table_name, [:id, :json_array], keys: id
 
@@ -114,7 +114,7 @@ describe "Spanner Client", :types, :json, :spanner do
     skip if emulator_enabled?
 
     id = SecureRandom.int64
-    params = [nil].concat(json_array_params)
+    params = [nil].concat json_array_params
     db.upsert table_name, { id: id, json_array: params }
     results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = @id", params: { id: id }
 
