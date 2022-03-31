@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.2 / 2022-03-31
+
+#### Documentation
+
+* Clarify the use of SuggestionResult error fields
+
 ### 0.15.1 / 2022-03-09
 
 #### Documentation
