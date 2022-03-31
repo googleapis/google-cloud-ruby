@@ -620,7 +620,8 @@ describe "Files Snippets" do
   end
 
   it "storage_download_byte_range" do
-    assert_output "Downloaded bytes 0 to 3 of object #{remote_file_name} from bucket #{bucket_name}" \
+    bucket.create_file local_file, remote_file_name
+    assert_output "Downloaded bytes 0 to 3 of object #{remote_file_name} from bucket #{bucket.name}" \
     + " to local file #{local_file_path}." do
       StorageDownloadByteRange.new.storage_download_byte_range bucket_name: bucket.name, file_name: remote_file_name,
                                                                start_byte: 0, end_byte: 3
@@ -628,13 +629,14 @@ describe "Files Snippets" do
   end
 
   it "storage_stream_file_upload" do
-    assert_output "Stream data uploaded to #{remote_file_name} in bucket #{bucket_name}\n" do
+    assert_output "Stream data uploaded to #{remote_file_name} in bucket #{bucket.name}\n" do
       StorageStreamFileUpload.new.storage_stream_file_upload bucket_name: bucket.name, local_file_obj: local_file,
                                                              file_name: remote_file_name
     end
   end
 
   it "storage_stream_file_download" do
+    bucket.create_file local_file, remote_file_name
     assert_output "The full downloaded file contents are: #{file_content}\n" do
       StorageStreamFileDownload.new.storage_stream_file_download bucket_name: bucket.name, file_name: remote_file_name,
                                                                  local_file_obj: local_file
