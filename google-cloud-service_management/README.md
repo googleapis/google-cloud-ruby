@@ -1,6 +1,6 @@
-# Ruby Client for the Service Management API API
+# Ruby Client for the Service Management API
 
-API Client library for the Service Management API API
+API Client library for the Service Management API
 
 Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
 

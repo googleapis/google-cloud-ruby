@@ -1,13 +1,13 @@
-# Ruby Client for the Service Management API V1 API
+# Ruby Client for the Service Management V1 API
 
-API Client library for the Service Management API V1 API
+API Client library for the Service Management V1 API
 
 Google Service Management allows service producers to publish their services on Google Cloud Platform so that they can be discovered and used by service consumers.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Service Management API V1 API. Most users should consider using
+specific version of the Service Management V1 API. Most users should consider using
 the main client gem,
 [google-cloud-service_management](https://rubygems.org/gems/google-cloud-service_management).
 See the section below titled *Which client should I use?* for more information.
