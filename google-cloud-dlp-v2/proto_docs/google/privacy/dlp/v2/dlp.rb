@@ -3180,6 +3180,144 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A task to execute when a data profile has been generated.
+        # @!attribute [rw] export_data
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::Export]
+        #     Export data profiles into a provided location.
+        # @!attribute [rw] pub_sub_notification
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PubSubNotification]
+        #     Publish a message into the Pub/Sub topic.
+        class DataProfileAction
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # If set, the detailed data profiles will be persisted to the location
+          # of your choice whenever updated.
+          # @!attribute [rw] profile_table
+          #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
+          #     Store all table and column profiles in an existing table or a new table
+          #     in an existing dataset. Each re-generation will result in a new row in
+          #     BigQuery.
+          class Export
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Send a Pub/Sub message into the given Pub/Sub topic to connect other
+          # systems to data profile generation. The message payload data will
+          # be the byte serialization of `DataProfilePubSubMessage`.
+          # @!attribute [rw] topic
+          #   @return [::String]
+          #     Cloud Pub/Sub topic to send notifications to.
+          #     Format is projects/\\{project}/topics/\\{topic}.
+          # @!attribute [rw] event
+          #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::EventType]
+          #     The type of event that triggers a Pub/Sub. At most one
+          #     `PubSubNotification` per EventType is permitted.
+          # @!attribute [rw] pubsub_condition
+          #   @return [::Google::Cloud::Dlp::V2::DataProfilePubSubCondition]
+          #     Conditions (e.g., data risk or sensitivity level) for triggering a
+          #     Pub/Sub.
+          # @!attribute [rw] detail_of_message
+          #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::PubSubNotification::DetailLevel]
+          #     How much data to include in the Pub/Sub message. If the user wishes to
+          #     limit the size of the message, they can use resource_name and fetch the
+          #     profile fields they wish to. Per table profile (not per column).
+          class PubSubNotification
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The levels of detail that can be included in the Pub/Sub message.
+            module DetailLevel
+              # Unused.
+              DETAIL_LEVEL_UNSPECIFIED = 0
+
+              # The full table data profile.
+              TABLE_PROFILE = 1
+
+              # The resource name of the table.
+              RESOURCE_NAME = 2
+            end
+          end
+
+          # Types of event that can trigger an action.
+          module EventType
+            # Unused.
+            EVENT_TYPE_UNSPECIFIED = 0
+
+            # New profile (not a re-profile).
+            NEW_PROFILE = 1
+
+            # Changed one of the following profile metrics:
+            # * Table data risk score
+            # * Table sensitivity score
+            # * Table resource visibility
+            # * Table encryption type
+            # * Table predicted infoTypes
+            # * Table other infoTypes
+            CHANGED_PROFILE = 2
+
+            # Table data risk score or sensitivity score increased.
+            SCORE_INCREASED = 3
+
+            # A user (non-internal) error occurred.
+            ERROR_CHANGED = 4
+          end
+        end
+
+        # Configuration for setting up a job to scan resources for profile generation.
+        # Only one data profile configuration may exist per organization, folder,
+        # or project.
+        #
+        # The generated data profiles are retained according to the
+        # [data retention policy]
+        # (https://cloud.google.com/dlp/docs/data-profiles#retention).
+        # @!attribute [rw] location
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileLocation]
+        #     The data to scan.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     The project that will run the scan. The DLP service
+        #     account that exists within this project must have access to all resources
+        #     that are profiled, and the Cloud DLP API must be enabled.
+        # @!attribute [rw] inspect_templates
+        #   @return [::Array<::String>]
+        #     Detection logic for profile generation.
+        #
+        #     Not all template features are used by profiles. FindingLimits,
+        #     include_quote and exclude_info_types have no impact on
+        #     data profiling.
+        #
+        #     Multiple templates may be provided if there is data in multiple regions.
+        #     At most one template must be specified per-region (including "global").
+        #     Each region is scanned using the applicable template. If no region-specific
+        #     template is specified, but a "global" template is specified, it will be
+        #     copied to that region and used instead. If no global or region-specific
+        #     template is provided for a region with data, that region's data will not be
+        #     scanned.
+        #
+        #     For more information, see
+        #     https://cloud.google.com/dlp/docs/data-profiles#data_residency.
+        # @!attribute [rw] data_profile_actions
+        #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfileAction>]
+        #     Actions to execute at the completion of the job.
+        class DataProfileJobConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The data that will be profiled.
+        # @!attribute [rw] organization_id
+        #   @return [::Integer]
+        #     The ID of an organization to scan.
+        # @!attribute [rw] folder_id
+        #   @return [::Integer]
+        #     The ID of the Folder within an organization to scan.
+        class DataProfileLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Combines all of the information about a DLP job.
         # @!attribute [rw] name
         #   @return [::String]
@@ -3886,6 +4024,291 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Score is a summary of all elements in the data profile.
+        # A higher number means more sensitive.
+        # @!attribute [rw] score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore::SensitivityScoreLevel]
+        #     The score applied to the resource.
+        class SensitivityScore
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Various score levels for resources.
+          module SensitivityScoreLevel
+            # Unused.
+            SENSITIVITY_SCORE_UNSPECIFIED = 0
+
+            # No sensitive information detected. Limited access.
+            SENSITIVITY_LOW = 10
+
+            # Medium risk - PII, potentially sensitive data, or fields with free-text
+            # data that are at higher risk of having intermittent sensitive data.
+            # Consider limiting access.
+            SENSITIVITY_MODERATE = 20
+
+            # High risk – SPII may be present. Exfiltration of data may lead to user
+            # data loss. Re-identification of users may be possible. Consider limiting
+            # usage and or removing SPII.
+            SENSITIVITY_HIGH = 30
+          end
+        end
+
+        # Score is a summary of all elements in the data profile.
+        # A higher number means more risky.
+        # @!attribute [rw] score
+        #   @return [::Google::Cloud::Dlp::V2::DataRiskLevel::DataRiskLevelScore]
+        #     The score applied to the resource.
+        class DataRiskLevel
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Various score levels for resources.
+          module DataRiskLevelScore
+            # Unused.
+            RISK_SCORE_UNSPECIFIED = 0
+
+            # Low risk - Lower indication of sensitive data that appears to have
+            # additional access restrictions in place or no indication of sensitive
+            # data found.
+            RISK_LOW = 10
+
+            # Medium risk - Sensitive data may be present but additional access or fine
+            # grain access restrictions appears to be present.  Consider limiting
+            # access even further or transforming data to mask.
+            RISK_MODERATE = 20
+
+            # High risk – SPII may be present. Access controls may include public
+            # ACLs. Exfiltration of data may lead to user data loss. Re-identification
+            # of users may be possible. Consider limiting usage and or removing SPII.
+            RISK_HIGH = 30
+          end
+        end
+
+        # Snapshot of the configurations used to generate the profile.
+        # @!attribute [rw] inspect_config
+        #   @return [::Google::Cloud::Dlp::V2::InspectConfig]
+        #     A copy of the inspection config used to generate this profile. This
+        #     is a copy of the inspect_template specified in `DataProfileJobConfig`.
+        # @!attribute [rw] data_profile_job
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileJobConfig]
+        #     A copy of the configuration used to generate this profile.
+        class DataProfileConfigSnapshot
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The profile for a scanned table.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the profile.
+        # @!attribute [rw] project_data_profile
+        #   @return [::String]
+        #     The resource name to the project data profile for this table.
+        # @!attribute [rw] dataset_project_id
+        #   @return [::String]
+        #     The GCP project ID that owns the BigQuery dataset.
+        # @!attribute [rw] dataset_location
+        #   @return [::String]
+        #     The BigQuery location where the dataset's data is stored.
+        #     See https://cloud.google.com/bigquery/docs/locations for supported
+        #     locations.
+        # @!attribute [rw] dataset_id
+        #   @return [::String]
+        #     The BigQuery dataset ID.
+        # @!attribute [rw] table_id
+        #   @return [::String]
+        #     The BigQuery table ID.
+        # @!attribute [rw] full_resource
+        #   @return [::String]
+        #     The resource name of the table.
+        #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+        # @!attribute [rw] profile_status
+        #   @return [::Google::Cloud::Dlp::V2::ProfileStatus]
+        #     Success or error status from the most recent profile generation attempt.
+        #     May be empty if the profile is still being generated.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::Dlp::V2::TableDataProfile::State]
+        #     State of a profile.
+        # @!attribute [rw] sensitivity_score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore]
+        #     The sensitivity score of this table.
+        # @!attribute [rw] data_risk_level
+        #   @return [::Google::Cloud::Dlp::V2::DataRiskLevel]
+        #     The data risk level of this table.
+        # @!attribute [rw] predicted_info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeSummary>]
+        #     The infoTypes predicted from this table's data.
+        # @!attribute [rw] other_info_types
+        #   @return [::Array<::Google::Cloud::Dlp::V2::OtherInfoTypeSummary>]
+        #     Other infoTypes found in this table's data.
+        # @!attribute [rw] config_snapshot
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileConfigSnapshot]
+        #     The snapshot of the configurations used to generate the profile.
+        # @!attribute [rw] last_modified_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time when this table was last modified
+        # @!attribute [rw] expiration_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. The time when this table expires.
+        # @!attribute [rw] scanned_column_count
+        #   @return [::Integer]
+        #     The number of columns profiled in the table.
+        # @!attribute [rw] failed_column_count
+        #   @return [::Integer]
+        #     The number of columns skipped in the table because of an error.
+        # @!attribute [rw] table_size_bytes
+        #   @return [::Integer]
+        #     The size of the table when the profile was generated.
+        # @!attribute [rw] row_count
+        #   @return [::Integer]
+        #     Number of rows in the table when the profile was generated.
+        # @!attribute [rw] encryption_status
+        #   @return [::Google::Cloud::Dlp::V2::EncryptionStatus]
+        #     How the table is encrypted.
+        # @!attribute [rw] resource_visibility
+        #   @return [::Google::Cloud::Dlp::V2::ResourceVisibility]
+        #     How broadly a resource has been shared.
+        # @!attribute [rw] profile_last_generated
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The last time the profile was generated.
+        # @!attribute [rw] resource_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The labels applied to the resource at the time the profile was generated.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the table was created.
+        class TableDataProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible states of a profile. New items may be added.
+          module State
+            # Unused.
+            STATE_UNSPECIFIED = 0
+
+            # The profile is currently running. Once a profile has finished it will
+            # transition to DONE.
+            RUNNING = 1
+
+            # The profile is no longer generating.
+            # If profile_status.status.code is 0, the profile succeeded, otherwise, it
+            # failed.
+            DONE = 2
+          end
+        end
+
+        # @!attribute [rw] status
+        #   @return [::Google::Rpc::Status]
+        #     Profiling status code and optional message
+        # @!attribute [rw] timestamp
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Time when the profile generation status was updated
+        class ProfileStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The infoType details for this column.
+        # @!attribute [rw] info_type
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
+        #     The infoType.
+        class InfoTypeSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Infotype details for other infoTypes found within a column.
+        # @!attribute [rw] info_type
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
+        #     The other infoType.
+        class OtherInfoTypeSummary
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A condition for determining whether a PubSub should be triggered.
+        # @!attribute [rw] expressions
+        #   @return [::Google::Cloud::Dlp::V2::DataProfilePubSubCondition::PubSubExpressions]
+        #     An expression.
+        class DataProfilePubSubCondition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A condition consisting of a value.
+          # @!attribute [rw] minimum_risk_score
+          #   @return [::Google::Cloud::Dlp::V2::DataProfilePubSubCondition::ProfileScoreBucket]
+          #     The minimum data risk score that triggers the condition.
+          # @!attribute [rw] minimum_sensitivity_score
+          #   @return [::Google::Cloud::Dlp::V2::DataProfilePubSubCondition::ProfileScoreBucket]
+          #     The minimum sensitivity level that triggers the condition.
+          class PubSubCondition
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # An expression, consisting of an operator and conditions.
+          # @!attribute [rw] logical_operator
+          #   @return [::Google::Cloud::Dlp::V2::DataProfilePubSubCondition::PubSubExpressions::PubSubLogicalOperator]
+          #     The operator to apply to the collection of conditions.
+          # @!attribute [rw] conditions
+          #   @return [::Array<::Google::Cloud::Dlp::V2::DataProfilePubSubCondition::PubSubCondition>]
+          #     Conditions to apply to the expression.
+          class PubSubExpressions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Logical operators for conditional checks.
+            module PubSubLogicalOperator
+              # Unused.
+              LOGICAL_OPERATOR_UNSPECIFIED = 0
+
+              # Conditional OR.
+              OR = 1
+
+              # Conditional AND.
+              AND = 2
+            end
+          end
+
+          # Various score levels for resources.
+          module ProfileScoreBucket
+            # Unused.
+            PROFILE_SCORE_BUCKET_UNSPECIFIED = 0
+
+            # High risk/sensitivity detected.
+            HIGH = 1
+
+            # Medium or high risk/sensitivity detected.
+            MEDIUM_OR_HIGH = 2
+          end
+        end
+
+        # The message that will be published to a Pub/Sub topic.
+        # To receive a message of protocol buffer schema type, convert the message data
+        # to an object of this proto class.
+        # https://cloud.google.com/pubsub/docs/samples/pubsub-subscribe-proto-messages
+        # @!attribute [rw] profile
+        #   @return [::Google::Cloud::Dlp::V2::TableDataProfile]
+        #     If `DetailLevel` is `TABLE_PROFILE` this will be fully populated.
+        #     Otherwise, if `DetailLevel` is `RESOURCE_NAME`, then only `name` and
+        #     `full_resource` will be populated.
+        # @!attribute [rw] event
+        #   @return [::Google::Cloud::Dlp::V2::DataProfileAction::EventType]
+        #     The event that caused the Pub/Sub message to be sent.
+        class DataProfilePubSubMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Operators available for comparing the value of fields.
         module RelationalOperator
           # Unused
@@ -4006,6 +4429,31 @@ module Google
           # user-controlled storage were modified. To fix an invalid StoredInfoType,
           # use the `UpdateStoredInfoType` method to create a new version.
           INVALID = 4
+        end
+
+        # How broadly a resource has been shared. New items may be added over time.
+        # A higher number means more restricted.
+        module ResourceVisibility
+          # Unused.
+          RESOURCE_VISIBILITY_UNSPECIFIED = 0
+
+          # Visible to any user.
+          RESOURCE_VISIBILITY_PUBLIC = 10
+
+          # Visible only to specific users.
+          RESOURCE_VISIBILITY_RESTRICTED = 20
+        end
+
+        # How a resource is encrypted.
+        module EncryptionStatus
+          # Unused.
+          ENCRYPTION_STATUS_UNSPECIFIED = 0
+
+          # Google manages server-side encryption keys on your behalf.
+          ENCRYPTION_GOOGLE_MANAGED = 1
+
+          # Customer provides the key.
+          ENCRYPTION_CUSTOMER_MANAGED = 2
         end
       end
     end
