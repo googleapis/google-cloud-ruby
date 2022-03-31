@@ -324,10 +324,13 @@ end
 
 def run_linkinator dir
   dir_without_version = dir.sub(/-v\d\w*$/, "")
-  linkinator_cmd = [
-    "npx", "linkinator", "./doc", "--skip",
-    "\\w+\\.md$ ^https://googleapis\\.dev/ruby/#{dir}/latest$ ^https://rubygems.org/gems/#{dir_without_version}"
+  skip_regexes = [
+    "\\w+\\.md$",
+    "^https://googleapis\\.dev/ruby/#{dir}/latest$",
+    "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
+    "^https://rubygems.org/gems/#{dir_without_version}"
   ]
+  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", skip_regexes.join(" ")]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
