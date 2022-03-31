@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 / 2022-03-31
+
+#### Documentation
+
+* Clarification on a few autoscaling and encryption fields
+
 ### 0.9.0 / 2022-03-30
 
 #### Features
