@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 / 2022-04-01
+
+#### Features
+
+* increase GRPC max metadata size to 4 MB
+
 ### 0.7.1 / 2022-02-15
 
 #### Bug Fixes
