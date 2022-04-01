@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.8 / 2022-04-01
+
+#### Documentation
+
+* Remove redundant "API" in the service name
+
 ### 0.3.7 / 2022-02-17
 
 #### Bug Fixes
