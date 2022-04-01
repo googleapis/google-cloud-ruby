@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.1 / 2022-04-01
+
+#### Documentation
+
+* Mark row_count fields deprecated in the Read API
+
 ### 0.10.0 / 2022-03-03
 
 #### Features
