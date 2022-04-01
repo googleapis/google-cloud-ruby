@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_download_byte_range]
 # Sample for storage_download_byte_range
 class StorageDownloadByteRange
   def storage_download_byte_range bucket_name:, file_name:, start_byte:, end_byte:, local_file_path:
+    # [START storage_download_byte_range]
     # The ID of your GCS bucket
     # bucket_name = "your-unique-bucket-name"
 
@@ -40,9 +40,9 @@ class StorageDownloadByteRange
 
     puts "Downloaded bytes #{start_byte} to #{end_byte} of object #{file_name} from bucket #{bucket_name}" \
          + " to local file #{local_file_path}."
+  # [END storage_download_byte_range]
   end
 end
-# [END storage_download_byte_range]
 
 if $PROGRAM_NAME == __FILE__
   StorageDownloadByteRange.new.storage_download_byte_range bucket_name: arguments.shift,

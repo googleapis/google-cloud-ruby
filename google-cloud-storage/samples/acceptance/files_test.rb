@@ -619,7 +619,7 @@ describe "Files Snippets" do
     assert_equal "NEARLINE", bucket.file(remote_file_name).storage_class
   end
 
-  focus; it "storage_download_byte_range" do
+  it "storage_download_byte_range" do
     bucket.create_file local_file, remote_file_name
 
     Tempfile.open [downloaded_file] do |tmpfile|
@@ -638,7 +638,7 @@ describe "Files Snippets" do
     end
   end
 
-  focus; it "storage_stream_file_upload" do
+  it "storage_stream_file_upload" do
     file_obj = StringIO.new file_content
     assert_output "Stream data uploaded to #{remote_file_name} in bucket #{bucket.name}\n" do
       StorageStreamFileUpload.new.storage_stream_file_upload bucket_name: bucket.name,
@@ -647,7 +647,7 @@ describe "Files Snippets" do
     end
   end
 
-  focus; it "storage_stream_file_download" do
+  it "storage_stream_file_download" do
     bucket.create_file StringIO.new(file_content), remote_file_name
     assert_output "The full downloaded file contents are: \"#{file_content}\"\n" do
       StorageStreamFileDownload.new.storage_stream_file_download bucket_name: bucket.name,
