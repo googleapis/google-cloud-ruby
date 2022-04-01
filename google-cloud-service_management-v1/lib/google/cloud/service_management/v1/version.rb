@@ -21,7 +21,7 @@ module Google
   module Cloud
     module ServiceManagement
       module V1
-        VERSION = "0.3.7"
+        VERSION = "0.3.8"
       end
     end
   end
