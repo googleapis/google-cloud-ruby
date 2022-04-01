@@ -4,7 +4,7 @@
 
 #### Features
 
-* increase GRPC max metadata size to 4 MB ([#17921](https://www.github.com/googleapis/google-cloud-ruby/issues/17921))
+* increase GRPC max metadata size to 4 MB
 
 ### 0.7.1 / 2022-02-15
 
