@@ -34,8 +34,9 @@ class StorageStreamFileDownload
     file    = bucket.file file_name
 
     file.download local_file_obj, verify: :none
-    local_file_obj.rewind
 
+    # rewind the object before starting to read the downloaded contents
+    local_file_obj.rewind
     puts "The full downloaded file contents are: #{local_file_obj.read.inspect}"
     # [END storage_stream_file_download]
   end
