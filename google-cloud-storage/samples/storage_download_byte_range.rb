@@ -40,7 +40,7 @@ class StorageDownloadByteRange
 
     puts "Downloaded bytes #{start_byte} to #{end_byte} of object #{file_name} from bucket #{bucket_name}" \
          + " to local file #{local_file_path}."
-  # [END storage_download_byte_range]
+    # [END storage_download_byte_range]
   end
 end
 
