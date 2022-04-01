@@ -1,5 +1,14 @@
 # Release History
 
+### 2.13.0 / 2022-04-01
+
+#### Features
+
+* add spangres support ([#17661](https://www.github.com/googleapis/google-cloud-ruby/issues/17661))
+  * add pg_numeric and tests
+  * skip test for emulator
+  * add rubocop for acceptance
+
 ### 2.12.1 / 2022-02-16
 
 #### Bug Fixes
