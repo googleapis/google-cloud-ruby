@@ -5,7 +5,6 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/storagetransfer/v1/transfer_types_pb'
@@ -48,6 +47,31 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :job_name, :string, 1
       optional :project_id, :string, 2
     end
+    add_message "google.storagetransfer.v1.CreateAgentPoolRequest" do
+      optional :project_id, :string, 1
+      optional :agent_pool, :message, 2, "google.storagetransfer.v1.AgentPool"
+      optional :agent_pool_id, :string, 3
+    end
+    add_message "google.storagetransfer.v1.UpdateAgentPoolRequest" do
+      optional :agent_pool, :message, 1, "google.storagetransfer.v1.AgentPool"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.storagetransfer.v1.GetAgentPoolRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.storagetransfer.v1.DeleteAgentPoolRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.storagetransfer.v1.ListAgentPoolsRequest" do
+      optional :project_id, :string, 1
+      optional :filter, :string, 2
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+    end
+    add_message "google.storagetransfer.v1.ListAgentPoolsResponse" do
+      repeated :agent_pools, :message, 1, "google.storagetransfer.v1.AgentPool"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -64,6 +88,12 @@ module Google
         PauseTransferOperationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.PauseTransferOperationRequest").msgclass
         ResumeTransferOperationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.ResumeTransferOperationRequest").msgclass
         RunTransferJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.RunTransferJobRequest").msgclass
+        CreateAgentPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.CreateAgentPoolRequest").msgclass
+        UpdateAgentPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.UpdateAgentPoolRequest").msgclass
+        GetAgentPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.GetAgentPoolRequest").msgclass
+        DeleteAgentPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.DeleteAgentPoolRequest").msgclass
+        ListAgentPoolsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.ListAgentPoolsRequest").msgclass
+        ListAgentPoolsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.ListAgentPoolsResponse").msgclass
       end
     end
   end

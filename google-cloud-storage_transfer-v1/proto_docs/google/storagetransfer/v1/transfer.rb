@@ -24,8 +24,8 @@ module Google
         # Request passed to GetGoogleServiceAccount.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Required. The ID of the Google Cloud Platform Console project that the
-        #     Google service account is associated with.
+        #     Required. The ID of the Google Cloud project that the Google service
+        #     account is associated with.
         class GetGoogleServiceAccountRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -46,20 +46,19 @@ module Google
         #     Required. The name of job to update.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Required. The ID of the Google Cloud Platform Console project that owns the
+        #     Required. The ID of the Google Cloud project that owns the
         #     job.
         # @!attribute [rw] transfer_job
         #   @return [::Google::Cloud::StorageTransfer::V1::TransferJob]
-        #     Required. The job to update. `transferJob` is expected to specify only
-        #     four fields:
-        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
+        #     Required. The job to update. `transferJob` is expected to specify one or more of
+        #     five fields: {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#transfer_spec transfer_spec},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#notification_config notification_config},
-        #     and {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  An
-        #     `UpdateTransferJobRequest` that specifies other fields are rejected with
-        #     the error {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a
-        #     job status to
-        #     {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#logging_config logging_config}, and
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  An `UpdateTransferJobRequest` that specifies
+        #     other fields are rejected with the error
+        #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a job status
+        #     to {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
         #     `storagetransfer.jobs.delete` permissions.
         # @!attribute [rw] update_transfer_job_field_mask
         #   @return [::Google::Protobuf::FieldMask]
@@ -68,10 +67,10 @@ module Google
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#transfer_spec transfer_spec},
         #     {::Google::Cloud::StorageTransfer::V1::TransferJob#notification_config notification_config},
-        #     and {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  To update the
-        #     `transfer_spec` of the job, a complete transfer specification must be
-        #     provided. An incomplete specification missing any required fields is
-        #     rejected with the error
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#logging_config logging_config}, and
+        #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  To update the `transfer_spec` of the job, a
+        #     complete transfer specification must be provided. An incomplete
+        #     specification missing any required fields is rejected with the error
         #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}.
         class UpdateTransferJobRequest
           include ::Google::Protobuf::MessageExts
@@ -81,11 +80,10 @@ module Google
         # Request passed to GetTransferJob.
         # @!attribute [rw] job_name
         #   @return [::String]
-        #     Required.
-        #     The job to get.
+        #     Required. The job to get.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Required. The ID of the Google Cloud Platform Console project that owns the
+        #     Required. The ID of the Google Cloud project that owns the
         #     job.
         class GetTransferJobRequest
           include ::Google::Protobuf::MessageExts
@@ -155,9 +153,120 @@ module Google
         #     Required. The name of the transfer job.
         # @!attribute [rw] project_id
         #   @return [::String]
-        #     Required. The ID of the Google Cloud Platform Console project that owns the
-        #     transfer job.
+        #     Required. The ID of the Google Cloud project that owns the transfer
+        #     job.
         class RunTransferJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the request passed to CreateAgentPool.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. The ID of the Google Cloud project that owns the
+        #     agent pool.
+        # @!attribute [rw] agent_pool
+        #   @return [::Google::Cloud::StorageTransfer::V1::AgentPool]
+        #     Required. The agent pool to create.
+        # @!attribute [rw] agent_pool_id
+        #   @return [::String]
+        #     Required. The ID of the agent pool to create.
+        #
+        #     The `agent_pool_id` must meet the following requirements:
+        #
+        #     *   Length of 128 characters or less.
+        #     *   Not start with the string `goog`.
+        #     *   Start with a lowercase ASCII character, followed by:
+        #         *   Zero or more: lowercase Latin alphabet characters, numerals,
+        #             hyphens (`-`), periods (`.`), underscores (`_`), or tildes (`~`).
+        #         *   One or more numerals or lowercase ASCII characters.
+        #
+        #     As expressed by the regular expression:
+        #     `^(?!goog)[a-z]([a-z0-9-._~]*[a-z0-9])?$`.
+        class CreateAgentPoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the request passed to UpdateAgentPool.
+        # @!attribute [rw] agent_pool
+        #   @return [::Google::Cloud::StorageTransfer::V1::AgentPool]
+        #     Required. The agent pool to update. `agent_pool` is expected to specify following
+        #     fields:
+        #
+        #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#name name}
+        #
+        #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#display_name display_name}
+        #
+        #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#bandwidth_limit bandwidth_limit}
+        #     An `UpdateAgentPoolRequest` with any other fields is rejected
+        #     with the error {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     The [field mask]
+        #     (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf)
+        #     of the fields in `agentPool` to update in this request.
+        #     The following `agentPool` fields can be updated:
+        #
+        #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#display_name display_name}
+        #
+        #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#bandwidth_limit bandwidth_limit}
+        class UpdateAgentPoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the request passed to GetAgentPool.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the agent pool to get.
+        class GetAgentPoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the request passed to DeleteAgentPool.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the agent pool to delete.
+        class DeleteAgentPoolRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request passed to ListAgentPools.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. The ID of the Google Cloud project that owns the job.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     An optional list of query parameters specified as JSON text in the
+        #     form of:
+        #
+        #     `{"agentPoolNames":["agentpool1","agentpool2",...]}`
+        #
+        #     Since `agentPoolNames` support multiple values, its values must be
+        #     specified with array notation. When the filter is either empty or not
+        #     provided, the list returns all agent pools for the project.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The list page size. The max allowed value is `256`.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The list page token.
+        class ListAgentPoolsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response from ListAgentPools.
+        # @!attribute [rw] agent_pools
+        #   @return [::Array<::Google::Cloud::StorageTransfer::V1::AgentPool>]
+        #     A list of agent pools.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The list next page token.
+        class ListAgentPoolsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

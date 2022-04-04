@@ -32,6 +32,8 @@ module Google
           # source external to Google to a Cloud Storage bucket.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :storage_transfer_service_stub
 
@@ -64,7 +66,7 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 60.0
+                default_config.timeout = 30.0
 
                 default_config
               end
@@ -163,7 +165,7 @@ module Google
             # Returns the Google service account that is used by Storage Transfer
             # Service to access buckets in the project where transfers
             # run or in other projects. Each Google service account is associated
-            # with one Google Cloud Platform Console project. Users
+            # with one Google Cloud project. Users
             # should add this service account to the Google Cloud Storage bucket
             # ACLs to grant access to Storage Transfer Service. This service
             # account is created and owned by Storage Transfer Service and can
@@ -185,8 +187,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
-            #     Required. The ID of the Google Cloud Platform Console project that the
-            #     Google service account is associated with.
+            #     Required. The ID of the Google Cloud project that the Google service
+            #     account is associated with.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::StorageTransfer::V1::GoogleServiceAccount]
@@ -333,8 +335,8 @@ module Google
             # Updates a transfer job. Updating a job's transfer spec does not affect
             # transfer operations that are running already.
             #
-            # **Note:** The job's {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}
-            # field can be modified using this RPC (for example, to set a job's status to
+            # **Note:** The job's {::Google::Cloud::StorageTransfer::V1::TransferJob#status status} field can be modified
+            # using this RPC (for example, to set a job's status to
             # {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED},
             # {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DISABLED DISABLED}, or
             # {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::ENABLED ENABLED}).
@@ -357,19 +359,18 @@ module Google
             #   @param job_name [::String]
             #     Required. The name of job to update.
             #   @param project_id [::String]
-            #     Required. The ID of the Google Cloud Platform Console project that owns the
+            #     Required. The ID of the Google Cloud project that owns the
             #     job.
             #   @param transfer_job [::Google::Cloud::StorageTransfer::V1::TransferJob, ::Hash]
-            #     Required. The job to update. `transferJob` is expected to specify only
-            #     four fields:
-            #     {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
+            #     Required. The job to update. `transferJob` is expected to specify one or more of
+            #     five fields: {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
             #     {::Google::Cloud::StorageTransfer::V1::TransferJob#transfer_spec transfer_spec},
             #     {::Google::Cloud::StorageTransfer::V1::TransferJob#notification_config notification_config},
-            #     and {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  An
-            #     `UpdateTransferJobRequest` that specifies other fields are rejected with
-            #     the error {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a
-            #     job status to
-            #     {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
+            #     {::Google::Cloud::StorageTransfer::V1::TransferJob#logging_config logging_config}, and
+            #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  An `UpdateTransferJobRequest` that specifies
+            #     other fields are rejected with the error
+            #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a job status
+            #     to {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
             #     `storagetransfer.jobs.delete` permissions.
             #   @param update_transfer_job_field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The field mask of the fields in `transferJob` that are to be updated in
@@ -377,10 +378,10 @@ module Google
             #     {::Google::Cloud::StorageTransfer::V1::TransferJob#description description},
             #     {::Google::Cloud::StorageTransfer::V1::TransferJob#transfer_spec transfer_spec},
             #     {::Google::Cloud::StorageTransfer::V1::TransferJob#notification_config notification_config},
-            #     and {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  To update the
-            #     `transfer_spec` of the job, a complete transfer specification must be
-            #     provided. An incomplete specification missing any required fields is
-            #     rejected with the error
+            #     {::Google::Cloud::StorageTransfer::V1::TransferJob#logging_config logging_config}, and
+            #     {::Google::Cloud::StorageTransfer::V1::TransferJob#status status}.  To update the `transfer_spec` of the job, a
+            #     complete transfer specification must be provided. An incomplete
+            #     specification missing any required fields is rejected with the error
             #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -466,10 +467,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param job_name [::String]
-            #     Required.
-            #     The job to get.
+            #     Required. The job to get.
             #   @param project_id [::String]
-            #     Required. The ID of the Google Cloud Platform Console project that owns the
+            #     Required. The ID of the Google Cloud project that owns the
             #     job.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -808,7 +808,7 @@ module Google
             ##
             # Attempts to start a new TransferOperation for the current TransferJob. A
             # TransferJob has a maximum of one active TransferOperation. If this method
-            # is called while a TransferOperation is active, an error wil be returned.
+            # is called while a TransferOperation is active, an error will be returned.
             #
             # @overload run_transfer_job(request, options = nil)
             #   Pass arguments to `run_transfer_job` via a request object, either of type
@@ -828,8 +828,8 @@ module Google
             #   @param job_name [::String]
             #     Required. The name of the transfer job.
             #   @param project_id [::String]
-            #     Required. The ID of the Google Cloud Platform Console project that owns the
-            #     transfer job.
+            #     Required. The ID of the Google Cloud project that owns the transfer
+            #     job.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -896,6 +896,486 @@ module Google
 
               @storage_transfer_service_stub.call_rpc :run_transfer_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates an agent pool resource.
+            #
+            # @overload create_agent_pool(request, options = nil)
+            #   Pass arguments to `create_agent_pool` via a request object, either of type
+            #   {::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_agent_pool(project_id: nil, agent_pool: nil, agent_pool_id: nil)
+            #   Pass arguments to `create_agent_pool` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param project_id [::String]
+            #     Required. The ID of the Google Cloud project that owns the
+            #     agent pool.
+            #   @param agent_pool [::Google::Cloud::StorageTransfer::V1::AgentPool, ::Hash]
+            #     Required. The agent pool to create.
+            #   @param agent_pool_id [::String]
+            #     Required. The ID of the agent pool to create.
+            #
+            #     The `agent_pool_id` must meet the following requirements:
+            #
+            #     *   Length of 128 characters or less.
+            #     *   Not start with the string `goog`.
+            #     *   Start with a lowercase ASCII character, followed by:
+            #         *   Zero or more: lowercase Latin alphabet characters, numerals,
+            #             hyphens (`-`), periods (`.`), underscores (`_`), or tildes (`~`).
+            #         *   One or more numerals or lowercase ASCII characters.
+            #
+            #     As expressed by the regular expression:
+            #     `^(?!goog)[a-z]([a-z0-9-._~]*[a-z0-9])?$`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::StorageTransfer::V1::AgentPool]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::StorageTransfer::V1::AgentPool]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest.new
+            #
+            #   # Call the create_agent_pool method.
+            #   result = client.create_agent_pool request
+            #
+            #   # The returned object is of type Google::Cloud::StorageTransfer::V1::AgentPool.
+            #   p result
+            #
+            def create_agent_pool request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_agent_pool.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_agent_pool.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_agent_pool.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_transfer_service_stub.call_rpc :create_agent_pool, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates an existing agent pool resource.
+            #
+            # @overload update_agent_pool(request, options = nil)
+            #   Pass arguments to `update_agent_pool` via a request object, either of type
+            #   {::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_agent_pool(agent_pool: nil, update_mask: nil)
+            #   Pass arguments to `update_agent_pool` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param agent_pool [::Google::Cloud::StorageTransfer::V1::AgentPool, ::Hash]
+            #     Required. The agent pool to update. `agent_pool` is expected to specify following
+            #     fields:
+            #
+            #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#name name}
+            #
+            #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#display_name display_name}
+            #
+            #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#bandwidth_limit bandwidth_limit}
+            #     An `UpdateAgentPoolRequest` with any other fields is rejected
+            #     with the error {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The [field mask]
+            #     (https://developers.google.com/protocol-buffers/docs/reference/google.protobuf)
+            #     of the fields in `agentPool` to update in this request.
+            #     The following `agentPool` fields can be updated:
+            #
+            #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#display_name display_name}
+            #
+            #     *  {::Google::Cloud::StorageTransfer::V1::AgentPool#bandwidth_limit bandwidth_limit}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::StorageTransfer::V1::AgentPool]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::StorageTransfer::V1::AgentPool]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest.new
+            #
+            #   # Call the update_agent_pool method.
+            #   result = client.update_agent_pool request
+            #
+            #   # The returned object is of type Google::Cloud::StorageTransfer::V1::AgentPool.
+            #   p result
+            #
+            def update_agent_pool request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_agent_pool.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.agent_pool&.name
+                header_params["agent_pool.name"] = request.agent_pool.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_agent_pool.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_agent_pool.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_transfer_service_stub.call_rpc :update_agent_pool, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets an agent pool.
+            #
+            # @overload get_agent_pool(request, options = nil)
+            #   Pass arguments to `get_agent_pool` via a request object, either of type
+            #   {::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_agent_pool(name: nil)
+            #   Pass arguments to `get_agent_pool` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the agent pool to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::StorageTransfer::V1::AgentPool]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::StorageTransfer::V1::AgentPool]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest.new
+            #
+            #   # Call the get_agent_pool method.
+            #   result = client.get_agent_pool request
+            #
+            #   # The returned object is of type Google::Cloud::StorageTransfer::V1::AgentPool.
+            #   p result
+            #
+            def get_agent_pool request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_agent_pool.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_agent_pool.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_agent_pool.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_transfer_service_stub.call_rpc :get_agent_pool, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists agent pools.
+            #
+            # @overload list_agent_pools(request, options = nil)
+            #   Pass arguments to `list_agent_pools` via a request object, either of type
+            #   {::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_agent_pools(project_id: nil, filter: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_agent_pools` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param project_id [::String]
+            #     Required. The ID of the Google Cloud project that owns the job.
+            #   @param filter [::String]
+            #     An optional list of query parameters specified as JSON text in the
+            #     form of:
+            #
+            #     `{"agentPoolNames":["agentpool1","agentpool2",...]}`
+            #
+            #     Since `agentPoolNames` support multiple values, its values must be
+            #     specified with array notation. When the filter is either empty or not
+            #     provided, the list returns all agent pools for the project.
+            #   @param page_size [::Integer]
+            #     The list page size. The max allowed value is `256`.
+            #   @param page_token [::String]
+            #     The list page token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::StorageTransfer::V1::AgentPool>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::StorageTransfer::V1::AgentPool>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest.new
+            #
+            #   # Call the list_agent_pools method.
+            #   result = client.list_agent_pools request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::StorageTransfer::V1::AgentPool.
+            #     p response
+            #   end
+            #
+            def list_agent_pools request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_agent_pools.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_agent_pools.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_agent_pools.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_transfer_service_stub.call_rpc :list_agent_pools, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @storage_transfer_service_stub, :list_agent_pools, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes an agent pool.
+            #
+            # @overload delete_agent_pool(request, options = nil)
+            #   Pass arguments to `delete_agent_pool` via a request object, either of type
+            #   {::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_agent_pool(name: nil)
+            #   Pass arguments to `delete_agent_pool` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the agent pool to delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest.new
+            #
+            #   # Call the delete_agent_pool method.
+            #   result = client.delete_agent_pool request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_agent_pool request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_agent_pool.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_agent_pool.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_agent_pool.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_transfer_service_stub.call_rpc :delete_agent_pool, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1078,6 +1558,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :run_transfer_job
+                ##
+                # RPC-specific configuration for `create_agent_pool`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_agent_pool
+                ##
+                # RPC-specific configuration for `update_agent_pool`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_agent_pool
+                ##
+                # RPC-specific configuration for `get_agent_pool`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_agent_pool
+                ##
+                # RPC-specific configuration for `list_agent_pools`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_agent_pools
+                ##
+                # RPC-specific configuration for `delete_agent_pool`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_agent_pool
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1097,6 +1602,16 @@ module Google
                   @resume_transfer_operation = ::Gapic::Config::Method.new resume_transfer_operation_config
                   run_transfer_job_config = parent_rpcs.run_transfer_job if parent_rpcs.respond_to? :run_transfer_job
                   @run_transfer_job = ::Gapic::Config::Method.new run_transfer_job_config
+                  create_agent_pool_config = parent_rpcs.create_agent_pool if parent_rpcs.respond_to? :create_agent_pool
+                  @create_agent_pool = ::Gapic::Config::Method.new create_agent_pool_config
+                  update_agent_pool_config = parent_rpcs.update_agent_pool if parent_rpcs.respond_to? :update_agent_pool
+                  @update_agent_pool = ::Gapic::Config::Method.new update_agent_pool_config
+                  get_agent_pool_config = parent_rpcs.get_agent_pool if parent_rpcs.respond_to? :get_agent_pool
+                  @get_agent_pool = ::Gapic::Config::Method.new get_agent_pool_config
+                  list_agent_pools_config = parent_rpcs.list_agent_pools if parent_rpcs.respond_to? :list_agent_pools
+                  @list_agent_pools = ::Gapic::Config::Method.new list_agent_pools_config
+                  delete_agent_pool_config = parent_rpcs.delete_agent_pool if parent_rpcs.respond_to? :delete_agent_pool
+                  @delete_agent_pool = ::Gapic::Config::Method.new delete_agent_pool_config
 
                   yield self if block_given?
                 end

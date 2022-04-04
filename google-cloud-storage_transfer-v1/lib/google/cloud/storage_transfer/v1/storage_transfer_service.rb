@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/storage_transfer/v1/version"
 
 require "google/cloud/storage_transfer/v1/storage_transfer_service/credentials"
+require "google/cloud/storage_transfer/v1/storage_transfer_service/paths"
 require "google/cloud/storage_transfer/v1/storage_transfer_service/operations"
 require "google/cloud/storage_transfer/v1/storage_transfer_service/client"
 
