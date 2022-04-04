@@ -1,0 +1,16 @@
+{
+  "bootstrap-sha": "4552813f7653e3b0d4d272549be08b6cbc0606f2",
+  "bump-minor-pre-major": true,
+  "bump-patch-for-minor-pre-major": false,
+  "draft": false,
+  "prerelease": false,
+  "release-type": "ruby-yoshi",
+  "skip-github-release": false,
+  "separate-pull-requests": true,
+  "packages": {
+    "google-cloud-secret_manager-v1": {
+      "component": "google-cloud-secret_manager-v1",
+      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
+    }
+  }
+}
