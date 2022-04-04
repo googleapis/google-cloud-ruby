@@ -1,0 +1,13 @@
+{
+  "packages": {
+    ".": {
+      "releaseType": "ruby-yoshi",
+      "draft": false,
+      "prerelease": false,
+      "bumpMinorPreMajor": true,
+      "bumpPatchForMinorPreMajor": false,
+      "changelogPath": "CHANGELOG.md",
+      "versioning": "default"
+    }
+  }
+}
