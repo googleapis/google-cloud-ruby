@@ -27,7 +27,8 @@ module Google
           ##
           # Client for the IAMPolicy service.
           #
-          # ## API Overview
+          # API Overview
+          #
           #
           # Manages Identity and Access Management (IAM) policies.
           #
@@ -170,6 +171,8 @@ module Google
             # Sets the access control policy on the specified resource. Replaces any
             # existing policy.
             #
+            # Can return `NOT_FOUND`, `INVALID_ARGUMENT`, and `PERMISSION_DENIED` errors.
+            #
             # @overload set_iam_policy(request, options = nil)
             #   Pass arguments to `set_iam_policy` via a request object, either of type
             #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
@@ -180,7 +183,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload set_iam_policy(resource: nil, policy: nil)
+            # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
             #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -193,6 +196,12 @@ module Google
             #     the policy is limited to a few 10s of KB. An empty policy is a
             #     valid policy but certain Cloud Platform services (such as Projects)
             #     might reject them.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+            #     the fields in the mask will be modified. If no mask is provided, the
+            #     following default mask is used:
+            #
+            #     `paths: "bindings, etag"`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -283,7 +292,7 @@ module Google
             #     See the operation documentation for the appropriate value for this field.
             #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
             #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
-            #     `GetIamPolicy`. This field is only used by Cloud IAM.
+            #     `GetIamPolicy`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Iam::V1::Policy]
@@ -352,7 +361,7 @@ module Google
             ##
             # Returns permissions that a caller has on the specified resource.
             # If the resource does not exist, this will return an empty set of
-            # permissions, not a NOT_FOUND error.
+            # permissions, not a `NOT_FOUND` error.
             #
             # Note: This operation is designed to be used for building permission-aware
             # UIs and command-line tools, not for authorization checking. This operation

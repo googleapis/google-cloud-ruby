@@ -30,7 +30,8 @@ module Google
     module Kms
       module V1
         ##
-        # ## API Overview
+        # API Overview
+        #
         #
         # Manages Identity and Access Management (IAM) policies.
         #

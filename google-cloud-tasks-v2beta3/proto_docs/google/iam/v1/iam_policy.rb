@@ -31,6 +31,13 @@ module Google
       #     the policy is limited to a few 10s of KB. An empty policy is a
       #     valid policy but certain Cloud Platform services (such as Projects)
       #     might reject them.
+      # @!attribute [rw] update_mask
+      #   @return [::Google::Protobuf::FieldMask]
+      #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+      #     the fields in the mask will be modified. If no mask is provided, the
+      #     following default mask is used:
+      #
+      #     `paths: "bindings, etag"`
       class SetIamPolicyRequest
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -44,7 +51,7 @@ module Google
       # @!attribute [rw] options
       #   @return [::Google::Iam::V1::GetPolicyOptions]
       #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
-      #     `GetIamPolicy`. This field is only used by Cloud IAM.
+      #     `GetIamPolicy`.
       class GetIamPolicyRequest
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
