@@ -59,6 +59,7 @@ tool "bootstrap" do
     date = Time.now.utc.strftime("%Y%m%d-%H%M%S")
     set :branch_name, "gen/bootstrap-release-#{date}" unless branch_name
     commit_message = "chore: Bootstrap release manifest for new packages"
+    yoshi_utils.git_ensure_identity
     yoshi_pr_generator.capture enabled: !git_remote.nil?,
                                remote: git_remote,
                                branch_name: branch_name,
