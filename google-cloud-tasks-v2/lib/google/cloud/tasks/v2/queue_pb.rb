@@ -5,7 +5,6 @@ require 'google/api/resource_pb'
 require 'google/cloud/tasks/v2/target_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
