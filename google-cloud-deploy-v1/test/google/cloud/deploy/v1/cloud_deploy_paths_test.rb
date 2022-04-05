@@ -83,6 +83,18 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_membership_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.membership_path project: "value0", location: "value1", membership: "value2"
+      assert_equal "projects/value0/locations/value1/memberships/value2", path
+    end
+  end
+
   def test_release_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

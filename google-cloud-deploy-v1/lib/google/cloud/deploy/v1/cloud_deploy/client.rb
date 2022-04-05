@@ -254,7 +254,7 @@ module Google
             #     When paginating, all other provided parameters match
             #     the call that provided the page token.
             #   @param filter [::String]
-            #     Filter builds to be returned. See https://google.aip.dev/160 for more
+            #     Filter pipelines to be returned. See https://google.aip.dev/160 for more
             #     details.
             #   @param order_by [::String]
             #     Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -804,7 +804,7 @@ module Google
             #     When paginating, all other provided parameters match
             #     the call that provided the page token.
             #   @param filter [::String]
-            #     Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+            #     Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
             #     details.
             #   @param order_by [::String]
             #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -1350,7 +1350,7 @@ module Google
             #     When paginating, all other provided parameters match
             #     the call that provided the page token.
             #   @param filter [::String]
-            #     Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+            #     Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
             #     details.
             #   @param order_by [::String]
             #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
@@ -1748,7 +1748,7 @@ module Google
             #     When paginating, all other provided parameters match
             #     the call that provided the page token.
             #   @param filter [::String]
-            #     Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+            #     Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
             #     details.
             #   @param order_by [::String]
             #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
