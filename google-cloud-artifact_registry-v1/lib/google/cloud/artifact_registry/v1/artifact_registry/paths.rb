@@ -25,6 +25,27 @@ module Google
           # Path helper methods for the ArtifactRegistry API.
           module Paths
             ##
+            # Create a fully-qualified DockerImage resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/dockerImages/{docker_image}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param docker_image [String]
+            #
+            # @return [::String]
+            def docker_image_path project:, location:, repository:, docker_image:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/dockerImages/#{docker_image}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:
@@ -39,6 +60,20 @@ module Google
               raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}"
+            end
+
+            ##
+            # Create a fully-qualified ProjectSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/projectSettings`
+            #
+            # @param project [String]
+            #
+            # @return [::String]
+            def project_settings_path project:
+              "projects/#{project}/projectSettings"
             end
 
             ##
@@ -58,6 +93,29 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/repositories/#{repository}"
+            end
+
+            ##
+            # Create a fully-qualified Tag resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/repositories/{repository}/packages/{package}/tags/{tag}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param repository [String]
+            # @param package [String]
+            # @param tag [String]
+            #
+            # @return [::String]
+            def tag_path project:, location:, repository:, package:, tag:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "repository cannot contain /" if repository.to_s.include? "/"
+              raise ::ArgumentError, "package cannot contain /" if package.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/repositories/#{repository}/packages/#{package}/tags/#{tag}"
             end
 
             extend self

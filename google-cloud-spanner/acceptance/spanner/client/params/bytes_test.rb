@@ -36,7 +36,8 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns an array of bytes parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
+    results = db.execute_query "SELECT @value AS value",
+                               params: { value: [StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:BYTES]
@@ -48,7 +49,8 @@ describe "Spanner Client", :params, :bytes, :spanner do
   end
 
   it "queries and returns an array of bytes parameters with a nil value" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [nil, StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
+    results = db.execute_query "SELECT @value AS value",
+                               params: { value: [nil, StringIO.new("foo"), StringIO.new("bar"), StringIO.new("baz")] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:BYTES]

@@ -99,9 +99,8 @@ module Google
         #     The textual values of this custom attribute. For example, `["yellow",
         #     "green"]` when the key is "color".
         #
-        #     At most 400 values are allowed. Empty values are not allowed. Each value
-        #     must be a UTF-8 encoded string with a length limit of 256 characters.
-        #     Otherwise, an INVALID_ARGUMENT error is returned.
+        #     Empty string is not allowed. Otherwise, an INVALID_ARGUMENT error is
+        #     returned.
         #
         #     Exactly one of {::Google::Cloud::Retail::V2::CustomAttribute#text text} or
         #     {::Google::Cloud::Retail::V2::CustomAttribute#numbers numbers} should be set.
@@ -111,15 +110,16 @@ module Google
         #     The numerical values of this custom attribute. For example, `[2.3, 15.4]`
         #     when the key is "lengths_cm".
         #
-        #     At most 400 values are allowed.Otherwise, an INVALID_ARGUMENT error is
-        #     returned.
-        #
         #     Exactly one of {::Google::Cloud::Retail::V2::CustomAttribute#text text} or
         #     {::Google::Cloud::Retail::V2::CustomAttribute#numbers numbers} should be set.
         #     Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] searchable
         #   @return [::Boolean]
-        #     If true, custom attribute values are searchable by text queries in
+        #     This field will only be used when
+        #     [AttributesConfig.attribute_config_level][] of the
+        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is
+        #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG', if true, custom attribute values are
+        #     searchable by text queries in
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
         #
         #     This field is ignored in a {::Google::Cloud::Retail::V2::UserEvent UserEvent}.
@@ -128,8 +128,11 @@ module Google
         #     set. Otherwise, a INVALID_ARGUMENT error is returned.
         # @!attribute [rw] indexable
         #   @return [::Boolean]
-        #     If true, custom attribute values are indexed, so that it can be filtered,
-        #     faceted or boosted in
+        #     This field will only be used when
+        #     [AttributesConfig.attribute_config_level][] of the
+        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is
+        #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG', if true, custom attribute values are
+        #     indexed, so that it can be filtered, faceted or boosted in
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
         #
         #     This field is ignored in a {::Google::Cloud::Retail::V2::UserEvent UserEvent}.
@@ -183,7 +186,10 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # {::Google::Cloud::Retail::V2::Product Product} thumbnail/detail image.
+        # {::Google::Cloud::Retail::V2::Product Product} image. Recommendations AI and
+        # Retail Search do not use product images to improve prediction and search
+        # results. However, product images can be returned in results, and are shown in
+        # prediction or search previews in the console.
         # @!attribute [rw] uri
         #   @return [::String]
         #     Required. URI of the image.
@@ -250,7 +256,7 @@ module Google
         #
         #     Google Merchant Center property
         #     [price](https://support.google.com/merchants/answer/6324371). Schema.org
-        #     property [Offer.priceSpecification](https://schema.org/priceSpecification).
+        #     property [Offer.price](https://schema.org/price).
         # @!attribute [rw] original_price
         #   @return [::Float]
         #     Price of the product without any discount. If zero, by default set to be
@@ -369,19 +375,24 @@ module Google
         #     Highly recommended for logged-in users. Unique identifier for logged-in
         #     user, such as a user name.
         #
+        #     Always use a hashed value for this ID.
+        #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] ip_address
         #   @return [::String]
-        #     The end user's IP address. Required for getting
-        #     [SearchResponse.sponsored_results][google.cloud.retail.v2.SearchResponse.sponsored_results].
-        #     This field is used to extract location information for personalization.
+        #     The end user's IP address. This field is used to extract location
+        #     information for personalization.
         #
         #     This field must be either an IPv4 address (e.g. "104.133.9.80") or an IPv6
         #     address (e.g. "2001:0db8:85a3:0000:0000:8a2e:0370:7334"). Otherwise, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     This should not be set when using the JavaScript tag in
+        #     This should not be set when:
+        #
+        #     * setting
+        #     {::Google::Cloud::Retail::V2::SearchRequest#user_info SearchRequest.user_info}.
+        #     * using the JavaScript tag in
         #     {::Google::Cloud::Retail::V2::UserEventService::Client#collect_user_event UserEventService.CollectUserEvent}
         #     or if
         #     {::Google::Cloud::Retail::V2::UserInfo#direct_user_request direct_user_request}
@@ -416,21 +427,73 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Promotion information.
-        # @!attribute [rw] promotion_id
+        # The inventory information at a place (e.g. a store) identified
+        # by a place ID.
+        # @!attribute [rw] place_id
         #   @return [::String]
-        #     ID of the promotion. For example, "free gift".
-        #
-        #     The value value must be a UTF-8 encoded string with a length limit of 128
-        #     characters, and match the pattern: `[a-zA-Z][a-zA-Z0-9_]*`. For example,
-        #     id0LikeThis or ID_1_LIKE_THIS. Otherwise, an INVALID_ARGUMENT error is
-        #     returned.
+        #     The place ID for the current set of inventory information.
+        # @!attribute [rw] price_info
+        #   @return [::Google::Cloud::Retail::V2::PriceInfo]
+        #     Product price and cost information.
         #
         #     Google Merchant Center property
-        #     [promotion](https://support.google.com/merchants/answer/7050148).
-        class Promotion
+        #     [price](https://support.google.com/merchants/answer/6324371).
+        # @!attribute [rw] attributes
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CustomAttribute}]
+        #     Additional local inventory attributes, for example, store name, promotion
+        #     tags, etc.
+        #
+        #     This field needs to pass all below criteria, otherwise an INVALID_ARGUMENT
+        #     error is returned:
+        #
+        #     * At most 30 attributes are allowed.
+        #     * The key must be a UTF-8 encoded string with a length limit of 32
+        #       characters.
+        #     * The key must match the pattern: `[a-zA-Z0-9][a-zA-Z0-9_]*`. For example,
+        #       key0LikeThis or KEY_1_LIKE_THIS.
+        #     * The attribute values must be of the same type (text or number).
+        #     * Only 1 value is allowed for each attribute.
+        #     * For text values, the length limit is 256 UTF-8 characters.
+        #     * The attribute does not support search. The `searchable` field should be
+        #       unset or set to false.
+        #     * The max summed total bytes of custom attribute keys and values per
+        #       product is 5MiB.
+        # @!attribute [rw] fulfillment_types
+        #   @return [::Array<::String>]
+        #     Input only. Supported fulfillment types. Valid fulfillment type values
+        #     include commonly used types (such as pickup in store and same day
+        #     delivery), and custom types. Customers have to map custom types to their
+        #     display names before rendering UI.
+        #
+        #     Supported values:
+        #
+        #     * "pickup-in-store"
+        #     * "ship-to-store"
+        #     * "same-day-delivery"
+        #     * "next-day-delivery"
+        #     * "custom-type-1"
+        #     * "custom-type-2"
+        #     * "custom-type-3"
+        #     * "custom-type-4"
+        #     * "custom-type-5"
+        #
+        #     If this field is set to an invalid value other than these, an
+        #     INVALID_ARGUMENT error is returned.
+        #
+        #     All the elements must be distinct. Otherwise, an INVALID_ARGUMENT error is
+        #     returned.
+        class LocalInventory
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Retail::V2::CustomAttribute]
+          class AttributesEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.1 / 2022-04-01
+
+#### Bug Fixes
+
+* Remove an unused require
+
 ### 0.5.0 / 2022-01-20
 
 #### Features

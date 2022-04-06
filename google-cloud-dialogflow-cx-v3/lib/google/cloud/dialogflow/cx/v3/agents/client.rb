@@ -638,7 +638,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload export_agent(name: nil, agent_uri: nil, environment: nil)
+              # @overload export_agent(name: nil, agent_uri: nil, data_format: nil, environment: nil)
               #   Pass arguments to `export_agent` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -651,6 +651,14 @@ module Google
               #     export the agent to. The format of this URI must be
               #     `gs://<bucket-name>/<object-name>`.
               #     If left unspecified, the serialized agent is returned inline.
+              #
+              #     Dialogflow performs a write operation for the Cloud Storage object
+              #     on the caller's behalf, so your request authentication must
+              #     have write permissions for the object. For more information, see
+              #     [Dialogflow access
+              #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+              #   @param data_format [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::DataFormat]
+              #     Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
               #   @param environment [::String]
               #     Optional. Environment name. If not set, draft environment is assumed.
               #     Format: `projects/<Project ID>/locations/<Location ID>/agents/<Agent
@@ -769,6 +777,12 @@ module Google
               #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
               #     to restore agent from. The format of this URI must be
               #     `gs://<bucket-name>/<object-name>`.
+              #
+              #     Dialogflow performs a read operation for the Cloud Storage object
+              #     on the caller's behalf, so your request authentication must
+              #     have read permissions for the object. For more information, see
+              #     [Dialogflow access
+              #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
               #   @param agent_content [::String]
               #     Uncompressed raw byte content for agent.
               #   @param restore_option [::Google::Cloud::Dialogflow::CX::V3::RestoreAgentRequest::RestoreOption]

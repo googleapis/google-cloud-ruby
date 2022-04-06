@@ -120,6 +120,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.bigtable.admin.v2.UpdateAppProfileMetadata" do
     end
+    add_message "google.bigtable.admin.v2.ListHotTabletsRequest" do
+      optional :parent, :string, 1
+      optional :start_time, :message, 2, "google.protobuf.Timestamp"
+      optional :end_time, :message, 3, "google.protobuf.Timestamp"
+      optional :page_size, :int32, 4
+      optional :page_token, :string, 5
+    end
+    add_message "google.bigtable.admin.v2.ListHotTabletsResponse" do
+      repeated :hot_tablets, :message, 1, "google.bigtable.admin.v2.HotTablet"
+      optional :next_page_token, :string, 2
+    end
   end
 end
 
@@ -152,6 +163,8 @@ module Google
           UpdateAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileRequest").msgclass
           DeleteAppProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteAppProfileRequest").msgclass
           UpdateAppProfileMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateAppProfileMetadata").msgclass
+          ListHotTabletsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListHotTabletsRequest").msgclass
+          ListHotTabletsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListHotTabletsResponse").msgclass
         end
       end
     end

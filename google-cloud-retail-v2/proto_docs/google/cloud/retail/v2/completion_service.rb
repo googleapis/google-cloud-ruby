@@ -35,22 +35,21 @@ module Google
         #     The maximum number of allowed characters is 255.
         # @!attribute [rw] visitor_id
         #   @return [::String]
-        #     A unique identifier for tracking visitors. For example, this could be
-        #     implemented with an HTTP cookie, which should be able to uniquely identify
-        #     a visitor on a single device. This unique identifier should not change if
-        #     the visitor logs in or out of the website.
+        #     Required field. A unique identifier for tracking visitors. For example,
+        #     this could be implemented with an HTTP cookie, which should be able to
+        #     uniquely identify a visitor on a single device. This unique identifier
+        #     should not change if the visitor logs in or out of the website.
         #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] language_codes
         #   @return [::Array<::String>]
-        #     The list of languages of the query. This is
-        #     the BCP-47 language code, such as "en-US" or "sr-Latn".
-        #     For more information, see
-        #     [Tags for Identifying Languages](https://tools.ietf.org/html/bcp47).
-        #
-        #     The maximum number of allowed characters is 255.
-        #     Only "en-US" is currently supported.
+        #     The language filters applied to the output suggestions. If set, it should
+        #     contain the language of the query. If not set, suggestions are returned
+        #     without considering language restrictions. This is the BCP-47 language
+        #     code, such as "en-US" or "sr-Latn". For more information, see [Tags for
+        #     Identifying Languages](https://tools.ietf.org/html/bcp47). The maximum
+        #     number of language codes is 3.
         # @!attribute [rw] device_type
         #   @return [::String]
         #     The device type context for completion suggestions.
@@ -102,9 +101,9 @@ module Google
         # @!attribute [rw] attribution_token
         #   @return [::String]
         #     A unique complete token. This should be included in the
-        #     {::Google::Cloud::Retail::V2::SearchRequest SearchRequest} resulting from this
-        #     completion, which enables accurate attribution of complete model
-        #     performance.
+        #     {::Google::Cloud::Retail::V2::UserEvent#completion_detail UserEvent.completion_detail}
+        #     for search events resulting from this completion, which enables accurate
+        #     attribution of complete model performance.
         # @!attribute [rw] recent_search_results
         #   @return [::Array<::Google::Cloud::Retail::V2::CompleteQueryResponse::RecentSearchResult>]
         #     Matched recent searches of this user. The maximum number of recent searches
@@ -134,7 +133,11 @@ module Google
           #     The suggestion for the query.
           # @!attribute [rw] attributes
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CustomAttribute}]
-          #     Additional custom attributes ingested through BigQuery.
+          #     Custom attributes for the suggestion term.
+          #     * For "user-data", the attributes are additional custom attributes
+          #     ingested through BigQuery.
+          #     * For "cloud-retail", the attributes are product attributes generated
+          #     by Cloud Retail.
           class CompletionResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

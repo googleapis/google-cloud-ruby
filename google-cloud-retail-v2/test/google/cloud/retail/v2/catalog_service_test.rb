@@ -185,6 +185,7 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
     catalog = "hello world"
     branch_id = "hello world"
     note = "hello world"
+    force = true
 
     set_default_branch_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :set_default_branch, name
@@ -192,6 +193,7 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
       assert_equal "hello world", request["catalog"]
       assert_equal "hello world", request["branch_id"]
       assert_equal "hello world", request["note"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -202,31 +204,31 @@ class ::Google::Cloud::Retail::V2::CatalogService::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note }) do |response, operation|
+      client.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.set_default_branch catalog: catalog, branch_id: branch_id, note: note do |response, operation|
+      client.set_default_branch catalog: catalog, branch_id: branch_id, note: note, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.set_default_branch ::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note) do |response, operation|
+      client.set_default_branch ::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note }, grpc_options) do |response, operation|
+      client.set_default_branch({ catalog: catalog, branch_id: branch_id, note: note, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.set_default_branch(::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note), grpc_options) do |response, operation|
+      client.set_default_branch(::Google::Cloud::Retail::V2::SetDefaultBranchRequest.new(catalog: catalog, branch_id: branch_id, note: note, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

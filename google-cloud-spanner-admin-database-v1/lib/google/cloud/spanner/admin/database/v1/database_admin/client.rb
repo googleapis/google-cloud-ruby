@@ -110,6 +110,8 @@ module Google
 
                     default_config.rpcs.create_backup.timeout = 3600.0
 
+                    default_config.rpcs.copy_backup.timeout = 3600.0
+
                     default_config.rpcs.get_backup.timeout = 3600.0
                     default_config.rpcs.get_backup.retry_policy = {
                       initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
@@ -1253,6 +1255,134 @@ module Google
                 end
 
                 ##
+                # Starts copying a Cloud Spanner Backup.
+                # The returned backup {::Google::Longrunning::Operation long-running operation}
+                # will have a name of the format
+                # `projects/<project>/instances/<instance>/backups/<backup>/operations/<operation_id>`
+                # and can be used to track copying of the backup. The operation is associated
+                # with the destination backup.
+                # The {::Google::Longrunning::Operation#metadata metadata} field type is
+                # {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupMetadata CopyBackupMetadata}.
+                # The {::Google::Longrunning::Operation#response response} field type is
+                # {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}, if successful. Cancelling the returned operation will stop the
+                # copying and delete the backup.
+                # Concurrent CopyBackup requests can run on the same source backup.
+                #
+                # @overload copy_backup(request, options = nil)
+                #   Pass arguments to `copy_backup` via a request object, either of type
+                #   {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload copy_backup(parent: nil, backup_id: nil, source_backup: nil, expire_time: nil, encryption_config: nil)
+                #   Pass arguments to `copy_backup` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The name of the destination instance that will contain the backup copy.
+                #     Values are of the form: `projects/<project>/instances/<instance>`.
+                #   @param backup_id [::String]
+                #     Required. The id of the backup copy.
+                #     The `backup_id` appended to `parent` forms the full backup_uri of the form
+                #     `projects/<project>/instances/<instance>/backups/<backup>`.
+                #   @param source_backup [::String]
+                #     Required. The source backup to be copied.
+                #     The source backup needs to be in READY state for it to be copied.
+                #     Once CopyBackup is in progress, the source backup cannot be deleted or
+                #     cleaned up on expiration until CopyBackup is finished.
+                #     Values are of the form:
+                #     `projects/<project>/instances/<instance>/backups/<backup>`.
+                #   @param expire_time [::Google::Protobuf::Timestamp, ::Hash]
+                #     Required. The expiration time of the backup in microsecond granularity.
+                #     The expiration time must be at least 6 hours and at most 366 days
+                #     from the `create_time` of the source backup. Once the `expire_time` has
+                #     passed, the backup is eligible to be automatically deleted by Cloud Spanner
+                #     to free the resources used by the backup.
+                #   @param encryption_config [::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig, ::Hash]
+                #     Optional. The encryption configuration used to encrypt the backup. If this field is
+                #     not specified, the backup will use the same
+                #     encryption configuration as the source backup by default, namely
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupEncryptionConfig#encryption_type encryption_type} =
+                #     `USE_CONFIG_DEFAULT_OR_BACKUP_ENCRYPTION`.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::Operation]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::Operation]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/spanner/admin/database/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest.new
+                #
+                #   # Call the copy_backup method.
+                #   result = client.copy_backup request
+                #
+                #   # The returned object is of type Gapic::Operation. You can use this
+                #   # object to check the status of an operation, cancel it, or wait
+                #   # for results. Here is how to block until completion:
+                #   result.wait_until_done! timeout: 60
+                #   if result.response?
+                #     p result.response
+                #   else
+                #     puts "Error!"
+                #   end
+                #
+                def copy_backup request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.copy_backup.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.parent
+                    header_params["parent"] = request.parent
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.copy_backup.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.copy_backup.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @database_admin_stub.call_rpc :copy_backup, request, options: options do |response, operation|
+                    response = ::Gapic::Operation.new response, @operations_client, options: options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Gets metadata on a pending or completed {::Google::Cloud::Spanner::Admin::Database::V1::Backup Backup}.
                 #
                 # @overload get_backup(request, options = nil)
@@ -1833,6 +1963,8 @@ module Google
                 #          for {::Google::Cloud::Spanner::Admin::Database::V1::RestoreDatabaseMetadata RestoreDatabaseMetadata} is
                 #          `type.googleapis.com/google.spanner.admin.database.v1.RestoreDatabaseMetadata`.
                 #       * `metadata.<field_name>` - any field in metadata.value.
+                #          `metadata.@type` must be specified first, if filtering on metadata
+                #          fields.
                 #       * `error` - Error associated with the long-running operation.
                 #       * `response.@type` - the type of response.
                 #       * `response.<field_name>` - any field in response.value.
@@ -1985,6 +2117,8 @@ module Google
                 #          for {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata} is
                 #          `type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata`.
                 #       * `metadata.<field_name>` - any field in metadata.value.
+                #          `metadata.@type` must be specified first if filtering on metadata
+                #          fields.
                 #       * `error` - Error associated with the long-running operation.
                 #       * `response.@type` - the type of response.
                 #       * `response.<field_name>` - any field in response.value.
@@ -1996,8 +2130,11 @@ module Google
                 #     Here are a few examples:
                 #
                 #       * `done:true` - The operation is complete.
-                #       * `metadata.database:prod` - The database the backup was taken from has
-                #          a name containing the string "prod".
+                #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
+                #          `metadata.database:prod` - Returns operations where:
+                #          * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
+                #          * The database the backup was taken from has a name containing the
+                #          string "prod".
                 #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
                 #         `(metadata.name:howl) AND` \
                 #         `(metadata.progress.start_time < \"2018-03-28T14:50:00Z\") AND` \
@@ -2005,6 +2142,29 @@ module Google
                 #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata}.
                 #         * The backup name contains the string "howl".
                 #         * The operation started before 2018-03-28T14:50:00Z.
+                #         * The operation resulted in an error.
+                #       * `(metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CopyBackupMetadata) AND` \
+                #         `(metadata.source_backup:test) AND` \
+                #         `(metadata.progress.start_time < \"2022-01-18T14:50:00Z\") AND` \
+                #         `(error:*)` - Returns operations where:
+                #         * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupMetadata CopyBackupMetadata}.
+                #         * The source backup of the copied backup name contains the string
+                #         "test".
+                #         * The operation started before 2022-01-18T14:50:00Z.
+                #         * The operation resulted in an error.
+                #       * `((metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CreateBackupMetadata) AND` \
+                #         `(metadata.database:test_db)) OR` \
+                #         `((metadata.@type=type.googleapis.com/google.spanner.admin.database.v1.CopyBackupMetadata)
+                #         AND` \
+                #         `(metadata.source_backup:test_bkp)) AND` \
+                #         `(error:*)` - Returns operations where:
+                #         * The operation's metadata matches either of criteria:
+                #           * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CreateBackupMetadata CreateBackupMetadata} AND the
+                #           database the backup was taken from has name containing string
+                #           "test_db"
+                #           * The operation's metadata type is {::Google::Cloud::Spanner::Admin::Database::V1::CopyBackupMetadata CopyBackupMetadata} AND the
+                #           backup the backup was copied from has name containing string
+                #           "test_bkp"
                 #         * The operation resulted in an error.
                 #   @param page_size [::Integer]
                 #     Number of operations to be returned in the response. If 0 or
@@ -2273,6 +2433,11 @@ module Google
                     #
                     attr_reader :create_backup
                     ##
+                    # RPC-specific configuration for `copy_backup`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :copy_backup
+                    ##
                     # RPC-specific configuration for `get_backup`
                     # @return [::Gapic::Config::Method]
                     #
@@ -2330,6 +2495,8 @@ module Google
                       @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                       create_backup_config = parent_rpcs.create_backup if parent_rpcs.respond_to? :create_backup
                       @create_backup = ::Gapic::Config::Method.new create_backup_config
+                      copy_backup_config = parent_rpcs.copy_backup if parent_rpcs.respond_to? :copy_backup
+                      @copy_backup = ::Gapic::Config::Method.new copy_backup_config
                       get_backup_config = parent_rpcs.get_backup if parent_rpcs.respond_to? :get_backup
                       @get_backup = ::Gapic::Config::Method.new get_backup_config
                       update_backup_config = parent_rpcs.update_backup if parent_rpcs.respond_to? :update_backup

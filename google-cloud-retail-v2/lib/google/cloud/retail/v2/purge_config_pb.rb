@@ -2,6 +2,7 @@
 # source: google/cloud/retail/v2/purge_config.proto
 
 require 'google/api/field_behavior_pb'
+require 'google/api/resource_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

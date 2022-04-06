@@ -1,5 +1,24 @@
 # Changelog
 
+### 0.7.0 / 2022-03-30
+
+#### Features
+
+* Support for locking an agent for changes and setting the data format of an exported agent
+
+#### Documentation
+
+* Change documentation format
+
+### 0.6.0 / 2022-03-09
+
+#### Features
+
+* provide option to add page in test config
+  * feat: added page in TestConfig
+  docs: clarified wording around Cloud Storage usage
+  * 🦉 Updates from OwlBot post-processor
+
 ### 0.5.0 / 2022-01-11
 
 #### Features

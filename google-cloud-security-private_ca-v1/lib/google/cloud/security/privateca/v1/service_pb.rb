@@ -7,7 +7,6 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/security/privateca/v1/resources_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf'
@@ -96,6 +95,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :request_id, :string, 2
       optional :ignore_active_certificates, :bool, 4
+      optional :skip_grace_period, :bool, 5
     end
     add_message "google.cloud.security.privateca.v1.UpdateCertificateAuthorityRequest" do
       optional :certificate_authority, :message, 1, "google.cloud.security.privateca.v1.CertificateAuthority"

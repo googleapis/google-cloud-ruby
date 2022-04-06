@@ -30,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :catalog, :string, 1
       optional :branch_id, :string, 2
       optional :note, :string, 3
+      optional :force, :bool, 4
     end
     add_message "google.cloud.retail.v2.GetDefaultBranchRequest" do
       optional :catalog, :string, 1

@@ -147,6 +147,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @operations_client = Operations.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @artifact_registry_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Stub,
                 credentials:  credentials,
@@ -155,6 +161,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for long-running operations.
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Operations]
+            #
+            attr_reader :operations_client
 
             # Service calls
 
@@ -255,6 +268,287 @@ module Google
             end
 
             ##
+            # Gets a docker image.
+            #
+            # @overload get_docker_image(request, options = nil)
+            #   Pass arguments to `get_docker_image` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::GetDockerImageRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::GetDockerImageRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_docker_image(name: nil)
+            #   Pass arguments to `get_docker_image` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the docker images.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::DockerImage]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::DockerImage]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::GetDockerImageRequest.new
+            #
+            #   # Call the get_docker_image method.
+            #   result = client.get_docker_image request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::DockerImage.
+            #   p result
+            #
+            def get_docker_image request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::GetDockerImageRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_docker_image.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_docker_image.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_docker_image.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :get_docker_image, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports Apt artifacts. The returned Operation will complete once the
+            # resources are imported. Package, Version, and File resources are created
+            # based on the imported artifacts. Imported artifacts that conflict with
+            # existing resources are ignored.
+            #
+            # @overload import_apt_artifacts(request, options = nil)
+            #   Pass arguments to `import_apt_artifacts` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::ImportAptArtifactsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::ImportAptArtifactsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_apt_artifacts(gcs_source: nil, parent: nil)
+            #   Pass arguments to `import_apt_artifacts` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param gcs_source [::Google::Cloud::ArtifactRegistry::V1::ImportAptArtifactsGcsSource, ::Hash]
+            #     Google Cloud Storage location where input content is located.
+            #   @param parent [::String]
+            #     The name of the parent resource where the artifacts will be imported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ImportAptArtifactsRequest.new
+            #
+            #   # Call the import_apt_artifacts method.
+            #   result = client.import_apt_artifacts request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def import_apt_artifacts request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::ImportAptArtifactsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_apt_artifacts.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_apt_artifacts.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_apt_artifacts.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :import_apt_artifacts, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Imports Yum (RPM) artifacts. The returned Operation will complete once the
+            # resources are imported. Package, Version, and File resources are created
+            # based on the imported artifacts. Imported artifacts that conflict with
+            # existing resources are ignored.
+            #
+            # @overload import_yum_artifacts(request, options = nil)
+            #   Pass arguments to `import_yum_artifacts` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::ImportYumArtifactsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::ImportYumArtifactsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload import_yum_artifacts(gcs_source: nil, parent: nil)
+            #   Pass arguments to `import_yum_artifacts` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param gcs_source [::Google::Cloud::ArtifactRegistry::V1::ImportYumArtifactsGcsSource, ::Hash]
+            #     Google Cloud Storage location where input content is located.
+            #   @param parent [::String]
+            #     The name of the parent resource where the artifacts will be imported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ImportYumArtifactsRequest.new
+            #
+            #   # Call the import_yum_artifacts method.
+            #   result = client.import_yum_artifacts request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def import_yum_artifacts request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::ImportYumArtifactsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.import_yum_artifacts.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.import_yum_artifacts.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.import_yum_artifacts.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :import_yum_artifacts, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Lists repositories.
             #
             # @overload list_repositories(request, options = nil)
@@ -275,7 +569,7 @@ module Google
             #   @param parent [::String]
             #     Required. The name of the parent resource whose repositories will be listed.
             #   @param page_size [::Integer]
-            #     The maximum number of repositories to return.
+            #     The maximum number of repositories to return. Maximum page size is 1,000.
             #   @param page_token [::String]
             #     The next_page_token value returned from a previous list request, if any.
             #
@@ -436,6 +730,1941 @@ module Google
             end
 
             ##
+            # Creates a repository. The returned Operation will finish once the
+            # repository has been created. Its response will be the created Repository.
+            #
+            # @overload create_repository(request, options = nil)
+            #   Pass arguments to `create_repository` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::CreateRepositoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::CreateRepositoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_repository(parent: nil, repository_id: nil, repository: nil)
+            #   Pass arguments to `create_repository` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the parent resource where the repository will be created.
+            #   @param repository_id [::String]
+            #     The repository id to use for this repository.
+            #   @param repository [::Google::Cloud::ArtifactRegistry::V1::Repository, ::Hash]
+            #     The repository to be created.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::CreateRepositoryRequest.new
+            #
+            #   # Call the create_repository method.
+            #   result = client.create_repository request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def create_repository request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::CreateRepositoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_repository.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_repository.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_repository.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :create_repository, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a repository.
+            #
+            # @overload update_repository(request, options = nil)
+            #   Pass arguments to `update_repository` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::UpdateRepositoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::UpdateRepositoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_repository(repository: nil, update_mask: nil)
+            #   Pass arguments to `update_repository` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param repository [::Google::Cloud::ArtifactRegistry::V1::Repository, ::Hash]
+            #     The repository that replaces the resource on the server.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The update mask applies to the resource. For the `FieldMask` definition,
+            #     see
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::Repository]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::Repository]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::UpdateRepositoryRequest.new
+            #
+            #   # Call the update_repository method.
+            #   result = client.update_repository request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Repository.
+            #   p result
+            #
+            def update_repository request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::UpdateRepositoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_repository.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.repository&.name
+                header_params["repository.name"] = request.repository.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_repository.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_repository.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :update_repository, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a repository and all of its contents. The returned Operation will
+            # finish once the repository has been deleted. It will not have any Operation
+            # metadata and will return a google.protobuf.Empty response.
+            #
+            # @overload delete_repository(request, options = nil)
+            #   Pass arguments to `delete_repository` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::DeleteRepositoryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::DeleteRepositoryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_repository(name: nil)
+            #   Pass arguments to `delete_repository` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the repository to delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::DeleteRepositoryRequest.new
+            #
+            #   # Call the delete_repository method.
+            #   result = client.delete_repository request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_repository request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::DeleteRepositoryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_repository.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_repository.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_repository.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :delete_repository, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists packages.
+            #
+            # @overload list_packages(request, options = nil)
+            #   Pass arguments to `list_packages` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_packages(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_packages` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the parent resource whose packages will be listed.
+            #   @param page_size [::Integer]
+            #     The maximum number of packages to return. Maximum page size is 1,000.
+            #   @param page_token [::String]
+            #     The next_page_token value returned from a previous list request, if any.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::Package>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::Package>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest.new
+            #
+            #   # Call the list_packages method.
+            #   result = client.list_packages request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1::Package.
+            #     p response
+            #   end
+            #
+            def list_packages request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::ListPackagesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_packages.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_packages.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_packages.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :list_packages, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @artifact_registry_stub, :list_packages, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a package.
+            #
+            # @overload get_package(request, options = nil)
+            #   Pass arguments to `get_package` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::GetPackageRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::GetPackageRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_package(name: nil)
+            #   Pass arguments to `get_package` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the package to retrieve.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::Package]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::Package]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::GetPackageRequest.new
+            #
+            #   # Call the get_package method.
+            #   result = client.get_package request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Package.
+            #   p result
+            #
+            def get_package request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::GetPackageRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_package.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_package.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_package.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :get_package, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a package and all of its versions and tags. The returned operation
+            # will complete once the package has been deleted.
+            #
+            # @overload delete_package(request, options = nil)
+            #   Pass arguments to `delete_package` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::DeletePackageRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::DeletePackageRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_package(name: nil)
+            #   Pass arguments to `delete_package` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the package to delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::DeletePackageRequest.new
+            #
+            #   # Call the delete_package method.
+            #   result = client.delete_package request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_package request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::DeletePackageRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_package.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_package.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_package.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :delete_package, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists versions.
+            #
+            # @overload list_versions(request, options = nil)
+            #   Pass arguments to `list_versions` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_versions(parent: nil, page_size: nil, page_token: nil, view: nil, order_by: nil)
+            #   Pass arguments to `list_versions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The name of the parent resource whose versions will be listed.
+            #   @param page_size [::Integer]
+            #     The maximum number of versions to return. Maximum page size is 1,000.
+            #   @param page_token [::String]
+            #     The next_page_token value returned from a previous list request, if any.
+            #   @param view [::Google::Cloud::ArtifactRegistry::V1::VersionView]
+            #     The view that should be returned in the response.
+            #   @param order_by [::String]
+            #     Optional. The field to order the results by.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::Version>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::Version>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest.new
+            #
+            #   # Call the list_versions method.
+            #   result = client.list_versions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1::Version.
+            #     p response
+            #   end
+            #
+            def list_versions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::ListVersionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_versions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_versions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_versions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :list_versions, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @artifact_registry_stub, :list_versions, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a version
+            #
+            # @overload get_version(request, options = nil)
+            #   Pass arguments to `get_version` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::GetVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::GetVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_version(name: nil, view: nil)
+            #   Pass arguments to `get_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name of the version to retrieve.
+            #   @param view [::Google::Cloud::ArtifactRegistry::V1::VersionView]
+            #     The view that should be returned in the response.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::Version]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::Version]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::GetVersionRequest.new
+            #
+            #   # Call the get_version method.
+            #   result = client.get_version request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Version.
+            #   p result
+            #
+            def get_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::GetVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_version.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :get_version, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a version and all of its content. The returned operation will
+            # complete once the version has been deleted.
+            #
+            # @overload delete_version(request, options = nil)
+            #   Pass arguments to `delete_version` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::DeleteVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::DeleteVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_version(name: nil, force: nil)
+            #   Pass arguments to `delete_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name of the version to delete.
+            #   @param force [::Boolean]
+            #     By default, a version that is tagged may not be deleted. If force=true, the
+            #     version and any tags pointing to the version are deleted.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::DeleteVersionRequest.new
+            #
+            #   # Call the delete_version method.
+            #   result = client.delete_version request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::DeleteVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_version.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :delete_version, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists files.
+            #
+            # @overload list_files(request, options = nil)
+            #   Pass arguments to `list_files` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::ListFilesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::ListFilesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_files(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil)
+            #   Pass arguments to `list_files` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The name of the repository whose files will be listed. For example:
+            #     "projects/p1/locations/us-central1/repositories/repo1
+            #   @param filter [::String]
+            #     An expression for filtering the results of the request. Filter rules are
+            #     case insensitive. The fields eligible for filtering are:
+            #
+            #       * `name`
+            #       * `owner`
+            #
+            #      An example of using a filter:
+            #
+            #       * `name="projects/p1/locations/us-central1/repositories/repo1/files/a/b/*"` --> Files with an
+            #       ID starting with "a/b/".
+            #       * `owner="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"` -->
+            #       Files owned by the version `1.0` in package `pkg1`.
+            #   @param page_size [::Integer]
+            #     The maximum number of files to return.
+            #   @param page_token [::String]
+            #     The next_page_token value returned from a previous list request, if any.
+            #   @param order_by [::String]
+            #     The field to order the results by.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::File>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::File>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ListFilesRequest.new
+            #
+            #   # Call the list_files method.
+            #   result = client.list_files request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1::File.
+            #     p response
+            #   end
+            #
+            def list_files request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::ListFilesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_files.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_files.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_files.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :list_files, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @artifact_registry_stub, :list_files, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a file.
+            #
+            # @overload get_file(request, options = nil)
+            #   Pass arguments to `get_file` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::GetFileRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::GetFileRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_file(name: nil)
+            #   Pass arguments to `get_file` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name of the file to retrieve.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::File]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::File]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::GetFileRequest.new
+            #
+            #   # Call the get_file method.
+            #   result = client.get_file request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::File.
+            #   p result
+            #
+            def get_file request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::GetFileRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_file.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_file.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_file.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :get_file, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists tags.
+            #
+            # @overload list_tags(request, options = nil)
+            #   Pass arguments to `list_tags` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::ListTagsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::ListTagsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_tags(parent: nil, filter: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_tags` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The name of the parent resource whose tags will be listed.
+            #   @param filter [::String]
+            #     An expression for filtering the results of the request. Filter rules are
+            #     case insensitive. The fields eligible for filtering are:
+            #
+            #       * `version`
+            #
+            #      An example of using a filter:
+            #
+            #       * `version="projects/p1/locations/us-central1/repositories/repo1/packages/pkg1/versions/1.0"`
+            #       --> Tags that are applied to the version `1.0` in package `pkg1`.
+            #   @param page_size [::Integer]
+            #     The maximum number of tags to return. Maximum page size is 10,000.
+            #   @param page_token [::String]
+            #     The next_page_token value returned from a previous list request, if any.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::Tag>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::ArtifactRegistry::V1::Tag>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::ListTagsRequest.new
+            #
+            #   # Call the list_tags method.
+            #   result = client.list_tags request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::ArtifactRegistry::V1::Tag.
+            #     p response
+            #   end
+            #
+            def list_tags request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::ListTagsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_tags.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_tags.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_tags.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :list_tags, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @artifact_registry_stub, :list_tags, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets a tag.
+            #
+            # @overload get_tag(request, options = nil)
+            #   Pass arguments to `get_tag` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::GetTagRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::GetTagRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_tag(name: nil)
+            #   Pass arguments to `get_tag` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name of the tag to retrieve.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::Tag]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::Tag]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::GetTagRequest.new
+            #
+            #   # Call the get_tag method.
+            #   result = client.get_tag request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Tag.
+            #   p result
+            #
+            def get_tag request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::GetTagRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_tag.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_tag.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_tag.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :get_tag, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a tag.
+            #
+            # @overload create_tag(request, options = nil)
+            #   Pass arguments to `create_tag` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::CreateTagRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::CreateTagRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_tag(parent: nil, tag_id: nil, tag: nil)
+            #   Pass arguments to `create_tag` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     The name of the parent resource where the tag will be created.
+            #   @param tag_id [::String]
+            #     The tag id to use for this repository.
+            #   @param tag [::Google::Cloud::ArtifactRegistry::V1::Tag, ::Hash]
+            #     The tag to be created.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::Tag]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::Tag]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::CreateTagRequest.new
+            #
+            #   # Call the create_tag method.
+            #   result = client.create_tag request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Tag.
+            #   p result
+            #
+            def create_tag request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::CreateTagRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_tag.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_tag.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_tag.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :create_tag, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a tag.
+            #
+            # @overload update_tag(request, options = nil)
+            #   Pass arguments to `update_tag` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_tag(tag: nil, update_mask: nil)
+            #   Pass arguments to `update_tag` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param tag [::Google::Cloud::ArtifactRegistry::V1::Tag, ::Hash]
+            #     The tag that replaces the resource on the server.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The update mask applies to the resource. For the `FieldMask` definition,
+            #     see
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::Tag]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::Tag]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest.new
+            #
+            #   # Call the update_tag method.
+            #   result = client.update_tag request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Tag.
+            #   p result
+            #
+            def update_tag request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::UpdateTagRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_tag.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.tag&.name
+                header_params["tag.name"] = request.tag.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_tag.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_tag.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :update_tag, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a tag.
+            #
+            # @overload delete_tag(request, options = nil)
+            #   Pass arguments to `delete_tag` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_tag(name: nil)
+            #   Pass arguments to `delete_tag` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     The name of the tag to delete.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest.new
+            #
+            #   # Call the delete_tag method.
+            #   result = client.delete_tag request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_tag request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::DeleteTagRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_tag.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_tag.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_tag.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :delete_tag, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the IAM policy for a given resource.
+            #
+            # @overload set_iam_policy(request, options = nil)
+            #   Pass arguments to `set_iam_policy` via a request object, either of type
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_iam_policy(resource: nil, policy: nil)
+            #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy is being specified.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
+            #     REQUIRED: The complete policy to be applied to the `resource`. The size of
+            #     the policy is limited to a few 10s of KB. An empty policy is a
+            #     valid policy but certain Cloud Platform services (such as Projects)
+            #     might reject them.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
+            def set_iam_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the IAM policy for a given resource.
+            #
+            # @overload get_iam_policy(request, options = nil)
+            #   Pass arguments to `get_iam_policy` via a request object, either of type
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_iam_policy(resource: nil, options: nil)
+            #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy is being requested.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
+            #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+            #     `GetIamPolicy`. This field is only used by Cloud IAM.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
+            def get_iam_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Tests if the caller has a list of permissions on a resource.
+            #
+            # @overload test_iam_permissions(request, options = nil)
+            #   Pass arguments to `test_iam_permissions` via a request object, either of type
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload test_iam_permissions(resource: nil, permissions: nil)
+            #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy detail is being requested.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param permissions [::Array<::String>]
+            #     The set of permissions to check for the `resource`. Permissions with
+            #     wildcards (such as '*' or 'storage.*') are not allowed. For more
+            #     information see
+            #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
+            def test_iam_permissions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves the Settings for the Project.
+            #
+            # @overload get_project_settings(request, options = nil)
+            #   Pass arguments to `get_project_settings` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::GetProjectSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::GetProjectSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_project_settings(name: nil)
+            #   Pass arguments to `get_project_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the projectSettings resource.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::ProjectSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::ProjectSettings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::GetProjectSettingsRequest.new
+            #
+            #   # Call the get_project_settings method.
+            #   result = client.get_project_settings request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::ProjectSettings.
+            #   p result
+            #
+            def get_project_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::GetProjectSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_project_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_project_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_project_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :get_project_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates the Settings for the Project.
+            #
+            # @overload update_project_settings(request, options = nil)
+            #   Pass arguments to `update_project_settings` via a request object, either of type
+            #   {::Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_project_settings(project_settings: nil, update_mask: nil)
+            #   Pass arguments to `update_project_settings` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param project_settings [::Google::Cloud::ArtifactRegistry::V1::ProjectSettings, ::Hash]
+            #     The project settings.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Field mask to support partial updates.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::ArtifactRegistry::V1::ProjectSettings]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::ArtifactRegistry::V1::ProjectSettings]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/artifact_registry/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest.new
+            #
+            #   # Call the update_project_settings method.
+            #   result = client.update_project_settings request
+            #
+            #   # The returned object is of type Google::Cloud::ArtifactRegistry::V1::ProjectSettings.
+            #   p result
+            #
+            def update_project_settings request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::ArtifactRegistry::V1::UpdateProjectSettingsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_project_settings.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::ArtifactRegistry::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_settings&.name
+                header_params["project_settings.name"] = request.project_settings.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_project_settings.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_project_settings.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @artifact_registry_stub.call_rpc :update_project_settings, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ArtifactRegistry API.
             #
             # This class represents the configuration for ArtifactRegistry,
@@ -576,6 +2805,21 @@ module Google
                 #
                 attr_reader :list_docker_images
                 ##
+                # RPC-specific configuration for `get_docker_image`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_docker_image
+                ##
+                # RPC-specific configuration for `import_apt_artifacts`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_apt_artifacts
+                ##
+                # RPC-specific configuration for `import_yum_artifacts`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :import_yum_artifacts
+                ##
                 # RPC-specific configuration for `list_repositories`
                 # @return [::Gapic::Config::Method]
                 #
@@ -585,15 +2829,168 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :get_repository
+                ##
+                # RPC-specific configuration for `create_repository`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_repository
+                ##
+                # RPC-specific configuration for `update_repository`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_repository
+                ##
+                # RPC-specific configuration for `delete_repository`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_repository
+                ##
+                # RPC-specific configuration for `list_packages`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_packages
+                ##
+                # RPC-specific configuration for `get_package`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_package
+                ##
+                # RPC-specific configuration for `delete_package`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_package
+                ##
+                # RPC-specific configuration for `list_versions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_versions
+                ##
+                # RPC-specific configuration for `get_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_version
+                ##
+                # RPC-specific configuration for `delete_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_version
+                ##
+                # RPC-specific configuration for `list_files`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_files
+                ##
+                # RPC-specific configuration for `get_file`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_file
+                ##
+                # RPC-specific configuration for `list_tags`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_tags
+                ##
+                # RPC-specific configuration for `get_tag`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_tag
+                ##
+                # RPC-specific configuration for `create_tag`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_tag
+                ##
+                # RPC-specific configuration for `update_tag`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_tag
+                ##
+                # RPC-specific configuration for `delete_tag`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_tag
+                ##
+                # RPC-specific configuration for `set_iam_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_iam_policy
+                ##
+                # RPC-specific configuration for `get_iam_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_iam_policy
+                ##
+                # RPC-specific configuration for `test_iam_permissions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :test_iam_permissions
+                ##
+                # RPC-specific configuration for `get_project_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_project_settings
+                ##
+                # RPC-specific configuration for `update_project_settings`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_project_settings
 
                 # @private
                 def initialize parent_rpcs = nil
                   list_docker_images_config = parent_rpcs.list_docker_images if parent_rpcs.respond_to? :list_docker_images
                   @list_docker_images = ::Gapic::Config::Method.new list_docker_images_config
+                  get_docker_image_config = parent_rpcs.get_docker_image if parent_rpcs.respond_to? :get_docker_image
+                  @get_docker_image = ::Gapic::Config::Method.new get_docker_image_config
+                  import_apt_artifacts_config = parent_rpcs.import_apt_artifacts if parent_rpcs.respond_to? :import_apt_artifacts
+                  @import_apt_artifacts = ::Gapic::Config::Method.new import_apt_artifacts_config
+                  import_yum_artifacts_config = parent_rpcs.import_yum_artifacts if parent_rpcs.respond_to? :import_yum_artifacts
+                  @import_yum_artifacts = ::Gapic::Config::Method.new import_yum_artifacts_config
                   list_repositories_config = parent_rpcs.list_repositories if parent_rpcs.respond_to? :list_repositories
                   @list_repositories = ::Gapic::Config::Method.new list_repositories_config
                   get_repository_config = parent_rpcs.get_repository if parent_rpcs.respond_to? :get_repository
                   @get_repository = ::Gapic::Config::Method.new get_repository_config
+                  create_repository_config = parent_rpcs.create_repository if parent_rpcs.respond_to? :create_repository
+                  @create_repository = ::Gapic::Config::Method.new create_repository_config
+                  update_repository_config = parent_rpcs.update_repository if parent_rpcs.respond_to? :update_repository
+                  @update_repository = ::Gapic::Config::Method.new update_repository_config
+                  delete_repository_config = parent_rpcs.delete_repository if parent_rpcs.respond_to? :delete_repository
+                  @delete_repository = ::Gapic::Config::Method.new delete_repository_config
+                  list_packages_config = parent_rpcs.list_packages if parent_rpcs.respond_to? :list_packages
+                  @list_packages = ::Gapic::Config::Method.new list_packages_config
+                  get_package_config = parent_rpcs.get_package if parent_rpcs.respond_to? :get_package
+                  @get_package = ::Gapic::Config::Method.new get_package_config
+                  delete_package_config = parent_rpcs.delete_package if parent_rpcs.respond_to? :delete_package
+                  @delete_package = ::Gapic::Config::Method.new delete_package_config
+                  list_versions_config = parent_rpcs.list_versions if parent_rpcs.respond_to? :list_versions
+                  @list_versions = ::Gapic::Config::Method.new list_versions_config
+                  get_version_config = parent_rpcs.get_version if parent_rpcs.respond_to? :get_version
+                  @get_version = ::Gapic::Config::Method.new get_version_config
+                  delete_version_config = parent_rpcs.delete_version if parent_rpcs.respond_to? :delete_version
+                  @delete_version = ::Gapic::Config::Method.new delete_version_config
+                  list_files_config = parent_rpcs.list_files if parent_rpcs.respond_to? :list_files
+                  @list_files = ::Gapic::Config::Method.new list_files_config
+                  get_file_config = parent_rpcs.get_file if parent_rpcs.respond_to? :get_file
+                  @get_file = ::Gapic::Config::Method.new get_file_config
+                  list_tags_config = parent_rpcs.list_tags if parent_rpcs.respond_to? :list_tags
+                  @list_tags = ::Gapic::Config::Method.new list_tags_config
+                  get_tag_config = parent_rpcs.get_tag if parent_rpcs.respond_to? :get_tag
+                  @get_tag = ::Gapic::Config::Method.new get_tag_config
+                  create_tag_config = parent_rpcs.create_tag if parent_rpcs.respond_to? :create_tag
+                  @create_tag = ::Gapic::Config::Method.new create_tag_config
+                  update_tag_config = parent_rpcs.update_tag if parent_rpcs.respond_to? :update_tag
+                  @update_tag = ::Gapic::Config::Method.new update_tag_config
+                  delete_tag_config = parent_rpcs.delete_tag if parent_rpcs.respond_to? :delete_tag
+                  @delete_tag = ::Gapic::Config::Method.new delete_tag_config
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
+                  get_project_settings_config = parent_rpcs.get_project_settings if parent_rpcs.respond_to? :get_project_settings
+                  @get_project_settings = ::Gapic::Config::Method.new get_project_settings_config
+                  update_project_settings_config = parent_rpcs.update_project_settings if parent_rpcs.respond_to? :update_project_settings
+                  @update_project_settings = ::Gapic::Config::Method.new update_project_settings_config
 
                   yield self if block_given?
                 end

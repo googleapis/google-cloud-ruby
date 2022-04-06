@@ -1,5 +1,14 @@
 # Release History
 
+### 0.7.0 / 2022-03-29
+
+#### Features
+
+* Support for getting the AUTH string for a Redis instance
+* Support for enabling AUTH and setting the TLS mode of an instance
+* Support for rescheduling maintenance for an instance
+* Support for setting the maintenance policy of an instance
+
 ### 0.6.1 / 2022-01-11
 
 #### Bug Fixes

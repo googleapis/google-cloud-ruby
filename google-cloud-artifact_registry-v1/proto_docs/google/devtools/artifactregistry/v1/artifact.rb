@@ -100,6 +100,15 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # The request to get docker images.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the docker images.
+        class GetDockerImageRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

@@ -644,6 +644,146 @@ class ::Google::Cloud::Retail::V2::ProductService::ClientTest < Minitest::Test
     end
   end
 
+  def test_add_local_inventories
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    product = "hello world"
+    local_inventories = [{}]
+    add_mask = {}
+    add_time = {}
+    allow_missing = true
+
+    add_local_inventories_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :add_local_inventories, name
+      assert_kind_of ::Google::Cloud::Retail::V2::AddLocalInventoriesRequest, request
+      assert_equal "hello world", request["product"]
+      assert_kind_of ::Google::Cloud::Retail::V2::LocalInventory, request["local_inventories"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["add_mask"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["add_time"]
+      assert_equal true, request["allow_missing"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, add_local_inventories_client_stub do
+      # Create client
+      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.add_local_inventories({ product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.add_local_inventories product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.add_local_inventories ::Google::Cloud::Retail::V2::AddLocalInventoriesRequest.new(product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.add_local_inventories({ product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.add_local_inventories(::Google::Cloud::Retail::V2::AddLocalInventoriesRequest.new(product: product, local_inventories: local_inventories, add_mask: add_mask, add_time: add_time, allow_missing: allow_missing), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, add_local_inventories_client_stub.call_rpc_count
+    end
+  end
+
+  def test_remove_local_inventories
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    product = "hello world"
+    place_ids = ["hello world"]
+    remove_time = {}
+    allow_missing = true
+
+    remove_local_inventories_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :remove_local_inventories, name
+      assert_kind_of ::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest, request
+      assert_equal "hello world", request["product"]
+      assert_equal ["hello world"], request["place_ids"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Timestamp), request["remove_time"]
+      assert_equal true, request["allow_missing"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, remove_local_inventories_client_stub do
+      # Create client
+      client = ::Google::Cloud::Retail::V2::ProductService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.remove_local_inventories({ product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.remove_local_inventories product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.remove_local_inventories ::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest.new(product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.remove_local_inventories({ product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.remove_local_inventories(::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest.new(product: product, place_ids: place_ids, remove_time: remove_time, allow_missing: allow_missing), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, remove_local_inventories_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

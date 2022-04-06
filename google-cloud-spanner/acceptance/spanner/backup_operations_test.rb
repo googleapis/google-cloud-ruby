@@ -19,7 +19,7 @@ describe "Spanner Database Backup Operations", :spanner do
   let(:instance_id) { $spanner_instance_id }
   let(:database_id) { $spanner_database_id }
   let(:backup_id) { "#{$spanner_database_id}-ops" }
-  let(:expire_time) { Time.now + 36000 }
+  let(:expire_time) { Time.now + 36_000 }
 
   it "list backup operations" do
     skip if emulator_enabled?
@@ -30,8 +30,8 @@ describe "Spanner Database Backup Operations", :spanner do
     database = instance.database database_id
     _(database).wont_be :nil?
 
-    job = database.create_backup backup_id, expire_time
-    job.wait_until_done!
+    create_job = database.create_backup backup_id, expire_time
+    create_job.wait_until_done!
 
     # All
     jobs = instance.backup_operations.all.to_a
@@ -48,8 +48,8 @@ describe "Spanner Database Backup Operations", :spanner do
       _(job.start_time).must_be_kind_of Time
     end
 
-    job = jobs.first
-    _(job.reload!).must_be_kind_of Google::Cloud::Spanner::Backup::Job
+    first_job = jobs.first
+    _(first_job.reload!).must_be_kind_of Google::Cloud::Spanner::Backup::Job
 
     # Filter completed jobs
     filter = "done:true"
@@ -76,7 +76,7 @@ describe "Spanner Database Backup Operations", :spanner do
     end
 
     # Filter by job start time
-    time = (Time.now - 360000)
+    time = (Time.now - 360_000)
     filter = "metadata.progress.start_time > \"#{time.iso8601}\""
     jobs = instance.backup_operations(filter: filter).all.to_a
     _(jobs).wont_be :empty?
@@ -85,11 +85,11 @@ describe "Spanner Database Backup Operations", :spanner do
     end
 
     # Filer - AND
-    time = (Time.now - 360000)
+    time = (Time.now - 360_000)
     filter = [
       "metadata.database:#{database_id}",
       "metadata.progress.start_time > \"#{time.iso8601}\""
-    ].map{|f| "(#{f})"}.join(" AND ")
+    ].map { |f| "(#{f})" }.join(" AND ")
 
     jobs = instance.backup_operations(filter: filter).all.to_a
     _(jobs).wont_be :empty?

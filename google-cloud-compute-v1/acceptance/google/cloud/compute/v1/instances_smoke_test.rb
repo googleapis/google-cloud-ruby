@@ -102,13 +102,8 @@ class InstancesSmokeTest < Minitest::Test
   private
 
   def wait_for_zonal_op operation, op_type
-    operation = operation.operation
     $stdout.puts "Waiting for zonal #{op_type} operation #{operation.name}."
-    starttime = Time.now
-    while (operation.status != :DONE) && (Time.now < starttime + 200)
-      operation = @client_ops.get operation: operation.name, project: @default_project, zone: @default_zone
-      sleep 3
-    end
+    operation.wait_until_done!
   end
 
   def read_instance

@@ -1,5 +1,19 @@
 # Release History
 
+### 0.8.0 / 2022-03-28
+
+#### Features
+
+* Add support for copy_backup
+
+### 0.7.6 / 2022-03-17
+
+#### Bug Fixes
+
+* remove unused imports from google/spanner/* ([#17893](https://www.github.com/googleapis/google-cloud-ruby/issues/17893))
+  * fix: remove unused imports from google/spanner/*
+  * 🦉 Updates from OwlBot post-processor
+
 ### 0.7.5 / 2022-01-11
 
 #### Bug Fixes

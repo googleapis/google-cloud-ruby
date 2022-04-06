@@ -1,5 +1,13 @@
 # Release History
 
+### 0.4.7 / 2022-03-07
+
+#### Bug Fixes
+
+* remove requiring unused annotations_pb
+  * fix: change REST binding for ListDocuments to support root collection
+  * 🦉 Updates from OwlBot post-processor
+
 ### 0.4.6 / 2022-01-11
 
 #### Documentation

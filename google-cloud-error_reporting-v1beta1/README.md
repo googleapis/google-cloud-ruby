@@ -1,13 +1,13 @@
-# Ruby Client for the Cloud Error Reporting V1beta1 API
+# Ruby Client for the Error Reporting V1beta1 API
 
-API Client library for the Cloud Error Reporting V1beta1 API
+API Client library for the Error Reporting V1beta1 API
 
 The Error Reporting API provides a simple endpoint to report errors from your running service, and read access to error groups and their associated errors.
 
 https://github.com/googleapis/google-cloud-ruby
 
 This gem is a _versioned_ client. It provides basic client classes for a
-specific version of the Cloud Error Reporting V1beta1 API. Most users should consider using
+specific version of the Error Reporting V1beta1 API. Most users should consider using
 the main client gem,
 [google-cloud-error_reporting](https://rubygems.org/gems/google-cloud-error_reporting).
 See the section below titled *Which client should I use?* for more information.

@@ -73,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :container_image, :string, 1
       optional :use_single_core_per_container, :bool, 2
       optional :environment_id, :string, 3
+      repeated :capabilities, :string, 4
     end
     add_message "google.dataflow.v1beta3.WorkerPool" do
       optional :kind, :string, 1

@@ -51,6 +51,14 @@ module Google
         #     {::Google::Cloud::Retail::V2::UserEvent UserEvent} per line.
         #     * `user_event_ga360`: Using
         #       https://support.google.com/analytics/answer/3437719.
+        #
+        #     Supported values for control imports:
+        #
+        #     * 'control' (default): One JSON [Control][] per line.
+        #
+        #     Supported values for catalog attribute imports:
+        #
+        #     * 'catalog_attribute' (default): One CSV [CatalogAttribute][] per line.
         class GcsSource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -98,8 +106,19 @@ module Google
         #
         #     * `user_event` (default): One JSON
         #     {::Google::Cloud::Retail::V2::UserEvent UserEvent} per line.
-        #     * `user_event_ga360`: Using
+        #     * `user_event_ga360`:
+        #       The schema is available here:
         #       https://support.google.com/analytics/answer/3437719.
+        #     * `user_event_ga4`: This feature is in private preview. Please contact the
+        #       support team for importing Google Analytics 4 events.
+        #       The schema is available here:
+        #       https://support.google.com/analytics/answer/7029846.
+        #
+        #     Supported values for auto-completion imports:
+        #
+        #     * `suggestions` (default): One JSON completion suggestion per line.
+        #     * `denylist`:  One JSON deny suggestion per line.
+        #     * `allowlist`:  One JSON allow suggestion per line.
         class BigQuerySource
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -128,9 +147,9 @@ module Google
         # Configuration of destination for Import related errors.
         # @!attribute [rw] gcs_prefix
         #   @return [::String]
-        #     Google Cloud Storage path for import errors. This must be an empty,
-        #     existing Cloud Storage bucket. Import errors will be written to a file in
-        #     this bucket, one per line, as a JSON-encoded
+        #     Google Cloud Storage prefix for import errors. This must be an empty,
+        #     existing Cloud Storage directory. Import errors will be written to
+        #     sharded files in this directory, one per line, as a JSON-encoded
         #     `google.rpc.Status` message.
         class ImportErrorsConfig
           include ::Google::Protobuf::MessageExts
@@ -147,15 +166,7 @@ module Google
         #     If updateMask is specified, requires products.update permission.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Unique identifier provided by client, within the ancestor
-        #     dataset scope. Ensures idempotency and used for request deduplication.
-        #     Server-generated if unspecified. Up to 128 characters long and must match
-        #     the pattern: `[a-zA-Z0-9_]+`. This is returned as [Operation.name][] in
-        #     {::Google::Cloud::Retail::V2::ImportMetadata ImportMetadata}.
-        #
-        #     Only supported when
-        #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}
-        #     is set to `FULL`.
+        #     Deprecated. This field has no effect.
         # @!attribute [rw] input_config
         #   @return [::Google::Cloud::Retail::V2::ProductInputConfig]
         #     Required. The desired input location of the data.
@@ -198,16 +209,14 @@ module Google
             # Calculates diff and replaces the entire product dataset. Existing
             # products may be deleted if they are not present in the source location.
             #
-            # Can only be while using
-            # {::Google::Cloud::Retail::V2::BigQuerySource BigQuerySource}.
+            # Can only be set while using
+            # {::Google::Cloud::Retail::V2::BigQuerySource BigQuerySource}. And the BigQuery
+            # dataset must be created in the data location "us (multiple regions in
+            # United States)", otherwise a PERMISSION_DENIED error is thrown.
             #
             # Add the IAM permission "BigQuery Data Viewer" for
             # cloud-retail-customer-data-access@system.gserviceaccount.com before
             # using this feature otherwise an error is thrown.
-            #
-            # This feature is only available for users who have Retail Search enabled.
-            # Please submit a form [here](https://cloud.google.com/contact) to contact
-            # cloud sales if you are interested in using Retail Search.
             FULL = 2
           end
         end
@@ -309,8 +318,7 @@ module Google
         #     Count of entries that encountered errors while processing.
         # @!attribute [rw] request_id
         #   @return [::String]
-        #     Id of the request / operation. This is parroting back the requestId
-        #     that was passed in the request.
+        #     Deprecated. This field is never set.
         # @!attribute [rw] notification_pubsub_topic
         #   @return [::String]
         #     Pub/Sub topic for receiving notification. If this field is set,

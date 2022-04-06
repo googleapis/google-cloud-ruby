@@ -2,10 +2,10 @@
 # source: google/cloud/talent/v4/completion_service.proto
 
 require 'google/api/annotations_pb'
+require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/talent/v4/common_pb'
-require 'google/api/client_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

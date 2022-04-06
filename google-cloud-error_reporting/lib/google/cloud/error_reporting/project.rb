@@ -26,7 +26,7 @@ module Google
       #
       # Projects are top-level containers in Google Cloud Platform. They store
       # information about billing and authorized users, and they control access
-      # to Stackdriver ErrorReporting. Each project has a friendly name and a
+      # to Error Reporting. Each project has a friendly name and a
       # unique ID. Projects can be created only in the [Google Developers
       # Console](https://console.developers.google.com).
       #
@@ -111,7 +111,7 @@ module Google
         alias project project_id
 
         ##
-        # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to Stackdriver
+        # Report a {Google::Cloud::ErrorReporting::ErrorEvent} to
         # Error Reporting service.
         #
         # @example
@@ -128,7 +128,7 @@ module Google
 
         ##
         # Create a {Google::Cloud::ErrorReporting::ErrorEvent} from the
-        # given exception, and report this ErrorEvent to Stackdriver Error
+        # given exception, and report this ErrorEvent to Error
         # Reporting service.
         #
         # @param [Exception] exception A Ruby exception

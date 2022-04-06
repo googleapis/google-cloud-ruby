@@ -18,8 +18,10 @@ require "concurrent"
 describe "Spanner Client", :transaction, :spanner do
   let(:db) { spanner_client }
   let(:columns) { [:account_id, :username, :friends, :active, :reputation, :avatar] }
-  let(:fields_hash) { { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
-  let(:additional_account) { { account_id: 4, username: "swcloud", reputation: 99.894, active: true, friends: [1,2] } }
+  let :fields_hash do
+    { account_id: :INT64, username: :STRING, friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES }
+  end
+  let(:additional_account) { { account_id: 4, username: "swcloud", reputation: 99.894, active: true, friends: [1, 2] } }
   let(:query_reputation) { "SELECT reputation FROM accounts WHERE account_id = 1 LIMIT 1" }
 
   before do
@@ -157,7 +159,7 @@ describe "Spanner Client", :transaction, :spanner do
           new_val = tx_val + 1
           tx.update "accounts", [{ account_id: 1, reputation: new_val }]
           # puts "write 2"
-        end # Thread 2 commits now
+        end
         commit_latch.count_down # Let thread 1 commit now
         # puts "commit 2"
       end
@@ -194,7 +196,7 @@ describe "Spanner Client", :transaction, :spanner do
       tx.execute_query "SELECT * from accounts", request_options: { tag: "Tag-1-1" }
       tx.batch_update request_options: { tag: "Tag-1-2" } do |b|
         b.batch_update(
-          "UPDATE accounts SET username = 'Charlie' WHERE account_id = 1",
+          "UPDATE accounts SET username = 'Charlie' WHERE account_id = 1"
         )
       end
 

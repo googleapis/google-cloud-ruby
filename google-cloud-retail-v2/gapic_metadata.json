@@ -116,6 +116,16 @@
               "methods": [
                 "remove_fulfillment_places"
               ]
+            },
+            "AddLocalInventories": {
+              "methods": [
+                "add_local_inventories"
+              ]
+            },
+            "RemoveLocalInventories": {
+              "methods": [
+                "remove_local_inventories"
+              ]
             }
           }
         }

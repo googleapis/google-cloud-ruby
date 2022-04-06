@@ -18,6 +18,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :topics, :message, 5, "google.cloud.secretmanager.v1.Topic"
       optional :etag, :string, 8
       optional :rotation, :message, 9, "google.cloud.secretmanager.v1.Rotation"
+      map :version_aliases, :string, :int64, 11
       oneof :expiration do
         optional :expire_time, :message, 6, "google.protobuf.Timestamp"
         optional :ttl, :message, 7, "google.protobuf.Duration"

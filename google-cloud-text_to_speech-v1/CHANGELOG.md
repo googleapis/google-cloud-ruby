@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 / 2022-03-24
+
+#### Features
+
+* Add custom_voice field to VoiceSelectionParams
+
 ### 0.5.2 / 2022-02-15
 
 #### Documentation

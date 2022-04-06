@@ -30,6 +30,8 @@ module Google
           # Service that implements Google Cloud Text-to-Speech API.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :text_to_speech_stub
 

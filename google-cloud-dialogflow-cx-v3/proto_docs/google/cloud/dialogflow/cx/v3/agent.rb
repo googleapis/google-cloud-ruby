@@ -98,6 +98,10 @@ module Google
           #   @return [::Boolean]
           #     Indicates if automatic spell correction is enabled in detect intent
           #     requests.
+          # @!attribute [rw] locked
+          #   @return [::Boolean]
+          #     Indiciates whether the agent is locked for changes. If the agent is locked,
+          #     modifications to the agent will be rejected except for [RestoreAgent][].
           # @!attribute [rw] advanced_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]
           #     Hierarchical advanced settings for this agent. The settings exposed at the
@@ -195,6 +199,15 @@ module Google
           #     export the agent to. The format of this URI must be
           #     `gs://<bucket-name>/<object-name>`.
           #     If left unspecified, the serialized agent is returned inline.
+          #
+          #     Dialogflow performs a write operation for the Cloud Storage object
+          #     on the caller's behalf, so your request authentication must
+          #     have write permissions for the object. For more information, see
+          #     [Dialogflow access
+          #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
+          # @!attribute [rw] data_format
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::ExportAgentRequest::DataFormat]
+          #     Optional. The data format of the exported agent. If not specified, `BLOB` is assumed.
           # @!attribute [rw] environment
           #   @return [::String]
           #     Optional. Environment name. If not set, draft environment is assumed.
@@ -203,6 +216,15 @@ module Google
           class ExportAgentRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Data format of the exported agent.
+            module DataFormat
+              # Unspecified format.
+              DATA_FORMAT_UNSPECIFIED = 0
+
+              # Agent content will be exported as raw bytes.
+              BLOB = 1
+            end
           end
 
           # The response message for {::Google::Cloud::Dialogflow::CX::V3::Agents::Client#export_agent Agents.ExportAgent}.
@@ -228,6 +250,12 @@ module Google
           #     The [Google Cloud Storage](https://cloud.google.com/storage/docs/) URI
           #     to restore agent from. The format of this URI must be
           #     `gs://<bucket-name>/<object-name>`.
+          #
+          #     Dialogflow performs a read operation for the Cloud Storage object
+          #     on the caller's behalf, so your request authentication must
+          #     have read permissions for the object. For more information, see
+          #     [Dialogflow access
+          #     control](https://cloud.google.com/dialogflow/cx/docs/concept/access-control#storage).
           # @!attribute [rw] agent_content
           #   @return [::String]
           #     Uncompressed raw byte content for agent.

@@ -9,7 +9,6 @@ require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/protobuf/wrappers_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -50,6 +49,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :cloud_sql, :message, 4, "google.cloud.bigquery.connection.v1.CloudSqlProperties"
         optional :aws, :message, 8, "google.cloud.bigquery.connection.v1.AwsProperties"
         optional :cloud_spanner, :message, 21, "google.cloud.bigquery.connection.v1.CloudSpannerProperties"
+        optional :cloud_resource, :message, 22, "google.cloud.bigquery.connection.v1.CloudResourceProperties"
       end
     end
     add_message "google.cloud.bigquery.connection.v1.CloudSqlProperties" do
@@ -86,6 +86,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :iam_role_id, :string, 1
       optional :identity, :string, 2
     end
+    add_message "google.cloud.bigquery.connection.v1.CloudResourceProperties" do
+      optional :service_account_id, :string, 1
+    end
   end
 end
 
@@ -108,6 +111,7 @@ module Google
           AwsProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AwsProperties").msgclass
           AwsCrossAccountRole = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AwsCrossAccountRole").msgclass
           AwsAccessRole = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.AwsAccessRole").msgclass
+          CloudResourceProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.connection.v1.CloudResourceProperties").msgclass
         end
       end
     end

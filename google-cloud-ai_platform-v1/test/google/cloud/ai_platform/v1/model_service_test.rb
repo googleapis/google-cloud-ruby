@@ -431,6 +431,66 @@ class ::Google::Cloud::AIPlatform::V1::ModelService::ClientTest < Minitest::Test
     end
   end
 
+  def test_import_model_evaluation
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::ModelEvaluation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    model_evaluation = {}
+
+    import_model_evaluation_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :import_model_evaluation, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::AIPlatform::V1::ModelEvaluation), request["model_evaluation"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, import_model_evaluation_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::ModelService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.import_model_evaluation({ parent: parent, model_evaluation: model_evaluation }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.import_model_evaluation parent: parent, model_evaluation: model_evaluation do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.import_model_evaluation ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest.new(parent: parent, model_evaluation: model_evaluation) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.import_model_evaluation({ parent: parent, model_evaluation: model_evaluation }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.import_model_evaluation(::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest.new(parent: parent, model_evaluation: model_evaluation), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, import_model_evaluation_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_model_evaluation
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::ModelEvaluation.new

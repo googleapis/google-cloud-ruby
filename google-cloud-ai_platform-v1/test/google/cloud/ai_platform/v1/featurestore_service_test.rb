@@ -1101,6 +1101,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::ClientTest < Minites
     feature_specs = [{}]
     disable_online_serving = true
     worker_count = 42
+    disable_ingestion_analysis = true
 
     import_feature_values_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :import_feature_values, name
@@ -1114,6 +1115,7 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::ClientTest < Minites
       assert_kind_of ::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest::FeatureSpec, request["feature_specs"].first
       assert_equal true, request["disable_online_serving"]
       assert_equal 42, request["worker_count"]
+      assert_equal true, request["disable_ingestion_analysis"]
       refute_nil options
     end
 
@@ -1124,35 +1126,35 @@ class ::Google::Cloud::AIPlatform::V1::FeaturestoreService::ClientTest < Minites
       end
 
       # Use hash object
-      client.import_feature_values({ avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count }) do |response, operation|
+      client.import_feature_values({ avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count, disable_ingestion_analysis: disable_ingestion_analysis }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_feature_values avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count do |response, operation|
+      client.import_feature_values avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count, disable_ingestion_analysis: disable_ingestion_analysis do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_feature_values ::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest.new(avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count) do |response, operation|
+      client.import_feature_values ::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest.new(avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count, disable_ingestion_analysis: disable_ingestion_analysis) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_feature_values({ avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count }, grpc_options) do |response, operation|
+      client.import_feature_values({ avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count, disable_ingestion_analysis: disable_ingestion_analysis }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_feature_values(::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest.new(avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count), grpc_options) do |response, operation|
+      client.import_feature_values(::Google::Cloud::AIPlatform::V1::ImportFeatureValuesRequest.new(avro_source: avro_source, feature_time_field: feature_time_field, entity_type: entity_type, entity_id_field: entity_id_field, feature_specs: feature_specs, disable_online_serving: disable_online_serving, worker_count: worker_count, disable_ingestion_analysis: disable_ingestion_analysis), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

@@ -23,7 +23,7 @@ def get_metadata bucket_name:, file_name:
   require "google/cloud/storage"
 
   storage = Google::Cloud::Storage.new
-  bucket  = storage.bucket bucket_name, skip_lookup: true
+  bucket  = storage.bucket bucket_name
   file    = bucket.file file_name
 
   puts "Name: #{file.name}"

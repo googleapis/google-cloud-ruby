@@ -17,6 +17,7 @@
     "lib/google/cloud/text_to_speech/v1/text_to_speech.rb",
     "lib/google/cloud/text_to_speech/v1/text_to_speech/client.rb",
     "lib/google/cloud/text_to_speech/v1/text_to_speech/credentials.rb",
+    "lib/google/cloud/text_to_speech/v1/text_to_speech/paths.rb",
     "lib/google/cloud/text_to_speech/v1/version.rb",
     "lib/google/cloud/texttospeech/v1/cloud_tts_pb.rb",
     "lib/google/cloud/texttospeech/v1/cloud_tts_services_pb.rb",
@@ -27,6 +28,7 @@
     "snippets/Gemfile",
     "snippets/text_to_speech/list_voices.rb",
     "snippets/text_to_speech/synthesize_speech.rb",
+    "test/google/cloud/text_to_speech/v1/text_to_speech_paths_test.rb",
     "test/google/cloud/text_to_speech/v1/text_to_speech_test.rb",
     "test/helper.rb"
   ],
