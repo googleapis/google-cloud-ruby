@@ -42,7 +42,8 @@ module Google
           #     IPC-serialized Arrow RecordBatch.
           # @!attribute [rw] row_count
           #   @return [::Integer]
-          #     The count of rows in `serialized_record_batch`.
+          #     [Deprecated] The count of rows in `serialized_record_batch`.
+          #     Please use the format-independent ReadRowsResponse.row_count instead.
           class ArrowRecordBatch
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

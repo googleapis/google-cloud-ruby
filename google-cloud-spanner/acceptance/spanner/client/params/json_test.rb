@@ -17,7 +17,7 @@ require "spanner_helper"
 describe "Spanner Client", :params, :json, :spanner do
   let(:db) { spanner_client }
   let(:json_params) { { "venue" => "abc", "rating" => 10 } }
-  let(:json_array_params) do
+  let :json_array_params do
     3.times.map do |i|
       { "venue" => "abc-#{i}", "rating" => 10 + i }
     end
@@ -56,7 +56,7 @@ describe "Spanner Client", :params, :json, :spanner do
   it "queries and returns an array of json parameters with a nil value" do
     skip if emulator_enabled?
 
-    params = [nil].concat(json_array_params)
+    params = [nil].concat json_array_params
     results = db.execute_query "SELECT @value AS value", params: { value: params }, types: { value: [:JSON] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results

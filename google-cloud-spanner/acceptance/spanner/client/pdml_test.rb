@@ -16,54 +16,69 @@ require "spanner_helper"
 require "concurrent"
 
 describe "Spanner Client", :pdml, :spanner do
-  let(:db) { spanner_client }
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
 
   before do
-    db.commit do |c|
+    db[:gsql].commit do |c|
       c.delete "accounts"
       c.insert "accounts", default_account_rows
+    end
+    unless emulator_enabled?
+      db[:pg].commit do |c|
+        c.delete "accounts"
+        c.insert "accounts", default_pg_account_rows
+      end
     end
   end
 
   after do
-    db.delete "accounts"
+    db[:gsql].delete "accounts"
+    db[:pg].delete "accounts" unless emulator_enabled?
   end
 
-  it "executes a simple Partitioned DML statement" do
-    prior_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE"
-    _(prior_results.rows.count).must_equal 2
+  dialects = [:gsql]
+  dialects.push :pg unless emulator_enabled?
 
-    pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE"
-    _(pdml_row_count).must_equal 1
+  dialects.each do |dialect|
+    it "executes a simple Partitioned DML statement for #{dialect}" do
+      prior_results = db[dialect].execute_sql "SELECT * FROM accounts WHERE active = TRUE"
+      _(prior_results.rows.count).must_equal 2
 
-    post_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
-    _(post_results.rows.count).must_equal 3
-  end
+      pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts SET active = TRUE WHERE active = FALSE"
+      _(pdml_row_count).must_equal 1
 
-  it "executes a simple Partitioned DML statement with query options" do
-    prior_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE"
-    _(prior_results.rows.count).must_equal 2
+      post_results = db[dialect].execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
+      _(post_results.rows.count).must_equal 3
+    end
 
-    query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
-    pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE", query_options: query_options
-    _(pdml_row_count).must_equal 1
+    it "executes a simple Partitioned DML statement with query options for #{dialect}" do
+      prior_results = db[dialect].execute_sql "SELECT * FROM accounts WHERE active = TRUE"
+      _(prior_results.rows.count).must_equal 2
 
-    post_results = db.execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
-    _(post_results.rows.count).must_equal 3
-  end
+      query_options = { optimizer_version: "3", optimizer_statistics_package: "latest" }
+      pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts SET active = TRUE WHERE active = FALSE",
+                                                            query_options: query_options
+      _(pdml_row_count).must_equal 1
 
-  describe "request options" do
-    it "execute Partitioned DML statement with priority options" do
-      pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE",
-                                                   request_options: { priority: :PRIORITY_MEDIUM }
+      post_results = db[dialect].execute_sql "SELECT * FROM accounts WHERE active = TRUE", single_use: { strong: true }
+      _(post_results.rows.count).must_equal 3
+    end
 
+    describe "request options for #{dialect}" do
+      it "execute Partitioned DML statement with priority options for #{dialect}" do
+        pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts SET active = TRUE WHERE active = FALSE",
+                                                              request_options: { priority: :PRIORITY_MEDIUM }
+
+        _(pdml_row_count).must_equal 1
+      end
+    end
+
+    it "executes a Partitioned DML statement with request tagging option for #{dialect}" do
+      pdml_row_count = db[dialect].execute_partition_update "UPDATE accounts  SET active = TRUE WHERE active = FALSE",
+                                                            request_options: { tag: "Tag-P-1" }
       _(pdml_row_count).must_equal 1
     end
-  end
-
-  it "executes a Partitioned DML statement with request tagging option" do
-    pdml_row_count = db.execute_partition_update "UPDATE accounts a SET a.active = TRUE WHERE a.active = FALSE",
-                                                 request_options: { tag: "Tag-P-1" }
-    _(pdml_row_count).must_equal 1
   end
 end

@@ -44,7 +44,7 @@ describe "Spanner Client", :types, :bytes, :spanner do
 
   it "writes and reads random bytes" do
     id = SecureRandom.int64
-    random_bytes = StringIO.new(SecureRandom.random_bytes(rand(1024..4096)))
+    random_bytes = StringIO.new SecureRandom.random_bytes(rand(1024..4096))
     db.upsert table_name, { id: id, byte: random_bytes }
     results = db.read table_name, [:id, :byte], keys: id
 
@@ -58,7 +58,7 @@ describe "Spanner Client", :types, :bytes, :spanner do
 
   it "writes and queries random bytes" do
     id = SecureRandom.int64
-    random_bytes = StringIO.new(SecureRandom.random_bytes(rand(1024..4096)))
+    random_bytes = StringIO.new SecureRandom.random_bytes(rand(1024..4096))
     db.upsert table_name, { id: id, byte: random_bytes }
     results = db.execute_query "SELECT id, byte FROM #{table_name} WHERE id = @id", params: { id: id }
 

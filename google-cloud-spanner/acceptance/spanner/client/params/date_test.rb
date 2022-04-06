@@ -35,7 +35,8 @@ describe "Spanner Client", :params, :date, :spanner do
   end
 
   it "queries and returns an array of date parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [(date_value - 1), date_value, (date_value + 1)] }
+    results = db.execute_query "SELECT @value AS value",
+                               params: { value: [(date_value - 1), date_value, (date_value + 1)] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:DATE]
@@ -43,7 +44,8 @@ describe "Spanner Client", :params, :date, :spanner do
   end
 
   it "queries and returns an array of date parameters with a nil value" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [nil, (date_value - 1), date_value, (date_value + 1)] }
+    results = db.execute_query "SELECT @value AS value",
+                               params: { value: [nil, (date_value - 1), date_value, (date_value + 1)] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields[:value]).must_equal [:DATE]

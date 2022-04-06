@@ -18,7 +18,7 @@ require "spanner_helper"
 describe "Spanner Database Backup", :spanner do
   let(:instance_id) { $spanner_instance_id }
   let(:database_id) { $spanner_database_id }
-  let(:expire_time) { Time.now + 36000 }
+  let(:expire_time) { Time.now + 36_000 }
   let(:version_time) { Time.now }
 
   it "creates, get, updates, restore and delete a database backup" do
@@ -77,10 +77,10 @@ describe "Spanner Database Backup", :spanner do
     backup = instance.backup backup_id
     _(backup.expire_time.to_i).must_equal((expire_time + 3600).to_i)
 
-    _ {
-      backup.expire_time = Time.now - 36000
-    }.must_raise Google::Cloud::InvalidArgumentError
-    _(backup.expire_time.to_i).must_equal((expire_time + 3600 ).to_i)
+    _ do
+      backup.expire_time = Time.now - 36_000
+    end.must_raise Google::Cloud::InvalidArgumentError
+    _(backup.expire_time.to_i).must_equal((expire_time + 3600).to_i)
 
     # Restore
     restore_database_id = "restore-#{database_id}"
@@ -146,7 +146,7 @@ describe "Spanner Database Backup", :spanner do
     thirty_days_ago = Time.now - (30 * 24 * 60 * 60)
 
     assert_raises Google::Cloud::InvalidArgumentError do
-      job = database.create_backup backup_id, expire_time, version_time: thirty_days_ago
+      database.create_backup backup_id, expire_time, version_time: thirty_days_ago
     end
   end
 
@@ -158,7 +158,7 @@ describe "Spanner Database Backup", :spanner do
     tomorrow = Time.now + (24 * 60 * 60)
 
     assert_raises Google::Cloud::InvalidArgumentError do
-      job = database.create_backup backup_id, expire_time, version_time: tomorrow
+      database.create_backup backup_id, expire_time, version_time: tomorrow
     end
   end
 
@@ -171,7 +171,7 @@ describe "Spanner Database Backup", :spanner do
 
     job = database.create_backup backup_id, expire_time
     job.wait_until_done!
-    backup = job.backup
+    created_backup = job.backup
 
     instance = spanner.instance instance_id
 
@@ -192,6 +192,6 @@ describe "Spanner Database Backup", :spanner do
     _(backups).wont_be :empty?
     _(backups.first.database_id).must_equal database_id
 
-    backup.delete
+    created_backup.delete
   end
 end

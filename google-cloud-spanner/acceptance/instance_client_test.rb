@@ -35,7 +35,7 @@ describe "Spanner Instances Client", :spanner do
 
     request = Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceRequest.new parent: project_path,
                                                                                      instance_id: instance_id,
-                                                                                     instance: instance                   
+                                                                                     instance: instance
 
     job = client.create_instance request
     _(job).wont_be :done? unless emulator_enabled?
@@ -56,7 +56,7 @@ describe "Spanner Instances Client", :spanner do
     # update display_name of the instance
     # instance.display_name = "#{instance.display_name}-updated"
     # request = Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest.new instance: instance,
-    #                                                                                  field_mask: { paths: ["display_name"] }
+    # field_mask: { paths: ["display_name"] }
 
     # job2 = client.update_instance request
 

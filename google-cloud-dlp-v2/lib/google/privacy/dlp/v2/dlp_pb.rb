@@ -834,6 +834,45 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :inspect_template_name, :string, 3
       repeated :actions, :message, 4, "google.privacy.dlp.v2.Action"
     end
+    add_message "google.privacy.dlp.v2.DataProfileAction" do
+      oneof :action do
+        optional :export_data, :message, 1, "google.privacy.dlp.v2.DataProfileAction.Export"
+        optional :pub_sub_notification, :message, 2, "google.privacy.dlp.v2.DataProfileAction.PubSubNotification"
+      end
+    end
+    add_message "google.privacy.dlp.v2.DataProfileAction.Export" do
+      optional :profile_table, :message, 1, "google.privacy.dlp.v2.BigQueryTable"
+    end
+    add_message "google.privacy.dlp.v2.DataProfileAction.PubSubNotification" do
+      optional :topic, :string, 1
+      optional :event, :enum, 2, "google.privacy.dlp.v2.DataProfileAction.EventType"
+      optional :pubsub_condition, :message, 3, "google.privacy.dlp.v2.DataProfilePubSubCondition"
+      optional :detail_of_message, :enum, 4, "google.privacy.dlp.v2.DataProfileAction.PubSubNotification.DetailLevel"
+    end
+    add_enum "google.privacy.dlp.v2.DataProfileAction.PubSubNotification.DetailLevel" do
+      value :DETAIL_LEVEL_UNSPECIFIED, 0
+      value :TABLE_PROFILE, 1
+      value :RESOURCE_NAME, 2
+    end
+    add_enum "google.privacy.dlp.v2.DataProfileAction.EventType" do
+      value :EVENT_TYPE_UNSPECIFIED, 0
+      value :NEW_PROFILE, 1
+      value :CHANGED_PROFILE, 2
+      value :SCORE_INCREASED, 3
+      value :ERROR_CHANGED, 4
+    end
+    add_message "google.privacy.dlp.v2.DataProfileJobConfig" do
+      optional :location, :message, 1, "google.privacy.dlp.v2.DataProfileLocation"
+      optional :project_id, :string, 5
+      repeated :inspect_templates, :string, 7
+      repeated :data_profile_actions, :message, 6, "google.privacy.dlp.v2.DataProfileAction"
+    end
+    add_message "google.privacy.dlp.v2.DataProfileLocation" do
+      oneof :location do
+        optional :organization_id, :int64, 1
+        optional :folder_id, :int64, 2
+      end
+    end
     add_message "google.privacy.dlp.v2.DlpJob" do
       optional :name, :string, 1
       optional :type, :enum, 2, "google.privacy.dlp.v2.DlpJobType"
@@ -995,6 +1034,97 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.privacy.dlp.v2.HybridInspectResponse" do
     end
+    add_message "google.privacy.dlp.v2.SensitivityScore" do
+      optional :score, :enum, 1, "google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel"
+    end
+    add_enum "google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel" do
+      value :SENSITIVITY_SCORE_UNSPECIFIED, 0
+      value :SENSITIVITY_LOW, 10
+      value :SENSITIVITY_MODERATE, 20
+      value :SENSITIVITY_HIGH, 30
+    end
+    add_message "google.privacy.dlp.v2.DataRiskLevel" do
+      optional :score, :enum, 1, "google.privacy.dlp.v2.DataRiskLevel.DataRiskLevelScore"
+    end
+    add_enum "google.privacy.dlp.v2.DataRiskLevel.DataRiskLevelScore" do
+      value :RISK_SCORE_UNSPECIFIED, 0
+      value :RISK_LOW, 10
+      value :RISK_MODERATE, 20
+      value :RISK_HIGH, 30
+    end
+    add_message "google.privacy.dlp.v2.DataProfileConfigSnapshot" do
+      optional :inspect_config, :message, 2, "google.privacy.dlp.v2.InspectConfig"
+      optional :data_profile_job, :message, 3, "google.privacy.dlp.v2.DataProfileJobConfig"
+    end
+    add_message "google.privacy.dlp.v2.TableDataProfile" do
+      optional :name, :string, 1
+      optional :project_data_profile, :string, 2
+      optional :dataset_project_id, :string, 24
+      optional :dataset_location, :string, 29
+      optional :dataset_id, :string, 25
+      optional :table_id, :string, 26
+      optional :full_resource, :string, 3
+      optional :profile_status, :message, 21, "google.privacy.dlp.v2.ProfileStatus"
+      optional :state, :enum, 22, "google.privacy.dlp.v2.TableDataProfile.State"
+      optional :sensitivity_score, :message, 5, "google.privacy.dlp.v2.SensitivityScore"
+      optional :data_risk_level, :message, 6, "google.privacy.dlp.v2.DataRiskLevel"
+      repeated :predicted_info_types, :message, 27, "google.privacy.dlp.v2.InfoTypeSummary"
+      repeated :other_info_types, :message, 28, "google.privacy.dlp.v2.OtherInfoTypeSummary"
+      optional :config_snapshot, :message, 7, "google.privacy.dlp.v2.DataProfileConfigSnapshot"
+      optional :last_modified_time, :message, 8, "google.protobuf.Timestamp"
+      optional :expiration_time, :message, 9, "google.protobuf.Timestamp"
+      optional :scanned_column_count, :int64, 10
+      optional :failed_column_count, :int64, 11
+      optional :table_size_bytes, :int64, 12
+      optional :row_count, :int64, 13
+      optional :encryption_status, :enum, 14, "google.privacy.dlp.v2.EncryptionStatus"
+      optional :resource_visibility, :enum, 15, "google.privacy.dlp.v2.ResourceVisibility"
+      optional :profile_last_generated, :message, 16, "google.protobuf.Timestamp"
+      map :resource_labels, :string, :string, 17
+      optional :create_time, :message, 23, "google.protobuf.Timestamp"
+    end
+    add_enum "google.privacy.dlp.v2.TableDataProfile.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :RUNNING, 1
+      value :DONE, 2
+    end
+    add_message "google.privacy.dlp.v2.ProfileStatus" do
+      optional :status, :message, 1, "google.rpc.Status"
+      optional :timestamp, :message, 3, "google.protobuf.Timestamp"
+    end
+    add_message "google.privacy.dlp.v2.InfoTypeSummary" do
+      optional :info_type, :message, 1, "google.privacy.dlp.v2.InfoType"
+    end
+    add_message "google.privacy.dlp.v2.OtherInfoTypeSummary" do
+      optional :info_type, :message, 1, "google.privacy.dlp.v2.InfoType"
+    end
+    add_message "google.privacy.dlp.v2.DataProfilePubSubCondition" do
+      optional :expressions, :message, 1, "google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions"
+    end
+    add_message "google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition" do
+      oneof :value do
+        optional :minimum_risk_score, :enum, 1, "google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket"
+        optional :minimum_sensitivity_score, :enum, 2, "google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket"
+      end
+    end
+    add_message "google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions" do
+      optional :logical_operator, :enum, 1, "google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator"
+      repeated :conditions, :message, 2, "google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition"
+    end
+    add_enum "google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator" do
+      value :LOGICAL_OPERATOR_UNSPECIFIED, 0
+      value :OR, 1
+      value :AND, 2
+    end
+    add_enum "google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket" do
+      value :PROFILE_SCORE_BUCKET_UNSPECIFIED, 0
+      value :HIGH, 1
+      value :MEDIUM_OR_HIGH, 2
+    end
+    add_message "google.privacy.dlp.v2.DataProfilePubSubMessage" do
+      optional :profile, :message, 1, "google.privacy.dlp.v2.TableDataProfile"
+      optional :event, :enum, 2, "google.privacy.dlp.v2.DataProfileAction.EventType"
+    end
     add_enum "google.privacy.dlp.v2.RelationalOperator" do
       value :RELATIONAL_OPERATOR_UNSPECIFIED, 0
       value :EQUAL_TO, 1
@@ -1036,6 +1166,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :READY, 2
       value :FAILED, 3
       value :INVALID, 4
+    end
+    add_enum "google.privacy.dlp.v2.ResourceVisibility" do
+      value :RESOURCE_VISIBILITY_UNSPECIFIED, 0
+      value :RESOURCE_VISIBILITY_PUBLIC, 10
+      value :RESOURCE_VISIBILITY_RESTRICTED, 20
+    end
+    add_enum "google.privacy.dlp.v2.EncryptionStatus" do
+      value :ENCRYPTION_STATUS_UNSPECIFIED, 0
+      value :ENCRYPTION_GOOGLE_MANAGED, 1
+      value :ENCRYPTION_CUSTOMER_MANAGED, 2
     end
   end
 end
@@ -1195,6 +1335,13 @@ module Google
         ListJobTriggersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListJobTriggersResponse").msgclass
         DeleteJobTriggerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DeleteJobTriggerRequest").msgclass
         InspectJobConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectJobConfig").msgclass
+        DataProfileAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileAction").msgclass
+        DataProfileAction::Export = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileAction.Export").msgclass
+        DataProfileAction::PubSubNotification = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileAction.PubSubNotification").msgclass
+        DataProfileAction::PubSubNotification::DetailLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileAction.PubSubNotification.DetailLevel").enummodule
+        DataProfileAction::EventType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileAction.EventType").enummodule
+        DataProfileJobConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileJobConfig").msgclass
+        DataProfileLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileLocation").msgclass
         DlpJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DlpJob").msgclass
         DlpJob::JobState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DlpJob.JobState").enummodule
         GetDlpJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.GetDlpJobRequest").msgclass
@@ -1226,6 +1373,22 @@ module Google
         HybridContentItem = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridContentItem").msgclass
         HybridFindingDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridFindingDetails").msgclass
         HybridInspectResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridInspectResponse").msgclass
+        SensitivityScore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.SensitivityScore").msgclass
+        SensitivityScore::SensitivityScoreLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel").enummodule
+        DataRiskLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataRiskLevel").msgclass
+        DataRiskLevel::DataRiskLevelScore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataRiskLevel.DataRiskLevelScore").enummodule
+        DataProfileConfigSnapshot = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfileConfigSnapshot").msgclass
+        TableDataProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TableDataProfile").msgclass
+        TableDataProfile::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.TableDataProfile.State").enummodule
+        ProfileStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ProfileStatus").msgclass
+        InfoTypeSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeSummary").msgclass
+        OtherInfoTypeSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.OtherInfoTypeSummary").msgclass
+        DataProfilePubSubCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfilePubSubCondition").msgclass
+        DataProfilePubSubCondition::PubSubCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubCondition").msgclass
+        DataProfilePubSubCondition::PubSubExpressions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions").msgclass
+        DataProfilePubSubCondition::PubSubExpressions::PubSubLogicalOperator = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfilePubSubCondition.PubSubExpressions.PubSubLogicalOperator").enummodule
+        DataProfilePubSubCondition::ProfileScoreBucket = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfilePubSubCondition.ProfileScoreBucket").enummodule
+        DataProfilePubSubMessage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DataProfilePubSubMessage").msgclass
         RelationalOperator = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RelationalOperator").enummodule
         MatchingType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.MatchingType").enummodule
         ContentOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ContentOption").enummodule
@@ -1233,6 +1396,8 @@ module Google
         InfoTypeSupportedBy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeSupportedBy").enummodule
         DlpJobType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.DlpJobType").enummodule
         StoredInfoTypeState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredInfoTypeState").enummodule
+        ResourceVisibility = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ResourceVisibility").enummodule
+        EncryptionStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.EncryptionStatus").enummodule
       end
     end
   end

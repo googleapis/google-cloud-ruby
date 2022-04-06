@@ -3,7 +3,6 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "acceptance/**/*"
     - "support/**/*"
     - "google-cloud-spanner.gemspec"
     - "Rakefile"
@@ -14,17 +13,34 @@ AllCops:
 Documentation:
   Enabled: false
 
+Metrics/BlockLength:
+  Exclude:
+    - "acceptance/**/*"
+Metrics/MethodLength:
+  Exclude:
+    - "acceptance/**/*"
+Metrics/ModuleLength:
+  Exclude:
+    - "acceptance/**/*"
+Metrics/AbcSize:  
+  Exclude:
+      - "acceptance/**/*"  
 Metrics/ClassLength:
   Enabled: false
 Metrics/CyclomaticComplexity:
   Exclude:
+    - "acceptance/**/*"
     - "lib/google/cloud/spanner.rb"
 Metrics/PerceivedComplexity:
   Exclude:
+    - "acceptance/**/*"
     - "lib/google/cloud/spanner.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-spanner.rb"
+Style/GlobalVars:   
+  Exclude:
+      - "acceptance/**/*"
 Style/SymbolArray:
   Enabled: false
 Style/WordArray:

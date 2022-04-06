@@ -38,7 +38,8 @@ module Google
           #     Binary serialized rows in a block.
           # @!attribute [rw] row_count
           #   @return [::Integer]
-          #     The count of rows in the returning block.
+          #     [Deprecated] The count of rows in the returning block.
+          #     Please use the format-independent ReadRowsResponse.row_count instead.
           class AvroRows
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

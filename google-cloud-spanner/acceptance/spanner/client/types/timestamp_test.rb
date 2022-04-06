@@ -81,42 +81,62 @@ describe "Spanner Client", :types, :timestamp, :spanner do
 
   it "writes and reads array of timestamp" do
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
+    db.upsert table_name,
+              { id: id,
+timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] }
     results = db.read table_name, [:id, :timestamps], keys: id
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results.rows.first.to_h).must_equal({ id: id,
+timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and queries array of timestamp" do
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
+    db.upsert table_name,
+              { id: id,
+timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] }
     results = db.execute_query "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results.rows.first.to_h).must_equal({ id: id,
+timestamps: [Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and reads array of timestamp with NULL" do
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
+    db.upsert table_name,
+              { id: id,
+timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] }
     results = db.read table_name, [:id, :timestamps], keys: id
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results.rows.first.to_h).must_equal({ id: id,
+timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and queries array of timestamp with NULL" do
     id = SecureRandom.int64
-    db.upsert table_name, { id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] }
+    db.upsert table_name,
+              { id: id,
+timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] }
     results = db.execute_query "SELECT id, timestamps FROM #{table_name} WHERE id = @id", params: { id: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, timestamps: [:TIMESTAMP] })
-    _(results.rows.first.to_h).must_equal({ id: id, timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"), Time.parse("2017-01-01 00:00:00Z")] })
+    _(results.rows.first.to_h).must_equal({ id: id,
+timestamps: [nil, Time.parse("2016-12-30 00:00:00Z"), Time.parse("2016-12-31 00:00:00Z"),
+             Time.parse("2017-01-01 00:00:00Z")] })
   end
 
   it "writes and reads empty array of timestamp" do
