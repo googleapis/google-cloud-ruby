@@ -351,7 +351,7 @@ module Google
               #   @param disk [::String]
               #     Name of the persistent disk to snapshot.
               #   @param guest_flush [::Boolean]
-              #     [Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS).
+              #     [Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]

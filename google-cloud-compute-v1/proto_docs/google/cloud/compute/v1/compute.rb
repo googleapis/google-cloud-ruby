@@ -296,6 +296,51 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.AddAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_association_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyAssociation]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] replace_existing_association
+        #   @return [::Boolean]
+        #     Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class AddAssociationNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.AddAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_association_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyAssociation]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] replace_existing_association
+        #   @return [::Boolean]
+        #     Indicates whether or not to replace it if an association already exists. This is false by default, in which case an error will be returned if an association already exists.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class AddAssociationRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for TargetPools.AddHealthCheck. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -472,6 +517,57 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class AddRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.AddRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] max_priority
+        #   @return [::Integer]
+        #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+        # @!attribute [rw] min_priority
+        #   @return [::Integer]
+        #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class AddRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.AddRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] max_priority
+        #   @return [::Integer]
+        #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+        # @!attribute [rw] min_priority
+        #   @return [::Integer]
+        #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class AddRuleRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1138,6 +1234,33 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkEdgeSecurityServices.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Name of the project scoping this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class AggregatedListNetworkEdgeSecurityServicesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NetworkEndpointGroups.AggregatedList. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -1404,6 +1527,33 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class AggregatedListRoutersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for SecurityPolicies.AggregatedList. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] include_all_scopes
+        #   @return [::Boolean]
+        #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Name of the project scoping this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class AggregatedListSecurityPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1761,6 +1911,9 @@ module Google
         end
 
         # This reservation type allows to pre allocate specific instance configuration. Next ID: 5
+        # @!attribute [rw] assured_count
+        #   @return [::Integer]
+        #     [Output Only] Indicates how many instances are actually usable currently.
         # @!attribute [rw] count
         #   @return [::Integer]
         #     Specifies the number of resources that are allocated.
@@ -2785,6 +2938,9 @@ module Google
         #   @return [::String]
         #     Specifies the load balancer type. A backend service created for one type of load balancer cannot be used with another. For more information, refer to Choosing a load balancer.
         #     Check the LoadBalancingScheme enum for the list of possible values.
+        # @!attribute [rw] locality_lb_policies
+        #   @return [::Array<::Google::Cloud::Compute::V1::BackendServiceLocalityLoadBalancingPolicyConfig>]
+        #     A list of locality load balancing policies to be used in order of preference. Either the policy or the customPolicy field should be set. Overrides any value set in the localityLbPolicy field. localityLbPolicies is only supported when the BackendService is referenced by a URL Map that is referenced by a target gRPC proxy that has the validateForProxyless field set to true.
         # @!attribute [rw] locality_lb_policy
         #   @return [::String]
         #     The load balancing algorithm used within the scope of the locality. The possible values are: - ROUND_ROBIN: This is a simple policy in which each healthy backend is selected in round robin order. This is the default. - LEAST_REQUEST: An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests. - RING_HASH: The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests. - RANDOM: The load balancer selects a random healthy host. - ORIGINAL_DESTINATION: Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer. - MAGLEV: used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824 This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. If sessionAffinity is not NONE, and this field is not set to MAGLEV or RING_HASH, session affinity settings will not take effect. Only ROUND_ROBIN and RING_HASH are supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
@@ -2834,7 +2990,7 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Subsetting]
         # @!attribute [rw] timeout_sec
         #   @return [::Integer]
-        #     Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. Instead, use maxStreamDuration.
+        #     The backend service timeout has a different meaning depending on the type of load balancer. For more information see, Backend service settings. The default is 30 seconds. The full range of timeout values allowed goes from 1 through 2,147,483,647 seconds. This value can be overridden in the PathMatcher configuration of the UrlMap that references this backend service. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true. Instead, use maxStreamDuration.
         class BackendService
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3069,6 +3225,9 @@ module Google
         #   @return [::String]
         #     Specifies connection persistence when backends are unhealthy. The default value is DEFAULT_FOR_PROTOCOL. If set to DEFAULT_FOR_PROTOCOL, the existing connections persist on unhealthy backends only for connection-oriented protocols (TCP and SCTP) and only if the Tracking Mode is PER_CONNECTION (default tracking mode) or the Session Affinity is configured for 5-tuple. They do not persist for UDP. If set to NEVER_PERSIST, after a backend becomes unhealthy, the existing connections on the unhealthy backend are never persisted on the unhealthy backend. They are always diverted to newly selected healthy backends (unless all backends are unhealthy). If set to ALWAYS_PERSIST, existing connections always persist on unhealthy backends regardless of protocol and session affinity. It is generally not recommended to use this mode overriding the default. For more details, see [Connection Persistence for Network Load Balancing](https://cloud.google.com/load-balancing/docs/network/networklb-backend-service#connection-persistence) and [Connection Persistence for Internal TCP/UDP Load Balancing](https://cloud.google.com/load-balancing/docs/internal#connection-persistence).
         #     Check the ConnectionPersistenceOnUnhealthyBackends enum for the list of possible values.
+        # @!attribute [rw] enable_strong_affinity
+        #   @return [::Boolean]
+        #     Enable Strong Session Affinity for Network Load Balancing. This option is not available publicly.
         # @!attribute [rw] idle_timeout_sec
         #   @return [::Integer]
         #     Specifies how long to keep a Connection Tracking entry while there is no matching traffic (in seconds). For Internal TCP/UDP Load Balancing: - The minimum (default) is 10 minutes and the maximum is 16 hours. - It can be set only if Connection Tracking is less than 5-tuple (i.e. Session Affinity is CLIENT_IP_NO_DESTINATION, CLIENT_IP or CLIENT_IP_PROTO, and Tracking Mode is PER_SESSION). For Network Load Balancer the default is 60 seconds. This option is not available publicly.
@@ -3183,6 +3342,64 @@ module Google
         class BackendServiceList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Container for either a built-in LB policy supported by gRPC or Envoy or a custom one implemented by the end user.
+        # @!attribute [rw] custom_policy
+        #   @return [::Google::Cloud::Compute::V1::BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy]
+        # @!attribute [rw] policy
+        #   @return [::Google::Cloud::Compute::V1::BackendServiceLocalityLoadBalancingPolicyConfigPolicy]
+        class BackendServiceLocalityLoadBalancingPolicyConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The configuration for a custom policy implemented by the user and deployed with the client.
+        # @!attribute [rw] data
+        #   @return [::String]
+        #     An optional, arbitrary JSON object with configuration data, understood by a locally installed custom policy implementation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Identifies the custom policy. The value should match the type the custom implementation is registered with on the gRPC clients. It should follow protocol buffer message naming conventions and include the full path (e.g. myorg.CustomLbPolicy). The maximum length is 256 characters. Note that specifying the same custom policy more than once for a backend is not a valid configuration and will be rejected.
+        class BackendServiceLocalityLoadBalancingPolicyConfigCustomPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The configuration for a built-in load balancing policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of a locality load balancer policy to be used. The value should be one of the predefined ones as supported by localityLbPolicy, although at the moment only ROUND_ROBIN is supported. This field should only be populated when the customPolicy field is not used. Note that specifying the same policy more than once for a backend is not a valid configuration and will be rejected.
+        #     Check the Name enum for the list of possible values.
+        class BackendServiceLocalityLoadBalancingPolicyConfigPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The name of a locality load balancer policy to be used. The value should be one of the predefined ones as supported by localityLbPolicy, although at the moment only ROUND_ROBIN is supported. This field should only be populated when the customPolicy field is not used. Note that specifying the same policy more than once for a backend is not a valid configuration and will be rejected.
+          module Name
+            # A value indicating that the enum field is not set.
+            UNDEFINED_NAME = 0
+
+            INVALID_LB_POLICY = 323318707
+
+            # An O(1) algorithm which selects two random healthy hosts and picks the host which has fewer active requests.
+            LEAST_REQUEST = 46604921
+
+            # This algorithm implements consistent hashing to backends. Maglev can be used as a drop in replacement for the ring hash load balancer. Maglev is not as stable as ring hash but has faster table lookup build times and host selection times. For more information about Maglev, see https://ai.google/research/pubs/pub44824
+            MAGLEV = 119180266
+
+            # Backend host is selected based on the client connection metadata, i.e., connections are opened to the same address as the destination address of the incoming connection before the connection was redirected to the load balancer.
+            ORIGINAL_DESTINATION = 166297216
+
+            # The load balancer selects a random healthy host.
+            RANDOM = 262527171
+
+            # The ring/modulo hash load balancer implements consistent hashing to backends. The algorithm has the property that the addition/removal of a host from a set of N hosts only affects 1/N of the requests.
+            RING_HASH = 432795069
+
+            # This is a simple policy in which each healthy backend is selected in round robin order. This is the default.
+            ROUND_ROBIN = 153895801
+          end
         end
 
         # The available logging options for the load balancer traffic served by this backend service.
@@ -3561,19 +3778,19 @@ module Google
         # Settings controlling the volume of requests, connections and retries to this backend service.
         # @!attribute [rw] max_connections
         #   @return [::Integer]
-        #     Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     The maximum number of connections to the backend service. If not specified, there is no limit. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] max_pending_requests
         #   @return [::Integer]
-        #     Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     The maximum number of pending requests allowed to the backend service. If not specified, there is no limit. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] max_requests
         #   @return [::Integer]
         #     The maximum number of parallel requests that allowed to the backend service. If not specified, there is no limit.
         # @!attribute [rw] max_requests_per_connection
         #   @return [::Integer]
-        #     Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     Maximum requests for a single connection to the backend service. This parameter is respected by both the HTTP/1.1 and HTTP/2 implementations. If not specified, there is no limit. Setting this parameter to 1 will effectively disable keep alive. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] max_retries
         #   @return [::Integer]
-        #     Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     The maximum number of parallel retries allowed to the backend cluster. If not specified, the default is 1. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         class CircuitBreakers
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3590,6 +3807,45 @@ module Google
         #   @return [::String]
         #     The firewall policy from which to copy rules.
         class CloneRulesFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.CloneRules. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] source_firewall_policy
+        #   @return [::String]
+        #     The firewall policy from which to copy rules.
+        class CloneRulesNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.CloneRules. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] source_firewall_policy
+        #   @return [::String]
+        #     The firewall policy from which to copy rules.
+        class CloneRulesRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3796,21 +4052,97 @@ module Google
         # @!attribute [rw] iam
         #   @return [::String]
         #     This is deprecated and has no effect. Do not use.
+        #     Check the Iam enum for the list of possible values.
         # @!attribute [rw] op
         #   @return [::String]
         #     This is deprecated and has no effect. Do not use.
+        #     Check the Op enum for the list of possible values.
         # @!attribute [rw] svc
         #   @return [::String]
         #     This is deprecated and has no effect. Do not use.
         # @!attribute [rw] sys
         #   @return [::String]
         #     This is deprecated and has no effect. Do not use.
+        #     Check the Sys enum for the list of possible values.
         # @!attribute [rw] values
         #   @return [::Array<::String>]
         #     This is deprecated and has no effect. Do not use.
         class Condition
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # This is deprecated and has no effect. Do not use.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NO_ATTR
+          module Iam
+            # A value indicating that the enum field is not set.
+            UNDEFINED_IAM = 0
+
+            # This is deprecated and has no effect. Do not use.
+            APPROVER = 357258949
+
+            # This is deprecated and has no effect. Do not use.
+            ATTRIBUTION = 232465503
+
+            # This is deprecated and has no effect. Do not use.
+            AUTHORITY = 504108835
+
+            # This is deprecated and has no effect. Do not use.
+            CREDENTIALS_TYPE = 348222141
+
+            # This is deprecated and has no effect. Do not use.
+            CREDS_ASSERTION = 332343272
+
+            # This is deprecated and has no effect. Do not use.
+            JUSTIFICATION_TYPE = 206147719
+
+            # This is deprecated and has no effect. Do not use.
+            SECURITY_REALM = 526269616
+          end
+
+          # This is deprecated and has no effect. Do not use.
+          module Op
+            # A value indicating that the enum field is not set.
+            UNDEFINED_OP = 0
+
+            # This is deprecated and has no effect. Do not use.
+            DISCHARGED = 266338274
+
+            # This is deprecated and has no effect. Do not use.
+            EQUALS = 442201023
+
+            # This is deprecated and has no effect. Do not use.
+            IN = 2341
+
+            # This is deprecated and has no effect. Do not use.
+            NOT_EQUALS = 19718859
+
+            # This is deprecated and has no effect. Do not use.
+            NOT_IN = 161144369
+
+            # This is deprecated and has no effect. Do not use.
+            NO_OP = 74481951
+          end
+
+          # This is deprecated and has no effect. Do not use.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NO_ATTR
+          module Sys
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SYS = 0
+
+            # This is deprecated and has no effect. Do not use.
+            IP = 2343
+
+            # This is deprecated and has no effect. Do not use.
+            NAME = 2388619
+
+            # This is deprecated and has no effect. Do not use.
+            REGION = 266017524
+
+            # This is deprecated and has no effect. Do not use.
+            SERVICE = 17781397
+          end
         end
 
         # A set of Confidential Instance options.
@@ -3939,7 +4271,7 @@ module Google
         #     Name of the persistent disk to snapshot.
         # @!attribute [rw] guest_flush
         #   @return [::Boolean]
-        #     [Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS).
+        #     [Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process.
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID for this request.
@@ -4488,6 +4820,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkEdgeSecurityServices.Delete. See the method description for details.
+        # @!attribute [rw] network_edge_security_service
+        #   @return [::String]
+        #     Name of the network edge security service to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class DeleteNetworkEdgeSecurityServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NetworkEndpointGroups.Delete. See the method description for details.
         # @!attribute [rw] network_endpoint_group
         #   @return [::String]
@@ -4502,6 +4852,21 @@ module Google
         #   @return [::String]
         #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
         class DeleteNetworkEndpointGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.Delete. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class DeleteNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -4791,6 +5156,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionNetworkFirewallPolicies.Delete. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to delete.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class DeleteRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNotificationEndpoints.Delete. See the method description for details.
         # @!attribute [rw] notification_endpoint
         #   @return [::String]
@@ -4826,6 +5209,24 @@ module Google
 
         # A response message for RegionOperations.Delete. See the method description for details.
         class DeleteRegionOperationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSecurityPolicies.Delete. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to delete.
+        class DeleteRegionSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -6350,6 +6751,9 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     [Output Only] The parent of the firewall policy.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] URL of the region where the regional firewall policy resides. This field is not applicable to global firewall policies. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
         # @!attribute [rw] rule_tuple_count
         #   @return [::Integer]
         #     [Output Only] Total count of all firewall policy rule tuples. A firewall policy can not exceed a set number of tuples.
@@ -6436,12 +6840,18 @@ module Google
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     An integer indicating the priority of a rule in the list. The priority must be a positive value between 0 and 2147483647. Rules are evaluated from highest to lowest priority where 0 is the highest priority and 2147483647 is the lowest prority.
+        # @!attribute [rw] rule_name
+        #   @return [::String]
+        #     An optional name for the rule. This field is not a unique identifier and can be updated.
         # @!attribute [rw] rule_tuple_count
         #   @return [::Integer]
         #     [Output Only] Calculation of the complexity of a single firewall policy rule.
         # @!attribute [rw] target_resources
         #   @return [::Array<::String>]
         #     A list of network resource URLs to which this rule applies. This field allows you to control which network's VMs get this rule. If this field is left blank, all VMs within the organization will receive the rule.
+        # @!attribute [rw] target_secure_tags
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRuleSecureTag>]
+        #     A list of secure tags that controls which instances the firewall rule applies to. If targetSecureTag are specified, then the firewall rule applies only to instances in the VPC network that have one of those EFFECTIVE secure tags, if all the target_secure_tag are in INEFFECTIVE state, then this rule will be ignored. targetSecureTag may not be set at the same time as targetServiceAccounts. If neither targetServiceAccounts nor targetSecureTag are specified, the firewall rule applies to all instances on the specified network. Maximum number of target label tags allowed is 256.
         # @!attribute [rw] target_service_accounts
         #   @return [::Array<::String>]
         #     A list of service accounts indicating the sets of instances that are applied with this rule.
@@ -6470,6 +6880,9 @@ module Google
         # @!attribute [rw] src_ip_ranges
         #   @return [::Array<::String>]
         #     CIDR IP address range. Maximum number of source CIDR IP ranges allowed is 5000.
+        # @!attribute [rw] src_secure_tags
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRuleSecureTag>]
+        #     List of secure tag values, which should be matched at the source of the traffic. For INGRESS rule, if all the srcSecureTag are INEFFECTIVE, and there is no srcIpRange, this rule will be ignored. Maximum number of source tag values allowed is 256.
         class FirewallPolicyRuleMatcher
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -6484,6 +6897,28 @@ module Google
         class FirewallPolicyRuleMatcherLayer4Config
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the secure tag, created with TagManager's TagValue API.
+        # @!attribute [rw] state
+        #   @return [::String]
+        #     [Output Only] State of the secure tag, either `EFFECTIVE` or `INEFFECTIVE`. A secure tag is `INEFFECTIVE` when it is deleted or its network is deleted.
+        #     Check the State enum for the list of possible values.
+        class FirewallPolicyRuleSecureTag
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] State of the secure tag, either `EFFECTIVE` or `INEFFECTIVE`. A secure tag is `INEFFECTIVE` when it is deleted or its network is deleted.
+          module State
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATE = 0
+
+            EFFECTIVE = 244201863
+
+            INEFFECTIVE = 304458242
+          end
         end
 
         # Encapsulates numeric value that can be either absolute or relative.
@@ -6863,6 +7298,39 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.GetAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to which the queried association belongs.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the association to get from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetAssociationNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.GetAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to which the queried association belongs.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name of the association to get from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetAssociationRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Autoscalers.Get. See the method description for details.
         # @!attribute [rw] autoscaler
         #   @return [::String]
@@ -6970,6 +7438,21 @@ module Google
         #   @return [::String]
         #     Project ID for this request.
         class GetEffectiveFirewallsNetworkRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.GetEffectiveFirewalls. See the method description for details.
+        # @!attribute [rw] network
+        #   @return [::String]
+        #     Network reference
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetEffectiveFirewallsRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -7296,6 +7779,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NodeGroups.GetIamPolicy. See the method description for details.
         # @!attribute [rw] options_requested_policy_version
         #   @return [::Integer]
@@ -7346,6 +7844,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class GetIamPolicyRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.GetIamPolicy. See the method description for details.
+        # @!attribute [rw] options_requested_policy_version
+        #   @return [::Integer]
+        #     Requested IAM Policy version.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class GetIamPolicyRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -7641,6 +8157,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkEdgeSecurityServices.Get. See the method description for details.
+        # @!attribute [rw] network_edge_security_service
+        #   @return [::String]
+        #     Name of the network edge security service to get.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetNetworkEdgeSecurityServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NetworkEndpointGroups.Get. See the method description for details.
         # @!attribute [rw] network_endpoint_group
         #   @return [::String]
@@ -7652,6 +8183,18 @@ module Google
         #   @return [::String]
         #     The name of the zone where the network endpoint group is located. It should comply with RFC1035.
         class GetNetworkEndpointGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.Get. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to get.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -7914,6 +8457,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionNetworkFirewallPolicies.Get. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to get.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNotificationEndpoints.Get. See the method description for details.
         # @!attribute [rw] notification_endpoint
         #   @return [::String]
@@ -7952,6 +8510,21 @@ module Google
         #   @return [::String]
         #     Name of the region resource to return.
         class GetRegionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSecurityPolicies.Get. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to get.
+        class GetRegionSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -8096,6 +8669,39 @@ module Google
         #   @return [::Integer]
         #     The priority of the rule to get from the firewall policy.
         class GetRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.GetRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to which the queried rule belongs.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to get from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        class GetRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.GetRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to which the queried rule belongs.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to get from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        class GetRuleRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -8501,7 +9107,7 @@ module Google
         #     The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash when updating or changing labels, otherwise the request will fail with error 412 conditionNotMet. Make a get() request to the resource to get the latest fingerprint.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     A list of labels to apply for this resource. Each label key & value must comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").
+        #     A list of labels to apply for this resource. Each label must comply with the requirements for labels. For example, "webserver-frontend": "images". A label value can also be empty (e.g. "my-label": "").
         class GlobalSetLabelsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -8580,13 +9186,13 @@ module Google
         # Guest OS features.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - SECURE_BOOT - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE For more information, see Enabling guest operating system features.
+        #     The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.
         #     Check the Type enum for the list of possible values.
         class GuestOsFeature
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - SECURE_BOOT - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE For more information, see Enabling guest operating system features.
+          # The ID of a supported feature. To add multiple values, use commas to separate values. Set to one or more of the following values: - VIRTIO_SCSI_MULTIQUEUE - WINDOWS - MULTI_IP_SUBNET - UEFI_COMPATIBLE - GVNIC - SEV_CAPABLE - SUSPEND_RESUME_COMPATIBLE - SEV_SNP_CAPABLE For more information, see Enabling guest operating system features.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -9320,7 +9926,7 @@ module Google
         #     The specification for allowing client-side cross-origin requests. For more information about the W3C recommendation for cross-origin resource sharing (CORS), see Fetch API Living Standard. Not supported when the URL map is bound to a target gRPC proxy.
         # @!attribute [rw] fault_injection_policy
         #   @return [::Google::Cloud::Compute::V1::HttpFaultInjection]
-        #     The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by a load balancer on a percentage of requests before sending those requests to the backend service. Similarly requests from clients can be aborted by the load balancer for a percentage of requests. For the requests impacted by fault injection, timeout and retry_policy is ignored by clients that are configured with a fault_injection_policy.
+        #     The specification for fault injection introduced into traffic to test the resiliency of clients to backend service failure. As part of fault injection, when clients send requests to a backend service, delays can be introduced by a load balancer on a percentage of requests before sending those requests to the backend service. Similarly requests from clients can be aborted by the load balancer for a percentage of requests. timeout and retry_policy is ignored by clients that are configured with a fault_injection_policy if: 1. The traffic is generated by fault injection AND 2. The fault injection is not a delay fault injection.
         # @!attribute [rw] max_stream_duration
         #   @return [::Google::Cloud::Compute::V1::Duration]
         #     Specifies the maximum duration (timeout) for streams on the selected route. Unlike the timeout field where the timeout duration starts from the time the request has been fully processed (known as *end-of-stream*), the duration in this field is computed from the beginning of the stream until the response has been processed, including all retries. A stream that does not complete in this duration is closed. If not specified, this field uses the maximum maxStreamDuration value among all backend services associated with the route. This field is only allowed if the Url map is used with backend services with loadBalancingScheme set to INTERNAL_SELF_MANAGED.
@@ -9971,6 +10577,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkEdgeSecurityServices.Insert. See the method description for details.
+        # @!attribute [rw] network_edge_security_service_resource
+        #   @return [::Google::Cloud::Compute::V1::NetworkEdgeSecurityService]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     If true, the request will not be committed.
+        class InsertNetworkEdgeSecurityServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NetworkEndpointGroups.Insert. See the method description for details.
         # @!attribute [rw] network_endpoint_group_resource
         #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroup]
@@ -9985,6 +10612,21 @@ module Google
         #   @return [::String]
         #     The name of the zone where you want to create the network endpoint group. It should comply with RFC1035.
         class InsertNetworkEndpointGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.Insert. See the method description for details.
+        # @!attribute [rw] firewall_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class InsertNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -10241,6 +10883,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionNetworkFirewallPolicies.Insert. See the method description for details.
+        # @!attribute [rw] firewall_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class InsertRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNotificationEndpoints.Insert. See the method description for details.
         # @!attribute [rw] notification_endpoint_resource
         #   @return [::Google::Cloud::Compute::V1::NotificationEndpoint]
@@ -10255,6 +10915,27 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class InsertRegionNotificationEndpointRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSecurityPolicies.Insert. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     If true, the request will not be committed.
+        class InsertRegionSecurityPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -10750,6 +11431,9 @@ module Google
         #     An array of network configurations for this instance. These specify how interfaces are configured to interact with other network services, such as connecting to the internet. Multiple interfaces are supported per instance.
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Compute::V1::NetworkPerformanceConfig]
+        # @!attribute [rw] params
+        #   @return [::Google::Cloud::Compute::V1::InstanceParams]
+        #     Input only. [Input Only] Additional params passed with the request, but not persisted as part of resource payload.
         # @!attribute [rw] private_ipv6_google_access
         #   @return [::String]
         #     The private IPv6 google access type for the VM. If not specified, use INHERIT_FROM_SUBNETWORK as default.
@@ -10919,7 +11603,7 @@ module Google
         #     The name of the instance group. The name must be 1-63 characters long, and comply with RFC1035.
         # @!attribute [rw] named_ports
         #   @return [::Array<::Google::Cloud::Compute::V1::NamedPort>]
-        #     Assigns a name to a port number. For example: \\{name: "http", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [\\{name: "http", port: 80},\\{name: "http", port: 8080}] Named ports apply to all instances in this instance group.
+        #     Assigns a name to a port number. For example: \\{name: "http", port: 80} This allows the system to reference ports by the assigned name instead of a port number. Named ports can also contain multiple ports. For example: [\\{name: "app1", port: 8080}, \\{name: "app1", port: 8081}, \\{name: "app2", port: 8082}] Named ports apply to all instances in this instance group.
         # @!attribute [rw] network
         #   @return [::String]
         #     [Output Only] The URL of the network to which all instances in the instance group belong. If your instance has multiple network interfaces, then the network and subnetwork fields only refer to the network and subnet used by your primary interface (nic0).
@@ -11235,6 +11919,7 @@ module Google
         # @!attribute [rw] instance_redistribution_type
         #   @return [::String]
         #     The instance redistribution policy for regional managed instance groups. Valid values are: - PROACTIVE (default): The group attempts to maintain an even distribution of VM instances across zones in the region. - NONE: For non-autoscaled groups, proactive redistribution is disabled.
+        #     Check the InstanceRedistributionType enum for the list of possible values.
         # @!attribute [rw] max_surge
         #   @return [::Google::Cloud::Compute::V1::FixedOrPercent]
         #     The maximum number of instances that can be created above the specified targetSize during the update process. This value can be either a fixed number or, if the group has 10 or more instances, a percentage. If you set a percentage, the number of instances is rounded if necessary. The default value for maxSurge is a fixed value equal to the number of zones in which the managed instance group operates. At least one of either maxSurge or maxUnavailable must be greater than 0. Learn more about maxSurge.
@@ -11244,18 +11929,76 @@ module Google
         # @!attribute [rw] minimal_action
         #   @return [::String]
         #     Minimal action to be taken on an instance. You can specify either RESTART to restart existing instances or REPLACE to delete and create new instances from the target template. If you specify a RESTART, the Updater will attempt to perform that action only. However, if the Updater determines that the minimal action you specify is not enough to perform the update, it might perform a more disruptive action.
+        #     Check the MinimalAction enum for the list of possible values.
         # @!attribute [rw] most_disruptive_allowed_action
         #   @return [::String]
         #     Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to allow actions that do not need instance restart, RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
+        #     Check the MostDisruptiveAllowedAction enum for the list of possible values.
         # @!attribute [rw] replacement_method
         #   @return [::String]
         #     What action should be used to replace instances. See minimal_action.REPLACE
+        #     Check the ReplacementMethod enum for the list of possible values.
         # @!attribute [rw] type
         #   @return [::String]
         #     The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
+        #     Check the Type enum for the list of possible values.
         class InstanceGroupManagerUpdatePolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The instance redistribution policy for regional managed instance groups. Valid values are: - PROACTIVE (default): The group attempts to maintain an even distribution of VM instances across zones in the region. - NONE: For non-autoscaled groups, proactive redistribution is disabled.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NONE
+          # PROACTIVE
+          module InstanceRedistributionType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_INSTANCE_REDISTRIBUTION_TYPE = 0
+          end
+
+          # Minimal action to be taken on an instance. You can specify either RESTART to restart existing instances or REPLACE to delete and create new instances from the target template. If you specify a RESTART, the Updater will attempt to perform that action only. However, if the Updater determines that the minimal action you specify is not enough to perform the update, it might perform a more disruptive action.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NONE
+          # REFRESH
+          # REPLACE
+          # RESTART
+          module MinimalAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MINIMAL_ACTION = 0
+          end
+
+          # Most disruptive action that is allowed to be taken on an instance. You can specify either NONE to forbid any actions, REFRESH to allow actions that do not need instance restart, RESTART to allow actions that can be applied without instance replacing or REPLACE to allow all possible actions. If the Updater determines that the minimal update action needed is more disruptive than most disruptive allowed action you specify it will not perform the update at all.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NONE
+          # REFRESH
+          # REPLACE
+          # RESTART
+          module MostDisruptiveAllowedAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
+          end
+
+          # What action should be used to replace instances. See minimal_action.REPLACE
+          module ReplacementMethod
+            # A value indicating that the enum field is not set.
+            UNDEFINED_REPLACEMENT_METHOD = 0
+
+            # Instances will be recreated (with the same name)
+            RECREATE = 522644719
+
+            # Default option: instances will be deleted and created (with a new name)
+            SUBSTITUTE = 280924314
+          end
+
+          # The type of update process. You can specify either PROACTIVE so that the instance group manager proactively executes actions in order to bring instances to their target versions or OPPORTUNISTIC so that no action is proactively executed but the update will be performed as part of other actions (for example, resizes or recreateInstances calls).
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # PROACTIVE
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            # No action is being proactively performed in order to bring this IGM to its target version distribution (regardless of whether this distribution is expressed using instanceTemplate or versions field).
+            OPPORTUNISTIC = 429530089
+          end
         end
 
         # @!attribute [rw] instance_template
@@ -11290,12 +12033,36 @@ module Google
         # @!attribute [rw] minimal_action
         #   @return [::String]
         #     The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+        #     Check the MinimalAction enum for the list of possible values.
         # @!attribute [rw] most_disruptive_allowed_action
         #   @return [::String]
         #     The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+        #     Check the MostDisruptiveAllowedAction enum for the list of possible values.
         class InstanceGroupManagersApplyUpdatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NONE
+          # REFRESH
+          # REPLACE
+          # RESTART
+          module MinimalAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MINIMAL_ACTION = 0
+          end
+
+          # The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NONE
+          # REFRESH
+          # REPLACE
+          # RESTART
+          module MostDisruptiveAllowedAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
+          end
         end
 
         # InstanceGroupManagers.createInstances
@@ -11645,6 +12412,24 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Additional instance params.
+        # @!attribute [rw] resource_manager_tags
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Resource manager tags to be bound to the instance. Tag keys and values have the same definition as resource manager tags. Keys must be in the format `tagKeys/{tag_key_id}`, and values are in the format `tagValues/456`. The field is ignored (both PUT & PATCH) when empty.
+        class InstanceParams
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceManagerTagsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # @!attribute [rw] advanced_machine_features
         #   @return [::Google::Cloud::Compute::V1::AdvancedMachineFeatures]
         #     Controls for advanced machine-related behavior features. Note that for MachineImage, this is not supported yet.
@@ -11893,18 +12678,22 @@ module Google
         #     [Output Only] The short name of the firewall policy.
         # @!attribute [rw] type
         #   @return [::String]
-        #     [Output Only] The type of the firewall policy.
+        #     [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
         #     Check the Type enum for the list of possible values.
         class InstancesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # [Output Only] The type of the firewall policy.
+          # [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
 
             HIERARCHY = 69902869
+
+            NETWORK = 413984270
+
+            NETWORK_REGIONAL = 190804272
 
             UNSPECIFIED = 526786327
           end
@@ -12143,7 +12932,7 @@ module Google
         #     Check the Bandwidth enum for the list of possible values.
         # @!attribute [rw] candidate_ipv6_subnets
         #   @return [::Array<::String>]
-        #     Up to 16 candidate prefixes that control the allocation of cloudRouterIpv6Address and customerRouterIpv6Address for this attachment. Each prefix must be in the Global Unique Address (GUA) space. It is highly recommended that it be in a range owned by the requestor. A GUA in a range owned by Google will cause the request to fail. Google will select an available prefix from the supplied candidates or fail the request. If not supplied, a /125 from a Google-owned GUA block will be selected.
+        #     This field is not available.
         # @!attribute [rw] candidate_subnets
         #   @return [::Array<::String>]
         #     Up to 16 candidate prefixes that can be used to restrict the allocation of cloudRouterIpAddress and customerRouterIpAddress for this attachment. All prefixes must be within link-local address space (169.254.0.0/16) and must be /29 or shorter (/28, /27, etc). Google will attempt to select an unused /29 from the supplied candidate prefix(es). The request will fail if all possible /29s are in use on Google's edge. If not supplied, Google will randomly select an unused /29 from all of link-local space.
@@ -12155,7 +12944,7 @@ module Google
         #     [Output Only] IPv6 address + prefix length to be configured on Cloud Router Interface for this interconnect attachment.
         # @!attribute [rw] cloud_router_ipv6_interface_id
         #   @return [::String]
-        #     If supplied, the interface id (index within the subnet) to be used for the cloud router address. The id must be in the range of 1 to 6. If a subnet mask is supplied, it must be /125, and the subnet should either be 0 or match the selected subnet.
+        #     This field is not available.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -12167,10 +12956,10 @@ module Google
         #     [Output Only] IPv6 address + prefix length to be configured on the customer router subinterface for this interconnect attachment.
         # @!attribute [rw] customer_router_ipv6_interface_id
         #   @return [::String]
-        #     If supplied, the interface id (index within the subnet) to be used for the customer router address. The id must be in the range of 1 to 6. If a subnet mask is supplied, it must be /125, and the subnet should either be 0 or match the selected subnet.
+        #     This field is not available.
         # @!attribute [rw] dataplane_version
         #   @return [::Integer]
-        #     [Output only for types PARTNER and DEDICATED. Not present for PARTNER_PROVIDER.] Dataplane version for this InterconnectAttachment. This field is only present for Dataplane version 2 and higher. Absence of this field in the API output indicates that the Dataplane is version 1.
+        #     [Output Only] Dataplane version for this InterconnectAttachment. This field is only present for Dataplane version 2 and higher. Absence of this field in the API output indicates that the Dataplane is version 1.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource.
@@ -14079,6 +14868,30 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListNetworkFirewallPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Networks.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -14725,6 +15538,33 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionNetworkFirewallPolicies.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListRegionNetworkFirewallPoliciesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionNotificationEndpoints.List. See the method description for details.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -14775,6 +15615,33 @@ module Google
         #   @return [::Boolean]
         #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
         class ListRegionOperationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSecurityPolicies.List. See the method description for details.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+        # @!attribute [rw] max_results
+        #   @return [::Integer]
+        #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] return_partial_success
+        #   @return [::Boolean]
+        #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+        class ListRegionSecurityPoliciesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -15704,7 +16571,7 @@ module Google
         #     An optional description of this resource. Provide this property when you create the resource.
         # @!attribute [rw] guest_flush
         #   @return [::Boolean]
-        #     [Input Only] Whether to attempt an application consistent machine image by informing the OS to prepare for the snapshot process. Currently only supported on Windows instances using the Volume Shadow Copy Service (VSS).
+        #     [Input Only] Whether to attempt an application consistent machine image by informing the OS to prepare for the snapshot process.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] A unique identifier for this machine image. The server defines this identifier.
@@ -15934,6 +16801,7 @@ module Google
         # @!attribute [rw] instance_status
         #   @return [::String]
         #     [Output Only] The status of the instance. This field is empty when the instance does not exist.
+        #     Check the InstanceStatus enum for the list of possible values.
         # @!attribute [rw] last_attempt
         #   @return [::Google::Cloud::Compute::V1::ManagedInstanceLastAttempt]
         #     [Output Only] Information about the last attempt to create or delete the instance.
@@ -15951,6 +16819,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # [Output Only] The current action that the managed instance group has scheduled for the instance. Possible values: - NONE The instance is running, and the managed instance group does not have any scheduled actions for this instance. - CREATING The managed instance group is creating this instance. If the group fails to create this instance, it will try again until it is successful. - CREATING_WITHOUT_RETRIES The managed instance group is attempting to create this instance only once. If the group fails to create this instance, it does not try again and the group's targetSize value is decreased instead. - RECREATING The managed instance group is recreating this instance. - DELETING The managed instance group is permanently deleting this instance. - ABANDONING The managed instance group is abandoning this instance. The instance will be removed from the instance group and from any target pools that are associated with this group. - RESTARTING The managed instance group is restarting the instance. - REFRESHING The managed instance group is applying configuration changes to the instance without stopping it. For example, the group can update the target pool list for an instance without stopping that instance. - VERIFYING The managed instance group has created the instance and it is in the process of being verified.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # STOPPING
+          # SUSPENDING
           module CurrentAction
             # A value indicating that the enum field is not set.
             UNDEFINED_CURRENT_ACTION = 0
@@ -15979,11 +16850,20 @@ module Google
             # The managed instance group is restarting this instance.
             RESTARTING = 320534387
 
+            # The managed instance group is resuming this instance.
+            RESUMING = 446856618
+
+            # The managed instance group is starting this instance.
+            STARTING = 488820800
+
             # The managed instance group is verifying this already created instance. Verification happens every time the instance is (re)created or restarted and consists of: 1. Waiting until health check specified as part of this managed instance group's autohealing policy reports HEALTHY. Note: Applies only if autohealing policy has a health check specified 2. Waiting for addition verification steps performed as post-instance creation (subject to future extensions).
             VERIFYING = 16982185
           end
 
           # [Output Only] The status of the instance. This field is empty when the instance does not exist.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # STOPPING
+          # SUSPENDING
           module InstanceStatus
             # A value indicating that the enum field is not set.
             UNDEFINED_INSTANCE_STATUS = 0
@@ -16006,13 +16886,11 @@ module Google
             # The instance has stopped successfully.
             STOPPED = 444276141
 
-            # The instance is currently stopping (either being deleted or killed).
             STOPPING = 350791796
 
             # The instance has suspended.
             SUSPENDED = 51223995
 
-            # The instance is suspending.
             SUSPENDING = 514206246
 
             # The instance has stopped (either by explicit action or underlying failure).
@@ -16197,12 +17075,18 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this field when you create the resource.
+        # @!attribute [rw] enable_ula_internal_ipv6
+        #   @return [::Boolean]
+        #     Enable ULA internal ipv6 on this network. Enabling this feature will assign a /48 from google defined ULA prefix fd20::/20. .
         # @!attribute [rw] gateway_i_pv4
         #   @return [::String]
         #     [Output Only] The gateway address for default routing out of the network, selected by GCP.
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] internal_ipv6_range
+        #   @return [::String]
+        #     When enabling ula internal ipv6, caller optionally can specify the /48 range they want from the google defined ULA prefix fd20::/20. The input must be a valid /48 ULA IPv6 address and must be within the fd20::/20. Operation will fail if the speficied /48 is already in used by another resource. If the field is not speficied, then a /48 range will be randomly allocated from fd20::/20 and returned via this field. .
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#network for networks.
@@ -16212,6 +17096,10 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?`. The first character must be a lowercase letter, and all following characters (except for the last character) must be a dash, lowercase letter, or digit. The last character must be a lowercase letter or digit.
+        # @!attribute [rw] network_firewall_policy_enforcement_order
+        #   @return [::String]
+        #     The network firewall policy enforcement order. Can be either AFTER_CLASSIC_FIREWALL or BEFORE_CLASSIC_FIREWALL. Defaults to AFTER_CLASSIC_FIREWALL if the field is not specified.
+        #     Check the NetworkFirewallPolicyEnforcementOrder enum for the list of possible values.
         # @!attribute [rw] peerings
         #   @return [::Array<::Google::Cloud::Compute::V1::NetworkPeering>]
         #     [Output Only] A list of network peerings for the resource.
@@ -16221,10 +17109,107 @@ module Google
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource with the resource id.
         # @!attribute [rw] subnetworks
         #   @return [::Array<::String>]
         #     [Output Only] Server-defined fully-qualified URLs for all subnetworks in this VPC network.
         class Network
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The network firewall policy enforcement order. Can be either AFTER_CLASSIC_FIREWALL or BEFORE_CLASSIC_FIREWALL. Defaults to AFTER_CLASSIC_FIREWALL if the field is not specified.
+          module NetworkFirewallPolicyEnforcementOrder
+            # A value indicating that the enum field is not set.
+            UNDEFINED_NETWORK_FIREWALL_POLICY_ENFORCEMENT_ORDER = 0
+
+            AFTER_CLASSIC_FIREWALL = 154582608
+
+            BEFORE_CLASSIC_FIREWALL = 338458349
+          end
+        end
+
+        # Represents a Google Cloud Armor network edge security service resource.
+        # @!attribute [rw] creation_timestamp
+        #   @return [::String]
+        #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     An optional description of this resource. Provide this property when you create the resource.
+        # @!attribute [rw] fingerprint
+        #   @return [::String]
+        #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a NetworkEdgeSecurityService. An up-to-date fingerprint must be provided in order to update the NetworkEdgeSecurityService, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a NetworkEdgeSecurityService.
+        # @!attribute [rw] id
+        #   @return [::Integer]
+        #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output only] Type of the resource. Always compute#networkEdgeSecurityService for NetworkEdgeSecurityServices
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] URL of the region where the resource resides. You must specify this field as part of the HTTP request URL. It is not settable as a field in the request body.
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     The resource URL for the network edge security service associated with this network edge security service.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for the resource.
+        # @!attribute [rw] self_link_with_id
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource with the resource id.
+        class NetworkEdgeSecurityService
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServicesScopedList}]
+        #     A list of NetworkEdgeSecurityServicesScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#networkEdgeSecurityServiceAggregatedList for lists of Network Edge Security Services.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class NetworkEdgeSecurityServiceAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::NetworkEdgeSecurityServicesScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # @!attribute [rw] network_edge_security_services
+        #   @return [::Array<::Google::Cloud::Compute::V1::NetworkEdgeSecurityService>]
+        #     A list of NetworkEdgeSecurityServices contained in this scope.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     Informational warning which replaces the list of security policies when the list is empty.
+        class NetworkEdgeSecurityServicesScopedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -16295,7 +17280,7 @@ module Google
         #     The URL of the network to which all network endpoints in the NEG belong. Uses "default" project network if unspecified.
         # @!attribute [rw] network_endpoint_type
         #   @return [::String]
-        #     Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT.
+        #     Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP, GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT.
         #     Check the NetworkEndpointType enum for the list of possible values.
         # @!attribute [rw] psc_target_service
         #   @return [::String]
@@ -16328,7 +17313,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT.
+          # Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP, GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT.
           module NetworkEndpointType
             # A value indicating that the enum field is not set.
             UNDEFINED_NETWORK_ENDPOINT_TYPE = 0
@@ -16427,7 +17412,7 @@ module Google
         #     Optional Cloud Run tag represents the "named-revision" to provide additional fine-grained traffic routing information. The tag must be 1-63 characters long, and comply with RFC1035. Example value: "revision-0010".
         # @!attribute [rw] url_mask
         #   @return [::String]
-        #     A template to parse service and tag fields from a request URL. URL mask allows for routing to multiple Run services without having to create multiple network endpoint groups and backend services. For example, request URLs "foo1.domain.com/bar1" and "foo1.domain.com/bar2" can be backed by the same Serverless Network Endpoint Group (NEG) with URL mask ".domain.com/". The URL mask will parse them to { service="bar1", tag="foo1" } and { service="bar2", tag="foo2" } respectively.
+        #     A template to parse <service> and <tag> fields from a request URL. URL mask allows for routing to multiple Run services without having to create multiple network endpoint groups and backend services. For example, request URLs "foo1.domain.com/bar1" and "foo1.domain.com/bar2" can be backed by the same Serverless Network Endpoint Group (NEG) with URL mask "<tag>.domain.com/<service>". The URL mask will parse them to { service="bar1", tag="foo1" } and { service="bar2", tag="foo2" } respectively.
         class NetworkEndpointGroupCloudRun
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -16545,6 +17530,9 @@ module Google
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint hash of contents stored in this network interface. This field will be ignored when inserting an Instance or adding a NetworkInterface. An up-to-date fingerprint must be provided in order to update the NetworkInterface. The request will fail with error 400 Bad Request if the fingerprint is not provided, or 412 Precondition Failed if the fingerprint is out of date.
+        # @!attribute [rw] internal_ipv6_prefix_length
+        #   @return [::Integer]
+        #     The prefix length of the primary internal IPv6 range.
         # @!attribute [rw] ipv6_access_configs
         #   @return [::Array<::Google::Cloud::Compute::V1::AccessConfig>]
         #     An array of IPv6 access configurations for this interface. Currently, only one IPv6 access config, DIRECT_IPV6, is supported. If there is no ipv6AccessConfig specified, then this instance will have no external IPv6 Internet access.
@@ -16560,7 +17548,7 @@ module Google
         #     [Output Only] Type of the resource. Always compute#networkInterface for network interfaces.
         # @!attribute [rw] name
         #   @return [::String]
-        #     [Output Only] The name of the network interface, which is generated by the server. For network devices, these are eth0, eth1, etc.
+        #     [Output Only] The name of the network interface, which is generated by the server. For a VM, the network interface uses the nicN naming format. Where N is a value between 0 and 7. The default interface value is nic0.
         # @!attribute [rw] network
         #   @return [::String]
         #     URL of the VPC network resource for this instance. When creating an instance, if neither the network nor the subnetwork is specified, the default network global/networks/default is used. If the selected project doesn't have the default network, you must specify a network or subnet. If the network is not specified but the subnetwork is specified, the network is inferred. If you specify this property, you can specify the network as a full or partial URL. For example, the following are all valid URLs: - https://www.googleapis.com/compute/v1/projects/project/global/networks/ network - projects/project/global/networks/network - global/networks/default
@@ -16593,7 +17581,9 @@ module Google
             # This network interface can have external IPv6.
             EXTERNAL = 35607499
 
-            # IPv6 access type not set. Means this network interface hasn't been turned on IPv6 yet.
+            # This network interface can have internal IPv6.
+            INTERNAL = 279295677
+
             UNSPECIFIED_IPV6_ACCESS_TYPE = 313080613
           end
 
@@ -18196,6 +19186,50 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkEdgeSecurityServices.Patch. See the method description for details.
+        # @!attribute [rw] network_edge_security_service
+        #   @return [::String]
+        #     Name of the network edge security service to update.
+        # @!attribute [rw] network_edge_security_service_resource
+        #   @return [::Google::Cloud::Compute::V1::NetworkEdgeSecurityService]
+        #     The body resource for this request
+        # @!attribute [rw] paths
+        #   @return [::String]
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] update_mask
+        #   @return [::String]
+        #     Indicates fields to be updated as part of this request.
+        class PatchNetworkEdgeSecurityServiceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.Patch. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class PatchNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Networks.Patch. See the method description for details.
         # @!attribute [rw] network
         #   @return [::String]
@@ -18442,6 +19476,69 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for RegionNetworkFirewallPolicies.Patch. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicy]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class PatchRegionNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionSecurityPolicies.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] security_policy
+        #   @return [::String]
+        #     Name of the security policy to update.
+        # @!attribute [rw] security_policy_resource
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicy]
+        #     The body resource for this request
+        class PatchRegionSecurityPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionTargetHttpsProxies.Patch. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        # @!attribute [rw] target_https_proxy
+        #   @return [::String]
+        #     Name of the TargetHttpsProxy resource to patch.
+        # @!attribute [rw] target_https_proxy_resource
+        #   @return [::Google::Cloud::Compute::V1::TargetHttpsProxy]
+        #     The body resource for this request
+        class PatchRegionTargetHttpsProxyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for RegionUrlMaps.Patch. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -18498,6 +19595,51 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class PatchRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.PatchRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to patch.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class PatchRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.PatchRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] firewall_policy_rule_resource
+        #   @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+        #     The body resource for this request
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to patch.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class PatchRuleRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -18775,7 +19917,6 @@ module Google
         #     `etag` is used for optimistic concurrency control as a way to help prevent simultaneous updates of a policy from overwriting each other. It is strongly suggested that systems make use of the `etag` in the read-modify-write cycle to perform policy updates in order to avoid race conditions: An `etag` is returned in the response to `getIamPolicy`, and systems are expected to put that etag in the request to `setIamPolicy` to ensure that their change will be applied to the same version of the policy. **Important:** If you use IAM Conditions, you must include the `etag` field whenever you call `setIamPolicy`. If you omit this field, then IAM allows you to overwrite a version `3` policy with a version `1` policy, and all of the conditions in the version `3` policy are lost.
         # @!attribute [rw] iam_owned
         #   @return [::Boolean]
-        #     This is deprecated and has no effect. Do not use.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::Rule>]
         #     This is deprecated and has no effect. Do not use.
@@ -19398,6 +20539,8 @@ module Google
 
             E2_CPUS = 481995837
 
+            EXTERNAL_MANAGED_FORWARDING_RULES = 150790089
+
             EXTERNAL_NETWORK_LB_FORWARDING_RULES = 374298265
 
             EXTERNAL_PROTOCOL_FORWARDING_RULES = 63478888
@@ -19887,12 +21030,36 @@ module Google
         # @!attribute [rw] minimal_action
         #   @return [::String]
         #     The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+        #     Check the MinimalAction enum for the list of possible values.
         # @!attribute [rw] most_disruptive_allowed_action
         #   @return [::String]
         #     The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+        #     Check the MostDisruptiveAllowedAction enum for the list of possible values.
         class RegionInstanceGroupManagersApplyUpdatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The minimal action that you want to perform on each instance during the update: - REPLACE: At minimum, delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the minimum action is NONE. If your update requires a more disruptive action than you set with this flag, the necessary action is performed to execute the update.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NONE
+          # REFRESH
+          # REPLACE
+          # RESTART
+          module MinimalAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MINIMAL_ACTION = 0
+          end
+
+          # The most disruptive action that you want to perform on each instance during the update: - REPLACE: Delete the instance and create it again. - RESTART: Stop the instance and start it again. - REFRESH: Do not stop the instance. - NONE: Do not disrupt the instance at all. By default, the most disruptive allowed action is REPLACE. If your update requires a more disruptive action than you set with this flag, the update request will fail.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # NONE
+          # REFRESH
+          # REPLACE
+          # RESTART
+          module MostDisruptiveAllowedAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
+          end
         end
 
         # RegionInstanceGroupManagers.createInstances
@@ -20060,6 +21227,49 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] firewall_policys
+        #   @return [::Array<::Google::Cloud::Compute::V1::RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy>]
+        #     Effective firewalls from firewall policy.
+        # @!attribute [rw] firewalls
+        #   @return [::Array<::Google::Cloud::Compute::V1::Firewall>]
+        #     Effective firewalls on the network.
+        class RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     [Output Only] The display name of the firewall policy.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     [Output Only] The name of the firewall policy.
+        # @!attribute [rw] rules
+        #   @return [::Array<::Google::Cloud::Compute::V1::FirewallPolicyRule>]
+        #     The rules that apply to the network.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
+        #     Check the Type enum for the list of possible values.
+        class RegionNetworkFirewallPoliciesGetEffectiveFirewallsResponseEffectiveFirewallPolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The type of the firewall policy. Can be one of HIERARCHY, NETWORK, NETWORK_REGIONAL.
+          module Type
+            # A value indicating that the enum field is not set.
+            UNDEFINED_TYPE = 0
+
+            HIERARCHY = 69902869
+
+            NETWORK = 413984270
+
+            NETWORK_REGIONAL = 190804272
+
+            UNSPECIFIED = 526786327
+          end
+        end
+
         # @!attribute [rw] label_fingerprint
         #   @return [::String]
         #     The fingerprint of the previous set of labels for this resource, used to detect conflicts. The fingerprint is initially generated by Compute Engine and changes after every request to modify or update labels. You must always provide an up-to-date fingerprint hash in order to update or change labels. Make a get() request to the resource to get the latest fingerprint.
@@ -20121,6 +21331,45 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class RemoveAssociationFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.RemoveAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name for the attachment that will be removed.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class RemoveAssociationNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.RemoveAssociation. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name for the association that will be removed.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class RemoveAssociationRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -20280,6 +21529,45 @@ module Google
         #   @return [::String]
         #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
         class RemoveRuleFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for NetworkFirewallPolicies.RemoveRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to remove from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class RemoveRuleNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.RemoveRule. See the method description for details.
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     Name of the firewall policy to update.
+        # @!attribute [rw] priority
+        #   @return [::Integer]
+        #     The priority of the rule to remove from the firewall policy.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Name of the region scoping this request.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+        class RemoveRuleRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -20761,7 +22049,7 @@ module Google
         # Time window specified for daily operations.
         # @!attribute [rw] days_in_cycle
         #   @return [::Integer]
-        #     Defines a schedule with units measured in months. The value determines how many months pass between the start of each cycle.
+        #     Defines a schedule with units measured in days. The value determines how many days pass between the start of each cycle.
         # @!attribute [rw] duration
         #   @return [::String]
         #     [Output only] A predetermined duration for the window, automatically chosen to be the smallest possible in the given scenario.
@@ -21081,6 +22369,10 @@ module Google
         # @!attribute [rw] priority
         #   @return [::Integer]
         #     The priority of this route. Priority is used to break ties in cases where there is more than one matching route of equal prefix length. In cases where multiple routes have equal prefix length, the one with the lowest-numbered priority value wins. The default value is `1000`. The priority value must be from `0` to `65535`, inclusive.
+        # @!attribute [rw] route_status
+        #   @return [::String]
+        #     [Output only] The status of the route.
+        #     Check the RouteStatus enum for the list of possible values.
         # @!attribute [rw] route_type
         #   @return [::String]
         #     [Output Only] The type of this route, which can be one of the following values: - 'TRANSIT' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - 'SUBNET' for a route from a subnet of the VPC - 'BGP' for a route learned from a BGP peer of this router - 'STATIC' for a static route
@@ -21097,6 +22389,24 @@ module Google
         class Route
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output only] The status of the route.
+          module RouteStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ROUTE_STATUS = 0
+
+            # This route is processed and active.
+            ACTIVE = 314733318
+
+            # The route is dropped due to the VPC exceeding the dynamic route limit. For dynamic route limit, please refer to the Learned route example
+            DROPPED = 496235424
+
+            # This route is processed but inactive due to failure from the backend. The backend may have rejected the route
+            INACTIVE = 270421099
+
+            # This route is being processed internally. The status will change once processed.
+            PENDING = 35394935
+          end
 
           # [Output Only] The type of this route, which can be one of the following values: - 'TRANSIT' for a transit route that this router learned from another Cloud Router and will readvertise to one of its BGP peers - 'SUBNET' for a route from a subnet of the VPC - 'BGP' for a route learned from a BGP peer of this router - 'STATIC' for a static route
           module RouteType
@@ -21404,13 +22714,13 @@ module Google
         #     The number of consecutive BFD packets that must be missed before BFD declares that a peer is unavailable. If set, the value must be a value between 5 and 16. The default is 5.
         # @!attribute [rw] session_initialization_mode
         #   @return [::String]
-        #     The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer. The default is PASSIVE.
+        #     The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer. The default is DISABLED.
         #     Check the SessionInitializationMode enum for the list of possible values.
         class RouterBgpPeerBfd
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer. The default is PASSIVE.
+          # The BFD session initialization mode for this BGP peer. If set to ACTIVE, the Cloud Router will initiate the BFD session for this BGP peer. If set to PASSIVE, the Cloud Router will wait for the peer router to initiate the BFD session for this BGP peer. If set to DISABLED, BFD is disabled for this BGP peer. The default is DISABLED.
           module SessionInitializationMode
             # A value indicating that the enum field is not set.
             UNDEFINED_SESSION_INITIALIZATION_MODE = 0
@@ -21704,7 +23014,7 @@ module Google
         #     [Output only] URI of the VM instance that is used as third-party router appliances such as Next Gen Firewalls, Virtual Routers, or Router Appliances. The VM instance is the peer side of the BGP session.
         # @!attribute [rw] state
         #   @return [::String]
-        #     BGP state as specified in RFC1771.
+        #     The state of the BGP session. For a list of possible values for this field, see BGP session states.
         # @!attribute [rw] status
         #   @return [::String]
         #     Status of the BGP peer: \\{UP, DOWN}
@@ -22201,9 +23511,57 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] etag
+        #   @return [::String]
+        # @!attribute [rw] id
+        #   @return [::String]
+        #     [Output Only] Unique identifier for the resource; defined by the server.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::SecurityPoliciesScopedList}]
+        #     A list of SecurityPoliciesScopedList resources.
+        # @!attribute [rw] kind
+        #   @return [::String]
+        #     [Output Only] Type of resource. Always compute#securityPolicyAggregatedList for lists of Security Policies.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     [Output Only] This token allows you to get the next page of results for list requests. If the number of results is larger than maxResults, use the nextPageToken as a value for the query parameter pageToken in the next list request. Subsequent list requests will have their own nextPageToken to continue paging through the results.
+        # @!attribute [rw] self_link
+        #   @return [::String]
+        #     [Output Only] Server-defined URL for this resource.
+        # @!attribute [rw] unreachables
+        #   @return [::Array<::String>]
+        #     [Output Only] Unreachable resources.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     [Output Only] Informational warning message.
+        class SecurityPoliciesAggregatedList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::Compute::V1::SecurityPoliciesScopedList]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # @!attribute [rw] preconfigured_expression_sets
         #   @return [::Google::Cloud::Compute::V1::SecurityPoliciesWafConfig]
         class SecurityPoliciesListPreconfiguredExpressionSetsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] security_policies
+        #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicy>]
+        #     A list of SecurityPolicies contained in this scope.
+        # @!attribute [rw] warning
+        #   @return [::Google::Cloud::Compute::V1::Warning]
+        #     Informational warning which replaces the list of security policies when the list is empty.
+        class SecurityPoliciesScopedList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -22223,6 +23581,8 @@ module Google
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
+        # @!attribute [rw] ddos_protection_config
+        #   @return [::Google::Cloud::Compute::V1::SecurityPolicyDdosProtectionConfig]
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description of this resource. Provide this property when you create the resource.
@@ -22240,6 +23600,9 @@ module Google
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] recaptcha_options_config
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRecaptchaOptionsConfig]
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     [Output Only] URL of the region where the regional security policy resides. This field is not applicable to global security policies.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRule>]
         #     A list of rules that belong to this policy. There must always be a default rule (rule with priority 2147483647 and match "*"). If no rules are provided when creating a security policy, a default rule with action "allow" will be added.
@@ -22248,13 +23611,13 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] type
         #   @return [::String]
-        #     The type indicates the intended use of the security policy. CLOUD_ARMOR - Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. CLOUD_ARMOR_EDGE - Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache.
+        #     The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. This field can be set only at resource creation time.
         #     Check the Type enum for the list of possible values.
         class SecurityPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The type indicates the intended use of the security policy. CLOUD_ARMOR - Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. CLOUD_ARMOR_EDGE - Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache.
+          # The type indicates the intended use of the security policy. - CLOUD_ARMOR: Cloud Armor backend security policies can be configured to filter incoming HTTP requests targeting backend services. They filter requests before they hit the origin servers. - CLOUD_ARMOR_EDGE: Cloud Armor edge security policies can be configured to filter incoming HTTP requests targeting backend services (including Cloud CDN-enabled) as well as backend buckets (Cloud Storage). They filter requests before the request is served from Google's cache. - CLOUD_ARMOR_INTERNAL_SERVICE: Cloud Armor internal service policies can be configured to filter HTTP requests targeting services managed by Traffic Director in a service mesh. They filter requests before the request is served from the application. This field can be set only at resource creation time.
           module Type
             # A value indicating that the enum field is not set.
             UNDEFINED_TYPE = 0
@@ -22262,6 +23625,8 @@ module Google
             CLOUD_ARMOR = 260640373
 
             CLOUD_ARMOR_EDGE = 250728775
+
+            CLOUD_ARMOR_NETWORK = 488527428
           end
         end
 
@@ -22324,6 +23689,24 @@ module Google
             NORMAL = 161067239
 
             VERBOSE = 532219234
+          end
+        end
+
+        # @!attribute [rw] ddos_protection
+        #   @return [::String]
+        #     Check the DdosProtection enum for the list of possible values.
+        class SecurityPolicyDdosProtectionConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module DdosProtection
+            # A value indicating that the enum field is not set.
+            UNDEFINED_DDOS_PROTECTION = 0
+
+            ADVANCED = 63789090
+
+            STANDARD = 484642493
           end
         end
 
@@ -22458,14 +23841,14 @@ module Google
         #     Action to take for requests that are under the configured rate limit threshold. Valid option is "allow" only.
         # @!attribute [rw] enforce_on_key
         #   @return [::String]
-        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key type defaults to ALL. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL.
+        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL.
         #     Check the EnforceOnKey enum for the list of possible values.
         # @!attribute [rw] enforce_on_key_name
         #   @return [::String]
         #     Rate limit key name applicable only for the following key types: HTTP_HEADER -- Name of the HTTP header whose value is taken as the key value. HTTP_COOKIE -- Name of the HTTP cookie whose value is taken as the key value.
         # @!attribute [rw] exceed_action
         #   @return [::String]
-        #     Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are "deny()" where valid values for status are 403, 404, 429, and 502, and "redirect" where the redirect parameters come from exceed_redirect_options below.
+        #     Action to take for requests that are above the configured rate limit threshold, to either deny with a specified HTTP response code, or redirect to a different endpoint. Valid options are "deny(status)", where valid values for status are 403, 404, 429, and 502, and "redirect" where the redirect parameters come from exceedRedirectOptions below.
         # @!attribute [rw] exceed_redirect_options
         #   @return [::Google::Cloud::Compute::V1::SecurityPolicyRuleRedirectOptions]
         #     Parameters defining the redirect action that is used as the exceed action. Cannot be specified if the exceed action is not redirect.
@@ -22476,7 +23859,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key type defaults to ALL. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL.
+          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL.
           module EnforceOnKey
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY = 0
@@ -23083,6 +24466,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] global_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::GlobalSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NodeGroups.SetIamPolicy. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -23133,6 +24531,24 @@ module Google
         #   @return [::String]
         #     Name or id of the resource for this request.
         class SetIamPolicyRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.SetIamPolicy. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] region_set_policy_request_resource
+        #   @return [::Google::Cloud::Compute::V1::RegionSetPolicyRequest]
+        #     The body resource for this request
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        class SetIamPolicyRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -24785,7 +26201,7 @@ module Google
         #     Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is determined by the org policy, if there is no org policy specified, then it will default to disabled. This field isn't supported with the purpose field set to INTERNAL_HTTPS_LOAD_BALANCER.
         # @!attribute [rw] external_ipv6_prefix
         #   @return [::String]
-        #     [Output Only] The range of external IPv6 addresses that are owned by this subnetwork.
+        #     [Output Only] The external IPv6 address range that is assigned to this subnetwork.
         # @!attribute [rw] fingerprint
         #   @return [::String]
         #     Fingerprint of this resource. A hash of the contents stored in this object. This field is used in optimistic locking. This field will be ignored when inserting a Subnetwork. An up-to-date fingerprint must be provided in order to update the Subnetwork, otherwise the request will fail with error 412 conditionNotMet. To see the latest fingerprint, make a get() request to retrieve a Subnetwork.
@@ -24795,16 +26211,19 @@ module Google
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] internal_ipv6_prefix
+        #   @return [::String]
+        #     [Output Only] The internal IPv6 address range that is assigned to this subnetwork.
         # @!attribute [rw] ip_cidr_range
         #   @return [::String]
         #     The range of internal addresses that are owned by this subnetwork. Provide this property when you create the subnetwork. For example, 10.0.0.0/8 or 100.64.0.0/10. Ranges must be unique and non-overlapping within a network. Only IPv4 is supported. This field is set at resource creation time. The range can be any range listed in the Valid ranges list. The range can be expanded after creation using expandIpCidrRange.
         # @!attribute [rw] ipv6_access_type
         #   @return [::String]
-        #     The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack. If the ipv6_type is EXTERNAL then this subnet cannot enable direct path.
+        #     The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
         #     Check the Ipv6AccessType enum for the list of possible values.
         # @!attribute [rw] ipv6_cidr_range
         #   @return [::String]
-        #     [Output Only] The range of internal IPv6 addresses that are owned by this subnetwork. Note this will be for private google access only eventually.
+        #     [Output Only] This field is for internal use.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#subnetwork for Subnetwork resources.
@@ -24822,7 +26241,7 @@ module Google
         #     Whether the VMs in this subnet can access Google services without assigned external IP addresses. This field can be both set at resource creation time and updated using setPrivateIpGoogleAccess.
         # @!attribute [rw] private_ipv6_google_access
         #   @return [::String]
-        #     The private IPv6 google access type for the VMs in this subnet. This is an expanded field of enablePrivateV6Access. If both fields are set, privateIpv6GoogleAccess will take priority. This field can be both set at resource creation time and updated using patch.
+        #     This field is for internal use. This field can be both set at resource creation time and updated using patch.
         #     Check the PrivateIpv6GoogleAccess enum for the list of possible values.
         # @!attribute [rw] purpose
         #   @return [::String]
@@ -24843,7 +26262,7 @@ module Google
         #     [Output Only] Server-defined URL for the resource.
         # @!attribute [rw] stack_type
         #   @return [::String]
-        #     The stack type for this subnet to identify whether the IPv6 feature is enabled or not. If not specified IPV4_ONLY will be used. This field can be both set at resource creation time and updated using patch.
+        #     The stack type for the subnet. If set to IPV4_ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4_IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
         #     Check the StackType enum for the list of possible values.
         # @!attribute [rw] state
         #   @return [::String]
@@ -24853,19 +26272,21 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack. If the ipv6_type is EXTERNAL then this subnet cannot enable direct path.
+          # The access type of IPv6 address this subnet holds. It's immutable and can only be specified during creation or the first time the subnet is updated into IPV4_IPV6 dual stack.
           module Ipv6AccessType
             # A value indicating that the enum field is not set.
             UNDEFINED_IPV6_ACCESS_TYPE = 0
 
-            # VMs on this subnet will be assigned IPv6 addresses that are accesible via the Internet, as well as the VPC network.
+            # VMs on this subnet will be assigned IPv6 addresses that are accessible via the Internet, as well as the VPC network.
             EXTERNAL = 35607499
 
-            # IPv6 access type not set. Means this subnet hasn't been turned on IPv6 yet.
+            # VMs on this subnet will be assigned IPv6 addresses that are only accessible over the VPC network.
+            INTERNAL = 279295677
+
             UNSPECIFIED_IPV6_ACCESS_TYPE = 313080613
           end
 
-          # The private IPv6 google access type for the VMs in this subnet. This is an expanded field of enablePrivateV6Access. If both fields are set, privateIpv6GoogleAccess will take priority. This field can be both set at resource creation time and updated using patch.
+          # This field is for internal use. This field can be both set at resource creation time and updated using patch.
           module PrivateIpv6GoogleAccess
             # A value indicating that the enum field is not set.
             UNDEFINED_PRIVATE_IPV6_GOOGLE_ACCESS = 0
@@ -24913,7 +26334,7 @@ module Google
             BACKUP = 341010882
           end
 
-          # The stack type for this subnet to identify whether the IPv6 feature is enabled or not. If not specified IPV4_ONLY will be used. This field can be both set at resource creation time and updated using patch.
+          # The stack type for the subnet. If set to IPV4_ONLY, new VMs in the subnet are assigned IPv4 addresses only. If set to IPV4_IPV6, new VMs in the subnet can be assigned both IPv4 and IPv6 addresses. If not specified, IPV4_ONLY is used. This field can be both set at resource creation time and updated using patch.
           module StackType
             # A value indicating that the enum field is not set.
             UNDEFINED_STACK_TYPE = 0
@@ -25009,7 +26430,7 @@ module Google
         #     Whether to enable flow logging for this subnetwork. If this field is not explicitly set, it will not appear in get listings. If not set the default behavior is determined by the org policy, if there is no org policy specified, then it will default to disabled.
         # @!attribute [rw] filter_expr
         #   @return [::String]
-        #     Can only be specified if VPC flow logs for this subnetwork is enabled. Export filter used to define which VPC flow logs should be logged.
+        #     Can only be specified if VPC flow logs for this subnetwork is enabled. The filter expression is used to define which VPC flow logs should be exported to Cloud Logging.
         # @!attribute [rw] flow_sampling
         #   @return [::Float]
         #     Can only be specified if VPC flow logging for this subnetwork is enabled. The value of the field must be in [0, 1]. Set the sampling rate of VPC flow logs within the subnetwork where 1.0 means all collected logs are reported and 0.0 means no logs are reported. Default is 0.5 unless otherwise specified by the org policy, which means half of all collected logs are reported.
@@ -26361,6 +27782,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # A request message for NetworkFirewallPolicies.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsNetworkFirewallPolicyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for NodeGroups.TestIamPermissions. See the method description for details.
         # @!attribute [rw] project
         #   @return [::String]
@@ -26429,6 +27865,24 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
         #     The body resource for this request
         class TestIamPermissionsRegionDiskRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request message for RegionNetworkFirewallPolicies.TestIamPermissions. See the method description for details.
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     Project ID for this request.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     The name of the region for this request.
+        # @!attribute [rw] resource
+        #   @return [::String]
+        #     Name or id of the resource for this request.
+        # @!attribute [rw] test_permissions_request_resource
+        #   @return [::Google::Cloud::Compute::V1::TestPermissionsRequest]
+        #     The body resource for this request
+        class TestIamPermissionsRegionNetworkFirewallPolicyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -26711,9 +28165,11 @@ module Google
         # @!attribute [rw] minimal_action
         #   @return [::String]
         #     Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
+        #     Check the MinimalAction enum for the list of possible values.
         # @!attribute [rw] most_disruptive_allowed_action
         #   @return [::String]
         #     Specifies the most disruptive action that can be taken on the instance as part of the update. Compute Engine returns an error if the instance properties require a more disruptive action as part of the instance update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and RESTART.
+        #     Check the MostDisruptiveAllowedAction enum for the list of possible values.
         # @!attribute [rw] project
         #   @return [::String]
         #     Project ID for this request.
@@ -26726,6 +28182,28 @@ module Google
         class UpdateInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Specifies the action to take when updating an instance even if the updated properties do not require it. If not specified, then Compute Engine acts based on the minimum action that the updated properties require.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # INVALID
+          # NO_EFFECT
+          # REFRESH
+          # RESTART
+          module MinimalAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MINIMAL_ACTION = 0
+          end
+
+          # Specifies the most disruptive action that can be taken on the instance as part of the update. Compute Engine returns an error if the instance properties require a more disruptive action as part of the instance update. Valid options from lowest to highest are NO_EFFECT, REFRESH, and RESTART.
+          # Additional supported values which may be not listed in the enum directly due to technical reasons:
+          # INVALID
+          # NO_EFFECT
+          # REFRESH
+          # RESTART
+          module MostDisruptiveAllowedAction
+            # A value indicating that the enum field is not set.
+            UNDEFINED_MOST_DISRUPTIVE_ALLOWED_ACTION = 0
+          end
         end
 
         # A request message for Instances.UpdateNetworkInterface. See the method description for details.
@@ -27191,12 +28669,31 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] load_balancing_schemes
+        #   @return [::Array<::String>]
+        #     Specifies the load balancer type(s) this validation request is for. Use EXTERNAL_MANAGED for HTTP/HTTPS External Global Load Balancer with Advanced Traffic Management. Use EXTERNAL for Classic HTTP/HTTPS External Global Load Balancer. Other load balancer types are not supported. For more information, refer to Choosing a load balancer. If unspecified, the load balancing scheme will be inferred from the backend service resources this URL map references. If that can not be inferred (for example, this URL map only references backend buckets, or this Url map is for rewrites and redirects only and doesn't reference any backends), EXTERNAL will be used as the default type. If specified, the scheme(s) must not conflict with the load balancing scheme of the backend service resources this Url map references.
+        #     Check the LoadBalancingSchemes enum for the list of possible values.
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Compute::V1::UrlMap]
         #     Content of the UrlMap to be validated.
         class UrlMapsValidateRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+
+          module LoadBalancingSchemes
+            # A value indicating that the enum field is not set.
+            UNDEFINED_LOAD_BALANCING_SCHEMES = 0
+
+            # Signifies that this will be used for Classic L7 External Load Balancing.
+            EXTERNAL = 35607499
+
+            # Signifies that this will be used for Envoy-based L7 External Load Balancing.
+            EXTERNAL_MANAGED = 512006923
+
+            # If unspecified, the validation will try to infer the scheme from the backend service resources this Url map references. If the inferrence is not possible, EXTERNAL will be used as the default type.
+            LOAD_BALANCING_SCHEME_UNSPECIFIED = 526507452
+          end
         end
 
         # @!attribute [rw] result

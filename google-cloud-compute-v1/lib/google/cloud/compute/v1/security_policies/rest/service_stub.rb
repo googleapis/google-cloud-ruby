@@ -83,6 +83,56 @@ module Google
               end
 
               ##
+              # Baseline implementation for the aggregated_list REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListSecurityPoliciesRequest]
+              #   A request object representing the call parameters. Required.
+              # @param options [::Gapic::CallOptions]
+              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPoliciesAggregatedList]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::SecurityPoliciesAggregatedList]
+              #   A result object deserialized from the server's reply
+              def aggregated_list request_pb, options = nil
+                raise ::ArgumentError, "request must be provided" if request_pb.nil?
+
+                uri, _body, query_string_params = transcode_aggregated_list_request request_pb
+                response = @client_stub.make_get_request(
+                  uri:     uri,
+                  params:  query_string_params,
+                  options: options
+                )
+                result = ::Google::Cloud::Compute::V1::SecurityPoliciesAggregatedList.decode_json response.body, ignore_unknown_fields: true
+
+                yield result, response if block_given?
+                result
+              end
+
+              ##
+              # GRPC transcoding helper method for the aggregated_list REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListSecurityPoliciesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_aggregated_list_request request_pb
+                uri = "/compute/v1/projects/#{request_pb.project}/aggregated/securityPolicies"
+                body = nil
+                query_string_params = {}
+                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
+                query_string_params["includeAllScopes"] = request_pb.include_all_scopes.to_s if request_pb.has_include_all_scopes?
+                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
+                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
+                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
+                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
+
+                [uri, body, query_string_params]
+              end
+
+              ##
               # Baseline implementation for the delete REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::DeleteSecurityPolicyRequest]
