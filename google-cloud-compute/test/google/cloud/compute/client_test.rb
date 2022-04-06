@@ -301,12 +301,30 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_network_edge_security_services
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::Compute.network_edge_security_services do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client, client
+    end
+  end
+
   def test_network_endpoint_groups
     Gapic::ServiceStub.stub :new, :stub do
       client = Google::Cloud::Compute.network_endpoint_groups do |config|
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::NetworkEndpointGroups::Rest::Client, client
+    end
+  end
+
+  def test_network_firewall_policies
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::Compute.network_firewall_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client, client
     end
   end
 
@@ -481,6 +499,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_region_network_firewall_policies
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::Compute.region_network_firewall_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::Client, client
+    end
+  end
+
   def test_region_notification_endpoints
     Gapic::ServiceStub.stub :new, :stub do
       client = Google::Cloud::Compute.region_notification_endpoints do |config|
@@ -496,6 +523,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionOperations::Rest::Client, client
+    end
+  end
+
+  def test_region_security_policies
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::Compute.region_security_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::Client, client
     end
   end
 

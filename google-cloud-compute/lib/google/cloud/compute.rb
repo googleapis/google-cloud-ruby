@@ -974,6 +974,36 @@ module Google
       end
 
       ##
+      # Create a new client object for NetworkEdgeSecurityServices.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NetworkEdgeSecurityServices/Rest/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the NetworkEdgeSecurityServices service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About NetworkEdgeSecurityServices
+      #
+      # The NetworkEdgeSecurityServices API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [NetworkEdgeSecurityServices::Rest::Client] A client object for the specified version.
+      #
+      def self.network_edge_security_services version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Compute.const_get package_name
+        package_module.const_get(:NetworkEdgeSecurityServices).const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for NetworkEndpointGroups.
       #
       # By default, this returns an instance of
@@ -1001,6 +1031,36 @@ module Google
                        .first
         package_module = Google::Cloud::Compute.const_get package_name
         package_module.const_get(:NetworkEndpointGroups).const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for NetworkFirewallPolicies.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/NetworkFirewallPolicies/Rest/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the NetworkFirewallPolicies service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About NetworkFirewallPolicies
+      #
+      # The NetworkFirewallPolicies API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [NetworkFirewallPolicies::Rest::Client] A client object for the specified version.
+      #
+      def self.network_firewall_policies version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Compute.const_get package_name
+        package_module.const_get(:NetworkFirewallPolicies).const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
@@ -1574,6 +1634,36 @@ module Google
       end
 
       ##
+      # Create a new client object for RegionNetworkFirewallPolicies.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionNetworkFirewallPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionNetworkFirewallPolicies/Rest/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the RegionNetworkFirewallPolicies service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About RegionNetworkFirewallPolicies
+      #
+      # The RegionNetworkFirewallPolicies API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [RegionNetworkFirewallPolicies::Rest::Client] A client object for the specified version.
+      #
+      def self.region_network_firewall_policies version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Compute.const_get package_name
+        package_module.const_get(:RegionNetworkFirewallPolicies).const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for RegionNotificationEndpoints.
       #
       # By default, this returns an instance of
@@ -1631,6 +1721,36 @@ module Google
                        .first
         package_module = Google::Cloud::Compute.const_get package_name
         package_module.const_get(:RegionOperations).const_get(:Rest).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for RegionSecurityPolicies.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Compute::V1::RegionSecurityPolicies::Rest::Client](https://googleapis.dev/ruby/google-cloud-compute-v1/latest/Google/Cloud/Compute/V1/RegionSecurityPolicies/Rest/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the RegionSecurityPolicies service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About RegionSecurityPolicies
+      #
+      # The RegionSecurityPolicies API.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [RegionSecurityPolicies::Rest::Client] A client object for the specified version.
+      #
+      def self.region_security_policies version: :v1, &block
+        require "google/cloud/compute/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Compute
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Compute.const_get package_name
+        package_module.const_get(:RegionSecurityPolicies).const_get(:Rest).const_get(:Client).new(&block)
       end
 
       ##
