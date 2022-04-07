@@ -185,13 +185,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.Resource" do
       optional :name, :string, 1
+      optional :display_name, :string, 8
+      optional :type, :string, 6
       optional :project_name, :string, 2
       optional :project_display_name, :string, 3
       optional :parent_name, :string, 4
       optional :parent_display_name, :string, 5
-      optional :type, :string, 6
       repeated :folders, :message, 7, "google.cloud.securitycenter.v1.Folder"
-      optional :display_name, :string, 8
     end
     add_enum "google.cloud.securitycenter.v1.ListFindingsResponse.ListFindingsResult.StateChange" do
       value :UNUSED, 0

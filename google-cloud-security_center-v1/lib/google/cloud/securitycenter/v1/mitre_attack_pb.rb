@@ -59,6 +59,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MODIFY_CLOUD_COMPUTE_INFRASTRUCTURE, 26
       value :EXPLOIT_PUBLIC_FACING_APPLICATION, 27
       value :MODIFY_AUTHENTICATION_PROCESS, 28
+      value :DATA_DESTRUCTION, 29
     end
   end
 end
