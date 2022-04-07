@@ -2,7 +2,6 @@
 # source: google/cloud/dialogflow/cx/v3/audio_config.proto
 
 require 'google/api/field_behavior_pb'
-require 'google/api/resource_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf'
 
