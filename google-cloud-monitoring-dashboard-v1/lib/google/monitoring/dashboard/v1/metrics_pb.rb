@@ -42,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :value, :double, 2
       optional :color, :enum, 3, "google.monitoring.dashboard.v1.Threshold.Color"
       optional :direction, :enum, 4, "google.monitoring.dashboard.v1.Threshold.Direction"
+      optional :target_axis, :enum, 5, "google.monitoring.dashboard.v1.Threshold.TargetAxis"
     end
     add_enum "google.monitoring.dashboard.v1.Threshold.Color" do
       value :COLOR_UNSPECIFIED, 0
@@ -52,6 +53,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DIRECTION_UNSPECIFIED, 0
       value :ABOVE, 1
       value :BELOW, 2
+    end
+    add_enum "google.monitoring.dashboard.v1.Threshold.TargetAxis" do
+      value :TARGET_AXIS_UNSPECIFIED, 0
+      value :Y1, 1
+      value :Y2, 2
     end
     add_enum "google.monitoring.dashboard.v1.SparkChartType" do
       value :SPARK_CHART_TYPE_UNSPECIFIED, 0
@@ -73,6 +79,7 @@ module Google
           Threshold = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold").msgclass
           Threshold::Color = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold.Color").enummodule
           Threshold::Direction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold.Direction").enummodule
+          Threshold::TargetAxis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.Threshold.TargetAxis").enummodule
           SparkChartType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.dashboard.v1.SparkChartType").enummodule
         end
       end
