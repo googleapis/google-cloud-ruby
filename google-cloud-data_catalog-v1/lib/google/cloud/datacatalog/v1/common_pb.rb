@@ -15,6 +15,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :BIGQUERY, 1
       value :CLOUD_PUBSUB, 2
       value :DATAPROC_METASTORE, 3
+      value :DATAPLEX, 4
     end
   end
 end

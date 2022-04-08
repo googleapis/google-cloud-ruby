@@ -502,6 +502,10 @@ module Google
         #   @return [::Google::Cloud::DataCatalog::V1::RoutineSpec]
         #     Specification that applies to a user-defined function or procedure. Valid
         #     only for entries with the `ROUTINE` type.
+        # @!attribute [rw] fileset_spec
+        #   @return [::Google::Cloud::DataCatalog::V1::FilesetSpec]
+        #     Specification that applies to a fileset resource. Valid only
+        #     for entries with the `FILESET` type.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name of an entry.
@@ -522,7 +526,7 @@ module Google
         #     Default value is an empty string.
         # @!attribute [rw] business_context
         #   @return [::Google::Cloud::DataCatalog::V1::BusinessContext]
-        #     Business Context of the entry. Not supported for BigQuery datasets.
+        #     Business Context of the entry. Not supported for BigQuery datasets
         # @!attribute [rw] schema
         #   @return [::Google::Cloud::DataCatalog::V1::Schema]
         #     Schema of the entry. An entry might not have any schema attached to it.
@@ -569,6 +573,10 @@ module Google
         # @!attribute [rw] type
         #   @return [::Google::Cloud::DataCatalog::V1::DatabaseTableSpec::TableType]
         #     Type of this table.
+        # @!attribute [rw] dataplex_table
+        #   @return [::Google::Cloud::DataCatalog::V1::DataplexTableSpec]
+        #     Fields specific to a Dataplex table and present only in the Dataplex table
+        #     entries.
         class DatabaseTableSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -584,6 +592,17 @@ module Google
             # External table.
             EXTERNAL = 2
           end
+        end
+
+        # Specification that applies to a fileset. Valid only for entries with the
+        # 'FILESET' type.
+        # @!attribute [rw] dataplex_fileset
+        #   @return [::Google::Cloud::DataCatalog::V1::DataplexFilesetSpec]
+        #     Fields specific to a Dataplex fileset and present only in the Dataplex
+        #     fileset entries.
+        class FilesetSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Specification that applies to a data source connection. Valid only for
@@ -711,8 +730,8 @@ module Google
           #     Designation of the person, for example, Data Steward.
           # @!attribute [rw] email
           #   @return [::String]
-          #     Email of the person in the format of `john.doe@example.com`,
-          #     `<john.doe@example.com>`, or `John Doe<john.doe@example.com>`.
+          #     Email of the person in the format of `john.doe@xyz`,
+          #     `<john.doe@xyz>`, or `John Doe<john.doe@xyz>`.
           class Person
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1129,6 +1148,12 @@ module Google
 
           # Output only. Routine, for example, a BigQuery routine.
           ROUTINE = 9
+
+          # A Dataplex lake.
+          LAKE = 10
+
+          # A Dataplex zone.
+          ZONE = 11
 
           # A service, for example, a Dataproc Metastore service.
           SERVICE = 14

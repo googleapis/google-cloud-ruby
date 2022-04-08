@@ -154,7 +154,7 @@ module Google
         #     [ListTags][google.cloud.datacatalog.v1.ListTags] API response.
         #
         #     Additionally, you can search for a public tag by value with a
-        #     simple search query instead of using a ``tag:`` predicate.
+        #     simple search query in addition to using a ``tag:`` predicate.
         # @!attribute [rw] fields
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::DataCatalog::V1::TagTemplateField}]
         #     Required. Map of tag template field IDs to the settings for the field.

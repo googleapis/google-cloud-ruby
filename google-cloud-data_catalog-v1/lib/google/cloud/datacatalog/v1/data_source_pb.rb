@@ -9,11 +9,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.datacatalog.v1.DataSource" do
       optional :service, :enum, 1, "google.cloud.datacatalog.v1.DataSource.Service"
       optional :resource, :string, 2
+      optional :source_entry, :string, 3
+      oneof :properties do
+        optional :storage_properties, :message, 4, "google.cloud.datacatalog.v1.StorageProperties"
+      end
     end
     add_enum "google.cloud.datacatalog.v1.DataSource.Service" do
       value :SERVICE_UNSPECIFIED, 0
       value :CLOUD_STORAGE, 1
       value :BIGQUERY, 2
+    end
+    add_message "google.cloud.datacatalog.v1.StorageProperties" do
+      repeated :file_pattern, :string, 1
+      optional :file_type, :string, 2
     end
   end
 end
@@ -24,6 +32,7 @@ module Google
       module V1
         DataSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DataSource").msgclass
         DataSource::Service = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DataSource.Service").enummodule
+        StorageProperties = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.StorageProperties").msgclass
       end
     end
   end
