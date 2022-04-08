@@ -22,8 +22,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.cloud.dataproc.v1.BasicAutoscalingAlgorithm" do
-      optional :yarn_config, :message, 1, "google.cloud.dataproc.v1.BasicYarnAutoscalingConfig"
       optional :cooldown_period, :message, 2, "google.protobuf.Duration"
+      oneof :config do
+        optional :yarn_config, :message, 1, "google.cloud.dataproc.v1.BasicYarnAutoscalingConfig"
+      end
     end
     add_message "google.cloud.dataproc.v1.BasicYarnAutoscalingConfig" do
       optional :graceful_decommission_timeout, :message, 5, "google.protobuf.Duration"
