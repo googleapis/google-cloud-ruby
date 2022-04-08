@@ -43,7 +43,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.dataproc.v1.VirtualClusterConfig" do
       optional :staging_bucket, :string, 1
-      optional :temp_bucket, :string, 2
       optional :auxiliary_services_config, :message, 7, "google.cloud.dataproc.v1.AuxiliaryServicesConfig"
       oneof :infrastructure_config do
         optional :kubernetes_cluster_config, :message, 6, "google.cloud.dataproc.v1.KubernetesClusterConfig"
