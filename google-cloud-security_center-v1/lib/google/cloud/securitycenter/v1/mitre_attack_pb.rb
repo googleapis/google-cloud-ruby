@@ -60,6 +60,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EXPLOIT_PUBLIC_FACING_APPLICATION, 27
       value :MODIFY_AUTHENTICATION_PROCESS, 28
       value :DATA_DESTRUCTION, 29
+      value :DOMAIN_POLICY_MODIFICATION, 30
     end
   end
 end

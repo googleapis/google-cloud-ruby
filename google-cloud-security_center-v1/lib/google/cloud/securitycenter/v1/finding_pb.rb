@@ -39,6 +39,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :access, :message, 26, "google.cloud.securitycenter.v1.Access"
       optional :mute_initiator, :string, 28
       repeated :iam_bindings, :message, 39, "google.cloud.securitycenter.v1.IamBinding"
+      optional :next_steps, :string, 40
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do
       value :STATE_UNSPECIFIED, 0

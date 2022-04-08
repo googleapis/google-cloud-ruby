@@ -141,6 +141,9 @@ module Google
         # @!attribute [rw] iam_bindings
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::IamBinding>]
         #     Represents IAM bindings associated with the Finding.
+        # @!attribute [rw] next_steps
+        #   @return [::String]
+        #     Next steps associate to the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
