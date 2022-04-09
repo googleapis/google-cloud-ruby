@@ -165,15 +165,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this phrase set will be created. Format:
+            #     Required. The parent resource where this phrase set will be created.
+            #     Format:
             #
             #     `projects/{project}/locations/{location}/phraseSets`
             #
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #   @param phrase_set_id [::String]
             #     Required. The ID to use for the phrase set, which will become the final
             #     component of the phrase set's resource name.
@@ -273,8 +274,8 @@ module Google
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Speech::V1p1beta1::PhraseSet]
@@ -366,8 +367,8 @@ module Google
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #   @param page_size [::Integer]
             #     The maximum number of phrase sets to return. The service may return
             #     fewer than this value. If unspecified, at most 50 phrase sets will be
@@ -480,8 +481,8 @@ module Google
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated.
             #
@@ -655,15 +656,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this custom class will be created. Format:
+            #     Required. The parent resource where this custom class will be created.
+            #     Format:
             #
             #     `projects/{project}/locations/{location}/customClasses`
             #
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #   @param custom_class_id [::String]
             #     Required. The ID to use for the custom class, which will become the final
             #     component of the custom class' resource name.
@@ -850,8 +852,8 @@ module Google
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #   @param page_size [::Integer]
             #     The maximum number of custom classes to return. The service may return
             #     fewer than this value. If unspecified, at most 50 custom classes will be
@@ -964,8 +966,8 @@ module Google
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated.
             #
@@ -1059,8 +1061,8 @@ module Google
             #     Speech-to-Text supports three locations: `global`, `us` (US North America),
             #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
             #     endpoint, use the `global` location. To specify a region, use a
-            #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-            #     `eu` location value.
+            #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+            #     with matching `us` or `eu` location value.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
