@@ -78,6 +78,22 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
   end
 
+  it "creates a dual region bucket" do
+    region_1 = "US-EAST1"
+    region_2 = "US-WEST1"
+    
+    one_off_bucket_name = "#{bucket_name}_dual_region"
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
+
+    one_off_bucket = safe_gcs_execute { storage.create_bucket one_off_bucket_name, location: "#{region_1}+#{region_2}" }
+
+    _(storage.bucket(one_off_bucket_name)).wont_be :nil?
+
+    _(one_off_bucket.name).must_equal == one_off_bucket_name
+    _(one_off_bucket.location).must_equal == "#{region_1}+#{region_2}"
+    _(one_off_bucket.location_type).must_equal == "dual-region"
+  end
+
   it "knows its attributes" do
     _(bucket.id).must_be_kind_of String
     _(bucket.name).must_equal bucket_name
