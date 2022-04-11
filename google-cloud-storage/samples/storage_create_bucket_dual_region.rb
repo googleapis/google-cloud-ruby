@@ -1,0 +1,42 @@
+# Copyright 2022 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+
+# [START storage_create_bucket_dual_region]
+require "google/cloud/storage"
+
+def storage_create_bucket_dual_region bucket_name:, region_1:, region_2:
+  # topic_name = "your-unique-topic-name"
+
+  # The ID of your GCS bucket
+  # bucket_name = "your-bucket-name"
+
+  # The bucket's pair of regions. Case-insensitive.
+  # See this documentation for other valid locations:
+  # https://cloud.google.com/storage/docs/locations
+  # region_1 = "US-EAST1"
+  # region_2 = "US-WEST1"
+
+  storage = Google::Cloud::Storage.new
+  bucket  = storage.create_bucket bucket_name,
+                                  location: "#{region_1}+#{region_2}"
+
+  puts "Bucket #{bucket.name} created in #{bucket.location}."
+end
+# [END storage_create_bucket_dual_region]
+
+if $PROGRAM_NAME == __FILE__
+  storage_create_bucket_dual_region bucket_name: ARGV.shift,
+                                    region_1: ARGV.shift,
+                                    region_2: ARGV.shift
+end
