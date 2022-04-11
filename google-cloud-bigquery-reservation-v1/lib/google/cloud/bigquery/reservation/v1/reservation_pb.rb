@@ -17,8 +17,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :slot_capacity, :int64, 2
       optional :ignore_idle_slots, :bool, 4
+      optional :concurrency, :int64, 16
       optional :creation_time, :message, 8, "google.protobuf.Timestamp"
       optional :update_time, :message, 9, "google.protobuf.Timestamp"
+      optional :multi_region_auxiliary, :bool, 14
     end
     add_message "google.cloud.bigquery.reservation.v1.CapacityCommitment" do
       optional :name, :string, 1
@@ -29,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :commitment_end_time, :message, 5, "google.protobuf.Timestamp"
       optional :failure_status, :message, 7, "google.rpc.Status"
       optional :renewal_plan, :enum, 8, "google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan"
+      optional :multi_region_auxiliary, :bool, 10
     end
     add_enum "google.cloud.bigquery.reservation.v1.CapacityCommitment.CommitmentPlan" do
       value :COMMITMENT_PLAN_UNSPECIFIED, 0
@@ -163,10 +166,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :destination_id, :string, 3
     end
+    add_message "google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest" do
+      optional :assignment, :message, 1, "google.cloud.bigquery.reservation.v1.Assignment"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.bigquery.reservation.v1.TableReference" do
+      optional :project_id, :string, 1
+      optional :dataset_id, :string, 2
+      optional :table_id, :string, 3
+    end
     add_message "google.cloud.bigquery.reservation.v1.BiReservation" do
       optional :name, :string, 1
       optional :update_time, :message, 3, "google.protobuf.Timestamp"
       optional :size, :int64, 4
+      repeated :preferred_tables, :message, 5, "google.cloud.bigquery.reservation.v1.TableReference"
     end
     add_message "google.cloud.bigquery.reservation.v1.GetBiReservationRequest" do
       optional :name, :string, 1
@@ -214,6 +227,8 @@ module Google
           SearchAssignmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.SearchAssignmentsResponse").msgclass
           SearchAllAssignmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.SearchAllAssignmentsResponse").msgclass
           MoveAssignmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.MoveAssignmentRequest").msgclass
+          UpdateAssignmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.UpdateAssignmentRequest").msgclass
+          TableReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.TableReference").msgclass
           BiReservation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.BiReservation").msgclass
           GetBiReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.GetBiReservationRequest").msgclass
           UpdateBiReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.reservation.v1.UpdateBiReservationRequest").msgclass

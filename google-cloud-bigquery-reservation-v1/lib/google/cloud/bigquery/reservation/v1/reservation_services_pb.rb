@@ -85,7 +85,7 @@ module Google
               #
               # For example, in order to downgrade from 10000 slots to 8000, you might
               # split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
-              # you would change the plan of the first one to `FLEX` and then delete it.
+              # you delete the first one after the commitment end time passes.
               rpc :SplitCapacityCommitment, ::Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentRequest, ::Google::Cloud::Bigquery::Reservation::V1::SplitCapacityCommitmentResponse
               # Merges capacity commitments of the same plan into a single commitment.
               #
@@ -169,8 +169,8 @@ module Google
               # queries from `project1` will still use `res1` while queries from
               # `project2` will switch to use on-demand mode.
               rpc :DeleteAssignment, ::Google::Cloud::Bigquery::Reservation::V1::DeleteAssignmentRequest, ::Google::Protobuf::Empty
-              # Deprecated: Looks up assignments for a specified resource for a particular region.
-              # If the request is about a project:
+              # Deprecated: Looks up assignments for a specified resource for a particular
+              # region. If the request is about a project:
               #
               # 1. Assignments created on the project will be returned if they exist.
               # 2. Otherwise assignments created on the closest ancestor will be
@@ -220,6 +220,10 @@ module Google
               # by providing a transactional change that ensures an assignee always has an
               # associated reservation.
               rpc :MoveAssignment, ::Google::Cloud::Bigquery::Reservation::V1::MoveAssignmentRequest, ::Google::Cloud::Bigquery::Reservation::V1::Assignment
+              # Updates an existing assignment.
+              #
+              # Only the `priority` field can be updated.
+              rpc :UpdateAssignment, ::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest, ::Google::Cloud::Bigquery::Reservation::V1::Assignment
               # Retrieves a BI reservation.
               rpc :GetBiReservation, ::Google::Cloud::Bigquery::Reservation::V1::GetBiReservationRequest, ::Google::Cloud::Bigquery::Reservation::V1::BiReservation
               # Updates a BI reservation.

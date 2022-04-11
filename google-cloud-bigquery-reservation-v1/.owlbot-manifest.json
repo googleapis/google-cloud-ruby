@@ -48,6 +48,7 @@
     "snippets/reservation_service/search_all_assignments.rb",
     "snippets/reservation_service/search_assignments.rb",
     "snippets/reservation_service/split_capacity_commitment.rb",
+    "snippets/reservation_service/update_assignment.rb",
     "snippets/reservation_service/update_bi_reservation.rb",
     "snippets/reservation_service/update_capacity_commitment.rb",
     "snippets/reservation_service/update_reservation.rb",

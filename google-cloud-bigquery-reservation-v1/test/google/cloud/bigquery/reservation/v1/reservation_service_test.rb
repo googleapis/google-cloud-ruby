@@ -1166,6 +1166,66 @@ class ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::ClientTest
     end
   end
 
+  def test_update_assignment
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Bigquery::Reservation::V1::Assignment.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    assignment = {}
+    update_mask = {}
+
+    update_assignment_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_assignment, name
+      assert_kind_of ::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Reservation::V1::Assignment), request["assignment"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_assignment_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_assignment({ assignment: assignment, update_mask: update_mask }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_assignment assignment: assignment, update_mask: update_mask do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_assignment ::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest.new(assignment: assignment, update_mask: update_mask) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_assignment({ assignment: assignment, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_assignment(::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest.new(assignment: assignment, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_assignment_client_stub.call_rpc_count
+    end
+  end
+
   def test_get_bi_reservation
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Bigquery::Reservation::V1::BiReservation.new

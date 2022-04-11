@@ -27,6 +27,9 @@ module Google
           #   @return [::String]
           #     The resource name of the reservation, e.g.,
           #     `projects/*/locations/*/reservations/team1-prod`.
+          #     The reservation_id must only contain lower case alphanumeric characters or
+          #     dashes. It must start with a letter and must not end with a dash. Its
+          #     maximum length is 64 characters.
           # @!attribute [rw] slot_capacity
           #   @return [::Integer]
           #     Minimum slots available to this reservation. A slot is a unit of
@@ -35,22 +38,41 @@ module Google
           #     Queries using this reservation might use more slots during runtime if
           #     ignore_idle_slots is set to false.
           #
-          #     If the new reservation's slot capacity exceed the parent's slot capacity or
-          #     if total slot capacity of the new reservation and its siblings exceeds the
-          #     parent's slot capacity, the request will fail with
+          #     If the new reservation's slot capacity exceeds the project's slot capacity
+          #     or if total slot capacity of the new reservation and its siblings exceeds
+          #     the project's slot capacity, the request will fail with
           #     `google.rpc.Code.RESOURCE_EXHAUSTED`.
+          #
+          #     NOTE: for reservations in US or EU multi-regions, slot capacity constraints
+          #     are checked separately for default and auxiliary regions. See
+          #     multi_region_auxiliary flag for more details.
           # @!attribute [rw] ignore_idle_slots
           #   @return [::Boolean]
           #     If false, any query or pipeline job using this reservation will use idle
           #     slots from other reservations within the same admin project. If true, a
           #     query or pipeline job using this reservation will execute with the slot
           #     capacity specified in the slot_capacity field at most.
+          # @!attribute [rw] concurrency
+          #   @return [::Integer]
+          #     Maximum number of queries that are allowed to run concurrently in this
+          #     reservation. This is a soft limit due to asynchronous nature of the system
+          #     and various optimizations for small queries.
+          #     Default value is 0 which means that concurrency will be automatically set
+          #     based on the reservation size.
           # @!attribute [r] creation_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Creation time of the reservation.
           # @!attribute [r] update_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Output only. Last update time of the reservation.
+          # @!attribute [rw] multi_region_auxiliary
+          #   @return [::Boolean]
+          #     Applicable only for reservations located within one of the BigQuery
+          #     multi-regions (US or EU).
+          #
+          #     If set to true, this reservation is placed in the organization's
+          #     secondary region which is designated for disaster recovery purposes.
+          #     If false, this reservation is placed in the organization's default region.
           class Reservation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -70,6 +92,9 @@ module Google
           #   @return [::String]
           #     Output only. The resource name of the capacity commitment, e.g.,
           #     `projects/myproject/locations/US/capacityCommitments/123`
+          #     The commitment_id must only contain lower case alphanumeric characters or
+          #     dashes. It must start with a letter and must not end
+          #     with a dash. Its maximum length is 64 characters.
           # @!attribute [rw] slot_count
           #   @return [::Integer]
           #     Number of slots in this commitment.
@@ -95,6 +120,14 @@ module Google
           #     The plan this capacity commitment is converted to after commitment_end_time
           #     passes. Once the plan is changed, committed period is extended according to
           #     commitment plan. Only applicable for ANNUAL and TRIAL commitments.
+          # @!attribute [rw] multi_region_auxiliary
+          #   @return [::Boolean]
+          #     Applicable only for commitments located within one of the BigQuery
+          #     multi-regions (US or EU).
+          #
+          #     If set to true, this commitment is placed in the organization's
+          #     secondary region which is designated for disaster recovery purposes.
+          #     If false, this commitment is placed in the organization's default region.
           class CapacityCommitment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -135,11 +168,11 @@ module Google
               STATE_UNSPECIFIED = 0
 
               # Capacity commitment is pending provisioning. Pending capacity commitment
-              # does not contribute to the parent's slot_capacity.
+              # does not contribute to the project's slot_capacity.
               PENDING = 1
 
               # Once slots are provisioned, capacity commitment becomes active.
-              # slot_count is added to the parent's slot_capacity.
+              # slot_count is added to the project's slot_capacity.
               ACTIVE = 2
 
               # Capacity commitment is failed to be activated by the backend.
@@ -154,8 +187,9 @@ module Google
           #     `projects/myproject/locations/US`
           # @!attribute [rw] reservation_id
           #   @return [::String]
-          #     The reservation ID. This field must only contain lower case alphanumeric
-          #     characters or dash. Max length is 64 characters.
+          #     The reservation ID. It must only contain lower case alphanumeric
+          #     characters or dashes. It must start with a letter and must not end
+          #     with a dash. Its maximum length is 64 characters.
           # @!attribute [rw] reservation
           #   @return [::Google::Cloud::Bigquery::Reservation::V1::Reservation]
           #     Definition of the new reservation to create.
@@ -241,8 +275,8 @@ module Google
           #   @return [::String]
           #     The optional capacity commitment ID. Capacity commitment name will be
           #     generated automatically if this field is empty.
-          #     This field must only contain lower case alphanumeric characters or dash.
-          #     Max length is 64 characters.
+          #     This field must only contain lower case alphanumeric characters or dashes.
+          #     The first and last character cannot be a dash. Max length is 64 characters.
           #     NOTE: this ID won't be kept if the capacity commitment is split or merged.
           class CreateCapacityCommitmentRequest
             include ::Google::Protobuf::MessageExts
@@ -357,12 +391,14 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A Assignment allows a project to submit jobs
+          # An assignment allows a project to submit jobs
           # of a certain type using slots from the specified reservation.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. Name of the resource. E.g.:
           #     `projects/myproject/locations/US/reservations/team1-prod/assignments/123`.
+          #     The assignment_id must only contain lower case alphanumeric characters or
+          #     dashes and the max length is 64 characters.
           # @!attribute [rw] assignee
           #   @return [::String]
           #     The resource which will use the reservation. E.g.
@@ -424,7 +460,7 @@ module Google
           #   @return [::String]
           #     The optional assignment ID. Assignment name will be generated automatically
           #     if this field is empty.
-          #     This field must only contain lower case alphanumeric characters or dash.
+          #     This field must only contain lower case alphanumeric characters or dashes.
           #     Max length is 64 characters.
           class CreateAssignmentRequest
             include ::Google::Protobuf::MessageExts
@@ -584,6 +620,34 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
+          # The request for {::Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#update_assignment ReservationService.UpdateAssignment}.
+          # @!attribute [rw] assignment
+          #   @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
+          #     Content of the assignment to update.
+          # @!attribute [rw] update_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Standard field mask for the set of fields to be updated.
+          class UpdateAssignmentRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Fully qualified reference to BigQuery table.
+          # Internally stored as google.cloud.bi.v1.BqTableReference.
+          # @!attribute [rw] project_id
+          #   @return [::String]
+          #     The assigned project ID of the project.
+          # @!attribute [rw] dataset_id
+          #   @return [::String]
+          #     The ID of the dataset in the above project.
+          # @!attribute [rw] table_id
+          #   @return [::String]
+          #     The ID of the table in the above dataset.
+          class TableReference
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # Represents a BI Reservation.
           # @!attribute [rw] name
           #   @return [::String]
@@ -596,6 +660,9 @@ module Google
           # @!attribute [rw] size
           #   @return [::Integer]
           #     Size of a reservation, in bytes.
+          # @!attribute [rw] preferred_tables
+          #   @return [::Array<::Google::Cloud::Bigquery::Reservation::V1::TableReference>]
+          #     Preferred tables to use BI capacity for.
           class BiReservation
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

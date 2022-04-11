@@ -249,8 +249,9 @@ module Google
               #     Required. Project, location. E.g.,
               #     `projects/myproject/locations/US`
               #   @param reservation_id [::String]
-              #     The reservation ID. This field must only contain lower case alphanumeric
-              #     characters or dash. Max length is 64 characters.
+              #     The reservation ID. It must only contain lower case alphanumeric
+              #     characters or dashes. It must start with a letter and must not end
+              #     with a dash. Its maximum length is 64 characters.
               #   @param reservation [::Google::Cloud::Bigquery::Reservation::V1::Reservation, ::Hash]
               #     Definition of the new reservation to create.
               #
@@ -705,8 +706,8 @@ module Google
               #   @param capacity_commitment_id [::String]
               #     The optional capacity commitment ID. Capacity commitment name will be
               #     generated automatically if this field is empty.
-              #     This field must only contain lower case alphanumeric characters or dash.
-              #     Max length is 64 characters.
+              #     This field must only contain lower case alphanumeric characters or dashes.
+              #     The first and last character cannot be a dash. Max length is 64 characters.
               #     NOTE: this ID won't be kept if the capacity commitment is split or merged.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1149,7 +1150,7 @@ module Google
               #
               # For example, in order to downgrade from 10000 slots to 8000, you might
               # split a 10000 capacity commitment into commitments of 2000 and 8000. Then,
-              # you would change the plan of the first one to `FLEX` and then delete it.
+              # you delete the first one after the commitment end time passes.
               #
               # @overload split_capacity_commitment(request, options = nil)
               #   Pass arguments to `split_capacity_commitment` via a request object, either of type
@@ -1394,7 +1395,7 @@ module Google
               #   @param assignment_id [::String]
               #     The optional assignment ID. Assignment name will be generated automatically
               #     if this field is empty.
-              #     This field must only contain lower case alphanumeric characters or dash.
+              #     This field must only contain lower case alphanumeric characters or dashes.
               #     Max length is 64 characters.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -1684,8 +1685,8 @@ module Google
               end
 
               ##
-              # Deprecated: Looks up assignments for a specified resource for a particular region.
-              # If the request is about a project:
+              # Deprecated: Looks up assignments for a specified resource for a particular
+              # region. If the request is about a project:
               #
               # 1. Assignments created on the project will be returned if they exist.
               # 2. Otherwise assignments created on the closest ancestor will be
@@ -2025,6 +2026,95 @@ module Google
                                        retry_policy: @config.retry_policy
 
                 @reservation_service_stub.call_rpc :move_assignment, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
+              # Updates an existing assignment.
+              #
+              # Only the `priority` field can be updated.
+              #
+              # @overload update_assignment(request, options = nil)
+              #   Pass arguments to `update_assignment` via a request object, either of type
+              #   {::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_assignment(assignment: nil, update_mask: nil)
+              #   Pass arguments to `update_assignment` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param assignment [::Google::Cloud::Bigquery::Reservation::V1::Assignment, ::Hash]
+              #     Content of the assignment to update.
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Standard field mask for the set of fields to be updated.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Bigquery::Reservation::V1::Assignment]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigquery/reservation/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest.new
+              #
+              #   # Call the update_assignment method.
+              #   result = client.update_assignment request
+              #
+              #   # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Assignment.
+              #   p result
+              #
+              def update_assignment request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigquery::Reservation::V1::UpdateAssignmentRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_assignment.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigquery::Reservation::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.assignment&.name
+                  header_params["assignment.name"] = request.assignment.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_assignment.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_assignment.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @reservation_service_stub.call_rpc :update_assignment, request, options: options do |response, operation|
                   yield response, operation if block_given?
                   return response
                 end
@@ -2438,6 +2528,11 @@ module Google
                   #
                   attr_reader :move_assignment
                   ##
+                  # RPC-specific configuration for `update_assignment`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_assignment
+                  ##
                   # RPC-specific configuration for `get_bi_reservation`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2486,6 +2581,8 @@ module Google
                     @search_all_assignments = ::Gapic::Config::Method.new search_all_assignments_config
                     move_assignment_config = parent_rpcs.move_assignment if parent_rpcs.respond_to? :move_assignment
                     @move_assignment = ::Gapic::Config::Method.new move_assignment_config
+                    update_assignment_config = parent_rpcs.update_assignment if parent_rpcs.respond_to? :update_assignment
+                    @update_assignment = ::Gapic::Config::Method.new update_assignment_config
                     get_bi_reservation_config = parent_rpcs.get_bi_reservation if parent_rpcs.respond_to? :get_bi_reservation
                     @get_bi_reservation = ::Gapic::Config::Method.new get_bi_reservation_config
                     update_bi_reservation_config = parent_rpcs.update_bi_reservation if parent_rpcs.respond_to? :update_bi_reservation
