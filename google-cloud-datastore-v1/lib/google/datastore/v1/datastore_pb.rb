@@ -6,6 +6,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/datastore/v1/entity_pb'
 require 'google/datastore/v1/query_pb'
+require 'google/protobuf/timestamp_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -19,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :found, :message, 1, "google.datastore.v1.EntityResult"
       repeated :missing, :message, 2, "google.datastore.v1.EntityResult"
       repeated :deferred, :message, 3, "google.datastore.v1.Key"
+      optional :read_time, :message, 7, "google.protobuf.Timestamp"
     end
     add_message "google.datastore.v1.RunQueryRequest" do
       optional :project_id, :string, 8
@@ -62,6 +64,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.datastore.v1.CommitResponse" do
       repeated :mutation_results, :message, 3, "google.datastore.v1.MutationResult"
       optional :index_updates, :int32, 4
+      optional :commit_time, :message, 8, "google.protobuf.Timestamp"
     end
     add_message "google.datastore.v1.AllocateIdsRequest" do
       optional :project_id, :string, 8
@@ -86,17 +89,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
       oneof :conflict_detection_strategy do
         optional :base_version, :int64, 8
+        optional :update_time, :message, 11, "google.protobuf.Timestamp"
       end
     end
     add_message "google.datastore.v1.MutationResult" do
       optional :key, :message, 3, "google.datastore.v1.Key"
       optional :version, :int64, 4
+      optional :update_time, :message, 6, "google.protobuf.Timestamp"
       optional :conflict_detected, :bool, 5
     end
     add_message "google.datastore.v1.ReadOptions" do
       oneof :consistency_type do
         optional :read_consistency, :enum, 1, "google.datastore.v1.ReadOptions.ReadConsistency"
         optional :transaction, :bytes, 2
+        optional :read_time, :message, 4, "google.protobuf.Timestamp"
       end
     end
     add_enum "google.datastore.v1.ReadOptions.ReadConsistency" do
@@ -114,6 +120,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :previous_transaction, :bytes, 1
     end
     add_message "google.datastore.v1.TransactionOptions.ReadOnly" do
+      optional :read_time, :message, 1, "google.protobuf.Timestamp"
     end
   end
 end

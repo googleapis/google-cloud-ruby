@@ -2,6 +2,7 @@
 # source: google/datastore/v1/query.proto
 
 require 'google/datastore/v1/entity_pb'
+require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/protobuf'
 
@@ -10,6 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.datastore.v1.EntityResult" do
       optional :entity, :message, 1, "google.datastore.v1.Entity"
       optional :version, :int64, 4
+      optional :update_time, :message, 5, "google.protobuf.Timestamp"
       optional :cursor, :bytes, 3
     end
     add_enum "google.datastore.v1.EntityResult.ResultType" do
@@ -98,6 +100,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :end_cursor, :bytes, 4
       optional :more_results, :enum, 5, "google.datastore.v1.QueryResultBatch.MoreResultsType"
       optional :snapshot_version, :int64, 7
+      optional :read_time, :message, 8, "google.protobuf.Timestamp"
     end
     add_enum "google.datastore.v1.QueryResultBatch.MoreResultsType" do
       value :MORE_RESULTS_TYPE_UNSPECIFIED, 0
