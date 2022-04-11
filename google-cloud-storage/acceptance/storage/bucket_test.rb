@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     region_1 = "US-EAST1"
     region_2 = "US-WEST1"
     
-    one_off_bucket_name = "#{bucket_name}_dual_region"
+    one_off_bucket_name = "#{bucket_name}_one_off"
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
 
     one_off_bucket = safe_gcs_execute { storage.create_bucket one_off_bucket_name, location: "#{region_1}+#{region_2}" }
@@ -92,6 +92,10 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(one_off_bucket.name).must_equal == one_off_bucket_name
     _(one_off_bucket.location).must_equal == "#{region_1}+#{region_2}"
     _(one_off_bucket.location_type).must_equal == "dual-region"
+
+    safe_gcs_execute { one_off_bucket.delete }
+    
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
   end
 
   it "knows its attributes" do
