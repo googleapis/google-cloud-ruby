@@ -23,6 +23,7 @@ ANALYSES = {
   wrapper_prerelease: "List wrapper gems whose service is GA but do not have a 1.0 release",
   outdated_wrappers: "List wrapper gems prioritizing an outdated gapic",
   incomplete_bazel: "List incomplete Ruby bazel configs",
+  wrapper_bazel: "List missing Ruby wrapper bazel configs",
   gapic_ready: "List complete Ruby bazel configs that haven't yet been generated"
 }
 
@@ -42,10 +43,11 @@ def run
   require "repo_info"
   require "fileutils"
   require "tmpdir"
-  ANALYSES.keys.each do |analysis|
+  ANALYSES.each do |analysis, description|
     next unless all || self[analysis]
     name = "#{analysis}_analysis"
     puts "**** Running #{name} ... ****", :bold
+    puts "(#{description})", :bold
     send name.to_sym
     puts
   end
@@ -57,7 +59,7 @@ def googleapis_path
     dir = Dir.mktmpdir
     at_exit { FileUtils.rm_rf dir }
     Dir.chdir dir do
-      exec ["git", "clone", "--depth=1", "https://github.com/googleapis/googleapis.git"]
+      exec ["git", "clone", "--depth=1", "https://github.com/googleapis/googleapis.git"], out: :null, err: :null
     end
     File.join dir, "googleapis"
   end
@@ -196,6 +198,24 @@ def incomplete_bazel_analysis
              content.include?("ruby_cloud_title")
         puts build_file
         count += 1
+      end
+    end
+  end
+  puts "Total: #{count}", :cyan
+end
+
+def wrapper_bazel_analysis
+  count = 0
+  puts "Results:", :cyan
+  Dir.chdir googleapis_path do
+    Dir.glob("**/BUILD.bazel") do |build_file|
+      dir = File.dirname build_file
+      if dir =~ /v\d\w+$/
+        wrapper_bazel_path = File.join File.dirname(dir), "BUILD.bazel"
+        unless File.file? wrapper_bazel_path
+          puts wrapper_bazel_path
+          count += 1
+        end
       end
     end
   end
