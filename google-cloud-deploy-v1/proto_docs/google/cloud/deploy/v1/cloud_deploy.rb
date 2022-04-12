@@ -45,10 +45,16 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
         #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints: Each resource is limited to 64 labels. Keys must conform to
-        #     the regexp: `[a-zA-Z][a-zA-Z0-9_-]{0,62}`. Values must conform to the
-        #     regexp: `[a-zA-Z0-9_-]{0,63}`. Both keys and values are additionally
-        #     constrained to be <= 128 bytes in size.
+        #     constraints:
+        #
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes.
+        #     * All characters must use UTF-8 encoding, and international characters are
+        #     allowed.
+        #     * Keys must start with a lowercase letter or international character.
+        #     * Each resource is limited to a maximum of 64 labels.
+        #
+        #     Both keys and values are additionally constrained to be <= 128 bytes.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time at which the pipeline was created.
@@ -106,9 +112,9 @@ module Google
         #     The target_id to which this stage points. This field refers exclusively to
         #     the last segment of a target name. For example, this field would just be
         #     `my-target` (rather than
-        #     `projects/project/deliveryPipelines/pipeline/targets/my-target`). The
-        #     parent `DeliveryPipeline` of the `Target` is inferred to be the parent
-        #     `DeliveryPipeline` of the `Release` in which this `Stage` lives.
+        #     `projects/project/locations/location/targets/my-target`). The location of
+        #     the `Target` is inferred to be the same as the location of the
+        #     `DeliveryPipeline` that contains this `Stage`.
         # @!attribute [rw] profiles
         #   @return [::Array<::String>]
         #     Skaffold profiles to use when rendering the manifest for this stage's
@@ -183,7 +189,7 @@ module Google
         #     the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Filter builds to be returned. See https://google.aip.dev/160 for more
+        #     Filter pipelines to be returned. See https://google.aip.dev/160 for more
         #     details.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -342,8 +348,8 @@ module Google
         # can be deployed.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Optional. Name of the `Target`. Format is projects/\\{project}/locations/\\{location}/
-        #     deliveryPipelines/\\{deliveryPipeline}/targets/[a-z][a-z0-9\-]\\{0,62}.
+        #     Optional. Name of the `Target`. Format is
+        #     projects/\\{project}/locations/\\{location}/targets/[a-z][a-z0-9\-]\\{0,62}.
         # @!attribute [r] target_id
         #   @return [::String]
         #     Output only. Resource id of the `Target`.
@@ -363,10 +369,16 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Optional. Labels are attributes that can be set and used by both the
         #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints: Each resource is limited to 64 labels. Keys must conform to
-        #     the regexp: `[a-zA-Z][a-zA-Z0-9_-]{0,62}`. Values must conform to the
-        #     regexp: `[a-zA-Z0-9_-]{0,63}`. Both keys and values are additionally
-        #     constrained to be <= 128 bytes in size.
+        #     constraints:
+        #
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes.
+        #     * All characters must use UTF-8 encoding, and international characters are
+        #     allowed.
+        #     * Keys must start with a lowercase letter or international character.
+        #     * Each resource is limited to a maximum of 64 labels.
+        #
+        #     Both keys and values are additionally constrained to be <= 128 bytes.
         # @!attribute [rw] require_approval
         #   @return [::Boolean]
         #     Optional. Whether or not the `Target` requires approval.
@@ -379,6 +391,9 @@ module Google
         # @!attribute [rw] gke
         #   @return [::Google::Cloud::Deploy::V1::GkeCluster]
         #     Information specifying a GKE Cluster.
+        # @!attribute [rw] anthos_cluster
+        #   @return [::Google::Cloud::Deploy::V1::AnthosCluster]
+        #     Information specifying an Anthos Cluster.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. This checksum is computed by the server based on the value of other
@@ -426,6 +441,23 @@ module Google
         # @!attribute [rw] private_pool
         #   @return [::Google::Cloud::Deploy::V1::PrivatePool]
         #     Optional. Use private Cloud Build pool.
+        # @!attribute [rw] worker_pool
+        #   @return [::String]
+        #     Optional. The resource name of the `WorkerPool`, with the format
+        #     `projects/{project}/locations/{location}/workerPools/{worker_pool}`.
+        #     If this optional field is unspecified, the default Cloud Build pool will be
+        #     used.
+        # @!attribute [rw] service_account
+        #   @return [::String]
+        #     Optional. Google service account to use for execution. If unspecified,
+        #     the project execution service account
+        #     (<PROJECT_NUMBER>-compute@developer.gserviceaccount.com) is used.
+        # @!attribute [rw] artifact_storage
+        #   @return [::String]
+        #     Optional. Cloud Storage location in which to store execution outputs. This can
+        #     either be a bucket ("gs://my-bucket") or a path within a bucket
+        #     ("gs://my-bucket/my-dir").
+        #     If unspecified, a default bucket located in the same region will be used.
         class ExecutionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -486,7 +518,28 @@ module Google
         #   @return [::String]
         #     Information specifying a GKE Cluster. Format is
         #     `projects/{project_id}/locations/{location_id}/clusters/{cluster_id}.
+        # @!attribute [rw] internal_ip
+        #   @return [::Boolean]
+        #     Optional. If true, `cluster` is accessed using the private IP address of the control
+        #     plane endpoint. Otherwise, the default IP address of the control plane
+        #     endpoint is used. The default IP address is the private IP address for
+        #     clusters with private control-plane endpoints and the public IP address
+        #     otherwise.
+        #
+        #     Only specify this option when `cluster` is a [private GKE
+        #     cluster](https://cloud.google.com/kubernetes-engine/docs/concepts/private-cluster-concept).
         class GkeCluster
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information specifying an Anthos Cluster.
+        # @!attribute [rw] membership
+        #   @return [::String]
+        #     Membership of the GKE Hub-registered cluster to which to apply the Skaffold
+        #     configuration. Format is
+        #     `projects/{project}/locations/{location}/memberships/{membership_name}`.
+        class AnthosCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -510,7 +563,7 @@ module Google
         #     the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+        #     Optional. Filter targets to be returned. See https://google.aip.dev/160 for more
         #     details.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -684,10 +737,16 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
         #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints: Each resource is limited to 64 labels. Keys must conform to
-        #     the regexp: `[a-zA-Z][a-zA-Z0-9_-]{0,62}`. Values must conform to the
-        #     regexp: `[a-zA-Z0-9_-]{0,63}`. Both keys and values are additionally
-        #     constrained to be <= 128 bytes in size.
+        #     constraints:
+        #
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes.
+        #     * All characters must use UTF-8 encoding, and international characters are
+        #     allowed.
+        #     * Keys must start with a lowercase letter or international character.
+        #     * Each resource is limited to a maximum of 64 labels.
+        #
+        #     Both keys and values are additionally constrained to be <= 128 bytes.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time at which the `Release` was created.
@@ -711,7 +770,7 @@ module Google
         #     Output only. Snapshot of the parent pipeline taken at release creation time.
         # @!attribute [r] target_snapshots
         #   @return [::Array<::Google::Cloud::Deploy::V1::Target>]
-        #     Output only. Snapshot of the parent pipeline's targets taken at release creation time.
+        #     Output only. Snapshot of the targets taken at release creation time.
         # @!attribute [r] render_state
         #   @return [::Google::Cloud::Deploy::V1::Release::RenderState]
         #     Output only. Current state of the render operation.
@@ -747,6 +806,10 @@ module Google
           # @!attribute [r] rendering_state
           #   @return [::Google::Cloud::Deploy::V1::Release::TargetRender::TargetRenderState]
           #     Output only. Current state of the render operation for this Target.
+          # @!attribute [r] failure_cause
+          #   @return [::Google::Cloud::Deploy::V1::Release::TargetRender::FailureCause]
+          #     Output only. Reason this render failed. This will always be unspecified while the
+          #     render in progress.
           class TargetRender
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -764,6 +827,21 @@ module Google
 
               # The render operation is in progress.
               IN_PROGRESS = 3
+            end
+
+            # Well-known rendering failures.
+            module FailureCause
+              # No reason for failure is specified.
+              FAILURE_CAUSE_UNSPECIFIED = 0
+
+              # Cloud Build is not available, either because it is not enabled or
+              # because Cloud Deploy has insufficient permissions. See [required
+              # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+              CLOUD_BUILD_UNAVAILABLE = 1
+
+              # The render operation did not complete successfully; check Cloud Build
+              # logs.
+              EXECUTION_FAILED = 2
             end
           end
 
@@ -868,7 +946,7 @@ module Google
         #     the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+        #     Optional. Filter releases to be returned. See https://google.aip.dev/160 for more
         #     details.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -965,10 +1043,16 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
         #     user and by Google Cloud Deploy. Labels must meet the following
-        #     constraints: Each resource is limited to 64 labels. Keys must conform to
-        #     the regexp: `[a-zA-Z][a-zA-Z0-9_-]{0,62}`. Values must conform to the
-        #     regexp: `[a-zA-Z0-9_-]{0,63}`. Both keys and values are additionally
-        #     constrained to be <= 128 bytes in size.
+        #     constraints:
+        #
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #     underscores, and dashes.
+        #     * All characters must use UTF-8 encoding, and international characters are
+        #     allowed.
+        #     * Keys must start with a lowercase letter or international character.
+        #     * Each resource is limited to a maximum of 64 labels.
+        #
+        #     Both keys and values are additionally constrained to be <= 128 bytes.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time at which the `Rollout` was created.
@@ -1006,6 +1090,10 @@ module Google
         #     This checksum is computed by the server based on the value of other
         #     fields, and may be sent on update and delete requests to ensure the
         #     client has an up-to-date value before proceeding.
+        # @!attribute [r] deploy_failure_cause
+        #   @return [::Google::Cloud::Deploy::V1::Rollout::FailureCause]
+        #     Output only. The reason this deploy failed. This will always be unspecified while the
+        #     deploy in progress.
         class Rollout
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1073,6 +1161,27 @@ module Google
             # The `Rollout` is waiting for the `Release` to be fully rendered.
             PENDING_RELEASE = 7
           end
+
+          # Well-known deployment failures.
+          module FailureCause
+            # No reason for failure is specified.
+            FAILURE_CAUSE_UNSPECIFIED = 0
+
+            # Cloud Build is not available, either because it is not enabled or because
+            # Cloud Deploy has insufficient permissions. See [required
+            # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+            CLOUD_BUILD_UNAVAILABLE = 1
+
+            # The deploy operation did not complete successfully; check Cloud Build
+            # logs.
+            EXECUTION_FAILED = 2
+
+            # Deployment did not complete within the alloted time.
+            DEADLINE_EXCEEDED = 3
+
+            # Release is in a failed state.
+            RELEASE_FAILED = 4
+          end
         end
 
         # ListRolloutsRequest is the request object used by `ListRollouts`.
@@ -1093,7 +1202,7 @@ module Google
         #     the call that provided the page token.
         # @!attribute [rw] filter
         #   @return [::String]
-        #     Optional. Filter builds to be returned. See https://google.aip.dev/160 for more
+        #     Optional. Filter rollouts to be returned. See https://google.aip.dev/160 for more
         #     details.
         # @!attribute [rw] order_by
         #   @return [::String]

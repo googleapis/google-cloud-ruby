@@ -98,10 +98,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :execution_configs, :message, 16, "google.cloud.deploy.v1.ExecutionConfig"
       oneof :deployment_target do
         optional :gke, :message, 15, "google.cloud.deploy.v1.GkeCluster"
+        optional :anthos_cluster, :message, 17, "google.cloud.deploy.v1.AnthosCluster"
       end
     end
     add_message "google.cloud.deploy.v1.ExecutionConfig" do
       repeated :usages, :enum, 1, "google.cloud.deploy.v1.ExecutionConfig.ExecutionEnvironmentUsage"
+      optional :worker_pool, :string, 4
+      optional :service_account, :string, 5
+      optional :artifact_storage, :string, 6
       oneof :execution_environment do
         optional :default_pool, :message, 2, "google.cloud.deploy.v1.DefaultPool"
         optional :private_pool, :message, 3, "google.cloud.deploy.v1.PrivatePool"
@@ -123,6 +127,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.deploy.v1.GkeCluster" do
       optional :cluster, :string, 1
+      optional :internal_ip, :bool, 2
+    end
+    add_message "google.cloud.deploy.v1.AnthosCluster" do
+      optional :membership, :string, 1
     end
     add_message "google.cloud.deploy.v1.ListTargetsRequest" do
       optional :parent, :string, 1
@@ -183,12 +191,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.deploy.v1.Release.TargetRender" do
       optional :rendering_build, :string, 1
       optional :rendering_state, :enum, 2, "google.cloud.deploy.v1.Release.TargetRender.TargetRenderState"
+      optional :failure_cause, :enum, 4, "google.cloud.deploy.v1.Release.TargetRender.FailureCause"
     end
     add_enum "google.cloud.deploy.v1.Release.TargetRender.TargetRenderState" do
       value :TARGET_RENDER_STATE_UNSPECIFIED, 0
       value :SUCCEEDED, 1
       value :FAILED, 2
       value :IN_PROGRESS, 3
+    end
+    add_enum "google.cloud.deploy.v1.Release.TargetRender.FailureCause" do
+      value :FAILURE_CAUSE_UNSPECIFIED, 0
+      value :CLOUD_BUILD_UNAVAILABLE, 1
+      value :EXECUTION_FAILED, 2
     end
     add_enum "google.cloud.deploy.v1.Release.RenderState" do
       value :RENDER_STATE_UNSPECIFIED, 0
@@ -246,6 +260,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :failure_reason, :string, 14
       optional :deploying_build, :string, 17
       optional :etag, :string, 16
+      optional :deploy_failure_cause, :enum, 19, "google.cloud.deploy.v1.Rollout.FailureCause"
     end
     add_enum "google.cloud.deploy.v1.Rollout.ApprovalState" do
       value :APPROVAL_STATE_UNSPECIFIED, 0
@@ -263,6 +278,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :APPROVAL_REJECTED, 5
       value :PENDING, 6
       value :PENDING_RELEASE, 7
+    end
+    add_enum "google.cloud.deploy.v1.Rollout.FailureCause" do
+      value :FAILURE_CAUSE_UNSPECIFIED, 0
+      value :CLOUD_BUILD_UNAVAILABLE, 1
+      value :EXECUTION_FAILED, 2
+      value :DEADLINE_EXCEEDED, 3
+      value :RELEASE_FAILED, 4
     end
     add_message "google.cloud.deploy.v1.ListRolloutsRequest" do
       optional :parent, :string, 1
@@ -338,6 +360,7 @@ module Google
         DefaultPool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DefaultPool").msgclass
         PrivatePool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.PrivatePool").msgclass
         GkeCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GkeCluster").msgclass
+        AnthosCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.AnthosCluster").msgclass
         ListTargetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListTargetsRequest").msgclass
         ListTargetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListTargetsResponse").msgclass
         GetTargetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GetTargetRequest").msgclass
@@ -347,6 +370,7 @@ module Google
         Release = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Release").msgclass
         Release::TargetRender = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Release.TargetRender").msgclass
         Release::TargetRender::TargetRenderState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Release.TargetRender.TargetRenderState").enummodule
+        Release::TargetRender::FailureCause = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Release.TargetRender.FailureCause").enummodule
         Release::RenderState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Release.RenderState").enummodule
         BuildArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.BuildArtifact").msgclass
         TargetArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.TargetArtifact").msgclass
@@ -357,6 +381,7 @@ module Google
         Rollout = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Rollout").msgclass
         Rollout::ApprovalState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Rollout.ApprovalState").enummodule
         Rollout::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Rollout.State").enummodule
+        Rollout::FailureCause = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Rollout.FailureCause").enummodule
         ListRolloutsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListRolloutsRequest").msgclass
         ListRolloutsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListRolloutsResponse").msgclass
         GetRolloutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GetRolloutRequest").msgclass
