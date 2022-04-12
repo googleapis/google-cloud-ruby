@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,34 +18,34 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/region_target_https_proxies/rest/service_stub"
+require "google/cloud/compute/v1/network_edge_security_services/rest/service_stub"
 require "google/cloud/compute/v1/region_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module RegionTargetHttpsProxies
+        module NetworkEdgeSecurityServices
           module Rest
             ##
-            # REST client for the RegionTargetHttpsProxies service.
+            # REST client for the NetworkEdgeSecurityServices service.
             #
-            # The RegionTargetHttpsProxies API.
+            # The NetworkEdgeSecurityServices API.
             #
             class Client
               # @private
-              attr_reader :region_target_https_proxies_stub
+              attr_reader :network_edge_security_services_stub
 
               ##
-              # Configure the RegionTargetHttpsProxies Client class.
+              # Configure the NetworkEdgeSecurityServices Client class.
               #
-              # See {::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all RegionTargetHttpsProxies clients
-              #   ::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client.configure do |config|
+              #   # Modify the configuration for all NetworkEdgeSecurityServices clients
+              #   ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -65,6 +65,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
+                  default_config.rpcs.aggregated_list.timeout = 600.0
+                  default_config.rpcs.aggregated_list.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.delete.timeout = 600.0
 
                   default_config.rpcs.get.timeout = 600.0
@@ -74,16 +79,7 @@ module Google
 
                   default_config.rpcs.insert.timeout = 600.0
 
-                  default_config.rpcs.list.timeout = 600.0
-                  default_config.rpcs.list.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
-                  }
-
                   default_config.rpcs.patch.timeout = 600.0
-
-                  default_config.rpcs.set_ssl_certificates.timeout = 600.0
-
-                  default_config.rpcs.set_url_map.timeout = 600.0
 
                   default_config
                 end
@@ -92,13 +88,13 @@ module Google
               end
 
               ##
-              # Configure the RegionTargetHttpsProxies Client instance.
+              # Configure the NetworkEdgeSecurityServices Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -112,19 +108,19 @@ module Google
               end
 
               ##
-              # Create a new RegionTargetHttpsProxies REST client object.
+              # Create a new NetworkEdgeSecurityServices REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the RegionTargetHttpsProxies client.
+              # @yield [config] Configure the NetworkEdgeSecurityServices client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -146,7 +142,7 @@ module Google
                   config.endpoint = @config.endpoint
                 end
 
-                @region_target_https_proxies_stub = ::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @network_edge_security_services_stub = ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               ##
@@ -159,13 +155,13 @@ module Google
               # Service calls
 
               ##
-              # Deletes the specified TargetHttpsProxy resource.
+              # Retrieves the list of all NetworkEdgeSecurityService resources available to the specified project.
               #
-              # @overload delete(request, options = nil)
-              #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteRegionTargetHttpsProxyRequest} or an equivalent Hash.
+              # @overload aggregated_list(request, options = nil)
+              #   Pass arguments to `aggregated_list` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AggregatedListNetworkEdgeSecurityServicesRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteRegionTargetHttpsProxyRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::AggregatedListNetworkEdgeSecurityServicesRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -173,19 +169,93 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload delete(project: nil, region: nil, request_id: nil, target_https_proxy: nil)
+              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
+              #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param filter [::String]
+              #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
+              #   @param include_all_scopes [::Boolean]
+              #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
+              #   @param max_results [::Integer]
+              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
+              #   @param order_by [::String]
+              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
+              #   @param page_token [::String]
+              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
+              #   @param project [::String]
+              #     Name of the project scoping this request.
+              #   @param return_partial_success [::Boolean]
+              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServicesScopedList>]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServicesScopedList>]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def aggregated_list request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AggregatedListNetworkEdgeSecurityServicesRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.aggregated_list.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @network_edge_security_services_stub.aggregated_list request, options do |result, response|
+                  result = ::Gapic::Rest::PagedEnumerable.new @network_edge_security_services_stub, :aggregated_list, "items", request, result, options
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Deletes the specified service.
+              #
+              # @overload delete(request, options = nil)
+              #   Pass arguments to `delete` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::DeleteNetworkEdgeSecurityServiceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::DeleteNetworkEdgeSecurityServiceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload delete(network_edge_security_service: nil, project: nil, region: nil, request_id: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param network_edge_security_service [::String]
+              #     Name of the network edge security service to delete.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param target_https_proxy [::String]
-              #     Name of the TargetHttpsProxy resource to delete.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -196,7 +266,7 @@ module Google
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteRegionTargetHttpsProxyRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteNetworkEdgeSecurityServiceRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -216,7 +286,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @region_target_https_proxies_stub.delete request, options do |result, response|
+                @network_edge_security_services_stub.delete request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: region_operations,
@@ -235,13 +305,13 @@ module Google
               end
 
               ##
-              # Returns the specified TargetHttpsProxy resource in the specified region. Gets a list of available target HTTP proxies by making a list() request.
+              # Gets a specified NetworkEdgeSecurityService.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetRegionTargetHttpsProxyRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetNetworkEdgeSecurityServiceRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetRegionTargetHttpsProxyRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetNetworkEdgeSecurityServiceRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -249,28 +319,28 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload get(project: nil, region: nil, target_https_proxy: nil)
+              # @overload get(network_edge_security_service: nil, project: nil, region: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param network_edge_security_service [::String]
+              #     Name of the network edge security service to get.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
-              #   @param target_https_proxy [::String]
-              #     Name of the TargetHttpsProxy resource to return.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::TargetHttpsProxy]
+              # @yieldparam result [::Google::Cloud::Compute::V1::NetworkEdgeSecurityService]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::TargetHttpsProxy]
+              # @return [::Google::Cloud::Compute::V1::NetworkEdgeSecurityService]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetRegionTargetHttpsProxyRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetNetworkEdgeSecurityServiceRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -290,7 +360,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @region_target_https_proxies_stub.get request, options do |result, response|
+                @network_edge_security_services_stub.get request, options do |result, response|
                   yield result, response if block_given?
                   return result
                 end
@@ -300,13 +370,13 @@ module Google
               end
 
               ##
-              # Creates a TargetHttpsProxy resource in the specified project and region using the data included in the request.
+              # Creates a new service in the specified project using the data included in the request.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::InsertRegionTargetHttpsProxyRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::InsertNetworkEdgeSecurityServiceRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::InsertRegionTargetHttpsProxyRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::InsertNetworkEdgeSecurityServiceRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -314,19 +384,21 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload insert(project: nil, region: nil, request_id: nil, target_https_proxy_resource: nil)
+              # @overload insert(network_edge_security_service_resource: nil, project: nil, region: nil, request_id: nil, validate_only: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param network_edge_security_service_resource [::Google::Cloud::Compute::V1::NetworkEdgeSecurityService, ::Hash]
+              #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param region [::String]
               #     Name of the region scoping this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param target_https_proxy_resource [::Google::Cloud::Compute::V1::TargetHttpsProxy, ::Hash]
-              #     The body resource for this request
+              #   @param validate_only [::Boolean]
+              #     If true, the request will not be committed.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -337,7 +409,7 @@ module Google
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertRegionTargetHttpsProxyRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertNetworkEdgeSecurityServiceRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -357,7 +429,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @region_target_https_proxies_stub.insert request, options do |result, response|
+                @network_edge_security_services_stub.insert request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: region_operations,
@@ -376,87 +448,13 @@ module Google
               end
 
               ##
-              # Retrieves the list of TargetHttpsProxy resources available to the specified project in the specified region.
-              #
-              # @overload list(request, options = nil)
-              #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListRegionTargetHttpsProxiesRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::ListRegionTargetHttpsProxiesRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
-              #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
-              #   Pass arguments to `list` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-              #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-              #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-              #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param region [::String]
-              #     Name of the region scoping this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::TargetHttpsProxy>]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::TargetHttpsProxy>]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def list request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListRegionTargetHttpsProxiesRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.list.metadata.to_h
-
-                # Set x-goog-api-client header
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                options.apply_defaults timeout:      @config.rpcs.list.timeout,
-                                       metadata:     call_metadata
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
-
-                @region_target_https_proxies_stub.list request, options do |result, response|
-                  result = ::Gapic::Rest::PagedEnumerable.new @region_target_https_proxies_stub, :list, "items", request, result, options
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
-              end
-
-              ##
-              # Patches the specified regional TargetHttpsProxy resource with the data included in the request. This method supports PATCH semantics and uses JSON merge patch format and processing rules.
+              # Patches the specified policy with the data included in the request.
               #
               # @overload patch(request, options = nil)
               #   Pass arguments to `patch` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::PatchRegionTargetHttpsProxyRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::PatchNetworkEdgeSecurityServiceRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::PatchRegionTargetHttpsProxyRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::PatchNetworkEdgeSecurityServiceRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -464,21 +462,24 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload patch(project: nil, region: nil, request_id: nil, target_https_proxy: nil, target_https_proxy_resource: nil)
+              # @overload patch(network_edge_security_service: nil, network_edge_security_service_resource: nil, paths: nil, project: nil, region: nil, request_id: nil, update_mask: nil)
               #   Pass arguments to `patch` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param network_edge_security_service [::String]
+              #     Name of the network edge security service to update.
+              #   @param network_edge_security_service_resource [::Google::Cloud::Compute::V1::NetworkEdgeSecurityService, ::Hash]
+              #     The body resource for this request
+              #   @param paths [::String]
               #   @param project [::String]
               #     Project ID for this request.
               #   @param region [::String]
-              #     Name of the region for this request.
+              #     Name of the region scoping this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param target_https_proxy [::String]
-              #     Name of the TargetHttpsProxy resource to patch.
-              #   @param target_https_proxy_resource [::Google::Cloud::Compute::V1::TargetHttpsProxy, ::Hash]
-              #     The body resource for this request
+              #   @param update_mask [::String]
+              #     Indicates fields to be updated as part of this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -489,7 +490,7 @@ module Google
               def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchRegionTargetHttpsProxyRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchNetworkEdgeSecurityServiceRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -509,7 +510,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @region_target_https_proxies_stub.patch request, options do |result, response|
+                @network_edge_security_services_stub.patch request, options do |result, response|
                   result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
                     client: region_operations,
@@ -528,165 +529,9 @@ module Google
               end
 
               ##
-              # Replaces SslCertificates for TargetHttpsProxy.
+              # Configuration class for the NetworkEdgeSecurityServices REST API.
               #
-              # @overload set_ssl_certificates(request, options = nil)
-              #   Pass arguments to `set_ssl_certificates` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetSslCertificatesRegionTargetHttpsProxyRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetSslCertificatesRegionTargetHttpsProxyRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
-              #
-              # @overload set_ssl_certificates(project: nil, region: nil, region_target_https_proxies_set_ssl_certificates_request_resource: nil, request_id: nil, target_https_proxy: nil)
-              #   Pass arguments to `set_ssl_certificates` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param region [::String]
-              #     Name of the region scoping this request.
-              #   @param region_target_https_proxies_set_ssl_certificates_request_resource [::Google::Cloud::Compute::V1::RegionTargetHttpsProxiesSetSslCertificatesRequest, ::Hash]
-              #     The body resource for this request
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param target_https_proxy [::String]
-              #     Name of the TargetHttpsProxy resource to set an SslCertificates resource for.
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def set_ssl_certificates request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetSslCertificatesRegionTargetHttpsProxyRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_ssl_certificates.metadata.to_h
-
-                # Set x-goog-api-client header
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                options.apply_defaults timeout:      @config.rpcs.set_ssl_certificates.timeout,
-                                       metadata:     call_metadata
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
-
-                @region_target_https_proxies_stub.set_ssl_certificates request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: region_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "region" => request.region
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
-              end
-
-              ##
-              # Changes the URL map for TargetHttpsProxy.
-              #
-              # @overload set_url_map(request, options = nil)
-              #   Pass arguments to `set_url_map` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpsProxyRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpsProxyRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
-              #
-              # @overload set_url_map(project: nil, region: nil, request_id: nil, target_https_proxy: nil, url_map_reference_resource: nil)
-              #   Pass arguments to `set_url_map` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param region [::String]
-              #     Name of the region scoping this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param target_https_proxy [::String]
-              #     Name of the TargetHttpsProxy to set a URL map for.
-              #   @param url_map_reference_resource [::Google::Cloud::Compute::V1::UrlMapReference, ::Hash]
-              #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def set_url_map request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpsProxyRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_url_map.metadata.to_h
-
-                # Set x-goog-api-client header
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                options.apply_defaults timeout:      @config.rpcs.set_url_map.timeout,
-                                       metadata:     call_metadata
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
-
-                @region_target_https_proxies_stub.set_url_map request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: region_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "region" => request.region
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
-              end
-
-              ##
-              # Configuration class for the RegionTargetHttpsProxies REST API.
-              #
-              # This class represents the configuration for RegionTargetHttpsProxies REST,
+              # This class represents the configuration for NetworkEdgeSecurityServices REST,
               # providing control over credentials, timeouts, retry behavior, logging.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -696,13 +541,13 @@ module Google
               #
               # To modify the global config, setting the timeout for all calls to 10 seconds:
               #
-              #     ::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Client.configure do |config|
+              #     ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Client.configure do |config|
               #       config.timeout = 10.0
               #     end
               #
               # To apply the above configuration only to a new client:
               #
-              #     client = ::Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Client.new do |config|
+              #     client = ::Google::Cloud::Compute::V1::NetworkEdgeSecurityServices::Client.new do |config|
               #       config.timeout = 10.0
               #     end
               #
@@ -770,7 +615,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the RegionTargetHttpsProxies API.
+                # Configuration RPC class for the NetworkEdgeSecurityServices API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -782,6 +627,11 @@ module Google
                 # but is currently not supported for REST Gapic libraries.
                 #
                 class Rpcs
+                  ##
+                  # RPC-specific configuration for `aggregated_list`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :aggregated_list
                   ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
@@ -798,42 +648,23 @@ module Google
                   #
                   attr_reader :insert
                   ##
-                  # RPC-specific configuration for `list`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :list
-                  ##
                   # RPC-specific configuration for `patch`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :patch
-                  ##
-                  # RPC-specific configuration for `set_ssl_certificates`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :set_ssl_certificates
-                  ##
-                  # RPC-specific configuration for `set_url_map`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :set_url_map
 
                   # @private
                   def initialize parent_rpcs = nil
+                    aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
+                    @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
-                    list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
-                    @list = ::Gapic::Config::Method.new list_config
                     patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
                     @patch = ::Gapic::Config::Method.new patch_config
-                    set_ssl_certificates_config = parent_rpcs.set_ssl_certificates if parent_rpcs.respond_to? :set_ssl_certificates
-                    @set_ssl_certificates = ::Gapic::Config::Method.new set_ssl_certificates_config
-                    set_url_map_config = parent_rpcs.set_url_map if parent_rpcs.respond_to? :set_url_map
-                    @set_url_map = ::Gapic::Config::Method.new set_url_map_config
 
                     yield self if block_given?
                   end

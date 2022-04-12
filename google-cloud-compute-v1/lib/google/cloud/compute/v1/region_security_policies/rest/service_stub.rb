@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ module Google
   module Cloud
     module Compute
       module V1
-        module RegionTargetHttpsProxies
+        module RegionSecurityPolicies
           module Rest
             ##
-            # REST service stub for the RegionTargetHttpsProxies service.
+            # REST service stub for the RegionSecurityPolicies service.
             # service stub contains baseline method implementations
             # including transcoding, making the REST call and deserialing the response
             #
@@ -41,7 +41,7 @@ module Google
               ##
               # Baseline implementation for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -70,12 +70,12 @@ module Google
               ##
               # GRPC transcoding helper method for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_delete_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetHttpsProxies/#{request_pb.target_https_proxy}"
+                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/securityPolicies/#{request_pb.security_policy}"
                 body = nil
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
@@ -86,16 +86,16 @@ module Google
               ##
               # Baseline implementation for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::TargetHttpsProxy]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicy]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::TargetHttpsProxy]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicy]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -105,7 +105,7 @@ module Google
                   uri:     uri,
                   options: options
                 )
-                result = ::Google::Cloud::Compute::V1::TargetHttpsProxy.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::SecurityPolicy.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -114,12 +114,12 @@ module Google
               ##
               # GRPC transcoding helper method for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_get_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetHttpsProxies/#{request_pb.target_https_proxy}"
+                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/securityPolicies/#{request_pb.security_policy}"
                 body = nil
                 query_string_params = {}
 
@@ -129,7 +129,7 @@ module Google
               ##
               # Baseline implementation for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -159,15 +159,16 @@ module Google
               ##
               # GRPC transcoding helper method for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_insert_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetHttpsProxies"
-                body = request_pb.target_https_proxy_resource.to_json
+                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/securityPolicies"
+                body = request_pb.security_policy_resource.to_json
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+                query_string_params["validateOnly"] = request_pb.validate_only.to_s if request_pb.has_validate_only?
 
                 [uri, body, query_string_params]
               end
@@ -175,16 +176,16 @@ module Google
               ##
               # Baseline implementation for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListRegionTargetHttpsProxiesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListRegionSecurityPoliciesRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::TargetHttpsProxyList]
+              # @yieldparam result [::Google::Cloud::Compute::V1::SecurityPolicyList]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::TargetHttpsProxyList]
+              # @return [::Google::Cloud::Compute::V1::SecurityPolicyList]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -195,7 +196,7 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
-                result = ::Google::Cloud::Compute::V1::TargetHttpsProxyList.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::SecurityPolicyList.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -204,12 +205,12 @@ module Google
               ##
               # GRPC transcoding helper method for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListRegionTargetHttpsProxiesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListRegionSecurityPoliciesRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_list_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetHttpsProxies"
+                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/securityPolicies"
                 body = nil
                 query_string_params = {}
                 query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
@@ -224,7 +225,7 @@ module Google
               ##
               # Baseline implementation for the patch REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::PatchRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -254,105 +255,13 @@ module Google
               ##
               # GRPC transcoding helper method for the patch REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::PatchRegionTargetHttpsProxyRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::PatchRegionSecurityPolicyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_patch_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetHttpsProxies/#{request_pb.target_https_proxy}"
-                body = request_pb.target_https_proxy_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
-              end
-
-              ##
-              # Baseline implementation for the set_ssl_certificates REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetSslCertificatesRegionTargetHttpsProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def set_ssl_certificates request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                uri, body, query_string_params = transcode_set_ssl_certificates_request request_pb
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_ssl_certificates REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetSslCertificatesRegionTargetHttpsProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_ssl_certificates_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetHttpsProxies/#{request_pb.target_https_proxy}/setSslCertificates"
-                body = request_pb.region_target_https_proxies_set_ssl_certificates_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
-              end
-
-              ##
-              # Baseline implementation for the set_url_map REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpsProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def set_url_map request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                uri, body, query_string_params = transcode_set_url_map_request request_pb
-                response = @client_stub.make_post_request(
-                  uri:     uri,
-                  body:    body,
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_url_map REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetUrlMapRegionTargetHttpsProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_url_map_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/targetHttpsProxies/#{request_pb.target_https_proxy}/setUrlMap"
-                body = request_pb.url_map_reference_resource.to_json
+                uri = "/compute/v1/projects/#{request_pb.project}/regions/#{request_pb.region}/securityPolicies/#{request_pb.security_policy}"
+                body = request_pb.security_policy_resource.to_json
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
 

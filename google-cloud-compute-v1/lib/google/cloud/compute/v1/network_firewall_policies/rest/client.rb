@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,34 +18,34 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/disks/rest/service_stub"
-require "google/cloud/compute/v1/zone_operations/rest"
+require "google/cloud/compute/v1/network_firewall_policies/rest/service_stub"
+require "google/cloud/compute/v1/global_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module Disks
+        module NetworkFirewallPolicies
           module Rest
             ##
-            # REST client for the Disks service.
+            # REST client for the NetworkFirewallPolicies service.
             #
-            # The Disks API.
+            # The NetworkFirewallPolicies API.
             #
             class Client
               # @private
-              attr_reader :disks_stub
+              attr_reader :network_firewall_policies_stub
 
               ##
-              # Configure the Disks Client class.
+              # Configure the NetworkFirewallPolicies Client class.
               #
-              # See {::Google::Cloud::Compute::V1::Disks::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all Disks clients
-              #   ::Google::Cloud::Compute::V1::Disks::Rest::Client.configure do |config|
+              #   # Modify the configuration for all NetworkFirewallPolicies clients
+              #   ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -65,14 +65,11 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.add_resource_policies.timeout = 600.0
+                  default_config.rpcs.add_association.timeout = 600.0
 
-                  default_config.rpcs.aggregated_list.timeout = 600.0
-                  default_config.rpcs.aggregated_list.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
-                  }
+                  default_config.rpcs.add_rule.timeout = 600.0
 
-                  default_config.rpcs.create_snapshot.timeout = 600.0
+                  default_config.rpcs.clone_rules.timeout = 600.0
 
                   default_config.rpcs.delete.timeout = 600.0
 
@@ -81,8 +78,18 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
+                  default_config.rpcs.get_association.timeout = 600.0
+                  default_config.rpcs.get_association.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.get_iam_policy.timeout = 600.0
                   default_config.rpcs.get_iam_policy.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
+                  default_config.rpcs.get_rule.timeout = 600.0
+                  default_config.rpcs.get_rule.retry_policy = {
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
@@ -93,13 +100,15 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.remove_resource_policies.timeout = 600.0
+                  default_config.rpcs.patch.timeout = 600.0
 
-                  default_config.rpcs.resize.timeout = 600.0
+                  default_config.rpcs.patch_rule.timeout = 600.0
+
+                  default_config.rpcs.remove_association.timeout = 600.0
+
+                  default_config.rpcs.remove_rule.timeout = 600.0
 
                   default_config.rpcs.set_iam_policy.timeout = 600.0
-
-                  default_config.rpcs.set_labels.timeout = 600.0
 
                   default_config.rpcs.test_iam_permissions.timeout = 600.0
 
@@ -110,13 +119,13 @@ module Google
               end
 
               ##
-              # Configure the Disks Client instance.
+              # Configure the NetworkFirewallPolicies Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::Disks::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -130,19 +139,19 @@ module Google
               end
 
               ##
-              # Create a new Disks REST client object.
+              # Create a new NetworkFirewallPolicies REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::Disks::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::Disks::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the Disks client.
+              # @yield [config] Configure the NetworkFirewallPolicies client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -159,31 +168,31 @@ module Google
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
-                @zone_operations = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new do |config|
+                @global_operations = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.endpoint = @config.endpoint
                 end
 
-                @disks_stub = ::Google::Cloud::Compute::V1::Disks::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @network_firewall_policies_stub = ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               ##
-              # Get the associated client for long-running operations via ZoneOperations.
+              # Get the associated client for long-running operations via GlobalOperations.
               #
-              # @return [::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client]
+              # @return [::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client]
               #
-              attr_reader :zone_operations
+              attr_reader :global_operations
 
               # Service calls
 
               ##
-              # Adds existing resource policies to a disk. You can only add one policy which will be applied to this disk for scheduling snapshot creation.
+              # Inserts an association for the specified firewall policy.
               #
-              # @overload add_resource_policies(request, options = nil)
-              #   Pass arguments to `add_resource_policies` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::AddResourcePoliciesDiskRequest} or an equivalent Hash.
+              # @overload add_association(request, options = nil)
+              #   Pass arguments to `add_association` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AddAssociationNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::AddResourcePoliciesDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::AddAssociationNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -191,21 +200,21 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload add_resource_policies(disk: nil, disks_add_resource_policies_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `add_resource_policies` via keyword arguments. Note that at
+              # @overload add_association(firewall_policy: nil, firewall_policy_association_resource: nil, project: nil, replace_existing_association: nil, request_id: nil)
+              #   Pass arguments to `add_association` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param disk [::String]
-              #     The disk name for this request.
-              #   @param disks_add_resource_policies_request_resource [::Google::Cloud::Compute::V1::DisksAddResourcePoliciesRequest, ::Hash]
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param firewall_policy_association_resource [::Google::Cloud::Compute::V1::FirewallPolicyAssociation, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param replace_existing_association [::Boolean]
+              #     Indicates whether or not to replace it if an association of the attachment already exists. This is false by default, in which case an error will be returned if an association already exists.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -213,16 +222,16 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def add_resource_policies request, options = nil
+              def add_association request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddResourcePoliciesDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddAssociationNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.add_resource_policies.metadata.to_h
+                call_metadata = @config.rpcs.add_association.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -230,19 +239,18 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.rpcs.add_resource_policies.timeout,
+                options.apply_defaults timeout:      @config.rpcs.add_association.timeout,
                                        metadata:     call_metadata
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.add_resource_policies request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                @network_firewall_policies_stub.add_association request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: zone_operations,
+                    client: global_operations,
                     request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
+                      "project" => request.project
                     },
                     options: options
                   )
@@ -255,13 +263,13 @@ module Google
               end
 
               ##
-              # Retrieves an aggregated list of persistent disks.
+              # Inserts a rule into a firewall policy.
               #
-              # @overload aggregated_list(request, options = nil)
-              #   Pass arguments to `aggregated_list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::AggregatedListDisksRequest} or an equivalent Hash.
+              # @overload add_rule(request, options = nil)
+              #   Pass arguments to `add_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::AddRuleNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::AggregatedListDisksRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::AddRuleNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -269,97 +277,23 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload aggregated_list(filter: nil, include_all_scopes: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
-              #   Pass arguments to `aggregated_list` via keyword arguments. Note that at
+              # @overload add_rule(firewall_policy: nil, firewall_policy_rule_resource: nil, max_priority: nil, min_priority: nil, project: nil, request_id: nil)
+              #   Pass arguments to `add_rule` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param filter [::String]
-              #     A filter expression that filters resources listed in the response. The expression must specify the field name, an operator, and the value that you want to use for filtering. The value must be a string, a number, or a boolean. The operator must be either `=`, `!=`, `>`, `<`, `<=`, `>=` or `:`. For example, if you are filtering Compute Engine instances, you can exclude instances named `example-instance` by specifying `name != example-instance`. The `:` operator can be used with string fields to match substrings. For non-string fields it is equivalent to the `=` operator. The `:*` comparison can be used to test whether a key has been defined. For example, to find all objects with `owner` label use: ``` labels.owner:* ``` You can also filter nested fields. For example, you could specify `scheduling.automaticRestart = false` to include instances only if they are not scheduled for automatic restarts. You can use filtering on nested fields to filter based on resource labels. To filter on multiple expressions, provide each separate expression within parentheses. For example: ``` (scheduling.automaticRestart = true) (cpuPlatform = "Intel Skylake") ``` By default, each expression is an `AND` expression. However, you can include `AND` and `OR` expressions explicitly. For example: ``` (cpuPlatform = "Intel Skylake") OR (cpuPlatform = "Intel Broadwell") AND (scheduling.automaticRestart = true) ```
-              #   @param include_all_scopes [::Boolean]
-              #     Indicates whether every visible scope for each scope type (zone, region, global) should be included in the response. For new resource types added after this field, the flag has no effect as new resource types will always include every visible scope for each scope type in response. For resource types which predate this field, if this flag is omitted or false, only scopes of the scope types where the resource type is expected to be found will be included.
-              #   @param max_results [::Integer]
-              #     The maximum number of results per page that should be returned. If the number of available results is larger than `maxResults`, Compute Engine returns a `nextPageToken` that can be used to get the next page of results in subsequent list requests. Acceptable values are `0` to `500`, inclusive. (Default: `500`)
-              #   @param order_by [::String]
-              #     Sorts list results by a certain order. By default, results are returned in alphanumerical order based on the resource name. You can also sort results in descending order based on the creation timestamp using `orderBy="creationTimestamp desc"`. This sorts results based on the `creationTimestamp` field in reverse chronological order (newest result first). Use this to sort resources like operations so that the newest operation is returned first. Currently, only sorting by `name` or `creationTimestamp desc` is supported.
-              #   @param page_token [::String]
-              #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param return_partial_success [::Boolean]
-              #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::DisksScopedList>]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Gapic::Rest::PagedEnumerable<::String, ::Google::Cloud::Compute::V1::DisksScopedList>]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def aggregated_list request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AggregatedListDisksRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.aggregated_list.metadata.to_h
-
-                # Set x-goog-api-client header
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                options.apply_defaults timeout:      @config.rpcs.aggregated_list.timeout,
-                                       metadata:     call_metadata
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
-
-                @disks_stub.aggregated_list request, options do |result, response|
-                  result = ::Gapic::Rest::PagedEnumerable.new @disks_stub, :aggregated_list, "items", request, result, options
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
-              end
-
-              ##
-              # Creates a snapshot of a specified persistent disk. For regular snapshot creation, consider using snapshots.insert instead, as that method supports more features, such as creating snapshots in a project different from the source disk project.
-              #
-              # @overload create_snapshot(request, options = nil)
-              #   Pass arguments to `create_snapshot` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::CreateSnapshotDiskRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::CreateSnapshotDiskRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
-              #
-              # @overload create_snapshot(disk: nil, guest_flush: nil, project: nil, request_id: nil, snapshot_resource: nil, zone: nil)
-              #   Pass arguments to `create_snapshot` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param disk [::String]
-              #     Name of the persistent disk to snapshot.
-              #   @param guest_flush [::Boolean]
-              #     [Input Only] Whether to attempt an application consistent snapshot by informing the OS to prepare for the snapshot process.
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param firewall_policy_rule_resource [::Google::Cloud::Compute::V1::FirewallPolicyRule, ::Hash]
+              #     The body resource for this request
+              #   @param max_priority [::Integer]
+              #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
+              #   @param min_priority [::Integer]
+              #     When rule.priority is not specified, auto choose a unused priority between minPriority and maxPriority>. This field is exclusive with rule.priority.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param snapshot_resource [::Google::Cloud::Compute::V1::Snapshot, ::Hash]
-              #     The body resource for this request
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -367,16 +301,16 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def create_snapshot request, options = nil
+              def add_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CreateSnapshotDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::AddRuleNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.create_snapshot.metadata.to_h
+                call_metadata = @config.rpcs.add_rule.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -384,19 +318,18 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.rpcs.create_snapshot.timeout,
+                options.apply_defaults timeout:      @config.rpcs.add_rule.timeout,
                                        metadata:     call_metadata
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.create_snapshot request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                @network_firewall_policies_stub.add_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: zone_operations,
+                    client: global_operations,
                     request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
+                      "project" => request.project
                     },
                     options: options
                   )
@@ -409,13 +342,88 @@ module Google
               end
 
               ##
-              # Deletes the specified persistent disk. Deleting a disk removes its data permanently and is irreversible. However, deleting a disk does not delete any snapshots previously made from the disk. You must separately delete snapshots.
+              # Copies rules to the specified firewall policy.
+              #
+              # @overload clone_rules(request, options = nil)
+              #   Pass arguments to `clone_rules` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::CloneRulesNetworkFirewallPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::CloneRulesNetworkFirewallPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload clone_rules(firewall_policy: nil, project: nil, request_id: nil, source_firewall_policy: nil)
+              #   Pass arguments to `clone_rules` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param source_firewall_policy [::String]
+              #     The firewall policy from which to copy rules.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def clone_rules request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::CloneRulesNetworkFirewallPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.clone_rules.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.clone_rules.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @network_firewall_policies_stub.clone_rules request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Deletes the specified policy.
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteDiskRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::DeleteNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::DeleteNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -423,19 +431,17 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload delete(disk: nil, project: nil, request_id: nil, zone: nil)
+              # @overload delete(firewall_policy: nil, project: nil, request_id: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param disk [::String]
-              #     Name of the persistent disk to delete.
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to delete.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -446,7 +452,7 @@ module Google
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -466,13 +472,12 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.delete request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                @network_firewall_policies_stub.delete request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: zone_operations,
+                    client: global_operations,
                     request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
+                      "project" => request.project
                     },
                     options: options
                   )
@@ -485,13 +490,13 @@ module Google
               end
 
               ##
-              # Returns a specified persistent disk. Gets a list of available persistent disks by making a list() request.
+              # Returns the specified network firewall policy.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetDiskRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -499,28 +504,26 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload get(disk: nil, project: nil, zone: nil)
+              # @overload get(firewall_policy: nil, project: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param disk [::String]
-              #     Name of the persistent disk to return.
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to get.
               #   @param project [::String]
               #     Project ID for this request.
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Disk]
+              # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPolicy]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Disk]
+              # @return [::Google::Cloud::Compute::V1::FirewallPolicy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -540,7 +543,72 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.get request, options do |result, response|
+                @network_firewall_policies_stub.get request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Gets an association with the specified name.
+              #
+              # @overload get_association(request, options = nil)
+              #   Pass arguments to `get_association` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetAssociationNetworkFirewallPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetAssociationNetworkFirewallPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload get_association(firewall_policy: nil, name: nil, project: nil)
+              #   Pass arguments to `get_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to which the queried association belongs.
+              #   @param name [::String]
+              #     The name of the association to get from the firewall policy.
+              #   @param project [::String]
+              #     Project ID for this request.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPolicyAssociation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::FirewallPolicyAssociation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetAssociationNetworkFirewallPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_association.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.get_association.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @network_firewall_policies_stub.get_association request, options do |result, response|
                   yield result, response if block_given?
                   return result
                 end
@@ -554,9 +622,9 @@ module Google
               #
               # @overload get_iam_policy(request, options = nil)
               #   Pass arguments to `get_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetIamPolicyDiskRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetIamPolicyNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -564,7 +632,7 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload get_iam_policy(options_requested_policy_version: nil, project: nil, resource: nil, zone: nil)
+              # @overload get_iam_policy(options_requested_policy_version: nil, project: nil, resource: nil)
               #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -575,8 +643,6 @@ module Google
               #     Project ID for this request.
               #   @param resource [::String]
               #     Name or id of the resource for this request.
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
               # @yieldparam response [::Faraday::Response]
@@ -587,7 +653,7 @@ module Google
               def get_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -607,7 +673,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.get_iam_policy request, options do |result, response|
+                @network_firewall_policies_stub.get_iam_policy request, options do |result, response|
                   yield result, response if block_given?
                   return result
                 end
@@ -617,13 +683,13 @@ module Google
               end
 
               ##
-              # Creates a persistent disk in the specified project using the data in the request. You can create a disk from a source (sourceImage, sourceSnapshot, or sourceDisk) or create an empty 500 GB data disk by omitting all properties. You can also create a disk that is larger than the default size by specifying the sizeGb property.
+              # Gets a rule of the specified priority.
               #
-              # @overload insert(request, options = nil)
-              #   Pass arguments to `insert` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::InsertDiskRequest} or an equivalent Hash.
+              # @overload get_rule(request, options = nil)
+              #   Pass arguments to `get_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetRuleNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::InsertDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetRuleNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -631,21 +697,82 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload insert(disk_resource: nil, project: nil, request_id: nil, source_image: nil, zone: nil)
+              # @overload get_rule(firewall_policy: nil, priority: nil, project: nil)
+              #   Pass arguments to `get_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to which the queried rule belongs.
+              #   @param priority [::Integer]
+              #     The priority of the rule to get from the firewall policy.
+              #   @param project [::String]
+              #     Project ID for this request.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::FirewallPolicyRule]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetRuleNetworkFirewallPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_rule.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.get_rule.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @network_firewall_policies_stub.get_rule request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Creates a new policy in the specified project using the data included in the request.
+              #
+              # @overload insert(request, options = nil)
+              #   Pass arguments to `insert` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::InsertNetworkFirewallPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::InsertNetworkFirewallPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload insert(firewall_policy_resource: nil, project: nil, request_id: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param disk_resource [::Google::Cloud::Compute::V1::Disk, ::Hash]
+              #   @param firewall_policy_resource [::Google::Cloud::Compute::V1::FirewallPolicy, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param source_image [::String]
-              #     Source image to restore onto a disk. This field is optional.
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -656,7 +783,7 @@ module Google
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -676,13 +803,12 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.insert request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                @network_firewall_policies_stub.insert request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: zone_operations,
+                    client: global_operations,
                     request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
+                      "project" => request.project
                     },
                     options: options
                   )
@@ -695,13 +821,13 @@ module Google
               end
 
               ##
-              # Retrieves a list of persistent disks contained within the specified zone.
+              # Lists all the policies that have been configured for the specified project.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListDisksRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::ListNetworkFirewallPoliciesRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListDisksRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListNetworkFirewallPoliciesRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -709,7 +835,7 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil, zone: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -726,19 +852,17 @@ module Google
               #     Project ID for this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Disk>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::FirewallPolicy>]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Disk>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::FirewallPolicy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListDisksRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListNetworkFirewallPoliciesRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -758,8 +882,8 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.list request, options do |result, response|
-                  result = ::Gapic::Rest::PagedEnumerable.new @disks_stub, :list, "items", request, result, options
+                @network_firewall_policies_stub.list request, options do |result, response|
+                  result = ::Gapic::Rest::PagedEnumerable.new @network_firewall_policies_stub, :list, "items", request, result, options
                   yield result, response if block_given?
                   return result
                 end
@@ -769,13 +893,13 @@ module Google
               end
 
               ##
-              # Removes resource policies from a disk.
+              # Patches the specified policy with the data included in the request.
               #
-              # @overload remove_resource_policies(request, options = nil)
-              #   Pass arguments to `remove_resource_policies` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::RemoveResourcePoliciesDiskRequest} or an equivalent Hash.
+              # @overload patch(request, options = nil)
+              #   Pass arguments to `patch` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PatchNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::RemoveResourcePoliciesDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::PatchNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -783,21 +907,19 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload remove_resource_policies(disk: nil, disks_remove_resource_policies_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `remove_resource_policies` via keyword arguments. Note that at
+              # @overload patch(firewall_policy: nil, firewall_policy_resource: nil, project: nil, request_id: nil)
+              #   Pass arguments to `patch` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param disk [::String]
-              #     The disk name for this request.
-              #   @param disks_remove_resource_policies_request_resource [::Google::Cloud::Compute::V1::DisksRemoveResourcePoliciesRequest, ::Hash]
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param firewall_policy_resource [::Google::Cloud::Compute::V1::FirewallPolicy, ::Hash]
               #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -805,16 +927,16 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def remove_resource_policies request, options = nil
+              def patch request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RemoveResourcePoliciesDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.remove_resource_policies.metadata.to_h
+                call_metadata = @config.rpcs.patch.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -822,19 +944,18 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.rpcs.remove_resource_policies.timeout,
+                options.apply_defaults timeout:      @config.rpcs.patch.timeout,
                                        metadata:     call_metadata
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.remove_resource_policies request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                @network_firewall_policies_stub.patch request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: zone_operations,
+                    client: global_operations,
                     request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
+                      "project" => request.project
                     },
                     options: options
                   )
@@ -847,13 +968,13 @@ module Google
               end
 
               ##
-              # Resizes the specified persistent disk. You can only increase the size of the disk.
+              # Patches a rule of the specified priority.
               #
-              # @overload resize(request, options = nil)
-              #   Pass arguments to `resize` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ResizeDiskRequest} or an equivalent Hash.
+              # @overload patch_rule(request, options = nil)
+              #   Pass arguments to `patch_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::PatchRuleNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ResizeDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::PatchRuleNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -861,21 +982,21 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload resize(disk: nil, disks_resize_request_resource: nil, project: nil, request_id: nil, zone: nil)
-              #   Pass arguments to `resize` via keyword arguments. Note that at
+              # @overload patch_rule(firewall_policy: nil, firewall_policy_rule_resource: nil, priority: nil, project: nil, request_id: nil)
+              #   Pass arguments to `patch_rule` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param disk [::String]
-              #     The name of the persistent disk.
-              #   @param disks_resize_request_resource [::Google::Cloud::Compute::V1::DisksResizeRequest, ::Hash]
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param firewall_policy_rule_resource [::Google::Cloud::Compute::V1::FirewallPolicyRule, ::Hash]
               #     The body resource for this request
+              #   @param priority [::Integer]
+              #     The priority of the rule to patch.
               #   @param project [::String]
               #     Project ID for this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -883,16 +1004,16 @@ module Google
               # @return [::Gapic::GenericLRO::Operation]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def resize request, options = nil
+              def patch_rule request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ResizeDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::PatchRuleNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
 
                 # Customize the options with defaults
-                call_metadata = @config.rpcs.resize.metadata.to_h
+                call_metadata = @config.rpcs.patch_rule.metadata.to_h
 
                 # Set x-goog-api-client header
                 call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
@@ -900,19 +1021,168 @@ module Google
                   gapic_version: ::Google::Cloud::Compute::V1::VERSION,
                   transports_version_send: [:rest]
 
-                options.apply_defaults timeout:      @config.rpcs.resize.timeout,
+                options.apply_defaults timeout:      @config.rpcs.patch_rule.timeout,
                                        metadata:     call_metadata
 
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.resize request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
+                @network_firewall_policies_stub.patch_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: zone_operations,
+                    client: global_operations,
                     request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Removes an association for the specified firewall policy.
+              #
+              # @overload remove_association(request, options = nil)
+              #   Pass arguments to `remove_association` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::RemoveAssociationNetworkFirewallPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::RemoveAssociationNetworkFirewallPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload remove_association(firewall_policy: nil, name: nil, project: nil, request_id: nil)
+              #   Pass arguments to `remove_association` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param name [::String]
+              #     Name for the attachment that will be removed.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def remove_association request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RemoveAssociationNetworkFirewallPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.remove_association.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.remove_association.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @network_firewall_policies_stub.remove_association request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
+                    },
+                    options: options
+                  )
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
+              # Deletes a rule of the specified priority.
+              #
+              # @overload remove_rule(request, options = nil)
+              #   Pass arguments to `remove_rule` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::RemoveRuleNetworkFirewallPolicyRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::RemoveRuleNetworkFirewallPolicyRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload remove_rule(firewall_policy: nil, priority: nil, project: nil, request_id: nil)
+              #   Pass arguments to `remove_rule` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param firewall_policy [::String]
+              #     Name of the firewall policy to update.
+              #   @param priority [::Integer]
+              #     The priority of the rule to remove from the firewall policy.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param request_id [::String]
+              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Gapic::GenericLRO::Operation]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Gapic::GenericLRO::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def remove_rule request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::RemoveRuleNetworkFirewallPolicyRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.remove_rule.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.remove_rule.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @network_firewall_policies_stub.remove_rule request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                    operation: result,
+                    client: global_operations,
+                    request_values: {
+                      "project" => request.project
                     },
                     options: options
                   )
@@ -929,9 +1199,9 @@ module Google
               #
               # @overload set_iam_policy(request, options = nil)
               #   Pass arguments to `set_iam_policy` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetIamPolicyDiskRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::SetIamPolicyNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -939,19 +1209,17 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload set_iam_policy(project: nil, resource: nil, zone: nil, zone_set_policy_request_resource: nil)
+              # @overload set_iam_policy(global_set_policy_request_resource: nil, project: nil, resource: nil)
               #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param global_set_policy_request_resource [::Google::Cloud::Compute::V1::GlobalSetPolicyRequest, ::Hash]
+              #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
               #   @param resource [::String]
               #     Name or id of the resource for this request.
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              #   @param zone_set_policy_request_resource [::Google::Cloud::Compute::V1::ZoneSetPolicyRequest, ::Hash]
-              #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
               # @yieldparam response [::Faraday::Response]
@@ -962,7 +1230,7 @@ module Google
               def set_iam_policy request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -982,85 +1250,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.set_iam_policy request, options do |result, response|
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
-              end
-
-              ##
-              # Sets the labels on a disk. To learn more about labels, read the Labeling Resources documentation.
-              #
-              # @overload set_labels(request, options = nil)
-              #   Pass arguments to `set_labels` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetLabelsDiskRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetLabelsDiskRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
-              #
-              # @overload set_labels(project: nil, request_id: nil, resource: nil, zone: nil, zone_set_labels_request_resource: nil)
-              #   Pass arguments to `set_labels` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param request_id [::String]
-              #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
-              #   @param resource [::String]
-              #     Name or id of the resource for this request.
-              #   @param zone [::String]
-              #     The name of the zone for this request.
-              #   @param zone_set_labels_request_resource [::Google::Cloud::Compute::V1::ZoneSetLabelsRequest, ::Hash]
-              #     The body resource for this request
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def set_labels request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetLabelsDiskRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_labels.metadata.to_h
-
-                # Set x-goog-api-client header
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
-                                       metadata:     call_metadata
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
-
-                @disks_stub.set_labels request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: zone_operations,
-                    request_values: {
-                      "project" => request.project,
-                      "zone" => request.zone
-                    },
-                    options: options
-                  )
+                @network_firewall_policies_stub.set_iam_policy request, options do |result, response|
                   yield result, response if block_given?
                   return result
                 end
@@ -1074,9 +1264,9 @@ module Google
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::TestIamPermissionsDiskRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::TestIamPermissionsNetworkFirewallPolicyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsDiskRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::TestIamPermissionsNetworkFirewallPolicyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -1084,7 +1274,7 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload test_iam_permissions(project: nil, resource: nil, test_permissions_request_resource: nil, zone: nil)
+              # @overload test_iam_permissions(project: nil, resource: nil, test_permissions_request_resource: nil)
               #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1095,8 +1285,6 @@ module Google
               #     Name or id of the resource for this request.
               #   @param test_permissions_request_resource [::Google::Cloud::Compute::V1::TestPermissionsRequest, ::Hash]
               #     The body resource for this request
-              #   @param zone [::String]
-              #     The name of the zone for this request.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Google::Cloud::Compute::V1::TestPermissionsResponse]
               # @yieldparam response [::Faraday::Response]
@@ -1107,7 +1295,7 @@ module Google
               def test_iam_permissions request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsDiskRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::TestIamPermissionsNetworkFirewallPolicyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -1127,7 +1315,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @disks_stub.test_iam_permissions request, options do |result, response|
+                @network_firewall_policies_stub.test_iam_permissions request, options do |result, response|
                   yield result, response if block_given?
                   return result
                 end
@@ -1137,9 +1325,9 @@ module Google
               end
 
               ##
-              # Configuration class for the Disks REST API.
+              # Configuration class for the NetworkFirewallPolicies REST API.
               #
-              # This class represents the configuration for Disks REST,
+              # This class represents the configuration for NetworkFirewallPolicies REST,
               # providing control over credentials, timeouts, retry behavior, logging.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -1149,13 +1337,13 @@ module Google
               #
               # To modify the global config, setting the timeout for all calls to 10 seconds:
               #
-              #     ::Google::Cloud::Compute::V1::Disks::Client.configure do |config|
+              #     ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Client.configure do |config|
               #       config.timeout = 10.0
               #     end
               #
               # To apply the above configuration only to a new client:
               #
-              #     client = ::Google::Cloud::Compute::V1::Disks::Client.new do |config|
+              #     client = ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::Client.new do |config|
               #       config.timeout = 10.0
               #     end
               #
@@ -1223,7 +1411,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the Disks API.
+                # Configuration RPC class for the NetworkFirewallPolicies API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -1236,20 +1424,20 @@ module Google
                 #
                 class Rpcs
                   ##
-                  # RPC-specific configuration for `add_resource_policies`
+                  # RPC-specific configuration for `add_association`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :add_resource_policies
+                  attr_reader :add_association
                   ##
-                  # RPC-specific configuration for `aggregated_list`
+                  # RPC-specific configuration for `add_rule`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :aggregated_list
+                  attr_reader :add_rule
                   ##
-                  # RPC-specific configuration for `create_snapshot`
+                  # RPC-specific configuration for `clone_rules`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :create_snapshot
+                  attr_reader :clone_rules
                   ##
                   # RPC-specific configuration for `delete`
                   # @return [::Gapic::Config::Method]
@@ -1261,10 +1449,20 @@ module Google
                   #
                   attr_reader :get
                   ##
+                  # RPC-specific configuration for `get_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_association
+                  ##
                   # RPC-specific configuration for `get_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :get_iam_policy
+                  ##
+                  # RPC-specific configuration for `get_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_rule
                   ##
                   # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
@@ -1276,25 +1474,30 @@ module Google
                   #
                   attr_reader :list
                   ##
-                  # RPC-specific configuration for `remove_resource_policies`
+                  # RPC-specific configuration for `patch`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :remove_resource_policies
+                  attr_reader :patch
                   ##
-                  # RPC-specific configuration for `resize`
+                  # RPC-specific configuration for `patch_rule`
                   # @return [::Gapic::Config::Method]
                   #
-                  attr_reader :resize
+                  attr_reader :patch_rule
+                  ##
+                  # RPC-specific configuration for `remove_association`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_association
+                  ##
+                  # RPC-specific configuration for `remove_rule`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :remove_rule
                   ##
                   # RPC-specific configuration for `set_iam_policy`
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :set_iam_policy
-                  ##
-                  # RPC-specific configuration for `set_labels`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :set_labels
                   ##
                   # RPC-specific configuration for `test_iam_permissions`
                   # @return [::Gapic::Config::Method]
@@ -1303,30 +1506,36 @@ module Google
 
                   # @private
                   def initialize parent_rpcs = nil
-                    add_resource_policies_config = parent_rpcs.add_resource_policies if parent_rpcs.respond_to? :add_resource_policies
-                    @add_resource_policies = ::Gapic::Config::Method.new add_resource_policies_config
-                    aggregated_list_config = parent_rpcs.aggregated_list if parent_rpcs.respond_to? :aggregated_list
-                    @aggregated_list = ::Gapic::Config::Method.new aggregated_list_config
-                    create_snapshot_config = parent_rpcs.create_snapshot if parent_rpcs.respond_to? :create_snapshot
-                    @create_snapshot = ::Gapic::Config::Method.new create_snapshot_config
+                    add_association_config = parent_rpcs.add_association if parent_rpcs.respond_to? :add_association
+                    @add_association = ::Gapic::Config::Method.new add_association_config
+                    add_rule_config = parent_rpcs.add_rule if parent_rpcs.respond_to? :add_rule
+                    @add_rule = ::Gapic::Config::Method.new add_rule_config
+                    clone_rules_config = parent_rpcs.clone_rules if parent_rpcs.respond_to? :clone_rules
+                    @clone_rules = ::Gapic::Config::Method.new clone_rules_config
                     delete_config = parent_rpcs.delete if parent_rpcs.respond_to? :delete
                     @delete = ::Gapic::Config::Method.new delete_config
                     get_config = parent_rpcs.get if parent_rpcs.respond_to? :get
                     @get = ::Gapic::Config::Method.new get_config
+                    get_association_config = parent_rpcs.get_association if parent_rpcs.respond_to? :get_association
+                    @get_association = ::Gapic::Config::Method.new get_association_config
                     get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
                     @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                    get_rule_config = parent_rpcs.get_rule if parent_rpcs.respond_to? :get_rule
+                    @get_rule = ::Gapic::Config::Method.new get_rule_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
-                    remove_resource_policies_config = parent_rpcs.remove_resource_policies if parent_rpcs.respond_to? :remove_resource_policies
-                    @remove_resource_policies = ::Gapic::Config::Method.new remove_resource_policies_config
-                    resize_config = parent_rpcs.resize if parent_rpcs.respond_to? :resize
-                    @resize = ::Gapic::Config::Method.new resize_config
+                    patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
+                    @patch = ::Gapic::Config::Method.new patch_config
+                    patch_rule_config = parent_rpcs.patch_rule if parent_rpcs.respond_to? :patch_rule
+                    @patch_rule = ::Gapic::Config::Method.new patch_rule_config
+                    remove_association_config = parent_rpcs.remove_association if parent_rpcs.respond_to? :remove_association
+                    @remove_association = ::Gapic::Config::Method.new remove_association_config
+                    remove_rule_config = parent_rpcs.remove_rule if parent_rpcs.respond_to? :remove_rule
+                    @remove_rule = ::Gapic::Config::Method.new remove_rule_config
                     set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
                     @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
-                    set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
-                    @set_labels = ::Gapic::Config::Method.new set_labels_config
                     test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
                     @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
 
