@@ -110,7 +110,10 @@ module Google
           # @!attribute [rw] filters
           #   @return [::Array<::Google::Cloud::Firestore::V1::StructuredQuery::Filter>]
           #     The list of filters to combine.
-          #     Must contain at least one filter.
+          #
+          #     Requires:
+          #
+          #     * At least one filter is present.
           class CompositeFilter
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -120,7 +123,7 @@ module Google
               # Unspecified. This value must not be used.
               OPERATOR_UNSPECIFIED = 0
 
-              # The results are required to satisfy each of the combined filters.
+              # Documents are required to satisfy all of the combined filters.
               AND = 1
             end
           end
