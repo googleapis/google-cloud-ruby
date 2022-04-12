@@ -100,6 +100,11 @@
                 "move_assignment"
               ]
             },
+            "UpdateAssignment": {
+              "methods": [
+                "update_assignment"
+              ]
+            },
             "GetBiReservation": {
               "methods": [
                 "get_bi_reservation"
