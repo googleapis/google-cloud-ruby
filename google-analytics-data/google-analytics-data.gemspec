@@ -22,7 +22,6 @@ Gem::Specification.new do |gem|
 
   gem.required_ruby_version = ">= 2.5"
 
-  gem.add_dependency "google-analytics-data-v1alpha", ">= 0.0", "< 2.a"
   gem.add_dependency "google-analytics-data-v1beta", ">= 0.0", "< 2.a"
   gem.add_dependency "google-cloud-core", "~> 1.6"
 
