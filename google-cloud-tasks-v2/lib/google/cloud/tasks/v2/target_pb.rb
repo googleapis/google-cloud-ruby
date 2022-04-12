@@ -2,7 +2,6 @@
 # source: google/cloud/tasks/v2/target.proto
 
 require 'google/api/field_behavior_pb'
-require 'google/api/annotations_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
