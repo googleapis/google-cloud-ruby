@@ -6,7 +6,6 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/datacatalog/v1/policytagmanager_pb'
-require 'google/iam/v1/policy_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

@@ -8,6 +8,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/datacatalog/v1/bigquery_pb'
 require 'google/cloud/datacatalog/v1/common_pb'
 require 'google/cloud/datacatalog/v1/data_source_pb'
+require 'google/cloud/datacatalog/v1/dataplex_spec_pb'
 require 'google/cloud/datacatalog/v1/gcs_fileset_spec_pb'
 require 'google/cloud/datacatalog/v1/schema_pb'
 require 'google/cloud/datacatalog/v1/search_pb'
@@ -19,7 +20,6 @@ require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/protobuf/timestamp_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -122,15 +122,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :database_table_spec, :message, 24, "google.cloud.datacatalog.v1.DatabaseTableSpec"
         optional :data_source_connection_spec, :message, 27, "google.cloud.datacatalog.v1.DataSourceConnectionSpec"
         optional :routine_spec, :message, 28, "google.cloud.datacatalog.v1.RoutineSpec"
+        optional :fileset_spec, :message, 33, "google.cloud.datacatalog.v1.FilesetSpec"
       end
     end
     add_message "google.cloud.datacatalog.v1.DatabaseTableSpec" do
       optional :type, :enum, 1, "google.cloud.datacatalog.v1.DatabaseTableSpec.TableType"
+      optional :dataplex_table, :message, 2, "google.cloud.datacatalog.v1.DataplexTableSpec"
     end
     add_enum "google.cloud.datacatalog.v1.DatabaseTableSpec.TableType" do
       value :TABLE_TYPE_UNSPECIFIED, 0
       value :NATIVE, 1
       value :EXTERNAL, 2
+    end
+    add_message "google.cloud.datacatalog.v1.FilesetSpec" do
+      optional :dataplex_fileset, :message, 1, "google.cloud.datacatalog.v1.DataplexFilesetSpec"
     end
     add_message "google.cloud.datacatalog.v1.DataSourceConnectionSpec" do
       optional :bigquery_connection_spec, :message, 1, "google.cloud.datacatalog.v1.BigQueryConnectionSpec"
@@ -277,6 +282,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DATABASE, 7
       value :DATA_SOURCE_CONNECTION, 8
       value :ROUTINE, 9
+      value :LAKE, 10
+      value :ZONE, 11
       value :SERVICE, 14
     end
   end
@@ -303,6 +310,7 @@ module Google
         Entry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.Entry").msgclass
         DatabaseTableSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec").msgclass
         DatabaseTableSpec::TableType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DatabaseTableSpec.TableType").enummodule
+        FilesetSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.FilesetSpec").msgclass
         DataSourceConnectionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.DataSourceConnectionSpec").msgclass
         RoutineSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec").msgclass
         RoutineSpec::Argument = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datacatalog.v1.RoutineSpec.Argument").msgclass

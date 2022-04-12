@@ -46,6 +46,9 @@ module Google
 
           # Dataproc Metastore.
           DATAPROC_METASTORE = 3
+
+          # Dataplex.
+          DATAPLEX = 4
         end
       end
     end
