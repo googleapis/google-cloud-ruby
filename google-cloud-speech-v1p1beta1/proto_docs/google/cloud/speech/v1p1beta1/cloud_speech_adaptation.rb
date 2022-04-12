@@ -24,15 +24,16 @@ module Google
         # Message sent by the client for the `CreatePhraseSet` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource where this phrase set will be created. Format:
+        #     Required. The parent resource where this phrase set will be created.
+        #     Format:
         #
         #     `projects/{project}/locations/{location}/phraseSets`
         #
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         # @!attribute [rw] phrase_set_id
         #   @return [::String]
         #     Required. The ID to use for the phrase set, which will become the final
@@ -61,8 +62,8 @@ module Google
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated.
@@ -81,8 +82,8 @@ module Google
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         class GetPhraseSetRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -98,8 +99,8 @@ module Google
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of phrase sets to return. The service may return
@@ -145,15 +146,16 @@ module Google
         # Message sent by the client for the `CreateCustomClass` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource where this custom class will be created. Format:
+        #     Required. The parent resource where this custom class will be created.
+        #     Format:
         #
         #     `projects/{project}/locations/{location}/customClasses`
         #
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         # @!attribute [rw] custom_class_id
         #   @return [::String]
         #     Required. The ID to use for the custom class, which will become the final
@@ -182,8 +184,8 @@ module Google
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated.
@@ -213,8 +215,8 @@ module Google
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of custom classes to return. The service may return
@@ -256,8 +258,8 @@ module Google
         #     Speech-to-Text supports three locations: `global`, `us` (US North America),
         #     and `eu` (Europe). If you are calling the `speech.googleapis.com`
         #     endpoint, use the `global` location. To specify a region, use a
-        #     [regional endpoint](/speech-to-text/docs/endpoints) with matching `us` or
-        #     `eu` location value.
+        #     [regional endpoint](https://cloud.google.com/speech-to-text/docs/endpoints)
+        #     with matching `us` or `eu` location value.
         class DeleteCustomClassRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
