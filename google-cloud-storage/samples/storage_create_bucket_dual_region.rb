@@ -16,8 +16,6 @@
 require "google/cloud/storage"
 
 def storage_create_bucket_dual_region bucket_name:, region_1:, region_2:
-  # topic_name = "your-unique-topic-name"
-
   # The ID of your GCS bucket
   # bucket_name = "your-bucket-name"
 
