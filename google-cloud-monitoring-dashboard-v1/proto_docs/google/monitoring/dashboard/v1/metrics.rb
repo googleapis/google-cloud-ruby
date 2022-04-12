@@ -129,6 +129,10 @@ module Google
           #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Threshold::Direction]
           #     The direction for the current threshold. Direction is not allowed in a
           #     XyChart.
+          # @!attribute [rw] target_axis
+          #   @return [::Google::Cloud::Monitoring::Dashboard::V1::Threshold::TargetAxis]
+          #     The target axis to use for plotting the threshold. Target axis is not
+          #     allowed in a Scorecard.
           class Threshold
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -160,6 +164,18 @@ module Google
               # The threshold will be considered crossed if the actual value is below
               # the threshold value.
               BELOW = 2
+            end
+
+            # An axis identifier.
+            module TargetAxis
+              # The target axis was not specified. Defaults to Y1.
+              TARGET_AXIS_UNSPECIFIED = 0
+
+              # The y_axis (the right axis of chart).
+              Y1 = 1
+
+              # The y2_axis (the left axis of chart).
+              Y2 = 2
             end
           end
 
