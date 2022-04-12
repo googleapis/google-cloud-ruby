@@ -75,13 +75,13 @@ module Google
         #     creation or update.
         # @!attribute [r] most_recent_editor
         #   @return [::String]
-        #     Output only. Email address of the user who last edited the big query
-        #     export. This field is set by the server and will be ignored if provided on
-        #     export creation or update.
+        #     Output only. Email address of the user who last edited the big query export.
+        #     This field is set by the server and will be ignored if provided on export
+        #     creation or update.
         # @!attribute [r] principal
         #   @return [::String]
-        #     Output only. The service account that needs permission to create table,
-        #     upload data to the big query dataset.
+        #     Output only. The service account that needs permission to create table, upload data to
+        #     the big query dataset.
         class BigQueryExport
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

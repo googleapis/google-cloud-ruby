@@ -1048,29 +1048,29 @@ module Google
             #   @return [::String]
             #     The full resource name of the resource. See:
             #     https://cloud.google.com/apis/design/resource_names#full_resource_name
+            # @!attribute [rw] display_name
+            #   @return [::String]
+            #     The human readable name of the resource.
+            # @!attribute [rw] type
+            #   @return [::String]
+            #     The full resource type of the resource.
             # @!attribute [rw] project_name
             #   @return [::String]
             #     The full resource name of project that the resource belongs to.
             # @!attribute [rw] project_display_name
             #   @return [::String]
-            #     The project id that the resource belongs to.
+            #     The project ID that the resource belongs to.
             # @!attribute [rw] parent_name
             #   @return [::String]
             #     The full resource name of resource's parent.
             # @!attribute [rw] parent_display_name
             #   @return [::String]
             #     The human readable name of resource's parent.
-            # @!attribute [rw] type
-            #   @return [::String]
-            #     The full resource type of the resource.
             # @!attribute [rw] folders
             #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Folder>]
             #     Contains a Folder message for each folder in the assets ancestry.
             #     The first folder is the deepest nested folder, and the last folder is
             #     the folder directly under the Organization.
-            # @!attribute [rw] display_name
-            #   @return [::String]
-            #     The human readable name of the resource.
             class Resource
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1259,7 +1259,7 @@ module Google
         #     The time at which the updated SecurityMarks take effect.
         #     If not set uses current server time.  Updates will be applied to the
         #     SecurityMarks that are active immediately preceding this time. Must be
-        #     smaller or equal to the server time.
+        #     earlier or equal to the server time.
         class UpdateSecurityMarksRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
