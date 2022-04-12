@@ -38,7 +38,7 @@ module Google
             # Returns the Google service account that is used by Storage Transfer
             # Service to access buckets in the project where transfers
             # run or in other projects. Each Google service account is associated
-            # with one Google Cloud Platform Console project. Users
+            # with one Google Cloud project. Users
             # should add this service account to the Google Cloud Storage bucket
             # ACLs to grant access to Storage Transfer Service. This service
             # account is created and owned by Storage Transfer Service and can
@@ -49,8 +49,8 @@ module Google
             # Updates a transfer job. Updating a job's transfer spec does not affect
             # transfer operations that are running already.
             #
-            # **Note:** The job's [status][google.storagetransfer.v1.TransferJob.status]
-            # field can be modified using this RPC (for example, to set a job's status to
+            # **Note:** The job's [status][google.storagetransfer.v1.TransferJob.status] field can be modified
+            # using this RPC (for example, to set a job's status to
             # [DELETED][google.storagetransfer.v1.TransferJob.Status.DELETED],
             # [DISABLED][google.storagetransfer.v1.TransferJob.Status.DISABLED], or
             # [ENABLED][google.storagetransfer.v1.TransferJob.Status.ENABLED]).
@@ -65,8 +65,18 @@ module Google
             rpc :ResumeTransferOperation, ::Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest, ::Google::Protobuf::Empty
             # Attempts to start a new TransferOperation for the current TransferJob. A
             # TransferJob has a maximum of one active TransferOperation. If this method
-            # is called while a TransferOperation is active, an error wil be returned.
+            # is called while a TransferOperation is active, an error will be returned.
             rpc :RunTransferJob, ::Google::Cloud::StorageTransfer::V1::RunTransferJobRequest, ::Google::Longrunning::Operation
+            # Creates an agent pool resource.
+            rpc :CreateAgentPool, ::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest, ::Google::Cloud::StorageTransfer::V1::AgentPool
+            # Updates an existing agent pool resource.
+            rpc :UpdateAgentPool, ::Google::Cloud::StorageTransfer::V1::UpdateAgentPoolRequest, ::Google::Cloud::StorageTransfer::V1::AgentPool
+            # Gets an agent pool.
+            rpc :GetAgentPool, ::Google::Cloud::StorageTransfer::V1::GetAgentPoolRequest, ::Google::Cloud::StorageTransfer::V1::AgentPool
+            # Lists agent pools.
+            rpc :ListAgentPools, ::Google::Cloud::StorageTransfer::V1::ListAgentPoolsRequest, ::Google::Cloud::StorageTransfer::V1::ListAgentPoolsResponse
+            # Deletes an agent pool.
+            rpc :DeleteAgentPool, ::Google::Cloud::StorageTransfer::V1::DeleteAgentPoolRequest, ::Google::Protobuf::Empty
           end
 
           Stub = Service.rpc_stub_class
