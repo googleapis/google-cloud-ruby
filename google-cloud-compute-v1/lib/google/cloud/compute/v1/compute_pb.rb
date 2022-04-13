@@ -3497,7 +3497,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.compute.v1.InsertFirewallPolicyRequest" do
       optional :firewall_policy_resource, :message, 495049532, "google.cloud.compute.v1.FirewallPolicy"
-      proto3_optional :parent_id, :string, 459714768
+      optional :parent_id, :string, 459714768
       proto3_optional :request_id, :string, 37109963
     end
     add_message "google.cloud.compute.v1.InsertFirewallRequest" do
