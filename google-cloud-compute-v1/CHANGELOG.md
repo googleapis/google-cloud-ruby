@@ -1,10 +1,20 @@
 # Release History
 
+### 1.3.0 (2022-04-13)
+
+#### Features
+
+* Support for the NetworkEdgeSecurity service
+* Support for the NetworkFirewallPolicies service
+* Support for the RegionSecurityPolicies service
+* Support for patching RegionTargetHttpsProxies
+* Support for retrieving aggregated lists of security policies
+
 ### 1.2.0 / 2022-03-15
 
 #### Features
 
-* use the new nonstandard LRO helpers ([#17827](https://www.github.com/googleapis/google-cloud-ruby/issues/17827))
+* use the new nonstandard LRO helpers
 
 ### 1.1.0 / 2022-02-15
 
