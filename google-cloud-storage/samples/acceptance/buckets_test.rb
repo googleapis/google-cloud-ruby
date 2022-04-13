@@ -121,9 +121,9 @@ describe "Buckets Snippets" do
 
       retry_resource_exhaustion do
         assert_output "Bucket #{bucket_name} created in #{region_1}+#{region_2}.\n" do
-          storage_create_bucket_dual_region bucket_name: bucket_name,
-                                            region_1: region_1,
-                                            region_2: region_2
+          StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: bucket_name,
+                                                                              region_1: region_1,
+                                                                              region_2: region_2
         end
       end
 

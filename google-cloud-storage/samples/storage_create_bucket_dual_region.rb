@@ -12,29 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START storage_create_bucket_dual_region]
-require "google/cloud/storage"
 
-def storage_create_bucket_dual_region bucket_name:, region_1:, region_2:
-  # The ID of your GCS bucket
-  # bucket_name = "your-bucket-name"
+class StorageCreateBucketDualRegion
+  def storage_create_bucket_dual_region bucket_name:, region_1:, region_2:
+    # [START storage_create_bucket_dual_region]
+    # The ID of your GCS bucket
+    # bucket_name = "your-bucket-name"
+    
+    # The bucket's pair of regions. Case-insensitive.
+    # See this documentation for other valid locations:
+    # https://cloud.google.com/storage/docs/locations
+    # region_1 = "US-EAST1"
+    # region_2 = "US-WEST1"
 
-  # The bucket's pair of regions. Case-insensitive.
-  # See this documentation for other valid locations:
-  # https://cloud.google.com/storage/docs/locations
-  # region_1 = "US-EAST1"
-  # region_2 = "US-WEST1"
+    require "google/cloud/storage"
 
-  storage = Google::Cloud::Storage.new
-  bucket  = storage.create_bucket bucket_name,
-                                  location: "#{region_1}+#{region_2}"
+    storage = Google::Cloud::Storage.new
+    bucket  = storage.create_bucket bucket_name,
+                                    location: "#{region_1}+#{region_2}"
 
-  puts "Bucket #{bucket.name} created in #{bucket.location}."
+    puts "Bucket #{bucket.name} created in #{bucket.location}."
+    # [END storage_create_bucket_dual_region]
+  end
 end
-# [END storage_create_bucket_dual_region]
 
 if $PROGRAM_NAME == __FILE__
-  storage_create_bucket_dual_region bucket_name: ARGV.shift,
+  StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: ARGV.shift,
                                     region_1: ARGV.shift,
                                     region_2: ARGV.shift
 end
