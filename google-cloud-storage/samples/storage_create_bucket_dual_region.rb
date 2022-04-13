@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+# Sample for storage_create_bucket_dual_region
 class StorageCreateBucketDualRegion
   def storage_create_bucket_dual_region bucket_name:, region_1:, region_2:
     # [START storage_create_bucket_dual_region]
     # The ID of your GCS bucket
     # bucket_name = "your-bucket-name"
-    
+
     # The bucket's pair of regions. Case-insensitive.
     # See this documentation for other valid locations:
     # https://cloud.google.com/storage/docs/locations
@@ -38,6 +38,6 @@ end
 
 if $PROGRAM_NAME == __FILE__
   StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: ARGV.shift,
-                                    region_1: ARGV.shift,
-                                    region_2: ARGV.shift
+                                                                      region_1: ARGV.shift,
+                                                                      region_2: ARGV.shift
 end
