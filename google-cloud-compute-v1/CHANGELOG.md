@@ -4,13 +4,17 @@
 
 #### Features
 
-* **compute-v1:** Various updates ([d66771c](https://github.com/googleapis/google-cloud-ruby/commit/d66771c431f997505abf4840d5f509dcd2158620))
+* Support for the NetworkEdgeSecurity service
+* Support for the NetworkFirewallPolicies service
+* Support for the RegionSecurityPolicies service
+* Support for patching RegionTargetHttpsProxies
+* Support for retrieving aggregated lists of security policies
 
 ### 1.2.0 / 2022-03-15
 
 #### Features
 
-* use the new nonstandard LRO helpers ([#17827](https://www.github.com/googleapis/google-cloud-ruby/issues/17827))
+* use the new nonstandard LRO helpers
 
 ### 1.1.0 / 2022-02-15
 
