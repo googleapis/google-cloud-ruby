@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2022-04-13)
+
+#### Features
+
+* **compute-v1:** Various updates ([d66771c](https://github.com/googleapis/google-cloud-ruby/commit/d66771c431f997505abf4840d5f509dcd2158620))
+
 ### 1.2.0 / 2022-03-15
 
 #### Features
