@@ -52,6 +52,9 @@ module Google
         #     A list of keys that were not looked up due to resource constraints. The
         #     order of results in this field is undefined and has no relation to the
         #     order of the keys in the input.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which these entities were read or found missing.
         class LookupResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -189,6 +192,9 @@ module Google
         #   @return [::Integer]
         #     The number of index entries updated during the commit, or zero if none were
         #     updated.
+        # @!attribute [rw] commit_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The transaction commit timestamp. Not set for non-transactional commits.
         class CommitResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -261,6 +267,11 @@ module Google
         #     The version of the entity that this mutation is being applied
         #     to. If this does not match the current version on the server, the
         #     mutation conflicts.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The update time of the entity that this mutation is being applied
+        #     to. If this does not match the current update time on the server, the
+        #     mutation conflicts.
         class Mutation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -278,6 +289,12 @@ module Google
         #     be the version of the current entity or, if no entity is present, a version
         #     that is strictly greater than the version of any previous entity and less
         #     than the version of any possible future entity.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The update time of the entity on the server after processing the mutation.
+        #     If the mutation doesn't change anything on the server, then the timestamp
+        #     will be the update timestamp of the current entity. This field will not be
+        #     set after a 'delete'.
         # @!attribute [rw] conflict_detected
         #   @return [::Boolean]
         #     Whether a conflict was detected for this mutation. Always false when a
@@ -297,6 +314,11 @@ module Google
         #     The identifier of the transaction in which to read. A
         #     transaction identifier is returned by a call to
         #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Reads entities as they were at the given time. This may not be older
+        #     than 270 seconds.  This value is only supported for Cloud Firestore in
+        #     Datastore mode.
         class ReadOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -339,6 +361,10 @@ module Google
           end
 
           # Options specific to read-only transactions.
+          # @!attribute [rw] read_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Reads entities at the given time.
+          #     This may not be older than 60 seconds.
           class ReadOnly
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

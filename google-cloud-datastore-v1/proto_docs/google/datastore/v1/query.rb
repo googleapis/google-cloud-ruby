@@ -36,6 +36,12 @@ module Google
         #     For {::Google::Cloud::Datastore::V1::LookupResponse#missing missing} entities in `LookupResponse`, this
         #     is the version of the snapshot that was used to look up the entity, and it
         #     is always set except for eventually consistent reads.
+        # @!attribute [rw] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time at which the entity was last changed.
+        #     This field is set for {::Google::Cloud::Datastore::V1::EntityResult::ResultType::FULL `FULL`} entity
+        #     results.
+        #     If this entity is missing, this field will not be set.
         # @!attribute [rw] cursor
         #   @return [::String]
         #     A cursor that points to the position after the result entity.
@@ -364,6 +370,18 @@ module Google
         #     can have a greater snapshot version number. Each batch's snapshot version
         #     is valid for all preceding batches.
         #     The value will be zero for eventually consistent queries.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Read timestamp this batch was returned from.
+        #     This applies to the range of results from the query's `start_cursor` (or
+        #     the beginning of the query if no cursor was given) to this batch's
+        #     `end_cursor` (not the query's `end_cursor`).
+        #
+        #     In a single transaction, subsequent query result batches for the same query
+        #     can have a greater timestamp. Each batch's read timestamp
+        #     is valid for all preceding batches.
+        #     This value will not be set for eventually consistent queries in Cloud
+        #     Datastore.
         class QueryResultBatch
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
