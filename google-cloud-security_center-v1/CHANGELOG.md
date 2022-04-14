@@ -2,7 +2,6 @@
 
 ### 0.14.0 (2022-04-14)
 
-
 #### Features
 
 * Support for update masks when setting IAM policies
