@@ -4,7 +4,10 @@
 
 #### Features
 
-* Various updates
+* Support for updating existing assignments
+* Support for setting the maximum number of concurrent queries in a reservation
+* Support for placing a reservation in the secondary region, if available
+* Support for setting the preferred tables for BI capacity
 
 ### 0.4.2 / 2022-01-11
 
