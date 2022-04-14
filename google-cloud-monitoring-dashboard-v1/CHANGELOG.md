@@ -1,5 +1,17 @@
 # Release History
 
+### 0.7.0 (2022-04-14)
+
+#### Features
+
+* Support for dashboard filters
+* Support for dashboard labels
+* Support for time series table widgets
+* Support for collapsible group widgets
+* Support for logs panel widgets
+* Support for target axis when plotting a threshold
+* Support for a second Y axis when plotting data sets
+
 ### 0.6.6 / 2022-01-11
 
 #### Documentation
