@@ -64,12 +64,23 @@ class MiscTest < Minitest::Test
   
     # }
     
-    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json operation_json
+    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json operation_json, ignore_unknown_fields: true
     assert_equal :PENDING, op_decoded.status
 
+    # Passing an unknown int works
     int_enum_json = operation_json.gsub '"PENDING"', '42'
-
-    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json int_enum_json
+    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json int_enum_json, ignore_unknown_fields: true
     assert_equal 42, op_decoded.status
+
+    # Passing an unknown string value works, as long as you give the `ignore_unknown_fields: true` option
+    unknown_enum_json = operation_json.gsub "PENDING", "THIS_VALUE_DOES_NOT_EXIST"
+    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json unknown_enum_json, ignore_unknown_fields: true
+    assert_equal :UNDEFINED_STATUS, op_decoded.status
+
+    # Passing an unknown string value throws without the `ignore_unknown_fields: true` option
+    ex = assert_raises ::Google::Protobuf::ParseError do
+      op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json unknown_enum_json
+    end
+    assert_match /Error parsing JSON.*Unknown enumerator.*THIS_VALUE_DOES_NOT_EXIST/, ex.message
   end
 end
