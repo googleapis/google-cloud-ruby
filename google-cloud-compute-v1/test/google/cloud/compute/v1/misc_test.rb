@@ -8,8 +8,8 @@ class MiscTest < Minitest::Test
   ##
   # This tests verifies that an unknown enum value in a proto json is getting parsed into an :UNDEFINED_STATE
   #
-  def test_parse_unknown_enum_value
-    deprecation_status_json = Google::Cloud::Compute::V1::DeprecationStatus.new(
+  def test_parse_unknown_stringenum_value
+    deprecation_status_json = ::Google::Cloud::Compute::V1::DeprecationStatus.new(
       deleted: "foo",
       state: :OBSOLETE).to_json
 
@@ -29,21 +29,47 @@ class MiscTest < Minitest::Test
     assert_equal "THIS_VALUE_DOES_NOT_EXIST", ds_decoded.state
   end
 
-  def test_parse_numeric_enum_value
-    deprecation_status_json = Google::Cloud::Compute::V1::DeprecationStatus.new(
+  def test_parse_numeric_stringenum_value
+    deprecation_status_json = ::Google::Cloud::Compute::V1::DeprecationStatus.new(
       deleted: "foo",
       state: :OBSOLETE).to_json
 
     ds_decoded = ::Google::Cloud::Compute::V1::DeprecationStatus.decode_json deprecation_status_json, ignore_unknown_fields: true
     assert_equal "OBSOLETE", ds_decoded.state
     
-    unknown_enum_json = deprecation_status_json.gsub "\"OBSOLETE\"", "57"
+    int_enumstr_json = deprecation_status_json.gsub "\"OBSOLETE\"", "42"
     
     err = assert_raises ::Google::Protobuf::ParseError do 
-      ds_decoded = ::Google::Cloud::Compute::V1::DeprecationStatus.decode_json unknown_enum_json, ignore_unknown_fields: true
+      ds_decoded = ::Google::Cloud::Compute::V1::DeprecationStatus.decode_json int_enumstr_json, ignore_unknown_fields: true
     end
 
     assert_match /Error parsing JSON/, err.message
     assert_match /Expected string/, err.message
+  end
+  
+  def test_parse_numeric_stringenum_value
+    operation_json = ::Google::Cloud::Compute::V1::Operation.new(
+      status: :PENDING
+    ).to_json
+
+    # enum Status {
+    #   // A value indicating that the enum field is not set.
+    #   UNDEFINED_STATUS = 0;
+  
+    #   DONE = 2104194;
+  
+    #   PENDING = 35394935;
+  
+    #   RUNNING = 121282975;
+  
+    # }
+    
+    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json operation_json
+    assert_equal :PENDING, op_decoded.status
+
+    int_enum_json = operation_json.gsub '"PENDING"', '42'
+
+    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json int_enum_json
+    assert_equal 42, op_decoded.status
   end
 end
