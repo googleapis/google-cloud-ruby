@@ -139,6 +139,16 @@ module Google
         #     AI](https://cloud.google.com/vertex-ai/docs/general/vpc-peering).
         #
         #     If this field is left unspecified, the job is not peered with any network.
+        # @!attribute [rw] reserved_ip_ranges
+        #   @return [::Array<::String>]
+        #     Optional. A list of names for the reserved ip ranges under the VPC network
+        #     that can be used for this job.
+        #
+        #     If set, we will deploy the job within the provided ip ranges. Otherwise,
+        #     the job will be deployed to any ip ranges under the provided VPC
+        #     network.
+        #
+        #     Example: ['vertex-ai-ip-range'].
         # @!attribute [rw] base_output_directory
         #   @return [::Google::Cloud::AIPlatform::V1::GcsDestination]
         #     The Cloud Storage location to store the output of this CustomJob or
@@ -195,6 +205,9 @@ module Google
         # @!attribute [rw] replica_count
         #   @return [::Integer]
         #     Optional. The number of worker replicas to use for this worker pool.
+        # @!attribute [rw] nfs_mounts
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::NfsMount>]
+        #     Optional. List of NFS mount spec.
         # @!attribute [rw] disk_spec
         #   @return [::Google::Cloud::AIPlatform::V1::DiskSpec]
         #     Disk spec.

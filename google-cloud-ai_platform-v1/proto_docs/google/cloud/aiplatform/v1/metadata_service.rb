@@ -238,7 +238,7 @@ module Google
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. A FieldMask indicating which fields should be updated.
+        #     Optional. A FieldMask indicating which fields should be updated.
         #     Functionality of this field is not yet supported.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
@@ -424,7 +424,7 @@ module Google
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. A FieldMask indicating which fields should be updated.
+        #     Optional. A FieldMask indicating which fields should be updated.
         #     Functionality of this field is not yet supported.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
@@ -678,7 +678,7 @@ module Google
         #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. A FieldMask indicating which fields should be updated.
+        #     Optional. A FieldMask indicating which fields should be updated.
         #     Functionality of this field is not yet supported.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]

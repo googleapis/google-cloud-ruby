@@ -34,6 +34,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :boot_disk_type, :string, 1
       optional :boot_disk_size_gb, :int32, 2
     end
+    add_message "google.cloud.aiplatform.v1.NfsMount" do
+      optional :server, :string, 1
+      optional :path, :string, 2
+      optional :mount_point, :string, 3
+    end
     add_message "google.cloud.aiplatform.v1.AutoscalingMetricSpec" do
       optional :metric_name, :string, 1
       optional :target, :int32, 2
@@ -51,6 +56,7 @@ module Google
         BatchDedicatedResources = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchDedicatedResources").msgclass
         ResourcesConsumed = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ResourcesConsumed").msgclass
         DiskSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DiskSpec").msgclass
+        NfsMount = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.NfsMount").msgclass
         AutoscalingMetricSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.AutoscalingMetricSpec").msgclass
       end
     end

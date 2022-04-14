@@ -47,6 +47,9 @@ module Google
         # @!attribute [r] schedule_state
         #   @return [::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob::MonitoringScheduleState]
         #     Output only. Schedule state when the monitoring job is in Running state.
+        # @!attribute [r] latest_monitoring_pipeline_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringJob::LatestMonitoringPipelineMetadata]
+        #     Output only. Latest triggered monitoring pipeline metadata.
         # @!attribute [rw] model_deployment_monitoring_objective_configs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelDeploymentMonitoringObjectiveConfig>]
         #     Required. The config for monitoring objectives. This is a per DeployedModel config.
@@ -138,6 +141,19 @@ module Google
         class ModelDeploymentMonitoringJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # All metadata of most recent monitoring pipelines.
+          # @!attribute [rw] run_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time that most recent monitoring pipelines that is related to this
+          #     run.
+          # @!attribute [rw] status
+          #   @return [::Google::Rpc::Status]
+          #     The status of the most recent monitoring pipeline.
+          class LatestMonitoringPipelineMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]

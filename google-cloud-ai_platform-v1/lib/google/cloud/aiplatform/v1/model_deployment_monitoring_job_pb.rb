@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :endpoint, :string, 3
       optional :state, :enum, 4, "google.cloud.aiplatform.v1.JobState"
       optional :schedule_state, :enum, 5, "google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.MonitoringScheduleState"
+      optional :latest_monitoring_pipeline_metadata, :message, 25, "google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.LatestMonitoringPipelineMetadata"
       repeated :model_deployment_monitoring_objective_configs, :message, 6, "google.cloud.aiplatform.v1.ModelDeploymentMonitoringObjectiveConfig"
       optional :model_deployment_monitoring_schedule_config, :message, 7, "google.cloud.aiplatform.v1.ModelDeploymentMonitoringScheduleConfig"
       optional :logging_sampling_strategy, :message, 8, "google.cloud.aiplatform.v1.SamplingStrategy"
@@ -39,6 +40,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :encryption_spec, :message, 21, "google.cloud.aiplatform.v1.EncryptionSpec"
       optional :enable_monitoring_pipeline_logs, :bool, 22
       optional :error, :message, 23, "google.rpc.Status"
+    end
+    add_message "google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.LatestMonitoringPipelineMetadata" do
+      optional :run_time, :message, 1, "google.protobuf.Timestamp"
+      optional :status, :message, 2, "google.rpc.Status"
     end
     add_enum "google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.MonitoringScheduleState" do
       value :MONITORING_SCHEDULE_STATE_UNSPECIFIED, 0
@@ -95,6 +100,7 @@ module Google
     module AIPlatform
       module V1
         ModelDeploymentMonitoringJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob").msgclass
+        ModelDeploymentMonitoringJob::LatestMonitoringPipelineMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.LatestMonitoringPipelineMetadata").msgclass
         ModelDeploymentMonitoringJob::MonitoringScheduleState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelDeploymentMonitoringJob.MonitoringScheduleState").enummodule
         ModelDeploymentMonitoringBigQueryTable = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelDeploymentMonitoringBigQueryTable").msgclass
         ModelDeploymentMonitoringBigQueryTable::LogSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelDeploymentMonitoringBigQueryTable.LogSource").enummodule

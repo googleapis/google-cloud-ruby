@@ -44,7 +44,7 @@ module Google
         #     Output only. Timestamp when this PipelineJob was most recently updated.
         # @!attribute [rw] pipeline_spec
         #   @return [::Google::Protobuf::Struct]
-        #     Required. The spec of the pipeline.
+        #     The spec of the pipeline.
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineState]
         #     Output only. The detailed state of the job.

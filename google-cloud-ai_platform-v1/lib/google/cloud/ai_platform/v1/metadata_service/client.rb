@@ -896,7 +896,7 @@ module Google
             #     Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/artifacts/{artifact}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. A FieldMask indicating which fields should be updated.
+            #     Optional. A FieldMask indicating which fields should be updated.
             #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is not found, a new {::Google::Cloud::AIPlatform::V1::Artifact Artifact} is
@@ -1513,7 +1513,7 @@ module Google
             #     Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. A FieldMask indicating which fields should be updated.
+            #     Optional. A FieldMask indicating which fields should be updated.
             #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Context Context} is not found, a new {::Google::Cloud::AIPlatform::V1::Context Context} is
@@ -2417,7 +2417,7 @@ module Google
             #     Format:
             #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/executions/{execution}`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. A FieldMask indicating which fields should be updated.
+            #     Optional. A FieldMask indicating which fields should be updated.
             #     Functionality of this field is not yet supported.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the {::Google::Cloud::AIPlatform::V1::Execution Execution} is not found, a new {::Google::Cloud::AIPlatform::V1::Execution Execution}

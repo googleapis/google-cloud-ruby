@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Next ID: 7
+        # Next ID: 8
         # @!attribute [rw] training_dataset
         #   @return [::Google::Cloud::AIPlatform::V1::ModelMonitoringObjectiveConfig::TrainingDataset]
         #     Training dataset for models. This field has to be set only if

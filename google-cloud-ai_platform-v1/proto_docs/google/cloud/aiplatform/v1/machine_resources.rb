@@ -70,6 +70,11 @@ module Google
         #     replicas at maximum may handle, a portion of the traffic will be dropped.
         #     If this value is not provided, will use {::Google::Cloud::AIPlatform::V1::DedicatedResources#min_replica_count min_replica_count} as the
         #     default value.
+        #
+        #     The value of this field impacts the charge against Vertex CPU and GPU
+        #     quotas. Specifically, you will be charged for (max_replica_count *
+        #     number of cores in the selected machine type) and (max_replica_count *
+        #     number of GPUs per replica in the selected machine type).
         # @!attribute [rw] autoscaling_metric_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::AutoscalingMetricSpec>]
         #     Immutable. The metric specifications that overrides a resource
@@ -163,6 +168,24 @@ module Google
         #   @return [::Integer]
         #     Size in GB of the boot disk (default is 100GB).
         class DiskSpec
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Represents a mount configuration for Network File System (NFS) to mount.
+        # @!attribute [rw] server
+        #   @return [::String]
+        #     Required. IP address of the NFS server.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Required. Source path exported from NFS server.
+        #     Has to start with '/', and combined with the ip address, it indicates
+        #     the source mount path in the form of `server:path`
+        # @!attribute [rw] mount_point
+        #   @return [::String]
+        #     Required. Destination mount path. The NFS will be mounted for the user under
+        #     /mnt/nfs/<mount_point>
+        class NfsMount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

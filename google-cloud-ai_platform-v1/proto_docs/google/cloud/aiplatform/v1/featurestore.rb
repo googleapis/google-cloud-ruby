@@ -53,7 +53,8 @@ module Google
         #     and are immutable.
         # @!attribute [rw] online_serving_config
         #   @return [::Google::Cloud::AIPlatform::V1::Featurestore::OnlineServingConfig]
-        #     Required. Config for online serving resources.
+        #     Optional. Config for online storage resources. If unset, the featurestore will
+        #     not have an online store and cannot be used for online serving.
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::Featurestore::State]
         #     Output only. State of the featurestore.
@@ -69,11 +70,10 @@ module Google
           # resources.
           # @!attribute [rw] fixed_node_count
           #   @return [::Integer]
-          #     The number of nodes for each cluster. The number of nodes will not
-          #     scale automatically but can be scaled manually by providing different
-          #     values when updating.
-          #     Only one of `fixed_node_count` and `scaling` can be set. Setting one will
-          #     reset the other.
+          #     The number of nodes for the online store. The number of nodes doesn't
+          #     scale automatically, but you can manually update the number of
+          #     nodes. If set to 0, the featurestore will not have an
+          #     online store and cannot be used for online serving.
           class OnlineServingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -88,24 +88,26 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Possible states a Featurestore can have.
+          # Possible states a featurestore can have.
           module State
             # Default value. This value is unused.
             STATE_UNSPECIFIED = 0
 
-            # State when the Featurestore configuration is not being updated and the
-            # fields reflect the current configuration of the Featurestore. The
-            # Featurestore is usable in this state.
+            # State when the featurestore configuration is not being updated and the
+            # fields reflect the current configuration of the featurestore. The
+            # featurestore is usable in this state.
             STABLE = 1
 
-            # State when the Featurestore configuration is being updated and the fields
-            # reflect the updated configuration of the Featurestore, not the current
-            # one. For example, `online_serving_config.fixed_node_count` can take
-            # minutes to update. While the update is in progress, the Featurestore
-            # will be in the UPDATING state and the value of `fixed_node_count` will be
-            # the updated value. Until the update completes, the actual number of nodes
-            # can still be the original value of `fixed_node_count`. The Featurestore
-            # is still usable in this state.
+            # The state of the featurestore configuration when it is being updated.
+            # During an update, the fields reflect either the original configuration
+            # or the updated configuration of the featurestore. For example,
+            # `online_serving_config.fixed_node_count` can take minutes to update.
+            # While the update is in progress, the featurestore is in the UPDATING
+            # state, and the value of `fixed_node_count` can be the original value or
+            # the updated value, depending on the progress of the operation. Until the
+            # update completes, the actual number of nodes can still be the original
+            # value of `fixed_node_count`. The featurestore is still usable in this
+            # state.
             UPDATING = 2
           end
         end
