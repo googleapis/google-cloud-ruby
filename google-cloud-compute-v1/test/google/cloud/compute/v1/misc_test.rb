@@ -67,9 +67,11 @@ class MiscTest < Minitest::Test
     op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json operation_json, ignore_unknown_fields: true
     assert_equal :PENDING, op_decoded.status
 
-    # Passing an unknown int works
+    # Passing an unknown int works, with or without the `ignore_unknown_fields: true` option
     int_enum_json = operation_json.gsub '"PENDING"', '42'
     op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json int_enum_json, ignore_unknown_fields: true
+    assert_equal 42, op_decoded.status
+    op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json int_enum_json
     assert_equal 42, op_decoded.status
 
     # Passing an unknown string value works, as long as you give the `ignore_unknown_fields: true` option
