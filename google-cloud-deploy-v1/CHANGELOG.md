@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.2.0 (2022-04-14)
+
+#### Features
+
+* Support for specifying an Anthos Cluster target
+* Support for specifying the execution worker pool
+* Support for specifying the execution service account
+* Support for specifying the storage bucket for artifacts
+* Support for specifying the internal IP for a private GKE cluster
+* Rollouts and renders now report the failure cause
+* Defined types for notification payloads
+
 ### 0.1.3 / 2022-01-11
 
 #### Bug Fixes
