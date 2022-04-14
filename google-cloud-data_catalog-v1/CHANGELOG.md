@@ -4,9 +4,10 @@
 
 #### Features
 
-* Various updates
-#### Bug Fixes
-
+* Support for integrating with Dataplex
+* Support for update masks when setting IAM policies
+* Support for DataCatalog entry name
+* Support for detailed storage properties
 * Update grpc-google-iam-v1 dependency to 1.1
 
 ### 0.10.0 / 2022-02-16
