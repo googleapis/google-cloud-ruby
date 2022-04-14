@@ -47,7 +47,7 @@ class MiscTest < Minitest::Test
     assert_match /Expected string/, err.message
   end
   
-  def test_parse_numeric_stringenum_value
+  def test_parse_numeric_enum_value
     operation_json = ::Google::Cloud::Compute::V1::Operation.new(
       status: :PENDING
     ).to_json
