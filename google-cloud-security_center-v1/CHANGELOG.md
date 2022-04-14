@@ -5,9 +5,9 @@
 
 #### Features
 
-* Various updates
-#### Bug Fixes
-
+* Support for update masks when setting IAM policies
+* Added IAM bindings and next steps to Findings
+* Added two new Mitre Attack techniques
 * Update grpc-google-iam-v1 dependency to 1.1
 
 ### 0.13.0 / 2022-03-03
