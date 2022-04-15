@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2022-04-15)
+
+#### Features
+
+* add recommendation priority and insights severity projection
+
 ### 0.8.6 / 2022-01-11
 
 #### Documentation
