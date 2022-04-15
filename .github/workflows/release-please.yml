@@ -31,11 +31,11 @@ jobs:
           node-version: "16.x"
       - name: Install tools
         run: |
-          gem install --no-document toys && \
-          toys release manifest --install --global-node-package
+          gem install --no-document toys && toys release manifest --install
       - name: execute
         run: |
           toys release manifest -v \
-            --fork --global-node-package \
+            --fork \
             --github-event-name=${{ github.event_name }} \
-            ${{ github.event.inputs.args }} -- ${{ github.event.inputs.gem }}
+            ${{ github.event.inputs.args }} \
+            -- ${{ github.event.inputs.gem }}
