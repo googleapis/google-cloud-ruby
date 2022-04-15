@@ -21,7 +21,7 @@ module Google
   module Cloud
     module OsConfig
       module V1
-        VERSION = "0.10.0"
+        VERSION = "0.9.1"
       end
     end
   end
