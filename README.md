@@ -24,7 +24,7 @@ This client supports the following Google Cloud Platform services:
 * [Cloud Debugger](#cloud-debugger)
 * [Dialogflow API](#dialogflow-api)
 * [Cloud DNS](#cloud-dns)
-* [Cloud Error Reporting](#cloud-error-reporting)
+* [Error Reporting](#error-reporting)
 * [Cloud Firestore](#cloud-firestore)
 * [Cloud Key Management Service](#cloud-key-management-service)
 * [Cloud Natural Language API](#cloud-natural-language-api)
@@ -185,7 +185,7 @@ linked from the README documents listed below for each service.
 - [google-cloud-dns on RubyGems](https://rubygems.org/gems/google-cloud-dns)
 - [Google Cloud DNS documentation](https://cloud.google.com/dns/docs)
 
-### Cloud Error Reporting
+### Error Reporting
 
 - `gem install google-cloud-error_reporting`
 - [google-cloud-error_reporting README](google-cloud-error_reporting/README.md)
