@@ -1,11 +1,5 @@
 # Changelog
 
-### 0.2.0 / 2022-02-13
-
-#### Features
-
-* add KubernetesResource to membership endpoint
-
 ### 0.1.2 / 2022-01-11
 
 #### Bug Fixes
