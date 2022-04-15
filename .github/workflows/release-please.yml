@@ -31,7 +31,7 @@ jobs:
           node-version: "16.x"
       - name: Install tools
         run: |
-          gem install --no-document toys && toys release manifest --install
+          gem install --no-document toys
       - name: execute
         run: |
           toys release manifest -v \
