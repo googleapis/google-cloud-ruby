@@ -125,11 +125,6 @@ module Google
         # @!attribute [rw] dataproc_parameters
         #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::DataprocParameters]
         #     Parameters used in Dataproc JobType executions.
-        # @!attribute [rw] kernel_spec
-        #   @return [::String]
-        #     Name of the kernel spec to use. This must be specified if the
-        #     kernel spec name on the execution target does not match the name in the
-        #     input notebook file.
         class ExecutionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

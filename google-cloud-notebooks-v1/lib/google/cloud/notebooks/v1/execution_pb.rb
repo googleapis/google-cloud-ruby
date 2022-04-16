@@ -20,7 +20,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parameters, :string, 9
       optional :service_account, :string, 10
       optional :job_type, :enum, 11, "google.cloud.notebooks.v1.ExecutionTemplate.JobType"
-      optional :kernel_spec, :string, 13
       oneof :job_parameters do
         optional :dataproc_parameters, :message, 12, "google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters"
       end
