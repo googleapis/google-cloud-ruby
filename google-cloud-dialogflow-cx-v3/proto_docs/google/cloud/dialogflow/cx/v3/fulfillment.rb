@@ -54,7 +54,11 @@ module Google
           #     that have slow webhooks.
           # @!attribute [rw] tag
           #   @return [::String]
-          #     The tag used by the webhook to identify which fulfillment is being called.
+          #     The value of this field will be populated in the {::Google::Cloud::Dialogflow::CX::V3::WebhookRequest WebhookRequest}
+          #     `fulfillmentInfo.tag` field by Dialogflow when the associated webhook is
+          #     called.
+          #     The tag is typically used by the webhook service to identify which
+          #     fulfillment is being called, but it could be used for other purposes.
           #     This field is required if `webhook` is specified.
           # @!attribute [rw] set_parameter_actions
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Fulfillment::SetParameterAction>]

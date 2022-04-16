@@ -108,7 +108,7 @@ module Google
           #
           #     TransitionRoutes are evalauted in the following order:
           #
-          #     *   TransitionRoutes with intent specified..
+          #     *   TransitionRoutes with intent specified.
           #     *   TransitionRoutes with only condition specified.
           #
           #     TransitionRoutes with intent specified are inherited by pages in the flow.

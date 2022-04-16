@@ -34,7 +34,7 @@ module Google
           # @!attribute [rw] display_name
           #   @return [::String]
           #     Required. The human-readable name of the transition route group, unique within
-          #     the {::Google::Cloud::Dialogflow::CX::V3::Agent Agent}. The display name can be no longer than 30 characters.
+          #     the flow. The display name can be no longer than 30 characters.
           # @!attribute [rw] transition_routes
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::TransitionRoute>]
           #     Transition routes associated with the {::Google::Cloud::Dialogflow::CX::V3::TransitionRouteGroup TransitionRouteGroup}.

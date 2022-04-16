@@ -47,7 +47,7 @@ module Google
           #     ID>/flows/<Flow ID>/pages/<Page ID>`.
           # @!attribute [rw] display_name
           #   @return [::String]
-          #     Required. The human-readable name of the page, unique within the agent.
+          #     Required. The human-readable name of the page, unique within the flow.
           # @!attribute [rw] entry_fulfillment
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Fulfillment]
           #     The fulfillment to call when the session is entering the page.
