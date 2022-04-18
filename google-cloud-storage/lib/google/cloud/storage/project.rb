@@ -288,12 +288,11 @@ module Google
         #     roles.
         #   * `public`, `public_read`, `publicRead` - File owner gets OWNER
         #     access, and allUsers get READER access.
-        # @param [String] location The location of the bucket. Object data for
-        #   objects in the bucket resides in physical storage within this
-        #   region. Possible values include `ASIA`, `EU`, and `US`. (See the
-        #   [developer's
-        #   guide](https://cloud.google.com/storage/docs/bucket-locations) for
-        #   the authoritative list. The default value is `US`.
+        # @param [String] location The location of the bucket. Optional.
+        #   If not passed, the default location, 'US', will be used.
+        #   If specifying a dual-region location, the regions can be specified
+        #   by joining them with a plus sign, for example 'US-CENTRAL1+US-WEST1'. See:
+        #   [Storage Locaitons](https://cloud.google.com/storage/docs/locations).
         # @param [String] logging_bucket The destination bucket for the bucket's
         #   logs. For more information, see [Access
         #   Logs](https://cloud.google.com/storage/docs/access-logs).

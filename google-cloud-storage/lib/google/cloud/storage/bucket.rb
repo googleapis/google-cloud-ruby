@@ -279,7 +279,7 @@ module Google
         #
         # @return [String]
         #
-        # @see https://cloud.google.com/storage/docs/concepts-techniques
+        # @see https://cloud.google.com/storage/docs/locations
         #
         def location
           @gapi.location

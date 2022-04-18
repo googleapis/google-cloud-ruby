@@ -19,6 +19,7 @@ require_relative "../storage_change_default_storage_class"
 require_relative "../storage_cors_configuration"
 require_relative "../storage_create_bucket"
 require_relative "../storage_create_bucket_class_location"
+require_relative "../storage_create_bucket_dual_region"
 require_relative "../storage_define_bucket_website_configuration"
 require_relative "../storage_delete_bucket"
 require_relative "../storage_disable_bucket_lifecycle_management"
@@ -108,6 +109,27 @@ describe "Buckets Snippets" do
 
       delete_bucket_helper bucket_name
       delete_bucket_helper secondary_bucket_name
+    end
+  end
+
+  describe "storage_create_bucket_dual_region" do
+    it "creates dual region bucket" do
+      region_1 = "US-EAST1"
+      region_2 = "US-WEST1"
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+
+      retry_resource_exhaustion do
+        assert_output "Bucket #{bucket_name} created in #{region_1}+#{region_2}.\n" do
+          StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: bucket_name,
+                                                                              region_1: region_1,
+                                                                              region_2: region_2
+        end
+      end
+
+      refute_nil storage_client.bucket bucket_name
+
+      delete_bucket_helper bucket_name
     end
   end
 

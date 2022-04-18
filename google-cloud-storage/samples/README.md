@@ -72,6 +72,7 @@ Run the tests for these samples by running `bundle exec rake test`.
 | storage_cors_configuration.rb | `bucket` | Set a CORS rule for a bucket 
 | storage_create_bucket.rb | `bucket` | Create a new bucket with default storage class and location |
 | storage_create_bucket_class_location.rb | `bucket` | Create a new bucket with specific storage class and location |
+| storage_create_bucket_dual_region.rb | `bucket` | Create a new bucket with default storage class and dual region location |
 | storage_create_hmac_key.rb | `service_account_email` | Create HMAC Key |
 | storage_deactivate_hmac_key.rb | `access_id` | Deactivate an HMAC Key |
 | storage_define_bucket_website_configuration.rb | `bucket` `main_page_suffix` `not_found_page` | Configure index and 404 pages for static website bucket |
