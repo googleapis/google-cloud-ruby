@@ -9,6 +9,7 @@
   "skip-github-release": false,
   "separate-pull-requests": true,
   "tag-separator": "/",
+  "sequential-calls": true,
   "packages": {
     "google-cloud-secret_manager-v1": {
       "component": "google-cloud-secret_manager-v1",
