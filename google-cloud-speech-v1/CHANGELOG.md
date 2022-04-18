@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.2 (2022-04-16)
+
+#### Bug Fixes
+
+* Removed some unused requires
+
 ### 0.7.1 / 2022-01-11
 
 #### Bug Fixes
