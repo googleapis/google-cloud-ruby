@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.7.1 (2022-04-18)
+
+#### Bug Fixes
+
+* Remove unused requires
+#### Documentation
+
+* fix typos and add reference for Fulfilment tag
+
 ### 0.7.0 / 2022-03-30
 
 #### Features
