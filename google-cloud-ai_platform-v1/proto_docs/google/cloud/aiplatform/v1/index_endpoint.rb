@@ -68,9 +68,9 @@ module Google
         #     Private services access must already be configured for the network. If left
         #     unspecified, the Endpoint is not peered with any network.
         #
-        #     Only one of the fields, {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} or
-        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#enable_private_service_connect enable_private_service_connect},
-        #     can be set.
+        #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} and
+        #     [private_service_connect_config][google.cloud.aiplatform.v1.IndexEndpoint.private_service_connect_config]
+        #     are mutually exclusive.
         #
         #     [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert):
         #     projects/\\{project}/global/networks/\\{network}.
@@ -78,7 +78,7 @@ module Google
         #     network name.
         # @!attribute [rw] enable_private_service_connect
         #   @return [::Boolean]
-        #     Optional. If true, expose the IndexEndpoint via private service connect.
+        #     Optional. Deprecated: If true, expose the IndexEndpoint via private service connect.
         #
         #     Only one of the fields, {::Google::Cloud::AIPlatform::V1::IndexEndpoint#network network} or
         #     {::Google::Cloud::AIPlatform::V1::IndexEndpoint#enable_private_service_connect enable_private_service_connect},

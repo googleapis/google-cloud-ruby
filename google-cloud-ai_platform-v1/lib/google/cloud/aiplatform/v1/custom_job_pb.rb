@@ -34,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :scheduling, :message, 3, "google.cloud.aiplatform.v1.Scheduling"
       optional :service_account, :string, 4
       optional :network, :string, 5
+      repeated :reserved_ip_ranges, :string, 13
       optional :base_output_directory, :message, 6, "google.cloud.aiplatform.v1.GcsDestination"
       optional :tensorboard, :string, 7
       optional :enable_web_access, :bool, 10
@@ -41,6 +42,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.WorkerPoolSpec" do
       optional :machine_spec, :message, 1, "google.cloud.aiplatform.v1.MachineSpec"
       optional :replica_count, :int64, 2
+      repeated :nfs_mounts, :message, 4, "google.cloud.aiplatform.v1.NfsMount"
       optional :disk_spec, :message, 5, "google.cloud.aiplatform.v1.DiskSpec"
       oneof :task do
         optional :container_spec, :message, 6, "google.cloud.aiplatform.v1.ContainerSpec"

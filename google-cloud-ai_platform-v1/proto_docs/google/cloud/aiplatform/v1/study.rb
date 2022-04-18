@@ -187,6 +187,9 @@ module Google
         # @!attribute [rw] median_automated_stopping_spec
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::MedianAutomatedStoppingSpec]
         #     The automated early stopping spec using median rule.
+        # @!attribute [rw] convex_automated_stopping_spec
+        #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ConvexAutomatedStoppingSpec]
+        #     The automated early stopping spec using convex stopping rule.
         # @!attribute [rw] metrics
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::StudySpec::MetricSpec>]
         #     Required. Metric specs for the Study.
@@ -444,6 +447,57 @@ module Google
           #     field of latest measurement of current Trial is used to compute median
           #     objective value for each completed Trials.
           class MedianAutomatedStoppingSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration for ConvexAutomatedStoppingSpec.
+          # When there are enough completed trials (configured by
+          # min_measurement_count), for pending trials with enough measurements and
+          # steps, the policy first computes an overestimate of the objective value at
+          # max_num_steps according to the slope of the incomplete objective value
+          # curve. No prediction can be made if the curve is completely flat. If the
+          # overestimation is worse than the best objective value of the completed
+          # trials, this pending trial will be early-stopped, but a last measurement
+          # will be added to the pending trial with max_num_steps and predicted
+          # objective value from the autoregression model.
+          # @!attribute [rw] max_step_count
+          #   @return [::Integer]
+          #     Steps used in predicting the final objective for early stopped trials. In
+          #     general, it's set to be the same as the defined steps in training /
+          #     tuning. If not defined, it will learn it from the completed trials. When
+          #     use_steps is false, this field is set to the maximum elapsed seconds.
+          # @!attribute [rw] min_step_count
+          #   @return [::Integer]
+          #     Minimum number of steps for a trial to complete. Trials which do not have
+          #     a measurement with step_count > min_step_count won't be considered for
+          #     early stopping. It's ok to set it to 0, and a trial can be early stopped
+          #     at any stage. By default, min_step_count is set to be one-tenth of the
+          #     max_step_count.
+          #     When use_elapsed_duration is true, this field is set to the minimum
+          #     elapsed seconds.
+          # @!attribute [rw] min_measurement_count
+          #   @return [::Integer]
+          #     The minimal number of measurements in a Trial.  Early-stopping checks
+          #     will not trigger if less than min_measurement_count+1 completed trials or
+          #     pending trials with less than min_measurement_count measurements. If not
+          #     defined, the default value is 5.
+          # @!attribute [rw] learning_rate_parameter_name
+          #   @return [::String]
+          #     The hyper-parameter name used in the tuning job that stands for learning
+          #     rate. Leave it blank if learning rate is not in a parameter in tuning.
+          #     The learning_rate is used to estimate the objective value of the ongoing
+          #     trial.
+          # @!attribute [rw] use_elapsed_duration
+          #   @return [::Boolean]
+          #     This bool determines whether or not the rule is applied based on
+          #     elapsed_secs or steps. If use_elapsed_duration==false, the early stopping
+          #     decision is made according to the predicted objective values according to
+          #     the target steps. If use_elapsed_duration==true, elapsed_secs is used
+          #     instead of steps. Also, in this case, the parameters max_num_steps and
+          #     min_num_steps are overloaded to contain max_elapsed_seconds and
+          #     min_elapsed_seconds.
+          class ConvexAutomatedStoppingSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

@@ -92,7 +92,7 @@ module Google
         #     network name.
         # @!attribute [rw] enable_private_service_connect
         #   @return [::Boolean]
-        #     If true, expose the Endpoint via private service connect.
+        #     Deprecated: If true, expose the Endpoint via private service connect.
         #
         #     Only one of the fields, {::Google::Cloud::AIPlatform::V1::Endpoint#network network} or
         #     {::Google::Cloud::AIPlatform::V1::Endpoint#enable_private_service_connect enable_private_service_connect},
@@ -236,7 +236,7 @@ module Google
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::AIPlatform::V1::BigQueryDestination]
         #     BigQuery table for logging.
-        #     If only given project, a new dataset will be created with name
+        #     If only given a project, a new dataset will be created with name
         #     `logging_<endpoint-display-name>_<endpoint-id>` where
         #     <endpoint-display-name> will be made BigQuery-dataset-name compatible (e.g.
         #     most special characters will become underscores). If no table name is

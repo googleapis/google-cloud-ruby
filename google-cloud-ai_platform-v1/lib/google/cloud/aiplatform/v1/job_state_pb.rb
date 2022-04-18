@@ -16,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :JOB_STATE_CANCELLED, 7
       value :JOB_STATE_PAUSED, 8
       value :JOB_STATE_EXPIRED, 9
+      value :JOB_STATE_UPDATING, 10
     end
   end
 end
