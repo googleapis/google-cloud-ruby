@@ -267,8 +267,11 @@ module Google
             # Represents fulfillment information communicated to the webhook.
             # @!attribute [rw] tag
             #   @return [::String]
-            #     Always present. The tag used to identify which fulfillment is being
-            #     called.
+            #     Always present.
+            #     The value of the {::Google::Cloud::Dialogflow::CX::V3::Fulfillment#tag Fulfillment.tag} field will be populated in this
+            #     field by Dialogflow when the associated webhook is called.
+            #     The tag is typically used by the webhook service to identify which
+            #     fulfillment is being called, but it could be used for other purposes.
             class FulfillmentInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
