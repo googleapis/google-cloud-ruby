@@ -132,12 +132,18 @@ module Google
         #   @return [::Google::Cloud::SecurityCenter::V1::Access]
         #     Access details associated to the Finding, such as more information on the
         #     caller, which method was accessed, from where, etc.
+        # @!attribute [rw] connections
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Connection>]
+        #     Contains information about the IP connection associated with the finding.
         # @!attribute [rw] mute_initiator
         #   @return [::String]
         #     First known as mute_annotation. Records additional information about the
         #     mute operation e.g. mute config that muted the finding, user who muted the
         #     finding, etc. Unlike other attributes of a finding, a finding provider
         #     shouldn't set the value of mute.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Contains more detail about the finding.
         # @!attribute [rw] iam_bindings
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::IamBinding>]
         #     Represents IAM bindings associated with the Finding.
