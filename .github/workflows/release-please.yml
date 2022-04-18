@@ -35,7 +35,7 @@ jobs:
       - name: execute
         run: |
           toys release manifest -v \
-            --fork --no-labels \
+            --fork --skip-labeling \
             --github-event-name=${{ github.event_name }} \
             ${{ github.event.inputs.args }} \
             -- ${{ github.event.inputs.gem }}
