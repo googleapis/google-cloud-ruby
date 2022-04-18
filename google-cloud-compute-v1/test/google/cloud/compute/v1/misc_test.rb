@@ -73,6 +73,8 @@ class MiscTest < Minitest::Test
     assert_equal 42, op_decoded.status
     op_decoded = ::Google::Cloud::Compute::V1::Operation.decode_json int_enum_json
     assert_equal 42, op_decoded.status
+    op_re_coded_json = op_decoded.to_json
+    assert_match /42/, op_re_coded_json
 
     # Passing an unknown string value works, as long as you give the `ignore_unknown_fields: true` option
     unknown_enum_json = operation_json.gsub "PENDING", "THIS_VALUE_DOES_NOT_EXIST"
