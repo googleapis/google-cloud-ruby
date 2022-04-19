@@ -15,10 +15,6 @@
       "component": "google-cloud-secret_manager-v1",
       "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
     },
-    "gcloud": {
-      "component": "gcloud",
-      "version_file": "lib/gcloud/version.rb"
-    },
     "google-analytics-admin": {
       "component": "google-analytics-admin",
       "version_file": "lib/google/analytics/admin/version.rb"
@@ -46,10 +42,6 @@
     "google-area120-tables-v1alpha1": {
       "component": "google-area120-tables-v1alpha1",
       "version_file": "lib/google/area120/tables/v1alpha1/version.rb"
-    },
-    "google-cloud": {
-      "component": "google-cloud",
-      "version_file": "lib/google/cloud/version.rb"
     },
     "google-cloud-access_approval": {
       "component": "google-cloud-access_approval",
@@ -110,10 +102,6 @@
     "google-cloud-asset-v1": {
       "component": "google-cloud-asset-v1",
       "version_file": "lib/google/cloud/asset/v1/version.rb"
-    },
-    "google-cloud-asset-v1beta1": {
-      "component": "google-cloud-asset-v1beta1",
-      "version_file": "lib/google/cloud/asset/v1beta1/version.rb"
     },
     "google-cloud-assured_workloads": {
       "component": "google-cloud-assured_workloads",
@@ -1150,10 +1138,6 @@
     "google-cloud-web_security_scanner-v1beta": {
       "component": "google-cloud-web_security_scanner-v1beta",
       "version_file": "lib/google/cloud/web_security_scanner/v1beta/version.rb"
-    },
-    "google-cloud-webrisk": {
-      "component": "google-cloud-webrisk",
-      "version_file": "lib/google/cloud/webrisk/version.rb"
     },
     "google-cloud-workflows": {
       "component": "google-cloud-workflows",
