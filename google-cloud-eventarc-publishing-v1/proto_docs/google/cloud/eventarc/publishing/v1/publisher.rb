@@ -40,6 +40,25 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # The request message for the PublishEvents method.
+          # @!attribute [rw] channel
+          #   @return [::String]
+          #     The full name of the channel to publish to. For example:
+          #     `projects/{project}/locations/{location}/channels/{channel-id}`.
+          # @!attribute [rw] events
+          #   @return [::Array<::Google::Protobuf::Any>]
+          #     The CloudEvents v1.0 events to publish. No other types are allowed.
+          class PublishEventsRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The response message for the PublishEvents method.
+          class PublishEventsResponse
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

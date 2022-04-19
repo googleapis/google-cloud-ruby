@@ -2,8 +2,8 @@
 # source: google/cloud/eventarc/publishing/v1/publisher.proto
 
 require 'google/api/annotations_pb'
-require 'google/protobuf/any_pb'
 require 'google/api/client_pb'
+require 'google/protobuf/any_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -13,6 +13,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :events, :message, 2, "google.protobuf.Any"
     end
     add_message "google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse" do
+    end
+    add_message "google.cloud.eventarc.publishing.v1.PublishEventsRequest" do
+      optional :channel, :string, 1
+      repeated :events, :message, 2, "google.protobuf.Any"
+    end
+    add_message "google.cloud.eventarc.publishing.v1.PublishEventsResponse" do
     end
   end
 end
@@ -24,6 +30,8 @@ module Google
         module V1
           PublishChannelConnectionEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsRequest").msgclass
           PublishChannelConnectionEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.publishing.v1.PublishChannelConnectionEventsResponse").msgclass
+          PublishEventsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.publishing.v1.PublishEventsRequest").msgclass
+          PublishEventsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.publishing.v1.PublishEventsResponse").msgclass
         end
       end
     end

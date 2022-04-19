@@ -59,6 +59,8 @@ module Google
 
               # Publish events to a ChannelConnection in a partner's project.
               rpc :PublishChannelConnectionEvents, ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest, ::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsResponse
+              # Publish events to a subscriber's channel.
+              rpc :PublishEvents, ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest, ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse
             end
 
             Stub = Service.rpc_stub_class
