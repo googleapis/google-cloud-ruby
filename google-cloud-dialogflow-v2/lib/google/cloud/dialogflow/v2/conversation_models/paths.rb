@@ -87,36 +87,40 @@ module Google
             ##
             # Create a fully-qualified ConversationModelEvaluation resource string.
             #
-            # @overload conversation_model_evaluation_path(project:, conversation_model:)
+            # @overload conversation_model_evaluation_path(project:, conversation_model:, evaluation:)
             #   The resource will be in the following format:
             #
-            #   `projects/{project}/conversationModels/{conversation_model}/evaluations/evaluation`
+            #   `projects/{project}/conversationModels/{conversation_model}/evaluations/{evaluation}`
             #
             #   @param project [String]
             #   @param conversation_model [String]
+            #   @param evaluation [String]
             #
-            # @overload conversation_model_evaluation_path(project:, location:, conversation_model:)
+            # @overload conversation_model_evaluation_path(project:, location:, conversation_model:, evaluation:)
             #   The resource will be in the following format:
             #
-            #   `projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/evaluation`
+            #   `projects/{project}/locations/{location}/conversationModels/{conversation_model}/evaluations/{evaluation}`
             #
             #   @param project [String]
             #   @param location [String]
             #   @param conversation_model [String]
+            #   @param evaluation [String]
             #
             # @return [::String]
             def conversation_model_evaluation_path **args
               resources = {
-                "conversation_model:project" => (proc do |project:, conversation_model:|
+                "conversation_model:evaluation:project" => (proc do |project:, conversation_model:, evaluation:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                  raise ::ArgumentError, "conversation_model cannot contain /" if conversation_model.to_s.include? "/"
 
-                  "projects/#{project}/conversationModels/#{conversation_model}/evaluations/evaluation"
+                  "projects/#{project}/conversationModels/#{conversation_model}/evaluations/#{evaluation}"
                 end),
-                "conversation_model:location:project" => (proc do |project:, location:, conversation_model:|
+                "conversation_model:evaluation:location:project" => (proc do |project:, location:, conversation_model:, evaluation:|
                   raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
                   raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                  raise ::ArgumentError, "conversation_model cannot contain /" if conversation_model.to_s.include? "/"
 
-                  "projects/#{project}/locations/#{location}/conversationModels/#{conversation_model}/evaluations/evaluation"
+                  "projects/#{project}/locations/#{location}/conversationModels/#{conversation_model}/evaluations/#{evaluation}"
                 end)
               }
 
