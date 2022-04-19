@@ -77,6 +77,9 @@ module Google
         # @!attribute [rw] runtime
         #   @return [::Google::Cloud::Notebooks::V1::Runtime]
         #     Required. The Runtime to be created.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
         class CreateRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -87,6 +90,9 @@ module Google
         #   @return [::String]
         #     Required. Format:
         #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
         class DeleteRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -97,6 +103,9 @@ module Google
         #   @return [::String]
         #     Required. Format:
         #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
         class StartRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -107,6 +116,9 @@ module Google
         #   @return [::String]
         #     Required. Format:
         #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
         class StopRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,16 +135,22 @@ module Google
         # @!attribute [rw] accelerator_config
         #   @return [::Google::Cloud::Notebooks::V1::RuntimeAcceleratorConfig]
         #     accelerator config.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
         class SwitchRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for reseting a Managed Notebook Runtime.
+        # Request for resetting a Managed Notebook Runtime.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Format:
         #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     Idempotent request UUID.
         class ResetRuntimeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -151,6 +169,32 @@ module Google
         #   @return [::Google::Cloud::Notebooks::V1::Event]
         #     Required. The Event to be reported.
         class ReportRuntimeEventRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for getting a new access token.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format:
+        #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+        # @!attribute [rw] vm_id
+        #   @return [::String]
+        #     Required. The VM hardware token for authenticating the VM.
+        #     https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+        class RefreshRuntimeTokenInternalRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response with a new access token.
+        # @!attribute [rw] access_token
+        #   @return [::String]
+        #     The OAuth 2.0 access token.
+        # @!attribute [r] expire_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Token expiration time.
+        class RefreshRuntimeTokenInternalResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -200,6 +200,46 @@ module Google
           end
         end
 
+        # Request for adding/changing metadata items  for an instance.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Format:
+        #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Metadata items to add/update for the instance.
+        class UpdateInstanceMetadataItemsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Response for adding/changing metadata items for an instance.
+        # @!attribute [rw] items
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Map of items that were added/updated to/in the metadata.
+        class UpdateInstanceMetadataItemsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ItemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # Request for updating the Shielded Instance config for a notebook instance.
         # You can only use this method on a stopped instance
         # @!attribute [rw] name
@@ -244,7 +284,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for reseting a notebook instance
+        # Request for resetting a notebook instance
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Format:
@@ -286,6 +326,10 @@ module Google
         #   @return [::String]
         #     Required. Format:
         #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Notebooks::V1::UpgradeType]
+        #     Optional. The optional UpgradeType. Setting this field will search for additional
+        #     compute images to upgrade this instance.
         class IsInstanceUpgradeableRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -380,6 +424,10 @@ module Google
         #   @return [::String]
         #     Required. Format:
         #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Notebooks::V1::UpgradeType]
+        #     Optional. The optional UpgradeType. Setting this field will search for additional
+        #     compute images to upgrade this instance.
         class UpgradeInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -408,6 +456,10 @@ module Google
         #   @return [::String]
         #     Required. The VM hardware token for authenticating the VM.
         #     https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Notebooks::V1::UpgradeType]
+        #     Optional. The optional UpgradeType. Setting this field will search for additional
+        #     compute images to upgrade this instance.
         class UpgradeInstanceInternalRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -649,6 +701,25 @@ module Google
         class CreateExecutionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Definition of the types of upgrade that can be used on this
+        # instance.
+        module UpgradeType
+          # Upgrade type is not specified.
+          UPGRADE_TYPE_UNSPECIFIED = 0
+
+          # Upgrade ML framework.
+          UPGRADE_FRAMEWORK = 1
+
+          # Upgrade Operating System.
+          UPGRADE_OS = 2
+
+          # Upgrade CUDA.
+          UPGRADE_CUDA = 3
+
+          # Upgrade All (OS, Framework and CUDA).
+          UPGRADE_ALL = 4
         end
       end
     end

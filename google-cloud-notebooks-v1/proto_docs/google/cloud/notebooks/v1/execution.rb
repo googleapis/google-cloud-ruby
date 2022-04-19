@@ -74,7 +74,8 @@ module Google
         #
         #     Finally, if you want to use a TPU for training, specify `cloud_tpu` in this
         #     field. Learn more about the [special configuration options for training
-        #     with TPU.
+        #     with
+        #     TPU](https://cloud.google.com/ai-platform/training/docs/using-tpus#configuring_a_custom_tpu_machine).
         # @!attribute [rw] accelerator_config
         #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::SchedulerAcceleratorConfig]
         #     Configuration (count and accelerator type) for hardware running notebook
@@ -90,7 +91,7 @@ module Google
         #   @return [::String]
         #     Path to the notebook file to execute.
         #     Must be in a Google Cloud Storage bucket.
-        #     Format: `gs://{project_id}/{folder}/{notebook_file_name}`
+        #     Format: `gs://{bucket_name}/{folder}/{notebook_file_name}`
         #     Ex: `gs://notebook_user/scheduled_notebooks/sentiment_notebook.ipynb`
         # @!attribute [rw] container_image_uri
         #   @return [::String]
@@ -102,7 +103,7 @@ module Google
         #   @return [::String]
         #     Path to the notebook folder to write to.
         #     Must be in a Google Cloud Storage bucket path.
-        #     Format: `gs://{project_id}/{folder}`
+        #     Format: `gs://{bucket_name}/{folder}`
         #     Ex: `gs://notebook_user/scheduled_notebooks`
         # @!attribute [rw] params_yaml_file
         #   @return [::String]
@@ -125,13 +126,27 @@ module Google
         # @!attribute [rw] dataproc_parameters
         #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::DataprocParameters]
         #     Parameters used in Dataproc JobType executions.
+        # @!attribute [rw] vertex_ai_parameters
+        #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::VertexAIParameters]
+        #     Parameters used in Vertex AI JobType executions.
+        # @!attribute [rw] kernel_spec
+        #   @return [::String]
+        #     Name of the kernel spec to use. This must be specified if the
+        #     kernel spec name on the execution target does not match the name in the
+        #     input notebook file.
+        # @!attribute [rw] tensorboard
+        #   @return [::String]
+        #     The name of a Vertex AI [Tensorboard] resource to which this execution
+        #     will upload Tensorboard logs.
+        #     Format:
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
         class ExecutionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Definition of a hardware accelerator. Note that not all combinations
-          # of `type` and `core_count` are valid. Check GPUs on
-          # Compute Engine to find a valid
+          # of `type` and `core_count` are valid. Check [GPUs on
+          # Compute Engine](https://cloud.google.com/compute/docs/gpus) to find a valid
           # combination. TPUs are not supported.
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Notebooks::V1::ExecutionTemplate::SchedulerAcceleratorType]
@@ -152,6 +167,38 @@ module Google
           class DataprocParameters
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Parameters used in Vertex AI JobType executions.
+          # @!attribute [rw] network
+          #   @return [::String]
+          #     The full name of the Compute Engine
+          #     [network](/compute/docs/networks-and-firewalls#networks) to which the Job
+          #     should be peered. For example, `projects/12345/global/networks/myVPC`.
+          #     [Format](https://cloud.google.com/compute/docs/reference/rest/v1/networks/insert)
+          #     is of the form `projects/{project}/global/networks/{network}`.
+          #     Where \\{project} is a project number, as in `12345`, and \\{network} is a
+          #     network name.
+          #
+          #     Private services access must already be configured for the network. If
+          #     left unspecified, the job is not peered with any network.
+          # @!attribute [rw] env
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     Environment variables.
+          #      At most 100 environment variables can be specified and unique.
+          #     Example: GCP_BUCKET=gs://my-bucket/samples/
+          class VertexAIParameters
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class EnvEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # @!attribute [rw] key
@@ -189,25 +236,9 @@ module Google
             # own cluster specification. When you use this tier, set values to
             # configure your processing cluster according to these guidelines:
             #
-            # *   You _must_ set `TrainingInput.masterType` to specify the type
+            # *   You _must_ set `ExecutionTemplate.masterType` to specify the type
             #     of machine to use for your master node. This is the only required
             #     setting.
-            #
-            # *   You _may_ set `TrainingInput.workerCount` to specify the number of
-            #     workers to use. If you specify one or more workers, you _must_ also
-            #     set `TrainingInput.workerType` to specify the type of machine to use
-            #     for your worker nodes.
-            #
-            # *   You _may_ set `TrainingInput.parameterServerCount` to specify the
-            #     number of parameter servers to use. If you specify one or more
-            #     parameter servers, you _must_ also set
-            #     `TrainingInput.parameterServerType` to specify the type of machine to
-            #     use for your parameter servers.
-            #
-            # Note that all of your workers must use the same machine type, which can
-            # be different from your parameter server type and master type. Your
-            # parameter servers must likewise use the same machine type, which can be
-            # different from your worker type and master type.
             CUSTOM = 6
           end
 
@@ -230,6 +261,9 @@ module Google
 
             # Nvidia Tesla T4 GPU.
             NVIDIA_TESLA_T4 = 5
+
+            # Nvidia Tesla A100 GPU.
+            NVIDIA_TESLA_A100 = 10
 
             # TPU v2.
             TPU_V2 = 6
@@ -260,7 +294,7 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the execute. Format:
-        #     `projects/{project_id}/locations/{location}/execution/{execution_id}`
+        #     `projects/{project_id}/locations/{location}/executions/{execution_id}`
         # @!attribute [r] display_name
         #   @return [::String]
         #     Output only. Name used for UI purposes.
@@ -316,7 +350,7 @@ module Google
             # `error_message` should describe the reason for the cancellation.
             CANCELLED = 7
 
-            # The jobs has become expired (added for uCAIP jobs)
+            # The job has become expired (relevant to Vertex AI jobs)
             # https://cloud.google.com/vertex-ai/docs/reference/rest/v1/JobState
             EXPIRED = 9
 

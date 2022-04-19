@@ -37,6 +37,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :HEALTH_STATE_UNSPECIFIED, 0
       value :HEALTHY, 1
       value :UNHEALTHY, 2
+      value :AGENT_NOT_INSTALLED, 3
+      value :AGENT_NOT_RUNNING, 4
     end
     add_message "google.cloud.notebooks.v1.RuntimeAcceleratorConfig" do
       optional :type, :enum, 1, "google.cloud.notebooks.v1.RuntimeAcceleratorConfig.AcceleratorType"
@@ -88,6 +90,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PD_STANDARD, 1
       value :PD_SSD, 2
       value :PD_BALANCED, 3
+      value :PD_EXTREME, 4
     end
     add_message "google.cloud.notebooks.v1.RuntimeAccessConfig" do
       optional :access_type, :enum, 1, "google.cloud.notebooks.v1.RuntimeAccessConfig.RuntimeAccessType"
@@ -97,6 +100,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.notebooks.v1.RuntimeAccessConfig.RuntimeAccessType" do
       value :RUNTIME_ACCESS_TYPE_UNSPECIFIED, 0
       value :SINGLE_USER, 1
+      value :SERVICE_ACCOUNT, 2
     end
     add_message "google.cloud.notebooks.v1.RuntimeSoftwareConfig" do
       optional :notebook_upgrade_schedule, :string, 1
@@ -106,6 +110,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :install_gpu_driver, :bool, 5
       optional :custom_gpu_driver_path, :string, 6
       optional :post_startup_script, :string, 7
+      repeated :kernels, :message, 8, "google.cloud.notebooks.v1.ContainerImage"
+      proto3_optional :upgradeable, :bool, 9
     end
     add_message "google.cloud.notebooks.v1.RuntimeMetrics" do
       map :system_metrics, :string, :string, 1
@@ -136,6 +142,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :metadata, :string, :string, 15
       map :labels, :string, :string, 16
       optional :nic_type, :enum, 17, "google.cloud.notebooks.v1.VirtualMachineConfig.NicType"
+      optional :reserved_ip_range, :string, 18
+      optional :boot_image, :message, 19, "google.cloud.notebooks.v1.VirtualMachineConfig.BootImage"
+    end
+    add_message "google.cloud.notebooks.v1.VirtualMachineConfig.BootImage" do
     end
     add_enum "google.cloud.notebooks.v1.VirtualMachineConfig.NicType" do
       value :UNSPECIFIED_NIC_TYPE, 0
@@ -166,6 +176,7 @@ module Google
         RuntimeShieldedInstanceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RuntimeShieldedInstanceConfig").msgclass
         VirtualMachine = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.VirtualMachine").msgclass
         VirtualMachineConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.VirtualMachineConfig").msgclass
+        VirtualMachineConfig::BootImage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.VirtualMachineConfig.BootImage").msgclass
         VirtualMachineConfig::NicType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.VirtualMachineConfig.NicType").enummodule
       end
     end

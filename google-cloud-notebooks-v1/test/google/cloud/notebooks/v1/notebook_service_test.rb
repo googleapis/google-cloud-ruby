@@ -631,6 +631,66 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::ClientTest < Minitest::Te
     end
   end
 
+  def test_update_instance_metadata_items
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+    items = {}
+
+    update_instance_metadata_items_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_instance_metadata_items, name
+      assert_kind_of ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest, request
+      assert_equal "hello world", request["name"]
+      assert_equal({}, request["items"].to_h)
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_instance_metadata_items_client_stub do
+      # Create client
+      client = ::Google::Cloud::Notebooks::V1::NotebookService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_instance_metadata_items({ name: name, items: items }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_instance_metadata_items name: name, items: items do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_instance_metadata_items ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new(name: name, items: items) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_instance_metadata_items({ name: name, items: items }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_instance_metadata_items(::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new(name: name, items: items), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_instance_metadata_items_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_instance
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -959,11 +1019,13 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::ClientTest < Minitest::Te
 
     # Create request parameters for a unary method.
     notebook_instance = "hello world"
+    type = :UPGRADE_TYPE_UNSPECIFIED
 
     is_instance_upgradeable_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :is_instance_upgradeable, name
       assert_kind_of ::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest, request
       assert_equal "hello world", request["notebook_instance"]
+      assert_equal :UPGRADE_TYPE_UNSPECIFIED, request["type"]
       refute_nil options
     end
 
@@ -974,31 +1036,31 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.is_instance_upgradeable({ notebook_instance: notebook_instance }) do |response, operation|
+      client.is_instance_upgradeable({ notebook_instance: notebook_instance, type: type }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.is_instance_upgradeable notebook_instance: notebook_instance do |response, operation|
+      client.is_instance_upgradeable notebook_instance: notebook_instance, type: type do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.is_instance_upgradeable ::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance) do |response, operation|
+      client.is_instance_upgradeable ::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance, type: type) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.is_instance_upgradeable({ notebook_instance: notebook_instance }, grpc_options) do |response, operation|
+      client.is_instance_upgradeable({ notebook_instance: notebook_instance, type: type }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.is_instance_upgradeable(::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance), grpc_options) do |response, operation|
+      client.is_instance_upgradeable(::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableRequest.new(notebook_instance: notebook_instance, type: type), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -1075,11 +1137,13 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::ClientTest < Minitest::Te
 
     # Create request parameters for a unary method.
     name = "hello world"
+    type = :UPGRADE_TYPE_UNSPECIFIED
 
     upgrade_instance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upgrade_instance, name
       assert_kind_of ::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :UPGRADE_TYPE_UNSPECIFIED, request["type"]
       refute_nil options
     end
 
@@ -1090,35 +1154,35 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.upgrade_instance({ name: name }) do |response, operation|
+      client.upgrade_instance({ name: name, type: type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upgrade_instance name: name do |response, operation|
+      client.upgrade_instance name: name, type: type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upgrade_instance ::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name) do |response, operation|
+      client.upgrade_instance ::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name, type: type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upgrade_instance({ name: name }, grpc_options) do |response, operation|
+      client.upgrade_instance({ name: name, type: type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upgrade_instance(::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name), grpc_options) do |response, operation|
+      client.upgrade_instance(::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest.new(name: name, type: type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
@@ -1204,12 +1268,14 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::ClientTest < Minitest::Te
     # Create request parameters for a unary method.
     name = "hello world"
     vm_id = "hello world"
+    type = :UPGRADE_TYPE_UNSPECIFIED
 
     upgrade_instance_internal_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :upgrade_instance_internal, name
       assert_kind_of ::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest, request
       assert_equal "hello world", request["name"]
       assert_equal "hello world", request["vm_id"]
+      assert_equal :UPGRADE_TYPE_UNSPECIFIED, request["type"]
       refute_nil options
     end
 
@@ -1220,35 +1286,35 @@ class ::Google::Cloud::Notebooks::V1::NotebookService::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.upgrade_instance_internal({ name: name, vm_id: vm_id }) do |response, operation|
+      client.upgrade_instance_internal({ name: name, vm_id: vm_id, type: type }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.upgrade_instance_internal name: name, vm_id: vm_id do |response, operation|
+      client.upgrade_instance_internal name: name, vm_id: vm_id, type: type do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.upgrade_instance_internal ::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id) do |response, operation|
+      client.upgrade_instance_internal ::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id, type: type) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.upgrade_instance_internal({ name: name, vm_id: vm_id }, grpc_options) do |response, operation|
+      client.upgrade_instance_internal({ name: name, vm_id: vm_id, type: type }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.upgrade_instance_internal(::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id), grpc_options) do |response, operation|
+      client.upgrade_instance_internal(::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest.new(name: name, vm_id: vm_id, type: type), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation

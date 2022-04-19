@@ -204,6 +204,13 @@ module Google
         #     the specified [Zonal Compute
         #     Reservation](https://cloud.google.com/compute/docs/instances/reserving-zonal-resources)
         #     to this notebook instance.
+        # @!attribute [r] creator
+        #   @return [::String]
+        #     Output only. Email address of entity that sent original CreateInstance request.
+        # @!attribute [rw] can_ip_forward
+        #   @return [::Boolean]
+        #     Optional. Flag to enable ip forwarding or not, default false/off.
+        #     https://cloud.google.com/vpc/docs/using-routes#canipforward
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Instance creation time.
@@ -446,7 +453,7 @@ module Google
             # Accelerator type is Nvidia Tesla V100.
             NVIDIA_TESLA_V100 = 3
 
-            # Accelerator type is Nvidia Tesla P4 GPU.
+            # Accelerator type is Nvidia Tesla P4.
             NVIDIA_TESLA_P4 = 4
 
             # Accelerator type is Nvidia Tesla T4.
@@ -461,7 +468,7 @@ module Google
             # Accelerator type is NVIDIA Tesla P100 Virtual Workstations.
             NVIDIA_TESLA_P100_VWS = 9
 
-            # Accelerator type is Nvidia Tesla P4 GPU Virtual Workstations.
+            # Accelerator type is NVIDIA Tesla P4 Virtual Workstations.
             NVIDIA_TESLA_P4_VWS = 10
 
             # (Coming soon) Accelerator type is TPU V2.
@@ -503,6 +510,12 @@ module Google
 
             # The instance is getting registered.
             REGISTERING = 9
+
+            # The instance is suspending.
+            SUSPENDING = 10
+
+            # The instance is suspended.
+            SUSPENDED = 11
           end
 
           # Possible disk types for notebook instances.
@@ -518,6 +531,9 @@ module Google
 
             # Balanced persistent disk type.
             PD_BALANCED = 3
+
+            # Extreme persistent disk type.
+            PD_EXTREME = 4
           end
 
           # Definition of the disk encryption options.

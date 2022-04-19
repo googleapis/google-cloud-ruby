@@ -8,6 +8,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/notebooks/v1/event_pb'
 require 'google/cloud/notebooks/v1/runtime_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/timestamp_pb'
 require 'google/protobuf'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -29,28 +30,42 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :runtime_id, :string, 2
       optional :runtime, :message, 3, "google.cloud.notebooks.v1.Runtime"
+      optional :request_id, :string, 4
     end
     add_message "google.cloud.notebooks.v1.DeleteRuntimeRequest" do
       optional :name, :string, 1
+      optional :request_id, :string, 2
     end
     add_message "google.cloud.notebooks.v1.StartRuntimeRequest" do
       optional :name, :string, 1
+      optional :request_id, :string, 2
     end
     add_message "google.cloud.notebooks.v1.StopRuntimeRequest" do
       optional :name, :string, 1
+      optional :request_id, :string, 2
     end
     add_message "google.cloud.notebooks.v1.SwitchRuntimeRequest" do
       optional :name, :string, 1
       optional :machine_type, :string, 2
       optional :accelerator_config, :message, 3, "google.cloud.notebooks.v1.RuntimeAcceleratorConfig"
+      optional :request_id, :string, 4
     end
     add_message "google.cloud.notebooks.v1.ResetRuntimeRequest" do
       optional :name, :string, 1
+      optional :request_id, :string, 2
     end
     add_message "google.cloud.notebooks.v1.ReportRuntimeEventRequest" do
       optional :name, :string, 1
       optional :vm_id, :string, 2
       optional :event, :message, 3, "google.cloud.notebooks.v1.Event"
+    end
+    add_message "google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest" do
+      optional :name, :string, 1
+      optional :vm_id, :string, 2
+    end
+    add_message "google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse" do
+      optional :access_token, :string, 1
+      optional :expire_time, :message, 2, "google.protobuf.Timestamp"
     end
   end
 end
@@ -69,6 +84,8 @@ module Google
         SwitchRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.SwitchRuntimeRequest").msgclass
         ResetRuntimeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ResetRuntimeRequest").msgclass
         ReportRuntimeEventRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ReportRuntimeEventRequest").msgclass
+        RefreshRuntimeTokenInternalRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RefreshRuntimeTokenInternalRequest").msgclass
+        RefreshRuntimeTokenInternalResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.RefreshRuntimeTokenInternalResponse").msgclass
       end
     end
   end

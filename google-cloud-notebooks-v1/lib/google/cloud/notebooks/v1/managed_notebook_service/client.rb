@@ -376,7 +376,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_runtime(parent: nil, runtime_id: nil, runtime: nil)
+            # @overload create_runtime(parent: nil, runtime_id: nil, runtime: nil, request_id: nil)
             #   Pass arguments to `create_runtime` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -388,6 +388,8 @@ module Google
             #     Required. User-defined unique ID of this Runtime.
             #   @param runtime [::Google::Cloud::Notebooks::V1::Runtime, ::Hash]
             #     Required. The Runtime to be created.
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -474,7 +476,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_runtime(name: nil)
+            # @overload delete_runtime(name: nil, request_id: nil)
             #   Pass arguments to `delete_runtime` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -482,6 +484,8 @@ module Google
             #   @param name [::String]
             #     Required. Format:
             #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -572,7 +576,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload start_runtime(name: nil)
+            # @overload start_runtime(name: nil, request_id: nil)
             #   Pass arguments to `start_runtime` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -580,6 +584,8 @@ module Google
             #   @param name [::String]
             #     Required. Format:
             #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -670,7 +676,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload stop_runtime(name: nil)
+            # @overload stop_runtime(name: nil, request_id: nil)
             #   Pass arguments to `stop_runtime` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -678,6 +684,8 @@ module Google
             #   @param name [::String]
             #     Required. Format:
             #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -764,7 +772,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload switch_runtime(name: nil, machine_type: nil, accelerator_config: nil)
+            # @overload switch_runtime(name: nil, machine_type: nil, accelerator_config: nil, request_id: nil)
             #   Pass arguments to `switch_runtime` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -776,6 +784,8 @@ module Google
             #     machine type.
             #   @param accelerator_config [::Google::Cloud::Notebooks::V1::RuntimeAcceleratorConfig, ::Hash]
             #     accelerator config.
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -862,7 +872,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload reset_runtime(name: nil)
+            # @overload reset_runtime(name: nil, request_id: nil)
             #   Pass arguments to `reset_runtime` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -870,6 +880,8 @@ module Google
             #   @param name [::String]
             #     Required. Format:
             #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1035,6 +1047,96 @@ module Google
 
               @managed_notebook_service_stub.call_rpc :report_runtime_event, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets an access token for the consumer service account that the customer
+            # attached to the runtime. Only accessible from the tenant instance.
+            #
+            # @overload refresh_runtime_token_internal(request, options = nil)
+            #   Pass arguments to `refresh_runtime_token_internal` via a request object, either of type
+            #   {::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload refresh_runtime_token_internal(name: nil, vm_id: nil)
+            #   Pass arguments to `refresh_runtime_token_internal` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Format:
+            #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+            #   @param vm_id [::String]
+            #     Required. The VM hardware token for authenticating the VM.
+            #     https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest.new
+            #
+            #   # Call the refresh_runtime_token_internal method.
+            #   result = client.refresh_runtime_token_internal request
+            #
+            #   # The returned object is of type Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse.
+            #   p result
+            #
+            def refresh_runtime_token_internal request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.refresh_runtime_token_internal.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Notebooks::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.refresh_runtime_token_internal.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.refresh_runtime_token_internal.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_notebook_service_stub.call_rpc :refresh_runtime_token_internal, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1222,6 +1324,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :report_runtime_event
+                ##
+                # RPC-specific configuration for `refresh_runtime_token_internal`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :refresh_runtime_token_internal
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1243,6 +1350,8 @@ module Google
                   @reset_runtime = ::Gapic::Config::Method.new reset_runtime_config
                   report_runtime_event_config = parent_rpcs.report_runtime_event if parent_rpcs.respond_to? :report_runtime_event
                   @report_runtime_event = ::Gapic::Config::Method.new report_runtime_event_config
+                  refresh_runtime_token_internal_config = parent_rpcs.refresh_runtime_token_internal if parent_rpcs.respond_to? :refresh_runtime_token_internal
+                  @refresh_runtime_token_internal = ::Gapic::Config::Method.new refresh_runtime_token_internal_config
 
                   yield self if block_given?
                 end
