@@ -1,5 +1,14 @@
 # Release History
 
+### 0.5.0 (2022-04-19)
+
+#### Features
+
+* Support for update masks when setting IAM policies
+#### Bug Fixes
+
+* Update grpc-google-iam-v1 dependency to 1.1
+
 ### 0.4.7 / 2022-02-15
 
 #### Bug Fixes
