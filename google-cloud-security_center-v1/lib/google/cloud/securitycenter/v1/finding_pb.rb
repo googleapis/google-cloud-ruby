@@ -4,6 +4,7 @@
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/access_pb'
+require 'google/cloud/securitycenter/v1/connection_pb'
 require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/iam_binding_pb'
 require 'google/cloud/securitycenter/v1/indicator_pb'
@@ -37,7 +38,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :external_systems, :string, :message, 22, "google.cloud.securitycenter.v1.ExternalSystem"
       optional :mitre_attack, :message, 25, "google.cloud.securitycenter.v1.MitreAttack"
       optional :access, :message, 26, "google.cloud.securitycenter.v1.Access"
+      repeated :connections, :message, 31, "google.cloud.securitycenter.v1.Connection"
       optional :mute_initiator, :string, 28
+      optional :description, :string, 37
       repeated :iam_bindings, :message, 39, "google.cloud.securitycenter.v1.IamBinding"
       optional :next_steps, :string, 40
     end
