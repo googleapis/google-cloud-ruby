@@ -26,6 +26,7 @@
     "proto_docs/google/protobuf/any.rb",
     "snippets/Gemfile",
     "snippets/publisher/publish_channel_connection_events.rb",
+    "snippets/publisher/publish_events.rb",
     "test/google/cloud/eventarc/publishing/v1/publisher_test.rb",
     "test/helper.rb"
   ],

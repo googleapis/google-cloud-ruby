@@ -257,6 +257,94 @@ module Google
               end
 
               ##
+              # Publish events to a subscriber's channel.
+              #
+              # @overload publish_events(request, options = nil)
+              #   Pass arguments to `publish_events` via a request object, either of type
+              #   {::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload publish_events(channel: nil, events: nil)
+              #   Pass arguments to `publish_events` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param channel [::String]
+              #     The full name of the channel to publish to. For example:
+              #     `projects/{project}/locations/{location}/channels/{channel-id}`.
+              #   @param events [::Array<::Google::Protobuf::Any, ::Hash>]
+              #     The CloudEvents v1.0 events to publish. No other types are allowed.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/eventarc/publishing/v1"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest.new
+              #
+              #   # Call the publish_events method.
+              #   result = client.publish_events request
+              #
+              #   # The returned object is of type Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse.
+              #   p result
+              #
+              def publish_events request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::Publishing::V1::PublishEventsRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.publish_events.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Eventarc::Publishing::V1::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.channel
+                  header_params["channel"] = request.channel
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.publish_events.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.publish_events.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @publisher_stub.call_rpc :publish_events, request, options: options do |response, operation|
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Configuration class for the Publisher API.
               #
               # This class represents the configuration for Publisher,
@@ -396,11 +484,18 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :publish_channel_connection_events
+                  ##
+                  # RPC-specific configuration for `publish_events`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :publish_events
 
                   # @private
                   def initialize parent_rpcs = nil
                     publish_channel_connection_events_config = parent_rpcs.publish_channel_connection_events if parent_rpcs.respond_to? :publish_channel_connection_events
                     @publish_channel_connection_events = ::Gapic::Config::Method.new publish_channel_connection_events_config
+                    publish_events_config = parent_rpcs.publish_events if parent_rpcs.respond_to? :publish_events
+                    @publish_events = ::Gapic::Config::Method.new publish_events_config
 
                     yield self if block_given?
                   end
