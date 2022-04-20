@@ -187,7 +187,7 @@
   "google-cloud-profiler": "1.0.3",
   "google-cloud-profiler-v2": "0.2.5",
   "google-cloud-pubsub": "2.9.1",
-  "google-cloud-pubsub-v1": "0.8.0",
+  "google-cloud-pubsub-v1": "0.9.0",
   "google-cloud-recaptcha_enterprise": "1.2.3",
   "google-cloud-recaptcha_enterprise-v1": "0.7.1",
   "google-cloud-recaptcha_enterprise-v1beta1": "0.4.5",
