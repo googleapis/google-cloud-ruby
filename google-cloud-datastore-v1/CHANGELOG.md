@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 (2022-04-19)
+
+#### Features
+
+* Support for read, commit, and update timestamps (private preview only)
+
 ### 0.4.0 / 2022-03-30
 
 #### Features
