@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2022-04-19)
+
+#### Features
+
+* Remove dependency on the obsolete v1alpha version
+
 ### 0.1.4 / 2022-01-11
 
 #### Documentation

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.8 (2022-04-19)
+
+#### Documentation
+
+* Minor clarifications to filter documentation
+
 ### 0.4.7 / 2022-03-07
 
 #### Bug Fixes

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 (2022-04-20)
+
+#### Features
+
+* Support for update masks when setting IAM policies
+
 ### 0.6.0 / 2022-03-08
 
 #### Features
