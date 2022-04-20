@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2022-04-20)
+
+#### Features
+
+* add new fields connection and description to finding
+
 ### 0.14.0 (2022-04-14)
 
 #### Features
