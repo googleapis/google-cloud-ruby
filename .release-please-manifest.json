@@ -131,7 +131,7 @@
   "google-cloud-ids": "0.1.1",
   "google-cloud-ids-v1": "0.1.1",
   "google-cloud-iot": "1.0.3",
-  "google-cloud-iot-v1": "0.3.5",
+  "google-cloud-iot-v1": "0.4.0",
   "google-cloud-kms": "2.3.0",
   "google-cloud-kms-v1": "0.11.0",
   "google-cloud-language": "1.3.4",
