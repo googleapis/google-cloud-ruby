@@ -44,7 +44,7 @@
   "google-cloud-billing-budgets": "2.0.1",
   "google-cloud-billing-budgets-v1": "0.1.2",
   "google-cloud-billing-budgets-v1beta1": "0.6.5",
-  "google-cloud-billing-v1": "0.7.5",
+  "google-cloud-billing-v1": "0.8.0",
   "google-cloud-binary_authorization": "1.0.1",
   "google-cloud-binary_authorization-v1": "0.1.2",
   "google-cloud-binary_authorization-v1beta1": "0.4.1",
