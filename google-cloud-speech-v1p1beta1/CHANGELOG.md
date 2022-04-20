@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.2 (2022-04-20)
+
+#### Documentation
+
+* Fix broken links in reference documentation
+
 ### 0.12.1 / 2022-01-11
 
 #### Bug Fixes
