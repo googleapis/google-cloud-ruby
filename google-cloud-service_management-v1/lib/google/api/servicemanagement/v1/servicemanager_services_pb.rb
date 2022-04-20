@@ -24,7 +24,8 @@ module Google
     module ServiceManagement
       module V1
         module ServiceManager
-          # [Google Service Management API](/service-management/overview)
+          # [Google Service Management
+          # API](https://cloud.google.com/service-infrastructure/docs/overview)
           class Service
 
             include ::GRPC::GenericService
@@ -56,8 +57,10 @@ module Google
             rpc :CreateService, ::Google::Cloud::ServiceManagement::V1::CreateServiceRequest, ::Google::Longrunning::Operation
             # Deletes a managed service. This method will change the service to the
             # `Soft-Delete` state for 30 days. Within this period, service producers may
-            # call [UndeleteService][google.api.servicemanagement.v1.ServiceManager.UndeleteService] to restore the service.
-            # After 30 days, the service will be permanently deleted.
+            # call
+            # [UndeleteService][google.api.servicemanagement.v1.ServiceManager.UndeleteService]
+            # to restore the service. After 30 days, the service will be permanently
+            # deleted.
             #
             # Operation<response: google.protobuf.Empty>
             rpc :DeleteService, ::Google::Cloud::ServiceManagement::V1::DeleteServiceRequest, ::Google::Longrunning::Operation
@@ -88,7 +91,8 @@ module Google
             # Specification). This method stores the source configurations as well as the
             # generated service configuration. To rollout the service configuration to
             # other services,
-            # please call [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout].
+            # please call
+            # [CreateServiceRollout][google.api.servicemanagement.v1.ServiceManager.CreateServiceRollout].
             #
             # Only the 100 most recent configuration sources and ones referenced by
             # existing service configurtions are kept for each service. The rest will be
@@ -99,7 +103,8 @@ module Google
             # Lists the history of the service configuration rollouts for a managed
             # service, from the newest to the oldest.
             rpc :ListServiceRollouts, ::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsRequest, ::Google::Cloud::ServiceManagement::V1::ListServiceRolloutsResponse
-            # Gets a service configuration [rollout][google.api.servicemanagement.v1.Rollout].
+            # Gets a service configuration
+            # [rollout][google.api.servicemanagement.v1.Rollout].
             rpc :GetServiceRollout, ::Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest, ::Google::Cloud::ServiceManagement::V1::Rollout
             # Creates a new service configuration rollout. Based on rollout, the
             # Google Service Management will roll out the service configurations to

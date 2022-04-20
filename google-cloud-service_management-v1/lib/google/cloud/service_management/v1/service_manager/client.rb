@@ -27,7 +27,8 @@ module Google
           ##
           # Client for the ServiceManager service.
           #
-          # [Google Service Management API](/service-management/overview)
+          # [Google Service Management
+          # API](https://cloud.google.com/service-infrastructure/docs/overview)
           #
           class Client
             # @private
@@ -277,8 +278,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the `ServiceManager` overview for naming
-            #     requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the `ServiceManager` overview for
+            #     naming requirements.  For example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ServiceManagement::V1::ManagedService]
@@ -442,8 +443,10 @@ module Google
             ##
             # Deletes a managed service. This method will change the service to the
             # `Soft-Delete` state for 30 days. Within this period, service producers may
-            # call {::Google::Cloud::ServiceManagement::V1::ServiceManager::Client#undelete_service UndeleteService} to restore the service.
-            # After 30 days, the service will be permanently deleted.
+            # call
+            # {::Google::Cloud::ServiceManagement::V1::ServiceManager::Client#undelete_service UndeleteService}
+            # to restore the service. After 30 days, the service will be permanently
+            # deleted.
             #
             # Operation<response: google.protobuf.Empty>
             #
@@ -463,8 +466,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -562,8 +566,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service. See the [overview](/service-management/overview)
-            #     for naming requirements. For example: `example.googleapis.com`.
+            #     Required. The name of the service. See the
+            #     [overview](/service-management/overview) for naming requirements. For
+            #     example: `example.googleapis.com`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -657,8 +662,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
             #   @param page_size [::Integer]
@@ -755,8 +761,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #   @param config_id [::String]
             #     Required. The id of the service configuration resource.
             #
@@ -859,8 +866,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #   @param service_config [::Google::Api::Service, ::Hash]
             #     Required. The service configuration resource.
             #
@@ -935,7 +943,8 @@ module Google
             # Specification). This method stores the source configurations as well as the
             # generated service configuration. To rollout the service configuration to
             # other services,
-            # please call {::Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service_rollout CreateServiceRollout}.
+            # please call
+            # {::Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service_rollout CreateServiceRollout}.
             #
             # Only the 100 most recent configuration sources and ones referenced by
             # existing service configurtions are kept for each service. The rest will be
@@ -959,8 +968,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #   @param config_source [::Google::Cloud::ServiceManagement::V1::ConfigSource, ::Hash]
             #     Required. The source configuration for the service.
             #   @param validate_only [::Boolean]
@@ -1060,8 +1070,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #   @param page_token [::String]
             #     The token of the page to retrieve.
             #   @param page_size [::Integer]
@@ -1071,10 +1082,10 @@ module Google
             #     Required. Use `filter` to return subset of rollouts.
             #     The following filters are supported:
             #       -- To limit the results to only those in
-            #          [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+            #          status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
             #          use filter='status=SUCCESS'
             #       -- To limit the results to those in
-            #          [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+            #          status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
             #          or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1149,7 +1160,8 @@ module Google
             end
 
             ##
-            # Gets a service configuration {::Google::Cloud::ServiceManagement::V1::Rollout rollout}.
+            # Gets a service configuration
+            # {::Google::Cloud::ServiceManagement::V1::Rollout rollout}.
             #
             # @overload get_service_rollout(request, options = nil)
             #   Pass arguments to `get_service_rollout` via a request object, either of type
@@ -1167,8 +1179,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #   @param rollout_id [::String]
             #     Required. The id of the rollout resource.
             #
@@ -1271,8 +1284,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service_name [::String]
-            #     Required. The name of the service.  See the [overview](/service-management/overview)
-            #     for naming requirements.  For example: `example.googleapis.com`.
+            #     Required. The name of the service.  See the
+            #     [overview](/service-management/overview) for naming requirements.  For
+            #     example: `example.googleapis.com`.
             #   @param rollout [::Google::Cloud::ServiceManagement::V1::Rollout, ::Hash]
             #     Required. The rollout resource. The `service_name` field is output only.
             #

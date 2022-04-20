@@ -60,8 +60,8 @@ module Google
         # Request message for `GetService` method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the `ServiceManager` overview for naming
-        #     requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the `ServiceManager` overview for
+        #     naming requirements.  For example: `example.googleapis.com`.
         class GetServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -79,8 +79,9 @@ module Google
         # Request message for DeleteService method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         class DeleteServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -89,8 +90,9 @@ module Google
         # Request message for UndeleteService method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service. See the [overview](/service-management/overview)
-        #     for naming requirements. For example: `example.googleapis.com`.
+        #     Required. The name of the service. See the
+        #     [overview](/service-management/overview) for naming requirements. For
+        #     example: `example.googleapis.com`.
         class UndeleteServiceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -108,8 +110,9 @@ module Google
         # Request message for GetServiceConfig method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         # @!attribute [rw] config_id
         #   @return [::String]
         #     Required. The id of the service configuration resource.
@@ -139,8 +142,9 @@ module Google
         # Request message for ListServiceConfigs method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The token of the page to retrieve.
@@ -168,8 +172,9 @@ module Google
         # Request message for CreateServiceConfig method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         # @!attribute [rw] service_config
         #   @return [::Google::Api::Service]
         #     Required. The service configuration resource.
@@ -181,8 +186,9 @@ module Google
         # Request message for SubmitConfigSource method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         # @!attribute [rw] config_source
         #   @return [::Google::Cloud::ServiceManagement::V1::ConfigSource]
         #     Required. The source configuration for the service.
@@ -208,8 +214,9 @@ module Google
         # Request message for 'CreateServiceRollout'
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         # @!attribute [rw] rollout
         #   @return [::Google::Cloud::ServiceManagement::V1::Rollout]
         #     Required. The rollout resource. The `service_name` field is output only.
@@ -221,8 +228,9 @@ module Google
         # Request message for 'ListServiceRollouts'
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     The token of the page to retrieve.
@@ -235,10 +243,10 @@ module Google
         #     Required. Use `filter` to return subset of rollouts.
         #     The following filters are supported:
         #       -- To limit the results to only those in
-        #          [status](google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
+        #          status (google.api.servicemanagement.v1.RolloutStatus) 'SUCCESS',
         #          use filter='status=SUCCESS'
         #       -- To limit the results to those in
-        #          [status](google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
+        #          status (google.api.servicemanagement.v1.RolloutStatus) 'CANCELLED'
         #          or 'FAILED', use filter='status=CANCELLED OR status=FAILED'
         class ListServiceRolloutsRequest
           include ::Google::Protobuf::MessageExts
@@ -260,8 +268,9 @@ module Google
         # Request message for GetServiceRollout method.
         # @!attribute [rw] service_name
         #   @return [::String]
-        #     Required. The name of the service.  See the [overview](/service-management/overview)
-        #     for naming requirements.  For example: `example.googleapis.com`.
+        #     Required. The name of the service.  See the
+        #     [overview](/service-management/overview) for naming requirements.  For
+        #     example: `example.googleapis.com`.
         # @!attribute [rw] rollout_id
         #   @return [::String]
         #     Required. The id of the rollout resource.
