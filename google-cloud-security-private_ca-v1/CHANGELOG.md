@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2022-04-20)
+
+#### Bug Fixes
+
+* Update grpc-google-iam-v1 dependency to 1.1
+
 ### 0.2.0 / 2022-03-24
 
 #### Features

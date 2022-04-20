@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2022-04-20)
+
+#### Features
+
+* Support for managing Agent Pools
+
 ### 0.1.2 / 2022-01-11
 
 #### Bug Fixes
