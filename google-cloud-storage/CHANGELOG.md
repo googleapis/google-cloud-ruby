@@ -1,5 +1,11 @@
 # Release History
 
+### 1.36.2 (2022-04-20)
+
+#### Documentation
+
+* Document support for dual region buckets
+
 ### 1.36.1 / 2022-02-08
 
 #### Documentation
