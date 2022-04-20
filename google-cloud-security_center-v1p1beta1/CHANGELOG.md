@@ -9,9 +9,6 @@
 #### Features
 
 * Support for update masks when setting IAM policies
-#### Bug Fixes
-
-* Update grpc-google-iam-v1 dependency to 1.1
 
 ### 0.7.5 / 2022-01-11
 
