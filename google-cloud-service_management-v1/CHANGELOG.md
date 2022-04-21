@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.9 (2022-04-21)
+
+#### Documentation
+
+* update broken link for Google service management and format docs
+
 ### 0.3.8 / 2022-04-01
 
 #### Documentation
