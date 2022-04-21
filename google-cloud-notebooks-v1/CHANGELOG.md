@@ -4,7 +4,7 @@
 
 #### Features
 
-* add  refresh_runtime_token_internal and update_instance_metadata_items apis([#18035](https://github.com/googleapis/google-cloud-ruby/issues/18035))
+* add refresh_runtime_token_internal and update_instance_metadata_items apis
 * add request_id to client’s create_runtime, delete_runtime, start runtime, stop_runtime, switch_runtime and reset_runtime
 * add reserved_ip_range and boot_image to VirtualMachineConfig
 * add tensorboard_path to notebook_service
