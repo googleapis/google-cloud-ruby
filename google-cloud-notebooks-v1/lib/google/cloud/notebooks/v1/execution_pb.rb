@@ -20,8 +20,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parameters, :string, 9
       optional :service_account, :string, 10
       optional :job_type, :enum, 11, "google.cloud.notebooks.v1.ExecutionTemplate.JobType"
+      optional :kernel_spec, :string, 14
+      optional :tensorboard, :string, 15
       oneof :job_parameters do
         optional :dataproc_parameters, :message, 12, "google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters"
+        optional :vertex_ai_parameters, :message, 13, "google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters"
       end
     end
     add_message "google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorConfig" do
@@ -30,6 +33,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters" do
       optional :cluster, :string, 1
+    end
+    add_message "google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters" do
+      optional :network, :string, 1
+      map :env, :string, :string, 2
     end
     add_enum "google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier" do
       value :SCALE_TIER_UNSPECIFIED, 0
@@ -47,6 +54,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NVIDIA_TESLA_V100, 3
       value :NVIDIA_TESLA_P4, 4
       value :NVIDIA_TESLA_T4, 5
+      value :NVIDIA_TESLA_A100, 10
       value :TPU_V2, 6
       value :TPU_V3, 7
     end
@@ -88,6 +96,7 @@ module Google
         ExecutionTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ExecutionTemplate").msgclass
         ExecutionTemplate::SchedulerAcceleratorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorConfig").msgclass
         ExecutionTemplate::DataprocParameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ExecutionTemplate.DataprocParameters").msgclass
+        ExecutionTemplate::VertexAIParameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ExecutionTemplate.VertexAIParameters").msgclass
         ExecutionTemplate::ScaleTier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ExecutionTemplate.ScaleTier").enummodule
         ExecutionTemplate::SchedulerAcceleratorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ExecutionTemplate.SchedulerAcceleratorType").enummodule
         ExecutionTemplate::JobType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.ExecutionTemplate.JobType").enummodule

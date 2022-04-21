@@ -54,6 +54,8 @@ module Google
             rpc :UpdateShieldedInstanceConfig, ::Google::Cloud::Notebooks::V1::UpdateShieldedInstanceConfigRequest, ::Google::Longrunning::Operation
             # Replaces all the labels of an Instance.
             rpc :SetInstanceLabels, ::Google::Cloud::Notebooks::V1::SetInstanceLabelsRequest, ::Google::Longrunning::Operation
+            # Add/update metadata items for an instance.
+            rpc :UpdateInstanceMetadataItems, ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest, ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsResponse
             # Deletes a single Instance.
             rpc :DeleteInstance, ::Google::Cloud::Notebooks::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
             # Starts a notebook instance.
@@ -102,7 +104,7 @@ module Google
             rpc :GetExecution, ::Google::Cloud::Notebooks::V1::GetExecutionRequest, ::Google::Cloud::Notebooks::V1::Execution
             # Deletes execution
             rpc :DeleteExecution, ::Google::Cloud::Notebooks::V1::DeleteExecutionRequest, ::Google::Longrunning::Operation
-            # Creates a new Scheduled Notebook in a given project and location.
+            # Creates a new Execution in a given project and location.
             rpc :CreateExecution, ::Google::Cloud::Notebooks::V1::CreateExecutionRequest, ::Google::Longrunning::Operation
           end
 

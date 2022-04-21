@@ -65,6 +65,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       map :labels, :string, :string, 2
     end
+    add_message "google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest" do
+      optional :name, :string, 1
+      map :items, :string, :string, 2
+    end
+    add_message "google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse" do
+      map :items, :string, :string, 1
+    end
     add_message "google.cloud.notebooks.v1.UpdateShieldedInstanceConfigRequest" do
       optional :name, :string, 1
       optional :shielded_instance_config, :message, 2, "google.cloud.notebooks.v1.Instance.ShieldedInstanceConfig"
@@ -88,6 +95,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.notebooks.v1.IsInstanceUpgradeableRequest" do
       optional :notebook_instance, :string, 1
+      optional :type, :enum, 2, "google.cloud.notebooks.v1.UpgradeType"
     end
     add_message "google.cloud.notebooks.v1.IsInstanceUpgradeableResponse" do
       optional :upgradeable, :bool, 1
@@ -111,6 +119,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.notebooks.v1.UpgradeInstanceRequest" do
       optional :name, :string, 1
+      optional :type, :enum, 2, "google.cloud.notebooks.v1.UpgradeType"
     end
     add_message "google.cloud.notebooks.v1.RollbackInstanceRequest" do
       optional :name, :string, 1
@@ -119,6 +128,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.notebooks.v1.UpgradeInstanceInternalRequest" do
       optional :name, :string, 1
       optional :vm_id, :string, 2
+      optional :type, :enum, 3, "google.cloud.notebooks.v1.UpgradeType"
     end
     add_message "google.cloud.notebooks.v1.ListEnvironmentsRequest" do
       optional :parent, :string, 1
@@ -190,6 +200,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :execution_id, :string, 2
       optional :execution, :message, 3, "google.cloud.notebooks.v1.Execution"
     end
+    add_enum "google.cloud.notebooks.v1.UpgradeType" do
+      value :UPGRADE_TYPE_UNSPECIFIED, 0
+      value :UPGRADE_FRAMEWORK, 1
+      value :UPGRADE_OS, 2
+      value :UPGRADE_CUDA, 3
+      value :UPGRADE_ALL, 4
+    end
   end
 end
 
@@ -207,6 +224,8 @@ module Google
         SetInstanceMachineTypeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.SetInstanceMachineTypeRequest").msgclass
         UpdateInstanceConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpdateInstanceConfigRequest").msgclass
         SetInstanceLabelsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.SetInstanceLabelsRequest").msgclass
+        UpdateInstanceMetadataItemsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpdateInstanceMetadataItemsRequest").msgclass
+        UpdateInstanceMetadataItemsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpdateInstanceMetadataItemsResponse").msgclass
         UpdateShieldedInstanceConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpdateShieldedInstanceConfigRequest").msgclass
         DeleteInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.DeleteInstanceRequest").msgclass
         StartInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.StartInstanceRequest").msgclass
@@ -237,6 +256,7 @@ module Google
         GetExecutionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.GetExecutionRequest").msgclass
         DeleteExecutionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.DeleteExecutionRequest").msgclass
         CreateExecutionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.CreateExecutionRequest").msgclass
+        UpgradeType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.notebooks.v1.UpgradeType").enummodule
       end
     end
   end

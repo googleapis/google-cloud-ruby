@@ -60,6 +60,9 @@ module Google
             rpc :ResetRuntime, ::Google::Cloud::Notebooks::V1::ResetRuntimeRequest, ::Google::Longrunning::Operation
             # Report and process a runtime event.
             rpc :ReportRuntimeEvent, ::Google::Cloud::Notebooks::V1::ReportRuntimeEventRequest, ::Google::Longrunning::Operation
+            # Gets an access token for the consumer service account that the customer
+            # attached to the runtime. Only accessible from the tenant instance.
+            rpc :RefreshRuntimeTokenInternal, ::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalRequest, ::Google::Cloud::Notebooks::V1::RefreshRuntimeTokenInternalResponse
           end
 
           Stub = Service.rpc_stub_class

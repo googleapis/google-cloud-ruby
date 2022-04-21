@@ -54,6 +54,11 @@
               "methods": [
                 "report_runtime_event"
               ]
+            },
+            "RefreshRuntimeTokenInternal": {
+              "methods": [
+                "refresh_runtime_token_internal"
+              ]
             }
           }
         }
@@ -107,6 +112,11 @@
             "SetInstanceLabels": {
               "methods": [
                 "set_instance_labels"
+              ]
+            },
+            "UpdateInstanceMetadataItems": {
+              "methods": [
+                "update_instance_metadata_items"
               ]
             },
             "DeleteInstance": {

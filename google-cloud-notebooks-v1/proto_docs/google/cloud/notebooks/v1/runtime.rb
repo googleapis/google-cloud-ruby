@@ -101,6 +101,14 @@ module Google
             # (for example, critical daemons are not running)
             # Applies to ACTIVE state.
             UNHEALTHY = 2
+
+            # The runtime has not installed health monitoring agent.
+            # Applies to ACTIVE state.
+            AGENT_NOT_INSTALLED = 3
+
+            # The runtime health monitoring agent is not running.
+            # Applies to ACTIVE state.
+            AGENT_NOT_RUNNING = 4
           end
         end
 
@@ -113,6 +121,7 @@ module Google
         # * `nvidia-tesla-k80`
         # * `nvidia-tesla-p100`
         # * `nvidia-tesla-v100`
+        # * `nvidia-tesla-p4`
         # * `nvidia-tesla-t4`
         # * `nvidia-tesla-a100`
         # @!attribute [rw] type
@@ -139,7 +148,7 @@ module Google
             # Accelerator type is Nvidia Tesla V100.
             NVIDIA_TESLA_V100 = 3
 
-            # Accelerator type is Nvidia Tesla P4 GPU.
+            # Accelerator type is Nvidia Tesla P4.
             NVIDIA_TESLA_P4 = 4
 
             # Accelerator type is Nvidia Tesla T4.
@@ -160,7 +169,7 @@ module Google
             # Accelerator type is NVIDIA Tesla P100 Virtual Workstations.
             NVIDIA_TESLA_P100_VWS = 10
 
-            # Accelerator type is Nvidia Tesla P.4 GPU Virtual Workstations.
+            # Accelerator type is NVIDIA Tesla P4 Virtual Workstations.
             NVIDIA_TESLA_P4_VWS = 11
           end
         end
@@ -335,6 +344,9 @@ module Google
 
             # Balanced persistent disk type.
             PD_BALANCED = 3
+
+            # Extreme persistent disk type.
+            PD_EXTREME = 4
           end
         end
 
@@ -361,6 +373,12 @@ module Google
 
             # Single user login.
             SINGLE_USER = 1
+
+            # Service Account mode.
+            # In Service Account mode, Runtime creator will specify a SA that exists
+            # in the consumer project. Using Runtime Service Account field.
+            # Users accessing the Runtime need ActAs (Service Account User) permission.
+            SERVICE_ACCOUNT = 2
           end
         end
 
@@ -370,7 +388,7 @@ module Google
         #
         # * `idle_shutdown: true`
         # * `idle_shutdown_timeout: 180`
-        # * `report-system-health: true`
+        # * `enable_health_monitoring: true`
         # @!attribute [rw] notebook_upgrade_schedule
         #   @return [::String]
         #     Cron expression in UTC timezone, used to schedule instance auto upgrade.
@@ -389,6 +407,7 @@ module Google
         # @!attribute [rw] install_gpu_driver
         #   @return [::Boolean]
         #     Install Nvidia Driver automatically.
+        #     Default: True
         # @!attribute [rw] custom_gpu_driver_path
         #   @return [::String]
         #     Specify a custom Cloud Storage path where the GPU driver is stored.
@@ -398,6 +417,12 @@ module Google
         #     Path to a Bash script that automatically runs after a notebook instance
         #     fully boots up. The path must be a URL or
         #     Cloud Storage path (`gs://path-to-file/file-name`).
+        # @!attribute [rw] kernels
+        #   @return [::Array<::Google::Cloud::Notebooks::V1::ContainerImage>]
+        #     Optional. Use a list of container images to use as Kernels in the notebook instance.
+        # @!attribute [r] upgradeable
+        #   @return [::Boolean]
+        #     Output only. Bool indicating whether an newer image is available in an image family.
         class RuntimeSoftwareConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -479,7 +504,7 @@ module Google
         #     * `e2-standard-8`
         # @!attribute [rw] container_images
         #   @return [::Array<::Google::Cloud::Notebooks::V1::ContainerImage>]
-        #     Optional. Use a list of container images to start the notebook instance.
+        #     Optional. Use a list of container images to use as Kernels in the notebook instance.
         # @!attribute [rw] data_disk
         #   @return [::Google::Cloud::Notebooks::V1::LocalDisk]
         #     Required. Data disk option configuration settings.
@@ -557,9 +582,35 @@ module Google
         #   @return [::Google::Cloud::Notebooks::V1::VirtualMachineConfig::NicType]
         #     Optional. The type of vNIC to be used on this interface. This may be gVNIC or
         #     VirtioNet.
+        # @!attribute [rw] reserved_ip_range
+        #   @return [::String]
+        #     Optional. Reserved IP Range name is used for VPC Peering.
+        #     The subnetwork allocation will use the range *name* if it's assigned.
+        #
+        #     Example: managed-notebooks-range-c
+        #     PEERING_RANGE_NAME_3=managed-notebooks-range-c
+        #     gcloud compute addresses create $PEERING_RANGE_NAME_3 \
+        #       --global \
+        #       --prefix-length=24 \
+        #       --description="Google Cloud Managed Notebooks Range 24 c" \
+        #       --network=$NETWORK \
+        #       --addresses=192.168.0.0 \
+        #       --purpose=VPC_PEERING
+        #
+        #     Field value will be: `managed-notebooks-range-c`
+        # @!attribute [rw] boot_image
+        #   @return [::Google::Cloud::Notebooks::V1::VirtualMachineConfig::BootImage]
+        #     Optional. Boot image metadata used for runtime upgradeability.
         class VirtualMachineConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Definition of the boot image used by the Runtime.
+          # Used to facilitate runtime upgradeability.
+          class BootImage
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
 
           # @!attribute [rw] key
           #   @return [::String]

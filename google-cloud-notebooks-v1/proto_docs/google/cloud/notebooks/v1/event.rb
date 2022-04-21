@@ -28,17 +28,44 @@ module Google
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Notebooks::V1::Event::EventType]
         #     Event type.
+        # @!attribute [rw] details
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Optional. Event details. This field is used to pass event information.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The definition of the even types.
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DetailsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The definition of the event types.
           module EventType
             # Event is not specified.
             EVENT_TYPE_UNSPECIFIED = 0
 
             # The instance / runtime is idle
             IDLE = 1
+
+            # The instance / runtime is available.
+            # This event indicates that instance / runtime underlying compute is
+            # operational.
+            HEARTBEAT = 2
+
+            # The instance / runtime health is available.
+            # This event indicates that instance / runtime health information.
+            HEALTH = 3
+
+            # The instance / runtime is available.
+            # This event allows instance / runtime to send Host maintenance
+            # information to Control Plane.
+            # https://cloud.google.com/compute/docs/gpus/gpu-host-maintenance
+            MAINTENANCE = 4
           end
         end
       end

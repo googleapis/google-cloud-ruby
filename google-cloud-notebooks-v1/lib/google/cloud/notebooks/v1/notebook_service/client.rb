@@ -1096,6 +1096,94 @@ module Google
             end
 
             ##
+            # Add/update metadata items for an instance.
+            #
+            # @overload update_instance_metadata_items(request, options = nil)
+            #   Pass arguments to `update_instance_metadata_items` via a request object, either of type
+            #   {::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_instance_metadata_items(name: nil, items: nil)
+            #   Pass arguments to `update_instance_metadata_items` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Format:
+            #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+            #   @param items [::Hash{::String => ::String}]
+            #     Metadata items to add/update for the instance.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest.new
+            #
+            #   # Call the update_instance_metadata_items method.
+            #   result = client.update_instance_metadata_items request
+            #
+            #   # The returned object is of type Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsResponse.
+            #   p result
+            #
+            def update_instance_metadata_items request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Notebooks::V1::UpdateInstanceMetadataItemsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_instance_metadata_items.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Notebooks::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_instance_metadata_items.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_instance_metadata_items.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @notebook_service_stub.call_rpc :update_instance_metadata_items, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Deletes a single Instance.
             #
             # @overload delete_instance(request, options = nil)
@@ -1587,7 +1675,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload is_instance_upgradeable(notebook_instance: nil)
+            # @overload is_instance_upgradeable(notebook_instance: nil, type: nil)
             #   Pass arguments to `is_instance_upgradeable` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1595,6 +1683,9 @@ module Google
             #   @param notebook_instance [::String]
             #     Required. Format:
             #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+            #   @param type [::Google::Cloud::Notebooks::V1::UpgradeType]
+            #     Optional. The optional UpgradeType. Setting this field will search for additional
+            #     compute images to upgrade this instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Notebooks::V1::IsInstanceUpgradeableResponse]
@@ -1759,7 +1850,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload upgrade_instance(name: nil)
+            # @overload upgrade_instance(name: nil, type: nil)
             #   Pass arguments to `upgrade_instance` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1767,6 +1858,9 @@ module Google
             #   @param name [::String]
             #     Required. Format:
             #     `projects/{project_id}/locations/{location}/instances/{instance_id}`
+            #   @param type [::Google::Cloud::Notebooks::V1::UpgradeType]
+            #     Optional. The optional UpgradeType. Setting this field will search for additional
+            #     compute images to upgrade this instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1951,7 +2045,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload upgrade_instance_internal(name: nil, vm_id: nil)
+            # @overload upgrade_instance_internal(name: nil, vm_id: nil, type: nil)
             #   Pass arguments to `upgrade_instance_internal` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1962,6 +2056,9 @@ module Google
             #   @param vm_id [::String]
             #     Required. The VM hardware token for authenticating the VM.
             #     https://cloud.google.com/compute/docs/instances/verifying-instance-identity
+            #   @param type [::Google::Cloud::Notebooks::V1::UpgradeType]
+            #     Optional. The optional UpgradeType. Setting this field will search for additional
+            #     compute images to upgrade this instance.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -3171,7 +3268,7 @@ module Google
             end
 
             ##
-            # Creates a new Scheduled Notebook in a given project and location.
+            # Creates a new Execution in a given project and location.
             #
             # @overload create_execution(request, options = nil)
             #   Pass arguments to `create_execution` via a request object, either of type
@@ -3449,6 +3546,11 @@ module Google
                 #
                 attr_reader :set_instance_labels
                 ##
+                # RPC-specific configuration for `update_instance_metadata_items`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_instance_metadata_items
+                ##
                 # RPC-specific configuration for `delete_instance`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3584,6 +3686,8 @@ module Google
                   @update_shielded_instance_config = ::Gapic::Config::Method.new update_shielded_instance_config_config
                   set_instance_labels_config = parent_rpcs.set_instance_labels if parent_rpcs.respond_to? :set_instance_labels
                   @set_instance_labels = ::Gapic::Config::Method.new set_instance_labels_config
+                  update_instance_metadata_items_config = parent_rpcs.update_instance_metadata_items if parent_rpcs.respond_to? :update_instance_metadata_items
+                  @update_instance_metadata_items = ::Gapic::Config::Method.new update_instance_metadata_items_config
                   delete_instance_config = parent_rpcs.delete_instance if parent_rpcs.respond_to? :delete_instance
                   @delete_instance = ::Gapic::Config::Method.new delete_instance_config
                   start_instance_config = parent_rpcs.start_instance if parent_rpcs.respond_to? :start_instance

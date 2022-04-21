@@ -51,6 +51,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :upgrade_history, :message, 29, "google.cloud.notebooks.v1.Instance.UpgradeHistoryEntry"
       optional :nic_type, :enum, 33, "google.cloud.notebooks.v1.Instance.NicType"
       optional :reservation_affinity, :message, 34, "google.cloud.notebooks.v1.ReservationAffinity"
+      optional :creator, :string, 36
+      optional :can_ip_forward, :bool, 39
       optional :create_time, :message, 23, "google.protobuf.Timestamp"
       optional :update_time, :message, 24, "google.protobuf.Timestamp"
       oneof :environment do
@@ -132,12 +134,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UPGRADING, 7
       value :INITIALIZING, 8
       value :REGISTERING, 9
+      value :SUSPENDING, 10
+      value :SUSPENDED, 11
     end
     add_enum "google.cloud.notebooks.v1.Instance.DiskType" do
       value :DISK_TYPE_UNSPECIFIED, 0
       value :PD_STANDARD, 1
       value :PD_SSD, 2
       value :PD_BALANCED, 3
+      value :PD_EXTREME, 4
     end
     add_enum "google.cloud.notebooks.v1.Instance.DiskEncryption" do
       value :DISK_ENCRYPTION_UNSPECIFIED, 0
