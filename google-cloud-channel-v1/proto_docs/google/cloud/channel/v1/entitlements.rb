@@ -54,7 +54,8 @@ module Google
         #     Optional. This purchase order (PO) information is for resellers to use for their
         #     company tracking usage. If a purchaseOrderId value is given, it appears in
         #     the API responses and shows up in the invoice. The property accepts up to
-        #     80 plain text characters.
+        #     80 plain text characters. This is only supported for Google Workspace
+        #     entitlements.
         # @!attribute [r] trial_settings
         #   @return [::Google::Cloud::Channel::V1::TrialSettings]
         #     Output only. Settings for trial offers.
