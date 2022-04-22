@@ -1,5 +1,11 @@
 # Release History
 
+### 0.3.10 (2022-04-22)
+
+#### Documentation
+
+* fix broken links
+
 ### 0.3.9 (2022-04-21)
 
 #### Documentation
