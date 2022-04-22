@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2022-04-22)
+
+#### Features
+
+* add support for filters in ListCustomersRequest
+
 ### 0.9.5 / 2022-02-15
 
 #### Documentation
