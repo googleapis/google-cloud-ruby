@@ -105,13 +105,13 @@ module Google
         end
 
         # Represents information which resellers will get as part of notification from
-        # Cloud Pub/Sub.
+        # Pub/Sub.
         # @!attribute [rw] customer_event
         #   @return [::Google::Cloud::Channel::V1::CustomerEvent]
-        #     Customer event send as part of Pub/Sub event to partners.
+        #     Customer event sent as part of Pub/Sub event to partners.
         # @!attribute [rw] entitlement_event
         #   @return [::Google::Cloud::Channel::V1::EntitlementEvent]
-        #     Entitlement event send as part of Pub/Sub event to partners.
+        #     Entitlement event sent as part of Pub/Sub event to partners.
         class SubscriberEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

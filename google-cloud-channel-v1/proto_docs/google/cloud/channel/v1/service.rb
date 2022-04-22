@@ -83,6 +83,11 @@ module Google
         #     Obtained through
         #     {::Google::Cloud::Channel::V1::ListCustomersResponse#next_page_token ListCustomersResponse.next_page_token} of the previous
         #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers} call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+        #     https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
+        #     for more information.
         class ListCustomersRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

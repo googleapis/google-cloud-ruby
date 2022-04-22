@@ -224,7 +224,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_customers(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_customers(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_customers` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -241,6 +241,10 @@ module Google
             #     Obtained through
             #     {::Google::Cloud::Channel::V1::ListCustomersResponse#next_page_token ListCustomersResponse.next_page_token} of the previous
             #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customers CloudChannelService.ListCustomers} call.
+            #   @param filter [::String]
+            #     Optional. Filters applied to the [CloudChannelService.ListCustomers] results. See
+            #     https://cloud.google.com/channel/docs/concepts/google-cloud/filter-customers
+            #     for more information.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Channel::V1::Customer>]
