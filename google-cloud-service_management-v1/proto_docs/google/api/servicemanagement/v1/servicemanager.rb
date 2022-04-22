@@ -80,7 +80,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         class DeleteServiceRequest
           include ::Google::Protobuf::MessageExts
@@ -91,7 +91,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service. See the
-        #     [overview](/service-management/overview) for naming requirements. For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements. For
         #     example: `example.googleapis.com`.
         class UndeleteServiceRequest
           include ::Google::Protobuf::MessageExts
@@ -111,7 +111,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         # @!attribute [rw] config_id
         #   @return [::String]
@@ -143,7 +143,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -173,7 +173,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         # @!attribute [rw] service_config
         #   @return [::Google::Api::Service]
@@ -187,7 +187,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         # @!attribute [rw] config_source
         #   @return [::Google::Cloud::ServiceManagement::V1::ConfigSource]
@@ -215,7 +215,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         # @!attribute [rw] rollout
         #   @return [::Google::Cloud::ServiceManagement::V1::Rollout]
@@ -229,7 +229,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -269,7 +269,7 @@ module Google
         # @!attribute [rw] service_name
         #   @return [::String]
         #     Required. The name of the service.  See the
-        #     [overview](/service-management/overview) for naming requirements.  For
+        #     [overview](https://cloud.google.com/service-infrastructure/docs/overview) for naming requirements.  For
         #     example: `example.googleapis.com`.
         # @!attribute [rw] rollout_id
         #   @return [::String]
