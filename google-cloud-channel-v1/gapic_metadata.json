@@ -140,6 +140,56 @@
                 "update_channel_partner_link"
               ]
             },
+            "GetCustomerRepricingConfig": {
+              "methods": [
+                "get_customer_repricing_config"
+              ]
+            },
+            "ListCustomerRepricingConfigs": {
+              "methods": [
+                "list_customer_repricing_configs"
+              ]
+            },
+            "CreateCustomerRepricingConfig": {
+              "methods": [
+                "create_customer_repricing_config"
+              ]
+            },
+            "UpdateCustomerRepricingConfig": {
+              "methods": [
+                "update_customer_repricing_config"
+              ]
+            },
+            "DeleteCustomerRepricingConfig": {
+              "methods": [
+                "delete_customer_repricing_config"
+              ]
+            },
+            "GetChannelPartnerRepricingConfig": {
+              "methods": [
+                "get_channel_partner_repricing_config"
+              ]
+            },
+            "ListChannelPartnerRepricingConfigs": {
+              "methods": [
+                "list_channel_partner_repricing_configs"
+              ]
+            },
+            "CreateChannelPartnerRepricingConfig": {
+              "methods": [
+                "create_channel_partner_repricing_config"
+              ]
+            },
+            "UpdateChannelPartnerRepricingConfig": {
+              "methods": [
+                "update_channel_partner_repricing_config"
+              ]
+            },
+            "DeleteChannelPartnerRepricingConfig": {
+              "methods": [
+                "delete_channel_partner_repricing_config"
+              ]
+            },
             "LookupOffer": {
               "methods": [
                 "lookup_offer"

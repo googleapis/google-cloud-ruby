@@ -460,6 +460,192 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_customer_repricing_config CloudChannelService.GetCustomerRepricingConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the CustomerRepricingConfig.
+        #     Format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}/customerRepricingConfigs/\\{id}.
+        class GetCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the customer.
+        #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}.
+        #     Supports accounts/\\{account_id}/customers/- to retrieve configs for all
+        #     customers.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of repricing configs to return. The service may return
+        #     fewer than this value. If unspecified, returns a maximum of 50 rules. The
+        #     maximum value is 100; values above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results beyond the first page.
+        #     Obtained through
+        #     {::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsResponse#next_page_token ListCustomerRepricingConfigsResponse.next_page_token} of the previous
+        #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs} call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter for [CloudChannelService.ListCustomerRepricingConfigs]
+        #     results (customer only). You can use this filter when you support
+        #     a BatchGet-like query.
+        #     To use the filter, you must set `parent=accounts/{account_id}/customers/-`.
+        #
+        #     Example: customer = accounts/account_id/customers/c1 OR
+        #     customer = accounts/account_id/customers/c2.
+        class ListCustomerRepricingConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_customer_repricing_configs CloudChannelService.ListCustomerRepricingConfigs}.
+        # @!attribute [rw] customer_repricing_configs
+        #   @return [::Array<::Google::Cloud::Channel::V1::CustomerRepricingConfig>]
+        #     The repricing configs for this channel partner.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to {::Google::Cloud::Channel::V1::ListCustomerRepricingConfigsRequest#page_token ListCustomerRepricingConfigsRequest.page_token} to obtain that
+        #     page.
+        class ListCustomerRepricingConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_customer_repricing_config CloudChannelService.CreateCustomerRepricingConfig}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the customer that will receive this repricing config.
+        #     Parent uses the format: accounts/\\{account_id}/customers/\\{customer_id}
+        # @!attribute [rw] customer_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::CustomerRepricingConfig]
+        #     Required. The CustomerRepricingConfig object to update.
+        class CreateCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_customer_repricing_config CloudChannelService.UpdateCustomerRepricingConfig}.
+        # @!attribute [rw] customer_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::CustomerRepricingConfig]
+        #     Required. The CustomerRepricingConfig object to update.
+        class UpdateCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#delete_customer_repricing_config CloudChannelService.DeleteCustomerRepricingConfig}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the customer repricing config rule to delete.
+        #     Format:
+        #     accounts/\\{account_id}/customers/\\{customer_id}/customerRepricingConfigs/\\{id}.
+        class DeleteCustomerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#get_channel_partner_repricing_config CloudChannelService.GetChannelPartnerRepricingConfig}
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the ChannelPartnerRepricingConfig
+        #     Format:
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}/channelPartnerRepricingConfigs/\\{id}.
+        class GetChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the account's {::Google::Cloud::Channel::V1::ChannelPartnerLink ChannelPartnerLink}.
+        #     Parent uses the format:
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}.
+        #     Supports accounts/\\{account_id}/channelPartnerLinks/- to retrieve configs
+        #     for all channel partners.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of repricing configs to return. The service may return
+        #     fewer than this value. If unspecified, returns a maximum of 50 rules. The
+        #     maximum value is 100; values above 100 will be coerced to 100.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A token identifying a page of results beyond the first page.
+        #     Obtained through
+        #     {::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsResponse#next_page_token ListChannelPartnerRepricingConfigsResponse.next_page_token} of the
+        #     previous {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs} call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A filter for [CloudChannelService.ListChannelPartnerRepricingConfigs]
+        #     results (channel_partner_link only). You can use this filter when you
+        #     support a BatchGet-like query.
+        #     To use the filter, you must set
+        #     `parent=accounts/{account_id}/channelPartnerLinks/-`.
+        #
+        #     Example: `channel_partner_link =
+        #     accounts/account_id/channelPartnerLinks/c1` OR `channel_partner_link =
+        #     accounts/account_id/channelPartnerLinks/c2`.
+        class ListChannelPartnerRepricingConfigsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_channel_partner_repricing_configs CloudChannelService.ListChannelPartnerRepricingConfigs}.
+        # @!attribute [rw] channel_partner_repricing_configs
+        #   @return [::Array<::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig>]
+        #     The repricing configs for this channel partner.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to {::Google::Cloud::Channel::V1::ListChannelPartnerRepricingConfigsRequest#page_token ListChannelPartnerRepricingConfigsRequest.page_token} to obtain
+        #     that page.
+        class ListChannelPartnerRepricingConfigsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_channel_partner_repricing_config CloudChannelService.CreateChannelPartnerRepricingConfig}.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The resource name of the ChannelPartner that will receive the repricing
+        #     config. Parent uses the format:
+        #     accounts/\\{account_id}/channelPartnerLinks/\\{channel_partner_id}
+        # @!attribute [rw] channel_partner_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig]
+        #     Required. The ChannelPartnerRepricingConfig object to update.
+        class CreateChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for
+        # {::Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_repricing_config CloudChannelService.UpdateChannelPartnerRepricingConfig}.
+        # @!attribute [rw] channel_partner_repricing_config
+        #   @return [::Google::Cloud::Channel::V1::ChannelPartnerRepricingConfig]
+        #     Required. The ChannelPartnerRepricingConfig object to update.
+        class UpdateChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for DeleteChannelPartnerRepricingConfig.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the channel partner repricing config rule to delete.
+        class DeleteChannelPartnerRepricingConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::Channel::V1::CloudChannelService::Client#create_entitlement CloudChannelService.CreateEntitlement}
         # @!attribute [rw] parent
         #   @return [::String]
