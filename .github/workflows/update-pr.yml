@@ -10,6 +10,9 @@ on:
         description: "Options"
         required: false
 
+permissions:
+  contents: read
+
 jobs:
   OwlBot:
     if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}

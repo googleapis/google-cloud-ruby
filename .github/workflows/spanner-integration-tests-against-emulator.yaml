@@ -8,6 +8,9 @@ on:
     paths:
       - 'google-cloud-spanner*/**'
 name: Run Spanner integration tests against service emulator
+permissions:
+  contents: read
+
 jobs:
   test:
     runs-on: ubuntu-latest
