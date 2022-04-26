@@ -14,6 +14,7 @@
 
 require "helper"
 require "gapic/grpc/service_stub"
+require "google/cloud/pubsub/v1"
 
 describe Google::Cloud::PubSub::Service do
   let(:project) { "test" }
@@ -205,6 +206,58 @@ describe Google::Cloud::PubSub::Service do
           assert_config_rpcs_equals schema_service_default_config.rpcs, 6, config.rpcs, timeout: timeout
         end
       end
+    end
+  end
+
+  it "should ignore any grpc error on ack" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_subscriber = Minitest::Mock.new
+    service.mocked_subscriber = mocked_subscriber
+    def mocked_subscriber.acknowledge *args
+      begin
+        raise GRPC::InvalidArgument.new "test"
+      rescue => exception
+        raise ::Google::Cloud::Error.from_error(exception)
+      end
+    end
+    assert_nil service.acknowledge "sub","ack_id"
+  end
+
+  it "should ignore any grpc error on modack" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_subscriber = Minitest::Mock.new
+    service.mocked_subscriber = mocked_subscriber
+    def mocked_subscriber.modify_ack_deadline *args
+      begin
+        raise GRPC::InvalidArgument.new "test"
+      rescue => exception
+        raise ::Google::Cloud::Error.from_error(exception)
+      end
+    end
+    assert_nil service.modify_ack_deadline "sub","ack_id", 80
+  end
+
+  it "should raise errors other than grpc on ack" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_subscriber = Minitest::Mock.new
+    service.mocked_subscriber = mocked_subscriber
+    def mocked_subscriber.acknowledge *args
+      raise RuntimeError.new "test"
+    end
+    assert_raises RuntimeError do 
+      service.acknowledge "sub","ack_id"
+    end
+  end
+
+  it "should raise errors other than grpc on modack" do
+    service = Google::Cloud::PubSub::Service.new project, nil
+    mocked_subscriber = Minitest::Mock.new
+    service.mocked_subscriber = mocked_subscriber
+    def mocked_subscriber.modify_ack_deadline *args
+      raise RuntimeError.new "test"
+    end
+    assert_raises RuntimeError do 
+      service.modify_ack_deadline "sub","ack_id", 80
     end
   end
 
