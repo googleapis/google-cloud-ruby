@@ -1,0 +1,43 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.assuredworkloads.v1",
+  "libraryPackage": "::Google::Cloud::AssuredWorkloads::V1",
+  "services": {
+    "AssuredWorkloadsService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client",
+          "rpcs": {
+            "CreateWorkload": {
+              "methods": [
+                "create_workload"
+              ]
+            },
+            "UpdateWorkload": {
+              "methods": [
+                "update_workload"
+              ]
+            },
+            "DeleteWorkload": {
+              "methods": [
+                "delete_workload"
+              ]
+            },
+            "GetWorkload": {
+              "methods": [
+                "get_workload"
+              ]
+            },
+            "ListWorkloads": {
+              "methods": [
+                "list_workloads"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
