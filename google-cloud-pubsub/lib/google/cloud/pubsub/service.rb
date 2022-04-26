@@ -257,8 +257,8 @@ module Google
         def acknowledge subscription, *ack_ids
           begin
             subscriber.acknowledge subscription: subscription_path(subscription), ack_ids: ack_ids
-          rescue => error
-            raise error unless error.cause.is_a? GRPC::BadStatus 
+          rescue StandardError => e
+            raise e unless e.cause.is_a? GRPC::BadStatus
           end
         end
 
@@ -281,10 +281,10 @@ module Google
         def modify_ack_deadline subscription, ids, deadline
           begin
             subscriber.modify_ack_deadline subscription:         subscription_path(subscription),
-                                         ack_ids:              Array(ids),
-                                         ack_deadline_seconds: deadline  
-          rescue => error
-            raise error unless error.cause.is_a? GRPC::BadStatus
+                                           ack_ids:              Array(ids),
+                                           ack_deadline_seconds: deadline
+          rescue StandardError => e
+            raise e unless e.cause.is_a? GRPC::BadStatus
           end
         end
 
