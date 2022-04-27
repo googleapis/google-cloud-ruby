@@ -176,6 +176,21 @@ module Google
           # @!attribute [rw] purge_data_types
           #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::PurgeDataType>]
           #     List of types of data to remove when retention settings triggers purge.
+          # @!attribute [rw] audio_export_settings
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::AudioExportSettings]
+          #     Controls audio export settings for post-conversation analytics when
+          #     ingesting audio to conversations via [Participants.AnalyzeContent][] or
+          #     [Participants.StreamingAnalyzeContent][].
+          #
+          #     If [retention_strategy][google.cloud.dialogflow.cx.v3.SecuritySettings.retention_strategy] is set to REMOVE_AFTER_CONVERSATION or
+          #     [audio_export_settings.gcs_bucket][] is empty, audio export is disabled.
+          #
+          #     If audio export is enabled, audio is recorded and saved to
+          #     [audio_export_settings.gcs_bucket][], subject to retention policy of
+          #     [audio_export_settings.gcs_bucket][].
+          #
+          #     This setting won't effect audio input for implicit sessions via
+          #     {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#detect_intent Sessions.DetectIntent} or {::Google::Cloud::Dialogflow::CX::V3::Sessions::Client#streaming_detect_intent Sessions.StreamingDetectIntent}.
           # @!attribute [rw] insights_export_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::InsightsExportSettings]
           #     Controls conversation exporting settings to Insights after conversation is
@@ -186,6 +201,44 @@ module Google
           class SecuritySettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Settings for exporting audio.
+            # @!attribute [rw] gcs_bucket
+            #   @return [::String]
+            #     Cloud Storage bucket to export audio record to. You need to grant
+            #     `service-<Conversation Project
+            #     Number>@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Storage Object
+            #     Admin` role in this bucket.
+            # @!attribute [rw] audio_export_pattern
+            #   @return [::String]
+            #     Filename pattern for exported audio.
+            # @!attribute [rw] enable_audio_redaction
+            #   @return [::Boolean]
+            #     Enable audio redaction if it is true.
+            # @!attribute [rw] audio_format
+            #   @return [::Google::Cloud::Dialogflow::CX::V3::SecuritySettings::AudioExportSettings::AudioFormat]
+            #     File format for exported audio file. Currently only in telephony
+            #     recordings.
+            class AudioExportSettings
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # File format for exported audio file. Currently only in telephony
+              # recordings.
+              module AudioFormat
+                # Unspecified. Do not use.
+                AUDIO_FORMAT_UNSPECIFIED = 0
+
+                # G.711 mu-law PCM with 8kHz sample rate.
+                MULAW = 1
+
+                # MP3 file format.
+                MP3 = 2
+
+                # OGG Vorbis.
+                OGG = 3
+              end
+            end
 
             # Settings for exporting conversations to
             # [Insights](https://cloud.google.com/contact-center/insights/docs).
