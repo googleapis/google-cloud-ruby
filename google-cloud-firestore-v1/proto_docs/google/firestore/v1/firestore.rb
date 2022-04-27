@@ -360,6 +360,10 @@ module Google
         #   @return [::Integer]
         #     The number of results that have been skipped due to an offset between
         #     the last response and the current response.
+        # @!attribute [rw] done
+        #   @return [::Boolean]
+        #     If present, Firestore has completely finished the request and no more
+        #     documents will be returned.
         class RunQueryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
