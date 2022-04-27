@@ -536,7 +536,7 @@ module Google
           #     {::Google::Cloud::DocumentAI::V1::Document#text Document.text}.
           # @!attribute [rw] type
           #   @return [::String]
-          #     Entity type from a schema e.g. `Address`.
+          #     Required. Entity type from a schema e.g. `Address`.
           # @!attribute [rw] mention_text
           #   @return [::String]
           #     Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If
