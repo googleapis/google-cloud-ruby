@@ -15,6 +15,9 @@ end
 flag :all do
   desc "Run owlbot on all gems in this repo."
 end
+flag :except, "--except=GEM", handler: :push, default: [] do
+  desc "Omit this gem from --all. Can be used multiple times."
+end
 flag :postprocessor_tag, "--postprocessor-tag=TAG", default: "latest" do
   desc "The tag for the Ruby postprocessor image. Defaults to 'latest'."
 end
@@ -108,7 +111,7 @@ def all_gems
     gems.delete_if do |name|
       !File.file? File.join(context_directory, name, "#{name}.gemspec")
     end
-    gems
+    gems - except
   end
 end
 
