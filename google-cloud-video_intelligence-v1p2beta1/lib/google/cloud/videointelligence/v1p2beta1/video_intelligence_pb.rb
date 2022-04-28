@@ -129,7 +129,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :entity, :message, 1, "google.cloud.videointelligence.v1p2beta1.Entity"
       optional :confidence, :float, 4
       repeated :frames, :message, 2, "google.cloud.videointelligence.v1p2beta1.ObjectTrackingFrame"
-      optional :segment, :message, 3, "google.cloud.videointelligence.v1p2beta1.VideoSegment"
+      oneof :track_info do
+        optional :segment, :message, 3, "google.cloud.videointelligence.v1p2beta1.VideoSegment"
+        optional :track_id, :int64, 5
+      end
     end
     add_enum "google.cloud.videointelligence.v1p2beta1.Feature" do
       value :FEATURE_UNSPECIFIED, 0
