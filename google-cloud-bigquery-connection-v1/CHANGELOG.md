@@ -10,9 +10,7 @@
 
 #### Features
 
-* remove wrapper and add cloud_resource properties in connections
-  * feat: Add Cloud_Resource Connection Support
-  * 🦉 Updates from OwlBot post-processor
+* Add Cloud Resource Connection Support
 
 ### 0.5.3 / 2022-01-11
 
