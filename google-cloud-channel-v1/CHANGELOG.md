@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2022-04-28)
+
+#### Features
+
+* Support for repricing
+
 ### 0.10.0 (2022-04-22)
 
 #### Features
