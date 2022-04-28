@@ -2,19 +2,11 @@
 
 ### 0.11.0 / 2022-03-09
 
-#### ⚠ BREAKING CHANGES
-
-* **analytics:** remove `WebDataStream`, `IosAppDataStream`, `AndroidAppDataStream` resources (#17866)
-
 #### Features
 
-* remove `WebDataStream`, `IosAppDataStream`, `AndroidAppDataStream` resources ([#17866](https://www.github.com/googleapis/google-cloud-ruby/issues/17866))
-  * feat!: remove `WebDataStream`, `IosAppDataStream`, `AndroidAppDataStream` resources
-  and corresponding operations, as they are replaced by the `DataStream` resource
-  feat: add `restricted_metric_type` field to the `CustomMetric` resource
-  feat!: move the `GlobalSiteTag` resource from the property level to the data stream level
-  * 🦉 Updates from OwlBot post-processor
-  * 🦉 Updates from OwlBot post-processor
+* BREAKING CHANGE: remove `WebDataStream`, `IosAppDataStream`, `AndroidAppDataStream` resources and corresponding operations, as they are replaced by the `DataStream` resource
+* BREAKING CHANGE: move the `GlobalSiteTag` resource from the property level to the data stream level
+* add `restricted_metric_type` field to the `CustomMetric` resource
 
 ### 0.10.0 / 2022-01-11
 

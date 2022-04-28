@@ -4,9 +4,7 @@
 
 #### Bug Fixes
 
-* remove unused imports from google/spanner/* ([#17893](https://www.github.com/googleapis/google-cloud-ruby/issues/17893))
-  * fix: remove unused imports from google/spanner/*
-  * 🦉 Updates from OwlBot post-processor
+* remove unused imports
 
 ### 0.8.0 / 2022-02-15
 

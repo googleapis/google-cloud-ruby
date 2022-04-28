@@ -17,8 +17,6 @@
 #### Bug Fixes
 
 * remove requiring unused annotations_pb
-  * fix: change REST binding for ListDocuments to support root collection
-  * 🦉 Updates from OwlBot post-processor
 
 ### 0.4.6 / 2022-01-11
 

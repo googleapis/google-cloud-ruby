@@ -10,9 +10,7 @@
 
 #### Features
 
-* Update routing headers in API calls -- add `app_profile_id` ([#17242](https://www.github.com/googleapis/google-cloud-ruby/issues/17242))
-  * feat(bigtable-v2): Update routing headers in API calls -- add `app_profile_id` 
-  * 🦉 Updates from OwlBot
+* Update routing headers in API calls -- add `app_profile_id`
 
 ### 0.3.5 / 2022-01-11
 
