@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.0 (2022-04-28)
+
+#### Features
+
+* Support audio export settings
+
 ### 0.7.1 (2022-04-19)
 
 #### Bug Fixes
