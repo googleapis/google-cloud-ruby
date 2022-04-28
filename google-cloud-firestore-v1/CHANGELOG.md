@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 (2022-04-28)
+
+#### Features
+
+* run_query reports whether the request is complete and no more documents will be returned
+
 ### 0.4.8 (2022-04-19)
 
 #### Documentation
