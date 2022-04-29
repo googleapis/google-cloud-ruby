@@ -10,7 +10,6 @@ require 'google/api/resource_pb'
 require 'google/cloud/gkehub/v1/feature_pb'
 require 'google/cloud/gkehub/v1/membership_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
