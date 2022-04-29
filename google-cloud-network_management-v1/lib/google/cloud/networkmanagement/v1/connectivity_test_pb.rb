@@ -8,7 +8,6 @@ require 'google/api/resource_pb'
 require 'google/cloud/networkmanagement/v1/trace_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/networkmanagement/v1/connectivity_test.proto", :syntax => :proto3) do
