@@ -1,5 +1,11 @@
 # Release History
 
+### 2.9.2 (2022-04-28)
+
+#### Bug Fixes
+
+* ignore grpc errors on ack/modack   
+
 ### 2.9.1 / 2022-01-11
 
 #### Documentation
