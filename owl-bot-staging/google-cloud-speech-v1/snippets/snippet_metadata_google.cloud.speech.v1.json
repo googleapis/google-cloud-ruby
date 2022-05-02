@@ -1,0 +1,135 @@
+{
+  "client_library": {
+    "name": "google-cloud-speech-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.speech.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "speech_v1_generated_Speech_Recognize_sync",
+      "title": "Snippet for recognize in Speech",
+      "description": "Basic snippet for recognize in Speech",
+      "file": "speech/recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "recognize",
+        "full_name": "::Google::Cloud::Speech::V1::Speech::Client#recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1::RecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1::RecognizeResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V1::Speech::Client"
+        },
+        "method": {
+          "short_name": "Recognize",
+          "full_name": "google.cloud.speech.v1.Speech.Recognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v1.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1_generated_Speech_LongRunningRecognize_sync",
+      "title": "Snippet for long_running_recognize in Speech",
+      "description": "Basic snippet for long_running_recognize in Speech",
+      "file": "speech/long_running_recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "long_running_recognize",
+        "full_name": "::Google::Cloud::Speech::V1::Speech::Client#long_running_recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1::LongRunningRecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V1::Speech::Client"
+        },
+        "method": {
+          "short_name": "LongRunningRecognize",
+          "full_name": "google.cloud.speech.v1.Speech.LongRunningRecognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v1.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "speech_v1_generated_Speech_StreamingRecognize_sync",
+      "title": "Snippet for streaming_recognize in Speech",
+      "description": "Basic snippet for streaming_recognize in Speech",
+      "file": "speech/streaming_recognize.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "streaming_recognize",
+        "full_name": "::Google::Cloud::Speech::V1::Speech::Client#streaming_recognize",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Speech::V1::StreamingRecognizeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Speech::V1::StreamingRecognizeResponse",
+        "client": {
+          "short_name": "Speech::Client",
+          "full_name": "::Google::Cloud::Speech::V1::Speech::Client"
+        },
+        "method": {
+          "short_name": "StreamingRecognize",
+          "full_name": "google.cloud.speech.v1.Speech.StreamingRecognize",
+          "service": {
+            "short_name": "Speech",
+            "full_name": "google.cloud.speech.v1.Speech"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
