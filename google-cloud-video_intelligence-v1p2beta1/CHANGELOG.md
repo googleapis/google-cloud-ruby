@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 (2022-05-02)
+
+#### Features
+
+* Added a way to correlate object tracking results during streaming
+
 ### 0.4.5 / 2022-01-11
 
 #### Bug Fixes
