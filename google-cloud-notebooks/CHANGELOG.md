@@ -4,7 +4,7 @@
 
 #### Features
 
-* BREAKING CHANGE: Updated the service from Notebooks V1beta1 to Notebooks V1
+* BREAKING CHANGE: Updated the default service from Notebooks V1beta1 to Notebooks V1
 
 ### 1.1.3 / 2022-01-11
 
