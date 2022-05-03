@@ -56,8 +56,8 @@ module Google
         #
         #     If unspecified, `startMinutesAgo` is defaulted to 29. Standard Analytics
         #     properties can request up to the last 30 minutes of event data
-        #     (`startMinutesAgo <= 29`), and 360 Analytics properties can request up to
-        #     the last 60 minutes of event data (`startMinutesAgo <= 59`).
+        #     (`startMinutesAgo <= 29`), and Google Analytics 360 properties can request
+        #     up to the last 60 minutes of event data (`startMinutesAgo <= 59`).
         # @!attribute [rw] end_minutes_ago
         #   @return [::Integer]
         #     The inclusive end minute for the query as a number of minutes before now.
@@ -67,8 +67,8 @@ module Google
         #
         #     If unspecified, `endMinutesAgo` is defaulted to 0. Standard Analytics
         #     properties can request any minute in the last 30 minutes of event data
-        #     (`endMinutesAgo <= 29`), and 360 Analytics properties can request any
-        #     minute in the last 60 minutes of event data (`endMinutesAgo <= 59`).
+        #     (`endMinutesAgo <= 29`), and Google Analytics 360 properties can request
+        #     any minute in the last 60 minutes of event data (`endMinutesAgo <= 59`).
         # @!attribute [rw] name
         #   @return [::String]
         #     Assigns a name to this minute range. The dimension `dateRange` is valued to
