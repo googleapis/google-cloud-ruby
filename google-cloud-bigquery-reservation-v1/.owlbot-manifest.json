@@ -52,6 +52,7 @@
     "snippets/reservation_service/update_bi_reservation.rb",
     "snippets/reservation_service/update_capacity_commitment.rb",
     "snippets/reservation_service/update_reservation.rb",
+    "snippets/snippet_metadata_google.cloud.bigquery.reservation.v1.json",
     "test/google/cloud/bigquery/reservation/v1/reservation_service_paths_test.rb",
     "test/google/cloud/bigquery/reservation/v1/reservation_service_test.rb",
     "test/helper.rb"
