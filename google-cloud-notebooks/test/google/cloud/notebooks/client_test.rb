@@ -28,7 +28,7 @@ class Google::Cloud::Notebooks::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Notebooks.notebook_service do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Notebooks::V1beta1::NotebookService::Client, client
+      assert_kind_of Google::Cloud::Notebooks::V1::NotebookService::Client, client
     end
   end
 end

@@ -48,8 +48,8 @@ module Google
       # Create a new client object for NotebookService.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Notebooks::V1beta1::NotebookService::Client](https://googleapis.dev/ruby/google-cloud-notebooks-v1beta1/latest/Google/Cloud/Notebooks/V1beta1/NotebookService/Client.html)
-      # for version V1beta1 of the API.
+      # [Google::Cloud::Notebooks::V1::NotebookService::Client](https://googleapis.dev/ruby/google-cloud-notebooks-v1/latest/Google/Cloud/Notebooks/V1/NotebookService/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the NotebookService service is
       # supported by that API version, and the corresponding gem is available, the
@@ -60,10 +60,10 @@ module Google
       # API v1beta1 service for Cloud AI Platform Notebooks.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta1`.
+      #   Defaults to `:v1`.
       # @return [NotebookService::Client] A client object for the specified version.
       #
-      def self.notebook_service version: :v1beta1, &block
+      def self.notebook_service version: :v1, &block
         require "google/cloud/notebooks/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Notebooks
