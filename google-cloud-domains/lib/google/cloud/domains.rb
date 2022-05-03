@@ -48,8 +48,8 @@ module Google
       # Create a new client object for Domains.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Domains::V1beta1::Domains::Client](https://googleapis.dev/ruby/google-cloud-domains-v1beta1/latest/Google/Cloud/Domains/V1beta1/Domains/Client.html)
-      # for version V1beta1 of the API.
+      # [Google::Cloud::Domains::V1::Domains::Client](https://googleapis.dev/ruby/google-cloud-domains-v1/latest/Google/Cloud/Domains/V1/Domains/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the Domains service is
       # supported by that API version, and the corresponding gem is available, the
@@ -60,10 +60,10 @@ module Google
       # The Cloud Domains API enables management and configuration of domain names.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1beta1`.
+      #   Defaults to `:v1`.
       # @return [Domains::Client] A client object for the specified version.
       #
-      def self.domains version: :v1beta1, &block
+      def self.domains version: :v1, &block
         require "google/cloud/domains/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Domains

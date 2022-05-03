@@ -28,7 +28,7 @@ class Google::Cloud::Domains::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Domains.domains do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Domains::V1beta1::Domains::Client, client
+      assert_kind_of Google::Cloud::Domains::V1::Domains::Client, client
     end
   end
 end
