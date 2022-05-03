@@ -20,7 +20,7 @@
 module Google
   module Cloud
     module Domains
-      VERSION = "0.2.3"
+      VERSION = "1.0.0"
     end
   end
 end

@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.0 (2022-05-03)
+
+#### Features
+
+* BREAKING CHANGE: Updated the default service from Domains V1beta1 to Domains V1
+
 ### 0.2.3 / 2022-01-11
 
 #### Documentation
