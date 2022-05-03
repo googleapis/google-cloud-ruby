@@ -29,6 +29,7 @@
     "snippets/Gemfile",
     "snippets/recaptcha_enterprise_service/annotate_assessment.rb",
     "snippets/recaptcha_enterprise_service/create_assessment.rb",
+    "snippets/snippet_metadata_google.cloud.recaptchaenterprise.v1beta1.json",
     "test/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service_paths_test.rb",
     "test/google/cloud/recaptcha_enterprise/v1beta1/recaptcha_enterprise_service_test.rb",
     "test/helper.rb"

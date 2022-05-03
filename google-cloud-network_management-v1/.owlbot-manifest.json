@@ -44,6 +44,7 @@
     "snippets/reachability_service/list_connectivity_tests.rb",
     "snippets/reachability_service/rerun_connectivity_test.rb",
     "snippets/reachability_service/update_connectivity_test.rb",
+    "snippets/snippet_metadata_google.cloud.networkmanagement.v1.json",
     "test/google/cloud/network_management/v1/reachability_service_operations_test.rb",
     "test/google/cloud/network_management/v1/reachability_service_paths_test.rb",
     "test/google/cloud/network_management/v1/reachability_service_test.rb",

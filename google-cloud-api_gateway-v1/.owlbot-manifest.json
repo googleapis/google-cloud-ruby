@@ -50,6 +50,7 @@
     "snippets/api_gateway_service/update_api.rb",
     "snippets/api_gateway_service/update_api_config.rb",
     "snippets/api_gateway_service/update_gateway.rb",
+    "snippets/snippet_metadata_google.cloud.apigateway.v1.json",
     "test/google/cloud/api_gateway/v1/api_gateway_service_operations_test.rb",
     "test/google/cloud/api_gateway/v1/api_gateway_service_paths_test.rb",
     "test/google/cloud/api_gateway/v1/api_gateway_service_test.rb",

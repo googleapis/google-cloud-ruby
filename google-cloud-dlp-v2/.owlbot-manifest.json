@@ -71,6 +71,7 @@
     "snippets/dlp_service/update_inspect_template.rb",
     "snippets/dlp_service/update_job_trigger.rb",
     "snippets/dlp_service/update_stored_info_type.rb",
+    "snippets/snippet_metadata_google.privacy.dlp.v2.json",
     "test/google/cloud/dlp/v2/dlp_service_paths_test.rb",
     "test/google/cloud/dlp/v2/dlp_service_test.rb",
     "test/helper.rb"

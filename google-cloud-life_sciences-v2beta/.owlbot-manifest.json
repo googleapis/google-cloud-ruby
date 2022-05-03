@@ -33,6 +33,7 @@
     "proto_docs/google/rpc/code.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.cloud.lifesciences.v2beta.json",
     "snippets/workflows_service/run_pipeline.rb",
     "test/google/cloud/life_sciences/v2beta/workflows_service_operations_test.rb",
     "test/google/cloud/life_sciences/v2beta/workflows_service_test.rb",

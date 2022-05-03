@@ -51,6 +51,7 @@
     "snippets/cloud_functions_service/set_iam_policy.rb",
     "snippets/cloud_functions_service/test_iam_permissions.rb",
     "snippets/cloud_functions_service/update_function.rb",
+    "snippets/snippet_metadata_google.cloud.functions.v1.json",
     "test/google/cloud/functions/v1/cloud_functions_service_operations_test.rb",
     "test/google/cloud/functions/v1/cloud_functions_service_paths_test.rb",
     "test/google/cloud/functions/v1/cloud_functions_service_test.rb",

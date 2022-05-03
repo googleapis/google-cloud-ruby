@@ -58,6 +58,7 @@
     "snippets/network_security/update_authorization_policy.rb",
     "snippets/network_security/update_client_tls_policy.rb",
     "snippets/network_security/update_server_tls_policy.rb",
+    "snippets/snippet_metadata_google.cloud.networksecurity.v1beta1.json",
     "test/google/cloud/network_security/v1beta1/network_security_operations_test.rb",
     "test/google/cloud/network_security/v1beta1/network_security_paths_test.rb",
     "test/google/cloud/network_security/v1beta1/network_security_test.rb",

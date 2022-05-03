@@ -98,6 +98,7 @@
     "snippets/notebook_service/update_shielded_instance_config.rb",
     "snippets/notebook_service/upgrade_instance.rb",
     "snippets/notebook_service/upgrade_instance_internal.rb",
+    "snippets/snippet_metadata_google.cloud.notebooks.v1.json",
     "test/google/cloud/notebooks/v1/managed_notebook_service_operations_test.rb",
     "test/google/cloud/notebooks/v1/managed_notebook_service_paths_test.rb",
     "test/google/cloud/notebooks/v1/managed_notebook_service_test.rb",

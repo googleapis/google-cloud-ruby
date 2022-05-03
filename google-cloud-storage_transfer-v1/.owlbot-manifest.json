@@ -39,6 +39,7 @@
     "proto_docs/google/type/date.rb",
     "proto_docs/google/type/timeofday.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.storagetransfer.v1.json",
     "snippets/storage_transfer_service/create_agent_pool.rb",
     "snippets/storage_transfer_service/create_transfer_job.rb",
     "snippets/storage_transfer_service/delete_agent_pool.rb",

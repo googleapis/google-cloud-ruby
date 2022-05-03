@@ -36,6 +36,7 @@
     "snippets/container_analysis/get_vulnerability_occurrences_summary.rb",
     "snippets/container_analysis/set_iam_policy.rb",
     "snippets/container_analysis/test_iam_permissions.rb",
+    "snippets/snippet_metadata_google.devtools.containeranalysis.v1.json",
     "test/google/cloud/container_analysis/v1/container_analysis_paths_test.rb",
     "test/google/cloud/container_analysis/v1/container_analysis_test.rb",
     "test/helper.rb"

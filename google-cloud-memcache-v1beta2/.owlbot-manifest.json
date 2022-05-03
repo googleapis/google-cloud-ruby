@@ -42,6 +42,7 @@
     "snippets/cloud_memcache/list_instances.rb",
     "snippets/cloud_memcache/update_instance.rb",
     "snippets/cloud_memcache/update_parameters.rb",
+    "snippets/snippet_metadata_google.cloud.memcache.v1beta2.json",
     "test/google/cloud/memcache/v1beta2/cloud_memcache_operations_test.rb",
     "test/google/cloud/memcache/v1beta2/cloud_memcache_paths_test.rb",
     "test/google/cloud/memcache/v1beta2/cloud_memcache_test.rb",

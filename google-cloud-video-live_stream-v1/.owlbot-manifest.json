@@ -54,6 +54,7 @@
     "snippets/livestream_service/stop_channel.rb",
     "snippets/livestream_service/update_channel.rb",
     "snippets/livestream_service/update_input.rb",
+    "snippets/snippet_metadata_google.cloud.video.livestream.v1.json",
     "test/google/cloud/video/live_stream/v1/livestream_service_operations_test.rb",
     "test/google/cloud/video/live_stream/v1/livestream_service_paths_test.rb",
     "test/google/cloud/video/live_stream/v1/livestream_service_test.rb",

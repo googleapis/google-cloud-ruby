@@ -141,6 +141,7 @@
     "snippets/service_monitoring_service/list_services.rb",
     "snippets/service_monitoring_service/update_service.rb",
     "snippets/service_monitoring_service/update_service_level_objective.rb",
+    "snippets/snippet_metadata_google.monitoring.v3.json",
     "snippets/uptime_check_service/create_uptime_check_config.rb",
     "snippets/uptime_check_service/delete_uptime_check_config.rb",
     "snippets/uptime_check_service/get_uptime_check_config.rb",

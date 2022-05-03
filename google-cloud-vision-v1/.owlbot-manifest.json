@@ -76,6 +76,7 @@
     "snippets/product_search/remove_product_from_product_set.rb",
     "snippets/product_search/update_product.rb",
     "snippets/product_search/update_product_set.rb",
+    "snippets/snippet_metadata_google.cloud.vision.v1.json",
     "test/google/cloud/vision/v1/image_annotator_operations_test.rb",
     "test/google/cloud/vision/v1/image_annotator_paths_test.rb",
     "test/google/cloud/vision/v1/image_annotator_test.rb",
@@ -87,6 +88,7 @@
   "static": [
     ".OwlBot.yaml",
     ".owlbot.rb",
+    ".toys/generate-helpers.rb",
     "acceptance/data",
     "acceptance/google/cloud/vision/v1/helpers_smoke_test.rb",
     "acceptance/google/cloud/vision/v1/image_annotator_smoke_test.rb",

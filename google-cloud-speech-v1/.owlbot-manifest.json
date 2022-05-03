@@ -36,6 +36,7 @@
     "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.cloud.speech.v1.json",
     "snippets/speech/long_running_recognize.rb",
     "snippets/speech/recognize.rb",
     "snippets/speech/streaming_recognize.rb",

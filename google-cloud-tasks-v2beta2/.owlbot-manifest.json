@@ -62,6 +62,7 @@
     "snippets/cloud_tasks/set_iam_policy.rb",
     "snippets/cloud_tasks/test_iam_permissions.rb",
     "snippets/cloud_tasks/update_queue.rb",
+    "snippets/snippet_metadata_google.cloud.tasks.v2beta2.json",
     "test/google/cloud/tasks/v2beta2/cloud_tasks_paths_test.rb",
     "test/google/cloud/tasks/v2beta2/cloud_tasks_test.rb",
     "test/helper.rb"

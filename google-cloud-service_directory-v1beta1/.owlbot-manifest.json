@@ -65,6 +65,7 @@
     "snippets/registration_service/update_endpoint.rb",
     "snippets/registration_service/update_namespace.rb",
     "snippets/registration_service/update_service.rb",
+    "snippets/snippet_metadata_google.cloud.servicedirectory.v1beta1.json",
     "test/google/cloud/service_directory/v1beta1/lookup_service_paths_test.rb",
     "test/google/cloud/service_directory/v1beta1/lookup_service_test.rb",
     "test/google/cloud/service_directory/v1beta1/registration_service_paths_test.rb",

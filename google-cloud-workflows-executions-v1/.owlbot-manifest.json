@@ -31,6 +31,7 @@
     "snippets/executions/create_execution.rb",
     "snippets/executions/get_execution.rb",
     "snippets/executions/list_executions.rb",
+    "snippets/snippet_metadata_google.cloud.workflows.executions.v1.json",
     "test/google/cloud/workflows/executions/v1/executions_paths_test.rb",
     "test/google/cloud/workflows/executions/v1/executions_test.rb",
     "test/helper.rb"

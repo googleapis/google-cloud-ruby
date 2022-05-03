@@ -40,6 +40,7 @@
     "snippets/datastore/reserve_ids.rb",
     "snippets/datastore/rollback.rb",
     "snippets/datastore/run_query.rb",
+    "snippets/snippet_metadata_google.datastore.v1.json",
     "test/google/cloud/datastore/v1/datastore_test.rb",
     "test/helper.rb"
   ],

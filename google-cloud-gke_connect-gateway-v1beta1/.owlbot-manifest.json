@@ -30,6 +30,7 @@
     "snippets/gateway_service/patch_resource.rb",
     "snippets/gateway_service/post_resource.rb",
     "snippets/gateway_service/put_resource.rb",
+    "snippets/snippet_metadata_google.cloud.gkeconnect.gateway.v1beta1.json",
     "test/google/cloud/gke_connect/gateway/v1beta1/gateway_service_test.rb",
     "test/helper.rb"
   ],

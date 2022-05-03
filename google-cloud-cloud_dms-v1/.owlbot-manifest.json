@@ -54,6 +54,7 @@
     "snippets/data_migration_service/update_connection_profile.rb",
     "snippets/data_migration_service/update_migration_job.rb",
     "snippets/data_migration_service/verify_migration_job.rb",
+    "snippets/snippet_metadata_google.cloud.clouddms.v1.json",
     "test/google/cloud/cloud_dms/v1/data_migration_service_operations_test.rb",
     "test/google/cloud/cloud_dms/v1/data_migration_service_paths_test.rb",
     "test/google/cloud/cloud_dms/v1/data_migration_service_test.rb",

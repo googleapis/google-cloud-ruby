@@ -49,6 +49,7 @@
     "snippets/question_service/get_question.rb",
     "snippets/question_service/get_user_feedback.rb",
     "snippets/question_service/update_user_feedback.rb",
+    "snippets/snippet_metadata_google.cloud.dataqna.v1alpha.json",
     "test/google/cloud/dataqna/v1alpha/auto_suggestion_service_paths_test.rb",
     "test/google/cloud/dataqna/v1alpha/auto_suggestion_service_test.rb",
     "test/google/cloud/dataqna/v1alpha/question_service_paths_test.rb",

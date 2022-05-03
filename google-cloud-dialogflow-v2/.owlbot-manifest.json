@@ -262,6 +262,7 @@
     "snippets/session_entity_types/update_session_entity_type.rb",
     "snippets/sessions/detect_intent.rb",
     "snippets/sessions/streaming_detect_intent.rb",
+    "snippets/snippet_metadata_google.cloud.dialogflow.v2.json",
     "snippets/versions/create_version.rb",
     "snippets/versions/delete_version.rb",
     "snippets/versions/get_version.rb",

@@ -64,6 +64,7 @@
     "snippets/cluster_manager/update_cluster.rb",
     "snippets/cluster_manager/update_master.rb",
     "snippets/cluster_manager/update_node_pool.rb",
+    "snippets/snippet_metadata_google.container.v1.json",
     "test/google/cloud/container/v1/cluster_manager_paths_test.rb",
     "test/google/cloud/container/v1/cluster_manager_test.rb",
     "test/helper.rb"

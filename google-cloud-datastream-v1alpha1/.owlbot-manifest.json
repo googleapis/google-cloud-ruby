@@ -57,6 +57,7 @@
     "snippets/datastream/list_streams.rb",
     "snippets/datastream/update_connection_profile.rb",
     "snippets/datastream/update_stream.rb",
+    "snippets/snippet_metadata_google.cloud.datastream.v1alpha1.json",
     "test/google/cloud/datastream/v1alpha1/datastream_operations_test.rb",
     "test/google/cloud/datastream/v1alpha1/datastream_paths_test.rb",
     "test/google/cloud/datastream/v1alpha1/datastream_test.rb",

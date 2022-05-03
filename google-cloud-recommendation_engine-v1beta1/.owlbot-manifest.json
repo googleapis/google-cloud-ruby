@@ -78,6 +78,7 @@
     "snippets/prediction_api_key_registry/delete_prediction_api_key_registration.rb",
     "snippets/prediction_api_key_registry/list_prediction_api_key_registrations.rb",
     "snippets/prediction_service/predict.rb",
+    "snippets/snippet_metadata_google.cloud.recommendationengine.v1beta1.json",
     "snippets/user_event_service/collect_user_event.rb",
     "snippets/user_event_service/import_user_events.rb",
     "snippets/user_event_service/list_user_events.rb",

@@ -47,6 +47,7 @@
     "snippets/cloud_redis/reschedule_maintenance.rb",
     "snippets/cloud_redis/update_instance.rb",
     "snippets/cloud_redis/upgrade_instance.rb",
+    "snippets/snippet_metadata_google.cloud.redis.v1beta1.json",
     "test/google/cloud/redis/v1beta1/cloud_redis_operations_test.rb",
     "test/google/cloud/redis/v1beta1/cloud_redis_paths_test.rb",
     "test/google/cloud/redis/v1beta1/cloud_redis_test.rb",

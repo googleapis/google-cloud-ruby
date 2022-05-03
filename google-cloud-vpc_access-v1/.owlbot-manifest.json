@@ -33,6 +33,7 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.cloud.vpcaccess.v1.json",
     "snippets/vpc_access_service/create_connector.rb",
     "snippets/vpc_access_service/delete_connector.rb",
     "snippets/vpc_access_service/get_connector.rb",

@@ -38,6 +38,7 @@
     "snippets/essential_contacts_service/list_contacts.rb",
     "snippets/essential_contacts_service/send_test_message.rb",
     "snippets/essential_contacts_service/update_contact.rb",
+    "snippets/snippet_metadata_google.cloud.essentialcontacts.v1.json",
     "test/google/cloud/essential_contacts/v1/essential_contacts_service_paths_test.rb",
     "test/google/cloud/essential_contacts/v1/essential_contacts_service_test.rb",
     "test/helper.rb"
