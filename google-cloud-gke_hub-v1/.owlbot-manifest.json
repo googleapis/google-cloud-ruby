@@ -53,6 +53,7 @@
     "snippets/gke_hub/list_memberships.rb",
     "snippets/gke_hub/update_feature.rb",
     "snippets/gke_hub/update_membership.rb",
+    "snippets/snippet_metadata_google.cloud.gkehub.v1.json",
     "test/google/cloud/gke_hub/v1/gke_hub_operations_test.rb",
     "test/google/cloud/gke_hub/v1/gke_hub_paths_test.rb",
     "test/google/cloud/gke_hub/v1/gke_hub_test.rb",

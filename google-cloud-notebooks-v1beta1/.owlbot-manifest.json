@@ -56,6 +56,7 @@
     "snippets/notebook_service/stop_instance.rb",
     "snippets/notebook_service/upgrade_instance.rb",
     "snippets/notebook_service/upgrade_instance_internal.rb",
+    "snippets/snippet_metadata_google.cloud.notebooks.v1beta1.json",
     "test/google/cloud/notebooks/v1beta1/notebook_service_operations_test.rb",
     "test/google/cloud/notebooks/v1beta1/notebook_service_paths_test.rb",
     "test/google/cloud/notebooks/v1beta1/notebook_service_test.rb",

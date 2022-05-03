@@ -57,6 +57,7 @@
     "snippets/certificate_authority_service/update_certificate.rb",
     "snippets/certificate_authority_service/update_certificate_authority.rb",
     "snippets/certificate_authority_service/update_certificate_revocation_list.rb",
+    "snippets/snippet_metadata_google.cloud.security.privateca.v1beta1.json",
     "test/google/cloud/security/private_ca/v1beta1/certificate_authority_service_operations_test.rb",
     "test/google/cloud/security/private_ca/v1beta1/certificate_authority_service_paths_test.rb",
     "test/google/cloud/security/private_ca/v1beta1/certificate_authority_service_test.rb",

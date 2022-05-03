@@ -77,6 +77,7 @@
     "snippets/grafeas/list_occurrences.rb",
     "snippets/grafeas/update_note.rb",
     "snippets/grafeas/update_occurrence.rb",
+    "snippets/snippet_metadata_grafeas.v1.json",
     "test/grafeas/v1/grafeas_paths_test.rb",
     "test/grafeas/v1/grafeas_test.rb",
     "test/helper.rb"

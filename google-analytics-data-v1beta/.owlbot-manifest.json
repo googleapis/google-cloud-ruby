@@ -35,6 +35,7 @@
     "snippets/analytics_data/run_pivot_report.rb",
     "snippets/analytics_data/run_realtime_report.rb",
     "snippets/analytics_data/run_report.rb",
+    "snippets/snippet_metadata_google.analytics.data.v1beta.json",
     "test/google/analytics/data/v1beta/analytics_data_paths_test.rb",
     "test/google/analytics/data/v1beta/analytics_data_test.rb",
     "test/helper.rb"

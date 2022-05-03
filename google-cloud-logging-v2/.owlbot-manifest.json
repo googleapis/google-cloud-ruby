@@ -95,6 +95,7 @@
     "snippets/metrics_service/get_log_metric.rb",
     "snippets/metrics_service/list_log_metrics.rb",
     "snippets/metrics_service/update_log_metric.rb",
+    "snippets/snippet_metadata_google.logging.v2.json",
     "test/google/cloud/logging/v2/config_service_operations_test.rb",
     "test/google/cloud/logging/v2/config_service_paths_test.rb",
     "test/google/cloud/logging/v2/config_service_test.rb",

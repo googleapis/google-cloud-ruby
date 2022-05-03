@@ -104,6 +104,7 @@
     "snippets/projects/test_iam_permissions.rb",
     "snippets/projects/undelete_project.rb",
     "snippets/projects/update_project.rb",
+    "snippets/snippet_metadata_google.cloud.resourcemanager.v3.json",
     "snippets/tag_bindings/create_tag_binding.rb",
     "snippets/tag_bindings/delete_tag_binding.rb",
     "snippets/tag_bindings/list_tag_bindings.rb",

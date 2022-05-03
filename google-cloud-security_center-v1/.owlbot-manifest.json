@@ -113,6 +113,7 @@
     "snippets/security_center/update_organization_settings.rb",
     "snippets/security_center/update_security_marks.rb",
     "snippets/security_center/update_source.rb",
+    "snippets/snippet_metadata_google.cloud.securitycenter.v1.json",
     "test/google/cloud/security_center/v1/security_center_operations_test.rb",
     "test/google/cloud/security_center/v1/security_center_paths_test.rb",
     "test/google/cloud/security_center/v1/security_center_test.rb",

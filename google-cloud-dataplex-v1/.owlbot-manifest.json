@@ -102,6 +102,7 @@
     "snippets/metadata_service/list_entities.rb",
     "snippets/metadata_service/list_partitions.rb",
     "snippets/metadata_service/update_entity.rb",
+    "snippets/snippet_metadata_google.cloud.dataplex.v1.json",
     "test/google/cloud/dataplex/v1/content_service_paths_test.rb",
     "test/google/cloud/dataplex/v1/content_service_test.rb",
     "test/google/cloud/dataplex/v1/dataplex_service_operations_test.rb",

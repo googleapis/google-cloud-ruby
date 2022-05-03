@@ -48,6 +48,7 @@
     "snippets/identity_aware_proxy_o_auth_service/list_brands.rb",
     "snippets/identity_aware_proxy_o_auth_service/list_identity_aware_proxy_clients.rb",
     "snippets/identity_aware_proxy_o_auth_service/reset_identity_aware_proxy_client_secret.rb",
+    "snippets/snippet_metadata_google.cloud.iap.v1.json",
     "test/google/cloud/iap/v1/identity_aware_proxy_admin_service_test.rb",
     "test/google/cloud/iap/v1/identity_aware_proxy_o_auth_service_test.rb",
     "test/helper.rb"

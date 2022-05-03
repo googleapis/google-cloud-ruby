@@ -51,6 +51,7 @@
     "snippets/domains/search_domains.rb",
     "snippets/domains/transfer_domain.rb",
     "snippets/domains/update_registration.rb",
+    "snippets/snippet_metadata_google.cloud.domains.v1.json",
     "test/google/cloud/domains/v1/domains_operations_test.rb",
     "test/google/cloud/domains/v1/domains_paths_test.rb",
     "test/google/cloud/domains/v1/domains_test.rb",

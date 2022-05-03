@@ -56,6 +56,7 @@
     "snippets/device_manager/unbind_device_from_gateway.rb",
     "snippets/device_manager/update_device.rb",
     "snippets/device_manager/update_device_registry.rb",
+    "snippets/snippet_metadata_google.cloud.iot.v1.json",
     "test/google/cloud/iot/v1/device_manager_paths_test.rb",
     "test/google/cloud/iot/v1/device_manager_test.rb",
     "test/helper.rb"

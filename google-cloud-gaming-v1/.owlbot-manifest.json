@@ -91,6 +91,7 @@
     "snippets/realms_service/list_realms.rb",
     "snippets/realms_service/preview_realm_update.rb",
     "snippets/realms_service/update_realm.rb",
+    "snippets/snippet_metadata_google.cloud.gaming.v1.json",
     "test/google/cloud/gaming/v1/game_server_clusters_service_operations_test.rb",
     "test/google/cloud/gaming/v1/game_server_clusters_service_paths_test.rb",
     "test/google/cloud/gaming/v1/game_server_clusters_service_test.rb",

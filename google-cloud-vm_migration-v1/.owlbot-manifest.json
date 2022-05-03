@@ -35,6 +35,7 @@
     "proto_docs/google/rpc/error_details.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.cloud.vmmigration.v1.json",
     "snippets/vm_migration/add_group_migration.rb",
     "snippets/vm_migration/cancel_clone_job.rb",
     "snippets/vm_migration/cancel_cutover_job.rb",

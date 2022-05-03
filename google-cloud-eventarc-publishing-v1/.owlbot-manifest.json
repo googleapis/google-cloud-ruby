@@ -27,6 +27,7 @@
     "snippets/Gemfile",
     "snippets/publisher/publish_channel_connection_events.rb",
     "snippets/publisher/publish_events.rb",
+    "snippets/snippet_metadata_google.cloud.eventarc.publishing.v1.json",
     "test/google/cloud/eventarc/publishing/v1/publisher_test.rb",
     "test/helper.rb"
   ],

@@ -46,6 +46,7 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.cloud.websecurityscanner.v1.json",
     "snippets/web_security_scanner/create_scan_config.rb",
     "snippets/web_security_scanner/delete_scan_config.rb",
     "snippets/web_security_scanner/get_finding.rb",

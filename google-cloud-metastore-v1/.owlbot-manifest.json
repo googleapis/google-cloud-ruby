@@ -51,6 +51,7 @@
     "snippets/dataproc_metastore/restore_service.rb",
     "snippets/dataproc_metastore/update_metadata_import.rb",
     "snippets/dataproc_metastore/update_service.rb",
+    "snippets/snippet_metadata_google.cloud.metastore.v1.json",
     "test/google/cloud/metastore/v1/dataproc_metastore_operations_test.rb",
     "test/google/cloud/metastore/v1/dataproc_metastore_paths_test.rb",
     "test/google/cloud/metastore/v1/dataproc_metastore_test.rb",

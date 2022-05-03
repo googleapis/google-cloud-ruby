@@ -129,6 +129,7 @@
     "snippets/profile_service/list_profiles.rb",
     "snippets/profile_service/search_profiles.rb",
     "snippets/profile_service/update_profile.rb",
+    "snippets/snippet_metadata_google.cloud.talent.v4beta1.json",
     "snippets/tenant_service/create_tenant.rb",
     "snippets/tenant_service/delete_tenant.rb",
     "snippets/tenant_service/get_tenant.rb",

@@ -116,6 +116,7 @@
     "snippets/services/get_service.rb",
     "snippets/services/list_services.rb",
     "snippets/services/update_service.rb",
+    "snippets/snippet_metadata_google.appengine.v1.json",
     "snippets/versions/create_version.rb",
     "snippets/versions/delete_version.rb",
     "snippets/versions/get_version.rb",

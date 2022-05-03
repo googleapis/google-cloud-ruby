@@ -76,6 +76,7 @@
     "snippets/snapshots/delete_snapshot.rb",
     "snippets/snapshots/get_snapshot.rb",
     "snippets/snapshots/list_snapshots.rb",
+    "snippets/snippet_metadata_google.dataflow.v1beta3.json",
     "snippets/templates_service/create_job_from_template.rb",
     "snippets/templates_service/get_template.rb",
     "snippets/templates_service/launch_template.rb",

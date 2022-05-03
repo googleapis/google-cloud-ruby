@@ -33,6 +33,7 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.cloud.translation.v3.json",
     "snippets/translation_service/batch_translate_document.rb",
     "snippets/translation_service/batch_translate_text.rb",
     "snippets/translation_service/create_glossary.rb",

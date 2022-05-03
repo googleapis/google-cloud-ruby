@@ -66,6 +66,7 @@
     "snippets/schema_service/list_schemas.rb",
     "snippets/schema_service/validate_message.rb",
     "snippets/schema_service/validate_schema.rb",
+    "snippets/snippet_metadata_google.pubsub.v1.json",
     "snippets/subscriber/acknowledge.rb",
     "snippets/subscriber/create_snapshot.rb",
     "snippets/subscriber/create_subscription.rb",

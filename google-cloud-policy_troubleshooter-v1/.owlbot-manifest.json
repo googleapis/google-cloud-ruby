@@ -30,6 +30,7 @@
     "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
     "snippets/iam_checker/troubleshoot_iam_policy.rb",
+    "snippets/snippet_metadata_google.cloud.policytroubleshooter.v1.json",
     "test/google/cloud/policy_troubleshooter/v1/iam_checker_test.rb",
     "test/helper.rb"
   ],

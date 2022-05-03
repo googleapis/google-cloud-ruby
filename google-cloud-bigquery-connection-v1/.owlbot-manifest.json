@@ -40,6 +40,7 @@
     "snippets/connection_service/set_iam_policy.rb",
     "snippets/connection_service/test_iam_permissions.rb",
     "snippets/connection_service/update_connection.rb",
+    "snippets/snippet_metadata_google.cloud.bigquery.connection.v1.json",
     "test/google/cloud/bigquery/connection/v1/connection_service_paths_test.rb",
     "test/google/cloud/bigquery/connection/v1/connection_service_test.rb",
     "test/helper.rb"

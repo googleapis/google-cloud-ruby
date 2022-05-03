@@ -38,6 +38,7 @@
     "snippets/ids/delete_endpoint.rb",
     "snippets/ids/get_endpoint.rb",
     "snippets/ids/list_endpoints.rb",
+    "snippets/snippet_metadata_google.cloud.ids.v1.json",
     "test/google/cloud/ids/v1/ids_operations_test.rb",
     "test/google/cloud/ids/v1/ids_paths_test.rb",
     "test/google/cloud/ids/v1/ids_test.rb",

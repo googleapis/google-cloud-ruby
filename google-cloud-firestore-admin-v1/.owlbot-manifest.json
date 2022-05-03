@@ -57,6 +57,7 @@
     "snippets/firestore_admin/list_indexes.rb",
     "snippets/firestore_admin/update_database.rb",
     "snippets/firestore_admin/update_field.rb",
+    "snippets/snippet_metadata_google.firestore.admin.v1.json",
     "test/google/cloud/firestore/admin/v1/firestore_admin_operations_test.rb",
     "test/google/cloud/firestore/admin/v1/firestore_admin_paths_test.rb",
     "test/google/cloud/firestore/admin/v1/firestore_admin_test.rb",

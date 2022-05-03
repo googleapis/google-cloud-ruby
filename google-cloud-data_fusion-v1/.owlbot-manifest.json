@@ -41,6 +41,7 @@
     "snippets/data_fusion/list_instances.rb",
     "snippets/data_fusion/restart_instance.rb",
     "snippets/data_fusion/update_instance.rb",
+    "snippets/snippet_metadata_google.cloud.datafusion.v1.json",
     "test/google/cloud/data_fusion/v1/data_fusion_operations_test.rb",
     "test/google/cloud/data_fusion/v1/data_fusion_paths_test.rb",
     "test/google/cloud/data_fusion/v1/data_fusion_test.rb",
