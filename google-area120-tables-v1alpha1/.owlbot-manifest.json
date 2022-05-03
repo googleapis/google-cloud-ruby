@@ -29,6 +29,7 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/struct.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.area120.tables.v1alpha1.json",
     "snippets/tables_service/batch_create_rows.rb",
     "snippets/tables_service/batch_delete_rows.rb",
     "snippets/tables_service/batch_update_rows.rb",
