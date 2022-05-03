@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2022-05-03)
+
+#### Bug Fixes
+
+* Removed a few unused requires
+
 ### 0.2.0 / 2022-02-17
 
 #### Features
