@@ -84,6 +84,7 @@
     "snippets/artifact_registry/update_project_settings.rb",
     "snippets/artifact_registry/update_repository.rb",
     "snippets/artifact_registry/update_tag.rb",
+    "snippets/snippet_metadata_google.devtools.artifactregistry.v1.json",
     "test/google/cloud/artifact_registry/v1/artifact_registry_operations_test.rb",
     "test/google/cloud/artifact_registry/v1/artifact_registry_paths_test.rb",
     "test/google/cloud/artifact_registry/v1/artifact_registry_test.rb",
