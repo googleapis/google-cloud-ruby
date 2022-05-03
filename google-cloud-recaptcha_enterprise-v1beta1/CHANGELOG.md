@@ -2,19 +2,16 @@
 
 ### 0.5.0 (2022-05-03)
 
-### ⚠ BREAKING CHANGES
-
-* Removed unsupported key management API
-
 #### Features
 
 * Support Account Defender assessments
 * Support password leak verification
 * Support providing a hashed account ID with an assessment annotation
 * Support providing a reason for an assessment annotation
+
 #### Bug Fixes
 
-* Removed unsupported key management API
+* BREAKING CHANGE: Removed unsupported key management API
 
 ### 0.4.5 / 2022-01-11
 
