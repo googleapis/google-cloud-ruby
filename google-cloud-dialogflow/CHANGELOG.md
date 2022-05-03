@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 (2022-05-03)
+
+#### Features
+
+* Added support for the ConversationDataset and ConversationModel services
+
 ### 1.3.4 / 2022-01-11
 
 #### Documentation
