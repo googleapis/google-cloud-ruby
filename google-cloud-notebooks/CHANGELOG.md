@@ -2,13 +2,9 @@
 
 ### 2.0.0 (2022-05-03)
 
-### ⚠ BREAKING CHANGES
-
-* Update to the Notebooks V1 service
-
 #### Features
 
-* Update to the Notebooks V1 service
+* BREAKING CHANGE: Updated the service from Notebooks V1beta1 to Notebooks V1
 
 ### 1.1.3 / 2022-01-11
 
