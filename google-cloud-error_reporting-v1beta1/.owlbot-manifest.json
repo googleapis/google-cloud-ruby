@@ -50,6 +50,7 @@
     "snippets/error_stats_service/list_events.rb",
     "snippets/error_stats_service/list_group_stats.rb",
     "snippets/report_errors_service/report_error_event.rb",
+    "snippets/snippet_metadata_google.devtools.clouderrorreporting.v1beta1.json",
     "test/google/cloud/error_reporting/v1beta1/error_group_service_paths_test.rb",
     "test/google/cloud/error_reporting/v1beta1/error_group_service_test.rb",
     "test/google/cloud/error_reporting/v1beta1/error_stats_service_paths_test.rb",
