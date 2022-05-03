@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.3 (2022-05-03)
+
+#### Documentation
+
+* Document the latest_long and latest_short recognition models
+
 ### 0.7.2 (2022-04-16)
 
 #### Bug Fixes
