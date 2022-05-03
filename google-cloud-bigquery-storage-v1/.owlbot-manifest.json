@@ -53,6 +53,7 @@
     "snippets/big_query_write/finalize_write_stream.rb",
     "snippets/big_query_write/flush_rows.rb",
     "snippets/big_query_write/get_write_stream.rb",
+    "snippets/snippet_metadata_google.cloud.bigquery.storage.v1.json",
     "test/google/cloud/bigquery/storage/v1/big_query_read_paths_test.rb",
     "test/google/cloud/bigquery/storage/v1/big_query_read_test.rb",
     "test/google/cloud/bigquery/storage/v1/big_query_write_paths_test.rb",

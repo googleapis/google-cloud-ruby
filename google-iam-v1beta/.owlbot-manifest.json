@@ -33,6 +33,7 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/rpc/status.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.iam.v1beta.json",
     "snippets/workload_identity_pools/create_workload_identity_pool.rb",
     "snippets/workload_identity_pools/create_workload_identity_pool_provider.rb",
     "snippets/workload_identity_pools/delete_workload_identity_pool.rb",

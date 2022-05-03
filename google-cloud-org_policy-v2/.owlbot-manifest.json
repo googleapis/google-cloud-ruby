@@ -38,6 +38,7 @@
     "snippets/org_policy/list_constraints.rb",
     "snippets/org_policy/list_policies.rb",
     "snippets/org_policy/update_policy.rb",
+    "snippets/snippet_metadata_google.cloud.orgpolicy.v2.json",
     "test/google/cloud/org_policy/v2/org_policy_paths_test.rb",
     "test/google/cloud/org_policy/v2/org_policy_test.rb",
     "test/helper.rb"

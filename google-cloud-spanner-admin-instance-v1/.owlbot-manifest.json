@@ -48,6 +48,7 @@
     "snippets/instance_admin/set_iam_policy.rb",
     "snippets/instance_admin/test_iam_permissions.rb",
     "snippets/instance_admin/update_instance.rb",
+    "snippets/snippet_metadata_google.spanner.admin.instance.v1.json",
     "test/google/cloud/spanner/admin/instance/v1/instance_admin_operations_test.rb",
     "test/google/cloud/spanner/admin/instance/v1/instance_admin_paths_test.rb",
     "test/google/cloud/spanner/admin/instance/v1/instance_admin_test.rb",

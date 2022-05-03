@@ -86,6 +86,7 @@
     "snippets/data_labeling_service/search_evaluations.rb",
     "snippets/data_labeling_service/search_example_comparisons.rb",
     "snippets/data_labeling_service/update_evaluation_job.rb",
+    "snippets/snippet_metadata_google.cloud.datalabeling.v1beta1.json",
     "test/google/cloud/data_labeling/v1beta1/data_labeling_service_operations_test.rb",
     "test/google/cloud/data_labeling/v1beta1/data_labeling_service_paths_test.rb",
     "test/google/cloud/data_labeling/v1beta1/data_labeling_service_test.rb",

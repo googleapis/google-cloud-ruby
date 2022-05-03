@@ -65,6 +65,7 @@
     "snippets/cloud_deploy/list_targets.rb",
     "snippets/cloud_deploy/update_delivery_pipeline.rb",
     "snippets/cloud_deploy/update_target.rb",
+    "snippets/snippet_metadata_google.cloud.deploy.v1.json",
     "test/google/cloud/deploy/v1/cloud_deploy_operations_test.rb",
     "test/google/cloud/deploy/v1/cloud_deploy_paths_test.rb",
     "test/google/cloud/deploy/v1/cloud_deploy_test.rb",

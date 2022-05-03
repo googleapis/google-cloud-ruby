@@ -27,6 +27,7 @@
     "snippets/Gemfile",
     "snippets/locations/get_location.rb",
     "snippets/locations/list_locations.rb",
+    "snippets/snippet_metadata_google.cloud.location.json",
     "test/google/cloud/location/locations_test.rb",
     "test/helper.rb"
   ],

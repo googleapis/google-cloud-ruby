@@ -55,6 +55,7 @@
     "snippets/firestore/run_query.rb",
     "snippets/firestore/update_document.rb",
     "snippets/firestore/write.rb",
+    "snippets/snippet_metadata_google.firestore.v1.json",
     "test/google/cloud/firestore/v1/firestore_test.rb",
     "test/helper.rb"
   ],

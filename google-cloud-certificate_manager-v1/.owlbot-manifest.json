@@ -54,6 +54,7 @@
     "snippets/certificate_manager/update_certificate_map.rb",
     "snippets/certificate_manager/update_certificate_map_entry.rb",
     "snippets/certificate_manager/update_dns_authorization.rb",
+    "snippets/snippet_metadata_google.cloud.certificatemanager.v1.json",
     "test/google/cloud/certificate_manager/v1/certificate_manager_operations_test.rb",
     "test/google/cloud/certificate_manager/v1/certificate_manager_paths_test.rb",
     "test/google/cloud/certificate_manager/v1/certificate_manager_test.rb",

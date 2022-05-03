@@ -72,6 +72,7 @@
     "snippets/service_manager/list_services.rb",
     "snippets/service_manager/submit_config_source.rb",
     "snippets/service_manager/undelete_service.rb",
+    "snippets/snippet_metadata_google.api.servicemanagement.v1.json",
     "test/google/cloud/service_management/v1/service_manager_operations_test.rb",
     "test/google/cloud/service_management/v1/service_manager_test.rb",
     "test/helper.rb"

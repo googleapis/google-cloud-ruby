@@ -54,6 +54,7 @@
     "snippets/eventarc/list_triggers.rb",
     "snippets/eventarc/update_channel.rb",
     "snippets/eventarc/update_trigger.rb",
+    "snippets/snippet_metadata_google.cloud.eventarc.v1.json",
     "test/google/cloud/eventarc/v1/eventarc_operations_test.rb",
     "test/google/cloud/eventarc/v1/eventarc_paths_test.rb",
     "test/google/cloud/eventarc/v1/eventarc_test.rb",

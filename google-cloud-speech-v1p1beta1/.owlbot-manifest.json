@@ -54,6 +54,7 @@
     "snippets/adaptation/list_phrase_set.rb",
     "snippets/adaptation/update_custom_class.rb",
     "snippets/adaptation/update_phrase_set.rb",
+    "snippets/snippet_metadata_google.cloud.speech.v1p1beta1.json",
     "snippets/speech/long_running_recognize.rb",
     "snippets/speech/recognize.rb",
     "snippets/speech/streaming_recognize.rb",

@@ -101,6 +101,7 @@
     "snippets/cloud_channel_service/update_channel_partner_repricing_config.rb",
     "snippets/cloud_channel_service/update_customer.rb",
     "snippets/cloud_channel_service/update_customer_repricing_config.rb",
+    "snippets/snippet_metadata_google.cloud.channel.v1.json",
     "test/google/cloud/channel/v1/cloud_channel_service_operations_test.rb",
     "test/google/cloud/channel/v1/cloud_channel_service_paths_test.rb",
     "test/google/cloud/channel/v1/cloud_channel_service_test.rb",

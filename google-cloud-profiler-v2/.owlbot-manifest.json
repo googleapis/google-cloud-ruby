@@ -29,6 +29,7 @@
     "snippets/profiler_service/create_offline_profile.rb",
     "snippets/profiler_service/create_profile.rb",
     "snippets/profiler_service/update_profile.rb",
+    "snippets/snippet_metadata_google.devtools.cloudprofiler.v2.json",
     "test/google/cloud/profiler/v2/profiler_service_test.rb",
     "test/helper.rb"
   ],

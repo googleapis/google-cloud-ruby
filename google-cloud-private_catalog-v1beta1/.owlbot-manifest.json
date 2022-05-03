@@ -36,6 +36,7 @@
     "snippets/private_catalog/search_catalogs.rb",
     "snippets/private_catalog/search_products.rb",
     "snippets/private_catalog/search_versions.rb",
+    "snippets/snippet_metadata_google.cloud.privatecatalog.v1beta1.json",
     "test/google/cloud/private_catalog/v1beta1/private_catalog_test.rb",
     "test/helper.rb"
   ],

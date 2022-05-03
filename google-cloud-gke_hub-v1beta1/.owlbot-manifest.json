@@ -42,6 +42,7 @@
     "snippets/gke_hub_membership_service/list_memberships.rb",
     "snippets/gke_hub_membership_service/update_membership.rb",
     "snippets/gke_hub_membership_service/validate_exclusivity.rb",
+    "snippets/snippet_metadata_google.cloud.gkehub.v1beta1.json",
     "test/google/cloud/gke_hub/v1beta1/gke_hub_membership_service_operations_test.rb",
     "test/google/cloud/gke_hub/v1beta1/gke_hub_membership_service_paths_test.rb",
     "test/google/cloud/gke_hub/v1beta1/gke_hub_membership_service_test.rb",

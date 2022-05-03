@@ -26,6 +26,7 @@
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/texttospeech/v1/cloud_tts.rb",
     "snippets/Gemfile",
+    "snippets/snippet_metadata_google.cloud.texttospeech.v1.json",
     "snippets/text_to_speech/list_voices.rb",
     "snippets/text_to_speech/synthesize_speech.rb",
     "test/google/cloud/text_to_speech/v1/text_to_speech_paths_test.rb",

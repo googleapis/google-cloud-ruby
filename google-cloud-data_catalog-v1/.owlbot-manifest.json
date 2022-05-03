@@ -119,6 +119,7 @@
     "snippets/policy_tag_manager_serialization/export_taxonomies.rb",
     "snippets/policy_tag_manager_serialization/import_taxonomies.rb",
     "snippets/policy_tag_manager_serialization/replace_taxonomy.rb",
+    "snippets/snippet_metadata_google.cloud.datacatalog.v1.json",
     "test/google/cloud/data_catalog/v1/data_catalog_paths_test.rb",
     "test/google/cloud/data_catalog/v1/data_catalog_test.rb",
     "test/google/cloud/data_catalog/v1/policy_tag_manager_paths_test.rb",

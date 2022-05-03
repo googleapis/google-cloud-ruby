@@ -50,6 +50,7 @@
     "snippets/document_processor_service/batch_process_documents.rb",
     "snippets/document_processor_service/process_document.rb",
     "snippets/document_processor_service/review_document.rb",
+    "snippets/snippet_metadata_google.cloud.documentai.v1.json",
     "test/google/cloud/document_ai/v1/document_processor_service_operations_test.rb",
     "test/google/cloud/document_ai/v1/document_processor_service_paths_test.rb",
     "test/google/cloud/document_ai/v1/document_processor_service_test.rb",

@@ -46,6 +46,7 @@
     "snippets/debugger/list_breakpoints.rb",
     "snippets/debugger/list_debuggees.rb",
     "snippets/debugger/set_breakpoint.rb",
+    "snippets/snippet_metadata_google.devtools.clouddebugger.v2.json",
     "test/google/cloud/debugger/v2/controller_test.rb",
     "test/google/cloud/debugger/v2/debugger_test.rb",
     "test/helper.rb"

@@ -43,6 +43,7 @@
     "snippets/binauthz_management_service/list_attestors.rb",
     "snippets/binauthz_management_service/update_attestor.rb",
     "snippets/binauthz_management_service/update_policy.rb",
+    "snippets/snippet_metadata_google.cloud.binaryauthorization.v1beta1.json",
     "snippets/system_policy/get_system_policy.rb",
     "test/google/cloud/binary_authorization/v1beta1/binauthz_management_service_paths_test.rb",
     "test/google/cloud/binary_authorization/v1beta1/binauthz_management_service_test.rb",

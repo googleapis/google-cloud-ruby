@@ -103,6 +103,7 @@
     "snippets/analytics_admin_service/update_measurement_protocol_secret.rb",
     "snippets/analytics_admin_service/update_property.rb",
     "snippets/analytics_admin_service/update_user_link.rb",
+    "snippets/snippet_metadata_google.analytics.admin.v1alpha.json",
     "test/google/analytics/admin/v1alpha/analytics_admin_service_paths_test.rb",
     "test/google/analytics/admin/v1alpha/analytics_admin_service_test.rb",
     "test/helper.rb"

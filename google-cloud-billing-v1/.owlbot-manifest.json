@@ -52,6 +52,7 @@
     "snippets/cloud_billing/update_project_billing_info.rb",
     "snippets/cloud_catalog/list_services.rb",
     "snippets/cloud_catalog/list_skus.rb",
+    "snippets/snippet_metadata_google.cloud.billing.v1.json",
     "test/google/cloud/billing/v1/cloud_billing_paths_test.rb",
     "test/google/cloud/billing/v1/cloud_billing_test.rb",
     "test/google/cloud/billing/v1/cloud_catalog_paths_test.rb",

@@ -50,6 +50,7 @@
     "snippets/secret_manager_service/set_iam_policy.rb",
     "snippets/secret_manager_service/test_iam_permissions.rb",
     "snippets/secret_manager_service/update_secret.rb",
+    "snippets/snippet_metadata_google.cloud.secrets.v1beta1.json",
     "test/google/cloud/secret_manager/v1beta1/secret_manager_service_paths_test.rb",
     "test/google/cloud/secret_manager/v1beta1/secret_manager_service_test.rb",
     "test/helper.rb"

@@ -39,6 +39,7 @@
     "snippets/metrics_scopes/delete_monitored_project.rb",
     "snippets/metrics_scopes/get_metrics_scope.rb",
     "snippets/metrics_scopes/list_metrics_scopes_by_monitored_project.rb",
+    "snippets/snippet_metadata_google.monitoring.metricsscope.v1.json",
     "test/google/cloud/monitoring/metrics_scope/v1/metrics_scopes_operations_test.rb",
     "test/google/cloud/monitoring/metrics_scope/v1/metrics_scopes_paths_test.rb",
     "test/google/cloud/monitoring/metrics_scope/v1/metrics_scopes_test.rb",

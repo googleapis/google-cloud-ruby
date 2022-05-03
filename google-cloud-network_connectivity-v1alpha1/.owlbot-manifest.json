@@ -46,6 +46,7 @@
     "snippets/hub_service/list_spokes.rb",
     "snippets/hub_service/update_hub.rb",
     "snippets/hub_service/update_spoke.rb",
+    "snippets/snippet_metadata_google.cloud.networkconnectivity.v1alpha1.json",
     "test/google/cloud/network_connectivity/v1alpha1/hub_service_operations_test.rb",
     "test/google/cloud/network_connectivity/v1alpha1/hub_service_paths_test.rb",
     "test/google/cloud/network_connectivity/v1alpha1/hub_service_test.rb",

@@ -29,6 +29,7 @@
     "snippets/resource_settings_service/get_setting.rb",
     "snippets/resource_settings_service/list_settings.rb",
     "snippets/resource_settings_service/update_setting.rb",
+    "snippets/snippet_metadata_google.cloud.resourcesettings.v1.json",
     "test/google/cloud/resource_settings/v1/resource_settings_service_paths_test.rb",
     "test/google/cloud/resource_settings/v1/resource_settings_service_test.rb",
     "test/helper.rb"

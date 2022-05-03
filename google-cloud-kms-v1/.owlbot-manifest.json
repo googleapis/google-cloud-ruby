@@ -79,6 +79,7 @@
     "snippets/key_management_service/update_crypto_key.rb",
     "snippets/key_management_service/update_crypto_key_primary_version.rb",
     "snippets/key_management_service/update_crypto_key_version.rb",
+    "snippets/snippet_metadata_google.cloud.kms.v1.json",
     "test/google/cloud/kms/v1/ekm_service_paths_test.rb",
     "test/google/cloud/kms/v1/ekm_service_test.rb",
     "test/google/cloud/kms/v1/iam_policy_test.rb",

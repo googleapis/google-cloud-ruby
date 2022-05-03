@@ -39,6 +39,7 @@
     "snippets/bigtable/read_modify_write_row.rb",
     "snippets/bigtable/read_rows.rb",
     "snippets/bigtable/sample_row_keys.rb",
+    "snippets/snippet_metadata_google.bigtable.v2.json",
     "test/google/cloud/bigtable/v2/bigtable_paths_test.rb",
     "test/google/cloud/bigtable/v2/bigtable_test.rb",
     "test/helper.rb"
