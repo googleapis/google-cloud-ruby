@@ -20,6 +20,8 @@ FileUtils.rm_rf File.join(OwlBot.staging_dir, "proto_docs/google/cloud/location"
 FileUtils.rm_rf File.join(OwlBot.staging_dir, "proto_docs/google/iam/v1")
 FileUtils.rm_rf File.join(OwlBot.staging_dir, "snippets/iam_policy")
 FileUtils.rm_rf File.join(OwlBot.staging_dir, "snippets/locations")
+FileUtils.rm_f File.join(OwlBot.staging_dir, "snippets/snippet_metadata_google.cloud.location.json")
+FileUtils.rm_f File.join(OwlBot.staging_dir, "snippets/snippet_metadata_google.iam.v1.json")
 FileUtils.rm_rf File.join(OwlBot.staging_dir, "test/google/cloud/location")
 FileUtils.rm_rf File.join(OwlBot.staging_dir, "test/google/iam")
 
