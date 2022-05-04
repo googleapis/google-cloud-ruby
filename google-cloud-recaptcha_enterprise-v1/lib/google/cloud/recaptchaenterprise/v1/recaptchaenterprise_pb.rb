@@ -138,6 +138,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 6
       optional :create_time, :message, 7, "google.protobuf.Timestamp"
       optional :testing_options, :message, 9, "google.cloud.recaptchaenterprise.v1.TestingOptions"
+      optional :waf_settings, :message, 10, "google.cloud.recaptchaenterprise.v1.WafSettings"
       oneof :platform_settings do
         optional :web_settings, :message, 3, "google.cloud.recaptchaenterprise.v1.WebKeySettings"
         optional :android_settings, :message, 4, "google.cloud.recaptchaenterprise.v1.AndroidKeySettings"
@@ -212,7 +213,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :next_page_token, :string, 2
     end
     add_message "google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsRequest" do
-      optional :parent, :string, 1
+      optional :project, :string, 1
       optional :hashed_account_id, :bytes, 2
       optional :page_size, :int32, 3
       optional :page_token, :string, 4
@@ -227,6 +228,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.recaptchaenterprise.v1.RelatedAccountGroup" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.WafSettings" do
+      optional :waf_service, :enum, 1, "google.cloud.recaptchaenterprise.v1.WafSettings.WafService"
+      optional :waf_feature, :enum, 2, "google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature"
+    end
+    add_enum "google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature" do
+      value :WAF_FEATURE_UNSPECIFIED, 0
+      value :CHALLENGE_PAGE, 1
+      value :SESSION_TOKEN, 2
+      value :ACTION_TOKEN, 3
+    end
+    add_enum "google.cloud.recaptchaenterprise.v1.WafSettings.WafService" do
+      value :WAF_SERVICE_UNSPECIFIED, 0
+      value :CA, 1
     end
   end
 end
@@ -276,6 +291,9 @@ module Google
         SearchRelatedAccountGroupMembershipsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.SearchRelatedAccountGroupMembershipsResponse").msgclass
         RelatedAccountGroupMembership = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RelatedAccountGroupMembership").msgclass
         RelatedAccountGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RelatedAccountGroup").msgclass
+        WafSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.WafSettings").msgclass
+        WafSettings::WafFeature = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.WafSettings.WafFeature").enummodule
+        WafSettings::WafService = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.WafSettings.WafService").enummodule
       end
     end
   end
