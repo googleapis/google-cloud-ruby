@@ -67,7 +67,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -84,7 +84,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -100,7 +100,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -116,7 +116,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -132,7 +132,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -148,7 +148,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -164,7 +164,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -180,7 +180,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -196,7 +196,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal  fields_hash
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end

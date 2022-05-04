@@ -19,7 +19,7 @@ describe "Spanner Client", :params, :date, :spanner do
     { gsql: spanner_client, pg: spanner_pg_client }
   end
   let :date_query do
-    { gsql: "SELECT @value AS value", 
+    { gsql: "SELECT @value AS value",
       pg: "SELECT $1 AS value" }
   end
   let(:date_value) { Date.today }
@@ -29,7 +29,8 @@ describe "Spanner Client", :params, :date, :spanner do
 
   dialects.each do |dialect|
     it "queries and returns a date parameter for #{dialect}" do
-      results = db[dialect].execute_query date_query[dialect], params: dialect === :gsql ? { value: date_value } : { p1: date_value}
+      results = db[dialect].execute_query date_query[dialect],
+                                          params: dialect === :gsql ? { value: date_value } : { p1: date_value }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields[:value]).must_equal :DATE
@@ -37,7 +38,9 @@ describe "Spanner Client", :params, :date, :spanner do
     end
 
     it "queries and returns a NULL date parameter for #{dialect}" do
-      results = db[dialect].execute_query date_query[dialect], params:  dialect === :gsql ? { value: nil } : { p1: nil}, types: dialect === :gsql ? { value: :DATE } : {p1: :DATE}
+      results = db[dialect].execute_query date_query[dialect],
+                                          params: dialect === :gsql ? { value: nil } : { p1: nil },
+                                          types: dialect === :gsql ? { value: :DATE } : { p1: :DATE }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields[:value]).must_equal :DATE
@@ -46,7 +49,14 @@ describe "Spanner Client", :params, :date, :spanner do
 
     it "queries and returns an array of date parameters for #{dialect}" do
       results = db[dialect].execute_query date_query[dialect],
-                                params: dialect === :gsql ? { value: [(date_value - 1), date_value, (date_value + 1)] } : { p1: [(date_value - 1), date_value, (date_value + 1)] }
+                                          params: if dialect === :gsql
+                                                    { value: [(date_value - 1), date_value,
+                                                              (date_value + 1)] }
+                                                  else
+                                                    { p1: [
+                                                      (date_value - 1), date_value, (date_value + 1)
+                                                    ] }
+                                                  end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields[:value]).must_equal [:DATE]
@@ -55,7 +65,13 @@ describe "Spanner Client", :params, :date, :spanner do
 
     it "queries and returns an array of date parameters with a nil value for #{dialect}" do
       results = db[dialect].execute_query date_query[dialect],
-                                params: dialect === :gsql ? { value: [nil, (date_value - 1), date_value, (date_value + 1)] } : { p1: [nil, (date_value - 1), date_value, (date_value + 1)] }
+                                          params: if dialect === :gsql
+                                                    { value: [nil, (date_value - 1), date_value,
+                                                              (date_value + 1)] }
+                                                  else
+                                                    { p1: [nil,
+                                                           (date_value - 1), date_value, (date_value + 1)] }
+                                                  end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields[:value]).must_equal [:DATE]
@@ -63,7 +79,8 @@ describe "Spanner Client", :params, :date, :spanner do
     end
 
     it "queries and returns an empty array of date parameters for #{dialect}" do
-      results = db[dialect].execute_query date_query[dialect], params:  dialect === :gsql ? { value: [] } : { p1: [] }, types: dialect === :gsql ? { value: [:DATE] } : { p1: [:DATE] }
+      results = db[dialect].execute_query date_query[dialect], params: dialect === :gsql ? { value: [] } : { p1: [] },
+types: dialect === :gsql ? { value: [:DATE] } : { p1: [:DATE] }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields[:value]).must_equal [:DATE]
@@ -71,7 +88,9 @@ describe "Spanner Client", :params, :date, :spanner do
     end
 
     it "queries and returns a NULL array of date parameters for #{dialect}" do
-      results = db[dialect].execute_query date_query[dialect], params: dialect === :gsql ? { value: nil } : { p1: nil }, types: dialect === :gsql ? { value: [:DATE] } : { p1: [:DATE] }
+      results = db[dialect].execute_query date_query[dialect],
+                                          params: dialect === :gsql ? { value: nil } : { p1: nil },
+                                          types: dialect === :gsql ? { value: [:DATE] } : { p1: [:DATE] }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields[:value]).must_equal [:DATE]
