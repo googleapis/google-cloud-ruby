@@ -1198,6 +1198,18 @@
     "stackdriver-core": {
       "component": "stackdriver-core",
       "version_file": "lib/stackdriver/core/version.rb"
+    },
+    "google-cloud-bigquery-migration-v2": {
+      "component": "google-cloud-bigquery-migration-v2",
+      "version_file": "lib/google/cloud/bigquery/migration/v2/version.rb"
+    },
+    "google-cloud-datastream-v1": {
+      "component": "google-cloud-datastream-v1",
+      "version_file": "lib/google/cloud/datastream/v1/version.rb"
+    },
+    "google-cloud-run-v2": {
+      "component": "google-cloud-run-v2",
+      "version_file": "lib/google/cloud/run/v2/version.rb"
     }
   }
 }
