@@ -157,7 +157,9 @@ module Google
                                          is_live: nil,
                                          matches_storage_class: nil,
                                          noncurrent_time_before: nil,
-                                         num_newer_versions: nil
+                                         num_newer_versions: nil,
+                                         matches_prefix: nil,
+                                         matches_suffix: nil
             push Rule.new(
               "SetStorageClass",
               storage_class: storage_class_for(storage_class),
@@ -169,7 +171,9 @@ module Google
               is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
               noncurrent_time_before: noncurrent_time_before,
-              num_newer_versions: num_newer_versions
+              num_newer_versions: num_newer_versions,
+              matches_prefix: matches_prefix,
+              matches_suffix: matches_suffix
             )
           end
 
@@ -239,7 +243,9 @@ module Google
                               is_live: nil,
                               matches_storage_class: nil,
                               noncurrent_time_before: nil,
-                              num_newer_versions: nil
+                              num_newer_versions: nil,
+                              matches_prefix: nil,
+                              matches_suffix: nil
             push Rule.new(
               "Delete",
               age: age,
@@ -250,7 +256,9 @@ module Google
               is_live: is_live,
               matches_storage_class: storage_class_for(matches_storage_class),
               noncurrent_time_before: noncurrent_time_before,
-              num_newer_versions: num_newer_versions
+              num_newer_versions: num_newer_versions,
+              matches_prefix: matches_prefix,
+              matches_suffix: matches_suffix
             )
           end
 
@@ -382,6 +390,8 @@ module Google
             attr_accessor :matches_storage_class
             attr_accessor :noncurrent_time_before
             attr_accessor :num_newer_versions
+            attr_accessor :matches_prefix
+            attr_accessor :matches_suffix
 
             # @private
             def initialize action,
@@ -394,7 +404,9 @@ module Google
                            is_live: nil,
                            matches_storage_class: nil,
                            noncurrent_time_before: nil,
-                           num_newer_versions: nil
+                           num_newer_versions: nil,
+                           matches_prefix: nil,
+                           matches_suffix: nil
               @action = action
               @storage_class = storage_class
               @age = age
@@ -406,6 +418,8 @@ module Google
               @matches_storage_class = Array(matches_storage_class)
               @noncurrent_time_before = noncurrent_time_before
               @num_newer_versions = num_newer_versions
+              @matches_prefix = matches_prefix
+              @matches_suffix = matches_suffix
             end
 
             # @private
@@ -420,7 +434,9 @@ module Google
                 is_live,
                 matches_storage_class,
                 noncurrent_time_before,
-                num_newer_versions
+                num_newer_versions,
+                matches_prefix,
+                matches_suffix
               )
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule.new(
                 action: action_gapi(action, storage_class),
@@ -445,7 +461,9 @@ module Google
                                is_live,
                                matches_storage_class,
                                noncurrent_time_before,
-                               num_newer_versions
+                               num_newer_versions,
+                               matches_prefix,
+                               matches_suffix
               Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Condition.new(
                 age: age,
                 created_before: created_before,
@@ -455,7 +473,9 @@ module Google
                 is_live: is_live,
                 matches_storage_class: Array(matches_storage_class),
                 noncurrent_time_before: noncurrent_time_before,
-                num_newer_versions: num_newer_versions
+                num_newer_versions: num_newer_versions,
+                matches_prefix: matches_prefix,
+                matches_suffix: matches_suffix
               )
             end
 
@@ -475,7 +495,9 @@ module Google
                 is_live: c.is_live,
                 matches_storage_class: c.matches_storage_class,
                 noncurrent_time_before: c.noncurrent_time_before,
-                num_newer_versions: c.num_newer_versions
+                num_newer_versions: c.num_newer_versions,
+                matches_prefix: c.matches_prefix,
+                matches_suffix: c.matches_suffix
               )
             end
 
