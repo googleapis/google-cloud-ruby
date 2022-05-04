@@ -24,7 +24,6 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-cloud-dataproc-v1", ">= 0.7", "< 2.a"
-  gem.add_dependency "google-cloud-dataproc-v1beta2", ">= 0.6", "< 2.a"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"
   gem.add_development_dependency "minitest", "~> 5.14"
