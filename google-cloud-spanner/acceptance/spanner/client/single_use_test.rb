@@ -19,13 +19,10 @@ describe "Spanner Client", :single_use, :spanner do
     { gsql: spanner_client, pg: spanner_pg_client }
   end
   let :columns do
-    { gsql: [:account_id, :username, :friends, :active, :reputation, :avatar],
-                  pg: [:account_id, :username, :active, :reputation, :avatar] }
+    [:account_id, :username, :friends, :active, :reputation, :avatar]
   end
   let :fields_hash do
-    { gsql: { account_id: :INT64, username: :STRING, friends: [:INT64],
-              active: :BOOL, reputation: :FLOAT64, avatar: :BYTES },
-      pg: { account_id: :INT64, username: :STRING, active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
+    { account_id: :INT64, username: :STRING,  friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES }
   end
 
   before do
@@ -56,7 +53,7 @@ describe "Spanner Client", :single_use, :spanner do
       results = db[dialect].execute_sql "SELECT * FROM accounts ORDER BY account_id ASC", single_use: { strong: true }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -66,10 +63,10 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     it "runs a read with strong option for #{dialect}" do
-      results = db[dialect].read "accounts", columns[dialect], single_use: { strong: true }
+      results = db[dialect].read "accounts",  columns, single_use: { strong: true }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -83,7 +80,7 @@ describe "Spanner Client", :single_use, :spanner do
                                         single_use: { timestamp: @setup_timestamp[dialect] }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -93,10 +90,10 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     it "runs a read with timestamp option for #{dialect}" do
-      results = db[dialect].read "accounts", columns[dialect], single_use: { timestamp: @setup_timestamp[dialect] }
+      results = db[dialect].read "accounts",  columns, single_use: { timestamp: @setup_timestamp[dialect] }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -110,7 +107,7 @@ describe "Spanner Client", :single_use, :spanner do
                                         single_use: { staleness: 0.0001 }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -120,10 +117,10 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     it "runs a read with staleness option for #{dialect}" do
-      results = db[dialect].read "accounts", columns[dialect], single_use: { staleness: 0.0001 }
+      results = db[dialect].read "accounts",  columns, single_use: { staleness: 0.0001 }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -137,7 +134,7 @@ describe "Spanner Client", :single_use, :spanner do
                                         single_use: { bounded_timestamp: @setup_timestamp[dialect] }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -147,11 +144,11 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     it "runs a read with bounded_timestamp option for #{dialect}" do
-      results = db[dialect].read "accounts", columns[dialect],
+      results = db[dialect].read "accounts",  columns,
                                  single_use: { bounded_timestamp: @setup_timestamp[dialect] }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -165,7 +162,7 @@ describe "Spanner Client", :single_use, :spanner do
                                         single_use: { bounded_staleness: 0.0001 }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -175,10 +172,10 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     it "runs a read with bounded_staleness option for #{dialect}" do
-      results = db[dialect].read "accounts", columns[dialect], single_use: { bounded_staleness: 0.0001 }
+      results = db[dialect].read "accounts",  columns, single_use: { bounded_staleness: 0.0001 }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal  fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end

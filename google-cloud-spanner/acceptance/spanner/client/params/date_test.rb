@@ -15,56 +15,67 @@
 require "spanner_helper"
 
 describe "Spanner Client", :params, :date, :spanner do
-  let(:db) { spanner_client }
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
+  let :date_query do
+    { gsql: "SELECT @value AS value", 
+      pg: "SELECT $1 AS value" }
+  end
   let(:date_value) { Date.today }
 
-  it "queries and returns a date parameter" do
-    results = db.execute_query "SELECT @value AS value", params: { value: date_value }
+  dialects = [:gsql]
+  dialects.push :pg unless emulator_enabled?
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal :DATE
-    _(results.rows.first[:value]).must_equal date_value
-  end
+  dialects.each do |dialect|
+    it "queries and returns a date parameter for #{dialect}" do
+      results = db[dialect].execute_query date_query[dialect], params: dialect === :gsql ? { value: date_value } : { p1: date_value}
 
-  it "queries and returns a NULL date parameter" do
-    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: :DATE }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields[:value]).must_equal :DATE
+      _(results.rows.first[:value]).must_equal date_value
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal :DATE
-    _(results.rows.first[:value]).must_be :nil?
-  end
+    it "queries and returns a NULL date parameter for #{dialect}" do
+      results = db[dialect].execute_query date_query[dialect], params:  dialect === :gsql ? { value: nil } : { p1: nil}, types: dialect === :gsql ? { value: :DATE } : {p1: :DATE}
 
-  it "queries and returns an array of date parameters" do
-    results = db.execute_query "SELECT @value AS value",
-                               params: { value: [(date_value - 1), date_value, (date_value + 1)] }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields[:value]).must_equal :DATE
+      _(results.rows.first[:value]).must_be :nil?
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:DATE]
-    _(results.rows.first[:value]).must_equal [(date_value - 1), date_value, (date_value + 1)]
-  end
+    it "queries and returns an array of date parameters for #{dialect}" do
+      results = db[dialect].execute_query date_query[dialect],
+                                params: dialect === :gsql ? { value: [(date_value - 1), date_value, (date_value + 1)] } : { p1: [(date_value - 1), date_value, (date_value + 1)] }
 
-  it "queries and returns an array of date parameters with a nil value" do
-    results = db.execute_query "SELECT @value AS value",
-                               params: { value: [nil, (date_value - 1), date_value, (date_value + 1)] }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields[:value]).must_equal [:DATE]
+      _(results.rows.first[:value]).must_equal [(date_value - 1), date_value, (date_value + 1)]
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:DATE]
-    _(results.rows.first[:value]).must_equal [nil, (date_value - 1), date_value, (date_value + 1)]
-  end
+    it "queries and returns an array of date parameters with a nil value for #{dialect}" do
+      results = db[dialect].execute_query date_query[dialect],
+                                params: dialect === :gsql ? { value: [nil, (date_value - 1), date_value, (date_value + 1)] } : { p1: [nil, (date_value - 1), date_value, (date_value + 1)] }
 
-  it "queries and returns an empty array of date parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: [] }, types: { value: [:DATE] }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields[:value]).must_equal [:DATE]
+      _(results.rows.first[:value]).must_equal [nil, (date_value - 1), date_value, (date_value + 1)]
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:DATE]
-    _(results.rows.first[:value]).must_equal []
-  end
+    it "queries and returns an empty array of date parameters for #{dialect}" do
+      results = db[dialect].execute_query date_query[dialect], params:  dialect === :gsql ? { value: [] } : { p1: [] }, types: dialect === :gsql ? { value: [:DATE] } : { p1: [:DATE] }
 
-  it "queries and returns a NULL array of date parameters" do
-    results = db.execute_query "SELECT @value AS value", params: { value: nil }, types: { value: [:DATE] }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields[:value]).must_equal [:DATE]
+      _(results.rows.first[:value]).must_equal []
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields[:value]).must_equal [:DATE]
-    _(results.rows.first[:value]).must_be :nil?
+    it "queries and returns a NULL array of date parameters for #{dialect}" do
+      results = db[dialect].execute_query date_query[dialect], params: dialect === :gsql ? { value: nil } : { p1: nil }, types: dialect === :gsql ? { value: [:DATE] } : { p1: [:DATE] }
+
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields[:value]).must_equal [:DATE]
+      _(results.rows.first[:value]).must_be :nil?
+    end
   end
 end
