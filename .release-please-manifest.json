@@ -295,5 +295,8 @@
   "grafeas-client": "0.4.0",
   "grafeas-v1": "0.4.0",
   "stackdriver": "0.21.1",
-  "stackdriver-core": "1.5.0"
+  "stackdriver-core": "1.5.0",
+  "google-cloud-bigquery-migration-v2": "0.0.1",
+  "google-cloud-datastream-v1": "0.0.1",
+  "google-cloud-run-v2": "0.0.1"
 }
