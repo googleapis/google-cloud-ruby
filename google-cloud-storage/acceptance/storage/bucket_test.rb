@@ -192,7 +192,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
       l.last.noncurrent_time_before = "2019-03-16"
       l.last.num_newer_versions = 4
       l.last.matches_prefix = ["some_other_prefix"]
-      l.last.matches_prefix = ["some_other_suffix"]
+      l.last.matches_suffix = ["some_other_suffix"]
 
 
       _(l.last.created_before).must_be_kind_of String
