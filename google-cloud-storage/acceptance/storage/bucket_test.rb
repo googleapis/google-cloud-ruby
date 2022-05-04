@@ -205,8 +205,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.custom_time_before).must_equal custom_time_before_2
     _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
-    _(bucket.lifecycle.last.matches_prefix).must_equal ["some_prefix"]
-    _(bucket.lifecycle.last.matches_suffix).must_equal ["some_suffix"]
+    _(bucket.lifecycle.last.matches_prefix).must_equal ["some_other_prefix"]
+    _(bucket.lifecycle.last.matches_suffix).must_equal ["some_other_suffix"]
 
 
     bucket.reload!
@@ -227,8 +227,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
     _(bucket.lifecycle.last.num_newer_versions).must_equal 4
-    _(bucket.lifecycle.last.matches_prefix).must_equal ["some_prefix"]
-    _(bucket.lifecycle.last.matches_suffix).must_equal ["some_suffix"]
+    _(bucket.lifecycle.last.matches_prefix).must_equal ["some_other_prefix"]
+    _(bucket.lifecycle.last.matches_suffix).must_equal ["some_other_suffix"]
 
     bucket.lifecycle do |l|
       l.delete_at(bucket.lifecycle.count - 1)
