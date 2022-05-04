@@ -85,18 +85,18 @@ module Google
             # Default unspecified reason.
             REASON_UNSPECIFIED = 0
 
-            # Indicates a chargeback was issued for the transaction associated with the
-            # assessment, with no other details. When possible, specify the type by
-            # using CHARGEBACK_FRAUD or CHARGEBACK_DISPUTE instead.
+            # Indicates a chargeback issued for the transaction with no other details.
+            # When possible, specify the type by using CHARGEBACK_FRAUD or
+            # CHARGEBACK_DISPUTE instead.
             CHARGEBACK = 1
 
             # Indicates a chargeback related to an alleged unauthorized transaction
-            # from the perspective of the cardholder (for example, the card number was
+            # from the cardholder's perspective (for example, the card number was
             # stolen).
             CHARGEBACK_FRAUD = 8
 
             # Indicates a chargeback related to the cardholder having provided their
-            # card but allegedly not being satisfied with the purchase
+            # card details but allegedly not being satisfied with the purchase
             # (for example, misrepresentation, attempted cancellation).
             CHARGEBACK_DISPUTE = 9
 
@@ -447,6 +447,9 @@ module Google
         # @!attribute [rw] testing_options
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::TestingOptions]
         #     Options for user acceptance testing.
+        # @!attribute [rw] waf_settings
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings]
+        #     Settings for WAF
         class Key
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -721,7 +724,7 @@ module Google
         end
 
         # The request message to search related account group memberships.
-        # @!attribute [rw] parent
+        # @!attribute [rw] project
         #   @return [::String]
         #     Required. The name of the project to search related account group memberships from,
         #     in the format "projects/\\{project}".
@@ -786,6 +789,45 @@ module Google
         class RelatedAccountGroup
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings specific to keys that can be used for WAF (Web Application
+        # Firewall).
+        # @!attribute [rw] waf_service
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings::WafService]
+        #     Required. The WAF service that uses this key.
+        # @!attribute [rw] waf_feature
+        #   @return [::Google::Cloud::RecaptchaEnterprise::V1::WafSettings::WafFeature]
+        #     Required. The WAF feature for which this key is enabled.
+        class WafSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Supported WAF features. For more information, see
+          # https://cloud.google.com/recaptcha-enterprise/docs/usecase#comparison_of_features.
+          module WafFeature
+            # Undefined feature.
+            WAF_FEATURE_UNSPECIFIED = 0
+
+            # Redirects suspicious traffic to reCAPTCHA.
+            CHALLENGE_PAGE = 1
+
+            # Use reCAPTCHA session-tokens to protect the whole user session on the
+            # site's domain.
+            SESSION_TOKEN = 2
+
+            # Use reCAPTCHA action-tokens to protect user actions.
+            ACTION_TOKEN = 3
+          end
+
+          # Web Application Firewalls supported by reCAPTCHA Enterprise.
+          module WafService
+            # Undefined WAF
+            WAF_SERVICE_UNSPECIFIED = 0
+
+            # Cloud Armor
+            CA = 1
+          end
         end
       end
     end

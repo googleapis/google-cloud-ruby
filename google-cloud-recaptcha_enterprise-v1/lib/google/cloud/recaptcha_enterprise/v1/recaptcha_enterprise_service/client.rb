@@ -1193,12 +1193,12 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_related_account_group_memberships(parent: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
+            # @overload search_related_account_group_memberships(project: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `search_related_account_group_memberships` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [::String]
+            #   @param project [::String]
             #     Required. The name of the project to search related account group memberships from,
             #     in the format "projects/\\{project}".
             #   @param hashed_account_id [::String]
@@ -1266,8 +1266,8 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.parent
-                header_params["parent"] = request.parent
+              if request.project
+                header_params["project"] = request.project
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
