@@ -1,5 +1,15 @@
 # Release History
 
+### 2.0.0 (2022-05-05)
+
+### ⚠ BREAKING CHANGES
+
+* Removed the obsolete google-cloud-dataproc-v1beta2 from the dependencies
+
+#### Bug Fixes
+
+* Removed the obsolete google-cloud-dataproc-v1beta2 from the dependencies
+
 ### 1.3.1 / 2022-01-11
 
 #### Documentation
