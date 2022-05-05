@@ -45,7 +45,7 @@ describe "Spanner Client", :types, :date, :spanner do
     it "writes and queries date #{dialect}" do
       id = SecureRandom.int64
       db[dialect].upsert table_name, { id: id, date: Date.parse("2017-01-01") }
-      results = db[dialect].execute_query date_query[dialect], params: dialect === :gsql ? { id: id } : { p1: id }
+      results = db[dialect].execute_query date_query[dialect], params: make_params(dialect, id)
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
@@ -65,7 +65,7 @@ describe "Spanner Client", :types, :date, :spanner do
     it "writes and queries NULL date #{dialect}" do
       id = SecureRandom.int64
       db[dialect].upsert table_name, { id: id, date: nil }
-      results = db[dialect].execute_query date_query[dialect], params: dialect === :gsql ? { id: id } : { p1: id }
+      results = db[dialect].execute_query date_query[dialect], params: make_params(dialect, id)
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
@@ -90,7 +90,7 @@ dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-
       db[dialect].upsert table_name,
                          { id: id,
 dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-      results = db[dialect].execute_query dates_query[dialect], params: dialect === :gsql ? { id: id } : { p1: id }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
@@ -116,7 +116,7 @@ dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("201
       db[dialect].upsert table_name,
                          { id: id,
 dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-      results = db[dialect].execute_query dates_query[dialect], params: dialect === :gsql ? { id: id } : { p1: id }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
@@ -137,7 +137,7 @@ dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("201
     it "writes and queries empty array of date #{dialect}" do
       id = SecureRandom.int64
       db[dialect].upsert table_name, { id: id, dates: [] }
-      results = db[dialect].execute_query dates_query[dialect], params: dialect === :gsql ? { id: id } : { p1: id }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
@@ -157,7 +157,7 @@ dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("201
     it "writes and queries NULL array of date #{dialect}" do
       id = SecureRandom.int64
       db[dialect].upsert table_name, { id: id, dates: nil }
-      results = db[dialect].execute_query dates_query[dialect], params: dialect === :gsql ? { id: id } : { p1: id }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })

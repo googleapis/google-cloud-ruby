@@ -90,7 +90,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     it "runs a read with timestamp option for #{dialect}" do
-      results = db[dialect].read "accounts",  columns, single_use: { timestamp: @setup_timestamp[dialect] }
+      results = db[dialect].read "accounts", columns, single_use: { timestamp: @setup_timestamp[dialect] }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal fields_hash
@@ -117,7 +117,7 @@ describe "Spanner Client", :single_use, :spanner do
     end
 
     it "runs a read with staleness option for #{dialect}" do
-      results = db[dialect].read "accounts",  columns, single_use: { staleness: 0.0001 }
+      results = db[dialect].read "accounts", columns, single_use: { staleness: 0.0001 }
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal fields_hash

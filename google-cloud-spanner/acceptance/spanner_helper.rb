@@ -38,6 +38,11 @@ def emulator_enabled?
   ENV["SPANNER_EMULATOR_HOST"]
 end
 
+def make_params dialect, value
+  key = dialect == :gsql ? :value : :p1
+  { key => value }
+end
+
 # Create shared spanner object so we don't create new for each test
 $spanner = Google::Cloud::Spanner.new
 $spanner_db_admin = Google::Cloud::Spanner::Admin::Database.database_admin
