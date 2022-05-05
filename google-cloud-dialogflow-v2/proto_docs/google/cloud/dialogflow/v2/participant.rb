@@ -215,6 +215,14 @@ module Google
         # @!attribute [rw] assist_query_params
         #   @return [::Google::Cloud::Dialogflow::V2::AssistQueryParameters]
         #     Parameters for a human assist query.
+        # @!attribute [rw] cx_parameters
+        #   @return [::Google::Protobuf::Struct]
+        #     Additional parameters to be put into Dialogflow CX session parameters. To
+        #     remove a parameter from the session, clients should explicitly set the
+        #     parameter value to null.
+        #
+        #     Note: this field should only be used if you are connecting to a Dialogflow
+        #     CX agent.
         # @!attribute [rw] request_id
         #   @return [::String]
         #     A unique identifier for this request. Restricted to 36 ASCII characters.
