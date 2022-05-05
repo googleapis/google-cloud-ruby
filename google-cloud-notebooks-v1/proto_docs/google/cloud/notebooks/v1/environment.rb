@@ -58,7 +58,7 @@ module Google
         # @!attribute [rw] project
         #   @return [::String]
         #     Required. The name of the Google Cloud project that this VM image belongs to.
-        #     Format: `projects/{project_id}`
+        #     Format: `{project_id}`
         # @!attribute [rw] image_name
         #   @return [::String]
         #     Use VM image name to find the image.
