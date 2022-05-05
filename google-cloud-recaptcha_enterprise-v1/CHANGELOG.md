@@ -1,5 +1,18 @@
 # Release History
 
+### 0.8.0 (2022-05-05)
+
+### ⚠ BREAKING CHANGES
+
+* Renamed the "parent" argument to "project" in search_related_account_group_memberships to match what the service expects
+
+#### Features
+
+* Added WAF settings to application keys
+#### Bug Fixes
+
+* Renamed the "parent" argument to "project" in search_related_account_group_memberships to match what the service expects
+
 ### 0.7.1 / 2022-01-11
 
 #### Documentation
