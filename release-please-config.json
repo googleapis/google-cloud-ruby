@@ -1210,6 +1210,14 @@
     "google-cloud-run-v2": {
       "component": "google-cloud-run-v2",
       "version_file": "lib/google/cloud/run/v2/version.rb"
+    },
+    "google-cloud-bigquery-migration": {
+      "component": "google-cloud-bigquery-migration",
+      "version_file": "lib/google/cloud/bigquery/migration/version.rb"
+    },
+    "google-cloud-run": {
+      "component": "google-cloud-run",
+      "version_file": "lib/google/cloud/run/version.rb"
     }
   }
 }
