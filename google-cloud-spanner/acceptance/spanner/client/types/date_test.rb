@@ -82,10 +82,9 @@ describe "Spanner Client", :types, :date, :spanner do
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
       _(results.rows.first.to_h).must_equal({ id: id,
-                                              dates: [Date.parse("2016-12-30"), 
-                                                      Date.parse("2016-12-31"), 
-                                                      Date.parse("2017-01-01")] 
-                                           })
+                                              dates: [Date.parse("2016-12-30"),
+                                                      Date.parse("2016-12-31"),
+                                                      Date.parse("2017-01-01")] })
     end
 
     it "writes and queries array of date #{dialect}" do
@@ -98,10 +97,9 @@ describe "Spanner Client", :types, :date, :spanner do
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
       _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
       _(results.rows.first.to_h).must_equal({ id: id,
-                                              dates: [Date.parse("2016-12-30"), 
-                                                      Date.parse("2016-12-31"), 
-                                                      Date.parse("2017-01-01")] 
-                                           })
+                                              dates: [Date.parse("2016-12-30"),
+                                                      Date.parse("2016-12-31"),
+                                                      Date.parse("2017-01-01")] })
     end
 
     it "writes and reads array of date with NULL #{dialect}" do
@@ -120,7 +118,7 @@ describe "Spanner Client", :types, :date, :spanner do
     it "writes and queries array of date with NULL #{dialect}" do
       id = SecureRandom.int64
       db[dialect].upsert table_name,
-                         { id: id, 
+                         { id: id,
                            dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
       results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
