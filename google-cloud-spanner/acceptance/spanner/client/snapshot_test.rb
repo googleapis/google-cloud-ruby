@@ -96,7 +96,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts",  columns
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -128,7 +128,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts",  columns
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -160,7 +160,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts",  columns
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -192,7 +192,7 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts",  columns
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
