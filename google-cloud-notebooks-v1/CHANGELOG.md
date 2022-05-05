@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2022-05-05)
+
+#### Documentation
+
+* Fix the documented format for the VMImage#project field
+
 ### 0.2.0 (2022-04-21)
 
 #### Features
