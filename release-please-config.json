@@ -11,10 +11,6 @@
   "tag-separator": "/",
   "sequential-calls": true,
   "packages": {
-    "google-cloud-secret_manager-v1": {
-      "component": "google-cloud-secret_manager-v1",
-      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
-    },
     "google-analytics-admin": {
       "component": "google-analytics-admin",
       "version_file": "lib/google/analytics/admin/version.rb"
@@ -146,6 +142,14 @@
     "google-cloud-bigquery-data_transfer-v1": {
       "component": "google-cloud-bigquery-data_transfer-v1",
       "version_file": "lib/google/cloud/bigquery/data_transfer/v1/version.rb"
+    },
+    "google-cloud-bigquery-migration": {
+      "component": "google-cloud-bigquery-migration",
+      "version_file": "lib/google/cloud/bigquery/migration/version.rb"
+    },
+    "google-cloud-bigquery-migration-v2": {
+      "component": "google-cloud-bigquery-migration-v2",
+      "version_file": "lib/google/cloud/bigquery/migration/v2/version.rb"
     },
     "google-cloud-bigquery-reservation": {
       "component": "google-cloud-bigquery-reservation",
@@ -354,6 +358,10 @@
     "google-cloud-datastream": {
       "component": "google-cloud-datastream",
       "version_file": "lib/google/cloud/datastream/version.rb"
+    },
+    "google-cloud-datastream-v1": {
+      "component": "google-cloud-datastream-v1",
+      "version_file": "lib/google/cloud/datastream/v1/version.rb"
     },
     "google-cloud-datastream-v1alpha1": {
       "component": "google-cloud-datastream-v1alpha1",
@@ -831,6 +839,14 @@
       "component": "google-cloud-retail-v2",
       "version_file": "lib/google/cloud/retail/v2/version.rb"
     },
+    "google-cloud-run": {
+      "component": "google-cloud-run",
+      "version_file": "lib/google/cloud/run/version.rb"
+    },
+    "google-cloud-run-v2": {
+      "component": "google-cloud-run-v2",
+      "version_file": "lib/google/cloud/run/v2/version.rb"
+    },
     "google-cloud-scheduler": {
       "component": "google-cloud-scheduler",
       "version_file": "lib/google/cloud/scheduler/version.rb"
@@ -846,6 +862,10 @@
     "google-cloud-secret_manager": {
       "component": "google-cloud-secret_manager",
       "version_file": "lib/google/cloud/secret_manager/version.rb"
+    },
+    "google-cloud-secret_manager-v1": {
+      "component": "google-cloud-secret_manager-v1",
+      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
     },
     "google-cloud-secret_manager-v1beta1": {
       "component": "google-cloud-secret_manager-v1beta1",
@@ -1198,26 +1218,6 @@
     "stackdriver-core": {
       "component": "stackdriver-core",
       "version_file": "lib/stackdriver/core/version.rb"
-    },
-    "google-cloud-bigquery-migration-v2": {
-      "component": "google-cloud-bigquery-migration-v2",
-      "version_file": "lib/google/cloud/bigquery/migration/v2/version.rb"
-    },
-    "google-cloud-datastream-v1": {
-      "component": "google-cloud-datastream-v1",
-      "version_file": "lib/google/cloud/datastream/v1/version.rb"
-    },
-    "google-cloud-run-v2": {
-      "component": "google-cloud-run-v2",
-      "version_file": "lib/google/cloud/run/v2/version.rb"
-    },
-    "google-cloud-bigquery-migration": {
-      "component": "google-cloud-bigquery-migration",
-      "version_file": "lib/google/cloud/bigquery/migration/version.rb"
-    },
-    "google-cloud-run": {
-      "component": "google-cloud-run",
-      "version_file": "lib/google/cloud/run/version.rb"
     }
   }
 }
