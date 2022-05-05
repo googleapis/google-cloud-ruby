@@ -11,6 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :id, :string, 2
       optional :split, :message, 3, "google.appengine.v1.TrafficSplit"
+      map :labels, :string, :string, 4
       optional :network_settings, :message, 6, "google.appengine.v1.NetworkSettings"
     end
     add_message "google.appengine.v1.TrafficSplit" do

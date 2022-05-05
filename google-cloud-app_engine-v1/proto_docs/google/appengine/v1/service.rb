@@ -40,12 +40,34 @@ module Google
         #   @return [::Google::Cloud::AppEngine::V1::TrafficSplit]
         #     Mapping that defines fractional HTTP traffic diversion to
         #     different versions within the service.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     A set of labels to apply to this service. Labels are key/value pairs that
+        #     describe the service and all resources that belong to it (e.g.,
+        #     versions). The labels can be used to search and group resources, and are
+        #     propagated to the usage and billing reports, enabling fine-grain analysis
+        #     of costs. An example of using labels is to tag resources belonging to
+        #     different environments (e.g., "env=prod", "env=qa").
+        #
+        #     <p>Label keys and values can be no longer than 63 characters and can only
+        #     contain lowercase letters, numeric characters, underscores, dashes, and
+        #     international characters. Label keys must start with a lowercase letter
+        #     or an international character. Each service can have at most 32 labels.
         # @!attribute [rw] network_settings
         #   @return [::Google::Cloud::AppEngine::V1::NetworkSettings]
         #     Ingress settings for this service. Will apply to all versions.
         class Service
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # Traffic routing configuration for versions within a single service. Traffic

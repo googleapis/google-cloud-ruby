@@ -465,7 +465,7 @@ module Google
             #     A domain mapping containing the updated resource. Only fields set
             #     in the field mask will be updated.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Standard field mask for the set of fields to be updated.
+            #     Required. Standard field mask for the set of fields to be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
