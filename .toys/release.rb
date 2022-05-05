@@ -89,14 +89,23 @@ tool "bootstrap" do
         }
       end
     end
+    config["packages"] = sort_hash config_packages
     puts "Added #{added_count} packages (#{already_present_count} already present)", :bold
 
     File.open config_name, "w" do |file|
       file.puts JSON.pretty_generate config
     end
     File.open manifest_name, "w" do |file|
-      file.puts JSON.pretty_generate manifest
+      file.puts JSON.pretty_generate sort_hash manifest
     end
+  end
+
+  def sort_hash original
+    result = {}
+    original.keys.sort.each do |key|
+      result[key] = original[key]
+    end
+    result
   end
 
   def find_all_packages
