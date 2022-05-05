@@ -19,11 +19,11 @@ describe "Spanner Client", :types, :date, :spanner do
     { gsql: spanner_client, pg: spanner_pg_client }
   end
   let :date_query do
-    { gsql: "SELECT id, date FROM #{table_name} WHERE id = @id",
+    { gsql: "SELECT id, date FROM #{table_name} WHERE id = @value",
       pg: "SELECT id, date FROM #{table_name} WHERE id = $1" }
   end
   let :dates_query do
-    { gsql: "SELECT id, dates FROM #{table_name} WHERE id = @id",
+    { gsql: "SELECT id, dates FROM #{table_name} WHERE id = @value",
       pg: "SELECT id, dates FROM #{table_name} WHERE id = $1" }
   end
   let(:table_name) { "stuffs" }
