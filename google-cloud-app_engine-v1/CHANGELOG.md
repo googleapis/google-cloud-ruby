@@ -1,5 +1,14 @@
 # Release History
 
+### 0.4.0 (2022-05-06)
+
+#### Features
+
+* Added the labels field to the Service data type
+* Added the service_account field to the Application data type
+* Allow second generation runtimes to access legacy bundled services
+* Support the egress setting for a VPC access connector
+
 ### 0.3.6 / 2022-02-18
 
 #### Bug Fixes
