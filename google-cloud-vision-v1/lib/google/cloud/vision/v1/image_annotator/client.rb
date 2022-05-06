@@ -294,8 +294,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param requests [::Array<::Google::Cloud::Vision::V1::AnnotateFileRequest, ::Hash>]
-            #     Required. The list of file annotation requests. Right now we support only
-            #     one AnnotateFileRequest in BatchAnnotateFilesRequest.
+            #     Required. The list of file annotation requests. Right now we support only one
+            #     AnnotateFileRequest in BatchAnnotateFilesRequest.
             #   @param parent [::String]
             #     Optional. Target project and location to make a call.
             #
