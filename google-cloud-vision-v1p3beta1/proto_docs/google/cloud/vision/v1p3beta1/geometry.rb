@@ -60,15 +60,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A normalized bounding polygon around a portion of an image.
-        # @!attribute [rw] vertices
-        #   @return [::Array<::Google::Cloud::Vision::V1p3beta1::NormalizedVertex>]
-        #     Normalized vertices of the bounding polygon.
-        class NormalizedBoundingPoly
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # A 3D position in the image, used primarily for Face detection landmarks.
         # A valid Position must have both x and y coordinates.
         # The position coordinates are in the same scale as the original image.
