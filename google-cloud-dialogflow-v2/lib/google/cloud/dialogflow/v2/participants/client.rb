@@ -534,7 +534,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload analyze_content(participant: nil, text_input: nil, event_input: nil, reply_audio_config: nil, query_params: nil, assist_query_params: nil, request_id: nil)
+            # @overload analyze_content(participant: nil, text_input: nil, event_input: nil, reply_audio_config: nil, query_params: nil, assist_query_params: nil, cx_parameters: nil, request_id: nil)
             #   Pass arguments to `analyze_content` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -557,6 +557,13 @@ module Google
             #     Parameters for a Dialogflow virtual-agent query.
             #   @param assist_query_params [::Google::Cloud::Dialogflow::V2::AssistQueryParameters, ::Hash]
             #     Parameters for a human assist query.
+            #   @param cx_parameters [::Google::Protobuf::Struct, ::Hash]
+            #     Additional parameters to be put into Dialogflow CX session parameters. To
+            #     remove a parameter from the session, clients should explicitly set the
+            #     parameter value to null.
+            #
+            #     Note: this field should only be used if you are connecting to a Dialogflow
+            #     CX agent.
             #   @param request_id [::String]
             #     A unique identifier for this request. Restricted to 36 ASCII characters.
             #     A random UUID is recommended.

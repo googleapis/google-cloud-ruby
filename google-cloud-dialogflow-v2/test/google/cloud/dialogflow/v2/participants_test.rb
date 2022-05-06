@@ -305,6 +305,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
     reply_audio_config = {}
     query_params = {}
     assist_query_params = {}
+    cx_parameters = {}
     request_id = "hello world"
 
     analyze_content_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -316,6 +317,7 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::OutputAudioConfig), request["reply_audio_config"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::QueryParameters), request["query_params"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Dialogflow::V2::AssistQueryParameters), request["assist_query_params"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Struct), request["cx_parameters"]
       assert_equal "hello world", request["request_id"]
       refute_nil options
     end
@@ -327,31 +329,31 @@ class ::Google::Cloud::Dialogflow::V2::Participants::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id }) do |response, operation|
+      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.analyze_content participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id do |response, operation|
+      client.analyze_content participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.analyze_content ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id) do |response, operation|
+      client.analyze_content ::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id }, grpc_options) do |response, operation|
+      client.analyze_content({ participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.analyze_content(::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, request_id: request_id), grpc_options) do |response, operation|
+      client.analyze_content(::Google::Cloud::Dialogflow::V2::AnalyzeContentRequest.new(participant: participant, text_input: text_input, reply_audio_config: reply_audio_config, query_params: query_params, assist_query_params: assist_query_params, cx_parameters: cx_parameters, request_id: request_id), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

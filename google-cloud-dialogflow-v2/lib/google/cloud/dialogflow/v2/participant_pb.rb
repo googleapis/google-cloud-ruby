@@ -64,6 +64,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :reply_audio_config, :message, 5, "google.cloud.dialogflow.v2.OutputAudioConfig"
       optional :query_params, :message, 9, "google.cloud.dialogflow.v2.QueryParameters"
       optional :assist_query_params, :message, 14, "google.cloud.dialogflow.v2.AssistQueryParameters"
+      optional :cx_parameters, :message, 18, "google.protobuf.Struct"
       optional :request_id, :string, 11
       oneof :input do
         optional :text_input, :message, 6, "google.cloud.dialogflow.v2.TextInput"

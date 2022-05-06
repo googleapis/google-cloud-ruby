@@ -35,6 +35,7 @@ module Google
         #   @return [::String]
         #     Required. The unique identifier of the fulfillment.
         #     Supported formats:
+        #
         #     - `projects/<Project ID>/agent/fulfillment`
         #     - `projects/<Project ID>/locations/<Location ID>/agent/fulfillment`
         #
@@ -59,8 +60,10 @@ module Google
 
           # Represents configuration for a generic web service.
           # Dialogflow supports two mechanisms for authentications:
+          #
           # - Basic authentication with username and password.
           # - Authentication with additional authentication headers.
+          #
           # More information could be found at:
           # https://cloud.google.com/dialogflow/docs/fulfillment-configure.
           # @!attribute [rw] uri
