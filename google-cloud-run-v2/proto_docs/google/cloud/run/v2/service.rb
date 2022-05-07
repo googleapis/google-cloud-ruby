@@ -46,9 +46,6 @@ module Google
         # @!attribute [rw] service
         #   @return [::Google::Cloud::Run::V2::Service]
         #     Required. The Service to be updated.
-        # @!attribute [rw] update_mask
-        #   @return [::Google::Protobuf::FieldMask]
-        #     The list of fields to be updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated and default values
@@ -150,6 +147,8 @@ module Google
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
         #     modifies the desired state.
+        #     Please note that unlike v1, this is an int64 value. As with most Google
+        #     APIs, its JSON representation will be a `string` instead of an `integer`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Map of string keys and values that can be used to organize and categorize
@@ -222,6 +221,8 @@ module Google
         #     Output only. The generation of this Service currently serving traffic. See comments in
         #     `reconciling` for additional information on reconciliation process in Cloud
         #     Run.
+        #     Please note that unlike v1, this is an int64 value. As with most Google
+        #     APIs, its JSON representation will be a `string` instead of an `integer`.
         # @!attribute [r] terminal_condition
         #   @return [::Google::Cloud::Run::V2::Condition]
         #     Output only. The Condition of this Service, containing its readiness status, and

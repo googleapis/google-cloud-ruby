@@ -31,8 +31,8 @@ module Google
         #     Name of the container specified as a DNS_LABEL.
         # @!attribute [rw] image
         #   @return [::String]
-        #     Required. URL of the Container image in Google Container Registry or Docker
-        #     More info: https://kubernetes.io/docs/concepts/containers/images
+        #     Required. URL of the Container image in Google Container Registry or Google Artifact
+        #     Registry. More info: https://kubernetes.io/docs/concepts/containers/images
         # @!attribute [rw] command
         #   @return [::Array<::String>]
         #     Entrypoint array. Not executed within a shell.
@@ -273,7 +273,7 @@ module Google
         end
 
         # Represents a specific Cloud SQL instance.
-        # @!attribute [rw] connections
+        # @!attribute [rw] instances
         #   @return [::Array<::String>]
         #     The Cloud SQL instance connection names, as can be found in
         #     https://console.cloud.google.com/sql/instances. Visit
