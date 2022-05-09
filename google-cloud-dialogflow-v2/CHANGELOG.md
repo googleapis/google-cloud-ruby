@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.0 (2022-05-09)
+
+#### Features
+
+* Support setting CX session parameters in the analyze_content call
+
 ### 0.15.2 / 2022-03-31
 
 #### Documentation
