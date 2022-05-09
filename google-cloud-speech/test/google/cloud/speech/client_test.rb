@@ -31,4 +31,14 @@ class Google::Cloud::Speech::ClientConstructionMinitest < Minitest::Test
       assert_kind_of Google::Cloud::Speech::V1::Speech::Client, client
     end
   end
+
+  def test_adaptation
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Speech.adaptation do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Speech::V1::Adaptation::Client, client
+    end
+  end
 end
