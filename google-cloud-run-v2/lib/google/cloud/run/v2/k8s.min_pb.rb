@@ -62,7 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :mode, :int32, 3
     end
     add_message "google.cloud.run.v2.CloudSqlInstance" do
-      repeated :connections, :string, 1
+      repeated :instances, :string, 1
     end
   end
 end

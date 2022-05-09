@@ -16,14 +16,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :annotations, :string, :string, 3
       optional :scaling, :message, 4, "google.cloud.run.v2.RevisionScaling"
       optional :vpc_access, :message, 6, "google.cloud.run.v2.VpcAccess"
-      optional :container_concurrency, :int32, 7
       optional :timeout, :message, 8, "google.protobuf.Duration"
       optional :service_account, :string, 9
       repeated :containers, :message, 10, "google.cloud.run.v2.Container"
       repeated :volumes, :message, 11, "google.cloud.run.v2.Volume"
-      optional :confidential, :bool, 12
       optional :execution_environment, :enum, 13, "google.cloud.run.v2.ExecutionEnvironment"
       optional :encryption_key, :string, 14
+      optional :max_instance_request_concurrency, :int32, 15
     end
   end
 end

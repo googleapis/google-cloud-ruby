@@ -97,8 +97,8 @@ module Google
           # Unspecified
           EXECUTION_ENVIRONMENT_UNSPECIFIED = 0
 
-          # Uses the Google-default environment.
-          EXECUTION_ENVIRONMENT_DEFAULT = 1
+          # Uses the First Generation environment.
+          EXECUTION_ENVIRONMENT_GEN1 = 1
 
           # Uses Second Generation environment.
           EXECUTION_ENVIRONMENT_GEN2 = 2

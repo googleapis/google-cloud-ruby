@@ -15,8 +15,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :severity, :enum, 5, "google.cloud.run.v2.Condition.Severity"
       oneof :reasons do
         optional :reason, :enum, 6, "google.cloud.run.v2.Condition.CommonReason"
-        optional :internal_reason, :enum, 7, "google.cloud.run.v2.Condition.InternalReason"
-        optional :domain_mapping_reason, :enum, 8, "google.cloud.run.v2.Condition.DomainMappingReason"
         optional :revision_reason, :enum, 9, "google.cloud.run.v2.Condition.RevisionReason"
         optional :execution_reason, :enum, 11, "google.cloud.run.v2.Condition.ExecutionReason"
       end
@@ -37,10 +35,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.run.v2.Condition.CommonReason" do
       value :COMMON_REASON_UNDEFINED, 0
       value :UNKNOWN, 1
-      value :ROUTE_MISSING, 2
       value :REVISION_FAILED, 3
       value :PROGRESS_DEADLINE_EXCEEDED, 4
-      value :BUILD_STEP_FAILED, 5
       value :CONTAINER_MISSING, 6
       value :CONTAINER_PERMISSION_DENIED, 7
       value :CONTAINER_IMAGE_UNAUTHORIZED, 8
@@ -51,25 +47,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :WAITING_FOR_OPERATION, 13
       value :IMMEDIATE_RETRY, 14
       value :POSTPONED_RETRY, 15
-    end
-    add_enum "google.cloud.run.v2.Condition.InternalReason" do
-      value :INTERNAL_REASON_UNDEFINED, 0
-      value :CONFLICTING_REVISION_NAME, 1
-      value :REVISION_MISSING, 2
-      value :CONFIGURATION_MISSING, 3
-      value :ASSIGNING_TRAFFIC, 4
-      value :UPDATING_INGRESS_TRAFFIC_ALLOWED, 5
-      value :REVISION_ORG_POLICY_VIOLATION, 6
-      value :ENABLING_GCFV2_URI_SUPPORT, 7
-    end
-    add_enum "google.cloud.run.v2.Condition.DomainMappingReason" do
-      value :DOMAIN_MAPPING_REASON_UNDEFINED, 0
-      value :ROUTE_NOT_READY, 1
-      value :PERMISSION_DENIED, 2
-      value :CERTIFICATE_ALREADY_EXISTS, 3
-      value :MAPPING_ALREADY_EXISTS, 4
-      value :CERTIFICATE_PENDING, 5
-      value :CERTIFICATE_FAILED, 6
+      value :INTERNAL, 16
     end
     add_enum "google.cloud.run.v2.Condition.RevisionReason" do
       value :REVISION_REASON_UNDEFINED, 0
@@ -101,8 +79,6 @@ module Google
         Condition::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Condition.State").enummodule
         Condition::Severity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Condition.Severity").enummodule
         Condition::CommonReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Condition.CommonReason").enummodule
-        Condition::InternalReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Condition.InternalReason").enummodule
-        Condition::DomainMappingReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Condition.DomainMappingReason").enummodule
         Condition::RevisionReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Condition.RevisionReason").enummodule
         Condition::ExecutionReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Condition.ExecutionReason").enummodule
       end
