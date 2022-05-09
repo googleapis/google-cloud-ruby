@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.1 (2022-05-09)
+
+#### Documentation
+
+* Expand  documentation for diagnostic_info
+
 ### 0.8.0 (2022-04-28)
 
 #### Features
