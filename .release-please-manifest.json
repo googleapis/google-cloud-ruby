@@ -95,7 +95,7 @@
   "google-cloud-dialogflow": "1.4.0",
   "google-cloud-dialogflow-cx": "0.2.1",
   "google-cloud-dialogflow-cx-v3": "0.8.1",
-  "google-cloud-dialogflow-v2": "0.15.2",
+  "google-cloud-dialogflow-v2": "0.16.0",
   "google-cloud-dlp": "1.2.3",
   "google-cloud-dlp-v2": "0.10.0",
   "google-cloud-dns": "0.35.1",

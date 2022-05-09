@@ -38,6 +38,7 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
+    "proto_docs/google/api/routing.rb",
     "proto_docs/google/cloud/run/v2/condition.rb",
     "proto_docs/google/cloud/run/v2/k8s.min.rb",
     "proto_docs/google/cloud/run/v2/revision.rb",

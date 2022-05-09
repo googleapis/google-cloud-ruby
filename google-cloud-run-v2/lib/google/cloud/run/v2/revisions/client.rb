@@ -222,10 +222,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_revision.timeout,
@@ -323,10 +326,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_revisions.timeout,
@@ -424,10 +430,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_revision.timeout,

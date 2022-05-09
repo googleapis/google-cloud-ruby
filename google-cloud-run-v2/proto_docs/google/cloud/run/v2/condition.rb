@@ -44,12 +44,6 @@ module Google
         # @!attribute [rw] reason
         #   @return [::Google::Cloud::Run::V2::Condition::CommonReason]
         #     A common (service-level) reason for this condition.
-        # @!attribute [rw] internal_reason
-        #   @return [::Google::Cloud::Run::V2::Condition::InternalReason]
-        #     A reason for the internal condition.
-        # @!attribute [rw] domain_mapping_reason
-        #   @return [::Google::Cloud::Run::V2::Condition::DomainMappingReason]
-        #     A reason for the domain mapping condition.
         # @!attribute [rw] revision_reason
         #   @return [::Google::Cloud::Run::V2::Condition::RevisionReason]
         #     A reason for the revision condition.
@@ -101,17 +95,11 @@ module Google
             # Reason unknown. Further details will be in message.
             UNKNOWN = 1
 
-            # The internal route is missing.
-            ROUTE_MISSING = 2
-
             # Revision creation process failed.
             REVISION_FAILED = 3
 
             # Timed out waiting for completion.
             PROGRESS_DEADLINE_EXCEEDED = 4
-
-            # There was a build error.
-            BUILD_STEP_FAILED = 5
 
             # The container image path is incorrect.
             CONTAINER_MISSING = 6
@@ -142,58 +130,9 @@ module Google
 
             # System will retry later; current attempt failed.
             POSTPONED_RETRY = 15
-          end
 
-          # Reasons applicable to internal resources not exposed to users. These will
-          # surface in Service.conditions, and could be useful for further diagnosis.
-          module InternalReason
-            # Default value.
-            INTERNAL_REASON_UNDEFINED = 0
-
-            # The revision name provided conflicts with an existing one.
-            CONFLICTING_REVISION_NAME = 1
-
-            # Revision is missing; this is usually a transient reason.
-            REVISION_MISSING = 2
-
-            # Internal configuration is missing; this is usually a transient reason.
-            CONFIGURATION_MISSING = 3
-
-            # Assigning traffic; this is a transient reason.
-            ASSIGNING_TRAFFIC = 4
-
-            # Updating ingress traffic settings; this is a transient reason.
-            UPDATING_INGRESS_TRAFFIC_ALLOWED = 5
-
-            # The revision can't be created because it violates an org policy setting.
-            REVISION_ORG_POLICY_VIOLATION = 6
-
-            # Enabling GCFv2 URI support; this is a transient reason.
-            ENABLING_GCFV2_URI_SUPPORT = 7
-          end
-
-          # Reasons specific to DomainMapping resource.
-          module DomainMappingReason
-            # Default value.
-            DOMAIN_MAPPING_REASON_UNDEFINED = 0
-
-            # Internal route is not yet ready.
-            ROUTE_NOT_READY = 1
-
-            # Insufficient permissions.
-            PERMISSION_DENIED = 2
-
-            # Certificate already exists.
-            CERTIFICATE_ALREADY_EXISTS = 3
-
-            # Mapping already exists.
-            MAPPING_ALREADY_EXISTS = 4
-
-            # Certificate issuance pending.
-            CERTIFICATE_PENDING = 5
-
-            # Certificate issuance failed.
-            CERTIFICATE_FAILED = 6
+            # An internal error occurred. Further information may be in the message.
+            INTERNAL = 16
           end
 
           # Reasons specific to Revision resource.

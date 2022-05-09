@@ -147,7 +147,7 @@ module Google
         #   @return [::Google::Cloud::Run::V2::VpcAccess]
         #     VPC Access configuration for this Revision. For more information, visit
         #     https://cloud.google.com/run/docs/configuring/connecting-vpc.
-        # @!attribute [rw] container_concurrency
+        # @!attribute [rw] max_instance_request_concurrency
         #   @return [::Integer]
         #     Sets the maximum number of requests that each serving instance can receive.
         # @!attribute [rw] timeout
@@ -165,9 +165,6 @@ module Google
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
         #     A list of Volumes to make available to containers.
-        # @!attribute [rw] confidential
-        #   @return [::Boolean]
-        #     Indicates whether Confidential Cloud Run is enabled in this Revision.
         # @!attribute [rw] execution_environment
         #   @return [::Google::Cloud::Run::V2::ExecutionEnvironment]
         #     The execution environment being used to host this Revision.

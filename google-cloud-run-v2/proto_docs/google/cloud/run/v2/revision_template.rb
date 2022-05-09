@@ -40,9 +40,6 @@ module Google
         #   @return [::Google::Cloud::Run::V2::VpcAccess]
         #     VPC Access configuration to use for this Revision. For more information,
         #     visit https://cloud.google.com/run/docs/configuring/connecting-vpc.
-        # @!attribute [rw] container_concurrency
-        #   @return [::Integer]
-        #     Sets the maximum number of requests that each serving instance can receive.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
         #     Max allowed time for an instance to respond to a request.
@@ -59,9 +56,6 @@ module Google
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Run::V2::Volume>]
         #     A list of Volumes to make available to containers.
-        # @!attribute [rw] confidential
-        #   @return [::Boolean]
-        #     Enables Confidential Cloud Run in Revisions created using this template.
         # @!attribute [rw] execution_environment
         #   @return [::Google::Cloud::Run::V2::ExecutionEnvironment]
         #     The sandbox environment to host this Revision.
@@ -70,6 +64,9 @@ module Google
         #     A reference to a customer managed encryption key (CMEK) to use to encrypt
         #     this container image. For more information, go to
         #     https://cloud.google.com/run/docs/securing/using-cmek
+        # @!attribute [rw] max_instance_request_concurrency
+        #   @return [::Integer]
+        #     Sets the maximum number of requests that each serving instance can receive.
         class RevisionTemplate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
