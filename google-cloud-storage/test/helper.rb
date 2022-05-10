@@ -45,6 +45,7 @@ class MockStorage < Minitest::Spec
   let(:pubsub_topic_name) { "my-topic-name" }
   let(:file_obj) { StringIO.new("My test file") }
   let(:file_name) { "my_test_file.txt" }
+  let(:acl) { "authenticated_read" }
 
   # Register this spec type for when :mock_storage is used.
   register_spec_type(self) do |desc, *addl|

@@ -17,24 +17,22 @@ require "net/http"
 require_relative "../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb"
 require_relative "./utils.rb"
 
-Google::Apis.logger.level = Logger::DEBUG
-
 class ConformanceTest < MockStorage
 
   HOST = "http://localhost:9000/"
 
   def setup
     storage.service.service.root_url = HOST
-    @bucket = storage.create_bucket random_bucket_name, acl: "authenticated_read",
-                                    default_acl: "authenticated_read"
+    create_resources
+  end
+
+  def create_resources
+    @bucket = storage.create_bucket random_bucket_name, acl: acl,
+                                    default_acl: acl
     @hmac_key = storage.create_hmac_key storage.service_account_email
     @hmac_key.inactive!
     @notification = storage.service.insert_notification @bucket.name, pubsub_topic_name
     # @object = @bucket.create_file file_obj, file_name
-  end
-
-  def teardown
-    # @bucket.delete
   end
 
   def self.run_tests test
@@ -51,7 +49,6 @@ class ConformanceTest < MockStorage
   end
 
   def self.run_test_case test_name, scenario, instructions, method, lib_func
-    focus
     define_method("test_#{test_name}") do
       expect_success = scenario.expectSuccess
 
@@ -74,7 +71,13 @@ class ConformanceTest < MockStorage
       assert_equal status_response_body["completed"], true
 
       # Clean up and close out test in testbench.
+      delete_resources
       delete_retry_test test_id
+    end
+
+    def delete_resources
+      @hmac_key.delete unless @hmac_key.deleted?
+      @bucket.delete if @bucket.exists?
     end
   end
 
@@ -97,7 +100,6 @@ class ConformanceTest < MockStorage
     headers = {"Content-Type" => "application/json"}
     data = {"instructions" => {method_name => instructions.to_a}}.to_json
     http = Net::HTTP.new uri.host, uri.port
-    http.set_debug_output($stdout)
     request = Net::HTTP::Post.new uri.request_uri, headers
     request.body = data
     http.request request
