@@ -165,8 +165,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this phrase set will be created.
-            #     Format:
+            #     Required. The parent resource where this phrase set will be created. Format:
             #
             #     `projects/{project}/locations/{location}/phraseSets`
             #
@@ -179,8 +178,8 @@ module Google
             #     Required. The ID to use for the phrase set, which will become the final
             #     component of the phrase set's resource name.
             #
-            #     This value should be 4-63 characters, and valid characters
-            #     are /[a-z][0-9]-/.
+            #     This value should restrict to letters, numbers, and hyphens, with the first
+            #     character a letter, the last a letter or a number, and be 4-63 characters.
             #   @param phrase_set [::Google::Cloud::Speech::V1p1beta1::PhraseSet, ::Hash]
             #     Required. The phrase set to create.
             #
@@ -656,8 +655,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource where this custom class will be created.
-            #     Format:
+            #     Required. The parent resource where this custom class will be created. Format:
             #
             #     `projects/{project}/locations/{location}/customClasses`
             #
@@ -670,8 +668,8 @@ module Google
             #     Required. The ID to use for the custom class, which will become the final
             #     component of the custom class' resource name.
             #
-            #     This value should be 4-63 characters, and valid characters
-            #     are /[a-z][0-9]-/.
+            #     This value should restrict to letters, numbers, and hyphens, with the first
+            #     character a letter, the last a letter or a number, and be 4-63 characters.
             #   @param custom_class [::Google::Cloud::Speech::V1p1beta1::CustomClass, ::Hash]
             #     Required. The custom class to create.
             #
