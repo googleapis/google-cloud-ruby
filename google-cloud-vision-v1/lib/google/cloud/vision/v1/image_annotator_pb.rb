@@ -138,12 +138,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :medical, :enum, 3, "google.cloud.vision.v1.Likelihood"
       optional :violence, :enum, 4, "google.cloud.vision.v1.Likelihood"
       optional :racy, :enum, 9, "google.cloud.vision.v1.Likelihood"
-      optional :adult_confidence, :float, 16
-      optional :spoof_confidence, :float, 18
-      optional :medical_confidence, :float, 20
-      optional :violence_confidence, :float, 22
-      optional :racy_confidence, :float, 24
-      optional :nsfw_confidence, :float, 26
     end
     add_message "google.cloud.vision.v1.LatLongRect" do
       optional :min_lat_lng, :message, 1, "google.type.LatLng"
