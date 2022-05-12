@@ -60,13 +60,16 @@ module Google
             #
             # The resource will be in the following format:
             #
-            # `properties/{property}/customDimensions`
+            # `properties/{property}/customDimensions/{custom_dimension}`
             #
             # @param property [String]
+            # @param custom_dimension [String]
             #
             # @return [::String]
-            def custom_dimension_path property:
-              "properties/#{property}/customDimensions"
+            def custom_dimension_path property:, custom_dimension:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/customDimensions/#{custom_dimension}"
             end
 
             ##
@@ -74,13 +77,16 @@ module Google
             #
             # The resource will be in the following format:
             #
-            # `properties/{property}/customMetrics`
+            # `properties/{property}/customMetrics/{custom_metric}`
             #
             # @param property [String]
+            # @param custom_metric [String]
             #
             # @return [::String]
-            def custom_metric_path property:
-              "properties/#{property}/customMetrics"
+            def custom_metric_path property:, custom_metric:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/customMetrics/#{custom_metric}"
             end
 
             ##
