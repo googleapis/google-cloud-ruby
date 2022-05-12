@@ -293,7 +293,7 @@
   "google-cloud-workflows-v1beta": "0.3.5",
   "google-iam-credentials": "1.0.3",
   "google-iam-credentials-v1": "0.3.5",
-  "google-iam-v1": "0.0.1",
+  "google-iam-v1": "0.1.0",
   "google-iam-v1beta": "0.3.6",
   "google-identity-access_context_manager": "1.0.1",
   "google-identity-access_context_manager-v1": "0.1.2",
