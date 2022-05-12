@@ -54,8 +54,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
         config.credentials = grpc_channel
       end
 
-      path = client.custom_dimension_path property: "value0"
-      assert_equal "properties/value0/customDimensions", path
+      path = client.custom_dimension_path property: "value0", custom_dimension: "value1"
+      assert_equal "properties/value0/customDimensions/value1", path
     end
   end
 
@@ -66,8 +66,8 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientPathsTes
         config.credentials = grpc_channel
       end
 
-      path = client.custom_metric_path property: "value0"
-      assert_equal "properties/value0/customMetrics", path
+      path = client.custom_metric_path property: "value0", custom_metric: "value1"
+      assert_equal "properties/value0/customMetrics/value1", path
     end
   end
 
