@@ -105,7 +105,7 @@ module Google
       end
 
       ##
-      # Configure the google-cloud-run library.
+      # Configure the google-cloud-run-client library.
       #
       # The following configuration parameters are supported:
       #

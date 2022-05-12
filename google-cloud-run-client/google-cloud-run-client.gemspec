@@ -4,7 +4,7 @@
 require File.expand_path("lib/google/cloud/run/version", __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-cloud-run"
+  gem.name          = "google-cloud-run-client"
   gem.version       = Google::Cloud::Run::VERSION
 
   gem.authors       = ["Google LLC"]

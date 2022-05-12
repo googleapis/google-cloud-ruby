@@ -206,7 +206,7 @@
   "google-cloud-resource_settings-v1": "0.1.5",
   "google-cloud-retail": "1.2.0",
   "google-cloud-retail-v2": "0.7.0",
-  "google-cloud-run": "0.1.0",
+  "google-cloud-run-client": "0.0.1",
   "google-cloud-run-v2": "0.2.0",
   "google-cloud-scheduler": "2.2.3",
   "google-cloud-scheduler-v1": "0.4.5",
