@@ -1187,6 +1187,10 @@
       "component": "google-iam-credentials-v1",
       "version_file": "lib/google/iam/credentials/v1/version.rb"
     },
+    "google-iam-v1": {
+      "component": "google-iam-v1",
+      "version_file": "lib/google/iam/v1/version.rb"
+    },
     "google-iam-v1beta": {
       "component": "google-iam-v1beta",
       "version_file": "lib/google/iam/v1beta/version.rb"
