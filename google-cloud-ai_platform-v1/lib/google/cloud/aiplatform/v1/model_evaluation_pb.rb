@@ -13,6 +13,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/aiplatform/v1/model_evaluation.proto", :syntax => :proto3) do
     add_message "google.cloud.aiplatform.v1.ModelEvaluation" do
       optional :name, :string, 1
+      optional :display_name, :string, 10
       optional :metrics_schema_uri, :string, 2
       optional :metrics, :message, 3, "google.protobuf.Value"
       optional :create_time, :message, 4, "google.protobuf.Timestamp"
@@ -21,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :annotation_schema_uri, :string, 7
       optional :model_explanation, :message, 8, "google.cloud.aiplatform.v1.ModelExplanation"
       repeated :explanation_specs, :message, 9, "google.cloud.aiplatform.v1.ModelEvaluation.ModelEvaluationExplanationSpec"
+      optional :metadata, :message, 11, "google.protobuf.Value"
     end
     add_message "google.cloud.aiplatform.v1.ModelEvaluation.ModelEvaluationExplanationSpec" do
       optional :explanation_type, :string, 1
