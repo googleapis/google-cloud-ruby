@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-05-12)
+
+#### Features
+
+* Added display_name and metadata fields to ModelEvaluation
+
 ### 0.3.0 (2022-04-20)
 
 #### Features
