@@ -20,7 +20,7 @@
 # requiring "google/cloud". This is because google-cloud-core will load the
 # entrypoint (gem name) file, which in turn re-requires this file (hence
 # causing a require cycle) unless the version constant is already defined.
-require "google/cloud/run/version"
+require "google/cloud/run/client/version"
 
 require "googleauth"
 gem "google-cloud-core"

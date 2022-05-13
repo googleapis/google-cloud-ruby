@@ -14,17 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# The generator thinks this gem name is "google-cloud-run" and defines the
-# version constant under that namespace. This handwritten file ensures the
-# constant is also defined under the "correct" namespace.
-
-require "google/cloud/run/version"
-
 module Google
   module Cloud
     module Run
       module Client
-        VERSION = ::Google::Cloud::Run::VERSION
+        VERSION = "0.0.1"
       end
     end
   end
