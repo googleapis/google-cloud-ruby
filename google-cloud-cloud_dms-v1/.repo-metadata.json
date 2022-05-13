@@ -3,6 +3,7 @@
     "api_shortname": "datamigration",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-cloud_dms-v1/latest",
     "distribution_name": "google-cloud-cloud_dms-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "datamigration",
     "name_pretty": "Cloud Database Migration Service V1 API",

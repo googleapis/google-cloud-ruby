@@ -3,6 +3,7 @@
     "api_shortname": "language",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1beta2/latest",
     "distribution_name": "google-cloud-language-v1beta2",
+    "is_cloud": true,
     "language": "ruby",
     "name": "language",
     "name_pretty": "Natural Language V1beta2 API",

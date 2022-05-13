@@ -3,6 +3,7 @@
     "api_shortname": "networkmanagement",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-network_management/latest",
     "distribution_name": "google-cloud-network_management",
+    "is_cloud": true,
     "language": "ruby",
     "name": "networkmanagement",
     "name_pretty": "Network Management API",

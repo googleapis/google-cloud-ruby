@@ -3,6 +3,7 @@
     "api_shortname": "notebooks",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-notebooks-v1beta1/latest",
     "distribution_name": "google-cloud-notebooks-v1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "notebooks",
     "name_pretty": "AI Platform Notebooks V1beta1 API",

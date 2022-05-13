@@ -3,6 +3,7 @@
     "api_shortname": "recommendationengine",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-recommendation_engine/latest",
     "distribution_name": "google-cloud-recommendation_engine",
+    "is_cloud": true,
     "language": "ruby",
     "name": "recommendationengine",
     "name_pretty": "Recommendations AI API",

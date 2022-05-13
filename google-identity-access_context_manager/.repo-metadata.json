@@ -3,6 +3,7 @@
     "api_shortname": "accesscontextmanager",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-identity-access_context_manager/latest",
     "distribution_name": "google-identity-access_context_manager",
+    "is_cloud": true,
     "language": "ruby",
     "name": "accesscontextmanager",
     "name_pretty": "Access Context Manager API",

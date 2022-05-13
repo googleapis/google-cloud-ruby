@@ -3,6 +3,7 @@
     "api_shortname": "containeranalysis",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-container_analysis/latest",
     "distribution_name": "google-cloud-container_analysis",
+    "is_cloud": true,
     "language": "ruby",
     "name": "containeranalysis",
     "name_pretty": "Container Analysis API",

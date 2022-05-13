@@ -3,6 +3,7 @@
     "api_shortname": "bigqueryreservation",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-reservation/latest",
     "distribution_name": "google-cloud-bigquery-reservation",
+    "is_cloud": true,
     "language": "ruby",
     "name": "bigqueryreservation",
     "name_pretty": "BigQuery Reservation API",

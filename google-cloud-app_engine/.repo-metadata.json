@@ -3,6 +3,7 @@
     "api_shortname": "appengine",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-app_engine/latest",
     "distribution_name": "google-cloud-app_engine",
+    "is_cloud": true,
     "language": "ruby",
     "name": "appengine",
     "name_pretty": "App Engine Admin API",

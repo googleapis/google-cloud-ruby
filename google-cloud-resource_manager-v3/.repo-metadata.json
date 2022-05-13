@@ -3,6 +3,7 @@
     "api_shortname": "cloudresourcemanager",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-resource_manager-v3/latest",
     "distribution_name": "google-cloud-resource_manager-v3",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudresourcemanager",
     "name_pretty": "Resource Manager V3 API",

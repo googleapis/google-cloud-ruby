@@ -3,6 +3,7 @@
     "api_shortname": "memcache",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-memcache-v1beta2/latest",
     "distribution_name": "google-cloud-memcache-v1beta2",
+    "is_cloud": true,
     "language": "ruby",
     "name": "memcache",
     "name_pretty": "Google Cloud Memorystore for Memcached API",

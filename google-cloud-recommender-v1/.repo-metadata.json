@@ -3,6 +3,7 @@
     "api_shortname": "recommender",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-recommender-v1/latest",
     "distribution_name": "google-cloud-recommender-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "recommender",
     "name_pretty": "Recommender V1 API",

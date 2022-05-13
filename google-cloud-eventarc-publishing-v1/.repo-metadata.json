@@ -3,6 +3,7 @@
     "api_shortname": "eventarcpublishing",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-eventarc-publishing-v1/latest",
     "distribution_name": "google-cloud-eventarc-publishing-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "eventarcpublishing",
     "name_pretty": "Eventarc Publishing V1 API",

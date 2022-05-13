@@ -3,6 +3,7 @@
     "api_shortname": "osconfig",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-os_config-v1alpha/latest",
     "distribution_name": "google-cloud-os_config-v1alpha",
+    "is_cloud": true,
     "language": "ruby",
     "name": "osconfig",
     "name_pretty": "Cloud OS Config V1alpha API",

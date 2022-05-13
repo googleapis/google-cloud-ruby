@@ -3,6 +3,7 @@
     "api_shortname": "bigqueryconnection",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-connection/latest",
     "distribution_name": "google-cloud-bigquery-connection",
+    "is_cloud": true,
     "language": "ruby",
     "name": "bigqueryconnection",
     "name_pretty": "BigQuery Connection API",
