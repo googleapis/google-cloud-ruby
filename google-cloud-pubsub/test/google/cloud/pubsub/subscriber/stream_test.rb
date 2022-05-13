@@ -1,4 +1,4 @@
-# Copyright 2017 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -53,7 +53,5 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     assert subscriber.stream_pool.first.exactly_once_delivery_enabled
     subscriber.stop
     subscriber.wait!
-
-    # stub requests are not guaranteed, so don't check in this test
   end
 end
