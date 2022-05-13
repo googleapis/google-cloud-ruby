@@ -47,6 +47,10 @@ module Google
           attr_reader :sequencer
 
           ##
+          # @private Sequencer.
+          attr_reader :exactly_once_delivery_enabled
+
+          ##
           # @private Create an empty Subscriber::Stream object.
           def initialize subscriber
             super() # to init MonitorMixin
@@ -57,6 +61,7 @@ module Google
             @stopped = nil
             @paused  = nil
             @pause_cond = new_cond
+            @exactly_once_delivery_enabled = false
 
             @inventory = Inventory.new self, **@subscriber.stream_inventory
 
@@ -242,9 +247,12 @@ module Google
               begin
                 # Cannot syncronize the enumerator, causes deadlock
                 response = enum.next
+                new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
 
                 # Use synchronize so both changes happen atomically
                 synchronize do
+                  @exactly_once_delivery_enabled = new_exactly_once_delivery_enabled unless new_exactly_once_delivery_enabled.nil? 
+
                   # Create receipt of received messages reception
                   @subscriber.buffer.modify_ack_deadline @subscriber.deadline, response.received_messages.map(&:ack_id)
 
