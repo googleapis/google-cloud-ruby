@@ -53,6 +53,18 @@ module Google
             # Updates the IAP settings on a particular IAP protected resource. It
             # replaces all fields unless the `update_mask` is set.
             rpc :UpdateIapSettings, ::Google::Cloud::Iap::V1::UpdateIapSettingsRequest, ::Google::Cloud::Iap::V1::IapSettings
+            # Lists the existing TunnelDestGroups. To group across all locations, use a
+            # `-` as the location ID. For example:
+            # `/v1/projects/123/iap_tunnel/locations/-/destGroups`
+            rpc :ListTunnelDestGroups, ::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest, ::Google::Cloud::Iap::V1::ListTunnelDestGroupsResponse
+            # Creates a new TunnelDestGroup.
+            rpc :CreateTunnelDestGroup, ::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest, ::Google::Cloud::Iap::V1::TunnelDestGroup
+            # Retrieves an existing TunnelDestGroup.
+            rpc :GetTunnelDestGroup, ::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest, ::Google::Cloud::Iap::V1::TunnelDestGroup
+            # Deletes a TunnelDestGroup.
+            rpc :DeleteTunnelDestGroup, ::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest, ::Google::Protobuf::Empty
+            # Updates a TunnelDestGroup.
+            rpc :UpdateTunnelDestGroup, ::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest, ::Google::Cloud::Iap::V1::TunnelDestGroup
           end
 
           Stub = Service.rpc_stub_class
@@ -73,11 +85,12 @@ module Google
             rpc :ListBrands, ::Google::Cloud::Iap::V1::ListBrandsRequest, ::Google::Cloud::Iap::V1::ListBrandsResponse
             # Constructs a new OAuth brand for the project if one does not exist.
             # The created brand is "internal only", meaning that OAuth clients created
-            # under it only accept requests from users who belong to the same G Suite
-            # organization as the project. The brand is created in an un-reviewed status.
-            # NOTE: The "internal only" status can be manually changed in the Google
-            # Cloud console. Requires that a brand does not already exist for the
-            # project, and that the specified support email is owned by the caller.
+            # under it only accept requests from users who belong to the same Google
+            # Workspace organization as the project. The brand is created in an
+            # un-reviewed status. NOTE: The "internal only" status can be manually
+            # changed in the Google Cloud Console. Requires that a brand does not already
+            # exist for the project, and that the specified support email is owned by the
+            # caller.
             rpc :CreateBrand, ::Google::Cloud::Iap::V1::CreateBrandRequest, ::Google::Cloud::Iap::V1::Brand
             # Retrieves the OAuth brand of the project.
             rpc :GetBrand, ::Google::Cloud::Iap::V1::GetBrandRequest, ::Google::Cloud::Iap::V1::Brand
