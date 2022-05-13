@@ -129,7 +129,7 @@
   "google-cloud-gke_hub-v1": "0.2.0",
   "google-cloud-gke_hub-v1beta1": "0.2.2",
   "google-cloud-iap": "1.0.1",
-  "google-cloud-iap-v1": "0.2.0",
+  "google-cloud-iap-v1": "0.3.0",
   "google-cloud-ids": "0.1.1",
   "google-cloud-ids-v1": "0.1.1",
   "google-cloud-iot": "1.0.3",
