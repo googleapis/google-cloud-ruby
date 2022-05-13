@@ -1,5 +1,15 @@
 # Release History
 
+### 0.7.0 (2022-05-13)
+
+### ⚠ BREAKING CHANGES
+
+* Remove confidence scores from SafeSearchAnnotation
+
+#### Bug Fixes
+
+* Remove confidence scores from SafeSearchAnnotation
+
 ### 0.6.4 / 2022-01-11
 
 #### Bug Fixes
