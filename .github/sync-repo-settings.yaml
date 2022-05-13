@@ -7,7 +7,6 @@ branchProtectionRules:
   requiredStatusCheckContexts:
     - 'cla/google'
     - 'CI (macos-latest, 3.0, --test)'
-    - 'CI (ubuntu-latest, 2.5, --test)'
     - 'CI (ubuntu-latest, 2.6, --test)'
     - 'CI (ubuntu-latest, 2.7, --test)'
     - 'CI (ubuntu-latest, 3.0, --rubocop --build --test)'
