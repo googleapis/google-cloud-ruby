@@ -48,8 +48,8 @@ module Google
       # Create a new client object for Datastream.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Datastream::V1alpha1::Datastream::Client](https://googleapis.dev/ruby/google-cloud-datastream-v1alpha1/latest/Google/Cloud/Datastream/V1alpha1/Datastream/Client.html)
-      # for version V1alpha1 of the API.
+      # [Google::Cloud::Datastream::V1::Datastream::Client](https://googleapis.dev/ruby/google-cloud-datastream-v1/latest/Google/Cloud/Datastream/V1/Datastream/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the Datastream service is
       # supported by that API version, and the corresponding gem is available, the
@@ -60,10 +60,10 @@ module Google
       # Datastream service
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1alpha1`.
+      #   Defaults to `:v1`.
       # @return [Datastream::Client] A client object for the specified version.
       #
-      def self.datastream version: :v1alpha1, &block
+      def self.datastream version: :v1, &block
         require "google/cloud/datastream/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Datastream
@@ -72,6 +72,38 @@ module Google
                        .first
         package_module = Google::Cloud::Datastream.const_get package_name
         package_module.const_get(:Datastream).const_get(:Client).new(&block)
+      end
+
+      ##
+      # Create a new client object for Locations.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Datastream::V1::Locations::Client](https://googleapis.dev/ruby/google-cloud-datastream-v1/latest/Google/Cloud/Datastream/V1/Locations/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the Locations service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About Locations
+      #
+      # An abstract interface that provides location-related information for
+      # a service. Service-specific metadata is provided through the
+      # Location.metadata field.
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [Locations::Client] A client object for the specified version.
+      #
+      def self.locations version: :v1, &block
+        require "google/cloud/datastream/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Datastream
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Datastream.const_get package_name
+        package_module.const_get(:Locations).const_get(:Client).new(&block)
       end
 
       ##

@@ -3,6 +3,7 @@
     "api_shortname": "bigtableadmin",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigtable-admin-v2/latest",
     "distribution_name": "google-cloud-bigtable-admin-v2",
+    "is_cloud": true,
     "language": "ruby",
     "name": "bigtableadmin",
     "name_pretty": "Cloud Bigtable Admin V2 API",

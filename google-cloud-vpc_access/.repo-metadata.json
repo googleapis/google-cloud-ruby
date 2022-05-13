@@ -3,6 +3,7 @@
     "api_shortname": "vpcaccess",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-vpc_access/latest",
     "distribution_name": "google-cloud-vpc_access",
+    "is_cloud": true,
     "language": "ruby",
     "name": "vpcaccess",
     "name_pretty": "Serverless VPC Access API",

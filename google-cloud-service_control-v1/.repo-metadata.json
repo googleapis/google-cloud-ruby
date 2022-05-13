@@ -3,6 +3,7 @@
     "api_shortname": "servicecontrol",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-service_control-v1/latest",
     "distribution_name": "google-cloud-service_control-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "servicecontrol",
     "name_pretty": "Service Control API V1 API",

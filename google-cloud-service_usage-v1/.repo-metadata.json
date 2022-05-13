@@ -3,6 +3,7 @@
     "api_shortname": "serviceusage",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-service_usage-v1/latest",
     "distribution_name": "google-cloud-service_usage-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "serviceusage",
     "name_pretty": "Service Usage V1 API",

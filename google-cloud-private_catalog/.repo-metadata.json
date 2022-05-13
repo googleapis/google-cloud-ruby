@@ -3,6 +3,7 @@
     "api_shortname": "cloudprivatecatalog",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-private_catalog/latest",
     "distribution_name": "google-cloud-private_catalog",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudprivatecatalog",
     "name_pretty": "Private Catalog API",

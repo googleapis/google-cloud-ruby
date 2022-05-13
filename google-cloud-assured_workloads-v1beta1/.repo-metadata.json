@@ -3,6 +3,7 @@
     "api_shortname": "assuredworkloads",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-assured_workloads-v1beta1/latest",
     "distribution_name": "google-cloud-assured_workloads-v1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "assuredworkloads",
     "name_pretty": "Assured Workloads for Government V1beta1 API",

@@ -3,6 +3,7 @@
     "api_shortname": "iap",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-iap/latest",
     "distribution_name": "google-cloud-iap",
+    "is_cloud": true,
     "language": "ruby",
     "name": "iap",
     "name_pretty": "Identity-Aware Proxy API",

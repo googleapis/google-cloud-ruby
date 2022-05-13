@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-datastream
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Datastream::V1alpha1::Datastream::Credentials`):
+`::Google::Cloud::Datastream::V1::Datastream::Credentials`):
 
 * `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 * `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents

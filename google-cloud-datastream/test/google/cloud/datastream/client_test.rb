@@ -28,7 +28,17 @@ class Google::Cloud::Datastream::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Datastream.datastream do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Datastream::V1alpha1::Datastream::Client, client
+      assert_kind_of Google::Cloud::Datastream::V1::Datastream::Client, client
+    end
+  end
+
+  def test_locations
+    Gapic::ServiceStub.stub :new, :stub do
+      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+      client = Google::Cloud::Datastream.locations do |config|
+        config.credentials = grpc_channel
+      end
+      assert_kind_of Google::Cloud::Datastream::V1::Locations::Client, client
     end
   end
 end

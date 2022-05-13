@@ -3,6 +3,7 @@
     "api_shortname": "cloudchannel",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-channel-v1/latest",
     "distribution_name": "google-cloud-channel-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudchannel",
     "name_pretty": "Cloud Channel V1 API",

@@ -3,6 +3,7 @@
     "api_shortname": "datastream",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-datastream/latest",
     "distribution_name": "google-cloud-datastream",
+    "is_cloud": true,
     "language": "ruby",
     "name": "datastream",
     "name_pretty": "Datastream API",

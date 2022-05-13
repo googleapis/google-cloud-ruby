@@ -1,6 +1,7 @@
 {
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-location/latest",
     "distribution_name": "google-cloud-location",
+    "is_cloud": true,
     "language": "ruby",
     "name_pretty": "Locations API",
     "release_level": "preview",

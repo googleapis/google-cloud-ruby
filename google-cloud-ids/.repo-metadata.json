@@ -3,6 +3,7 @@
     "api_shortname": "ids",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-ids/latest",
     "distribution_name": "google-cloud-ids",
+    "is_cloud": true,
     "language": "ruby",
     "name": "ids",
     "name_pretty": "Cloud IDS API",

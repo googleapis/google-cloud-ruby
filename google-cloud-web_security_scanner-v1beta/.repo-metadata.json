@@ -3,6 +3,7 @@
     "api_shortname": "websecurityscanner",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-web_security_scanner-v1beta/latest",
     "distribution_name": "google-cloud-web_security_scanner-v1beta",
+    "is_cloud": true,
     "language": "ruby",
     "name": "websecurityscanner",
     "name_pretty": "Web Security Scanner V1beta API",
