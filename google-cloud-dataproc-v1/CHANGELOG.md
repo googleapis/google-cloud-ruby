@@ -2,13 +2,9 @@
 
 ### 0.10.0 (2022-05-12)
 
-### ⚠ BREAKING CHANGES
-
-* Remove unused VirtualClusterConfig#temp_bucket field
-
 #### Bug Fixes
 
-* Remove unused VirtualClusterConfig#temp_bucket field
+* BREAKING CHANGE: Remove unused VirtualClusterConfig#temp_bucket field
 
 ### 0.9.0 / 2022-02-17
 
