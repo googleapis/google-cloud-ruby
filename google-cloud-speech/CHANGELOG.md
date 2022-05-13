@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2022-05-13)
+
+#### Features
+
+* Support for the Adaptation API
+
 ### 1.2.3 / 2022-01-12
 
 #### Documentation
