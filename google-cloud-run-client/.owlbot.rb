@@ -22,6 +22,7 @@
 Dir.chdir OwlBot.staging_dir do
   FileUtils.mv "google-cloud-run.gemspec", "google-cloud-run-client.gemspec"
   FileUtils.mv "lib/google-cloud-run.rb", "lib/google-cloud-run-client.rb"
+  FileUtils.rm_f "lib/google/cloud/run/version.rb"
 end
 
 file_paths = [
@@ -31,10 +32,13 @@ file_paths = [
   "google-cloud-run-client.gemspec",
   "Rakefile",
   "README.md",
-  %r{^lib/.+\.rb$}
+  %r{^lib/.+\.rb$},
+  %r{^test/.+\.rb$}
 ]
 OwlBot.modifier path: file_paths, name: "Rename gem" do |content|
   content.gsub(/google-cloud-run(?=[^-])/, "google-cloud-run-client")
+         .gsub("google/cloud/run/version", "google/cloud/run/client/version")
+         .gsub("Google::Cloud::Run::VERSION", "Google::Cloud::Run::Client::VERSION")
 end
 
 OwlBot.move_files

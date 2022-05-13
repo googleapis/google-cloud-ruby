@@ -1,11 +1,11 @@
 # -*- ruby -*-
 # encoding: utf-8
 
-require File.expand_path("lib/google/cloud/run/version", __dir__)
+require File.expand_path("lib/google/cloud/run/client/version", __dir__)
 
 Gem::Specification.new do |gem|
   gem.name          = "google-cloud-run-client"
-  gem.version       = Google::Cloud::Run::VERSION
+  gem.version       = Google::Cloud::Run::Client::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

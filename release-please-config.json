@@ -841,7 +841,7 @@
     },
     "google-cloud-run-client": {
       "component": "google-cloud-run-client",
-      "version_file": "lib/google/cloud/run/version.rb"
+      "version_file": "lib/google/cloud/run/client/version.rb"
     },
     "google-cloud-run-v2": {
       "component": "google-cloud-run-v2",
