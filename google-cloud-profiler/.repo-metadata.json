@@ -3,6 +3,7 @@
     "api_shortname": "cloudprofiler",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-profiler/latest",
     "distribution_name": "google-cloud-profiler",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudprofiler",
     "name_pretty": "Cloud Profiler API",

@@ -3,6 +3,7 @@
     "api_shortname": "transcoder",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-video-transcoder-v1/latest",
     "distribution_name": "google-cloud-video-transcoder-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "transcoder",
     "name_pretty": "Transcoder V1 API",

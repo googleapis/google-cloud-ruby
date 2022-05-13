@@ -92,6 +92,7 @@
     "snippets/job_controller/submit_job.rb",
     "snippets/job_controller/submit_job_as_operation.rb",
     "snippets/job_controller/update_job.rb",
+    "snippets/snippet_metadata_google.cloud.dataproc.v1.json",
     "snippets/workflow_template_service/create_workflow_template.rb",
     "snippets/workflow_template_service/delete_workflow_template.rb",
     "snippets/workflow_template_service/get_workflow_template.rb",

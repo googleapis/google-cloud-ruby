@@ -3,6 +3,7 @@
     "api_shortname": "cloudoptimization",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-optimization/latest",
     "distribution_name": "google-cloud-optimization",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudoptimization",
     "name_pretty": "Cloud Optimization API",

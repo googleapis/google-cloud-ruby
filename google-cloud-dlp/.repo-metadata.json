@@ -3,6 +3,7 @@
     "api_shortname": "dlp",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dlp/latest",
     "distribution_name": "google-cloud-dlp",
+    "is_cloud": true,
     "language": "ruby",
     "name": "dlp",
     "name_pretty": "Cloud Data Loss Prevention (DLP) API",

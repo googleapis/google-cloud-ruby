@@ -3,6 +3,7 @@
     "api_shortname": "apigateway",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-api_gateway-v1/latest",
     "distribution_name": "google-cloud-api_gateway-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "apigateway",
     "name_pretty": "API Gateway V1 API",

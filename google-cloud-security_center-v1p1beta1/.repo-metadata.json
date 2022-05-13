@@ -3,6 +3,7 @@
     "api_shortname": "securitycenter",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-security_center-v1p1beta1/latest",
     "distribution_name": "google-cloud-security_center-v1p1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "securitycenter",
     "name_pretty": "Cloud Security Command Center V1p1beta1 API",

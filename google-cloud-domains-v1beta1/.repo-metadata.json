@@ -3,6 +3,7 @@
     "api_shortname": "domains",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-domains-v1beta1/latest",
     "distribution_name": "google-cloud-domains-v1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "domains",
     "name_pretty": "Cloud Domains V1beta1 API",

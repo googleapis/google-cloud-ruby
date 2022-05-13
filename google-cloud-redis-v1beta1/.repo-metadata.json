@@ -3,6 +3,7 @@
     "api_shortname": "redis",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-redis-v1beta1/latest",
     "distribution_name": "google-cloud-redis-v1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "redis",
     "name_pretty": "Google Cloud Memorystore for Redis V1beta1 API",

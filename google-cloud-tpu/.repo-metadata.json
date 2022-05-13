@@ -3,6 +3,7 @@
     "api_shortname": "tpu",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-tpu/latest",
     "distribution_name": "google-cloud-tpu",
+    "is_cloud": true,
     "language": "ruby",
     "name": "tpu",
     "name_pretty": "Cloud TPU API",

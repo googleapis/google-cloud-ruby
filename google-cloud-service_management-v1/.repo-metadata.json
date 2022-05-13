@@ -3,6 +3,7 @@
     "api_shortname": "servicemanagement",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-service_management-v1/latest",
     "distribution_name": "google-cloud-service_management-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "servicemanagement",
     "name_pretty": "Service Management V1 API",

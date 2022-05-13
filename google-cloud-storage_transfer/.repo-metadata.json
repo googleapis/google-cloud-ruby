@@ -3,6 +3,7 @@
     "api_shortname": "storagetransfer",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-storage_transfer/latest",
     "distribution_name": "google-cloud-storage_transfer",
+    "is_cloud": true,
     "language": "ruby",
     "name": "storagetransfer",
     "name_pretty": "Storage Transfer Service API",

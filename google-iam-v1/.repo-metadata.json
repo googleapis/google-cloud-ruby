@@ -1,6 +1,7 @@
 {
-    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-iam-v1/latest",
+    "client_documentation": "https://googleapis.dev/ruby/google-iam-v1/latest",
     "distribution_name": "google-iam-v1",
+    "is_cloud": false,
     "language": "ruby",
     "name_pretty": "IAM API",
     "release_level": "preview",

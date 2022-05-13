@@ -3,6 +3,7 @@
     "api_shortname": "spanner",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-spanner-v1/latest",
     "distribution_name": "google-cloud-spanner-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "spanner",
     "name_pretty": "Cloud Spanner V1 API",

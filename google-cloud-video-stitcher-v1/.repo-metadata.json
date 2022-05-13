@@ -3,6 +3,7 @@
     "api_shortname": "videostitcher",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-video-stitcher-v1/latest",
     "distribution_name": "google-cloud-video-stitcher-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "videostitcher",
     "name_pretty": "Video Stitcher V1 API",

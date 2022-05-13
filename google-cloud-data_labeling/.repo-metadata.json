@@ -3,6 +3,7 @@
     "api_shortname": "datalabeling",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-data_labeling/latest",
     "distribution_name": "google-cloud-data_labeling",
+    "is_cloud": true,
     "language": "ruby",
     "name": "datalabeling",
     "name_pretty": "AI Platform Data Labeling Service API",

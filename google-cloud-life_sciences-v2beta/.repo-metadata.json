@@ -3,6 +3,7 @@
     "api_shortname": "lifesciences",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-life_sciences-v2beta/latest",
     "distribution_name": "google-cloud-life_sciences-v2beta",
+    "is_cloud": true,
     "language": "ruby",
     "name": "lifesciences",
     "name_pretty": "Cloud Life Sciences V2beta API",

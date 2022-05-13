@@ -3,6 +3,7 @@
     "api_shortname": "cloudscheduler",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-scheduler-v1beta1/latest",
     "distribution_name": "google-cloud-scheduler-v1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudscheduler",
     "name_pretty": "Cloud Scheduler V1beta1 API",

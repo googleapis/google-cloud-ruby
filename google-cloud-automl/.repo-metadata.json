@@ -3,6 +3,7 @@
     "api_shortname": "automl",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-automl/latest",
     "distribution_name": "google-cloud-automl",
+    "is_cloud": true,
     "language": "ruby",
     "name": "automl",
     "name_pretty": "Cloud AutoML API",
