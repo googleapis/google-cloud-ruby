@@ -215,7 +215,7 @@
   "google-cloud-secret_manager-v1": "0.13.0",
   "google-cloud-secret_manager-v1beta1": "0.9.0",
   "google-cloud-security-private_ca": "1.0.3",
-  "google-cloud-security-private_ca-v1": "0.2.1",
+  "google-cloud-security-private_ca-v1": "0.3.0",
   "google-cloud-security-private_ca-v1beta1": "0.3.6",
   "google-cloud-security_center": "1.2.3",
   "google-cloud-security_center-v1": "0.15.0",

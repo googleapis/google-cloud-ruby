@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-05-13)
+
+#### Features
+
+* Provide interfaces for location and IAM policy calls
+
 ### 0.2.1 (2022-04-20)
 
 #### Bug Fixes
