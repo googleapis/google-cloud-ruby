@@ -23,7 +23,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.5"
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
-  gem.add_dependency "google-cloud-speech-v1", ">= 0.0", "< 2.a"
+  gem.add_dependency "google-cloud-speech-v1", ">= 0.8", "< 2.a"
   gem.add_dependency "google-cloud-speech-v1p1beta1", ">= 0.0", "< 2.a"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"
