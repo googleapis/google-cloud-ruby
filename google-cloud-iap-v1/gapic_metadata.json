@@ -34,6 +34,31 @@
               "methods": [
                 "update_iap_settings"
               ]
+            },
+            "ListTunnelDestGroups": {
+              "methods": [
+                "list_tunnel_dest_groups"
+              ]
+            },
+            "CreateTunnelDestGroup": {
+              "methods": [
+                "create_tunnel_dest_group"
+              ]
+            },
+            "GetTunnelDestGroup": {
+              "methods": [
+                "get_tunnel_dest_group"
+              ]
+            },
+            "DeleteTunnelDestGroup": {
+              "methods": [
+                "delete_tunnel_dest_group"
+              ]
+            },
+            "UpdateTunnelDestGroup": {
+              "methods": [
+                "update_tunnel_dest_group"
+              ]
             }
           }
         }

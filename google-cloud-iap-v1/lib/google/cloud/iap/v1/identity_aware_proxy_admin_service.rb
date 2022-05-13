@@ -23,6 +23,7 @@ require "gapic/config/method"
 require "google/cloud/iap/v1/version"
 
 require "google/cloud/iap/v1/identity_aware_proxy_admin_service/credentials"
+require "google/cloud/iap/v1/identity_aware_proxy_admin_service/paths"
 require "google/cloud/iap/v1/identity_aware_proxy_admin_service/client"
 
 module Google
