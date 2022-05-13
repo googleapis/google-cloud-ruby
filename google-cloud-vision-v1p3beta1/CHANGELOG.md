@@ -1,5 +1,16 @@
 # Release History
 
+### 0.6.0 (2022-05-12)
+
+#### Features
+
+* Add product_grouped_results field to ProductSearchResults
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Remove unused catalog_name, category, product_category, view, and normalized_bounding_poly fields from ProductSearchParams
+* BREAKING CHANGE: Remove unused category, product_category, and products fields from ProductSearchResults
+
 ### 0.5.5 / 2022-01-11
 
 #### Bug Fixes
