@@ -16,7 +16,7 @@
 module Google
   module Cloud
     module Speech
-      VERSION = "1.2.3".freeze
+      VERSION = "1.3.0".freeze
     end
   end
 end
