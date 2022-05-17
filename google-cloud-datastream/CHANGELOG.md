@@ -1,5 +1,11 @@
 # Changelog
 
+### 1.0.0 (2022-05-17)
+
+#### Features
+
+* BREAKING CHANGE: Switch from Datastream V1alpha1 to Datastream V1
+
 ### 0.1.1 / 2022-01-11
 
 #### Documentation
