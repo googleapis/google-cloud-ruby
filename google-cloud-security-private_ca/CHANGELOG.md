@@ -1,5 +1,11 @@
 # Release History
 
+### 1.0.4 (2022-05-17)
+
+#### Bug Fixes
+
+* Update the dependency on the underlying google-cloud-security-private_ca-v1 client
+
 ### 1.0.3 / 2022-01-11
 
 #### Documentation
