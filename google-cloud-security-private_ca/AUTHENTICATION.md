@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-security-private_ca
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Credentials`):
+`::Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Credentials`):
 
 * `PRIVATE_CA_CREDENTIALS` - Path to JSON file, or JSON contents
 * `PRIVATE_CA_KEYFILE` - Path to JSON file, or JSON contents
