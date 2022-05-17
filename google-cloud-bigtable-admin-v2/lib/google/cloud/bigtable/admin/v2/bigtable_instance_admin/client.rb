@@ -108,11 +108,6 @@ module Google
                     initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
                   }
 
-                  default_config.rpcs.partial_update_cluster.timeout = 60.0
-                  default_config.rpcs.partial_update_cluster.retry_policy = {
-                    initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14, 4]
-                  }
-
                   default_config.rpcs.delete_cluster.timeout = 60.0
 
                   default_config.rpcs.create_app_profile.timeout = 60.0
@@ -546,11 +541,14 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_instance(display_name: nil, state: nil, type: nil, labels: nil)
+              # @overload update_instance(name: nil, display_name: nil, state: nil, type: nil, labels: nil)
               #   Pass arguments to `update_instance` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param name [::String]
+              #     The unique name of the instance. Values are of the form
+              #     `projects/{project}/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
               #   @param display_name [::String]
               #     Required. The descriptive name for this instance as it appears in UIs.
               #     Can be changed at any time, but should be kept globally unique
@@ -1121,14 +1119,16 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload update_cluster(location: nil, serve_nodes: nil, cluster_config: nil, default_storage_type: nil, encryption_config: nil)
+              # @overload update_cluster(name: nil, location: nil, serve_nodes: nil, cluster_config: nil, default_storage_type: nil, encryption_config: nil)
               #   Pass arguments to `update_cluster` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
+              #   @param name [::String]
+              #     The unique name of the cluster. Values are of the form
+              #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
               #   @param location [::String]
-              #     (`CreationOnly`)
-              #     The location where this cluster's nodes and storage reside. For best
+              #     Immutable. The location where this cluster's nodes and storage reside. For best
               #     performance, clients should be located as close as possible to this
               #     cluster. Currently only zones are supported, so values should be of the
               #     form `projects/{project}/locations/{zone}`.
@@ -1138,8 +1138,7 @@ module Google
               #   @param cluster_config [::Google::Cloud::Bigtable::Admin::V2::Cluster::ClusterConfig, ::Hash]
               #     Configuration for this cluster.
               #   @param default_storage_type [::Google::Cloud::Bigtable::Admin::V2::StorageType]
-              #     (`CreationOnly`)
-              #     The type of storage used by this cluster to serve its
+              #     Immutable. The type of storage used by this cluster to serve its
               #     parent instance's tables, unless explicitly overridden.
               #   @param encryption_config [::Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig, ::Hash]
               #     Immutable. The encryption configuration for CMEK-protected clusters.

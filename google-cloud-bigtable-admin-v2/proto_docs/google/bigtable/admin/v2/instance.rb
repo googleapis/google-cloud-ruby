@@ -26,7 +26,7 @@ module Google
           # the resources that serve them.
           # All tables in an instance are served from all
           # {::Google::Cloud::Bigtable::Admin::V2::Cluster Clusters} in the instance.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
           #     The unique name of the instance. Values are of the form
           #     `projects/{project}/instances/[a-z][a-z0-9\\-]+[a-z0-9]`.
@@ -98,13 +98,8 @@ module Google
               # on the cluster.
               PRODUCTION = 1
 
-              # The instance is meant for development and testing purposes only; it has
-              # no performance or uptime guarantees and is not covered by SLA.
-              # After a development instance is created, it can be upgraded by
-              # updating the instance to type `PRODUCTION`. An instance created
-              # as a production instance cannot be changed to a development instance.
-              # When creating a development instance, `serve_nodes` on the cluster must
-              # not be set.
+              # DEPRECATED: Prefer PRODUCTION for all use cases, as it no longer enforces
+              # a higher minimum node count than DEVELOPMENT.
               DEVELOPMENT = 2
             end
           end
@@ -136,20 +131,19 @@ module Google
           # A resizable group of nodes in a particular cloud location, capable
           # of serving all {::Google::Cloud::Bigtable::Admin::V2::Table Tables} in the parent
           # {::Google::Cloud::Bigtable::Admin::V2::Instance Instance}.
-          # @!attribute [r] name
+          # @!attribute [rw] name
           #   @return [::String]
           #     The unique name of the cluster. Values are of the form
           #     `projects/{project}/instances/{instance}/clusters/[a-z][-a-z0-9]*`.
           # @!attribute [rw] location
           #   @return [::String]
-          #     (`CreationOnly`)
-          #     The location where this cluster's nodes and storage reside. For best
+          #     Immutable. The location where this cluster's nodes and storage reside. For best
           #     performance, clients should be located as close as possible to this
           #     cluster. Currently only zones are supported, so values should be of the
           #     form `projects/{project}/locations/{zone}`.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::State]
-          #     The current state of the cluster.
+          #     Output only. The current state of the cluster.
           # @!attribute [rw] serve_nodes
           #   @return [::Integer]
           #     The number of nodes allocated to this cluster. More nodes enable higher
@@ -159,8 +153,7 @@ module Google
           #     Configuration for this cluster.
           # @!attribute [rw] default_storage_type
           #   @return [::Google::Cloud::Bigtable::Admin::V2::StorageType]
-          #     (`CreationOnly`)
-          #     The type of storage used by this cluster to serve its
+          #     Immutable. The type of storage used by this cluster to serve its
           #     parent instance's tables, unless explicitly overridden.
           # @!attribute [rw] encryption_config
           #   @return [::Google::Cloud::Bigtable::Admin::V2::Cluster::EncryptionConfig]
@@ -201,6 +194,9 @@ module Google
             #      `cloudkms.cryptoKeyEncrypterDecrypter` role on the CMEK key.
             #      2) Only regional keys can be used and the region of the CMEK key must
             #      match the region of the cluster.
+            #      3) All clusters within an instance must use the same CMEK key.
+            #     Values are of the form
+            #     `projects/{project}/locations/{location}/keyRings/{keyring}/cryptoKeys/{key}`
             class EncryptionConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -236,7 +232,6 @@ module Google
           # from a particular end user application.
           # @!attribute [rw] name
           #   @return [::String]
-          #     (`OutputOnly`)
           #     The unique name of the app profile. Values are of the form
           #     `projects/{project}/instances/{instance}/appProfiles/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`.
           # @!attribute [rw] etag
@@ -251,7 +246,7 @@ module Google
           #     details.
           # @!attribute [rw] description
           #   @return [::String]
-          #     Optional long form description of the use case for this AppProfile.
+          #     Long form description of the use case for this AppProfile.
           # @!attribute [rw] multi_cluster_routing_use_any
           #   @return [::Google::Cloud::Bigtable::Admin::V2::AppProfile::MultiClusterRoutingUseAny]
           #     Use a multi-cluster routing policy.

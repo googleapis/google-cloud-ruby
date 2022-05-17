@@ -76,6 +76,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :original_request, :message, 1, "google.bigtable.admin.v2.CreateClusterRequest"
       optional :request_time, :message, 2, "google.protobuf.Timestamp"
       optional :finish_time, :message, 3, "google.protobuf.Timestamp"
+      map :tables, :string, :message, 4, "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress"
+    end
+    add_message "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress" do
+      optional :estimated_size_bytes, :int64, 2
+      optional :estimated_copied_bytes, :int64, 3
+      optional :state, :enum, 4, "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress.State"
+    end
+    add_enum "google.bigtable.admin.v2.CreateClusterMetadata.TableProgress.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :PENDING, 1
+      value :COPYING, 2
+      value :COMPLETED, 3
+      value :CANCELLED, 4
     end
     add_message "google.bigtable.admin.v2.UpdateClusterMetadata" do
       optional :original_request, :message, 1, "google.bigtable.admin.v2.Cluster"
@@ -154,6 +167,8 @@ module Google
           CreateInstanceMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateInstanceMetadata").msgclass
           UpdateInstanceMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateInstanceMetadata").msgclass
           CreateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata").msgclass
+          CreateClusterMetadata::TableProgress = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata.TableProgress").msgclass
+          CreateClusterMetadata::TableProgress::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.CreateClusterMetadata.TableProgress.State").enummodule
           UpdateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateClusterMetadata").msgclass
           PartialUpdateClusterMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateClusterMetadata").msgclass
           PartialUpdateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.PartialUpdateClusterRequest").msgclass
