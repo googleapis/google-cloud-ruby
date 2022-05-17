@@ -2,13 +2,9 @@
 
 ### 1.0.0 (2022-05-17)
 
-### ⚠ BREAKING CHANGES
-
-* Switch from Datastream V1alpha1 to Datastream V1 (#18216)
-
 #### Features
 
-* Switch from Datastream V1alpha1 to Datastream V1
+* BREAKING CHANGE: Switch from Datastream V1alpha1 to Datastream V1
 
 ### 0.1.1 / 2022-01-11
 
