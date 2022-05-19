@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2022-05-19)
+
+#### Features
+
+* add support for private_password_leak_verification
+
 ### 0.8.0 (2022-05-05)
 
 #### Features
