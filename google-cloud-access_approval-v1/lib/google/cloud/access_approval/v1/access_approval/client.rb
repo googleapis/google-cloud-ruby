@@ -110,6 +110,8 @@ module Google
 
                 default_config.rpcs.dismiss_approval_request.timeout = 600.0
 
+                default_config.rpcs.invalidate_approval_request.timeout = 600.0
+
                 default_config.rpcs.get_access_approval_settings.timeout = 600.0
                 default_config.rpcs.get_access_approval_settings.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
@@ -583,6 +585,98 @@ module Google
             end
 
             ##
+            # Invalidates an existing ApprovalRequest. Returns the updated
+            # ApprovalRequest.
+            #
+            # NOTE: This does not deny access to the resource if another request has been
+            # made and approved. It only invalidates a single approval.
+            #
+            # Returns FAILED_PRECONDITION if the request exists but is not in an approved
+            # state.
+            #
+            # @overload invalidate_approval_request(request, options = nil)
+            #   Pass arguments to `invalidate_approval_request` via a request object, either of type
+            #   {::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload invalidate_approval_request(name: nil)
+            #   Pass arguments to `invalidate_approval_request` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Name of the ApprovalRequest to invalidate.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AccessApproval::V1::ApprovalRequest]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AccessApproval::V1::ApprovalRequest]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage.new
+            #
+            #   # Call the invalidate_approval_request method.
+            #   result = client.invalidate_approval_request request
+            #
+            #   # The returned object is of type Google::Cloud::AccessApproval::V1::ApprovalRequest.
+            #   p result
+            #
+            def invalidate_approval_request request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.invalidate_approval_request.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.invalidate_approval_request.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.invalidate_approval_request.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @access_approval_stub.call_rpc :invalidate_approval_request, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets the settings associated with a project, folder, or organization.
             #
             # @overload get_access_approval_settings(request, options = nil)
@@ -856,6 +950,92 @@ module Google
             end
 
             ##
+            # Retrieves the service account that is used by Access Approval to access KMS
+            # keys for signing approved approval requests.
+            #
+            # @overload get_access_approval_service_account(request, options = nil)
+            #   Pass arguments to `get_access_approval_service_account` via a request object, either of type
+            #   {::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_access_approval_service_account(name: nil)
+            #   Pass arguments to `get_access_approval_service_account` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Name of the AccessApprovalServiceAccount to retrieve.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AccessApproval::V1::AccessApprovalServiceAccount]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AccessApproval::V1::AccessApprovalServiceAccount]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/access_approval/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage.new
+            #
+            #   # Call the get_access_approval_service_account method.
+            #   result = client.get_access_approval_service_account request
+            #
+            #   # The returned object is of type Google::Cloud::AccessApproval::V1::AccessApprovalServiceAccount.
+            #   p result
+            #
+            def get_access_approval_service_account request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_access_approval_service_account.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AccessApproval::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_access_approval_service_account.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_access_approval_service_account.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @access_approval_stub.call_rpc :get_access_approval_service_account, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AccessApproval API.
             #
             # This class represents the configuration for AccessApproval,
@@ -1011,6 +1191,11 @@ module Google
                 #
                 attr_reader :dismiss_approval_request
                 ##
+                # RPC-specific configuration for `invalidate_approval_request`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :invalidate_approval_request
+                ##
                 # RPC-specific configuration for `get_access_approval_settings`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1025,6 +1210,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_access_approval_settings
+                ##
+                # RPC-specific configuration for `get_access_approval_service_account`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_access_approval_service_account
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1036,12 +1226,16 @@ module Google
                   @approve_approval_request = ::Gapic::Config::Method.new approve_approval_request_config
                   dismiss_approval_request_config = parent_rpcs.dismiss_approval_request if parent_rpcs.respond_to? :dismiss_approval_request
                   @dismiss_approval_request = ::Gapic::Config::Method.new dismiss_approval_request_config
+                  invalidate_approval_request_config = parent_rpcs.invalidate_approval_request if parent_rpcs.respond_to? :invalidate_approval_request
+                  @invalidate_approval_request = ::Gapic::Config::Method.new invalidate_approval_request_config
                   get_access_approval_settings_config = parent_rpcs.get_access_approval_settings if parent_rpcs.respond_to? :get_access_approval_settings
                   @get_access_approval_settings = ::Gapic::Config::Method.new get_access_approval_settings_config
                   update_access_approval_settings_config = parent_rpcs.update_access_approval_settings if parent_rpcs.respond_to? :update_access_approval_settings
                   @update_access_approval_settings = ::Gapic::Config::Method.new update_access_approval_settings_config
                   delete_access_approval_settings_config = parent_rpcs.delete_access_approval_settings if parent_rpcs.respond_to? :delete_access_approval_settings
                   @delete_access_approval_settings = ::Gapic::Config::Method.new delete_access_approval_settings_config
+                  get_access_approval_service_account_config = parent_rpcs.get_access_approval_service_account if parent_rpcs.respond_to? :get_access_approval_service_account
+                  @get_access_approval_service_account = ::Gapic::Config::Method.new get_access_approval_service_account_config
 
                   yield self if block_given?
                 end
