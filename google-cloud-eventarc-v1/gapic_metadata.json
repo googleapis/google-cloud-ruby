@@ -60,6 +60,16 @@
                 "delete_channel"
               ]
             },
+            "GetProvider": {
+              "methods": [
+                "get_provider"
+              ]
+            },
+            "ListProviders": {
+              "methods": [
+                "list_providers"
+              ]
+            },
             "GetChannelConnection": {
               "methods": [
                 "get_channel_connection"
