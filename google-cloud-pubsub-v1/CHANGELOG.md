@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2022-05-19)
+
+#### Features
+
+* add BigQuery configuration and state for Subscriptions
+
 ### 0.9.0 (2022-04-20)
 
 #### Features
