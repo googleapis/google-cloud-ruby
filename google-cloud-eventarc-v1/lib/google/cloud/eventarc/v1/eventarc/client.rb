@@ -1142,6 +1142,198 @@ module Google
             end
 
             ##
+            # Get a single Provider.
+            #
+            # @overload get_provider(request, options = nil)
+            #   Pass arguments to `get_provider` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::GetProviderRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::GetProviderRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_provider(name: nil)
+            #   Pass arguments to `get_provider` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the provider to get.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Eventarc::V1::Provider]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Eventarc::V1::Provider]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::GetProviderRequest.new
+            #
+            #   # Call the get_provider method.
+            #   result = client.get_provider request
+            #
+            #   # The returned object is of type Google::Cloud::Eventarc::V1::Provider.
+            #   p result
+            #
+            def get_provider request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::GetProviderRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_provider.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_provider.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_provider.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :get_provider, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # List providers.
+            #
+            # @overload list_providers(request, options = nil)
+            #   Pass arguments to `list_providers` via a request object, either of type
+            #   {::Google::Cloud::Eventarc::V1::ListProvidersRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Eventarc::V1::ListProvidersRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_providers(parent: nil, page_size: nil, page_token: nil, order_by: nil, filter: nil)
+            #   Pass arguments to `list_providers` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent of the provider to get.
+            #   @param page_size [::Integer]
+            #     The maximum number of providers to return on each page.
+            #   @param page_token [::String]
+            #     The page token; provide the value from the `next_page_token` field in a
+            #     previous `ListProviders` call to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to `ListProviders` must
+            #     match the call that provided the page token.
+            #   @param order_by [::String]
+            #     The sorting order of the resources returned. Value should be a
+            #     comma-separated list of fields. The default sorting oder is ascending. To
+            #     specify descending order for a field, append a `desc` suffix; for example:
+            #     `name desc, _id`.
+            #   @param filter [::String]
+            #     The filter field that the list request will filter on.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Provider>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Eventarc::V1::Provider>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/eventarc/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Eventarc::V1::Eventarc::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Eventarc::V1::ListProvidersRequest.new
+            #
+            #   # Call the list_providers method.
+            #   result = client.list_providers request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Eventarc::V1::Provider.
+            #     p response
+            #   end
+            #
+            def list_providers request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Eventarc::V1::ListProvidersRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_providers.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Eventarc::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_providers.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_providers.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @eventarc_stub.call_rpc :list_providers, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @eventarc_stub, :list_providers, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Get a single ChannelConnection.
             #
             # @overload get_channel_connection(request, options = nil)
@@ -1703,6 +1895,16 @@ module Google
                 #
                 attr_reader :delete_channel
                 ##
+                # RPC-specific configuration for `get_provider`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_provider
+                ##
+                # RPC-specific configuration for `list_providers`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_providers
+                ##
                 # RPC-specific configuration for `get_channel_connection`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1745,6 +1947,10 @@ module Google
                   @update_channel = ::Gapic::Config::Method.new update_channel_config
                   delete_channel_config = parent_rpcs.delete_channel if parent_rpcs.respond_to? :delete_channel
                   @delete_channel = ::Gapic::Config::Method.new delete_channel_config
+                  get_provider_config = parent_rpcs.get_provider if parent_rpcs.respond_to? :get_provider
+                  @get_provider = ::Gapic::Config::Method.new get_provider_config
+                  list_providers_config = parent_rpcs.list_providers if parent_rpcs.respond_to? :list_providers
+                  @list_providers = ::Gapic::Config::Method.new list_providers_config
                   get_channel_connection_config = parent_rpcs.get_channel_connection if parent_rpcs.respond_to? :get_channel_connection
                   @get_channel_connection = ::Gapic::Config::Method.new get_channel_connection_config
                   list_channel_connections_config = parent_rpcs.list_channel_connections if parent_rpcs.respond_to? :list_channel_connections

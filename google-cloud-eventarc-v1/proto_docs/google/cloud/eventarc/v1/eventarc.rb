@@ -235,6 +235,59 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request message for the GetProvider method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the provider to get.
+        class GetProviderRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request message for the ListProviders method.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The parent of the provider to get.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of providers to return on each page.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The page token; provide the value from the `next_page_token` field in a
+        #     previous `ListProviders` call to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListProviders` must
+        #     match the call that provided the page token.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     The sorting order of the resources returned. Value should be a
+        #     comma-separated list of fields. The default sorting oder is ascending. To
+        #     specify descending order for a field, append a `desc` suffix; for example:
+        #     `name desc, _id`.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     The filter field that the list request will filter on.
+        class ListProvidersRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response message for the `ListProviders` method.
+        # @!attribute [rw] providers
+        #   @return [::Array<::Google::Cloud::Eventarc::V1::Provider>]
+        #     The requested providers, up to the number specified in `page_size`.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A page token that can be sent to ListProviders to request the next page.
+        #     If this is empty, then there are no more pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Unreachable resources, if any.
+        class ListProvidersResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request message for the GetChannelConnection method.
         # @!attribute [rw] name
         #   @return [::String]

@@ -99,6 +99,25 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Provider resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/providers/{provider}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param provider [String]
+            #
+            # @return [::String]
+            def provider_path project:, location:, provider:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/providers/#{provider}"
+            end
+
+            ##
             # Create a fully-qualified ServiceAccount resource string.
             #
             # The resource will be in the following format:
