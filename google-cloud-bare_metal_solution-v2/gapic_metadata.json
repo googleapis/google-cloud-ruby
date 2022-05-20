@@ -1,0 +1,118 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.baremetalsolution.v2",
+  "libraryPackage": "::Google::Cloud::BaremetalSolution::V2",
+  "services": {
+    "BareMetalSolution": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::BaremetalSolution::V2::BareMetalSolution::Client",
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "ResetInstance": {
+              "methods": [
+                "reset_instance"
+              ]
+            },
+            "ListVolumes": {
+              "methods": [
+                "list_volumes"
+              ]
+            },
+            "GetVolume": {
+              "methods": [
+                "get_volume"
+              ]
+            },
+            "UpdateVolume": {
+              "methods": [
+                "update_volume"
+              ]
+            },
+            "ListNetworks": {
+              "methods": [
+                "list_networks"
+              ]
+            },
+            "GetNetwork": {
+              "methods": [
+                "get_network"
+              ]
+            },
+            "ListSnapshotSchedulePolicies": {
+              "methods": [
+                "list_snapshot_schedule_policies"
+              ]
+            },
+            "GetSnapshotSchedulePolicy": {
+              "methods": [
+                "get_snapshot_schedule_policy"
+              ]
+            },
+            "CreateSnapshotSchedulePolicy": {
+              "methods": [
+                "create_snapshot_schedule_policy"
+              ]
+            },
+            "UpdateSnapshotSchedulePolicy": {
+              "methods": [
+                "update_snapshot_schedule_policy"
+              ]
+            },
+            "DeleteSnapshotSchedulePolicy": {
+              "methods": [
+                "delete_snapshot_schedule_policy"
+              ]
+            },
+            "CreateVolumeSnapshot": {
+              "methods": [
+                "create_volume_snapshot"
+              ]
+            },
+            "RestoreVolumeSnapshot": {
+              "methods": [
+                "restore_volume_snapshot"
+              ]
+            },
+            "DeleteVolumeSnapshot": {
+              "methods": [
+                "delete_volume_snapshot"
+              ]
+            },
+            "GetVolumeSnapshot": {
+              "methods": [
+                "get_volume_snapshot"
+              ]
+            },
+            "ListVolumeSnapshots": {
+              "methods": [
+                "list_volume_snapshots"
+              ]
+            },
+            "GetLun": {
+              "methods": [
+                "get_lun"
+              ]
+            },
+            "ListLuns": {
+              "methods": [
+                "list_luns"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
