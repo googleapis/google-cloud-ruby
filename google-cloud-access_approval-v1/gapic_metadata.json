@@ -30,6 +30,11 @@
                 "dismiss_approval_request"
               ]
             },
+            "InvalidateApprovalRequest": {
+              "methods": [
+                "invalidate_approval_request"
+              ]
+            },
             "GetAccessApprovalSettings": {
               "methods": [
                 "get_access_approval_settings"
@@ -43,6 +48,11 @@
             "DeleteAccessApprovalSettings": {
               "methods": [
                 "delete_access_approval_settings"
+              ]
+            },
+            "GetAccessApprovalServiceAccount": {
+              "methods": [
+                "get_access_approval_service_account"
               ]
             }
           }

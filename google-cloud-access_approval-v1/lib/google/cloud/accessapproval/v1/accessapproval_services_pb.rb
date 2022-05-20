@@ -87,6 +87,15 @@ module Google
             # Returns FAILED_PRECONDITION if the request exists but is not in a pending
             # state.
             rpc :DismissApprovalRequest, ::Google::Cloud::AccessApproval::V1::DismissApprovalRequestMessage, ::Google::Cloud::AccessApproval::V1::ApprovalRequest
+            # Invalidates an existing ApprovalRequest. Returns the updated
+            # ApprovalRequest.
+            #
+            # NOTE: This does not deny access to the resource if another request has been
+            # made and approved. It only invalidates a single approval.
+            #
+            # Returns FAILED_PRECONDITION if the request exists but is not in an approved
+            # state.
+            rpc :InvalidateApprovalRequest, ::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage, ::Google::Cloud::AccessApproval::V1::ApprovalRequest
             # Gets the settings associated with a project, folder, or organization.
             rpc :GetAccessApprovalSettings, ::Google::Cloud::AccessApproval::V1::GetAccessApprovalSettingsMessage, ::Google::Cloud::AccessApproval::V1::AccessApprovalSettings
             # Updates the settings associated with a project, folder, or organization.
@@ -99,6 +108,9 @@ module Google
             # hierarchy, then Access Approval will still be enabled at this level as
             # the settings are inherited.
             rpc :DeleteAccessApprovalSettings, ::Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage, ::Google::Protobuf::Empty
+            # Retrieves the service account that is used by Access Approval to access KMS
+            # keys for signing approved approval requests.
+            rpc :GetAccessApprovalServiceAccount, ::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage, ::Google::Cloud::AccessApproval::V1::AccessApprovalServiceAccount
           end
 
           Stub = Service.rpc_stub_class
