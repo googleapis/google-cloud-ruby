@@ -202,8 +202,7 @@ module Google
               # specified output location.
               STREAMING = 1
 
-              # Channel is waiting for the input stream through the input. Live streams
-              # do not start yet.
+              # Channel is waiting for the input stream through the input.
               AWAITING_INPUT = 2
 
               # Channel is running, but has trouble publishing the live streams onto the
@@ -213,6 +212,7 @@ module Google
 
               # Channel is generating live streams with no input stream. Live streams are
               # filled out with black screen, while input stream is missing.
+              # Not supported yet.
               STREAMING_NO_INPUT = 5
 
               # Channel is stopped, finishing live streams.
@@ -441,6 +441,9 @@ module Google
 
               # Event has been created but not scheduled yet.
               PENDING = 5
+
+              # Event was stopped before running for its full duration.
+              STOPPED = 6
             end
           end
         end
