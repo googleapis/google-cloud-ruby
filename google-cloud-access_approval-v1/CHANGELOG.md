@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 (2022-05-22)
+
+#### Features
+
+* add support for invalidate_approval_request and get_access_approval_service_account
+
 ### 0.5.0 / 2022-02-15
 
 #### Features
