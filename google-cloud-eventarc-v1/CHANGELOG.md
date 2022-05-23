@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-05-22)
+
+#### Features
+
+* add support for get_provider and list_providers
+
 ### 0.2.1 (2022-05-05)
 
 #### Bug Fixes
