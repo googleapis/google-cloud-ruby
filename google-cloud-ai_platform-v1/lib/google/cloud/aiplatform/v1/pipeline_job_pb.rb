@@ -9,6 +9,7 @@ require 'google/cloud/aiplatform/v1/artifact_pb'
 require 'google/cloud/aiplatform/v1/context_pb'
 require 'google/cloud/aiplatform/v1/encryption_spec_pb'
 require 'google/cloud/aiplatform/v1/execution_pb'
+require 'google/cloud/aiplatform/v1/pipeline_failure_policy_pb'
 require 'google/cloud/aiplatform/v1/pipeline_state_pb'
 require 'google/cloud/aiplatform/v1/value_pb'
 require 'google/protobuf/struct_pb'
@@ -40,6 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :parameters, :string, :message, 1, "google.cloud.aiplatform.v1.Value"
       optional :gcs_output_directory, :string, 2
       map :parameter_values, :string, :message, 3, "google.protobuf.Value"
+      optional :failure_policy, :enum, 4, "google.cloud.aiplatform.v1.PipelineFailurePolicy"
     end
     add_message "google.cloud.aiplatform.v1.PipelineTemplateMetadata" do
       optional :version, :string, 3
