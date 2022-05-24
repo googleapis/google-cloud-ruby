@@ -135,6 +135,10 @@
       "component": "google-cloud-bigquery-connection-v1",
       "version_file": "lib/google/cloud/bigquery/connection/v1/version.rb"
     },
+    "google-cloud-bigquery-data_exchange": {
+      "component": "google-cloud-bigquery-data_exchange",
+      "version_file": "lib/google/cloud/bigquery/data_exchange/version.rb"
+    },
     "google-cloud-bigquery-data_exchange-v1beta1": {
       "component": "google-cloud-bigquery-data_exchange-v1beta1",
       "version_file": "lib/google/cloud/bigquery/data_exchange/v1beta1/version.rb"
@@ -530,6 +534,10 @@
     "google-cloud-gke_hub-v1beta1": {
       "component": "google-cloud-gke_hub-v1beta1",
       "version_file": "lib/google/cloud/gke_hub/v1beta1/version.rb"
+    },
+    "google-cloud-gke_multi_cloud": {
+      "component": "google-cloud-gke_multi_cloud",
+      "version_file": "lib/google/cloud/gke_multi_cloud/version.rb"
     },
     "google-cloud-gke_multi_cloud-v1": {
       "component": "google-cloud-gke_multi_cloud-v1",
