@@ -59,6 +59,9 @@ module Google
         #     Note: The URI given on output may be different, including the URI scheme,
         #     than the one given on input. The output URI will point to a location where
         #     the user only has a read access.
+        # @!attribute [rw] latent_space_source
+        #   @return [::String]
+        #     Name of the source to generate embeddings for example based explanations.
         class ExplanationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

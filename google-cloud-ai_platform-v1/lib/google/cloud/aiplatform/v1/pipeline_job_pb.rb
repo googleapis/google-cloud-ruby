@@ -33,11 +33,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :encryption_spec, :message, 16, "google.cloud.aiplatform.v1.EncryptionSpec"
       optional :service_account, :string, 17
       optional :network, :string, 18
+      optional :template_uri, :string, 19
+      optional :template_metadata, :message, 20, "google.cloud.aiplatform.v1.PipelineTemplateMetadata"
     end
     add_message "google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig" do
       map :parameters, :string, :message, 1, "google.cloud.aiplatform.v1.Value"
       optional :gcs_output_directory, :string, 2
       map :parameter_values, :string, :message, 3, "google.protobuf.Value"
+    end
+    add_message "google.cloud.aiplatform.v1.PipelineTemplateMetadata" do
+      optional :version, :string, 3
     end
     add_message "google.cloud.aiplatform.v1.PipelineJobDetail" do
       optional :pipeline_context, :message, 1, "google.cloud.aiplatform.v1.Context"
@@ -101,6 +106,7 @@ module Google
       module V1
         PipelineJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineJob").msgclass
         PipelineJob::RuntimeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig").msgclass
+        PipelineTemplateMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineTemplateMetadata").msgclass
         PipelineJobDetail = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineJobDetail").msgclass
         PipelineTaskDetail = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineTaskDetail").msgclass
         PipelineTaskDetail::PipelineTaskStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineTaskDetail.PipelineTaskStatus").msgclass

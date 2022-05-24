@@ -74,9 +74,30 @@ module Google
           #     scale automatically, but you can manually update the number of
           #     nodes. If set to 0, the featurestore will not have an
           #     online store and cannot be used for online serving.
+          # @!attribute [rw] scaling
+          #   @return [::Google::Cloud::AIPlatform::V1::Featurestore::OnlineServingConfig::Scaling]
+          #     Online serving scaling configuration.
+          #     Only one of `fixed_node_count` and `scaling` can be set. Setting one will
+          #     reset the other.
           class OnlineServingConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Online serving scaling configuration. If min_node_count and
+            # max_node_count are set to the same value, the cluster will be configured
+            # with the fixed number of node (no auto-scaling).
+            # @!attribute [rw] min_node_count
+            #   @return [::Integer]
+            #     Required. The minimum number of nodes to scale down to. Must be greater than or
+            #     equal to 1.
+            # @!attribute [rw] max_node_count
+            #   @return [::Integer]
+            #     The maximum number of nodes to scale up to. Must be greater than
+            #     min_node_count, and less than or equal to 10 times of 'min_node_count'.
+            class Scaling
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # @!attribute [rw] key
