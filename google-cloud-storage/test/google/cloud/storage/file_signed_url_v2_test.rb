@@ -172,21 +172,21 @@ describe Google::Cloud::Storage::File, :signed_url, :mock_storage do
     }.must_raise ArgumentError
   end
 
-  describe "Files with spaces in them" do
-    let(:file_name) { "hello world.txt" }
+  describe "Files with spaces and hashes in them" do
+    let(:file_name) { "hello world #1.txt" }
 
     it "properly escapes the path when generating signed_url" do
       Time.stub :now, Time.new(2012,1,1,0,0,0, "+00:00") do
         signing_key_mock = Minitest::Mock.new
         signing_key_mock.expect :is_a?, false, [Proc]
-        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/hello%20world.txt"]
+        signing_key_mock.expect :sign, "native-signature", [OpenSSL::Digest::SHA256, "GET\n\n\n1325376300\n/bucket/hello%20world%20%231.txt"]
         credentials.issuer = "native_client_email"
         credentials.signing_key = signing_key_mock
 
         signed_url = file.signed_url
 
         signed_uri = URI signed_url
-        _(signed_uri.path).must_equal "/bucket/hello%20world.txt"
+        _(signed_uri.path).must_equal "/bucket/hello%20world%20%231.txt"
 
         signed_url_params = CGI::parse signed_uri.query
         _(signed_url_params["GoogleAccessId"]).must_equal ["native_client_email"]
