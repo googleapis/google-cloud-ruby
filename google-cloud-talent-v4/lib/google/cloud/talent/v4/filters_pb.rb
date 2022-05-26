@@ -38,6 +38,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TELECOMMUTE_PREFERENCE_UNSPECIFIED, 0
       value :TELECOMMUTE_EXCLUDED, 1
       value :TELECOMMUTE_ALLOWED, 2
+      value :TELECOMMUTE_JOBS_EXCLUDED, 3
     end
     add_message "google.cloud.talent.v4.CompensationFilter" do
       optional :type, :enum, 1, "google.cloud.talent.v4.CompensationFilter.FilterType"

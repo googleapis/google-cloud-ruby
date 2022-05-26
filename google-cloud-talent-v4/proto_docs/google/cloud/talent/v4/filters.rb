@@ -90,14 +90,22 @@ module Google
         #   @return [::Array<::String>]
         #     This filter specifies the company {::Google::Cloud::Talent::V4::Company#display_name Company.display_name}
         #     of the jobs to search against. The company name must match the value
-        #     exactly (case sensitive).
+        #     exactly.
         #
-        #     Alternatively, if the value being searched for is wrapped in
-        #     `SUBSTRING_MATCH([value])`, the company name must contain a case
-        #     insensitive substring match of the value. Using this function may increase
-        #     latency.
+        #     Alternatively, the value being searched for can be wrapped in different
+        #     match operators.
+        #     `SUBSTRING_MATCH([value])`
+        #     The company name must contain a case insensitive substring match of the
+        #     value. Using this function may increase latency.
         #
-        #     Sample Values: `["Google LLC", "SUBSTRING_MATCH(google)"]`
+        #     Sample Value: `SUBSTRING_MATCH(google)`
+        #
+        #     `MULTI_WORD_TOKEN_MATCH([value])`
+        #     The value will be treated as a multi word token and the company name must
+        #     contain a case insensitive match of the value. Using this function may
+        #     increase latency.
+        #
+        #     Sample Value: `MULTI_WORD_TOKEN_MATCH(google)`
         #
         #     If a value isn't specified, jobs within the search results are
         #     associated with any company.
@@ -216,7 +224,7 @@ module Google
         #   @return [::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference]
         #     Allows the client to return jobs without a
         #     set location, specifically, telecommuting jobs (telecommuting is considered
-        #     by the service as a special location.
+        #     by the service as a special location).
         #     {::Google::Cloud::Talent::V4::Job#posting_region Job.posting_region} indicates if a job permits telecommuting.
         #     If this field is set to {::Google::Cloud::Talent::V4::LocationFilter::TelecommutePreference::TELECOMMUTE_ALLOWED TelecommutePreference.TELECOMMUTE_ALLOWED},
         #     telecommuting jobs are searched, and {::Google::Cloud::Talent::V4::LocationFilter#address address} and {::Google::Cloud::Talent::V4::LocationFilter#lat_lng lat_lng} are
@@ -243,11 +251,15 @@ module Google
             # Default value if the telecommute preference isn't specified.
             TELECOMMUTE_PREFERENCE_UNSPECIFIED = 0
 
-            # Exclude telecommute jobs.
+            # Deprecated: Ignore telecommute status of jobs. Use
+            # TELECOMMUTE_JOBS_EXCLUDED if want to exclude telecommute jobs.
             TELECOMMUTE_EXCLUDED = 1
 
             # Allow telecommute jobs.
             TELECOMMUTE_ALLOWED = 2
+
+            # Exclude telecommute jobs.
+            TELECOMMUTE_JOBS_EXCLUDED = 3
           end
         end
 
