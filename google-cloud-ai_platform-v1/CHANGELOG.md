@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.5.0 (2022-05-26)
+
+#### Features
+
+* add latent_space_source to explanation metadata
+* add pipeline template metadata template to pipeline jobs
+* add scaling to online serving config
+* add support for pipeline failure policy in pipeline runtime config
+
 ### 0.4.0 (2022-05-12)
 
 #### Features
