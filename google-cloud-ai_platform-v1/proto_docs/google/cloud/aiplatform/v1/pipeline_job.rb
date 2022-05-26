@@ -97,6 +97,14 @@ module Google
         #     being launched, if applied, such as Vertex AI
         #     Training or Dataflow job. If left unspecified, the workload is not peered
         #     with any network.
+        # @!attribute [rw] template_uri
+        #   @return [::String]
+        #     A template uri from where the {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec}, if empty, will
+        #     be downloaded.
+        # @!attribute [r] template_metadata
+        #   @return [::Google::Cloud::AIPlatform::V1::PipelineTemplateMetadata]
+        #     Output only. Pipeline template metadata. Will fill up fields if
+        #     {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri} is from supported template registry.
         class PipelineJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -126,6 +134,14 @@ module Google
           #     at runtime. This field is used by pipelines built using
           #     `PipelineJob.pipeline_spec.schema_version` 2.1.0, such as pipelines built
           #     using Kubeflow Pipelines SDK 1.9 or higher and the v2 DSL.
+          # @!attribute [rw] failure_policy
+          #   @return [::Google::Cloud::AIPlatform::V1::PipelineFailurePolicy]
+          #     Represents the failure policy of a pipeline. Currently, the default of a
+          #     pipeline is that the pipeline will continue to run until no more tasks
+          #     can be executed, also known as PIPELINE_FAILURE_POLICY_FAIL_SLOW.
+          #     However, if a pipeline is set to PIPELINE_FAILURE_POLICY_FAIL_FAST, it
+          #     will stop scheduling any new tasks when a task has failed. Any scheduled
+          #     tasks will continue to completion.
           class RuntimeConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -157,6 +173,22 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Pipeline template metadata if {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri} is from supported
+        # template registry. Currently, the only supported registry is Artifact
+        # Registry.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     The version_name in artifact registry.
+        #
+        #     Will always be presented in output if the {::Google::Cloud::AIPlatform::V1::PipelineJob#template_uri PipelineJob.template_uri} is
+        #     from supported template registry.
+        #
+        #     Format is "sha256:abcdef123456...".
+        class PipelineTemplateMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The runtime detail of PipelineJob.

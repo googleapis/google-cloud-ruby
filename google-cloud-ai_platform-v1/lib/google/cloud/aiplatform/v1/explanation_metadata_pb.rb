@@ -12,6 +12,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :inputs, :string, :message, 1, "google.cloud.aiplatform.v1.ExplanationMetadata.InputMetadata"
       map :outputs, :string, :message, 2, "google.cloud.aiplatform.v1.ExplanationMetadata.OutputMetadata"
       optional :feature_attributions_schema_uri, :string, 3
+      optional :latent_space_source, :string, 5
     end
     add_message "google.cloud.aiplatform.v1.ExplanationMetadata.InputMetadata" do
       repeated :input_baselines, :message, 1, "google.protobuf.Value"

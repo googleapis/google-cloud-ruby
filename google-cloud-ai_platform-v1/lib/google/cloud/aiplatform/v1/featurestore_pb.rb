@@ -22,6 +22,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig" do
       optional :fixed_node_count, :int32, 2
+      optional :scaling, :message, 4, "google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig.Scaling"
+    end
+    add_message "google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig.Scaling" do
+      optional :min_node_count, :int32, 1
+      optional :max_node_count, :int32, 2
     end
     add_enum "google.cloud.aiplatform.v1.Featurestore.State" do
       value :STATE_UNSPECIFIED, 0
@@ -37,6 +42,7 @@ module Google
       module V1
         Featurestore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Featurestore").msgclass
         Featurestore::OnlineServingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig").msgclass
+        Featurestore::OnlineServingConfig::Scaling = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Featurestore.OnlineServingConfig.Scaling").msgclass
         Featurestore::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Featurestore.State").enummodule
       end
     end
