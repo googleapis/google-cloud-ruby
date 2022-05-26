@@ -48,7 +48,7 @@ module Google
           #
           def ext_path
             path = "/#{@bucket}/#{@path}"
-            escaped = Addressable::URI.escape path
+            escaped = Addressable::URI.encode_component path, Addressable::URI::CharacterClasses::PATH
             special_var = "${filename}"
             # Restore the unencoded `${filename}` variable, if present.
             if path.include? special_var
