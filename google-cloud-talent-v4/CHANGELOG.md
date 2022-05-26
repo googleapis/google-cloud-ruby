@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 (2022-05-26)
+
+#### Features
+
+* update TelecommutePreference filter to add TELECOMMUTE_JOBS_EXCLUDED filter option
+
 ### 0.6.4 / 2022-03-30
 
 #### Documentation
