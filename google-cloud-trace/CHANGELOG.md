@@ -1,5 +1,12 @@
 # Release History
 
+### 0.41.4 (2022-05-27)
+
+#### Bug Fixes
+
+* normalize span time based on rails version
+* wrap patched methods into class to ignore yard parsing
+
 ### 0.41.3 / 2021-07-08
 
 #### Documentation
