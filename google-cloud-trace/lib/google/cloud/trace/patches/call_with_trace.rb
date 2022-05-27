@@ -84,7 +84,7 @@ module GRPC
     end
 
     # Patch GRPC::Core::Call#run_batch method
-    # @api private
+    # @private
     class Call
       prepend CallWithTrace
     end

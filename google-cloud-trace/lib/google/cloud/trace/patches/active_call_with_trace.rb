@@ -41,7 +41,7 @@ module GRPC
   end
 
   # Patch GRPC::ActiveCall#request_response method
-  # @api private
+  # @private
   class ActiveCall
     prepend ActiveCallWithTrace
   end

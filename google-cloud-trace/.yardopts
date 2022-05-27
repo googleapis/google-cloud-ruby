@@ -4,7 +4,6 @@
 --markup markdown
 --markup-provider redcarpet
 --main OVERVIEW.md
---no-api private
 
 ./lib/**/*.rb
 -
