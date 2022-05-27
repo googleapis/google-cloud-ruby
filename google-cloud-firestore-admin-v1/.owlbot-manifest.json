@@ -43,7 +43,6 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
-    "proto_docs/google/type/latlng.rb",
     "snippets/Gemfile",
     "snippets/firestore_admin/create_index.rb",
     "snippets/firestore_admin/delete_index.rb",

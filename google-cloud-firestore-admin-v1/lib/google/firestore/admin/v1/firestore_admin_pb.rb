@@ -10,11 +10,9 @@ require 'google/api/resource_pb'
 require 'google/firestore/admin/v1/database_pb'
 require 'google/firestore/admin/v1/field_pb'
 require 'google/firestore/admin/v1/index_pb'
-require 'google/firestore/admin/v1/operation_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/admin/v1/firestore_admin.proto", :syntax => :proto3) do

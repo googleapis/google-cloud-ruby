@@ -5,9 +5,6 @@ require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
-require 'google/protobuf/duration_pb'
-require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/firestore/admin/v1/database.proto", :syntax => :proto3) do
@@ -16,6 +13,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :location_id, :string, 9
       optional :type, :enum, 10, "google.firestore.admin.v1.Database.DatabaseType"
       optional :concurrency_mode, :enum, 15, "google.firestore.admin.v1.Database.ConcurrencyMode"
+      optional :app_engine_integration_mode, :enum, 19, "google.firestore.admin.v1.Database.AppEngineIntegrationMode"
+      optional :key_prefix, :string, 20
       optional :etag, :string, 99
     end
     add_enum "google.firestore.admin.v1.Database.DatabaseType" do
@@ -29,6 +28,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :PESSIMISTIC, 2
       value :OPTIMISTIC_WITH_ENTITY_GROUPS, 3
     end
+    add_enum "google.firestore.admin.v1.Database.AppEngineIntegrationMode" do
+      value :APP_ENGINE_INTEGRATION_MODE_UNSPECIFIED, 0
+      value :ENABLED, 1
+      value :DISABLED, 2
+    end
   end
 end
 
@@ -40,6 +44,7 @@ module Google
           Database = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Database").msgclass
           Database::DatabaseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Database.DatabaseType").enummodule
           Database::ConcurrencyMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Database.ConcurrencyMode").enummodule
+          Database::AppEngineIntegrationMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.firestore.admin.v1.Database.AppEngineIntegrationMode").enummodule
         end
       end
     end
