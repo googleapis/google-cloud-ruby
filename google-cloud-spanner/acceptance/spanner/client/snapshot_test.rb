@@ -19,13 +19,10 @@ describe "Spanner Client", :snapshot, :spanner do
     { gsql: spanner_client, pg: spanner_pg_client }
   end
   let :columns do
-    { gsql: [:account_id, :username, :friends, :active, :reputation, :avatar],
-      pg: [:account_id, :username, :active, :reputation, :avatar] }
+    [:account_id, :username, :friends, :active, :reputation, :avatar]
   end
   let :fields_hash do
-    { gsql: { account_id: :INT64, username: :STRING, friends: [:INT64],
-              active: :BOOL, reputation: :FLOAT64, avatar: :BYTES },
-      pg: { account_id: :INT64, username: :STRING, active: :BOOL, reputation: :FLOAT64, avatar: :BYTES } }
+    { account_id: :INT64, username: :STRING,  friends: [:INT64], active: :BOOL, reputation: :FLOAT64, avatar: :BYTES }
   end
   let :select_dql do
     { gsql: "SELECT account_id, username FROM accounts WHERE account_id = @id",
@@ -70,7 +67,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -87,7 +84,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -99,11 +96,11 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts", columns[dialect]
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -119,7 +116,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -131,11 +128,11 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts", columns[dialect]
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -151,7 +148,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -163,11 +160,11 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts", columns[dialect]
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -183,7 +180,7 @@ describe "Spanner Client", :snapshot, :spanner do
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end
@@ -195,11 +192,11 @@ describe "Spanner Client", :snapshot, :spanner do
         _(snp.transaction_id).wont_be :nil?
         _(snp.timestamp).wont_be :nil?
 
-        results = snp.read "accounts", columns[dialect]
+        results = snp.read "accounts", columns
       end
 
       _(results).must_be_kind_of Google::Cloud::Spanner::Results
-      _(results.fields.to_h).must_equal fields_hash[dialect]
+      _(results.fields.to_h).must_equal fields_hash
       results.rows.zip(@default_rows[dialect]).each do |expected, actual|
         assert_accounts_equal expected, actual
       end

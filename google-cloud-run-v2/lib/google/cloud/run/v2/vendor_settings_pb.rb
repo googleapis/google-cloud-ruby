@@ -34,7 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_enum "google.cloud.run.v2.ExecutionEnvironment" do
       value :EXECUTION_ENVIRONMENT_UNSPECIFIED, 0
-      value :EXECUTION_ENVIRONMENT_DEFAULT, 1
+      value :EXECUTION_ENVIRONMENT_GEN1, 1
       value :EXECUTION_ENVIRONMENT_GEN2, 2
     end
   end

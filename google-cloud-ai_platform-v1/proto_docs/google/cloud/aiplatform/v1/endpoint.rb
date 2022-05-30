@@ -146,8 +146,8 @@ module Google
         #     This value should be 1-10 characters, and valid characters are /[0-9]/.
         # @!attribute [rw] model
         #   @return [::String]
-        #     Required. The name of the Model that this is the deployment of. Note that the Model
-        #     may be in a different location than the DeployedModel's Endpoint.
+        #     Required. The resource name of the Model that this is the deployment of. Note that
+        #     the Model may be in a different location than the DeployedModel's Endpoint.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the DeployedModel. If not provided upon creation,

@@ -3,6 +3,7 @@
     "api_shortname": "jobs",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4beta1/latest",
     "distribution_name": "google-cloud-talent-v4beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "jobs",
     "name_pretty": "Cloud Talent Solution V4beta1 API",

@@ -3,6 +3,7 @@
     "api_shortname": "workflows",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-workflows-v1beta/latest",
     "distribution_name": "google-cloud-workflows-v1beta",
+    "is_cloud": true,
     "language": "ruby",
     "name": "workflows",
     "name_pretty": "Workflows V1beta API",

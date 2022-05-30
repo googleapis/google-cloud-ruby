@@ -11,10 +11,6 @@
   "tag-separator": "/",
   "sequential-calls": true,
   "packages": {
-    "google-cloud-secret_manager-v1": {
-      "component": "google-cloud-secret_manager-v1",
-      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
-    },
     "google-analytics-admin": {
       "component": "google-analytics-admin",
       "version_file": "lib/google/analytics/admin/version.rb"
@@ -139,6 +135,14 @@
       "component": "google-cloud-bigquery-connection-v1",
       "version_file": "lib/google/cloud/bigquery/connection/v1/version.rb"
     },
+    "google-cloud-bigquery-data_exchange": {
+      "component": "google-cloud-bigquery-data_exchange",
+      "version_file": "lib/google/cloud/bigquery/data_exchange/version.rb"
+    },
+    "google-cloud-bigquery-data_exchange-v1beta1": {
+      "component": "google-cloud-bigquery-data_exchange-v1beta1",
+      "version_file": "lib/google/cloud/bigquery/data_exchange/v1beta1/version.rb"
+    },
     "google-cloud-bigquery-data_transfer": {
       "component": "google-cloud-bigquery-data_transfer",
       "version_file": "lib/google/cloud/bigquery/data_transfer/version.rb"
@@ -146,6 +150,14 @@
     "google-cloud-bigquery-data_transfer-v1": {
       "component": "google-cloud-bigquery-data_transfer-v1",
       "version_file": "lib/google/cloud/bigquery/data_transfer/v1/version.rb"
+    },
+    "google-cloud-bigquery-migration": {
+      "component": "google-cloud-bigquery-migration",
+      "version_file": "lib/google/cloud/bigquery/migration/version.rb"
+    },
+    "google-cloud-bigquery-migration-v2": {
+      "component": "google-cloud-bigquery-migration-v2",
+      "version_file": "lib/google/cloud/bigquery/migration/v2/version.rb"
     },
     "google-cloud-bigquery-reservation": {
       "component": "google-cloud-bigquery-reservation",
@@ -355,6 +367,10 @@
       "component": "google-cloud-datastream",
       "version_file": "lib/google/cloud/datastream/version.rb"
     },
+    "google-cloud-datastream-v1": {
+      "component": "google-cloud-datastream-v1",
+      "version_file": "lib/google/cloud/datastream/v1/version.rb"
+    },
     "google-cloud-datastream-v1alpha1": {
       "component": "google-cloud-datastream-v1alpha1",
       "version_file": "lib/google/cloud/datastream/v1alpha1/version.rb"
@@ -518,6 +534,14 @@
     "google-cloud-gke_hub-v1beta1": {
       "component": "google-cloud-gke_hub-v1beta1",
       "version_file": "lib/google/cloud/gke_hub/v1beta1/version.rb"
+    },
+    "google-cloud-gke_multi_cloud": {
+      "component": "google-cloud-gke_multi_cloud",
+      "version_file": "lib/google/cloud/gke_multi_cloud/version.rb"
+    },
+    "google-cloud-gke_multi_cloud-v1": {
+      "component": "google-cloud-gke_multi_cloud-v1",
+      "version_file": "lib/google/cloud/gke_multi_cloud/v1/version.rb"
     },
     "google-cloud-iap": {
       "component": "google-cloud-iap",
@@ -831,6 +855,14 @@
       "component": "google-cloud-retail-v2",
       "version_file": "lib/google/cloud/retail/v2/version.rb"
     },
+    "google-cloud-run-client": {
+      "component": "google-cloud-run-client",
+      "version_file": "lib/google/cloud/run/client/version.rb"
+    },
+    "google-cloud-run-v2": {
+      "component": "google-cloud-run-v2",
+      "version_file": "lib/google/cloud/run/v2/version.rb"
+    },
     "google-cloud-scheduler": {
       "component": "google-cloud-scheduler",
       "version_file": "lib/google/cloud/scheduler/version.rb"
@@ -846,6 +878,10 @@
     "google-cloud-secret_manager": {
       "component": "google-cloud-secret_manager",
       "version_file": "lib/google/cloud/secret_manager/version.rb"
+    },
+    "google-cloud-secret_manager-v1": {
+      "component": "google-cloud-secret_manager-v1",
+      "version-file": "lib/google/cloud/secret_manager/v1/version.rb"
     },
     "google-cloud-secret_manager-v1beta1": {
       "component": "google-cloud-secret_manager-v1beta1",
@@ -1166,6 +1202,10 @@
     "google-iam-credentials-v1": {
       "component": "google-iam-credentials-v1",
       "version_file": "lib/google/iam/credentials/v1/version.rb"
+    },
+    "google-iam-v1": {
+      "component": "google-iam-v1",
+      "version_file": "lib/google/iam/v1/version.rb"
     },
     "google-iam-v1beta": {
       "component": "google-iam-v1beta",

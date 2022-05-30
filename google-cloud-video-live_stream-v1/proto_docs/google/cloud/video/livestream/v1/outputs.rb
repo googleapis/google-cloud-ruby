@@ -92,7 +92,7 @@ module Google
           #     Maximum number of segments that this manifest holds. Once the manifest
           #     reaches this maximum number of segments, whenever a new segment is added to
           #     the manifest, the oldest segment will be removed from the manifest.
-          #     The minimum value is 1 and the default value is 5.
+          #     The minimum value is 3 and the default value is 5.
           # @!attribute [rw] segment_keep_duration
           #   @return [::Google::Protobuf::Duration]
           #     How long to keep a segment on the output Google Cloud Storage bucket after

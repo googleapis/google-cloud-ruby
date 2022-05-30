@@ -26,6 +26,9 @@ module Google
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The resource name of the ModelEvaluation.
+        # @!attribute [rw] display_name
+        #   @return [::String]
+        #     The display name of the ModelEvaluation.
         # @!attribute [rw] metrics_schema_uri
         #   @return [::String]
         #     Points to a YAML file stored on Google Cloud Storage describing the
@@ -76,6 +79,12 @@ module Google
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelEvaluation::ModelEvaluationExplanationSpec>]
         #     Describes the values of {::Google::Cloud::AIPlatform::V1::ExplanationSpec ExplanationSpec} that are used for explaining
         #     the predicted values on the evaluated data.
+        # @!attribute [rw] metadata
+        #   @return [::Google::Protobuf::Value]
+        #     The metadata of the ModelEvaluation.
+        #     For the ModelEvaluation uploaded from Managed Pipeline, metadata contains a
+        #     structured value with keys of "pipeline_job_id", "evaluation_dataset_type",
+        #     "evaluation_dataset_path".
         class ModelEvaluation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

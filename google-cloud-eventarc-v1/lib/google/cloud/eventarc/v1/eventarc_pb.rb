@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/eventarc/v1/channel_pb'
 require 'google/cloud/eventarc/v1/channel_connection_pb'
+require 'google/cloud/eventarc/v1/discovery_pb'
 require 'google/cloud/eventarc/v1/trigger_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
@@ -77,6 +78,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :validate_only, :bool, 2
     end
+    add_message "google.cloud.eventarc.v1.GetProviderRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.eventarc.v1.ListProvidersRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :order_by, :string, 4
+      optional :filter, :string, 5
+    end
+    add_message "google.cloud.eventarc.v1.ListProvidersResponse" do
+      repeated :providers, :message, 1, "google.cloud.eventarc.v1.Provider"
+      optional :next_page_token, :string, 2
+      repeated :unreachable, :string, 3
+    end
     add_message "google.cloud.eventarc.v1.GetChannelConnectionRequest" do
       optional :name, :string, 1
     end
@@ -126,6 +142,9 @@ module Google
         CreateChannelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.CreateChannelRequest").msgclass
         UpdateChannelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.UpdateChannelRequest").msgclass
         DeleteChannelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.DeleteChannelRequest").msgclass
+        GetProviderRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.GetProviderRequest").msgclass
+        ListProvidersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.ListProvidersRequest").msgclass
+        ListProvidersResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.ListProvidersResponse").msgclass
         GetChannelConnectionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.GetChannelConnectionRequest").msgclass
         ListChannelConnectionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.ListChannelConnectionsRequest").msgclass
         ListChannelConnectionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.eventarc.v1.ListChannelConnectionsResponse").msgclass

@@ -3,6 +3,7 @@
     "api_shortname": "cloudshell",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-shell-v1/latest",
     "distribution_name": "google-cloud-shell-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudshell",
     "name_pretty": "Cloud Shell V1 API",

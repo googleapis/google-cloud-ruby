@@ -458,30 +458,6 @@ module Google
         #     include (but is not limited to) skimpy or sheer clothing, strategically
         #     covered nudity, lewd or provocative poses, or close-ups of sensitive
         #     body areas.
-        # @!attribute [rw] adult_confidence
-        #   @return [::Float]
-        #     Confidence of adult_score. Range [0, 1]. 0 means not confident, 1 means
-        #     very confident.
-        # @!attribute [rw] spoof_confidence
-        #   @return [::Float]
-        #     Confidence of spoof_score. Range [0, 1]. 0 means not confident, 1 means
-        #     very confident.
-        # @!attribute [rw] medical_confidence
-        #   @return [::Float]
-        #     Confidence of medical_score. Range [0, 1]. 0 means not confident, 1 means
-        #     very confident.
-        # @!attribute [rw] violence_confidence
-        #   @return [::Float]
-        #     Confidence of violence_score. Range [0, 1]. 0 means not confident, 1 means
-        #     very confident.
-        # @!attribute [rw] racy_confidence
-        #   @return [::Float]
-        #     Confidence of racy_score. Range [0, 1]. 0 means not confident, 1 means very
-        #     confident.
-        # @!attribute [rw] nsfw_confidence
-        #   @return [::Float]
-        #     Confidence of nsfw_score. Range [0, 1]. 0 means not confident, 1 means very
-        #     confident.
         class SafeSearchAnnotation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -798,8 +774,8 @@ module Google
         # A list of requests to annotate files using the BatchAnnotateFiles API.
         # @!attribute [rw] requests
         #   @return [::Array<::Google::Cloud::Vision::V1::AnnotateFileRequest>]
-        #     Required. The list of file annotation requests. Right now we support only
-        #     one AnnotateFileRequest in BatchAnnotateFilesRequest.
+        #     Required. The list of file annotation requests. Right now we support only one
+        #     AnnotateFileRequest in BatchAnnotateFilesRequest.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Optional. Target project and location to make a call.

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.1 (2022-05-13)
+
+#### Bug Fixes
+
+* Fixed custom metric and custom dimension resource paths
+
 ### 0.11.0 / 2022-03-09
 
 #### Features

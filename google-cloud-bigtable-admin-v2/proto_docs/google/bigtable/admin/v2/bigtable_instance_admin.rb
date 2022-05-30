@@ -237,9 +237,62 @@ module Google
           # @!attribute [rw] finish_time
           #   @return [::Google::Protobuf::Timestamp]
           #     The time at which the operation failed or was completed successfully.
+          # @!attribute [rw] tables
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata::TableProgress}]
+          #     Keys: the full `name` of each table that existed in the instance when
+          #     CreateCluster was first called, i.e.
+          #     `projects/<project>/instances/<instance>/tables/<table>`. Any table added
+          #     to the instance by a later API call will be created in the new cluster by
+          #     that API call, not this one.
+          #
+          #     Values: information on how much of a table's data has been copied to the
+          #     newly-created cluster so far.
           class CreateClusterMetadata
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Progress info for copying a table's data to the new cluster.
+            # @!attribute [rw] estimated_size_bytes
+            #   @return [::Integer]
+            #     Estimate of the size of the table to be copied.
+            # @!attribute [rw] estimated_copied_bytes
+            #   @return [::Integer]
+            #     Estimate of the number of bytes copied so far for this table.
+            #     This will eventually reach 'estimated_size_bytes' unless the table copy
+            #     is CANCELLED.
+            # @!attribute [rw] state
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata::TableProgress::State]
+            class TableProgress
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              module State
+                STATE_UNSPECIFIED = 0
+
+                # The table has not yet begun copying to the new cluster.
+                PENDING = 1
+
+                # The table is actively being copied to the new cluster.
+                COPYING = 2
+
+                # The table has been fully copied to the new cluster.
+                COMPLETED = 3
+
+                # The table was deleted before it finished copying to the new cluster.
+                # Note that tables deleted after completion will stay marked as
+                # COMPLETED, not CANCELLED.
+                CANCELLED = 4
+              end
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::Bigtable::Admin::V2::CreateClusterMetadata::TableProgress]
+            class TablesEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # The metadata for the Operation returned by UpdateCluster.

@@ -3,6 +3,7 @@
     "api_shortname": "datastore",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-datastore-v1/latest",
     "distribution_name": "google-cloud-datastore-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "datastore",
     "name_pretty": "Firestore in Datastore mode V1 API",

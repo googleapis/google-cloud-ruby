@@ -3,6 +3,7 @@
     "api_shortname": "videointelligence",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-video_intelligence-v1beta2/latest",
     "distribution_name": "google-cloud-video_intelligence-v1beta2",
+    "is_cloud": true,
     "language": "ruby",
     "name": "videointelligence",
     "name_pretty": "Cloud Video Intelligence V1beta2 API",

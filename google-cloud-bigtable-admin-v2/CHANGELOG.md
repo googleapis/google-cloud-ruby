@@ -1,5 +1,12 @@
 # Release History
 
+### 0.11.0 (2022-05-19)
+
+#### Features
+
+* Include table info in CreateClusterMetadata
+* Support the "name" parameter for update_instance and update_cluster
+
 ### 0.10.0 (2022-04-20)
 
 #### Features

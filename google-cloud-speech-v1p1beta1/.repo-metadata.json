@@ -3,6 +3,7 @@
     "api_shortname": "speech",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-speech-v1p1beta1/latest",
     "distribution_name": "google-cloud-speech-v1p1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "speech",
     "name_pretty": "Cloud Speech-to-Text V1p1beta1 API",

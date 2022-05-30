@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/launch_stage_pb'
 require 'google/api/resource_pb'
+require 'google/api/routing_pb'
 require 'google/cloud/run/v2/condition_pb'
 require 'google/cloud/run/v2/revision_template_pb'
 require 'google/cloud/run/v2/traffic_target_pb'
@@ -15,7 +16,6 @@ require 'google/cloud/run/v2/vendor_settings_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
-require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -28,7 +28,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.run.v2.UpdateServiceRequest" do
       optional :service, :message, 1, "google.cloud.run.v2.Service"
-      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
       optional :validate_only, :bool, 3
       optional :allow_missing, :bool, 4
     end

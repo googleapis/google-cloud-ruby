@@ -3,6 +3,7 @@
     "api_shortname": "cloudtasks",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-tasks-v2beta3/latest",
     "distribution_name": "google-cloud-tasks-v2beta3",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudtasks",
     "name_pretty": "Cloud Tasks V2beta3 API",

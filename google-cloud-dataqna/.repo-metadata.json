@@ -3,6 +3,7 @@
     "api_shortname": "dataqna",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dataqna/latest",
     "distribution_name": "google-cloud-dataqna",
+    "is_cloud": true,
     "language": "ruby",
     "name": "dataqna",
     "name_pretty": "BigQuery Data QnA API",

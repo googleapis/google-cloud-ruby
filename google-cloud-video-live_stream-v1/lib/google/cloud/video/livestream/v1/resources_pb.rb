@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/video/livestream/v1/outputs_pb'
@@ -134,6 +133,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SUCCEEDED, 3
       value :FAILED, 4
       value :PENDING, 5
+      value :STOPPED, 6
     end
   end
 end

@@ -54,6 +54,10 @@ module Google
             rpc :UpdateChannel, ::Google::Cloud::Eventarc::V1::UpdateChannelRequest, ::Google::Longrunning::Operation
             # Delete a single channel.
             rpc :DeleteChannel, ::Google::Cloud::Eventarc::V1::DeleteChannelRequest, ::Google::Longrunning::Operation
+            # Get a single Provider.
+            rpc :GetProvider, ::Google::Cloud::Eventarc::V1::GetProviderRequest, ::Google::Cloud::Eventarc::V1::Provider
+            # List providers.
+            rpc :ListProviders, ::Google::Cloud::Eventarc::V1::ListProvidersRequest, ::Google::Cloud::Eventarc::V1::ListProvidersResponse
             # Get a single ChannelConnection.
             rpc :GetChannelConnection, ::Google::Cloud::Eventarc::V1::GetChannelConnectionRequest, ::Google::Cloud::Eventarc::V1::ChannelConnection
             # List channel connections.

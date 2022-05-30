@@ -3,6 +3,7 @@
     "api_shortname": "servicedirectory",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-service_directory/latest",
     "distribution_name": "google-cloud-service_directory",
+    "is_cloud": true,
     "language": "ruby",
     "name": "servicedirectory",
     "name_pretty": "Service Directory API",

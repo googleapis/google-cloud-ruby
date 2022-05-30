@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-access_approval-v1",
-    "version": "0.5.0",
+    "version": "0.6.0",
     "language": "RUBY",
     "apis": [
       {
@@ -172,6 +172,46 @@
       ]
     },
     {
+      "region_tag": "accessapproval_v1_generated_AccessApproval_InvalidateApprovalRequest_sync",
+      "title": "Snippet for invalidate_approval_request in AccessApproval",
+      "description": "Basic snippet for invalidate_approval_request in AccessApproval",
+      "file": "access_approval/invalidate_approval_request.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "invalidate_approval_request",
+        "full_name": "::Google::Cloud::AccessApproval::V1::AccessApproval::Client#invalidate_approval_request",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AccessApproval::V1::InvalidateApprovalRequestMessage",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AccessApproval::V1::ApprovalRequest",
+        "client": {
+          "short_name": "AccessApproval::Client",
+          "full_name": "::Google::Cloud::AccessApproval::V1::AccessApproval::Client"
+        },
+        "method": {
+          "short_name": "InvalidateApprovalRequest",
+          "full_name": "google.cloud.accessapproval.v1.AccessApproval.InvalidateApprovalRequest",
+          "service": {
+            "short_name": "AccessApproval",
+            "full_name": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "accessapproval_v1_generated_AccessApproval_GetAccessApprovalSettings_sync",
       "title": "Snippet for get_access_approval_settings in AccessApproval",
       "description": "Basic snippet for get_access_approval_settings in AccessApproval",
@@ -275,6 +315,46 @@
         "method": {
           "short_name": "DeleteAccessApprovalSettings",
           "full_name": "google.cloud.accessapproval.v1.AccessApproval.DeleteAccessApprovalSettings",
+          "service": {
+            "short_name": "AccessApproval",
+            "full_name": "google.cloud.accessapproval.v1.AccessApproval"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "accessapproval_v1_generated_AccessApproval_GetAccessApprovalServiceAccount_sync",
+      "title": "Snippet for get_access_approval_service_account in AccessApproval",
+      "description": "Basic snippet for get_access_approval_service_account in AccessApproval",
+      "file": "access_approval/get_access_approval_service_account.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_access_approval_service_account",
+        "full_name": "::Google::Cloud::AccessApproval::V1::AccessApproval::Client#get_access_approval_service_account",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AccessApproval::V1::GetAccessApprovalServiceAccountMessage",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AccessApproval::V1::AccessApprovalServiceAccount",
+        "client": {
+          "short_name": "AccessApproval::Client",
+          "full_name": "::Google::Cloud::AccessApproval::V1::AccessApproval::Client"
+        },
+        "method": {
+          "short_name": "GetAccessApprovalServiceAccount",
+          "full_name": "google.cloud.accessapproval.v1.AccessApproval.GetAccessApprovalServiceAccount",
           "service": {
             "short_name": "AccessApproval",
             "full_name": "google.cloud.accessapproval.v1.AccessApproval"

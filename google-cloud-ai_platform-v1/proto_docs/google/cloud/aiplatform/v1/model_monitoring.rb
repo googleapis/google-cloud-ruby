@@ -62,6 +62,8 @@ module Google
           #
           #     "csv"
           #     The source file is a CSV file.
+          #     "jsonl"
+          #     The source file is a JSONL file.
           # @!attribute [rw] target_field
           #   @return [::String]
           #     The target field name the model is to predict.

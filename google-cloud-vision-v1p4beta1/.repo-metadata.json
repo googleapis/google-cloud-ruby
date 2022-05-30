@@ -3,6 +3,7 @@
     "api_shortname": "vision",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-vision-v1p4beta1/latest",
     "distribution_name": "google-cloud-vision-v1p4beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "vision",
     "name_pretty": "Cloud Vision V1p4beta1 API",

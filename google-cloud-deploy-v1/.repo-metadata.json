@@ -3,6 +3,7 @@
     "api_shortname": "clouddeploy",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-deploy-v1/latest",
     "distribution_name": "google-cloud-deploy-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "clouddeploy",
     "name_pretty": "Google Cloud Deploy V1 API",

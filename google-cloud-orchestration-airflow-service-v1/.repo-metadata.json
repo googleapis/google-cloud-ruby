@@ -3,6 +3,7 @@
     "api_shortname": "composer",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-orchestration-airflow-service-v1/latest",
     "distribution_name": "google-cloud-orchestration-airflow-service-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "composer",
     "name_pretty": "Cloud Composer V1 API",

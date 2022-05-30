@@ -41,6 +41,18 @@ module Google
           # @!attribute [rw] concurrency_mode
           #   @return [::Google::Cloud::Firestore::Admin::V1::Database::ConcurrencyMode]
           #     The concurrency control mode to use for this database.
+          # @!attribute [rw] app_engine_integration_mode
+          #   @return [::Google::Cloud::Firestore::Admin::V1::Database::AppEngineIntegrationMode]
+          #     The App Engine integration mode to use for this database.
+          # @!attribute [r] key_prefix
+          #   @return [::String]
+          #     Output only. The key_prefix for this database. This key_prefix is used, in combination
+          #     with the project id ("<key prefix>~<project id>") to construct the
+          #     application id that is returned from the Cloud Datastore APIs in Google App
+          #     Engine first generation runtimes.
+          #
+          #     This value may be empty in which case the appid to use for URL-encoded keys
+          #     is the project_id (eg: foo instead of v~foo).
           # @!attribute [rw] etag
           #   @return [::String]
           #     This checksum is computed by the server based on the value of other
@@ -53,6 +65,8 @@ module Google
             # The type of the database.
             # See https://cloud.google.com/datastore/docs/firestore-or-datastore for
             # information about how to choose.
+            #
+            # Mode changes are only allowed if the database is empty.
             module DatabaseType
               # The default value. This value is used if the database type is omitted.
               DATABASE_TYPE_UNSPECIFIED = 0
@@ -69,19 +83,39 @@ module Google
               # Not used.
               CONCURRENCY_MODE_UNSPECIFIED = 0
 
-              # Use optimistic concurrency control by default. This setting is available
-              # for Cloud Firestore customers.
+              # Use optimistic concurrency control by default. This mode is available
+              # for Cloud Firestore databases.
               OPTIMISTIC = 1
 
-              # Use pessimistic concurrency control by default. This setting is available
-              # for Cloud Firestore customers.
+              # Use pessimistic concurrency control by default. This mode is available
+              # for Cloud Firestore databases.
+              #
               # This is the default setting for Cloud Firestore.
               PESSIMISTIC = 2
 
-              # Use optimistic concurrency control with entity groups by default. This is
-              # the only available setting for Cloud Datastore customers.
-              # This is the default setting for Cloud Datastore.
+              # Use optimistic concurrency control with entity groups by default.
+              #
+              # This is the only available mode for Cloud Datastore.
+              #
+              # This mode is also available for Cloud Firestore with Datastore Mode but
+              # is not recommended.
               OPTIMISTIC_WITH_ENTITY_GROUPS = 3
+            end
+
+            # The type of App Engine integration mode.
+            module AppEngineIntegrationMode
+              # Not used.
+              APP_ENGINE_INTEGRATION_MODE_UNSPECIFIED = 0
+
+              # If an App Engine application exists in the same region as this database,
+              # App Engine configuration will impact this database. This includes
+              # disabling of the application & database, as well as disabling writes to
+              # the database.
+              ENABLED = 1
+
+              # Appengine has no affect on the ability of this database to serve
+              # requests.
+              DISABLED = 2
             end
           end
         end

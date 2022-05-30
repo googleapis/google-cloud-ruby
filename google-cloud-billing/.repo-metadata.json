@@ -3,6 +3,7 @@
     "api_shortname": "cloudbilling",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-billing/latest",
     "distribution_name": "google-cloud-billing",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudbilling",
     "name_pretty": "Billing API",

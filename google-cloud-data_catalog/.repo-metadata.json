@@ -3,6 +3,7 @@
     "api_shortname": "datacatalog",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-data_catalog/latest",
     "distribution_name": "google-cloud-data_catalog",
+    "is_cloud": true,
     "language": "ruby",
     "name": "datacatalog",
     "name_pretty": "Data Catalog API",

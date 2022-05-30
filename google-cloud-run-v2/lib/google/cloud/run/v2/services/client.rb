@@ -252,10 +252,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.create_service.timeout,
@@ -339,10 +342,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.get_service.timeout,
@@ -439,10 +445,13 @@ module Google
 
               header_params = {}
               if request.parent
-                header_params["parent"] = request.parent
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)/?$}.match request.parent
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.list_services.timeout,
@@ -475,15 +484,13 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload update_service(service: nil, update_mask: nil, validate_only: nil, allow_missing: nil)
+            # @overload update_service(service: nil, validate_only: nil, allow_missing: nil)
             #   Pass arguments to `update_service` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param service [::Google::Cloud::Run::V2::Service, ::Hash]
             #     Required. The Service to be updated.
-            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     The list of fields to be updated.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated and default values
             #     populated, without persisting the request or updating any resources.
@@ -541,10 +548,13 @@ module Google
 
               header_params = {}
               if request.service&.name
-                header_params["service.name"] = request.service.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.service.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.update_service.timeout,
@@ -643,10 +653,13 @@ module Google
 
               header_params = {}
               if request.name
-                header_params["name"] = request.name
+                regex_match = %r{^projects/[^/]+/locations/(?<location>[^/]+)(?:/.*)?$}.match request.name
+                if regex_match
+                  header_params["location"] = regex_match["location".to_s]
+                end
               end
 
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              request_params_header = URI.encode_www_form header_params
               metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.delete_service.timeout,

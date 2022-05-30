@@ -343,8 +343,15 @@ module Google
         # @!attribute [rw] push_config
         #   @return [::Google::Cloud::PubSub::V1::PushConfig]
         #     If push delivery is used with this subscription, this field is
-        #     used to configure it. An empty `pushConfig` signifies that the subscriber
-        #     will pull and ack messages using API methods.
+        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
+        #     but not both. If both are empty, then the subscriber will pull and ack
+        #     messages using API methods.
+        # @!attribute [rw] bigquery_config
+        #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig]
+        #     If delivery to BigQuery is used with this subscription, this field is
+        #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
+        #     but not both. If both are empty, then the subscriber will pull and ack
+        #     messages using API methods.
         # @!attribute [rw] ack_deadline_seconds
         #   @return [::Integer]
         #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
@@ -455,6 +462,10 @@ module Google
         #     `topic_message_retention_duration` are always available to subscribers. See
         #     the `message_retention_duration` field in `Topic`. This field is set only
         #     in responses from the server; it is ignored if it is set in any requests.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::PubSub::V1::Subscription::State]
+        #     Output only. An output-only field indicating whether or not the subscription can receive
+        #     messages.
         class Subscription
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -466,6 +477,20 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible states for a subscription.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The subscription can actively receive messages
+            ACTIVE = 1
+
+            # The subscription cannot receive messages because of an error with the
+            # resource to which it pushes messages. See the more detailed error state
+            # in the corresponding configuration.
+            RESOURCE_ERROR = 2
           end
         end
 
@@ -610,6 +635,56 @@ module Google
           class AttributesEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Configuration for a BigQuery subscription.
+        # @!attribute [rw] table
+        #   @return [::String]
+        #     The name of the table to which to write data, of the form
+        #     \\{projectId}:\\{datasetId}.\\{tableId}
+        # @!attribute [rw] use_topic_schema
+        #   @return [::Boolean]
+        #     When true, use the topic's schema as the columns to write to in BigQuery,
+        #     if it exists.
+        # @!attribute [rw] write_metadata
+        #   @return [::Boolean]
+        #     When true, write the subscription name, message_id, publish_time,
+        #     attributes, and ordering_key to additional columns in the table. The
+        #     subscription name, message_id, and publish_time fields are put in their own
+        #     columns while all other message properties (other than data) are written to
+        #     a JSON object in the attributes column.
+        # @!attribute [rw] drop_unknown_fields
+        #   @return [::Boolean]
+        #     When true and use_topic_schema is true, any fields that are a part of the
+        #     topic schema that are not part of the BigQuery table schema are dropped
+        #     when writing to BigQuery. Otherwise, the schemas must be kept in sync and
+        #     any messages with extra fields are not written and remain in the
+        #     subscription's backlog.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::PubSub::V1::BigQueryConfig::State]
+        #     Output only. An output-only field that indicates whether or not the subscription can
+        #     receive messages.
+        class BigQueryConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Possible states for a BigQuery subscription.
+          module State
+            # Default value. This value is unused.
+            STATE_UNSPECIFIED = 0
+
+            # The subscription can actively send messages to BigQuery
+            ACTIVE = 1
+
+            # Cannot write to the BigQuery table because of permission denied errors.
+            PERMISSION_DENIED = 2
+
+            # Cannot write to the BigQuery table because it does not exist.
+            NOT_FOUND = 3
+
+            # Cannot write to the BigQuery table due to a schema mismatch.
+            SCHEMA_MISMATCH = 4
           end
         end
 

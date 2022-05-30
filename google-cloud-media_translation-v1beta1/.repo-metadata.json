@@ -3,6 +3,7 @@
     "api_shortname": "mediatranslation",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-media_translation-v1beta1/latest",
     "distribution_name": "google-cloud-media_translation-v1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "mediatranslation",
     "name_pretty": "Media Translation V1beta1 API",

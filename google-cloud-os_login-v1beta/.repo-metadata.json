@@ -3,6 +3,7 @@
     "api_shortname": "oslogin",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1beta/latest",
     "distribution_name": "google-cloud-os_login-v1beta",
+    "is_cloud": true,
     "language": "ruby",
     "name": "oslogin",
     "name_pretty": "Cloud OS Login V1beta API",

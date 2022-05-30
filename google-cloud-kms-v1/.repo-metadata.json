@@ -3,6 +3,7 @@
     "api_shortname": "cloudkms",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-kms-v1/latest",
     "distribution_name": "google-cloud-kms-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "cloudkms",
     "name_pretty": "Cloud Key Management Service (KMS) V1 API",

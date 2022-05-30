@@ -48,8 +48,8 @@ module Google
       # Create a new client object for Datastream.
       #
       # By default, this returns an instance of
-      # [Google::Cloud::Datastream::V1alpha1::Datastream::Client](https://googleapis.dev/ruby/google-cloud-datastream-v1alpha1/latest/Google/Cloud/Datastream/V1alpha1/Datastream/Client.html)
-      # for version V1alpha1 of the API.
+      # [Google::Cloud::Datastream::V1::Datastream::Client](https://googleapis.dev/ruby/google-cloud-datastream-v1/latest/Google/Cloud/Datastream/V1/Datastream/Client.html)
+      # for version V1 of the API.
       # However, you can specify specify a different API version by passing it in the
       # `version` parameter. If the Datastream service is
       # supported by that API version, and the corresponding gem is available, the
@@ -60,10 +60,10 @@ module Google
       # Datastream service
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
-      #   Defaults to `:v1alpha1`.
+      #   Defaults to `:v1`.
       # @return [Datastream::Client] A client object for the specified version.
       #
-      def self.datastream version: :v1alpha1, &block
+      def self.datastream version: :v1, &block
         require "google/cloud/datastream/#{version.to_s.downcase}"
 
         package_name = Google::Cloud::Datastream

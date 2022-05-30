@@ -30,6 +30,8 @@ module Google
           # APIs for Identity-Aware Proxy Admin configurations.
           #
           class Client
+            include Paths
+
             # @private
             attr_reader :identity_aware_proxy_admin_service_stub
 
@@ -610,6 +612,473 @@ module Google
             end
 
             ##
+            # Lists the existing TunnelDestGroups. To group across all locations, use a
+            # `-` as the location ID. For example:
+            # `/v1/projects/123/iap_tunnel/locations/-/destGroups`
+            #
+            # @overload list_tunnel_dest_groups(request, options = nil)
+            #   Pass arguments to `list_tunnel_dest_groups` via a request object, either of type
+            #   {::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_tunnel_dest_groups(parent: nil, page_size: nil, page_token: nil)
+            #   Pass arguments to `list_tunnel_dest_groups` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Google Cloud Project ID and location.
+            #     In the following format:
+            #     `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+            #     A `-` can be used for the location to group across all locations.
+            #   @param page_size [::Integer]
+            #     The maximum number of groups to return. The service might return fewer than
+            #     this value.
+            #     If unspecified, at most 100 groups are returned.
+            #     The maximum value is 1000; values above 1000 are coerced to 1000.
+            #   @param page_token [::String]
+            #     A page token, received from a previous `ListTunnelDestGroups`
+            #     call. Provide this to retrieve the subsequent page.
+            #
+            #     When paginating, all other parameters provided to
+            #     `ListTunnelDestGroups` must match the call that provided the page
+            #     token.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Iap::V1::TunnelDestGroup>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Iap::V1::TunnelDestGroup>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest.new
+            #
+            #   # Call the list_tunnel_dest_groups method.
+            #   result = client.list_tunnel_dest_groups request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Iap::V1::TunnelDestGroup.
+            #     p response
+            #   end
+            #
+            def list_tunnel_dest_groups request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iap::V1::ListTunnelDestGroupsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_tunnel_dest_groups.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_tunnel_dest_groups.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_tunnel_dest_groups.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @identity_aware_proxy_admin_service_stub.call_rpc :list_tunnel_dest_groups, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @identity_aware_proxy_admin_service_stub, :list_tunnel_dest_groups, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new TunnelDestGroup.
+            #
+            # @overload create_tunnel_dest_group(request, options = nil)
+            #   Pass arguments to `create_tunnel_dest_group` via a request object, either of type
+            #   {::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_tunnel_dest_group(parent: nil, tunnel_dest_group: nil, tunnel_dest_group_id: nil)
+            #   Pass arguments to `create_tunnel_dest_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. Google Cloud Project ID and location.
+            #     In the following format:
+            #     `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+            #   @param tunnel_dest_group [::Google::Cloud::Iap::V1::TunnelDestGroup, ::Hash]
+            #     Required. The TunnelDestGroup to create.
+            #   @param tunnel_dest_group_id [::String]
+            #     Required. The ID to use for the TunnelDestGroup, which becomes the final component of
+            #     the resource name.
+            #
+            #     This value must be 4-63 characters, and valid characters
+            #     are `[a-z][0-9]-`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Iap::V1::TunnelDestGroup]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest.new
+            #
+            #   # Call the create_tunnel_dest_group method.
+            #   result = client.create_tunnel_dest_group request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
+            #   p result
+            #
+            def create_tunnel_dest_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iap::V1::CreateTunnelDestGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_tunnel_dest_group.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_tunnel_dest_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_tunnel_dest_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @identity_aware_proxy_admin_service_stub.call_rpc :create_tunnel_dest_group, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves an existing TunnelDestGroup.
+            #
+            # @overload get_tunnel_dest_group(request, options = nil)
+            #   Pass arguments to `get_tunnel_dest_group` via a request object, either of type
+            #   {::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_tunnel_dest_group(name: nil)
+            #   Pass arguments to `get_tunnel_dest_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the TunnelDestGroup to be fetched.
+            #     In the following format:
+            #     `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Iap::V1::TunnelDestGroup]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new
+            #
+            #   # Call the get_tunnel_dest_group method.
+            #   result = client.get_tunnel_dest_group request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
+            #   p result
+            #
+            def get_tunnel_dest_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iap::V1::GetTunnelDestGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_tunnel_dest_group.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_tunnel_dest_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_tunnel_dest_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @identity_aware_proxy_admin_service_stub.call_rpc :get_tunnel_dest_group, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a TunnelDestGroup.
+            #
+            # @overload delete_tunnel_dest_group(request, options = nil)
+            #   Pass arguments to `delete_tunnel_dest_group` via a request object, either of type
+            #   {::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_tunnel_dest_group(name: nil)
+            #   Pass arguments to `delete_tunnel_dest_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the TunnelDestGroup to delete.
+            #     In the following format:
+            #     `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest.new
+            #
+            #   # Call the delete_tunnel_dest_group method.
+            #   result = client.delete_tunnel_dest_group request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_tunnel_dest_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iap::V1::DeleteTunnelDestGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_tunnel_dest_group.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_tunnel_dest_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_tunnel_dest_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @identity_aware_proxy_admin_service_stub.call_rpc :delete_tunnel_dest_group, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a TunnelDestGroup.
+            #
+            # @overload update_tunnel_dest_group(request, options = nil)
+            #   Pass arguments to `update_tunnel_dest_group` via a request object, either of type
+            #   {::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_tunnel_dest_group(tunnel_dest_group: nil, update_mask: nil)
+            #   Pass arguments to `update_tunnel_dest_group` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param tunnel_dest_group [::Google::Cloud::Iap::V1::TunnelDestGroup, ::Hash]
+            #     Required. The new values for the TunnelDestGroup.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     A field mask that specifies which IAP settings to update.
+            #     If omitted, then all of the settings are updated. See
+            #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Iap::V1::TunnelDestGroup]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/iap/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest.new
+            #
+            #   # Call the update_tunnel_dest_group method.
+            #   result = client.update_tunnel_dest_group request
+            #
+            #   # The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
+            #   p result
+            #
+            def update_tunnel_dest_group request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Iap::V1::UpdateTunnelDestGroupRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_tunnel_dest_group.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Iap::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.tunnel_dest_group&.name
+                header_params["tunnel_dest_group.name"] = request.tunnel_dest_group.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_tunnel_dest_group.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_tunnel_dest_group.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @identity_aware_proxy_admin_service_stub.call_rpc :update_tunnel_dest_group, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the IdentityAwareProxyAdminService API.
             #
             # This class represents the configuration for IdentityAwareProxyAdminService,
@@ -769,6 +1238,31 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :update_iap_settings
+                ##
+                # RPC-specific configuration for `list_tunnel_dest_groups`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_tunnel_dest_groups
+                ##
+                # RPC-specific configuration for `create_tunnel_dest_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_tunnel_dest_group
+                ##
+                # RPC-specific configuration for `get_tunnel_dest_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_tunnel_dest_group
+                ##
+                # RPC-specific configuration for `delete_tunnel_dest_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_tunnel_dest_group
+                ##
+                # RPC-specific configuration for `update_tunnel_dest_group`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_tunnel_dest_group
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -782,6 +1276,16 @@ module Google
                   @get_iap_settings = ::Gapic::Config::Method.new get_iap_settings_config
                   update_iap_settings_config = parent_rpcs.update_iap_settings if parent_rpcs.respond_to? :update_iap_settings
                   @update_iap_settings = ::Gapic::Config::Method.new update_iap_settings_config
+                  list_tunnel_dest_groups_config = parent_rpcs.list_tunnel_dest_groups if parent_rpcs.respond_to? :list_tunnel_dest_groups
+                  @list_tunnel_dest_groups = ::Gapic::Config::Method.new list_tunnel_dest_groups_config
+                  create_tunnel_dest_group_config = parent_rpcs.create_tunnel_dest_group if parent_rpcs.respond_to? :create_tunnel_dest_group
+                  @create_tunnel_dest_group = ::Gapic::Config::Method.new create_tunnel_dest_group_config
+                  get_tunnel_dest_group_config = parent_rpcs.get_tunnel_dest_group if parent_rpcs.respond_to? :get_tunnel_dest_group
+                  @get_tunnel_dest_group = ::Gapic::Config::Method.new get_tunnel_dest_group_config
+                  delete_tunnel_dest_group_config = parent_rpcs.delete_tunnel_dest_group if parent_rpcs.respond_to? :delete_tunnel_dest_group
+                  @delete_tunnel_dest_group = ::Gapic::Config::Method.new delete_tunnel_dest_group_config
+                  update_tunnel_dest_group_config = parent_rpcs.update_tunnel_dest_group if parent_rpcs.respond_to? :update_tunnel_dest_group
+                  @update_tunnel_dest_group = ::Gapic::Config::Method.new update_tunnel_dest_group_config
 
                   yield self if block_given?
                 end

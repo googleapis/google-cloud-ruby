@@ -21,10 +21,11 @@ def create_bucket_turbo_replication bucket_name:
 
   storage = Google::Cloud::Storage.new
   bucket  = storage.create_bucket bucket_name,
-                                  location: "ASIA",
+                                  location: "ASIA1",
                                   rpo:      "ASYNC_TURBO"
 
-  puts "Created bucket #{bucket.name} in #{bucket.location} with turbo replication set to #{bucket.rpo}."
+  puts "Created bucket #{bucket.name} in #{bucket.location} with "
+  + "the recovery point objective (RPO) set to #{bucket.rpo}."
 end
 # [END storage_create_bucket_turbo_replication]
 

@@ -86,15 +86,41 @@ module Google
             CUSTOMER_INITIATED_SUPPORT = 1
 
             # The principal accessed customer data in order to diagnose or resolve a
-            # suspected issue in services or a known outage. Often this access is used
-            # to confirm that customers are not affected by a suspected service issue
-            # or to remediate a reversible system issue.
+            # suspected issue in services. Often this access is used to confirm that
+            # customers are not affected by a suspected service issue or to remediate a
+            # reversible system issue.
             GOOGLE_INITIATED_SERVICE = 2
 
             # Google initiated service for security, fraud, abuse, or compliance
             # purposes.
             GOOGLE_INITIATED_REVIEW = 3
+
+            # The principal was compelled to access customer data in order to respond
+            # to a legal third party data request or process, including legal processes
+            # from customers themselves.
+            THIRD_PARTY_DATA_REQUEST = 4
+
+            # The principal accessed customer data in order to diagnose or resolve a
+            # suspected issue in services or a known outage.
+            GOOGLE_RESPONSE_TO_PRODUCTION_ALERT = 5
           end
+        end
+
+        # Information about the digital signature of the resource.
+        # @!attribute [rw] signature
+        #   @return [::String]
+        #     The digital signature.
+        # @!attribute [rw] google_public_key_pem
+        #   @return [::String]
+        #     The public key for the Google default signing, encoded in PEM format. The
+        #     signature was created using a private key which may be verified using
+        #     this public key.
+        # @!attribute [rw] customer_kms_key_version
+        #   @return [::String]
+        #     The resource name of the customer CryptoKeyVersion used for signing.
+        class SignatureInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # A decision that has been made to approve access to a resource.
@@ -104,6 +130,15 @@ module Google
         # @!attribute [rw] expire_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The time at which the approval expires.
+        # @!attribute [rw] invalidate_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     If set, denotes the timestamp at which the approval is invalidated.
+        # @!attribute [rw] signature_info
+        #   @return [::Google::Cloud::AccessApproval::V1::SignatureInfo]
+        #     The signature for the ApprovalRequest and details on how it was signed.
+        # @!attribute [rw] auto_approved
+        #   @return [::Boolean]
+        #     True when the request has been auto-approved.
         class ApproveDecision
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -115,8 +150,8 @@ module Google
         #     The time at which the approval request was dismissed.
         # @!attribute [rw] implicit
         #   @return [::Boolean]
-        #     This field will be true if the ApprovalRequest was implcitly dismissed
-        #     due to inaction by the access approval approvers (the request is not acted
+        #     This field will be true if the ApprovalRequest was implicitly dismissed due
+        #     to inaction by the access approval approvers (the request is not acted
         #     on by the approvers before the exiration time).
         class DismissDecision
           include ::Google::Protobuf::MessageExts
@@ -277,7 +312,44 @@ module Google
         #     indicates that at least one service is enrolled for Access Approval in one
         #     or more ancestors of the Project or Folder (this field will always be
         #     unset for the organization since organizations do not have ancestors).
+        # @!attribute [rw] active_key_version
+        #   @return [::String]
+        #     The asymmetric crypto key version to use for signing approval requests.
+        #     Empty active_key_version indicates that a Google-managed key should be used
+        #     for signing. This property will be ignored if set by an ancestor of this
+        #     resource, and new non-empty values may not be set.
+        # @!attribute [r] ancestor_has_active_key_version
+        #   @return [::Boolean]
+        #     Output only. This field is read only (not settable via UpdateAccessApprovalSettings
+        #     method). If the field is true, that indicates that an ancestor of this
+        #     Project or Folder has set active_key_version (this field will always be
+        #     unset for the organization since organizations do not have ancestors).
+        # @!attribute [r] invalid_key_version
+        #   @return [::Boolean]
+        #     Output only. This field is read only (not settable via UpdateAccessApprovalSettings
+        #     method). If the field is true, that indicates that there is some
+        #     configuration issue with the active_key_version configured at this level in
+        #     the resource hierarchy (e.g. it doesn't exist or the Access Approval
+        #     service account doesn't have the correct permissions on it, etc.) This key
+        #     version is not necessarily the effective key version at this level, as key
+        #     versions are inherited top-down.
         class AccessApprovalSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Access Approval service account related to a project/folder/organization.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The resource name of the Access Approval service account. Format is one of:
+        #
+        #       * "projects/\\{project}/serviceAccount"
+        #       * "folders/\\{folder}/serviceAccount"
+        #       * "organizations/\\{organization}/serviceAccount"
+        # @!attribute [rw] account_email
+        #   @return [::String]
+        #     Email address of the service account.
+        class AccessApprovalServiceAccount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -356,6 +428,15 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request to invalidate an existing approval.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the ApprovalRequest to invalidate.
+        class InvalidateApprovalRequestMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request to get access approval settings.
         # @!attribute [rw] name
         #   @return [::String]
@@ -392,6 +473,15 @@ module Google
         #   @return [::String]
         #     Name of the AccessApprovalSettings to delete.
         class DeleteAccessApprovalSettingsMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request to get an Access Approval service account.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the AccessApprovalServiceAccount to retrieve.
+        class GetAccessApprovalServiceAccountMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

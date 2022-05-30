@@ -1,8 +1,9 @@
 {
     "api_id": "iam.googleapis.com",
     "api_shortname": "iam",
-    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-iam-v1beta/latest",
+    "client_documentation": "https://googleapis.dev/ruby/google-iam-v1beta/latest",
     "distribution_name": "google-iam-v1beta",
+    "is_cloud": false,
     "language": "ruby",
     "name": "iam",
     "name_pretty": "Google IAM V1beta API",

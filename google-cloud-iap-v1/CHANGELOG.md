@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.0 (2022-05-13)
+
+#### Features
+
+* Support for managing TunnelDestGroups
+* Support for reauthentication policy settings
+
 ### 0.2.0 (2022-04-20)
 
 #### Features

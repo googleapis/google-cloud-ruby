@@ -186,21 +186,6 @@ module Google
         #     buckets](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
         #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
         #     a Cloud Storage bucket.**
-        # @!attribute [rw] temp_bucket
-        #   @return [::String]
-        #     Optional. A Cloud Storage bucket used to store ephemeral cluster and jobs data,
-        #     such as Spark and MapReduce history files.
-        #     If you do not specify a temp bucket,
-        #     Dataproc will determine a Cloud Storage location (US,
-        #     ASIA, or EU) for your cluster's temp bucket according to the
-        #     Compute Engine zone where your cluster is deployed, and then create
-        #     and manage this project-level, per-location bucket. The default bucket has
-        #     a TTL of 90 days, but you can use any TTL (or none) if you specify a
-        #     bucket (see
-        #     [Dataproc staging and temp
-        #     buckets](https://cloud.google.com/dataproc/docs/concepts/configuring-clusters/staging-bucket)).
-        #     **This field requires a Cloud Storage bucket name, not a `gs://...` URI to
-        #     a Cloud Storage bucket.**
         # @!attribute [rw] kubernetes_cluster_config
         #   @return [::Google::Cloud::Dataproc::V1::KubernetesClusterConfig]
         #     Required. The configuration for running the Dataproc cluster on Kubernetes.

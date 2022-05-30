@@ -58,6 +58,9 @@ module Acceptance
             bool boolean,
             string character varying,
             byte bytea,
+            date DATE,
+            numerics numeric[],
+            dates DATE[],
             PRIMARY KEY(id)
         );
       STUFFS
@@ -91,6 +94,7 @@ module Acceptance
         CREATE TABLE accounts (
             account_id INT NOT NULL,
             username TEXT,
+            friends INT[],
             active BOOL NOT NULL,
             reputation FLOAT,
             avatar bytea,
@@ -243,7 +247,8 @@ module Acceptance
           username: "blowmage",
           reputation: 63.5,
           active: true,
-          avatar: File.open("acceptance/data/logo.jpg", "rb")
+          avatar: File.open("acceptance/data/logo.jpg", "rb"),
+          friends: [2]
         }, {
           account_id: 2,
           username: "quartzmo",
@@ -262,7 +267,8 @@ module Acceptance
             y3BMQkMN9HEPr8AL3bfBv7Bp+7/SoExMDjZwKEJwmyhnnmQIQEBIlz2x0iKoAvJkAC6TsTIH6MqRrEWUMSZF2zAwqT4Eu/e\
             6pzFAIkmNSZ4OFT+VYBIIF//UqbJwnF/4DU0GwOn8r/JQYCpPGufEfJuZiA37ycQw/5uFeqPq4pfR6FADmkBCXjfWdZj3Nf\
             XW58dAJyB9W65wRoMWulryvAyqa05nQFaDFrpa8rwMqmtOZ0BWgxa6WvK8DKprTmdAVoMWulryvAyqa05nQFaDFrpa8rw\
-            MqmtOb89wr4AtQ4aPoL6yVpAAAAAElFTkSuQmCC")
+            MqmtOb89wr4AtQ4aPoL6yVpAAAAAElFTkSuQmCC"),
+          friends: [1]
         }, {
           account_id: 3,
           username: "-inactive-",

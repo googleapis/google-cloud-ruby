@@ -269,14 +269,15 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     "projects/\\{project}/assessments/\\{assessment}".
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that will be assigned to the Event. This field can be left
-            #     empty to provide reasons that apply to an event without concluding whether
-            #     the event is legitimate or fraudulent.
+            #     Optional. The annotation that will be assigned to the Event. This field can
+            #     be left empty to provide reasons that apply to an event without concluding
+            #     whether the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-            #     Optional. Optional reasons for the annotation that will be assigned to the Event.
+            #     Optional. Optional reasons for the annotation that will be assigned to the
+            #     Event.
             #   @param hashed_account_id [::String]
-            #     Optional. Optional unique stable hashed user identifier to apply to the assessment.
-            #     This is an alternative to setting the hashed_account_id in
+            #     Optional. Optional unique stable hashed user identifier to apply to the
+            #     assessment. This is an alternative to setting the hashed_account_id in
             #     CreateAssessment, for example when the account identifier is not yet known
             #     in the initial request. It is recommended that the identifier is hashed
             #     using hmac-sha256 with stable secret.
@@ -639,8 +640,8 @@ module Google
             #   @param key [::Google::Cloud::RecaptchaEnterprise::V1::Key, ::Hash]
             #     Required. The key to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. The mask to control which fields of the key get updated. If the mask is not
-            #     present, all fields will be updated.
+            #     Optional. The mask to control which fields of the key get updated. If the
+            #     mask is not present, all fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -989,16 +990,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project to list related account groups from, in the format
-            #     "projects/\\{project}".
+            #     Required. The name of the project to list related account groups from, in
+            #     the format "projects/\\{project}".
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service may return fewer than
-            #     this value.
-            #     If unspecified, at most 50 groups will be returned.
+            #     Optional. The maximum number of groups to return. The service may return
+            #     fewer than this value. If unspecified, at most 50 groups will be returned.
             #     The maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
-            #     Provide this to retrieve the subsequent page.
+            #     Optional. A page token, received from a previous `ListRelatedAccountGroups`
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroups` must match the call that provided the page
@@ -1097,13 +1097,13 @@ module Google
             #     Required. The resource name for the related account group in the format
             #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of accounts to return. The service may return fewer than
-            #     this value.
-            #     If unspecified, at most 50 accounts will be returned.
-            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. The maximum number of accounts to return. The service may return
+            #     fewer than this value. If unspecified, at most 50 accounts will be
+            #     returned. The maximum value is 1000; values above 1000 will be coerced to
+            #     1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
-            #     call.
+            #     Optional. A page token, received from a previous
+            #     `ListRelatedAccountGroupMemberships` call.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -1193,22 +1193,21 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_related_account_group_memberships(parent: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
+            # @overload search_related_account_group_memberships(project: nil, hashed_account_id: nil, page_size: nil, page_token: nil)
             #   Pass arguments to `search_related_account_group_memberships` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
-            #   @param parent [::String]
-            #     Required. The name of the project to search related account group memberships from,
-            #     in the format "projects/\\{project}".
+            #   @param project [::String]
+            #     Required. The name of the project to search related account group
+            #     memberships from, in the format "projects/\\{project}".
             #   @param hashed_account_id [::String]
-            #     Optional. The unique stable hashed user identifier we should search connections to.
-            #     The identifier should correspond to a `hashed_account_id` provided in a
-            #     previous CreateAssessment or AnnotateAssessment call.
+            #     Optional. The unique stable hashed user identifier we should search
+            #     connections to. The identifier should correspond to a `hashed_account_id`
+            #     provided in a previous CreateAssessment or AnnotateAssessment call.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service may return fewer than
-            #     this value.
-            #     If unspecified, at most 50 groups will be returned.
+            #     Optional. The maximum number of groups to return. The service may return
+            #     fewer than this value. If unspecified, at most 50 groups will be returned.
             #     The maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous
@@ -1266,8 +1265,8 @@ module Google
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
               header_params = {}
-              if request.parent
-                header_params["parent"] = request.parent
+              if request.project
+                header_params["project"] = request.project
               end
 
               request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")

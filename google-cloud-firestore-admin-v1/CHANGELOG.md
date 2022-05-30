@@ -1,5 +1,12 @@
 # Release History
 
+### 0.5.0 (2022-05-29)
+
+#### Features
+
+* support appengineIntegrationMode and key_prefix in database
+* support TTL config
+
 ### 0.4.0 / 2022-01-11
 
 #### Features

@@ -15,134 +15,163 @@
 require "spanner_helper"
 
 describe "Spanner Client", :types, :date, :spanner do
-  let(:db) { spanner_client }
+  let :db do
+    { gsql: spanner_client, pg: spanner_pg_client }
+  end
+  let :date_query do
+    { gsql: "SELECT id, date FROM #{table_name} WHERE id = @value",
+      pg: "SELECT id, date FROM #{table_name} WHERE id = $1" }
+  end
+  let :dates_query do
+    { gsql: "SELECT id, dates FROM #{table_name} WHERE id = @value",
+      pg: "SELECT id, dates FROM #{table_name} WHERE id = $1" }
+  end
   let(:table_name) { "stuffs" }
 
-  it "writes and reads date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, date: Date.parse("2017-01-01") }
-    results = db.read table_name, [:id, :date], keys: id
+  dialects = [:gsql]
+  dialects.push :pg unless emulator_enabled?
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
-    _(results.rows.first.to_h).must_equal({ id: id, date: Date.parse("2017-01-01") })
-  end
+  dialects.each do |dialect|
+    it "writes and reads date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, date: Date.parse("2017-01-01") }
+      results = db[dialect].read table_name, [:id, :date], keys: id
 
-  it "writes and queries date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, date: Date.parse("2017-01-01") }
-    results = db.execute_query "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+      _(results.rows.first.to_h).must_equal({ id: id, date: Date.parse("2017-01-01") })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
-    _(results.rows.first.to_h).must_equal({ id: id, date: Date.parse("2017-01-01") })
-  end
+    it "writes and queries date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, date: Date.parse("2017-01-01") }
+      results = db[dialect].execute_query date_query[dialect], params: make_params(dialect, id)
 
-  it "writes and reads NULL date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, date: nil }
-    results = db.read table_name, [:id, :date], keys: id
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+      _(results.rows.first.to_h).must_equal({ id: id, date: Date.parse("2017-01-01") })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
-    _(results.rows.first.to_h).must_equal({ id: id, date: nil })
-  end
+    it "writes and reads NULL date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, date: nil }
+      results = db[dialect].read table_name, [:id, :date], keys: id
 
-  it "writes and queries NULL date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, date: nil }
-    results = db.execute_query "SELECT id, date FROM #{table_name} WHERE id = @id", params: { id: id }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+      _(results.rows.first.to_h).must_equal({ id: id, date: nil })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
-    _(results.rows.first.to_h).must_equal({ id: id, date: nil })
-  end
+    it "writes and queries NULL date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, date: nil }
+      results = db[dialect].execute_query date_query[dialect], params: make_params(dialect, id)
 
-  it "writes and reads array of date" do
-    id = SecureRandom.int64
-    db.upsert table_name,
-              { id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-    results = db.read table_name, [:id, :dates], keys: id
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, date: :DATE })
+      _(results.rows.first.to_h).must_equal({ id: id, date: nil })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id,
-dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
-  end
+    it "writes and reads array of date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name,
+                         { id: id,
+                           dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
+      results = db[dialect].read table_name, [:id, :dates], keys: id
 
-  it "writes and queries array of date" do
-    id = SecureRandom.int64
-    db.upsert table_name,
-              { id: id, dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id,
+                                              dates: [Date.parse("2016-12-30"),
+                                                      Date.parse("2016-12-31"),
+                                                      Date.parse("2017-01-01")] })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id,
-dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
-  end
+    it "writes and queries array of date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name,
+                         { id: id,
+                           dates: [Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
-  it "writes and reads array of date with NULL" do
-    id = SecureRandom.int64
-    db.upsert table_name,
-              { id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-    results = db.read table_name, [:id, :dates], keys: id
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id,
+                                              dates: [Date.parse("2016-12-30"),
+                                                      Date.parse("2016-12-31"),
+                                                      Date.parse("2017-01-01")] })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id,
-dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
-  end
+    it "writes and reads array of date with NULL #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name,
+                         { id: id,
+                           dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
+      results = db[dialect].read table_name, [:id, :dates], keys: id
 
-  it "writes and queries array of date with NULL" do
-    id = SecureRandom.int64
-    db.upsert table_name,
-              { id: id, dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
-    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id,
+                                              dates: [nil,
+                                                      Date.parse("2016-12-30"),
+                                                      Date.parse("2016-12-31"),
+                                                      Date.parse("2017-01-01")] })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id,
-dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] })
-  end
+    it "writes and queries array of date with NULL #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name,
+                         { id: id,
+                           dates: [nil, Date.parse("2016-12-30"), Date.parse("2016-12-31"), Date.parse("2017-01-01")] }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
-  it "writes and reads empty array of date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, dates: [] }
-    results = db.read table_name, [:id, :dates], keys: id
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id,
+                                              dates: [nil,
+                                                      Date.parse("2016-12-30"),
+                                                      Date.parse("2016-12-31"),
+                                                      Date.parse("2017-01-01")] })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id, dates: [] })
-  end
+    it "writes and reads empty array of date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, dates: [] }
+      results = db[dialect].read table_name, [:id, :dates], keys: id
 
-  it "writes and queries empty array of date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, dates: [] }
-    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id, dates: [] })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id, dates: [] })
-  end
+    it "writes and queries empty array of date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, dates: [] }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
 
-  it "writes and reads NULL array of date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, dates: nil }
-    results = db.read table_name, [:id, :dates], keys: id
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id, dates: [] })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id, dates: nil })
-  end
+    it "writes and reads NULL array of date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, dates: nil }
+      results = db[dialect].read table_name, [:id, :dates], keys: id
 
-  it "writes and queries NULL array of date" do
-    id = SecureRandom.int64
-    db.upsert table_name, { id: id, dates: nil }
-    results = db.execute_query "SELECT id, dates FROM #{table_name} WHERE id = @id", params: { id: id }
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id, dates: nil })
+    end
 
-    _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
-    _(results.rows.first.to_h).must_equal({ id: id, dates: nil })
+    it "writes and queries NULL array of date #{dialect}" do
+      id = SecureRandom.int64
+      db[dialect].upsert table_name, { id: id, dates: nil }
+      results = db[dialect].execute_query dates_query[dialect], params: make_params(dialect, id)
+
+      _(results).must_be_kind_of Google::Cloud::Spanner::Results
+      _(results.fields.to_h).must_equal({ id: :INT64, dates: [:DATE] })
+      _(results.rows.first.to_h).must_equal({ id: id, dates: nil })
+    end
   end
 end

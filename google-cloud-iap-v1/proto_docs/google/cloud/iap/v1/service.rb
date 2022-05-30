@@ -21,6 +21,118 @@ module Google
   module Cloud
     module Iap
       module V1
+        # The request to ListTunnelDestGroups.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Google Cloud Project ID and location.
+        #     In the following format:
+        #     `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+        #     A `-` can be used for the location to group across all locations.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of groups to return. The service might return fewer than
+        #     this value.
+        #     If unspecified, at most 100 groups are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListTunnelDestGroups`
+        #     call. Provide this to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to
+        #     `ListTunnelDestGroups` must match the call that provided the page
+        #     token.
+        class ListTunnelDestGroupsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response from ListTunnelDestGroups.
+        # @!attribute [rw] tunnel_dest_groups
+        #   @return [::Array<::Google::Cloud::Iap::V1::TunnelDestGroup>]
+        #     TunnelDestGroup existing in the project.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token that you can send as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListTunnelDestGroupsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to CreateTunnelDestGroup.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Google Cloud Project ID and location.
+        #     In the following format:
+        #     `projects/{project_number/id}/iap_tunnel/locations/{location}`.
+        # @!attribute [rw] tunnel_dest_group
+        #   @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
+        #     Required. The TunnelDestGroup to create.
+        # @!attribute [rw] tunnel_dest_group_id
+        #   @return [::String]
+        #     Required. The ID to use for the TunnelDestGroup, which becomes the final component of
+        #     the resource name.
+        #
+        #     This value must be 4-63 characters, and valid characters
+        #     are `[a-z][0-9]-`.
+        class CreateTunnelDestGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to GetTunnelDestGroup.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the TunnelDestGroup to be fetched.
+        #     In the following format:
+        #     `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+        class GetTunnelDestGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to DeleteTunnelDestGroup.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the TunnelDestGroup to delete.
+        #     In the following format:
+        #     `projects/{project_number/id}/iap_tunnel/locations/{location}/destGroups/{dest_group}`.
+        class DeleteTunnelDestGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request to UpdateTunnelDestGroup.
+        # @!attribute [rw] tunnel_dest_group
+        #   @return [::Google::Cloud::Iap::V1::TunnelDestGroup]
+        #     Required. The new values for the TunnelDestGroup.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     A field mask that specifies which IAP settings to update.
+        #     If omitted, then all of the settings are updated. See
+        #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask
+        class UpdateTunnelDestGroupRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A TunnelDestGroup.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Immutable. Identifier for the TunnelDestGroup. Must be unique within the
+        #     project.
+        # @!attribute [rw] cidrs
+        #   @return [::Array<::String>]
+        #     null List of CIDRs that this group applies to.
+        # @!attribute [rw] fqdns
+        #   @return [::Array<::String>]
+        #     null List of FQDNs that this group applies to.
+        class TunnelDestGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request sent to GetIapSettings.
         # @!attribute [rw] name
         #   @return [::String]
@@ -73,6 +185,9 @@ module Google
         # @!attribute [rw] oauth_settings
         #   @return [::Google::Cloud::Iap::V1::OAuthSettings]
         #     Settings to configure IAP's OAuth behavior.
+        # @!attribute [rw] reauth_settings
+        #   @return [::Google::Cloud::Iap::V1::ReauthSettings]
+        #     Settings to configure reauthentication policies in IAP.
         class AccessSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -120,6 +235,55 @@ module Google
         class OAuthSettings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for IAP reauthentication policies.
+        # @!attribute [rw] method
+        #   @return [::Google::Cloud::Iap::V1::ReauthSettings::Method]
+        #     Reauth method required by the policy.
+        # @!attribute [rw] max_age
+        #   @return [::Google::Protobuf::Duration]
+        #     Reauth session lifetime, how long before a user has to reauthenticate
+        #     again.
+        # @!attribute [rw] policy_type
+        #   @return [::Google::Cloud::Iap::V1::ReauthSettings::PolicyType]
+        #     How IAP determines the effective policy in cases of hierarchial policies.
+        #     Policies are merged from higher in the hierarchy to lower in the hierarchy.
+        class ReauthSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Types of reauthentication methods supported by IAP.
+          module Method
+            # Reauthentication disabled.
+            METHOD_UNSPECIFIED = 0
+
+            # Mimics the behavior as if the user had logged out and tried to log in
+            # again. Users with 2SV (2-step verification) enabled see their 2SV
+            # challenges if they did not opt to have their second factor responses
+            # saved. Apps Core (GSuites) admins can configure settings to disable 2SV
+            # cookies and require 2SV for all Apps Core users in their domains.
+            LOGIN = 1
+
+            # User must type their password.
+            PASSWORD = 2
+
+            # User must use their secure key 2nd factor device.
+            SECURE_KEY = 3
+          end
+
+          # Type of policy in the case of hierarchial policies.
+          module PolicyType
+            # Default value. This value is unused.
+            POLICY_TYPE_UNSPECIFIED = 0
+
+            # This policy acts as a minimum to other policies, lower in the hierarchy.
+            # Effective policy may only be the same or stricter.
+            MINIMUM = 1
+
+            # This policy acts as a default if no other reauth policy is set.
+            DEFAULT = 2
+          end
         end
 
         # Wrapper over application specific settings for IAP.

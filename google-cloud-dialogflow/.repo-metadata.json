@@ -3,6 +3,7 @@
     "api_shortname": "dialogflow",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-dialogflow/latest",
     "distribution_name": "google-cloud-dialogflow",
+    "is_cloud": true,
     "language": "ruby",
     "name": "dialogflow",
     "name_pretty": "Dialogflow API",

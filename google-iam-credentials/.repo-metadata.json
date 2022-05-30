@@ -3,6 +3,7 @@
     "api_shortname": "iamcredentials",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-iam-credentials/latest",
     "distribution_name": "google-iam-credentials",
+    "is_cloud": true,
     "language": "ruby",
     "name": "iamcredentials",
     "name_pretty": "IAM Service Account Credentials API",

@@ -3,6 +3,7 @@
     "api_shortname": "apigeeconnect",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-apigee_connect-v1/latest",
     "distribution_name": "google-cloud-apigee_connect-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "apigeeconnect",
     "name_pretty": "Apigee Connect V1 API",

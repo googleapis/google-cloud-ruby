@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/launch_stage_pb'
 require 'google/api/resource_pb'
+require 'google/api/routing_pb'
 require 'google/cloud/run/v2/condition_pb'
 require 'google/cloud/run/v2/k8s.min_pb'
 require 'google/cloud/run/v2/vendor_settings_pb'
@@ -49,12 +50,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :service, :string, 11
       optional :scaling, :message, 12, "google.cloud.run.v2.RevisionScaling"
       optional :vpc_access, :message, 13, "google.cloud.run.v2.VpcAccess"
-      optional :container_concurrency, :int32, 14
+      optional :max_instance_request_concurrency, :int32, 34
       optional :timeout, :message, 15, "google.protobuf.Duration"
       optional :service_account, :string, 16
       repeated :containers, :message, 17, "google.cloud.run.v2.Container"
       repeated :volumes, :message, 18, "google.cloud.run.v2.Volume"
-      optional :confidential, :bool, 19
       optional :execution_environment, :enum, 20, "google.cloud.run.v2.ExecutionEnvironment"
       optional :encryption_key, :string, 21
       optional :reconciling, :bool, 30

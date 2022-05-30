@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2022-05-12)
+
+#### Features
+
+* Added a client for the Speech Adaptation API
+
 ### 0.7.3 (2022-05-03)
 
 #### Documentation

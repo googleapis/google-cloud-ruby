@@ -3,6 +3,7 @@
     "api_shortname": "clouderrorreporting",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-error_reporting-v1beta1/latest",
     "distribution_name": "google-cloud-error_reporting-v1beta1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "clouderrorreporting",
     "name_pretty": "Error Reporting V1beta1 API",

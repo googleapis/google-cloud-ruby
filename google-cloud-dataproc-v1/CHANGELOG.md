@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2022-05-12)
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Remove unused VirtualClusterConfig#temp_bucket field
+
 ### 0.9.0 / 2022-02-17
 
 #### Features

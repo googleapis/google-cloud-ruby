@@ -28,7 +28,7 @@ class Google::Cloud::Datastream::ClientConstructionMinitest < Minitest::Test
       client = Google::Cloud::Datastream.datastream do |config|
         config.credentials = grpc_channel
       end
-      assert_kind_of Google::Cloud::Datastream::V1alpha1::Datastream::Client, client
+      assert_kind_of Google::Cloud::Datastream::V1::Datastream::Client, client
     end
   end
 end

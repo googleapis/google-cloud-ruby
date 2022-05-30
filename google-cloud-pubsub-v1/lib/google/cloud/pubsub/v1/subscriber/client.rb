@@ -249,7 +249,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload create_subscription(name: nil, topic: nil, push_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil)
+            # @overload create_subscription(name: nil, topic: nil, push_config: nil, bigquery_config: nil, ack_deadline_seconds: nil, retain_acked_messages: nil, message_retention_duration: nil, labels: nil, enable_message_ordering: nil, expiration_policy: nil, filter: nil, dead_letter_policy: nil, retry_policy: nil, detached: nil, enable_exactly_once_delivery: nil)
             #   Pass arguments to `create_subscription` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -267,8 +267,14 @@ module Google
             #     field will be `_deleted-topic_` if the topic has been deleted.
             #   @param push_config [::Google::Cloud::PubSub::V1::PushConfig, ::Hash]
             #     If push delivery is used with this subscription, this field is
-            #     used to configure it. An empty `pushConfig` signifies that the subscriber
-            #     will pull and ack messages using API methods.
+            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
+            #     but not both. If both are empty, then the subscriber will pull and ack
+            #     messages using API methods.
+            #   @param bigquery_config [::Google::Cloud::PubSub::V1::BigQueryConfig, ::Hash]
+            #     If delivery to BigQuery is used with this subscription, this field is
+            #     used to configure it. Either `pushConfig` or `bigQueryConfig` can be set,
+            #     but not both. If both are empty, then the subscriber will pull and ack
+            #     messages using API methods.
             #   @param ack_deadline_seconds [::Integer]
             #     The approximate amount of time (on a best-effort basis) Pub/Sub waits for
             #     the subscriber to acknowledge receipt before resending the message. In the

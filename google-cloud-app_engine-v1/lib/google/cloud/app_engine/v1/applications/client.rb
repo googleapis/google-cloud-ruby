@@ -337,6 +337,7 @@ module Google
             #
             # * `auth_domain` - Google authentication domain for controlling user access to the application.
             # * `default_cookie_expiration` - Cookie expiration policy for the application.
+            # * `iap` - Identity-Aware Proxy properties for the application.
             #
             # @overload update_application(request, options = nil)
             #   Pass arguments to `update_application` via a request object, either of type
@@ -358,7 +359,7 @@ module Google
             #   @param application [::Google::Cloud::AppEngine::V1::Application, ::Hash]
             #     An Application containing the updated resource.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Standard field mask for the set of fields to be updated.
+            #     Required. Standard field mask for the set of fields to be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]

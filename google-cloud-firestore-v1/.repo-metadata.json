@@ -3,6 +3,7 @@
     "api_shortname": "firestore",
     "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-firestore-v1/latest",
     "distribution_name": "google-cloud-firestore-v1",
+    "is_cloud": true,
     "language": "ruby",
     "name": "firestore",
     "name_pretty": "Cloud Firestore V1 API",
