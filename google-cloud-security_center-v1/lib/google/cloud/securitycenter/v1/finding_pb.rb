@@ -6,11 +6,14 @@ require 'google/protobuf'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/access_pb'
+require 'google/cloud/securitycenter/v1/compliance_pb'
 require 'google/cloud/securitycenter/v1/connection_pb'
+require 'google/cloud/securitycenter/v1/exfiltration_pb'
 require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/iam_binding_pb'
 require 'google/cloud/securitycenter/v1/indicator_pb'
 require 'google/cloud/securitycenter/v1/mitre_attack_pb'
+require 'google/cloud/securitycenter/v1/process_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
 require 'google/cloud/securitycenter/v1/vulnerability_pb'
 require 'google/protobuf/struct_pb'
@@ -41,7 +44,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :access, :message, 26, "google.cloud.securitycenter.v1.Access"
       repeated :connections, :message, 31, "google.cloud.securitycenter.v1.Connection"
       optional :mute_initiator, :string, 28
+      repeated :processes, :message, 30, "google.cloud.securitycenter.v1.Process"
+      repeated :compliances, :message, 34, "google.cloud.securitycenter.v1.Compliance"
       optional :description, :string, 37
+      optional :exfiltration, :message, 38, "google.cloud.securitycenter.v1.Exfiltration"
       repeated :iam_bindings, :message, 39, "google.cloud.securitycenter.v1.IamBinding"
       optional :next_steps, :string, 40
     end
