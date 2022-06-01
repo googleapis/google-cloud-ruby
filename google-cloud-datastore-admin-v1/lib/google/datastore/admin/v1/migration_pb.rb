@@ -3,8 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
-
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/datastore/admin/v1/migration.proto", :syntax => :proto3) do
     add_message "google.datastore.admin.v1.MigrationStateEvent" do
@@ -27,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CONCURRENCY_MODE_UNSPECIFIED, 0
       value :PESSIMISTIC, 1
       value :OPTIMISTIC, 2
+      value :OPTIMISTIC_WITH_ENTITY_GROUPS, 3
     end
     add_enum "google.datastore.admin.v1.MigrationState" do
       value :MIGRATION_STATE_UNSPECIFIED, 0
