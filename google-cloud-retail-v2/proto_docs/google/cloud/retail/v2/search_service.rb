@@ -26,7 +26,7 @@ module Google
         # @!attribute [rw] placement
         #   @return [::String]
         #     Required. The resource name of the search engine placement, such as
-        #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`
+        #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
         #     This field is used to identify the serving configuration name and the set
         #     of models that will be used to make the search.
         # @!attribute [rw] branch
@@ -39,6 +39,11 @@ module Google
         # @!attribute [rw] query
         #   @return [::String]
         #     Raw search query.
+        #
+        #     If this field is empty, the request is considered a category browsing
+        #     request and returned results are based on
+        #     {::Google::Cloud::Retail::V2::SearchRequest#filter filter} and
+        #     {::Google::Cloud::Retail::V2::SearchRequest#page_categories page_categories}.
         # @!attribute [rw] visitor_id
         #   @return [::String]
         #     Required. A unique identifier for tracking visitors. For example, this
@@ -132,10 +137,10 @@ module Google
         #     [user guide](https://cloud.google.com/retail/docs/boosting).
         #
         #     Notice that if both [ServingConfig.boost_control_ids][] and
-        #     [SearchRequest.boost_spec] are set, the boost conditions from both places
-        #     are evaluated. If a search request matches multiple boost conditions,
-        #     the final boost score is equal to the sum of the boost scores from all
-        #     matched boost conditions.
+        #     {::Google::Cloud::Retail::V2::SearchRequest#boost_spec SearchRequest.boost_spec}
+        #     are set, the boost conditions from both places are evaluated. If a search
+        #     request matches multiple boost conditions, the final boost score is equal
+        #     to the sum of the boost scores from all matched boost conditions.
         # @!attribute [rw] query_expansion_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec]
         #     The query expansion specification that specifies the conditions under which
@@ -170,7 +175,8 @@ module Google
         #     * inventory(place_id,price)
         #     * inventory(place_id,original_price)
         #     * inventory(place_id,attributes.key), where key is any key in the
-        #       [Product.inventories.attributes][] map.
+        #       {::Google::Cloud::Retail::V2::LocalInventory#attributes Product.local_inventories.attributes}
+        #       map.
         #     * attributes.key, where key is any key in the
         #       {::Google::Cloud::Retail::V2::Product#attributes Product.attributes} map.
         #     * pickupInStore.id, where id is any
@@ -233,6 +239,29 @@ module Google
         # @!attribute [rw] personalization_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec]
         #     The specification for personalization.
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The labels applied to a resource must meet the following requirements:
+        #
+        #     * Each resource can have multiple labels, up to a maximum of 64.
+        #     * Each label must be a key-value pair.
+        #     * Keys have a minimum length of 1 character and a maximum length of 63
+        #       characters and cannot be empty. Values can be empty and have a maximum
+        #       length of 63 characters.
+        #     * Keys and values can contain only lowercase letters, numeric characters,
+        #       underscores, and dashes. All characters must use UTF-8 encoding, and
+        #       international characters are allowed.
+        #     * The key portion of a label must be unique. However, you can use the same
+        #       key with multiple resources.
+        #     * Keys must start with a lowercase letter or international character.
+        #
+        #     See [Google Cloud
+        #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+        #     for more details.
+        # @!attribute [rw] spell_correction_spec
+        #   @return [::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec]
+        #     The spell correction specification that specifies the mode under
+        #     which spell correction will take effect.
         class SearchRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -252,19 +281,29 @@ module Google
           #   @return [::Array<::String>]
           #     List of keys to exclude when faceting.
           #
+          #
           #     By default,
           #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#key FacetKey.key}
           #     is not excluded from the filter unless it is listed in this field.
           #
-          #     For example, suppose there are 100 products with color facet "Red" and
-          #     200 products with color facet "Blue". A query containing the filter
-          #     "colorFamilies:ANY("Red")" and have "colorFamilies" as
-          #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#key FacetKey.key}
-          #     will by default return the "Red" with count 100.
+          #     Listing a facet key in this field allows its values to appear as facet
+          #     results, even when they are filtered out of search results. Using this
+          #     field does not affect what search results are returned.
           #
-          #     If this field contains "colorFamilies", then the query returns both the
-          #     "Red" with count 100 and "Blue" with count 200, because the
-          #     "colorFamilies" key is now excluded from the filter.
+          #     For example, suppose there are 100 products with the color facet "Red"
+          #     and 200 products with the color facet "Blue". A query containing the
+          #     filter "colorFamilies:ANY("Red")" and having "colorFamilies" as
+          #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#key FacetKey.key}
+          #     would by default return only "Red" products in the search results, and
+          #     also return "Red" with count 100 as the only color facet. Although there
+          #     are also blue products available, "Blue" would not be shown as an
+          #     available facet value.
+          #
+          #     If "colorFamilies" is listed in "excludedFilterKeys", then the query
+          #     returns the facet values "Red" with count 100 and "Blue" with count
+          #     200, because the "colorFamilies" key is now excluded from the filter.
+          #     Because this field doesn't affect search results, the search results
+          #     are still correctly filtered to return only "Red" products.
           #
           #     A maximum of 100 values are allowed. Otherwise, an INVALID_ARGUMENT error
           #     is returned.
@@ -356,8 +395,8 @@ module Google
             #     Only get facet for the given restricted values. For example, when using
             #     "pickupInStore" as key and set restricted values to
             #     ["store123", "store456"], only facets for "store123" and "store456" are
-            #     returned. Only supported on textual fields and fulfillments.
-            #     Maximum is 20.
+            #     returned. Only supported on predefined textual fields, custom textual
+            #     attributes and fulfillments. Maximum is 20.
             #
             #     Must be set for the fulfillment facet keys:
             #
@@ -470,7 +509,7 @@ module Google
           #     Condition boost specifications. If a product matches multiple conditions
           #     in the specifictions, boost scores from these specifications are all
           #     applied and combined in a non-linear way. Maximum number of
-          #     specifications is 10.
+          #     specifications is 20.
           # @!attribute [rw] skip_boost_spec_validation
           #   @return [::Boolean]
           #     Whether to skip boostspec validation. If this field is set to true,
@@ -577,6 +616,43 @@ module Google
             end
           end
 
+          # The specification for query spell correction.
+          # @!attribute [rw] mode
+          #   @return [::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec::Mode]
+          #     The mode under which spell correction should take effect to
+          #     replace the original search query. Default to
+          #     {::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec::Mode::AUTO Mode.AUTO}.
+          class SpellCorrectionSpec
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Enum describing under which mode spell correction should occur.
+            module Mode
+              # Unspecified spell correction mode. This defaults to
+              # {::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec::Mode::AUTO Mode.AUTO}.
+              MODE_UNSPECIFIED = 0
+
+              # Google Retail Search will try to find a spell suggestion if there
+              # is any and put in the
+              # {::Google::Cloud::Retail::V2::SearchResponse#corrected_query SearchResponse.corrected_query}.
+              # The spell suggestion will not be used as the search query.
+              SUGGESTION_ONLY = 1
+
+              # Automatic spell correction built by Google Retail Search. Search will
+              # be based on the corrected query if found.
+              AUTO = 2
+            end
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
           # The search mode of each search request.
           module SearchMode
             # Default value. In this case both product search and faceted search will
@@ -598,7 +674,9 @@ module Google
             # Only faceted search will be performed. The product search will be
             # disabled.
             #
-            # When in this mode, one or both of [SearchRequest.facet_spec][] and
+            # When in this mode, one or both of
+            # {::Google::Cloud::Retail::V2::SearchRequest#facet_specs SearchRequest.facet_specs}
+            # and
             # {::Google::Cloud::Retail::V2::SearchRequest#dynamic_facet_spec SearchRequest.dynamic_facet_spec}
             # should be set. Otherwise, an INVALID_ARGUMENT error is returned. Only
             # [SearchResponse.Facet] will be returned. [SearchResponse.SearchResult]
@@ -624,7 +702,9 @@ module Google
         #     matches.
         # @!attribute [rw] corrected_query
         #   @return [::String]
-        #     If spell correction applies, the corrected query. Otherwise, empty.
+        #     Contains the spell corrected query, if found. If the spell correction type
+        #     is AUTOMATIC, then the search results are based on corrected_query.
+        #     Otherwise the original query will be used for search.
         # @!attribute [rw] attribution_token
         #   @return [::String]
         #     A unique search token. This should be included in the
@@ -642,10 +722,10 @@ module Google
         # @!attribute [rw] redirect_uri
         #   @return [::String]
         #     The URI of a customer-defined redirect page. If redirect action is
-        #     triggered, no search will be performed, and only
+        #     triggered, no search is performed, and only
         #     {::Google::Cloud::Retail::V2::SearchResponse#redirect_uri redirect_uri} and
         #     {::Google::Cloud::Retail::V2::SearchResponse#attribution_token attribution_token}
-        #     will be set in the response.
+        #     are set in the response.
         # @!attribute [rw] applied_controls
         #   @return [::Array<::String>]
         #     The fully qualified resource name of applied

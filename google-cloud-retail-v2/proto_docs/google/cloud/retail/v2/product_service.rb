@@ -91,6 +91,11 @@ module Google
         #
         #     If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
         #     is returned.
+        #
+        #     The attribute key can be updated by setting the mask path as
+        #     "attributes.$\\{key_name}". If a key name is present in the mask but not in
+        #     the patching product from the request, this key will be deleted after the
+        #     update.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
@@ -332,7 +337,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [AddFulfillmentPlaces][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces}
+        # method.
         # @!attribute [rw] product
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
@@ -400,21 +407,25 @@ module Google
 
         # Metadata related to the progress of the AddFulfillmentPlaces operation.
         # Currently empty because there is no meaningful metadata populated from the
-        # [AddFulfillmentPlaces][] method.
+        # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces}
+        # method.
         class AddFulfillmentPlacesMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response of the AddFulfillmentPlacesRequest.  Currently empty because
-        # there is no meaningful response populated from the [AddFulfillmentPlaces][]
+        # there is no meaningful response populated from the
+        # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces}
         # method.
         class AddFulfillmentPlacesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [AddLocalInventories][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+        # method.
         # @!attribute [rw] product
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
@@ -465,14 +476,18 @@ module Google
 
         # Metadata related to the progress of the AddLocalInventories operation.
         # Currently empty because there is no meaningful metadata populated from the
-        # [AddLocalInventories][] method.
+        # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+        # method.
         class AddLocalInventoriesMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response of the [AddLocalInventories][] API.  Currently empty because
-        # there is no meaningful response populated from the [AddLocalInventories][]
+        # Response of the
+        # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
+        # API.  Currently empty because there is no meaningful response populated from
+        # the
+        # {::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories ProductService.AddLocalInventories}
         # method.
         class AddLocalInventoriesResponse
           include ::Google::Protobuf::MessageExts
@@ -557,7 +572,8 @@ module Google
         #     If this field is set to an invalid value other than these, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     This field directly corresponds to [Product.fulfillment_info.type][].
+        #     This field directly corresponds to
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#type Product.fulfillment_info.type}.
         # @!attribute [rw] place_ids
         #   @return [::Array<::String>]
         #     Required. The IDs for this

@@ -34,6 +34,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :page_categories, :string, 23
       optional :search_mode, :enum, 31, "google.cloud.retail.v2.SearchRequest.SearchMode"
       optional :personalization_spec, :message, 32, "google.cloud.retail.v2.SearchRequest.PersonalizationSpec"
+      map :labels, :string, :string, 34
+      proto3_optional :spell_correction_spec, :message, 35, "google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec"
     end
     add_message "google.cloud.retail.v2.SearchRequest.FacetSpec" do
       optional :facet_key, :message, 1, "google.cloud.retail.v2.SearchRequest.FacetSpec.FacetKey"
@@ -82,6 +84,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MODE_UNSPECIFIED, 0
       value :AUTO, 1
       value :DISABLED, 2
+    end
+    add_message "google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec" do
+      optional :mode, :enum, 1, "google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode"
+    end
+    add_enum "google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode" do
+      value :MODE_UNSPECIFIED, 0
+      value :SUGGESTION_ONLY, 1
+      value :AUTO, 2
     end
     add_enum "google.cloud.retail.v2.SearchRequest.SearchMode" do
       value :SEARCH_MODE_UNSPECIFIED, 0
@@ -141,6 +151,8 @@ module Google
         SearchRequest::QueryExpansionSpec::Condition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.QueryExpansionSpec.Condition").enummodule
         SearchRequest::PersonalizationSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.PersonalizationSpec").msgclass
         SearchRequest::PersonalizationSpec::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.PersonalizationSpec.Mode").enummodule
+        SearchRequest::SpellCorrectionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec").msgclass
+        SearchRequest::SpellCorrectionSpec::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.SpellCorrectionSpec.Mode").enummodule
         SearchRequest::SearchMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchRequest.SearchMode").enummodule
         SearchResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchResponse").msgclass
         SearchResponse::SearchResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SearchResponse.SearchResult").msgclass

@@ -456,11 +456,11 @@ module Google
         #     * {::Google::Cloud::Retail::V2::Product#name name}
         #     * {::Google::Cloud::Retail::V2::Product#color_info color_info}
         #
-        #     Maximum number of paths is 30. Otherwise, an INVALID_ARGUMENT error is
+        #     The maximum number of paths is 30. Otherwise, an INVALID_ARGUMENT error is
         #     returned.
         #
         #     Note: Returning more fields in
-        #     {::Google::Cloud::Retail::V2::SearchResponse SearchResponse} may increase
+        #     {::Google::Cloud::Retail::V2::SearchResponse SearchResponse} can increase
         #     response payload size and serving latency.
         # @!attribute [r] variants
         #   @return [::Array<::Google::Cloud::Retail::V2::Product>]

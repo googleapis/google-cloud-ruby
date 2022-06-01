@@ -184,11 +184,18 @@ module Google
         #     {::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
         # @!attribute [rw] notification_pubsub_topic
         #   @return [::String]
-        #     Pub/Sub topic for receiving notification. If this field is set,
+        #     Full Pub/Sub topic name for receiving notification. If this field is set,
         #     when the import is finished, a notification will be sent to
         #     specified Pub/Sub topic. The message data will be JSON string of a
         #     {::Google::Longrunning::Operation Operation}.
-        #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+        #
+        #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
+        #     to be within the same project as
+        #     {::Google::Cloud::Retail::V2::ImportProductsRequest#parent ImportProductsRequest.parent}.
+        #     Make sure that both
+        #     `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+        #     `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+        #     have the `pubsub.topics.publish` IAM permission on the topic.
         #
         #     Only supported when
         #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}

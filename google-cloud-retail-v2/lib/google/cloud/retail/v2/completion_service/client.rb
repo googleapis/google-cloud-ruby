@@ -236,9 +236,9 @@ module Google
             #
             #     * user-data
             #
-            #     * cloud-retail
-            #       This option requires additional allowlisting. Before using cloud-retail,
-            #       contact Cloud Retail support team first.
+            #     * cloud-retail:
+            #       This option requires enabling auto-learning function first. See
+            #       [guidelines](https://cloud.google.com/retail/docs/completion-overview#generated-completion-dataset).
             #   @param max_suggestions [::Integer]
             #     Completion max suggestions. If left unset or set to 0, then will fallback
             #     to the configured value [CompletionConfig.max_suggestions][].
