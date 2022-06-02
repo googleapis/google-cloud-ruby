@@ -83,6 +83,9 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The approximate timestamp when the session is last used. It is
         #     typically earlier than the actual last use time.
+        # @!attribute [rw] creator_role
+        #   @return [::String]
+        #     The database role which created this session.
         class Session
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
