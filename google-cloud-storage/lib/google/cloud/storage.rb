@@ -84,7 +84,7 @@ module Google
       #   bucket = storage.bucket "my-bucket"
       #   file = bucket.file "path/to/my-file.ext"
       #
-      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
       def self.new project_id: nil, credentials: nil, scope: nil, retries: nil,
                    timeout: nil, open_timeout: nil, read_timeout: nil,
                    send_timeout: nil, endpoint: nil, project: nil, keyfile: nil,
@@ -121,7 +121,7 @@ module Google
           )
         )
       end
-      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+      # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity, Metrics/AbcSize
 
       ##
       # Creates an unauthenticated, anonymous client for retrieving public data
@@ -190,7 +190,7 @@ module Google
       #   the set of resources and operations that the connection can access.
       # * `retries` - (Integer) Number of times to retry requests on server
       #   error.
-      # * `max_elapsed_time` - (Integer) Total time in seconds that requests 
+      # * `max_elapsed_time` - (Integer) Total time in seconds that requests
       #    are allowed to keep being retried.
       # * `base_interval` - (Float) The initial interval in seconds between tries.
       # * `max_interval` - (Integer) The maximum interval in seconds that any

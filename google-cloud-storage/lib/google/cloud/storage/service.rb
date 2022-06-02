@@ -38,6 +38,7 @@ module Google
 
         ##
         # Creates a new Service instance.
+        # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def initialize project, credentials, retries: nil,
                        timeout: nil, open_timeout: nil, read_timeout: nil,
                        send_timeout: nil, host: nil, quota_project: nil,
@@ -66,6 +67,7 @@ module Google
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
         end
+        # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         def service
           return mocked_service if mocked_service

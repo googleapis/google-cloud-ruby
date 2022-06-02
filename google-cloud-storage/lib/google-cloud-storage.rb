@@ -114,7 +114,7 @@ module Google
     # @param [Float] base_interval The initial interval in seconds between tries.
     # @param [Integer] max_interval The maximum interval in seconds that any individual retry can reach.
     # @param [Integer] multiplier Each successive interval grows by this factor. A multipler of 1.5 means the next
-    #                  interval will be 1.5x the current interval.    
+    #                  interval will be 1.5x the current interval.
     # @param [Integer] timeout (default timeout) The max duration, in seconds, to wait before timing out. Optional.
     #    If left blank, the wait will be at most the time permitted by the underlying HTTP/RPC protocol.
     # @param [Integer] open_timeout How long, in seconds, before failed connections time out. Optional.
@@ -153,6 +153,7 @@ module Google
 end
 
 # Set the default storage configuration
+# rubocop:disable Metrics/BlockLength
 Google::Cloud.configure.add_config! :storage do |config|
   default_project = Google::Cloud::Config.deferred do
     ENV["STORAGE_PROJECT"]
@@ -184,3 +185,4 @@ Google::Cloud.configure.add_config! :storage do |config|
   # TODO: Remove once discovery document is updated.
   config.add_field! :endpoint, "https://storage.googleapis.com/", match: String
 end
+# rubocop:enable Metrics/BlockLength
