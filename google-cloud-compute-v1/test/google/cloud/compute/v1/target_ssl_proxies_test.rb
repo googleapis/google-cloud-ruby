@@ -363,6 +363,66 @@ class ::Google::Cloud::Compute::V1::TargetSslProxies::ClientTest < Minitest::Tes
     end
   end
 
+  def test_set_certificate_map
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    request_id = "hello world"
+    target_ssl_proxies_set_certificate_map_request_resource = {}
+    target_ssl_proxy = "hello world"
+
+    set_certificate_map_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
+      assert_equal :post, verb
+
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+
+      assert params.key? "requestId"
+      refute_nil body
+    end
+
+    Gapic::Rest::ClientStub.stub :new, set_certificate_map_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::TargetSslProxies::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.set_certificate_map({ project: project, request_id: request_id, target_ssl_proxies_set_certificate_map_request_resource: target_ssl_proxies_set_certificate_map_request_resource, target_ssl_proxy: target_ssl_proxy }) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.set_certificate_map project: project, request_id: request_id, target_ssl_proxies_set_certificate_map_request_resource: target_ssl_proxies_set_certificate_map_request_resource, target_ssl_proxy: target_ssl_proxy do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.set_certificate_map ::Google::Cloud::Compute::V1::SetCertificateMapTargetSslProxyRequest.new(project: project, request_id: request_id, target_ssl_proxies_set_certificate_map_request_resource: target_ssl_proxies_set_certificate_map_request_resource, target_ssl_proxy: target_ssl_proxy) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.set_certificate_map({ project: project, request_id: request_id, target_ssl_proxies_set_certificate_map_request_resource: target_ssl_proxies_set_certificate_map_request_resource, target_ssl_proxy: target_ssl_proxy }, call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.set_certificate_map(::Google::Cloud::Compute::V1::SetCertificateMapTargetSslProxyRequest.new(project: project, request_id: request_id, target_ssl_proxies_set_certificate_map_request_resource: target_ssl_proxies_set_certificate_map_request_resource, target_ssl_proxy: target_ssl_proxy), call_options) do |result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, set_certificate_map_client_stub.call_count
+    end
+  end
+
   def test_set_proxy_header
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
