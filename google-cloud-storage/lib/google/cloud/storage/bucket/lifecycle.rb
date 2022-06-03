@@ -158,8 +158,8 @@ module Google
                                          matches_storage_class: nil,
                                          noncurrent_time_before: nil,
                                          num_newer_versions: nil,
-                                         matches_prefix: nil,
-                                         matches_suffix: nil
+                                         matches_prefix: [],
+                                         matches_suffix: []
             push Rule.new(
               "SetStorageClass",
               storage_class: storage_class_for(storage_class),
@@ -244,8 +244,8 @@ module Google
                               matches_storage_class: nil,
                               noncurrent_time_before: nil,
                               num_newer_versions: nil,
-                              matches_prefix: nil,
-                              matches_suffix: nil
+                              matches_prefix: [],
+                              matches_suffix: []
             push Rule.new(
               "Delete",
               age: age,
@@ -405,8 +405,8 @@ module Google
                            matches_storage_class: nil,
                            noncurrent_time_before: nil,
                            num_newer_versions: nil,
-                           matches_prefix: nil,
-                           matches_suffix: nil
+                           matches_prefix: [],
+                           matches_suffix: []
               @action = action
               @storage_class = storage_class
               @age = age
