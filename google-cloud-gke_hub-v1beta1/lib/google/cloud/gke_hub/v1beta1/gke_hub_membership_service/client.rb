@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/gkehub/v1beta1/membership_pb"
+require "google/cloud/location"
+require "google/iam/v1/iam_policy"
 
 module Google
   module Cloud
@@ -28,8 +30,7 @@ module Google
           # Client for the GkeHubMembershipService service.
           #
           # The GKE Hub MembershipService handles the registration of many Kubernetes
-          # clusters to Google Cloud, represented with the
-          # {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
+          # clusters to Google Cloud, represented with the {::Google::Cloud::GkeHub::V1beta1::Membership Membership} resource.
           #
           # GKE Hub is currently only available in the global region.
           #
@@ -152,6 +153,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @gke_hub_membership_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Stub,
                 credentials:  credentials,
@@ -167,6 +180,20 @@ module Google
             # @return [::Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -189,19 +216,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Memberships will be
-            #     listed. Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Memberships will be listed.
+            #     Specified in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
-            #     Optional. When requesting a 'page' of resources, `page_size` specifies
-            #     number of resources to return. If unspecified or set to 0, all resources
-            #     will be returned.
+            #     Optional. When requesting a 'page' of resources, `page_size` specifies number of
+            #     resources to return. If unspecified or set to 0, all resources will
+            #     be returned.
             #   @param page_token [::String]
             #     Optional. Token returned by previous call to `ListMemberships` which
             #     specifies the position in the list from where to continue listing the
             #     resources.
             #   @param filter [::String]
-            #     Optional. Lists Memberships that match the filter expression, following the
-            #     syntax outlined in https://google.aip.dev/160.
+            #     Optional. Lists Memberships that match the filter expression, following the syntax
+            #     outlined in https://google.aip.dev/160.
             #
             #     Examples:
             #
@@ -404,11 +431,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Memberships will be
-            #     created. Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Memberships will be created.
+            #     Specified in the format `projects/*/locations/*`.
             #   @param membership_id [::String]
-            #     Required. Client chosen ID for the membership. `membership_id` must be a
-            #     valid RFC 1123 compliant DNS label:
+            #     Required. Client chosen ID for the membership. `membership_id` must be a valid RFC
+            #     1123 compliant DNS label:
             #
             #       1. At most 63 characters in length
             #       2. It must consist of lower case alphanumeric characters or `-`
@@ -639,8 +666,8 @@ module Google
             #     Required. The membership resource name in the format:
             #     `projects/[project_id]/locations/global/memberships/[membership_id]`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. Mask of fields to update. At least one field path must be
-            #     specified in this mask.
+            #     Required. Mask of fields to update. At least one field path must be specified in this
+            #     mask.
             #   @param resource [::Google::Cloud::GkeHub::V1beta1::Membership, ::Hash]
             #     Required. Only fields specified in update_mask are updated.
             #     If you specify a field in the update_mask but don't specify its value here
@@ -759,13 +786,12 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The Membership resource name the Agent will associate with, in
-            #     the format `projects/*/locations/*/memberships/*`.
+            #     Required. The Membership resource name the Agent will associate with, in the format
+            #     `projects/*/locations/*/memberships/*`.
             #   @param connect_agent [::Google::Cloud::GkeHub::V1beta1::ConnectAgent, ::Hash]
             #     Optional. The connect agent to generate manifest for.
             #   @param version [::String]
-            #     Optional. The Connect agent version to use. Defaults to the most current
-            #     version.
+            #     Optional. The Connect agent version to use. Defaults to the most current version.
             #   @param is_upgrade [::Boolean]
             #     Optional. If true, generate the resources for upgrade only. Some resources
             #     generated only for installation (e.g. secrets) will be excluded.
@@ -859,15 +885,14 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent (project and location) where the Memberships will be
-            #     created. Specified in the format `projects/*/locations/*`.
+            #     Required. The parent (project and location) where the Memberships will be created.
+            #     Specified in the format `projects/*/locations/*`.
             #   @param cr_manifest [::String]
-            #     Optional. The YAML of the membership CR in the cluster. Empty if the
-            #     membership CR does not exist.
+            #     Optional. The YAML of the membership CR in the cluster. Empty if the membership
+            #     CR does not exist.
             #   @param intended_membership [::String]
-            #     Required. The intended membership name under the `parent`. This method only
-            #     does validation in anticipation of a CreateMembership call with the same
-            #     name.
+            #     Required. The intended membership name under the `parent`. This method only does
+            #     validation in anticipation of a CreateMembership call with the same name.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::GkeHub::V1beta1::ValidateExclusivityResponse]
