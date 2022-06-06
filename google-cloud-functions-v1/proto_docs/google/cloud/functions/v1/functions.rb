@@ -23,7 +23,6 @@ module Google
       module V1
         # Describes a Cloud Function that contains user computation executed in
         # response to an event. It encapsulate function and triggers configurations.
-        # Next tag: 36
         # @!attribute [rw] name
         #   @return [::String]
         #     A user-defined name of the function. Function names must be unique
@@ -167,8 +166,9 @@ module Google
         #     the `docker_repository` field that was created with the same KMS crypto
         #     key.
         #
-        #     The following service accounts need to be granted Cloud KMS crypto key
-        #     encrypter/decrypter roles on the key.
+        #     The following service accounts need to be granted the role 'Cloud KMS
+        #     CryptoKey Encrypter/Decrypter (roles/cloudkms.cryptoKeyEncrypterDecrypter)'
+        #     on the Key/KeyRing/Project/Organization (least access preferred).
         #
         #     1. Google Cloud Functions service account
         #        (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) -
@@ -232,6 +232,14 @@ module Google
         #     Cross-project repositories are not supported.
         #     Cross-location repositories are not supported.
         #     Repository format must be 'DOCKER'.
+        # @!attribute [rw] docker_registry
+        #   @return [::Google::Cloud::Functions::V1::CloudFunction::DockerRegistry]
+        #     Docker Registry to use for this deployment.
+        #
+        #     If `docker_repository` field is specified, this field will be automatically
+        #     set as `ARTIFACT_REGISTRY`.
+        #     If unspecified, it currently defaults to `CONTAINER_REGISTRY`.
+        #     This field may be overridden by the backend for eligible deployments.
         class CloudFunction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -296,6 +304,23 @@ module Google
 
             # Allow HTTP traffic from private VPC sources and through GCLB.
             ALLOW_INTERNAL_AND_GCLB = 3
+          end
+
+          # Docker Registry to use for storing function Docker images.
+          module DockerRegistry
+            # Unspecified.
+            DOCKER_REGISTRY_UNSPECIFIED = 0
+
+            # Docker images will be stored in multi-regional Container Registry
+            # repositories named `gcf`.
+            CONTAINER_REGISTRY = 1
+
+            # Docker images will be stored in regional Artifact Registry repositories.
+            # By default, GCF will create and use repositories named `gcf-artifacts`
+            # in every region in which a function is deployed. But the repository to
+            # use can also be specified by the user using the `docker_repository`
+            # field.
+            ARTIFACT_REGISTRY = 2
           end
         end
 
@@ -434,8 +459,7 @@ module Google
 
         # Configuration for a secret environment variable. It has the information
         # necessary to fetch the secret value from secret manager and expose it as an
-        # environment variable. Secret value is not a part of the configuration. Secret
-        # values are only fetched when a new clone starts.
+        # environment variable.
         # @!attribute [rw] key
         #   @return [::String]
         #     Name of the environment variable.
@@ -452,7 +476,7 @@ module Google
         #   @return [::String]
         #     Version of the secret (version number or the string 'latest'). It is
         #     recommended to use a numeric version for secret environment variables as
-        #     any updates to the secret value is not reflected until new clones start.
+        #     any updates to the secret value is not reflected until new instances start.
         class SecretEnvVar
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -527,7 +551,7 @@ module Google
         #     Required. New version of the function.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required list of fields to be updated in this request.
+        #     Required. The list of fields in `CloudFunction` that have to be updated.
         class UpdateFunctionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -627,6 +651,25 @@ module Google
         #   @return [::String]
         #     The project and location in which the Google Cloud Storage signed URL
         #     should be generated, specified in the format `projects/*/locations/*`.
+        # @!attribute [rw] kms_key_name
+        #   @return [::String]
+        #     Resource name of a KMS crypto key (managed by the user) used to
+        #     encrypt/decrypt function source code objects in staging Cloud Storage
+        #     buckets. When you generate an upload url and upload your source code, it
+        #     gets copied to a staging Cloud Storage bucket in an internal regional
+        #     project. The source code is then copied to a versioned directory in the
+        #     sources bucket in the consumer project during the function deployment.
+        #
+        #     It must match the pattern
+        #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+        #
+        #     The Google Cloud Functions service account
+        #     (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+        #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+        #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+        #     Key/KeyRing/Project/Organization (least access preferred). GCF will
+        #     delegate access to the Google Storage service account in the internal
+        #     project.
         class GenerateUploadUrlRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
