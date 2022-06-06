@@ -909,10 +909,13 @@ module Google
             #
             #     The fields eligible for filtering are:
             #
-            #     * `companyName` (Required)
+            #     * `companyName`
             #     * `requisitionId`
             #     * `status` Available values: OPEN, EXPIRED, ALL. Defaults to
             #     OPEN if no value is specified.
+            #
+            #     At least one of `companyName` and `requisitionId` must present or an
+            #     INVALID_ARGUMENT error is thrown.
             #
             #     Sample Query:
             #
@@ -921,6 +924,8 @@ module Google
             #     requisitionId = "req-1"
             #     * companyName = "projects/foo/tenants/bar/companies/baz" AND
             #     status = "EXPIRED"
+            #     * requisitionId = "req-1"
+            #     * requisitionId = "req-1" AND status = "EXPIRED"
             #   @param page_token [::String]
             #     The starting point of a query result.
             #   @param page_size [::Integer]
@@ -1023,7 +1028,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil)
+            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1051,15 +1056,7 @@ module Google
             #
             #     Defaults to false.
             #   @param require_precise_result_size [::Boolean]
-            #     Controls if the search job request requires the return of a precise
-            #     count of the first 300 results. Setting this to `true` ensures
-            #     consistency in the number of results per page. Best practice is to set this
-            #     value to true if a client allows users to jump directly to a
-            #     non-sequential search results page.
-            #
-            #     Enabling this flag may adversely impact performance.
-            #
-            #     Defaults to false.
+            #     This field is deprecated.
             #   @param histogram_queries [::Array<::Google::Cloud::Talent::V4beta1::HistogramQuery, ::Hash>]
             #     An expression specifies a histogram request against matching jobs.
             #
@@ -1071,6 +1068,8 @@ module Google
             #     for each distinct attribute value.
             #     * `count(numeric_histogram_facet, list of buckets)`: Count the number of
             #     matching entities within each bucket.
+            #
+            #     A maximum of 200 histogram buckets are supported.
             #
             #     Data types:
             #
@@ -1098,6 +1097,9 @@ module Google
             #       "FULL_TIME", "PART_TIME".
             #     * company_size: histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example, "SMALL",
             #     "MEDIUM", "BIG".
+            #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
+            #       in days.
+            #       Must specify list of numeric buckets in spec.
             #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
             #       in months.
             #       Must specify list of numeric buckets in spec.
@@ -1151,7 +1153,7 @@ module Google
             #     bucket(100000, MAX)])`
             #     * `count(string_custom_attribute["some-string-custom-attribute"])`
             #     * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
             #   @param job_view [::Google::Cloud::Talent::V4beta1::JobView]
             #     The desired job attributes returned for jobs in the search response.
             #     Defaults to {::Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1239,6 +1241,14 @@ module Google
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
             #   @param disable_keyword_match [::Boolean]
+            #     This field is deprecated. Please use
+            #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+            #
+            #     To migrate, disable_keyword_match set to false maps to
+            #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+            #     true maps to {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+            #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+            #
             #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4beta1::Job#title Job.title},
             #     {::Google::Cloud::Talent::V4beta1::Job#description Job.description}, {::Google::Cloud::Talent::V4beta1::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4beta1::Job#addresses Job.addresses},
             #     {::Google::Cloud::Talent::V4beta1::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -1258,6 +1268,11 @@ module Google
             #     requests.
             #
             #     Defaults to false.
+            #   @param keyword_match_mode [::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode]
+            #     Controls what keyword match options to use.
+            #
+            #     Defaults to {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+            #     is specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::SearchJobsResponse]
@@ -1345,7 +1360,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil)
+            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, require_precise_result_size: nil, histogram_queries: nil, job_view: nil, offset: nil, page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs_for_alert` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1373,15 +1388,7 @@ module Google
             #
             #     Defaults to false.
             #   @param require_precise_result_size [::Boolean]
-            #     Controls if the search job request requires the return of a precise
-            #     count of the first 300 results. Setting this to `true` ensures
-            #     consistency in the number of results per page. Best practice is to set this
-            #     value to true if a client allows users to jump directly to a
-            #     non-sequential search results page.
-            #
-            #     Enabling this flag may adversely impact performance.
-            #
-            #     Defaults to false.
+            #     This field is deprecated.
             #   @param histogram_queries [::Array<::Google::Cloud::Talent::V4beta1::HistogramQuery, ::Hash>]
             #     An expression specifies a histogram request against matching jobs.
             #
@@ -1393,6 +1400,8 @@ module Google
             #     for each distinct attribute value.
             #     * `count(numeric_histogram_facet, list of buckets)`: Count the number of
             #     matching entities within each bucket.
+            #
+            #     A maximum of 200 histogram buckets are supported.
             #
             #     Data types:
             #
@@ -1420,6 +1429,9 @@ module Google
             #       "FULL_TIME", "PART_TIME".
             #     * company_size: histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example, "SMALL",
             #     "MEDIUM", "BIG".
+            #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
+            #       in days.
+            #       Must specify list of numeric buckets in spec.
             #     * publish_time_in_month: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
             #       in months.
             #       Must specify list of numeric buckets in spec.
@@ -1473,7 +1485,7 @@ module Google
             #     bucket(100000, MAX)])`
             #     * `count(string_custom_attribute["some-string-custom-attribute"])`
             #     * `count(numeric_custom_attribute["some-numeric-custom-attribute"],
-            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative"])`
+            #       [bucket(MIN, 0, "negative"), bucket(0, MAX, "non-negative")])`
             #   @param job_view [::Google::Cloud::Talent::V4beta1::JobView]
             #     The desired job attributes returned for jobs in the search response.
             #     Defaults to {::Google::Cloud::Talent::V4beta1::JobView::JOB_VIEW_SMALL JobView.JOB_VIEW_SMALL} if no value is specified.
@@ -1561,6 +1573,14 @@ module Google
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
             #   @param disable_keyword_match [::Boolean]
+            #     This field is deprecated. Please use
+            #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
+            #
+            #     To migrate, disable_keyword_match set to false maps to
+            #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL}, and disable_keyword_match set to
+            #     true maps to {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_DISABLED KeywordMatchMode.KEYWORD_MATCH_DISABLED}. If
+            #     {::Google::Cloud::Talent::V4beta1::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} is set, this field is ignored.
+            #
             #     Controls whether to disable exact keyword match on {::Google::Cloud::Talent::V4beta1::Job#title Job.title},
             #     {::Google::Cloud::Talent::V4beta1::Job#description Job.description}, {::Google::Cloud::Talent::V4beta1::Job#company_display_name Job.company_display_name}, {::Google::Cloud::Talent::V4beta1::Job#addresses Job.addresses},
             #     {::Google::Cloud::Talent::V4beta1::Job#qualifications Job.qualifications}. When disable keyword match is turned off, a
@@ -1580,6 +1600,11 @@ module Google
             #     requests.
             #
             #     Defaults to false.
+            #   @param keyword_match_mode [::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode]
+            #     Controls what keyword match options to use.
+            #
+            #     Defaults to {::Google::Cloud::Talent::V4beta1::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
+            #     is specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4beta1::SearchJobsResponse]

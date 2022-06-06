@@ -241,7 +241,7 @@ module Google
         #     not be updated. And when creating a job with past timestamp, the
         #     {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time posting_publish_time} must be set before
         #     {::Google::Cloud::Talent::V4beta1::Job#posting_expire_time posting_expire_time}. The purpose of this feature is
-        #     to allow other objects, such as {::Google::Cloud::Talent::V4beta1::Application Application}, to refer a job
+        #     to allow other objects, such as [Application][google.cloud.talent.v4beta1.Application], to refer a job
         #     that didn't exist in the system prior to becoming expired. If you
         #     want to modify a job that was expired on creation,
         #     delete it and create a new one.

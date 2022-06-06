@@ -47,7 +47,7 @@ module Google
         #     Defaults behavior is {::Google::Cloud::Talent::V4beta1::Tenant::DataUsageType::ISOLATED DataUsageType.ISOLATED} if it's unset.
         # @!attribute [rw] keyword_searchable_profile_custom_attributes
         #   @return [::Array<::String>]
-        #     A list of keys of filterable {::Google::Cloud::Talent::V4beta1::Profile#custom_attributes Profile.custom_attributes}, whose
+        #     A list of keys of filterable [Profile.custom_attributes][google.cloud.talent.v4beta1.Profile.custom_attributes], whose
         #     corresponding `string_values` are used in keyword searches. Profiles with
         #     `string_values` under these specified field keys are returned if any
         #     of the values match the search keyword. Custom field values with
