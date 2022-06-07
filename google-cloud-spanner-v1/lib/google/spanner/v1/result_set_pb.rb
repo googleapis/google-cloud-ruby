@@ -4,7 +4,6 @@
 require 'google/protobuf'
 
 require 'google/protobuf/struct_pb'
-require 'google/spanner/v1/commit_response_pb'
 require 'google/spanner/v1/query_plan_pb'
 require 'google/spanner/v1/transaction_pb'
 require 'google/spanner/v1/type_pb'

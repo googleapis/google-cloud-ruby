@@ -37,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 2
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :approximate_last_use_time, :message, 4, "google.protobuf.Timestamp"
+      optional :creator_role, :string, 5
     end
     add_message "google.spanner.v1.GetSessionRequest" do
       optional :name, :string, 1
