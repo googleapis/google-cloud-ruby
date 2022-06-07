@@ -76,6 +76,100 @@ module Google
               resource.call(**args)
             end
 
+            ##
+            # Create a fully-qualified Folder resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `folders/{folder}`
+            #
+            # @param folder [String]
+            #
+            # @return [::String]
+            def folder_path folder:
+              "folders/#{folder}"
+            end
+
+            ##
+            # Create a fully-qualified Organization resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}`
+            #
+            # @param organization [String]
+            #
+            # @return [::String]
+            def organization_path organization:
+              "organizations/#{organization}"
+            end
+
+            ##
+            # Create a fully-qualified Project resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}`
+            #
+            # @param project [String]
+            #
+            # @return [::String]
+            def project_path project:
+              "projects/#{project}"
+            end
+
+            ##
+            # Create a fully-qualified SavedQuery resource string.
+            #
+            # @overload saved_query_path(project:, saved_query:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/savedQueries/{saved_query}`
+            #
+            #   @param project [String]
+            #   @param saved_query [String]
+            #
+            # @overload saved_query_path(folder:, saved_query:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/savedQueries/{saved_query}`
+            #
+            #   @param folder [String]
+            #   @param saved_query [String]
+            #
+            # @overload saved_query_path(organization:, saved_query:)
+            #   The resource will be in the following format:
+            #
+            #   `organizations/{organization}/savedQueries/{saved_query}`
+            #
+            #   @param organization [String]
+            #   @param saved_query [String]
+            #
+            # @return [::String]
+            def saved_query_path **args
+              resources = {
+                "project:saved_query" => (proc do |project:, saved_query:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/savedQueries/#{saved_query}"
+                end),
+                "folder:saved_query" => (proc do |folder:, saved_query:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/savedQueries/#{saved_query}"
+                end),
+                "organization:saved_query" => (proc do |organization:, saved_query:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+
+                  "organizations/#{organization}/savedQueries/#{saved_query}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
+            end
+
             extend self
           end
         end
