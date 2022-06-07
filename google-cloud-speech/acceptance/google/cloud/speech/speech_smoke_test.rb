@@ -34,6 +34,7 @@ class SpeechSmokeTest < Minitest::Test
     response = speech_client.recognize config: config, audio: audio
     refute_equal 0, response.results.size
   end
+
   def test_long_running_recognize
     speech_client = Google::Cloud::Speech.speech
     config = {
@@ -44,7 +45,7 @@ class SpeechSmokeTest < Minitest::Test
     audio = {
       uri: "gs://cloud-samples-data/speech/brooklyn_bridge.flac"
     }
-    op = speech_client.test_long_running_recognize config: config, audio: audio
+    op = speech_client.long_running_recognize config: config, audio: audio
     op.wait_until_done!
     assert op.response?
     refute_equal 0, op.response.results.size
