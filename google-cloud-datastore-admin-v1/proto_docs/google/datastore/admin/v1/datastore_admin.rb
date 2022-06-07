@@ -374,7 +374,7 @@ module Google
           # design pattern.
           #
           # This singleton resource can be accessed at:
-          # `projects/{project_id}/datastore-firestore-migration`
+          # "projects/\\{project_id}/operations/datastore-firestore-migration"
           # @!attribute [rw] migration_state
           #   @return [::Google::Cloud::Datastore::Admin::V1::MigrationState]
           #     The current state of migration from Cloud Datastore to Cloud Firestore in
