@@ -54,4 +54,68 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscriber.stop
     subscriber.wait!
   end
+
+  it "should update min_duration_per_lease_extension when exactly_once_delivery is modified" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                     subscription_properties: {
+                                                                         exactly_once_delivery_enabled: true
+                                                                     }   
+    response_groups = [[pull_res1]]
+
+    stub = StreamingPullStub.new response_groups
+    called = false
+
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      assert msg.subscription.exactly_once_delivery_enabled
+      called = true
+    end
+
+    subscriber.on_error do |error|
+      # raise error
+      p error
+    end
+
+    subscriber.start
+
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.01
+    end
+
+    assert_equal subscriber.stream_pool.first.inventory.min_duration_per_lease_extension, 60 
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should not update min_duration_per_lease_extension when exactly_once_delivery is not modified" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                     subscription_properties: {
+                                                                         exactly_once_delivery_enabled: false
+                                                                     }   
+    response_groups = [[pull_res1]]
+
+    stub = StreamingPullStub.new response_groups
+    called = false
+
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      called = true
+    end
+
+    subscriber.start
+
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.01
+    end
+
+    assert_equal subscriber.stream_pool.first.inventory.min_duration_per_lease_extension, 0 
+    subscriber.stop
+    subscriber.wait!
+  end
 end

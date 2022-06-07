@@ -332,6 +332,16 @@ module Google
         end
 
         ##
+        # The minimum amount of time in seconds for a single lease extension attempt. Bounds the delay before a message
+        # redelivery if the subscriber fails to extend the deadline. Default is 0 (disabled).
+        #
+        # @return [Integer] The minimum number of seconds.
+        #
+        def min_duration_per_lease_extension
+          @inventory[:min_duration_per_lease_extension]
+        end
+
+        ##
         # @private
         def stream_inventory
           {
@@ -339,6 +349,7 @@ module Google
             bytesize:                         @inventory[:max_outstanding_bytes].fdiv(@streams).ceil,
             extension:                        @inventory[:max_total_lease_duration],
             max_duration_per_lease_extension: @inventory[:max_duration_per_lease_extension],
+            min_duration_per_lease_extension: @inventory[:min_duration_per_lease_extension],
             use_legacy_flow_control:          @inventory[:use_legacy_flow_control]
           }
         end
@@ -394,6 +405,7 @@ module Google
           @inventory[:max_outstanding_bytes] = Integer(@inventory[:max_outstanding_bytes] || 100_000_000)
           @inventory[:max_total_lease_duration] = Integer(@inventory[:max_total_lease_duration] || 3600)
           @inventory[:max_duration_per_lease_extension] = Integer(@inventory[:max_duration_per_lease_extension] || 0)
+          @inventory[:min_duration_per_lease_extension] = Integer(@inventory[:min_duration_per_lease_extension] || 0)
           @inventory[:use_legacy_flow_control] = @inventory[:use_legacy_flow_control] || false
         end
 

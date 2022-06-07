@@ -47,7 +47,7 @@ module Google
           attr_reader :sequencer
 
           ##
-          # @private Sequencer.
+          # @private exactly_once_delivery_enabled.
           attr_reader :exactly_once_delivery_enabled
 
           ##
@@ -249,8 +249,9 @@ module Google
                 response = enum.next
                 new_exactly_once_delivery_enabled = response&.subscription_properties&.exactly_once_delivery_enabled
 
-                # Use synchronize so both changes happen atomically
+                # Use synchronize so changes happen atomically
                 synchronize do
+                  update_min_duration_per_lease_extension new_exactly_once_delivery_enabled
                   @exactly_once_delivery_enabled = new_exactly_once_delivery_enabled unless new_exactly_once_delivery_enabled.nil? 
 
                   # Create receipt of received messages reception
@@ -292,6 +293,14 @@ module Google
           end
 
           # rubocop:enable all
+
+          # Updates min_duration_per_lease_extension to 60 when exactly_once_delivery_enabled
+          # and reverts back to default 0 when disabled.
+          # Skips if exactly_once_enabled is not modified.
+          def update_min_duration_per_lease_extension new_exactly_once_delivery_enabled
+            return if new_exactly_once_delivery_enabled == @exactly_once_delivery_enabled
+            @inventory.min_duration_per_lease_extension = new_exactly_once_delivery_enabled ? 60 : 0
+          end
 
           def register_callback rec_msg
             if @sequencer
