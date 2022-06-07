@@ -168,14 +168,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil)
+            # @overload search(placement: nil, branch: nil, query: nil, visitor_id: nil, user_info: nil, page_size: nil, page_token: nil, offset: nil, filter: nil, canonical_filter: nil, order_by: nil, facet_specs: nil, dynamic_facet_spec: nil, boost_spec: nil, query_expansion_spec: nil, variant_rollup_keys: nil, page_categories: nil, search_mode: nil, personalization_spec: nil, labels: nil, spell_correction_spec: nil)
             #   Pass arguments to `search` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param placement [::String]
             #     Required. The resource name of the search engine placement, such as
-            #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`
+            #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
             #     This field is used to identify the serving configuration name and the set
             #     of models that will be used to make the search.
             #   @param branch [::String]
@@ -186,6 +186,11 @@ module Google
             #     products under the default branch.
             #   @param query [::String]
             #     Raw search query.
+            #
+            #     If this field is empty, the request is considered a category browsing
+            #     request and returned results are based on
+            #     {::Google::Cloud::Retail::V2::SearchRequest#filter filter} and
+            #     {::Google::Cloud::Retail::V2::SearchRequest#page_categories page_categories}.
             #   @param visitor_id [::String]
             #     Required. A unique identifier for tracking visitors. For example, this
             #     could be implemented with an HTTP cookie, which should be able to uniquely
@@ -268,10 +273,10 @@ module Google
             #     [user guide](https://cloud.google.com/retail/docs/boosting).
             #
             #     Notice that if both [ServingConfig.boost_control_ids][] and
-            #     [SearchRequest.boost_spec] are set, the boost conditions from both places
-            #     are evaluated. If a search request matches multiple boost conditions,
-            #     the final boost score is equal to the sum of the boost scores from all
-            #     matched boost conditions.
+            #     {::Google::Cloud::Retail::V2::SearchRequest#boost_spec SearchRequest.boost_spec}
+            #     are set, the boost conditions from both places are evaluated. If a search
+            #     request matches multiple boost conditions, the final boost score is equal
+            #     to the sum of the boost scores from all matched boost conditions.
             #   @param query_expansion_spec [::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec, ::Hash]
             #     The query expansion specification that specifies the conditions under which
             #     query expansion will occur. See more details at this [user
@@ -304,7 +309,8 @@ module Google
             #     * inventory(place_id,price)
             #     * inventory(place_id,original_price)
             #     * inventory(place_id,attributes.key), where key is any key in the
-            #       [Product.inventories.attributes][] map.
+            #       {::Google::Cloud::Retail::V2::LocalInventory#attributes Product.local_inventories.attributes}
+            #       map.
             #     * attributes.key, where key is any key in the
             #       {::Google::Cloud::Retail::V2::Product#attributes Product.attributes} map.
             #     * pickupInStore.id, where id is any
@@ -364,6 +370,27 @@ module Google
             #     request triggers both product search and faceted search.
             #   @param personalization_spec [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec, ::Hash]
             #     The specification for personalization.
+            #   @param labels [::Hash{::String => ::String}]
+            #     The labels applied to a resource must meet the following requirements:
+            #
+            #     * Each resource can have multiple labels, up to a maximum of 64.
+            #     * Each label must be a key-value pair.
+            #     * Keys have a minimum length of 1 character and a maximum length of 63
+            #       characters and cannot be empty. Values can be empty and have a maximum
+            #       length of 63 characters.
+            #     * Keys and values can contain only lowercase letters, numeric characters,
+            #       underscores, and dashes. All characters must use UTF-8 encoding, and
+            #       international characters are allowed.
+            #     * The key portion of a label must be unique. However, you can use the same
+            #       key with multiple resources.
+            #     * Keys must start with a lowercase letter or international character.
+            #
+            #     See [Google Cloud
+            #     Document](https://cloud.google.com/resource-manager/docs/creating-managing-labels#requirements)
+            #     for more details.
+            #   @param spell_correction_spec [::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec, ::Hash]
+            #     The spell correction specification that specifies the mode under
+            #     which spell correction will take effect.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Retail::V2::SearchResponse::SearchResult>]

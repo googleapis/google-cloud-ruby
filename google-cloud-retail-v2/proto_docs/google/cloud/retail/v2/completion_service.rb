@@ -78,9 +78,9 @@ module Google
         #
         #     * user-data
         #
-        #     * cloud-retail
-        #       This option requires additional allowlisting. Before using cloud-retail,
-        #       contact Cloud Retail support team first.
+        #     * cloud-retail:
+        #       This option requires enabling auto-learning function first. See
+        #       [guidelines](https://cloud.google.com/retail/docs/completion-overview#generated-completion-dataset).
         # @!attribute [rw] max_suggestions
         #   @return [::Integer]
         #     Completion max suggestions. If left unset or set to 0, then will fallback
@@ -114,11 +114,15 @@ module Google
         #     {::Google::Cloud::Retail::V2::CompleteQueryRequest#visitor_id CompleteQueryRequest.visitor_id}
         #     field is set and {::Google::Cloud::Retail::V2::UserEvent UserEvent} is imported.
         #     The recent searches satisfy the follow rules:
+        #
         #      * They are ordered from latest to oldest.
+        #
         #      * They are matched with
         #      {::Google::Cloud::Retail::V2::CompleteQueryRequest#query CompleteQueryRequest.query}
         #      case insensitively.
+        #
         #      * They are transformed to lower cases.
+        #
         #      * They are UTF-8 safe.
         #
         #     Recent searches are deduplicated. More recent searches will be reserved
@@ -134,10 +138,13 @@ module Google
           # @!attribute [rw] attributes
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Retail::V2::CustomAttribute}]
           #     Custom attributes for the suggestion term.
+          #
           #     * For "user-data", the attributes are additional custom attributes
           #     ingested through BigQuery.
+          #
           #     * For "cloud-retail", the attributes are product attributes generated
-          #     by Cloud Retail.
+          #     by Cloud Retail. This is an experimental feature. Contact Retail Search
+          #     support team if you are interested in enabling it.
           class CompletionResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

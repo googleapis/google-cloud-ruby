@@ -39,6 +39,16 @@ module Google
         #     they took to trigger the predict request. Note that this user event detail
         #     won't be ingested to userEvent logs. Thus, a separate userEvent write
         #     request is required for event logging.
+        #
+        #     Don't set
+        #     {::Google::Cloud::Retail::V2::UserEvent#visitor_id UserEvent.visitor_id} or
+        #     {::Google::Cloud::Retail::V2::UserInfo#user_id UserInfo.user_id} to the same
+        #     fixed ID for different users. If you are trying to receive non-personalized
+        #     recommendations (not recommended; this can negatively impact model
+        #     performance), instead set
+        #     {::Google::Cloud::Retail::V2::UserEvent#visitor_id UserEvent.visitor_id} to a
+        #     random unique ID and leave
+        #     {::Google::Cloud::Retail::V2::UserInfo#user_id UserInfo.user_id} unset.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of results to return per page. Set this property
@@ -119,7 +129,7 @@ module Google
         #     * Each resource can have multiple labels, up to a maximum of 64.
         #     * Each label must be a key-value pair.
         #     * Keys have a minimum length of 1 character and a maximum length of 63
-        #       characters, and cannot be empty. Values can be empty, and have a maximum
+        #       characters and cannot be empty. Values can be empty and have a maximum
         #       length of 63 characters.
         #     * Keys and values can contain only lowercase letters, numeric characters,
         #       underscores, and dashes. All characters must use UTF-8 encoding, and
@@ -185,9 +195,9 @@ module Google
           #
           #     Possible values:
           #
-          #     * `product`: JSON representation of the product. Will be set if
+          #     * `product`: JSON representation of the product. Is set if
           #       `returnProduct` is set to true in `PredictRequest.params`.
-          #     * `score`: Prediction score in double value. Will be set if
+          #     * `score`: Prediction score in double value. Is set if
           #       `returnScore` is set to true in `PredictRequest.params`.
           class PredictionResult
             include ::Google::Protobuf::MessageExts
