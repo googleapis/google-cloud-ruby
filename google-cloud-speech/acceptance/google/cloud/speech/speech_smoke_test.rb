@@ -51,7 +51,7 @@ class SpeechSmokeTest < Minitest::Test
     assert ops.count > 0
     op = speech_client.operations_client.get_operation name: op.name
     retry_config = { initial_delay: 1, multiplier: 2, max_delay: 2, timeout: 10 }
-    op.wait_until_done! retry_config
+    op.wait_until_done! retry_policy: retry_config
     assert op.response?
     refute_equal 0, op.response.results.size
   end
