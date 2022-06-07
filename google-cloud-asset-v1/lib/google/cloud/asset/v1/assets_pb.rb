@@ -3,18 +3,17 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/orgpolicy/v1/orgpolicy_pb'
+require 'google/cloud/osconfig/v1/inventory_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/identity/accesscontextmanager/v1/access_level_pb'
 require 'google/identity/accesscontextmanager/v1/access_policy_pb'
-require 'google/cloud/osconfig/v1/inventory_pb'
 require 'google/identity/accesscontextmanager/v1/service_perimeter_pb'
-require 'google/protobuf/any_pb'
 require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/code_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/asset/v1/assets.proto", :syntax => :proto3) do
@@ -45,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :org_policy, :message, 6, "google.cloud.orgpolicy.v1.Policy"
       optional :os_inventory, :message, 12, "google.cloud.osconfig.v1.Inventory"
       optional :related_assets, :message, 13, "google.cloud.asset.v1.RelatedAssets"
+      optional :related_asset, :message, 15, "google.cloud.asset.v1.RelatedAsset"
       repeated :ancestors, :string, 10
       oneof :access_context_policy do
         optional :access_policy, :message, 7, "google.identity.accesscontextmanager.v1.AccessPolicy"
@@ -75,6 +75,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :asset, :string, 1
       optional :asset_type, :string, 2
       repeated :ancestors, :string, 3
+      optional :relationship_type, :string, 4
     end
     add_message "google.cloud.asset.v1.ResourceSearchResult" do
       optional :name, :string, 1
@@ -96,6 +97,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :versioned_resources, :message, 16, "google.cloud.asset.v1.VersionedResource"
       repeated :attached_resources, :message, 20, "google.cloud.asset.v1.AttachedResource"
       map :relationships, :string, :message, 21, "google.cloud.asset.v1.RelatedResources"
+      repeated :tag_keys, :string, 23
+      repeated :tag_values, :string, 25
+      repeated :tag_value_ids, :string, 26
       optional :parent_asset_type, :string, 103
     end
     add_message "google.cloud.asset.v1.VersionedResource" do
