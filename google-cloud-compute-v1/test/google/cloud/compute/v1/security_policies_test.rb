@@ -73,6 +73,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
     project = "hello world"
     security_policy = "hello world"
     security_policy_rule_resource = {}
+    validate_only = true
 
     add_rule_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
       assert_equal :post, verb
@@ -81,6 +82,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
 
+      assert params.key? "validateOnly"
       refute_nil body
     end
 
@@ -91,27 +93,27 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.add_rule({ project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource }) do |result, response|
+      client.add_rule({ project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.add_rule project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource do |result, response|
+      client.add_rule project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.add_rule ::Google::Cloud::Compute::V1::AddRuleSecurityPolicyRequest.new(project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource) do |result, response|
+      client.add_rule ::Google::Cloud::Compute::V1::AddRuleSecurityPolicyRequest.new(project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.add_rule({ project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource }, call_options) do |result, response|
+      client.add_rule({ project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.add_rule(::Google::Cloud::Compute::V1::AddRuleSecurityPolicyRequest.new(project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource), call_options) do |result, response|
+      client.add_rule(::Google::Cloud::Compute::V1::AddRuleSecurityPolicyRequest.new(project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -374,6 +376,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
     project = "hello world"
     request_id = "hello world"
     security_policy_resource = {}
+    validate_only = true
 
     insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
       assert_equal :post, verb
@@ -383,6 +386,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
 
       assert params.key? "requestId"
+      assert params.key? "validateOnly"
       refute_nil body
     end
 
@@ -393,27 +397,27 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.insert({ project: project, request_id: request_id, security_policy_resource: security_policy_resource }) do |result, response|
+      client.insert({ project: project, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, request_id: request_id, security_policy_resource: security_policy_resource do |result, response|
+      client.insert project: project, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy_resource: security_policy_resource) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, request_id: request_id, security_policy_resource: security_policy_resource }, call_options) do |result, response|
+      client.insert({ project: project, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy_resource: security_policy_resource), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertSecurityPolicyRequest.new(project: project, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only), call_options) do |result, response|
         assert_equal http_response, response
       end
 
@@ -626,6 +630,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
     project = "hello world"
     security_policy = "hello world"
     security_policy_rule_resource = {}
+    validate_only = true
 
     patch_rule_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
       assert_equal :post, verb
@@ -635,6 +640,7 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
 
       assert params.key? "priority"
+      assert params.key? "validateOnly"
       refute_nil body
     end
 
@@ -645,27 +651,27 @@ class ::Google::Cloud::Compute::V1::SecurityPolicies::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource }) do |result, response|
+      client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only }) do |result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch_rule priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource do |result, response|
+      client.patch_rule priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch_rule ::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource) do |result, response|
+      client.patch_rule ::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only) do |result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource }, call_options) do |result, response|
+      client.patch_rule({ priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only }, call_options) do |result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch_rule(::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource), call_options) do |result, response|
+      client.patch_rule(::Google::Cloud::Compute::V1::PatchRuleSecurityPolicyRequest.new(priority: priority, project: project, security_policy: security_policy, security_policy_rule_resource: security_policy_rule_resource, validate_only: validate_only), call_options) do |result, response|
         assert_equal http_response, response
       end
 
