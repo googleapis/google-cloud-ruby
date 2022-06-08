@@ -1,5 +1,15 @@
 # Release History
 
+### 0.19.0 (2022-06-08)
+
+#### Features
+
+* Added a call to get effective IAM policies for a batch of resources
+* Added relationship_type field to RelatedAsset
+* Added support for saved analysis queries
+* Added tag key and value fields to search results
+* Deprecated Asset#related_assets and replaced with Asset#related_asset
+
 ### 0.18.0 (2022-04-20)
 
 #### Features
