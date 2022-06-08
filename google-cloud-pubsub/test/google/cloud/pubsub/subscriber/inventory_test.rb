@@ -13,7 +13,7 @@
 # limitations under the License.
 
 require "helper"
-require 'ostruct'
+require "ostruct"
 
 describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
   let(:topic_name) { "topic-name-goes-here" }
@@ -179,7 +179,7 @@ describe Google::Cloud::PubSub::Subscriber, :inventory, :mock_pubsub do
                                                                  use_legacy_flow_control: false
 
     inventory.add rec_msg1_grpc
-    delay = inventory.send(:calc_delay)
+    delay = inventory.send :calc_delay
     assert_equal 61, delay
   end
 
