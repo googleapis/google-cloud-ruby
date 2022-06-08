@@ -55,10 +55,11 @@ module Google
               def add_rule request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, _query_string_params = transcode_add_rule_request request_pb
+                uri, body, query_string_params = transcode_add_rule_request request_pb
                 response = @client_stub.make_post_request(
                   uri:     uri,
                   body:    body,
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
@@ -78,6 +79,7 @@ module Google
                 uri = "/compute/v1/projects/#{request_pb.project}/global/securityPolicies/#{request_pb.security_policy}/addRule"
                 body = request_pb.security_policy_rule_resource.to_json
                 query_string_params = {}
+                query_string_params["validateOnly"] = request_pb.validate_only.to_s if request_pb.has_validate_only?
 
                 [uri, body, query_string_params]
               end
@@ -307,6 +309,7 @@ module Google
                 body = request_pb.security_policy_resource.to_json
                 query_string_params = {}
                 query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
+                query_string_params["validateOnly"] = request_pb.validate_only.to_s if request_pb.has_validate_only?
 
                 [uri, body, query_string_params]
               end
@@ -497,6 +500,7 @@ module Google
                 body = request_pb.security_policy_rule_resource.to_json
                 query_string_params = {}
                 query_string_params["priority"] = request_pb.priority.to_s if request_pb.has_priority?
+                query_string_params["validateOnly"] = request_pb.validate_only.to_s if request_pb.has_validate_only?
 
                 [uri, body, query_string_params]
               end

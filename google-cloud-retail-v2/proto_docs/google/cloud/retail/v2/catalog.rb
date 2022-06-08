@@ -34,10 +34,10 @@ module Google
         #       default to
         #       {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Product.Type.PRIMARY} if
         #       unset.
-        #     * `variant`: You can only ingest
-        #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT Product.Type.VARIANT}
-        #     {::Google::Cloud::Retail::V2::Product Product}s.
-        #       This means
+        #     * `variant` (incompatible with Retail Search): You can only
+        #       ingest
+        #       {::Google::Cloud::Retail::V2::Product::Type::VARIANT Product.Type.VARIANT}
+        #       {::Google::Cloud::Retail::V2::Product Product}s. This means
         #       {::Google::Cloud::Retail::V2::Product#primary_product_id Product.primary_product_id}
         #       cannot be empty.
         #
@@ -48,8 +48,8 @@ module Google
         #     {::Google::Cloud::Retail::V2::ProductLevelConfig#merchant_center_product_id_field merchant_center_product_id_field}
         #     is `itemGroupId`, an INVALID_ARGUMENT error is returned.
         #
-        #     See [Using product
-        #     levels](https://cloud.google.com/retail/recommendations-ai/docs/catalog#product-levels)
+        #     See [Product
+        #     levels](https://cloud.google.com/retail/docs/catalog#product-levels)
         #     for more details.
         # @!attribute [rw] merchant_center_product_id_field
         #   @return [::String]
@@ -70,8 +70,8 @@ module Google
         #     {::Google::Cloud::Retail::V2::ProductLevelConfig#ingestion_product_type ingestion_product_type}
         #     is `variant`, an INVALID_ARGUMENT error is returned.
         #
-        #     See [Using product
-        #     levels](https://cloud.google.com/retail/recommendations-ai/docs/catalog#product-levels)
+        #     See [Product
+        #     levels](https://cloud.google.com/retail/docs/catalog#product-levels)
         #     for more details.
         class ProductLevelConfig
           include ::Google::Protobuf::MessageExts

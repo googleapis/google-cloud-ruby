@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/talent/v4beta1"
 
-client = ::Google::Cloud::Talent::V4beta1::ApplicationService::Client.new
-request = ::Google::Cloud::Talent::V4beta1::CreateApplicationRequest.new # (request fields as keyword arguments...)
-response = client.create_application request
+client = ::Google::Cloud::Talent::V4beta1::CompanyService::Client.new
+request = ::Google::Cloud::Talent::V4beta1::CreateCompanyRequest.new # (request fields as keyword arguments...)
+response = client.create_company request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-talent-v4beta1/latest)

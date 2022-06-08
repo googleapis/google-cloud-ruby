@@ -115,11 +115,13 @@ module Google
         #     Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] searchable
         #   @return [::Boolean]
-        #     This field will only be used when
+        #     This field is normally ignored unless
         #     [AttributesConfig.attribute_config_level][] of the
-        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is
-        #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG', if true, custom attribute values are
-        #     searchable by text queries in
+        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is set to the deprecated
+        #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG' mode. For information about product-level
+        #     attribute configuration, see [Configuration
+        #     modes](https://cloud.google.com/retail/docs/attribute-config#config-modes).
+        #     If true, custom attribute values are searchable by text queries in
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
         #
         #     This field is ignored in a {::Google::Cloud::Retail::V2::UserEvent UserEvent}.
@@ -128,11 +130,14 @@ module Google
         #     set. Otherwise, a INVALID_ARGUMENT error is returned.
         # @!attribute [rw] indexable
         #   @return [::Boolean]
-        #     This field will only be used when
+        #     This field is normally ignored unless
         #     [AttributesConfig.attribute_config_level][] of the
-        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is
-        #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG', if true, custom attribute values are
-        #     indexed, so that it can be filtered, faceted or boosted in
+        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is set to the deprecated
+        #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG' mode. For information about product-level
+        #     attribute configuration, see [Configuration
+        #     modes](https://cloud.google.com/retail/docs/attribute-config#config-modes).
+        #     If true, custom attribute values are indexed, so that they can be filtered,
+        #     faceted or boosted in
         #     {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search}.
         #
         #     This field is ignored in a {::Google::Cloud::Retail::V2::UserEvent UserEvent}.
@@ -260,7 +265,10 @@ module Google
         # @!attribute [rw] original_price
         #   @return [::Float]
         #     Price of the product without any discount. If zero, by default set to be
-        #     the {::Google::Cloud::Retail::V2::PriceInfo#price price}.
+        #     the {::Google::Cloud::Retail::V2::PriceInfo#price price}. If set,
+        #     {::Google::Cloud::Retail::V2::PriceInfo#original_price original_price} should be
+        #     greater than or equal to {::Google::Cloud::Retail::V2::PriceInfo#price price},
+        #     otherwise an INVALID_ARGUMENT error is thrown.
         # @!attribute [rw] cost
         #   @return [::Float]
         #     The costs associated with the sale of a particular product. Used for gross
@@ -373,9 +381,13 @@ module Google
         # @!attribute [rw] user_id
         #   @return [::String]
         #     Highly recommended for logged-in users. Unique identifier for logged-in
-        #     user, such as a user name.
+        #     user, such as a user name. Don't set for anonymous users.
         #
         #     Always use a hashed value for this ID.
+        #
+        #     Don't set the field to the same fixed ID for different users. This mixes
+        #     the event history of those users together, which results in degraded
+        #     model quality.
         #
         #     The field must be a UTF-8 encoded string with a length limit of 128
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.

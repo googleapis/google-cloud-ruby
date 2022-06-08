@@ -99,7 +99,6 @@ module Google
 
           # MITRE ATT&CK techniques that can be referenced by SCC findings.
           # See: https://attack.mitre.org/techniques/enterprise/
-          # Next ID: 31
           module Technique
             # Unspecified value.
             TECHNIQUE_UNSPECIFIED = 0
@@ -193,6 +192,9 @@ module Google
 
             # T1484
             DOMAIN_POLICY_MODIFICATION = 30
+
+            # T1562
+            IMPAIR_DEFENSES = 31
           end
         end
       end

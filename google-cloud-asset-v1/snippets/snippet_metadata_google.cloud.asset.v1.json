@@ -530,6 +530,246 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_CreateSavedQuery_sync",
+      "title": "Snippet for create_saved_query in AssetService",
+      "description": "Basic snippet for create_saved_query in AssetService",
+      "file": "asset_service/create_saved_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_saved_query",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#create_saved_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::CreateSavedQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::SavedQuery",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "CreateSavedQuery",
+          "full_name": "google.cloud.asset.v1.AssetService.CreateSavedQuery",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_GetSavedQuery_sync",
+      "title": "Snippet for get_saved_query in AssetService",
+      "description": "Basic snippet for get_saved_query in AssetService",
+      "file": "asset_service/get_saved_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_saved_query",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#get_saved_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::GetSavedQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::SavedQuery",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "GetSavedQuery",
+          "full_name": "google.cloud.asset.v1.AssetService.GetSavedQuery",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_ListSavedQueries_sync",
+      "title": "Snippet for list_saved_queries in AssetService",
+      "description": "Basic snippet for list_saved_queries in AssetService",
+      "file": "asset_service/list_saved_queries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_saved_queries",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#list_saved_queries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::ListSavedQueriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::ListSavedQueriesResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "ListSavedQueries",
+          "full_name": "google.cloud.asset.v1.AssetService.ListSavedQueries",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_UpdateSavedQuery_sync",
+      "title": "Snippet for update_saved_query in AssetService",
+      "description": "Basic snippet for update_saved_query in AssetService",
+      "file": "asset_service/update_saved_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_saved_query",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#update_saved_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::UpdateSavedQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::SavedQuery",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "UpdateSavedQuery",
+          "full_name": "google.cloud.asset.v1.AssetService.UpdateSavedQuery",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_DeleteSavedQuery_sync",
+      "title": "Snippet for delete_saved_query in AssetService",
+      "description": "Basic snippet for delete_saved_query in AssetService",
+      "file": "asset_service/delete_saved_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_saved_query",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#delete_saved_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::DeleteSavedQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "DeleteSavedQuery",
+          "full_name": "google.cloud.asset.v1.AssetService.DeleteSavedQuery",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_BatchGetEffectiveIamPolicies_sync",
+      "title": "Snippet for batch_get_effective_iam_policies in AssetService",
+      "description": "Basic snippet for batch_get_effective_iam_policies in AssetService",
+      "file": "asset_service/batch_get_effective_iam_policies.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_get_effective_iam_policies",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "BatchGetEffectiveIamPolicies",
+          "full_name": "google.cloud.asset.v1.AssetService.BatchGetEffectiveIamPolicies",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

@@ -61,6 +61,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MODIFY_AUTHENTICATION_PROCESS, 28
       value :DATA_DESTRUCTION, 29
       value :DOMAIN_POLICY_MODIFICATION, 30
+      value :IMPAIR_DEFENSES, 31
     end
   end
 end

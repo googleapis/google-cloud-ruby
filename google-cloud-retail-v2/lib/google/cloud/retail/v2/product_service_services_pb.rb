@@ -46,7 +46,7 @@ module Google
             rpc :DeleteProduct, ::Google::Cloud::Retail::V2::DeleteProductRequest, ::Google::Protobuf::Empty
             # Bulk import of multiple [Product][google.cloud.retail.v2.Product]s.
             #
-            # Request processing may be synchronous. No partial updating is supported.
+            # Request processing may be synchronous.
             # Non-existing items are created.
             #
             # Note that it is possible for a subset of the
@@ -86,7 +86,7 @@ module Google
             #
             # Pre-existing inventory information can only be updated with
             # [SetInventory][google.cloud.retail.v2.ProductService.SetInventory],
-            # [AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces],
+            # [ProductService.AddFulfillmentPlaces][google.cloud.retail.v2.ProductService.AddFulfillmentPlaces],
             # and
             # [RemoveFulfillmentPlaces][google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces].
             #

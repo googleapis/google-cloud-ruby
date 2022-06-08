@@ -489,7 +489,7 @@ module Google
             #   @param function [::Google::Cloud::Functions::V1::CloudFunction, ::Hash]
             #     Required. New version of the function.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required list of fields to be updated in this request.
+            #     Required. The list of fields in `CloudFunction` that have to be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -785,7 +785,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload generate_upload_url(parent: nil)
+            # @overload generate_upload_url(parent: nil, kms_key_name: nil)
             #   Pass arguments to `generate_upload_url` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -793,6 +793,24 @@ module Google
             #   @param parent [::String]
             #     The project and location in which the Google Cloud Storage signed URL
             #     should be generated, specified in the format `projects/*/locations/*`.
+            #   @param kms_key_name [::String]
+            #     Resource name of a KMS crypto key (managed by the user) used to
+            #     encrypt/decrypt function source code objects in staging Cloud Storage
+            #     buckets. When you generate an upload url and upload your source code, it
+            #     gets copied to a staging Cloud Storage bucket in an internal regional
+            #     project. The source code is then copied to a versioned directory in the
+            #     sources bucket in the consumer project during the function deployment.
+            #
+            #     It must match the pattern
+            #     `projects/{project}/locations/{location}/keyRings/{key_ring}/cryptoKeys/{crypto_key}`.
+            #
+            #     The Google Cloud Functions service account
+            #     (service-\\{project_number}@gcf-admin-robot.iam.gserviceaccount.com) must be
+            #     granted the role 'Cloud KMS CryptoKey Encrypter/Decrypter
+            #     (roles/cloudkms.cryptoKeyEncrypterDecrypter)' on the
+            #     Key/KeyRing/Project/Organization (least access preferred). GCF will
+            #     delegate access to the Google Storage service account in the internal
+            #     project.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Functions::V1::GenerateUploadUrlResponse]

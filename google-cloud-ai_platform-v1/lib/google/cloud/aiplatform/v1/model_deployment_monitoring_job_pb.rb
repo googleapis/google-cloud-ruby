@@ -73,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.ModelDeploymentMonitoringScheduleConfig" do
       optional :monitor_interval, :message, 1, "google.protobuf.Duration"
+      optional :monitor_window, :message, 2, "google.protobuf.Duration"
     end
     add_message "google.cloud.aiplatform.v1.ModelMonitoringStatsAnomalies" do
       optional :objective, :enum, 1, "google.cloud.aiplatform.v1.ModelDeploymentMonitoringObjectiveType"

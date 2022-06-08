@@ -142,8 +142,14 @@ module Google
         #     for more information.
         # @!attribute [rw] related_assets
         #   @return [::Google::Cloud::Asset::V1::RelatedAssets]
-        #     The related assets of the asset of one relationship type.
-        #     One asset only represents one type of relationship.
+        #     DEPRECATED. This field only presents for the purpose of
+        #     backward-compatibility. The server will never generate responses with this
+        #     field.
+        #     The related assets of the asset of one relationship type. One asset
+        #     only represents one type of relationship.
+        # @!attribute [rw] related_asset
+        #   @return [::Google::Cloud::Asset::V1::RelatedAsset]
+        #     One related asset of the current asset.
         # @!attribute [rw] ancestors
         #   @return [::Array<::String>]
         #     The ancestry path of an asset in Google Cloud [resource
@@ -212,6 +218,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DEPRECATED. This message only presents for the purpose of
+        # backward-compatibility. The server will never populate this message in
+        # responses.
         # The detailed related assets with the `relationship_type`.
         # @!attribute [rw] relationship_attributes
         #   @return [::Google::Cloud::Asset::V1::RelationshipAttributes]
@@ -224,6 +233,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # DEPRECATED. This message only presents for the purpose of
+        # backward-compatibility. The server will never populate this message in
+        # responses.
         # The relationship attributes which include  `type`, `source_resource_type`,
         # `target_resource_type` and `action`.
         # @!attribute [rw] type
@@ -244,7 +256,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An asset identify in Google Cloud which contains its name, type and
+        # An asset identifier in Google Cloud which contains its name, type and
         # ancestors. An asset can be any resource in the Google Cloud [resource
         # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
         # a resource outside the Google Cloud resource hierarchy (such as Google
@@ -275,6 +287,10 @@ module Google
         #     with the closest ancestor in the hierarchy and ends at root.
         #
         #     Example: `["projects/123456789", "folders/5432", "organizations/1234"]`
+        # @!attribute [rw] relationship_type
+        #   @return [::String]
+        #     The unique identifier of the relationship type. Example:
+        #     `INSTANCE_TO_INSTANCEGROUP`
         class RelatedAsset
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -336,7 +352,7 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of this resource. This field is available only when the
-        #     resource's proto contains it.
+        #     resource's Protobuf contains it.
         #
         #     To search against the `display_name`:
         #
@@ -346,7 +362,7 @@ module Google
         #   @return [::String]
         #     One or more paragraphs of text description of this resource. Maximum length
         #     could be up to 1M bytes. This field is available only when the resource's
-        #     proto contains it.
+        #     Protobuf contains it.
         #
         #     To search against the `description`:
         #
@@ -355,7 +371,7 @@ module Google
         # @!attribute [rw] location
         #   @return [::String]
         #     Location can be `global`, regional like `us-east1`, or zonal like
-        #     `us-west1-b`. This field is available only when the resource's proto
+        #     `us-west1-b`. This field is available only when the resource's Protobuf
         #     contains it.
         #
         #     To search against the `location`:
@@ -367,7 +383,7 @@ module Google
         #     Labels associated with this resource. See [Labelling and grouping GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
         #     for more information. This field is available only when the resource's
-        #     proto contains it.
+        #     Protobuf contains it.
         #
         #     To search against the `labels`:
         #
@@ -382,7 +398,7 @@ module Google
         #     type of annotations used to group GCP resources. See [Labelling GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
         #     for more information. This field is available only when the resource's
-        #     proto contains it.
+        #     Protobuf contains it.
         #
         #     To search against the `network_tags`:
         #
@@ -391,10 +407,11 @@ module Google
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     The Cloud KMS
-        #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys?hl=en)
+        #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
         #     name or
-        #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions?hl=en)
-        #     name. This field is available only when the resource's proto contains it.
+        #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
+        #     name. This field is available only when the resource's Protobuf contains
+        #     it.
         #
         #     To search against the `kms_key`:
         #
@@ -404,7 +421,7 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     The create timestamp of this resource, at which the resource was created.
         #     The granularity is in seconds. Timestamp.nanos will always be 0. This field
-        #     is available only when the resource's proto contains it.
+        #     is available only when the resource's Protobuf contains it.
         #
         #     To search against `create_time`:
         #
@@ -417,7 +434,7 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     The last update timestamp of this resource, at which the resource was last
         #     modified or deleted. The granularity is in seconds. Timestamp.nanos will
-        #     always be 0. This field is available only when the resource's proto
+        #     always be 0. This field is available only when the resource's Protobuf
         #     contains it.
         #
         #     To search against `update_time`:
@@ -431,7 +448,8 @@ module Google
         #   @return [::String]
         #     The state of this resource. Different resources types have different state
         #     definitions that are mapped from various fields of different resource
-        #     types. This field is available only when the resource's proto contains it.
+        #     types. This field is available only when the resource's Protobuf contains
+        #     it.
         #
         #     Example:
         #     If the resource is an instance provided by Compute Engine,
@@ -504,6 +522,43 @@ module Google
         #     `DISK_TO_NETWORK`, `INSTANCE_TO_INSTANCEGROUP`.
         #     See [supported relationship
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#supported_relationship_types).
+        # @!attribute [rw] tag_keys
+        #   @return [::Array<::String>]
+        #     TagKey namespaced names, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
+        #     To search against the `tagKeys`:
+        #
+        #     * use a field query. Example:
+        #         - `tagKeys:"123456789/env*"`
+        #         - `tagKeys="123456789/env"`
+        #         - `tagKeys:"env"`
+        #
+        #     * use a free text query. Example:
+        #         - `env`
+        # @!attribute [rw] tag_values
+        #   @return [::Array<::String>]
+        #     TagValue namespaced names, in the format of
+        #     \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}/\\{TAG_VALUE_SHORT_NAME}.
+        #     To search against the `tagValues`:
+        #
+        #     * use a field query. Example:
+        #         - `tagValues:"env"`
+        #         - `tagValues:"env/prod"`
+        #         - `tagValues:"123456789/env/prod*"`
+        #         - `tagValues="123456789/env/prod"`
+        #
+        #     * use a free text query. Example:
+        #         - `prod`
+        # @!attribute [rw] tag_value_ids
+        #   @return [::Array<::String>]
+        #     TagValue IDs, in the format of tagValues/\\{TAG_VALUE_ID}.
+        #     To search against the `tagValueIds`:
+        #
+        #     * use a field query. Example:
+        #         - `tagValueIds:"456"`
+        #         - `tagValueIds="tagValues/456"`
+        #
+        #     * use a free text query. Example:
+        #         - `456`
         # @!attribute [rw] parent_asset_type
         #   @return [::String]
         #     The type of this resource's immediate parent, if there is one.
@@ -771,22 +826,28 @@ module Google
         #   @return [::String]
         #     The [full resource
         #     name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
-        #     of the resource to which the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} policy attaches.
+        #     of the resource to which the
+        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
+        #     policy attaches.
         # @!attribute [rw] iam_binding
         #   @return [::Google::Iam::V1::Binding]
         #     The Cloud IAM policy binding under analysis.
         # @!attribute [rw] access_control_lists
         #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::AccessControlList>]
-        #     The access control lists derived from the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} that match or
-        #     potentially match resource and access selectors specified in the request.
+        #     The access control lists derived from the
+        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
+        #     that match or potentially match resource and access selectors specified in
+        #     the request.
         # @!attribute [rw] identity_list
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList]
-        #     The identity list derived from members of the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} that match or
-        #     potentially match identity selector specified in the request.
+        #     The identity list derived from members of the
+        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
+        #     that match or potentially match identity selector specified in the request.
         # @!attribute [rw] fully_explored
         #   @return [::Boolean]
-        #     Represents whether all analyses on the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} have successfully
-        #     finished.
+        #     Represents whether all analyses on the
+        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
+        #     have successfully finished.
         class IamPolicyAnalysisResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -883,8 +944,10 @@ module Google
           # @!attribute [rw] resource_edges
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
           #     Resource edges of the graph starting from the policy attached
-          #     resource to any descendant resources. The {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node} contains
-          #     the full resource name of a parent resource and {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
+          #     resource to any descendant resources. The
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
+          #     contains the full resource name of a parent resource and
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
           #     contains the full resource name of a child resource. This field is
           #     present only if the output_resource_edges option is enabled in request.
           # @!attribute [rw] condition_evaluation
@@ -906,12 +969,15 @@ module Google
           # @!attribute [rw] group_edges
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
           #     Group identity edges of the graph starting from the binding's
-          #     group members to any node of the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList#identities identities}. The {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
+          #     group members to any node of the
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList#identities identities}.
+          #     The
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
           #     contains a group, such as `group:parent@google.com`. The
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node} contains a member of the group,
-          #     such as `group:child@google.com` or `user:foo@google.com`.
-          #     This field is present only if the output_group_edges option is enabled in
-          #     request.
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
+          #     contains a member of the group, such as `group:child@google.com` or
+          #     `user:foo@google.com`. This field is present only if the
+          #     output_group_edges option is enabled in request.
           class IdentityList
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

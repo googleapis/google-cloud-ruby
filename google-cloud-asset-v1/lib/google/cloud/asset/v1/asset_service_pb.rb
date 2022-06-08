@@ -8,11 +8,11 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/asset/v1/assets_pb'
+require 'google/iam/v1/policy_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 require 'google/type/expr_pb'
@@ -190,6 +190,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.asset.v1.AnalyzeIamPolicyRequest" do
       optional :analysis_query, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisQuery"
+      optional :saved_analysis_query, :string, 3
       optional :execution_timeout, :message, 2, "google.protobuf.Duration"
     end
     add_message "google.cloud.asset.v1.AnalyzeIamPolicyResponse" do
@@ -224,9 +225,50 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest" do
       optional :analysis_query, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisQuery"
+      optional :saved_analysis_query, :string, 3
       optional :output_config, :message, 2, "google.cloud.asset.v1.IamPolicyAnalysisOutputConfig"
     end
     add_message "google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse" do
+    end
+    add_message "google.cloud.asset.v1.SavedQuery" do
+      optional :name, :string, 1
+      optional :description, :string, 2
+      optional :create_time, :message, 3, "google.protobuf.Timestamp"
+      optional :creator, :string, 4
+      optional :last_update_time, :message, 5, "google.protobuf.Timestamp"
+      optional :last_updater, :string, 6
+      map :labels, :string, :string, 7
+      optional :content, :message, 8, "google.cloud.asset.v1.SavedQuery.QueryContent"
+    end
+    add_message "google.cloud.asset.v1.SavedQuery.QueryContent" do
+      oneof :query_content do
+        optional :iam_policy_analysis_query, :message, 1, "google.cloud.asset.v1.IamPolicyAnalysisQuery"
+      end
+    end
+    add_message "google.cloud.asset.v1.CreateSavedQueryRequest" do
+      optional :parent, :string, 1
+      optional :saved_query, :message, 2, "google.cloud.asset.v1.SavedQuery"
+      optional :saved_query_id, :string, 3
+    end
+    add_message "google.cloud.asset.v1.GetSavedQueryRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.asset.v1.ListSavedQueriesRequest" do
+      optional :parent, :string, 1
+      optional :filter, :string, 4
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.cloud.asset.v1.ListSavedQueriesResponse" do
+      repeated :saved_queries, :message, 1, "google.cloud.asset.v1.SavedQuery"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.asset.v1.UpdateSavedQueryRequest" do
+      optional :saved_query, :message, 1, "google.cloud.asset.v1.SavedQuery"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.asset.v1.DeleteSavedQueryRequest" do
+      optional :name, :string, 1
     end
     add_message "google.cloud.asset.v1.AnalyzeMoveRequest" do
       optional :resource, :string, 1
@@ -254,6 +296,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.asset.v1.MoveImpact" do
       optional :detail, :string, 1
+    end
+    add_message "google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest" do
+      optional :scope, :string, 1
+      repeated :names, :string, 3
+    end
+    add_message "google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse" do
+      repeated :policy_results, :message, 2, "google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy"
+    end
+    add_message "google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy" do
+      optional :full_resource_name, :string, 1
+      repeated :policies, :message, 2, "google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo"
+    end
+    add_message "google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo" do
+      optional :attached_resource, :string, 1
+      optional :policy, :message, 2, "google.iam.v1.Policy"
     end
     add_enum "google.cloud.asset.v1.ContentType" do
       value :CONTENT_TYPE_UNSPECIFIED, 0
@@ -313,12 +370,24 @@ module Google
         IamPolicyAnalysisOutputConfig::BigQueryDestination::PartitionKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.IamPolicyAnalysisOutputConfig.BigQueryDestination.PartitionKey").enummodule
         AnalyzeIamPolicyLongrunningRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyLongrunningRequest").msgclass
         AnalyzeIamPolicyLongrunningResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeIamPolicyLongrunningResponse").msgclass
+        SavedQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SavedQuery").msgclass
+        SavedQuery::QueryContent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.SavedQuery.QueryContent").msgclass
+        CreateSavedQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.CreateSavedQueryRequest").msgclass
+        GetSavedQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.GetSavedQueryRequest").msgclass
+        ListSavedQueriesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ListSavedQueriesRequest").msgclass
+        ListSavedQueriesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ListSavedQueriesResponse").msgclass
+        UpdateSavedQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.UpdateSavedQueryRequest").msgclass
+        DeleteSavedQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.DeleteSavedQueryRequest").msgclass
         AnalyzeMoveRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeMoveRequest").msgclass
         AnalyzeMoveRequest::AnalysisView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeMoveRequest.AnalysisView").enummodule
         AnalyzeMoveResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.AnalyzeMoveResponse").msgclass
         MoveAnalysis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveAnalysis").msgclass
         MoveAnalysisResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveAnalysisResult").msgclass
         MoveImpact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveImpact").msgclass
+        BatchGetEffectiveIamPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest").msgclass
+        BatchGetEffectiveIamPoliciesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse").msgclass
+        BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy").msgclass
+        BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy.PolicyInfo").msgclass
         ContentType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.ContentType").enummodule
       end
     end

@@ -44,6 +44,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :secret_volumes, :message, 30, "google.cloud.functions.v1.SecretVolume"
       optional :source_token, :string, 31
       optional :docker_repository, :string, 34
+      optional :docker_registry, :enum, 35, "google.cloud.functions.v1.CloudFunction.DockerRegistry"
       oneof :source_code do
         optional :source_archive_url, :string, 3
         optional :source_repository, :message, 4, "google.cloud.functions.v1.SourceRepository"
@@ -64,6 +65,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ALLOW_ALL, 1
       value :ALLOW_INTERNAL_ONLY, 2
       value :ALLOW_INTERNAL_AND_GCLB, 3
+    end
+    add_enum "google.cloud.functions.v1.CloudFunction.DockerRegistry" do
+      value :DOCKER_REGISTRY_UNSPECIFIED, 0
+      value :CONTAINER_REGISTRY, 1
+      value :ARTIFACT_REGISTRY, 2
     end
     add_message "google.cloud.functions.v1.SourceRepository" do
       optional :url, :string, 1
@@ -142,6 +148,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.functions.v1.GenerateUploadUrlRequest" do
       optional :parent, :string, 1
+      optional :kms_key_name, :string, 2
     end
     add_message "google.cloud.functions.v1.GenerateUploadUrlResponse" do
       optional :upload_url, :string, 1
@@ -171,6 +178,7 @@ module Google
         CloudFunction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.CloudFunction").msgclass
         CloudFunction::VpcConnectorEgressSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.CloudFunction.VpcConnectorEgressSettings").enummodule
         CloudFunction::IngressSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.CloudFunction.IngressSettings").enummodule
+        CloudFunction::DockerRegistry = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.CloudFunction.DockerRegistry").enummodule
         SourceRepository = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.SourceRepository").msgclass
         HttpsTrigger = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.HttpsTrigger").msgclass
         HttpsTrigger::SecurityLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.functions.v1.HttpsTrigger.SecurityLevel").enummodule

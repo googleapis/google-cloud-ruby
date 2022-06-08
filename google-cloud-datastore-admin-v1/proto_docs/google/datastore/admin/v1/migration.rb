@@ -81,6 +81,9 @@ module Google
 
               # Optimistic concurrency.
               OPTIMISTIC = 2
+
+              # Optimistic concurrency with entity groups.
+              OPTIMISTIC_WITH_ENTITY_GROUPS = 3
             end
           end
 

@@ -566,6 +566,11 @@ module Google
             #
             #     If an unsupported or unknown field is provided, an INVALID_ARGUMENT error
             #     is returned.
+            #
+            #     The attribute key can be updated by setting the mask path as
+            #     "attributes.$\\{key_name}". If a key name is present in the mask but not in
+            #     the patching product from the request, this key will be deleted after the
+            #     update.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the {::Google::Cloud::Retail::V2::Product Product} is not
             #     found, a new {::Google::Cloud::Retail::V2::Product Product} will be created. In
@@ -743,7 +748,7 @@ module Google
             ##
             # Bulk import of multiple {::Google::Cloud::Retail::V2::Product Product}s.
             #
-            # Request processing may be synchronous. No partial updating is supported.
+            # Request processing may be synchronous.
             # Non-existing items are created.
             #
             # Note that it is possible for a subset of the
@@ -784,11 +789,18 @@ module Google
             #     imported. Defaults to
             #     {::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
             #   @param notification_pubsub_topic [::String]
-            #     Pub/Sub topic for receiving notification. If this field is set,
+            #     Full Pub/Sub topic name for receiving notification. If this field is set,
             #     when the import is finished, a notification will be sent to
             #     specified Pub/Sub topic. The message data will be JSON string of a
             #     {::Google::Longrunning::Operation Operation}.
-            #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
+            #
+            #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
+            #     to be within the same project as
+            #     {::Google::Cloud::Retail::V2::ImportProductsRequest#parent ImportProductsRequest.parent}.
+            #     Make sure that both
+            #     `cloud-retail-customer-data-access@system.gserviceaccount.com` and
+            #     `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
+            #     have the `pubsub.topics.publish` IAM permission on the topic.
             #
             #     Only supported when
             #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}
@@ -901,7 +913,7 @@ module Google
             #
             # Pre-existing inventory information can only be updated with
             # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory SetInventory},
-            # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places AddFulfillmentPlaces},
+            # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces},
             # and
             # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places RemoveFulfillmentPlaces}.
             #
@@ -1286,7 +1298,8 @@ module Google
             #     If this field is set to an invalid value other than these, an
             #     INVALID_ARGUMENT error is returned.
             #
-            #     This field directly corresponds to [Product.fulfillment_info.type][].
+            #     This field directly corresponds to
+            #     {::Google::Cloud::Retail::V2::FulfillmentInfo#type Product.fulfillment_info.type}.
             #   @param place_ids [::Array<::String>]
             #     Required. The IDs for this
             #     {::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest#type type}, such as
