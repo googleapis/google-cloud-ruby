@@ -53,6 +53,8 @@ module Google
         #   rule.storage_class #=> "COLDLINE"
         #   rule.age #=> 10
         #   rule.matches_storage_class #=> ["STANDARD", "NEARLINE"]
+        #   rule.matches_prefix #=> ["myprefix/foo"]
+        #   rule.matches_suffix #=> [".jpg", ".png"]
         #
         # @example Updating the bucket's lifecycle management rules in a block.
         #   require "google/cloud/storage"
@@ -138,6 +140,12 @@ module Google
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
           #   this version of the file.
+          # @param [Array<String,Symbol>] matches_prefix
+          #  Files having their name with the specified list of prefixs will be matched.
+          #  Arguments will be converted from symbols to strings.
+          # @param [Array<String,Symbol>] matches_suffix
+          #  Files having their name with the specified list of suffixes will be matched.
+          #  Arguments will be converted from symbols to strings.
           #
           # @example
           #   require "google/cloud/storage"
@@ -225,6 +233,12 @@ module Google
           #   files. If the value is N, this condition is satisfied when there
           #   are at least N versions (including the live version) newer than
           #   this version of the file.
+          # @param [Array<String,Symbol>] matches_prefix
+          #  Files having their name with the specified list of prefixs will be matched.
+          #  Arguments will be converted from symbols to strings.
+          # @param [Array<String,Symbol>] matches_suffix
+          #  Files having their name with the specified list of suffixes will be matched.
+          #  Arguments will be converted from symbols to strings.
           #
           # @example
           #   require "google/cloud/storage"
@@ -354,6 +368,8 @@ module Google
           #   rule.storage_class #=> "COLDLINE"
           #   rule.age #=> 10
           #   rule.matches_storage_class #=> ["STANDARD", "NEARLINE"]
+          #   rule.matches_prefix #=> ["myprefix/foo"]
+          #   rule.matches_suffix #=> [".jpg", ".png"]
           #
           # @example Updating the bucket's lifecycle rules in a block.
           #   require "google/cloud/storage"
