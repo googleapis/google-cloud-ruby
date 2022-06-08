@@ -42,10 +42,6 @@ module Google
         #   @return [::Google::Cloud::Talent::V4beta1::JobEvent]
         #     An event issued when a job seeker interacts with the application that
         #     implements Cloud Talent Solution.
-        # @!attribute [rw] profile_event
-        #   @return [::Google::Cloud::Talent::V4beta1::ProfileEvent]
-        #     An event issued when a profile searcher interacts with the application
-        #     that implements Cloud Talent Solution.
         # @!attribute [rw] event_notes
         #   @return [::String]
         #     Notes about the event provided by recruiters or other users, for example,
@@ -73,7 +69,7 @@ module Google
         #     example, "projects/foo/tenants/bar/jobs/baz".
         # @!attribute [rw] profile
         #   @return [::String]
-        #     The {::Google::Cloud::Talent::V4beta1::Profile#name profile name} associated with this client event.
+        #     The [profile name][google.cloud.talent.v4beta1.Profile.name] associated with this client event.
         #
         #     The format is
         #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}",
@@ -174,61 +170,6 @@ module Google
             # part of an application that was initiated by a search conducted through /
             # recommendation provided by the Cloud Talent Solution service.
             INTERVIEW_GRANTED = 15
-          end
-        end
-
-        # An event issued when a profile searcher interacts with the application
-        # that implements Cloud Talent Solution.
-        # @!attribute [rw] type
-        #   @return [::Google::Cloud::Talent::V4beta1::ProfileEvent::ProfileEventType]
-        #     Required. Type of event.
-        # @!attribute [rw] profiles
-        #   @return [::Array<::String>]
-        #     Required. The [profile name(s)][google.cloud.talent.v4beta1.Profile.name] associated with this client event.
-        #
-        #     The format is
-        #     "projects/\\{project_id}/tenants/\\{tenant_id}/profiles/\\{profile_id}",
-        #     for example, "projects/foo/tenants/bar/profiles/baz".
-        # @!attribute [rw] jobs
-        #   @return [::Array<::String>]
-        #     The [job name(s)][google.cloud.talent.v4beta1.Job.name] associated with this client event. Leave it
-        #     empty if the event isn't associated with a job.
-        #
-        #     The format is
-        #     "projects/\\{project_id}/tenants/\\{tenant_id}/jobs/\\{job_id}", for
-        #     example, "projects/foo/tenants/bar/jobs/baz".
-        class ProfileEvent
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # The enum represents types of client events for a candidate profile.
-          module ProfileEventType
-            # Default value.
-            PROFILE_EVENT_TYPE_UNSPECIFIED = 0
-
-            # Send this event when a {::Google::Cloud::Talent::V4beta1::ProfileEvent#profiles ProfileEvent.profiles} was sent as a part of
-            # a result set for a CTS API call and was rendered in the end user's UI
-            # (that is, the [ProfileEvent.recruiter][google.cloud.talent.v4beta1.ProfileEvent.recruiter]).
-            IMPRESSION = 1
-
-            # The VIEW event records the action of a candidate's profile being
-            # viewed by an end user. This is critical to tracking product metrics and
-            # should be sent for every profile VIEW that happens in your system,
-            # whether the event is associated with an API call (for example, a
-            # recruiter making a request for a result set and clicking on a profile)
-            # or not (a recruiter using the system to view profile details without
-            # making a request).
-            #
-            # For a VIEW events associated with API calls, the
-            # {::Google::Cloud::Talent::V4beta1::ClientEvent#request_id ClientEvent.request_id} should be populated.  If the VIEW is not
-            # associated with an API call, {::Google::Cloud::Talent::V4beta1::ClientEvent#request_id request_id} should
-            # not be populated.
-            #
-            # This event requires a valid recruiter and one valid ID in profiles.
-            VIEW = 2
-
-            # The profile is bookmarked.
-            BOOKMARK = 3
           end
         end
       end
