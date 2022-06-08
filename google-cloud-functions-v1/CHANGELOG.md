@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 (2022-06-08)
+
+#### Features
+
+* Added support for CMEK
+
 ### 0.6.0 (2022-04-20)
 
 #### Features
