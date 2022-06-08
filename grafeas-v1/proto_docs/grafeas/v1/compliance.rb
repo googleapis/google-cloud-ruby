@@ -60,6 +60,10 @@ module Grafeas
     #   @return [::String]
     #     The CPE URI (https://cpe.mitre.org/specification/) this benchmark is
     #     applicable to.
+    # @!attribute [rw] benchmark_document
+    #   @return [::String]
+    #     The name of the document that defines this benchmark, e.g. "CIS
+    #     Container-Optimized OS".
     # @!attribute [rw] version
     #   @return [::String]
     #     The version of the benchmark. This is set to the version of the OS-specific
