@@ -416,6 +416,10 @@ module Google
         #     to PartitionQuery will return up to 8 partitions and a `next_page_token`
         #     if more results exist. A second call to PartitionQuery will return up to
         #     2 partitions, to complete the total of 10 specified in `partition_count`.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Reads documents as they were at the given time.
+        #     This may not be older than 270 seconds.
         class PartitionQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -730,6 +734,10 @@ module Google
         #   @return [::String]
         #     A page token. Must be a value from
         #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Reads documents as they were at the given time.
+        #     This may not be older than 270 seconds.
         class ListCollectionIdsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
