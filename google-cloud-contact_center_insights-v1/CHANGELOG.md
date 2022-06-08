@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.7.2 (2022-06-08)
+
+#### Documentation
+
+* Update comments in contact_center_insights-v1
+
 ### 0.7.1 / 2022-01-21
 
 #### Documentation
