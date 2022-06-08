@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 (2022-06-08)
+
+#### Features
+
+* Support for the OPTIMISTIC_WITH_ENTITY_GROUPS concurrency mode
+
 ### 0.5.0 / 2022-01-11
 
 #### Features
