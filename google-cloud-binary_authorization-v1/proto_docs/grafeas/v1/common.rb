@@ -108,6 +108,44 @@ module Grafeas
       extend ::Google::Protobuf::MessageExts::ClassMethods
     end
 
+    # Indicates the location at which a package was found.
+    # @!attribute [rw] file_path
+    #   @return [::String]
+    #     For jars that are contained inside .war files, this filepath
+    #     can indicate the path to war file combined with the path to jar file.
+    class FileLocation
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # License information.
+    # @!attribute [rw] expression
+    #   @return [::String]
+    #     Often a single license can be used to represent the licensing terms.
+    #     Sometimes it is necessary to include a choice of one or more licenses
+    #     or some combination of license identifiers.
+    #     Examples: "LGPL-2.1-only OR MIT", "LGPL-2.1-only AND MIT",
+    #     "GPL-2.0-or-later WITH Bison-exception-2.2".
+    # @!attribute [rw] comments
+    #   @return [::String]
+    #     Comments
+    class License
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
+    # Digest information.
+    # @!attribute [rw] algo
+    #   @return [::String]
+    #     `SHA1`, `SHA512` etc.
+    # @!attribute [rw] digest_bytes
+    #   @return [::String]
+    #     Value of the digest.
+    class Digest
+      include ::Google::Protobuf::MessageExts
+      extend ::Google::Protobuf::MessageExts::ClassMethods
+    end
+
     # Kind represents the kinds of notes supported.
     module NoteKind
       # Default value. This value is unused.
