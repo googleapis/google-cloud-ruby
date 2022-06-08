@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2022-06-08)
+
+#### Features
+
+* Added creator_role field to Session
+
 ### 0.8.1 / 2022-03-21
 
 #### Bug Fixes
