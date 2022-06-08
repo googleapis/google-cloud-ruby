@@ -124,6 +124,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :query_type do
         optional :structured_query, :message, 2, "google.firestore.v1.StructuredQuery"
       end
+      oneof :consistency_selector do
+        optional :read_time, :message, 6, "google.protobuf.Timestamp"
+      end
     end
     add_message "google.firestore.v1.PartitionQueryResponse" do
       repeated :partitions, :message, 1, "google.firestore.v1.Cursor"
@@ -198,6 +201,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      oneof :consistency_selector do
+        optional :read_time, :message, 4, "google.protobuf.Timestamp"
+      end
     end
     add_message "google.firestore.v1.ListCollectionIdsResponse" do
       repeated :collection_ids, :string, 1

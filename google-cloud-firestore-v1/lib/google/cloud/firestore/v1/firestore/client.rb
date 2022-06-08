@@ -1138,7 +1138,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil)
+            # @overload partition_query(parent: nil, structured_query: nil, partition_count: nil, page_token: nil, page_size: nil, read_time: nil)
             #   Pass arguments to `partition_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1184,6 +1184,9 @@ module Google
             #     to PartitionQuery will return up to 8 partitions and a `next_page_token`
             #     if more results exist. A second call to PartitionQuery will return up to
             #     2 partitions, to complete the total of 10 specified in `partition_count`.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Reads documents as they were at the given time.
+            #     This may not be older than 270 seconds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Firestore::V1::Cursor>]
@@ -1425,7 +1428,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_collection_ids(parent: nil, page_size: nil, page_token: nil, read_time: nil)
             #   Pass arguments to `list_collection_ids` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1440,6 +1443,9 @@ module Google
             #   @param page_token [::String]
             #     A page token. Must be a value from
             #     {::Google::Cloud::Firestore::V1::ListCollectionIdsResponse ListCollectionIdsResponse}.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Reads documents as they were at the given time.
+            #     This may not be older than 270 seconds.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Firestore::V1::ListCollectionIdsResponse]
