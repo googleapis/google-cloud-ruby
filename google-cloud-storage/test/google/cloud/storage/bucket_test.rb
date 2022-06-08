@@ -38,8 +38,8 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
           },
           "condition" => {
             "age" => 32,
-            "matches_prefix" => ["blah"],
-            "matches_suffix" => ["bleh"]
+            "matchesPrefix" => ["blah"],
+            "matchesSuffix" => ["bleh"]
           }
         }
       ]
