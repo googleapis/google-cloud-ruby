@@ -1,5 +1,12 @@
 # Release History
 
+### 0.8.0 (2022-06-08)
+
+#### Features
+
+* Support for configuring spell correction in search requests
+* Support for searching by label
+
 ### 0.7.0 / 2022-03-30
 
 #### Features
