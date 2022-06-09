@@ -230,6 +230,26 @@ describe Google::Cloud::PubSub::Subscription, :listen, :mock_pubsub do
     _(subscriber.use_legacy_flow_control?).must_equal false
   end
 
+  it "will set inventory min_duration_per_lease_extension while creating a Subscriber" do
+    subscriber = subscription.listen inventory: { min_duration_per_lease_extension: 10 } do |msg|
+      puts msg.msg_id
+    end
+    _(subscriber).must_be_kind_of Google::Cloud::PubSub::Subscriber
+    _(subscriber.subscription_name).must_equal subscription.name
+    _(subscriber.deadline).must_equal 60
+    _(subscriber.streams).must_equal 2
+    _(subscriber.inventory).must_equal 1000
+    _(subscriber.inventory_limit).must_equal 1000
+    _(subscriber.max_outstanding_messages).must_equal 1000
+    _(subscriber.inventory_bytesize).must_equal 100000000
+    _(subscriber.max_outstanding_bytes).must_equal 100000000
+    _(subscriber.inventory_extension).must_equal 3600
+    _(subscriber.max_total_lease_duration).must_equal 3600
+    _(subscriber.max_duration_per_lease_extension).must_equal 0
+    _(subscriber.min_duration_per_lease_extension).must_equal 10
+    _(subscriber.use_legacy_flow_control?).must_equal false
+  end
+
   it "will use inventory use_legacy_flow_control while creating a Subscriber" do
     subscriber = subscription.listen inventory: { use_legacy_flow_control: true } do |msg|
       puts msg.msg_id
