@@ -1,5 +1,11 @@
 # Release History
 
+### 0.16.0 (2022-06-08)
+
+#### Features
+
+* Add compliances, processes and exfiltration fields to findings attributes
+
 ### 0.15.0 (2022-04-20)
 
 #### Features
