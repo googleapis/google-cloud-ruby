@@ -75,6 +75,10 @@ module Google
         ##
         # @private Implementation attributes.
         attr_reader :stream_pool, :thread_pool, :buffer, :service
+        
+        ##
+        # @private Implementation attributes.
+        attr_accessor :exactly_once_delivery_enabled
 
         ##
         # @private Create an empty {Subscriber} object.
@@ -91,6 +95,7 @@ module Google
           @message_ordering = message_ordering
           @callback_threads = Integer(threads[:callback] || 8)
           @push_threads = Integer(threads[:push] || 4)
+          @exactly_once_delivery_enabled = nil
 
           @service = service
 

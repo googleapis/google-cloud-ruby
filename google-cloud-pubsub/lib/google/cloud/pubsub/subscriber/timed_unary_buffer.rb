@@ -28,6 +28,16 @@ module Google
           attr_reader :max_bytes
           attr_reader :interval
 
+          PERMANENT_FAILURE = "PERMANENT_FAILURE"
+          # Google::Cloud::Unavailable error is already retried at gapic level
+          RETRIABLE_ERRORS = [Google::Cloud::Cancelled, 
+                              Google::Cloud::DeadlineExceeded, 
+                              Google::Cloud::Internal,
+                              Google::Cloud::ResourceExhausted,
+                              Google::Cloud::InvalidArgumentError]
+          MAX_RETRY_DURATION = 600 # 600s since the server allows ack/modacks for 10 mins max       
+          MAX_TRIES = 10                                 
+
           def initialize subscriber, max_bytes: 500_000, interval: 1.0
             super() # to init MonitorMixin
 
@@ -40,6 +50,7 @@ module Google
             # entry.
             @register = {}
 
+            @retry_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.push_threads
             @task = Concurrent::TimerTask.new execution_interval: interval do
               flush!
             end
@@ -92,13 +103,27 @@ module Google
             with_threadpool do |pool|
               requests[:acknowledge].each do |ack_req|
                 add_future pool do
-                  @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
+                  begin
+                    @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
+                  rescue Google::Cloud::Cancelled, Google::Cloud::DeadlineExceeded, Google::Cloud::Internal,
+                         Google::Cloud::ResourceExhausted
+                    retry if @subscriber.exactly_once_delivery_enabled
+                  rescue Google::Cloud::InvalidArgumentError => e
+                    handleAcknowledgeError e.error_metadata if @subscriber.exactly_once_delivery_enabled
+                  end
                 end
               end
               requests[:modify_ack_deadline].each do |mod_ack_req|
                 add_future pool do
-                  @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
-                                                          mod_ack_req.ack_deadline_seconds
+                  begin
+                    @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
+                                                            mod_ack_req.ack_deadline_seconds
+                  rescue Google::Cloud::Cancelled, Google::Cloud::DeadlineExceeded, Google::Cloud::Internal,
+                         Google::Cloud::ResourceExhausted
+                    retry if @subscriber.exactly_once_delivery_enabled
+                  rescue Google::Cloud::InvalidArgumentError => e
+                    handleModAckError e.error_metadata, mod_ack_req.ack_deadline_seconds if @subscriber.exactly_once_delivery_enabled
+                  end                                                            
                 end
               end
             end
@@ -114,6 +139,7 @@ module Google
 
           def stop
             @task.shutdown
+            @retry_thread_pool.shutdown
             flush!
 
             self
@@ -128,6 +154,81 @@ module Google
           end
 
           private
+
+          def handleAcknowledgeError error_metadata
+            return if error_metadata.empty?
+            permanent_failures, temporary_failures = parseError error_metadata
+            log_permanent_failures permanent_failures
+            perform_ack_retry_async temporary_failures.keys.map(&:to_s)
+          end
+
+          def handleModAckError error_metadata, ack_deadline_seconds
+            return if error_metadata.empty?
+            permanent_failures, temporary_failures = parseError error_metadata
+            log_permanent_failures permanent_failures
+            perform_mod_ack_retry_async temporary_failures.keys.map(&:to_s), ack_deadline_seconds
+          end
+
+          def parseError error_metadata
+            error_metadata.partition { |_, v| v.include? PERMANENT_FAILURE }.map(&:to_h)
+          end
+
+          def log_permanent_failures permanent_failures
+            permanent_failures.each do |ack_id, cause|
+              p "The acknowledgement id #{ack_id} failed with cause #{cause}"
+            end
+          end
+
+          def perform_ack_retry_async ack_ids
+            return unless retry_thread_pool.running?
+
+            Concurrent::Promises.future_on(
+              retry_thread_pool, ack_ids, &method(:retry_temporary_ack)
+            )
+          end
+
+          def retry_temporary_ack ack_ids
+            Retriable.retriable tries: MAX_TRIES, max_elapsed_time: MAX_RETRY_DURATION, on: RETRIABLE_ERRORS do
+              return if ack_ids.empty?
+              requests = create_acknowledge_requests ack_ids
+              requests.each do |ack_req|
+                begin
+                  @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
+                rescue Google::Cloud::InvalidArgumentError => e
+                  permanent_failures, temporary_failures = parseError error_metadata
+                  log_permanent_failures permanent_failures
+                  ack_ids = temporary_failures.keys.map(&:to_s)
+                  raise e
+                end
+              end
+            end
+          end
+
+          def perform_mod_ack_retry_async ack_ids, ack_deadline_seconds
+            return unless retry_thread_pool.running?
+
+            Concurrent::Promises.future_on(
+              retry_thread_pool, ack_ids, ack_deadline_seconds, &method(:retry_temporary_mod_ack)
+            )
+          end
+
+          def retry_temporary_mod_ack ack_ids, ack_deadline_seconds
+            Retriable.retriable tries: MAX_TRIES, max_elapsed_time: MAX_RETRY_DURATION, on: RETRIABLE_ERRORS do
+              return if ack_ids.empty?
+              requests = create_modify_ack_deadline_requests ack_deadline_seconds, ack_ids
+              requests.each do |mod_ack_req|
+                begin
+                  @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
+                                                            mod_ack_req.ack_deadline_seconds
+                rescue Google::Cloud::InvalidArgumentError => e
+                  permanent_failures, temporary_failures = parseError error_metadata
+                  log_permanent_failures permanent_failures
+                  ack_ids = temporary_failures.keys.map(&:to_s)
+                  raise e
+                end
+              end
+            end
+          end
 
           def flush_requests!
             prev_reg =
