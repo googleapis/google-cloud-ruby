@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :ad_tag_macro_map, :string, :string, 7
       optional :client_ad_tracking, :bool, 8
       optional :manifest_options, :message, 9, "google.cloud.video.stitcher.v1.ManifestOptions"
+      optional :asset_id, :string, 10
     end
     add_message "google.cloud.video.stitcher.v1.Interstitials" do
       repeated :ad_breaks, :message, 1, "google.cloud.video.stitcher.v1.VodSessionAdBreak"
@@ -50,11 +51,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :default_slate_id, :string, 8
       optional :stitching_policy, :enum, 9, "google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy"
       optional :manifest_options, :message, 10, "google.cloud.video.stitcher.v1.ManifestOptions"
+      optional :stream_id, :string, 11
     end
     add_enum "google.cloud.video.stitcher.v1.LiveSession.StitchingPolicy" do
       value :STITCHING_POLICY_UNSPECIFIED, 0
       value :COMPLETE_AD, 1
-      value :COMPLETE_POD, 2
       value :CUT_CURRENT, 3
     end
     add_message "google.cloud.video.stitcher.v1.AdTag" do
