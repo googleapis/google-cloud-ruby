@@ -13,6 +13,7 @@
 # limitations under the License.
 
 # Delete the Google::Cloud::Security::PrivateCA.iam_policy method and test
+# until https://github.com/googleapis/gapic-generator-ruby/issues/775 is fixed
 OwlBot.modifier path: "lib/google/cloud/security/private_ca.rb",
                 name: "delete-iam-policy-factory" do |content|
   OwlBot::RubyContent
@@ -34,6 +35,7 @@ OwlBot.modifier path: "test/google/cloud/security/private_ca/client_test.rb",
 end
 
 # Delete the Google::Cloud::Security::PrivateCA.locations method and test
+# until https://github.com/googleapis/gapic-generator-ruby/issues/775 is fixed
 OwlBot.modifier path: "lib/google/cloud/security/private_ca.rb",
                 name: "delete-locations-factory" do |content|
   OwlBot::RubyContent
