@@ -66,6 +66,27 @@ module Google
               end
 
               ##
+              # Create a fully-qualified Service resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/namespaces/{namespace}/services/{service}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param namespace [String]
+              # @param service [String]
+              #
+              # @return [::String]
+              def service_path project:, location:, namespace:, service:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "namespace cannot contain /" if namespace.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/namespaces/#{namespace}/services/#{service}"
+              end
+
+              ##
               # Create a fully-qualified TestCase resource string.
               #
               # The resource will be in the following format:
@@ -107,6 +128,27 @@ module Google
                 raise ::ArgumentError, "flow cannot contain /" if flow.to_s.include? "/"
 
                 "projects/#{project}/locations/#{location}/agents/#{agent}/flows/#{flow}/versions/#{version}"
+              end
+
+              ##
+              # Create a fully-qualified Webhook resource string.
+              #
+              # The resource will be in the following format:
+              #
+              # `projects/{project}/locations/{location}/agents/{agent}/webhooks/{webhook}`
+              #
+              # @param project [String]
+              # @param location [String]
+              # @param agent [String]
+              # @param webhook [String]
+              #
+              # @return [::String]
+              def webhook_path project:, location:, agent:, webhook:
+                raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+                raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+                raise ::ArgumentError, "agent cannot contain /" if agent.to_s.include? "/"
+
+                "projects/#{project}/locations/#{location}/agents/#{agent}/webhooks/#{webhook}"
               end
 
               extend self
