@@ -12,8 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Remove locations mixin service proto_docs until
+# Remove locations and iam_policy mixin service proto_docs until
 # https://github.com/googleapis/gapic-generator-ruby/issues/774 is fixed.
 FileUtils.rm_rf File.join(OwlBot.staging_dir, "proto_docs", "google", "cloud", "location")
+FileUtils.rm_rf File.join(OwlBot.staging_dir, "proto_docs", "google", "iam", "v1")
 
 OwlBot.move_files

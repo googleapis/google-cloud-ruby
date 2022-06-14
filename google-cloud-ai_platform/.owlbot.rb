@@ -12,9 +12,30 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# Delete the Google::Cloud::AIPlatform.iam_policy method and test
+# until https://github.com/googleapis/gapic-generator-ruby/issues/775 is fixed
+OwlBot.modifier path: "lib/google/cloud/ai_platform.rb",
+                name: "delete-iam-policy-factory" do |content|
+  OwlBot::RubyContent
+    .new(content)
+    .select_block("module Google")
+    .select_block("module Cloud")
+    .select_block("module AIPlatform")
+    .select_block("def self.iam_policy")
+    .delete
+end
+OwlBot.modifier path: "test/google/cloud/ai_platform/client_test.rb",
+                name: "delete-iam-policy-factory-test" do |content|
+  OwlBot::RubyContent
+    .new(content)
+    .select_block("class Google::Cloud::AIPlatform::ClientConstructionMinitest")
+    .select_block("def test_iam_policy")
+    .delete
+end
+
 # Delete the Google::Cloud::AIPlatform.locations method and test
 # until https://github.com/googleapis/gapic-generator-ruby/issues/775 is fixed
-OwlBot.modifier path: "lib/google/cloud/aiplatform.rb",
+OwlBot.modifier path: "lib/google/cloud/ai_platform.rb",
                 name: "delete-locations-factory" do |content|
   OwlBot::RubyContent
     .new(content)
@@ -24,7 +45,7 @@ OwlBot.modifier path: "lib/google/cloud/aiplatform.rb",
     .select_block("def self.locations")
     .delete
 end
-OwlBot.modifier path: "test/google/cloud/aiplatform/client_test.rb",
+OwlBot.modifier path: "test/google/cloud/ai_platform/client_test.rb",
                 name: "delete-locations-factory-test" do |content|
   OwlBot::RubyContent
     .new(content)
