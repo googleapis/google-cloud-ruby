@@ -671,6 +671,11 @@
                 "list_models"
               ]
             },
+            "ListModelVersions": {
+              "methods": [
+                "list_model_versions"
+              ]
+            },
             "UpdateModel": {
               "methods": [
                 "update_model"
@@ -679,6 +684,16 @@
             "DeleteModel": {
               "methods": [
                 "delete_model"
+              ]
+            },
+            "DeleteModelVersion": {
+              "methods": [
+                "delete_model_version"
+              ]
+            },
+            "MergeVersionAliases": {
+              "methods": [
+                "merge_version_aliases"
               ]
             },
             "ExportModel": {

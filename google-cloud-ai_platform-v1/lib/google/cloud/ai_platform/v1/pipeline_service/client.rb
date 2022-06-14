@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/pipeline_service_pb"
+require "google/cloud/location"
+require "google/iam/v1/iam_policy"
 
 module Google
   module Cloud
@@ -141,6 +143,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @pipeline_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::AIPlatform::V1::PipelineService::Stub,
                 credentials:  credentials,
@@ -156,6 +170,20 @@ module Google
             # @return [::Google::Cloud::AIPlatform::V1::PipelineService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 

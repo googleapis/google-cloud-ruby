@@ -26,6 +26,17 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Location into which to upload the Model.
         #     Format: `projects/{project}/locations/{location}`
+        # @!attribute [rw] parent_model
+        #   @return [::String]
+        #     Optional. The resource name of the model into which to upload the version. Only
+        #     specify this field when uploading a new version.
+        # @!attribute [rw] model_id
+        #   @return [::String]
+        #     Optional. The ID to use for the uploaded Model, which will become the final
+        #     component of the model resource name.
+        #
+        #     This value may be up to 63 characters, and valid characters are
+        #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
         # @!attribute [rw] model
         #   @return [::Google::Cloud::AIPlatform::V1::Model]
         #     Required. The Model to create.
@@ -58,6 +69,16 @@ module Google
         #   @return [::String]
         #     Required. The name of the Model resource.
         #     Format: `projects/{project}/locations/{location}/models/{model}`
+        #
+        #     In order to retrieve a specific version of the model, also provide
+        #     the version ID or version alias.
+        #       Example: `projects/{project}/locations/{location}/models/{model}@2`
+        #                  or
+        #                `projects/{project}/locations/{location}/models/{model}@golden`
+        #     If no version ID or alias is specified, the "default" version will be
+        #     returned. The "default" version alias is created for the first version of
+        #     the model, and can be moved to other versions later on. There will be
+        #     exactly one default version.
         class GetModelRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,6 +146,54 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ModelService.ListModelVersions}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the model to list versions for.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The standard list page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     The standard list page token.
+        #     Typically obtained via
+        #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token ListModelVersionsResponse.next_page_token} of the previous
+        #     [ModelService.ListModelversions][] call.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     An expression for filtering the results of the request. For field names
+        #     both snake_case and camelCase are supported.
+        #
+        #       * `labels` supports general map functions that is:
+        #         * `labels.key=value` - key:value equality
+        #         * `labels.key:* or labels:key - key existence
+        #         * A key including a space must be quoted. `labels."a key"`.
+        #
+        #     Some examples:
+        #       * `labels.myKey="myValue"`
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask specifying which fields to read.
+        class ListModelVersionsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions ModelService.ListModelVersions}
+        # @!attribute [rw] models
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Model>]
+        #     List of Model versions in the requested page.
+        #     In the returned Model name field, version ID instead of regvision tag will
+        #     be included.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token to retrieve the next page of results.
+        #     Pass to {::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest#page_token ListModelVersionsRequest.page_token} to obtain that page.
+        class ListModelVersionsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#update_model ModelService.UpdateModel}.
         # @!attribute [rw] model
         #   @return [::Google::Cloud::AIPlatform::V1::Model]
@@ -165,10 +234,50 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model_version ModelService.DeleteModelVersion}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the model version to be deleted, with a version ID explicitly
+        #     included.
+        #
+        #     Example: `projects/{project}/locations/{location}/models/{model}@1234`
+        class DeleteModelVersionRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#merge_version_aliases ModelService.MergeVersionAliases}.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the model version to merge aliases, with a version ID
+        #     explicitly included.
+        #
+        #     Example: `projects/{project}/locations/{location}/models/{model}@1234`
+        # @!attribute [rw] version_aliases
+        #   @return [::Array<::String>]
+        #     Required. The set of version aliases to merge.
+        #     The alias should be at most 128 characters, and match
+        #     `[a-z][a-z0-9-]{0,126}[a-z-0-9]`.
+        #     Add the `-` prefix to an alias means removing that alias from the version.
+        #     `-` is NOT counted in the 128 characters. Example: `-golden` means removing
+        #     the `golden` alias from the version.
+        #
+        #     There is NO ordering in aliases, which means
+        #     1) The aliases returned from GetModel API might not have the exactly same
+        #     order from this MergeVersionAliases API. 2) Adding and deleting the same
+        #     alias in the request is not recommended, and the 2 operations will be
+        #     cancelled out.
+        class MergeVersionAliasesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#export_model ModelService.ExportModel}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the Model to export.
+        #     The resource name may contain version id or version alias to specify the
+        #     version, if no version is specified, the default version will be exported.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::AIPlatform::V1::ExportModelRequest::OutputConfig]
         #     Required. The desired output location and configuration.

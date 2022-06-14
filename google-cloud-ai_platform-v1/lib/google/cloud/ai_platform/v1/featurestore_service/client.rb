@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/featurestore_service_pb"
+require "google/cloud/location"
+require "google/iam/v1/iam_policy"
 
 module Google
   module Cloud
@@ -139,6 +141,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @featurestore_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::AIPlatform::V1::FeaturestoreService::Stub,
                 credentials:  credentials,
@@ -154,6 +168,20 @@ module Google
             # @return [::Google::Cloud::AIPlatform::V1::FeaturestoreService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -520,6 +548,7 @@ module Google
             #
             #       * `labels`
             #       * `online_serving_config.fixed_node_count`
+            #       * `online_serving_config.scaling`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
