@@ -100,7 +100,7 @@ module Google
           #     requests.
           # @!attribute [rw] locked
           #   @return [::Boolean]
-          #     Indiciates whether the agent is locked for changes. If the agent is locked,
+          #     Indicates whether the agent is locked for changes. If the agent is locked,
           #     modifications to the agent will be rejected except for [RestoreAgent][].
           # @!attribute [rw] advanced_settings
           #   @return [::Google::Cloud::Dialogflow::CX::V3::AdvancedSettings]

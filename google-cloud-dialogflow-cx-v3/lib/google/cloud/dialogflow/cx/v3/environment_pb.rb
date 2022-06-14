@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/dialogflow/cx/v3/test_case_pb'
+require 'google/cloud/dialogflow/cx/v3/webhook_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
@@ -22,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :version_configs, :message, 6, "google.cloud.dialogflow.cx.v3.Environment.VersionConfig"
       optional :update_time, :message, 5, "google.protobuf.Timestamp"
       optional :test_cases_config, :message, 7, "google.cloud.dialogflow.cx.v3.Environment.TestCasesConfig"
+      optional :webhook_config, :message, 10, "google.cloud.dialogflow.cx.v3.Environment.WebhookConfig"
     end
     add_message "google.cloud.dialogflow.cx.v3.Environment.VersionConfig" do
       optional :version, :string, 1
@@ -30,6 +32,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :test_cases, :string, 1
       optional :enable_continuous_run, :bool, 2
       optional :enable_predeployment_run, :bool, 3
+    end
+    add_message "google.cloud.dialogflow.cx.v3.Environment.WebhookConfig" do
+      repeated :webhook_overrides, :message, 1, "google.cloud.dialogflow.cx.v3.Webhook"
     end
     add_message "google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest" do
       optional :parent, :string, 1
@@ -114,6 +119,7 @@ module Google
           Environment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.Environment").msgclass
           Environment::VersionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.Environment.VersionConfig").msgclass
           Environment::TestCasesConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.Environment.TestCasesConfig").msgclass
+          Environment::WebhookConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.Environment.WebhookConfig").msgclass
           ListEnvironmentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ListEnvironmentsRequest").msgclass
           ListEnvironmentsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.ListEnvironmentsResponse").msgclass
           GetEnvironmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dialogflow.cx.v3.GetEnvironmentRequest").msgclass

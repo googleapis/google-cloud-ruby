@@ -2572,6 +2572,206 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v3_generated_Webhooks_ListWebhooks_sync",
+      "title": "Snippet for list_webhooks in Webhooks",
+      "description": "Basic snippet for list_webhooks in Webhooks",
+      "file": "webhooks/list_webhooks.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_webhooks",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListWebhooksResponse",
+        "client": {
+          "short_name": "Webhooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
+        },
+        "method": {
+          "short_name": "ListWebhooks",
+          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.ListWebhooks",
+          "service": {
+            "short_name": "Webhooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Webhooks_GetWebhook_sync",
+      "title": "Snippet for get_webhook in Webhooks",
+      "description": "Basic snippet for get_webhook in Webhooks",
+      "file": "webhooks/get_webhook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_webhook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#get_webhook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Webhook",
+        "client": {
+          "short_name": "Webhooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
+        },
+        "method": {
+          "short_name": "GetWebhook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.GetWebhook",
+          "service": {
+            "short_name": "Webhooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Webhooks_CreateWebhook_sync",
+      "title": "Snippet for create_webhook in Webhooks",
+      "description": "Basic snippet for create_webhook in Webhooks",
+      "file": "webhooks/create_webhook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_webhook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Webhook",
+        "client": {
+          "short_name": "Webhooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
+        },
+        "method": {
+          "short_name": "CreateWebhook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.CreateWebhook",
+          "service": {
+            "short_name": "Webhooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Webhooks_UpdateWebhook_sync",
+      "title": "Snippet for update_webhook in Webhooks",
+      "description": "Basic snippet for update_webhook in Webhooks",
+      "file": "webhooks/update_webhook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_webhook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Webhook",
+        "client": {
+          "short_name": "Webhooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
+        },
+        "method": {
+          "short_name": "UpdateWebhook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.UpdateWebhook",
+          "service": {
+            "short_name": "Webhooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dialogflow_v3_generated_Webhooks_DeleteWebhook_sync",
+      "title": "Snippet for delete_webhook in Webhooks",
+      "description": "Basic snippet for delete_webhook in Webhooks",
+      "file": "webhooks/delete_webhook.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_webhook",
+        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#delete_webhook",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "Webhooks::Client",
+          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
+        },
+        "method": {
+          "short_name": "DeleteWebhook",
+          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.DeleteWebhook",
+          "service": {
+            "short_name": "Webhooks",
+            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v3_generated_Environments_ListEnvironments_sync",
       "title": "Snippet for list_environments in Environments",
       "description": "Basic snippet for list_environments in Environments",
@@ -3678,206 +3878,6 @@
           "service": {
             "short_name": "Versions",
             "full_name": "google.cloud.dialogflow.cx.v3.Versions"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 32,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v3_generated_Webhooks_ListWebhooks_sync",
-      "title": "Snippet for list_webhooks in Webhooks",
-      "description": "Basic snippet for list_webhooks in Webhooks",
-      "file": "webhooks/list_webhooks.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_webhooks",
-        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#list_webhooks",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::CX::V3::ListWebhooksRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::CX::V3::ListWebhooksResponse",
-        "client": {
-          "short_name": "Webhooks::Client",
-          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
-        },
-        "method": {
-          "short_name": "ListWebhooks",
-          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.ListWebhooks",
-          "service": {
-            "short_name": "Webhooks",
-            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v3_generated_Webhooks_GetWebhook_sync",
-      "title": "Snippet for get_webhook in Webhooks",
-      "description": "Basic snippet for get_webhook in Webhooks",
-      "file": "webhooks/get_webhook.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "get_webhook",
-        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#get_webhook",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::CX::V3::GetWebhookRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Webhook",
-        "client": {
-          "short_name": "Webhooks::Client",
-          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
-        },
-        "method": {
-          "short_name": "GetWebhook",
-          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.GetWebhook",
-          "service": {
-            "short_name": "Webhooks",
-            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 32,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v3_generated_Webhooks_CreateWebhook_sync",
-      "title": "Snippet for create_webhook in Webhooks",
-      "description": "Basic snippet for create_webhook in Webhooks",
-      "file": "webhooks/create_webhook.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "create_webhook",
-        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#create_webhook",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::CX::V3::CreateWebhookRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Webhook",
-        "client": {
-          "short_name": "Webhooks::Client",
-          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
-        },
-        "method": {
-          "short_name": "CreateWebhook",
-          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.CreateWebhook",
-          "service": {
-            "short_name": "Webhooks",
-            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 32,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v3_generated_Webhooks_UpdateWebhook_sync",
-      "title": "Snippet for update_webhook in Webhooks",
-      "description": "Basic snippet for update_webhook in Webhooks",
-      "file": "webhooks/update_webhook.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "update_webhook",
-        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#update_webhook",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::CX::V3::UpdateWebhookRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::Dialogflow::CX::V3::Webhook",
-        "client": {
-          "short_name": "Webhooks::Client",
-          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
-        },
-        "method": {
-          "short_name": "UpdateWebhook",
-          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.UpdateWebhook",
-          "service": {
-            "short_name": "Webhooks",
-            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 32,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
-      "region_tag": "dialogflow_v3_generated_Webhooks_DeleteWebhook_sync",
-      "title": "Snippet for delete_webhook in Webhooks",
-      "description": "Basic snippet for delete_webhook in Webhooks",
-      "file": "webhooks/delete_webhook.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "delete_webhook",
-        "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client#delete_webhook",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::Dialogflow::CX::V3::DeleteWebhookRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Protobuf::Empty",
-        "client": {
-          "short_name": "Webhooks::Client",
-          "full_name": "::Google::Cloud::Dialogflow::CX::V3::Webhooks::Client"
-        },
-        "method": {
-          "short_name": "DeleteWebhook",
-          "full_name": "google.cloud.dialogflow.cx.v3.Webhooks.DeleteWebhook",
-          "service": {
-            "short_name": "Webhooks",
-            "full_name": "google.cloud.dialogflow.cx.v3.Webhooks"
           }
         }
       },
