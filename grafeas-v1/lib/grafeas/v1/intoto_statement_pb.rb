@@ -5,6 +5,7 @@ require 'google/protobuf'
 
 require 'grafeas/v1/intoto_provenance_pb'
 require 'grafeas/v1/slsa_provenance_pb'
+require 'grafeas/v1/slsa_provenance_zero_two_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("grafeas/v1/intoto_statement.proto", :syntax => :proto3) do
@@ -15,6 +16,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :predicate do
         optional :provenance, :message, 4, "grafeas.v1.InTotoProvenance"
         optional :slsa_provenance, :message, 5, "grafeas.v1.SlsaProvenance"
+        optional :slsa_provenance_zero_two, :message, 6, "grafeas.v1.SlsaProvenanceZeroTwo"
       end
     end
     add_message "grafeas.v1.Subject" do

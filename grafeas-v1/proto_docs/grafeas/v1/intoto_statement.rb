@@ -35,6 +35,8 @@ module Grafeas
     #   @return [::Grafeas::V1::InTotoProvenance]
     # @!attribute [rw] slsa_provenance
     #   @return [::Grafeas::V1::SlsaProvenance]
+    # @!attribute [rw] slsa_provenance_zero_two
+    #   @return [::Grafeas::V1::SlsaProvenanceZeroTwo]
     class InTotoStatement
       include ::Google::Protobuf::MessageExts
       extend ::Google::Protobuf::MessageExts::ClassMethods

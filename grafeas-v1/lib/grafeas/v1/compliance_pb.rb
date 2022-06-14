@@ -24,6 +24,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "grafeas.v1.ComplianceVersion" do
       optional :cpe_uri, :string, 1
+      optional :benchmark_document, :string, 3
       optional :version, :string, 2
     end
     add_message "grafeas.v1.ComplianceOccurrence" do

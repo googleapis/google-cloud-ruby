@@ -38,9 +38,12 @@ module Google
 
         ##
         # Creates a new Service instance.
+        # rubocop:disable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
         def initialize project, credentials, retries: nil,
                        timeout: nil, open_timeout: nil, read_timeout: nil,
-                       send_timeout: nil, host: nil, quota_project: nil
+                       send_timeout: nil, host: nil, quota_project: nil,
+                       max_elapsed_time: nil, base_interval: nil, max_interval: nil,
+                       multiplier: nil
           @project = project
           @credentials = credentials
           @service = API::StorageService.new
@@ -57,9 +60,14 @@ module Google
             "gl-ruby/#{RUBY_VERSION} gccl/#{Google::Cloud::Storage::VERSION}"
           @service.request_options.header["Accept-Encoding"] = "gzip"
           @service.request_options.quota_project = quota_project if quota_project
+          @service.request_options.max_elapsed_time = max_elapsed_time if max_elapsed_time
+          @service.request_options.base_interval = base_interval if base_interval
+          @service.request_options.max_interval = max_interval if max_interval
+          @service.request_options.multiplier = multiplier if multiplier
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
         end
+        # rubocop:enable Metrics/AbcSize, Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
         def service
           return mocked_service if mocked_service

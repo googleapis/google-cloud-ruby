@@ -1,5 +1,12 @@
 # Release History
 
+### 0.3.0 (2022-06-08)
+
+#### Features
+
+* Added edgeCluster and applianceCluster membership endpoint types
+* Added support for locations and iam_policy clients
+
 ### 0.2.2 / 2022-01-11
 
 #### Bug Fixes
