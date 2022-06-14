@@ -186,8 +186,8 @@ class MockStorage < Minitest::Spec
                           matches_storage_class: nil,
                           noncurrent_time_before: nil,
                           num_newer_versions: nil,
-                          matches_prefix: [],
-                          matches_suffix: []
+                          matches_prefix: nil,
+                          matches_suffix: nil
     Google::Apis::StorageV1::Bucket::Lifecycle::Rule.new(
       action: Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Action.new(
         storage_class: storage_class,
@@ -203,8 +203,8 @@ class MockStorage < Minitest::Spec
         matches_storage_class: Array(matches_storage_class),
         noncurrent_time_before: noncurrent_time_before,
         num_newer_versions: num_newer_versions,
-        matches_prefix: matches_prefix,
-        matches_suffix: matches_suffix
+        matches_prefix: Array(matches_prefix),
+        matches_suffix: Array(matches_suffix)
       )
     )
   end

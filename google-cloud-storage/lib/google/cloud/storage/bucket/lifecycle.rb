@@ -158,8 +158,8 @@ module Google
                                          matches_storage_class: nil,
                                          noncurrent_time_before: nil,
                                          num_newer_versions: nil,
-                                         matches_prefix: [],
-                                         matches_suffix: []
+                                         matches_prefix: nil,
+                                         matches_suffix: nil
             push Rule.new(
               "SetStorageClass",
               storage_class: storage_class_for(storage_class),
@@ -172,8 +172,8 @@ module Google
               matches_storage_class: storage_class_for(matches_storage_class),
               noncurrent_time_before: noncurrent_time_before,
               num_newer_versions: num_newer_versions,
-              matches_prefix: matches_prefix,
-              matches_suffix: matches_suffix
+              matches_prefix: Array(matches_prefix),
+              matches_suffix: Array(matches_suffix)
             )
           end
 
@@ -244,8 +244,8 @@ module Google
                               matches_storage_class: nil,
                               noncurrent_time_before: nil,
                               num_newer_versions: nil,
-                              matches_prefix: [],
-                              matches_suffix: []
+                              matches_prefix: nil,
+                              matches_suffix: nil
             push Rule.new(
               "Delete",
               age: age,
@@ -257,8 +257,8 @@ module Google
               matches_storage_class: storage_class_for(matches_storage_class),
               noncurrent_time_before: noncurrent_time_before,
               num_newer_versions: num_newer_versions,
-              matches_prefix: matches_prefix,
-              matches_suffix: matches_suffix
+              matches_prefix: Array(matches_prefix),
+              matches_suffix: Array(matches_suffix)
             )
           end
 
@@ -405,8 +405,8 @@ module Google
                            matches_storage_class: nil,
                            noncurrent_time_before: nil,
                            num_newer_versions: nil,
-                           matches_prefix: [],
-                           matches_suffix: []
+                           matches_prefix: nil,
+                           matches_suffix: nil
               @action = action
               @storage_class = storage_class
               @age = age
@@ -418,8 +418,8 @@ module Google
               @matches_storage_class = Array(matches_storage_class)
               @noncurrent_time_before = noncurrent_time_before
               @num_newer_versions = num_newer_versions
-              @matches_prefix = matches_prefix
-              @matches_suffix = matches_suffix
+              @matches_prefix = Array(matches_prefix)
+              @matches_suffix = Array(matches_suffix)
             end
 
             # @private
@@ -474,8 +474,8 @@ module Google
                 matches_storage_class: Array(matches_storage_class),
                 noncurrent_time_before: noncurrent_time_before,
                 num_newer_versions: num_newer_versions,
-                matches_prefix: matches_prefix,
-                matches_suffix: matches_suffix
+                matches_prefix: Array(matches_prefix),
+                matches_suffix: Array(matches_suffix)
               )
             end
 
