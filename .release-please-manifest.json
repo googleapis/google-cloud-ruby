@@ -303,7 +303,7 @@
   "google-identity-access_context_manager-v1": "0.1.2",
   "grafeas": "1.1.2",
   "grafeas-client": "0.4.0",
-  "grafeas-v1": "0.4.0",
+  "grafeas-v1": "0.5.0",
   "stackdriver": "0.21.1",
   "stackdriver-core": "1.5.0"
 }
