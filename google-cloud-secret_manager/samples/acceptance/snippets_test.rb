@@ -298,6 +298,7 @@ describe "Secret Manager Snippets" do
       }.must_output(/Updated secret/)
     end
   end
+  
   describe "#update_secret_with_alias" do
     it "updates the secret" do
       expect(secret).wont_be_nil
