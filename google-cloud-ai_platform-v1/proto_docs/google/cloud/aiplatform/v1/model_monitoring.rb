@@ -91,6 +91,11 @@ module Google
           #     Key is the feature name and value is the threshold. The threshold here is
           #     against attribution score distance between the training and prediction
           #     feature.
+          # @!attribute [rw] default_skew_threshold
+          #   @return [::Google::Cloud::AIPlatform::V1::ThresholdConfig]
+          #     Skew anomaly detection threshold used by all features.
+          #     When the per-feature thresholds are not set, this field can be used to
+          #     specify a threshold for all features.
           class TrainingPredictionSkewDetectionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -125,6 +130,11 @@ module Google
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::ThresholdConfig}]
           #     Key is the feature name and value is the threshold. The threshold here is
           #     against attribution score distance between different time windows.
+          # @!attribute [rw] default_drift_threshold
+          #   @return [::Google::Cloud::AIPlatform::V1::ThresholdConfig]
+          #     Drift anomaly detection threshold used by all features.
+          #     When the per-feature thresholds are not set, this field can be used to
+          #     specify a threshold for all features.
           class PredictionDriftDetectionConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
