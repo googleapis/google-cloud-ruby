@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.6.0 (2022-06-15)
+
+#### Features
+
+* Added a monitor time window to ModelDeploymentMonitoringScheduleConfig
+* Added support for location and iam_policy mixin clients
+* Added support for model version calls
+* Added version fields to Model, including ID, aliases, create and update time, and description
+* CompletionStats includes successful_forecast_point_count
+* Explanation includes a list of nearest neighbors
+* ExplanationSpecOverride includes example-based parameter overrides
+* TrainingPipeline includes model ID and parent
+* You can now specify the parent model and model ID when uploading a model
+
 ### 0.5.0 (2022-05-26)
 
 #### Features
