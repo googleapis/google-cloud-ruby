@@ -1,5 +1,11 @@
 # Release History
 
+### 2.10.0 (2022-06-14)
+
+#### Features
+
+* introduce min_duration_per_lease_extension
+
 ### 2.9.2 (2022-04-28)
 
 #### Bug Fixes
