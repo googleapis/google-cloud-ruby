@@ -23,6 +23,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :training_task_inputs, :message, 5, "google.protobuf.Value"
       optional :training_task_metadata, :message, 6, "google.protobuf.Value"
       optional :model_to_upload, :message, 7, "google.cloud.aiplatform.v1.Model"
+      optional :model_id, :string, 22
+      optional :parent_model, :string, 21
       optional :state, :enum, 9, "google.cloud.aiplatform.v1.PipelineState"
       optional :error, :message, 10, "google.rpc.Status"
       optional :create_time, :message, 11, "google.protobuf.Timestamp"

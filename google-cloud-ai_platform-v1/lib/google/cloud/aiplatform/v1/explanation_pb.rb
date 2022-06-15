@@ -11,6 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/aiplatform/v1/explanation.proto", :syntax => :proto3) do
     add_message "google.cloud.aiplatform.v1.Explanation" do
       repeated :attributions, :message, 1, "google.cloud.aiplatform.v1.Attribution"
+      repeated :neighbors, :message, 2, "google.cloud.aiplatform.v1.Neighbor"
     end
     add_message "google.cloud.aiplatform.v1.ModelExplanation" do
       repeated :mean_attributions, :message, 1, "google.cloud.aiplatform.v1.Attribution"
@@ -23,6 +24,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :output_display_name, :string, 5
       optional :approximation_error, :double, 6
       optional :output_name, :string, 7
+    end
+    add_message "google.cloud.aiplatform.v1.Neighbor" do
+      optional :neighbor_id, :string, 1
+      optional :neighbor_distance, :double, 2
     end
     add_message "google.cloud.aiplatform.v1.ExplanationSpec" do
       optional :parameters, :message, 1, "google.cloud.aiplatform.v1.ExplanationParameters"
@@ -70,12 +75,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.ExplanationSpecOverride" do
       optional :parameters, :message, 1, "google.cloud.aiplatform.v1.ExplanationParameters"
       optional :metadata, :message, 2, "google.cloud.aiplatform.v1.ExplanationMetadataOverride"
+      optional :examples_override, :message, 3, "google.cloud.aiplatform.v1.ExamplesOverride"
     end
     add_message "google.cloud.aiplatform.v1.ExplanationMetadataOverride" do
       map :inputs, :string, :message, 1, "google.cloud.aiplatform.v1.ExplanationMetadataOverride.InputMetadataOverride"
     end
     add_message "google.cloud.aiplatform.v1.ExplanationMetadataOverride.InputMetadataOverride" do
       repeated :input_baselines, :message, 1, "google.protobuf.Value"
+    end
+    add_message "google.cloud.aiplatform.v1.ExamplesOverride" do
+      optional :neighbor_count, :int32, 1
+      optional :crowding_count, :int32, 2
+      repeated :restrictions, :message, 3, "google.cloud.aiplatform.v1.ExamplesRestrictionsNamespace"
+      optional :return_embeddings, :bool, 4
+      optional :data_format, :enum, 5, "google.cloud.aiplatform.v1.ExamplesOverride.DataFormat"
+    end
+    add_enum "google.cloud.aiplatform.v1.ExamplesOverride.DataFormat" do
+      value :DATA_FORMAT_UNSPECIFIED, 0
+      value :INSTANCES, 1
+      value :EMBEDDINGS, 2
+    end
+    add_message "google.cloud.aiplatform.v1.ExamplesRestrictionsNamespace" do
+      optional :namespace_name, :string, 1
+      repeated :allow, :string, 2
+      repeated :deny, :string, 3
     end
   end
 end
@@ -87,6 +110,7 @@ module Google
         Explanation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Explanation").msgclass
         ModelExplanation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelExplanation").msgclass
         Attribution = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Attribution").msgclass
+        Neighbor = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Neighbor").msgclass
         ExplanationSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationSpec").msgclass
         ExplanationParameters = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationParameters").msgclass
         SampledShapleyAttribution = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.SampledShapleyAttribution").msgclass
@@ -99,6 +123,9 @@ module Google
         ExplanationSpecOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationSpecOverride").msgclass
         ExplanationMetadataOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationMetadataOverride").msgclass
         ExplanationMetadataOverride::InputMetadataOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExplanationMetadataOverride.InputMetadataOverride").msgclass
+        ExamplesOverride = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExamplesOverride").msgclass
+        ExamplesOverride::DataFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExamplesOverride.DataFormat").enummodule
+        ExamplesRestrictionsNamespace = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExamplesRestrictionsNamespace").msgclass
       end
     end
   end

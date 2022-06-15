@@ -4652,6 +4652,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_ModelService_ListModelVersions_sync",
+      "title": "Snippet for list_model_versions in ModelService",
+      "description": "Basic snippet for list_model_versions in ModelService",
+      "file": "model_service/list_model_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_model_versions",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse",
+        "client": {
+          "short_name": "ModelService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client"
+        },
+        "method": {
+          "short_name": "ListModelVersions",
+          "full_name": "google.cloud.aiplatform.v1.ModelService.ListModelVersions",
+          "service": {
+            "short_name": "ModelService",
+            "full_name": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_ModelService_UpdateModel_sync",
       "title": "Snippet for update_model in ModelService",
       "description": "Basic snippet for update_model in ModelService",
@@ -4727,6 +4767,86 @@
         {
           "start": 20,
           "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ModelService_DeleteModelVersion_sync",
+      "title": "Snippet for delete_model_version in ModelService",
+      "description": "Basic snippet for delete_model_version in ModelService",
+      "file": "model_service/delete_model_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_model_version",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ModelService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client"
+        },
+        "method": {
+          "short_name": "DeleteModelVersion",
+          "full_name": "google.cloud.aiplatform.v1.ModelService.DeleteModelVersion",
+          "service": {
+            "short_name": "ModelService",
+            "full_name": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ModelService_MergeVersionAliases_sync",
+      "title": "Snippet for merge_version_aliases in ModelService",
+      "description": "Basic snippet for merge_version_aliases in ModelService",
+      "file": "model_service/merge_version_aliases.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "merge_version_aliases",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client#merge_version_aliases",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::Model",
+        "client": {
+          "short_name": "ModelService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client"
+        },
+        "method": {
+          "short_name": "MergeVersionAliases",
+          "full_name": "google.cloud.aiplatform.v1.ModelService.MergeVersionAliases",
+          "service": {
+            "short_name": "ModelService",
+            "full_name": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
           "type": "FULL"
         }
       ]

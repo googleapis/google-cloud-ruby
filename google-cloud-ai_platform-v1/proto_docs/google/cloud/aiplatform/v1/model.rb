@@ -25,6 +25,29 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     The resource name of the Model.
+        # @!attribute [r] version_id
+        #   @return [::String]
+        #     Output only. Immutable. The version ID of the model.
+        #     A new version is committed when a new model version is uploaded or
+        #     trained under an existing model id. It is an auto-incrementing decimal
+        #     number in string representation.
+        # @!attribute [rw] version_aliases
+        #   @return [::Array<::String>]
+        #     User provided version aliases so that a model version can be referenced via
+        #     alias (i.e.
+        #     projects/\\{project}/locations/\\{location}/models/\\{model_id}@\\{version_alias}
+        #     instead of auto-generated version id (i.e.
+        #     projects/\\{project}/locations/\\{location}/models/\\{model_id}@\\{version_id}).
+        #     The format is [a-z][a-zA-Z0-9-]\\{0,126}[a-z0-9] to distinguish from
+        #     version_id. A default version alias will be created for the first version
+        #     of the model, and there must be exactly one default version alias for a
+        #     model.
+        # @!attribute [r] version_create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when this version was created.
+        # @!attribute [r] version_update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Timestamp when this version was most recently updated.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. The display name of the Model.
@@ -33,6 +56,9 @@ module Google
         # @!attribute [rw] description
         #   @return [::String]
         #     The description of the Model.
+        # @!attribute [rw] version_description
+        #   @return [::String]
+        #     The description of this version.
         # @!attribute [rw] predict_schemata
         #   @return [::Google::Cloud::AIPlatform::V1::PredictSchemata]
         #     The schemata that describe formats of the Model's predictions and

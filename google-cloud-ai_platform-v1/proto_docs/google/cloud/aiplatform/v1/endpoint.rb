@@ -148,6 +148,9 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Model that this is the deployment of. Note that
         #     the Model may be in a different location than the DeployedModel's Endpoint.
+        #
+        #     The resource name may contain version id or version alias to specify the
+        #     version, if no version is specified, the default version will be deployed.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the DeployedModel. If not provided upon creation,
