@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.9.0 (2022-06-15)
+
+#### Features
+
+* Added support for the location mixin client
+* Added support for webhook configuration
+
 ### 0.8.1 (2022-05-09)
 
 #### Documentation
