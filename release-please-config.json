@@ -515,6 +515,14 @@
       "component": "google-cloud-gaming-v1",
       "version_file": "lib/google/cloud/gaming/v1/version.rb"
     },
+    "google-cloud-gke_backup": {
+      "component": "google-cloud-gke_backup",
+      "version_file": "lib/google/cloud/gke_backup/version.rb"
+    },
+    "google-cloud-gke_backup-v1": {
+      "component": "google-cloud-gke_backup-v1",
+      "version_file": "lib/google/cloud/gke_backup/v1/version.rb"
+    },
     "google-cloud-gke_connect-gateway": {
       "component": "google-cloud-gke_connect-gateway",
       "version_file": "lib/google/cloud/gke_connect/gateway/version.rb"
