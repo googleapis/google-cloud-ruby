@@ -15,6 +15,7 @@
 
 require "concurrent"
 require "monitor"
+require "Retriable"
 
 module Google
   module Cloud
@@ -28,12 +29,16 @@ module Google
           attr_reader :max_bytes
           attr_reader :interval
 
+          ##
+          # @private Implementation attributes.
+          attr_reader :retry_thread_pool
+
           PERMANENT_FAILURE = "PERMANENT_FAILURE"
           # Google::Cloud::Unavailable error is already retried at gapic level
-          RETRIABLE_ERRORS = [Google::Cloud::Cancelled, 
-                              Google::Cloud::DeadlineExceeded, 
-                              Google::Cloud::Internal,
-                              Google::Cloud::ResourceExhausted,
+          RETRIABLE_ERRORS = [Google::Cloud::CanceledError, 
+                              Google::Cloud::DeadlineExceededError, 
+                              Google::Cloud::InternalError,
+                              Google::Cloud::ResourceExhaustedError,
                               Google::Cloud::InvalidArgumentError]
           MAX_RETRY_DURATION = 600 # 600s since the server allows ack/modacks for 10 mins max       
           MAX_TRIES = 10                                 
@@ -105,24 +110,20 @@ module Google
                 add_future pool do
                   begin
                     @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
-                  rescue Google::Cloud::Cancelled, Google::Cloud::DeadlineExceeded, Google::Cloud::Internal,
-                         Google::Cloud::ResourceExhausted
-                    retry if @subscriber.exactly_once_delivery_enabled
-                  rescue Google::Cloud::InvalidArgumentError => e
-                    handleAcknowledgeError e.error_metadata if @subscriber.exactly_once_delivery_enabled
+                  rescue *RETRIABLE_ERRORS => e
+                    handle_failure e, ack_req.ack_ids if @subscriber.exactly_once_delivery_enabled
                   end
-                end
+                end 
               end
               requests[:modify_ack_deadline].each do |mod_ack_req|
                 add_future pool do
                   begin
                     @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
                                                             mod_ack_req.ack_deadline_seconds
-                  rescue Google::Cloud::Cancelled, Google::Cloud::DeadlineExceeded, Google::Cloud::Internal,
-                         Google::Cloud::ResourceExhausted
-                    retry if @subscriber.exactly_once_delivery_enabled
-                  rescue Google::Cloud::InvalidArgumentError => e
-                    handleModAckError e.error_metadata, mod_ack_req.ack_deadline_seconds if @subscriber.exactly_once_delivery_enabled
+                  rescue *RETRIABLE_ERRORS => e
+                    if @subscriber.exactly_once_delivery_enabled
+                      handle_failure e, mod_ack_req.ack_ids, mod_ack_req.ack_deadline_seconds 
+                    end
                   end                                                            
                 end
               end
@@ -155,78 +156,55 @@ module Google
 
           private
 
-          def handleAcknowledgeError error_metadata
-            return if error_metadata.empty?
-            permanent_failures, temporary_failures = parseError error_metadata
-            log_permanent_failures permanent_failures
-            perform_ack_retry_async temporary_failures.keys.map(&:to_s)
+          def handle_failure error, ack_ids, ack_deadline_seconds=nil
+            ack_ids = (parse_error error) || ack_ids
+            perform_retry_async ack_ids, ack_deadline_seconds
           end
 
-          def handleModAckError error_metadata, ack_deadline_seconds
-            return if error_metadata.empty?
-            permanent_failures, temporary_failures = parseError error_metadata
-            log_permanent_failures permanent_failures
-            perform_mod_ack_retry_async temporary_failures.keys.map(&:to_s), ack_deadline_seconds
+          def parse_error error
+            metadata = error.error_metadata
+            return if metadata.nil?
+            permanent_failures, temporary_failures = metadata.partition { |_, v| v.include? PERMANENT_FAILURE }.map(&:to_h)
+            handle_permanent_failures error
+            return temporary_failures.keys.map(&:to_s) unless temporary_failures.empty?
           end
 
-          def parseError error_metadata
-            error_metadata.partition { |_, v| v.include? PERMANENT_FAILURE }.map(&:to_h)
+          def handle_permanent_failures error
+              # TODO Add log or pass on result(AcknowledgeResult) to callback
           end
 
-          def log_permanent_failures permanent_failures
-            permanent_failures.each do |ack_id, cause|
-              p "The acknowledgement id #{ack_id} failed with cause #{cause}"
-            end
-          end
-
-          def perform_ack_retry_async ack_ids
+          def perform_retry_async ack_ids, ack_deadline_seconds=nil
             return unless retry_thread_pool.running?
-
             Concurrent::Promises.future_on(
-              retry_thread_pool, ack_ids, &method(:retry_temporary_ack)
+              retry_thread_pool, ack_ids, ack_deadline_seconds, &method(:retry_transient_error)
             )
           end
 
-          def retry_temporary_ack ack_ids
-            Retriable.retriable tries: MAX_TRIES, max_elapsed_time: MAX_RETRY_DURATION, on: RETRIABLE_ERRORS do
-              return if ack_ids.empty?
-              requests = create_acknowledge_requests ack_ids
-              requests.each do |ack_req|
-                begin
-                  @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
-                rescue Google::Cloud::InvalidArgumentError => e
-                  permanent_failures, temporary_failures = parseError error_metadata
-                  log_permanent_failures permanent_failures
-                  ack_ids = temporary_failures.keys.map(&:to_s)
-                  raise e
-                end
+          def retry_transient_error ack_ids, ack_deadline_seconds
+            if ack_deadline_seconds.nil?
+              retry_request ack_ids do |retry_ack_ids|
+                @subscriber.service.acknowledge subscription_name, *retry_ack_ids
+              end
+            else
+              retry_request ack_ids do |retry_ack_ids|
+                @subscriber.service.modify_ack_deadline subscription, retry_ack_ids, ack_deadline_seconds
               end
             end
           end
-
-          def perform_mod_ack_retry_async ack_ids, ack_deadline_seconds
-            return unless retry_thread_pool.running?
-
-            Concurrent::Promises.future_on(
-              retry_thread_pool, ack_ids, ack_deadline_seconds, &method(:retry_temporary_mod_ack)
-            )
-          end
-
-          def retry_temporary_mod_ack ack_ids, ack_deadline_seconds
-            Retriable.retriable tries: MAX_TRIES, max_elapsed_time: MAX_RETRY_DURATION, on: RETRIABLE_ERRORS do
-              return if ack_ids.empty?
-              requests = create_modify_ack_deadline_requests ack_deadline_seconds, ack_ids
-              requests.each do |mod_ack_req|
+          
+          def retry_request ack_ids
+            begin
+              Retriable.retriable tries: MAX_TRIES, max_elapsed_time: MAX_RETRY_DURATION, on: RETRIABLE_ERRORS do
+                return if ack_ids.nil?
                 begin
-                  @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
-                                                            mod_ack_req.ack_deadline_seconds
+                  yield ack_ids
                 rescue Google::Cloud::InvalidArgumentError => e
-                  permanent_failures, temporary_failures = parseError error_metadata
-                  log_permanent_failures permanent_failures
-                  ack_ids = temporary_failures.keys.map(&:to_s)
+                  ack_ids = parse_error e.error_metadata 
                   raise e
                 end
               end
+            rescue StandardError => error
+              handle_permanent_failures error
             end
           end
 
