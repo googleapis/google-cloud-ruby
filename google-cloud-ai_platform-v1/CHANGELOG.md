@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.7.0 (2022-06-17)
+
+#### Features
+
+* Added default threshold to drift detection config
+* Added default threshold to skew detection config
+* Added model version ID to the upload_model response
+
 ### 0.6.0 (2022-06-15)
 
 #### Features
