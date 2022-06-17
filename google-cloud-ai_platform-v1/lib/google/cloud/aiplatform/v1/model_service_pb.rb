@@ -28,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.UploadModelResponse" do
       optional :model, :string, 1
+      optional :model_version_id, :string, 2
     end
     add_message "google.cloud.aiplatform.v1.GetModelRequest" do
       optional :name, :string, 1

@@ -59,6 +59,9 @@ module Google
         #   @return [::String]
         #     The name of the uploaded Model resource.
         #     Format: `projects/{project}/locations/{location}/models/{model}`
+        # @!attribute [r] model_version_id
+        #   @return [::String]
+        #     Output only. The version ID of the model that is uploaded.
         class UploadModelResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
