@@ -131,7 +131,7 @@
   "google-cloud-gke_connect-gateway-v1beta1": "0.1.5",
   "google-cloud-gke_hub": "1.0.1",
   "google-cloud-gke_hub-v1": "0.2.0",
-  "google-cloud-gke_hub-v1beta1": "0.3.0",
+  "google-cloud-gke_hub-v1beta1": "0.4.0",
   "google-cloud-gke_multi_cloud": "0.1.0",
   "google-cloud-gke_multi_cloud-v1": "0.1.0",
   "google-cloud-iap": "1.0.1",
