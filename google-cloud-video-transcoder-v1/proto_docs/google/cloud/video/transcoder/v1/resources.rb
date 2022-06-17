@@ -32,12 +32,16 @@ module Google
           #     Input only. Specify the `input_uri` to populate empty `uri` fields in each element of
           #     `Job.config.inputs` or `JobTemplate.config.inputs` when using template.
           #     URI of the media. Input files must be at least 5 seconds in duration and
-          #     stored in Cloud Storage (for example, `gs://bucket/inputs/file.mp4`).
+          #     stored in Cloud Storage (for example, `gs://bucket/inputs/file.mp4`). See
+          #     [Supported input and output
+          #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           # @!attribute [rw] output_uri
           #   @return [::String]
           #     Input only. Specify the `output_uri` to populate an empty `Job.config.output.uri` or
           #     `JobTemplate.config.output.uri` when using template.
-          #     URI for the output file(s). For example, `gs://my-bucket/outputs/`.
+          #     URI for the output file(s). For example, `gs://my-bucket/outputs/`. See
+          #     [Supported input and output
+          #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           # @!attribute [rw] template_id
           #   @return [::String]
           #     Input only. Specify the `template_id` to use for populating `Job.config`. The default
@@ -68,6 +72,10 @@ module Google
           #     Job time to live value in days, which will be effective after job
           #     completion. Job should be deleted automatically after the given TTL. Enter
           #     a value between 1 and 90. The default is 30.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     The labels associated with this job. You can use these to organize and
+          #     group your jobs.
           # @!attribute [r] error
           #   @return [::Google::Rpc::Status]
           #     Output only. An error object that describes the reason for the failure.
@@ -75,6 +83,15 @@ module Google
           class Job
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # The current state of the job.
             module ProcessingState
@@ -105,9 +122,22 @@ module Google
           # @!attribute [rw] config
           #   @return [::Google::Cloud::Video::Transcoder::V1::JobConfig]
           #     The configuration for this template.
+          # @!attribute [rw] labels
+          #   @return [::Google::Protobuf::Map{::String => ::String}]
+          #     The labels associated with this job template. You can use these to organize
+          #     and group your job templates.
           class JobTemplate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::String]
+            class LabelsEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
 
           # Job configuration
@@ -140,6 +170,7 @@ module Google
           # @!attribute [rw] sprite_sheets
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::SpriteSheet>]
           #     List of output sprite sheets.
+          #     Spritesheets require at least one VideoStream in the Jobconfig.
           # @!attribute [rw] overlays
           #   @return [::Array<::Google::Cloud::Video::Transcoder::V1::Overlay>]
           #     List of overlays on the output video, in descending Z-order.
@@ -157,7 +188,9 @@ module Google
           #   @return [::String]
           #     URI of the media. Input files must be at least 5 seconds in duration and
           #     stored in Cloud Storage (for example, `gs://bucket/inputs/file.mp4`).
-          #     If empty, the value will be populated from `Job.input_uri`.
+          #     If empty, the value is populated from `Job.input_uri`. See
+          #     [Supported input and output
+          #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           # @!attribute [rw] preprocessing_config
           #   @return [::Google::Cloud::Video::Transcoder::V1::PreprocessingConfig]
           #     Preprocessing configurations.
@@ -170,7 +203,9 @@ module Google
           # @!attribute [rw] uri
           #   @return [::String]
           #     URI for the output file(s). For example, `gs://my-bucket/outputs/`.
-          #     If empty the value is populated from `Job.output_uri`.
+          #     If empty, the value is populated from `Job.output_uri`. See
+          #     [Supported input and output
+          #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats).
           class Output
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -251,6 +286,10 @@ module Google
           #     - `fmp4`- the corresponding file extension is `.m4s`
           #     - `mp4`
           #     - `vtt`
+          #
+          #     See also:
+          #     [Supported input and output
+          #     formats](https://cloud.google.com/transcoder/docs/concepts/supported-input-and-output-formats)
           # @!attribute [rw] elementary_streams
           #   @return [::Array<::String>]
           #     List of `ElementaryStream.key`s multiplexed in this stream.
@@ -514,6 +553,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Color preprocessing configuration.
+            #
+            # **Note:** This configuration is not supported.
             # @!attribute [rw] saturation
             #   @return [::Float]
             #     Control color saturation of the video. Enter a value between -1 and 1,
@@ -535,6 +576,8 @@ module Google
             end
 
             # Denoise preprocessing configuration.
+            #
+            # **Note:** This configuration is not supported.
             # @!attribute [rw] strength
             #   @return [::Float]
             #     Set strength of the denoise. Enter a value between 0 and 1. The higher
@@ -553,6 +596,8 @@ module Google
             end
 
             # Deblock preprocessing configuration.
+            #
+            # **Note:** This configuration is not supported.
             # @!attribute [rw] strength
             #   @return [::Float]
             #     Set strength of the deblocker. Enter a value between 0 and 1. The higher
@@ -583,9 +628,13 @@ module Google
             # @!attribute [rw] high_boost
             #   @return [::Boolean]
             #     Enable boosting high frequency components. The default is `false`.
+            #
+            #     **Note:** This field is not supported.
             # @!attribute [rw] low_boost
             #   @return [::Boolean]
             #     Enable boosting low frequency components. The default is `false`.
+            #
+            #     **Note:** This field is not supported.
             class Audio
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -967,11 +1016,12 @@ module Google
             #     Supported rate control modes:
             #
             #     - `vbr` - variable bitrate
-            #     - `crf` - constant rate factor
             # @!attribute [rw] crf_level
             #   @return [::Integer]
             #     Target CRF level. Must be between 10 and 36, where 10 is the highest
             #     quality and 36 is the most efficient compression. The default is 21.
+            #
+            #     **Note:** This field is not supported.
             # @!attribute [rw] gop_frame_count
             #   @return [::Integer]
             #     Select the GOP size based on the specified frame count. Must be greater
