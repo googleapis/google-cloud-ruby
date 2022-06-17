@@ -70,6 +70,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :resource_link, :string, 1
       optional :cluster_missing, :bool, 2
       optional :admin_cluster, :bool, 3
+      optional :cluster_type, :enum, 4, "google.cloud.gkehub.v1beta1.OnPremCluster.ClusterType"
+    end
+    add_enum "google.cloud.gkehub.v1beta1.OnPremCluster.ClusterType" do
+      value :CLUSTERTYPE_UNSPECIFIED, 0
+      value :BOOTSTRAP, 1
+      value :HYBRID, 2
+      value :STANDALONE, 3
+      value :USER, 4
     end
     add_message "google.cloud.gkehub.v1beta1.MultiCloudCluster" do
       optional :resource_link, :string, 1
@@ -204,6 +212,7 @@ module Google
         ResourceManifest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.ResourceManifest").msgclass
         GkeCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.GkeCluster").msgclass
         OnPremCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.OnPremCluster").msgclass
+        OnPremCluster::ClusterType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.OnPremCluster.ClusterType").enummodule
         MultiCloudCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.MultiCloudCluster").msgclass
         EdgeCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.EdgeCluster").msgclass
         ApplianceCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.gkehub.v1beta1.ApplianceCluster").msgclass
