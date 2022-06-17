@@ -14,6 +14,7 @@
 
 
 require "concurrent"
+require "google/cloud/errors"
 require "monitor"
 require "Retriable"
 
@@ -111,7 +112,7 @@ module Google
                   begin
                     @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
                   rescue *RETRIABLE_ERRORS => e
-                    handle_failure e, ack_req.ack_ids if @subscriber.exactly_once_delivery_enabled
+                    (handle_failure e, ack_req.ack_ids) if @subscriber.exactly_once_delivery_enabled
                   end
                 end 
               end
@@ -187,7 +188,7 @@ module Google
               end
             else
               retry_request ack_ids do |retry_ack_ids|
-                @subscriber.service.modify_ack_deadline subscription, retry_ack_ids, ack_deadline_seconds
+                @subscriber.service.modify_ack_deadline subscription_name, retry_ack_ids, ack_deadline_seconds
               end
             end
           end
