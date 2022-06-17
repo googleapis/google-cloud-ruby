@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 (2022-06-17)
+
+#### Bug Fixes
+
+* Fixed serialization of the Assessment.private_password_leak_verification field
+
 ### 0.9.0 (2022-05-19)
 
 #### Features

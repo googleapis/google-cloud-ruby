@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-06-17)
+
+#### Features
+
+* Support user labels in Job and JobTemplate
+
 ### 0.2.2 / 2022-01-11
 
 #### Documentation
