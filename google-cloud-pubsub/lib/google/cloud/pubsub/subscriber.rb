@@ -75,7 +75,7 @@ module Google
         ##
         # @private Implementation attributes.
         attr_reader :stream_pool, :thread_pool, :buffer, :service
-        
+
         ##
         # @private Implementation attributes.
         attr_accessor :exactly_once_delivery_enabled

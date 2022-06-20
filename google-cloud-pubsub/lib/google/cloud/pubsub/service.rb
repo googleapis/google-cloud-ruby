@@ -278,7 +278,6 @@ module Google
           subscriber.modify_ack_deadline subscription:         subscription_path(subscription),
                                          ack_ids:              Array(ids),
                                          ack_deadline_seconds: deadline
-          
         end
 
         ##
