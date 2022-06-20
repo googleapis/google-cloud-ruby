@@ -1,5 +1,14 @@
 # Release History
 
+### 1.37.0 (2022-06-20)
+
+#### Features
+
+* allow retry options to be configurable on client initialization
+#### Bug Fixes
+
+* update object path parsing to handle hashes in them
+
 ### 1.36.2 (2022-04-20)
 
 #### Documentation
