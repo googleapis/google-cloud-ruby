@@ -22,7 +22,11 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   let(:sub_path) { sub_grpc.name }
   let(:subscription) { Google::Cloud::PubSub::Subscription.from_grpc sub_grpc, pubsub.service }
   let(:rec_msg1_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
-                          rec_message_hash("rec_message1-msg-goes-here", 1111) }
+    rec_message_hash("rec_message1-msg-goes-here", 1111) }
+  let(:rec_msg2_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
+    rec_message_hash("rec_message2-msg-goes-here", 1112) }
+  let(:rec_msg3_grpc) { Google::Cloud::PubSub::V1::ReceivedMessage.new \
+    rec_message_hash("rec_message3-msg-goes-here", 1113) }
 
 
   it "should call handle error for ack on retriable error" do
@@ -142,7 +146,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscriber.wait!
   end
   
-  it "should raise other errors on modack" do
+  it "should raise other errors on ack" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
                                                                     subscription_properties: {
                                                                         exactly_once_delivery_enabled: true
@@ -177,6 +181,62 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
      
     sleep 5
     assert_equal errors.first.message, "Test failure"
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should retry only transient failures" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    pull_res2 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg2_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    pull_res3 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg3_grpc] ,
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }                                                                   
+    response_groups = [[pull_res1,pull_res2,pull_res3]]
+  
+    stub = StreamingPullStub.new response_groups
+    called = false  
+    errors = []
+    def stub.acknowledge subscription:, ack_ids:
+        @acknowledge_requests << [subscription, ack_ids.flatten.sort]
+        begin
+          raise GRPC::InvalidArgument.new
+        rescue => exception
+          error = ::Google::Cloud::Error.from_error(exception)
+          def error.error_metadata
+            {"ack-id-1111"=>"PERMANENT_FAILURE_INVALID_ACK_ID","ack-id-1113"=>"TRANSIENT_FAILURE_INVALID_ACK_ID","ack-id-1112"=>"PERMANENT_FAILURE_INVALID_ACK_ID"}
+          end
+          raise error
+        end
+    end
+  
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      msg.acknowledge!
+      called = true
+    end
+
+    subscriber.on_error do |error|
+        errors << error
+    end
+  
+    subscriber.start
+  
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.1
+    end
+     
+    sleep 5
+    assert_equal stub.acknowledge_requests[1][1], ["ack-id-1113"]
     subscriber.stop
     subscriber.wait!
   end

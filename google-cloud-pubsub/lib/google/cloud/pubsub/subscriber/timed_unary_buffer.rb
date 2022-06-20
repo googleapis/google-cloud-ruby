@@ -168,7 +168,7 @@ module Google
             permanent_failures, temporary_failures = metadata.partition do |_, v|
               v.include? PERMANENT_FAILURE
             end.map(&:to_h)
-            handle_permanent_failures error
+            handle_permanent_failures permanent_failures
             return temporary_failures.keys.map(&:to_s) unless temporary_failures.empty?
           end
 
