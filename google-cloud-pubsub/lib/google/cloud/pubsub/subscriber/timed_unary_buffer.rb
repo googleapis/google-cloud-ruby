@@ -16,7 +16,7 @@
 require "concurrent"
 require "google/cloud/errors"
 require "monitor"
-require "Retriable"
+require "retriable"
 
 module Google
   module Cloud
