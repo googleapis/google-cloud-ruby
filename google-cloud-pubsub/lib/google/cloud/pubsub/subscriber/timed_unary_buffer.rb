@@ -29,9 +29,6 @@ module Google
 
           attr_reader :max_bytes
           attr_reader :interval
-
-          ##
-          # @private Implementation attributes.
           attr_reader :retry_thread_pool
 
           PERMANENT_FAILURE = "PERMANENT_FAILURE".freeze
