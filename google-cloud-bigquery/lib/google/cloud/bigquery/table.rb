@@ -853,6 +853,23 @@ module Google
           return nil if reference?
           @gapi.type == "EXTERNAL"
         end
+        
+        ##
+        # Checks if the table's type is `SNAPSHOT`, indicating that the table
+        # represents a table snapshot.
+        #
+        # @see https://cloud.google.com/bigquery/docs/table-snapshots-intro Introduction to table snapshots
+        #
+        # @return [Boolean, nil] `true` when the type is `SNAPSHOT`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see #{reference?}).
+        #
+        # @!group Attributes
+        #
+        def snapshot?
+          return nil if reference?
+          @gapi.type == "SNAPSHOT"
+        end
 
         ##
         # The geographic location where the table should reside. Possible
