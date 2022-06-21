@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 (2022-06-14)
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Removed Application and Profile services and related data types
+
 ### 0.4.6 / 2022-01-11
 
 #### Bug Fixes

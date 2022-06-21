@@ -13,6 +13,7 @@
 # limitations under the License.
 
 # Delete the Google::Cloud::Datastream.locations method and test
+# until https://github.com/googleapis/gapic-generator-ruby/issues/775 is fixed
 OwlBot.modifier path: "lib/google/cloud/datastream.rb",
                 name: "delete-locations-factory" do |content|
   OwlBot::RubyContent

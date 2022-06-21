@@ -298,6 +298,7 @@
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/protobuf/wrappers.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
     "proto_docs/google/type/money.rb",
     "snippets/Gemfile",
     "snippets/dataset_service/create_dataset.rb",
@@ -414,6 +415,7 @@
     "snippets/migration_service/batch_migrate_resources.rb",
     "snippets/migration_service/search_migratable_resources.rb",
     "snippets/model_service/delete_model.rb",
+    "snippets/model_service/delete_model_version.rb",
     "snippets/model_service/export_model.rb",
     "snippets/model_service/get_model.rb",
     "snippets/model_service/get_model_evaluation.rb",
@@ -421,7 +423,9 @@
     "snippets/model_service/import_model_evaluation.rb",
     "snippets/model_service/list_model_evaluation_slices.rb",
     "snippets/model_service/list_model_evaluations.rb",
+    "snippets/model_service/list_model_versions.rb",
     "snippets/model_service/list_models.rb",
+    "snippets/model_service/merge_version_aliases.rb",
     "snippets/model_service/update_model.rb",
     "snippets/model_service/upload_model.rb",
     "snippets/pipeline_service/cancel_pipeline_job.rb",
@@ -532,6 +536,7 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb"
   ]
 }

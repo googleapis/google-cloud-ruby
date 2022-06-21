@@ -12,10 +12,8 @@ require 'google/cloud/video/stitcher/v1/cdn_keys_pb'
 require 'google/cloud/video/stitcher/v1/sessions_pb'
 require 'google/cloud/video/stitcher/v1/slates_pb'
 require 'google/cloud/video/stitcher/v1/stitch_details_pb'
-require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
-require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/video/stitcher/v1/video_stitcher_service.proto", :syntax => :proto3) do

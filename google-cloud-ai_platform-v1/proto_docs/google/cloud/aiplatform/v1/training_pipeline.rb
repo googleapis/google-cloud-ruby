@@ -77,6 +77,17 @@ module Google
         #     model_to_upload's resource {::Google::Cloud::AIPlatform::V1::Model#name name} is populated. The Model
         #     is always uploaded into the Project and Location in which this pipeline
         #     is.
+        # @!attribute [rw] model_id
+        #   @return [::String]
+        #     Optional. The ID to use for the uploaded Model, which will become the final
+        #     component of the model resource name.
+        #
+        #     This value may be up to 63 characters, and valid characters are
+        #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
+        # @!attribute [rw] parent_model
+        #   @return [::String]
+        #     Optional. When specify this field, the `model_to_upload` will not be uploaded as a
+        #     new model, instead, it will become a new version of this `parent_model`.
         # @!attribute [r] state
         #   @return [::Google::Cloud::AIPlatform::V1::PipelineState]
         #     Output only. The detailed state of the pipeline.

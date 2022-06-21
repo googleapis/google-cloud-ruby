@@ -1,5 +1,17 @@
 # Release History
 
+### 0.5.0 (2022-06-14)
+
+#### Features
+
+* Added a number of fields, including package type, CPE URI, and architecture, to the PackageNoteand PackageOccurrence data structures
+* Added benchmark document name field to ComplianceVersion
+* Added file location field to the PackageIssue data structure
+* Added support for SLSA provenance version 0.2
+#### Bug Fixes
+
+* Deprecated the CPE URI from the Location data structure
+
 ### 0.4.0 / 2022-01-13
 
 #### Features

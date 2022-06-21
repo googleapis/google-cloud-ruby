@@ -27,10 +27,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.TrainingPredictionSkewDetectionConfig" do
       map :skew_thresholds, :string, :message, 1, "google.cloud.aiplatform.v1.ThresholdConfig"
       map :attribution_score_skew_thresholds, :string, :message, 2, "google.cloud.aiplatform.v1.ThresholdConfig"
+      optional :default_skew_threshold, :message, 6, "google.cloud.aiplatform.v1.ThresholdConfig"
     end
     add_message "google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.PredictionDriftDetectionConfig" do
       map :drift_thresholds, :string, :message, 1, "google.cloud.aiplatform.v1.ThresholdConfig"
       map :attribution_score_drift_thresholds, :string, :message, 2, "google.cloud.aiplatform.v1.ThresholdConfig"
+      optional :default_drift_threshold, :message, 5, "google.cloud.aiplatform.v1.ThresholdConfig"
     end
     add_message "google.cloud.aiplatform.v1.ModelMonitoringObjectiveConfig.ExplanationConfig" do
       optional :enable_feature_attributes, :bool, 1

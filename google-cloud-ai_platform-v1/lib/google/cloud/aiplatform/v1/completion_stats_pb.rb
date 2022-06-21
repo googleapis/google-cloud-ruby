@@ -11,6 +11,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :successful_count, :int64, 1
       optional :failed_count, :int64, 2
       optional :incomplete_count, :int64, 3
+      optional :successful_forecast_point_count, :int64, 5
     end
   end
 end

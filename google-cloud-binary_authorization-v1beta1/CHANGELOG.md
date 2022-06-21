@@ -1,5 +1,11 @@
 # Release History
 
+### 0.5.0 (2022-06-17)
+
+#### Features
+
+* Add a namespace field to pod events created by continuous validation
+
 ### 0.4.1 / 2022-01-11
 
 #### Documentation

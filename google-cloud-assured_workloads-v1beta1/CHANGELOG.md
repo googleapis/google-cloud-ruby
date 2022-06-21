@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.2 (2022-06-15)
+
+#### Bug Fixes
+
+* Renamed some internal protobuf definition files
+
 ### 0.9.1 / 2022-01-11
 
 #### Bug Fixes

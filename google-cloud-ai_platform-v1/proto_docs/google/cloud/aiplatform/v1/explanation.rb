@@ -39,6 +39,12 @@ module Google
         #     descending order. If {::Google::Cloud::AIPlatform::V1::ExplanationParameters#output_indices ExplanationParameters.output_indices} is specified,
         #     the attributions are stored by {::Google::Cloud::AIPlatform::V1::Attribution#output_index Attribution.output_index} in the same
         #     order as they appear in the output_indices.
+        # @!attribute [r] neighbors
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::Neighbor>]
+        #     Output only. List of the nearest neighbors for example-based explanations.
+        #
+        #     For models deployed with the examples explanations feature enabled, the
+        #     attributions field is empty and instead the neighbors field is populated.
         class Explanation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -160,6 +166,18 @@ module Google
         #     Output only. Name of the explain output. Specified as the key in
         #     {::Google::Cloud::AIPlatform::V1::ExplanationMetadata#outputs ExplanationMetadata.outputs}.
         class Attribution
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Neighbors for example-based explanations.
+        # @!attribute [r] neighbor_id
+        #   @return [::String]
+        #     Output only. The neighbor id.
+        # @!attribute [r] neighbor_distance
+        #   @return [::Float]
+        #     Output only. The neighbor distance.
+        class Neighbor
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -397,6 +415,9 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationMetadataOverride]
         #     The metadata to be overridden. If not specified, no metadata is overridden.
+        # @!attribute [rw] examples_override
+        #   @return [::Google::Cloud::AIPlatform::V1::ExamplesOverride]
+        #     The example-based explanations parameter overrides.
         class ExplanationSpecOverride
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -438,6 +459,54 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Overrides for example-based explanations.
+        # @!attribute [rw] neighbor_count
+        #   @return [::Integer]
+        #     The number of neighbors to return.
+        # @!attribute [rw] crowding_count
+        #   @return [::Integer]
+        #     The number of neighbors to return that have the same crowding tag.
+        # @!attribute [rw] restrictions
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::ExamplesRestrictionsNamespace>]
+        #     Restrict the resulting nearest neighbors to respect these constraints.
+        # @!attribute [rw] return_embeddings
+        #   @return [::Boolean]
+        #     If true, return the embeddings instead of neighbors.
+        # @!attribute [rw] data_format
+        #   @return [::Google::Cloud::AIPlatform::V1::ExamplesOverride::DataFormat]
+        #     The format of the data being provided with each call.
+        class ExamplesOverride
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Data format enum.
+          module DataFormat
+            # Unspecified format. Must not be used.
+            DATA_FORMAT_UNSPECIFIED = 0
+
+            # Provided data is a set of model inputs.
+            INSTANCES = 1
+
+            # Provided data is a set of embeddings.
+            EMBEDDINGS = 2
+          end
+        end
+
+        # Restrictions namespace for example-based explanations overrides.
+        # @!attribute [rw] namespace_name
+        #   @return [::String]
+        #     The namespace name.
+        # @!attribute [rw] allow
+        #   @return [::Array<::String>]
+        #     The list of allowed tags.
+        # @!attribute [rw] deny
+        #   @return [::Array<::String>]
+        #     The list of deny tags.
+        class ExamplesRestrictionsNamespace
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

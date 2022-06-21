@@ -40,7 +40,7 @@ describe Google::Cloud::PubSub::Schema, :resource, :mock_pubsub do
   it "validates a message" do
     mock = Minitest::Mock.new
     res = Google::Cloud::PubSub::V1::ValidateMessageResponse.new # always empty
-    mock.expect :validate_message, res, [parent: project_path, name: schema_path(schema_id), schema: nil, message: message_data, encoding: message_encoding.to_s]
+    mock.expect :validate_message, res, parent: project_path, name: schema_path(schema_id), schema: nil, message: message_data, encoding: message_encoding.to_s
     pubsub.service.mocked_schemas = mock
 
     _(schema.validate_message message_data, message_encoding).must_equal true
@@ -60,7 +60,7 @@ describe Google::Cloud::PubSub::Schema, :resource, :mock_pubsub do
 
   it "deletes itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_schema, nil, [name: schema_path(schema_id)]
+    mock.expect :delete_schema, nil, name: schema_path(schema_id)
     pubsub.service.mocked_schemas = mock
 
     schema.delete
@@ -71,7 +71,7 @@ describe Google::Cloud::PubSub::Schema, :resource, :mock_pubsub do
   it "reloads itself" do
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 2]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 2
     pubsub.service.mocked_schemas = mock
 
     schema.reload!
@@ -87,7 +87,7 @@ describe Google::Cloud::PubSub::Schema, :resource, :mock_pubsub do
   it "reloads itself with view option" do
     get_res = Google::Cloud::PubSub::V1::Schema.new schema_hash(schema_id, definition: nil)
     mock = Minitest::Mock.new
-    mock.expect :get_schema, get_res, [name: schema_path(schema_id), view: 1]
+    mock.expect :get_schema, get_res, name: schema_path(schema_id), view: 1
     pubsub.service.mocked_schemas = mock
 
     schema.reload! view: :basic
