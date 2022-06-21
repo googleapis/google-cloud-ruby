@@ -463,6 +463,38 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 1
     end
 
+    it "should filter by = operator" do
+      query = Google::Cloud::Datastore::Query.new.
+        kind("Character").ancestor(book).
+        where("appearances", "=", 0)
+      entities = dataset.run query
+      _(entities.count).must_equal 1
+    end
+
+    it "should filter by != operator" do
+      query = Google::Cloud::Datastore::Query.new.
+        kind("Character").ancestor(book).
+        where("appearances", "!=", 0)
+      entities = dataset.run query
+      _(entities.count).must_equal 7
+    end
+
+    it "should filter by in operator" do
+      query = Google::Cloud::Datastore::Query.new.
+        kind("Character").ancestor(book).
+        where("name", "in", ["Jon Snow", "Arya Stark"])
+      entities = dataset.run query
+      _(entities.count).must_equal 2
+    end
+
+    it "should filter by not_in operator" do
+      query = Google::Cloud::Datastore::Query.new.
+        kind("Character").ancestor(book).
+        where("appearances", "not_in", ["Jon Snow", "Arya Stark"])
+      entities = dataset.run query
+      _(entities.count).must_equal 6
+    end
+
     it "should order queries" do
       query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
