@@ -51,7 +51,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
     mock = Minitest::Mock.new
     patch_retention_policy_gapi = Google::Apis::StorageV1::Bucket::RetentionPolicy.new retention_period: bucket_retention_period
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new retention_policy: patch_retention_policy_gapi
-    mock.expect :patch_bucket, bucket_with_retention_policy_gapi, patch_bucket_args(bucket_name, patch_bucket_gapi)
+    mock.expect :patch_bucket, bucket_with_retention_policy_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args
     bucket.service.mocked_service = mock
 
     _(bucket.retention_period).must_be :nil?
@@ -67,7 +67,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
   it "updates its default_event_based_hold" do
     mock = Minitest::Mock.new
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new default_event_based_hold: true
-    mock.expect :patch_bucket, bucket_with_retention_policy_gapi, patch_bucket_args(bucket_name, patch_bucket_gapi)
+    mock.expect :patch_bucket, bucket_with_retention_policy_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args
     bucket.service.mocked_service = mock
 
     _(bucket.default_event_based_hold?).must_equal false
@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
   it "locks its retention policy" do
     mock = Minitest::Mock.new
     mock.expect :lock_bucket_retention_policy, bucket_with_retention_policy_gapi,
-                [bucket_name, bucket_metageneration, user_project: nil]
+                [bucket_name, bucket_metageneration], user_project: nil
     bucket.service.mocked_service = mock
 
     bucket.lock_retention_policy!
@@ -95,7 +95,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
   it "locks its retention policy with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :lock_bucket_retention_policy, bucket_with_retention_policy_gapi,
-                [bucket_name, bucket_metageneration, user_project: "test"]
+                [bucket_name, bucket_metageneration], user_project: "test"
     bucket_user_project.service.mocked_service = mock
 
     bucket_user_project.lock_retention_policy!
