@@ -78,6 +78,9 @@ module Google
           # @!attribute [rw] vertica_dialect
           #   @return [::Google::Cloud::Bigquery::Migration::V2::VerticaDialect]
           #     The Vertica dialect
+          # @!attribute [rw] sql_server_dialect
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::SQLServerDialect]
+          #     The SQL Server dialect
           class Dialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -154,6 +157,12 @@ module Google
 
           # The dialect definition for Vertica.
           class VerticaDialect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dialect definition for SQL Server.
+          class SQLServerDialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

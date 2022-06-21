@@ -139,7 +139,6 @@ module Google
         end
 
         # Value for a feature.
-        # (-- NEXT ID: 15 --)
         # @!attribute [rw] bool_value
         #   @return [::Boolean]
         #     Bool type feature value.

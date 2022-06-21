@@ -211,6 +211,7 @@ def run_owlbot gem_info
     "--source-repo", "/googleapis-gen"
   ]
   docker_run(*cmd)
+  FileUtils.rm_f ".gitconfig"
 end
 
 def verify_staging gems
@@ -316,7 +317,8 @@ def docker_run *args
     "--rm",
     "--user", "#{Process.uid}:#{Process.gid}",
     "-v", "#{context_directory}:/repo",
-    "-w", "/repo"
+    "-w", "/repo",
+    "--env", "HOME=/repo"
   ] + args
   exec cmd
 end

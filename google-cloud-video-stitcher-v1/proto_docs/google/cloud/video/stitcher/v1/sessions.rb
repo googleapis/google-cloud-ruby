@@ -64,6 +64,9 @@ module Google
           # @!attribute [rw] manifest_options
           #   @return [::Google::Cloud::Video::Stitcher::V1::ManifestOptions]
           #     Additional options that affect the output of the manifest.
+          # @!attribute [r] asset_id
+          #   @return [::String]
+          #     Output only. The generated ID of the VodSession's source media.
           class VodSession
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -193,6 +196,9 @@ module Google
           # @!attribute [rw] manifest_options
           #   @return [::Google::Cloud::Video::Stitcher::V1::ManifestOptions]
           #     Additional options that affect the output of the manifest.
+          # @!attribute [r] stream_id
+          #   @return [::String]
+          #     Output only. The generated ID of the LiveSession's source stream.
           class LiveSession
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -223,9 +229,6 @@ module Google
 
               # Finishes stitching the current ad before returning to content.
               COMPLETE_AD = 1
-
-              # Finishes stitching the current pod before returning to content.
-              COMPLETE_POD = 2
 
               # Cuts an ad short and returns to content in the middle of the ad.
               CUT_CURRENT = 3

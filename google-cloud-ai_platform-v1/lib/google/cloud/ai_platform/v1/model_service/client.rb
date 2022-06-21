@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/model_service_pb"
+require "google/cloud/location"
+require "google/iam/v1/iam_policy"
 
 module Google
   module Cloud
@@ -139,6 +141,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @model_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::AIPlatform::V1::ModelService::Stub,
                 credentials:  credentials,
@@ -155,6 +169,20 @@ module Google
             #
             attr_reader :operations_client
 
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
+
             # Service calls
 
             ##
@@ -170,7 +198,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload upload_model(parent: nil, model: nil)
+            # @overload upload_model(parent: nil, parent_model: nil, model_id: nil, model: nil)
             #   Pass arguments to `upload_model` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -178,6 +206,15 @@ module Google
             #   @param parent [::String]
             #     Required. The resource name of the Location into which to upload the Model.
             #     Format: `projects/{project}/locations/{location}`
+            #   @param parent_model [::String]
+            #     Optional. The resource name of the model into which to upload the version. Only
+            #     specify this field when uploading a new version.
+            #   @param model_id [::String]
+            #     Optional. The ID to use for the uploaded Model, which will become the final
+            #     component of the model resource name.
+            #
+            #     This value may be up to 63 characters, and valid characters are
+            #     `[a-z0-9_-]`. The first character cannot be a number or hyphen.
             #   @param model [::Google::Cloud::AIPlatform::V1::Model, ::Hash]
             #     Required. The Model to create.
             #
@@ -274,6 +311,16 @@ module Google
             #   @param name [::String]
             #     Required. The name of the Model resource.
             #     Format: `projects/{project}/locations/{location}/models/{model}`
+            #
+            #     In order to retrieve a specific version of the model, also provide
+            #     the version ID or version alias.
+            #       Example: `projects/{project}/locations/{location}/models/{model}@2`
+            #                  or
+            #                `projects/{project}/locations/{location}/models/{model}@golden`
+            #     If no version ID or alias is specified, the "default" version will be
+            #     returned. The "default" version alias is created for the first version of
+            #     the model, and can be moved to other versions later on. There will be
+            #     exactly one default version.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AIPlatform::V1::Model]
@@ -459,6 +506,118 @@ module Google
 
               @model_service_stub.call_rpc :list_models, request, options: options do |response, operation|
                 response = ::Gapic::PagedEnumerable.new @model_service_stub, :list_models, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists versions of the specified model.
+            #
+            # @overload list_model_versions(request, options = nil)
+            #   Pass arguments to `list_model_versions` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_model_versions(name: nil, page_size: nil, page_token: nil, filter: nil, read_mask: nil)
+            #   Pass arguments to `list_model_versions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the model to list versions for.
+            #   @param page_size [::Integer]
+            #     The standard list page size.
+            #   @param page_token [::String]
+            #     The standard list page token.
+            #     Typically obtained via
+            #     {::Google::Cloud::AIPlatform::V1::ListModelVersionsResponse#next_page_token ListModelVersionsResponse.next_page_token} of the previous
+            #     [ModelService.ListModelversions][] call.
+            #   @param filter [::String]
+            #     An expression for filtering the results of the request. For field names
+            #     both snake_case and camelCase are supported.
+            #
+            #       * `labels` supports general map functions that is:
+            #         * `labels.key=value` - key:value equality
+            #         * `labels.key:* or labels:key - key existence
+            #         * A key including a space must be quoted. `labels."a key"`.
+            #
+            #     Some examples:
+            #       * `labels.myKey="myValue"`
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Mask specifying which fields to read.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Model>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Model>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ListModelVersionsRequest.new
+            #
+            #   # Call the list_model_versions method.
+            #   result = client.list_model_versions request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AIPlatform::V1::Model.
+            #     p response
+            #   end
+            #
+            def list_model_versions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ListModelVersionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_model_versions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_model_versions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_model_versions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @model_service_stub.call_rpc :list_model_versions, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @model_service_stub, :list_model_versions, request, response, operation, options
                 yield response, operation if block_given?
                 return response
               end
@@ -670,6 +829,207 @@ module Google
             end
 
             ##
+            # Deletes a Model version.
+            #
+            # Model version can only be deleted if there are no [DeployedModels][]
+            # created from it. Deleting the only version in the Model is not allowed. Use
+            # {::Google::Cloud::AIPlatform::V1::ModelService::Client#delete_model DeleteModel} for deleting the Model instead.
+            #
+            # @overload delete_model_version(request, options = nil)
+            #   Pass arguments to `delete_model_version` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_model_version(name: nil)
+            #   Pass arguments to `delete_model_version` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the model version to be deleted, with a version ID explicitly
+            #     included.
+            #
+            #     Example: `projects/{project}/locations/{location}/models/{model}@1234`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest.new
+            #
+            #   # Call the delete_model_version method.
+            #   result = client.delete_model_version request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_model_version request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::DeleteModelVersionRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_model_version.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_model_version.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_model_version.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @model_service_stub.call_rpc :delete_model_version, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Merges a set of aliases for a Model version.
+            #
+            # @overload merge_version_aliases(request, options = nil)
+            #   Pass arguments to `merge_version_aliases` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload merge_version_aliases(name: nil, version_aliases: nil)
+            #   Pass arguments to `merge_version_aliases` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The name of the model version to merge aliases, with a version ID
+            #     explicitly included.
+            #
+            #     Example: `projects/{project}/locations/{location}/models/{model}@1234`
+            #   @param version_aliases [::Array<::String>]
+            #     Required. The set of version aliases to merge.
+            #     The alias should be at most 128 characters, and match
+            #     `[a-z][a-z0-9-]{0,126}[a-z-0-9]`.
+            #     Add the `-` prefix to an alias means removing that alias from the version.
+            #     `-` is NOT counted in the 128 characters. Example: `-golden` means removing
+            #     the `golden` alias from the version.
+            #
+            #     There is NO ordering in aliases, which means
+            #     1) The aliases returned from GetModel API might not have the exactly same
+            #     order from this MergeVersionAliases API. 2) Adding and deleting the same
+            #     alias in the request is not recommended, and the 2 operations will be
+            #     cancelled out.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::Model]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::Model]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest.new
+            #
+            #   # Call the merge_version_aliases method.
+            #   result = client.merge_version_aliases request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::Model.
+            #   p result
+            #
+            def merge_version_aliases request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::MergeVersionAliasesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.merge_version_aliases.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.merge_version_aliases.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.merge_version_aliases.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @model_service_stub.call_rpc :merge_version_aliases, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Exports a trained, exportable Model to a location specified by the
             # user. A Model is considered to be exportable if it has at least one
             # {::Google::Cloud::AIPlatform::V1::Model#supported_export_formats supported export format}.
@@ -691,6 +1051,8 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the Model to export.
+            #     The resource name may contain version id or version alias to specify the
+            #     version, if no version is specified, the default version will be exported.
             #   @param output_config [::Google::Cloud::AIPlatform::V1::ExportModelRequest::OutputConfig, ::Hash]
             #     Required. The desired output location and configuration.
             #
@@ -1390,6 +1752,11 @@ module Google
                 #
                 attr_reader :list_models
                 ##
+                # RPC-specific configuration for `list_model_versions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_model_versions
+                ##
                 # RPC-specific configuration for `update_model`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1399,6 +1766,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_model
+                ##
+                # RPC-specific configuration for `delete_model_version`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_model_version
+                ##
+                # RPC-specific configuration for `merge_version_aliases`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :merge_version_aliases
                 ##
                 # RPC-specific configuration for `export_model`
                 # @return [::Gapic::Config::Method]
@@ -1438,10 +1815,16 @@ module Google
                   @get_model = ::Gapic::Config::Method.new get_model_config
                   list_models_config = parent_rpcs.list_models if parent_rpcs.respond_to? :list_models
                   @list_models = ::Gapic::Config::Method.new list_models_config
+                  list_model_versions_config = parent_rpcs.list_model_versions if parent_rpcs.respond_to? :list_model_versions
+                  @list_model_versions = ::Gapic::Config::Method.new list_model_versions_config
                   update_model_config = parent_rpcs.update_model if parent_rpcs.respond_to? :update_model
                   @update_model = ::Gapic::Config::Method.new update_model_config
                   delete_model_config = parent_rpcs.delete_model if parent_rpcs.respond_to? :delete_model
                   @delete_model = ::Gapic::Config::Method.new delete_model_config
+                  delete_model_version_config = parent_rpcs.delete_model_version if parent_rpcs.respond_to? :delete_model_version
+                  @delete_model_version = ::Gapic::Config::Method.new delete_model_version_config
+                  merge_version_aliases_config = parent_rpcs.merge_version_aliases if parent_rpcs.respond_to? :merge_version_aliases
+                  @merge_version_aliases = ::Gapic::Config::Method.new merge_version_aliases_config
                   export_model_config = parent_rpcs.export_model if parent_rpcs.respond_to? :export_model
                   @export_model = ::Gapic::Config::Method.new export_model_config
                   import_model_evaluation_config = parent_rpcs.import_model_evaluation if parent_rpcs.respond_to? :import_model_evaluation

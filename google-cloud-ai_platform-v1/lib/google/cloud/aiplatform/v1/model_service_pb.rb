@@ -19,6 +19,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/aiplatform/v1/model_service.proto", :syntax => :proto3) do
     add_message "google.cloud.aiplatform.v1.UploadModelRequest" do
       optional :parent, :string, 1
+      optional :parent_model, :string, 4
+      optional :model_id, :string, 5
       optional :model, :message, 2, "google.cloud.aiplatform.v1.Model"
     end
     add_message "google.cloud.aiplatform.v1.UploadModelOperationMetadata" do
@@ -26,6 +28,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.UploadModelResponse" do
       optional :model, :string, 1
+      optional :model_version_id, :string, 2
     end
     add_message "google.cloud.aiplatform.v1.GetModelRequest" do
       optional :name, :string, 1
@@ -42,12 +45,30 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :models, :message, 1, "google.cloud.aiplatform.v1.Model"
       optional :next_page_token, :string, 2
     end
+    add_message "google.cloud.aiplatform.v1.ListModelVersionsRequest" do
+      optional :name, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+      optional :read_mask, :message, 5, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.aiplatform.v1.ListModelVersionsResponse" do
+      repeated :models, :message, 1, "google.cloud.aiplatform.v1.Model"
+      optional :next_page_token, :string, 2
+    end
     add_message "google.cloud.aiplatform.v1.UpdateModelRequest" do
       optional :model, :message, 1, "google.cloud.aiplatform.v1.Model"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.aiplatform.v1.DeleteModelRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.DeleteModelVersionRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.MergeVersionAliasesRequest" do
+      optional :name, :string, 1
+      repeated :version_aliases, :string, 2
     end
     add_message "google.cloud.aiplatform.v1.ExportModelRequest" do
       optional :name, :string, 1
@@ -113,8 +134,12 @@ module Google
         GetModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetModelRequest").msgclass
         ListModelsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelsRequest").msgclass
         ListModelsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelsResponse").msgclass
+        ListModelVersionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelVersionsRequest").msgclass
+        ListModelVersionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelVersionsResponse").msgclass
         UpdateModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UpdateModelRequest").msgclass
         DeleteModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteModelRequest").msgclass
+        DeleteModelVersionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteModelVersionRequest").msgclass
+        MergeVersionAliasesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.MergeVersionAliasesRequest").msgclass
         ExportModelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelRequest").msgclass
         ExportModelRequest::OutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelRequest.OutputConfig").msgclass
         ExportModelOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelOperationMetadata").msgclass

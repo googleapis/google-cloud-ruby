@@ -38,6 +38,9 @@ module Google
         #     Starting this job has no impact on any existing deployments of the Model
         #     and their resources.
         #     Exactly one of model and unmanaged_container_model must be set.
+        #
+        #     The model resource name may contain version id or version alias to specify
+        #     the version, if no version is specified, the default version will be used.
         # @!attribute [rw] unmanaged_container_model
         #   @return [::Google::Cloud::AIPlatform::V1::UnmanagedContainerModel]
         #     Contains model information necessary to perform batch prediction without

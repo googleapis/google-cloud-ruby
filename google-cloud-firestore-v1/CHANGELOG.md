@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 (2022-06-14)
+
+#### Features
+
+* Support read_time arguments to the partition_query and list_collection_ids calls
+
 ### 0.5.0 (2022-04-28)
 
 #### Features

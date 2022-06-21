@@ -345,15 +345,6 @@ module Google
           #   @return [::String]
           #     Required. The project and location in which the live session should be created,
           #     in the form of `projects/{project_number}/locations/{location}`.
-          #
-          #     Valid locations:
-          #
-          #     * `-` (Video Stitcher API will pick a location that is closest to the
-          #     caller.)
-          #     * `us-east1`
-          #     * `us-west1`
-          #     * `us-central1`
-          #     * `europe-west1`
           # @!attribute [rw] live_session
           #   @return [::Google::Cloud::Video::Stitcher::V1::LiveSession]
           #     Required. Parameters for creating a live session.

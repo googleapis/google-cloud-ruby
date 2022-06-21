@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.0 (2022-06-17)
+
+#### Features
+
+* Added cluster type field for OnPremCluster
+
 ### 0.3.0 (2022-06-08)
 
 #### Features

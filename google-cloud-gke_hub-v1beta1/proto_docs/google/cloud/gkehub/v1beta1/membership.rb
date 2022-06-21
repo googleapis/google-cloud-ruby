@@ -266,9 +266,30 @@ module Google
         # @!attribute [rw] admin_cluster
         #   @return [::Boolean]
         #     Immutable. Whether the cluster is an admin cluster.
+        # @!attribute [rw] cluster_type
+        #   @return [::Google::Cloud::GkeHub::V1beta1::OnPremCluster::ClusterType]
+        #     Immutable. The on prem cluster's type.
         class OnPremCluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # ClusterType describes on prem cluster's type.
+          module ClusterType
+            # The ClusterType is not set.
+            CLUSTERTYPE_UNSPECIFIED = 0
+
+            # The ClusterType is bootstrap cluster.
+            BOOTSTRAP = 1
+
+            # The ClusterType is baremetal hybrid cluster.
+            HYBRID = 2
+
+            # The ClusterType is baremetal standalone cluster.
+            STANDALONE = 3
+
+            # The ClusterType is user cluster.
+            USER = 4
+          end
         end
 
         # MultiCloudCluster contains information specific to GKE Multi-Cloud clusters.

@@ -16,8 +16,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/aiplatform/v1/model.proto", :syntax => :proto3) do
     add_message "google.cloud.aiplatform.v1.Model" do
       optional :name, :string, 1
+      optional :version_id, :string, 28
+      repeated :version_aliases, :string, 29
+      optional :version_create_time, :message, 31, "google.protobuf.Timestamp"
+      optional :version_update_time, :message, 32, "google.protobuf.Timestamp"
       optional :display_name, :string, 2
       optional :description, :string, 3
+      optional :version_description, :string, 30
       optional :predict_schemata, :message, 4, "google.cloud.aiplatform.v1.PredictSchemata"
       optional :metadata_schema_uri, :string, 5
       optional :metadata, :message, 6, "google.protobuf.Value"

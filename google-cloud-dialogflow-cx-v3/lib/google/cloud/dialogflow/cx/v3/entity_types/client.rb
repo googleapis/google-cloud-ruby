@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/dialogflow/cx/v3/entity_type_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -139,6 +140,12 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @entity_types_stub = ::Gapic::ServiceStub.new(
                   ::Google::Cloud::Dialogflow::CX::V3::EntityTypes::Stub,
                   credentials:  credentials,
@@ -147,6 +154,13 @@ module Google
                   interceptors: @config.interceptors
                 )
               end
+
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Client]
+              #
+              attr_reader :location_client
 
               # Service calls
 

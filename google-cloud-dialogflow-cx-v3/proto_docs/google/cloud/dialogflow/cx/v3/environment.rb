@@ -55,6 +55,9 @@ module Google
           # @!attribute [rw] test_cases_config
           #   @return [::Google::Cloud::Dialogflow::CX::V3::Environment::TestCasesConfig]
           #     The test cases config for continuous tests of this environment.
+          # @!attribute [rw] webhook_config
+          #   @return [::Google::Cloud::Dialogflow::CX::V3::Environment::WebhookConfig]
+          #     The webhook configuration for this environment.
           class Environment
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -84,6 +87,18 @@ module Google
             #     Whether to run test cases in {::Google::Cloud::Dialogflow::CX::V3::Environment::TestCasesConfig#test_cases TestCasesConfig.test_cases} before
             #     deploying a flow version to the environment. Default false.
             class TestCasesConfig
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Configuration for webhooks.
+            # @!attribute [rw] webhook_overrides
+            #   @return [::Array<::Google::Cloud::Dialogflow::CX::V3::Webhook>]
+            #     The list of webhooks to override for the agent environment. The webhook
+            #     must exist in the agent. You can override fields in
+            #     {::Google::Cloud::Dialogflow::CX::V3::Webhook#generic_web_service `generic_web_service`} and
+            #     {::Google::Cloud::Dialogflow::CX::V3::Webhook#service_directory `service_directory`}.
+            class WebhookConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

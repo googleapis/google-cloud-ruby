@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       end
     end
     add_message "google.cloud.binaryauthorization.v1beta1.ContinuousValidationEvent.ContinuousValidationPodEvent" do
+      optional :pod_namespace, :string, 7
       optional :pod, :string, 1
       optional :deploy_time, :message, 2, "google.protobuf.Timestamp"
       optional :end_time, :message, 3, "google.protobuf.Timestamp"

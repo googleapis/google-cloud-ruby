@@ -147,6 +147,7 @@ module Google
         #
         #       * `labels`
         #       * `online_serving_config.fixed_node_count`
+        #       * `online_serving_config.scaling`
         class UpdateFeaturestoreRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
