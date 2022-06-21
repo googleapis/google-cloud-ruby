@@ -482,7 +482,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
     it "should filter by in operator" do
       query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
-        where("name", "in", ["Jon Snow", "Arya Stark"])
+        where("name", "in", ["Jon Snow", "Arya"])
       entities = dataset.run query
       _(entities.count).must_equal 2
     end
@@ -490,7 +490,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
     it "should filter by not_in operator" do
       query = Google::Cloud::Datastore::Query.new.
         kind("Character").ancestor(book).
-        where("appearances", "not_in", ["Jon Snow", "Arya Stark"])
+        where("name", "not_in", ["Jon Snow", "Arya"])
       entities = dataset.run query
       _(entities.count).must_equal 6
     end
