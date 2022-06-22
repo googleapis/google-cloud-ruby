@@ -706,6 +706,11 @@
                 "import_model_evaluation"
               ]
             },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batch_import_model_evaluation_slices"
+              ]
+            },
             "GetModelEvaluation": {
               "methods": [
                 "get_model_evaluation"

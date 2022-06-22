@@ -364,6 +364,29 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices ModelService.BatchImportModelEvaluationSlices}
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The name of the parent ModelEvaluation resource.
+        #     Format:
+        #     `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
+        # @!attribute [rw] model_evaluation_slices
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice>]
+        #     Required. Model evaluation slice resource to be imported.
+        class BatchImportModelEvaluationSlicesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices ModelService.BatchImportModelEvaluationSlices}
+        # @!attribute [r] imported_model_evaluation_slices
+        #   @return [::Array<::String>]
+        #     Output only. List of imported {::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice#name ModelEvaluationSlice.name}.
+        class BatchImportModelEvaluationSlicesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::AIPlatform::V1::ModelService::Client#get_model_evaluation ModelService.GetModelEvaluation}.
         # @!attribute [rw] name
         #   @return [::String]

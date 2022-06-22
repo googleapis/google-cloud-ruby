@@ -4932,6 +4932,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_ModelService_BatchImportModelEvaluationSlices_sync",
+      "title": "Snippet for batch_import_model_evaluation_slices in ModelService",
+      "description": "Basic snippet for batch_import_model_evaluation_slices in ModelService",
+      "file": "model_service/batch_import_model_evaluation_slices.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_import_model_evaluation_slices",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse",
+        "client": {
+          "short_name": "ModelService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client"
+        },
+        "method": {
+          "short_name": "BatchImportModelEvaluationSlices",
+          "full_name": "google.cloud.aiplatform.v1.ModelService.BatchImportModelEvaluationSlices",
+          "service": {
+            "short_name": "ModelService",
+            "full_name": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_ModelService_GetModelEvaluation_sync",
       "title": "Snippet for get_model_evaluation in ModelService",
       "description": "Basic snippet for get_model_evaluation in ModelService",
