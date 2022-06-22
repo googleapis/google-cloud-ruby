@@ -14,7 +14,7 @@
   "google-cloud-api_gateway-v1": "0.1.5",
   "google-cloud-apigee_connect": "1.0.1",
   "google-cloud-apigee_connect-v1": "0.1.4",
-  "google-cloud-apigee_registry-v1": "0.0.1",
+  "google-cloud-apigee_registry-v1": "0.1.0",
   "google-cloud-app_engine": "1.0.3",
   "google-cloud-app_engine-v1": "0.4.0",
   "google-cloud-artifact_registry": "1.0.1",
