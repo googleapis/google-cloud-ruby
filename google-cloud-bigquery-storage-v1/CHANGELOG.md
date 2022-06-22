@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2022-06-22)
+
+#### Features
+
+* add row error field to fields
+
 ### 0.10.1 / 2022-04-01
 
 #### Documentation
