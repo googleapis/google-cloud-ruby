@@ -214,7 +214,7 @@ class MockPubsub < Minitest::Spec
                                filter: nil,
                                dead_letter_policy: nil,
                                retry_policy: nil
-    [
+    {
       name: subscription_path(sub_name),
       topic: topic_path(topic_name),
       push_config: push_config,
@@ -226,7 +226,7 @@ class MockPubsub < Minitest::Spec
       filter: filter,
       dead_letter_policy: dead_letter_policy,
       retry_policy: retry_policy
-    ]
+    }
   end
 
   def snapshots_hash topic_name, num_snapshots, token = nil

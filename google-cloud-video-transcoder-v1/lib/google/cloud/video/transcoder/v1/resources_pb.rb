@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 13, "google.protobuf.Timestamp"
       optional :end_time, :message, 14, "google.protobuf.Timestamp"
       optional :ttl_after_completion_days, :int32, 15
+      map :labels, :string, :string, 16
       optional :error, :message, 17, "google.rpc.Status"
       oneof :job_config do
         optional :template_id, :string, 4
@@ -36,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.video.transcoder.v1.JobTemplate" do
       optional :name, :string, 1
       optional :config, :message, 2, "google.cloud.video.transcoder.v1.JobConfig"
+      map :labels, :string, :string, 3
     end
     add_message "google.cloud.video.transcoder.v1.JobConfig" do
       repeated :inputs, :message, 1, "google.cloud.video.transcoder.v1.Input"

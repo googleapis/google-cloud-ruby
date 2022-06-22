@@ -50,7 +50,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :risk_analysis, :message, 3, "google.cloud.recaptchaenterprise.v1.RiskAnalysis"
       optional :token_properties, :message, 4, "google.cloud.recaptchaenterprise.v1.TokenProperties"
       optional :account_defender_assessment, :message, 6, "google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment"
-      optional :private_password_leak_verification, :message, 7, "google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification"
+      optional :private_password_leak_verification, :message, 8, "google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification"
     end
     add_message "google.cloud.recaptchaenterprise.v1.Event" do
       optional :token, :string, 1

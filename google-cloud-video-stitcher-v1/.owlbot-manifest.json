@@ -43,7 +43,6 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/struct.rb",
-    "proto_docs/google/protobuf/timestamp.rb",
     "snippets/Gemfile",
     "snippets/snippet_metadata_google.cloud.video.stitcher.v1.json",
     "snippets/video_stitcher_service/create_cdn_key.rb",

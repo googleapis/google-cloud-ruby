@@ -23,7 +23,7 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
 
   it "lists subscriptions" do
     mock = Minitest::Mock.new
-    mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
+    mock.expect :list_topic_subscriptions, subscriptions_with_token, topic: topic_path(topic_name), page_size: nil, page_token: nil
     topic.service.mocked_publisher = mock
 
     subs = topic.subscriptions
@@ -43,7 +43,7 @@ describe Google::Cloud::PubSub::Topic, :subscriptions, :mock_pubsub do
 
     it "lists subscriptions" do
       mock = Minitest::Mock.new
-      mock.expect :list_topic_subscriptions, subscriptions_with_token, [topic: topic_path(topic_name), page_size: nil, page_token: nil]
+      mock.expect :list_topic_subscriptions, subscriptions_with_token, topic: topic_path(topic_name), page_size: nil, page_token: nil
       topic.service.mocked_publisher = mock
 
       subs = topic.subscriptions

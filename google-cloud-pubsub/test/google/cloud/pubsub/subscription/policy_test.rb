@@ -34,7 +34,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
     }
     get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [resource: subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, resource: subscription_path(sub_name)
     subscription.service.mocked_iam = mock
 
     policy = subscription.policy
@@ -64,7 +64,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
     }
     get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [resource: subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, resource: subscription_path(sub_name)
 
     updated_policy = {
       "etag"=>"CAE=",
@@ -89,7 +89,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
 
     set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [resource: subscription_path(sub_name), policy: set_req]
+    mock.expect :set_iam_policy, set_res, resource: subscription_path(sub_name), policy: set_req
     subscription.service.mocked_iam = mock
 
     policy = subscription.policy
@@ -125,7 +125,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
     }
     get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [resource: subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, resource: subscription_path(sub_name)
 
     updated_policy = {
       "etag"=>"CAE=",
@@ -149,7 +149,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
     }
     set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [resource: subscription_path(sub_name), policy: set_req]
+    mock.expect :set_iam_policy, set_res, resource: subscription_path(sub_name), policy: set_req
     subscription.service.mocked_iam = mock
 
     policy = subscription.policy do |p|
@@ -176,7 +176,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
       permissions: ["pubsub.subscriptions.get"]
     )
     mock = Minitest::Mock.new
-    mock.expect :test_iam_permissions, test_res, [resource: subscription_path(sub_name), permissions: permissions]
+    mock.expect :test_iam_permissions, test_res, resource: subscription_path(sub_name), permissions: permissions
     subscription.service.mocked_iam = mock
 
     permissions = subscription.test_permissions "pubsub.subscriptions.get",
@@ -199,7 +199,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
     }
     get_res = Google::Iam::V1::Policy.decode_json policy_hash.to_json
     mock = Minitest::Mock.new
-    mock.expect :get_iam_policy, get_res, [resource: subscription_path(sub_name)]
+    mock.expect :get_iam_policy, get_res, resource: subscription_path(sub_name)
 
     updated_policy = {
       "etag"=>"CAE=",
@@ -211,7 +211,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
     }
     set_req = Google::Iam::V1::Policy.decode_json JSON.dump(updated_policy)
     set_res = Google::Iam::V1::Policy.decode_json JSON.dump(new_policy)
-    mock.expect :set_iam_policy, set_res, [resource: subscription_path(sub_name), policy: set_req]
+    mock.expect :set_iam_policy, set_res, resource: subscription_path(sub_name), policy: set_req
     subscription.service.mocked_iam = mock
 
     policy = subscription.policy do |p|
@@ -232,7 +232,7 @@ describe Google::Cloud::PubSub::Subscription, :policy, :mock_pubsub do
       permissions: ["pubsub.subscriptions.get"]
     )
     mock = Minitest::Mock.new
-    mock.expect :test_iam_permissions, test_res, [resource: subscription_path(sub_name), permissions: permissions]
+    mock.expect :test_iam_permissions, test_res, resource: subscription_path(sub_name), permissions: permissions
     subscription.service.mocked_iam = mock
 
     permissions = subscription.test_permissions "pubsub.subscriptions.get",
