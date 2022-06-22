@@ -8,6 +8,11 @@ indexes:
 - kind: Character
   ancestor: yes
   properties:
+  - name: family
+
+- kind: Character
+  ancestor: yes
+  properties:
   - name: alive
 
 - kind: Character

@@ -388,12 +388,12 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
 
     let(:jonsnow) do
       character = Google::Cloud::Datastore::Entity.new.tap do |e|
-        e["name"]        = "Jon Snow"
-        e["family"]      = "Stark"
+        e["name"]        = "Jon"
+        e["family"]      = "Snow"
         e["appearances"] = 32
         e["alive"]       = true
       end
-      character.key = Google::Cloud::Datastore::Key.new "Character", "Jon Snow"
+      character.key = Google::Cloud::Datastore::Key.new "Character", "Jon"
       character.key.parent = eddard
       character
     end
@@ -438,7 +438,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         where("family", "=", "Stark").
         where("appearances", ">=", 20)
       entities = dataset.run query
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should filter by ancestor key" do
@@ -473,9 +473,9 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       kind = "Character"
       query = datastore.query(kind).
         ancestor(book).
-        where("name", "in", ["Jon Snow", "Arya"])
+        where("appearances", "in", [0])
       entities = datastore.run query
-      _(entities.count).must_equal 2
+      _(entities.count).must_equal 1
     end
 
     it "should filter by not_in operator" do
@@ -483,9 +483,9 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       kind = "Character"
       query = datastore.query(kind).
         ancestor(book).
-        where("name", "not_in", ["Jon Snow", "Arya"])
+        where("family", "not_in", ["Stark"])
       entities = datastore.run query
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 1
     end
 
     it "should filter by ancestor entity" do
@@ -610,21 +610,21 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @bookKey AND family = @familyName AND appearances >= @appearanceCount",
                         bookKey: book.key, familyName: "Stark", appearanceCount: 20
       entities = dataset.run gql
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should filter queries with defined indexes using GQL and positional bindings" do
       gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR @1 AND family = @2 AND appearances >= @3"
       gql.positional_bindings = [book.key, "Stark", 20]
       entities = dataset.run gql
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should filter queries with defined indexes using GQL and literal values" do
       gql = dataset.gql "SELECT * FROM Character WHERE __key__ HAS ANCESTOR Key(Book, '#{prefix}_GoT') AND family = 'Stark' AND appearances >= 20"
       gql.allow_literals = true
       entities = dataset.run gql
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should specify consistency" do
@@ -633,7 +633,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         where("family", "=", "Stark").
         where("appearances", ">=", 20)
       entities = dataset.run query, consistency: :strong
-      _(entities.count).must_equal 6
+      _(entities.count).must_equal 5
     end
 
     it "should find and run query in a read-only transaction" do
