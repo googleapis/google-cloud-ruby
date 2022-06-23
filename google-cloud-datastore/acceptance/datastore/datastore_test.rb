@@ -468,22 +468,22 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 7
     end
 
-    it "should filter by IN operator" do
+    it "should filter by in operator" do
       datastore = Google::Cloud::Datastore.new
       kind = "Character"
       query = datastore.query(kind).
         ancestor(book).
-        where("appearances", "IN", [0])
+        where("appearances", "in", [0])
       entities = datastore.run query
       _(entities.count).must_equal 1
     end
 
-    it "should filter by NOT_IN operator" do
+    it "should filter by not_in operator" do
       datastore = Google::Cloud::Datastore.new
       kind = "Character"
       query = datastore.query(kind).
         ancestor(book).
-        where("family", "NOT_IN", ["Stark"])
+        where("family", "not_in", ["Stark"])
       entities = datastore.run query
       _(entities.count).must_equal 1
     end
