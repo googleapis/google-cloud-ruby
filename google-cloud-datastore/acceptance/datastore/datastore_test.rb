@@ -386,10 +386,10 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       character
     end
 
-    let(:jonsnow) do
+    let(:jon) do
       character = Google::Cloud::Datastore::Entity.new.tap do |e|
         e["name"]        = "Jon"
-        e["family"]      = "Snow"
+        e["family"]      = "Targaryen"
         e["appearances"] = 32
         e["alive"]       = true
       end
@@ -399,7 +399,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
     end
 
     let(:characters) do
-      [rickard, eddard, catelyn, arya, sansa, robb, bran, jonsnow]
+      [rickard, eddard, catelyn, arya, sansa, robb, bran, jon]
     end
 
     before do
@@ -497,7 +497,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       datastore = Google::Cloud::Datastore.new
       query = datastore.query("Character").
         ancestor(book).
-        where("family", "in", ["Stark", "Snow"])
+        where("family", "in", ["Stark", "Targaryen"])
       entities = datastore.run query
       _(entities.count).must_equal 8
     end
@@ -534,7 +534,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       datastore = Google::Cloud::Datastore.new
       query = datastore.query("Character").
         ancestor(book).
-        where("family", "not_in", ["Stark", "Snow"])
+        where("family", "not_in", ["Stark", "Targaryen"])
       entities = datastore.run query
       _(entities.count).must_equal 0
     end
@@ -650,7 +650,7 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         cursor(last_cursor)
       last_entities = dataset.run last_query
       _(last_entities.count).must_equal 2
-      _(last_entities[0]["name"]).must_equal jonsnow["name"]
+      _(last_entities[0]["name"]).must_equal jon["name"]
       _(last_entities[1]["name"]).must_equal arya["name"]
     end
 
