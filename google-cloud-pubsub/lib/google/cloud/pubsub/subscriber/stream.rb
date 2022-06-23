@@ -134,13 +134,13 @@ module Google
 
           ##
           # @private
-          def acknowledge *messages
+          def acknowledge *messages, &callback
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
             synchronize do
               @inventory.remove ack_ids
-              @subscriber.buffer.acknowledge ack_ids
+              @subscriber.buffer.acknowledge ack_ids, callback
             end
 
             true
@@ -148,13 +148,13 @@ module Google
 
           ##
           # @private
-          def modify_ack_deadline deadline, *messages
+          def modify_ack_deadline deadline, *messages, &callback
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
             synchronize do
               @inventory.remove mod_ack_ids
-              @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids
+              @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids, callback
             end
 
             true

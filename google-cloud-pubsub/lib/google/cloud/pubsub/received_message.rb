@@ -179,9 +179,9 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop!
         #
-        def acknowledge!
+        def acknowledge! &block
           ensure_subscription!
-          subscription.acknowledge ack_id
+          subscription.acknowledge ack_id, &block
         end
         alias ack! acknowledge!
 
@@ -216,9 +216,9 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop!
         #
-        def modify_ack_deadline! new_deadline
+        def modify_ack_deadline! new_deadline, &block
           ensure_subscription!
-          subscription.modify_ack_deadline new_deadline, ack_id
+          subscription.modify_ack_deadline new_deadline, ack_id, &block
         end
 
         ##
@@ -246,8 +246,8 @@ module Google
         #   # Shut down the subscriber when ready to stop receiving messages.
         #   subscriber.stop!
         #
-        def reject!
-          modify_ack_deadline! 0
+        def reject! &block
+          modify_ack_deadline! 0, &block
         end
         alias nack! reject!
         alias ignore! reject!

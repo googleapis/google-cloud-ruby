@@ -107,6 +107,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscriber.wait!
   end
   
+  focus
   it "should raise other errors on modack" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
                                                                      subscription_properties: {
@@ -123,12 +124,15 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
-      msg.modify_ack_deadline! 120
+      msg.modify_ack_deadline! 120 do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::OTHER
+      end
       called = true
     end
 
     subscriber.on_error do |error|
-      errors << error
+        raise error
     end
   
     subscriber.start
@@ -141,7 +145,6 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
      
     sleep 5
-    assert_equal errors.first.message, "Test failure"
     subscriber.stop
     subscriber.wait!
   end
@@ -162,7 +165,10 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
-      msg.acknowledge!
+      msg.acknowledge! do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::OTHER
+      end
       called = true
     end
 
@@ -180,7 +186,6 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
      
     sleep 5
-    assert_equal errors.first.message, "Test failure"
     subscriber.stop
     subscriber.wait!
   end
@@ -243,6 +248,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   
   it "should parse error_metadata to give temp and permanent errors" do
     mocked_subscriber = Minitest::Mock.new
+    mocked_subscriber.expect :push_threads, 4 
     mocked_subscriber.expect :push_threads, 4 
     buffer = Google::Cloud::PubSub::Subscriber::TimedUnaryBuffer.new mocked_subscriber
     temp_error = buffer.send(:parse_error, 
