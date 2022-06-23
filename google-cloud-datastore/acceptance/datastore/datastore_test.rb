@@ -448,17 +448,27 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 8
     end
 
-    it "should filter by = operator" do
+    it "should fetch entities filtered by = operator" do
       datastore = Google::Cloud::Datastore.new
       kind = "Character"
       query = datastore.query(kind).
         ancestor(book).
-        where("appearances", "=", 0)
+        where("alive", "=", true)
       entities = datastore.run query
-      _(entities.count).must_equal 1
+      _(entities.count).must_equal 4
     end
 
-    it "should filter by != operator" do
+    it "should fetch zero entities filtered by = operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("appearances", "=", 1000)
+      entities = datastore.run query
+      _(entities.count).must_equal 0
+    end
+
+    it "should fetch subset of entities filtered by != operator" do
       datastore = Google::Cloud::Datastore.new
       kind = "Character"
       query = datastore.query(kind).
@@ -466,6 +476,16 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         where("appearances", "!=", 0)
       entities = datastore.run query
       _(entities.count).must_equal 7
+    end
+
+    it "should fetch all entities filtered by != operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("appearances", "!=", -5)
+      entities = datastore.run query
+      _(entities.count).must_equal 8
     end
 
     it "should filter by in operator" do
@@ -478,6 +498,37 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       _(entities.count).must_equal 1
     end
 
+    it "should fetch all entities for all valid data for in operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("family", "in", ["Stark", "Snow"])
+      entities = datastore.run query
+      _(entities.count).must_equal 8
+    end
+
+    it "should fetch zero entities for invalid data for in operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("appearances", "in", [-5])
+      entities = datastore.run query
+      _(entities.count).must_equal 0
+    end
+
+    it "should raise an error for empty array for in operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("appearances", "in", [])
+      assert_raises Google::Cloud::InvalidArgumentError do
+        entities = datastore.run query
+      end
+    end
+
     it "should filter by not_in operator" do
       datastore = Google::Cloud::Datastore.new
       kind = "Character"
@@ -486,6 +537,37 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
         where("family", "not_in", ["Stark"])
       entities = datastore.run query
       _(entities.count).must_equal 1
+    end
+
+    it "should fetch zero entities for all valid data for not_in operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("family", "not_in", ["Stark", "Snow"])
+      entities = datastore.run query
+      _(entities.count).must_equal 0
+    end
+
+    it "should fetch all entities for invalid data for not_in operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("family", "not_in", ["Pym"])
+      entities = datastore.run query
+      _(entities.count).must_equal 8
+    end
+
+    it "should raise an error for empty array for not_in operator" do
+      datastore = Google::Cloud::Datastore.new
+      kind = "Character"
+      query = datastore.query(kind).
+        ancestor(book).
+        where("family", "not_in", [])
+      assert_raises Google::Cloud::InvalidArgumentError do
+        entities = datastore.run query
+      end
     end
 
     it "should filter by ancestor entity" do
