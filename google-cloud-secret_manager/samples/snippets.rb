@@ -448,7 +448,7 @@ def update_secret_with_alias project_id:, secret_id:
   secret = client.update_secret(
     secret: {
       name: name,
-      versionAliases: {
+      version_aliases: {
         test: "1"
       }
     },
