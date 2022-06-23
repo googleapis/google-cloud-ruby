@@ -459,7 +459,7 @@ def update_secret_with_alias project_id:, secret_id:
 
   # Print the updated secret name.
   puts "Updated secret: #{secret.name}"
-  # [END secretmanager_update_secret]
+  # [END secretmanager_update_secret_with_alias]
 
   secret
 end
