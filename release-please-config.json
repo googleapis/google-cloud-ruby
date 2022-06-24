@@ -71,6 +71,14 @@
       "component": "google-cloud-apigee_connect-v1",
       "version_file": "lib/google/cloud/apigee_connect/v1/version.rb"
     },
+    "google-cloud-apigee_registry": {
+      "component": "google-cloud-apigee_registry",
+      "version_file": "lib/google/cloud/apigee_registry/version.rb"
+    },
+    "google-cloud-apigee_registry-v1": {
+      "component": "google-cloud-apigee_registry-v1",
+      "version_file": "lib/google/cloud/apigee_registry/v1/version.rb"
+    },
     "google-cloud-app_engine": {
       "component": "google-cloud-app_engine",
       "version_file": "lib/google/cloud/app_engine/version.rb"
@@ -122,6 +130,22 @@
     "google-cloud-automl-v1beta1": {
       "component": "google-cloud-automl-v1beta1",
       "version_file": "lib/google/cloud/automl/v1beta1/version.rb"
+    },
+    "google-cloud-bare_metal_solution": {
+      "component": "google-cloud-bare_metal_solution",
+      "version_file": "lib/google/cloud/bare_metal_solution/version.rb"
+    },
+    "google-cloud-bare_metal_solution-v2": {
+      "component": "google-cloud-bare_metal_solution-v2",
+      "version_file": "lib/google/cloud/bare_metal_solution/v2/version.rb"
+    },
+    "google-cloud-batch": {
+      "component": "google-cloud-batch",
+      "version_file": "lib/google/cloud/batch/version.rb"
+    },
+    "google-cloud-batch-v1": {
+      "component": "google-cloud-batch-v1",
+      "version_file": "lib/google/cloud/batch/v1/version.rb"
     },
     "google-cloud-bigquery": {
       "component": "google-cloud-bigquery",

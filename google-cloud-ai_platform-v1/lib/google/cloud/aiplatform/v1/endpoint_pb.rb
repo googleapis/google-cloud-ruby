@@ -32,6 +32,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.DeployedModel" do
       optional :id, :string, 1
       optional :model, :string, 2
+      optional :model_version_id, :string, 18
       optional :display_name, :string, 3
       optional :create_time, :message, 6, "google.protobuf.Timestamp"
       optional :explanation_spec, :message, 9, "google.cloud.aiplatform.v1.ExplanationSpec"

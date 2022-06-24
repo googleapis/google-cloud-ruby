@@ -22,7 +22,9 @@ module Google
     module Bigquery
       module Storage
         module V1
-          # Schema of a table.
+          # Schema of a table. This schema is a subset of
+          # google.cloud.bigquery.v2.TableSchema containing information necessary to
+          # generate valid message to write to BigQuery.
           # @!attribute [rw] fields
           #   @return [::Array<::Google::Cloud::Bigquery::Storage::V1::TableFieldSchema>]
           #     Describes the fields in a table.
