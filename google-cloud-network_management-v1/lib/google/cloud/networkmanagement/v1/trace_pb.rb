@@ -226,6 +226,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.networkmanagement.v1.AbortInfo" do
       optional :cause, :enum, 1, "google.cloud.networkmanagement.v1.AbortInfo.Cause"
       optional :resource_uri, :string, 2
+      repeated :projects_missing_permission, :string, 3
     end
     add_enum "google.cloud.networkmanagement.v1.AbortInfo.Cause" do
       value :CAUSE_UNSPECIFIED, 0
