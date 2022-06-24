@@ -50,6 +50,11 @@
                 "list_data_items"
               ]
             },
+            "ListSavedQueries": {
+              "methods": [
+                "list_saved_queries"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "get_annotation_spec"

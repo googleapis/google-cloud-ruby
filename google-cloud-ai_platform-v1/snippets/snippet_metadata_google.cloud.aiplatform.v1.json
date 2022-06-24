@@ -332,6 +332,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_DatasetService_ListSavedQueries_sync",
+      "title": "Snippet for list_saved_queries in DatasetService",
+      "description": "Basic snippet for list_saved_queries in DatasetService",
+      "file": "dataset_service/list_saved_queries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_saved_queries",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_saved_queries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListSavedQueriesResponse",
+        "client": {
+          "short_name": "DatasetService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client"
+        },
+        "method": {
+          "short_name": "ListSavedQueries",
+          "full_name": "google.cloud.aiplatform.v1.DatasetService.ListSavedQueries",
+          "service": {
+            "short_name": "DatasetService",
+            "full_name": "google.cloud.aiplatform.v1.DatasetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_DatasetService_GetAnnotationSpec_sync",
       "title": "Snippet for get_annotation_spec in DatasetService",
       "description": "Basic snippet for get_annotation_spec in DatasetService",
