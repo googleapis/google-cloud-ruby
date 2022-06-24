@@ -41,6 +41,9 @@ module Google
         #
         #     The model resource name may contain version id or version alias to specify
         #     the version, if no version is specified, the default version will be used.
+        # @!attribute [r] model_version_id
+        #   @return [::String]
+        #     Output only. The version ID of the Model that produces the predictions via this job.
         # @!attribute [rw] unmanaged_container_model
         #   @return [::Google::Cloud::AIPlatform::V1::UnmanagedContainerModel]
         #     Contains model information necessary to perform batch prediction without

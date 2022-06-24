@@ -151,6 +151,9 @@ module Google
         #
         #     The resource name may contain version id or version alias to specify the
         #     version, if no version is specified, the default version will be deployed.
+        # @!attribute [r] model_version_id
+        #   @return [::String]
+        #     Output only. The version ID of the model that is deployed.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the DeployedModel. If not provided upon creation,
