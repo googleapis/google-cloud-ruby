@@ -107,7 +107,6 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscriber.wait!
   end
   
-  focus
   it "should raise other errors on modack" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
                                                                      subscription_properties: {
@@ -125,14 +124,14 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
       msg.modify_ack_deadline! 120 do |result|
-        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result
-        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::OTHER
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::OTHER, Proc.new { raise "Staus did not match!" }
       end
       called = true
     end
 
     subscriber.on_error do |error|
-        raise error
+        errors << error
     end
   
     subscriber.start
@@ -145,6 +144,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
      
     sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
     subscriber.stop
     subscriber.wait!
   end
@@ -166,8 +166,8 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscription.service.mocked_subscriber = stub
     subscriber = subscription.listen streams: 1 do |msg|
       msg.acknowledge! do |result|
-        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result
-        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::OTHER
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::OTHER, Proc.new { raise "Staus did not match!" }
       end
       called = true
     end
@@ -186,6 +186,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
      
     sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
     subscriber.stop
     subscriber.wait!
   end
