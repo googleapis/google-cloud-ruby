@@ -121,7 +121,7 @@ module Google
                   rescue *RETRIABLE_ERRORS => e
                     handle_failure e, ack_req.ack_ids if @subscriber.exactly_once_delivery_enabled
                   rescue StandardError => e
-                    handle_callback AcknowledgeResult.new(AcknowledgeResult::OTHER, e), ack_req.ack_ids
+                    handle_callback construct_result(e), ack_req.ack_ids
                   end
                 end
               end
@@ -136,7 +136,7 @@ module Google
                       handle_failure e, mod_ack_req.ack_ids, mod_ack_req.ack_deadline_seconds
                     end
                   rescue StandardError => e
-                    handle_callback AcknowledgeResult.new(AcknowledgeResult::OTHER, e), mod_ack_req.ack_ids, true
+                    handle_callback construct_result(e), mod_ack_req.ack_ids, true
                   end
                 end
               end

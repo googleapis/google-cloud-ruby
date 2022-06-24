@@ -191,6 +191,252 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     subscriber.wait!
   end
 
+  it "should raise permission errors on ack" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    response_groups = [[pull_res1]]
+  
+    stub = StreamingPullStub.new response_groups
+    called = false  
+    errors = []
+    def stub.acknowledge subscription:, ack_ids:
+      raise Google::Cloud::PermissionDeniedError.new "Test failure"
+    end
+  
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      msg.acknowledge! do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::PERMISSION_DENIED, Proc.new { raise "Staus did not match!" }
+      end
+      called = true
+    end
+
+    subscriber.on_error do |error|
+        errors << error
+    end
+  
+    subscriber.start
+  
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.1
+    end
+     
+    sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should raise permission errors on modack" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    response_groups = [[pull_res1]]
+  
+    stub = StreamingPullStub.new response_groups
+    called = false  
+    errors = []
+    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      raise Google::Cloud::PermissionDeniedError.new "Test failure"
+    end
+  
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      msg.modify_ack_deadline! 120 do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::PERMISSION_DENIED, Proc.new { raise "Staus did not match!" }
+      end
+      called = true
+    end
+
+    subscriber.on_error do |error|
+        errors << error
+    end
+  
+    subscriber.start
+  
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.1
+    end
+     
+    sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should raise failed precondition errors on ack" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    response_groups = [[pull_res1]]
+  
+    stub = StreamingPullStub.new response_groups
+    called = false  
+    errors = []
+    def stub.acknowledge subscription:, ack_ids:
+      raise Google::Cloud::FailedPreconditionError.new "Test failure"
+    end
+  
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      msg.acknowledge! do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::FAILED_PRECONDITION, Proc.new { raise "Staus did not match!" }
+      end
+      called = true
+    end
+
+    subscriber.on_error do |error|
+        errors << error
+    end
+  
+    subscriber.start
+  
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.1
+    end
+     
+    sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should raise failed precondition errors on modack" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    response_groups = [[pull_res1]]
+  
+    stub = StreamingPullStub.new response_groups
+    called = false  
+    errors = []
+    def stub.modify_ack_deadline subscription:, ack_ids:, ack_deadline_seconds:
+      raise Google::Cloud::FailedPreconditionError.new "Test failure"
+    end
+  
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      msg.modify_ack_deadline! 120 do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::FAILED_PRECONDITION, Proc.new { raise "Staus did not match!" }
+      end
+      called = true
+    end
+
+    subscriber.on_error do |error|
+        errors << error
+    end
+  
+    subscriber.start
+  
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.1
+    end
+     
+    sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should send success on modack" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    response_groups = [[pull_res1]]
+  
+    stub = StreamingPullStub.new response_groups
+    called = false  
+    errors = []
+  
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      msg.modify_ack_deadline! 120 do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::SUCCESS, Proc.new { raise "Staus did not match!" }
+      end
+      called = true
+    end
+
+    subscriber.on_error do |error|
+        errors << error
+    end
+  
+    subscriber.start
+  
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.1
+    end
+     
+    sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
+    subscriber.stop
+    subscriber.wait!
+  end
+
+  it "should send success on ack" do
+    pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
+                                                                    subscription_properties: {
+                                                                        exactly_once_delivery_enabled: true
+                                                                    }   
+    response_groups = [[pull_res1]]
+  
+    stub = StreamingPullStub.new response_groups
+    called = false  
+    errors = []
+
+    subscription.service.mocked_subscriber = stub
+    subscriber = subscription.listen streams: 1 do |msg|
+      msg.acknowledge! do |result|
+        assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
+        assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::SUCCESS, Proc.new { raise "Staus did not match!" }
+      end
+      called = true
+    end
+
+    subscriber.on_error do |error|
+        errors << error
+    end
+  
+    subscriber.start
+  
+    subscriber_retries = 0
+    until called
+      fail "total number of calls were never made" if subscriber_retries > 100
+      subscriber_retries += 1
+      sleep 0.1
+    end
+     
+    sleep 5
+    assert_empty errors, Proc.new { raise errors.first }
+    subscriber.stop
+    subscriber.wait!
+  end
+
   it "should retry only transient failures" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
                                                                      subscription_properties: {
