@@ -109,6 +109,10 @@ end
 
 desc "Run the CI build"
 task :ci do
+  # This is a temporary hack to run the datastore specs to fix minitest regression.
+  # It needs to be removed soon after fixing the regression.
+  ENV["MT_KWARGS_HACK"] = 1
+
   header "BUILDING google-cloud-datastore"
   header "google-cloud-datastore rubocop", "*"
   Rake::Task[:rubocop].invoke
@@ -119,6 +123,10 @@ task :ci do
   Rake::Task[:doctest].invoke
   header "google-cloud-datastore test", "*"
   Rake::Task[:test].invoke
+ensure
+  # Delete the ENV so it doesn't impact CI runs for other gems.
+  # Its a temporary hack. Remove it soon after fixing the minitest regression
+  ENV.delete "MT_KWARGS_HACK"
 end
 namespace :ci do
   desc "Run the CI build, with acceptance tests."
