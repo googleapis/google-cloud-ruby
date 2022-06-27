@@ -276,6 +276,10 @@ module Google
             )
           end
 
+          def add_abort_incomplete_multipart_upload_rule age: nil
+            push Rule.new("AbortIncompleteMultipartUpload", age: age)
+          end
+
           # @private
           def to_gapi
             Google::Apis::StorageV1::Bucket::Lifecycle.new(

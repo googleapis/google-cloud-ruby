@@ -710,6 +710,11 @@ module Google
         # @!attribute [rw] resource_uri
         #   @return [::String]
         #     URI of the resource that caused the abort.
+        # @!attribute [rw] projects_missing_permission
+        #   @return [::Array<::String>]
+        #     List of project IDs that the user has specified in the request but does
+        #     not have permission to access network configs. Analysis is aborted in this
+        #     case with the PERMISSION_DENIED cause.
         class AbortInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

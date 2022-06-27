@@ -36,7 +36,7 @@ describe Google::Cloud::Storage::Notification, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_notification, nil, [bucket.name, notification.id, { user_project: nil }]
+    mock.expect :delete_notification, nil, [bucket.name, notification.id], user_project: nil
 
     notification.service.mocked_service = mock
 
@@ -47,7 +47,7 @@ describe Google::Cloud::Storage::Notification, :mock_storage do
 
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_notification, nil, [bucket.name, notification_user_project.id, { user_project: "test" }]
+    mock.expect :delete_notification, nil, [bucket.name, notification_user_project.id], user_project: "test"
 
     notification_user_project.service.mocked_service = mock
 

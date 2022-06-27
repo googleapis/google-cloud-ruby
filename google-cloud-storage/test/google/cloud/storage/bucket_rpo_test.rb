@@ -33,7 +33,7 @@ describe Google::Cloud::Storage::Bucket, :rpo, :mock_storage do
   it "updates its rpo" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(dual_region_bucket_hash, rpo: "ASYNC_TURBO"),
-                patch_bucket_args(dual_region_bucket_name, patch_bucket_gapi(rpo: "ASYNC_TURBO"))
+                [dual_region_bucket_name, patch_bucket_gapi(rpo: "ASYNC_TURBO")], **patch_bucket_args
 
     dual_region_bucket.service.mocked_service = mock
 
@@ -49,7 +49,7 @@ describe Google::Cloud::Storage::Bucket, :rpo, :mock_storage do
   it "fails to update its rpo because it's multi-region" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, rpo: "DEFAULT"),
-                patch_bucket_args(bucket_name, patch_bucket_gapi(rpo: "ASYNC_TURBO"))
+                [bucket_name, patch_bucket_gapi(rpo: "ASYNC_TURBO")], **patch_bucket_args
 
     bucket.service.mocked_service = mock
 
