@@ -229,6 +229,29 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.count).must_equal original_count
   end
 
+  it "adds lifecycle action IncompleteMultipartUpload to bucket" do
+    original_count = bucket.lifecycle.count
+
+    bucket.lifecycle do |l|
+      l.add_abort_incomplete_multipart_upload_rule age: 10
+    end
+
+    bucket.reload!
+
+    _(bucket.lifecycle).wont_be :empty?
+    _(bucket.lifecycle.count).must_equal original_count + 1
+    _(bucket.lifecycle.last.action).must_equal "AbortIncompleteMultipartUpload"
+    _(bucket.lifecycle.last.age).must_equal 10
+
+    bucket.lifecycle do |l|
+      l.delete_at(bucket.lifecycle.count - 1)
+    end
+
+    bucket.reload!
+
+    _(bucket.lifecycle.count).must_equal original_count
+  end
+
   it "does not error when getting a file that does not exist" do
     random_bucket = storage.bucket "#{bucket_name}_does_not_exist"
     _(random_bucket).must_be :nil?
