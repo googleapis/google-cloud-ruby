@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.0 (2022-06-27)
+
+#### Features
+
+* add support for list_saved_queries and batch_import_model_evaluation_slices 
+
 ### 0.7.0 (2022-06-17)
 
 #### Features
