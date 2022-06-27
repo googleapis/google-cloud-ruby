@@ -265,10 +265,6 @@ module Google
           #
           # @param [Integer] age The age of a file (in days). This condition is
           #   satisfied when a file reaches the specified age.
-          # @param [String,Date] created_before A date in RFC 3339 format with
-          #   only the date part (for instance, "2013-01-15"). This condition is
-          #   satisfied when a file is created before midnight of the specified
-          #   date in UTC.
           #
           # @example
           #   require "google/cloud/storage"
