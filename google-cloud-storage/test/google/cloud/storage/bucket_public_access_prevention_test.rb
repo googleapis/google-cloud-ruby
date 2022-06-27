@@ -36,9 +36,9 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
   it "updates its public_access_prevention" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "inherited"),
-                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "inherited"))
+                [bucket_name, patch_bucket_gapi(public_access_prevention: "inherited")], **patch_bucket_args
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
-                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"))
+                [bucket_name, patch_bucket_gapi(public_access_prevention: "enforced")], **patch_bucket_args
     bucket.service.mocked_service = mock
 
     _(bucket.public_access_prevention).must_be :nil?
@@ -63,9 +63,9 @@ describe Google::Cloud::Storage::Bucket, :public_access_prevention, :mock_storag
   it "updates its public_access_prevention with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "inherited"),
-                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "inherited"), user_project: "test")
+                [bucket_name, patch_bucket_gapi(public_access_prevention: "inherited")], **patch_bucket_args(user_project: "test")
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, public_access_prevention: "enforced"),
-                patch_bucket_args(bucket_name, patch_bucket_gapi(public_access_prevention: "enforced"), user_project: "test")
+                [bucket_name, patch_bucket_gapi(public_access_prevention: "enforced")], **patch_bucket_args(user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 

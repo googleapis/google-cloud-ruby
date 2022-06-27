@@ -549,6 +549,246 @@ class ::Google::Cloud::Recommender::V1::Recommender::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_recommender_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Recommender::V1::RecommenderConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_recommender_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_recommender_config, name
+      assert_kind_of ::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_recommender_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_recommender_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_recommender_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_recommender_config ::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_recommender_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_recommender_config(::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_recommender_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_recommender_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Recommender::V1::RecommenderConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    recommender_config = {}
+    update_mask = {}
+    validate_only = true
+
+    update_recommender_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_recommender_config, name
+      assert_kind_of ::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Recommender::V1::RecommenderConfig), request["recommender_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_recommender_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_recommender_config({ recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_recommender_config recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_recommender_config ::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new(recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_recommender_config({ recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_recommender_config(::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new(recommender_config: recommender_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_recommender_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_insight_type_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Recommender::V1::InsightTypeConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_insight_type_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_insight_type_config, name
+      assert_kind_of ::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_insight_type_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_insight_type_config({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_insight_type_config name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_insight_type_config ::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_insight_type_config({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_insight_type_config(::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_insight_type_config_client_stub.call_rpc_count
+    end
+  end
+
+  def test_update_insight_type_config
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Recommender::V1::InsightTypeConfig.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    insight_type_config = {}
+    update_mask = {}
+    validate_only = true
+
+    update_insight_type_config_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_insight_type_config, name
+      assert_kind_of ::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Recommender::V1::InsightTypeConfig), request["insight_type_config"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      assert_equal true, request["validate_only"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_insight_type_config_client_stub do
+      # Create client
+      client = ::Google::Cloud::Recommender::V1::Recommender::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_insight_type_config({ insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_insight_type_config insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_insight_type_config ::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new(insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_insight_type_config({ insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_insight_type_config(::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new(insight_type_config: insight_type_config, update_mask: update_mask, validate_only: validate_only), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_insight_type_config_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

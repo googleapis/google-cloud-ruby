@@ -248,6 +248,20 @@ module Google
         #     When used in conjunction with {::Google::Cloud::AIPlatform::V1::InputDataConfig#annotations_filter annotations_filter}, the Annotations used
         #     for training are filtered by both {::Google::Cloud::AIPlatform::V1::InputDataConfig#annotations_filter annotations_filter} and
         #     {::Google::Cloud::AIPlatform::V1::InputDataConfig#annotation_schema_uri annotation_schema_uri}.
+        # @!attribute [rw] saved_query_id
+        #   @return [::String]
+        #     Only applicable to Datasets that have SavedQueries.
+        #
+        #     The ID of a SavedQuery (annotation set) under the Dataset specified by
+        #     {::Google::Cloud::AIPlatform::V1::InputDataConfig#dataset_id dataset_id} used for filtering Annotations for training.
+        #
+        #     Only Annotations that are associated with this SavedQuery are used in
+        #     respectively training. When used in conjunction with
+        #     {::Google::Cloud::AIPlatform::V1::InputDataConfig#annotations_filter annotations_filter}, the Annotations used for training are filtered by
+        #     both {::Google::Cloud::AIPlatform::V1::InputDataConfig#saved_query_id saved_query_id} and {::Google::Cloud::AIPlatform::V1::InputDataConfig#annotations_filter annotations_filter}.
+        #
+        #     Only one of {::Google::Cloud::AIPlatform::V1::InputDataConfig#saved_query_id saved_query_id} and {::Google::Cloud::AIPlatform::V1::InputDataConfig#annotation_schema_uri annotation_schema_uri} should be
+        #     specified as both of them represent the same thing: problem type.
         class InputDataConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

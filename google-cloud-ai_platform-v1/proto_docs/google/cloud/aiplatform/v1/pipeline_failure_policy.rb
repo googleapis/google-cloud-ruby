@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Reperesents the failure policy of a pipeline. Currently, the default of a
+        # Represents the failure policy of a pipeline. Currently, the default of a
         # pipeline is that the pipeline will continue to run until no more tasks can be
         # executed, also known as PIPELINE_FAILURE_POLICY_FAIL_SLOW. However, if a
         # pipeline is set to PIPELINE_FAILURE_POLICY_FAIL_FAST, it will stop scheduling

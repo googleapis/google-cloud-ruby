@@ -110,7 +110,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_bucket, nil, delete_bucket_args(bucket.name)
+    mock.expect :delete_bucket, nil, [bucket.name], **delete_bucket_args
 
     bucket.service.mocked_service = mock
 
@@ -121,7 +121,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "can delete itself with if_metageneration_match set to a metageneration" do
     mock = Minitest::Mock.new
-    mock.expect :delete_bucket, nil, delete_bucket_args(bucket.name, if_metageneration_match: metageneration)
+    mock.expect :delete_bucket, nil, [bucket.name], **delete_bucket_args(if_metageneration_match: metageneration)
 
     bucket.service.mocked_service = mock
 
@@ -132,7 +132,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "can delete itself with if_metageneration_not_match set to a metageneration" do
     mock = Minitest::Mock.new
-    mock.expect :delete_bucket, nil, delete_bucket_args(bucket.name, if_metageneration_not_match: metageneration)
+    mock.expect :delete_bucket, nil, [bucket.name], **delete_bucket_args(if_metageneration_not_match: metageneration)
 
     bucket.service.mocked_service = mock
 
@@ -143,7 +143,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "can delete itself with user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_bucket, nil, delete_bucket_args(bucket_user_project.name, user_project: "test")
+    mock.expect :delete_bucket, nil, [bucket_user_project.name], **delete_bucket_args(user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 
@@ -161,7 +161,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -180,7 +180,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -199,7 +199,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -215,7 +215,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-      insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: new_file_contents)
+      [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: new_file_contents)
 
     bucket.service.mocked_service = mock
 
@@ -230,7 +230,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-      insert_object_args(bucket.name, empty_file_gapi(md5: "PiWWCnnbxptnTNTsZ6csYg=="), name: new_file_name, upload_source: new_file_contents)
+      [bucket.name, empty_file_gapi(md5: "PiWWCnnbxptnTNTsZ6csYg==")], **insert_object_args(name: new_file_name, upload_source: new_file_contents)
 
     bucket.service.mocked_service = mock
 
@@ -245,7 +245,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-      insert_object_args(bucket.name, empty_file_gapi(crc32c: "crUfeA=="), name: new_file_name, upload_source: new_file_contents)
+      [bucket.name, empty_file_gapi(crc32c: "crUfeA==")], **insert_object_args(name: new_file_name, upload_source: new_file_contents)
 
     bucket.service.mocked_service = mock
 
@@ -286,7 +286,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: "private", upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, predefined_acl: "private", upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -305,7 +305,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, predefined_acl: "publicRead", upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, predefined_acl: "publicRead", upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -326,7 +326,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(md5: md5), name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(md5: md5)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -347,7 +347,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(crc32c: crc32c), name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(crc32c: crc32c)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -366,7 +366,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(md5: "hvsmnRkNLIX24EaM7KQqIA=="), name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(md5: "hvsmnRkNLIX24EaM7KQqIA==")], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -385,7 +385,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(crc32c: "e5jnUQ=="), name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(crc32c: "e5jnUQ==")], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -413,7 +413,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(**options), name: new_file_name, upload_source: tmpfile, content_encoding: options[:content_encoding], content_type: options[:content_type])
+        [bucket.name, empty_file_gapi(**options)], **insert_object_args(name: new_file_name, upload_source: tmpfile, content_encoding: options[:content_encoding], content_type: options[:content_type])
 
       bucket.service.mocked_service = mock
 
@@ -437,7 +437,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(metadata: metadata), name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(metadata: metadata)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -456,7 +456,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(temporary_hold: true), name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(temporary_hold: true)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -475,7 +475,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi(event_based_hold: true), name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(event_based_hold: true)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
 
       bucket.service.mocked_service = mock
 
@@ -494,7 +494,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile, if_generation_match: generation)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_match: generation)
 
       bucket.service.mocked_service = mock
 
@@ -513,7 +513,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile, if_generation_not_match: generation)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_not_match: generation)
 
       bucket.service.mocked_service = mock
 
@@ -532,7 +532,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile, if_metageneration_match: metageneration)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_metageneration_match: metageneration)
 
       bucket.service.mocked_service = mock
 
@@ -551,7 +551,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile, if_metageneration_not_match: metageneration)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_metageneration_not_match: metageneration)
 
       bucket.service.mocked_service = mock
 
@@ -570,7 +570,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket_user_project.name, new_file_name),
-        insert_object_args(bucket.name, empty_file_gapi, name: new_file_name, upload_source: tmpfile, user_project: "test")
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test")
 
       bucket_user_project.service.mocked_service = mock
 
@@ -597,7 +597,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(num_files),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -617,7 +617,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(num_files),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -635,7 +635,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "lists files with prefix set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, nil, ["/prefix/path1/", "/prefix/path2/"]),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -656,7 +656,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "lists files with delimiter set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, nil, ["/prefix/path1/", "/prefix/path2/"]),
-      [bucket.name, delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -677,7 +677,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "lists files with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -697,7 +697,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "lists files with versions set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -717,7 +717,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(num_files),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"
 
     bucket_user_project.service.mocked_service = mock
 
@@ -735,9 +735,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -765,9 +765,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -794,9 +794,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with next? and next and prefix set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: "/prefix/", versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: "/prefix/", versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -823,9 +823,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with next? and next and delimiter set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: "/", max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: "/", max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -852,9 +852,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with next? and next and max set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: 3, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: 3, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -881,9 +881,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with next? and next and versions set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: true, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: true, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -910,9 +910,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: "test"]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: "test"
 
     bucket_user_project.service.mocked_service = mock
 
@@ -940,9 +940,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -960,9 +960,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all and prefix set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: "/prefix/", versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: "/prefix/", versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: "/prefix/", versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -980,9 +980,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all and delimiter set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: "/", max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: "/", max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: "/", max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -1000,9 +1000,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all and max set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: 3, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: 3, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: 3, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -1020,9 +1020,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all and versions set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: true, user_project: nil
     mock.expect :list_objects, list_files_gapi(2),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: true, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: true, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -1040,9 +1040,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(3, "second_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -1060,9 +1060,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all and request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: nil
     mock.expect :list_objects, list_files_gapi(3, "second_page_token"),
-      [bucket.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil]
+      [bucket.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: nil
 
     bucket.service.mocked_service = mock
 
@@ -1080,9 +1080,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "paginates files with all and user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :list_objects, list_files_gapi(3, "next_page_token"),
-      [bucket_user_project.name, delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"]
+      [bucket_user_project.name], delimiter: nil, max_results: nil, page_token: nil, prefix: nil, versions: nil, user_project: "test"
     mock.expect :list_objects, list_files_gapi(3, "second_page_token"),
-      [bucket_user_project.name, delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: "test"]
+      [bucket_user_project.name], delimiter: nil, max_results: nil, page_token: "next_page_token", prefix: nil, versions: nil, user_project: "test"
 
     bucket_user_project.service.mocked_service = mock
 
@@ -1101,7 +1101,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket.name, file_name), get_object_args(bucket.name, file_name)
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name), [bucket.name, file_name], **get_object_args
       
 
     bucket.service.mocked_service = mock
@@ -1119,7 +1119,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     file_name = "file.ext"
 
     mock = Minitest::Mock.new
-    mock.expect :get_object, find_file_gapi(bucket.name, file_name), get_object_args(bucket.name, file_name)
+    mock.expect :get_object, find_file_gapi(bucket.name, file_name), [bucket.name, file_name], **get_object_args
 
     bucket.service.mocked_service = mock
 
@@ -1138,7 +1138,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      get_object_args(bucket.name, file_name, generation: generation)
+      [bucket.name, file_name], **get_object_args(generation: generation)
 
     bucket.service.mocked_service = mock
 
@@ -1157,7 +1157,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket.name, file_name),
-      get_object_args(bucket.name, file_name, if_generation_match: generation)
+      [bucket.name, file_name], **get_object_args(if_generation_match: generation)
 
     bucket.service.mocked_service = mock
 
@@ -1175,7 +1175,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_object, find_file_gapi(bucket_user_project.name, file_name),
-      get_object_args(bucket_user_project.name, file_name, generation: nil, user_project: "test")
+      [bucket_user_project.name, file_name], **get_object_args(generation: nil, user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 
@@ -1263,9 +1263,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name).to_json),
-      get_bucket_args(bucket_name)
+      [bucket_name], **get_bucket_args
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name, url_root: new_url_root).to_json),
-      get_bucket_args(bucket_name)
+      [bucket_name], **get_bucket_args
 
     bucket.service.mocked_service = mock
 
@@ -1284,9 +1284,9 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name).to_json),
-      get_bucket_args(bucket_name, user_project: "test")
+      [bucket_name], **get_bucket_args(user_project: "test")
     mock.expect :get_bucket, Google::Apis::StorageV1::Bucket.from_json(random_bucket_hash(name: bucket_name, url_root: new_url_root).to_json),
-      get_bucket_args(bucket_name, user_project: "test")
+      [bucket_name], **get_bucket_args(user_project: "test")
 
     bucket_user_project.service.mocked_service = mock
 

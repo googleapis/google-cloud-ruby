@@ -38,6 +38,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :dataset_id, :string, 1
       optional :annotations_filter, :string, 6
       optional :annotation_schema_uri, :string, 9
+      optional :saved_query_id, :string, 7
       oneof :split do
         optional :fraction_split, :message, 2, "google.cloud.aiplatform.v1.FractionSplit"
         optional :filter_split, :message, 3, "google.cloud.aiplatform.v1.FilterSplit"
