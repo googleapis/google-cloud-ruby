@@ -174,7 +174,7 @@ module Google
           end
 
           ##
-          # Adds a SetStorageClass lifecycle rule to the Object Lifecycle
+          # Adds a Delete lifecycle rule to the Object Lifecycle
           # Management rules for a bucket.
           #
           # @see https://cloud.google.com/storage/docs/lifecycle Object
@@ -254,6 +254,31 @@ module Google
             )
           end
 
+          ##
+          # Adds a AbortIncompleteMultipartUpload lifecycle rule to the Object Lifecycle
+          # Management rules for a bucket.
+          #
+          # @see https://cloud.google.com/storage/docs/lifecycle Object
+          #   Lifecycle Management
+          # @see https://cloud.google.com/storage/docs/managing-lifecycles
+          #   Managing Object Lifecycles
+          #
+          # @param [Integer] age The age of a file (in days). This condition is
+          #   satisfied when a file reaches the specified age.
+          # @param [String,Date] created_before A date in RFC 3339 format with
+          #   only the date part (for instance, "2013-01-15"). This condition is
+          #   satisfied when a file is created before midnight of the specified
+          #   date in UTC.
+          #
+          # @example
+          #   require "google/cloud/storage"
+          #
+          #   storage = Google::Cloud::Storage.new
+          #
+          #   bucket = storage.create_bucket "my-bucket" do |b|
+          #     b.lifecycle.add_abort_incomplete_multipart_upload_rule age: 10
+          #   end
+          #
           def add_abort_incomplete_multipart_upload_rule age: nil
             push Rule.new("AbortIncompleteMultipartUpload", age: age)
           end
