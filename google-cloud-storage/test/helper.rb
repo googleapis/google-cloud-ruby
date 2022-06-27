@@ -258,17 +258,17 @@ class MockStorage < Minitest::Spec
   end
 
   def insert_object_args name: nil,
-                      predefined_acl: nil,
-                      upload_source: nil,
-                      content_encoding: nil,
-                      content_type: "text/plain",
-                      kms_key_name: nil,
-                      if_generation_match: nil,
-                      if_generation_not_match: nil,
-                      if_metageneration_match: nil,
-                      if_metageneration_not_match: nil,
-                      user_project: nil,
-                      options: {}
+                         predefined_acl: nil,
+                         upload_source: nil,
+                         content_encoding: nil,
+                         content_type: "text/plain",
+                         kms_key_name: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil,
+                         options: {}
     {
       name: name,
       predefined_acl: predefined_acl,
