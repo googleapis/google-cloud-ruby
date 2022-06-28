@@ -31,9 +31,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
 
   it "should call handle error for ack on retriable error" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
-                                                                    subscription_properties: {
-                                                                        exactly_once_delivery_enabled: true
-                                                                    }   
+                                                                     subscription_properties: {
+                                                                      exactly_once_delivery_enabled: true
+                                                                     }   
     response_groups = [[pull_res1]]
   
     stub = StreamingPullStub.new response_groups
@@ -70,9 +70,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   
   it "should call handle error for retry mod ack on retriable error" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
-                                                                    subscription_properties: {
-                                                                        exactly_once_delivery_enabled: true
-                                                                    }   
+                                                                     subscription_properties: {
+                                                                      exactly_once_delivery_enabled: true
+                                                                     }   
     response_groups = [[pull_res1]]
   
     stub = StreamingPullStub.new response_groups
@@ -109,9 +109,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   
   it "should raise other errors on modack" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
-                                                                    subscription_properties: {
-                                                                        exactly_once_delivery_enabled: true
-                                                                    }   
+                                                                     subscription_properties: {
+                                                                      exactly_once_delivery_enabled: true
+                                                                     }   
     response_groups = [[pull_res1]]
   
     stub = StreamingPullStub.new response_groups
@@ -128,7 +128,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
 
     subscriber.on_error do |error|
-        errors << error
+      errors << error
     end
   
     subscriber.start
@@ -148,9 +148,9 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   
   it "should raise other errors on ack" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
-                                                                    subscription_properties: {
+                                                                     subscription_properties: {
                                                                         exactly_once_delivery_enabled: true
-                                                                    }   
+                                                                     }   
     response_groups = [[pull_res1]]
   
     stub = StreamingPullStub.new response_groups
@@ -167,7 +167,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
 
     subscriber.on_error do |error|
-        errors << error
+      errors << error
     end
   
     subscriber.start
@@ -187,17 +187,17 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
 
   it "should retry only transient failures" do
     pull_res1 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg1_grpc],
-                                                                    subscription_properties: {
-                                                                        exactly_once_delivery_enabled: true
-                                                                    }   
+                                                                     subscription_properties: {
+                                                                      exactly_once_delivery_enabled: true
+                                                                     }   
     pull_res2 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg2_grpc],
-                                                                    subscription_properties: {
-                                                                        exactly_once_delivery_enabled: true
-                                                                    }   
+                                                                     subscription_properties: {
+                                                                      exactly_once_delivery_enabled: true
+                                                                     }   
     pull_res3 = Google::Cloud::PubSub::V1::StreamingPullResponse.new received_messages: [rec_msg3_grpc] ,
-                                                                    subscription_properties: {
-                                                                        exactly_once_delivery_enabled: true
-                                                                    }                                                                   
+                                                                     subscription_properties: {
+                                                                      exactly_once_delivery_enabled: true
+                                                                     }                                                                   
     response_groups = [[pull_res1,pull_res2,pull_res3]]
   
     stub = StreamingPullStub.new response_groups
@@ -223,7 +223,7 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     end
 
     subscriber.on_error do |error|
-        errors << error
+      errors << error
     end
   
     subscriber.start

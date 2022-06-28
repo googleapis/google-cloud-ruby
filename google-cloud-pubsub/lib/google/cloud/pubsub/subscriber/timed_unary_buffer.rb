@@ -109,7 +109,7 @@ module Google
                   begin
                     @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
                   rescue *RETRIABLE_ERRORS => e
-                    (handle_failure e, ack_req.ack_ids) if @subscriber.exactly_once_delivery_enabled
+                    handle_failure e, ack_req.ack_ids if @subscriber.exactly_once_delivery_enabled
                   end
                 end
               end
@@ -155,7 +155,7 @@ module Google
           private
 
           def handle_failure error, ack_ids, ack_deadline_seconds = nil
-            ack_ids = (parse_error error) || ack_ids
+            ack_ids = parse_error(error) || ack_ids
             perform_retry_async ack_ids, ack_deadline_seconds
           end
 
@@ -166,11 +166,12 @@ module Google
               v.include? PERMANENT_FAILURE
             end.map(&:to_h)
             handle_permanent_failures permanent_failures
-            return temporary_failures.keys.map(&:to_s) unless temporary_failures.empty?
+            temporary_failures.keys.map(&:to_s) unless temporary_failures.empty?
           end
 
           def handle_permanent_failures error
             # TODO: Add log or pass on result(AcknowledgeResult) to callback
+            # https://github.com/googleapis/google-cloud-ruby/issues/18237
           end
 
           def perform_retry_async ack_ids, ack_deadline_seconds = nil
