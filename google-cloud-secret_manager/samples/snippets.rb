@@ -453,7 +453,7 @@ def update_secret_with_alias project_id:, secret_id:
       }
     },
     update_mask: {
-      paths: ["versionaliases"]
+      paths: ["versionAliases"]
     }
   )
 
