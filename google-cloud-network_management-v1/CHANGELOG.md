@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.0 (2022-06-28)
+
+#### Features
+
+* introduce a projects_missing_permissions field in the AbortInfo structure 
+
 ### 0.1.3 / 2022-01-11
 
 #### Bug Fixes
