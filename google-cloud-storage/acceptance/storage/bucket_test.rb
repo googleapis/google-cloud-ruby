@@ -239,13 +239,13 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.count).must_equal original_count
   end
 
-  focus; it "adds lifecycle action IncompleteMultipartUpload to bucket" do
+  it "adds lifecycle action IncompleteMultipartUpload to bucket" do
     original_count = bucket.lifecycle.count
 
     bucket.lifecycle do |l|
       l.add_abort_incomplete_multipart_upload_rule age: 10,
-                                                   matches_prefix: "some_prefix",
-                                                   matches_prefix: "some_suffix"
+                                                   matches_prefix: ["images/", :some_prefix],
+                                                   matches_suffix: [".pdf", :some_suffix]
     end
 
     bucket.reload!
@@ -254,8 +254,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.count).must_equal original_count + 1
     _(bucket.lifecycle.last.action).must_equal "AbortIncompleteMultipartUpload"
     _(bucket.lifecycle.last.age).must_equal 10
-    _(bucket.lifecycle.last.matches_prefix).must_equal "some_prefix"
-    _(bucket.lifecycle.last.matches_suffix).must_equal "some_suffix"
+    _(bucket.lifecycle.last.matches_prefix).must_equal ["images/", "some_prefix"]
+    _(bucket.lifecycle.last.matches_suffix).must_equal [".pdf", "some_suffix"]
 
     bucket.lifecycle do |l|
       l.delete_at(bucket.lifecycle.count - 1)
