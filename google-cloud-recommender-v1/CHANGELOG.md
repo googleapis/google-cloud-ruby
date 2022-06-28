@@ -1,5 +1,12 @@
 # Release History
 
+### 0.10.0 (2022-06-28)
+
+#### Features
+
+* add support for insight type config 
+* support getting and updating recommender config 
+
 ### 0.9.0 (2022-04-15)
 
 #### Features
