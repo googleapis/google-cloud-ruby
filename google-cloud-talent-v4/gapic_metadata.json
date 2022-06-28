@@ -107,11 +107,6 @@
                 "batch_delete_jobs"
               ]
             },
-            "PurgeJobs": {
-              "methods": [
-                "purge_jobs"
-              ]
-            },
             "ListJobs": {
               "methods": [
                 "list_jobs"

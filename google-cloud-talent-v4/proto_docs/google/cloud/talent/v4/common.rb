@@ -160,13 +160,6 @@ module Google
         #   @return [::Google::Cloud::Talent::V4::DeviceInfo]
         #     The type of device used by the job seeker at the time of the call to the
         #     service.
-        # @!attribute [rw] delegated_user_info
-        #   @return [::Google::Cloud::Talent::V4::DelegatedUserInfo]
-        #     Delegated user information only used for internal purpose.
-        # @!attribute [rw] debug_options
-        #   @return [::Google::Cloud::Talent::V4::DebugOptions]
-        #     Enables debugging mode and controls various debug parameters in the search
-        #     process. Internal only.
         class RequestMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -177,8 +170,6 @@ module Google
         #   @return [::String]
         #     A unique id associated with this call.
         #     This id is logged for tracking purposes.
-        # @!attribute [rw] debug_info
-        #   @return [::Google::Cloud::Talent::V4::DebugInfo]
         class ResponseMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -448,79 +439,6 @@ module Google
             # Other compensation units.
             OTHER_COMPENSATION_UNIT = 7
           end
-        end
-
-        # Delegated partner information where for admin or debug purpose, our
-        # internal source needs to act as a partner to do READ_ONLY operations (for
-        # example, SearchJobs).
-        # @!attribute [rw] project_number
-        #   @return [::Integer]
-        #     The GCP project number of the customer that the caller is acting on
-        #     behalf of.
-        #
-        #     If both project number and distributor id are provided,
-        #     distributor id has the higher priority.
-        # @!attribute [rw] distributor_id
-        #   @return [::String]
-        #     The pretended distributor id.
-        #
-        #     If both project number and distributor id are provided,
-        #     distributor id has the higher priority.
-        # @!attribute [rw] tenant_id
-        #   @return [::String]
-        #     The pretended tenant id.
-        class DelegatedUserInfo
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Various debug options available for debugging mode. Internal only.
-        # @!attribute [rw] level
-        #   @return [::Integer]
-        #     Specifies the level of debug output. The higher the number, the more
-        #     debug information is returned and printed in backend server logs.
-        #     Current levels are 1-4.
-        # @!attribute [rw] searcher
-        #   @return [::String]
-        #     Specifies which search backend to use. Current available options are:
-        #     st-bti, model-t, and st-muppet.
-        # @!attribute [rw] scoring_parameter_override
-        #   @return [::String]
-        #     Specifies the scoring parameters to override during search. This is
-        #     equivalent to the 'dsp' url parameter in the legacy system. For details,
-        #     consult go/gjobs-scoring-params.
-        # @!attribute [rw] st_expression_override
-        #   @return [::String]
-        #     Overrides the ST sorting/scoring expression.
-        # @!attribute [rw] search_all_tenant
-        #   @return [::Google::Protobuf::BoolValue]
-        #     Search documents of all tenants (only implemented for job search as of
-        #     6/14/2019).
-        # @!attribute [rw] enable_wildcard_search
-        #   @return [::Google::Protobuf::BoolValue]
-        #     Temporarily added this flag for profile wildcard search
-        #     Flag to indicate whether wildcard search is enabled
-        class DebugOptions
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Debug information.
-        # @!attribute [rw] query_debug_info
-        #   @return [::String]
-        # @!attribute [rw] moonshine_debug_info
-        #   @return [::String]
-        # @!attribute [rw] experiment_ids
-        #   @return [::Array<::Integer>]
-        #     Identifiers for the versions of the search algorithm used during
-        #     this API invocation if multiple algorithms are used.
-        #     The default value is empty.
-        # @!attribute [rw] recommend_model_id
-        #   @return [::String]
-        #     The model id for profiles recommendation.
-        class DebugInfo
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Metadata used for long running operations returned by CTS batch APIs.

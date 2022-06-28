@@ -41,7 +41,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :company_display_name, :string, 28
       optional :derived_info, :message, 29, "google.cloud.talent.v4.Job.DerivedInfo"
       optional :processing_options, :message, 30, "google.cloud.talent.v4.Job.ProcessingOptions"
-      optional :job_debug_info, :message, 58, "google.cloud.talent.v4.Job.JobDebugInfo"
     end
     add_message "google.cloud.talent.v4.Job.ApplicationInfo" do
       repeated :emails, :string, 1
@@ -50,35 +49,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.talent.v4.Job.DerivedInfo" do
       repeated :locations, :message, 1, "google.cloud.talent.v4.Location"
-      repeated :street_locations, :message, 2, "google.cloud.talent.v4.Location"
       repeated :job_categories, :enum, 3, "google.cloud.talent.v4.JobCategory"
     end
     add_message "google.cloud.talent.v4.Job.ProcessingOptions" do
       optional :disable_street_address_resolution, :bool, 1
       optional :html_sanitization, :enum, 2, "google.cloud.talent.v4.HtmlSanitization"
-    end
-    add_message "google.cloud.talent.v4.Job.JobDebugInfo" do
-      optional :status, :enum, 1, "google.cloud.talent.v4.Job.JobDebugInfo.JobStatus"
-      repeated :soc_beliefs, :message, 2, "google.cloud.talent.v4.Job.JobDebugInfo.SocBelief"
-      optional :project_id, :string, 3
-      optional :distributor_id, :string, 4
-      optional :tenant_id, :string, 5
-      optional :project_number, :int64, 6
-      repeated :job_classifications, :string, 7
-      optional :seniority, :string, 8
-      repeated :confidence_scores, :double, 9
-      optional :last_update_time, :message, 10, "google.protobuf.Timestamp"
-    end
-    add_message "google.cloud.talent.v4.Job.JobDebugInfo.SocBelief" do
-      optional :soc_code, :string, 1
-      optional :probability, :double, 2
-      optional :svp, :int32, 3
-    end
-    add_enum "google.cloud.talent.v4.Job.JobDebugInfo.JobStatus" do
-      value :JOB_DEBUG_INFO_UNSPECIFIED, 0
-      value :EXPIRED, 1
-      value :OPEN, 2
-      value :DELETED, 3
     end
   end
 end
@@ -91,9 +66,6 @@ module Google
         Job::ApplicationInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.Job.ApplicationInfo").msgclass
         Job::DerivedInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.Job.DerivedInfo").msgclass
         Job::ProcessingOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.Job.ProcessingOptions").msgclass
-        Job::JobDebugInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.Job.JobDebugInfo").msgclass
-        Job::JobDebugInfo::SocBelief = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.Job.JobDebugInfo.SocBelief").msgclass
-        Job::JobDebugInfo::JobStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.Job.JobDebugInfo.JobStatus").enummodule
       end
     end
   end

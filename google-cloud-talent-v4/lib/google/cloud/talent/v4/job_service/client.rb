@@ -876,124 +876,6 @@ module Google
             end
 
             ##
-            # Purges all jobs associated with requested target.
-            #
-            # Note: Jobs in OPEN status remain searchable until the operation completes.
-            #
-            # Note: The operation returned may take hours or longer to complete,
-            # depending on the number of jobs that need to be deleted.
-            #
-            # @overload purge_jobs(request, options = nil)
-            #   Pass arguments to `purge_jobs` via a request object, either of type
-            #   {::Google::Cloud::Talent::V4::PurgeJobsRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::Talent::V4::PurgeJobsRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload purge_jobs(parent: nil, filter: nil, force: nil)
-            #   Pass arguments to `purge_jobs` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param parent [::String]
-            #     Required. The resource name of the project under which the jobs should be deleted.
-            #
-            #     The format is "projects/\\{project_id}". For example, "projects/foo".
-            #   @param filter [::String]
-            #     Required. A filter matching the jobs to be purged.
-            #
-            #     The filter can be one of the following three parent resources.
-            #     1. Company. Resource name of the company under which all the jobs should be
-            #     deleted. The format is
-            #     "projects/\\{project_id}/tenants/\\{tenant_id}/companies/\\{company_id}". For
-            #     example, "projects/foo/tenants/bar/companies/baz"
-            #     2. Tenant. Resource name of the tenant under which all the jobs should be
-            #     deleted. The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For
-            #     example, "projects/foo/tenants/bar".
-            #     3. Project. Resource name of the project under which all the jobs should be
-            #     deleted. The format is "projects/\\{project_id}". For example,
-            #     "projects/foo/".
-            #   @param force [::Boolean]
-            #     Actually perform the purge.
-            #     If `force` is set to false, the method will return a sample of
-            #     resource names that will be deleted.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Gapic::Operation]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Gapic::Operation]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/cloud/talent/v4"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::Talent::V4::JobService::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::Talent::V4::PurgeJobsRequest.new
-            #
-            #   # Call the purge_jobs method.
-            #   result = client.purge_jobs request
-            #
-            #   # The returned object is of type Gapic::Operation. You can use this
-            #   # object to check the status of an operation, cancel it, or wait
-            #   # for results. Here is how to block until completion:
-            #   result.wait_until_done! timeout: 60
-            #   if result.response?
-            #     p result.response
-            #   else
-            #     puts "Error!"
-            #   end
-            #
-            def purge_jobs request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Talent::V4::PurgeJobsRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.purge_jobs.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::Talent::V4::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              header_params = {}
-              if request.parent
-                header_params["parent"] = request.parent
-              end
-
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
-              options.apply_defaults timeout:      @config.rpcs.purge_jobs.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.purge_jobs.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @job_service_stub.call_rpc :purge_jobs, request, options: options do |response, operation|
-                response = ::Gapic::Operation.new response, @operations_client, options: options
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
             # Lists jobs by filter.
             #
             # @overload list_jobs(request, options = nil)
@@ -1142,7 +1024,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, enable_debug_info: nil, disable_keyword_match: nil, keyword_match_mode: nil, mendel_debug_input: nil)
+            # @overload search_jobs(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1351,11 +1233,6 @@ module Google
             #   @param custom_ranking_info [::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo, ::Hash]
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
-            #   @param enable_debug_info [::Boolean]
-            #     Controls whether to add search debug information
-            #     (sortExpr, partial expressions) into SearchResponse.
-            #
-            #     Defaults to false.
             #   @param disable_keyword_match [::Boolean]
             #     This field is deprecated. Please use
             #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
@@ -1390,9 +1267,6 @@ module Google
             #
             #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
             #     is specified.
-            #   @param mendel_debug_input [::Google::Protobuf::Any, ::Hash]
-            #     This field allows us to pass in a MendelDebugInput proto to force mendel
-            #     experiment traffic in FORCEABLE experiments.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::SearchJobsResponse]
@@ -1480,7 +1354,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, enable_debug_info: nil, disable_keyword_match: nil, keyword_match_mode: nil, mendel_debug_input: nil)
+            # @overload search_jobs_for_alert(parent: nil, search_mode: nil, request_metadata: nil, job_query: nil, enable_broadening: nil, histogram_queries: nil, job_view: nil, offset: nil, max_page_size: nil, page_token: nil, order_by: nil, diversification_level: nil, custom_ranking_info: nil, disable_keyword_match: nil, keyword_match_mode: nil)
             #   Pass arguments to `search_jobs_for_alert` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1689,11 +1563,6 @@ module Google
             #   @param custom_ranking_info [::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo, ::Hash]
             #     Controls over how job documents get ranked on top of existing relevance
             #     score (determined by API algorithm).
-            #   @param enable_debug_info [::Boolean]
-            #     Controls whether to add search debug information
-            #     (sortExpr, partial expressions) into SearchResponse.
-            #
-            #     Defaults to false.
             #   @param disable_keyword_match [::Boolean]
             #     This field is deprecated. Please use
             #     {::Google::Cloud::Talent::V4::SearchJobsRequest#keyword_match_mode SearchJobsRequest.keyword_match_mode} going forward.
@@ -1728,9 +1597,6 @@ module Google
             #
             #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
             #     is specified.
-            #   @param mendel_debug_input [::Google::Protobuf::Any, ::Hash]
-            #     This field allows us to pass in a MendelDebugInput proto to force mendel
-            #     experiment traffic in FORCEABLE experiments.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Talent::V4::SearchJobsResponse]
@@ -1967,11 +1833,6 @@ module Google
                 #
                 attr_reader :batch_delete_jobs
                 ##
-                # RPC-specific configuration for `purge_jobs`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :purge_jobs
-                ##
                 # RPC-specific configuration for `list_jobs`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2003,8 +1864,6 @@ module Google
                   @delete_job = ::Gapic::Config::Method.new delete_job_config
                   batch_delete_jobs_config = parent_rpcs.batch_delete_jobs if parent_rpcs.respond_to? :batch_delete_jobs
                   @batch_delete_jobs = ::Gapic::Config::Method.new batch_delete_jobs_config
-                  purge_jobs_config = parent_rpcs.purge_jobs if parent_rpcs.respond_to? :purge_jobs
-                  @purge_jobs = ::Gapic::Config::Method.new purge_jobs_config
                   list_jobs_config = parent_rpcs.list_jobs if parent_rpcs.respond_to? :list_jobs
                   @list_jobs = ::Gapic::Config::Method.new list_jobs_config
                   search_jobs_config = parent_rpcs.search_jobs if parent_rpcs.respond_to? :search_jobs

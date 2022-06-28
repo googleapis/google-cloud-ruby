@@ -370,12 +370,6 @@ module Google
         #   @return [::Google::Cloud::Talent::V4::SearchJobsRequest::CustomRankingInfo]
         #     Controls over how job documents get ranked on top of existing relevance
         #     score (determined by API algorithm).
-        # @!attribute [rw] enable_debug_info
-        #   @return [::Boolean]
-        #     Controls whether to add search debug information
-        #     (sortExpr, partial expressions) into SearchResponse.
-        #
-        #     Defaults to false.
         # @!attribute [rw] disable_keyword_match
         #   @return [::Boolean]
         #     This field is deprecated. Please use
@@ -412,10 +406,6 @@ module Google
         #
         #     Defaults to {::Google::Cloud::Talent::V4::SearchJobsRequest::KeywordMatchMode::KEYWORD_MATCH_ALL KeywordMatchMode.KEYWORD_MATCH_ALL} if no value
         #     is specified.
-        # @!attribute [rw] mendel_debug_input
-        #   @return [::Google::Protobuf::Any]
-        #     This field allows us to pass in a MendelDebugInput proto to force mendel
-        #     experiment traffic in FORCEABLE experiments.
         class SearchJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -652,8 +642,6 @@ module Google
           #   @return [::Google::Cloud::Talent::V4::SearchJobsResponse::CommuteInfo]
           #     Commute information which is generated based on specified
           #      {::Google::Cloud::Talent::V4::CommuteFilter CommuteFilter}.
-          # @!attribute [rw] debug_info
-          #   @return [::String]
           class MatchingJob
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -745,37 +733,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request to purge a set of jobs.
-        # @!attribute [rw] parent
-        #   @return [::String]
-        #     Required. The resource name of the project under which the jobs should be deleted.
-        #
-        #     The format is "projects/\\{project_id}". For example, "projects/foo".
-        # @!attribute [rw] filter
-        #   @return [::String]
-        #     Required. A filter matching the jobs to be purged.
-        #
-        #     The filter can be one of the following three parent resources.
-        #     1. Company. Resource name of the company under which all the jobs should be
-        #     deleted. The format is
-        #     "projects/\\{project_id}/tenants/\\{tenant_id}/companies/\\{company_id}". For
-        #     example, "projects/foo/tenants/bar/companies/baz"
-        #     2. Tenant. Resource name of the tenant under which all the jobs should be
-        #     deleted. The format is "projects/\\{project_id}/tenants/\\{tenant_id}". For
-        #     example, "projects/foo/tenants/bar".
-        #     3. Project. Resource name of the project under which all the jobs should be
-        #     deleted. The format is "projects/\\{project_id}". For example,
-        #     "projects/foo/".
-        # @!attribute [rw] force
-        #   @return [::Boolean]
-        #     Actually perform the purge.
-        #     If `force` is set to false, the method will return a sample of
-        #     resource names that will be deleted.
-        class PurgeJobsRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Mutation result of a job from a batch operation.
         # @!attribute [rw] job
         #   @return [::Google::Cloud::Talent::V4::Job]
@@ -821,33 +778,6 @@ module Google
         #     List of job mutation results from a batch delete operation. It can change
         #     until operation status is FINISHED, FAILED or CANCELLED.
         class BatchDeleteJobsResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # The result of {::Google::Cloud::Talent::V4::JobService::Client#purge_jobs JobService.PurgeJobs}. It's used to
-        # replace {::Google::Longrunning::Operation#response google.longrunning.Operation.response} in case of success.
-        # @!attribute [rw] purge_count
-        #   @return [::Integer]
-        #     The number of jobs that this request deleted (or, if `force` is false,
-        #     the number of jobs that will be deleted).
-        #
-        #     Note: This number isn't guaranteed to be accurate.
-        #     Note: This number might change until operation status is FINISHED, FAILED
-        #     or CANCELLED.
-        # @!attribute [rw] purge_sample
-        #   @return [::Array<::String>]
-        #     A sample of the resource names of jobs that will be deleted.
-        #     Only populated if `force` is set to false.
-        #     At most 100 job names are returned as a sample.
-        # @!attribute [rw] job_results
-        #   @return [::Array<::Google::Cloud::Talent::V4::JobResult>]
-        #     List of job purge results from a purge jobs operation.
-        #     Only populated if `force` is set to true.
-        #
-        #     Note: This may change until operation status is FINISHED, FAILED or
-        #     CANCELLED.
-        class PurgeJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
