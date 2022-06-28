@@ -12,6 +12,7 @@ require 'google/cloud/talent/v4/filters_pb'
 require 'google/cloud/talent/v4/histogram_pb'
 require 'google/cloud/talent/v4/job_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/any_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
@@ -59,8 +60,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :order_by, :string, 12
       optional :diversification_level, :enum, 13, "google.cloud.talent.v4.SearchJobsRequest.DiversificationLevel"
       optional :custom_ranking_info, :message, 14, "google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo"
+      optional :enable_debug_info, :bool, 15
       optional :disable_keyword_match, :bool, 16
       optional :keyword_match_mode, :enum, 18, "google.cloud.talent.v4.SearchJobsRequest.KeywordMatchMode"
+      optional :mendel_debug_input, :message, 17, "google.protobuf.Any"
     end
     add_message "google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo" do
       optional :importance_level, :enum, 1, "google.cloud.talent.v4.SearchJobsRequest.CustomRankingInfo.ImportanceLevel"
@@ -110,6 +113,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :job_title_snippet, :string, 3
       optional :search_text_snippet, :string, 4
       optional :commute_info, :message, 5, "google.cloud.talent.v4.SearchJobsResponse.CommuteInfo"
+      optional :debug_info, :string, 6
     end
     add_message "google.cloud.talent.v4.SearchJobsResponse.CommuteInfo" do
       optional :job_location, :message, 1, "google.cloud.talent.v4.Location"
@@ -128,6 +132,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       repeated :names, :string, 2
     end
+    add_message "google.cloud.talent.v4.PurgeJobsRequest" do
+      optional :parent, :string, 1
+      optional :filter, :string, 2
+      optional :force, :bool, 3
+    end
     add_message "google.cloud.talent.v4.JobResult" do
       optional :job, :message, 1, "google.cloud.talent.v4.Job"
       optional :status, :message, 2, "google.rpc.Status"
@@ -140,6 +149,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.talent.v4.BatchDeleteJobsResponse" do
       repeated :job_results, :message, 1, "google.cloud.talent.v4.JobResult"
+    end
+    add_message "google.cloud.talent.v4.PurgeJobsResponse" do
+      optional :purge_count, :int32, 1
+      repeated :purge_sample, :string, 2
+      repeated :job_results, :message, 3, "google.cloud.talent.v4.JobResult"
     end
     add_enum "google.cloud.talent.v4.JobView" do
       value :JOB_VIEW_UNSPECIFIED, 0
@@ -173,10 +187,12 @@ module Google
         BatchCreateJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchCreateJobsRequest").msgclass
         BatchUpdateJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchUpdateJobsRequest").msgclass
         BatchDeleteJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchDeleteJobsRequest").msgclass
+        PurgeJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.PurgeJobsRequest").msgclass
         JobResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.JobResult").msgclass
         BatchCreateJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchCreateJobsResponse").msgclass
         BatchUpdateJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchUpdateJobsResponse").msgclass
         BatchDeleteJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchDeleteJobsResponse").msgclass
+        PurgeJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.PurgeJobsResponse").msgclass
         JobView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.JobView").enummodule
       end
     end

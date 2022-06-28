@@ -274,6 +274,9 @@ module Google
         # @!attribute [rw] processing_options
         #   @return [::Google::Cloud::Talent::V4::Job::ProcessingOptions]
         #     Options for job processing.
+        # @!attribute [rw] job_debug_info
+        #   @return [::Google::Cloud::Talent::V4::Job::JobDebugInfo]
+        #     Debugging information for internal users.
         class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -312,6 +315,19 @@ module Google
           #
           #     {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations locations} are exactly matched to {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} in the same
           #     order.
+          # @!attribute [rw] street_locations
+          #   @return [::Array<::Google::Cloud::Talent::V4::Location>]
+          #     Structured street locations of the job.
+          #
+          #     Unlike {::Google::Cloud::Talent::V4::Job::DerivedInfo#locations locations}, {::Google::Cloud::Talent::V4::Job::DerivedInfo#street_locations street_locations} contains street locations
+          #     inferred from job posting details, e.g. {::Google::Cloud::Talent::V4::Job#addresses Job.addresses},
+          #     {::Google::Cloud::Talent::V4::Job#company_display_name Job.company_display_name}, and so on.
+          #
+          #     Note that the inference of {::Google::Cloud::Talent::V4::Job::DerivedInfo#street_locations street_locations} isn't guaranteed to
+          #     be 100% correct.
+          #
+          #     {::Google::Cloud::Talent::V4::Job::DerivedInfo#street_locations street_locations} are exactly matched to {::Google::Cloud::Talent::V4::Job#addresses Job.addresses} in the same
+          #     order.
           # @!attribute [rw] job_categories
           #   @return [::Array<::Google::Cloud::Talent::V4::JobCategory>]
           #     Job categories derived from {::Google::Cloud::Talent::V4::Job#title Job.title} and {::Google::Cloud::Talent::V4::Job#description Job.description}.
@@ -342,6 +358,64 @@ module Google
           class ProcessingOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Debugging information for internal users.
+          # @!attribute [rw] status
+          #   @return [::Google::Cloud::Talent::V4::Job::JobDebugInfo::JobStatus]
+          #     Job Status.
+          # @!attribute [rw] soc_beliefs
+          #   @return [::Array<::Google::Cloud::Talent::V4::Job::JobDebugInfo::SocBelief>]
+          #     Soc Beliefs.
+          # @!attribute [rw] project_id
+          #   @return [::String]
+          #     project id.
+          # @!attribute [rw] distributor_id
+          #   @return [::String]
+          #     distributor id
+          # @!attribute [rw] tenant_id
+          #   @return [::String]
+          #     tenant id.
+          # @!attribute [rw] project_number
+          #   @return [::Integer]
+          #     project number
+          # @!attribute [rw] job_classifications
+          #   @return [::Array<::String>]
+          #     Job Classifications
+          # @!attribute [rw] seniority
+          #   @return [::String]
+          #     Seniority
+          # @!attribute [rw] confidence_scores
+          #   @return [::Array<::Float>]
+          #     Confidence Scores
+          # @!attribute [rw] last_update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Last Update TIme
+          class JobDebugInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A belief that a job has particular soc with some probability.
+            # @!attribute [rw] soc_code
+            #   @return [::String]
+            # @!attribute [rw] probability
+            #   @return [::Float]
+            # @!attribute [rw] svp
+            #   @return [::Integer]
+            class SocBelief
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            module JobStatus
+              JOB_DEBUG_INFO_UNSPECIFIED = 0
+
+              EXPIRED = 1
+
+              OPEN = 2
+
+              DELETED = 3
+            end
           end
 
           # @!attribute [rw] key

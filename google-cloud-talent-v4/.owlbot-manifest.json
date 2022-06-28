@@ -95,6 +95,7 @@
     "snippets/job_service/delete_job.rb",
     "snippets/job_service/get_job.rb",
     "snippets/job_service/list_jobs.rb",
+    "snippets/job_service/purge_jobs.rb",
     "snippets/job_service/search_jobs.rb",
     "snippets/job_service/search_jobs_for_alert.rb",
     "snippets/job_service/update_job.rb",

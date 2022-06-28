@@ -572,6 +572,46 @@
       ]
     },
     {
+      "region_tag": "jobs_v4_generated_JobService_PurgeJobs_sync",
+      "title": "Snippet for purge_jobs in JobService",
+      "description": "Basic snippet for purge_jobs in JobService",
+      "file": "job_service/purge_jobs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_jobs",
+        "full_name": "::Google::Cloud::Talent::V4::JobService::Client#purge_jobs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Talent::V4::PurgeJobsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "JobService::Client",
+          "full_name": "::Google::Cloud::Talent::V4::JobService::Client"
+        },
+        "method": {
+          "short_name": "PurgeJobs",
+          "full_name": "google.cloud.talent.v4.JobService.PurgeJobs",
+          "service": {
+            "short_name": "JobService",
+            "full_name": "google.cloud.talent.v4.JobService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "jobs_v4_generated_JobService_ListJobs_sync",
       "title": "Snippet for list_jobs in JobService",
       "description": "Basic snippet for list_jobs in JobService",

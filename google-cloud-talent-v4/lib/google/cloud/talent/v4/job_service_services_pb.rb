@@ -57,6 +57,13 @@ module Google
             rpc :DeleteJob, ::Google::Cloud::Talent::V4::DeleteJobRequest, ::Google::Protobuf::Empty
             # Begins executing a batch delete jobs operation.
             rpc :BatchDeleteJobs, ::Google::Cloud::Talent::V4::BatchDeleteJobsRequest, ::Google::Longrunning::Operation
+            # Purges all jobs associated with requested target.
+            #
+            # Note: Jobs in OPEN status remain searchable until the operation completes.
+            #
+            # Note: The operation returned may take hours or longer to complete,
+            # depending on the number of jobs that need to be deleted.
+            rpc :PurgeJobs, ::Google::Cloud::Talent::V4::PurgeJobsRequest, ::Google::Longrunning::Operation
             # Lists jobs by filter.
             rpc :ListJobs, ::Google::Cloud::Talent::V4::ListJobsRequest, ::Google::Cloud::Talent::V4::ListJobsResponse
             # Searches for jobs using the provided [SearchJobsRequest][google.cloud.talent.v4.SearchJobsRequest].

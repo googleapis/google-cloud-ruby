@@ -41,9 +41,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :user_id, :string, 3
       optional :allow_missing_ids, :bool, 4
       optional :device_info, :message, 5, "google.cloud.talent.v4.DeviceInfo"
+      optional :delegated_user_info, :message, 6, "google.cloud.talent.v4.DelegatedUserInfo"
+      optional :debug_options, :message, 7, "google.cloud.talent.v4.DebugOptions"
     end
     add_message "google.cloud.talent.v4.ResponseMetadata" do
       optional :request_id, :string, 1
+      optional :debug_info, :message, 2, "google.cloud.talent.v4.DebugInfo"
     end
     add_message "google.cloud.talent.v4.DeviceInfo" do
       optional :device_type, :enum, 1, "google.cloud.talent.v4.DeviceInfo.DeviceType"
@@ -108,6 +111,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :YEARLY, 5
       value :ONE_TIME, 6
       value :OTHER_COMPENSATION_UNIT, 7
+    end
+    add_message "google.cloud.talent.v4.DelegatedUserInfo" do
+      optional :project_number, :int64, 1
+      optional :distributor_id, :string, 2
+      optional :tenant_id, :string, 3
+    end
+    add_message "google.cloud.talent.v4.DebugOptions" do
+      optional :level, :int32, 1
+      optional :searcher, :string, 2
+      optional :scoring_parameter_override, :string, 3
+      optional :st_expression_override, :string, 4
+      optional :search_all_tenant, :message, 5, "google.protobuf.BoolValue"
+      optional :enable_wildcard_search, :message, 6, "google.protobuf.BoolValue"
+    end
+    add_message "google.cloud.talent.v4.DebugInfo" do
+      optional :query_debug_info, :string, 1
+      optional :moonshine_debug_info, :string, 2
+      repeated :experiment_ids, :int32, 3
+      optional :recommend_model_id, :string, 4
     end
     add_message "google.cloud.talent.v4.BatchOperationMetadata" do
       optional :state, :enum, 1, "google.cloud.talent.v4.BatchOperationMetadata.State"
@@ -263,6 +285,9 @@ module Google
         CompensationInfo::CompensationRange = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.CompensationInfo.CompensationRange").msgclass
         CompensationInfo::CompensationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.CompensationInfo.CompensationType").enummodule
         CompensationInfo::CompensationUnit = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.CompensationInfo.CompensationUnit").enummodule
+        DelegatedUserInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.DelegatedUserInfo").msgclass
+        DebugOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.DebugOptions").msgclass
+        DebugInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.DebugInfo").msgclass
         BatchOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchOperationMetadata").msgclass
         BatchOperationMetadata::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.BatchOperationMetadata.State").enummodule
         CompanySize = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.talent.v4.CompanySize").enummodule
