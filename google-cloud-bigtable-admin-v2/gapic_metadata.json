@@ -149,6 +149,11 @@
                 "delete_table"
               ]
             },
+            "UndeleteTable": {
+              "methods": [
+                "undelete_table"
+              ]
+            },
             "ModifyColumnFamilies": {
               "methods": [
                 "modify_column_families"

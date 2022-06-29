@@ -253,6 +253,34 @@ module Google
           end
 
           # Request message for
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable}
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. The unique name of the table to be restored.
+          #     Values are of the form
+          #     `projects/{project}/instances/{instance}/tables/{table}`.
+          class UndeleteTableRequest
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Metadata type for the operation returned by
+          # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#undelete_table google.bigtable.admin.v2.BigtableTableAdmin.UndeleteTable}.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     The name of the table being restored.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     The time at which this operation started.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     If set, the time at which this operation finished or was cancelled.
+          class UndeleteTableMetadata
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Request message for
           # {::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#modify_column_families google.bigtable.admin.v2.BigtableTableAdmin.ModifyColumnFamilies}
           # @!attribute [rw] name
           #   @return [::String]

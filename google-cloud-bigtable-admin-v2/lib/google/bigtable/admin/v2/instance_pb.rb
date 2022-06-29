@@ -30,6 +30,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.bigtable.admin.v2.AutoscalingTargets" do
       optional :cpu_utilization_percent, :int32, 2
+      optional :storage_utilization_gib_per_node, :int32, 3
     end
     add_message "google.bigtable.admin.v2.AutoscalingLimits" do
       optional :min_serve_nodes, :int32, 1
