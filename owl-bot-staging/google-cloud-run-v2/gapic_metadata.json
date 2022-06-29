@@ -1,0 +1,82 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.cloud.run.v2",
+  "libraryPackage": "::Google::Cloud::Run::V2",
+  "services": {
+    "Revisions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Run::V2::Revisions::Client",
+          "rpcs": {
+            "GetRevision": {
+              "methods": [
+                "get_revision"
+              ]
+            },
+            "ListRevisions": {
+              "methods": [
+                "list_revisions"
+              ]
+            },
+            "DeleteRevision": {
+              "methods": [
+                "delete_revision"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Services": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Run::V2::Services::Client",
+          "rpcs": {
+            "CreateService": {
+              "methods": [
+                "create_service"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "update_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            },
+            "GetIamPolicy": {
+              "methods": [
+                "get_iam_policy"
+              ]
+            },
+            "SetIamPolicy": {
+              "methods": [
+                "set_iam_policy"
+              ]
+            },
+            "TestIamPermissions": {
+              "methods": [
+                "test_iam_permissions"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

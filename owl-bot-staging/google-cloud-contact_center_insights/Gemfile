@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-contact_center_insights-v1", path: "../google-cloud-contact_center_insights-v1"
