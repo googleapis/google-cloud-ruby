@@ -204,16 +204,16 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
     called = false  
     errors = []
     def stub.acknowledge subscription:, ack_ids:
-        @acknowledge_requests << [subscription, ack_ids.flatten.sort]
-        begin
-          raise GRPC::InvalidArgument.new
-        rescue => exception
-          error = ::Google::Cloud::Error.from_error(exception)
-          def error.error_metadata
-            {"ack-id-1111"=>"PERMANENT_FAILURE_INVALID_ACK_ID","ack-id-1113"=>"TRANSIENT_FAILURE_INVALID_ACK_ID","ack-id-1112"=>"PERMANENT_FAILURE_INVALID_ACK_ID"}
-          end
-          raise error
+      @acknowledge_requests << [subscription, ack_ids.flatten.sort]
+      begin
+        raise GRPC::InvalidArgument.new
+      rescue => exception
+        error = ::Google::Cloud::Error.from_error(exception)
+        def error.error_metadata
+          {"ack-id-1111"=>"PERMANENT_FAILURE_INVALID_ACK_ID","ack-id-1113"=>"TRANSIENT_FAILURE_INVALID_ACK_ID","ack-id-1112"=>"PERMANENT_FAILURE_INVALID_ACK_ID"}
         end
+        raise error
+      end
     end
   
     subscription.service.mocked_subscriber = stub
@@ -242,12 +242,12 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   end
   
   it "should parse error_metadata to give temp and permanent errors" do
-      mocked_subscriber = Minitest::Mock.new
-      mocked_subscriber.expect :push_threads, 4 
-      buffer = Google::Cloud::PubSub::Subscriber::TimedUnaryBuffer.new mocked_subscriber
-      temp_error = buffer.send(:parse_error, 
-                              OpenStruct.new(error_metadata: {"12" =>"PERMANENT_FAILURE_INVALID_ACK_ID", 
-                                                              "13" => "TRANSIENT_FAILURE"}))
-      assert_equal ["13"], temp_error                                                                      
+    mocked_subscriber = Minitest::Mock.new
+    mocked_subscriber.expect :push_threads, 4 
+    buffer = Google::Cloud::PubSub::Subscriber::TimedUnaryBuffer.new mocked_subscriber
+    temp_error = buffer.send(:parse_error, 
+                            OpenStruct.new(error_metadata: {"12" =>"PERMANENT_FAILURE_INVALID_ACK_ID", 
+                                                            "13" => "TRANSIENT_FAILURE"}))
+    assert_equal ["13"], temp_error                                                                      
   end
 end
