@@ -55,9 +55,18 @@ module Google
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, _query_string_params = transcode_get_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::ImageFamilyView.decode_json response.body, ignore_unknown_fields: true
@@ -66,7 +75,12 @@ module Google
                 result
               end
 
+
+              private
+
               ##
+              # @private
+              #
               # GRPC transcoding helper method for the get REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::GetImageFamilyViewRequest]
@@ -74,11 +88,17 @@ module Google
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_get_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/imageFamilyViews/#{request_pb.family}"
-                body = nil
-                query_string_params = {}
-
-                [uri, body, query_string_params]
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/imageFamilyViews/{family}",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["family", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
               end
             end
           end
