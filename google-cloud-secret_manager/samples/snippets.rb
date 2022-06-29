@@ -430,6 +430,40 @@ def update_secret project_id:, secret_id:
   secret
 end
 
+def update_secret_with_alias project_id:, secret_id:
+  # [START secretmanager_update_secret_with_alias]
+  # project_id = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # secret_id  = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, secret: secret_id
+
+  # Create the secret.
+  secret = client.update_secret(
+    secret: {
+      name: name,
+      version_aliases: {
+        test: "1"
+      }
+    },
+    update_mask: {
+      paths: ["version_aliases"]
+    }
+  )
+
+  # Print the updated secret name.
+  puts "Updated secret: #{secret.name}"
+  # [END secretmanager_update_secret_with_alias]
+
+  secret
+end
+
 if $PROGRAM_NAME == __FILE__
   args    = ARGV.dup
   command = args.shift
