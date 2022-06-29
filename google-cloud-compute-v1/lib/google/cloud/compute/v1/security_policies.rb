@@ -28,6 +28,9 @@ module Google
   module Cloud
     module Compute
       module V1
+        ##
+        # The SecurityPolicies API.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/security_policies"
