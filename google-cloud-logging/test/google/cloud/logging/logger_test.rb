@@ -40,13 +40,13 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
                                               timestamp: timestamp_grpc)
     entry.trace = trace if trace
     entry.trace_sampled = trace_sampled unless trace_sampled.nil?
-    [
+    {
       entries: [entry],
       log_name: "projects/test/logs/#{log_name_override || log_name}",
       resource: resource.to_grpc,
       labels: labels.merge(extra_labels),
       partial_success: nil
-    ]
+    }
   end
 
   def apply_stubs
@@ -65,7 +65,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "creates a DEBUG log entry with #debug" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, write_req_args(:DEBUG)
+    mock.expect :write_log_entries, write_res, **write_req_args(:DEBUG)
     logging.service.mocked_logging = mock
 
     apply_stubs do
@@ -77,7 +77,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "creates an INFO log entry with #info" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, write_req_args(:INFO)
+    mock.expect :write_log_entries, write_res, **write_req_args(:INFO)
     logging.service.mocked_logging = mock
 
     apply_stubs do
@@ -89,7 +89,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "creates a WARNING log entry with #warn" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, write_req_args(:WARNING)
+    mock.expect :write_log_entries, write_res, **write_req_args(:WARNING)
     logging.service.mocked_logging = mock
 
     apply_stubs do
@@ -101,7 +101,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "creates a ERROR log entry with #error" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, write_req_args(:ERROR)
+    mock.expect :write_log_entries, write_res, **write_req_args(:ERROR)
     logging.service.mocked_logging = mock
 
     apply_stubs do
@@ -113,7 +113,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "creates a CRITICAL log entry with #fatal" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, write_req_args(:CRITICAL)
+    mock.expect :write_log_entries, write_res, **write_req_args(:CRITICAL)
     logging.service.mocked_logging = mock
 
     apply_stubs do
@@ -125,7 +125,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "creates a DEFAULT log entry with #unknown" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
+    mock.expect :write_log_entries, write_res, **write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
     apply_stubs do
@@ -137,7 +137,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
 
   it "creates a DEFAULT log entry with #<<" do
     mock = Minitest::Mock.new
-    mock.expect :write_log_entries, write_res, write_req_args(:DEFAULT)
+    mock.expect :write_log_entries, write_res, **write_req_args(:DEFAULT)
     logging.service.mocked_logging = mock
 
     apply_stubs do
@@ -158,7 +158,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       mock.verify
     end
 
-    mock.expect :write_log_entries, write_res, write_req_args(:ERROR)
+    mock.expect :write_log_entries, write_res, **write_req_args(:ERROR)
     apply_stubs do
       logger.reopen
       logger.error "Danger Will Robinson!"
@@ -184,7 +184,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
                             extra_labels: { "traceId" => trace_id },
                             trace: "projects/#{project}/traces/#{trace_id}",
                             trace_sampled: true
-      mock.expect :write_log_entries, write_res, args
+      mock.expect :write_log_entries, write_res, **args
       logging.service.mocked_logging = mock
 
       info = Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name, nil, true
@@ -213,7 +213,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
                                         "custom_label" => "just a string"
                                       }
 
-        mock.expect :write_log_entries, write_res, args
+        mock.expect :write_log_entries, write_res, **args
         logging.service.mocked_logging = mock
 
         logger.add_request_info env: env
@@ -241,7 +241,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
       it "executes the function and writes the result as a log label" do
         mock = Minitest::Mock.new
         args = write_req_args :ERROR, extra_labels: { "custom_header_value" => "42" }
-        mock.expect :write_log_entries, write_res, args
+        mock.expect :write_log_entries, write_res, **args
         logging.service.mocked_logging = mock
 
         logger.add_request_info env: env
@@ -263,7 +263,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
                             extra_labels: { "traceId" => trace_id,
                                             "appengine.googleapis.com/trace_id" => trace_id },
                             trace: "projects/#{project}/traces/#{trace_id}"
-      mock.expect :write_log_entries, write_res, args
+      mock.expect :write_log_entries, write_res, **args
       logging.service.mocked_logging = mock
 
       info = Google::Cloud::Logging::Logger::RequestInfo.new trace_id, log_name
@@ -305,7 +305,7 @@ describe Google::Cloud::Logging::Logger, :mock_logging do
     it "is reflected in log writes" do
       mock = Minitest::Mock.new
       mock.expect :write_log_entries, write_res,
-        write_req_args(:ERROR, log_name_override: "my_app_log")
+        **write_req_args(:ERROR, log_name_override: "my_app_log")
       logging.service.mocked_logging = mock
 
       logger.progname = "my_app_log"

@@ -66,7 +66,7 @@ module Google
           return nil if empty?
           Google::Api::MonitoredResource.new(
             type:   type,
-            labels: Hash[labels.map { |k, v| [String(k), String(v)] }]
+            labels: labels.to_h { |k, v| [String(k), String(v)] }
           )
         end
 
