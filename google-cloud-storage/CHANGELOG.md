@@ -1,5 +1,15 @@
 # Release History
 
+### 1.37.0 (2022-06-30)
+
+#### Features
+
+* support OLM Prefix/Suffix ([#18190](https://github.com/googleapis/google-cloud-ruby/issues/18190)) 
+* allow retry options to be configurable on client initialization ([#18332](https://github.com/googleapis/google-cloud-ruby/issues/18332)) 
+#### Bug Fixes
+
+* update object path parsing to handle hashes in them 
+
 ### 1.36.2 (2022-04-20)
 
 #### Documentation
