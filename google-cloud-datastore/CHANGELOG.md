@@ -1,5 +1,11 @@
 # Release History
 
+### 2.3.0 (2022-06-28)
+
+#### Features
+
+* Add support for operators "!=", "in" and "not_in" in datastore ([#18401](https://github.com/googleapis/google-cloud-ruby/issues/18401)) 
+
 ### 2.2.4 / 2022-01-11
 
 #### Documentation

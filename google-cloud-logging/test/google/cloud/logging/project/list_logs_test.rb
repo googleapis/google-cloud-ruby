@@ -21,7 +21,7 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(num_logs)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_logs, list_res, parent: "projects/#{project}", page_size: nil, page_token: nil
     logging.service.mocked_logging = mock
 
     logs = logging.logs
@@ -38,7 +38,7 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(num_logs)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_logs, list_res, parent: "projects/#{project}", page_size: nil, page_token: nil
     logging.service.mocked_logging = mock
 
     logs = logging.find_logs
@@ -54,8 +54,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_logs, first_list_res, parent: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_logs, second_list_res, parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs
@@ -78,8 +78,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_logs, first_list_res, parent: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_logs, second_list_res, parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs
@@ -101,8 +101,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2)))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_logs, first_list_res, parent: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_logs, second_list_res, parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     logging.service.mocked_logging = mock
 
     all_logs = logging.logs.all.to_a
@@ -118,8 +118,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_logs, first_list_res, parent: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_logs, second_list_res, parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     logging.service.mocked_logging = mock
 
     all_logs = logging.logs.all.take(5)
@@ -135,8 +135,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_logs, first_list_res, parent: "projects/#{project}", page_size: nil, page_token: nil
+    mock.expect :list_logs, second_list_res, parent: "projects/#{project}", page_size: nil, page_token: "next_page_token"
     logging.service.mocked_logging = mock
 
     all_logs = logging.logs.all(request_limit: 1).to_a
@@ -151,7 +151,7 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(3, "next_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, list_res, [parent: "projects/project1", page_size: nil, page_token: nil]
+    mock.expect :list_logs, list_res, parent: "projects/project1", page_size: nil, page_token: nil
     logging.service.mocked_logging = mock
 
     logs = logging.logs resource: "projects/project1"
@@ -169,8 +169,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, [parent: "projects/project1", page_size: nil, page_token: nil]
-    mock.expect :list_logs, second_list_res, [parent: "projects/project1", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_logs, first_list_res, parent: "projects/project1", page_size: nil, page_token: nil
+    mock.expect :list_logs, second_list_res, parent: "projects/project1", page_size: nil, page_token: "next_page_token"
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs resource: "projects/project1"
@@ -202,8 +202,8 @@ describe Google::Cloud::Logging::Project, :list_logs, :mock_logging do
     second_list_res = OpenStruct.new(response: Google::Cloud::Logging::V2::ListLogsResponse.new(list_logs_hash(2, "second_page_token")))
 
     mock = Minitest::Mock.new
-    mock.expect :list_logs, first_list_res, [parent: "projects/#{project}", page_size: 3, page_token: nil]
-    mock.expect :list_logs, second_list_res, [parent: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_logs, first_list_res, parent: "projects/#{project}", page_size: 3, page_token: nil
+    mock.expect :list_logs, second_list_res, parent: "projects/#{project}", page_size: 3, page_token: "next_page_token"
     logging.service.mocked_logging = mock
 
     first_logs = logging.logs max: 3

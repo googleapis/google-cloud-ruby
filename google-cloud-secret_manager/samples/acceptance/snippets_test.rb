@@ -298,4 +298,20 @@ describe "Secret Manager Snippets" do
       }.must_output(/Updated secret/)
     end
   end
+
+  describe "#update_secret_with_alias" do
+    it "updates the secret" do
+      expect(secret).wont_be_nil
+
+      expect {
+        n_secret = update_secret_with_alias(
+          project_id: project_id,
+          secret_id:  secret_id
+        )
+
+        expect(n_secret).wont_be_nil
+        expect(n_secret.version_aliases["test"]).must_equal("1")
+      }.must_output(/Updated secret/)
+    end
+  end
 end
