@@ -209,6 +209,9 @@ module Google
 
           # The request message for a webhook call. The request is sent as a JSON object
           # and the field names will be presented in camel cases.
+          #
+          # You may see undocumented fields in an actual request. These fields are used
+          # internally by Dialogflow and should be ignored.
           # @!attribute [rw] detect_intent_response_id
           #   @return [::String]
           #     Always present. The unique identifier of the {::Google::Cloud::Dialogflow::CX::V3::DetectIntentResponse DetectIntentResponse} that
