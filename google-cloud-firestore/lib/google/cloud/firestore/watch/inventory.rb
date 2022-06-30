@@ -134,7 +134,7 @@ module Google
           end
 
           def order_for docs
-            Hash[docs.map { |doc| [doc.path, doc.updated_at] }]
+            docs.to_h { |doc| [doc.path, doc.updated_at] }
           end
 
           def current_order

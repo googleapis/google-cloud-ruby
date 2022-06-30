@@ -24,7 +24,7 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
 
     list_res = paged_enum_struct list_documents_gapi(num_documents)
 
-    firestore_mock.expect :list_documents, list_res, list_documents_args
+    firestore_mock.expect :list_documents, list_res, **list_documents_args
 
     documents = collection.list_documents
 
@@ -38,8 +38,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     first_list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
     second_list_res = paged_enum_struct list_documents_gapi(2)
 
-    firestore_mock.expect :list_documents, first_list_res, list_documents_args
-    firestore_mock.expect :list_documents, second_list_res, list_documents_args(page_token: "next_page_token")
+    firestore_mock.expect :list_documents, first_list_res, **list_documents_args
+    firestore_mock.expect :list_documents, second_list_res, **list_documents_args(page_token: "next_page_token")
 
     first_documents = collection.list_documents
     second_documents = collection.list_documents token: first_documents.token
@@ -60,8 +60,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     first_list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
     second_list_res = paged_enum_struct list_documents_gapi(2)
 
-    firestore_mock.expect :list_documents, first_list_res, list_documents_args
-    firestore_mock.expect :list_documents, second_list_res, list_documents_args(page_token: "next_page_token")
+    firestore_mock.expect :list_documents, first_list_res, **list_documents_args
+    firestore_mock.expect :list_documents, second_list_res, **list_documents_args(page_token: "next_page_token")
 
     first_documents = collection.list_documents
     second_documents = first_documents.next
@@ -81,8 +81,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     first_list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
     second_list_res = paged_enum_struct list_documents_gapi(2)
 
-    firestore_mock.expect :list_documents, first_list_res, list_documents_args
-    firestore_mock.expect :list_documents, second_list_res, list_documents_args(page_token: "next_page_token")
+    firestore_mock.expect :list_documents, first_list_res, **list_documents_args
+    firestore_mock.expect :list_documents, second_list_res, **list_documents_args(page_token: "next_page_token")
 
     all_documents = collection.list_documents.all.to_a
 
@@ -96,8 +96,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     first_list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
     second_list_res = paged_enum_struct list_documents_gapi(3, "second_page_token")
 
-    firestore_mock.expect :list_documents, first_list_res, list_documents_args
-    firestore_mock.expect :list_documents, second_list_res, list_documents_args(page_token: "next_page_token")
+    firestore_mock.expect :list_documents, first_list_res, **list_documents_args
+    firestore_mock.expect :list_documents, second_list_res, **list_documents_args(page_token: "next_page_token")
 
     all_documents = collection.list_documents.all.take(5)
 
@@ -111,8 +111,8 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
     first_list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
     second_list_res = paged_enum_struct list_documents_gapi(3, "second_page_token")
 
-    firestore_mock.expect :list_documents, first_list_res, list_documents_args
-    firestore_mock.expect :list_documents, second_list_res, list_documents_args(page_token: "next_page_token")
+    firestore_mock.expect :list_documents, first_list_res, **list_documents_args
+    firestore_mock.expect :list_documents, second_list_res, **list_documents_args(page_token: "next_page_token")
 
     all_documents = collection.list_documents.all(request_limit: 1).to_a
 
@@ -125,7 +125,7 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
   it "paginates documents with max set" do
     list_res = paged_enum_struct list_documents_gapi(3, "next_page_token")
 
-    firestore_mock.expect :list_documents, list_res, list_documents_args(page_size: 3)
+    firestore_mock.expect :list_documents, list_res, **list_documents_args(page_size: 3)
 
     documents = collection.list_documents max: 3
 
@@ -154,13 +154,13 @@ describe Google::Cloud::Firestore::CollectionReference, :list_documents, :mock_f
   end
 
   def list_documents_args page_size: nil, page_token: nil
-    [
+    {
       parent: "projects/projectID/databases/(default)/documents/users/alice",
       collection_id: "messages",
       page_size: page_size,
       page_token: page_token,
       mask: {field_paths: []},
       show_missing: true
-    ]
+    }
   end
 end
