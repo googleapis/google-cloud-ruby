@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2022-06-30)
+
+#### Features
+
+* Support for undelete_table 
+
 ### 0.11.0 (2022-05-19)
 
 #### Features
