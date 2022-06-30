@@ -186,7 +186,7 @@ module Google
           end
 
           ##
-          # Adds a SetStorageClass lifecycle rule to the Object Lifecycle
+          # Adds a Delete lifecycle rule to the Object Lifecycle
           # Management rules for a bucket.
           #
           # @see https://cloud.google.com/storage/docs/lifecycle Object
@@ -271,6 +271,46 @@ module Google
               matches_storage_class: storage_class_for(matches_storage_class),
               noncurrent_time_before: noncurrent_time_before,
               num_newer_versions: num_newer_versions,
+              matches_prefix: Array(matches_prefix),
+              matches_suffix: Array(matches_suffix)
+            )
+          end
+
+          ##
+          # Adds a AbortIncompleteMultipartUpload lifecycle rule to the Object Lifecycle
+          # Management rules for a bucket.
+          #
+          # @see https://cloud.google.com/storage/docs/lifecycle Object
+          #   Lifecycle Management
+          # @see https://cloud.google.com/storage/docs/managing-lifecycles
+          #   Managing Object Lifecycles
+          #
+          # @param [Integer] age The age of a file (in days). This condition is
+          #   satisfied when a file reaches the specified age.
+          # @param [Array<String,Symbol>] matches_prefix
+          #  Files having their name with the specified list of prefixs will be matched.
+          #  Arguments will be converted from symbols to strings.
+          # @param [Array<String,Symbol>] matches_suffix
+          #  Files having their name with the specified list of suffixes will be matched.
+          #  Arguments will be converted from symbols to strings.
+          #
+          # @example
+          #   require "google/cloud/storage"
+          #
+          #   storage = Google::Cloud::Storage.new
+          #
+          #   bucket = storage.create_bucket "my-bucket" do |b|
+          #     b.lifecycle.add_abort_incomplete_multipart_upload_rule age: 10,
+          #                                                            matches_prefix: ["images/"],
+          #                                                            matches_suffix: [".pdf"]
+          #   end
+          #
+          def add_abort_incomplete_multipart_upload_rule age: nil,
+                                                         matches_prefix: nil,
+                                                         matches_suffix: nil
+            push Rule.new(
+              "AbortIncompleteMultipartUpload",
+              age: age,
               matches_prefix: Array(matches_prefix),
               matches_suffix: Array(matches_suffix)
             )
