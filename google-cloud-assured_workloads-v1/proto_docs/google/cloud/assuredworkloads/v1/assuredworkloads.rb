@@ -347,6 +347,9 @@ module Google
 
             # Assured Workloads For Canada Regions and Support controls
             CA_REGIONS_AND_SUPPORT = 9
+
+            # International Traffic in Arms Regulations
+            ITAR = 10
           end
 
           # Key Access Justifications(KAJ) Enrollment State.
