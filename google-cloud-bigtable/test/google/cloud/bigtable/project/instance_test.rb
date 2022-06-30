@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Project, :instance, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [name: instance_path(instance_id)]
+    mock.expect :get_instance, get_res, name: instance_path(instance_id)
     bigtable.service.mocked_instances = mock
     instance = bigtable.instance(instance_id)
 

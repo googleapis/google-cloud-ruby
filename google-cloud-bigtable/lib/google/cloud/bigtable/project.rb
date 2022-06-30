@@ -224,7 +224,7 @@ module Google
         #   end
         #
         def create_instance instance_id, display_name: nil, type: nil, labels: nil, clusters: nil
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
 
           instance_attrs = { display_name: display_name, type: type, labels: labels }.delete_if { |_, v| v.nil? }
           instance = Google::Cloud::Bigtable::Admin::V2::Instance.new instance_attrs

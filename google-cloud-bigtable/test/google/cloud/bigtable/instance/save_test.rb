@@ -54,7 +54,7 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
 
     mock = Minitest::Mock.new
     mask = Google::Protobuf::FieldMask.new(paths: %w[labels display_name type])
-    mock.expect :partial_update_instance, operation_grpc(job_grpc, mock), [instance: instance_grpc, update_mask: mask]
+    mock.expect :partial_update_instance, operation_grpc(job_grpc, mock), instance: instance_grpc, update_mask: mask
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 
@@ -81,7 +81,7 @@ describe Google::Cloud::Bigtable::Instance, :save, :mock_bigtable do
 
     mock = Minitest::Mock.new
     mask = Google::Protobuf::FieldMask.new(paths: %w[labels display_name type])
-    mock.expect :partial_update_instance, operation_grpc(job_grpc, mock), [instance: instance_grpc, update_mask: mask]
+    mock.expect :partial_update_instance, operation_grpc(job_grpc, mock), instance: instance_grpc, update_mask: mask
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 

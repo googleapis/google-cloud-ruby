@@ -76,7 +76,7 @@ describe Google::Cloud::Bigtable::AppProfile, :mock_bigtable do
 
   it "reloads its state" do
     mock = Minitest::Mock.new
-    mock.expect :get_app_profile, app_profile_grpc, [name: app_profile_path(instance_id, app_profile_id)]
+    mock.expect :get_app_profile, app_profile_grpc, name: app_profile_path(instance_id, app_profile_id)
     app_profile.service.mocked_instances = mock
 
     app_profile.reload!

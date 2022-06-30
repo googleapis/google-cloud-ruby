@@ -34,7 +34,7 @@ describe Google::Cloud::Bigtable::Instance, :delete, :mock_bigtable do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_instance, true, [name: instance_grpc.name]
+    mock.expect :delete_instance, true, name: instance_grpc.name
     bigtable.service.mocked_instances = mock
 
     result = instance.delete

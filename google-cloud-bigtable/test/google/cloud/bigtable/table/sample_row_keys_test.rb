@@ -31,10 +31,7 @@ describe Google::Cloud::Bigtable::Table, :sample_row_keys, :mock_bigtable do
     res = [
       Google::Cloud::Bigtable::V2::SampleRowKeysResponse.new(row_key: row_key, offset_bytes: offset)
     ]
-    mock.expect :sample_row_keys, res, [
-      table_name: table_path(instance_id, table_id),
-      app_profile_id: nil
-    ]
+    mock.expect :sample_row_keys, res, table_name: table_path(instance_id, table_id), app_profile_id: nil
 
     table.sample_row_keys.each do |sample_row|
       _(sample_row).must_be_kind_of Google::Cloud::Bigtable::SampleRowKey

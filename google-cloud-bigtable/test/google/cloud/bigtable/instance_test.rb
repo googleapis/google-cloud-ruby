@@ -76,7 +76,7 @@ describe Google::Cloud::Bigtable::Instance, :mock_bigtable do
   it "reloads its state" do
     mock = Minitest::Mock.new
     instance.service.mocked_instances = mock
-    mock.expect :get_instance, instance_grpc, [name: instance_path(instance_id)]
+    mock.expect :get_instance, instance_grpc, name: instance_path(instance_id)
 
     instance.reload!
 

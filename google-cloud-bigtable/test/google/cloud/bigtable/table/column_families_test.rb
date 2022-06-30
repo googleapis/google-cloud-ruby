@@ -65,10 +65,7 @@ describe Google::Cloud::Bigtable::Table, :column_families, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :modify_column_families, table_resp, [
-      name: table_path(instance_id, table_id),
-      modifications: modifications
-    ]
+    mock.expect :modify_column_families, table_resp, name: table_path(instance_id, table_id), modifications: modifications
     bigtable.service.mocked_tables = mock
 
     column_families = table.column_families do |cfm|
