@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0 (2022-06-30)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18439](https://github.com/googleapis/google-cloud-ruby/issues/18439)) 
+#### Documentation
+
+* Fixed the documented regular expression for the Job name 
+
 ### 0.3.0 / 2022-03-30
 
 #### Features
