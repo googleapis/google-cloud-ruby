@@ -34,7 +34,7 @@ describe Google::Cloud::Bigquery::ExtractJob, :model, :mock_bigquery do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
-    mock.expect :get_model, random_model_full_hash("source_dataset_id", "source_model_id").to_json, ["test-project", "source_dataset_id", "source_model_id", options: { skip_deserialization: true }]
+    mock.expect :get_model, random_model_full_hash("source_dataset_id", "source_model_id").to_json, ["test-project", "source_dataset_id", "source_model_id"], options: { skip_deserialization: true }
 
     source = job.source
     _(source).must_be_kind_of Google::Cloud::Bigquery::Model

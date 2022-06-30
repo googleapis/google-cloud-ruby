@@ -53,7 +53,7 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :mock_bigquery do
         enable_refresh: new_enable_refresh
       )
     )
-    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
     materialized_view.service.mocked_service = mock
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Bigquery::Table, :materialized_view, :mock_bigquery do
         refresh_interval_ms: new_refresh_interval_ms
       )
     )
-    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi, {options: {header: {"If-Match" => etag}}}]
+    mock.expect :patch_table, returned_table_gapi, [project, dataset_id, table_id, patch_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, returned_table_gapi, [project, dataset_id, table_id]
     materialized_view.service.mocked_service = mock
 

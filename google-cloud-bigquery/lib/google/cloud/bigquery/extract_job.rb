@@ -221,7 +221,7 @@ module Google
         #   and the counts as values.
         #
         def destinations_counts
-          Hash[destinations.zip destinations_file_counts]
+          destinations.zip(destinations_file_counts).to_h
         end
 
         ##

@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
   it "gets full data for name" do
     mock = Minitest::Mock.new
     mock.expect :get_model, model_full_hash.to_json,
-      [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
+      [model.project_id, model.dataset_id, model.model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.name).must_equal model_name
@@ -68,7 +68,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
   it "gets full data for description" do
     mock = Minitest::Mock.new
     mock.expect :get_model, model_full_hash.to_json,
-      [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
+      [model.project_id, model.dataset_id, model.model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.description).must_equal description
@@ -82,7 +82,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
   it "gets full data for etag" do
     mock = Minitest::Mock.new
     mock.expect :get_model, model_full_hash.to_json,
-      [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
+      [model.project_id, model.dataset_id, model.model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.etag).must_equal etag
@@ -96,7 +96,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
   it "gets full data for location" do
     mock = Minitest::Mock.new
     mock.expect :get_model, model_full_hash.to_json,
-      [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
+      [model.project_id, model.dataset_id, model.model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.location).must_equal location_code
@@ -110,7 +110,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
   it "gets full data for expires_at" do
     mock = Minitest::Mock.new
     mock.expect :get_model, model_full_hash.to_json,
-      [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
+      [model.project_id, model.dataset_id, model.model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.expires_at).must_be_close_to ::Time.now, 1
@@ -126,7 +126,7 @@ describe Google::Cloud::Bigquery::Model, :partial, :attributes, :mock_bigquery d
     model_without_exp_time = model_full_hash.dup
     model_without_exp_time.delete :expirationTime
     mock.expect :get_model, model_without_exp_time.to_json,
-      [model.project_id, model.dataset_id, model.model_id, options: { skip_deserialization: true }]
+      [model.project_id, model.dataset_id, model.model_id], options: { skip_deserialization: true }
     model.service.mocked_service = mock
 
     _(model.expires_at).must_be :nil?
