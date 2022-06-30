@@ -154,7 +154,7 @@
   "google-cloud-life_sciences": "0.1.4",
   "google-cloud-life_sciences-v2beta": "0.1.4",
   "google-cloud-location": "0.1.2",
-  "google-cloud-logging": "2.2.2",
+  "google-cloud-logging": "2.3.0",
   "google-cloud-logging-v2": "0.7.0",
   "google-cloud-managed_identities": "1.0.3",
   "google-cloud-managed_identities-v1": "0.3.5",
