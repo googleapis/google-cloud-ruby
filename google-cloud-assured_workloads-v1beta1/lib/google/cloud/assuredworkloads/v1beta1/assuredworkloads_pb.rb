@@ -122,6 +122,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :HITRUST, 7
       value :EU_REGIONS_AND_SUPPORT, 8
       value :CA_REGIONS_AND_SUPPORT, 9
+      value :ITAR, 10
     end
     add_enum "google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState" do
       value :KAJ_ENROLLMENT_STATE_UNSPECIFIED, 0
