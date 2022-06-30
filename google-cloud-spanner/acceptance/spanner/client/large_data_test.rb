@@ -37,7 +37,7 @@ describe "Spanner Client", :large_data, :spanner do
   ##
   # Guarenteed to be at least 1 MB
   def random_big_bytes offset = rand(1..2048)
-    generate_bytes 1024 * 1024 + offset
+    generate_bytes offset + (1024 * 1024)
   end
 
   ##
@@ -62,8 +62,8 @@ describe "Spanner Client", :large_data, :spanner do
     results = db.read table_name, [:id, :string, :byte, :strings, :bytes], keys: my_row[:id]
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING],
-bytes: [:BYTES] })
+    expected_fields = { id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] }
+    _(results.fields.to_h).must_equal expected_fields
     returned_row = results.rows.first
 
     _(returned_row[:string]).must_equal my_row[:string]
@@ -90,8 +90,8 @@ bytes: [:BYTES] })
                              params: { id: my_row[:id] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
-    _(results.fields.to_h).must_equal({ id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING],
-bytes: [:BYTES] })
+    expected_fields = { id: :INT64, string: :STRING, byte: :BYTES, strings: [:STRING], bytes: [:BYTES] }
+    _(results.fields.to_h).must_equal expected_fields
     returned_row = results.rows.first
 
     _(returned_row[:string]).must_equal my_row[:string]
