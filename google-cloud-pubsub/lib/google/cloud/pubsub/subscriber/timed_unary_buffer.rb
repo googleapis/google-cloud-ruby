@@ -42,6 +42,10 @@ module Google
                               Google::Cloud::InvalidArgumentError].freeze
           MAX_RETRY_DURATION = 600 # 600s since the server allows ack/modacks for 10 mins max
           MAX_TRIES = 10
+          BASE_INTERVAL = 1
+          MAX_INTERVAL = 64
+          MULTIPLIER = 2
+
 
           def initialize subscriber, max_bytes: 500_000, interval: 1.0
             super() # to init MonitorMixin
@@ -246,7 +250,12 @@ module Google
 
           def retry_request ack_ids, modack
             begin
-              Retriable.retriable tries: MAX_TRIES, max_elapsed_time: MAX_RETRY_DURATION, on: RETRIABLE_ERRORS do
+              Retriable.retriable tries: MAX_TRIES, 
+                                  base_interval: BASE_INTERVAL, 
+                                  max_interval: MAX_INTERVAL,
+                                  multiplier: MULTIPLIER,
+                                  max_elapsed_time: MAX_RETRY_DURATION, 
+                                  on: RETRIABLE_ERRORS do
                 return if ack_ids.nil?
                 begin
                   yield ack_ids
