@@ -135,7 +135,7 @@ module Google
                             processing_units: nil, labels: nil,
                             call_options: nil
           opts = default_options call_options: call_options
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
 
           create_obj = Admin::Instance::V1::Instance.new({
             display_name: name, config: instance_config_path(config),
