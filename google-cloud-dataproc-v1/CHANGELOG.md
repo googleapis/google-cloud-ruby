@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2022-06-30)
+
+#### Features
+
+* support OLM Prefix/Suffix ([#18190](https://github.com/googleapis/google-cloud-ruby/issues/18190)) 
+
 ### 0.10.0 (2022-05-12)
 
 #### Bug Fixes
