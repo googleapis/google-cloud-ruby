@@ -331,7 +331,7 @@ module Google
         # @return [Hash]
         #
         def to_grpc_hash
-          Hash[to_grpc.to_a]
+          to_grpc.to_a.to_h
         end
 
         ##

@@ -43,7 +43,7 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
       consistency_token: token
     )
     mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, get_res, [name: table_path(instance_id, table_id)]
+    mock.expect :generate_consistency_token, get_res, name: table_path(instance_id, table_id)
     bigtable.service.mocked_tables = mock
 
     result = table.generate_consistency_token
@@ -56,7 +56,7 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
       consistent: true
     )
     mock = Minitest::Mock.new
-    mock.expect :check_consistency, get_res, [name: table_path(instance_id, table_id), consistency_token: token]
+    mock.expect :check_consistency, get_res, name: table_path(instance_id, table_id), consistency_token: token
     bigtable.service.mocked_tables = mock
 
     result = table.check_consistency(token)
@@ -73,8 +73,8 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, gen_token_res, [name: table_path(instance_id, table_id)]
-    mock.expect :check_consistency, check_consistency_res, [name: table_path(instance_id, table_id), consistency_token: token]
+    mock.expect :generate_consistency_token, gen_token_res, name: table_path(instance_id, table_id)
+    mock.expect :check_consistency, check_consistency_res, name: table_path(instance_id, table_id), consistency_token: token
 
     bigtable.service.mocked_tables = mock
 
@@ -92,9 +92,9 @@ describe Google::Cloud::Bigtable::Table, :replication, :mock_bigtable do
     )
 
     mock = Minitest::Mock.new
-    mock.expect :generate_consistency_token, gen_token_res, [name: table_path(instance_id, table_id)]
+    mock.expect :generate_consistency_token, gen_token_res, name: table_path(instance_id, table_id)
     3.times do
-      mock.expect :check_consistency, check_consistency_res, [name: table_path(instance_id, table_id), consistency_token: token]
+      mock.expect :check_consistency, check_consistency_res, name: table_path(instance_id, table_id), consistency_token: token
     end
 
     bigtable.service.mocked_tables = mock

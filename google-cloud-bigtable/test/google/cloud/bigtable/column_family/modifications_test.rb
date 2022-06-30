@@ -54,7 +54,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :modify_column_families, get_res, [name: table_path(instance_id, table_id), modifications: modifications]
+    mock.expect :modify_column_families, get_res, name: table_path(instance_id, table_id), modifications: modifications
     bigtable.service.mocked_tables = mock
 
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(3)
@@ -89,10 +89,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :modify_column_families, get_res, [
-      name: table_path(instance_id, table_id),
-      modifications: modifications
-    ]
+    mock.expect :modify_column_families, get_res, name: table_path(instance_id, table_id), modifications: modifications
     bigtable.service.mocked_tables = mock
 
     column_families = table.column_families do |cfm|
@@ -128,10 +125,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :modify_column_families, get_res, [
-      name: table_path(instance_id, table_id),
-      modifications: modifications
-    ]
+    mock.expect :modify_column_families, get_res, name: table_path(instance_id, table_id), modifications: modifications
     bigtable.service.mocked_tables = mock
 
     gc_rule = Google::Cloud::Bigtable::GcRule.max_versions(1)
@@ -170,10 +164,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :modify_column_families, get_res, [
-      name: table_path(instance_id, table_id),
-      modifications: modifications
-    ]
+    mock.expect :modify_column_families, get_res, name: table_path(instance_id, table_id), modifications: modifications
     bigtable.service.mocked_tables = mock
 
     column_families = table.column_families do |cfm|
@@ -202,10 +193,7 @@ describe Google::Cloud::Bigtable::ColumnFamily, :create, :mock_bigtable do
     ]
 
     mock = Minitest::Mock.new
-    mock.expect :modify_column_families, get_res, [
-      name: table_path(instance_id, table_id),
-      modifications: modifications
-    ]
+    mock.expect :modify_column_families, get_res, name: table_path(instance_id, table_id), modifications: modifications
     bigtable.service.mocked_tables = mock
 
     column_families = table.column_families do |cfm|
