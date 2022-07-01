@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2022-07-01)
+
+#### Features
+
+* Remove dependency on the obsolete v1alpha version 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
 ### 0.3.0 (2022-07-01)
 
 #### Features
