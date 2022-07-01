@@ -22,6 +22,10 @@ module Google
     module SecurityCenter
       module V1
         # Represents an operating system process.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The process name visible in utilities like `top` and `ps`; it can
+        #     be accessed via `/proc/[pid]/comm` and changed with `prctl(PR_SET_NAME)`.
         # @!attribute [rw] binary
         #   @return [::Google::Cloud::SecurityCenter::V1::File]
         #     File information for the process executable.

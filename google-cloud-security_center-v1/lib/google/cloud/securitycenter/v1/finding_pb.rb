@@ -8,6 +8,7 @@ require 'google/api/resource_pb'
 require 'google/cloud/securitycenter/v1/access_pb'
 require 'google/cloud/securitycenter/v1/compliance_pb'
 require 'google/cloud/securitycenter/v1/connection_pb'
+require 'google/cloud/securitycenter/v1/contact_details_pb'
 require 'google/cloud/securitycenter/v1/exfiltration_pb'
 require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/iam_binding_pb'
@@ -45,6 +46,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :connections, :message, 31, "google.cloud.securitycenter.v1.Connection"
       optional :mute_initiator, :string, 28
       repeated :processes, :message, 30, "google.cloud.securitycenter.v1.Process"
+      map :contacts, :string, :message, 33, "google.cloud.securitycenter.v1.ContactDetails"
       repeated :compliances, :message, 34, "google.cloud.securitycenter.v1.Compliance"
       optional :description, :string, 37
       optional :exfiltration, :message, 38, "google.cloud.securitycenter.v1.Exfiltration"
