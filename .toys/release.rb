@@ -90,14 +90,22 @@ tool "bootstrap" do
       end
     end
     config["packages"] = sort_hash config_packages
+    manifest = sort_hash add_fillers manifest
     puts "Added #{added_count} packages (#{already_present_count} already present)", :bold
 
     File.open config_name, "w" do |file|
       file.puts JSON.pretty_generate config
     end
     File.open manifest_name, "w" do |file|
-      file.puts JSON.pretty_generate sort_hash manifest
+      file.puts JSON.pretty_generate manifest
     end
+  end
+
+  def add_fillers manifest
+    manifest.keys.each do |key|
+      manifest["#{key}+FILLER"] = "" unless key.end_with? "+FILLER"
+    end
+    manifest
   end
 
   def sort_hash original
