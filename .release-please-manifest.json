@@ -29,7 +29,7 @@
   "google-cloud-automl": "1.1.4",
   "google-cloud-automl-v1": "0.4.8",
   "google-cloud-automl-v1beta1": "0.5.5",
-  "google-cloud-bare_metal_solution": "0.1.0",
+  "google-cloud-bare_metal_solution": "0.2.0",
   "google-cloud-bare_metal_solution-v2": "0.1.0",
   "google-cloud-batch": "0.1.0",
   "google-cloud-batch-v1": "0.1.0",
