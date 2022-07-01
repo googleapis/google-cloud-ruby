@@ -107,6 +107,9 @@ module Google
             rpc :CreateNodePool, ::Google::Cloud::Container::V1::CreateNodePoolRequest, ::Google::Cloud::Container::V1::Operation
             # Deletes a node pool from a cluster.
             rpc :DeleteNodePool, ::Google::Cloud::Container::V1::DeleteNodePoolRequest, ::Google::Cloud::Container::V1::Operation
+            # CompleteNodePoolUpgrade will signal an on-going node pool upgrade to
+            # complete.
+            rpc :CompleteNodePoolUpgrade, ::Google::Cloud::Container::V1::CompleteNodePoolUpgradeRequest, ::Google::Protobuf::Empty
             # Rolls back a previously Aborted or Failed NodePool upgrade.
             # This makes no changes if the last upgrade successfully completed.
             rpc :RollbackNodePoolUpgrade, ::Google::Cloud::Container::V1::RollbackNodePoolUpgradeRequest, ::Google::Cloud::Container::V1::Operation
