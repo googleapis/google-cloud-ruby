@@ -23,7 +23,7 @@
   "google-cloud-ai_platform-v1+FILLER": "0.0.0",
   "google-cloud-api_gateway": "1.0.3",
   "google-cloud-api_gateway+FILLER": "0.0.0",
-  "google-cloud-api_gateway-v1": "0.1.5",
+  "google-cloud-api_gateway-v1": "0.2.0",
   "google-cloud-api_gateway-v1+FILLER": "0.0.0",
   "google-cloud-apigee_connect": "1.0.1",
   "google-cloud-apigee_connect+FILLER": "0.0.0",
