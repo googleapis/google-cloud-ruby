@@ -103,7 +103,7 @@ tool "bootstrap" do
 
   def add_fillers manifest
     manifest.keys.each do |key|
-      manifest["#{key}+FILLER"] = "0" unless key.end_with? "+FILLER"
+      manifest["#{key}+FILLER"] = "0.0.0" unless key.end_with? "+FILLER"
     end
     manifest
   end
