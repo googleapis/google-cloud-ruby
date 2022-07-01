@@ -1,5 +1,19 @@
 # Release History
 
+### 0.13.0 (2022-07-01)
+
+### ⚠ BREAKING CHANGES
+
+* remove `WebDataStream`, `IosAppDataStream`, `AndroidAppDataStream` resources (#17866)
+
+#### Features
+
+* remove `WebDataStream`, `IosAppDataStream`, `AndroidAppDataStream` resources ([#17866](https://github.com/googleapis/google-cloud-ruby/issues/17866)) 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed custom metric and custom dimension resource paths 
+
 ### 0.12.0 (2022-07-01)
 
 #### Features
