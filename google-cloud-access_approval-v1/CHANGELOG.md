@@ -1,5 +1,12 @@
 # Release History
 
+### 0.8.0 (2022-07-01)
+
+#### Features
+
+* add support for invalidate_approval_request and get_access_approval_service_account ([#18292](https://github.com/googleapis/google-cloud-ruby/issues/18292)) 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
 ### 0.7.0 (2022-07-01)
 
 #### Features
