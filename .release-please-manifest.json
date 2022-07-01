@@ -69,7 +69,7 @@
   "google-cloud-batch-v1+FILLER": "0.0.0",
   "google-cloud-bigquery": "1.38.1",
   "google-cloud-bigquery+FILLER": "0.0.0",
-  "google-cloud-bigquery-connection": "1.1.3",
+  "google-cloud-bigquery-connection": "1.2.0",
   "google-cloud-bigquery-connection+FILLER": "0.0.0",
   "google-cloud-bigquery-connection-v1": "0.8.0",
   "google-cloud-bigquery-connection-v1+FILLER": "0.0.0",
