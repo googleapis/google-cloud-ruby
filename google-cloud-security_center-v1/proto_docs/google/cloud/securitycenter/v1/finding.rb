@@ -122,8 +122,8 @@ module Google
         #     Output only. The most recent time this finding was muted or unmuted.
         # @!attribute [r] external_systems
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
-        #     Output only. Third party SIEM/SOAR fields within SCC, contains external
-        #     system information and external system finding fields.
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
+        #     information and external system finding fields.
         # @!attribute [rw] mitre_attack
         #   @return [::Google::Cloud::SecurityCenter::V1::MitreAttack]
         #     MITRE ATT&CK tactics and techniques related to this finding.
@@ -144,6 +144,25 @@ module Google
         # @!attribute [rw] processes
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Process>]
         #     Represents operating system processes associated with the Finding.
+        # @!attribute [r] contacts
+        #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ContactDetails}]
+        #     Output only. Map containing the point of contacts for the given finding. The key
+        #     represents the type of contact, while the value contains a list of all the
+        #     contacts that pertain. Please refer to:
+        #     https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories
+        #
+        #         {
+        #           "security": {
+        #             "contacts": [
+        #               {
+        #                 "email": "person1@company.com"
+        #               },
+        #               {
+        #                 "email": "person2@company.com"
+        #               }
+        #             ]
+        #           }
+        #         }
         # @!attribute [rw] compliances
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Compliance>]
         #     Contains compliance information for security standards associated to the
@@ -178,6 +197,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::Google::Cloud::SecurityCenter::V1::ExternalSystem]
           class ExternalSystemsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::Google::Cloud::SecurityCenter::V1::ContactDetails]
+          class ContactsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

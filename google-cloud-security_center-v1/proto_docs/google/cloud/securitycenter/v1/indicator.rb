@@ -31,9 +31,61 @@ module Google
         # @!attribute [rw] domains
         #   @return [::Array<::String>]
         #     List of domains associated to the Finding.
+        # @!attribute [rw] signatures
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature>]
+        #     The list of matched signatures indicating that the given
+        #     process is present in the environment.
         class Indicator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Indicates what signature matched this process.
+          # @!attribute [rw] memory_hash_signature
+          #   @return [::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::MemoryHashSignature]
+          #     Signature indicating that a binary family was matched.
+          # @!attribute [rw] yara_rule_signature
+          #   @return [::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::YaraRuleSignature]
+          #     Signature indicating that a YARA rule was matched.
+          class ProcessSignature
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # A signature corresponding to memory page hashes.
+            # @!attribute [rw] binary_family
+            #   @return [::String]
+            #     The binary family.
+            # @!attribute [rw] detections
+            #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature::MemoryHashSignature::Detection>]
+            #     The list of memory hash detections contributing to the binary family
+            #     match.
+            class MemoryHashSignature
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Memory hash detection contributing to the binary family match.
+              # @!attribute [rw] binary
+              #   @return [::String]
+              #     The name of the binary associated with the memory hash
+              #     signature detection.
+              # @!attribute [rw] percent_pages_matched
+              #   @return [::Float]
+              #     The percentage of memory page hashes in the signature
+              #     that were matched.
+              class Detection
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # A signature corresponding to a YARA rule.
+            # @!attribute [rw] yara_rule
+            #   @return [::String]
+            #     The name of the YARA rule.
+            class YaraRuleSignature
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
       end
     end
