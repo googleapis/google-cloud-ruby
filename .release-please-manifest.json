@@ -121,7 +121,7 @@
   "google-cloud-build-v1+FILLER": "0.0.0",
   "google-cloud-certificate_manager": "0.1.0",
   "google-cloud-certificate_manager+FILLER": "0.0.0",
-  "google-cloud-certificate_manager-v1": "0.1.0",
+  "google-cloud-certificate_manager-v1": "0.2.0",
   "google-cloud-certificate_manager-v1+FILLER": "0.0.0",
   "google-cloud-channel": "1.0.4",
   "google-cloud-channel+FILLER": "0.0.0",
