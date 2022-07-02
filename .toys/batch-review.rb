@@ -37,16 +37,33 @@ CONFIGS = {
     title_regexp: /^chore\(main\): release [\w-]+-v\d\w* \d+\.\d+\.\d+/,
     message_type: :pr_title_number,
     detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+    ],
   },
   "releases-wrappers" => {
     title_regexp: /^chore\(main\): release (\w+-)*(v[a-z_]|[a-uw-z])\w* \d+\.\d+\.\d+/,
     message_type: :pr_title_number,
     detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+    ],
   },
   "releases-all" => {
     title_regexp: /^chore\(main\): release [\w-]+ \d+\.\d+\.\d+/,
     message_type: :pr_title_number,
     detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+    ],
   },
 }
 
