@@ -1,5 +1,14 @@
 # Release History
 
+### 0.10.0 (2022-07-02)
+
+#### Features
+
+* Support for ignoring the pod disruption budget when rolling back node pool upgrades 
+* Support for the complete_node_pool_upgrade call ([#18458](https://github.com/googleapis/google-cloud-ruby/issues/18458)) 
+* Support network config and conventional nodes during node pool updates 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
 ### 0.9.0 / 2022-02-16
 
 #### Features
