@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/dialogflow/v2/intent_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -144,6 +145,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @intents_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dialogflow::V2::Intents::Stub,
                 credentials:  credentials,
@@ -159,6 +166,13 @@ module Google
             # @return [::Google::Cloud::Dialogflow::V2::Intents::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
