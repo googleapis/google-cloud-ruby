@@ -311,7 +311,7 @@
   "google-cloud-location+FILLER": "0.0.0",
   "google-cloud-logging": "2.3.0",
   "google-cloud-logging+FILLER": "0.0.0",
-  "google-cloud-logging-v2": "0.7.0",
+  "google-cloud-logging-v2": "0.8.0",
   "google-cloud-logging-v2+FILLER": "0.0.0",
   "google-cloud-managed_identities": "1.1.0",
   "google-cloud-managed_identities+FILLER": "0.0.0",
