@@ -251,7 +251,8 @@ module Google
         # @!attribute [rw] cancels_slot_filling
         #   @return [::Boolean]
         #     Indicates whether the conversational query triggers a cancellation for slot
-        #     filling.
+        #     filling. For more information, see the [cancel slot filling
+        #     documentation](https://cloud.google.com/dialogflow/es/docs/intents-actions-parameters#cancel).
         # @!attribute [rw] fulfillment_text
         #   @return [::String]
         #     The text to be pronounced to the user or shown on the screen.
@@ -541,6 +542,9 @@ module Google
           end
         end
 
+        # ============================================================================
+        # Auxiliary proto messages.
+        #
         # Represents the natural language text to be processed.
         # @!attribute [rw] text
         #   @return [::String]
