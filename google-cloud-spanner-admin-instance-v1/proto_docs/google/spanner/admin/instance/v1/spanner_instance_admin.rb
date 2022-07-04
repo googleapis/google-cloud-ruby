@@ -80,7 +80,7 @@ module Google
             #   @return [::String]
             #     A unique identifier for the instance configuration.  Values
             #     are of the form
-            #     `projects/<project>/instanceConfigs/[a-z][-a-z0-9]*`
+            #     `projects/<project>/instanceConfigs/[a-z][-a-z0-9]*`.
             # @!attribute [rw] display_name
             #   @return [::String]
             #     The name of this instance configuration as it appears in UIs.
@@ -90,7 +90,7 @@ module Google
             #     replication properties.
             # @!attribute [rw] leader_options
             #   @return [::Array<::String>]
-            #     Allowed values of the “default_leader” schema option for databases in
+            #     Allowed values of the "default_leader" schema option for databases in
             #     instances that use this instance configuration.
             class InstanceConfig
               include ::Google::Protobuf::MessageExts
@@ -116,17 +116,23 @@ module Google
             #     Must be unique per project and between 4 and 30 characters in length.
             # @!attribute [rw] node_count
             #   @return [::Integer]
-            #     Required. The number of nodes allocated to this instance. This may be zero
-            #     in API responses for instances that are not yet in state `READY`.
+            #     The number of nodes allocated to this instance. At most one of either
+            #     node_count or processing_units should be present in the message. This
+            #     may be zero in API responses for instances that are not yet in state
+            #     `READY`.
             #
             #     See [the
-            #     documentation](https://cloud.google.com/spanner/docs/instances#node_count)
-            #     for more information about nodes.
+            #     documentation](https://cloud.google.com/spanner/docs/compute-capacity)
+            #     for more information about nodes and processing units.
             # @!attribute [rw] processing_units
             #   @return [::Integer]
             #     The number of processing units allocated to this instance. At most one of
             #     processing_units or node_count should be present in the message. This may
             #     be zero in API responses for instances that are not yet in state `READY`.
+            #
+            #     See [the
+            #     documentation](https://cloud.google.com/spanner/docs/compute-capacity)
+            #     for more information about nodes and processing units.
             # @!attribute [r] state
             #   @return [::Google::Cloud::Spanner::Admin::Instance::V1::Instance::State]
             #     Output only. The current instance state. For
@@ -144,9 +150,9 @@ module Google
             #     firewall, load balancing, etc.).
             #
             #      * Label keys must be between 1 and 63 characters long and must conform to
-            #        the following regular expression: `[a-z]([-a-z0-9]*[a-z0-9])?`.
+            #        the following regular expression: `[a-z][a-z0-9_-]{0,62}`.
             #      * Label values must be between 0 and 63 characters long and must conform
-            #        to the regular expression `([a-z]([-a-z0-9]*[a-z0-9])?)?`.
+            #        to the regular expression `[a-z0-9_-]{0,63}`.
             #      * No more than 64 labels can be associated with a given resource.
             #
             #     See https://goo.gl/xmQnxf for more information on and examples of labels.
@@ -160,6 +166,12 @@ module Google
             # @!attribute [rw] endpoint_uris
             #   @return [::Array<::String>]
             #     Deprecated. This field is not populated.
+            # @!attribute [r] create_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time at which the instance was created.
+            # @!attribute [r] update_time
+            #   @return [::Google::Protobuf::Timestamp]
+            #     Output only. The time at which the instance was most recently updated.
             class Instance
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

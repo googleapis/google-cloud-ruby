@@ -788,7 +788,7 @@ module Google
                 # {::Google::Cloud::Spanner::Admin::Instance::V1::Instance Instance}, if successful.
                 #
                 # Authorization requires `spanner.instances.update` permission on
-                # resource {::Google::Cloud::Spanner::Admin::Instance::V1::Instance#name name}.
+                # the resource {::Google::Cloud::Spanner::Admin::Instance::V1::Instance#name name}.
                 #
                 # @overload update_instance(request, options = nil)
                 #   Pass arguments to `update_instance` via a request object, either of type

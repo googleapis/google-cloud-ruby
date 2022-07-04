@@ -42,6 +42,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 6, "google.spanner.admin.instance.v1.Instance.State"
       map :labels, :string, :string, 7
       repeated :endpoint_uris, :string, 8
+      optional :create_time, :message, 11, "google.protobuf.Timestamp"
+      optional :update_time, :message, 12, "google.protobuf.Timestamp"
     end
     add_enum "google.spanner.admin.instance.v1.Instance.State" do
       value :STATE_UNSPECIFIED, 0
