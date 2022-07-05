@@ -333,7 +333,7 @@
   "google-cloud-metastore-v1+FILLER": "0.0.0",
   "google-cloud-metastore-v1beta": "0.1.5",
   "google-cloud-metastore-v1beta+FILLER": "0.0.0",
-  "google-cloud-monitoring": "1.3.1",
+  "google-cloud-monitoring": "1.4.0",
   "google-cloud-monitoring+FILLER": "0.0.0",
   "google-cloud-monitoring-dashboard-v1": "0.8.0",
   "google-cloud-monitoring-dashboard-v1+FILLER": "0.0.0",
