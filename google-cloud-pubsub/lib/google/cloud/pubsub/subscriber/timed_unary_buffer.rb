@@ -117,36 +117,46 @@ module Google
 
             # Perform the RCP calls concurrently
             with_threadpool do |pool|
-              requests[:acknowledge].each do |ack_req|
-                add_future pool do
-                  begin
-                    @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
-                    handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS), ack_req.ack_ids
-                  rescue *RETRIABLE_ERRORS => e
-                    handle_failure e, ack_req.ack_ids if @subscriber.exactly_once_delivery_enabled
-                  rescue StandardError => e
-                    handle_callback construct_result(e), ack_req.ack_ids
-                  end
-                end
-              end
-              requests[:modify_ack_deadline].each do |mod_ack_req|
-                add_future pool do
-                  begin
-                    @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
-                                                            mod_ack_req.ack_deadline_seconds
-                    handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS), mod_ack_req.ack_ids, true                                                            
-                  rescue *RETRIABLE_ERRORS => e
-                    if @subscriber.exactly_once_delivery_enabled
-                      handle_failure e, mod_ack_req.ack_ids, mod_ack_req.ack_deadline_seconds
-                    end
-                  rescue StandardError => e
-                    handle_callback construct_result(e), mod_ack_req.ack_ids, true
-                  end
-                end
-              end
+              make_acknowledge_request requests, pool
+              make_modack_request requests, pool
             end
 
             true
+          end
+
+          def make_acknowledge_request requests, pool
+            requests[:acknowledge].each do |ack_req|
+              add_future pool do
+                begin
+                  @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
+                  handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS), ack_req.ack_ids
+                rescue *RETRIABLE_ERRORS => e
+                  handle_failure e, ack_req.ack_ids if @subscriber.exactly_once_delivery_enabled
+                rescue StandardError => e
+                  handle_callback construct_result(e), ack_req.ack_ids
+                end
+              end
+            end
+          end
+
+          def make_modack_request requests, pool
+            requests[:modify_ack_deadline].each do |mod_ack_req|
+              add_future pool do
+                begin
+                  @subscriber.service.modify_ack_deadline mod_ack_req.subscription, mod_ack_req.ack_ids,
+                                                          mod_ack_req.ack_deadline_seconds
+                  handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS),
+                                  mod_ack_req.ack_ids,
+                                  modack: true
+                rescue *RETRIABLE_ERRORS => e
+                  if @subscriber.exactly_once_delivery_enabled
+                    handle_failure e, mod_ack_req.ack_ids, mod_ack_req.ack_deadline_seconds
+                  end
+                rescue StandardError => e
+                  handle_callback construct_result(e), mod_ack_req.ack_ids, modack: true
+                end
+              end
+            end
           end
 
           def start
@@ -175,40 +185,48 @@ module Google
           private
 
           def handle_failure error, ack_ids, ack_deadline_seconds = nil
-            ack_ids = parse_error(error, ack_deadline_seconds.nil?) || ack_ids
+            ack_ids = parse_error(error, modack: ack_deadline_seconds.nil?) || ack_ids
             perform_retry_async ack_ids, ack_deadline_seconds
           end
 
-          def parse_error error, modack = false
+          def parse_error error, modack: false
             metadata = error.error_metadata
             return if metadata.nil?
             permanent_failures, temporary_failures = metadata.partition do |_, v|
               v.include? PERMANENT_FAILURE
             end.map(&:to_h)
-            handle_callback((construct_result error), permanent_failures.keys.map(&:to_s), modack) unless permanent_failures.empty?
+            unless permanent_failures.empty?
+              handle_callback construct_result(error),
+                              permanent_failures.keys.map(&:to_s),
+                              modack: modack
+            end
             temporary_failures.keys.map(&:to_s) unless temporary_failures.empty?
           end
 
           def construct_result error
-            if error.is_a? Google::Cloud::PermissionDeniedError
+            case error
+            when Google::Cloud::PermissionDeniedError
               AcknowledgeResult.new AcknowledgeResult::PERMISSION_DENIED, error
-            elsif error.is_a? Google::Cloud::FailedPreconditionError
+            when Google::Cloud::FailedPreconditionError
               AcknowledgeResult.new AcknowledgeResult::FAILED_PRECONDITION, error
-            elsif error.is_a? Google::Cloud::InvalidArgumentError
+            when Google::Cloud::InvalidArgumentError
               AcknowledgeResult.new AcknowledgeResult::INVALID_ACK_ID, error
             else
               AcknowledgeResult.new AcknowledgeResult::OTHER, error
             end
           end
 
-          def handle_callback result, ack_ids, modack = false
+          def handle_callback result, ack_ids, modack: false
             ack_ids.each do |ack_id|
               callback = modack ? @modack_callback_register[ack_id] : @ack_callback_register[ack_id]
               perform_callback_async result, callback unless callback.nil?
             end
             synchronize do
-              modack ? @modack_callback_register.delete_if { |ack_id, _| ack_ids.include? ack_id } :
-                       @ack_callback_register.delete_if { |ack_id, _| ack_ids.include? ack_id }
+              if modack
+                @modack_callback_register.delete_if { |ack_id, _| ack_ids.include? ack_id }
+              else
+                @ack_callback_register.delete_if { |ack_id, _| ack_ids.include? ack_id }
+              end
             end
           end
 
@@ -243,29 +261,29 @@ module Google
             else
               retry_request ack_ids, ack_deadline_seconds.nil? do |retry_ack_ids|
                 @subscriber.service.modify_ack_deadline subscription_name, retry_ack_ids, ack_deadline_seconds
-                handle_callback AcknowledgeResult.new AcknowledgeResult::SUCCESS, retry_ack_ids, true
+                handle_callback AcknowledgeResult.new AcknowledgeResult::SUCCESS, retry_ack_ids, modack: true
               end
             end
           end
 
           def retry_request ack_ids, modack
             begin
-              Retriable.retriable tries: MAX_TRIES, 
-                                  base_interval: BASE_INTERVAL, 
+              Retriable.retriable tries: MAX_TRIES,
+                                  base_interval: BASE_INTERVAL,
                                   max_interval: MAX_INTERVAL,
                                   multiplier: MULTIPLIER,
-                                  max_elapsed_time: MAX_RETRY_DURATION, 
+                                  max_elapsed_time: MAX_RETRY_DURATION,
                                   on: RETRIABLE_ERRORS do
                 return if ack_ids.nil?
                 begin
                   yield ack_ids
                 rescue Google::Cloud::InvalidArgumentError => e
-                  ack_ids = parse_error e.error_metadata
+                  ack_ids = parse_error e.error_metadata, modack: modack
                   raise e
                 end
               end
             rescue StandardError => e
-              handle_callback e, ack_ids, modack
+              handle_callback e, ack_ids, modack: modack
             end
           end
 

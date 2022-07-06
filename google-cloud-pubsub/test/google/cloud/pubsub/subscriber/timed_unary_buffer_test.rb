@@ -495,8 +495,8 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
   
   it "should parse error_metadata to give temp and permanent errors" do
     mocked_subscriber = Minitest::Mock.new
-    mocked_subscriber.expect :push_threads, 4 
-    mocked_subscriber.expect :push_threads, 4 
+    mocked_subscriber.expect :callback_threads, 4 
+    mocked_subscriber.expect :callback_threads, 4 
     buffer = Google::Cloud::PubSub::Subscriber::TimedUnaryBuffer.new mocked_subscriber
     temp_error = buffer.send(:parse_error, 
                             OpenStruct.new(error_metadata: {"12" =>"PERMANENT_FAILURE_INVALID_ACK_ID", 

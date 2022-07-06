@@ -14,48 +14,46 @@
 
 
 module Google
-    module Cloud
-      module PubSub
+  module Cloud
+    module PubSub
+      ##
+      # The result of a ack/nack/modack on messages. The message object is available on
+      # {#message} and will have {#message_id} assigned by the API.
+      #
+      # When the operation was successful the result will be marked
+      # {#succeeded?}. Otherwise, the result will be marked {#failed?} and the
+      # error raised will be availabe on {#error}.
+      #
+      class AcknowledgeResult
+        SUCCESS = 1
+        PERMISSION_DENIED = 2
+        FAILED_PRECONDITION = 3
+        INVALID_ACK_ID = 4
+        OTHER = 5
+
+        attr_reader :error
+        attr_reader :status
+
         ##
-        # The result of a ack/nack/modack on messages. The message object is available on
-        # {#message} and will have {#message_id} assigned by the API.
-        #
-        # When the operation was successful the result will be marked
-        # {#succeeded?}. Otherwise, the result will be marked {#failed?} and the
-        # error raised will be availabe on {#error}.
-        #
-        class AcknowledgeResult
+        # @private Create an PublishResult object.
+        def initialize status, error = nil
+          @error = error
+          @status = status
+        end
 
-					SUCCESS = 1
-					PERMISSION_DENIED = 2
-					FAILED_PRECONDITION = 3
-					INVALID_ACK_ID = 4
-					OTHER = 5  
+        ##
+        # Whether the operation was successful.
+        def succeeded?
+          @status == SUCCESS
+        end
 
-					attr_reader :error, :status
-          
-					##
-          # @private Create an PublishResult object.
-          def initialize status, error = nil
-            @error = error
-						@status = status
-          end
-      
-          ##
-          # Whether the operation was successful.
-          def succeeded?
-            @status == SUCCESS
-          end
-  
-          # Whether the operation failed.
-          def failed?
-            !succeeded?
-          end
-  
+        # Whether the operation failed.
+        def failed?
+          !succeeded?
         end
       end
-  
-      Pubsub = PubSub unless const_defined? :Pubsub
     end
+
+    Pubsub = PubSub unless const_defined? :Pubsub
   end
-  
+end
