@@ -121,7 +121,10 @@ $ gcloud config set project PROJECT_ID
 $ gcloud auth login
 
 # Create the indexes
-$ gcloud preview datastore create-indexes acceptance/data/
+$ gcloud datastore create-indexes acceptance/data/index.yaml
+
+# Create the indexes for datastore samples
+$ gcloud datastore create-indexes google-cloud-datastore/samples/index.yaml
 ```
 
 #### DNS Acceptance Tests
