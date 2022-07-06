@@ -41,7 +41,7 @@ module Google
                               Google::Cloud::ResourceExhaustedError,
                               Google::Cloud::InvalidArgumentError].freeze
           MAX_RETRY_DURATION = 600 # 600s since the server allows ack/modacks for 10 mins max
-          MAX_TRIES = 10
+          MAX_TRIES = 15
           BASE_INTERVAL = 1
           MAX_INTERVAL = 64
           MULTIPLIER = 2
@@ -63,8 +63,8 @@ module Google
 
             @modack_callback_register = {}
 
-            @retry_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.push_threads
-            @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.push_threads
+            @retry_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
+            @callback_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
             @task = Concurrent::TimerTask.new execution_interval: interval do
               flush!
             end
