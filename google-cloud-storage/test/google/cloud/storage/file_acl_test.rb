@@ -253,31 +253,31 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   end
 
   it "sets the predefined ACL rule authenticatedRead" do
-    predefined_acl_update "authenticatedRead" do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0 do |acl|
       acl.authenticatedRead!
     end
   end
 
   it "sets the predefined ACL rule auth" do
-    predefined_acl_update "authenticatedRead" do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0 do |acl|
       acl.auth!
     end
   end
 
   it "sets the predefined ACL rule auth with generation" do
-    predefined_acl_update "authenticatedRead", generation: generation do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0, generation: generation do |acl|
       acl.auth! generation: generation
     end
   end
 
   it "sets the predefined ACL rule auth with if_generation_match" do
-    predefined_acl_update "authenticatedRead", if_generation_match: generation do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0, if_generation_match: generation do |acl|
       acl.auth! if_generation_match: generation
     end
   end
 
   it "sets the predefined ACL rule auth with if_generation_not_match" do
-    predefined_acl_update "authenticatedRead", if_generation_not_match: generation do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0, if_generation_not_match: generation do |acl|
       acl.auth! if_generation_not_match: generation
     end
   end
@@ -289,55 +289,55 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   end
 
   it "sets the predefined ACL rule auth with if_metageneration_not_match" do
-    predefined_acl_update "authenticatedRead", if_metageneration_not_match: metageneration do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0, if_metageneration_not_match: metageneration do |acl|
       acl.auth! if_metageneration_not_match: metageneration
     end
   end
 
   it "sets the predefined ACL rule auth_read" do
-    predefined_acl_update "authenticatedRead" do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0 do |acl|
       acl.auth_read!
     end
   end
 
   it "sets the predefined ACL rule authenticated" do
-    predefined_acl_update "authenticatedRead" do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0 do |acl|
       acl.authenticated!
     end
   end
 
   it "sets the predefined ACL rule authenticated_read" do
-    predefined_acl_update "authenticatedRead" do |acl|
+    predefined_acl_update "authenticatedRead", retries: 0 do |acl|
       acl.authenticated_read!
     end
   end
 
   it "sets the predefined ACL rule bucketOwnerFullControl" do
-    predefined_acl_update "bucketOwnerFullControl" do |acl|
+    predefined_acl_update "bucketOwnerFullControl", retries: 0 do |acl|
       acl.bucketOwnerFullControl!
     end
   end
 
   it "sets the predefined ACL rule owner_full" do
-    predefined_acl_update "bucketOwnerFullControl" do |acl|
+    predefined_acl_update "bucketOwnerFullControl", retries: 0 do |acl|
       acl.owner_full!
     end
   end
 
   it "sets the predefined ACL rule owner_full with generation" do
-    predefined_acl_update "bucketOwnerFullControl", generation: generation do |acl|
+    predefined_acl_update "bucketOwnerFullControl", retries: 0, generation: generation do |acl|
       acl.owner_full! generation: generation
     end
   end
 
   it "sets the predefined ACL rule owner_full with if_generation_match" do
-    predefined_acl_update "bucketOwnerFullControl", if_generation_match: generation do |acl|
+    predefined_acl_update "bucketOwnerFullControl", retries: 0, if_generation_match: generation do |acl|
       acl.owner_full! if_generation_match: generation
     end
   end
 
   it "sets the predefined ACL rule owner_full with if_generation_not_match" do
-    predefined_acl_update "bucketOwnerFullControl", if_generation_not_match: generation do |acl|
+    predefined_acl_update "bucketOwnerFullControl", retries: 0, if_generation_not_match: generation do |acl|
       acl.owner_full! if_generation_not_match: generation
     end
   end
@@ -349,37 +349,37 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   end
 
   it "sets the predefined ACL rule owner_full with if_metageneration_not_match" do
-    predefined_acl_update "bucketOwnerFullControl", if_metageneration_not_match: metageneration do |acl|
+    predefined_acl_update "bucketOwnerFullControl", retries: 0, if_metageneration_not_match: metageneration do |acl|
       acl.owner_full! if_metageneration_not_match: metageneration
     end
   end
 
   it "sets the predefined ACL rule bucketOwnerRead" do
-    predefined_acl_update "bucketOwnerRead" do |acl|
+    predefined_acl_update "bucketOwnerRead", retries: 0 do |acl|
       acl.bucketOwnerRead!
     end
   end
 
   it "sets the predefined ACL rule owner_read" do
-    predefined_acl_update "bucketOwnerRead" do |acl|
+    predefined_acl_update "bucketOwnerRead", retries: 0 do |acl|
       acl.owner_read!
     end
   end
 
   it "sets the predefined ACL rule owner_read with generation" do
-    predefined_acl_update "bucketOwnerRead", generation: generation do |acl|
+    predefined_acl_update "bucketOwnerRead", retries: 0, generation: generation do |acl|
       acl.owner_read! generation: generation
     end
   end
 
   it "sets the predefined ACL rule owner_read with if_generation_match" do
-    predefined_acl_update "bucketOwnerRead", if_generation_match: generation do |acl|
+    predefined_acl_update "bucketOwnerRead", retries: 0, if_generation_match: generation do |acl|
       acl.owner_read! if_generation_match: generation
     end
   end
 
   it "sets the predefined ACL rule owner_read with if_generation_not_match" do
-    predefined_acl_update "bucketOwnerRead", if_generation_not_match: generation do |acl|
+    predefined_acl_update "bucketOwnerRead", retries: 0, if_generation_not_match: generation do |acl|
       acl.owner_read! if_generation_not_match: generation
     end
   end
@@ -391,31 +391,31 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   end
 
   it "sets the predefined ACL rule owner_read with if_metageneration_not_match" do
-    predefined_acl_update "bucketOwnerRead", if_metageneration_not_match: metageneration do |acl|
+    predefined_acl_update "bucketOwnerRead", retries: 0, if_metageneration_not_match: metageneration do |acl|
       acl.owner_read! if_metageneration_not_match: metageneration
     end
   end
 
   it "sets the predefined ACL rule private" do
-    predefined_acl_update "private" do |acl|
+    predefined_acl_update "private", retries: 0 do |acl|
       acl.private!
     end
   end
 
   it "sets the predefined ACL rule private with generation" do
-    predefined_acl_update "private", generation: generation do |acl|
+    predefined_acl_update "private", retries: 0, generation: generation do |acl|
       acl.private! generation: generation
     end
   end
 
   it "sets the predefined ACL rule private with if_generation_match" do
-    predefined_acl_update "private", if_generation_match: generation do |acl|
+    predefined_acl_update "private", retries: 0, if_generation_match: generation do |acl|
       acl.private! if_generation_match: generation
     end
   end
 
   it "sets the predefined ACL rule private with if_generation_not_match" do
-    predefined_acl_update "private", if_generation_not_match: generation do |acl|
+    predefined_acl_update "private", retries: 0, if_generation_not_match: generation do |acl|
       acl.private! if_generation_not_match: generation
     end
   end
@@ -427,37 +427,37 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   end
 
   it "sets the predefined ACL rule private with if_metageneration_not_match" do
-    predefined_acl_update "private", if_metageneration_not_match: metageneration do |acl|
+    predefined_acl_update "private", retries: 0, if_metageneration_not_match: metageneration do |acl|
       acl.private! if_metageneration_not_match: metageneration
     end
   end
 
   it "sets the predefined ACL rule projectPrivate" do
-    predefined_acl_update "projectPrivate" do |acl|
+    predefined_acl_update "projectPrivate", retries: 0 do |acl|
       acl.projectPrivate!
     end
   end
 
   it "sets the predefined ACL rule project_private" do
-    predefined_acl_update "projectPrivate" do |acl|
+    predefined_acl_update "projectPrivate", retries: 0 do |acl|
       acl.project_private!
     end
   end
 
   it "sets the predefined ACL rule project_private with generation" do
-    predefined_acl_update "projectPrivate", generation: generation do |acl|
+    predefined_acl_update "projectPrivate", retries: 0, generation: generation do |acl|
       acl.project_private! generation: generation
     end
   end
 
   it "sets the predefined ACL rule project_private with if_generation_match" do
-    predefined_acl_update "projectPrivate", if_generation_match: generation do |acl|
+    predefined_acl_update "projectPrivate", retries: 0, if_generation_match: generation do |acl|
       acl.project_private! if_generation_match: generation
     end
   end
 
   it "sets the predefined ACL rule project_private with if_generation_not_match" do
-    predefined_acl_update "projectPrivate", if_generation_not_match: generation do |acl|
+    predefined_acl_update "projectPrivate", retries: 0, if_generation_not_match: generation do |acl|
       acl.project_private! if_generation_not_match: generation
     end
   end
@@ -469,37 +469,37 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   end
 
   it "sets the predefined ACL rule project_private with if_metageneration_not_match" do
-    predefined_acl_update "projectPrivate", if_metageneration_not_match: metageneration do |acl|
+    predefined_acl_update "projectPrivate", retries: 0, if_metageneration_not_match: metageneration do |acl|
       acl.project_private! if_metageneration_not_match: metageneration
     end
   end
 
   it "sets the predefined ACL rule publicRead" do
-    predefined_acl_update "publicRead" do |acl|
+    predefined_acl_update "publicRead", retries: 0 do |acl|
       acl.publicRead!
     end
   end
 
   it "sets the predefined ACL rule public" do
-    predefined_acl_update "publicRead" do |acl|
+    predefined_acl_update "publicRead", retries: 0 do |acl|
       acl.public!
     end
   end
 
   it "sets the predefined ACL rule public with generation" do
-    predefined_acl_update "publicRead", generation: generation do |acl|
+    predefined_acl_update "publicRead", retries: 0, generation: generation do |acl|
       acl.public! generation: generation
     end
   end
 
   it "sets the predefined ACL rule public with if_generation_match" do
-    predefined_acl_update "publicRead", if_generation_match: generation do |acl|
+    predefined_acl_update "publicRead", retries: 0, if_generation_match: generation do |acl|
       acl.public! if_generation_match: generation
     end
   end
 
   it "sets the predefined ACL rule public with if_generation_not_match" do
-    predefined_acl_update "publicRead", if_generation_not_match: generation do |acl|
+    predefined_acl_update "publicRead", retries: 0, if_generation_not_match: generation do |acl|
       acl.public! if_generation_not_match: generation
     end
   end
@@ -511,13 +511,13 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
   end
 
   it "sets the predefined ACL rule public with if_metageneration_not_match" do
-    predefined_acl_update "publicRead", if_metageneration_not_match: metageneration do |acl|
+    predefined_acl_update "publicRead", retries: 0, if_metageneration_not_match: metageneration do |acl|
       acl.public! if_metageneration_not_match: metageneration
     end
   end
 
   it "sets the predefined ACL rule public_read" do
-    predefined_acl_update "publicRead" do |acl|
+    predefined_acl_update "publicRead", retries: 0 do |acl|
       acl.public_read!
     end
   end
@@ -612,11 +612,12 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     end
   end
 
-  def predefined_acl_update acl_role, **opts
+  def predefined_acl_update acl_role, retries: nil, **opts
+    options = retries.nil? ? {} : {retries: retries}
     mock = Minitest::Mock.new
     mock.expect :patch_object,
       Google::Apis::StorageV1::Object.from_json(random_file_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::Bucket.new(acl: [])], **patch_object_args(predefined_acl: acl_role, **opts)
+      [bucket_name, file_name, Google::Apis::StorageV1::Bucket.new(acl: [])], **patch_object_args(predefined_acl: acl_role, options: options, **opts)
 
     storage.service.mocked_service = mock
 

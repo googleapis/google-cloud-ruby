@@ -131,7 +131,9 @@ module Google
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
-          is_idempotent = Retry.retry?({if_metageneration_match: if_metageneration_match})
+          
+          is_idempotent = Retry.retry?(if_metageneration_match: if_metageneration_match)
+          options = is_idempotent ? {} : {retries: 0}
 
           execute do
             service.patch_bucket bucket_name,
@@ -141,7 +143,7 @@ module Google
                                  if_metageneration_match: if_metageneration_match,
                                  if_metageneration_not_match: if_metageneration_not_match,
                                  user_project: user_project(user_project),
-                                 options: {is_idempotent: is_idempotent}
+                                 options: options
           end
         end
 
@@ -359,8 +361,8 @@ module Google
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
-          is_idempotent = Retry.retry?({if_generation_match: if_generation_match})
-          options = key_options(key).merge({is_idempotent: is_idempotent})
+          is_idempotent = Retry.retry?(if_generation_match: if_generation_match)
+          options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
 
           execute do
             service.insert_object bucket_name,
@@ -427,6 +429,10 @@ module Google
                          token: nil,
                          user_project: nil
           key_options = rewrite_key_options source_key, destination_key
+          
+          is_idempotent = Retry.retry?(if_generation_match: if_generation_match)
+          options = is_idempotent ? key_options : key_options.merge(retries: 0)
+
           execute do
             service.rewrite_object source_bucket_name,
                                    source_file_path,
@@ -446,7 +452,7 @@ module Google
                                    if_source_metageneration_not_match: if_source_metageneration_not_match,
                                    rewrite_token: token,
                                    user_project: user_project(user_project),
-                                   options: key_options
+                                   options: options
           end
         end
 
@@ -467,7 +473,7 @@ module Google
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
           is_idempotent = Retry.retry?(if_generation_match: if_generation_match)
-          options = key_options(key).merge({is_idempotent: is_idempotent})
+          options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
 
           execute do
             service.compose_object bucket_name,
@@ -517,6 +523,10 @@ module Google
                        predefined_acl: nil,
                        user_project: nil
           file_gapi ||= Google::Apis::StorageV1::Object.new
+
+          is_idempotent = Retry.retry?(if_metageneration_match: if_metageneration_match)
+          options = is_idempotent ? {} : {retries: 0}
+
           execute do
             service.patch_object bucket_name,
                                  file_path,
@@ -527,7 +537,8 @@ module Google
                                  if_metageneration_match: if_metageneration_match,
                                  if_metageneration_not_match: if_metageneration_not_match,
                                  predefined_acl: predefined_acl,
-                                 user_project: user_project(user_project)
+                                 user_project: user_project(user_project),
+                                 options: options
           end
         end
 
@@ -542,6 +553,7 @@ module Google
                         if_metageneration_not_match: nil,
                         user_project: nil
           is_idempotent = Retry.retry?(generation: generation, if_generation_match: if_generation_match)
+          options = is_idempotent ? {} : {retries: 0}
                                   
           execute do
             service.delete_object bucket_name, file_path,
@@ -551,7 +563,7 @@ module Google
                                   if_metageneration_match: if_metageneration_match,
                                   if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project),
-                                  options: {is_idempotent: is_idempotent}
+                                  options: options
           end
         end
 

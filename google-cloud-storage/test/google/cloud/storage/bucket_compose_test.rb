@@ -53,7 +53,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with string sources" do
     mock = Minitest::Mock.new
     req = compose_request [file_name, file_2_name]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -67,7 +67,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with File sources" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -84,7 +84,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
 
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -100,7 +100,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
     req = compose_request [file_gapi, file_2_gapi], if_source_generation_match: [generation, generation_2]
     mock.expect :compose_object,
                 file_3_gapi,
-                [bucket.name, file_3_name, req], **compose_object_args
+                [bucket.name, file_3_name, req], **compose_object_args(options: {retries: 0})
     bucket.service.mocked_service = mock
 
     new_file = bucket.compose [file, file_2], file_3_name, if_source_generation_match: [generation, generation_2]
@@ -119,7 +119,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with predefined ACL" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(destination_predefined_acl: "private")
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(destination_predefined_acl: "private", options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -133,7 +133,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with ACL alias" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(destination_predefined_acl: "publicRead")
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(destination_predefined_acl: "publicRead", options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -147,7 +147,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with if_generation_match" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(if_generation_match: generation, is_idempotent: true)
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(if_generation_match: generation)
 
     bucket.service.mocked_service = mock
 
@@ -161,7 +161,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with if_metageneration_match" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(if_metageneration_match: metageneration)
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(if_metageneration_match: metageneration, options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -175,7 +175,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with user_project set to true" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(user_project: "test")
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(user_project: "test", options: {retries: 0})
 
     file.service.mocked_service = mock
 
@@ -190,7 +190,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with customer-supplied encryption key" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(options: key_options)
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(options: key_options.merge(retries: 0))
 
     file.service.mocked_service = mock
 
@@ -213,7 +213,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
       storage_class: "NEARLINE"
     )
     req = compose_request [file_gapi, file_2_gapi], update_file_gapi
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -246,7 +246,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
       storage_class: "NEARLINE"
     )
     req = compose_request [file_gapi, file_2_gapi], update_file_gapi
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(user_project: "test")
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(user_project: "test", options: {retries: 0})
 
     bucket.service.mocked_service = mock
 

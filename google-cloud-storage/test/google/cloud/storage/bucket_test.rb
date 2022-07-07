@@ -161,7 +161,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -180,7 +180,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -199,7 +199,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -215,7 +215,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-      [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: new_file_contents)
+      [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: new_file_contents, options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -230,7 +230,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-      [bucket.name, empty_file_gapi(md5: "PiWWCnnbxptnTNTsZ6csYg==")], **insert_object_args(name: new_file_name, upload_source: new_file_contents)
+      [bucket.name, empty_file_gapi(md5: "PiWWCnnbxptnTNTsZ6csYg==")], **insert_object_args(name: new_file_name, upload_source: new_file_contents, options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -245,7 +245,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-      [bucket.name, empty_file_gapi(crc32c: "crUfeA==")], **insert_object_args(name: new_file_name, upload_source: new_file_contents)
+      [bucket.name, empty_file_gapi(crc32c: "crUfeA==")], **insert_object_args(name: new_file_name, upload_source: new_file_contents, options: {retries: 0})
 
     bucket.service.mocked_service = mock
 
@@ -286,7 +286,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, predefined_acl: "private", upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, predefined_acl: "private", upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -305,7 +305,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, predefined_acl: "publicRead", upload_source: tmpfile)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, predefined_acl: "publicRead", upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -326,7 +326,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(md5: md5)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(md5: md5)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -347,7 +347,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(crc32c: crc32c)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(crc32c: crc32c)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -366,7 +366,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(md5: "hvsmnRkNLIX24EaM7KQqIA==")], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(md5: "hvsmnRkNLIX24EaM7KQqIA==")], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -385,7 +385,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(crc32c: "e5jnUQ==")], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(crc32c: "e5jnUQ==")], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -413,7 +413,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(**options)], **insert_object_args(name: new_file_name, upload_source: tmpfile, content_encoding: options[:content_encoding], content_type: options[:content_type])
+        [bucket.name, empty_file_gapi(**options)], **insert_object_args(name: new_file_name, upload_source: tmpfile, content_encoding: options[:content_encoding], content_type: options[:content_type], options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -437,7 +437,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(metadata: metadata)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(metadata: metadata)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -456,7 +456,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(temporary_hold: true)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(temporary_hold: true)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -475,7 +475,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi(event_based_hold: true)], **insert_object_args(name: new_file_name, upload_source: tmpfile)
+        [bucket.name, empty_file_gapi(event_based_hold: true)], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -494,7 +494,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_match: generation, options: {is_idempotent: true})
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_match: generation)
 
       bucket.service.mocked_service = mock
 
@@ -513,7 +513,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_not_match: generation)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_not_match: generation, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -532,7 +532,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_metageneration_match: metageneration)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_metageneration_match: metageneration, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -551,7 +551,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_metageneration_not_match: metageneration)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_metageneration_not_match: metageneration, options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -570,7 +570,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket_user_project.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test")
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test", options: {retries: 0})
 
       bucket_user_project.service.mocked_service = mock
 
