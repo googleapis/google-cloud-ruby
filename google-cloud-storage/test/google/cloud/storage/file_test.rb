@@ -106,7 +106,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   it "can delete itself with generation set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file.name], **delete_object_args(generation: generation)
+    mock.expect :delete_object, nil, [bucket.name, file.name], **delete_object_args(generation: generation, is_idempotent: true)
 
     file.service.mocked_service = mock
 
@@ -118,7 +118,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   it "can delete itself with generation set to a generation" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file.name], **delete_object_args(generation: generation)
+    mock.expect :delete_object, nil, [bucket.name, file.name], **delete_object_args(generation: generation, is_idempotent: true)
 
     file.service.mocked_service = mock
 
@@ -129,7 +129,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   it "can delete itself with if_generation_match set to a generation" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file.name], **delete_object_args(if_generation_match: generation)
+    mock.expect :delete_object, nil, [bucket.name, file.name], **delete_object_args(if_generation_match: generation, is_idempotent: true)
 
     file.service.mocked_service = mock
 
@@ -184,7 +184,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   it "can delete itself with generation set to true and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file_user_project.name], **delete_object_args(generation: generation, user_project: "test")
+    mock.expect :delete_object, nil, [bucket.name, file_user_project.name], **delete_object_args(generation: generation, user_project: "test", is_idempotent: true)
 
     file_user_project.service.mocked_service = mock
 
@@ -195,7 +195,7 @@ describe Google::Cloud::Storage::File, :mock_storage do
 
   it "can delete itself with generation set to a generation and user_project set to true" do
     mock = Minitest::Mock.new
-    mock.expect :delete_object, nil, [bucket.name, file_user_project.name], **delete_object_args(generation: generation, user_project: "test")
+    mock.expect :delete_object, nil, [bucket.name, file_user_project.name], **delete_object_args(generation: generation, user_project: "test", is_idempotent: true)
 
     file_user_project.service.mocked_service = mock
 

@@ -334,14 +334,16 @@ class MockStorage < Minitest::Spec
                          if_generation_not_match: nil,
                          if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
-                         user_project: nil
+                         user_project: nil,
+                         is_idempotent: false
     {
       generation: generation,
       if_generation_match: if_generation_match,
       if_generation_not_match: if_generation_not_match,
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
-      user_project: user_project
+      user_project: user_project,
+      options: {is_idempotent: is_idempotent}
     }
   end
 

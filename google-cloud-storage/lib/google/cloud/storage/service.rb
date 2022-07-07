@@ -539,6 +539,8 @@ module Google
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
                         user_project: nil
+          is_idempotent = Retry.retry?(generation: generation, if_generation_match: if_generation_match)
+                                  
           execute do
             service.delete_object bucket_name, file_path,
                                   generation: generation,
@@ -546,7 +548,8 @@ module Google
                                   if_generation_not_match: if_generation_not_match,
                                   if_metageneration_match: if_metageneration_match,
                                   if_metageneration_not_match: if_metageneration_not_match,
-                                  user_project: user_project(user_project)
+                                  user_project: user_project(user_project),
+                                  options: {is_idempotent: is_idempotent}
           end
         end
 
