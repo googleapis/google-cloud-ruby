@@ -14,6 +14,7 @@
 
 
 require "google/cloud/storage/version"
+require "google/cloud/storage/retry"
 require "google/apis/storage_v1"
 require "digest"
 require "mini_mime"
@@ -130,6 +131,7 @@ module Google
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
+          is_idempotent = Retry.retry?({if_metageneration_match: if_metageneration_match})
 
           execute do
             service.patch_bucket bucket_name,
@@ -138,7 +140,8 @@ module Google
                                  predefined_default_object_acl: predefined_default_acl,
                                  if_metageneration_match: if_metageneration_match,
                                  if_metageneration_not_match: if_metageneration_not_match,
-                                 user_project: user_project(user_project)
+                                 user_project: user_project(user_project),
+                                 options: {is_idempotent: is_idempotent}
           end
         end
 
@@ -356,6 +359,9 @@ module Google
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
+          is_idempotent = Retry.retry?({if_generation_match: if_generation_match})
+          options = key_options(key).merge({is_idempotent: is_idempotent})
+
           execute do
             service.insert_object bucket_name,
                                   file_obj,
@@ -370,7 +376,7 @@ module Google
                                   if_metageneration_not_match: if_metageneration_not_match,
                                   kms_key_name: kms_key,
                                   user_project: user_project(user_project),
-                                  options: key_options(key)
+                                  options: options
           end
         end
 

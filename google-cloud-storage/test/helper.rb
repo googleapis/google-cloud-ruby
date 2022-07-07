@@ -241,13 +241,15 @@ class MockStorage < Minitest::Spec
                         if_metageneration_not_match: nil,
                         predefined_acl: nil,
                         predefined_default_object_acl: nil,
-                        user_project: nil
+                        user_project: nil,
+                        is_idempotent: false
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       predefined_acl: predefined_acl,
       predefined_default_object_acl: predefined_default_object_acl,
-      user_project: user_project
+      user_project: user_project,
+      options: {is_idempotent: is_idempotent}
     }
   end
 
@@ -273,6 +275,8 @@ class MockStorage < Minitest::Spec
                          if_metageneration_not_match: nil,
                          user_project: nil,
                          options: {}
+    options[:is_idempotent] = false unless options.key? :is_idempotent
+    
     {
       name: name,
       predefined_acl: predefined_acl,

@@ -494,7 +494,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_match: generation)
+        [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, if_generation_match: generation, options: {is_idempotent: true})
 
       bucket.service.mocked_service = mock
 
