@@ -1,5 +1,19 @@
 # Changelog
 
+### 0.3.0 (2022-07-07)
+
+#### Features
+
+* Added support for the locations mixin client ([#18714](https://github.com/googleapis/google-cloud-ruby/issues/18714)) 
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Removed incorrectly implemented helper methods target_https_proxies_path and target_ssl_proxies_path 
+
+#### Documentation
+
+* Corrected the documented formats for GclbTarget#target_https_proxy and GclbTarget#target_ssl_proxy 
+
 ### 0.2.0 (2022-07-02)
 
 #### Features
