@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.1 (2022-07-07)
+
+#### Documentation
+
+* Remove unused location proto doc ([#18726](https://github.com/googleapis/google-cloud-ruby/issues/18726)) 
+
 ### 0.3.0 (2022-07-07)
 
 #### Features
