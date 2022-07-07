@@ -147,7 +147,7 @@ describe Google::Cloud::Storage::Bucket, :compose, :mock_storage do
   it "can compose a new file with if_generation_match" do
     mock = Minitest::Mock.new
     req = compose_request [file_gapi, file_2_gapi]
-    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(if_generation_match: generation)
+    mock.expect :compose_object, file_3_gapi, [bucket.name, file_3_name, req], **compose_object_args(if_generation_match: generation, is_idempotent: true)
 
     bucket.service.mocked_service = mock
 

@@ -466,6 +466,8 @@ module Google
           source_objects = compose_file_source_objects source_files, if_source_generation_match
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
+          is_idempotent = Retry.retry?(if_generation_match: if_generation_match)
+          options = key_options(key).merge({is_idempotent: is_idempotent})
 
           execute do
             service.compose_object bucket_name,
@@ -475,7 +477,7 @@ module Google
                                    if_generation_match: if_generation_match,
                                    if_metageneration_match: if_metageneration_match,
                                    user_project: user_project(user_project),
-                                   options: key_options(key)
+                                   options: options
           end
         end
 

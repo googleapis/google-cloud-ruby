@@ -383,13 +383,14 @@ class MockStorage < Minitest::Spec
                           if_generation_match: nil,
                           if_metageneration_match: nil,
                           user_project: nil,
+                          is_idempotent: false,
                           options: {}
     {
       destination_predefined_acl: destination_predefined_acl,
       if_generation_match: if_generation_match,
       if_metageneration_match: if_metageneration_match,
       user_project: user_project,
-      options: options
+      options: options.merge(is_idempotent: is_idempotent)
     }
   end
 
