@@ -185,7 +185,13 @@ module Google
           private
 
           def handle_failure error, ack_ids, ack_deadline_seconds = nil
-            ack_ids = parse_error(error, modack: ack_deadline_seconds.nil?) || ack_ids
+            error_ack_ids = parse_error error, modack: ack_deadline_seconds.nil?
+            unless error_ack_ids.nil?
+              handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS),
+                              ack_ids - error_ack_ids,
+                              modack: ack_deadline_seconds.nil?
+              ack_ids = error_ack_ids
+            end
             perform_retry_async ack_ids, ack_deadline_seconds
           end
 
@@ -278,7 +284,13 @@ module Google
                 begin
                   yield ack_ids
                 rescue Google::Cloud::InvalidArgumentError => e
-                  ack_ids = parse_error e.error_metadata, modack: modack
+                  error_ack_ids = parse_error e.error_metadata, modack: modack
+                  unless error_ack_ids.nil?
+                    handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS),
+                                    ack_ids - error_ack_ids,
+                                    modack: modack
+                  end
+                  ack_ids = error_ack_ids
                   raise e
                 end
               end

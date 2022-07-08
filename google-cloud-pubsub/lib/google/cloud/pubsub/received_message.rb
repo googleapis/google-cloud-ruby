@@ -172,7 +172,7 @@ module Google
         #
         #     received_message.acknowledge! do |result|
         #         puts result.status
-        #     end  
+        #     end
         #   end
         #
         #   # Start background threads that will call block passed to listen.
@@ -211,7 +211,7 @@ module Google
         #     # Delay for 2 minutes
         #     received_message.modify_ack_deadline! 120 do |result|
         #         puts result.status
-        #     end  
+        #     end
         #   end
         #
         #   # Start background threads that will call block passed to listen.
@@ -243,7 +243,7 @@ module Google
         #     # Release message back to the API.
         #     received_message.reject! do |result|
         #         puts result.status
-        #     end  
+        #     end
         #   end
         #
         #   # Start background threads that will call block passed to listen.
