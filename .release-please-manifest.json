@@ -581,7 +581,7 @@
   "google-cloud-vm_migration+FILLER": "0.0.0",
   "google-cloud-vm_migration-v1": "0.1.1",
   "google-cloud-vm_migration-v1+FILLER": "0.0.0",
-  "google-cloud-vpc_access": "1.0.1",
+  "google-cloud-vpc_access": "1.1.0",
   "google-cloud-vpc_access+FILLER": "0.0.0",
   "google-cloud-vpc_access-v1": "0.1.4",
   "google-cloud-vpc_access-v1+FILLER": "0.0.0",
