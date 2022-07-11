@@ -486,41 +486,23 @@ module Google
         #   retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: 5, maximum_backoff: 300
         #   sub = topic.subscribe "my-topic-sub", retry_policy: retry_policy
         #
-        def subscribe subscription_name,
-                      deadline: nil,
-                      retain_acked: false,
-                      retention: nil,
-                      endpoint: nil,
-                      push_config: nil,
-                      labels: nil,
-                      message_ordering: nil,
-                      filter: nil,
-                      dead_letter_topic: nil,
-                      dead_letter_max_delivery_attempts: nil,
-                      retry_policy: nil
+        def subscribe subscription_name, options = {}
           ensure_service!
-          if push_config && endpoint
+          if options[:push_config] && options[:endpoint]
             raise ArgumentError, "endpoint and push_config were both provided. Please provide only one."
           end
-          push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: endpoint if endpoint
+          if options[:endpoint]
+            options[:push_config] =
+              Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: options.delete(:endpoint)
+          end
 
-          options = {
-            deadline:                          deadline,
-            retain_acked:                      retain_acked,
-            retention:                         retention,
-            labels:                            labels,
-            message_ordering:                  message_ordering,
-            filter:                            filter,
-            dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts
-          }
-
-          options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
+          options[:dead_letter_topic_name] = options[:dead_letter_topic].name if options[:dead_letter_topic]
           if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
             # Service error message "3:Invalid resource name given (name=)." does not identify param.
             raise ArgumentError, "dead_letter_topic is required with dead_letter_max_delivery_attempts"
           end
-          options[:push_config] = push_config.to_grpc if push_config
-          options[:retry_policy] = retry_policy.to_grpc if retry_policy
+          options[:push_config] = options[:push_config].to_grpc if options[:push_config]
+          options[:retry_policy] = options[:retry_policy].to_grpc if options[:retry_policy]
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service
         end
