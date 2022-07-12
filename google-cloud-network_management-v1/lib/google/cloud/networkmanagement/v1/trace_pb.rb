@@ -122,6 +122,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NEXT_HOP_INTERNET_GATEWAY, 8
       value :NEXT_HOP_BLACKHOLE, 9
       value :NEXT_HOP_ILB, 10
+      value :NEXT_HOP_ROUTER_APPLIANCE, 11
     end
     add_message "google.cloud.networkmanagement.v1.ForwardingRuleInfo" do
       optional :display_name, :string, 1
@@ -244,6 +245,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MISMATCHED_SOURCE_NETWORK, 12
       value :DESTINATION_ENDPOINT_NOT_FOUND, 13
       value :MISMATCHED_DESTINATION_NETWORK, 14
+      value :UNSUPPORTED, 15
     end
     add_message "google.cloud.networkmanagement.v1.DropInfo" do
       optional :cause, :enum, 1, "google.cloud.networkmanagement.v1.DropInfo.Cause"
