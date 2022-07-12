@@ -28,6 +28,9 @@ module Google
   module Cloud
     module Compute
       module V1
+        ##
+        # The TargetInstances API.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/target_instances"

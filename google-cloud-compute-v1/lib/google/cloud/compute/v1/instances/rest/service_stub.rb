@@ -55,10 +55,17 @@ module Google
               def add_access_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_add_access_config_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_add_access_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -66,23 +73,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the add_access_config REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::AddAccessConfigInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_add_access_config_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/addAccessConfig"
-                body = request_pb.access_config_resource.to_json
-                query_string_params = {}
-                query_string_params["networkInterface"] = request_pb.network_interface.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -102,10 +92,17 @@ module Google
               def add_resource_policies request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_add_resource_policies_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_add_resource_policies_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -113,22 +110,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the add_resource_policies REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::AddResourcePoliciesInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_add_resource_policies_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/addResourcePolicies"
-                body = request_pb.instances_add_resource_policies_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -148,9 +129,17 @@ module Google
               def aggregated_list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_aggregated_list_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_aggregated_list_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -158,27 +147,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the aggregated_list REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListInstancesRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_aggregated_list_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/aggregated/instances"
-                body = nil
-                query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
-                query_string_params["includeAllScopes"] = request_pb.include_all_scopes.to_s if request_pb.has_include_all_scopes?
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -198,10 +166,17 @@ module Google
               def attach_disk request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_attach_disk_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_attach_disk_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -209,23 +184,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the attach_disk REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::AttachDiskInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_attach_disk_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/attachDisk"
-                body = request_pb.attached_disk_resource.to_json
-                query_string_params = {}
-                query_string_params["forceAttach"] = request_pb.force_attach.to_s if request_pb.has_force_attach?
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -245,10 +203,17 @@ module Google
               def bulk_insert request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_bulk_insert_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_bulk_insert_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -256,22 +221,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the bulk_insert REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::BulkInsertInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_bulk_insert_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/bulkInsert"
-                body = request_pb.bulk_insert_instance_resource_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -291,9 +240,17 @@ module Google
               def delete request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_delete_request request_pb
-                response = @client_stub.make_delete_request(
+                verb, uri, query_string_params, body = transcode_delete_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -301,22 +258,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the delete REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_delete_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}"
-                body = nil
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -336,9 +277,17 @@ module Google
               def delete_access_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_delete_access_config_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_delete_access_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -346,24 +295,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the delete_access_config REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteAccessConfigInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_delete_access_config_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/deleteAccessConfig"
-                body = nil
-                query_string_params = {}
-                query_string_params["accessConfig"] = request_pb.access_config.to_s
-                query_string_params["networkInterface"] = request_pb.network_interface.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -383,9 +314,17 @@ module Google
               def detach_disk request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_detach_disk_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_detach_disk_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -393,23 +332,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the detach_disk REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DetachDiskInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_detach_disk_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/detachDisk"
-                body = nil
-                query_string_params = {}
-                query_string_params["deviceName"] = request_pb.device_name.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -429,30 +351,24 @@ module Google
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, _query_string_params = transcode_get_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Instance.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}"
-                body = nil
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -472,9 +388,17 @@ module Google
               def get_effective_firewalls request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_get_effective_firewalls_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_effective_firewalls_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -482,22 +406,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get_effective_firewalls REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetEffectiveFirewallsInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_effective_firewalls_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/getEffectiveFirewalls"
-                body = nil
-                query_string_params = {}
-                query_string_params["networkInterface"] = request_pb.network_interface.to_s
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -517,9 +425,17 @@ module Google
               def get_guest_attributes request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_get_guest_attributes_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_guest_attributes_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -527,23 +443,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get_guest_attributes REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetGuestAttributesInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_guest_attributes_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/getGuestAttributes"
-                body = nil
-                query_string_params = {}
-                query_string_params["queryPath"] = request_pb.query_path.to_s if request_pb.has_query_path?
-                query_string_params["variableKey"] = request_pb.variable_key.to_s if request_pb.has_variable_key?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -563,9 +462,17 @@ module Google
               def get_iam_policy request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_get_iam_policy_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_iam_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -573,22 +480,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get_iam_policy REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_iam_policy_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.resource}/getIamPolicy"
-                body = nil
-                query_string_params = {}
-                query_string_params["optionsRequestedPolicyVersion"] = request_pb.options_requested_policy_version.to_s if request_pb.has_options_requested_policy_version?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -608,30 +499,24 @@ module Google
               def get_screenshot request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, _query_string_params = transcode_get_screenshot_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_screenshot_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Screenshot.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get_screenshot REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetScreenshotInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_screenshot_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/screenshot"
-                body = nil
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -651,9 +536,17 @@ module Google
               def get_serial_port_output request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_get_serial_port_output_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_serial_port_output_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -661,23 +554,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get_serial_port_output REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetSerialPortOutputInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_serial_port_output_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/serialPort"
-                body = nil
-                query_string_params = {}
-                query_string_params["port"] = request_pb.port.to_s if request_pb.has_port?
-                query_string_params["start"] = request_pb.start.to_s if request_pb.has_start?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -697,30 +573,24 @@ module Google
               def get_shielded_instance_identity request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, _query_string_params = transcode_get_shielded_instance_identity_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_shielded_instance_identity_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::ShieldedInstanceIdentity.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get_shielded_instance_identity REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetShieldedInstanceIdentityInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_shielded_instance_identity_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/getShieldedInstanceIdentity"
-                body = nil
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -740,10 +610,17 @@ module Google
               def insert request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_insert_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_insert_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -751,24 +628,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the insert REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_insert_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances"
-                body = request_pb.instance_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-                query_string_params["sourceInstanceTemplate"] = request_pb.source_instance_template.to_s if request_pb.has_source_instance_template?
-                query_string_params["sourceMachineImage"] = request_pb.source_machine_image.to_s if request_pb.has_source_machine_image?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -788,9 +647,17 @@ module Google
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_list_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_list_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -798,26 +665,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the list REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListInstancesRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_list_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances"
-                body = nil
-                query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -837,9 +684,17 @@ module Google
               def list_referrers request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_list_referrers_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_list_referrers_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -847,26 +702,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the list_referrers REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListReferrersInstancesRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_list_referrers_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/referrers"
-                body = nil
-                query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -886,10 +721,17 @@ module Google
               def remove_resource_policies request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_remove_resource_policies_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_remove_resource_policies_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -897,22 +739,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the remove_resource_policies REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::RemoveResourcePoliciesInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_remove_resource_policies_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/removeResourcePolicies"
-                body = request_pb.instances_remove_resource_policies_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -932,9 +758,17 @@ module Google
               def reset request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_reset_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_reset_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -942,22 +776,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the reset REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ResetInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_reset_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/reset"
-                body = nil
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -977,9 +795,17 @@ module Google
               def resume request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_resume_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_resume_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -987,22 +813,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the resume REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ResumeInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_resume_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/resume"
-                body = nil
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1022,30 +832,24 @@ module Google
               def send_diagnostic_interrupt request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, _query_string_params = transcode_send_diagnostic_interrupt_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_send_diagnostic_interrupt_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceResponse.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the send_diagnostic_interrupt REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_send_diagnostic_interrupt_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/sendDiagnosticInterrupt"
-                body = nil
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1065,9 +869,17 @@ module Google
               def set_deletion_protection request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_set_deletion_protection_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_deletion_protection_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1075,23 +887,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_deletion_protection REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetDeletionProtectionInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_deletion_protection_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.resource}/setDeletionProtection"
-                body = nil
-                query_string_params = {}
-                query_string_params["deletionProtection"] = request_pb.deletion_protection.to_s if request_pb.has_deletion_protection?
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1111,9 +906,17 @@ module Google
               def set_disk_auto_delete request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_set_disk_auto_delete_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_disk_auto_delete_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1121,24 +924,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_disk_auto_delete REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetDiskAutoDeleteInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_disk_auto_delete_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setDiskAutoDelete"
-                body = nil
-                query_string_params = {}
-                query_string_params["autoDelete"] = request_pb.auto_delete.to_s
-                query_string_params["deviceName"] = request_pb.device_name.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1158,31 +943,24 @@ module Google
               def set_iam_policy request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, _query_string_params = transcode_set_iam_policy_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_iam_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Policy.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_iam_policy REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_iam_policy_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.resource}/setIamPolicy"
-                body = request_pb.zone_set_policy_request_resource.to_json
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1202,10 +980,17 @@ module Google
               def set_labels request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_labels_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_labels_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1213,22 +998,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_labels REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_labels_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setLabels"
-                body = request_pb.instances_set_labels_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1248,10 +1017,17 @@ module Google
               def set_machine_resources request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_machine_resources_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_machine_resources_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1259,22 +1035,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_machine_resources REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetMachineResourcesInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_machine_resources_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMachineResources"
-                body = request_pb.instances_set_machine_resources_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1294,10 +1054,17 @@ module Google
               def set_machine_type request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_machine_type_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_machine_type_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1305,22 +1072,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_machine_type REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetMachineTypeInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_machine_type_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMachineType"
-                body = request_pb.instances_set_machine_type_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1340,10 +1091,17 @@ module Google
               def set_metadata request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_metadata_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_metadata_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1351,22 +1109,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_metadata REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetMetadataInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_metadata_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMetadata"
-                body = request_pb.metadata_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1386,10 +1128,17 @@ module Google
               def set_min_cpu_platform request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_min_cpu_platform_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_min_cpu_platform_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1397,22 +1146,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_min_cpu_platform REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetMinCpuPlatformInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_min_cpu_platform_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setMinCpuPlatform"
-                body = request_pb.instances_set_min_cpu_platform_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1432,10 +1165,17 @@ module Google
               def set_scheduling request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_scheduling_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_scheduling_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1443,22 +1183,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_scheduling REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetSchedulingInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_scheduling_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setScheduling"
-                body = request_pb.scheduling_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1478,10 +1202,17 @@ module Google
               def set_service_account request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_service_account_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_service_account_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1489,22 +1220,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_service_account REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetServiceAccountInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_service_account_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setServiceAccount"
-                body = request_pb.instances_set_service_account_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1524,10 +1239,17 @@ module Google
               def set_shielded_instance_integrity_policy request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_shielded_instance_integrity_policy_request request_pb
-                response = @client_stub.make_patch_request(
+                verb, uri, query_string_params, body = transcode_set_shielded_instance_integrity_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1535,22 +1257,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_shielded_instance_integrity_policy REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetShieldedInstanceIntegrityPolicyInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_shielded_instance_integrity_policy_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setShieldedInstanceIntegrityPolicy"
-                body = request_pb.shielded_instance_integrity_policy_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1570,10 +1276,17 @@ module Google
               def set_tags request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_tags_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_tags_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1581,22 +1294,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_tags REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetTagsInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_tags_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/setTags"
-                body = request_pb.tags_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1616,30 +1313,24 @@ module Google
               def simulate_maintenance_event request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, _query_string_params = transcode_simulate_maintenance_event_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_simulate_maintenance_event_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the simulate_maintenance_event REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_simulate_maintenance_event_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/simulateMaintenanceEvent"
-                body = nil
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1659,9 +1350,17 @@ module Google
               def start request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_start_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_start_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1669,22 +1368,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the start REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::StartInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_start_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/start"
-                body = nil
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1704,10 +1387,17 @@ module Google
               def start_with_encryption_key request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_start_with_encryption_key_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_start_with_encryption_key_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1715,22 +1405,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the start_with_encryption_key REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::StartWithEncryptionKeyInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_start_with_encryption_key_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/startWithEncryptionKey"
-                body = request_pb.instances_start_with_encryption_key_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1750,9 +1424,17 @@ module Google
               def stop request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_stop_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_stop_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1760,22 +1442,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the stop REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::StopInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_stop_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/stop"
-                body = nil
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1795,9 +1461,17 @@ module Google
               def suspend request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_suspend_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_suspend_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1805,22 +1479,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the suspend REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SuspendInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_suspend_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/suspend"
-                body = nil
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1840,31 +1498,24 @@ module Google
               def test_iam_permissions request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, _query_string_params = transcode_test_iam_permissions_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_test_iam_permissions_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::TestPermissionsResponse.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the test_iam_permissions REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_test_iam_permissions_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.resource}/testIamPermissions"
-                body = request_pb.test_permissions_request_resource.to_json
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1884,10 +1535,17 @@ module Google
               def update request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_update_request request_pb
-                response = @client_stub.make_put_request(
+                verb, uri, query_string_params, body = transcode_update_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1895,24 +1553,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the update REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_update_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}"
-                body = request_pb.instance_resource.to_json
-                query_string_params = {}
-                query_string_params["minimalAction"] = request_pb.minimal_action.to_s if request_pb.has_minimal_action?
-                query_string_params["mostDisruptiveAllowedAction"] = request_pb.most_disruptive_allowed_action.to_s if request_pb.has_most_disruptive_allowed_action?
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1932,10 +1572,17 @@ module Google
               def update_access_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_update_access_config_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_update_access_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1943,23 +1590,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the update_access_config REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateAccessConfigInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_update_access_config_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateAccessConfig"
-                body = request_pb.access_config_resource.to_json
-                query_string_params = {}
-                query_string_params["networkInterface"] = request_pb.network_interface.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -1979,10 +1609,17 @@ module Google
               def update_display_device request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_update_display_device_request request_pb
-                response = @client_stub.make_patch_request(
+                verb, uri, query_string_params, body = transcode_update_display_device_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -1990,22 +1627,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the update_display_device REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateDisplayDeviceInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_update_display_device_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateDisplayDevice"
-                body = request_pb.display_device_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -2025,10 +1646,17 @@ module Google
               def update_network_interface request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_update_network_interface_request request_pb
-                response = @client_stub.make_patch_request(
+                verb, uri, query_string_params, body = transcode_update_network_interface_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -2036,23 +1664,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the update_network_interface REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::UpdateNetworkInterfaceInstanceRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_update_network_interface_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateNetworkInterface"
-                body = request_pb.network_interface_resource.to_json
-                query_string_params = {}
-                query_string_params["networkInterface"] = request_pb.network_interface.to_s
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -2072,10 +1683,17 @@ module Google
               def update_shielded_instance_config request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_update_shielded_instance_config_request request_pb
-                response = @client_stub.make_patch_request(
+                verb, uri, query_string_params, body = transcode_update_shielded_instance_config_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -2085,7 +1703,1041 @@ module Google
                 result
               end
 
+
+              private
+
               ##
+              # @private
+              #
+              # GRPC transcoding helper method for the add_access_config REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::AddAccessConfigInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_add_access_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addAccessConfig",
+                                                          body: "access_config_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the add_resource_policies REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::AddResourcePoliciesInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_add_resource_policies_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/addResourcePolicies",
+                                                          body: "instances_add_resource_policies_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the aggregated_list REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::AggregatedListInstancesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_aggregated_list_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/aggregated/instances",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the attach_disk REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::AttachDiskInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_attach_disk_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/attachDisk",
+                                                          body: "attached_disk_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the bulk_insert REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::BulkInsertInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_bulk_insert_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/bulkInsert",
+                                                          body: "bulk_insert_instance_resource_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_delete_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete_access_config REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteAccessConfigInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_delete_access_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/deleteAccessConfig",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the detach_disk REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::DetachDiskInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_detach_disk_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/detachDisk",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_effective_firewalls REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetEffectiveFirewallsInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_effective_firewalls_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getEffectiveFirewalls",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_guest_attributes REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetGuestAttributesInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_guest_attributes_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getGuestAttributes",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_iam_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetIamPolicyInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_iam_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/getIamPolicy",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["resource", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_screenshot REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetScreenshotInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_screenshot_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/screenshot",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_serial_port_output REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetSerialPortOutputInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_serial_port_output_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/serialPort",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get_shielded_instance_identity REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetShieldedInstanceIdentityInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_shielded_instance_identity_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/getShieldedInstanceIdentity",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the insert REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_insert_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances",
+                                                          body: "instance_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListInstancesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_list_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list_referrers REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListReferrersInstancesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_list_referrers_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/referrers",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the remove_resource_policies REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::RemoveResourcePoliciesInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_remove_resource_policies_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/removeResourcePolicies",
+                                                          body: "instances_remove_resource_policies_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the reset REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ResetInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_reset_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/reset",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the resume REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ResumeInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_resume_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/resume",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the send_diagnostic_interrupt REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SendDiagnosticInterruptInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_send_diagnostic_interrupt_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/sendDiagnosticInterrupt",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_deletion_protection REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetDeletionProtectionInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_deletion_protection_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/setDeletionProtection",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["resource", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_disk_auto_delete REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetDiskAutoDeleteInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_disk_auto_delete_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setDiskAutoDelete",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_iam_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetIamPolicyInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_iam_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/setIamPolicy",
+                                                          body: "zone_set_policy_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["resource", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_labels REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_labels_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setLabels",
+                                                          body: "instances_set_labels_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_machine_resources REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetMachineResourcesInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_machine_resources_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMachineResources",
+                                                          body: "instances_set_machine_resources_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_machine_type REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetMachineTypeInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_machine_type_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMachineType",
+                                                          body: "instances_set_machine_type_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_metadata REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetMetadataInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_metadata_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMetadata",
+                                                          body: "metadata_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_min_cpu_platform REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetMinCpuPlatformInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_min_cpu_platform_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setMinCpuPlatform",
+                                                          body: "instances_set_min_cpu_platform_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_scheduling REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetSchedulingInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_scheduling_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setScheduling",
+                                                          body: "scheduling_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_service_account REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetServiceAccountInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_service_account_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setServiceAccount",
+                                                          body: "instances_set_service_account_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_shielded_instance_integrity_policy REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetShieldedInstanceIntegrityPolicyInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_shielded_instance_integrity_policy_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setShieldedInstanceIntegrityPolicy",
+                                                          body: "shielded_instance_integrity_policy_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_tags REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetTagsInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_tags_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/setTags",
+                                                          body: "tags_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the simulate_maintenance_event REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SimulateMaintenanceEventInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_simulate_maintenance_event_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/simulateMaintenanceEvent",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the start REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::StartInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_start_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/start",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the start_with_encryption_key REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::StartWithEncryptionKeyInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_start_with_encryption_key_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/startWithEncryptionKey",
+                                                          body: "instances_start_with_encryption_key_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the stop REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::StopInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_stop_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/stop",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the suspend REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SuspendInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_suspend_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/suspend",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the test_iam_permissions REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::TestIamPermissionsInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_test_iam_permissions_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{resource}/testIamPermissions",
+                                                          body: "test_permissions_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["resource", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_update_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :put,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}",
+                                                          body: "instance_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_access_config REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateAccessConfigInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_update_access_config_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateAccessConfig",
+                                                          body: "access_config_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_display_device REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateDisplayDeviceInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_update_display_device_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateDisplayDevice",
+                                                          body: "display_device_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the update_network_interface REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::UpdateNetworkInterfaceInstanceRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_update_network_interface_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateNetworkInterface",
+                                                          body: "network_interface_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the update_shielded_instance_config REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::UpdateShieldedInstanceConfigInstanceRequest]
@@ -2093,12 +2745,18 @@ module Google
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_update_shielded_instance_config_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/zones/#{request_pb.zone}/instances/#{request_pb.instance}/updateShieldedInstanceConfig"
-                body = request_pb.shielded_instance_config_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :patch,
+                                                          uri_template: "/compute/v1/projects/{project}/zones/{zone}/instances/{instance}/updateShieldedInstanceConfig",
+                                                          body: "shielded_instance_config_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["zone", %r{[^/]+}, false],
+                                                            ["instance", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
               end
             end
           end

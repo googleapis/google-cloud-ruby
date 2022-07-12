@@ -55,9 +55,17 @@ module Google
               def delete request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_delete_request request_pb
-                response = @client_stub.make_delete_request(
+                verb, uri, query_string_params, body = transcode_delete_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -65,22 +73,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the delete REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteTargetSslProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_delete_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies/#{request_pb.target_ssl_proxy}"
-                body = nil
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -100,30 +92,24 @@ module Google
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, _query_string_params = transcode_get_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_get_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
+                  params:  query_string_params,
                   options: options
                 )
                 result = ::Google::Cloud::Compute::V1::TargetSslProxy.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the get REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetTargetSslProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_get_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies/#{request_pb.target_ssl_proxy}"
-                body = nil
-                query_string_params = {}
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -143,10 +129,17 @@ module Google
               def insert request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_insert_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_insert_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -154,22 +147,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the insert REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertTargetSslProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_insert_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies"
-                body = request_pb.target_ssl_proxy_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -189,9 +166,17 @@ module Google
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, _body, query_string_params = transcode_list_request request_pb
-                response = @client_stub.make_get_request(
+                verb, uri, query_string_params, body = transcode_list_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -199,26 +184,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the list REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListTargetSslProxiesRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_list_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies"
-                body = nil
-                query_string_params = {}
-                query_string_params["filter"] = request_pb.filter.to_s if request_pb.has_filter?
-                query_string_params["maxResults"] = request_pb.max_results.to_s if request_pb.has_max_results?
-                query_string_params["orderBy"] = request_pb.order_by.to_s if request_pb.has_order_by?
-                query_string_params["pageToken"] = request_pb.page_token.to_s if request_pb.has_page_token?
-                query_string_params["returnPartialSuccess"] = request_pb.return_partial_success.to_s if request_pb.has_return_partial_success?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -238,10 +203,17 @@ module Google
               def set_backend_service request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_backend_service_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_backend_service_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -249,22 +221,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_backend_service REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetBackendServiceTargetSslProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_backend_service_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies/#{request_pb.target_ssl_proxy}/setBackendService"
-                body = request_pb.target_ssl_proxies_set_backend_service_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -284,10 +240,17 @@ module Google
               def set_certificate_map request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_certificate_map_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_certificate_map_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -295,22 +258,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_certificate_map REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetCertificateMapTargetSslProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_certificate_map_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies/#{request_pb.target_ssl_proxy}/setCertificateMap"
-                body = request_pb.target_ssl_proxies_set_certificate_map_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -330,10 +277,17 @@ module Google
               def set_proxy_header request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_proxy_header_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_proxy_header_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -341,22 +295,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_proxy_header REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetProxyHeaderTargetSslProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_proxy_header_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies/#{request_pb.target_ssl_proxy}/setProxyHeader"
-                body = request_pb.target_ssl_proxies_set_proxy_header_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -376,10 +314,17 @@ module Google
               def set_ssl_certificates request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_ssl_certificates_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_ssl_certificates_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -387,22 +332,6 @@ module Google
 
                 yield result, response if block_given?
                 result
-              end
-
-              ##
-              # GRPC transcoding helper method for the set_ssl_certificates REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetSslCertificatesTargetSslProxyRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_ssl_certificates_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies/#{request_pb.target_ssl_proxy}/setSslCertificates"
-                body = request_pb.target_ssl_proxies_set_ssl_certificates_request_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
               end
 
               ##
@@ -422,10 +351,17 @@ module Google
               def set_ssl_policy request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
 
-                uri, body, query_string_params = transcode_set_ssl_policy_request request_pb
-                response = @client_stub.make_post_request(
+                verb, uri, query_string_params, body = transcode_set_ssl_policy_request request_pb
+                query_string_params = if query_string_params.any?
+                                        query_string_params.to_h { |p| p.split("=", 2) }
+                                      else
+                                        {}
+                                      end
+
+                response = @client_stub.make_http_request(
+                  verb,
                   uri:     uri,
-                  body:    body,
+                  body:    body || "",
                   params:  query_string_params,
                   options: options
                 )
@@ -435,7 +371,191 @@ module Google
                 result
               end
 
+
+              private
+
               ##
+              # @private
+              #
+              # GRPC transcoding helper method for the delete REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteTargetSslProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_delete_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :delete,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["target_ssl_proxy", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the get REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::GetTargetSslProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_get_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["target_ssl_proxy", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the insert REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertTargetSslProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_insert_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies",
+                                                          body: "target_ssl_proxy_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the list REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::ListTargetSslProxiesRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_list_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :get,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_backend_service REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetBackendServiceTargetSslProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_backend_service_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setBackendService",
+                                                          body: "target_ssl_proxies_set_backend_service_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["target_ssl_proxy", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_certificate_map REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetCertificateMapTargetSslProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_certificate_map_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setCertificateMap",
+                                                          body: "target_ssl_proxies_set_certificate_map_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["target_ssl_proxy", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_proxy_header REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetProxyHeaderTargetSslProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_proxy_header_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setProxyHeader",
+                                                          body: "target_ssl_proxies_set_proxy_header_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["target_ssl_proxy", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
+              # GRPC transcoding helper method for the set_ssl_certificates REST call
+              #
+              # @param request_pb [::Google::Cloud::Compute::V1::SetSslCertificatesTargetSslProxyRequest]
+              #   A request object representing the call parameters. Required.
+              # @return [Array(String, [String, nil], Hash{String => String})]
+              #   Uri, Body, Query string parameters
+              def transcode_set_ssl_certificates_request request_pb
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setSslCertificates",
+                                                          body: "target_ssl_proxies_set_ssl_certificates_request_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["target_ssl_proxy", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
+              end
+
+              ##
+              # @private
+              #
               # GRPC transcoding helper method for the set_ssl_policy REST call
               #
               # @param request_pb [::Google::Cloud::Compute::V1::SetSslPolicyTargetSslProxyRequest]
@@ -443,12 +563,17 @@ module Google
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
               def transcode_set_ssl_policy_request request_pb
-                uri = "/compute/v1/projects/#{request_pb.project}/global/targetSslProxies/#{request_pb.target_ssl_proxy}/setSslPolicy"
-                body = request_pb.ssl_policy_reference_resource.to_json
-                query_string_params = {}
-                query_string_params["requestId"] = request_pb.request_id.to_s if request_pb.has_request_id?
-
-                [uri, body, query_string_params]
+                transcoder = Gapic::Rest::GrpcTranscoder.new
+                                                        .with_bindings(
+                                                          uri_method: :post,
+                                                          uri_template: "/compute/v1/projects/{project}/global/targetSslProxies/{target_ssl_proxy}/setSslPolicy",
+                                                          body: "ssl_policy_reference_resource",
+                                                          matches: [
+                                                            ["project", %r{[^/]+}, false],
+                                                            ["target_ssl_proxy", %r{[^/]+}, false]
+                                                          ]
+                                                        )
+                transcoder.transcode request_pb
               end
             end
           end
