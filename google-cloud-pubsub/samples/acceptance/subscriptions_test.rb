@@ -179,4 +179,18 @@ describe "subscriptions" do
                                                                              filter: filter
     end
   end 
+
+  it "supports creating subscription with exactly once delivery enabled" do
+    project_id = pubsub.project
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+    filter = "attributes.author=\"unknown\""
+
+    assert_output "Created subscription with exactly once delivery enabled: #{subscription_id}\n" do     
+      PubsubCreateSubscriptionWithFilter.new.create_subscription_with_filter project_id: project_id,
+                                                                             topic_id: topic_id,
+                                                                             subscription_id: subscription_id,
+                                                                             enable_exactly_once_delivery: true
+    end
+  end 
 end
