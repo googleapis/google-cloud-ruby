@@ -15,7 +15,7 @@
 # [START pubsub_create_subscription_with_exactly_once_delivery]
 require "google/cloud/pubsub"
 
-# Shows how to create a new subscription with filter for a given topic
+# Shows how to create a new subscription with exactly once delivery enabled
 class PubsubCreateSubscriptionWithExactlyOnceDelivery
   def create_subscription_with_exactly_once_delivery project_id:, topic_id:, subscription_id:
     pubsub = Google::Cloud::Pubsub.new project_id: project_id
@@ -29,7 +29,6 @@ class PubsubCreateSubscriptionWithExactlyOnceDelivery
     project_id = "your-project-id"
     topic_id = "your-topic-id"
     subscription_id = "id-for-new-subcription"
-    filter = "attributes.author=\"unknown\""
     pubsub_create_subscription_with_exactly_once_delivery = PubsubCreateSubscriptionWithExactlyOnceDelivery.new
     pubsub_create_subscription_with_exactly_once_delivery.create_subscription_with_exactly_once_delivery(
       project_id: project_id,
