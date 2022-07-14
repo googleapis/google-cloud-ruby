@@ -25,13 +25,33 @@ module Google
       # error raised will be availabe on {#error}.
       #
       class AcknowledgeResult
+        ##
+        # The constants below represents the status of ack/modack operations.
+        # Indicates successful ack/modack
         SUCCESS = 1
+
+        ##
+        # Indicates occurence of permenant permission denied error
         PERMISSION_DENIED = 2
+
+        ##
+        # Indicates occurence of permenant failed precondition error
         FAILED_PRECONDITION = 3
+
+        ##
+        # Indicates occurence of permenant permission denied error
         INVALID_ACK_ID = 4
+
+        ##
+        # Indicates occurence of permenant uncatogorised error
         OTHER = 5
 
+        ##
+        # @return [Google::Cloud::Error] Error object of ack/modack operation
         attr_reader :error
+
+        ##
+        # @return [Numeric] Status of the ack/modack operation.
         attr_reader :status
 
         ##
@@ -42,12 +62,13 @@ module Google
         end
 
         ##
-        # Whether the operation was successful.
+        # @return [Boolean] Whether the operation was successful.
         def succeeded?
           @status == SUCCESS
         end
 
-        # Whether the operation failed.
+        ##
+        # @return [Boolean] Whether the operation failed.
         def failed?
           !succeeded?
         end

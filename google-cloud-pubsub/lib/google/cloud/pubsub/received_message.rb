@@ -161,6 +161,9 @@ module Google
         ##
         # Acknowledges receipt of the message.
         #
+        # @yield [callback] The block to be called when reject operation is done.
+        # @yieldparam [Google::Cloud::PubSub::AcknowledgeResult] Result object that contains the status and error.
+        #
         # @example
         #   require "google/cloud/pubsub"
         #
@@ -171,7 +174,7 @@ module Google
         #     puts received_message.message.data
         #
         #     received_message.acknowledge! do |result|
-        #         puts result.status
+        #       puts result.status
         #     end
         #   end
         #
@@ -199,6 +202,9 @@ module Google
         #   seconds after the call is made. Specifying `0` may immediately make
         #   the message available for another pull request.
         #
+        # @yield [callback] The block to be called when reject operation is done.
+        # @yieldparam [Google::Cloud::PubSub::AcknowledgeResult] Result object that contains the status and error.
+        #
         # @example
         #   require "google/cloud/pubsub"
         #
@@ -210,7 +216,7 @@ module Google
         #
         #     # Delay for 2 minutes
         #     received_message.modify_ack_deadline! 120 do |result|
-        #         puts result.status
+        #       puts result.status
         #     end
         #   end
         #
@@ -231,6 +237,9 @@ module Google
         #
         # This will make the message available for redelivery.
         #
+        # @yield [callback] The block to be called when reject operation is done.
+        # @yieldparam [Google::Cloud::PubSub::AcknowledgeResult] Result object that contains the status and error.
+        #
         # @example
         #   require "google/cloud/pubsub"
         #
@@ -242,7 +251,7 @@ module Google
         #
         #     # Release message back to the API.
         #     received_message.reject! do |result|
-        #         puts result.status
+        #       puts result.status
         #     end
         #   end
         #
