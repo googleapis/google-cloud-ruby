@@ -15,6 +15,7 @@
 require_relative "helper"
 require_relative "../subscriptions.rb"
 require_relative "../pubsub_create_subscription_with_filter.rb"
+require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
 
 describe "subscriptions" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -184,13 +185,13 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
-    filter = "attributes.author=\"unknown\""
 
     assert_output "Created subscription with exactly once delivery enabled: #{subscription_id}\n" do     
-      PubsubCreateSubscriptionWithFilter.new.create_subscription_with_filter project_id: project_id,
-                                                                             topic_id: topic_id,
-                                                                             subscription_id: subscription_id,
-                                                                             enable_exactly_once_delivery: true
+      PubsubCreateSubscriptionWithExactlyOnceDelivery.new.create_subscription_with_exactly_once_delivery(
+        project_id: project_id,
+        topic_id: topic_id,
+        subscription_id: subscription_id
+      )
     end
   end 
 end

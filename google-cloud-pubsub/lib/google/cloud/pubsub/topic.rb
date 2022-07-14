@@ -486,14 +486,14 @@ module Google
         #   retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: 5, maximum_backoff: 300
         #   sub = topic.subscribe "my-topic-sub", retry_policy: retry_policy
         #
-        def subscribe subscription_name, options = {}
+        def subscribe subscription_name, **options
           ensure_service!
           if options[:push_config] && options[:endpoint]
             raise ArgumentError, "endpoint and push_config were both provided. Please provide only one."
           end
           if options[:endpoint]
             options[:push_config] =
-              Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: options.delete(:endpoint)
+              Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: options[:endpoint]
           end
 
           options[:dead_letter_topic_name] = options[:dead_letter_topic].name if options[:dead_letter_topic]

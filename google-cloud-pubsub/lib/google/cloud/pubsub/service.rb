@@ -204,14 +204,27 @@ module Google
         ##
         # Creates a subscription on a given topic for a given subscriber.
         def create_subscription topic, subscription_name, options = {}
+          updated_option = construct_create_subscription_options topic, subscription_name, options
+          subscriber.create_subscription **updated_option
+        end
+
+        def construct_create_subscription_options topic, subscription_name, options
           options[:name] = subscription_path subscription_name, options
           options[:topic] = topic_path topic
           options[:message_retention_duration] = Convert.number_to_duration options.delete(:retention)
           options[:dead_letter_policy] = dead_letter_policy options
-          options[:ack_deadline_seconds] = options.delete :deadline
-          options[:retain_acked_messages] = options.delete :retain_acked
-          options[:enable_message_ordering] = options.delete :message_ordering
-          subscriber.create_subscription(**options.compact)
+          options[:ack_deadline_seconds] = options[:deadline]
+          options[:retain_acked_messages] = options[:retain_acked]
+          options[:enable_message_ordering] = options[:message_ordering]
+          
+          excess_options = [:deadline, 
+                            :retain_acked, 
+                            :message_ordering, 
+                            :endpoint, 
+                            :dead_letter_topic_name,
+                            :dead_letter_max_delivery_attempts,
+                            :dead_letter_topic]
+          options.filter { |k,v| !v.nil? && !excess_options.include?(k) }
         end
 
         def update_subscription subscription_obj, *fields
@@ -489,11 +502,6 @@ module Google
           policy = Google::Cloud::PubSub::V1::DeadLetterPolicy.new dead_letter_topic: options[:dead_letter_topic_name]
           if options[:dead_letter_max_delivery_attempts]
             policy.max_delivery_attempts = options[:dead_letter_max_delivery_attempts]
-          end
-          options.delete_if do |key, _|
-            [:dead_letter_topic_name,
-             :dead_letter_max_delivery_attempts,
-             :dead_letter_topic].include? key
           end
           policy
         end
