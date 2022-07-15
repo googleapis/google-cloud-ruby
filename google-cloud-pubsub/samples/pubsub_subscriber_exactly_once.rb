@@ -49,6 +49,6 @@ class PubsubSubscriberExactlyOnce
 end
 
 if $PROGRAM_NAME == __FILE__
-  PubsubCreateSubscriptionWithFilter.run
+  PubsubSubscriberExactlyOnce.run
 end
-# [END pubsub_create_subscription_with_filter]
+# [END pubsub_subscriber_exactly_once]
