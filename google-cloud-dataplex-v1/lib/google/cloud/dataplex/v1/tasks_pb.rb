@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 8
       optional :trigger_spec, :message, 100, "google.cloud.dataplex.v1.Task.TriggerSpec"
       optional :execution_spec, :message, 101, "google.cloud.dataplex.v1.Task.ExecutionSpec"
+      optional :execution_status, :message, 201, "google.cloud.dataplex.v1.Task.ExecutionStatus"
       oneof :config do
         optional :spark, :message, 300, "google.cloud.dataplex.v1.Task.SparkTaskConfig"
       end
@@ -42,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :max_executors_count, :int32, 2
     end
     add_message "google.cloud.dataplex.v1.Task.InfrastructureSpec.ContainerImageRuntime" do
+      optional :image, :string, 1
       repeated :java_jars, :string, 2
       repeated :python_packages, :string, 3
       map :properties, :string, :string, 4
@@ -70,7 +72,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataplex.v1.Task.ExecutionSpec" do
       map :args, :string, :string, 4
       optional :service_account, :string, 5
+      optional :project, :string, 7
       optional :max_job_execution_lifetime, :message, 8, "google.protobuf.Duration"
+      optional :kms_key, :string, 9
     end
     add_message "google.cloud.dataplex.v1.Task.SparkTaskConfig" do
       repeated :file_uris, :string, 3
@@ -83,6 +87,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :sql_script_file, :string, 104
         optional :sql_script, :string, 105
       end
+    end
+    add_message "google.cloud.dataplex.v1.Task.ExecutionStatus" do
+      optional :update_time, :message, 3, "google.protobuf.Timestamp"
+      optional :latest_job, :message, 9, "google.cloud.dataplex.v1.Job"
     end
     add_message "google.cloud.dataplex.v1.Job" do
       optional :name, :string, 1
@@ -124,6 +132,7 @@ module Google
         Task::TriggerSpec::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.TriggerSpec.Type").enummodule
         Task::ExecutionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.ExecutionSpec").msgclass
         Task::SparkTaskConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.SparkTaskConfig").msgclass
+        Task::ExecutionStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.ExecutionStatus").msgclass
         Job = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Job").msgclass
         Job::Service = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Job.Service").enummodule
         Job::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Job.State").enummodule

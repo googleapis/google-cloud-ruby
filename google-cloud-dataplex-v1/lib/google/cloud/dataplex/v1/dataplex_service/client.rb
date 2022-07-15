@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/dataplex/v1/service_pb"
+require "google/cloud/location"
+require "google/iam/v1/iam_policy"
 
 module Google
   module Cloud
@@ -29,9 +31,9 @@ module Google
           #
           # Dataplex service provides data lakes as a service. The primary resources
           # offered by this service are Lakes, Zones and Assets which collectively allow
-          # a data adminstrator to organize, manage, secure and catalog data across their
-          # organization located across cloud projects in a variety of storage systems
-          # including Cloud Storage and BigQuery.
+          # a data administrator to organize, manage, secure and catalog data across
+          # their organization located across cloud projects in a variety of storage
+          # systems including Cloud Storage and BigQuery.
           #
           class Client
             include Paths
@@ -159,6 +161,22 @@ module Google
 
                 default_config.rpcs.cancel_job.timeout = 60.0
 
+                default_config.rpcs.create_environment.timeout = 60.0
+
+                default_config.rpcs.update_environment.timeout = 60.0
+
+                default_config.rpcs.delete_environment.timeout = 60.0
+
+                default_config.rpcs.list_environments.timeout = 60.0
+                default_config.rpcs.list_environments.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_environment.timeout = 60.0
+                default_config.rpcs.get_environment.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -234,6 +252,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @dataplex_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dataplex::V1::DataplexService::Stub,
                 credentials:  credentials,
@@ -249,6 +279,20 @@ module Google
             # @return [::Google::Cloud::Dataplex::V1::DataplexService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -481,7 +525,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the lake:
-            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -767,7 +811,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the parent lake:
-            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of actions to return. The service may return fewer than this
             #     value. If unspecified, at most 10 actions will be returned. The maximum
@@ -1465,7 +1509,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the parent zone:
-            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
             #   @param asset_id [::String]
             #     Required. Asset identifier.
             #     This ID will be used to generate names such as table names when publishing
@@ -2460,7 +2504,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the task:
-            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::Task]
@@ -2820,7 +2864,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the parent lake:
-            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+            #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
             #   @param environment_id [::String]
             #     Required. Environment identifier.
             #     * Must contain only lowercase letters, numbers and hyphens.
@@ -3026,7 +3070,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the environment:
-            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}`
+            #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -3120,7 +3164,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The resource name of the parent lake:
-            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+            #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of environments to return. The service may return fewer than
             #     this value. If unspecified, at most 10 environments will be returned. The
@@ -3226,7 +3270,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The resource name of the environment:
-            #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}
+            #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Dataplex::V1::Environment]
@@ -3305,14 +3349,14 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_sessions(parent: nil, page_size: nil, page_token: nil)
+            # @overload list_sessions(parent: nil, page_size: nil, page_token: nil, filter: nil)
             #   Pass arguments to `list_sessions` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
             #     Required. The resource name of the parent environment:
-            #     projects/\\{project_number}/locations/\\{location_id}/lakes/\\{lake_id}/environment/\\{environment_id}
+            #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
             #   @param page_size [::Integer]
             #     Optional. Maximum number of sessions to return. The service may return fewer than
             #     this value. If unspecified, at most 10 sessions will be returned. The
@@ -3322,6 +3366,16 @@ module Google
             #     retrieve the subsequent page. When paginating, all other parameters
             #     provided to `ListSessions` must match the call that provided the page
             #     token.
+            #   @param filter [::String]
+            #     Optional. Filter request. The following `mode` filter is supported to return only the
+            #     sessions belonging to the requester when the mode is USER and return
+            #     sessions of all the users when the mode is ADMIN. When no filter is sent
+            #     default to USER mode.
+            #     NOTE: When the mode is ADMIN, the requester should have
+            #     `dataplex.environments.listAllSessions` permission to list all sessions,
+            #     in absence of the permission, the request fails.
+            #
+            #     mode = ADMIN | USER
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Session>]
