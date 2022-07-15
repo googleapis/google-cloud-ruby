@@ -1,5 +1,14 @@
 # Release History
 
+### 2.7.1 (2022-07-15)
+
+#### Bug Fixes
+
+* Fix a regression in fields conversion ([#18833](https://github.com/googleapis/google-cloud-ruby/issues/18833)) 
+#### Documentation
+
+* Fix typo in data model reference ([#18835](https://github.com/googleapis/google-cloud-ruby/issues/18835)) 
+
 ### 2.7.0 (2022-07-02)
 
 #### Features
