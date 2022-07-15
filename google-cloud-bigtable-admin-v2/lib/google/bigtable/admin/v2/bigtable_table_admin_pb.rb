@@ -77,6 +77,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.bigtable.admin.v2.DeleteTableRequest" do
       optional :name, :string, 1
     end
+    add_message "google.bigtable.admin.v2.UndeleteTableRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.bigtable.admin.v2.UndeleteTableMetadata" do
+      optional :name, :string, 1
+      optional :start_time, :message, 2, "google.protobuf.Timestamp"
+      optional :end_time, :message, 3, "google.protobuf.Timestamp"
+    end
     add_message "google.bigtable.admin.v2.ModifyColumnFamiliesRequest" do
       optional :name, :string, 1
       repeated :modifications, :message, 2, "google.bigtable.admin.v2.ModifyColumnFamiliesRequest.Modification"
@@ -185,6 +193,8 @@ module Google
           ListTablesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesResponse").msgclass
           GetTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetTableRequest").msgclass
           DeleteTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteTableRequest").msgclass
+          UndeleteTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UndeleteTableRequest").msgclass
+          UndeleteTableMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UndeleteTableMetadata").msgclass
           ModifyColumnFamiliesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest").msgclass
           ModifyColumnFamiliesRequest::Modification = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ModifyColumnFamiliesRequest.Modification").msgclass
           GenerateConsistencyTokenRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GenerateConsistencyTokenRequest").msgclass

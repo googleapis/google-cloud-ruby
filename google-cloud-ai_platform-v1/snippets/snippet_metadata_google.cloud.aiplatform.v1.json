@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-ai_platform-v1",
-    "version": "0.7.0",
+    "version": "0.9.0",
     "language": "RUBY",
     "apis": [
       {
@@ -315,6 +315,46 @@
         "method": {
           "short_name": "ListDataItems",
           "full_name": "google.cloud.aiplatform.v1.DatasetService.ListDataItems",
+          "service": {
+            "short_name": "DatasetService",
+            "full_name": "google.cloud.aiplatform.v1.DatasetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_DatasetService_ListSavedQueries_sync",
+      "title": "Snippet for list_saved_queries in DatasetService",
+      "description": "Basic snippet for list_saved_queries in DatasetService",
+      "file": "dataset_service/list_saved_queries.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_saved_queries",
+        "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_saved_queries",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::ListSavedQueriesResponse",
+        "client": {
+          "short_name": "DatasetService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::DatasetService::Client"
+        },
+        "method": {
+          "short_name": "ListSavedQueries",
+          "full_name": "google.cloud.aiplatform.v1.DatasetService.ListSavedQueries",
           "service": {
             "short_name": "DatasetService",
             "full_name": "google.cloud.aiplatform.v1.DatasetService"
@@ -4915,6 +4955,46 @@
         "method": {
           "short_name": "ImportModelEvaluation",
           "full_name": "google.cloud.aiplatform.v1.ModelService.ImportModelEvaluation",
+          "service": {
+            "short_name": "ModelService",
+            "full_name": "google.cloud.aiplatform.v1.ModelService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_ModelService_BatchImportModelEvaluationSlices_sync",
+      "title": "Snippet for batch_import_model_evaluation_slices in ModelService",
+      "description": "Basic snippet for batch_import_model_evaluation_slices in ModelService",
+      "file": "model_service/batch_import_model_evaluation_slices.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "batch_import_model_evaluation_slices",
+        "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse",
+        "client": {
+          "short_name": "ModelService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::ModelService::Client"
+        },
+        "method": {
+          "short_name": "BatchImportModelEvaluationSlices",
+          "full_name": "google.cloud.aiplatform.v1.ModelService.BatchImportModelEvaluationSlices",
           "service": {
             "short_name": "ModelService",
             "full_name": "google.cloud.aiplatform.v1.ModelService"

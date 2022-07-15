@@ -29,6 +29,8 @@ module Google
         #
         #     The following parameters are supported.
         #
+        #     net.core.busy_poll
+        #     net.core.busy_read
         #     net.core.netdev_max_backlog
         #     net.core.rmem_max
         #     net.core.wmem_default
@@ -85,12 +87,24 @@ module Google
         #     fraction and a unit suffix, such as "300ms".
         #     Valid time units are "ns", "us" (or "µs"), "ms", "s", "m", "h".
         #     The value must be a positive duration.
+        # @!attribute [rw] pod_pids_limit
+        #   @return [::Integer]
+        #     Set the Pod PID limits. See
+        #     https://kubernetes.io/docs/concepts/policy/pid-limiting/#pod-pid-limits
+        #
+        #     Controls the maximum number of processes allowed to run in a pod. The value
+        #     must be greater than or equal to 1024 and less than 4194304.
         class NodeKubeletConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Parameters that describe the nodes in a cluster.
+        #
+        # GKE Autopilot clusters do not
+        # recognize parameters in `NodeConfig`. Use
+        # {::Google::Cloud::Container::V1::AutoprovisioningNodePoolDefaults AutoprovisioningNodePoolDefaults}
+        # instead.
         # @!attribute [rw] machine_type
         #   @return [::String]
         #     The name of a Google Compute Engine [machine
@@ -133,6 +147,7 @@ module Google
         #     in length. These are reflected as part of a URL in the metadata server.
         #     Additionally, to avoid ambiguity, keys must not conflict with any other
         #     metadata keys for the project or be one of the reserved keys:
+        #
         #      - "cluster-location"
         #      - "cluster-name"
         #      - "cluster-uid"
@@ -261,6 +276,14 @@ module Google
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1::VirtualNIC]
         #     Enable or disable gvnic in the node pool.
+        # @!attribute [rw] spot
+        #   @return [::Boolean]
+        #     Spot flag for enabling Spot VM, which is a rebrand of
+        #     the existing preemptible flag.
+        # @!attribute [rw] confidential_nodes
+        #   @return [::Google::Cloud::Container::V1::ConfidentialNodes]
+        #     Confidential nodes config.
+        #     All the nodes in the node pool will be Confidential VM once enabled.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -337,9 +360,30 @@ module Google
         #     Only applicable if `ip_allocation_policy.use_ip_aliases` is true.
         #
         #     This field cannot be changed after the node pool has been created.
+        # @!attribute [rw] network_performance_config
+        #   @return [::Google::Cloud::Container::V1::NodeNetworkConfig::NetworkPerformanceConfig]
+        #     Network bandwidth tier configuration.
         class NodeNetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration of all network bandwidth tiers
+          # @!attribute [rw] total_egress_bandwidth_tier
+          #   @return [::Google::Cloud::Container::V1::NodeNetworkConfig::NetworkPerformanceConfig::Tier]
+          #     Specifies the total network bandwidth tier for the NodePool.
+          class NetworkPerformanceConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Node network tier
+            module Tier
+              # Default value
+              TIER_UNSPECIFIED = 0
+
+              # Higher bandwidth, actual values based on VM size.
+              TIER_1 = 1
+            end
+          end
         end
 
         # A set of Shielded Instance options.
@@ -459,6 +503,45 @@ module Google
             # NoExecute
             NO_EXECUTE = 3
           end
+        end
+
+        # Collection of Kubernetes [node
+        # taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration).
+        # @!attribute [rw] taints
+        #   @return [::Array<::Google::Cloud::Container::V1::NodeTaint>]
+        #     List of node taints.
+        class NodeTaints
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Collection of node-level [Kubernetes
+        # labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels).
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Map of node label keys and node label values.
+        class NodeLabels
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Collection of Compute Engine network tags that can be applied to a node's
+        # underlying VM instance.
+        # @!attribute [rw] tags
+        #   @return [::Array<::String>]
+        #     List of network tags.
+        class NetworkTags
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The authentication information for accessing the master endpoint.
@@ -789,9 +872,28 @@ module Google
         #   @return [::Boolean]
         #     Enable Binary Authorization for this cluster. If enabled, all container
         #     images will be validated by Binary Authorization.
+        # @!attribute [rw] evaluation_mode
+        #   @return [::Google::Cloud::Container::V1::BinaryAuthorization::EvaluationMode]
+        #     Mode of operation for binauthz policy evaluation. Currently the only
+        #     options are equivalent to enable/disable. If unspecified, defaults to
+        #     DISABLED.
         class BinaryAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Binary Authorization mode of operation.
+          module EvaluationMode
+            # Default value
+            EVALUATION_MODE_UNSPECIFIED = 0
+
+            # Disable BinaryAuthorization
+            DISABLED = 1
+
+            # Enforce Kubernetes admission requests with BinaryAuthorization using the
+            # project's singleton policy. This is equivalent to setting the
+            # enabled boolean to true.
+            PROJECT_SINGLETON_POLICY_ENFORCE = 2
+          end
         end
 
         # Configuration for controlling how IPs are allocated in the cluster.
@@ -1104,7 +1206,11 @@ module Google
         #     Notification configuration of the cluster.
         # @!attribute [rw] confidential_nodes
         #   @return [::Google::Cloud::Container::V1::ConfidentialNodes]
-        #     Configuration of Confidential Nodes
+        #     Configuration of Confidential Nodes.
+        #     All the nodes in the cluster will be Confidential VM once enabled.
+        # @!attribute [rw] identity_service_config
+        #   @return [::Google::Cloud::Container::V1::IdentityServiceConfig]
+        #     Configuration for Identity Service component.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output only] Server-defined URL for the resource.
@@ -1216,6 +1322,10 @@ module Google
         # @!attribute [rw] monitoring_config
         #   @return [::Google::Cloud::Container::V1::MonitoringConfig]
         #     Monitoring configuration for the cluster.
+        # @!attribute [rw] node_pool_auto_config
+        #   @return [::Google::Cloud::Container::V1::NodePoolAutoConfig]
+        #     Node pool configs that apply to all auto-provisioned node pools
+        #     in autopilot clusters and node auto-provisioning enabled clusters.
         class Cluster
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1259,6 +1369,19 @@ module Google
           end
         end
 
+        # Node pool configs that apply to all auto-provisioned node pools
+        # in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] network_tags
+        #   @return [::Google::Cloud::Container::V1::NetworkTags]
+        #     The list of instance tags applied to all nodes. Tags are used to identify
+        #     valid sources or targets for network firewalls and are specified by
+        #     the client during cluster creation. Each tag within the list
+        #     must comply with RFC1035.
+        class NodePoolAutoConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Subset of Nodepool message that has defaults.
         # @!attribute [rw] node_config_defaults
         #   @return [::Google::Cloud::Container::V1::NodeConfigDefaults]
@@ -1271,7 +1394,7 @@ module Google
         # Subset of NodeConfig message that has defaults.
         # @!attribute [rw] gcfs_config
         #   @return [::Google::Cloud::Container::V1::GcfsConfig]
-        #     GCFS (Google Container File System, a.k.a Riptide) options.
+        #     GCFS (Google Container File System, a.k.a. Riptide) options.
         class NodeConfigDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1412,6 +1535,9 @@ module Google
         # @!attribute [rw] desired_monitoring_config
         #   @return [::Google::Cloud::Container::V1::MonitoringConfig]
         #     The desired monitoring configuration.
+        # @!attribute [rw] desired_identity_service_config
+        #   @return [::Google::Cloud::Container::V1::IdentityServiceConfig]
+        #     The desired Identity Service component configuration.
         # @!attribute [rw] desired_service_external_ips_config
         #   @return [::Google::Cloud::Container::V1::ServiceExternalIPsConfig]
         #     ServiceExternalIPsConfig specifies the config for the use of Services with
@@ -1431,6 +1557,10 @@ module Google
         # @!attribute [rw] desired_gcfs_config
         #   @return [::Google::Cloud::Container::V1::GcfsConfig]
         #     The desired GCFS config for the cluster
+        # @!attribute [rw] desired_node_pool_auto_config_network_tags
+        #   @return [::Google::Cloud::Container::V1::NetworkTags]
+        #     The desired network tags that apply to all auto-provisioned node pools
+        #     in autopilot clusters and node auto-provisioning enabled clusters.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1618,7 +1748,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the parent field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1643,7 +1773,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1668,7 +1798,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1696,7 +1826,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1746,15 +1876,37 @@ module Google
         # @!attribute [rw] upgrade_settings
         #   @return [::Google::Cloud::Container::V1::NodePool::UpgradeSettings]
         #     Upgrade settings control disruption and speed of the upgrade.
+        # @!attribute [rw] tags
+        #   @return [::Google::Cloud::Container::V1::NetworkTags]
+        #     The desired network tags to be applied to all nodes in the node pool.
+        #     If this field is not present, the tags will not be changed. Otherwise,
+        #     the existing network tags will be *replaced* with the provided tags.
+        # @!attribute [rw] taints
+        #   @return [::Google::Cloud::Container::V1::NodeTaints]
+        #     The desired node taints to be applied to all nodes in the node pool.
+        #     If this field is not present, the taints will not be changed. Otherwise,
+        #     the existing node taints will be *replaced* with the provided taints.
+        # @!attribute [rw] labels
+        #   @return [::Google::Cloud::Container::V1::NodeLabels]
+        #     The desired node labels to be applied to all nodes in the node pool.
+        #     If this field is not present, the labels will not be changed. Otherwise,
+        #     the existing node labels will be *replaced* with the provided labels.
         # @!attribute [rw] linux_node_config
         #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig]
         #     Parameters that can be configured on Linux nodes.
         # @!attribute [rw] kubelet_config
         #   @return [::Google::Cloud::Container::V1::NodeKubeletConfig]
         #     Node kubelet configs.
+        # @!attribute [rw] node_network_config
+        #   @return [::Google::Cloud::Container::V1::NodeNetworkConfig]
+        #     Node network config.
         # @!attribute [rw] gcfs_config
         #   @return [::Google::Cloud::Container::V1::GcfsConfig]
         #     GCFS config.
+        # @!attribute [rw] confidential_nodes
+        #   @return [::Google::Cloud::Container::V1::ConfidentialNodes]
+        #     Confidential nodes config.
+        #     All the nodes in the node pool will be Confidential VM once enabled.
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1::VirtualNIC]
         #     Enable or disable gvnic on the node pool.
@@ -1767,7 +1919,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1800,7 +1952,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1838,7 +1990,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1876,7 +2028,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1905,7 +2057,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1939,7 +2091,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -1976,7 +2128,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2025,7 +2177,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2050,7 +2202,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the parent field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2086,7 +2238,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2111,7 +2263,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the parent field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2133,7 +2285,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2171,7 +2323,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2231,7 +2383,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the parent field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2248,7 +2400,7 @@ module Google
         #     Required. The node pool to create.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent (project, location, cluster id) where the node pool will be
+        #     The parent (project, location, cluster name) where the node pool will be
         #     created. Specified in the format
         #     `projects/*/locations/*/clusters/*`.
         class CreateNodePoolRequest
@@ -2260,7 +2412,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2290,7 +2442,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the parent field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2304,7 +2456,7 @@ module Google
         #     This field has been deprecated and replaced by the parent field.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The parent (project, location, cluster id) where the node pools will be
+        #     The parent (project, location, cluster name) where the node pools will be
         #     listed. Specified in the format `projects/*/locations/*/clusters/*`.
         class ListNodePoolsRequest
           include ::Google::Protobuf::MessageExts
@@ -2315,7 +2467,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2339,6 +2491,35 @@ module Google
         class GetNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Settings for blue-green upgrade.
+        # @!attribute [rw] standard_rollout_policy
+        #   @return [::Google::Cloud::Container::V1::BlueGreenSettings::StandardRolloutPolicy]
+        #     Standard policy for the blue-green upgrade.
+        # @!attribute [rw] node_pool_soak_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Time needed after draining entire blue pool. After this period, blue pool
+        #     will be cleaned up.
+        class BlueGreenSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Standard rollout policy is the default policy for blue-green.
+          # @!attribute [rw] batch_percentage
+          #   @return [::Float]
+          #     Percentage of the bool pool nodes to drain in a batch.
+          #     The range of this field should be (0.0, 1.0].
+          # @!attribute [rw] batch_node_count
+          #   @return [::Integer]
+          #     Number of blue nodes to drain in a batch.
+          # @!attribute [rw] batch_soak_duration
+          #   @return [::Google::Protobuf::Duration]
+          #     Soak time after each batch gets drained. Default to zero.
+          class StandardRolloutPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
 
         # NodePool contains the name and configuration for a cluster's node pool.
@@ -2386,6 +2567,8 @@ module Google
         #     [Output only] The resource URLs of the [managed instance
         #     groups](https://cloud.google.com/compute/docs/instance-groups/creating-groups-of-managed-instances)
         #     associated with this node pool.
+        #     During the node pool blue-green upgrade operation, the URLs contain both
+        #     blue and green resources.
         # @!attribute [rw] status
         #   @return [::Google::Cloud::Container::V1::NodePool::Status]
         #     [Output only] The status of the nodes in this pool instance.
@@ -2414,6 +2597,10 @@ module Google
         # @!attribute [rw] upgrade_settings
         #   @return [::Google::Cloud::Container::V1::NodePool::UpgradeSettings]
         #     Upgrade settings control disruption and speed of the upgrade.
+        # @!attribute [r] update_info
+        #   @return [::Google::Cloud::Container::V1::NodePool::UpdateInfo]
+        #     Output only. [Output only] Update info contains relevant information during a node
+        #     pool update.
         class NodePool
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2441,6 +2628,29 @@ module Google
           # simultaneously. It creates 2 additional (upgraded) nodes, then it brings
           # down 3 old (not yet upgraded) nodes at the same time. This ensures that
           # there are always at least 4 nodes available.
+          #
+          # These upgrade settings configure the upgrade strategy for the node pool.
+          # Use strategy to switch between the strategies applied to the node pool.
+          #
+          # If the strategy is ROLLING, use max_surge and max_unavailable to control
+          # the level of parallelism and the level of disruption caused by upgrade.
+          # 1. maxSurge controls the number of additional nodes that can be added to
+          # the node pool temporarily for the time of the upgrade to increase the
+          # number of available nodes.
+          # 2. maxUnavailable controls the number of nodes that can be simultaneously
+          # unavailable.
+          # 3. (maxUnavailable + maxSurge) determines the level of parallelism (how
+          # many nodes are being upgraded at the same time).
+          #
+          # If the strategy is BLUE_GREEN, use blue_green_settings to configure the
+          # blue-green upgrade related settings.
+          # 1. standard_rollout_policy is the default policy. The policy is used to
+          # control the way blue pool gets drained. The draining is executed in the
+          # batch mode. The batch size could be specified as either percentage of the
+          # node pool size or the number of nodes. batch_soak_duration is the soak
+          # time after each batch gets drained.
+          # 2. node_pool_soak_duration is the soak time after all blue nodes are
+          # drained. After this period, the blue pool nodes will be deleted.
           # @!attribute [rw] max_surge
           #   @return [::Integer]
           #     The maximum number of nodes that can be created beyond the current size
@@ -2450,9 +2660,78 @@ module Google
           #     The maximum number of nodes that can be simultaneously unavailable during
           #     the upgrade process. A node is considered available if its status is
           #     Ready.
+          # @!attribute [rw] strategy
+          #   @return [::Google::Cloud::Container::V1::NodePoolUpdateStrategy]
+          #     Update strategy of the node pool.
+          # @!attribute [rw] blue_green_settings
+          #   @return [::Google::Cloud::Container::V1::BlueGreenSettings]
+          #     Settings for blue-green upgrade strategy.
           class UpgradeSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # UpdateInfo contains resource (instance groups, etc), status and other
+          # intermediate information relevant to a node pool upgrade.
+          # @!attribute [rw] blue_green_info
+          #   @return [::Google::Cloud::Container::V1::NodePool::UpdateInfo::BlueGreenInfo]
+          #     Information of a blue-green upgrade.
+          class UpdateInfo
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Information relevant to blue-green upgrade.
+            # @!attribute [rw] phase
+            #   @return [::Google::Cloud::Container::V1::NodePool::UpdateInfo::BlueGreenInfo::Phase]
+            #     Current blue-green upgrade phase.
+            # @!attribute [rw] blue_instance_group_urls
+            #   @return [::Array<::String>]
+            #     The resource URLs of the [managed instance groups]
+            #     (/compute/docs/instance-groups/creating-groups-of-managed-instances)
+            #     associated with blue pool.
+            # @!attribute [rw] green_instance_group_urls
+            #   @return [::Array<::String>]
+            #     The resource URLs of the [managed instance groups]
+            #     (/compute/docs/instance-groups/creating-groups-of-managed-instances)
+            #     associated with green pool.
+            # @!attribute [rw] blue_pool_deletion_start_time
+            #   @return [::String]
+            #     Time to start deleting blue pool to complete blue-green upgrade,
+            #     in [RFC3339](https://www.ietf.org/rfc/rfc3339.txt) text format.
+            # @!attribute [rw] green_pool_version
+            #   @return [::String]
+            #     Version of green pool.
+            class BlueGreenInfo
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Phase represents the different stages blue-green upgrade is running in.
+              module Phase
+                # Unspecified phase.
+                PHASE_UNSPECIFIED = 0
+
+                # blue-green upgrade has been initiated.
+                UPDATE_STARTED = 1
+
+                # Start creating green pool nodes.
+                CREATING_GREEN_POOL = 2
+
+                # Start cordoning blue pool nodes.
+                CORDONING_BLUE_POOL = 3
+
+                # Start draining blue pool nodes.
+                DRAINING_BLUE_POOL = 4
+
+                # Start soaking time after draining entire blue pool.
+                NODE_POOL_SOAKING = 5
+
+                # Start deleting blue nodes.
+                DELETING_BLUE_POOL = 6
+
+                # Rollback has been initiated.
+                ROLLBACK_STARTED = 7
+              end
+            end
           end
 
           # The current status of the node pool instance.
@@ -2676,7 +2955,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2709,7 +2988,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2738,13 +3017,25 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # CompleteNodePoolUpgradeRequest sets the name of target node pool to complete
+        # upgrade.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The name (project, location, cluster, node pool id) of the node pool to
+        #     complete upgrade.
+        #     Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+        class CompleteNodePoolUpgradeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # RollbackNodePoolUpgradeRequest rollbacks the previously Aborted or Failed
         # NodePool upgrade. This will be an no-op if the last upgrade successfully
         # completed.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2765,6 +3056,10 @@ module Google
         #     The name (project, location, cluster, node pool id) of the node poll to
         #     rollback upgrade.
         #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
+        # @!attribute [rw] respect_pdb
+        #   @return [::Boolean]
+        #     Option for rollback to ignore the PodDisruptionBudget.
+        #     Default value is false.
         class RollbackNodePoolUpgradeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2835,13 +3130,15 @@ module Google
         #     Specifies the node management options for NAP created node-pools.
         # @!attribute [rw] min_cpu_platform
         #   @return [::String]
-        #     Minimum CPU platform to be used for NAP created node pools.
+        #     Deprecated. Minimum CPU platform to be used for NAP created node pools.
         #     The instance may be scheduled on the specified or newer CPU platform.
         #     Applicable values are the friendly names of CPU platforms, such as
         #     minCpuPlatform: Intel Haswell or
         #     minCpuPlatform: Intel Sandy Bridge. For more
         #     information, read [how to specify min CPU
         #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+        #     This field is deprecated, min_cpu_platform should be specified using
+        #     cloud.google.com/requested-min-cpu-platform label selector on the pod.
         #     To unset the min cpu platform field pass "automatic"
         #     as field value.
         # @!attribute [rw] disk_size_gb
@@ -2907,9 +3204,38 @@ module Google
         # @!attribute [rw] autoprovisioned
         #   @return [::Boolean]
         #     Can this node pool be deleted automatically.
+        # @!attribute [rw] location_policy
+        #   @return [::Google::Cloud::Container::V1::NodePoolAutoscaling::LocationPolicy]
+        #     Location policy used when scaling up a nodepool.
+        # @!attribute [rw] total_min_node_count
+        #   @return [::Integer]
+        #     Minimum number of nodes in the node pool. Must be greater than 1 less than
+        #     total_max_node_count.
+        #     The total_*_node_count fields are mutually exclusive with the *_node_count
+        #     fields.
+        # @!attribute [rw] total_max_node_count
+        #   @return [::Integer]
+        #     Maximum number of nodes in the node pool. Must be greater than
+        #     total_min_node_count. There has to be enough quota to scale up the cluster.
+        #     The total_*_node_count fields are mutually exclusive with the *_node_count
+        #     fields.
         class NodePoolAutoscaling
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Location policy specifies how zones are picked when scaling up the
+          # nodepool.
+          module LocationPolicy
+            # Not set.
+            LOCATION_POLICY_UNSPECIFIED = 0
+
+            # BALANCED is a best effort policy that aims to balance the sizes of
+            # different zones.
+            BALANCED = 1
+
+            # ANY policy picks zones that have the highest capacity available.
+            ANY = 2
+          end
         end
 
         # SetLabelsRequest sets the Google Cloud Platform labels on a Google Container
@@ -2918,7 +3244,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2943,7 +3269,7 @@ module Google
         #     resource to get the latest fingerprint.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name (project, location, cluster id) of the cluster to set labels.
+        #     The name (project, location, cluster name) of the cluster to set labels.
         #     Specified in the format `projects/*/locations/*/clusters/*`.
         class SetLabelsRequest
           include ::Google::Protobuf::MessageExts
@@ -2964,7 +3290,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -2981,8 +3307,8 @@ module Google
         #     Required. Whether ABAC authorization will be enabled in the cluster.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name (project, location, cluster id) of the cluster to set legacy abac.
-        #     Specified in the format `projects/*/locations/*/clusters/*`.
+        #     The name (project, location, cluster name) of the cluster to set legacy
+        #     abac. Specified in the format `projects/*/locations/*/clusters/*`.
         class SetLegacyAbacRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2993,7 +3319,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -3007,7 +3333,7 @@ module Google
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name (project, location, cluster id) of the cluster to start IP
+        #     The name (project, location, cluster name) of the cluster to start IP
         #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
         # @!attribute [rw] rotate_credentials
         #   @return [::Boolean]
@@ -3021,7 +3347,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -3035,7 +3361,7 @@ module Google
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name (project, location, cluster id) of the cluster to complete IP
+        #     The name (project, location, cluster name) of the cluster to complete IP
         #     rotation. Specified in the format `projects/*/locations/*/clusters/*`.
         class CompleteIPRotationRequest
           include ::Google::Protobuf::MessageExts
@@ -3055,9 +3381,34 @@ module Google
         #     Size of partitions to create on the GPU. Valid values are described in the
         #     NVIDIA [mig user
         #     guide](https://docs.nvidia.com/datacenter/tesla/mig-user-guide/#partitioning).
+        # @!attribute [rw] gpu_sharing_config
+        #   @return [::Google::Cloud::Container::V1::GPUSharingConfig]
+        #     The configuration for GPU sharing options.
         class AcceleratorConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GPUSharingConfig represents the GPU sharing configuration for Hardware
+        # Accelerators.
+        # @!attribute [rw] max_shared_clients_per_gpu
+        #   @return [::Integer]
+        #     The max number of containers that can share a physical GPU.
+        # @!attribute [rw] gpu_sharing_strategy
+        #   @return [::Google::Cloud::Container::V1::GPUSharingConfig::GPUSharingStrategy]
+        #     The type of GPU sharing strategy to enable on the GPU node.
+        class GPUSharingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of GPU sharing strategy currently provided.
+          module GPUSharingStrategy
+            # Default value.
+            GPU_SHARING_STRATEGY_UNSPECIFIED = 0
+
+            # GPUs are time-shared between containers.
+            TIME_SHARING = 1
+          end
         end
 
         # WorkloadMetadataConfig defines the metadata configuration to expose to
@@ -3092,7 +3443,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Deprecated. The Google Developers Console [project ID or project
-        #     number](https://developers.google.com/console/help/new/#projectnumber).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         #     This field has been deprecated and replaced by the name field.
         # @!attribute [rw] zone
         #   @return [::String]
@@ -3109,7 +3460,7 @@ module Google
         #     Required. Configuration options for the NetworkPolicy feature.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name (project, location, cluster id) of the cluster to set networking
+        #     The name (project, location, cluster name) of the cluster to set networking
         #     policy. Specified in the format `projects/*/locations/*/clusters/*`.
         class SetNetworkPolicyRequest
           include ::Google::Protobuf::MessageExts
@@ -3120,7 +3471,7 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The Google Developers Console [project ID or project
-        #     number](https://support.google.com/cloud/answer/6158840).
+        #     number](https://cloud.google.com/resource-manager/docs/creating-managing-projects).
         # @!attribute [rw] zone
         #   @return [::String]
         #     Required. The name of the Google Compute Engine
@@ -3135,8 +3486,8 @@ module Google
         #     clears the existing maintenance policy.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The name (project, location, cluster id) of the cluster to set maintenance
-        #     policy.
+        #     The name (project, location, cluster name) of the cluster to set
+        #     maintenance policy.
         #     Specified in the format `projects/*/locations/*/clusters/*`.
         class SetMaintenancePolicyRequest
           include ::Google::Protobuf::MessageExts
@@ -3288,7 +3639,7 @@ module Google
         # Discovery 1.0 specification for details.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The cluster (project, location, cluster id) to get keys for. Specified in
+        #     The cluster (project, location, cluster name) to get keys for. Specified in
         #     the format `projects/*/locations/*/clusters/*`.
         class GetJSONWebKeysRequest
           include ::Google::Protobuf::MessageExts
@@ -3446,6 +3797,16 @@ module Google
         #   @return [::String]
         #     The workload pool to attach all Kubernetes service accounts to.
         class WorkloadIdentityConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # IdentityServiceConfig is configuration for Identity Service which allows
+        # customers to use external identity providers with the K8S API
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether to enable the Identity Service component
+        class IdentityServiceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -3735,8 +4096,7 @@ module Google
         # makes nodes run on confidential VMs.
         # @!attribute [rw] enabled
         #   @return [::Boolean]
-        #     Whether Confidential Nodes feature is enabled for all nodes in this
-        #     cluster.
+        #     Whether Confidential Nodes feature is enabled.
         class ConfidentialNodes
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3877,6 +4237,10 @@ module Google
         # @!attribute [rw] component_config
         #   @return [::Google::Cloud::Container::V1::MonitoringComponentConfig]
         #     Monitoring components configuration
+        # @!attribute [rw] managed_prometheus_config
+        #   @return [::Google::Cloud::Container::V1::ManagedPrometheusConfig]
+        #     Enable Google Cloud Managed Service for Prometheus
+        #     in the cluster.
         class MonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3898,7 +4262,26 @@ module Google
 
             # system components
             SYSTEM_COMPONENTS = 1
+
+            # kube-apiserver
+            APISERVER = 3
+
+            # kube-scheduler
+            SCHEDULER = 4
+
+            # kube-controller-manager
+            CONTROLLER_MANAGER = 5
           end
+        end
+
+        # ManagedPrometheusConfig defines the configuration for
+        # Google Cloud Managed Service for Prometheus.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Enable Managed Collection.
+        class ManagedPrometheusConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # PrivateIPv6GoogleAccess controls whether and how the pods can communicate
@@ -3917,6 +4300,19 @@ module Google
           PRIVATE_IPV6_GOOGLE_ACCESS_BIDIRECTIONAL = 3
         end
 
+        # UpgradeResourceType is the resource type that is upgrading. It is used
+        # in upgrade notifications.
+        module UpgradeResourceType
+          # Default value. This shouldn't be used.
+          UPGRADE_RESOURCE_TYPE_UNSPECIFIED = 0
+
+          # Master / control plane
+          MASTER = 1
+
+          # Node pool
+          NODE_POOL = 2
+        end
+
         # The datapath provider selects the implementation of the Kubernetes networking
         # model for service resolution and network policy enforcement.
         module DatapathProvider
@@ -3933,17 +4329,17 @@ module Google
           ADVANCED_DATAPATH = 2
         end
 
-        # UpgradeResourceType is the resource type that is upgrading. It is used
-        # in upgrade notifications.
-        module UpgradeResourceType
-          # Default value. This shouldn't be used.
-          UPGRADE_RESOURCE_TYPE_UNSPECIFIED = 0
+        # Strategy used for node pool update.
+        module NodePoolUpdateStrategy
+          # Default value.
+          NODE_POOL_UPDATE_STRATEGY_UNSPECIFIED = 0
 
-          # Master / control plane
-          MASTER = 1
+          # blue-green upgrade.
+          BLUE_GREEN = 2
 
-          # Node pool
-          NODE_POOL = 2
+          # SURGE is the traditional way of upgrade a node pool.
+          # max_surge and max_unavailable determines the level of upgrade parallelism.
+          SURGE = 3
         end
       end
     end

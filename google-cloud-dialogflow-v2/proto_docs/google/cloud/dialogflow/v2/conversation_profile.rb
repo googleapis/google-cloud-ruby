@@ -380,7 +380,8 @@ module Google
 
           # Custom conversation models used in agent assist feature.
           #
-          # Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY.
+          # Supported feature: ARTICLE_SUGGESTION, SMART_COMPOSE, SMART_REPLY,
+          # CONVERSATION_SUMMARIZATION.
           # @!attribute [rw] model
           #   @return [::String]
           #     Conversation model resource name. Format: `projects/<Project

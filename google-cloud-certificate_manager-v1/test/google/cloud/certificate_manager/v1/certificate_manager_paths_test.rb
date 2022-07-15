@@ -82,28 +82,4 @@ class ::Google::Cloud::CertificateManager::V1::CertificateManager::ClientPathsTe
       assert_equal "projects/value0/locations/value1", path
     end
   end
-
-  def test_target_https_proxies_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.target_https_proxies_path project: "value0", location: "value1", target_https_proxy: "value2"
-      assert_equal "projects/value0/locations/value1/targetHttpsProxies/value2", path
-    end
-  end
-
-  def test_target_ssl_proxies_path
-    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    ::Gapic::ServiceStub.stub :new, nil do
-      client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      path = client.target_ssl_proxies_path project: "value0", location: "value1", target_ssl_proxy: "value2"
-      assert_equal "projects/value0/locations/value1/targetSslProxies/value2", path
-    end
-  end
 end

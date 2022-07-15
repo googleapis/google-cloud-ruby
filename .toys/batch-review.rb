@@ -22,40 +22,48 @@ CONFIGS = {
     title_regexp: /^\[CHANGE ME\] Re-generated [\w-]+-v\d\w* to pick up changes in the API or client/,
     message_type: :shared,
     detail_type: :none,
-    omit_path: ["/synth\\.metadata$"]
   },
   "wrappers" => {
     title_regexp: /^\[CHANGE ME\] Re-generated (\w+-)*(v[a-z_]|[a-uw-z])\w* to pick up changes in the API or client/,
     message_type: :shared,
     detail_type: :none,
-    omit_path: ["/synth\\.metadata$"]
   },
   "all" => {
     title_regexp: //,
     message_type: :pr_title,
     detail_type: :none,
-    omit_path: ["/synth\\.metadata$"]
   },
   "releases-gapics" => {
-    title_regexp: /^chore: release [\w-]+-v\d\w* \d+\.\d+\.\d+/,
+    title_regexp: /^chore\(main\): release [\w-]+-v\d\w* \d+\.\d+\.\d+/,
     message_type: :pr_title_number,
     detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+    ],
   },
   "releases-wrappers" => {
-    title_regexp: /^chore: release (\w+-)*(v[a-z_]|[a-uw-z])\w* \d+\.\d+\.\d+/,
+    title_regexp: /^chore\(main\): release (\w+-)*(v[a-z_]|[a-uw-z])\w* \d+\.\d+\.\d+/,
     message_type: :pr_title_number,
     detail_type: :none,
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+    ],
   },
   "releases-all" => {
-    title_regexp: /^chore: release [\w-]+ \d+\.\d+\.\d+/,
+    title_regexp: /^chore\(main\): release [\w-]+ \d+\.\d+\.\d+/,
     message_type: :pr_title_number,
     detail_type: :none,
-  },
-  "obsolete-tracker" => {
-    title_regexp: /^chore: start tracking obsolete files/,
-    message_type: :pr_title_number,
-    detail_type: :none,
-    omit_path: ["/synth\\.metadata$"]
+    omit_path: [
+      /\.release-please-manifest\.json$/,
+      /\/CHANGELOG\.md$/,
+      /\/version\.rb$/,
+      /\/snippets\/snippet_metadata_[\w\.]+\.json$/
+    ],
   },
 }
 

@@ -259,7 +259,7 @@ module Google
           config = config.path if config.respond_to? :path
 
           # Convert from possible Google::Protobuf::Map
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
           grpc = service.create_instance \
             instance_id, name: name, config: config, nodes: nodes,
                          processing_units: processing_units, labels: labels
@@ -571,7 +571,7 @@ module Google
         def client instance_id, database_id, pool: {}, labels: nil,
                    query_options: nil
           # Convert from possible Google::Protobuf::Map
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
           # Configs set by environment variables take over client-level configs.
           if query_options.nil?
             query_options = @query_options
@@ -647,7 +647,7 @@ module Google
         def batch_client instance_id, database_id, labels: nil,
                          query_options: nil
           # Convert from possible Google::Protobuf::Map
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
           BatchClient.new self, instance_id, database_id, session_labels: labels,
                           query_options: query_options
         end

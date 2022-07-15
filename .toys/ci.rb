@@ -281,17 +281,11 @@ end
 def filter_gem_dirs dirs
   dirs.find_all do |dir|
     if ["Rakefile", "Gemfile", "#{dir}.gemspec"].all? { |file| File.file?(File.join(dir, file)) }
-      if ::Toys::Compat.allow_fork?
-        func = proc do
-          Dir.chdir dir do
-            spec = Gem::Specification.load "#{dir}.gemspec"
-            puts spec.required_ruby_version.satisfied_by?(Gem::Version.new(RUBY_VERSION)).to_s
-          end
-        end
-        capture_proc(func).strip == "true"
-      else
-        true
+      result = capture_ruby([], in: :controller) do |controller|
+        controller.in.puts "spec = Gem::Specification.load '#{dir}/#{dir}.gemspec'"
+        controller.in.puts "puts spec.required_ruby_version.satisfied_by? Gem::Version.new(#{RUBY_VERSION.inspect})"
       end
+      result == "true"
     else
       false
     end

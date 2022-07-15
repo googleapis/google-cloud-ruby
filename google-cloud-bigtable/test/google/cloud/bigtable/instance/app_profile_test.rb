@@ -31,7 +31,7 @@ describe Google::Cloud::Bigtable::Instance, :app_profile, :mock_bigtable do
     get_res = app_profile_grpc instance_id, app_profile_id
 
     mock = Minitest::Mock.new
-    mock.expect :get_app_profile, get_res, [name: app_profile_path(instance_id, app_profile_id)]
+    mock.expect :get_app_profile, get_res, name: app_profile_path(instance_id, app_profile_id)
     bigtable.service.mocked_instances = mock
     app_profile = instance.app_profile(app_profile_id)
 

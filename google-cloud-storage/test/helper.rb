@@ -185,7 +185,9 @@ class MockStorage < Minitest::Spec
                           is_live: nil,
                           matches_storage_class: nil,
                           noncurrent_time_before: nil,
-                          num_newer_versions: nil
+                          num_newer_versions: nil,
+                          matches_prefix: nil,
+                          matches_suffix: nil
     Google::Apis::StorageV1::Bucket::Lifecycle::Rule.new(
       action: Google::Apis::StorageV1::Bucket::Lifecycle::Rule::Action.new(
         storage_class: storage_class,
@@ -200,7 +202,9 @@ class MockStorage < Minitest::Spec
         is_live: is_live,
         matches_storage_class: Array(matches_storage_class),
         noncurrent_time_before: noncurrent_time_before,
-        num_newer_versions: num_newer_versions
+        num_newer_versions: num_newer_versions,
+        matches_prefix: Array(matches_prefix),
+        matches_suffix: Array(matches_suffix)
       )
     )
   end
@@ -223,63 +227,53 @@ class MockStorage < Minitest::Spec
     Google::Apis::StorageV1::Policy.new etag: etag, version: version, bindings: bindings
   end
 
-  def get_bucket_args bucket_name,
-                      if_metageneration_match: nil,
+  def get_bucket_args if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
                       user_project: nil
-    opts = {
+    {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       user_project: user_project
     }
-    [bucket_name, opts]
   end
 
-  def patch_bucket_args bucket_name,
-                        bucket_gapi = nil,
-                        if_metageneration_match: nil,
+  def patch_bucket_args if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
                         predefined_acl: nil,
                         predefined_default_object_acl: nil,
                         user_project: nil
-    bucket_gapi ||= Google::Apis::StorageV1::Bucket.new(acl: [])
-    opts = {
+    {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       predefined_acl: predefined_acl,
       predefined_default_object_acl: predefined_default_object_acl,
       user_project: user_project
     }
-    [bucket_name, bucket_gapi, opts]
   end
 
-  def delete_bucket_args bucket_name,
-                         if_metageneration_match: nil,
+  def delete_bucket_args if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
                          user_project: nil
-    opts = {
+    {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       user_project: user_project
     }
-    [bucket_name, opts]
   end
 
-  def insert_object_args bucket_name,
-                      file_gapi,
-                      name: nil,
-                      predefined_acl: nil,
-                      upload_source: nil,
-                      content_encoding: nil,
-                      content_type: "text/plain",
-                      kms_key_name: nil,
-                      if_generation_match: nil,
-                      if_generation_not_match: nil,
-                      if_metageneration_match: nil,
-                      if_metageneration_not_match: nil,
-                      user_project: nil,
-                      options: {}
-    opts = {
+  def insert_object_args name: nil,
+                         predefined_acl: nil,
+                         upload_source: nil,
+                         content_encoding: nil,
+                         content_type: "text/plain",
+                         kms_key_name: nil,
+                         if_generation_match: nil,
+                         if_generation_not_match: nil,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil,
+                         options: {}
+    {
       name: name,
       predefined_acl: predefined_acl,
       upload_source: upload_source,
@@ -293,19 +287,16 @@ class MockStorage < Minitest::Spec
       user_project: user_project,
       options: options
     }
-    [bucket_name, file_gapi, opts]
   end
 
-  def get_object_args bucket_name,
-                      file_name,
-                      generation: nil,
+  def get_object_args generation: nil,
                       if_generation_match: nil,
                       if_generation_not_match: nil,
                       if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
                       user_project: nil,
                       options: {}
-    opts = {
+    {
       generation: generation,
       if_generation_match: if_generation_match,
       if_generation_not_match: if_generation_not_match,
@@ -314,20 +305,15 @@ class MockStorage < Minitest::Spec
       user_project: user_project,
       options: options
     }
-    [bucket_name, file_name, opts]
   end
 
-  def patch_object_args bucket_name,
-                        file_name,
-                        file_gapi = nil,
-                        generation: nil,
+  def patch_object_args generation: nil,
                         if_generation_match: nil,
                         if_generation_not_match: nil,
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
                         predefined_acl: nil,
                         user_project: nil
-    file_gapi ||= Google::Apis::StorageV1::Object.new(acl: [])
     opts = {
       generation: generation,
       if_generation_match: if_generation_match,
@@ -337,18 +323,15 @@ class MockStorage < Minitest::Spec
       predefined_acl: predefined_acl,
       user_project: user_project
     }
-    [bucket_name, file_name, file_gapi, opts]
   end
 
-  def delete_object_args bucket_name,
-                         file_name,
-                         generation: nil,
+  def delete_object_args generation: nil,
                          if_generation_match: nil,
                          if_generation_not_match: nil,
                          if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
                          user_project: nil
-    opts = {
+    {
       generation: generation,
       if_generation_match: if_generation_match,
       if_generation_not_match: if_generation_not_match,
@@ -356,15 +339,9 @@ class MockStorage < Minitest::Spec
       if_metageneration_not_match: if_metageneration_not_match,
       user_project: user_project
     }
-    [bucket_name, file_name, opts]
   end
 
-  def rewrite_object_args source_bucket,
-                          source_object,
-                          destination_bucket,
-                          destination_object,
-                          object_object = nil,
-                          destination_kms_key_name: nil,
+  def rewrite_object_args destination_kms_key_name: nil,
                           destination_predefined_acl: nil,
                           if_generation_match: nil,
                           if_generation_not_match: nil,
@@ -378,7 +355,7 @@ class MockStorage < Minitest::Spec
                           rewrite_token: nil,
                           user_project: nil,
                           options: {}
-    opts = {
+    {
       destination_kms_key_name: destination_kms_key_name,
       destination_predefined_acl: destination_predefined_acl,
       if_generation_match: if_generation_match,
@@ -394,31 +371,23 @@ class MockStorage < Minitest::Spec
       user_project: user_project,
       options: options
     }
-    [source_bucket, source_object, destination_bucket, destination_object, object_object, opts]
   end
 
-  def compose_object_args bucket_name,
-                          file_name,
-                          source_files,
-                          destination_gapi = nil,
-                          destination_predefined_acl: nil,
-                          if_source_generation_match: nil,
+  def compose_object_args destination_predefined_acl: nil,
                           if_generation_match: nil,
                           if_metageneration_match: nil,
                           user_project: nil,
                           options: {}
-    req = compose_request source_files, destination_gapi, if_source_generation_match
-    opts = {
+    {
       destination_predefined_acl: destination_predefined_acl,
       if_generation_match: if_generation_match,
       if_metageneration_match: if_metageneration_match,
       user_project: user_project,
       options: options
     }
-    [bucket_name, file_name, req, opts]
   end
 
-  def compose_request source_files, destination_gapi, if_source_generation_match
+  def compose_request source_files, destination_gapi = nil, if_source_generation_match: nil
     source_objects = source_files.map do |file|
       if file.is_a? String
         Google::Apis::StorageV1::ComposeRequest::SourceObject.new \

@@ -63,6 +63,8 @@ module Google
             rpc :ExportModel, ::Google::Cloud::AIPlatform::V1::ExportModelRequest, ::Google::Longrunning::Operation
             # Imports an externally generated ModelEvaluation.
             rpc :ImportModelEvaluation, ::Google::Cloud::AIPlatform::V1::ImportModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
+            # Imports a list of externally generated ModelEvaluationSlice.
+            rpc :BatchImportModelEvaluationSlices, ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest, ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse
             # Gets a ModelEvaluation.
             rpc :GetModelEvaluation, ::Google::Cloud::AIPlatform::V1::GetModelEvaluationRequest, ::Google::Cloud::AIPlatform::V1::ModelEvaluation
             # Lists ModelEvaluations in a Model.

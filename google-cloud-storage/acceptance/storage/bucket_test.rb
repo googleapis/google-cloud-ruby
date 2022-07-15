@@ -156,7 +156,9 @@ describe Google::Cloud::Storage::Bucket, :storage do
                                    is_live: true,
                                    matches_storage_class: ["STANDARD"],
                                    noncurrent_time_before: noncurrent_time_before, # string in RFC 3339 format with only the date part also ok
-                                   num_newer_versions: 3
+                                   num_newer_versions: 3,
+                                   matches_prefix: ["some_prefix"],
+                                   matches_suffix: ["some_suffix"]
 
     end
 
@@ -173,6 +175,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.matches_storage_class).must_equal ["STANDARD"]
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before
     _(bucket.lifecycle.last.num_newer_versions).must_equal 3
+    _(bucket.lifecycle.last.matches_prefix).must_equal ["some_prefix"]
+    _(bucket.lifecycle.last.matches_suffix).must_equal ["some_suffix"]
 
     bucket.reload!
 
@@ -187,6 +191,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
       l.last.matches_storage_class = ["NEARLINE"]
       l.last.noncurrent_time_before = "2019-03-16"
       l.last.num_newer_versions = 4
+      l.last.matches_prefix = ["some_other_prefix"]
+      l.last.matches_suffix = ["some_other_suffix"]
 
 
       _(l.last.created_before).must_be_kind_of String
@@ -199,6 +205,8 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.custom_time_before).must_equal custom_time_before_2
     _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
+    _(bucket.lifecycle.last.matches_prefix).must_equal ["some_other_prefix"]
+    _(bucket.lifecycle.last.matches_suffix).must_equal ["some_other_suffix"]
 
 
     bucket.reload!
@@ -219,6 +227,35 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(bucket.lifecycle.last.noncurrent_time_before).must_be_kind_of Date
     _(bucket.lifecycle.last.noncurrent_time_before).must_equal noncurrent_time_before_2
     _(bucket.lifecycle.last.num_newer_versions).must_equal 4
+    _(bucket.lifecycle.last.matches_prefix).must_equal ["some_other_prefix"]
+    _(bucket.lifecycle.last.matches_suffix).must_equal ["some_other_suffix"]
+
+    bucket.lifecycle do |l|
+      l.delete_at(bucket.lifecycle.count - 1)
+    end
+
+    bucket.reload!
+
+    _(bucket.lifecycle.count).must_equal original_count
+  end
+
+  it "adds lifecycle action IncompleteMultipartUpload to bucket" do
+    original_count = bucket.lifecycle.count
+
+    bucket.lifecycle do |l|
+      l.add_abort_incomplete_multipart_upload_rule age: 10,
+                                                   matches_prefix: ["images/", :some_prefix],
+                                                   matches_suffix: [".pdf", :some_suffix]
+    end
+
+    bucket.reload!
+
+    _(bucket.lifecycle).wont_be :empty?
+    _(bucket.lifecycle.count).must_equal original_count + 1
+    _(bucket.lifecycle.last.action).must_equal "AbortIncompleteMultipartUpload"
+    _(bucket.lifecycle.last.age).must_equal 10
+    _(bucket.lifecycle.last.matches_prefix).must_equal ["images/", "some_prefix"]
+    _(bucket.lifecycle.last.matches_suffix).must_equal [".pdf", "some_suffix"]
 
     bucket.lifecycle do |l|
       l.delete_at(bucket.lifecycle.count - 1)

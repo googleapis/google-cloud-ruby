@@ -52,11 +52,10 @@ describe Google::Cloud::Bigtable::Instance, :create_cluster, :mock_bigtable do
       serve_nodes: 3, location: location_path(location_id), default_storage_type: :SSD
     )
 
-    mock.expect :create_cluster, operation_grpc(job_grpc, mock), [
-      parent: instance_path(instance_id),
-      cluster_id: cluster_id,
-      cluster: cluster
-    ]
+    mock.expect :create_cluster, operation_grpc(job_grpc, mock),
+                parent: instance_path(instance_id),
+                cluster_id: cluster_id,
+                cluster: cluster
     mock.expect :get_operation, operation_grpc(job_done_grpc, mock), [{name: ops_name}, Gapic::CallOptions]
     bigtable.service.mocked_instances = mock
 

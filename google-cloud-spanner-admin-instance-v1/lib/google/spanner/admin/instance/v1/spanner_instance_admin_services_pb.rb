@@ -137,7 +137,7 @@ module Google
                 # [Instance][google.spanner.admin.instance.v1.Instance], if successful.
                 #
                 # Authorization requires `spanner.instances.update` permission on
-                # resource [name][google.spanner.admin.instance.v1.Instance.name].
+                # the resource [name][google.spanner.admin.instance.v1.Instance.name].
                 rpc :UpdateInstance, ::Google::Cloud::Spanner::Admin::Instance::V1::UpdateInstanceRequest, ::Google::Longrunning::Operation
                 # Deletes an instance.
                 #

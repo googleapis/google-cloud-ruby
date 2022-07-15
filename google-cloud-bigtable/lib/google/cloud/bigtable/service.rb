@@ -649,11 +649,15 @@ module Google
         end
 
         def read_rows instance_id, table_id, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil
-          client.read_rows table_name:     table_path(instance_id, table_id),
-                           rows:           rows,
-                           filter:         filter,
-                           rows_limit:     rows_limit,
-                           app_profile_id: app_profile_id
+          client.read_rows(
+            {
+              table_name:     table_path(instance_id, table_id),
+              rows:           rows,
+              filter:         filter,
+              rows_limit:     rows_limit,
+              app_profile_id: app_profile_id
+            }
+          )
         end
 
         def sample_row_keys table_name, app_profile_id: nil

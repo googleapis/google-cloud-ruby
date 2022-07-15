@@ -978,6 +978,111 @@ module Google
             end
 
             ##
+            # Lists SavedQueries in a Dataset.
+            #
+            # @overload list_saved_queries(request, options = nil)
+            #   Pass arguments to `list_saved_queries` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_saved_queries(parent: nil, filter: nil, page_size: nil, page_token: nil, read_mask: nil, order_by: nil)
+            #   Pass arguments to `list_saved_queries` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The resource name of the Dataset to list SavedQueries from.
+            #     Format:
+            #     `projects/{project}/locations/{location}/datasets/{dataset}`
+            #   @param filter [::String]
+            #     The standard list filter.
+            #   @param page_size [::Integer]
+            #     The standard list page size.
+            #   @param page_token [::String]
+            #     The standard list page token.
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Mask specifying which fields to read.
+            #   @param order_by [::String]
+            #     A comma-separated list of fields to order by, sorted in ascending order.
+            #     Use "desc" after a field name for descending.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::SavedQuery>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::SavedQuery>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest.new
+            #
+            #   # Call the list_saved_queries method.
+            #   result = client.list_saved_queries request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AIPlatform::V1::SavedQuery.
+            #     p response
+            #   end
+            #
+            def list_saved_queries request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::ListSavedQueriesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_saved_queries.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_saved_queries.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_saved_queries.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @dataset_service_stub.call_rpc :list_saved_queries, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @dataset_service_stub, :list_saved_queries, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets an AnnotationSpec.
             #
             # @overload get_annotation_spec(request, options = nil)
@@ -1347,6 +1452,11 @@ module Google
                 #
                 attr_reader :list_data_items
                 ##
+                # RPC-specific configuration for `list_saved_queries`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_saved_queries
+                ##
                 # RPC-specific configuration for `get_annotation_spec`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1375,6 +1485,8 @@ module Google
                   @export_data = ::Gapic::Config::Method.new export_data_config
                   list_data_items_config = parent_rpcs.list_data_items if parent_rpcs.respond_to? :list_data_items
                   @list_data_items = ::Gapic::Config::Method.new list_data_items_config
+                  list_saved_queries_config = parent_rpcs.list_saved_queries if parent_rpcs.respond_to? :list_saved_queries
+                  @list_saved_queries = ::Gapic::Config::Method.new list_saved_queries_config
                   get_annotation_spec_config = parent_rpcs.get_annotation_spec if parent_rpcs.respond_to? :get_annotation_spec
                   @get_annotation_spec = ::Gapic::Config::Method.new get_annotation_spec_config
                   list_annotations_config = parent_rpcs.list_annotations if parent_rpcs.respond_to? :list_annotations

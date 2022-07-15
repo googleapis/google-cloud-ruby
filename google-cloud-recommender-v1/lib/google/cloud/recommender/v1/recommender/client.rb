@@ -213,14 +213,14 @@ module Google
             #     INSIGHT_TYPE_ID refers to supported insight types:
             #     https://cloud.google.com/recommender/docs/insights/insight-types.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of results to return from this request.  Non-positive
-            #     values are ignored. If not specified, the server will determine the number
-            #     of results to return.
+            #     Optional. The maximum number of results to return from this request.
+            #     Non-positive values are ignored. If not specified, the server will
+            #     determine the number of results to return.
             #   @param page_token [::String]
-            #     Optional. If present, retrieves the next batch of results from the preceding call to
-            #     this method. `page_token` must be the value of `next_page_token` from the
-            #     previous response. The values of other method parameters must be identical
-            #     to those in the previous call.
+            #     Optional. If present, retrieves the next batch of results from the
+            #     preceding call to this method. `page_token` must be the value of
+            #     `next_page_token` from the previous response. The values of other method
+            #     parameters must be identical to those in the previous call.
             #   @param filter [::String]
             #     Optional. Filter expression to restrict the insights returned. Supported
             #     filter fields:
@@ -427,8 +427,8 @@ module Google
             #   @param name [::String]
             #     Required. Name of the insight.
             #   @param state_metadata [::Hash{::String => ::String}]
-            #     Optional. State properties user wish to include with this state.  Full replace of the
-            #     current state_metadata.
+            #     Optional. State properties user wish to include with this state.  Full
+            #     replace of the current state_metadata.
             #   @param etag [::String]
             #     Required. Fingerprint of the Insight. Provides optimistic locking.
             #
@@ -534,14 +534,14 @@ module Google
             #     RECOMMENDER_ID refers to supported recommenders:
             #     https://cloud.google.com/recommender/docs/recommenders.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of results to return from this request.  Non-positive
-            #     values are ignored. If not specified, the server will determine the number
-            #     of results to return.
+            #     Optional. The maximum number of results to return from this request.
+            #     Non-positive values are ignored. If not specified, the server will
+            #     determine the number of results to return.
             #   @param page_token [::String]
-            #     Optional. If present, retrieves the next batch of results from the preceding call to
-            #     this method. `page_token` must be the value of `next_page_token` from the
-            #     previous response. The values of other method parameters must be identical
-            #     to those in the previous call.
+            #     Optional. If present, retrieves the next batch of results from the
+            #     preceding call to this method. `page_token` must be the value of
+            #     `next_page_token` from the previous response. The values of other method
+            #     parameters must be identical to those in the previous call.
             #   @param filter [::String]
             #     Filter expression to restrict the recommendations returned. Supported
             #     filter fields:
@@ -1028,6 +1028,376 @@ module Google
             end
 
             ##
+            # Gets the requested Recommender Config. There is only one instance of the
+            # config for each Recommender.
+            #
+            # @overload get_recommender_config(request, options = nil)
+            #   Pass arguments to `get_recommender_config` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_recommender_config(name: nil)
+            #   Pass arguments to `get_recommender_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the Recommendation Config to get.
+            #
+            #     Acceptable formats:
+            #
+            #     * `projects/[PROJECT_NUMBER]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
+            #
+            #     * `projects/[PROJECT_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
+            #
+            #     * `organizations/[ORGANIZATION_ID]/locations/[LOCATION]/recommenders/[RECOMMENDER_ID]/config`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Recommender::V1::RecommenderConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Recommender::V1::RecommenderConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recommender/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Recommender::V1::Recommender::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Recommender::V1::GetRecommenderConfigRequest.new
+            #
+            #   # Call the get_recommender_config method.
+            #   result = client.get_recommender_config request
+            #
+            #   # The returned object is of type Google::Cloud::Recommender::V1::RecommenderConfig.
+            #   p result
+            #
+            def get_recommender_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_recommender_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_recommender_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_recommender_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :get_recommender_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates a Recommender Config. This will create a new revision of the
+            # config.
+            #
+            # @overload update_recommender_config(request, options = nil)
+            #   Pass arguments to `update_recommender_config` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_recommender_config(recommender_config: nil, update_mask: nil, validate_only: nil)
+            #   Pass arguments to `update_recommender_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param recommender_config [::Google::Cloud::Recommender::V1::RecommenderConfig, ::Hash]
+            #     Required. The RecommenderConfig to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #   @param validate_only [::Boolean]
+            #     If true, validate the request and preview the change, but do not actually
+            #     update it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Recommender::V1::RecommenderConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Recommender::V1::RecommenderConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recommender/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Recommender::V1::Recommender::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new
+            #
+            #   # Call the update_recommender_config method.
+            #   result = client.update_recommender_config request
+            #
+            #   # The returned object is of type Google::Cloud::Recommender::V1::RecommenderConfig.
+            #   p result
+            #
+            def update_recommender_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_recommender_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.recommender_config&.name
+                header_params["recommender_config.name"] = request.recommender_config.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_recommender_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_recommender_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :update_recommender_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets the requested InsightTypeConfig. There is only one instance of the
+            # config for each InsightType.
+            #
+            # @overload get_insight_type_config(request, options = nil)
+            #   Pass arguments to `get_insight_type_config` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_insight_type_config(name: nil)
+            #   Pass arguments to `get_insight_type_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the InsightTypeConfig to get.
+            #
+            #     Acceptable formats:
+            #
+            #     * `projects/[PROJECT_NUMBER]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+            #
+            #     * `projects/[PROJECT_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+            #
+            #     * `organizations/[ORGANIZATION_ID]/locations/global/recommenders/[INSIGHT_TYPE_ID]/config`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Recommender::V1::InsightTypeConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Recommender::V1::InsightTypeConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recommender/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Recommender::V1::Recommender::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest.new
+            #
+            #   # Call the get_insight_type_config method.
+            #   result = client.get_insight_type_config request
+            #
+            #   # The returned object is of type Google::Cloud::Recommender::V1::InsightTypeConfig.
+            #   p result
+            #
+            def get_insight_type_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_insight_type_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_insight_type_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_insight_type_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :get_insight_type_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Updates an InsightTypeConfig change. This will create a new revision of the
+            # config.
+            #
+            # @overload update_insight_type_config(request, options = nil)
+            #   Pass arguments to `update_insight_type_config` via a request object, either of type
+            #   {::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_insight_type_config(insight_type_config: nil, update_mask: nil, validate_only: nil)
+            #   Pass arguments to `update_insight_type_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param insight_type_config [::Google::Cloud::Recommender::V1::InsightTypeConfig, ::Hash]
+            #     Required. The InsightTypeConfig to update.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     The list of fields to be updated.
+            #   @param validate_only [::Boolean]
+            #     If true, validate the request and preview the change, but do not actually
+            #     update it.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Recommender::V1::InsightTypeConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Recommender::V1::InsightTypeConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recommender/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Recommender::V1::Recommender::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new
+            #
+            #   # Call the update_insight_type_config method.
+            #   result = client.update_insight_type_config request
+            #
+            #   # The returned object is of type Google::Cloud::Recommender::V1::InsightTypeConfig.
+            #   p result
+            #
+            def update_insight_type_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_insight_type_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Recommender::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.insight_type_config&.name
+                header_params["insight_type_config.name"] = request.insight_type_config.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_insight_type_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_insight_type_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recommender_stub.call_rpc :update_insight_type_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the Recommender API.
             #
             # This class represents the configuration for Recommender,
@@ -1202,6 +1572,26 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :mark_recommendation_failed
+                ##
+                # RPC-specific configuration for `get_recommender_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_recommender_config
+                ##
+                # RPC-specific configuration for `update_recommender_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_recommender_config
+                ##
+                # RPC-specific configuration for `get_insight_type_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_insight_type_config
+                ##
+                # RPC-specific configuration for `update_insight_type_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_insight_type_config
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1221,6 +1611,14 @@ module Google
                   @mark_recommendation_succeeded = ::Gapic::Config::Method.new mark_recommendation_succeeded_config
                   mark_recommendation_failed_config = parent_rpcs.mark_recommendation_failed if parent_rpcs.respond_to? :mark_recommendation_failed
                   @mark_recommendation_failed = ::Gapic::Config::Method.new mark_recommendation_failed_config
+                  get_recommender_config_config = parent_rpcs.get_recommender_config if parent_rpcs.respond_to? :get_recommender_config
+                  @get_recommender_config = ::Gapic::Config::Method.new get_recommender_config_config
+                  update_recommender_config_config = parent_rpcs.update_recommender_config if parent_rpcs.respond_to? :update_recommender_config
+                  @update_recommender_config = ::Gapic::Config::Method.new update_recommender_config_config
+                  get_insight_type_config_config = parent_rpcs.get_insight_type_config if parent_rpcs.respond_to? :get_insight_type_config
+                  @get_insight_type_config = ::Gapic::Config::Method.new get_insight_type_config_config
+                  update_insight_type_config_config = parent_rpcs.update_insight_type_config if parent_rpcs.respond_to? :update_insight_type_config
+                  @update_insight_type_config = ::Gapic::Config::Method.new update_insight_type_config_config
 
                   yield self if block_given?
                 end

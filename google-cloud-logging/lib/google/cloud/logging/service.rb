@@ -102,7 +102,7 @@ module Google
             entry.log_name = log_path entry.log_name
           end
           resource = resource.to_grpc if resource
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
           logging.write_log_entries entries:         entries,
                                     log_name:        log_path(log_name),
                                     resource:        resource,

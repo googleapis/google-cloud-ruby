@@ -127,11 +127,12 @@ describe Google::Cloud::PubSub::Subscriber, :stream, :mock_pubsub do
         assert_kind_of Google::Cloud::PubSub::AcknowledgeResult, result,  Proc.new { raise "Result kind did not match!" }
         assert_equal result.status, Google::Cloud::PubSub::AcknowledgeResult::OTHER, Proc.new { raise "Staus did not match!" }
       end
+      
       called = true
     end
 
     subscriber.on_error do |error|
-        errors << error
+      errors << error
     end
   
     subscriber.start

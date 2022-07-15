@@ -46,7 +46,6 @@ module Google
           MAX_INTERVAL = 64
           MULTIPLIER = 2
 
-
           def initialize subscriber, max_bytes: 500_000, interval: 1.0
             super() # to init MonitorMixin
 
@@ -60,7 +59,6 @@ module Google
             @register = {}
 
             @ack_callback_register = {}
-
             @modack_callback_register = {}
 
             @retry_thread_pool = Concurrent::ThreadPoolExecutor.new max_threads: @subscriber.callback_threads
@@ -170,7 +168,6 @@ module Google
             @retry_thread_pool.shutdown
             @callback_thread_pool.shutdown
             flush!
-
             self
           end
 

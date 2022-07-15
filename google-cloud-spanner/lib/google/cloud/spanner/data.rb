@@ -172,7 +172,7 @@ module Google
         def to_h skip_dup_check: nil
           raise DuplicateNameError if !skip_dup_check && fields.duplicate_names?
 
-          Hash[keys.zip to_a(skip_dup_check: skip_dup_check)]
+          keys.zip(to_a(skip_dup_check: skip_dup_check)).to_h
         end
 
         # @private

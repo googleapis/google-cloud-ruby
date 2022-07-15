@@ -119,44 +119,6 @@ module Google
               "projects/#{project}/locations/#{location}"
             end
 
-            ##
-            # Create a fully-qualified TargetHttpsProxies resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/targetHttpsProxies/{target_https_proxy}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param target_https_proxy [String]
-            #
-            # @return [::String]
-            def target_https_proxies_path project:, location:, target_https_proxy:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/targetHttpsProxies/#{target_https_proxy}"
-            end
-
-            ##
-            # Create a fully-qualified TargetSslProxies resource string.
-            #
-            # The resource will be in the following format:
-            #
-            # `projects/{project}/locations/{location}/targetSslProxies/{target_ssl_proxy}`
-            #
-            # @param project [String]
-            # @param location [String]
-            # @param target_ssl_proxy [String]
-            #
-            # @return [::String]
-            def target_ssl_proxies_path project:, location:, target_ssl_proxy:
-              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
-              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
-
-              "projects/#{project}/locations/#{location}/targetSslProxies/#{target_ssl_proxy}"
-            end
-
             extend self
           end
         end

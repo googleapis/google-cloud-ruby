@@ -19,8 +19,8 @@ describe "Spanner Client", :types, :struct, :spanner do
 
   it "queries a nested struct" do
     nested_sql = "SELECT ARRAY(SELECT AS STRUCT C1, C2 " \
-      "FROM (SELECT 'a' AS C1, 1 AS C2 UNION ALL SELECT 'b' AS C1, 2 AS C2) " \
-      "ORDER BY C1 ASC)"
+                 "FROM (SELECT 'a' AS C1, 1 AS C2 UNION ALL SELECT 'b' AS C1, 2 AS C2) " \
+                 "ORDER BY C1 ASC)"
     results = db.execute_query nested_sql
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results

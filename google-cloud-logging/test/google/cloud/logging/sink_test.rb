@@ -82,7 +82,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
       filter: new_sink_filter
     )
     mock = Minitest::Mock.new
-    mock.expect :update_sink, sink_grpc, [sink_name: "projects/test/sinks/#{sink.name}", sink: new_sink, unique_writer_identity: nil]
+    mock.expect :update_sink, sink_grpc, sink_name: "projects/test/sinks/#{sink.name}", sink: new_sink, unique_writer_identity: nil
     sink.service.mocked_sinks = mock
 
     sink.destination = new_sink_destination
@@ -111,7 +111,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
       filter: new_sink_filter
     )
     mock = Minitest::Mock.new
-    mock.expect :update_sink, sink_grpc, [sink_name: "projects/test/sinks/#{sink.name}", sink: new_sink, unique_writer_identity: true]
+    mock.expect :update_sink, sink_grpc, sink_name: "projects/test/sinks/#{sink.name}", sink: new_sink, unique_writer_identity: true
     sink.service.mocked_sinks = mock
 
     sink.destination = new_sink_destination
@@ -129,7 +129,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
   it "can refresh itself" do
     mock = Minitest::Mock.new
-    mock.expect :get_sink, sink_grpc, [sink_name: "projects/test/sinks/#{sink.name}"]
+    mock.expect :get_sink, sink_grpc, sink_name: "projects/test/sinks/#{sink.name}"
     sink.service.mocked_sinks = mock
 
     sink.refresh!
@@ -139,7 +139,7 @@ describe Google::Cloud::Logging::Sink, :mock_logging do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_sink, sink_grpc, [sink_name: "projects/test/sinks/#{sink.name}"]
+    mock.expect :delete_sink, sink_grpc, sink_name: "projects/test/sinks/#{sink.name}"
     sink.service.mocked_sinks = mock
 
     sink.delete

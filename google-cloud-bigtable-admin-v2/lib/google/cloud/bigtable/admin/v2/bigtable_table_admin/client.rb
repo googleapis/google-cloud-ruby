@@ -738,6 +738,101 @@ module Google
               end
 
               ##
+              # Restores a specified table which was accidentally deleted.
+              #
+              # @overload undelete_table(request, options = nil)
+              #   Pass arguments to `undelete_table` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload undelete_table(name: nil)
+              #   Pass arguments to `undelete_table` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param name [::String]
+              #     Required. The unique name of the table to be restored.
+              #     Values are of the form
+              #     `projects/{project}/instances/{instance}/tables/{table}`.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest.new
+              #
+              #   # Call the undelete_table method.
+              #   result = client.undelete_table request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
+              def undelete_table request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::UndeleteTableRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.undelete_table.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.name
+                  header_params["name"] = request.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.undelete_table.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.undelete_table.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :undelete_table, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Performs a series of column family modifications on the specified table.
               # Either all or none of the modifications will occur before this method
               # returns, but data requests received prior to that point may see a table
@@ -2606,6 +2701,11 @@ module Google
                   #
                   attr_reader :delete_table
                   ##
+                  # RPC-specific configuration for `undelete_table`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :undelete_table
+                  ##
                   # RPC-specific configuration for `modify_column_families`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2703,6 +2803,8 @@ module Google
                     @get_table = ::Gapic::Config::Method.new get_table_config
                     delete_table_config = parent_rpcs.delete_table if parent_rpcs.respond_to? :delete_table
                     @delete_table = ::Gapic::Config::Method.new delete_table_config
+                    undelete_table_config = parent_rpcs.undelete_table if parent_rpcs.respond_to? :undelete_table
+                    @undelete_table = ::Gapic::Config::Method.new undelete_table_config
                     modify_column_families_config = parent_rpcs.modify_column_families if parent_rpcs.respond_to? :modify_column_families
                     @modify_column_families = ::Gapic::Config::Method.new modify_column_families_config
                     drop_row_range_config = parent_rpcs.drop_row_range if parent_rpcs.respond_to? :drop_row_range

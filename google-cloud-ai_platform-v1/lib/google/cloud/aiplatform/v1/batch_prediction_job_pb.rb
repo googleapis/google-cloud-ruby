@@ -23,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :display_name, :string, 2
       optional :model, :string, 3
+      optional :model_version_id, :string, 30
       optional :unmanaged_container_model, :message, 28, "google.cloud.aiplatform.v1.UnmanagedContainerModel"
       optional :input_config, :message, 4, "google.cloud.aiplatform.v1.BatchPredictionJob.InputConfig"
       optional :model_parameters, :message, 5, "google.protobuf.Value"
