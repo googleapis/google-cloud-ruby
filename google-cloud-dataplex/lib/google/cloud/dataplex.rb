@@ -29,7 +29,7 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :dataplex do |config|
-  config.add_field! :endpoint,      "dataplex.googleapis.com", match: ::String
+  config.add_field! :endpoint,      "iam-meta-api.googleapis.com", match: ::String
   config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String
@@ -120,9 +120,9 @@ module Google
       #
       # Dataplex service provides data lakes as a service. The primary resources
       # offered by this service are Lakes, Zones and Assets which collectively allow
-      # a data adminstrator to organize, manage, secure and catalog data across their
-      # organization located across cloud projects in a variety of storage systems
-      # including Cloud Storage and BigQuery.
+      # a data administrator to organize, manage, secure and catalog data across
+      # their organization located across cloud projects in a variety of storage
+      # systems including Cloud Storage and BigQuery.
       #
       # @param version [::String, ::Symbol] The API version to connect to. Optional.
       #   Defaults to `:v1`.
