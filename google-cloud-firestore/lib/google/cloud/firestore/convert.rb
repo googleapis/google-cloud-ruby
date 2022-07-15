@@ -50,6 +50,7 @@ module Google
           end
 
           def fields_to_hash fields, client
+            # Google::Protobuf::Map#to_h ignores the given block, unlike Hash#to_h
             # rubocop:disable Style/MapToHash
             fields
               .map { |key, value| [key.to_sym, value_to_raw(value, client)] }
