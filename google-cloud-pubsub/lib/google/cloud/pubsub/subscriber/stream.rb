@@ -253,6 +253,7 @@ module Google
                 synchronize do
                   update_min_duration_per_lease_extension new_exactly_once_delivery_enabled
                   @exactly_once_delivery_enabled = new_exactly_once_delivery_enabled unless new_exactly_once_delivery_enabled.nil? 
+                  @subscriber.exactly_once_delivery_enabled = @exactly_once_delivery_enabled
 
                   # Create receipt of received messages reception
                   @subscriber.buffer.modify_ack_deadline @subscriber.deadline, response.received_messages.map(&:ack_id)

@@ -209,34 +209,6 @@ describe Google::Cloud::PubSub::Service do
     end
   end
 
-  it "should ignore any grpc error on ack" do
-    service = Google::Cloud::PubSub::Service.new project, nil
-    mocked_subscriber = Minitest::Mock.new
-    service.mocked_subscriber = mocked_subscriber
-    def mocked_subscriber.acknowledge *args
-      begin
-        raise GRPC::InvalidArgument.new "test"
-      rescue => exception
-        raise ::Google::Cloud::Error.from_error(exception)
-      end
-    end
-    assert_nil service.acknowledge "sub","ack_id"
-  end
-
-  it "should ignore any grpc error on modack" do
-    service = Google::Cloud::PubSub::Service.new project, nil
-    mocked_subscriber = Minitest::Mock.new
-    service.mocked_subscriber = mocked_subscriber
-    def mocked_subscriber.modify_ack_deadline *args
-      begin
-        raise GRPC::InvalidArgument.new "test"
-      rescue => exception
-        raise ::Google::Cloud::Error.from_error(exception)
-      end
-    end
-    assert_nil service.modify_ack_deadline "sub","ack_id", 80
-  end
-
   it "should raise errors other than grpc on ack" do
     service = Google::Cloud::PubSub::Service.new project, nil
     mocked_subscriber = Minitest::Mock.new

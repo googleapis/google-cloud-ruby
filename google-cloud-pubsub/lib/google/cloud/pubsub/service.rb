@@ -255,11 +255,7 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
-          begin
-            subscriber.acknowledge subscription: subscription_path(subscription), ack_ids: ack_ids
-          rescue StandardError => e
-            raise e unless e.cause.is_a? GRPC::BadStatus
-          end
+          subscriber.acknowledge subscription: subscription_path(subscription), ack_ids: ack_ids
         end
 
         ##
@@ -279,13 +275,9 @@ module Google
         ##
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
-          begin
-            subscriber.modify_ack_deadline subscription:         subscription_path(subscription),
-                                           ack_ids:              Array(ids),
-                                           ack_deadline_seconds: deadline
-          rescue StandardError => e
-            raise e unless e.cause.is_a? GRPC::BadStatus
-          end
+          subscriber.modify_ack_deadline subscription:         subscription_path(subscription),
+                                         ack_ids:              Array(ids),
+                                         ack_deadline_seconds: deadline
         end
 
         ##
