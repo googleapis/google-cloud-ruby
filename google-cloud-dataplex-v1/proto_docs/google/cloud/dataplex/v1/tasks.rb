@@ -55,6 +55,9 @@ module Google
         # @!attribute [rw] execution_spec
         #   @return [::Google::Cloud::Dataplex::V1::Task::ExecutionSpec]
         #     Required. Spec related to how a task is executed.
+        # @!attribute [r] execution_status
+        #   @return [::Google::Cloud::Dataplex::V1::Task::ExecutionStatus]
+        #     Output only. Status of the latest task executions.
         # @!attribute [rw] spark
         #   @return [::Google::Cloud::Dataplex::V1::Task::SparkTaskConfig]
         #     Config related to running custom Spark tasks.
@@ -80,26 +83,31 @@ module Google
             # @!attribute [rw] executors_count
             #   @return [::Integer]
             #     Optional. Total number of job executors.
+            #     Executor Count should be between 2 and 100. [Default=2]
             # @!attribute [rw] max_executors_count
             #   @return [::Integer]
             #     Optional. Max configurable executors.
             #     If max_executors_count > executors_count, then auto-scaling is enabled.
+            #     Max Executor Count should be between 2 and 1000. [Default=1000]
             class BatchComputeResources
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
             # Container Image Runtime Configuration used with Batch execution.
+            # @!attribute [rw] image
+            #   @return [::String]
+            #     Optional. Container image to use.
             # @!attribute [rw] java_jars
             #   @return [::Array<::String>]
             #     Optional. A list of Java JARS to add to the classpath.
             #     Valid input includes Cloud Storage URIs to Jar binaries.
-            #     For example, `gs://bucket-name/my/path/to/file.jar`.
+            #     For example, gs://bucket-name/my/path/to/file.jar
             # @!attribute [rw] python_packages
             #   @return [::Array<::String>]
             #     Optional. A list of python packages to be installed.
             #     Valid formats include Cloud Storage URI to a PIP installable library.
-            #     For example, `gs://bucket-name/my/path/to/lib.tar.gz`.
+            #     For example, gs://bucket-name/my/path/to/lib.tar.gz
             # @!attribute [rw] properties
             #   @return [::Google::Protobuf::Map{::String => ::String}]
             #     Optional. Override to common configuration of open source components installed on
@@ -205,9 +213,18 @@ module Google
           #     Required. Service account to use to execute a task.
           #     If not provided, the default Compute service account for the project is
           #     used.
+          # @!attribute [rw] project
+          #   @return [::String]
+          #     Optional. The project in which jobs are run. By default, the project containing the
+          #     Lake is used. If a project is provided, the
+          #     {::Google::Cloud::Dataplex::V1::Task::ExecutionSpec#service_account ExecutionSpec.service_account} must belong to this project.
           # @!attribute [rw] max_job_execution_lifetime
           #   @return [::Google::Protobuf::Duration]
           #     Optional. The maximum duration after which the job execution is expired.
+          # @!attribute [rw] kms_key
+          #   @return [::String]
+          #     Optional. The Cloud KMS key to use for encryption, of the form:
+          #     `projects/{project_number}/locations/{location_id}/keyRings/{key-ring-name}/cryptoKeys/{key-name}`.
           class ExecutionSpec
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,6 +281,18 @@ module Google
           #   @return [::Google::Cloud::Dataplex::V1::Task::InfrastructureSpec]
           #     Optional. Infrastructure specification for the execution.
           class SparkTaskConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Status of the task execution (e.g. Jobs).
+          # @!attribute [r] update_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Output only. Last update time of the status.
+          # @!attribute [r] latest_job
+          #   @return [::Google::Cloud::Dataplex::V1::Job]
+          #     Output only. latest job execution
+          class ExecutionStatus
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

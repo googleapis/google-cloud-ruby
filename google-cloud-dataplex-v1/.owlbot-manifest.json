@@ -55,11 +55,15 @@
     "proto_docs/google/protobuf/field_mask.rb",
     "proto_docs/google/protobuf/timestamp.rb",
     "proto_docs/google/rpc/status.rb",
+    "proto_docs/google/type/expr.rb",
     "snippets/Gemfile",
     "snippets/content_service/create_content.rb",
     "snippets/content_service/delete_content.rb",
     "snippets/content_service/get_content.rb",
+    "snippets/content_service/get_iam_policy.rb",
     "snippets/content_service/list_content.rb",
+    "snippets/content_service/set_iam_policy.rb",
+    "snippets/content_service/test_iam_permissions.rb",
     "snippets/content_service/update_content.rb",
     "snippets/dataplex_service/cancel_job.rb",
     "snippets/dataplex_service/create_asset.rb",
@@ -113,6 +117,7 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb"
   ]
 }

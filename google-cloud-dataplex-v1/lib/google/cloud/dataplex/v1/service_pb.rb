@@ -206,6 +206,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
+      optional :filter, :string, 4
     end
     add_message "google.cloud.dataplex.v1.ListSessionsResponse" do
       repeated :sessions, :message, 1, "google.cloud.dataplex.v1.Session"

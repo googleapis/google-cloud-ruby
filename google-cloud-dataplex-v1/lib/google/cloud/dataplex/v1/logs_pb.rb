@@ -33,6 +33,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :partition, :string, 1
       optional :entity, :string, 2
       optional :type, :enum, 3, "google.cloud.dataplex.v1.DiscoveryEvent.EntityType"
+      repeated :sampled_data_locations, :string, 4
     end
     add_message "google.cloud.dataplex.v1.DiscoveryEvent.ActionDetails" do
       optional :type, :string, 1
