@@ -20,6 +20,16 @@
                 "update_workload"
               ]
             },
+            "RestrictAllowedServices": {
+              "methods": [
+                "restrict_allowed_services"
+              ]
+            },
+            "RestrictAllowedResources": {
+              "methods": [
+                "restrict_allowed_resources"
+              ]
+            },
             "DeleteWorkload": {
               "methods": [
                 "delete_workload"
@@ -28,6 +38,11 @@
             "GetWorkload": {
               "methods": [
                 "get_workload"
+              ]
+            },
+            "AnalyzeWorkloadMove": {
+              "methods": [
+                "analyze_workload_move"
               ]
             },
             "ListWorkloads": {
