@@ -68,15 +68,15 @@ module Google
         #     The replication schedule policy.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the migrating VM was created (this refers to this resource and not
-        #     to the time it was installed in the source).
+        #     Output only. The time the migrating VM was created (this refers to this
+        #     resource and not to the time it was installed in the source).
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last time the migrating VM resource was updated.
         # @!attribute [r] last_sync
         #   @return [::Google::Cloud::VMMigration::V1::ReplicationSync]
-        #     Output only. The most updated snapshot created time in the source that finished
-        #     replication.
+        #     Output only. The most updated snapshot created time in the source that
+        #     finished replication.
         # @!attribute [r] state
         #   @return [::Google::Cloud::VMMigration::V1::MigratingVm::State]
         #     Output only. State of the MigratingVm.
@@ -85,19 +85,34 @@ module Google
         #     Output only. The last time the migrating VM state was updated.
         # @!attribute [r] current_sync_info
         #   @return [::Google::Cloud::VMMigration::V1::ReplicationCycle]
-        #     Output only. The percentage progress of the current running replication cycle.
+        #     Output only. The percentage progress of the current running replication
+        #     cycle.
         # @!attribute [r] group
         #   @return [::String]
-        #     Output only. The group this migrating vm is included in, if any. The group is
-        #     represented by the full path of the appropriate
+        #     Output only. The group this migrating vm is included in, if any. The group
+        #     is represented by the full path of the appropriate
         #     {::Google::Cloud::VMMigration::V1::Group Group} resource.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels of the migrating VM.
+        # @!attribute [r] recent_clone_jobs
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::CloneJob>]
+        #     Output only. The recent {::Google::Cloud::VMMigration::V1::CloneJob clone jobs}
+        #     performed on the migrating VM. This field holds the vm's last completed
+        #     clone job and the vm's running clone job, if one exists.
+        #     Note: To have this field populated you need to explicitly request it via
+        #     the "view" parameter of the Get/List request.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Output only. Provides details on the state of the Migrating VM in case of an
-        #     error in replication.
+        #     Output only. Provides details on the state of the Migrating VM in case of
+        #     an error in replication.
+        # @!attribute [r] recent_cutover_jobs
+        #   @return [::Array<::Google::Cloud::VMMigration::V1::CutoverJob>]
+        #     Output only. The recent cutover jobs performed on the migrating VM.
+        #     This field holds the vm's last completed cutover job and the vm's
+        #     running cutover job, if one exists.
+        #     Note: To have this field populated you need to explicitly request it via
+        #     the "view" parameter of the Get/List request.
         class MigratingVm
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -172,11 +187,14 @@ module Google
         #     Output only. Details of the target VM in Compute Engine.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the clone job was created (as an API call, not when it was
-        #     actually created in the target).
-        # @!attribute [rw] name
+        #     Output only. The time the clone job was created (as an API call, not when
+        #     it was actually created in the target).
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the clone job was ended.
+        # @!attribute [r] name
         #   @return [::String]
-        #     The name of the clone.
+        #     Output only. The name of the clone.
         # @!attribute [r] state
         #   @return [::Google::Cloud::VMMigration::V1::CloneJob::State]
         #     Output only. State of the clone job.
@@ -185,7 +203,8 @@ module Google
         #     Output only. The time the state was last updated.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Output only. Provides details for the errors that led to the Clone Job's state.
+        #     Output only. Provides details for the errors that led to the Clone Job's
+        #     state.
         class CloneJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -227,8 +246,11 @@ module Google
         #     Output only. Details of the target VM in Compute Engine.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the cutover job was created (as an API call, not when it was
-        #     actually created in the target).
+        #     Output only. The time the cutover job was created (as an API call, not when
+        #     it was actually created in the target).
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time the cutover job had finished.
         # @!attribute [r] name
         #   @return [::String]
         #     Output only. The name of the cutover job.
@@ -243,10 +265,12 @@ module Google
         #     Output only. The current progress in percentage of the cutover job.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Output only. Provides details for the errors that led to the Cutover Job's state.
+        #     Output only. Provides details for the errors that led to the Cutover Job's
+        #     state.
         # @!attribute [r] state_message
         #   @return [::String]
-        #     Output only. A message providing possible extra details about the current state.
+        #     Output only. A message providing possible extra details about the current
+        #     state.
         class CutoverJob
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -331,10 +355,10 @@ module Google
         #     Required. The parent, which owns this collection of source VMs.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of clone jobs to return. The service may return
-        #     fewer than this value. If unspecified, at most 500 clone jobs will be
-        #     returned. The maximum value is 1000; values above 1000 will be coerced to
-        #     1000.
+        #     Optional. The maximum number of clone jobs to return. The service may
+        #     return fewer than this value. If unspecified, at most 500 clone jobs will
+        #     be returned. The maximum value is 1000; values above 1000 will be coerced
+        #     to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Required. A page token, received from a previous `ListCloneJobs` call.
@@ -359,8 +383,8 @@ module Google
         #     Output only. The list of clone jobs response.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -419,8 +443,8 @@ module Google
         #     The credentials username.
         # @!attribute [rw] password
         #   @return [::String]
-        #     Input only. The credentials password. This is write only and can not be read in a GET
-        #     operation.
+        #     Input only. The credentials password. This is write only and can not be
+        #     read in a GET operation.
         # @!attribute [rw] vcenter_ip
         #   @return [::String]
         #     The ip address of the vcenter this Source represents.
@@ -437,8 +461,8 @@ module Google
         # to connect the Datacenter to GCP and support vm migration data transfer.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the connector was created (as an API call, not when it was
-        #     actually installed).
+        #     Output only. The time the connector was created (as an API call, not when
+        #     it was actually installed).
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last time the connector was updated with an API call.
@@ -447,9 +471,9 @@ module Google
         #     Output only. The connector's name.
         # @!attribute [rw] registration_id
         #   @return [::String]
-        #     Immutable. A unique key for this connector. This key is internal to the OVA connector
-        #     and is supplied with its creation during the registration process and can
-        #     not be modified.
+        #     Immutable. A unique key for this connector. This key is internal to the OVA
+        #     connector and is supplied with its creation during the registration process
+        #     and can not be modified.
         # @!attribute [rw] service_account
         #   @return [::String]
         #     The service account to use in the connector when communicating with the
@@ -460,17 +484,35 @@ module Google
         #     connector during the registration process and can not be modified.
         # @!attribute [r] bucket
         #   @return [::String]
-        #     Output only. The communication channel between the datacenter connector and GCP.
+        #     Output only. The communication channel between the datacenter connector and
+        #     GCP.
         # @!attribute [r] state
         #   @return [::Google::Cloud::VMMigration::V1::DatacenterConnector::State]
-        #     Output only. State of the DatacenterConnector, as determined by the health checks.
+        #     Output only. State of the DatacenterConnector, as determined by the health
+        #     checks.
         # @!attribute [r] state_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the state was last set.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Output only. Provides details on the state of the Datacenter Connector in case of an
-        #     error.
+        #     Output only. Provides details on the state of the Datacenter Connector in
+        #     case of an error.
+        # @!attribute [r] appliance_infrastructure_version
+        #   @return [::String]
+        #     Output only. Appliance OVA version.
+        #     This is the OVA which is manually installed by the user and contains the
+        #     infrastructure for the automatically updatable components on the appliance.
+        # @!attribute [r] appliance_software_version
+        #   @return [::String]
+        #     Output only. Appliance last installed update bundle version.
+        #     This is the version of the automatically updatable components on the
+        #     appliance.
+        # @!attribute [r] available_versions
+        #   @return [::Google::Cloud::VMMigration::V1::AvailableUpdates]
+        #     Output only. The available versions for updating this appliance.
+        # @!attribute [r] upgrade_status
+        #   @return [::Google::Cloud::VMMigration::V1::UpgradeStatus]
+        #     Output only. The status of the current / last upgradeAppliance operation.
         class DatacenterConnector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -495,6 +537,76 @@ module Google
             # The source exists and its credentials were verified.
             ACTIVE = 4
           end
+        end
+
+        # UpgradeStatus contains information about upgradeAppliance operation.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     The version to upgrade to.
+        # @!attribute [rw] state
+        #   @return [::Google::Cloud::VMMigration::V1::UpgradeStatus::State]
+        #     The state of the upgradeAppliance operation.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     Provides details on the state of the upgrade operation in case of an error.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The time the operation was started.
+        # @!attribute [rw] previous_version
+        #   @return [::String]
+        #     The version from which we upgraded.
+        class UpgradeStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The possible values of the state.
+          module State
+            # The state was not sampled by the health checks yet.
+            STATE_UNSPECIFIED = 0
+
+            # The upgrade has started.
+            RUNNING = 1
+
+            # The upgrade failed.
+            FAILED = 2
+
+            # The upgrade finished successfully.
+            SUCCEEDED = 3
+          end
+        end
+
+        # Holds informatiom about the available versions for upgrade.
+        # @!attribute [rw] new_deployable_appliance
+        #   @return [::Google::Cloud::VMMigration::V1::ApplianceVersion]
+        #     The newest deployable version of the appliance.
+        #     The current appliance can't be updated into this version, and the owner
+        #     must manually deploy this OVA to a new appliance.
+        # @!attribute [rw] in_place_update
+        #   @return [::Google::Cloud::VMMigration::V1::ApplianceVersion]
+        #     The latest version for in place update.
+        #     The current appliance can be updated to this version using the API or m4c
+        #     CLI.
+        class AvailableUpdates
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes an appliance version.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     The appliance version.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     A link for downloading the version.
+        # @!attribute [rw] critical
+        #   @return [::Boolean]
+        #     Determine whether it's critical to upgrade the appliance to this version.
+        # @!attribute [rw] release_notes_uri
+        #   @return [::String]
+        #     Link to a page that contains the version release notes.
+        class ApplianceVersion
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for 'ListSources' request.
@@ -531,8 +643,8 @@ module Google
         #     Output only. The list of sources response.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -684,7 +796,7 @@ module Google
         # @!attribute [rw] guest_description
         #   @return [::String]
         #     The VM's OS. See for example
-        #     https://pubs.vmware.com/vi-sdk/visdk250/ReferenceGuide/vim.vm.GuestOsDescriptor.GuestOsIdentifier.html
+        #     https://vdc-repo.vmware.com/vmwb-repository/dcr-public/da47f910-60ac-438b-8b9b-6122f4d14524/16b7274a-bf8b-4b4c-a05e-746f2aa93c8c/doc/vim.vm.GuestOsDescriptor.GuestOsIdentifier.html
         #     for types of strings this might hold.
         # @!attribute [r] boot_option
         #   @return [::Google::Cloud::VMMigration::V1::VmwareVmDetails::BootOption]
@@ -732,13 +844,13 @@ module Google
 
         # Response message for
         # {::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory fetchInventory}.
-        # @!attribute [r] vmware_vms
+        # @!attribute [rw] vmware_vms
         #   @return [::Google::Cloud::VMMigration::V1::VmwareVmsDetails]
-        #     Output only. The description of the VMs in a Source of type Vmware.
+        #     The description of the VMs in a Source of type Vmware.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The timestamp when the source was last queried (if the result is from the
-        #     cache).
+        #     Output only. The timestamp when the source was last queried (if the result
+        #     is from the cache).
         class FetchInventoryResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -760,19 +872,20 @@ module Google
         #     Output only. The time the state was last set.
         # @!attribute [r] error
         #   @return [::Google::Rpc::Status]
-        #     Output only. Provides details on the state of the report in case of an error.
+        #     Output only. Provides details on the state of the report in case of an
+        #     error.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time the report was created (this refers to the time of the request,
-        #     not the time the report creation completed).
+        #     Output only. The time the report was created (this refers to the time of
+        #     the request, not the time the report creation completed).
         # @!attribute [rw] time_frame
         #   @return [::Google::Cloud::VMMigration::V1::UtilizationReport::TimeFrame]
         #     Time frame of the report.
         # @!attribute [r] frame_end_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The point in time when the time frame ends. Notice that the time
-        #     frame is counted backwards. For instance if the "frame_end_time" value is
-        #     2021/01/20 and the time frame is WEEK then the report covers the week
+        #     Output only. The point in time when the time frame ends. Notice that the
+        #     time frame is counted backwards. For instance if the "frame_end_time" value
+        #     is 2021/01/20 and the time frame is WEEK then the report covers the week
         #     between 2021/01/20 and 2021/01/14.
         # @!attribute [r] vm_count
         #   @return [::Integer]
@@ -881,8 +994,8 @@ module Google
         #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Required. A page token, received from a previous `ListUtilizationReports` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Required. A page token, received from a previous `ListUtilizationReports`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to `ListUtilizationReports`
         #     must match the call that provided the page token.
@@ -903,8 +1016,8 @@ module Google
         #     Output only. The list of reports.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -935,8 +1048,8 @@ module Google
         #     Required. The report to create.
         # @!attribute [rw] utilization_report_id
         #   @return [::String]
-        #     Required. The ID to use for the report, which will become the final component of
-        #     the reports's resource name.
+        #     Required. The ID to use for the report, which will become the final
+        #     component of the reports's resource name.
         #
         #     This value maximum length is 63 characters, and valid characters
         #     are /[a-z][0-9]-/. It must start with an english letter and must not
@@ -991,8 +1104,8 @@ module Google
         #     Output only. The list of sources response.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -1067,20 +1180,50 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for 'UpgradeAppliance' request.
+        # @!attribute [rw] datacenter_connector
+        #   @return [::String]
+        #     Required. The DatacenterConnector name.
+        # @!attribute [rw] request_id
+        #   @return [::String]
+        #     A request ID to identify requests. Specify a unique request ID
+        #     so that if you must retry your request, the server will know to ignore
+        #     the request if it has already been completed. The server will guarantee
+        #     that for at least 60 minutes after the first request.
+        #
+        #     For example, consider a situation where you make an initial request and t
+        #     he request times out. If you make the request again with the same request
+        #     ID, the server can check if original operation with the same request ID
+        #     was received, and if so, will ignore the second request. This prevents
+        #     clients from accidentally creating duplicate commitments.
+        #
+        #     The request ID must be a valid UUID with the exception that zero UUID is
+        #     not supported (00000000-0000-0000-0000-000000000000).
+        class UpgradeApplianceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for 'UpgradeAppliance' request.
+        class UpgradeApplianceResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for 'ListDatacenterConnectors' request.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of connectors.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of connectors to return. The service may return
-        #     fewer than this value. If unspecified, at most 500 sources will be
+        #     Optional. The maximum number of connectors to return. The service may
+        #     return fewer than this value. If unspecified, at most 500 sources will be
         #     returned. The maximum value is 1000; values above 1000 will be coerced to
         #     1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Required. A page token, received from a previous `ListDatacenterConnectors` call.
-        #     Provide this to retrieve the subsequent page.
+        #     Required. A page token, received from a previous `ListDatacenterConnectors`
+        #     call. Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
         #     `ListDatacenterConnectors` must match the call that provided the page
@@ -1148,6 +1291,12 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The metadata key/value pairs to assign to the VM.
+        # @!attribute [rw] additional_licenses
+        #   @return [::Array<::String>]
+        #     Additional licenses to assign to the VM.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     The hostname to assign to the VM.
         class ComputeEngineTargetDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1222,6 +1371,12 @@ module Google
         # @!attribute [rw] metadata
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The metadata key/value pairs to assign to the VM.
+        # @!attribute [rw] additional_licenses
+        #   @return [::Array<::String>]
+        #     Additional licenses to assign to the VM.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     The hostname to assign to the VM.
         class ComputeEngineTargetDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1427,10 +1582,10 @@ module Google
         #     Required. The parent, which owns this collection of MigratingVms.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of migrating VMs to return. The service may return
-        #     fewer than this value. If unspecified, at most 500 migrating VMs will be
-        #     returned. The maximum value is 1000; values above 1000 will be coerced to
-        #     1000.
+        #     Optional. The maximum number of migrating VMs to return. The service may
+        #     return fewer than this value. If unspecified, at most 500 migrating VMs
+        #     will be returned. The maximum value is 1000; values above 1000 will be
+        #     coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Required. A page token, received from a previous `ListMigratingVms` call.
@@ -1444,6 +1599,9 @@ module Google
         # @!attribute [rw] order_by
         #   @return [::String]
         #     Optional. the order by fields for the result.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::VMMigration::V1::MigratingVmView]
+        #     Optional. The level of details of each migrating VM.
         class ListMigratingVmsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1455,8 +1613,8 @@ module Google
         #     Output only. The list of Migrating VMs response.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -1469,6 +1627,9 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the MigratingVm.
+        # @!attribute [rw] view
+        #   @return [::Google::Cloud::VMMigration::V1::MigratingVmView]
+        #     Optional. The level of details of the migrating VM.
         class GetMigratingVmRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1576,9 +1737,9 @@ module Google
 
         # TargetProject message represents a target Compute Engine project for a
         # migration or a clone.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     The name of the target project.
+        #     Output only. The name of the target project.
         # @!attribute [rw] project
         #   @return [::String]
         #     The target project ID (number) or project name.
@@ -1587,8 +1748,8 @@ module Google
         #     The target project's description.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. The time this target project resource was created (not related to when the
-        #     Compute Engine project it points to was created).
+        #     Output only. The time this target project resource was created (not related
+        #     to when the Compute Engine project it points to was created).
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last time the target project resource was updated.
@@ -1640,8 +1801,8 @@ module Google
         #     Output only. The list of target response.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -1737,9 +1898,9 @@ module Google
 
         # Describes message for 'Group' resource. The Group is a collections of several
         # MigratingVms.
-        # @!attribute [rw] name
+        # @!attribute [r] name
         #   @return [::String]
-        #     The Group name.
+        #     Output only. The Group name.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The create time timestamp.
@@ -1791,8 +1952,8 @@ module Google
         #     Output only. The list of groups response.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -1982,10 +2143,10 @@ module Google
         #     Required. The parent, which owns this collection of migrating VMs.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of cutover jobs to return. The service may return
-        #     fewer than this value. If unspecified, at most 500 cutover jobs will be
-        #     returned. The maximum value is 1000; values above 1000 will be coerced to
-        #     1000.
+        #     Optional. The maximum number of cutover jobs to return. The service may
+        #     return fewer than this value. If unspecified, at most 500 cutover jobs will
+        #     be returned. The maximum value is 1000; values above 1000 will be coerced
+        #     to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Required. A page token, received from a previous `ListCutoverJobs` call.
@@ -2010,8 +2171,8 @@ module Google
         #     Output only. The list of cutover jobs response.
         # @!attribute [r] next_page_token
         #   @return [::String]
-        #     Output only. A token, which can be sent as `page_token` to retrieve the next page.
-        #     If this field is omitted, there are no subsequent pages.
+        #     Output only. A token, which can be sent as `page_token` to retrieve the
+        #     next page. If this field is omitted, there are no subsequent pages.
         # @!attribute [r] unreachable
         #   @return [::Array<::String>]
         #     Output only. Locations that could not be reached.
@@ -2049,8 +2210,9 @@ module Google
         #   @return [::Boolean]
         #     Output only. Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [r] api_version
         #   @return [::String]
         #     Output only. API version used to start the operation.
@@ -2073,7 +2235,8 @@ module Google
         #     Output only. Suggested action for solving the error.
         # @!attribute [r] help_links
         #   @return [::Array<::Google::Rpc::Help::Link>]
-        #     Output only. URL(s) pointing to additional information on handling the current error.
+        #     Output only. URL(s) pointing to additional information on handling the
+        #     current error.
         # @!attribute [r] error_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The time the error occurred.
@@ -2111,6 +2274,9 @@ module Google
             # Migrate for Compute encountered an error during utilization report
             # creation.
             UTILIZATION_REPORT_ERROR = 8
+
+            # Migrate for Compute encountered an error during appliance upgrade.
+            APPLIANCE_UPGRADE_ERROR = 9
           end
         end
 
@@ -2127,6 +2293,20 @@ module Google
 
           # Include everything.
           FULL = 2
+        end
+
+        # Controls the level of details of a Migrating VM.
+        module MigratingVmView
+          # View is unspecified. The API will fallback to the default value.
+          MIGRATING_VM_VIEW_UNSPECIFIED = 0
+
+          # Get the migrating VM basic details.
+          # The basic details do not include the recent clone jobs and recent cutover
+          # jobs lists.
+          MIGRATING_VM_VIEW_BASIC = 1
+
+          # Include everything.
+          MIGRATING_VM_VIEW_FULL = 2
         end
 
         # Types of disks supported for Compute Engine VM.

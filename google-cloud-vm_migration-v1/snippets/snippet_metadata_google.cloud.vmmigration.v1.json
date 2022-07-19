@@ -572,6 +572,46 @@
       ]
     },
     {
+      "region_tag": "vmmigration_v1_generated_VMMigration_UpgradeAppliance_sync",
+      "title": "Snippet for upgrade_appliance in VMMigration",
+      "description": "Basic snippet for upgrade_appliance in VMMigration",
+      "file": "vm_migration/upgrade_appliance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upgrade_appliance",
+        "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client#upgrade_appliance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VMMigration::Client",
+          "full_name": "::Google::Cloud::VMMigration::V1::VMMigration::Client"
+        },
+        "method": {
+          "short_name": "UpgradeAppliance",
+          "full_name": "google.cloud.vmmigration.v1.VmMigration.UpgradeAppliance",
+          "service": {
+            "short_name": "VmMigration",
+            "full_name": "google.cloud.vmmigration.v1.VmMigration"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "vmmigration_v1_generated_VMMigration_CreateMigratingVm_sync",
       "title": "Snippet for create_migrating_vm in VMMigration",
       "description": "Basic snippet for create_migrating_vm in VMMigration",
