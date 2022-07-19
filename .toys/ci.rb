@@ -285,7 +285,7 @@ def filter_gem_dirs dirs
         controller.in.puts "spec = Gem::Specification.load '#{dir}/#{dir}.gemspec'"
         controller.in.puts "puts spec.required_ruby_version.satisfied_by? Gem::Version.new(#{RUBY_VERSION.inspect})"
       end
-      result == "true"
+      result.chomp == "true"
     else
       false
     end
