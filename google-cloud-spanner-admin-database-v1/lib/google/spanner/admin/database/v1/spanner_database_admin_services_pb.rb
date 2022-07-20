@@ -174,6 +174,8 @@ module Google
                 # `operation.metadata.value.progress.start_time` in descending order starting
                 # from the most recently started operation.
                 rpc :ListBackupOperations, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListBackupOperationsResponse
+                # Lists Cloud Spanner database roles.
+                rpc :ListDatabaseRoles, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest, ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse
               end
 
               Stub = Service.rpc_stub_class

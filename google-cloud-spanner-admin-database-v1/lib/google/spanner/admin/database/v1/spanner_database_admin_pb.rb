@@ -126,6 +126,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :progress, :message, 2, "google.spanner.admin.database.v1.OperationProgress"
     end
+    add_message "google.spanner.admin.database.v1.DatabaseRole" do
+      optional :name, :string, 1
+    end
+    add_message "google.spanner.admin.database.v1.ListDatabaseRolesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.spanner.admin.database.v1.ListDatabaseRolesResponse" do
+      repeated :database_roles, :message, 1, "google.spanner.admin.database.v1.DatabaseRole"
+      optional :next_page_token, :string, 2
+    end
     add_enum "google.spanner.admin.database.v1.RestoreSourceType" do
       value :TYPE_UNSPECIFIED, 0
       value :BACKUP, 1
@@ -159,6 +171,9 @@ module Google
             RestoreDatabaseEncryptionConfig::EncryptionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseEncryptionConfig.EncryptionType").enummodule
             RestoreDatabaseMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreDatabaseMetadata").msgclass
             OptimizeRestoredDatabaseMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.OptimizeRestoredDatabaseMetadata").msgclass
+            DatabaseRole = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.DatabaseRole").msgclass
+            ListDatabaseRolesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseRolesRequest").msgclass
+            ListDatabaseRolesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.ListDatabaseRolesResponse").msgclass
             RestoreSourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.spanner.admin.database.v1.RestoreSourceType").enummodule
           end
         end
