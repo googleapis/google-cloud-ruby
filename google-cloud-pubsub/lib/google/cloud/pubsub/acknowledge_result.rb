@@ -17,8 +17,7 @@ module Google
   module Cloud
     module PubSub
       ##
-      # The result of a ack/nack/modack on messages. The message object is available on
-      # {#message} and will have {#message_id} assigned by the API.
+      # The result of a ack/nack/modack on messages.
       #
       # When the operation was successful the result will be marked
       # {#succeeded?}. Otherwise, the result will be marked {#failed?} and the
