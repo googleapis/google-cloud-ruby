@@ -14,7 +14,6 @@
 
 
 require "google/cloud/storage/version"
-require "google/cloud/storage/retry"
 require "google/apis/storage_v1"
 require "digest"
 require "mini_mime"
@@ -132,7 +131,7 @@ module Google
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
           
-          is_idempotent = Retry.retry?(if_metageneration_match: if_metageneration_match)
+          is_idempotent = retry?(if_metageneration_match: if_metageneration_match)
           options = is_idempotent ? {} : {retries: 0}
 
           execute do
@@ -361,7 +360,7 @@ module Google
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
-          is_idempotent = Retry.retry?(if_generation_match: if_generation_match)
+          is_idempotent = retry?(if_generation_match: if_generation_match)
           options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
 
           execute do
@@ -430,7 +429,7 @@ module Google
                          user_project: nil
           key_options = rewrite_key_options source_key, destination_key
           
-          is_idempotent = Retry.retry?(if_generation_match: if_generation_match)
+          is_idempotent = retry?(if_generation_match: if_generation_match)
           options = is_idempotent ? key_options : key_options.merge(retries: 0)
 
           execute do
@@ -472,7 +471,7 @@ module Google
           source_objects = compose_file_source_objects source_files, if_source_generation_match
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
-          is_idempotent = Retry.retry?(if_generation_match: if_generation_match)
+          is_idempotent = retry?(if_generation_match: if_generation_match)
           options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
 
           execute do
@@ -524,7 +523,7 @@ module Google
                        user_project: nil
           file_gapi ||= Google::Apis::StorageV1::Object.new
 
-          is_idempotent = Retry.retry?(if_metageneration_match: if_metageneration_match)
+          is_idempotent = retry?(if_metageneration_match: if_metageneration_match)
           options = is_idempotent ? {} : {retries: 0}
 
           execute do
@@ -552,7 +551,7 @@ module Google
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
                         user_project: nil
-          is_idempotent = Retry.retry?(generation: generation, if_generation_match: if_generation_match)
+          is_idempotent = retry?(generation: generation, if_generation_match: if_generation_match)
           options = is_idempotent ? {} : {retries: 0}
                                   
           execute do
@@ -793,6 +792,10 @@ module Google
           yield
         rescue Google::Apis::Error => e
           raise Google::Cloud::Error.from_error(e)
+        end
+
+        def retry? query_params
+          query_params.any? { |_key, val| !val.nil? }
         end
       end
     end
