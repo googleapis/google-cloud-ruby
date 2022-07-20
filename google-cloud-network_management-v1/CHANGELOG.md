@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-07-19)
+
+#### Features
+
+* Added router appliance next hop type  ([#18825](https://github.com/googleapis/google-cloud-ruby/issues/18825)) 
+
 ### 0.3.0 (2022-07-05)
 
 #### Features
