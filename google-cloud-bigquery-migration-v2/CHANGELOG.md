@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-07-19)
+
+#### Features
+
+* Added support for PostgreSQL and Presto dialects ([#18831](https://github.com/googleapis/google-cloud-ruby/issues/18831)) 
+
 ### 0.3.0 (2022-07-01)
 
 #### Features
