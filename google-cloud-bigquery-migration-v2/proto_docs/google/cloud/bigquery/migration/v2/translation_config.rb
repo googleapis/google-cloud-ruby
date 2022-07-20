@@ -81,6 +81,12 @@ module Google
           # @!attribute [rw] sql_server_dialect
           #   @return [::Google::Cloud::Bigquery::Migration::V2::SQLServerDialect]
           #     The SQL Server dialect
+          # @!attribute [rw] postgresql_dialect
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::PostgresqlDialect]
+          #     The Postgresql dialect
+          # @!attribute [rw] presto_dialect
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::PrestoDialect]
+          #     The Presto dialect
           class Dialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -163,6 +169,18 @@ module Google
 
           # The dialect definition for SQL Server.
           class SQLServerDialect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dialect definition for Postgresql.
+          class PostgresqlDialect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dialect definition for Presto.
+          class PrestoDialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

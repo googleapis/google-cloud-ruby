@@ -967,6 +967,71 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
     end
   end
 
+  def test_upgrade_appliance
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    datacenter_connector = "hello world"
+    request_id = "hello world"
+
+    upgrade_appliance_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :upgrade_appliance, name
+      assert_kind_of ::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest, request
+      assert_equal "hello world", request["datacenter_connector"]
+      assert_equal "hello world", request["request_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, upgrade_appliance_client_stub do
+      # Create client
+      client = ::Google::Cloud::VMMigration::V1::VMMigration::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.upgrade_appliance({ datacenter_connector: datacenter_connector, request_id: request_id }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.upgrade_appliance datacenter_connector: datacenter_connector, request_id: request_id do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.upgrade_appliance ::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new(datacenter_connector: datacenter_connector, request_id: request_id) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.upgrade_appliance({ datacenter_connector: datacenter_connector, request_id: request_id }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.upgrade_appliance(::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new(datacenter_connector: datacenter_connector, request_id: request_id), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, upgrade_appliance_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_migrating_vm
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -1049,6 +1114,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
     page_token = "hello world"
     filter = "hello world"
     order_by = "hello world"
+    view = :MIGRATING_VM_VIEW_UNSPECIFIED
 
     list_migrating_vms_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_migrating_vms, name
@@ -1058,6 +1124,7 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
       assert_equal "hello world", request["order_by"]
+      assert_equal :MIGRATING_VM_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -1068,35 +1135,35 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+      client.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_migrating_vms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+      client.list_migrating_vms parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_migrating_vms ::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+      client.list_migrating_vms ::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+      client.list_migrating_vms({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_migrating_vms(::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+      client.list_migrating_vms(::Google::Cloud::VMMigration::V1::ListMigratingVmsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by, view: view), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1116,11 +1183,13 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    view = :MIGRATING_VM_VIEW_UNSPECIFIED
 
     get_migrating_vm_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_migrating_vm, name
       assert_kind_of ::Google::Cloud::VMMigration::V1::GetMigratingVmRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :MIGRATING_VM_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -1131,31 +1200,31 @@ class ::Google::Cloud::VMMigration::V1::VMMigration::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_migrating_vm({ name: name }) do |response, operation|
+      client.get_migrating_vm({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_migrating_vm name: name do |response, operation|
+      client.get_migrating_vm name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_migrating_vm ::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name) do |response, operation|
+      client.get_migrating_vm ::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_migrating_vm({ name: name }, grpc_options) do |response, operation|
+      client.get_migrating_vm({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_migrating_vm(::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_migrating_vm(::Google::Cloud::VMMigration::V1::GetMigratingVmRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

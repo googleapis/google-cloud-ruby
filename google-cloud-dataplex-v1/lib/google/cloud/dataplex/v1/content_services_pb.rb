@@ -41,6 +41,30 @@ module Google
             rpc :DeleteContent, ::Google::Cloud::Dataplex::V1::DeleteContentRequest, ::Google::Protobuf::Empty
             # Get a content resource.
             rpc :GetContent, ::Google::Cloud::Dataplex::V1::GetContentRequest, ::Google::Cloud::Dataplex::V1::Content
+            # Gets the access control policy for a contentitem resource. A `NOT_FOUND`
+            # error is returned if the resource does not exist. An empty policy is
+            # returned if the resource exists but does not have a policy set on it.
+            #
+            # Caller must have Google IAM `dataplex.content.getIamPolicy` permission
+            # on the resource.
+            rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Sets the access control policy on the specified contentitem resource.
+            # Replaces any existing policy.
+            #
+            # Caller must have Google IAM `dataplex.content.setIamPolicy` permission
+            # on the resource.
+            rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
+            # Returns the caller's permissions on a resource.
+            # If the resource does not exist, an empty set of
+            # permissions is returned (a `NOT_FOUND` error is not returned).
+            #
+            # A caller is not required to have Google IAM permission to make this
+            # request.
+            #
+            # Note: This operation is designed to be used for building permission-aware
+            # UIs and command-line tools, not for authorization checking. This operation
+            # may "fail open" without warning.
+            rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             # List content.
             rpc :ListContent, ::Google::Cloud::Dataplex::V1::ListContentRequest, ::Google::Cloud::Dataplex::V1::ListContentResponse
           end
