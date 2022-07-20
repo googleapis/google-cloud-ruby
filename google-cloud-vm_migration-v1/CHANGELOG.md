@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.3.0 (2022-07-20)
+
+#### Features
+
+* Return additional_licenses and hostname in ComputeEngineTargetDefaults and ComputeEngineTargetDetails resources 
+* Return appliance_infrastructure_version, appliance_software_version, available_versions, and upgrade_status in DatacenterConnector resources 
+* Return recent_clone_jobs and recent_cutover_jobs in MigratingVm resources 
+* Return the end_time in CloneJob and CutoverJob resources 
+* Support for the upgrade_appliance call ([#18847](https://github.com/googleapis/google-cloud-ruby/issues/18847)) 
+* Support the view argument for get_migrating_vm and list_migrating_vms 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features
