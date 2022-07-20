@@ -61,6 +61,8 @@ module Acceptance
             date DATE,
             numerics numeric[],
             dates DATE[],
+            json jsonb,
+            json_array jsonb[],
             PRIMARY KEY(id)
         );
       STUFFS

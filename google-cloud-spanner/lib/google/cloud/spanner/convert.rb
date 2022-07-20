@@ -182,6 +182,8 @@ module Google
               )
             when :PG_NUMERIC
               V1::Type.new(code: :NUMERIC, type_annotation: :PG_NUMERIC)
+            when :PG_JSONB
+              V1::Type.new(code: :JSON, type_annotation: :PG_JSONB)  
             else
               V1::Type.new(code: field)
             end

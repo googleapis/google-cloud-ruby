@@ -43,6 +43,11 @@ def make_params dialect, value
   { key => value }
 end
 
+Google::Cloud::Spanner.configure do |config|
+  config.quota_project = "span-cloud-testing"
+  config.endpoint = "staging-wrenchworks.sandbox.googleapis.com:443"
+end
+
 # Create shared spanner object so we don't create new for each test
 $spanner = Google::Cloud::Spanner.new
 $spanner_db_admin = Google::Cloud::Spanner::Admin::Database.database_admin
@@ -117,7 +122,7 @@ end
 
 # Create buckets to be shared with all the tests
 require "date"
-$spanner_instance_id = "google-cloud-ruby-tests"
+$spanner_instance_id = "ruby-test-staging"
 # $spanner_database_id is already 22 characters, can only add 7 additional characters
 $spanner_database_id = "gcruby-#{Date.today.strftime '%y%m%d'}-#{SecureRandom.hex 4}"
 $spanner_pg_database_id = "gcruby-pg-#{Date.today.strftime '%y%m%d'}-#{SecureRandom.hex 4}"

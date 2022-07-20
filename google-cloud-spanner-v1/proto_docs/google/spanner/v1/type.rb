@@ -167,6 +167,7 @@ module Google
           # {::Google::Cloud::Spanner::V1::TypeCode::NUMERIC NUMERIC} when a client interacts with PostgreSQL-enabled
           # Spanner databases.
           PG_NUMERIC = 2
+          PG_JSONB = 3
         end
       end
     end
