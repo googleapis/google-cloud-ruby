@@ -553,7 +553,7 @@ module Google
                         user_project: nil
           is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
           options = is_idempotent ? {} : { retries: 0 }
-          
+
           execute do
             service.delete_object bucket_name, file_path,
                                   generation: generation,
