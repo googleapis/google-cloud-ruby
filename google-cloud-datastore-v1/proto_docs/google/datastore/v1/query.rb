@@ -187,7 +187,10 @@ module Google
         # @!attribute [rw] filters
         #   @return [::Array<::Google::Cloud::Datastore::V1::Filter>]
         #     The list of filters to combine.
-        #     Must contain at least one filter.
+        #
+        #     Requires:
+        #
+        #     * At least one filter is present.
         class CompositeFilter
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
