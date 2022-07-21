@@ -195,6 +195,9 @@ module Google
 
             # T1562
             IMPAIR_DEFENSES = 31
+
+            # T1046
+            NETWORK_SERVICE_DISCOVERY = 32
           end
         end
       end
