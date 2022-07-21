@@ -48,6 +48,9 @@ module Google
         #     and `mtls_policy` are set, server allows both plain text and mTLS
         #     connections. See documentation of other encryption modes to confirm
         #     compatibility.
+        #
+        #     Consider using it if you wish to upgrade in place your deployment to TLS
+        #     while having mixed TLS and non-TLS traffic reaching port :80.
         # @!attribute [rw] server_certificate
         #   @return [::Google::Cloud::NetworkSecurity::V1beta1::CertificateProvider]
         #     Defines a mechanism to provision server identity (public and private keys).
@@ -134,9 +137,10 @@ module Google
         #     the format `projects/*/locations/{location}`.
         # @!attribute [rw] server_tls_policy_id
         #   @return [::String]
-        #     Required. Short name of the ServerTlsPolicy resource to be created. This value should
-        #     be 1-63 characters long, containing only letters, numbers, hyphens, and
-        #     underscores, and should not start with a number. E.g. "server_mtls_policy".
+        #     Required. Short name of the ServerTlsPolicy resource to be created. This
+        #     value should be 1-63 characters long, containing only letters, numbers,
+        #     hyphens, and underscores, and should not start with a number. E.g.
+        #     "server_mtls_policy".
         # @!attribute [rw] server_tls_policy
         #   @return [::Google::Cloud::NetworkSecurity::V1beta1::ServerTlsPolicy]
         #     Required. ServerTlsPolicy resource to be created.
