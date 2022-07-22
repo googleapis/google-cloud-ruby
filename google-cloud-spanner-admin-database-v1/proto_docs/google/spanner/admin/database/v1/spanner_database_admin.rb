@@ -531,6 +531,53 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
+            # A Cloud Spanner database role.
+            # @!attribute [rw] name
+            #   @return [::String]
+            #     Required. The name of the database role. Values are of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles/
+            #     \\{role}`, where `<role>` is as specified in the `CREATE ROLE`
+            #     DDL statement. This name can be passed to Get/Set IAMPolicy methods to
+            #     identify the database role.
+            class DatabaseRole
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The request for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
+            # @!attribute [rw] parent
+            #   @return [::String]
+            #     Required. The database whose roles should be listed.
+            #     Values are of the form
+            #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles`.
+            # @!attribute [rw] page_size
+            #   @return [::Integer]
+            #     Number of database roles to be returned in the response. If 0 or less,
+            #     defaults to the server's maximum allowed page size.
+            # @!attribute [rw] page_token
+            #   @return [::String]
+            #     If non-empty, `page_token` should contain a
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse#next_page_token next_page_token} from a
+            #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse ListDatabaseRolesResponse}.
+            class ListDatabaseRolesRequest
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # The response for {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}.
+            # @!attribute [rw] database_roles
+            #   @return [::Array<::Google::Cloud::Spanner::Admin::Database::V1::DatabaseRole>]
+            #     Database roles that matched the request.
+            # @!attribute [rw] next_page_token
+            #   @return [::String]
+            #     `next_page_token` can be sent in a subsequent
+            #     {::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles ListDatabaseRoles}
+            #     call to fetch more of the matching roles.
+            class ListDatabaseRolesResponse
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
             # Indicates the type of the restore source.
             module RestoreSourceType
               # No restore associated.

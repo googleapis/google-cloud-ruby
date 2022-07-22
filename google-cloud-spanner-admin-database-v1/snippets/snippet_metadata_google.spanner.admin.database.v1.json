@@ -730,6 +730,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "spanner_v1_generated_DatabaseAdmin_ListDatabaseRoles_sync",
+      "title": "Snippet for list_database_roles in DatabaseAdmin",
+      "description": "Basic snippet for list_database_roles in DatabaseAdmin",
+      "file": "database_admin/list_database_roles.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_database_roles",
+        "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_database_roles",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse",
+        "client": {
+          "short_name": "DatabaseAdmin::Client",
+          "full_name": "::Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client"
+        },
+        "method": {
+          "short_name": "ListDatabaseRoles",
+          "full_name": "google.spanner.admin.database.v1.DatabaseAdmin.ListDatabaseRoles",
+          "service": {
+            "short_name": "DatabaseAdmin",
+            "full_name": "google.spanner.admin.database.v1.DatabaseAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
