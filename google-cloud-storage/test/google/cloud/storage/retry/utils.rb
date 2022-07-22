@@ -47,6 +47,7 @@ class MethodMapping
       :get_hmac_key,
       :hmac_key_reload
     ],
+    "storage.hmacKey.create" => [:create_hmac_key],
     "storage.hmacKey.list" => [:list_hmac_keys],
     "storage.notifications.delete" => [:delete_notification],
     "storage.notifications.get" => [
