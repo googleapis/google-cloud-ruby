@@ -29,9 +29,9 @@ class StorageCreateBucketDualRegion
 
     storage = Google::Cloud::Storage.new
     bucket  = storage.create_bucket bucket_name,
-                                    location: "#{region_1}+#{region_2}"
+                                    custom_placement_config: { data_locations: [region_1, region_2] }
 
-    puts "Bucket #{bucket.name} created in #{bucket.location}."
+    puts "Bucket #{bucket.name} created in #{bucket.custom_placement_config.data_locations}."
     # [END storage_create_bucket_dual_region]
   end
 end
