@@ -298,7 +298,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(single_use_bucket_name)).must_be :nil?
   end
 
-  focus; it "creates a dual region bucket" do    
+  it "creates a dual region bucket" do    
     one_off_bucket_name = "multi_loc_#{bucket_name}"
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
 
