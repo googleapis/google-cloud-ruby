@@ -31,7 +31,7 @@ class StorageCreateBucketDualRegion
     bucket  = storage.create_bucket bucket_name,
                                     custom_placement_config: { data_locations: [region_1, region_2] }
 
-    puts "Bucket #{bucket.name} created in #{bucket.custom_placement_config.data_locations}."
+    puts "Bucket #{bucket.name} created in #{bucket.data_locations}."
     # [END storage_create_bucket_dual_region]
   end
 end

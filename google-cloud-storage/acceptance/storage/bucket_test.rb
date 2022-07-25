@@ -312,7 +312,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
     _(one_off_bucket.name).must_equal one_off_bucket_name
     _(one_off_bucket.location).must_equal "US"
-    _(one_off_bucket.custom_placement_config.data_locations).must_equal ["US-EAST1", "US-WEST1"]
+    _(one_off_bucket.data_locations).must_equal ["US-EAST1", "US-WEST1"]
     _(one_off_bucket.location_type).must_equal "dual-region"
 
     safe_gcs_execute { one_off_bucket.delete }
