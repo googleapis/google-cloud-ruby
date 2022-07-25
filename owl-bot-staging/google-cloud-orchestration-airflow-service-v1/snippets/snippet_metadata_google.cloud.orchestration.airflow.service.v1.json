@@ -1,0 +1,255 @@
+{
+  "client_library": {
+    "name": "google-cloud-orchestration-airflow-service-v1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.orchestration.airflow.service.v1",
+        "version": "v1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "composer_v1_generated_Environments_CreateEnvironment_sync",
+      "title": "Snippet for create_environment in Environments",
+      "description": "Basic snippet for create_environment in Environments",
+      "file": "environments/create_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_environment",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#create_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::CreateEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "CreateEnvironment",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.CreateEnvironment",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_GetEnvironment_sync",
+      "title": "Snippet for get_environment in Environments",
+      "description": "Basic snippet for get_environment in Environments",
+      "file": "environments/get_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_environment",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#get_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::GetEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environment",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "GetEnvironment",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.GetEnvironment",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_ListEnvironments_sync",
+      "title": "Snippet for list_environments in Environments",
+      "description": "Basic snippet for list_environments in Environments",
+      "file": "environments/list_environments.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_environments",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#list_environments",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListEnvironmentsResponse",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "ListEnvironments",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.ListEnvironments",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_UpdateEnvironment_sync",
+      "title": "Snippet for update_environment in Environments",
+      "description": "Basic snippet for update_environment in Environments",
+      "file": "environments/update_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_environment",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#update_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::UpdateEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "UpdateEnvironment",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.UpdateEnvironment",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_Environments_DeleteEnvironment_sync",
+      "title": "Snippet for delete_environment in Environments",
+      "description": "Basic snippet for delete_environment in Environments",
+      "file": "environments/delete_environment.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_environment",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client#delete_environment",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::DeleteEnvironmentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "Environments::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::Environments::Client"
+        },
+        "method": {
+          "short_name": "DeleteEnvironment",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.Environments.DeleteEnvironment",
+          "service": {
+            "short_name": "Environments",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.Environments"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "composer_v1_generated_ImageVersions_ListImageVersions_sync",
+      "title": "Snippet for list_image_versions in ImageVersions",
+      "description": "Basic snippet for list_image_versions in ImageVersions",
+      "file": "image_versions/list_image_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_image_versions",
+        "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client#list_image_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Orchestration::Airflow::Service::V1::ListImageVersionsResponse",
+        "client": {
+          "short_name": "ImageVersions::Client",
+          "full_name": "::Google::Cloud::Orchestration::Airflow::Service::V1::ImageVersions::Client"
+        },
+        "method": {
+          "short_name": "ListImageVersions",
+          "full_name": "google.cloud.orchestration.airflow.service.v1.ImageVersions.ListImageVersions",
+          "service": {
+            "short_name": "ImageVersions",
+            "full_name": "google.cloud.orchestration.airflow.service.v1.ImageVersions"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

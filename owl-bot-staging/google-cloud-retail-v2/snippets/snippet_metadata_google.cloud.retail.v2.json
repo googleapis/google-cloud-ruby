@@ -1,0 +1,975 @@
+{
+  "client_library": {
+    "name": "google-cloud-retail-v2",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.retail.v2",
+        "version": "v2"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "retail_v2_generated_CatalogService_ListCatalogs_sync",
+      "title": "Snippet for list_catalogs in CatalogService",
+      "description": "Basic snippet for list_catalogs in CatalogService",
+      "file": "catalog_service/list_catalogs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_catalogs",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#list_catalogs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ListCatalogsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ListCatalogsResponse",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "ListCatalogs",
+          "full_name": "google.cloud.retail.v2.CatalogService.ListCatalogs",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_UpdateCatalog_sync",
+      "title": "Snippet for update_catalog in CatalogService",
+      "description": "Basic snippet for update_catalog in CatalogService",
+      "file": "catalog_service/update_catalog.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_catalog",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#update_catalog",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateCatalogRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::Catalog",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCatalog",
+          "full_name": "google.cloud.retail.v2.CatalogService.UpdateCatalog",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_SetDefaultBranch_sync",
+      "title": "Snippet for set_default_branch in CatalogService",
+      "description": "Basic snippet for set_default_branch in CatalogService",
+      "file": "catalog_service/set_default_branch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_default_branch",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#set_default_branch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::SetDefaultBranchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "SetDefaultBranch",
+          "full_name": "google.cloud.retail.v2.CatalogService.SetDefaultBranch",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_GetDefaultBranch_sync",
+      "title": "Snippet for get_default_branch in CatalogService",
+      "description": "Basic snippet for get_default_branch in CatalogService",
+      "file": "catalog_service/get_default_branch.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_default_branch",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#get_default_branch",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::GetDefaultBranchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::GetDefaultBranchResponse",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "GetDefaultBranch",
+          "full_name": "google.cloud.retail.v2.CatalogService.GetDefaultBranch",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CompletionService_CompleteQuery_sync",
+      "title": "Snippet for complete_query in CompletionService",
+      "description": "Basic snippet for complete_query in CompletionService",
+      "file": "completion_service/complete_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "complete_query",
+        "full_name": "::Google::Cloud::Retail::V2::CompletionService::Client#complete_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::CompleteQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::CompleteQueryResponse",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "CompleteQuery",
+          "full_name": "google.cloud.retail.v2.CompletionService.CompleteQuery",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.retail.v2.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CompletionService_ImportCompletionData_sync",
+      "title": "Snippet for import_completion_data in CompletionService",
+      "description": "Basic snippet for import_completion_data in CompletionService",
+      "file": "completion_service/import_completion_data.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_completion_data",
+        "full_name": "::Google::Cloud::Retail::V2::CompletionService::Client#import_completion_data",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ImportCompletionDataRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CompletionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CompletionService::Client"
+        },
+        "method": {
+          "short_name": "ImportCompletionData",
+          "full_name": "google.cloud.retail.v2.CompletionService.ImportCompletionData",
+          "service": {
+            "short_name": "CompletionService",
+            "full_name": "google.cloud.retail.v2.CompletionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_PredictionService_Predict_sync",
+      "title": "Snippet for predict in PredictionService",
+      "description": "Basic snippet for predict in PredictionService",
+      "file": "prediction_service/predict.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "predict",
+        "full_name": "::Google::Cloud::Retail::V2::PredictionService::Client#predict",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::PredictRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::PredictResponse",
+        "client": {
+          "short_name": "PredictionService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::PredictionService::Client"
+        },
+        "method": {
+          "short_name": "Predict",
+          "full_name": "google.cloud.retail.v2.PredictionService.Predict",
+          "service": {
+            "short_name": "PredictionService",
+            "full_name": "google.cloud.retail.v2.PredictionService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_CreateProduct_sync",
+      "title": "Snippet for create_product in ProductService",
+      "description": "Basic snippet for create_product in ProductService",
+      "file": "product_service/create_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_product",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#create_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::CreateProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::Product",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "CreateProduct",
+          "full_name": "google.cloud.retail.v2.ProductService.CreateProduct",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_GetProduct_sync",
+      "title": "Snippet for get_product in ProductService",
+      "description": "Basic snippet for get_product in ProductService",
+      "file": "product_service/get_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_product",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#get_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::GetProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::Product",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "GetProduct",
+          "full_name": "google.cloud.retail.v2.ProductService.GetProduct",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_ListProducts_sync",
+      "title": "Snippet for list_products in ProductService",
+      "description": "Basic snippet for list_products in ProductService",
+      "file": "product_service/list_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_products",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#list_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ListProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ListProductsResponse",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "ListProducts",
+          "full_name": "google.cloud.retail.v2.ProductService.ListProducts",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_UpdateProduct_sync",
+      "title": "Snippet for update_product in ProductService",
+      "description": "Basic snippet for update_product in ProductService",
+      "file": "product_service/update_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_product",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#update_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::Product",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "UpdateProduct",
+          "full_name": "google.cloud.retail.v2.ProductService.UpdateProduct",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_DeleteProduct_sync",
+      "title": "Snippet for delete_product in ProductService",
+      "description": "Basic snippet for delete_product in ProductService",
+      "file": "product_service/delete_product.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_product",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#delete_product",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::DeleteProductRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "DeleteProduct",
+          "full_name": "google.cloud.retail.v2.ProductService.DeleteProduct",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_ImportProducts_sync",
+      "title": "Snippet for import_products in ProductService",
+      "description": "Basic snippet for import_products in ProductService",
+      "file": "product_service/import_products.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_products",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#import_products",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ImportProductsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "ImportProducts",
+          "full_name": "google.cloud.retail.v2.ProductService.ImportProducts",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_SetInventory_sync",
+      "title": "Snippet for set_inventory in ProductService",
+      "description": "Basic snippet for set_inventory in ProductService",
+      "file": "product_service/set_inventory.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_inventory",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#set_inventory",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::SetInventoryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "SetInventory",
+          "full_name": "google.cloud.retail.v2.ProductService.SetInventory",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_AddFulfillmentPlaces_sync",
+      "title": "Snippet for add_fulfillment_places in ProductService",
+      "description": "Basic snippet for add_fulfillment_places in ProductService",
+      "file": "product_service/add_fulfillment_places.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_fulfillment_places",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "AddFulfillmentPlaces",
+          "full_name": "google.cloud.retail.v2.ProductService.AddFulfillmentPlaces",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_RemoveFulfillmentPlaces_sync",
+      "title": "Snippet for remove_fulfillment_places in ProductService",
+      "description": "Basic snippet for remove_fulfillment_places in ProductService",
+      "file": "product_service/remove_fulfillment_places.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_fulfillment_places",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::RemoveFulfillmentPlacesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "RemoveFulfillmentPlaces",
+          "full_name": "google.cloud.retail.v2.ProductService.RemoveFulfillmentPlaces",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_AddLocalInventories_sync",
+      "title": "Snippet for add_local_inventories in ProductService",
+      "description": "Basic snippet for add_local_inventories in ProductService",
+      "file": "product_service/add_local_inventories.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_local_inventories",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#add_local_inventories",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::AddLocalInventoriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "AddLocalInventories",
+          "full_name": "google.cloud.retail.v2.ProductService.AddLocalInventories",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ProductService_RemoveLocalInventories_sync",
+      "title": "Snippet for remove_local_inventories in ProductService",
+      "description": "Basic snippet for remove_local_inventories in ProductService",
+      "file": "product_service/remove_local_inventories.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_local_inventories",
+        "full_name": "::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::RemoveLocalInventoriesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ProductService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ProductService::Client"
+        },
+        "method": {
+          "short_name": "RemoveLocalInventories",
+          "full_name": "google.cloud.retail.v2.ProductService.RemoveLocalInventories",
+          "service": {
+            "short_name": "ProductService",
+            "full_name": "google.cloud.retail.v2.ProductService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_SearchService_Search_sync",
+      "title": "Snippet for search in SearchService",
+      "description": "Basic snippet for search in SearchService",
+      "file": "search_service/search.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "search",
+        "full_name": "::Google::Cloud::Retail::V2::SearchService::Client#search",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::SearchRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::SearchResponse",
+        "client": {
+          "short_name": "SearchService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::SearchService::Client"
+        },
+        "method": {
+          "short_name": "Search",
+          "full_name": "google.cloud.retail.v2.SearchService.Search",
+          "service": {
+            "short_name": "SearchService",
+            "full_name": "google.cloud.retail.v2.SearchService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_UserEventService_WriteUserEvent_sync",
+      "title": "Snippet for write_user_event in UserEventService",
+      "description": "Basic snippet for write_user_event in UserEventService",
+      "file": "user_event_service/write_user_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "write_user_event",
+        "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client#write_user_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::WriteUserEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::UserEvent",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "WriteUserEvent",
+          "full_name": "google.cloud.retail.v2.UserEventService.WriteUserEvent",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.retail.v2.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_UserEventService_CollectUserEvent_sync",
+      "title": "Snippet for collect_user_event in UserEventService",
+      "description": "Basic snippet for collect_user_event in UserEventService",
+      "file": "user_event_service/collect_user_event.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "collect_user_event",
+        "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client#collect_user_event",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::CollectUserEventRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Api::HttpBody",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "CollectUserEvent",
+          "full_name": "google.cloud.retail.v2.UserEventService.CollectUserEvent",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.retail.v2.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_UserEventService_PurgeUserEvents_sync",
+      "title": "Snippet for purge_user_events in UserEventService",
+      "description": "Basic snippet for purge_user_events in UserEventService",
+      "file": "user_event_service/purge_user_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "purge_user_events",
+        "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client#purge_user_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::PurgeUserEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "PurgeUserEvents",
+          "full_name": "google.cloud.retail.v2.UserEventService.PurgeUserEvents",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.retail.v2.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_UserEventService_ImportUserEvents_sync",
+      "title": "Snippet for import_user_events in UserEventService",
+      "description": "Basic snippet for import_user_events in UserEventService",
+      "file": "user_event_service/import_user_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "import_user_events",
+        "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client#import_user_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ImportUserEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "ImportUserEvents",
+          "full_name": "google.cloud.retail.v2.UserEventService.ImportUserEvents",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.retail.v2.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_UserEventService_RejoinUserEvents_sync",
+      "title": "Snippet for rejoin_user_events in UserEventService",
+      "description": "Basic snippet for rejoin_user_events in UserEventService",
+      "file": "user_event_service/rejoin_user_events.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "rejoin_user_events",
+        "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client#rejoin_user_events",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::RejoinUserEventsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "UserEventService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::UserEventService::Client"
+        },
+        "method": {
+          "short_name": "RejoinUserEvents",
+          "full_name": "google.cloud.retail.v2.UserEventService.RejoinUserEvents",
+          "service": {
+            "short_name": "UserEventService",
+            "full_name": "google.cloud.retail.v2.UserEventService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}
