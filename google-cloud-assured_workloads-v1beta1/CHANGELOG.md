@@ -1,5 +1,12 @@
 # Release History
 
+### 0.11.0 (2022-07-25)
+
+#### Features
+
+* Support for a new call analyzing whether a workload can be moved 
+* Support for new calls for restricting services and resources allowed in the workload environment ([#18845](https://github.com/googleapis/google-cloud-ruby/issues/18845)) 
+
 ### 0.10.0 (2022-07-01)
 
 #### Features
