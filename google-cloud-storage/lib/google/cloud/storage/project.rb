@@ -290,9 +290,9 @@ module Google
         #     access, and allUsers get READER access.
         # @param [String] location The location of the bucket. Optional.
         #   If not passed, the default location, 'US', will be used.
-        #   If specifying a dual-region location, the regions can be specified
-        #   by joining them with a plus sign, for example 'US-CENTRAL1+US-WEST1'. See:
-        #   [Storage Locaitons](https://cloud.google.com/storage/docs/locations).
+        #   If specifying a dual-region location, the `customPlacementConfig`
+        #   property should be set in conjunction. See:
+        #   [Storage Locatons](https://cloud.google.com/storage/docs/locations).
         # @param [String] logging_bucket The destination bucket for the bucket's
         #   logs. For more information, see [Access
         #   Logs](https://cloud.google.com/storage/docs/access-logs).
@@ -367,6 +367,7 @@ module Google
                           acl: nil,
                           default_acl: nil,
                           location: nil,
+                          custom_placement_config: nil,
                           storage_class: nil,
                           logging_bucket: nil,
                           logging_prefix: nil,
@@ -377,7 +378,8 @@ module Google
                           user_project: nil
           params = {
             name: bucket_name,
-            location: location
+            location: location,
+            custom_placement_config: custom_placement_config
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class

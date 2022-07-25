@@ -298,19 +298,21 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(single_use_bucket_name)).must_be :nil?
   end
 
-  it "creates a dual region bucket" do
-    region_1 = "US-EAST1"
-    region_2 = "US-WEST1"
-    
+  focus; it "creates a dual region bucket" do    
     one_off_bucket_name = "multi_loc_#{bucket_name}"
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
 
-    one_off_bucket = safe_gcs_execute { storage.create_bucket one_off_bucket_name, location: "#{region_1}+#{region_2}" }
+    one_off_bucket = safe_gcs_execute do
+      storage.create_bucket one_off_bucket_name,
+                            location: "US",
+                            custom_placement_config: { data_locations: ["US-EAST1", "US-WEST1"] }
+    end
 
     _(storage.bucket(one_off_bucket_name)).wont_be :nil?
 
     _(one_off_bucket.name).must_equal one_off_bucket_name
-    _(one_off_bucket.location).must_equal "#{region_1}+#{region_2}"
+    _(one_off_bucket.location).must_equal "US"
+    _(one_off_bucket.custom_placement_config.data_locations).must_equal ["US-EAST1", "US-WEST1"]
     _(one_off_bucket.location_type).must_equal "dual-region"
 
     safe_gcs_execute { one_off_bucket.delete }
