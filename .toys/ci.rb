@@ -58,6 +58,9 @@ end
 flag :load_kokoro_context do |f|
   f.desc "Load Kokoro credentials and environment info"
 end
+flag :open_issues do |f|
+  f.desc "Open GitHub issues for failures"
+end
 
 at_least_one_required desc: "Tasks" do
   flag :do_bundle, "--[no-]bundle" do |f|
@@ -76,10 +79,16 @@ at_least_one_required desc: "Tasks" do
   end
 end
 
+static :issue_tasks, ["bundle", "test", "rubocop", "build", "yard", "linkinator"]
+
 include :exec
 include :terminal, styled: true
+include "yoshi-utils"
 
 def run
+  set :open_issues, true if github_event_name == "schedule"
+  yoshi_utils.gh_verify_binary if open_issues
+
   if load_kokoro_context
     require "repo_context"
     RepoContext.load_kokoro_env
@@ -106,7 +115,8 @@ def run
     puts "CI passed", :bold, :green
   else
     puts "FAILURES:", :bold, :red
-    @errors.each { |err| puts err, :yellow }
+    @errors.each { |dir, task| puts "#{dir}: #{task}", :yellow }
+    do_open_issues if open_issues
     exit 1
   end
 end
@@ -299,7 +309,7 @@ def run_in_dir dir
       puts "#{dir}: bundle ...", :bold, :cyan
       result = exec ["bundle", @bundle_task]
       unless result.success?
-        @errors << "#{dir}: bundle"
+        @errors << [dir, "bundle"]
         next
       end
     end
@@ -311,7 +321,7 @@ def run_in_dir dir
       else
         exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
       end
-      @errors << "#{dir}: #{task}" unless success
+      @errors << [dir, task] unless success
     end
   end
 end
@@ -333,4 +343,61 @@ def run_linkinator dir
     puts link, :yellow
   end
   checked_links.empty?
+end
+
+def do_open_issues
+  require "digest/md5"
+  collected_errors = {}
+  @errors.each do |dir, task|
+    (collected_errors[dir] ||= []) << task if issue_tasks.include? task
+  end
+  collected_errors.each do |dir, tasks|
+    issue_id = find_existing_issue dir
+    if issue_id
+      update_issue issue_id, dir, tasks
+    else
+      create_new_issue dir, tasks
+    end
+  end
+end
+
+def find_existing_issue dir
+  encoded_dir = encode_str dir
+  result = capture [
+    "gh", "issue", "list",
+    "--repo", "googleapis/google-cloud-ruby",
+    "--search", "#{encoded_dir} in:body state:open type:issue label:\"nightly failure\"",
+    "--json", "number"
+  ]
+  result = JSON.parse result rescue []
+  result.first["number"] unless result.empty?
+end
+
+def update_issue issue_id, dir, tasks
+  body = create_body dir, tasks
+  exec [
+    "gh", "issue", "comment", issue_id.to_s,
+    "--repo", "googleapis/google-cloud-ruby",
+    "--body", body
+  ]
+end
+
+def create_new_issue dir, tasks
+  body = "#{create_body dir, tasks}\n\n#{encode_str dir}"
+  exec [
+    "gh", "issue", "create",
+    "--repo", "googleapis/google-cloud-ruby",
+    "--title", "[Nightly CI Failures] Failures detected for #{dir}",
+    "--label", "type: bug,priority: p1,nightly failure",
+    "--body", body,
+  ]
+end
+
+def encode_str str
+  "report_key_#{Digest::MD5.hexdigest str}"
+end
+
+def create_body dir, tasks
+  now = Time.now.utc.strftime "%Y-%m-%d %H:%M:%S"
+  "At #{now} UTC, detected failures in #{dir} for: #{tasks.join ', '}"
 end
