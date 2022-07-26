@@ -258,7 +258,7 @@ class Snippets
 
       # Start the first rotation in 24 hours.
       next_rotation_time: {
-        seconds: (Time.now + 60 * 60 * 24).to_i
+        seconds: (Time.now + (60 * 60 * 24)).to_i
       }
     }
 
@@ -974,7 +974,7 @@ class Snippets
 
       # Start the first rotation in 24 hours.
       next_rotation_time: {
-        seconds: (Time.now + 60 * 60 * 24).to_i
+        seconds: (Time.now + (60 * 60 * 24)).to_i
       }
     }
 
