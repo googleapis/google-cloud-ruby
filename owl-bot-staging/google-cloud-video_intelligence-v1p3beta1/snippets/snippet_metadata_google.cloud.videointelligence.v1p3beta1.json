@@ -1,0 +1,95 @@
+{
+  "client_library": {
+    "name": "google-cloud-video_intelligence-v1p3beta1",
+    "version": "",
+    "language": "RUBY",
+    "apis": [
+      {
+        "id": "google.cloud.videointelligence.v1p3beta1",
+        "version": "v1p3beta1"
+      }
+    ]
+  },
+  "snippets": [
+    {
+      "region_tag": "videointelligence_v1p3beta1_generated_VideoIntelligenceService_AnnotateVideo_sync",
+      "title": "Snippet for annotate_video in VideoIntelligenceService",
+      "description": "Basic snippet for annotate_video in VideoIntelligenceService",
+      "file": "video_intelligence_service/annotate_video.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "annotate_video",
+        "full_name": "::Google::Cloud::VideoIntelligence::V1p3beta1::VideoIntelligenceService::Client#annotate_video",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VideoIntelligence::V1p3beta1::AnnotateVideoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "VideoIntelligenceService::Client",
+          "full_name": "::Google::Cloud::VideoIntelligence::V1p3beta1::VideoIntelligenceService::Client"
+        },
+        "method": {
+          "short_name": "AnnotateVideo",
+          "full_name": "google.cloud.videointelligence.v1p3beta1.VideoIntelligenceService.AnnotateVideo",
+          "service": {
+            "short_name": "VideoIntelligenceService",
+            "full_name": "google.cloud.videointelligence.v1p3beta1.VideoIntelligenceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "videointelligence_v1p3beta1_generated_StreamingVideoIntelligenceService_StreamingAnnotateVideo_sync",
+      "title": "Snippet for streaming_annotate_video in StreamingVideoIntelligenceService",
+      "description": "Basic snippet for streaming_annotate_video in StreamingVideoIntelligenceService",
+      "file": "streaming_video_intelligence_service/streaming_annotate_video.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "streaming_annotate_video",
+        "full_name": "::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client#streaming_annotate_video",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingAnnotateVideoResponse",
+        "client": {
+          "short_name": "StreamingVideoIntelligenceService::Client",
+          "full_name": "::Google::Cloud::VideoIntelligence::V1p3beta1::StreamingVideoIntelligenceService::Client"
+        },
+        "method": {
+          "short_name": "StreamingAnnotateVideo",
+          "full_name": "google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService.StreamingAnnotateVideo",
+          "service": {
+            "short_name": "StreamingVideoIntelligenceService",
+            "full_name": "google.cloud.videointelligence.v1p3beta1.StreamingVideoIntelligenceService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-gke_backup-v1", path: "../google-cloud-gke_backup-v1"

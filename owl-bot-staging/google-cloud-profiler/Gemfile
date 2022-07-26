@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-profiler-v2", path: "../google-cloud-profiler-v2"
