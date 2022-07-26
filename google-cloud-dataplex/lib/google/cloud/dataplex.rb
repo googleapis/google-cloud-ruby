@@ -29,7 +29,7 @@ require "google/cloud/config"
 
 # Set the default configuration
 ::Google::Cloud.configure.add_config! :dataplex do |config|
-  config.add_field! :endpoint,      "iam-meta-api.googleapis.com", match: ::String
+  config.add_field! :endpoint,      "dataplex.googleapis.com", match: ::String
   config.add_field! :credentials,   nil, match: [::String, ::Hash, ::Google::Auth::Credentials]
   config.add_field! :scope,         nil, match: [::Array, ::String]
   config.add_field! :lib_name,      nil, match: ::String

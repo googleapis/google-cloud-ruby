@@ -27,7 +27,7 @@ export GOOGLE_CLOUD_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/dataplex"
 
-client = Google::Cloud::Dataplex.iam_policy
+client = Google::Cloud::Dataplex.content_service
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-dataplex
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Iam::V1::IAMPolicy::Credentials`):
+`::Google::Cloud::Dataplex::V1::ContentService::Credentials`):
 
 * `GOOGLE_CLOUD_CREDENTIALS` - Path to JSON file, or JSON contents
 * `GOOGLE_CLOUD_KEYFILE` - Path to JSON file, or JSON contents
@@ -75,7 +75,7 @@ require "google/cloud/dataplex"
 
 ENV["GOOGLE_CLOUD_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Dataplex.iam_policy
+client = Google::Cloud::Dataplex.content_service
 ```
 
 ### Configuration
@@ -86,7 +86,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/dataplex"
 
-client = Google::Cloud::Dataplex.iam_policy do |config|
+client = Google::Cloud::Dataplex.content_service do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -100,7 +100,7 @@ Google::Cloud::Dataplex.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Dataplex.iam_policy
+client = Google::Cloud::Dataplex.content_service
 ```
 
 ### Cloud SDK
