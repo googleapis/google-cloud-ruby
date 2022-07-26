@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the GlobalForwardingRules service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -315,8 +315,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/forwardingRules/{forwarding_rule}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["forwarding_rule", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["forwarding_rule", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -337,8 +337,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/forwardingRules/{forwarding_rule}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["forwarding_rule", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["forwarding_rule", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -360,7 +360,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/forwardingRules",
                                                           body: "forwarding_rule_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -381,7 +381,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/forwardingRules",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -403,8 +403,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/forwardingRules/{forwarding_rule}",
                                                           body: "forwarding_rule_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["forwarding_rule", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["forwarding_rule", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -426,8 +426,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/forwardingRules/{resource}/setLabels",
                                                           body: "global_set_labels_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -449,8 +449,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/forwardingRules/{forwarding_rule}/setTarget",
                                                           body: "target_reference_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["forwarding_rule", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["forwarding_rule", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

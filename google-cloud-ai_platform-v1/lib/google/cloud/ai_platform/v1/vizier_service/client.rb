@@ -19,7 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/vizier_service_pb"
 require "google/cloud/location"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1"
 
 module Google
   module Cloud

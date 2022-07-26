@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the ImageFamilyViews service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -93,9 +93,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/imageFamilyViews/{family}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["family", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["family", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

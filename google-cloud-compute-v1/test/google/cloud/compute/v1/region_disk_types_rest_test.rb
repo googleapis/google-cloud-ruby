@@ -74,9 +74,7 @@ class ::Google::Cloud::Compute::V1::RegionDiskTypes::ClientTest < Minitest::Test
     project = "hello world"
     region = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -89,27 +87,27 @@ class ::Google::Cloud::Compute::V1::RegionDiskTypes::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ disk_type: disk_type, project: project, region: region }) do |result, response|
+      client.get({ disk_type: disk_type, project: project, region: region }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get disk_type: disk_type, project: project, region: region do |result, response|
+      client.get disk_type: disk_type, project: project, region: region do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionDiskTypeRequest.new(disk_type: disk_type, project: project, region: region) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetRegionDiskTypeRequest.new(disk_type: disk_type, project: project, region: region) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ disk_type: disk_type, project: project, region: region }, call_options) do |result, response|
+      client.get({ disk_type: disk_type, project: project, region: region }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionDiskTypeRequest.new(disk_type: disk_type, project: project, region: region), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetRegionDiskTypeRequest.new(disk_type: disk_type, project: project, region: region), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -134,9 +132,7 @@ class ::Google::Cloud::Compute::V1::RegionDiskTypes::ClientTest < Minitest::Test
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -149,27 +145,27 @@ class ::Google::Cloud::Compute::V1::RegionDiskTypes::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionDiskTypesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListRegionDiskTypesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionDiskTypesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListRegionDiskTypesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

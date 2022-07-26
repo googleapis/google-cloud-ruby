@@ -448,7 +448,7 @@ module Google
             #     A token identifying a page of results for the server to return
             #     Typically obtained via
             #     {::Google::Cloud::AutoML::V1::ListDatasetsResponse#next_page_token ListDatasetsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AutoML::V1::AutoML::Client#list_datasets AutoMl.ListDatasets} call.
+            #     {::Google::Cloud::AutoML::V1::AutoMl::Client#list_datasets AutoMl.ListDatasets} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1::Dataset>]
@@ -1212,7 +1212,7 @@ module Google
             #     A token identifying a page of results for the server to return
             #     Typically obtained via
             #     {::Google::Cloud::AutoML::V1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AutoML::V1::AutoML::Client#list_models AutoMl.ListModels} call.
+            #     {::Google::Cloud::AutoML::V1::AutoMl::Client#list_models AutoMl.ListModels} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1::Model>]
@@ -1901,7 +1901,7 @@ module Google
             #     A token identifying a page of results for the server to return.
             #     Typically obtained via
             #     {::Google::Cloud::AutoML::V1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
+            #     {::Google::Cloud::AutoML::V1::AutoMl::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1::ModelEvaluation>]

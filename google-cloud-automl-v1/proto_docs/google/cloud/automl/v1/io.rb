@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AutoML
       module V1
-        # Input configuration for {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData} action.
+        # Input configuration for {::Google::Cloud::AutoML::V1::AutoMl::Client#import_data AutoMl.ImportData} action.
         #
         # The format of input depends on dataset_metadata the Dataset into which
         # the import is happening has. As input source the
@@ -635,7 +635,7 @@ module Google
         # @!attribute [rw] gcs_source
         #   @return [::Google::Cloud::AutoML::V1::GcsSource]
         #     The Google Cloud Storage location for the input content.
-        #     For {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData}, `gcs_source` points to a CSV file with
+        #     For {::Google::Cloud::AutoML::V1::AutoMl::Client#import_data AutoMl.ImportData}, `gcs_source` points to a CSV file with
         #     a structure described in {::Google::Cloud::AutoML::V1::InputConfig InputConfig}.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::String}]

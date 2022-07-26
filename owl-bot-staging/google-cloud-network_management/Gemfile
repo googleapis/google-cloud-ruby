@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-network_management-v1", path: "../google-cloud-network_management-v1"

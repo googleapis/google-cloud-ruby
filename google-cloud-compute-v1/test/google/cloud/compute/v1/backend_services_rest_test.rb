@@ -75,9 +75,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     request_id = "hello world"
     signed_url_key_resource = {}
 
-    add_signed_url_key_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    add_signed_url_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -90,27 +88,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.add_signed_url_key({ backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource }) do |result, response|
+      client.add_signed_url_key({ backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.add_signed_url_key backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource do |result, response|
+      client.add_signed_url_key backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.add_signed_url_key ::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource) do |result, response|
+      client.add_signed_url_key ::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.add_signed_url_key({ backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource }, call_options) do |result, response|
+      client.add_signed_url_key({ backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.add_signed_url_key(::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource), call_options) do |result, response|
+      client.add_signed_url_key(::Google::Cloud::Compute::V1::AddSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, signed_url_key_resource: signed_url_key_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -135,9 +133,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -150,27 +146,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListBackendServicesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -191,9 +187,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,27 +200,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ backend_service: backend_service, project: project, request_id: request_id }) do |result, response|
+      client.delete({ backend_service: backend_service, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete backend_service: backend_service, project: project, request_id: request_id do |result, response|
+      client.delete backend_service: backend_service, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ backend_service: backend_service, project: project, request_id: request_id }, call_options) do |result, response|
+      client.delete({ backend_service: backend_service, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -248,9 +242,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    delete_signed_url_key_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    delete_signed_url_key_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -263,27 +255,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete_signed_url_key({ backend_service: backend_service, key_name: key_name, project: project, request_id: request_id }) do |result, response|
+      client.delete_signed_url_key({ backend_service: backend_service, key_name: key_name, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete_signed_url_key backend_service: backend_service, key_name: key_name, project: project, request_id: request_id do |result, response|
+      client.delete_signed_url_key backend_service: backend_service, key_name: key_name, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete_signed_url_key ::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, key_name: key_name, project: project, request_id: request_id) do |result, response|
+      client.delete_signed_url_key ::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, key_name: key_name, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete_signed_url_key({ backend_service: backend_service, key_name: key_name, project: project, request_id: request_id }, call_options) do |result, response|
+      client.delete_signed_url_key({ backend_service: backend_service, key_name: key_name, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete_signed_url_key(::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, key_name: key_name, project: project, request_id: request_id), call_options) do |result, response|
+      client.delete_signed_url_key(::Google::Cloud::Compute::V1::DeleteSignedUrlKeyBackendServiceRequest.new(backend_service: backend_service, key_name: key_name, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -303,9 +295,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     backend_service = "hello world"
     project = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -318,27 +308,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ backend_service: backend_service, project: project }) do |result, response|
+      client.get({ backend_service: backend_service, project: project }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get backend_service: backend_service, project: project do |result, response|
+      client.get backend_service: backend_service, project: project do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetBackendServiceRequest.new(backend_service: backend_service, project: project) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetBackendServiceRequest.new(backend_service: backend_service, project: project) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ backend_service: backend_service, project: project }, call_options) do |result, response|
+      client.get({ backend_service: backend_service, project: project }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetBackendServiceRequest.new(backend_service: backend_service, project: project), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetBackendServiceRequest.new(backend_service: backend_service, project: project), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -359,9 +349,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     resource_group_reference_resource = {}
 
-    get_health_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    get_health_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -374,27 +362,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_health({ backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource }) do |result, response|
+      client.get_health({ backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_health backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource do |result, response|
+      client.get_health backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_health ::Google::Cloud::Compute::V1::GetHealthBackendServiceRequest.new(backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource) do |result, response|
+      client.get_health ::Google::Cloud::Compute::V1::GetHealthBackendServiceRequest.new(backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_health({ backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource }, call_options) do |result, response|
+      client.get_health({ backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_health(::Google::Cloud::Compute::V1::GetHealthBackendServiceRequest.new(backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource), call_options) do |result, response|
+      client.get_health(::Google::Cloud::Compute::V1::GetHealthBackendServiceRequest.new(backend_service: backend_service, project: project, resource_group_reference_resource: resource_group_reference_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -415,9 +403,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -430,27 +416,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ backend_service_resource: backend_service_resource, project: project, request_id: request_id }) do |result, response|
+      client.insert({ backend_service_resource: backend_service_resource, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert backend_service_resource: backend_service_resource, project: project, request_id: request_id do |result, response|
+      client.insert backend_service_resource: backend_service_resource, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertBackendServiceRequest.new(backend_service_resource: backend_service_resource, project: project, request_id: request_id) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertBackendServiceRequest.new(backend_service_resource: backend_service_resource, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ backend_service_resource: backend_service_resource, project: project, request_id: request_id }, call_options) do |result, response|
+      client.insert({ backend_service_resource: backend_service_resource, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertBackendServiceRequest.new(backend_service_resource: backend_service_resource, project: project, request_id: request_id), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertBackendServiceRequest.new(backend_service_resource: backend_service_resource, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -474,9 +460,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -489,27 +473,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListBackendServicesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListBackendServicesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListBackendServicesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListBackendServicesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -531,9 +515,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    patch_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -546,27 +528,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.patch({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }) do |result, response|
+      client.patch({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id do |result, response|
+      client.patch backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }, call_options) do |result, response|
+      client.patch({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -588,9 +570,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     request_id = "hello world"
     security_policy_reference_resource = {}
 
-    set_edge_security_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_edge_security_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -603,27 +583,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_edge_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }) do |result, response|
+      client.set_edge_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_edge_security_policy backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource do |result, response|
+      client.set_edge_security_policy backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_edge_security_policy ::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource) do |result, response|
+      client.set_edge_security_policy ::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_edge_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }, call_options) do |result, response|
+      client.set_edge_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_edge_security_policy(::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource), call_options) do |result, response|
+      client.set_edge_security_policy(::Google::Cloud::Compute::V1::SetEdgeSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -645,9 +625,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     request_id = "hello world"
     security_policy_reference_resource = {}
 
-    set_security_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_security_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -660,27 +638,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }) do |result, response|
+      client.set_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_security_policy backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource do |result, response|
+      client.set_security_policy backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_security_policy ::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource) do |result, response|
+      client.set_security_policy ::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }, call_options) do |result, response|
+      client.set_security_policy({ backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_security_policy(::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource), call_options) do |result, response|
+      client.set_security_policy(::Google::Cloud::Compute::V1::SetSecurityPolicyBackendServiceRequest.new(backend_service: backend_service, project: project, request_id: request_id, security_policy_reference_resource: security_policy_reference_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -702,9 +680,7 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    update_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :put, verb
-
+    update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -717,27 +693,27 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }) do |result, response|
+      client.update({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.update backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id do |result, response|
+      client.update backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.update ::Google::Cloud::Compute::V1::UpdateBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id) do |result, response|
+      client.update ::Google::Cloud::Compute::V1::UpdateBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.update({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }, call_options) do |result, response|
+      client.update({ backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.update(::Google::Cloud::Compute::V1::UpdateBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id), call_options) do |result, response|
+      client.update(::Google::Cloud::Compute::V1::UpdateBackendServiceRequest.new(backend_service: backend_service, backend_service_resource: backend_service_resource, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
