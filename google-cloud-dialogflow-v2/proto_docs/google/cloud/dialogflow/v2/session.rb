@@ -181,7 +181,8 @@ module Google
         #     Instructs the speech recognizer how to process the speech audio.
         # @!attribute [rw] text
         #   @return [::Google::Cloud::Dialogflow::V2::TextInput]
-        #     The natural language text to be processed.
+        #     The natural language text to be processed. Text length must not exceed
+        #     256 character for virtual agent interactions.
         # @!attribute [rw] event
         #   @return [::Google::Cloud::Dialogflow::V2::EventInput]
         #     The event to be processed.
@@ -549,7 +550,7 @@ module Google
         # @!attribute [rw] text
         #   @return [::String]
         #     Required. The UTF-8 encoded natural language text to be processed.
-        #     Text length must not exceed 256 characters.
+        #     Text length must not exceed 256 characters for virtual agent interactions.
         # @!attribute [rw] language_code
         #   @return [::String]
         #     Required. The language of this conversational query. See [Language
