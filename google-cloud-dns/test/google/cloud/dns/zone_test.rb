@@ -53,10 +53,10 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     mock = Minitest::Mock.new
     # get all records
     existing_records = list_records_gapi(5)
-    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
 
     # delete non-essential records and update SOA
-    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: [],
@@ -76,10 +76,10 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     mock = Minitest::Mock.new
     # get all records
     existing_records = list_records_gapi(5)
-    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
 
     # delete non-essential records and update SOA
-    mock.expect :list_resource_record_sets, existing_records, [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, existing_records, [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: [],
@@ -119,7 +119,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
   it "lists changes" do
     num_changes = 3
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(num_changes), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(num_changes), [project, zone.id], max_results: nil, page_token: nil, sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
     changes = zone.changes
@@ -131,7 +131,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "lists changes with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, page_token: nil, sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: 3, page_token: nil, sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
     changes = zone.changes max: 3
@@ -145,7 +145,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "lists changes with order set to asc" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"
 
     dns.service.mocked_service = mock
     changes = zone.changes order: :asc
@@ -159,7 +159,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "lists changes with order set to desc" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"
 
     dns.service.mocked_service = mock
     changes = zone.changes order: :desc
@@ -173,8 +173,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: nil, sort_order: nil
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
 
@@ -194,8 +194,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: nil, sort_order: nil
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
 
@@ -214,8 +214,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, page_token: nil, sort_by: nil, sort_order: nil}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: 3, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: 3, page_token: nil, sort_by: nil, sort_order: nil
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: 3, page_token: "next_page_token", sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
 
@@ -234,8 +234,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with next? and next and order set to asc" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "ascending"}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "ascending"
 
     dns.service.mocked_service = mock
 
@@ -254,8 +254,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with next? and next and order set to desc" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "descending"}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "descending"
 
     dns.service.mocked_service = mock
 
@@ -274,8 +274,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: nil, sort_order: nil
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
 
@@ -288,8 +288,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, page_token: nil, sort_by: nil, sort_order: nil}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: 3, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: 3, page_token: nil, sort_by: nil, sort_order: nil
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: 3, page_token: "next_page_token", sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
     changes = zone.changes(max: 3).all.to_a
@@ -301,8 +301,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with all and order set to asc" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "ascending"}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "ascending"
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "ascending"
 
     dns.service.mocked_service = mock
 
@@ -315,8 +315,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with all and order set to desc" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"}]
-    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "descending"}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: "changeSequence", sort_order: "descending"
+    mock.expect :list_changes, list_changes_gapi(2), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: "changeSequence", sort_order: "descending"
 
     dns.service.mocked_service = mock
     changes = zone.changes(order: :desc).all.to_a
@@ -328,8 +328,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
-    mock.expect :list_changes, list_changes_gapi(3, "second_page_token"), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: nil, sort_order: nil
+    mock.expect :list_changes, list_changes_gapi(3, "second_page_token"), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
 
@@ -342,8 +342,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates changes with all with request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, page_token: nil, sort_by: nil, sort_order: nil}]
-    mock.expect :list_changes, list_changes_gapi(3, "second_page_token"), [project, zone.id, {max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil}]
+    mock.expect :list_changes, list_changes_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, page_token: nil, sort_by: nil, sort_order: nil
+    mock.expect :list_changes, list_changes_gapi(3, "second_page_token"), [project, zone.id], max_results: nil, page_token: "next_page_token", sort_by: nil, sort_order: nil
 
     dns.service.mocked_service = mock
 
@@ -357,7 +357,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
   it "lists records" do
     num_records = 3
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
 
     dns.service.mocked_service = mock
     records = zone.records
@@ -370,7 +370,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
   it "lists records with name param" do
     num_records = 3
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: record_name, page_token: nil, type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id], max_results: nil, name: record_name, page_token: nil, type: nil
 
     dns.service.mocked_service = mock
     records = zone.records record_name
@@ -383,7 +383,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
   it "lists records with name and type params" do
     num_records = 3
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: record_name, page_token: nil, type: record_type}]
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id], max_results: nil, name: record_name, page_token: nil, type: record_type
 
     dns.service.mocked_service = mock
     records = zone.records record_name, record_type
@@ -396,7 +396,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
   it "lists records with subdomain and type params" do
     num_records = 3
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
+    mock.expect :list_resource_record_sets, list_records_gapi(num_records), [project, zone.id], max_results: nil, name: "www.example.com.", page_token: nil, type: "A"
 
     dns.service.mocked_service = mock
     records = zone.records "www", "A"
@@ -408,8 +408,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates records" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
-    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id], max_results: nil, name: nil, page_token: "next_page_token", type: nil
 
     dns.service.mocked_service = mock
 
@@ -429,8 +429,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates records with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
-    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id], max_results: nil, name: nil, page_token: "next_page_token", type: nil
 
     dns.service.mocked_service = mock
 
@@ -449,8 +449,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates records with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, name: nil, page_token: nil, type: nil}]
-    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: 3, name: nil, page_token: "next_page_token", type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id], max_results: 3, name: nil, page_token: nil, type: nil
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id], max_results: 3, name: nil, page_token: "next_page_token", type: nil
 
     dns.service.mocked_service = mock
 
@@ -469,8 +469,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "loads all records with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
-    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id], max_results: nil, name: nil, page_token: "next_page_token", type: nil
 
     dns.service.mocked_service = mock
 
@@ -483,8 +483,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "paginates records with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: 3, name: nil, page_token: nil, type: nil}]
-    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: 3, name: nil, page_token: "next_page_token", type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id], max_results: 3, name: nil, page_token: nil, type: nil
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id], max_results: 3, name: nil, page_token: "next_page_token", type: nil
 
     dns.service.mocked_service = mock
 
@@ -497,8 +497,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "loads all records with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
-    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
+    mock.expect :list_resource_record_sets, list_records_gapi(2), [project, zone.id], max_results: nil, name: nil, page_token: "next_page_token", type: nil
 
     dns.service.mocked_service = mock
 
@@ -511,8 +511,8 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
   it "loads all records with all with request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: nil, type: nil}]
-    mock.expect :list_resource_record_sets, list_records_gapi(3, "second_page_token"), [project, zone.id, {max_results: nil, name: nil, page_token: "next_page_token", type: nil}]
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "next_page_token"), [project, zone.id], max_results: nil, name: nil, page_token: nil, type: nil
+    mock.expect :list_resource_record_sets, list_records_gapi(3, "second_page_token"), [project, zone.id], max_results: nil, name: nil, page_token: "next_page_token", type: nil
 
     dns.service.mocked_service = mock
 
@@ -591,7 +591,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
     to_remove = zone.record "example.net.", "A", 18600, "example.org."
 
     mock = Minitest::Mock.new
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
@@ -637,7 +637,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: (Array(to_add.first.to_gapi) << updated_soa.to_gapi),
@@ -666,7 +666,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
@@ -693,7 +693,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: (Array(to_add.to_gapi) << updated_soa.to_gapi),
@@ -746,7 +746,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: (Array(to_add.to_gapi) << expected_soa.to_gapi),
@@ -768,7 +768,7 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
     new_change = Google::Apis::DnsV1::Change.new(
       kind: "dns#change",
       additions: (Array(to_add.to_gapi) << expected_soa.to_gapi),
@@ -788,9 +788,9 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "example.net.", page_token: nil, type: "A"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id], max_results: nil, name: "example.net.", page_token: nil, type: "A"
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
 
     # The request to remove the records.
     new_change = Google::Apis::DnsV1::Change.new(
@@ -818,9 +818,9 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id], max_results: nil, name: "www.example.com.", page_token: nil, type: "A"
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
 
     # The request to remove the records.
     new_change = Google::Apis::DnsV1::Change.new(
@@ -849,9 +849,9 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "example.net.", page_token: nil, type: "A"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id], max_results: nil, name: "example.net.", page_token: nil, type: "A"
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
 
     # The request to remove the records.
     new_change = Google::Apis::DnsV1::Change.new(
@@ -883,9 +883,9 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id], max_results: nil, name: "www.example.com.", page_token: nil, type: "A"
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
 
     # The request to remove the records.
     new_change = Google::Apis::DnsV1::Change.new(
@@ -917,9 +917,9 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "example.net.", page_token: nil, type: "A"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id], max_results: nil, name: "example.net.", page_token: nil, type: "A"
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
 
     # The request to remove the records.
     new_change = Google::Apis::DnsV1::Change.new(
@@ -953,9 +953,9 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # The request for the records to remove.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "A"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(to_remove), [project, zone.id], max_results: nil, name: "www.example.com.", page_token: nil, type: "A"
     # The request for the SOA record, to update its serial number.
-    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "SOA"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(soa), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "SOA"
 
     # The request to remove the records.
     new_change = Google::Apis::DnsV1::Change.new(
@@ -993,11 +993,11 @@ describe Google::Cloud::Dns::Zone, :mock_dns do
 
     mock = Minitest::Mock.new
     # mock the lookup for TXT
-    mock.expect :list_resource_record_sets, lookup_records_gapi(txt_to_remove), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "TXT"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(txt_to_remove), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "TXT"
     # mock the lookup for MX
-    mock.expect :list_resource_record_sets, lookup_records_gapi(mx_to_remove), [project, zone.id, {max_results: nil, name: "example.com.", page_token: nil, type: "MX"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(mx_to_remove), [project, zone.id], max_results: nil, name: "example.com.", page_token: nil, type: "MX"
     # mock the lookup for CNAME
-    mock.expect :list_resource_record_sets, lookup_records_gapi(cname_to_remove), [project, zone.id, {max_results: nil, name: "www.example.com.", page_token: nil, type: "CNAME"}]
+    mock.expect :list_resource_record_sets, lookup_records_gapi(cname_to_remove), [project, zone.id], max_results: nil, name: "www.example.com.", page_token: nil, type: "CNAME"
 
     # The request to remove the records.
     new_change = Google::Apis::DnsV1::Change.new(
