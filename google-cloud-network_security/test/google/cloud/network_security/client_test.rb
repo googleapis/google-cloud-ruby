@@ -31,24 +31,4 @@ class Google::Cloud::NetworkSecurity::ClientConstructionMinitest < Minitest::Tes
       assert_kind_of Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client, client
     end
   end
-
-  def test_locations
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::NetworkSecurity.locations do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::NetworkSecurity::V1beta1::Locations::Client, client
-    end
-  end
-
-  def test_iam_policy
-    Gapic::ServiceStub.stub :new, :stub do
-      grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-      client = Google::Cloud::NetworkSecurity.iam_policy do |config|
-        config.credentials = grpc_channel
-      end
-      assert_kind_of Google::Cloud::NetworkSecurity::V1beta1::IAMPolicy::Client, client
-    end
-  end
 end
