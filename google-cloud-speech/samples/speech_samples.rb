@@ -64,8 +64,8 @@ def speech_sync_recognize_words audio_file_path: nil
     puts "Transcription: #{alternative.transcript}"
 
     alternative.words.each do |word|
-      start_time = word.start_time.seconds + word.start_time.nanos / 1_000_000_000.0
-      end_time   = word.end_time.seconds + word.end_time.nanos / 1_000_000_000.0
+      start_time = word.start_time.seconds + (word.start_time.nanos / 1_000_000_000.0)
+      end_time   = word.end_time.seconds + (word.end_time.nanos / 1_000_000_000.0)
 
       puts "Word: #{word.word} #{start_time} #{end_time}"
     end
@@ -192,8 +192,8 @@ def speech_async_recognize_gcs_words storage_path: nil
     puts "Transcription: #{alternative.transcript}"
 
     alternative.words.each do |word|
-      start_time = word.start_time.seconds + word.start_time.nanos / 1_000_000_000.0
-      end_time   = word.end_time.seconds + word.end_time.nanos / 1_000_000_000.0
+      start_time = word.start_time.seconds + (word.start_time.nanos / 1_000_000_000.0)
+      end_time   = word.end_time.seconds + (word.end_time.nanos / 1_000_000_000.0)
 
       puts "Word: #{word.word} #{start_time} #{end_time}"
     end
