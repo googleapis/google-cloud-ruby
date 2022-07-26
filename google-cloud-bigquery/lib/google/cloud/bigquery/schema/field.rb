@@ -471,7 +471,7 @@ module Google
           #
           def param_type
             param_type = type.to_sym
-            param_type = Hash[fields.map { |field| [field.name.to_sym, field.param_type] }] if record?
+            param_type = fields.to_h { |field| [field.name.to_sym, field.param_type] } if record?
             param_type = [param_type] if repeated?
             param_type
           end

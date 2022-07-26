@@ -172,7 +172,7 @@ module Google
         #   schema.param_types
         #
         def param_types
-          Hash[fields.map { |field| [field.name.to_sym, field.param_type] }]
+          fields.to_h { |field| [field.name.to_sym, field.param_type] }
         end
 
         ##

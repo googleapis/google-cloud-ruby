@@ -489,7 +489,7 @@ module Google
         #
         def wait_until_done!
           backoff = lambda do |retries|
-            delay = [retries**2 + 5, 60].min # Maximum delay is 60
+            delay = [(retries**2) + 5, 60].min # Maximum delay is 60
             sleep delay
           end
           retries = 0
