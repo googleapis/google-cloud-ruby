@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/networksecurity/v1beta1/network_security_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -143,6 +145,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @network_security_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Stub,
                 credentials:  credentials,
@@ -158,6 +172,20 @@ module Google
             # @return [::Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -567,8 +595,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. A name of the AuthorizationPolicy to delete. Must be in the format
-            #     `projects/{project}/locations/{location}/authorizationPolicies/*`.
+            #     Required. A name of the AuthorizationPolicy to delete. Must be in the
+            #     format `projects/{project}/locations/{location}/authorizationPolicies/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -850,9 +878,10 @@ module Google
             #     Required. The parent resource of the ServerTlsPolicy. Must be in
             #     the format `projects/*/locations/{location}`.
             #   @param server_tls_policy_id [::String]
-            #     Required. Short name of the ServerTlsPolicy resource to be created. This value should
-            #     be 1-63 characters long, containing only letters, numbers, hyphens, and
-            #     underscores, and should not start with a number. E.g. "server_mtls_policy".
+            #     Required. Short name of the ServerTlsPolicy resource to be created. This
+            #     value should be 1-63 characters long, containing only letters, numbers,
+            #     hyphens, and underscores, and should not start with a number. E.g.
+            #     "server_mtls_policy".
             #   @param server_tls_policy [::Google::Cloud::NetworkSecurity::V1beta1::ServerTlsPolicy, ::Hash]
             #     Required. ServerTlsPolicy resource to be created.
             #
@@ -1330,9 +1359,10 @@ module Google
             #     Required. The parent resource of the ClientTlsPolicy. Must be in
             #     the format `projects/*/locations/{location}`.
             #   @param client_tls_policy_id [::String]
-            #     Required. Short name of the ClientTlsPolicy resource to be created. This value should
-            #     be 1-63 characters long, containing only letters, numbers, hyphens, and
-            #     underscores, and should not start with a number. E.g. "client_mtls_policy".
+            #     Required. Short name of the ClientTlsPolicy resource to be created. This
+            #     value should be 1-63 characters long, containing only letters, numbers,
+            #     hyphens, and underscores, and should not start with a number. E.g.
+            #     "client_mtls_policy".
             #   @param client_tls_policy [::Google::Cloud::NetworkSecurity::V1beta1::ClientTlsPolicy, ::Hash]
             #     Required. ClientTlsPolicy resource to be created.
             #
