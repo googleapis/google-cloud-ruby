@@ -748,7 +748,7 @@ module Google
         end
 
         # Request message for
-        # {::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory fetchInventory}.
+        # {::Google::Cloud::VMMigration::V1::VmMigration::Client#fetch_inventory fetchInventory}.
         # @!attribute [rw] source
         #   @return [::String]
         #     Required. The name of the Source.
@@ -843,7 +843,7 @@ module Google
         end
 
         # Response message for
-        # {::Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory fetchInventory}.
+        # {::Google::Cloud::VMMigration::V1::VmMigration::Client#fetch_inventory fetchInventory}.
         # @!attribute [rw] vmware_vms
         #   @return [::Google::Cloud::VMMigration::V1::VmwareVmsDetails]
         #     The description of the VMs in a Source of type Vmware.

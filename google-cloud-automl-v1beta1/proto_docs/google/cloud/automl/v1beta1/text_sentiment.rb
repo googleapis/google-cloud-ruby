@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Integer]
         #     Output only. The sentiment with the semantic, as given to the
-        #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#import_data AutoMl.ImportData} when populating the dataset from which the model used
+        #     {::Google::Cloud::AutoML::V1beta1::AutoMl::Client#import_data AutoMl.ImportData} when populating the dataset from which the model used
         #     for the prediction had been trained.
         #     The sentiment values are between 0 and
         #     Dataset.text_sentiment_dataset_metadata.sentiment_max (inclusive),

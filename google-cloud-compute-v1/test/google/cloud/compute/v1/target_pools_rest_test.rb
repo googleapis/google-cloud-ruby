@@ -76,9 +76,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     target_pool = "hello world"
     target_pools_add_health_check_request_resource = {}
 
-    add_health_check_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    add_health_check_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -91,27 +89,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.add_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource }) do |result, response|
+      client.add_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.add_health_check project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource do |result, response|
+      client.add_health_check project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.add_health_check ::Google::Cloud::Compute::V1::AddHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource) do |result, response|
+      client.add_health_check ::Google::Cloud::Compute::V1::AddHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.add_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource }, call_options) do |result, response|
+      client.add_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.add_health_check(::Google::Cloud::Compute::V1::AddHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource), call_options) do |result, response|
+      client.add_health_check(::Google::Cloud::Compute::V1::AddHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_health_check_request_resource: target_pools_add_health_check_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -134,9 +132,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     target_pool = "hello world"
     target_pools_add_instance_request_resource = {}
 
-    add_instance_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    add_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -149,27 +145,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.add_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource }) do |result, response|
+      client.add_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.add_instance project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource do |result, response|
+      client.add_instance project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.add_instance ::Google::Cloud::Compute::V1::AddInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource) do |result, response|
+      client.add_instance ::Google::Cloud::Compute::V1::AddInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.add_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource }, call_options) do |result, response|
+      client.add_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.add_instance(::Google::Cloud::Compute::V1::AddInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource), call_options) do |result, response|
+      client.add_instance(::Google::Cloud::Compute::V1::AddInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_add_instance_request_resource: target_pools_add_instance_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -194,9 +190,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -209,27 +203,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListTargetPoolsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListTargetPoolsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListTargetPoolsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListTargetPoolsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -251,9 +245,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     request_id = "hello world"
     target_pool = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -266,27 +258,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ project: project, region: region, request_id: request_id, target_pool: target_pool }) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, target_pool: target_pool }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, region: region, request_id: request_id, target_pool: target_pool do |result, response|
+      client.delete project: project, region: region, request_id: request_id, target_pool: target_pool do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, region: region, request_id: request_id, target_pool: target_pool }, call_options) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, target_pool: target_pool }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -307,9 +299,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     region = "hello world"
     target_pool = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -322,27 +312,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ project: project, region: region, target_pool: target_pool }) do |result, response|
+      client.get({ project: project, region: region, target_pool: target_pool }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, region: region, target_pool: target_pool do |result, response|
+      client.get project: project, region: region, target_pool: target_pool do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetTargetPoolRequest.new(project: project, region: region, target_pool: target_pool) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetTargetPoolRequest.new(project: project, region: region, target_pool: target_pool) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, region: region, target_pool: target_pool }, call_options) do |result, response|
+      client.get({ project: project, region: region, target_pool: target_pool }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetTargetPoolRequest.new(project: project, region: region, target_pool: target_pool), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetTargetPoolRequest.new(project: project, region: region, target_pool: target_pool), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -364,9 +354,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     region = "hello world"
     target_pool = "hello world"
 
-    get_health_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    get_health_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -379,27 +367,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_health({ instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool }) do |result, response|
+      client.get_health({ instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_health instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool do |result, response|
+      client.get_health instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_health ::Google::Cloud::Compute::V1::GetHealthTargetPoolRequest.new(instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool) do |result, response|
+      client.get_health ::Google::Cloud::Compute::V1::GetHealthTargetPoolRequest.new(instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_health({ instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool }, call_options) do |result, response|
+      client.get_health({ instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_health(::Google::Cloud::Compute::V1::GetHealthTargetPoolRequest.new(instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool), call_options) do |result, response|
+      client.get_health(::Google::Cloud::Compute::V1::GetHealthTargetPoolRequest.new(instance_reference_resource: instance_reference_resource, project: project, region: region, target_pool: target_pool), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -421,9 +409,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     request_id = "hello world"
     target_pool_resource = {}
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -436,27 +422,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource }) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource do |result, response|
+      client.insert project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource }, call_options) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool_resource: target_pool_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -481,9 +467,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -496,27 +480,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListTargetPoolsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListTargetPoolsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListTargetPoolsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListTargetPoolsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -539,9 +523,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     target_pool = "hello world"
     target_pools_remove_health_check_request_resource = {}
 
-    remove_health_check_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    remove_health_check_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -554,27 +536,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.remove_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource }) do |result, response|
+      client.remove_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.remove_health_check project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource do |result, response|
+      client.remove_health_check project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.remove_health_check ::Google::Cloud::Compute::V1::RemoveHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource) do |result, response|
+      client.remove_health_check ::Google::Cloud::Compute::V1::RemoveHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.remove_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource }, call_options) do |result, response|
+      client.remove_health_check({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.remove_health_check(::Google::Cloud::Compute::V1::RemoveHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource), call_options) do |result, response|
+      client.remove_health_check(::Google::Cloud::Compute::V1::RemoveHealthCheckTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_health_check_request_resource: target_pools_remove_health_check_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -597,9 +579,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     target_pool = "hello world"
     target_pools_remove_instance_request_resource = {}
 
-    remove_instance_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    remove_instance_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -612,27 +592,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.remove_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource }) do |result, response|
+      client.remove_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.remove_instance project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource do |result, response|
+      client.remove_instance project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.remove_instance ::Google::Cloud::Compute::V1::RemoveInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource) do |result, response|
+      client.remove_instance ::Google::Cloud::Compute::V1::RemoveInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.remove_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource }, call_options) do |result, response|
+      client.remove_instance({ project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.remove_instance(::Google::Cloud::Compute::V1::RemoveInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource), call_options) do |result, response|
+      client.remove_instance(::Google::Cloud::Compute::V1::RemoveInstanceTargetPoolRequest.new(project: project, region: region, request_id: request_id, target_pool: target_pool, target_pools_remove_instance_request_resource: target_pools_remove_instance_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -656,9 +636,7 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
     target_pool = "hello world"
     target_reference_resource = {}
 
-    set_backup_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_backup_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -671,27 +649,27 @@ class ::Google::Cloud::Compute::V1::TargetPools::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_backup({ failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource }) do |result, response|
+      client.set_backup({ failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_backup failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource do |result, response|
+      client.set_backup failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_backup ::Google::Cloud::Compute::V1::SetBackupTargetPoolRequest.new(failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource) do |result, response|
+      client.set_backup ::Google::Cloud::Compute::V1::SetBackupTargetPoolRequest.new(failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_backup({ failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource }, call_options) do |result, response|
+      client.set_backup({ failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_backup(::Google::Cloud::Compute::V1::SetBackupTargetPoolRequest.new(failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource), call_options) do |result, response|
+      client.set_backup(::Google::Cloud::Compute::V1::SetBackupTargetPoolRequest.new(failover_ratio: failover_ratio, project: project, region: region, request_id: request_id, target_pool: target_pool, target_reference_resource: target_reference_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

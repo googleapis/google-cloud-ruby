@@ -462,7 +462,7 @@ module Google
             #     A token identifying a page of results for the server to return
             #     Typically obtained via
             #     {::Google::Cloud::AutoML::V1beta1::ListDatasetsResponse#next_page_token ListDatasetsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_datasets AutoMl.ListDatasets} call.
+            #     {::Google::Cloud::AutoML::V1beta1::AutoMl::Client#list_datasets AutoMl.ListDatasets} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Dataset>]
@@ -1124,7 +1124,7 @@ module Google
             #     A token identifying a page of results for the server to return.
             #     Typically obtained from the
             #     {::Google::Cloud::AutoML::V1beta1::ListTableSpecsResponse#next_page_token ListTableSpecsResponse.next_page_token} field of the previous
-            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_table_specs AutoMl.ListTableSpecs} call.
+            #     {::Google::Cloud::AutoML::V1beta1::AutoMl::Client#list_table_specs AutoMl.ListTableSpecs} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::TableSpec>]
@@ -1402,7 +1402,7 @@ module Google
             #     A token identifying a page of results for the server to return.
             #     Typically obtained from the
             #     {::Google::Cloud::AutoML::V1beta1::ListColumnSpecsResponse#next_page_token ListColumnSpecsResponse.next_page_token} field of the previous
-            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_column_specs AutoMl.ListColumnSpecs} call.
+            #     {::Google::Cloud::AutoML::V1beta1::AutoMl::Client#list_column_specs AutoMl.ListColumnSpecs} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::ColumnSpec>]
@@ -1782,7 +1782,7 @@ module Google
             #     A token identifying a page of results for the server to return
             #     Typically obtained via
             #     {::Google::Cloud::AutoML::V1beta1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_models AutoMl.ListModels} call.
+            #     {::Google::Cloud::AutoML::V1beta1::AutoMl::Client#list_models AutoMl.ListModels} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::Model>]
@@ -2495,7 +2495,7 @@ module Google
             #     A token identifying a page of results for the server to return.
             #     Typically obtained via
             #     {::Google::Cloud::AutoML::V1beta1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token} of the previous
-            #     {::Google::Cloud::AutoML::V1beta1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
+            #     {::Google::Cloud::AutoML::V1beta1::AutoMl::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AutoML::V1beta1::ModelEvaluation>]

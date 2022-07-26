@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AutoML
       module V1
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#create_dataset AutoMl.CreateDataset}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#create_dataset AutoMl.CreateDataset}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the project to create the dataset for.
@@ -33,7 +33,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#get_dataset AutoMl.GetDataset}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#get_dataset AutoMl.GetDataset}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the dataset to retrieve.
@@ -42,7 +42,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#list_datasets AutoMl.ListDatasets}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#list_datasets AutoMl.ListDatasets}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the project from which to list datasets.
@@ -64,13 +64,13 @@ module Google
         #     A token identifying a page of results for the server to return
         #     Typically obtained via
         #     {::Google::Cloud::AutoML::V1::ListDatasetsResponse#next_page_token ListDatasetsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AutoML::V1::AutoML::Client#list_datasets AutoMl.ListDatasets} call.
+        #     {::Google::Cloud::AutoML::V1::AutoMl::Client#list_datasets AutoMl.ListDatasets} call.
         class ListDatasetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AutoML::V1::AutoML::Client#list_datasets AutoMl.ListDatasets}.
+        # Response message for {::Google::Cloud::AutoML::V1::AutoMl::Client#list_datasets AutoMl.ListDatasets}.
         # @!attribute [rw] datasets
         #   @return [::Array<::Google::Cloud::AutoML::V1::Dataset>]
         #     The datasets read.
@@ -83,7 +83,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#update_dataset AutoMl.UpdateDataset}
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#update_dataset AutoMl.UpdateDataset}
         # @!attribute [rw] dataset
         #   @return [::Google::Cloud::AutoML::V1::Dataset]
         #     Required. The dataset which replaces the resource on the server.
@@ -95,7 +95,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#delete_dataset AutoMl.DeleteDataset}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#delete_dataset AutoMl.DeleteDataset}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the dataset to delete.
@@ -104,7 +104,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#import_data AutoMl.ImportData}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#import_data AutoMl.ImportData}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Dataset name. Dataset must already exist. All imported
@@ -118,7 +118,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#export_data AutoMl.ExportData}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#export_data AutoMl.ExportData}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the dataset.
@@ -130,7 +130,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#get_annotation_spec AutoMl.GetAnnotationSpec}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#get_annotation_spec AutoMl.GetAnnotationSpec}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the annotation spec to retrieve.
@@ -139,7 +139,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#create_model AutoMl.CreateModel}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#create_model AutoMl.CreateModel}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the parent project where the model is being created.
@@ -151,7 +151,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#get_model AutoMl.GetModel}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#get_model AutoMl.GetModel}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name of the model.
@@ -160,7 +160,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#list_models AutoMl.ListModels}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#list_models AutoMl.ListModels}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the project, from which to list the models.
@@ -183,13 +183,13 @@ module Google
         #     A token identifying a page of results for the server to return
         #     Typically obtained via
         #     {::Google::Cloud::AutoML::V1::ListModelsResponse#next_page_token ListModelsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AutoML::V1::AutoML::Client#list_models AutoMl.ListModels} call.
+        #     {::Google::Cloud::AutoML::V1::AutoMl::Client#list_models AutoMl.ListModels} call.
         class ListModelsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AutoML::V1::AutoML::Client#list_models AutoMl.ListModels}.
+        # Response message for {::Google::Cloud::AutoML::V1::AutoMl::Client#list_models AutoMl.ListModels}.
         # @!attribute [rw] model
         #   @return [::Array<::Google::Cloud::AutoML::V1::Model>]
         #     List of models in the requested page.
@@ -202,7 +202,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#delete_model AutoMl.DeleteModel}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#delete_model AutoMl.DeleteModel}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name of the model being deleted.
@@ -211,7 +211,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#update_model AutoMl.UpdateModel}
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#update_model AutoMl.UpdateModel}
         # @!attribute [rw] model
         #   @return [::Google::Cloud::AutoML::V1::Model]
         #     Required. The model which replaces the resource on the server.
@@ -223,7 +223,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#deploy_model AutoMl.DeployModel}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#deploy_model AutoMl.DeployModel}.
         # @!attribute [rw] image_object_detection_model_deployment_metadata
         #   @return [::Google::Cloud::AutoML::V1::ImageObjectDetectionModelDeploymentMetadata]
         #     Model deployment metadata specific to Image Object Detection.
@@ -238,7 +238,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#undeploy_model AutoMl.UndeployModel}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#undeploy_model AutoMl.UndeployModel}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name of the model to undeploy.
@@ -247,7 +247,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#export_model AutoMl.ExportModel}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#export_model AutoMl.ExportModel}.
         # Models need to be enabled for exporting, otherwise an error code will be
         # returned.
         # @!attribute [rw] name
@@ -261,7 +261,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#get_model_evaluation AutoMl.GetModelEvaluation}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#get_model_evaluation AutoMl.GetModelEvaluation}.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Resource name for the model evaluation.
@@ -270,7 +270,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for {::Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations}.
+        # Request message for {::Google::Cloud::AutoML::V1::AutoMl::Client#list_model_evaluations AutoMl.ListModelEvaluations}.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. Resource name of the model to list the model evaluations for.
@@ -297,13 +297,13 @@ module Google
         #     A token identifying a page of results for the server to return.
         #     Typically obtained via
         #     {::Google::Cloud::AutoML::V1::ListModelEvaluationsResponse#next_page_token ListModelEvaluationsResponse.next_page_token} of the previous
-        #     {::Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
+        #     {::Google::Cloud::AutoML::V1::AutoMl::Client#list_model_evaluations AutoMl.ListModelEvaluations} call.
         class ListModelEvaluationsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message for {::Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations}.
+        # Response message for {::Google::Cloud::AutoML::V1::AutoMl::Client#list_model_evaluations AutoMl.ListModelEvaluations}.
         # @!attribute [rw] model_evaluation
         #   @return [::Array<::Google::Cloud::AutoML::V1::ModelEvaluation>]
         #     List of model evaluations in the requested page.
@@ -311,7 +311,7 @@ module Google
         #   @return [::String]
         #     A token to retrieve next page of results.
         #     Pass to the {::Google::Cloud::AutoML::V1::ListModelEvaluationsRequest#page_token ListModelEvaluationsRequest.page_token} field of a new
-        #     {::Google::Cloud::AutoML::V1::AutoML::Client#list_model_evaluations AutoMl.ListModelEvaluations} request to obtain that page.
+        #     {::Google::Cloud::AutoML::V1::AutoMl::Client#list_model_evaluations AutoMl.ListModelEvaluations} request to obtain that page.
         class ListModelEvaluationsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

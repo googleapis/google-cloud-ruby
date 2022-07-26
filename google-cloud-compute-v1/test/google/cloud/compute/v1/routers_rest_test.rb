@@ -78,9 +78,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -93,27 +91,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRoutersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -135,9 +133,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     request_id = "hello world"
     router = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -150,27 +146,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ project: project, region: region, request_id: request_id, router: router }) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, router: router }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, region: region, request_id: request_id, router: router do |result, response|
+      client.delete project: project, region: region, request_id: request_id, router: router do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteRouterRequest.new(project: project, region: region, request_id: request_id, router: router) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteRouterRequest.new(project: project, region: region, request_id: request_id, router: router) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, region: region, request_id: request_id, router: router }, call_options) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, router: router }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteRouterRequest.new(project: project, region: region, request_id: request_id, router: router), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteRouterRequest.new(project: project, region: region, request_id: request_id, router: router), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -191,9 +187,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     region = "hello world"
     router = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,27 +200,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ project: project, region: region, router: router }) do |result, response|
+      client.get({ project: project, region: region, router: router }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, region: region, router: router do |result, response|
+      client.get project: project, region: region, router: router do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRouterRequest.new(project: project, region: region, router: router) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetRouterRequest.new(project: project, region: region, router: router) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, region: region, router: router }, call_options) do |result, response|
+      client.get({ project: project, region: region, router: router }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRouterRequest.new(project: project, region: region, router: router), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetRouterRequest.new(project: project, region: region, router: router), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -252,9 +246,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     return_partial_success = true
     router = "hello world"
 
-    get_nat_mapping_info_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_nat_mapping_info_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -267,27 +259,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_nat_mapping_info({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |result, response|
+      client.get_nat_mapping_info({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_nat_mapping_info filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |result, response|
+      client.get_nat_mapping_info filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_nat_mapping_info ::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |result, response|
+      client.get_nat_mapping_info ::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_nat_mapping_info({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |result, response|
+      client.get_nat_mapping_info({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_nat_mapping_info(::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |result, response|
+      client.get_nat_mapping_info(::Google::Cloud::Compute::V1::GetNatMappingInfoRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success, router: router), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -308,9 +300,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     region = "hello world"
     router = "hello world"
 
-    get_router_status_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_router_status_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -323,27 +313,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_router_status({ project: project, region: region, router: router }) do |result, response|
+      client.get_router_status({ project: project, region: region, router: router }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_router_status project: project, region: region, router: router do |result, response|
+      client.get_router_status project: project, region: region, router: router do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_router_status ::Google::Cloud::Compute::V1::GetRouterStatusRouterRequest.new(project: project, region: region, router: router) do |result, response|
+      client.get_router_status ::Google::Cloud::Compute::V1::GetRouterStatusRouterRequest.new(project: project, region: region, router: router) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_router_status({ project: project, region: region, router: router }, call_options) do |result, response|
+      client.get_router_status({ project: project, region: region, router: router }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_router_status(::Google::Cloud::Compute::V1::GetRouterStatusRouterRequest.new(project: project, region: region, router: router), call_options) do |result, response|
+      client.get_router_status(::Google::Cloud::Compute::V1::GetRouterStatusRouterRequest.new(project: project, region: region, router: router), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -365,9 +355,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     request_id = "hello world"
     router_resource = {}
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -380,27 +368,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ project: project, region: region, request_id: request_id, router_resource: router_resource }) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, router_resource: router_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, region: region, request_id: request_id, router_resource: router_resource do |result, response|
+      client.insert project: project, region: region, request_id: request_id, router_resource: router_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertRouterRequest.new(project: project, region: region, request_id: request_id, router_resource: router_resource) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertRouterRequest.new(project: project, region: region, request_id: request_id, router_resource: router_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, region: region, request_id: request_id, router_resource: router_resource }, call_options) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, router_resource: router_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertRouterRequest.new(project: project, region: region, request_id: request_id, router_resource: router_resource), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertRouterRequest.new(project: project, region: region, request_id: request_id, router_resource: router_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -425,9 +413,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -440,27 +426,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListRoutersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -483,9 +469,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     router = "hello world"
     router_resource = {}
 
-    patch_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -498,27 +482,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.patch({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }) do |result, response|
+      client.patch({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch project: project, region: region, request_id: request_id, router: router, router_resource: router_resource do |result, response|
+      client.patch project: project, region: region, request_id: request_id, router: router, router_resource: router_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }, call_options) do |result, response|
+      client.patch({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -540,9 +524,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     router = "hello world"
     router_resource = {}
 
-    preview_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    preview_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -555,27 +537,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.preview({ project: project, region: region, router: router, router_resource: router_resource }) do |result, response|
+      client.preview({ project: project, region: region, router: router, router_resource: router_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.preview project: project, region: region, router: router, router_resource: router_resource do |result, response|
+      client.preview project: project, region: region, router: router, router_resource: router_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.preview ::Google::Cloud::Compute::V1::PreviewRouterRequest.new(project: project, region: region, router: router, router_resource: router_resource) do |result, response|
+      client.preview ::Google::Cloud::Compute::V1::PreviewRouterRequest.new(project: project, region: region, router: router, router_resource: router_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.preview({ project: project, region: region, router: router, router_resource: router_resource }, call_options) do |result, response|
+      client.preview({ project: project, region: region, router: router, router_resource: router_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.preview(::Google::Cloud::Compute::V1::PreviewRouterRequest.new(project: project, region: region, router: router, router_resource: router_resource), call_options) do |result, response|
+      client.preview(::Google::Cloud::Compute::V1::PreviewRouterRequest.new(project: project, region: region, router: router, router_resource: router_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -598,9 +580,7 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
     router = "hello world"
     router_resource = {}
 
-    update_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :put, verb
-
+    update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -613,27 +593,27 @@ class ::Google::Cloud::Compute::V1::Routers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }) do |result, response|
+      client.update({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.update project: project, region: region, request_id: request_id, router: router, router_resource: router_resource do |result, response|
+      client.update project: project, region: region, request_id: request_id, router: router, router_resource: router_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.update ::Google::Cloud::Compute::V1::UpdateRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource) do |result, response|
+      client.update ::Google::Cloud::Compute::V1::UpdateRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.update({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }, call_options) do |result, response|
+      client.update({ project: project, region: region, request_id: request_id, router: router, router_resource: router_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.update(::Google::Cloud::Compute::V1::UpdateRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource), call_options) do |result, response|
+      client.update(::Google::Cloud::Compute::V1::UpdateRouterRequest.new(project: project, region: region, request_id: request_id, router: router, router_resource: router_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
