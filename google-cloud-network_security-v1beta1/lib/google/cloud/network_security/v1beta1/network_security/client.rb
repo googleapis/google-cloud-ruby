@@ -19,7 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/networksecurity/v1beta1/network_security_pb"
 require "google/cloud/location"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1"
 
 module Google
   module Cloud
