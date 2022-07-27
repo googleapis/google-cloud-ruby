@@ -61,7 +61,6 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml",
-    ".owlbot.rb"
+    ".OwlBot.yaml"
   ]
 }
