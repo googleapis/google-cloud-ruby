@@ -58,6 +58,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :database, :string, 2
       optional :type, :enum, 3, "google.cloud.bigquery.connection.v1.CloudSqlProperties.DatabaseType"
       optional :credential, :message, 4, "google.cloud.bigquery.connection.v1.CloudSqlCredential"
+      optional :service_account_id, :string, 5
     end
     add_enum "google.cloud.bigquery.connection.v1.CloudSqlProperties.DatabaseType" do
       value :DATABASE_TYPE_UNSPECIFIED, 0
