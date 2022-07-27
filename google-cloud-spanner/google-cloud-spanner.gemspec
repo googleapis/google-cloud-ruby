@@ -24,6 +24,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency "google-cloud-spanner-v1", "~> 0.2"
   gem.add_dependency "concurrent-ruby", "~> 1.0"
 
+  gem.add_development_dependency "gapic-common", ">= 0.11.0"
   gem.add_development_dependency "google-style", "~> 1.26.1"
   gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"

@@ -24,7 +24,7 @@ describe Google::Cloud::Spanner::Transaction, :batch_update, :mock_spanner do
   let(:transaction_grpc) { Google::Cloud::Spanner::V1::Transaction.new id: transaction_id }
   let(:transaction) { Google::Cloud::Spanner::Transaction.from_grpc transaction_grpc, session }
   let(:tx_selector) { Google::Cloud::Spanner::V1::TransactionSelector.new id: transaction_id }
-  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
+  let(:default_options) { ::Gapic::CallOptions.new metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:timestamp) { Time.parse "2017-01-01 20:04:05.06 -0700" }
   let(:date) { Date.parse "2017-01-02" }
   let(:file) { StringIO.new "contents" }
