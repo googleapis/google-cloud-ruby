@@ -50,11 +50,10 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
       family_name: family_name, column_qualifier: qualifier, append_value: append_value
     )
 
-    mock.expect :read_modify_write_row, res, [
+    mock.expect :read_modify_write_row, res,
       table_name: table_path(instance_id, table_id),
       row_key: row_key,
       rules: [rule]
-    ]
 
     row = table.read_modify_write_row(
       row_key,
@@ -101,11 +100,10 @@ describe Google::Cloud::Bigtable::Table, :read_modify_write_row, :mock_bigtable 
       family_name: family_name, column_qualifier: qualifier, increment_amount: increment_amount
     )
 
-    mock.expect :read_modify_write_row, res, [
+    mock.expect :read_modify_write_row, res,
       table_name: table_path(instance_id, table_id),
       row_key: row_key,
       rules: [rule_1, rule_2]
-    ]
 
     row = table.read_modify_write_row(
       row_key,
