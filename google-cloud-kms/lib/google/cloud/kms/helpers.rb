@@ -17,6 +17,10 @@
 module Google
   module Cloud
     module Kms
+      # This method used to be generated, but is no longer because iam_policy
+      # is expected to be a mixin. We'll preserve it for backward compatibility.
+      # Note: When KMS is transitioned to true mixins, this will need to be
+      # updated.
       unless respond_to? :iam_policy
         ##
         # Create a new client object for IAMPolicy.
