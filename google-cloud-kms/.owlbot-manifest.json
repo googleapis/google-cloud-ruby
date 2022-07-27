@@ -22,11 +22,13 @@
     ".OwlBot.yaml",
     "MIGRATING.md",
     "acceptance/google/cloud/kms/v1/smoke_test.rb",
+    "lib/google/cloud/kms/helpers.rb",
     "samples/.rubocop.yml",
     "samples/Gemfile",
     "samples/README.md",
     "samples/Rakefile",
     "samples/acceptance/snippets_test.rb",
-    "samples/snippets.rb"
+    "samples/snippets.rb",
+    "test/google/cloud/kms/client_helper_test.rb"
   ]
 }
