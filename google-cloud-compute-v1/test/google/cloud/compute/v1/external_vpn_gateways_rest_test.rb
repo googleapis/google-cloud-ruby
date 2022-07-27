@@ -74,9 +74,7 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
     project = "hello world"
     request_id = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -89,27 +87,27 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.delete({ external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id }) do |result, response|
+      client.delete({ external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id do |result, response|
+      client.delete external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id }, call_options) do |result, response|
+      client.delete({ external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -129,9 +127,7 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
     external_vpn_gateway = "hello world"
     project = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -144,27 +140,27 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.get({ external_vpn_gateway: external_vpn_gateway, project: project }) do |result, response|
+      client.get({ external_vpn_gateway: external_vpn_gateway, project: project }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get external_vpn_gateway: external_vpn_gateway, project: project do |result, response|
+      client.get external_vpn_gateway: external_vpn_gateway, project: project do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ external_vpn_gateway: external_vpn_gateway, project: project }, call_options) do |result, response|
+      client.get({ external_vpn_gateway: external_vpn_gateway, project: project }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetExternalVpnGatewayRequest.new(external_vpn_gateway: external_vpn_gateway, project: project), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -185,9 +181,7 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
     project = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -200,27 +194,27 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.insert({ external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id }) do |result, response|
+      client.insert({ external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id do |result, response|
+      client.insert external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertExternalVpnGatewayRequest.new(external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertExternalVpnGatewayRequest.new(external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id }, call_options) do |result, response|
+      client.insert({ external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertExternalVpnGatewayRequest.new(external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertExternalVpnGatewayRequest.new(external_vpn_gateway_resource: external_vpn_gateway_resource, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -244,9 +238,7 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
     project = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -259,27 +251,27 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListExternalVpnGatewaysRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListExternalVpnGatewaysRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListExternalVpnGatewaysRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListExternalVpnGatewaysRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -300,9 +292,7 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
     project = "hello world"
     resource = "hello world"
 
-    set_labels_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -315,27 +305,27 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |result, response|
+      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |result, response|
+      client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsExternalVpnGatewayRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |result, response|
+      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsExternalVpnGatewayRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |result, response|
+      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsExternalVpnGatewayRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |result, response|
+      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsExternalVpnGatewayRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -356,9 +346,7 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
     resource = "hello world"
     test_permissions_request_resource = {}
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -371,27 +359,27 @@ class ::Google::Cloud::Compute::V1::ExternalVpnGateways::ClientTest < Minitest::
       end
 
       # Use hash object
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |result, response|
+      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsExternalVpnGatewayRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |result, response|
+      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsExternalVpnGatewayRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsExternalVpnGatewayRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |result, response|
+      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsExternalVpnGatewayRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the BackendServices service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -501,8 +501,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/addSignedUrlKey",
                                                           body: "signed_url_key_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -523,7 +523,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/backendServices",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -544,8 +544,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -566,8 +566,8 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/deleteSignedUrlKey",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -588,8 +588,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -611,8 +611,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/getHealth",
                                                           body: "resource_group_reference_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -634,7 +634,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices",
                                                           body: "backend_service_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -655,7 +655,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -677,8 +677,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
                                                           body: "backend_service_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -700,8 +700,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/setEdgeSecurityPolicy",
                                                           body: "security_policy_reference_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -723,8 +723,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}/setSecurityPolicy",
                                                           body: "security_policy_reference_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -746,8 +746,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/backendServices/{backend_service}",
                                                           body: "backend_service_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["backend_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["backend_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

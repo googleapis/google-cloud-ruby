@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the TargetHttpsProxies service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -463,7 +463,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/targetHttpsProxies",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -484,8 +484,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -506,8 +506,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -529,7 +529,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies",
                                                           body: "target_https_proxy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -550,7 +550,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -572,8 +572,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}",
                                                           body: "target_https_proxy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -595,8 +595,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setCertificateMap",
                                                           body: "target_https_proxies_set_certificate_map_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -618,8 +618,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setQuicOverride",
                                                           body: "target_https_proxies_set_quic_override_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -641,8 +641,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/targetHttpsProxies/{target_https_proxy}/setSslCertificates",
                                                           body: "target_https_proxies_set_ssl_certificates_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -664,8 +664,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetHttpsProxies/{target_https_proxy}/setSslPolicy",
                                                           body: "ssl_policy_reference_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -687,8 +687,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/targetHttpsProxies/{target_https_proxy}/setUrlMap",
                                                           body: "url_map_reference_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_https_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_https_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

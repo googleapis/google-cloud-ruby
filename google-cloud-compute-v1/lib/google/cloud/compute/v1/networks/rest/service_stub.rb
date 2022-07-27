@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the Networks service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -464,8 +464,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}/addPeering",
                                                           body: "networks_add_peering_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -486,8 +486,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -508,8 +508,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -530,8 +530,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}/getEffectiveFirewalls",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -553,7 +553,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networks",
                                                           body: "network_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -574,7 +574,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/networks",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -595,8 +595,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}/listPeeringRoutes",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -618,8 +618,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}",
                                                           body: "network_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -641,8 +641,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}/removePeering",
                                                           body: "networks_remove_peering_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -663,8 +663,8 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}/switchToCustomMode",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -686,8 +686,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networks/{network}/updatePeering",
                                                           body: "networks_update_peering_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

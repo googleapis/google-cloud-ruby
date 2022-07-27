@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the NodeGroups service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -538,9 +538,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/addNodes",
                                                           body: "node_groups_add_nodes_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["node_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["node_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -561,7 +561,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/nodeGroups",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -582,9 +582,9 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["node_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["node_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -606,9 +606,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/deleteNodes",
                                                           body: "node_groups_delete_nodes_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["node_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["node_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -629,9 +629,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["node_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["node_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -652,9 +652,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{resource}/getIamPolicy",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -676,8 +676,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups",
                                                           body: "node_group_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -698,8 +698,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -720,9 +720,9 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/listNodes",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["node_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["node_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -744,9 +744,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}",
                                                           body: "node_group_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["node_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["node_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -768,9 +768,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{resource}/setIamPolicy",
                                                           body: "zone_set_policy_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -792,9 +792,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{node_group}/setNodeTemplate",
                                                           body: "node_groups_set_node_template_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["node_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["node_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -816,9 +816,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/nodeGroups/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

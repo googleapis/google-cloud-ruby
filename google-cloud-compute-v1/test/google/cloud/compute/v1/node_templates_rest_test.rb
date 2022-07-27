@@ -78,9 +78,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -93,27 +91,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListNodeTemplatesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListNodeTemplatesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListNodeTemplatesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListNodeTemplatesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -135,9 +133,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     region = "hello world"
     request_id = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -150,27 +146,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ node_template: node_template, project: project, region: region, request_id: request_id }) do |result, response|
+      client.delete({ node_template: node_template, project: project, region: region, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete node_template: node_template, project: project, region: region, request_id: request_id do |result, response|
+      client.delete node_template: node_template, project: project, region: region, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteNodeTemplateRequest.new(node_template: node_template, project: project, region: region, request_id: request_id) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteNodeTemplateRequest.new(node_template: node_template, project: project, region: region, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ node_template: node_template, project: project, region: region, request_id: request_id }, call_options) do |result, response|
+      client.delete({ node_template: node_template, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteNodeTemplateRequest.new(node_template: node_template, project: project, region: region, request_id: request_id), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteNodeTemplateRequest.new(node_template: node_template, project: project, region: region, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -191,9 +187,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     project = "hello world"
     region = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,27 +200,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ node_template: node_template, project: project, region: region }) do |result, response|
+      client.get({ node_template: node_template, project: project, region: region }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get node_template: node_template, project: project, region: region do |result, response|
+      client.get node_template: node_template, project: project, region: region do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetNodeTemplateRequest.new(node_template: node_template, project: project, region: region) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetNodeTemplateRequest.new(node_template: node_template, project: project, region: region) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ node_template: node_template, project: project, region: region }, call_options) do |result, response|
+      client.get({ node_template: node_template, project: project, region: region }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetNodeTemplateRequest.new(node_template: node_template, project: project, region: region), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetNodeTemplateRequest.new(node_template: node_template, project: project, region: region), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -248,9 +242,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     region = "hello world"
     resource = "hello world"
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -263,27 +255,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource do |result, response|
+      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyNodeTemplateRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource) do |result, response|
+      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyNodeTemplateRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }, call_options) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyNodeTemplateRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource), call_options) do |result, response|
+      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyNodeTemplateRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -305,9 +297,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     region = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -320,27 +310,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ node_template_resource: node_template_resource, project: project, region: region, request_id: request_id }) do |result, response|
+      client.insert({ node_template_resource: node_template_resource, project: project, region: region, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert node_template_resource: node_template_resource, project: project, region: region, request_id: request_id do |result, response|
+      client.insert node_template_resource: node_template_resource, project: project, region: region, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertNodeTemplateRequest.new(node_template_resource: node_template_resource, project: project, region: region, request_id: request_id) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertNodeTemplateRequest.new(node_template_resource: node_template_resource, project: project, region: region, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ node_template_resource: node_template_resource, project: project, region: region, request_id: request_id }, call_options) do |result, response|
+      client.insert({ node_template_resource: node_template_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertNodeTemplateRequest.new(node_template_resource: node_template_resource, project: project, region: region, request_id: request_id), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertNodeTemplateRequest.new(node_template_resource: node_template_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -365,9 +355,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -380,27 +368,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListNodeTemplatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListNodeTemplatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListNodeTemplatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListNodeTemplatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -422,9 +410,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     region_set_policy_request_resource = {}
     resource = "hello world"
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -437,27 +423,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }) do |result, response|
+      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_iam_policy project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource do |result, response|
+      client.set_iam_policy project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyNodeTemplateRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource) do |result, response|
+      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyNodeTemplateRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }, call_options) do |result, response|
+      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyNodeTemplateRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource), call_options) do |result, response|
+      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyNodeTemplateRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -479,9 +465,7 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
     resource = "hello world"
     test_permissions_request_resource = {}
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -494,27 +478,27 @@ class ::Google::Cloud::Compute::V1::NodeTemplates::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |result, response|
+      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |result, response|
+      client.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsNodeTemplateRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |result, response|
+      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsNodeTemplateRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |result, response|
+      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsNodeTemplateRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |result, response|
+      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsNodeTemplateRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
