@@ -134,7 +134,7 @@ module Google
         end
 
         # Request message for
-        # {::Google::Cloud::BinaryAuthorization::V1::ValidationHelperV1::Client#validate_attestation_occurrence ValidationHelperV1.ValidateAttestationOccurrence}.
+        # {::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client#validate_attestation_occurrence ValidationHelperV1.ValidateAttestationOccurrence}.
         # @!attribute [rw] attestor
         #   @return [::String]
         #     Required. The resource name of the {::Google::Cloud::BinaryAuthorization::V1::Attestor Attestor} of the
@@ -160,7 +160,7 @@ module Google
         end
 
         # Response message for
-        # {::Google::Cloud::BinaryAuthorization::V1::ValidationHelperV1::Client#validate_attestation_occurrence ValidationHelperV1.ValidateAttestationOccurrence}.
+        # {::Google::Cloud::BinaryAuthorization::V1::ValidationHelper::Client#validate_attestation_occurrence ValidationHelperV1.ValidateAttestationOccurrence}.
         # @!attribute [rw] result
         #   @return [::Google::Cloud::BinaryAuthorization::V1::ValidateAttestationOccurrenceResponse::Result]
         #     The result of the Attestation validation.
