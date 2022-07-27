@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.1 (2022-07-27)
+
+#### Documentation
+
+* Minor updates from gapic-generator 0.15 ([#18892](https://github.com/googleapis/google-cloud-ruby/issues/18892)) 
+
 ### 0.6.0 (2022-07-08)
 
 #### Features
