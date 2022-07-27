@@ -37,7 +37,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       column_families: column_families,
       granularity: :MILLIS
     )
-    mock.expect :create_table, create_res, [parent: instance_path(instance_id), table_id: table_id, table: req_table]
+    mock.expect :create_table, create_res, parent: instance_path(instance_id), table_id: table_id, table: req_table
 
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
@@ -97,7 +97,7 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       column_families: column_families,
       granularity: :MILLIS
     )
-    mock.expect :create_table, create_res, [parent: instance_path(instance_id), table_id: table_id, table: req_table]
+    mock.expect :create_table, create_res, parent: instance_path(instance_id), table_id: table_id, table: req_table
 
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
@@ -154,12 +154,11 @@ describe Google::Cloud::Bigtable::Project, :create_table, :mock_bigtable do
       column_families: column_families,
       granularity: :MILLIS
     )
-    mock.expect :create_table, create_res, [
+    mock.expect :create_table, create_res,
       parent: instance_path(instance_id),
       table_id: table_id,
       table: req_table,
       initial_splits: initial_splits.map { |key| { key: key } }
-    ]
 
     get_res = Google::Cloud::Bigtable::Admin::V2::Table.new(
       table_hash(
