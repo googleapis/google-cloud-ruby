@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2022-07-28)
+
+#### Features
+
+* Added service_account_id output field for CloudSQL properties ([#18882](https://github.com/googleapis/google-cloud-ruby/issues/18882)) 
+
 ### 0.8.0 (2022-07-01)
 
 #### Features
