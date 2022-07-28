@@ -127,7 +127,7 @@ def create_ummr_secret project_id:, secret_id:, locations:
     secret:    {
       replication: {
         user_managed: {
-          replicas: locations.map {|x| { location: x } }
+          replicas: locations.map { |x| { location: x } }
         }
       }
     }

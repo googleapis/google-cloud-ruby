@@ -109,7 +109,7 @@ describe "Secret Manager Snippets" do
         secret = create_ummr_secret(
           project_id: project_id,
           secret_id:  secret_id,
-          locations: [ "us-east1", "us-east4", "us-west1" ]
+          locations: ["us-east1", "us-east4", "us-west1"]
         )
 
         expect(secret).wont_be_nil
