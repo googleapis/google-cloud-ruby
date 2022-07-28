@@ -482,7 +482,7 @@ def update_secret_with_alias project_id:, secret_id:
     secret: {
       name: name,
       version_aliases: {
-        test: "1"
+        test: 1
       }
     },
     update_mask: {

@@ -317,6 +317,7 @@ describe "Secret Manager Snippets" do
   describe "#update_secret_with_alias" do
     it "updates the secret" do
       expect(secret).wont_be_nil
+      expect(secret_version).wont_be_nil
 
       expect {
         n_secret = update_secret_with_alias(
@@ -325,7 +326,7 @@ describe "Secret Manager Snippets" do
         )
 
         expect(n_secret).wont_be_nil
-        expect(n_secret.version_aliases["test"]).must_equal("1")
+        expect(n_secret.version_aliases["test"]).must_equal(1)
       }.must_output(/Updated secret/)
     end
   end
