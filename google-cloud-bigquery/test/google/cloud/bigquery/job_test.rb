@@ -202,7 +202,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job,
                 Google::Apis::BigqueryV2::Job.from_json(random_job_hash(job_id, "done").to_json),
-                [project, job_id, {location: "US"}]
+                [project, job_id], location: "US"
 
     _(job).must_be :running?
     job.reload!
@@ -215,19 +215,19 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
     bigquery.service.mocked_service = mock
     mock.expect :get_job,
                 get_job_resp("pending"),
-                [project, job_id, {location: "US"}]
+                [project, job_id], location: "US"
     mock.expect :get_job,
                 get_job_resp("pending"),
-                [project, job_id, {location: "US"}]
+                [project, job_id], location: "US"
     mock.expect :get_job,
                 get_job_resp("running"),
-                [project, job_id, {location: "US"}]
+                [project, job_id], location: "US"
     mock.expect :get_job,
                 get_job_resp("running"),
-                [project, job_id, {location: "US"}]
+                [project, job_id], location: "US"
     mock.expect :get_job,
                 get_job_resp("done"),
-                [project, job_id, {location: "US"}]
+                [project, job_id], location: "US"
 
 
     # mock out the sleep method so the test doesn't actually block
@@ -243,7 +243,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
   it "can cancel itself" do
     mock = Minitest::Mock.new
     mock.expect :cancel_job, Google::Apis::BigqueryV2::CancelJobResponse.new(job: job_gapi),
-      [project, job_id, location: region]
+      [project, job_id], location: region
     bigquery.service.mocked_service = mock
 
     job.cancel
@@ -252,7 +252,7 @@ describe Google::Cloud::Bigquery::Job, :mock_bigquery do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_job, nil, [project, job_id, location: region]
+    mock.expect :delete_job, nil, [project, job_id], location: region
     bigquery.service.mocked_service = mock
 
     job.delete

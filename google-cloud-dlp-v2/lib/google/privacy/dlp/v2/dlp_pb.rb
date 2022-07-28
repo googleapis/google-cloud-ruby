@@ -274,6 +274,73 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :display_name, :string, 2
       repeated :supported_by, :enum, 3, "google.privacy.dlp.v2.InfoTypeSupportedBy"
       optional :description, :string, 4
+      repeated :categories, :message, 10, "google.privacy.dlp.v2.InfoTypeCategory"
+    end
+    add_message "google.privacy.dlp.v2.InfoTypeCategory" do
+      oneof :category do
+        optional :location_category, :enum, 1, "google.privacy.dlp.v2.InfoTypeCategory.LocationCategory"
+        optional :industry_category, :enum, 2, "google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory"
+        optional :type_category, :enum, 3, "google.privacy.dlp.v2.InfoTypeCategory.TypeCategory"
+      end
+    end
+    add_enum "google.privacy.dlp.v2.InfoTypeCategory.LocationCategory" do
+      value :LOCATION_UNSPECIFIED, 0
+      value :GLOBAL, 1
+      value :ARGENTINA, 2
+      value :AUSTRALIA, 3
+      value :BELGIUM, 4
+      value :BRAZIL, 5
+      value :CANADA, 6
+      value :CHILE, 7
+      value :CHINA, 8
+      value :COLOMBIA, 9
+      value :DENMARK, 10
+      value :FRANCE, 11
+      value :FINLAND, 12
+      value :GERMANY, 13
+      value :HONG_KONG, 14
+      value :INDIA, 15
+      value :INDONESIA, 16
+      value :IRELAND, 17
+      value :ISRAEL, 18
+      value :ITALY, 19
+      value :JAPAN, 20
+      value :KOREA, 21
+      value :MEXICO, 22
+      value :THE_NETHERLANDS, 23
+      value :NORWAY, 24
+      value :PARAGUAY, 25
+      value :PERU, 26
+      value :POLAND, 27
+      value :PORTUGAL, 28
+      value :SINGAPORE, 29
+      value :SOUTH_AFRICA, 30
+      value :SPAIN, 31
+      value :SWEDEN, 32
+      value :TAIWAN, 33
+      value :THAILAND, 34
+      value :TURKEY, 35
+      value :UNITED_KINGDOM, 36
+      value :UNITED_STATES, 37
+      value :URUGUAY, 38
+      value :VENEZUELA, 39
+      value :INTERNAL, 40
+    end
+    add_enum "google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory" do
+      value :INDUSTRY_UNSPECIFIED, 0
+      value :FINANCE, 1
+      value :HEALTH, 2
+      value :TELECOMMUNICATIONS, 3
+    end
+    add_enum "google.privacy.dlp.v2.InfoTypeCategory.TypeCategory" do
+      value :TYPE_UNSPECIFIED, 0
+      value :PII, 1
+      value :SPII, 2
+      value :DEMOGRAPHIC, 3
+      value :CREDENTIAL, 4
+      value :GOVERNMENT_ID, 5
+      value :DOCUMENT, 6
+      value :CONTEXTUAL_INFORMATION, 7
     end
     add_message "google.privacy.dlp.v2.ListInfoTypesRequest" do
       optional :parent, :string, 4
@@ -1228,6 +1295,10 @@ module Google
         InspectDataSourceDetails::Result = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectDataSourceDetails.Result").msgclass
         HybridInspectStatistics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.HybridInspectStatistics").msgclass
         InfoTypeDescription = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeDescription").msgclass
+        InfoTypeCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeCategory").msgclass
+        InfoTypeCategory::LocationCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeCategory.LocationCategory").enummodule
+        InfoTypeCategory::IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory").enummodule
+        InfoTypeCategory::TypeCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoTypeCategory.TypeCategory").enummodule
         ListInfoTypesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListInfoTypesRequest").msgclass
         ListInfoTypesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ListInfoTypesResponse").msgclass
         RiskAnalysisJobConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.RiskAnalysisJobConfig").msgclass

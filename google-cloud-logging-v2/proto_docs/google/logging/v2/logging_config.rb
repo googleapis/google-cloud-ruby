@@ -180,8 +180,8 @@ module Google
         #     Output only. An IAM identity&mdash;a service account or group&mdash;under which Cloud
         #     Logging writes the exported log entries to the sink's destination. This
         #     field is set by
-        #     {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#create_sink sinks.create} and
-        #     {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_sink sinks.update} based on the
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#create_sink sinks.create} and
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#update_sink sinks.update} based on the
         #     value of `unique_writer_identity` in those methods.
         #
         #     Until you grant this identity write-access to the destination, log entry
@@ -650,7 +650,7 @@ module Google
         #     of `sink_name`.
         # @!attribute [rw] unique_writer_identity
         #   @return [::Boolean]
-        #     Optional. See {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#create_sink sinks.create}
+        #     Optional. See {::Google::Cloud::Logging::V2::ConfigService::Client#create_sink sinks.create}
         #     for a description of this field. When updating a sink, the effect of this
         #     field on the value of `writer_identity` in the updated sink depends on both
         #     the old and new values of this field:
@@ -880,7 +880,7 @@ module Google
         end
 
         # The parameters to
-        # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#get_cmek_settings GetCmekSettings}.
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#get_cmek_settings GetCmekSettings}.
         #
         # See [Enabling CMEK for Log
         # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
@@ -908,7 +908,7 @@ module Google
         end
 
         # The parameters to
-        # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_cmek_settings UpdateCmekSettings}.
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#update_cmek_settings UpdateCmekSettings}.
         #
         # See [Enabling CMEK for Log
         # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
@@ -1001,7 +1001,7 @@ module Google
         #     Before enabling CMEK for Log Router, you must first assign the
         #     cloudkms.cryptoKeyEncrypterDecrypter role to the service account that
         #     the Log Router will use to access your Cloud KMS key. Use
-        #     {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#get_cmek_settings GetCmekSettings} to
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#get_cmek_settings GetCmekSettings} to
         #     obtain the service account ID.
         #
         #     See [Enabling CMEK for Log
@@ -1013,7 +1013,7 @@ module Google
         end
 
         # The parameters to
-        # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#get_settings GetSettings}.
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#get_settings GetSettings}.
         #
         # See [Enabling CMEK for Log
         # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
@@ -1041,7 +1041,7 @@ module Google
         end
 
         # The parameters to
-        # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_settings UpdateSettings}.
+        # {::Google::Cloud::Logging::V2::ConfigService::Client#update_settings UpdateSettings}.
         #
         # See [Enabling CMEK for Log
         # Router](https://cloud.google.com/logging/docs/routing/managed-encryption) for
@@ -1122,7 +1122,7 @@ module Google
         #     Before enabling CMEK for Log Router, you must first assign the role
         #     `roles/cloudkms.cryptoKeyEncrypterDecrypter` to the service account that
         #     the Log Router will use to access your Cloud KMS key. Use
-        #     {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#get_settings GetSettings} to
+        #     {::Google::Cloud::Logging::V2::ConfigService::Client#get_settings GetSettings} to
         #     obtain the service account ID.
         #
         #     See [Enabling CMEK for Log

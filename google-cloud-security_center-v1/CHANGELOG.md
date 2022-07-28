@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2022-07-25)
+
+#### Features
+
+* Return containers and kubernetes resources associated with a finding ([#18851](https://github.com/googleapis/google-cloud-ruby/issues/18851)) 
+
 ### 0.17.0 (2022-07-07)
 
 #### Features

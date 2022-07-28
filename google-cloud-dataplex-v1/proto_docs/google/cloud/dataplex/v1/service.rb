@@ -70,7 +70,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the lake:
-        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
         class DeleteLakeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -123,7 +123,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent lake:
-        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`
+        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of actions to return. The service may return fewer than this
@@ -292,7 +292,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent zone:
-        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`
+        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}`.
         # @!attribute [rw] asset_id
         #   @return [::String]
         #     Required. Asset identifier.
@@ -536,7 +536,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the task:
-        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`
+        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/tasks/{tasks_id}`.
         class GetTaskRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -600,7 +600,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent lake:
-        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+        #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
         # @!attribute [rw] environment_id
         #   @return [::String]
         #     Required. Environment identifier.
@@ -642,7 +642,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the environment:
-        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}`
+        #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`.
         class DeleteEnvironmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -652,7 +652,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent lake:
-        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}
+        #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of environments to return. The service may return fewer than
@@ -692,7 +692,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The resource name of the environment:
-        #     projects/\\{project_id}/locations/\\{location_id}/lakes/\\{lake_id}/environments/\\{environment_id}
+        #     `projects/{project_id}/locations/{location_id}/lakes/{lake_id}/environments/{environment_id}`.
         class GetEnvironmentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -702,7 +702,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The resource name of the parent environment:
-        #     projects/\\{project_number}/locations/\\{location_id}/lakes/\\{lake_id}/environment/\\{environment_id}
+        #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/environment/{environment_id}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Optional. Maximum number of sessions to return. The service may return fewer than
@@ -714,6 +714,17 @@ module Google
         #     retrieve the subsequent page. When paginating, all other parameters
         #     provided to `ListSessions` must match the call that provided the page
         #     token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter request. The following `mode` filter is supported to return only the
+        #     sessions belonging to the requester when the mode is USER and return
+        #     sessions of all the users when the mode is ADMIN. When no filter is sent
+        #     default to USER mode.
+        #     NOTE: When the mode is ADMIN, the requester should have
+        #     `dataplex.environments.listAllSessions` permission to list all sessions,
+        #     in absence of the permission, the request fails.
+        #
+        #     mode = ADMIN | USER
         class ListSessionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

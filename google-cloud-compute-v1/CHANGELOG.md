@@ -1,5 +1,14 @@
 # Release History
 
+### 1.5.0 (2022-07-19)
+
+#### Features
+
+* Updated minimum required Ruby to 2.6 ([#18442](https://github.com/googleapis/google-cloud-ruby/issues/18442)) 
+#### Bug Fixes
+
+* Transcoding methods in the service stub classes are now private 
+
 ### 1.4.0 (2022-06-08)
 
 #### Features

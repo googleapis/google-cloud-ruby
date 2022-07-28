@@ -18,9 +18,6 @@ themselves can be found in the client library documentation for the versioned
 client gems:
 [google-cloud-dataqna-v1alpha](https://googleapis.dev/ruby/google-cloud-dataqna-v1alpha/latest).
 
-See also the [Product Documentation](https://cloud.google.com/bigquery/docs/dataqna/)
-for more usage information.
-
 ## Quick Start
 
 ```

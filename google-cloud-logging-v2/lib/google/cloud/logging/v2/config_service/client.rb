@@ -1651,7 +1651,7 @@ module Google
             #     Required. The updated sink, whose name is the same identifier that appears as part
             #     of `sink_name`.
             #   @param unique_writer_identity [::Boolean]
-            #     Optional. See {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#create_sink sinks.create}
+            #     Optional. See {::Google::Cloud::Logging::V2::ConfigService::Client#create_sink sinks.create}
             #     for a description of this field. When updating a sink, the effect of this
             #     field on the value of `writer_identity` in the updated sink depends on both
             #     the old and new values of this field:
@@ -2455,7 +2455,7 @@ module Google
             # Cloud organizations. Once configured, it applies to all projects and
             # folders in the Google Cloud organization.
             #
-            # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_cmek_settings UpdateCmekSettings}
+            # {::Google::Cloud::Logging::V2::ConfigService::Client#update_cmek_settings UpdateCmekSettings}
             # will fail if 1) `kms_key_name` is invalid, or 2) the associated service
             # account does not have the required
             # `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or
@@ -2689,7 +2689,7 @@ module Google
             # Google Cloud organizations. Once configured, it applies to all projects and
             # folders in the Google Cloud organization.
             #
-            # {::Google::Cloud::Logging::V2::ConfigServiceV2::Client#update_settings UpdateSettings}
+            # {::Google::Cloud::Logging::V2::ConfigService::Client#update_settings UpdateSettings}
             # will fail if 1) `kms_key_name` is invalid, or 2) the associated service
             # account does not have the required
             # `roles/cloudkms.cryptoKeyEncrypterDecrypter` role assigned for the key, or

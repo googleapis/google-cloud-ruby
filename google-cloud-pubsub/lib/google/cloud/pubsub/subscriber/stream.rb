@@ -134,13 +134,13 @@ module Google
 
           ##
           # @private
-          def acknowledge *messages
+          def acknowledge *messages, &callback
             ack_ids = coerce_ack_ids messages
             return true if ack_ids.empty?
 
             synchronize do
               @inventory.remove ack_ids
-              @subscriber.buffer.acknowledge ack_ids
+              @subscriber.buffer.acknowledge ack_ids, callback
             end
 
             true
@@ -148,13 +148,13 @@ module Google
 
           ##
           # @private
-          def modify_ack_deadline deadline, *messages
+          def modify_ack_deadline deadline, *messages, &callback
             mod_ack_ids = coerce_ack_ids messages
             return true if mod_ack_ids.empty?
 
             synchronize do
               @inventory.remove mod_ack_ids
-              @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids
+              @subscriber.buffer.modify_ack_deadline deadline, mod_ack_ids, callback
             end
 
             true
@@ -253,6 +253,7 @@ module Google
                 synchronize do
                   update_min_duration_per_lease_extension new_exactly_once_delivery_enabled
                   @exactly_once_delivery_enabled = new_exactly_once_delivery_enabled unless new_exactly_once_delivery_enabled.nil? 
+                  @subscriber.exactly_once_delivery_enabled = @exactly_once_delivery_enabled
 
                   # Create receipt of received messages reception
                   @subscriber.buffer.modify_ack_deadline @subscriber.deadline, response.received_messages.map(&:ack_id)

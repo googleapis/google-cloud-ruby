@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-dataplex-v1",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "language": "RUBY",
     "apis": [
       {
@@ -155,6 +155,126 @@
         "method": {
           "short_name": "GetContent",
           "full_name": "google.cloud.dataplex.v1.ContentService.GetContent",
+          "service": {
+            "short_name": "ContentService",
+            "full_name": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_ContentService_GetIamPolicy_sync",
+      "title": "Snippet for get_iam_policy in ContentService",
+      "description": "Basic snippet for get_iam_policy in ContentService",
+      "file": "content_service/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "ContentService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.cloud.dataplex.v1.ContentService.GetIamPolicy",
+          "service": {
+            "short_name": "ContentService",
+            "full_name": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_ContentService_SetIamPolicy_sync",
+      "title": "Snippet for set_iam_policy in ContentService",
+      "description": "Basic snippet for set_iam_policy in ContentService",
+      "file": "content_service/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "ContentService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.cloud.dataplex.v1.ContentService.SetIamPolicy",
+          "service": {
+            "short_name": "ContentService",
+            "full_name": "google.cloud.dataplex.v1.ContentService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "dataplex_v1_generated_ContentService_TestIamPermissions_sync",
+      "title": "Snippet for test_iam_permissions in ContentService",
+      "description": "Basic snippet for test_iam_permissions in ContentService",
+      "file": "content_service/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "ContentService::Client",
+          "full_name": "::Google::Cloud::Dataplex::V1::ContentService::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.cloud.dataplex.v1.ContentService.TestIamPermissions",
           "service": {
             "short_name": "ContentService",
             "full_name": "google.cloud.dataplex.v1.ContentService"

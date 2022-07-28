@@ -113,7 +113,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "can delete itself" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,
-      [project, dataset.dataset_id, delete_contents: nil]
+      [project, dataset.dataset_id], delete_contents: nil
     dataset.service.mocked_service = mock
 
     _(dataset.delete).must_equal true
@@ -126,7 +126,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "can delete itself and all table data" do
     mock = Minitest::Mock.new
     mock.expect :delete_dataset, nil,
-      [project, dataset.dataset_id, delete_contents: true]
+      [project, dataset.dataset_id], delete_contents: true
     dataset.service.mocked_service = mock
 
     _(dataset.delete(force: true)).must_equal true
@@ -737,7 +737,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "lists tables" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     dataset.service.mocked_service = mock
 
     tables = dataset.tables
@@ -751,7 +751,7 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "lists tables with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token"),
-      [project, dataset_id, max_results: 3, page_token: nil]
+      [project, dataset_id], max_results: 3, page_token: nil
     dataset.service.mocked_service = mock
 
     tables = dataset.tables max: 3
@@ -767,9 +767,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     first_tables = dataset.tables
@@ -792,9 +792,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     first_tables = dataset.tables
@@ -817,9 +817,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with next? and next and max" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: 3, page_token: nil]
+      [project, dataset_id], max_results: 3, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: 3, page_token: "next_page_token"]
+      [project, dataset_id], max_results: 3, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     first_tables = dataset.tables max: 3
@@ -841,9 +841,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with all" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables.all.to_a
@@ -857,9 +857,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "paginates tables with all and max" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 5),
-      [project, dataset_id, max_results: 3, page_token: nil]
+      [project, dataset_id], max_results: 3, page_token: nil
     mock.expect :list_tables, list_tables_gapi(2, nil, 5),
-      [project, dataset_id, max_results: 3, page_token: "next_page_token"]
+      [project, dataset_id], max_results: 3, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables(max: 3).all.to_a
@@ -873,9 +873,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "iterates tables with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(3, "second_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables.all.take(5)
@@ -889,9 +889,9 @@ describe Google::Cloud::Bigquery::Dataset, :mock_bigquery do
   it "iterates tables with all with request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_tables, list_tables_gapi(3, "next_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: nil]
+      [project, dataset_id], max_results: nil, page_token: nil
     mock.expect :list_tables, list_tables_gapi(3, "second_page_token", 25),
-      [project, dataset_id, max_results: nil, page_token: "next_page_token"]
+      [project, dataset_id], max_results: nil, page_token: "next_page_token"
     dataset.service.mocked_service = mock
 
     tables = dataset.tables.all(request_limit: 1).to_a

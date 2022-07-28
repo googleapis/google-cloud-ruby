@@ -32,7 +32,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "WRITER", user_by_email: "writer@example.com"
     updated_gapi.access = new_access
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     _(dataset.access).must_be_kind_of Google::Cloud::Bigquery::Dataset::Access
     _(dataset.access).must_be :frozen?
@@ -81,7 +81,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "WRITER", group_by_email: "writers@example.com"
     updated_gapi.access = new_access
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     dataset.access do |acl|
       # reader
@@ -116,7 +116,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "WRITER", iam_member: "writers@example.com"
     updated_gapi.access = new_access
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     dataset.access do |acl|
       # reader
@@ -151,7 +151,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "OWNER", domain: "example.com"
     updated_gapi.access = new_access
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     dataset.access do |acl|
       # reader
@@ -186,7 +186,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "READER", special_group: "allAuthenticatedUsers"
     updated_gapi.access = new_access
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     dataset.access do |acl|
       # writer
@@ -226,7 +226,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
       new_access = Google::Apis::BigqueryV2::Dataset::Access.new routine: routine_gapi.routine_reference
       updated_gapi.access = new_access
       patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
       dataset.access do |acl|
         refute acl.reader_routine? routine
@@ -252,7 +252,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
       new_access = Google::Apis::BigqueryV2::Dataset::Access.new view: view_gapi.table_reference
       updated_gapi.access = new_access
       patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
       dataset.access do |acl|
         refute acl.reader_view? view
@@ -275,7 +275,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
       new_access = Google::Apis::BigqueryV2::Dataset::Access.new view: view_reference
       updated_gapi.access = new_access
       patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
       dataset.access do |acl|
         acl.add_reader_view "test-project_id:test-dataset_id.test-view_id"
@@ -292,7 +292,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
     new_access_2 = Google::Apis::BigqueryV2::Dataset::Access.new role: "READER", group_by_email: "readers@example.com"
     updated_gapi.access = new_access
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access, new_access_2], etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     dataset.access do |acl|
       refute acl.writer_user? "writer@example.com"
@@ -331,7 +331,7 @@ describe Google::Cloud::Bigquery::Dataset, :access, :mock_bigquery do
       new_access = Google::Apis::BigqueryV2::Dataset::Access.new role: "WRITER", user_by_email: "writer@example.com"
       updated_gapi.access = new_access
       patch_gapi = Google::Apis::BigqueryV2::Dataset.new access: [new_access], etag: dataset_gapi.etag
-      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+      mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
       dataset.access do |acl|
         assert acl.writer_user? "writer@example.com"

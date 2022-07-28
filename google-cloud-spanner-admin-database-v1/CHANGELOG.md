@@ -1,5 +1,11 @@
 # Release History
 
+### 0.11.0 (2022-07-25)
+
+#### Features
+
+* Support for listing database roles ([#18849](https://github.com/googleapis/google-cloud-ruby/issues/18849)) 
+
 ### 0.10.0 (2022-07-08)
 
 #### Features

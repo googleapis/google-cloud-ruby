@@ -204,18 +204,8 @@ module Google
         ##
         # Creates a subscription on a given topic for a given subscriber.
         def create_subscription topic, subscription_name, options = {}
-          subscriber.create_subscription \
-            name:                       subscription_path(subscription_name, options),
-            topic:                      topic_path(topic),
-            push_config:                options[:push_config],
-            ack_deadline_seconds:       options[:deadline],
-            retain_acked_messages:      options[:retain_acked],
-            message_retention_duration: Convert.number_to_duration(options[:retention]),
-            labels:                     options[:labels],
-            enable_message_ordering:    options[:message_ordering],
-            filter:                     options[:filter],
-            dead_letter_policy:         dead_letter_policy(options),
-            retry_policy:               options[:retry_policy]
+          updated_option = construct_create_subscription_options topic, subscription_name, options
+          subscriber.create_subscription **updated_option
         end
 
         def update_subscription subscription_obj, *fields
@@ -255,11 +245,7 @@ module Google
         ##
         # Acknowledges receipt of a message.
         def acknowledge subscription, *ack_ids
-          begin
-            subscriber.acknowledge subscription: subscription_path(subscription), ack_ids: ack_ids
-          rescue StandardError => e
-            raise e unless e.cause.is_a? GRPC::BadStatus
-          end
+          subscriber.acknowledge subscription: subscription_path(subscription), ack_ids: ack_ids
         end
 
         ##
@@ -279,13 +265,9 @@ module Google
         ##
         # Modifies the ack deadline for a specific message.
         def modify_ack_deadline subscription, ids, deadline
-          begin
-            subscriber.modify_ack_deadline subscription:         subscription_path(subscription),
-                                           ack_ids:              Array(ids),
-                                           ack_deadline_seconds: deadline
-          rescue StandardError => e
-            raise e unless e.cause.is_a? GRPC::BadStatus
-          end
+          subscriber.modify_ack_deadline subscription:         subscription_path(subscription),
+                                         ack_ids:              Array(ids),
+                                         ack_deadline_seconds: deadline
         end
 
         ##
@@ -495,6 +477,30 @@ module Google
             policy.max_delivery_attempts = options[:dead_letter_max_delivery_attempts]
           end
           policy
+        end
+
+        private
+
+        def construct_create_subscription_options topic, subscription_name, options
+          excess_options = [:deadline, 
+                            :retention,
+                            :retain_acked, 
+                            :message_ordering, 
+                            :endpoint, 
+                            :dead_letter_topic_name,
+                            :dead_letter_max_delivery_attempts,
+                            :dead_letter_topic]
+
+          new_options = options.filter { |k,v| !v.nil? && !excess_options.include?(k) }
+          new_options[:name] = subscription_path subscription_name, options
+          new_options[:topic] = topic_path topic
+          new_options[:message_retention_duration] = Convert.number_to_duration options[:retention]
+          new_options[:dead_letter_policy] = dead_letter_policy options
+          new_options[:ack_deadline_seconds] = options[:deadline]
+          new_options[:retain_acked_messages] = options[:retain_acked]
+          new_options[:enable_message_ordering] = options[:message_ordering]
+          
+          new_options.compact
         end
       end
     end

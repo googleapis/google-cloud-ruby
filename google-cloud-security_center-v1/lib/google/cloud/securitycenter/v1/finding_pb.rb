@@ -9,10 +9,12 @@ require 'google/cloud/securitycenter/v1/access_pb'
 require 'google/cloud/securitycenter/v1/compliance_pb'
 require 'google/cloud/securitycenter/v1/connection_pb'
 require 'google/cloud/securitycenter/v1/contact_details_pb'
+require 'google/cloud/securitycenter/v1/container_pb'
 require 'google/cloud/securitycenter/v1/exfiltration_pb'
 require 'google/cloud/securitycenter/v1/external_system_pb'
 require 'google/cloud/securitycenter/v1/iam_binding_pb'
 require 'google/cloud/securitycenter/v1/indicator_pb'
+require 'google/cloud/securitycenter/v1/kubernetes_pb'
 require 'google/cloud/securitycenter/v1/mitre_attack_pb'
 require 'google/cloud/securitycenter/v1/process_pb'
 require 'google/cloud/securitycenter/v1/security_marks_pb'
@@ -52,6 +54,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :exfiltration, :message, 38, "google.cloud.securitycenter.v1.Exfiltration"
       repeated :iam_bindings, :message, 39, "google.cloud.securitycenter.v1.IamBinding"
       optional :next_steps, :string, 40
+      repeated :containers, :message, 42, "google.cloud.securitycenter.v1.Container"
+      optional :kubernetes, :message, 43, "google.cloud.securitycenter.v1.Kubernetes"
     end
     add_enum "google.cloud.securitycenter.v1.Finding.State" do
       value :STATE_UNSPECIFIED, 0

@@ -179,6 +179,13 @@ module Google
         # @!attribute [rw] next_steps
         #   @return [::String]
         #     Next steps associate to the finding.
+        # @!attribute [rw] containers
+        #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Container>]
+        #     Containers associated with the finding. containers provides information
+        #     for both Kubernetes and non-Kubernetes containers.
+        # @!attribute [rw] kubernetes
+        #   @return [::Google::Cloud::SecurityCenter::V1::Kubernetes]
+        #     Kubernetes resources associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

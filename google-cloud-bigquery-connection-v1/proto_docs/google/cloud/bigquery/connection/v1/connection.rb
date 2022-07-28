@@ -153,6 +153,13 @@ module Google
           # @!attribute [rw] credential
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSqlCredential]
           #     Input only. Cloud SQL credential.
+          # @!attribute [r] service_account_id
+          #   @return [::String]
+          #     Output only. The account ID of the service used for the purpose of this connection.
+          #
+          #     When the connection is used in the context of an operation in
+          #     BigQuery, this service account will serve as identity being used for
+          #     connecting to the CloudSQL instance specified in this connection.
           class CloudSqlProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -22,7 +22,7 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "lists models" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: nil, options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     models = dataset.models
@@ -36,7 +36,7 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "lists models with max set" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: 3, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: 3, page_token: nil, options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     models = dataset.models max: 3
@@ -52,9 +52,9 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "paginates models" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: nil, options: { skip_deserialization: true }
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     first_models = dataset.models
@@ -75,9 +75,9 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "paginates models with next? and next" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: nil, options: { skip_deserialization: true }
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     first_models = dataset.models
@@ -98,9 +98,9 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "paginates models with next? and next and max" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: 3, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: 3, page_token: nil, options: { skip_deserialization: true }
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: 3, page_token: "next_page_token", options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: 3, page_token: "next_page_token", options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     first_models = dataset.models max: 3
@@ -120,9 +120,9 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "paginates models with all" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: nil, options: { skip_deserialization: true }
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     models = dataset.models.all.to_a
@@ -136,9 +136,9 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "paginates models with all and max" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: 3, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: 3, page_token: nil, options: { skip_deserialization: true }
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 2, nil),
-      [project, dataset.dataset_id, max_results: 3, page_token: "next_page_token", options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: 3, page_token: "next_page_token", options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     models = dataset.models(max: 3).all.to_a
@@ -152,9 +152,9 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "iterates models with all using Enumerator" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: nil, options: { skip_deserialization: true }
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "second_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     models = dataset.models.all.take(5)
@@ -168,9 +168,9 @@ describe Google::Cloud::Bigquery::Dataset, :models, :mock_bigquery do
   it "iterates models with all with request_limit set" do
     mock = Minitest::Mock.new
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "next_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: nil, options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: nil, options: { skip_deserialization: true }
     mock.expect :list_models, list_models_gapi_json(dataset.dataset_id, 3, "second_page_token"),
-      [project, dataset.dataset_id, max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }]
+      [project, dataset.dataset_id], max_results: nil, page_token: "next_page_token", options: { skip_deserialization: true }
     dataset.service.mocked_service = mock
 
     models = dataset.models.all(request_limit: 1).to_a

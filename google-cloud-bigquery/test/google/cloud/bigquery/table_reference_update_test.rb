@@ -35,7 +35,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new friendly_name: "My Updated Table", etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
 
     table.service.mocked_service = mock
@@ -54,7 +54,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new description: "This is my updated table", etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -76,7 +76,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -98,7 +98,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash),
-                [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+                [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -121,7 +121,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new time_partitioning: partitioning, etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -145,7 +145,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new clustering: clustering, etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash_clustering),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash_clustering), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -173,7 +173,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new clustering: clustering, etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash_clustering),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash_clustering), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -197,7 +197,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new clustering: nil, etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash_clustering),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash_clustering), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 
@@ -217,7 +217,7 @@ describe Google::Cloud::Bigquery::Table, :reference, :update, :mock_bigquery do
     request_table_gapi = Google::Apis::BigqueryV2::Table.new labels: new_labels, etag: etag
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     mock.expect :patch_table, return_table(table_hash),
-      [project, dataset_id, table_id, request_table_gapi, {options: {header: {"If-Match" => etag}}}]
+      [project, dataset_id, table_id, request_table_gapi], options: {header: {"If-Match" => etag}}
     mock.expect :get_table, return_table(table_hash), [project, dataset_id, table_id]
     table.service.mocked_service = mock
 

@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/dataplex/v1/metadata_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -164,6 +166,18 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @metadata_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dataplex::V1::MetadataService::Stub,
                 credentials:  credentials,
@@ -172,6 +186,20 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -376,7 +404,8 @@ module Google
             #     Required. The resource name of the entity:
             #     `projects/{project_number}/locations/{location_id}/lakes/{lake_id}/zones/{zone_id}/entities/{entity_id}`.
             #   @param etag [::String]
-            #     Required. The etag associated with the partition if it was previously retrieved.
+            #     Required. The etag associated with the entity, which can be retrieved with a
+            #     [GetEntity][] request.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -570,8 +599,8 @@ module Google
             #     - Entity ID: ?filter="id=entityID"
             #     - Asset ID: ?filter="asset=assetID"
             #     - Data path ?filter="data_path=gs://my-bucket"
-            #     - Is HIVE compatible: ?filter=”hive_compatible=true”
-            #     - Is BigQuery compatible: ?filter=”bigquery_compatible=true”
+            #     - Is HIVE compatible: ?filter="hive_compatible=true"
+            #     - Is BigQuery compatible: ?filter="bigquery_compatible=true"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Dataplex::V1::Entity>]
@@ -760,7 +789,7 @@ module Google
             #     The \\{partition_value_path} segment consists of an ordered sequence of
             #     partition values separated by "/". All values must be provided.
             #   @param etag [::String]
-            #     Optional. The etag associated with the partition if it was previously retrieved.
+            #     Optional. The etag associated with the partition.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -945,14 +974,14 @@ module Google
             #     provided to `ListPartitions` must match the call that provided the
             #     page token.
             #   @param filter [::String]
-            #     Optional. Filter the partitions returned to the caller using a key vslue pair
-            #     expression. The filter expression supports:
+            #     Optional. Filter the partitions returned to the caller using a key value pair
+            #     expression. Supported operators and syntax:
             #
-            #     - logical operators: AND, OR
+            #     - logic operators: AND, OR
             #     - comparison operators: <, >, >=, <= ,=, !=
             #     - LIKE operators:
-            #         - The right hand of a LIKE operator supports “.” and
-            #           “*” for wildcard searches, for example "value1 LIKE ".*oo.*"
+            #       - The right hand of a LIKE operator supports "." and
+            #         "*" for wildcard searches, for example "value1 LIKE ".*oo.*"
             #     - parenthetical grouping: ( )
             #
             #     Sample filter expression: `?filter="key1 < value1 OR key2 > value2"

@@ -24,8 +24,8 @@ module Google
         # Specification of the GRPC Endpoint.
         # @!attribute [rw] target_uri
         #   @return [::String]
-        #     Required. The target URI of the gRPC endpoint. Only UDS path is supported, and
-        #     should start with “unix:”.
+        #     Required. The target URI of the gRPC endpoint. Only UDS path is supported,
+        #     and should start with "unix:".
         class GrpcEndpoint
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -53,9 +53,9 @@ module Google
         # message to locate and load the CertificateProvider instance configuration.
         # @!attribute [rw] plugin_instance
         #   @return [::String]
-        #     Required. Plugin instance name, used to locate and load CertificateProvider instance
-        #     configuration. Set to "google_cloud_private_spiffe" to use Certificate
-        #     Authority Service certificate provider instance.
+        #     Required. Plugin instance name, used to locate and load CertificateProvider
+        #     instance configuration. Set to "google_cloud_private_spiffe" to use
+        #     Certificate Authority Service certificate provider instance.
         class CertificateProviderInstance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
