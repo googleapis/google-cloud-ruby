@@ -292,7 +292,7 @@ module Google
         #   If not passed, the default location, 'US', will be used.
         #   If specifying a dual-region location, the `customPlacementConfig`
         #   property should be set in conjunction. See:
-        #   [Storage Locatons](https://cloud.google.com/storage/docs/locations).
+        #   [Storage Locations](https://cloud.google.com/storage/docs/locations).
         # @param [String] logging_bucket The destination bucket for the bucket's
         #   logs. For more information, see [Access
         #   Logs](https://cloud.google.com/storage/docs/access-logs).
