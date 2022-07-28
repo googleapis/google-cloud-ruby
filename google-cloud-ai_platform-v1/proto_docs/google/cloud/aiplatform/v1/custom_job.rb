@@ -108,7 +108,7 @@ module Google
         end
 
         # Represents the spec of a CustomJob.
-        # Next Id: 14
+        # Next Id: 15
         # @!attribute [rw] worker_pool_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::WorkerPoolSpec>]
         #     Required. The spec of the worker pools including machine type and Docker image.
@@ -126,7 +126,7 @@ module Google
         #     for the CustomJob's project is used.
         # @!attribute [rw] network
         #   @return [::String]
-        #     The full name of the Compute Engine
+        #     Optional. The full name of the Compute Engine
         #     [network](/compute/docs/networks-and-firewalls#networks) to which the Job
         #     should be peered. For example, `projects/12345/global/networks/myVPC`.
         #     [Format](/compute/docs/reference/rest/v1/networks/insert)

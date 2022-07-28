@@ -495,6 +495,7 @@ module Google
             #         * A key including a space must be quoted. `labels."a key"`.
             #
             #     Some examples:
+            #
             #       * `displayName="myDisplayName"`
             #       * `labels.myKey="myValue"`
             #   @param page_size [::Integer]
@@ -507,6 +508,7 @@ module Google
             #     A comma-separated list of fields to order by, sorted in ascending order.
             #     Use "desc" after a field name for descending.
             #     Supported fields:
+            #
             #       * `display_name`
             #       * `create_time`
             #       * `update_time`
