@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.9.1 (2022-07-27)
+
+#### Bug Fixes
+
+* Set x-goog-request-params on long-running-operations calls ([#18877](https://github.com/googleapis/google-cloud-ruby/issues/18877)) 
+
 ### 0.9.0 (2022-07-01)
 
 #### Features
