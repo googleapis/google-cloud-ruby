@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-07-28)
+
+#### Features
+
+* Add support for location_client and iam_policy_client ([#18853](https://github.com/googleapis/google-cloud-ruby/issues/18853)) 
+
 ### 0.2.0 (2022-07-05)
 
 #### Features
