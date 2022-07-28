@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2022-07-28)
+
+#### Features
+
+* add support of preferred_min_stream_count 
+
 ### 0.12.0 (2022-07-01)
 
 #### Features
