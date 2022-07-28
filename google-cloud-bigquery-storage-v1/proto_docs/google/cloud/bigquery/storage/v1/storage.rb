@@ -42,6 +42,16 @@ module Google
           #     Typically, clients should either leave this unset to let the system to
           #     determine an upper bound OR set this a size for the maximum "units of work"
           #     it can gracefully handle.
+          # @!attribute [rw] preferred_min_stream_count
+          #   @return [::Integer]
+          #     The minimum preferred stream count. This parameter can be used to inform
+          #     the service that there is a desired lower bound on the number of streams.
+          #     This is typically a target parallelism of the client (e.g. a Spark
+          #     cluster with N-workers would set this to a low multiple of N to ensure
+          #     good cluster utilization).
+          #
+          #     The system will make a best effort to provide at least this number of
+          #     streams, but in some cases might provide less.
           class CreateReadSessionRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -183,6 +193,9 @@ module Google
           # Due to the nature of AppendRows being a bidirectional streaming RPC, certain
           # parts of the AppendRowsRequest need only be specified for the first request
           # sent each time the gRPC network connection is opened/reopened.
+          #
+          # The size of a single AppendRowsRequest must be less than 10 MB in size.
+          # Requests larger than this return an error, typically `INVALID_ARGUMENT`.
           # @!attribute [rw] write_stream
           #   @return [::String]
           #     Required. The write_stream identifies the target of the append operation, and only
@@ -269,6 +282,10 @@ module Google
           #     If a request failed due to corrupted rows, no rows in the batch will be
           #     appended. The API will return row level error info, so that the caller can
           #     remove the bad rows and retry the request.
+          # @!attribute [rw] write_stream
+          #   @return [::String]
+          #     The target of the append operation. Matches the write_stream in the
+          #     corresponding request.
           class AppendRowsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
