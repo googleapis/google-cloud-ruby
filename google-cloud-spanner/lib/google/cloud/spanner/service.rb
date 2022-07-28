@@ -604,7 +604,7 @@ module Google
             opts[:timeout] = call_options[:timeout] if call_options[:timeout]
             opts[:retry_policy] = call_options[:retry_policy] if call_options[:retry_policy]
           end
-          return opts unless opts.empty?
+          ::Gapic::CallOptions.new(**opts)
         end
 
         def partition_options partition_size_bytes, max_partitions

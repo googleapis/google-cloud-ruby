@@ -99,7 +99,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       backup_id: backup_id,
       backup: create_req,
       encryption_config: { kms_key_name: kms_key_name, encryption_type: :CUSTOMER_MANAGED_ENCRYPTION }
-    }, nil]
+    }, ::Gapic::CallOptions]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
@@ -150,7 +150,7 @@ describe Google::Cloud::Spanner::Backup, :create_backup, :mock_spanner do
       backup_id: backup_id,
       backup: create_req,
       encryption_config: nil
-    }, nil]
+    }, ::Gapic::CallOptions]
     mock.expect :cancel_operation, nil , [{ name: "1234567890" }, Gapic::CallOptions]
     mock.expect :get_operation, operation_cancel, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock

@@ -65,7 +65,7 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
         result_type: Google::Cloud::Spanner::Admin::Instance::V1::Instance,
         metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
     )
-    mock.expect :create_instance, create_res, [{ parent: project_path, instance_id: instance_id, instance: create_req }, nil]
+    mock.expect :create_instance, create_res, [{ parent: project_path, instance_id: instance_id, instance: create_req }, ::Gapic::CallOptions]
     mock.expect :get_operation, operation_done, [{name: "1234567890"}, Gapic::CallOptions]
     spanner.service.mocked_instances = mock
 
@@ -98,7 +98,7 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Instance::V1::CreateInstanceMetadata
       )
     mock = Minitest::Mock.new
-    mock.expect :create_instance, create_res, [{ parent: project_path, instance_id: instance_id, instance: create_req }, nil]
+    mock.expect :create_instance, create_res, [{ parent: project_path, instance_id: instance_id, instance: create_req }, ::Gapic::CallOptions]
     spanner.service.mocked_instances = mock
 
     job = spanner.create_instance instance_id, config: config, name: "My New Instance", nodes: 99, labels: { env: :production }
@@ -122,7 +122,7 @@ describe Google::Cloud::Spanner::Project, :create_instance, :mock_spanner do
       )
     mock = Minitest::Mock.new
 
-    mock.expect :create_instance, create_res, [{ parent: project_path, instance_id: instance_id, instance: create_req }, nil]
+    mock.expect :create_instance, create_res, [{ parent: project_path, instance_id: instance_id, instance: create_req }, ::Gapic::CallOptions]
     spanner.service.mocked_instances = mock
 
     job = spanner.create_instance instance_id, config: config, name: "My New Instance", processing_units: 1000, labels: { env: :production }

@@ -70,7 +70,7 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
       database_id: "restored-database",
       backup: backup_path(instance_id, backup_id),
       encryption_config: { kms_key_name: kms_key_name, encryption_type: :CUSTOMER_MANAGED_ENCRYPTION }
-    }, nil]
+    }, ::Gapic::CallOptions]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" }, Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
@@ -108,7 +108,7 @@ describe Google::Cloud::Spanner::Backup, :restore_database, :mock_spanner do
       database_id: "restored-database",
       backup: backup_path(instance_id, backup_id),
       encryption_config: nil
-    }, nil]
+    }, ::Gapic::CallOptions]
     mock.expect :get_operation, operation_done, [{ name: "1234567890" } , Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 

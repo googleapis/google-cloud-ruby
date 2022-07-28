@@ -24,7 +24,7 @@ describe Google::Cloud::Spanner::Client, :snapshot, :mock_spanner do
   let(:transaction_grpc) { Google::Cloud::Spanner::V1::Transaction.new id: transaction_id }
   let(:snapshot) { Google::Cloud::Spanner::Snapshot.from_grpc transaction_grpc, session }
   let(:tx_selector) { Google::Cloud::Spanner::V1::TransactionSelector.new id: transaction_id }
-  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
+  let(:default_options) { ::Gapic::CallOptions.new metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let :results_hash do
     {
       metadata: {

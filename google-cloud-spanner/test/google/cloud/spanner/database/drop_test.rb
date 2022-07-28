@@ -22,7 +22,7 @@ describe Google::Cloud::Spanner::Database, :drop, :mock_spanner do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :drop_database, nil, [{ database: database_path(instance_id, database_id) }, nil]
+    mock.expect :drop_database, nil, [{ database: database_path(instance_id, database_id) }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     database.drop
