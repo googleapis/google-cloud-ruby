@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.8.1 (2022-07-29)
+
+#### Documentation
+
+* Fixes to a few attribute descriptions ([#18928](https://github.com/googleapis/google-cloud-ruby/issues/18928)) 
+
 ### 0.8.0 (2022-07-02)
 
 #### Features
