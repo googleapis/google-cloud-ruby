@@ -15,6 +15,8 @@
 # limitations under the License.
 
 TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"]
+ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "linkinator"]
+FAILURES_REPORT_PATH = "tmp/ci-failures.json"
 
 desc "Run CI tasks."
 
@@ -55,11 +57,8 @@ end
 flag :load_kokoro_context do |f|
   f.desc "Load Kokoro credentials and environment info"
 end
-flag :open_issues do |f|
-  f.desc "Open GitHub issues for failures"
-end
-flag :gha_report do |f|
-  f.desc "Generate GitHub Actions output for failures"
+flag :failures_report, "--failures-report[=PATH]" do |f|
+  f.desc "Generate failures report file"
 end
 
 at_least_one_required desc: "Tasks" do
@@ -79,8 +78,6 @@ at_least_one_required desc: "Tasks" do
   end
 end
 
-static :issue_tasks, ["bundle", "test", "rubocop", "build", "yard", "linkinator"]
-
 include :exec
 include :terminal, styled: true
 
@@ -88,7 +85,8 @@ def run
   require "json"
   require "set"
 
-  set :gha_report, true if github_event_name == "schedule"
+  set :failures_report, true if github_event_name == "schedule"
+  set :failures_report, FAILURES_REPORT_PATH if failures_report == true
 
   if load_kokoro_context
     require "repo_context"
@@ -346,12 +344,8 @@ def handle_results
   else
     puts "FAILURES:", :bold, :red
     @errors.each { |dir, task| puts "#{dir}: #{task}", :yellow }
-    if open_issues
-      exec_tool ["ci", "report-failures", generate_failures_json]
-      puts "::set-output name=failures-json::{}"
-    elsif gha_report
-      puts "::set-output name=failures-json::#{generate_failures_json}"
-    end
+    File.write failures_report, generate_failures_json if failures_report
+    puts "Wrote failures report file to #{failures_report}"
     exit 1
   end
 end
@@ -359,13 +353,13 @@ end
 def generate_failures_json
   failures_by_dir = {}
   @errors.each do |dir, task|
-    (failures_by_dir[dir] ||= []) << task if issue_tasks.include? task
+    (failures_by_dir[dir] ||= []) << task if ISSUE_TASKS.include? task
   end
   JSON.generate failures_by_dir
 end
 
 tool "report-failures" do
-  required_arg :failures_json
+  flag :report_path, "--report-path=PATH", default: FAILURES_REPORT_PATH
 
   include :exec, e: true
   include :terminal
@@ -373,8 +367,9 @@ tool "report-failures" do
   def run
     require "digest/md5"
     require "json"
+    failures_json = File.read report_path rescue ""
     if failures_json.empty?
-      puts "No failures passed in", :yellow
+      puts "No failures report at #{report_path}", :yellow
       exit 1
     end
     failures_by_dir = JSON.parse failures_json
