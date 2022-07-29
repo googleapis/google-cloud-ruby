@@ -80,6 +80,7 @@ end
 
 include :exec
 include :terminal, styled: true
+include :fileutils
 
 def run
   require "json"
@@ -344,7 +345,10 @@ def handle_results
   else
     puts "FAILURES:", :bold, :red
     @errors.each { |dir, task| puts "#{dir}: #{task}", :yellow }
-    File.write failures_report, generate_failures_json if failures_report
+    if failures_report
+      mkdir_p File.dirname failures_report
+      File.write failures_report, generate_failures_json
+    end
     puts "Wrote failures report file to #{failures_report}"
     exit 1
   end
