@@ -63,5 +63,12 @@ jobs:
     - name: Install tools
       run: "gem install --no-document toys && npm install linkinator"
     - name: Test ${{ matrix.task }}
+      id: ci-run
       run: |
         toys ci -v ${{ matrix.task }} --github-event-name=${{ github.event_name }} --github-event-payload=${{ github.event_path }} ${{ github.event.inputs.flags }}
+    - name: Open Issues
+      if: ${{ failure() }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        toys ci report-failures -v '${{ steps.ci-run.outputs.failures-json }}'
