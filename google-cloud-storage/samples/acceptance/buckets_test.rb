@@ -120,7 +120,7 @@ describe "Buckets Snippets" do
       refute storage_client.bucket bucket_name
 
       retry_resource_exhaustion do
-        assert_output "Bucket #{bucket_name} created in #{region_1}+#{region_2}.\n" do
+        assert_output "Bucket #{bucket_name} created in [\"US-EAST1\", \"US-WEST1\"].\n" do
           StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: bucket_name,
                                                                               region_1: region_1,
                                                                               region_2: region_2
