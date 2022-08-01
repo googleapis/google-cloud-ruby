@@ -91,6 +91,7 @@ module Google
         #         * A key including a space must be quoted. `labels."a key"`.
         #
         #     Some examples:
+        #
         #       * `displayName="myDisplayName"`
         #       * `labels.myKey="myValue"`
         # @!attribute [rw] page_size
@@ -107,6 +108,7 @@ module Google
         #     A comma-separated list of fields to order by, sorted in ascending order.
         #     Use "desc" after a field name for descending.
         #     Supported fields:
+        #
         #       * `display_name`
         #       * `create_time`
         #       * `update_time`
@@ -273,7 +275,8 @@ module Google
         # Response message for {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_saved_queries DatasetService.ListSavedQueries}.
         # @!attribute [rw] saved_queries
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::SavedQuery>]
-        #     A list of SavedQueries that match the specified filter in the request.
+        #     A list of SavedQueries that matches the specified filter in the
+        #     request.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     The standard List next-page token.
