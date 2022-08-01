@@ -48,7 +48,7 @@ def set_usage_export_bucket project:, bucket_name:, report_name_prefix: ""
   projects_client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new
   operation = projects_client.set_usage_export_bucket project: project,
                                                       usage_export_location_resource: export_location
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_usage_report_set]
 
@@ -82,6 +82,6 @@ def disable_usage_export project:
 
   # Passing nil (default) to usage_export_location_resource disables the usage report generation.
   operation = projects_client.set_usage_export_bucket project: project
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_usage_report_disable]

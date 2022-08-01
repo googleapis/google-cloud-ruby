@@ -87,7 +87,7 @@ def create_firewall_rule project:, name:, network: "global/networks/default"
   client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
   operation = client.insert request
 
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_firewall_create]
 
@@ -113,7 +113,7 @@ def patch_firewall_priority project:, name:, priority:
   client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
   operation = client.patch request
 
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_firewall_patch]
 
@@ -127,6 +127,6 @@ def delete_firewall_rule project:, name:
   client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
   operation = client.delete project: project, firewall: name
 
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_firewall_delete]
