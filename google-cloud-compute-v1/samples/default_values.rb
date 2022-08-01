@@ -80,8 +80,8 @@ end
 def disable_usage_export project:
   projects_client = ::Google::Cloud::Compute::V1::Projects::Rest::Client.new
 
-  # Passing nil (default) to usage_export_location_resource disables the usage report generation.
-  operation = projects_client.set_usage_export_bucket project: project
+  # Passing an empty message to usage_export_location_resource disables the usage report generation.
+  operation = projects_client.set_usage_export_bucket project: project, usage_export_location_resource: {}
   wait_until_done operation: operation
 end
 # [END compute_usage_report_disable]
