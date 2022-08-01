@@ -96,10 +96,20 @@ end
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @param [String] name name of the rule you want to modify.
+# @param [Google::Protobuf::RepeatedField] allowed the repeated instances of the Allowed field in the rule.
+#         Compute errors out if allowed is empty.
 # @param [Integer] priority the new priority to be set for the rule.
-def patch_firewall_priority project:, name:, priority:
+def patch_firewall_priority project:, name:, allowed:, priority:
+  allowed_arr = allowed.map do |instance|
+    {
+      I_p_protocol: instance.I_p_protocol,
+      ports: instance.ports.to_a
+    }
+  end.to_a
+
   rule = {
-    priority: priority
+    priority: priority,
+    allowed: allowed_arr
   }
 
   request = {
