@@ -313,6 +313,10 @@ module Google
             # Resources that to large degree are decided by Vertex AI, and require
             # only a modest additional configuration.
             AUTOMATIC_RESOURCES = 2
+
+            # Resources that can be shared by multiple {::Google::Cloud::AIPlatform::V1::DeployedModel DeployedModels}.
+            # A pre-configured [DeploymentResourcePool][] is required.
+            SHARED_RESOURCES = 3
           end
         end
 

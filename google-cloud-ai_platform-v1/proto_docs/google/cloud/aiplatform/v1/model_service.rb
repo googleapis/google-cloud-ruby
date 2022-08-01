@@ -106,6 +106,7 @@ module Google
         #         * A key including a space must be quoted. `labels."a key"`.
         #
         #     Some examples:
+        #
         #       * `model=1234`
         #       * `displayName="myDisplayName"`
         #       * `labels.myKey="myValue"`
@@ -126,6 +127,7 @@ module Google
         #     A comma-separated list of fields to order by, sorted in ascending order.
         #     Use "desc" after a field name for descending.
         #     Supported fields:
+        #
         #       * `display_name`
         #       * `create_time`
         #       * `update_time`
@@ -173,6 +175,7 @@ module Google
         #         * A key including a space must be quoted. `labels."a key"`.
         #
         #     Some examples:
+        #
         #       * `labels.myKey="myValue"`
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]

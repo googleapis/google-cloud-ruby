@@ -33,7 +33,7 @@ module Google
         # A list of double values.
         # @!attribute [rw] values
         #   @return [::Array<::Float>]
-        #     A list of bool values.
+        #     A list of double values.
         class DoubleArray
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

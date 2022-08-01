@@ -391,9 +391,10 @@ module Google
         #   Default is 604,800 seconds (7 days).
         # @option options [String] endpoint A URL locating the endpoint to which messages
         #   should be pushed. The parameters `push_config` and `endpoint` should not both be provided.
-        # @option options [Google::Cloud::PubSub::Subscription::PushConfig] push_config The configuration for a push delivery
-        #   endpoint that should contain the endpoint, and can contain authentication data (OIDC token authentication).
-        #   The parameters `push_config` and `endpoint` should not both be provided.
+        # @option options [Google::Cloud::PubSub::Subscription::PushConfig] push_config
+        #  The configuration for a push delivery endpoint that should contain the endpoint,
+        #  and can contain authentication data (OIDC token authentication).
+        #  The parameters `push_config` and `endpoint` should not both be provided.
         # @option options [Hash] labels A hash of user-provided labels associated with
         #   the subscription. You can use these to organize and group your
         #   subscriptions. Label keys and values can be no longer than 63
@@ -404,23 +405,27 @@ module Google
         #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
         # @option options [Boolean] message_ordering Whether to enable message ordering
         #   on the subscription.
-        # @option options [String] filter An expression written in the Cloud Pub/Sub filter language. If non-empty, then only
-        #   {Message} instances whose `attributes` field matches the filter are delivered on this subscription. If
+        # @option options [String] filter An expression written in the Cloud Pub/Sub filter language.
+        #   If non-empty, then only {Message} instances whose `attributes` field
+        #   matches the filter are delivered on this subscription. If
         #   empty, then no messages are filtered out. Optional.
-        # @option options [Topic] dead_letter_topic The {Topic} to which dead letter messages for the subscription should be
-        #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
+        # @option options [Topic] dead_letter_topic
+        #   The {Topic} to which dead letter messages for the subscription should be published.
+        #   Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
         #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
         #   `service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to
         #   this topic.
         #
         #   The operation will fail if the topic does not exist. Users should ensure that there is a subscription
         #   attached to this topic since messages published to a topic with no subscriptions are lost.
-        # @option options [Integer] dead_letter_max_delivery_attempts The maximum number of delivery attempts for any message in
-        #   the subscription's dead letter policy. Dead lettering is done on a best effort basis. The same message might
+        # @option options [Integer] dead_letter_max_delivery_attempts
+        #   The maximum number of delivery attempts for any message in the subscription's dead letter policy.
+        #   Dead lettering is done on a best effort basis. The same message might
         #   be dead lettered multiple times. The value must be between 5 and 100. If this parameter is 0, a default
         #   value of 5 is used. The `dead_letter_topic` must also be set.
-        # @option options [RetryPolicy] retry_policy A policy that specifies how Cloud Pub/Sub retries message delivery for
-        #   this subscription. If not set, the default retry policy is applied. This generally implies that messages
+        # @option options [RetryPolicy] retry_policy
+        #   A policy that specifies how Cloud Pub/Sub retries message delivery for this subscription.
+        #   If not set, the default retry policy is applied. This generally implies that messages
         #   will be retried as soon as possible for healthy subscribers. Retry Policy will be triggered on NACKs or
         #   acknowledgement deadline exceeded events for a given message.
         #
