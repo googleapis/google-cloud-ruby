@@ -52,10 +52,11 @@ module Google
         ##
         # @private Creates a new Spanner Client instance.
         def initialize project, instance_id, database_id, session_labels: nil,
-                       pool_opts: {}, query_options: nil
+                       pool_opts: {}, query_options: nil, database_role: nil
           @project = project
           @instance_id = instance_id
           @database_id = database_id
+          @database_role = database_role
           @session_labels = session_labels
           @pool = Pool.new self, **pool_opts
           @query_options = query_options
@@ -2115,7 +2116,8 @@ module Google
             Admin::Database::V1::DatabaseAdmin::Paths.database_path(
               project: project_id, instance: instance_id, database: database_id
             ),
-            labels: @session_labels
+            labels: @session_labels,
+            database_role: @database_role
           Session.from_grpc grpc, @project.service, query_options: @query_options
         end
 
@@ -2144,7 +2146,8 @@ module Google
               project: project_id, instance: instance_id, database: database_id
             ),
             session_count,
-            labels: @session_labels
+            labels: @session_labels,
+            database_role: @database_role
           resp.session.map { |grpc| Session.from_grpc grpc, @project.service, query_options: @query_options }
         end
 
