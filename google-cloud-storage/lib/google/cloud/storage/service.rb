@@ -368,7 +368,7 @@ module Google
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
           else
-            options = key_options(key).merge(options)
+            options = key_options(key).merge options
           end
 
           execute do
@@ -442,7 +442,7 @@ module Google
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options : key_options.merge(retries: 0)
           else
-            options = key_options.merge(options)
+            options = key_options.merge options
           end
 
           execute do
