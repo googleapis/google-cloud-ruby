@@ -44,6 +44,9 @@ module Google
         #     characters. Otherwise, an INVALID_ARGUMENT error is returned.
         # @!attribute [rw] language_codes
         #   @return [::Array<::String>]
+        #     Note that this field applies for `user-data` dataset only. For requests
+        #     with `cloud-retail` dataset, setting this field has no effect.
+        #
         #     The language filters applied to the output suggestions. If set, it should
         #     contain the language of the query. If not set, suggestions are returned
         #     without considering language restrictions. This is the BCP-47 language
@@ -121,7 +124,7 @@ module Google
         #      {::Google::Cloud::Retail::V2::CompleteQueryRequest#query CompleteQueryRequest.query}
         #      case insensitively.
         #
-        #      * They are transformed to lower cases.
+        #      * They are transformed to lower case.
         #
         #      * They are UTF-8 safe.
         #
@@ -143,8 +146,9 @@ module Google
           #     ingested through BigQuery.
           #
           #     * For "cloud-retail", the attributes are product attributes generated
-          #     by Cloud Retail. This is an experimental feature. Contact Retail Search
-          #     support team if you are interested in enabling it.
+          #     by Cloud Retail. It requires
+          #     {::Google::Cloud::Retail::V2::UserEvent#product_details UserEvent.product_details}
+          #     is imported properly.
           class CompletionResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

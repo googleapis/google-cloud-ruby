@@ -21,7 +21,9 @@ module Google
   module Cloud
     module Retail
       module V2
-        # Request message for [CreateProduct][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#create_product ProductService.CreateProduct}
+        # method.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent catalog resource name, such as
@@ -51,7 +53,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [GetProduct][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+        # method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
@@ -69,7 +73,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [UpdateProduct][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
+        # method.
         # @!attribute [rw] product
         #   @return [::Google::Cloud::Retail::V2::Product]
         #     Required. The product to update/create.
@@ -106,7 +112,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [DeleteProduct][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#delete_product ProductService.DeleteProduct}
+        # method.
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
@@ -238,11 +246,14 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [SetInventory][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory ProductService.SetInventory}
+        # method.
         # @!attribute [rw] inventory
         #   @return [::Google::Cloud::Retail::V2::Product]
         #     Required. The inventory information to update. The allowable fields to
         #     update are:
+        #
         #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
         #     * {::Google::Cloud::Retail::V2::Product#availability Product.availability}
         #     * {::Google::Cloud::Retail::V2::Product#available_quantity Product.available_quantity}
@@ -250,8 +261,9 @@ module Google
         #     The updated inventory fields must be specified in
         #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask}.
         #
-        #     If [SetInventoryRequest.inventory.name][] is empty or invalid, an
-        #     INVALID_ARGUMENT error is returned.
+        #     If
+        #     {::Google::Cloud::Retail::V2::Product#name SetInventoryRequest.inventory.name}
+        #     is empty or invalid, an INVALID_ARGUMENT error is returned.
         #
         #     If the caller does not have permission to update the
         #     {::Google::Cloud::Retail::V2::Product Product} named in
@@ -274,7 +286,8 @@ module Google
         #     * Adds "fulfillment_info" in
         #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask}
         #     * Specifies only the desired fulfillment types and corresponding place IDs
-        #     to update in [SetInventoryRequest.inventory.fulfillment_info][]
+        #     to update in
+        #     {::Google::Cloud::Retail::V2::Product#fulfillment_info SetInventoryRequest.inventory.fulfillment_info}
         #
         #     The caller can clear all place IDs from a subset of fulfillment types in
         #     the following ways:
@@ -282,9 +295,9 @@ module Google
         #     * Adds "fulfillment_info" in
         #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask}
         #     * Specifies only the desired fulfillment types to clear in
-        #     [SetInventoryRequest.inventory.fulfillment_info][]
+        #     {::Google::Cloud::Retail::V2::Product#fulfillment_info SetInventoryRequest.inventory.fulfillment_info}
         #     * Checks that only the desired fulfillment info types have empty
-        #     [SetInventoryRequest.inventory.fulfillment_info.place_ids][]
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids SetInventoryRequest.inventory.fulfillment_info.place_ids}
         #
         #     The last update time is recorded for the following inventory fields:
         #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
@@ -293,7 +306,9 @@ module Google
         #     * {::Google::Cloud::Retail::V2::Product#fulfillment_info Product.fulfillment_info}
         #
         #     If a full overwrite of inventory information while ignoring timestamps is
-        #     needed, [UpdateProduct][] should be invoked instead.
+        #     needed,
+        #     {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
+        #     should be invoked instead.
         # @!attribute [rw] set_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Indicates which inventory fields in the provided
@@ -323,14 +338,16 @@ module Google
 
         # Metadata related to the progress of the SetInventory operation.
         # Currently empty because there is no meaningful metadata populated from the
-        # [SetInventory][] method.
+        # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory ProductService.SetInventory}
+        # method.
         class SetInventoryMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response of the SetInventoryRequest.  Currently empty because
-        # there is no meaningful response populated from the [SetInventory][]
+        # there is no meaningful response populated from the
+        # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory ProductService.SetInventory}
         # method.
         class SetInventoryResponse
           include ::Google::Protobuf::MessageExts
@@ -369,7 +386,8 @@ module Google
         #     If this field is set to an invalid value other than these, an
         #     INVALID_ARGUMENT error is returned.
         #
-        #     This field directly corresponds to [Product.fulfillment_info.type][].
+        #     This field directly corresponds to
+        #     {::Google::Cloud::Retail::V2::FulfillmentInfo#type Product.fulfillment_info.type}.
         # @!attribute [rw] place_ids
         #   @return [::Array<::String>]
         #     Required. The IDs for this
@@ -494,7 +512,9 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [RemoveLocalInventories][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+        # method.
         # @!attribute [rw] product
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
@@ -528,21 +548,27 @@ module Google
 
         # Metadata related to the progress of the RemoveLocalInventories operation.
         # Currently empty because there is no meaningful metadata populated from the
-        # [RemoveLocalInventories][] method.
+        # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+        # method.
         class RemoveLocalInventoriesMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response of the [RemoveLocalInventories][] API.  Currently empty because
-        # there is no meaningful response populated from the [RemoveLocalInventories][]
+        # Response of the
+        # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
+        # API.  Currently empty because there is no meaningful response populated from
+        # the
+        # {::Google::Cloud::Retail::V2::ProductService::Client#remove_local_inventories ProductService.RemoveLocalInventories}
         # method.
         class RemoveLocalInventoriesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for [RemoveFulfillmentPlaces][] method.
+        # Request message for
+        # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}
+        # method.
         # @!attribute [rw] product
         #   @return [::String]
         #     Required. Full resource name of {::Google::Cloud::Retail::V2::Product Product},
@@ -606,14 +632,16 @@ module Google
 
         # Metadata related to the progress of the RemoveFulfillmentPlaces operation.
         # Currently empty because there is no meaningful metadata populated from the
-        # [RemoveFulfillmentPlaces][] method.
+        # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}
+        # method.
         class RemoveFulfillmentPlacesMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Response of the RemoveFulfillmentPlacesRequest. Currently empty because there
-        # is no meaningful response populated from the [RemoveFulfillmentPlaces][]
+        # is no meaningful response populated from the
+        # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}
         # method.
         class RemoveFulfillmentPlacesResponse
           include ::Google::Protobuf::MessageExts
