@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.10.0 (2022-08-01)
+
+#### Features
+
+* add SHARED_RESOURCES to DeploymentResourcesType  
+#### Documentation
+
+* cleanup docs 
+
 ### 0.9.1 (2022-07-27)
 
 #### Bug Fixes
