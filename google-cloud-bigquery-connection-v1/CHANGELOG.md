@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2022-08-03)
+
+#### Features
+
+* support Azure for connections 
+
 ### 0.9.0 (2022-07-28)
 
 #### Features
