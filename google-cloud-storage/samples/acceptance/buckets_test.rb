@@ -114,13 +114,21 @@ describe "Buckets Snippets" do
 
   describe "storage_create_bucket_dual_region" do
     it "creates dual region bucket" do
+      location = "US"
       region_1 = "US-EAST1"
       region_2 = "US-WEST1"
+      location_type = "dual_region"
       bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
 
+      expected = "Bucket #{bucket_name} created:\n"
+      expected += "- location: #{location}\n"
+      expected += "- location_type: #{location_type}\n"
+      expected += "- custom_placement_config:\n"
+      expected += "  - data_locations: #{[region_1, region_2]}\n"
+
       retry_resource_exhaustion do
-        assert_output "Bucket #{bucket_name} created in [\"US-EAST1\", \"US-WEST1\"].\n" do
+        assert_output expected do
           StorageCreateBucketDualRegion.new.storage_create_bucket_dual_region bucket_name: bucket_name,
                                                                               region_1: region_1,
                                                                               region_2: region_2
