@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2022-08-03)
+
+#### Features
+
+* support case insensitive match and min max in facets search 
+
 ### 0.9.0 (2022-07-07)
 
 #### Features
