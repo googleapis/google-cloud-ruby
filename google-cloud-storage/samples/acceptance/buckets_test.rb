@@ -117,7 +117,7 @@ describe "Buckets Snippets" do
       location = "US"
       region_1 = "US-EAST1"
       region_2 = "US-WEST1"
-      location_type = "dual_region"
+      location_type = "dual-region"
       bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
 
