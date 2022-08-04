@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Monitoring
       module Dashboard
-        # @private
+        # @private Unused
         VERSION = ""
       end
     end
