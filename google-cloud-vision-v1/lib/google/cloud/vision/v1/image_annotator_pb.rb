@@ -170,6 +170,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.vision.v1.TextDetectionParams" do
       optional :enable_text_detection_confidence_score, :bool, 9
+      repeated :advanced_ocr_options, :string, 11
     end
     add_message "google.cloud.vision.v1.ImageContext" do
       optional :lat_long_rect, :message, 1, "google.cloud.vision.v1.LatLongRect"
