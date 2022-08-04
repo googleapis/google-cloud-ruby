@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the TargetTcpProxies service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -278,8 +278,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetTcpProxies/{target_tcp_proxy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_tcp_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_tcp_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -300,8 +300,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetTcpProxies/{target_tcp_proxy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_tcp_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_tcp_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -323,7 +323,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetTcpProxies",
                                                           body: "target_tcp_proxy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -344,7 +344,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetTcpProxies",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -366,8 +366,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetTcpProxies/{target_tcp_proxy}/setBackendService",
                                                           body: "target_tcp_proxies_set_backend_service_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_tcp_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_tcp_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -389,8 +389,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetTcpProxies/{target_tcp_proxy}/setProxyHeader",
                                                           body: "target_tcp_proxies_set_proxy_header_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_tcp_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_tcp_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

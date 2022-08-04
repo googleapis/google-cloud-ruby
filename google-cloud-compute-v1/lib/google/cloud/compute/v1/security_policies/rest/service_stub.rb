@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the SecurityPolicies service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -464,8 +464,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/addRule",
                                                           body: "security_policy_rule_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["security_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -486,7 +486,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/securityPolicies",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -507,8 +507,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/{security_policy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["security_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -529,8 +529,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/{security_policy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["security_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -551,8 +551,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/getRule",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["security_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -574,7 +574,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies",
                                                           body: "security_policy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -595,7 +595,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -616,7 +616,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/listPreconfiguredExpressionSets",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -638,8 +638,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/{security_policy}",
                                                           body: "security_policy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["security_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -661,8 +661,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/patchRule",
                                                           body: "security_policy_rule_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["security_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -683,8 +683,8 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/projects/{project}/global/securityPolicies/{security_policy}/removeRule",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["security_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["security_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

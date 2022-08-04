@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the GlobalNetworkEndpointGroups service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -316,8 +316,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/attachNetworkEndpoints",
                                                           body: "global_network_endpoint_groups_attach_endpoints_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network_endpoint_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network_endpoint_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -338,8 +338,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network_endpoint_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network_endpoint_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -361,8 +361,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/detachNetworkEndpoints",
                                                           body: "global_network_endpoint_groups_detach_endpoints_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network_endpoint_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network_endpoint_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -383,8 +383,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network_endpoint_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network_endpoint_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -406,7 +406,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/networkEndpointGroups",
                                                           body: "network_endpoint_group_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -427,7 +427,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/networkEndpointGroups",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -448,8 +448,8 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/projects/{project}/global/networkEndpointGroups/{network_endpoint_group}/listNetworkEndpoints",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["network_endpoint_group", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["network_endpoint_group", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

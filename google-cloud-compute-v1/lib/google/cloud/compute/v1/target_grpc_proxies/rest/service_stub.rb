@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the TargetGrpcProxies service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -241,8 +241,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetGrpcProxies/{target_grpc_proxy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_grpc_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_grpc_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -263,8 +263,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetGrpcProxies/{target_grpc_proxy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_grpc_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_grpc_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -286,7 +286,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetGrpcProxies",
                                                           body: "target_grpc_proxy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -307,7 +307,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/targetGrpcProxies",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -329,8 +329,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/targetGrpcProxies/{target_grpc_proxy}",
                                                           body: "target_grpc_proxy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["target_grpc_proxy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["target_grpc_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

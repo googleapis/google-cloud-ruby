@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the MachineImages service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -315,8 +315,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/machineImages/{machine_image}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["machine_image", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["machine_image", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -337,8 +337,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/machineImages/{machine_image}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["machine_image", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["machine_image", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -359,8 +359,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/machineImages/{resource}/getIamPolicy",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -382,7 +382,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/machineImages",
                                                           body: "machine_image_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -403,7 +403,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/machineImages",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -425,8 +425,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/machineImages/{resource}/setIamPolicy",
                                                           body: "global_set_policy_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -448,8 +448,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/machineImages/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

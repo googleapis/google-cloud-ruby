@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the RegionInstances service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -94,8 +94,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/instances/bulkInsert",
                                                           body: "bulk_insert_instance_resource_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -74,9 +74,7 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -89,27 +87,27 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ license: license, project: project, request_id: request_id }) do |result, response|
+      client.delete({ license: license, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete license: license, project: project, request_id: request_id do |result, response|
+      client.delete license: license, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteLicenseRequest.new(license: license, project: project, request_id: request_id) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteLicenseRequest.new(license: license, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ license: license, project: project, request_id: request_id }, call_options) do |result, response|
+      client.delete({ license: license, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteLicenseRequest.new(license: license, project: project, request_id: request_id), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteLicenseRequest.new(license: license, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -129,9 +127,7 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
     license = "hello world"
     project = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -144,27 +140,27 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ license: license, project: project }) do |result, response|
+      client.get({ license: license, project: project }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get license: license, project: project do |result, response|
+      client.get license: license, project: project do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetLicenseRequest.new(license: license, project: project) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetLicenseRequest.new(license: license, project: project) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ license: license, project: project }, call_options) do |result, response|
+      client.get({ license: license, project: project }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetLicenseRequest.new(license: license, project: project), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetLicenseRequest.new(license: license, project: project), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -185,9 +181,7 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
     project = "hello world"
     resource = "hello world"
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -200,27 +194,27 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource do |result, response|
+      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource) do |result, response|
+      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }, call_options) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource), call_options) do |result, response|
+      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyLicenseRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -241,9 +235,7 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
     project = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -256,27 +248,27 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ license_resource: license_resource, project: project, request_id: request_id }) do |result, response|
+      client.insert({ license_resource: license_resource, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert license_resource: license_resource, project: project, request_id: request_id do |result, response|
+      client.insert license_resource: license_resource, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertLicenseRequest.new(license_resource: license_resource, project: project, request_id: request_id) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertLicenseRequest.new(license_resource: license_resource, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ license_resource: license_resource, project: project, request_id: request_id }, call_options) do |result, response|
+      client.insert({ license_resource: license_resource, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertLicenseRequest.new(license_resource: license_resource, project: project, request_id: request_id), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertLicenseRequest.new(license_resource: license_resource, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -300,9 +292,7 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -315,27 +305,27 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListLicensesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListLicensesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListLicensesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListLicensesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -356,9 +346,7 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
     project = "hello world"
     resource = "hello world"
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -371,27 +359,27 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }) do |result, response|
+      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_iam_policy global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource do |result, response|
+      client.set_iam_policy global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource) do |result, response|
+      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }, call_options) do |result, response|
+      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource), call_options) do |result, response|
+      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyLicenseRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -412,9 +400,7 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
     resource = "hello world"
     test_permissions_request_resource = {}
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -427,27 +413,27 @@ class ::Google::Cloud::Compute::V1::Licenses::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |result, response|
+      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |result, response|
+      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |result, response|
+      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsLicenseRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

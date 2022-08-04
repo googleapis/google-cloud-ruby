@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the NetworkEdgeSecurityServices service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -241,7 +241,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/networkEdgeSecurityServices",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -262,9 +262,9 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/networkEdgeSecurityServices/{network_edge_security_service}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["network_edge_security_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["network_edge_security_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -285,9 +285,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/networkEdgeSecurityServices/{network_edge_security_service}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["network_edge_security_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["network_edge_security_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -309,8 +309,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/networkEdgeSecurityServices",
                                                           body: "network_edge_security_service_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -332,9 +332,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/networkEdgeSecurityServices/{network_edge_security_service}",
                                                           body: "network_edge_security_service_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["network_edge_security_service", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["network_edge_security_service", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

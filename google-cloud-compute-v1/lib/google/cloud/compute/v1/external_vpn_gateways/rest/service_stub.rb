@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the ExternalVpnGateways service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -278,8 +278,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/externalVpnGateways/{external_vpn_gateway}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["external_vpn_gateway", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["external_vpn_gateway", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -300,8 +300,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/externalVpnGateways/{external_vpn_gateway}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["external_vpn_gateway", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["external_vpn_gateway", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -323,7 +323,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/externalVpnGateways",
                                                           body: "external_vpn_gateway_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -344,7 +344,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/externalVpnGateways",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -366,8 +366,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/externalVpnGateways/{resource}/setLabels",
                                                           body: "global_set_labels_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -389,8 +389,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/externalVpnGateways/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
