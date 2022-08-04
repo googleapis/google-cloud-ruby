@@ -18,4 +18,10 @@ describe Google::Cloud::PubSub::Project, :mock_pubsub do
   it "knows the project identifier" do
     _(pubsub.project).must_equal project
   end
+
+  it "creates topic with async options when skip_lookup enabled" do
+    topic = pubsub.topic("test", skip_lookup: true, async: { interval: 1 })
+    topic.publish_async("{}")
+    _(topic.async_publisher.instance_variable_get("@interval")).must_equal 1
+  end
 end
