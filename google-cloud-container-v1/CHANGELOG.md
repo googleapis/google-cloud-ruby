@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.1 (2022-08-04)
+
+#### Documentation
+
+* BinaryAuthorization.enabled field is marked as deprecated ([#18957](https://github.com/googleapis/google-cloud-ruby/issues/18957)) 
+
 ### 0.9.0 (2022-07-02)
 
 #### Features
