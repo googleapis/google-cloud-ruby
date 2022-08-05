@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/analytics/admin/v1alpha/audience_pb'
 require 'google/analytics/admin/v1alpha/resources_pb'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
@@ -368,6 +369,36 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.GetDataStreamRequest" do
       optional :name, :string, 1
     end
+    add_message "google.analytics.admin.v1alpha.GetAudienceRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.ListAudiencesRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+    end
+    add_message "google.analytics.admin.v1alpha.ListAudiencesResponse" do
+      repeated :audiences, :message, 1, "google.analytics.admin.v1alpha.Audience"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.analytics.admin.v1alpha.CreateAudienceRequest" do
+      optional :parent, :string, 1
+      optional :audience, :message, 2, "google.analytics.admin.v1alpha.Audience"
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateAudienceRequest" do
+      optional :audience, :message, 1, "google.analytics.admin.v1alpha.Audience"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.analytics.admin.v1alpha.ArchiveAudienceRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.GetAttributionSettingsRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest" do
+      optional :attribution_settings, :message, 1, "google.analytics.admin.v1alpha.AttributionSettings"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
   end
 end
 
@@ -467,6 +498,14 @@ module Google
         ListDataStreamsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDataStreamsRequest").msgclass
         ListDataStreamsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListDataStreamsResponse").msgclass
         GetDataStreamRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetDataStreamRequest").msgclass
+        GetAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAudienceRequest").msgclass
+        ListAudiencesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAudiencesRequest").msgclass
+        ListAudiencesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAudiencesResponse").msgclass
+        CreateAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CreateAudienceRequest").msgclass
+        UpdateAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAudienceRequest").msgclass
+        ArchiveAudienceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ArchiveAudienceRequest").msgclass
+        GetAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAttributionSettingsRequest").msgclass
+        UpdateAttributionSettingsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.UpdateAttributionSettingsRequest").msgclass
       end
     end
   end

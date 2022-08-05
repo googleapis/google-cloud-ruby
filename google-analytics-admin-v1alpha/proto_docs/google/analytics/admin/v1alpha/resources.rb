@@ -54,6 +54,12 @@ module Google
         #     Output only. Resource name of this property.
         #     Format: properties/\\{property_id}
         #     Example: "properties/1000"
+        # @!attribute [rw] property_type
+        #   @return [::Google::Analytics::Admin::V1alpha::PropertyType]
+        #     Immutable. The property type for this Property resource. When creating a property, if
+        #     the type is "PROPERTY_TYPE_UNSPECIFIED", then "ORDINARY_PROPERTY" will be
+        #     implied. "SUBPROPERTY" and "ROLLUP_PROPERTY" types cannot yet be created
+        #     via Google Analytics Admin API.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time when the entity was originally created.
@@ -65,8 +71,8 @@ module Google
         #     Immutable. Resource name of this property's logical parent.
         #
         #     Note: The Property-Moving UI can be used to change the parent.
-        #     Format: accounts/\\{account}
-        #     Example: "accounts/100"
+        #     Format: accounts/\\{account}, properties/\\{property}
+        #     Example: "accounts/100", "properties/101"
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Human-readable display name for this property.
@@ -405,6 +411,16 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Display name for the property referred to in this property summary.
+        # @!attribute [rw] property_type
+        #   @return [::Google::Analytics::Admin::V1alpha::PropertyType]
+        #     The property's property type.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Resource name of this property's logical parent.
+        #
+        #     Note: The Property-Moving UI can be used to change the parent.
+        #     Format: accounts/\\{account}, properties/\\{property}
+        #     Example: "accounts/100", "properties/200"
         class PropertySummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -416,7 +432,7 @@ module Google
         #     Output only. Resource name of this secret. This secret may be a child of any type of
         #     stream.
         #     Format:
-        #     properties/\\{property}/webDataStreams/\\{webDataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
+        #     properties/\\{property}/dataStreams/\\{dataStream}/measurementProtocolSecrets/\\{measurementProtocolSecret}
         # @!attribute [rw] display_name
         #   @return [::String]
         #     Required. Human-readable display name for this secret.
@@ -523,6 +539,9 @@ module Google
           # @!attribute [rw] data_stream
           #   @return [::Google::Analytics::Admin::V1alpha::DataStream]
           #     A snapshot of a DataStream resource in change history.
+          # @!attribute [rw] attribution_settings
+          #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings]
+          #     A snapshot of AttributionSettings resource in change history.
           class ChangeHistoryResource
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -868,6 +887,103 @@ module Google
           end
         end
 
+        # The attribution settings used for a given property. This is a singleton
+        # resource.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Resource name of this attribution settings resource.
+        #     Format: properties/\\{property_id}/attributionSettings
+        #     Example: "properties/1000/attributionSettings"
+        # @!attribute [rw] acquisition_conversion_event_lookback_window
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::AcquisitionConversionEventLookbackWindow]
+        #     Required. The lookback window configuration for acquisition conversion events.
+        #     The default window size is 30 days.
+        # @!attribute [rw] other_conversion_event_lookback_window
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::OtherConversionEventLookbackWindow]
+        #     Required. The lookback window for all other, non-acquisition conversion events.
+        #     The default window size is 90 days.
+        # @!attribute [rw] reporting_attribution_model
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings::ReportingAttributionModel]
+        #     Required. The reporting attribution model used to calculate conversion credit in this
+        #     property's reports.
+        #
+        #     Changing the attribution model will apply to both historical and future
+        #     data. These changes will be reflected in reports with conversion and
+        #     revenue data. User and session data will be unaffected.
+        class AttributionSettings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # How far back in time events should be considered for inclusion in a
+          # converting path which leads to the first install of an app or the first
+          # visit to a site.
+          module AcquisitionConversionEventLookbackWindow
+            # Lookback window size unspecified.
+            ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED = 0
+
+            # 7-day lookback window.
+            ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS = 1
+
+            # 30-day lookback window.
+            ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS = 2
+          end
+
+          # How far back in time events should be considered for inclusion in a
+          # converting path for all conversions other than first app install/first site
+          # visit.
+          module OtherConversionEventLookbackWindow
+            # Lookback window size unspecified.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED = 0
+
+            # 30-day lookback window.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS = 1
+
+            # 60-day lookback window.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS = 2
+
+            # 90-day lookback window.
+            OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS = 3
+          end
+
+          # The reporting attribution model used to calculate conversion credit in this
+          # property's reports.
+          module ReportingAttributionModel
+            # Reporting attribution model unspecified.
+            REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED = 0
+
+            # Data-driven attribution distributes credit for the conversion based on
+            # data for each conversion event. Each Data-driven model is specific to
+            # each advertiser and each conversion event.
+            CROSS_CHANNEL_DATA_DRIVEN = 1
+
+            # Ignores direct traffic and attributes 100% of the conversion value to the
+            # last channel that the customer clicked through (or engaged view through
+            # for YouTube) before converting.
+            CROSS_CHANNEL_LAST_CLICK = 2
+
+            # Gives all credit for the conversion to the first channel that a customer
+            # clicked (or engaged view through for YouTube) before converting.
+            CROSS_CHANNEL_FIRST_CLICK = 3
+
+            # Distributes the credit for the conversion equally across all the channels
+            # a customer clicked (or engaged view through for YouTube) before
+            # converting.
+            CROSS_CHANNEL_LINEAR = 4
+
+            # Attributes 40% credit to the first and last interaction, and the
+            # remaining 20% credit is distributed evenly to the middle interactions.
+            CROSS_CHANNEL_POSITION_BASED = 5
+
+            # Gives more credit to the touchpoints that happened closer in time to
+            # the conversion.
+            CROSS_CHANNEL_TIME_DECAY = 6
+
+            # Attributes 100% of the conversion value to the last Google Ads channel
+            # that the customer clicked through before converting.
+            ADS_PREFERRED_LAST_CLICK = 7
+          end
+        end
+
         # The category selected for this property, used for industry benchmarking.
         module IndustryCategory
           # Industry category unspecified
@@ -1036,8 +1152,14 @@ module Google
           # DisplayVideo360AdvertiserLinkProposal resource
           DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL = 15
 
+          # SearchAds360Link resource
+          SEARCH_ADS_360_LINK = 16
+
           # DataStream resource
           DATA_STREAM = 18
+
+          # AttributionSettings resource
+          ATTRIBUTION_SETTINGS = 20
         end
 
         # Status of the Google Signals settings (i.e., whether this feature has been
@@ -1112,6 +1234,21 @@ module Google
           # the same external product resource that this proposal specifies. This
           # proposal will be automatically deleted after some time.
           OBSOLETE = 6
+        end
+
+        # Types of Property resources.
+        module PropertyType
+          # Unknown or unspecified property type
+          PROPERTY_TYPE_UNSPECIFIED = 0
+
+          # Ordinary GA4 property
+          PROPERTY_TYPE_ORDINARY = 1
+
+          # GA4 subproperty
+          PROPERTY_TYPE_SUBPROPERTY = 2
+
+          # GA4 rollup property
+          PROPERTY_TYPE_ROLLUP = 3
         end
       end
     end

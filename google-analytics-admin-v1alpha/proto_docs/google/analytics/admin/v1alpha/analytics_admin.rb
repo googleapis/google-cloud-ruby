@@ -1318,6 +1318,111 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request message for GetAudience RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the Audience to get.
+        #     Example format: properties/1234/audiences/5678
+        class GetAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ListAudiences RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     The maximum number of resources to return.
+        #     If unspecified, at most 50 resources will be returned.
+        #     The maximum value is 200 (higher values will be coerced to the maximum).
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     A page token, received from a previous `ListAudiences` call. Provide this
+        #     to retrieve the subsequent page.
+        #
+        #     When paginating, all other parameters provided to `ListAudiences` must
+        #     match the call that provided the page token.
+        class ListAudiencesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for ListAudiences RPC.
+        # @!attribute [rw] audiences
+        #   @return [::Array<::Google::Analytics::Admin::V1alpha::Audience>]
+        #     List of Audiences.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page.
+        #     If this field is omitted, there are no subsequent pages.
+        class ListAudiencesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for CreateAudience RPC.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. Example format: properties/1234
+        # @!attribute [rw] audience
+        #   @return [::Google::Analytics::Admin::V1alpha::Audience]
+        #     Required. The audience to create.
+        class CreateAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateAudience RPC.
+        # @!attribute [rw] audience
+        #   @return [::Google::Analytics::Admin::V1alpha::Audience]
+        #     Required. The audience to update.
+        #     The audience's `name` field is used to identify the audience to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
+        class UpdateAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for ArchiveAudience RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Example format: properties/1234/audiences/5678
+        class ArchiveAudienceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for GetAttributionSettings RPC.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The name of the attribution settings to retrieve.
+        #     Format: properties/\\{property}/attributionSettings
+        class GetAttributionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for UpdateAttributionSettings RPC
+        # @!attribute [rw] attribution_settings
+        #   @return [::Google::Analytics::Admin::V1alpha::AttributionSettings]
+        #     Required. The attribution settings to update.
+        #     The `name` field is used to identify the settings to be updated.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Required. The list of fields to be updated. Field names must be in snake case
+        #     (e.g., "field_to_update"). Omitted fields will not be updated. To replace
+        #     the entire entity, use one path with the string "*" to match all fields.
+        class UpdateAttributionSettingsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end
