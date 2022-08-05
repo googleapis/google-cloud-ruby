@@ -20,19 +20,19 @@ require "securerandom"
 $temp_instances = []
 
 def random_instance_name
-  "i-#{SecureRandom.hex 6}"
+  "rubysamplestest-i-#{SecureRandom.hex 6}"
 end
 
 def random_bucket_name
-  "test-#{SecureRandom.hex 10}"
+  "rubysamplestest-b-#{SecureRandom.hex 10}"
 end
 
 def random_firewall_name
-  "firewall-#{SecureRandom.hex 10}"
+  "rubysamplestest-f-#{SecureRandom.hex 10}"
 end
 
 def project
-  ENV["GOOGLE_CLOUD_PROJECT"]
+  ENV["GOOGLE_CLOUD_PROJECT"] || raise("No project defined. Set `GOOGLE_CLOUD_PROJECT` env var to your_project_name")
 end
 
 def zone
