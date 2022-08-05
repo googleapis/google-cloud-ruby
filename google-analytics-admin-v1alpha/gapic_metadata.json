@@ -399,6 +399,11 @@
               "methods": [
                 "update_attribution_settings"
               ]
+            },
+            "RunAccessReport": {
+              "methods": [
+                "run_access_report"
+              ]
             }
           }
         }

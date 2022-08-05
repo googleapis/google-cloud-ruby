@@ -4789,6 +4789,84 @@ class ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::ClientTest < M
     end
   end
 
+  def test_run_access_report
+    # Create GRPC objects.
+    grpc_response = ::Google::Analytics::Admin::V1alpha::RunAccessReportResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    entity = "hello world"
+    dimensions = [{}]
+    metrics = [{}]
+    date_ranges = [{}]
+    dimension_filter = {}
+    metric_filter = {}
+    offset = 42
+    limit = 42
+    time_zone = "hello world"
+    order_bys = [{}]
+    return_entity_quota = true
+
+    run_access_report_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :run_access_report, name
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest, request
+      assert_equal "hello world", request["entity"]
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessDimension, request["dimensions"].first
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessMetric, request["metrics"].first
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessDateRange, request["date_ranges"].first
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AccessFilterExpression), request["dimension_filter"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Analytics::Admin::V1alpha::AccessFilterExpression), request["metric_filter"]
+      assert_equal 42, request["offset"]
+      assert_equal 42, request["limit"]
+      assert_equal "hello world", request["time_zone"]
+      assert_kind_of ::Google::Analytics::Admin::V1alpha::AccessOrderBy, request["order_bys"].first
+      assert_equal true, request["return_entity_quota"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, run_access_report_client_stub do
+      # Create client
+      client = ::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.run_access_report entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.run_access_report ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.run_access_report({ entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.run_access_report(::Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new(entity: entity, dimensions: dimensions, metrics: metrics, date_ranges: date_ranges, dimension_filter: dimension_filter, metric_filter: metric_filter, offset: offset, limit: limit, time_zone: time_zone, order_bys: order_bys, return_entity_quota: return_entity_quota), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, run_access_report_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

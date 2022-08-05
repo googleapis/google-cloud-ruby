@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/analytics/admin/v1alpha/access_report_pb'
 require 'google/analytics/admin/v1alpha/audience_pb'
 require 'google/analytics/admin/v1alpha/resources_pb'
 require 'google/api/annotations_pb'
@@ -15,6 +16,26 @@ require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/analytics/admin/v1alpha/analytics_admin.proto", :syntax => :proto3) do
+    add_message "google.analytics.admin.v1alpha.RunAccessReportRequest" do
+      optional :entity, :string, 1
+      repeated :dimensions, :message, 2, "google.analytics.admin.v1alpha.AccessDimension"
+      repeated :metrics, :message, 3, "google.analytics.admin.v1alpha.AccessMetric"
+      repeated :date_ranges, :message, 4, "google.analytics.admin.v1alpha.AccessDateRange"
+      optional :dimension_filter, :message, 5, "google.analytics.admin.v1alpha.AccessFilterExpression"
+      optional :metric_filter, :message, 6, "google.analytics.admin.v1alpha.AccessFilterExpression"
+      optional :offset, :int64, 7
+      optional :limit, :int64, 8
+      optional :time_zone, :string, 9
+      repeated :order_bys, :message, 10, "google.analytics.admin.v1alpha.AccessOrderBy"
+      optional :return_entity_quota, :bool, 11
+    end
+    add_message "google.analytics.admin.v1alpha.RunAccessReportResponse" do
+      repeated :dimension_headers, :message, 1, "google.analytics.admin.v1alpha.AccessDimensionHeader"
+      repeated :metric_headers, :message, 2, "google.analytics.admin.v1alpha.AccessMetricHeader"
+      repeated :rows, :message, 3, "google.analytics.admin.v1alpha.AccessRow"
+      optional :row_count, :int32, 4
+      optional :quota, :message, 5, "google.analytics.admin.v1alpha.AccessQuota"
+    end
     add_message "google.analytics.admin.v1alpha.GetAccountRequest" do
       optional :name, :string, 1
     end
@@ -406,6 +427,8 @@ module Google
   module Analytics
     module Admin
       module V1alpha
+        RunAccessReportRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.RunAccessReportRequest").msgclass
+        RunAccessReportResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.RunAccessReportResponse").msgclass
         GetAccountRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GetAccountRequest").msgclass
         ListAccountsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountsRequest").msgclass
         ListAccountsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ListAccountsResponse").msgclass

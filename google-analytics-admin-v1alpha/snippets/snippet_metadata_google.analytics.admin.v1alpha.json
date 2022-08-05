@@ -3130,6 +3130,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_RunAccessReport_sync",
+      "title": "Snippet for run_access_report in AnalyticsAdminService",
+      "description": "Basic snippet for run_access_report in AnalyticsAdminService",
+      "file": "analytics_admin_service/run_access_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_access_report",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#run_access_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::RunAccessReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::RunAccessReportResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "RunAccessReport",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.RunAccessReport",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
