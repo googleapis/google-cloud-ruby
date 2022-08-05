@@ -22,7 +22,6 @@ require "gapic/config/method"
 require "google/cloud/compute/v1/version"
 
 require "google/cloud/compute/v1/zone_operations/credentials"
-require "google/cloud/compute/v1/zone_operations/rest/nonstandard_lro"
 require "google/cloud/compute/v1/zone_operations/rest"
 
 module Google

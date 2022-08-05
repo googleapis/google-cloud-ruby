@@ -78,9 +78,7 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -93,27 +91,27 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListAutoscalersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListAutoscalersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListAutoscalersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListAutoscalersRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -135,9 +133,7 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -150,27 +146,27 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ autoscaler: autoscaler, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.delete({ autoscaler: autoscaler, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete autoscaler: autoscaler, project: project, request_id: request_id, zone: zone do |result, response|
+      client.delete autoscaler: autoscaler, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteAutoscalerRequest.new(autoscaler: autoscaler, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteAutoscalerRequest.new(autoscaler: autoscaler, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ autoscaler: autoscaler, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.delete({ autoscaler: autoscaler, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteAutoscalerRequest.new(autoscaler: autoscaler, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteAutoscalerRequest.new(autoscaler: autoscaler, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -191,9 +187,7 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
     project = "hello world"
     zone = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,27 +200,27 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ autoscaler: autoscaler, project: project, zone: zone }) do |result, response|
+      client.get({ autoscaler: autoscaler, project: project, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get autoscaler: autoscaler, project: project, zone: zone do |result, response|
+      client.get autoscaler: autoscaler, project: project, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetAutoscalerRequest.new(autoscaler: autoscaler, project: project, zone: zone) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetAutoscalerRequest.new(autoscaler: autoscaler, project: project, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ autoscaler: autoscaler, project: project, zone: zone }, call_options) do |result, response|
+      client.get({ autoscaler: autoscaler, project: project, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetAutoscalerRequest.new(autoscaler: autoscaler, project: project, zone: zone), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetAutoscalerRequest.new(autoscaler: autoscaler, project: project, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -248,9 +242,7 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -263,27 +255,27 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.insert({ autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone do |result, response|
+      client.insert autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertAutoscalerRequest.new(autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertAutoscalerRequest.new(autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.insert({ autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertAutoscalerRequest.new(autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertAutoscalerRequest.new(autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -308,9 +300,7 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
     return_partial_success = true
     zone = "hello world"
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -323,27 +313,27 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListAutoscalersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListAutoscalersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListAutoscalersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListAutoscalersRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -366,9 +356,7 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    patch_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -381,27 +369,27 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.patch({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.patch({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone do |result, response|
+      client.patch autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.patch({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -424,9 +412,7 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    update_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :put, verb
-
+    update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -439,27 +425,27 @@ class ::Google::Cloud::Compute::V1::Autoscalers::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.update({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.update autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone do |result, response|
+      client.update autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.update ::Google::Cloud::Compute::V1::UpdateAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.update ::Google::Cloud::Compute::V1::UpdateAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.update({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.update({ autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.update(::Google::Cloud::Compute::V1::UpdateAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.update(::Google::Cloud::Compute::V1::UpdateAutoscalerRequest.new(autoscaler: autoscaler, autoscaler_resource: autoscaler_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

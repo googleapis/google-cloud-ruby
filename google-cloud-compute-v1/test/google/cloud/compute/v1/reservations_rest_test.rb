@@ -78,9 +78,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -93,27 +91,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListReservationsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -135,9 +133,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     reservation = "hello world"
     zone = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -150,27 +146,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ project: project, request_id: request_id, reservation: reservation, zone: zone }) do |result, response|
+      client.delete({ project: project, request_id: request_id, reservation: reservation, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, request_id: request_id, reservation: reservation, zone: zone do |result, response|
+      client.delete project: project, request_id: request_id, reservation: reservation, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteReservationRequest.new(project: project, request_id: request_id, reservation: reservation, zone: zone) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteReservationRequest.new(project: project, request_id: request_id, reservation: reservation, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, request_id: request_id, reservation: reservation, zone: zone }, call_options) do |result, response|
+      client.delete({ project: project, request_id: request_id, reservation: reservation, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteReservationRequest.new(project: project, request_id: request_id, reservation: reservation, zone: zone), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteReservationRequest.new(project: project, request_id: request_id, reservation: reservation, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -191,9 +187,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     reservation = "hello world"
     zone = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,27 +200,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ project: project, reservation: reservation, zone: zone }) do |result, response|
+      client.get({ project: project, reservation: reservation, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, reservation: reservation, zone: zone do |result, response|
+      client.get project: project, reservation: reservation, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetReservationRequest.new(project: project, reservation: reservation, zone: zone) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetReservationRequest.new(project: project, reservation: reservation, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, reservation: reservation, zone: zone }, call_options) do |result, response|
+      client.get({ project: project, reservation: reservation, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetReservationRequest.new(project: project, reservation: reservation, zone: zone), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetReservationRequest.new(project: project, reservation: reservation, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -248,9 +242,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     resource = "hello world"
     zone = "hello world"
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -263,27 +255,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone do |result, response|
+      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyReservationRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone) do |result, response|
+      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyReservationRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }, call_options) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyReservationRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone), call_options) do |result, response|
+      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyReservationRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -305,9 +297,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     reservation_resource = {}
     zone = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -320,27 +310,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone }) do |result, response|
+      client.insert({ project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone do |result, response|
+      client.insert project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertReservationRequest.new(project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertReservationRequest.new(project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone }, call_options) do |result, response|
+      client.insert({ project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertReservationRequest.new(project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertReservationRequest.new(project: project, request_id: request_id, reservation_resource: reservation_resource, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -365,9 +355,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     return_partial_success = true
     zone = "hello world"
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -380,27 +368,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListReservationsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -423,9 +411,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     reservations_resize_request_resource = {}
     zone = "hello world"
 
-    resize_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    resize_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -438,27 +424,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.resize({ project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone }) do |result, response|
+      client.resize({ project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.resize project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone do |result, response|
+      client.resize project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.resize ::Google::Cloud::Compute::V1::ResizeReservationRequest.new(project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone) do |result, response|
+      client.resize ::Google::Cloud::Compute::V1::ResizeReservationRequest.new(project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.resize({ project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone }, call_options) do |result, response|
+      client.resize({ project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.resize(::Google::Cloud::Compute::V1::ResizeReservationRequest.new(project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone), call_options) do |result, response|
+      client.resize(::Google::Cloud::Compute::V1::ResizeReservationRequest.new(project: project, request_id: request_id, reservation: reservation, reservations_resize_request_resource: reservations_resize_request_resource, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -480,9 +466,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     zone = "hello world"
     zone_set_policy_request_resource = {}
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -495,27 +479,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }) do |result, response|
+      client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_iam_policy project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource do |result, response|
+      client.set_iam_policy project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyReservationRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource) do |result, response|
+      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyReservationRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }, call_options) do |result, response|
+      client.set_iam_policy({ project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyReservationRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource), call_options) do |result, response|
+      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyReservationRequest.new(project: project, resource: resource, zone: zone, zone_set_policy_request_resource: zone_set_policy_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -537,9 +521,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     test_permissions_request_resource = {}
     zone = "hello world"
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -552,27 +534,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |result, response|
+      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsReservationRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |result, response|
+      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsReservationRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsReservationRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |result, response|
+      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsReservationRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -597,9 +579,7 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
     update_mask = "hello world"
     zone = "hello world"
 
-    update_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -612,27 +592,27 @@ class ::Google::Cloud::Compute::V1::Reservations::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.update({ paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone }) do |result, response|
+      client.update({ paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.update paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone do |result, response|
+      client.update paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.update ::Google::Cloud::Compute::V1::UpdateReservationRequest.new(paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone) do |result, response|
+      client.update ::Google::Cloud::Compute::V1::UpdateReservationRequest.new(paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.update({ paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone }, call_options) do |result, response|
+      client.update({ paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.update(::Google::Cloud::Compute::V1::UpdateReservationRequest.new(paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone), call_options) do |result, response|
+      client.update(::Google::Cloud::Compute::V1::UpdateReservationRequest.new(paths: paths, project: project, request_id: request_id, reservation: reservation, reservation_resource: reservation_resource, update_mask: update_mask, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

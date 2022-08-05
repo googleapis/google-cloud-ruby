@@ -571,7 +571,7 @@ module Google
               end
 
               ##
-              # Creates multiple instances. Count specifies the number of instances to create.
+              # Creates multiple instances. Count specifies the number of instances to create. For more information, see About bulk creation of VMs.
               #
               # @overload bulk_insert(request, options = nil)
               #   Pass arguments to `bulk_insert` via a request object, either of type
