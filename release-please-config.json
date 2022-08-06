@@ -147,6 +147,10 @@
       "component": "google-cloud-batch-v1",
       "version_file": "lib/google/cloud/batch/v1/version.rb"
     },
+    "google-cloud-beyond_corp": {
+      "component": "google-cloud-beyond_corp",
+      "version_file": "lib/google/cloud/beyond_corp/version.rb"
+    },
     "google-cloud-beyond_corp-app_connections-v1": {
       "component": "google-cloud-beyond_corp-app_connections-v1",
       "version_file": "lib/google/cloud/beyond_corp/app_connections/v1/version.rb"
