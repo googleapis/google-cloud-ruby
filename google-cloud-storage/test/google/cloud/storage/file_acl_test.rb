@@ -32,7 +32,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket.name, file_name], **get_object_args
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: nil
+      [bucket_name, file_name], user_project: nil, options: {}
 
     storage.service.mocked_service = mock
 
@@ -49,7 +49,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket_name, file_name], **get_object_args(user_project: "test")
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: "test"
+      [bucket_name, file_name], user_project: "test", options: {}
 
     storage.service.mocked_service = mock
 
@@ -78,10 +78,10 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket_name, file_name], **get_object_args
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: nil
+      [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :insert_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: nil
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: nil, options: {}
 
     storage.service.mocked_service = mock
 
@@ -116,10 +116,10 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket_name, file_name], **get_object_args
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: nil
+      [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :insert_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: generation, user_project: nil
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: generation, user_project: nil, options: {}
 
     storage.service.mocked_service = mock
 
@@ -153,10 +153,10 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket_name, file_name], **get_object_args(user_project: "test")
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: "test"
+      [bucket_name, file_name], user_project: "test", options: {}
     mock.expect :insert_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: "test"
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: "test", options: {}
 
     storage.service.mocked_service = mock
 
@@ -180,9 +180,9 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket_name, file_name], **get_object_args
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: nil
+      [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :delete_object_access_control, nil,
-      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: nil
+      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: nil, options: {}
 
     storage.service.mocked_service = mock
 
@@ -207,9 +207,9 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket_name, file_name], **get_object_args
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: nil
+      [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :delete_object_access_control, nil,
-      [bucket_name, file_name, existing_reader_entity], generation: generation, user_project: nil
+      [bucket_name, file_name, existing_reader_entity], generation: generation, user_project: nil, options: {}
 
     storage.service.mocked_service = mock
 
@@ -233,9 +233,9 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
     mock.expect :get_object, file_gapi, [bucket_name, file_name], **get_object_args(user_project: "test")
     mock.expect :list_object_access_controls,
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
-      [bucket_name, file_name], user_project: "test"
+      [bucket_name, file_name], user_project: "test", options: {}
     mock.expect :delete_object_access_control, nil,
-      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: "test"
+      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: "test", options: {}
 
     storage.service.mocked_service = mock
 

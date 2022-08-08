@@ -81,11 +81,11 @@ module Google
 
         ##
         # Retrieves a list of buckets for the given project.
-        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil
+        def list_buckets prefix: nil, token: nil, max: nil, user_project: nil, options: {}
           execute do
             service.list_buckets \
               @project, prefix: prefix, page_token: token, max_results: max,
-                        user_project: user_project(user_project)
+                        user_project: user_project(user_project), options: options
           end
         end
 
@@ -95,12 +95,14 @@ module Google
         def get_bucket bucket_name,
                        if_metageneration_match: nil,
                        if_metageneration_not_match: nil,
-                       user_project: nil
+                       user_project: nil,
+                       options: {}
           execute do
             service.get_bucket bucket_name,
                                if_metageneration_match: if_metageneration_match,
                                if_metageneration_not_match: if_metageneration_not_match,
-                               user_project: user_project(user_project)
+                               user_project: user_project(user_project),
+                               options: options
           end
         end
 
@@ -108,13 +110,14 @@ module Google
         # Creates a new bucket.
         # Returns Google::Apis::StorageV1::Bucket.
         def insert_bucket bucket_gapi, acl: nil, default_acl: nil,
-                          user_project: nil
+                          user_project: nil, options: {}
           execute do
             service.insert_bucket \
               @project, bucket_gapi,
               predefined_acl: acl,
               predefined_default_object_acl: default_acl,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -154,119 +157,132 @@ module Google
         def delete_bucket bucket_name,
                           if_metageneration_match: nil,
                           if_metageneration_not_match: nil,
-                          user_project: nil
+                          user_project: nil,
+                          options: {}
           execute do
             service.delete_bucket bucket_name,
                                   if_metageneration_match: if_metageneration_match,
                                   if_metageneration_not_match: if_metageneration_not_match,
-                                  user_project: user_project(user_project)
+                                  user_project: user_project(user_project),
+                                  options: options
           end
         end
 
         ##
         # Locks retention policy on a bucket.
         def lock_bucket_retention_policy bucket_name, metageneration,
-                                         user_project: nil
+                                         user_project: nil,
+                                         options: {}
           execute do
             service.lock_bucket_retention_policy \
               bucket_name, metageneration,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a list of ACLs for the given bucket.
-        def list_bucket_acls bucket_name, user_project: nil
+        def list_bucket_acls bucket_name, user_project: nil, options: {}
           execute do
             service.list_bucket_access_controls \
-              bucket_name, user_project: user_project(user_project)
+              bucket_name, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Creates a new bucket ACL.
-        def insert_bucket_acl bucket_name, entity, role, user_project: nil
+        def insert_bucket_acl bucket_name, entity, role, user_project: nil, options: {}
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::BucketAccessControl.new(**params)
           execute do
             service.insert_bucket_access_control \
-              bucket_name, new_acl, user_project: user_project(user_project)
+              bucket_name, new_acl, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Permanently deletes a bucket ACL.
-        def delete_bucket_acl bucket_name, entity, user_project: nil
+        def delete_bucket_acl bucket_name, entity, user_project: nil, options: {}
           execute do
             service.delete_bucket_access_control \
-              bucket_name, entity, user_project: user_project(user_project)
+              bucket_name, entity, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a list of default ACLs for the given bucket.
-        def list_default_acls bucket_name, user_project: nil
+        def list_default_acls bucket_name, user_project: nil, options: {}
           execute do
             service.list_default_object_access_controls \
-              bucket_name, user_project: user_project(user_project)
+              bucket_name, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Creates a new default ACL.
-        def insert_default_acl bucket_name, entity, role, user_project: nil
+        def insert_default_acl bucket_name, entity, role, user_project: nil, options: {}
           param = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**param)
           execute do
             service.insert_default_object_access_control \
-              bucket_name, new_acl, user_project: user_project(user_project)
+              bucket_name, new_acl, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Permanently deletes a default ACL.
-        def delete_default_acl bucket_name, entity, user_project: nil
+        def delete_default_acl bucket_name, entity, user_project: nil, options: {}
           execute do
             service.delete_default_object_access_control \
-              bucket_name, entity, user_project: user_project(user_project)
+              bucket_name, entity, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::Policy
-        def get_bucket_policy bucket_name, requested_policy_version: nil, user_project: nil
+        def get_bucket_policy bucket_name, requested_policy_version: nil, user_project: nil,
+                              options: {}
           # get_bucket_iam_policy(bucket, fields: nil, quota_user: nil,
           #                               user_ip: nil, options: nil)
           execute do
             service.get_bucket_iam_policy bucket_name, options_requested_policy_version: requested_policy_version,
-                                                       user_project: user_project(user_project)
+                                                       user_project: user_project(user_project), options: options
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::Policy
-        def set_bucket_policy bucket_name, new_policy, user_project: nil
+        def set_bucket_policy bucket_name, new_policy, user_project: nil, options: {}
           execute do
             service.set_bucket_iam_policy \
-              bucket_name, new_policy, user_project: user_project(user_project)
+              bucket_name, new_policy, user_project: user_project(user_project), options: options
           end
         end
 
         ##
         # Returns Google::Apis::StorageV1::TestIamPermissionsResponse
-        def test_bucket_permissions bucket_name, permissions, user_project: nil
+        def test_bucket_permissions bucket_name, permissions, user_project: nil, options: {}
           execute do
             service.test_bucket_iam_permissions \
-              bucket_name, permissions, user_project: user_project(user_project)
+              bucket_name, permissions, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a list of Pub/Sub notification subscriptions for a bucket.
-        def list_notifications bucket_name, user_project: nil
+        def list_notifications bucket_name, user_project: nil, options: {}
           execute do
             service.list_notifications bucket_name,
-                                       user_project: user_project(user_project)
+                                       user_project: user_project(user_project),
+                                       options: options
           end
         end
 
@@ -274,7 +290,7 @@ module Google
         # Creates a new Pub/Sub notification subscription for a bucket.
         def insert_notification bucket_name, topic_name, custom_attrs: nil,
                                 event_types: nil, prefix: nil, payload: nil,
-                                user_project: nil
+                                user_project: nil, options: {}
           params =
             { custom_attributes: custom_attrs,
               event_types: event_types(event_types),
@@ -286,38 +302,43 @@ module Google
           execute do
             service.insert_notification \
               bucket_name, new_notification,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves a Pub/Sub notification subscription for a bucket.
-        def get_notification bucket_name, notification_id, user_project: nil
+        def get_notification bucket_name, notification_id, user_project: nil, options: {}
           execute do
             service.get_notification bucket_name, notification_id,
-                                     user_project: user_project(user_project)
+                                     user_project: user_project(user_project),
+                                     options: options
           end
         end
 
         ##
         # Deletes a new Pub/Sub notification subscription for a bucket.
-        def delete_notification bucket_name, notification_id, user_project: nil
+        def delete_notification bucket_name, notification_id, user_project: nil, options: {}
           execute do
             service.delete_notification bucket_name, notification_id,
-                                        user_project: user_project(user_project)
+                                        user_project: user_project(user_project),
+                                        options: options
           end
         end
 
         ##
         # Retrieves a list of files matching the criteria.
         def list_files bucket_name, delimiter: nil, max: nil, token: nil,
-                       prefix: nil, versions: nil, user_project: nil
+                       prefix: nil, versions: nil, user_project: nil,
+                       options: {}
           execute do
             service.list_objects \
               bucket_name, delimiter: delimiter, max_results: max,
                            page_token: token, prefix: prefix,
                            versions: versions,
-                           user_project: user_project(user_project)
+                           user_project: user_project(user_project),
+                           options: options
           end
         end
 
@@ -399,7 +420,8 @@ module Google
                      if_metageneration_match: nil,
                      if_metageneration_not_match: nil,
                      key: nil,
-                     user_project: nil
+                     user_project: nil,
+                     options: {}
           execute do
             service.get_object \
               bucket_name, file_path,
@@ -409,7 +431,7 @@ module Google
               if_metageneration_match: if_metageneration_match,
               if_metageneration_not_match: if_metageneration_not_match,
               user_project: user_project(user_project),
-              options: key_options(key)
+              options: key_options(key).merge(options)
           end
         end
 
@@ -479,13 +501,19 @@ module Google
                          if_source_generation_match: nil,
                          if_generation_match: nil,
                          if_metageneration_match: nil,
-                         user_project: nil
+                         user_project: nil,
+                         options: {}
 
           source_objects = compose_file_source_objects source_files, if_source_generation_match
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
-          is_idempotent = retry? if_generation_match: if_generation_match
-          options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
+
+          if options[:retry].nil?
+            is_idempotent = retry? if_generation_match: if_generation_match
+            options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
+          else
+            options = key_options.merge options
+          end
 
           execute do
             service.compose_object bucket_name,
@@ -509,8 +537,8 @@ module Google
         #     Apis::StorageV1::StorageService and Apis::Core::DownloadCommand at
         #     the end of this file.
         def download_file bucket_name, file_path, target_path, generation: nil,
-                          key: nil, range: nil, user_project: nil
-          options = key_options key
+                          key: nil, range: nil, user_project: nil, options: {}
+          options = key_options(key).merge(options)
           options = range_header options, range
 
           execute do
@@ -588,34 +616,38 @@ module Google
 
         ##
         # Retrieves a list of ACLs for the given file.
-        def list_file_acls bucket_name, file_name, user_project: nil
+        def list_file_acls bucket_name, file_name, user_project: nil, options: {}
           execute do
             service.list_object_access_controls \
-              bucket_name, file_name, user_project: user_project(user_project)
+              bucket_name, file_name, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Creates a new file ACL.
         def insert_file_acl bucket_name, file_name, entity, role,
-                            generation: nil, user_project: nil
+                            generation: nil, user_project: nil,
+                            options: {}
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**params)
           execute do
             service.insert_object_access_control \
               bucket_name, file_name, new_acl,
-              generation: generation, user_project: user_project(user_project)
+              generation: generation, user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Permanently deletes a file ACL.
         def delete_file_acl bucket_name, file_name, entity, generation: nil,
-                            user_project: nil
+                            user_project: nil, options: {}
           execute do
             service.delete_object_access_control \
               bucket_name, file_name, entity,
-              generation: generation, user_project: user_project(user_project)
+              generation: generation, user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -623,32 +655,37 @@ module Google
         # Creates a new HMAC key for the specified service account.
         # Returns Google::Apis::StorageV1::HmacKey.
         def create_hmac_key service_account_email, project_id: nil,
-                            user_project: nil
+                            user_project: nil, options: {}
           execute do
             service.create_project_hmac_key \
               (project_id || @project), service_account_email,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Deletes an HMAC key. Key must be in the INACTIVE state.
-        def delete_hmac_key access_id, project_id: nil, user_project: nil
+        def delete_hmac_key access_id, project_id: nil, user_project: nil,
+                            options: {}
           execute do
             service.delete_project_hmac_key \
               (project_id || @project), access_id,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
         ##
         # Retrieves an HMAC key's metadata.
         # Returns Google::Apis::StorageV1::HmacKeyMetadata.
-        def get_hmac_key access_id, project_id: nil, user_project: nil
+        def get_hmac_key access_id, project_id: nil, user_project: nil,
+                         options: {}
           execute do
             service.get_project_hmac_key \
               (project_id || @project), access_id,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -657,14 +694,15 @@ module Google
         # Returns Google::Apis::StorageV1::HmacKeysMetadata.
         def list_hmac_keys max: nil, token: nil, service_account_email: nil,
                            project_id: nil, show_deleted_keys: nil,
-                           user_project: nil
+                           user_project: nil, options: {}
           execute do
             service.list_project_hmac_keys \
               (project_id || @project),
               max_results: max, page_token: token,
               service_account_email: service_account_email,
               show_deleted_keys: show_deleted_keys,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 
@@ -673,11 +711,13 @@ module Google
         # for valid states.
         # Returns Google::Apis::StorageV1::HmacKeyMetadata.
         def update_hmac_key access_id, hmac_key_metadata_object,
-                            project_id: nil, user_project: nil
+                            project_id: nil, user_project: nil,
+                            options: {}
           execute do
             service.update_project_hmac_key \
               (project_id || @project), access_id, hmac_key_metadata_object,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: options
           end
         end
 

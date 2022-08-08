@@ -229,11 +229,13 @@ class MockStorage < Minitest::Spec
 
   def get_bucket_args if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
-                      user_project: nil
+                      user_project: nil,
+                      options: {}
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
-      user_project: user_project
+      user_project: user_project,
+      options: options
     }
   end
 
@@ -255,11 +257,13 @@ class MockStorage < Minitest::Spec
 
   def delete_bucket_args if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
-                         user_project: nil
+                         user_project: nil,
+                         options: {}
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
-      user_project: user_project
+      user_project: user_project,
+      options: options
     }
   end
 

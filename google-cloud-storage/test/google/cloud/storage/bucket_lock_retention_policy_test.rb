@@ -82,7 +82,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
   it "locks its retention policy" do
     mock = Minitest::Mock.new
     mock.expect :lock_bucket_retention_policy, bucket_with_retention_policy_gapi,
-                [bucket_name, bucket_metageneration], user_project: nil
+                [bucket_name, bucket_metageneration], user_project: nil, options: {}
     bucket.service.mocked_service = mock
 
     bucket.lock_retention_policy!
@@ -95,7 +95,7 @@ describe Google::Cloud::Storage::Bucket, :lock_retention_policy, :mock_storage d
   it "locks its retention policy with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :lock_bucket_retention_policy, bucket_with_retention_policy_gapi,
-                [bucket_name, bucket_metageneration], user_project: "test"
+                [bucket_name, bucket_metageneration], user_project: "test", options: {}
     bucket_user_project.service.mocked_service = mock
 
     bucket_user_project.lock_retention_policy!
