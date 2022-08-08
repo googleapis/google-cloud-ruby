@@ -112,6 +112,11 @@ module Google
 
                 default_config.rpcs.analyze_iam_policy_longrunning.timeout = 60.0
 
+                default_config.rpcs.batch_get_effective_iam_policies.timeout = 300.0
+                default_config.rpcs.batch_get_effective_iam_policies.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -1145,6 +1150,14 @@ module Google
             #     * `labels.env:*` to find Cloud resources that have a label "env".
             #     * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
             #       encryption key whose name contains the word "key".
+            #     * `relationships:instance-group-1` to find Cloud resources that have
+            #       relationships with "instance-group-1" in the related resource name.
+            #     * `relationships:INSTANCE_TO_INSTANCEGROUP` to find compute instances that
+            #       have relationships of type "INSTANCE_TO_INSTANCEGROUP".
+            #     * `relationships.INSTANCE_TO_INSTANCEGROUP:instance-group-1` to find
+            #       compute instances that have relationships with "instance-group-1" in the
+            #       compute instance group resource name, for relationship type
+            #       "INSTANCE_TO_INSTANCEGROUP".
             #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
             #       word.
             #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
@@ -1358,8 +1371,8 @@ module Google
             #     compared against each Cloud IAM policy binding, including its principals,
             #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
             #     contain the bindings that match your query. To learn more about the IAM
-            #     policy structure, see [IAM policy
-            #     doc](https://cloud.google.com/iam/docs/policies#structure).
+            #     policy structure, see the [IAM policy
+            #     documentation](https://cloud.google.com/iam/help/allow-policies/structure).
             #
             #     Examples:
             #
