@@ -566,6 +566,9 @@ module Google
         #     By default, Cloud Vision API only includes confidence score for
         #     DOCUMENT_TEXT_DETECTION result. Set the flag to true to include confidence
         #     score for TEXT_DETECTION as well.
+        # @!attribute [rw] advanced_ocr_options
+        #   @return [::Array<::String>]
+        #     A list of advanced OCR options to fine-tune OCR behavior.
         class TextDetectionParams
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
