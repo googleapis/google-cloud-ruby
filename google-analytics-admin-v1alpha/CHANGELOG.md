@@ -1,5 +1,12 @@
 # Release History
 
+### 0.13.0 (2022-08-09)
+
+#### Features
+
+* Support for run_access_report ([#18985](https://github.com/googleapis/google-cloud-ruby/issues/18985)) 
+* support CRUD operations for audience 
+
 ### 0.12.0 (2022-07-01)
 
 #### Features
