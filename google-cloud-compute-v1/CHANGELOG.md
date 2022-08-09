@@ -14,9 +14,6 @@
 * Support for NAT rule mappings information 
 * Support for network firewall policy 
 * Support for SnapshotType 
-#### Bug Fixes
-
-* samples and tests of Compute V1 ([#18894](https://github.com/googleapis/google-cloud-ruby/issues/18894)) 
 
 ### 1.5.0 (2022-07-19)
 
