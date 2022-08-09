@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the FirewallPolicies service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -723,7 +723,7 @@ module Google
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/addAssociation",
                                                           body: "firewall_policy_association_resource",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -745,7 +745,7 @@ module Google
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/addRule",
                                                           body: "firewall_policy_rule_resource",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -766,7 +766,7 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/cloneRules",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -787,7 +787,7 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -808,7 +808,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -829,7 +829,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/getAssociation",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -850,7 +850,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{resource}/getIamPolicy",
                                                           matches: [
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -871,7 +871,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/getRule",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -950,7 +950,7 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/move",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -972,7 +972,7 @@ module Google
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}",
                                                           body: "firewall_policy_resource",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -994,7 +994,7 @@ module Google
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/patchRule",
                                                           body: "firewall_policy_rule_resource",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1015,7 +1015,7 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/removeAssociation",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1036,7 +1036,7 @@ module Google
                                                           uri_method: :post,
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{firewall_policy}/removeRule",
                                                           matches: [
-                                                            ["firewall_policy", %r{[^/]+}, false]
+                                                            ["firewall_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1058,7 +1058,7 @@ module Google
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{resource}/setIamPolicy",
                                                           body: "global_organization_set_policy_request_resource",
                                                           matches: [
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -1080,7 +1080,7 @@ module Google
                                                           uri_template: "/compute/v1/locations/global/firewallPolicies/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
