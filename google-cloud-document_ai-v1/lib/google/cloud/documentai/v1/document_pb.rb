@@ -4,6 +4,7 @@
 require 'google/protobuf'
 
 require 'google/api/field_behavior_pb'
+require 'google/cloud/documentai/v1/barcode_pb'
 require 'google/cloud/documentai/v1/geometry_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
@@ -64,6 +65,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :tables, :message, 10, "google.cloud.documentai.v1.Document.Page.Table"
       repeated :form_fields, :message, 11, "google.cloud.documentai.v1.Document.Page.FormField"
       repeated :symbols, :message, 12, "google.cloud.documentai.v1.Document.Page.Symbol"
+      repeated :detected_barcodes, :message, 15, "google.cloud.documentai.v1.Document.Page.DetectedBarcode"
       optional :provenance, :message, 16, "google.cloud.documentai.v1.Document.Provenance"
     end
     add_message "google.cloud.documentai.v1.Document.Page.Dimension" do
@@ -156,7 +158,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :name_detected_languages, :message, 3, "google.cloud.documentai.v1.Document.Page.DetectedLanguage"
       repeated :value_detected_languages, :message, 4, "google.cloud.documentai.v1.Document.Page.DetectedLanguage"
       optional :value_type, :string, 5
+      optional :corrected_key_text, :string, 6
+      optional :corrected_value_text, :string, 7
       optional :provenance, :message, 8, "google.cloud.documentai.v1.Document.Provenance"
+    end
+    add_message "google.cloud.documentai.v1.Document.Page.DetectedBarcode" do
+      optional :layout, :message, 1, "google.cloud.documentai.v1.Document.Page.Layout"
+      optional :barcode, :message, 2, "google.cloud.documentai.v1.Barcode"
     end
     add_message "google.cloud.documentai.v1.Document.Page.DetectedLanguage" do
       optional :language_code, :string, 1
@@ -183,6 +191,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :datetime_value, :message, 4, "google.type.DateTime"
         optional :address_value, :message, 5, "google.type.PostalAddress"
         optional :boolean_value, :bool, 6
+        optional :integer_value, :int32, 7
+        optional :float_value, :float, 8
       end
     end
     add_message "google.cloud.documentai.v1.Document.EntityRelation" do
@@ -241,6 +251,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.documentai.v1.Document.Revision" do
       optional :id, :string, 1
       repeated :parent, :int32, 2
+      repeated :parent_ids, :string, 7
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :human_review, :message, 6, "google.cloud.documentai.v1.Document.Revision.HumanReview"
       oneof :source do
@@ -286,6 +297,7 @@ module Google
         Document::Page::Table::TableRow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.Table.TableRow").msgclass
         Document::Page::Table::TableCell = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.Table.TableCell").msgclass
         Document::Page::FormField = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.FormField").msgclass
+        Document::Page::DetectedBarcode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.DetectedBarcode").msgclass
         Document::Page::DetectedLanguage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.DetectedLanguage").msgclass
         Document::Entity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Entity").msgclass
         Document::Entity::NormalizedValue = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Entity.NormalizedValue").msgclass
