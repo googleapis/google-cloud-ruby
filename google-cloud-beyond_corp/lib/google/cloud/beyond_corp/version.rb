@@ -17,7 +17,7 @@
 module Google
   module Cloud
     module BeyondCorp
-      VERSION = "0.0.1"
+      VERSION = "0.1.0"
     end
   end
 end
