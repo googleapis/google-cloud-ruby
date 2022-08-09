@@ -1,5 +1,23 @@
 # Release History
 
+### 1.6.0 (2022-08-09)
+
+#### Features
+
+* Catch path formatting errors on the client side ([#18962](https://github.com/googleapis/google-cloud-ruby/issues/18962)) 
+* Report the resource policy that created a scheduled snapshot 
+* Report the size of a snapshot at creation time 
+* Support for architecture of instance-attached disk resources 
+* Support for error details and localized error messages 
+* Support for KeyRevocationActionType 
+* Support for LocationPolicyLocationConstraints 
+* Support for NAT rule mappings information 
+* Support for network firewall policy 
+* Support for SnapshotType 
+#### Bug Fixes
+
+* samples and tests of Compute V1 ([#18894](https://github.com/googleapis/google-cloud-ruby/issues/18894)) 
+
 ### 1.5.0 (2022-07-19)
 
 #### Features
