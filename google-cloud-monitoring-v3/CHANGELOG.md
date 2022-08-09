@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2022-08-09)
+
+#### Features
+
+* Added support for evaluating missing data in AlertPolicy ([#18990](https://github.com/googleapis/google-cloud-ruby/issues/18990)) 
+
 ### 0.8.0 (2022-07-05)
 
 #### Features
