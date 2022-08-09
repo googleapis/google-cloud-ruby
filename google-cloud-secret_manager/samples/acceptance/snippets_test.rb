@@ -103,6 +103,21 @@ describe "Secret Manager Snippets" do
     end
   end
 
+  describe "#create_ummr_secret" do
+    it "creates a secret with user managed replication" do
+      expect {
+        secret = create_ummr_secret(
+          project_id: project_id,
+          secret_id:  secret_id,
+          locations: ["us-east1", "us-east4", "us-west1"]
+        )
+
+        expect(secret).wont_be_nil
+        expect(secret.name).must_include(secret_id)
+      }.must_output(/Created secret with user managed replication/)
+    end
+  end
+
   describe "#delete_secret" do
     it "deletes the secret" do
       expect(secret).wont_be_nil
@@ -302,6 +317,7 @@ describe "Secret Manager Snippets" do
   describe "#update_secret_with_alias" do
     it "updates the secret" do
       expect(secret).wont_be_nil
+      expect(secret_version).wont_be_nil
 
       expect {
         n_secret = update_secret_with_alias(
@@ -310,7 +326,7 @@ describe "Secret Manager Snippets" do
         )
 
         expect(n_secret).wont_be_nil
-        expect(n_secret.version_aliases["test"]).must_equal("1")
+        expect(n_secret.version_aliases["test"]).must_equal(1)
       }.must_output(/Updated secret/)
     end
   end
