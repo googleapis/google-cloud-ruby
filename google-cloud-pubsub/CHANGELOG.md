@@ -1,5 +1,14 @@
 # Release History
 
+### 2.12.0 (2022-08-09)
+
+#### Features
+
+* bump the minimum required version of pubsub v1 ([#18983](https://github.com/googleapis/google-cloud-ruby/issues/18983)) 
+#### Bug Fixes
+
+* honour async options of topic ([#18953](https://github.com/googleapis/google-cloud-ruby/issues/18953)) 
+
 ### 2.11.0 (2022-08-01)
 
 #### Features
