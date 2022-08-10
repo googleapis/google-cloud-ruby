@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2022-08-10)
+
+#### Features
+
+* Added MySQL dialect ([#19008](https://github.com/googleapis/google-cloud-ruby/issues/19008)) 
+
 ### 0.4.0 (2022-07-19)
 
 #### Features
