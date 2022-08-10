@@ -31,7 +31,6 @@ class ConformanceTest < MockStorage
   def create_resources
     @bucket = storage.create_bucket random_bucket_name, acl: acl,
                                     default_acl: acl
-    puts "sandeep: #{storage.service_account_email.inspect}"
     @hmac_key = storage.create_hmac_key storage.service_account_email
     @hmac_key.inactive!
     @notification = storage.service.insert_notification @bucket.name, pubsub_topic_name

@@ -582,7 +582,6 @@ module Google
         # Returns Google::Apis::StorageV1::HmacKey.
         def create_hmac_key service_account_email, project_id: nil,
                             user_project: nil
-          puts "anshul: #{service_account_email.inspect}"
           execute do
             service.create_project_hmac_key \
               (project_id || @project), service_account_email,
