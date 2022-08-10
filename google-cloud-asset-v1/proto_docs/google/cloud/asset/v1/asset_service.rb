@@ -1583,6 +1583,206 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Output configuration query assets.
+        # @!attribute [rw] bigquery_destination
+        #   @return [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig::BigQueryDestination]
+        #     BigQuery destination where the query results will be saved.
+        class QueryAssetsOutputConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # BigQuery destination.
+          # @!attribute [rw] dataset
+          #   @return [::String]
+          #     Required. The BigQuery dataset where the query results will be saved. It
+          #     has the format of "projects/\\{projectId}/datasets/\\{datasetId}".
+          # @!attribute [rw] table
+          #   @return [::String]
+          #     Required. The BigQuery table where the query results will be saved. If
+          #     this table does not exist, a new table with the given name will be
+          #     created.
+          # @!attribute [rw] write_disposition
+          #   @return [::String]
+          #     Specifies the action that occurs if the destination table or partition
+          #     already exists. The following values are supported:
+          #
+          #     * WRITE_TRUNCATE: If the table or partition already exists, BigQuery
+          #     overwrites the entire table or all the partitions data.
+          #     * WRITE_APPEND: If the table or partition already exists, BigQuery
+          #     appends the data to the table or the latest partition.
+          #     * WRITE_EMPTY: If the table already exists and contains data, an error is
+          #     returned.
+          class BigQueryDestination
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # QueryAssets request.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The relative name of the root asset. This can only be an
+        #     organization number (such as "organizations/123"), a project ID (such as
+        #     "projects/my-project-id"), or a project number (such as "projects/12345"),
+        #     or a folder number (such as "folders/123").
+        #
+        #     Only assets belonging to the `parent` will be returned.
+        # @!attribute [rw] statement
+        #   @return [::String]
+        #     Optional. A SQL statement that's compatible with [BigQuery Standard
+        #     SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+        # @!attribute [rw] job_reference
+        #   @return [::String]
+        #     Optional. Reference to the query job, which is from the
+        #     `QueryAssetsResponse` of previous `QueryAssets` call.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of rows to return in the results. Responses
+        #     are limited to 10 MB and 1000 rows.
+        #
+        #     By default, the maximum row count is 1000. When the byte or row count limit
+        #     is reached, the rest of the query results will be paginated.
+        #
+        #     The field will be ignored when [output_config] is specified.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token received from previous `QueryAssets`.
+        #
+        #     The field will be ignored when [output_config] is specified.
+        # @!attribute [rw] timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Specifies the maximum amount of time that the client is willing
+        #     to wait for the query to complete. By default, this limit is 5 min for the
+        #     first query, and 1 minute for the following queries. If the query is
+        #     complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
+        #     false.
+        #
+        #     Like BigQuery [jobs.query
+        #     API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
+        #     The call is not guaranteed to wait for the specified timeout; it typically
+        #     returns after around 200 seconds (200,000 milliseconds), even if the query
+        #     is not complete.
+        #
+        #     The field will be ignored when [output_config] is specified.
+        # @!attribute [rw] read_time_window
+        #   @return [::Google::Cloud::Asset::V1::TimeWindow]
+        #     Optional. [start_time] is required. [start_time] must be less than
+        #     [end_time] Defaults [end_time] to now if [start_time] is set and
+        #     [end_time] isn't. Maximum permitted time range is 7 days.
+        # @!attribute [rw] read_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Queries cloud assets as they appeared at the specified point in
+        #     time.
+        # @!attribute [rw] output_config
+        #   @return [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig]
+        #     Optional. Destination where the query results will be saved.
+        #
+        #     When this field is specified, the query results won't be saved in the
+        #     [QueryAssetsResponse.query_result]. Instead
+        #     [QueryAssetsResponse.output_config] will be set.
+        #
+        #     Meanwhile, [QueryAssetsResponse.job_reference] will be set and can be used
+        #     to check the status of the query job when passed to a following
+        #     [QueryAssets] API call.
+        class QueryAssetsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # QueryAssets response.
+        # @!attribute [rw] job_reference
+        #   @return [::String]
+        #     Reference to a query job.
+        # @!attribute [rw] done
+        #   @return [::Boolean]
+        #     The query response, which can be either an `error` or a valid `response`.
+        #
+        #     If `done` == `false` and the query result is being saved in a output, the
+        #     output_config field will be set.
+        #     If `done` == `true`, exactly one of
+        #     `error`, `query_result` or `output_config` will be set.
+        # @!attribute [rw] error
+        #   @return [::Google::Rpc::Status]
+        #     Error status.
+        # @!attribute [rw] query_result
+        #   @return [::Google::Cloud::Asset::V1::QueryResult]
+        #     Result of the query.
+        # @!attribute [rw] output_config
+        #   @return [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig]
+        #     Output configuration which indicates instead of being returned in API
+        #     response on the fly, the query result will be saved in a specific output.
+        class QueryAssetsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Execution results of the query.
+        #
+        # The result is formatted as rows represented by BigQuery compatible [schema].
+        # When pagination is necessary, it will contains the page token to retrieve
+        # the results of following pages.
+        # @!attribute [rw] rows
+        #   @return [::Array<::Google::Protobuf::Struct>]
+        #     Each row hold a query result in the format of `Struct`.
+        # @!attribute [rw] schema
+        #   @return [::Google::Cloud::Asset::V1::TableSchema]
+        #     Describes the format of the [rows].
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     Token to retrieve the next page of the results.
+        # @!attribute [rw] total_rows
+        #   @return [::Integer]
+        #     Total rows of the whole query results.
+        class QueryResult
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # BigQuery Compatible table schema.
+        # @!attribute [rw] fields
+        #   @return [::Array<::Google::Cloud::Asset::V1::TableFieldSchema>]
+        #     Describes the fields in a table.
+        class TableSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A field in TableSchema.
+        # @!attribute [rw] field
+        #   @return [::String]
+        #     The field name. The name must contain only letters (a-z, A-Z),
+        #     numbers (0-9), or underscores (_), and must start with a letter or
+        #     underscore. The maximum length is 128 characters.
+        # @!attribute [rw] type
+        #   @return [::String]
+        #     The field data type. Possible values include
+        #     * STRING
+        #     * BYTES
+        #     * INTEGER
+        #     * FLOAT
+        #     * BOOLEAN
+        #     * TIMESTAMP
+        #     * DATE
+        #     * TIME
+        #     * DATETIME
+        #     * GEOGRAPHY,
+        #     * NUMERIC,
+        #     * BIGNUMERIC,
+        #     * RECORD
+        #     (where RECORD indicates that the field contains a nested schema).
+        # @!attribute [rw] mode
+        #   @return [::String]
+        #     The field mode. Possible values include NULLABLE, REQUIRED and
+        #     REPEATED. The default value is NULLABLE.
+        # @!attribute [rw] fields
+        #   @return [::Array<::Google::Cloud::Asset::V1::TableFieldSchema>]
+        #     Describes the nested schema fields if the type property is set
+        #     to RECORD.
+        class TableFieldSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for
         # {::Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies AssetService.BatchGetEffectiveIamPolicies}.
         # @!attribute [rw] scope
