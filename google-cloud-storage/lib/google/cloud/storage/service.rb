@@ -585,7 +585,8 @@ module Google
           execute do
             service.create_project_hmac_key \
               (project_id || @project), service_account_email,
-              user_project: user_project(user_project)
+              user_project: user_project(user_project),
+              options: {retries: 0}
           end
         end
 
