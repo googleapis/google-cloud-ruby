@@ -17,6 +17,8 @@ class MethodMapping
   CONF_TEST_SERVICE_ACCOUNT_EMAIL = "my-service-account@test.iam.gserviceaccount.com"
   CONF_TEST_ACL_ENTITY = "my-entity@example.net"
   CONF_TEST_PUBSUB_TOPIC_NAME = "yet-another-topic"
+  CONF_TEST_FILE_CONTENT = "my-test-file"
+  CONF_TEST_FILE_PATH = "my-test-file.txt"
 
   ########################################################################################################################################
   ### Method Invocation Mapping ##########################################################################################################
@@ -66,6 +68,9 @@ class MethodMapping
       :blob_download_as_bytes_w_range,
       :blob_download_as_text,
       :blobreader_read,
+    ],
+    "storage.objects.insert" => [
+      :insert_object
     ],
     "storage.serviceaccount.get" => [:project_service_account],
     "storage.buckets.patch" => [
@@ -336,5 +341,15 @@ class MethodMapping
     bucket = resources[:bucket]
     pubsub_topic_name = CONF_TEST_PUBSUB_TOPIC_NAME
     bucket.create_notification pubsub_topic_name
+  end
+
+  def self.insert_object client, _preconditions, **resources
+    bucket = resources[:bucket]
+    file = StringIO.new CONF_TEST_FILE_CONTENT * 1024 * 1024 # 1MB
+    if _preconditions
+      bucket.create_file file, CONF_TEST_FILE_PATH, if_generation_match: 0
+    else
+      bucket.create_file file, CONF_TEST_FILE_PATH
+    end
   end
 end
