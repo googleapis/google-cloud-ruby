@@ -58,6 +58,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
     parent = "hello world"
     read_session = {}
     max_stream_count = 42
+    preferred_min_stream_count = 42
 
     create_read_session_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :create_read_session, name
@@ -65,6 +66,7 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       assert_equal "hello world", request["parent"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::Storage::V1::ReadSession), request["read_session"]
       assert_equal 42, request["max_stream_count"]
+      assert_equal 42, request["preferred_min_stream_count"]
       refute_nil options
     end
 
@@ -75,31 +77,31 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryRead::ClientTest < Minites
       end
 
       # Use hash object
-      client.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count }) do |response, operation|
+      client.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.create_read_session parent: parent, read_session: read_session, max_stream_count: max_stream_count do |response, operation|
+      client.create_read_session parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.create_read_session ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count) do |response, operation|
+      client.create_read_session ::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count }, grpc_options) do |response, operation|
+      client.create_read_session({ parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.create_read_session(::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count), grpc_options) do |response, operation|
+      client.create_read_session(::Google::Cloud::Bigquery::Storage::V1::CreateReadSessionRequest.new(parent: parent, read_session: read_session, max_stream_count: max_stream_count, preferred_min_stream_count: preferred_min_stream_count), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

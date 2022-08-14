@@ -17,6 +17,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :type, :enum, 4, "google.bigtable.admin.v2.Instance.Type"
       map :labels, :string, :string, 5
       optional :create_time, :message, 7, "google.protobuf.Timestamp"
+      proto3_optional :satisfies_pzs, :bool, 8
     end
     add_enum "google.bigtable.admin.v2.Instance.State" do
       value :STATE_NOT_KNOWN, 0
@@ -30,6 +31,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.bigtable.admin.v2.AutoscalingTargets" do
       optional :cpu_utilization_percent, :int32, 2
+      optional :storage_utilization_gib_per_node, :int32, 3
     end
     add_message "google.bigtable.admin.v2.AutoscalingLimits" do
       optional :min_serve_nodes, :int32, 1

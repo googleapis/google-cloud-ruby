@@ -42,13 +42,12 @@ class ReadRowsTest < MockBigtable
       table = bigtable.table(instance_id, table_id)
 
       resp = Google::Cloud::Bigtable::V2::ReadRowsResponse.new chunks: test.chunks.to_a
-      mock.expect :read_rows, [resp], [
+      mock.expect :read_rows, [resp],
         table_name: table_path(instance_id, table_id),
-          rows: Google::Cloud::Bigtable::V2::RowSet.new,
-          filter: nil,
-          rows_limit: nil,
-          app_profile_id: nil
-        ]
+        rows: Google::Cloud::Bigtable::V2::RowSet.new,
+        filter: nil,
+        rows_limit: nil,
+        app_profile_id: nil
       rows = table.read_rows
       if test.results.empty? # "no data after reset"
         expect do

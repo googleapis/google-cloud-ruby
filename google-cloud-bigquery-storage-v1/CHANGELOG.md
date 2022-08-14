@@ -1,5 +1,29 @@
 # Release History
 
+### 0.13.0 (2022-07-28)
+
+#### Features
+
+* add support of preferred_min_stream_count 
+
+### 0.12.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
+### 0.11.1 (2022-06-28)
+
+#### Bug Fixes
+
+* Modify client lib retry policy for CreateWriteStream with longer backoff, more error code and longer overall time ([#18424](https://github.com/googleapis/google-cloud-ruby/issues/18424)) 
+
+### 0.11.0 (2022-06-22)
+
+#### Features
+
+* add row error field to fields
+
 ### 0.10.1 / 2022-04-01
 
 #### Documentation

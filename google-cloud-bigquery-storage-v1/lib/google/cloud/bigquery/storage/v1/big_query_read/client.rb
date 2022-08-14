@@ -193,7 +193,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload create_read_session(parent: nil, read_session: nil, max_stream_count: nil)
+              # @overload create_read_session(parent: nil, read_session: nil, max_stream_count: nil, preferred_min_stream_count: nil)
               #   Pass arguments to `create_read_session` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -207,11 +207,22 @@ module Google
               #     Max initial number of streams. If unset or zero, the server will
               #     provide a value of streams so as to produce reasonable throughput. Must be
               #     non-negative. The number of streams may be lower than the requested number,
-              #     depending on the amount parallelism that is reasonable for the table. Error
-              #     will be returned if the max count is greater than the current system
-              #     max limit of 1,000.
+              #     depending on the amount parallelism that is reasonable for the table.
+              #     There is a default system max limit of 1,000.
               #
-              #     Streams must be read starting from offset 0.
+              #     This must be greater than or equal to preferred_min_stream_count.
+              #     Typically, clients should either leave this unset to let the system to
+              #     determine an upper bound OR set this a size for the maximum "units of work"
+              #     it can gracefully handle.
+              #   @param preferred_min_stream_count [::Integer]
+              #     The minimum preferred stream count. This parameter can be used to inform
+              #     the service that there is a desired lower bound on the number of streams.
+              #     This is typically a target parallelism of the client (e.g. a Spark
+              #     cluster with N-workers would set this to a low multiple of N to ensure
+              #     good cluster utilization).
+              #
+              #     The system will make a best effort to provide at least this number of
+              #     streams, but in some cases might provide less.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Storage::V1::ReadSession]

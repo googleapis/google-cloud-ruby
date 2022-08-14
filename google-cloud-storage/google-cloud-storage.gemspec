@@ -20,14 +20,14 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "google-cloud-core", "~> 1.6"
   gem.add_dependency "google-apis-iamcredentials_v1", "~> 0.1"
-  gem.add_dependency "google-apis-storage_v1", "~> 0.1"
+  gem.add_dependency "google-apis-storage_v1", "~> 0.17.0"
   gem.add_dependency "googleauth", ">= 0.16.2", "< 2.a"
   gem.add_dependency "digest-crc", "~> 0.4"
   gem.add_dependency "addressable", "~> 2.8"
   gem.add_dependency "mini_mime", "~> 1.0"
 
   gem.add_development_dependency "google-style", "~> 1.25.1"
-  gem.add_development_dependency "minitest", "~> 5.10"
+  gem.add_development_dependency "minitest", "~> 5.16"
   gem.add_development_dependency "minitest-autotest", "~> 1.0"
   gem.add_development_dependency "minitest-focus", "~> 1.1"
   gem.add_development_dependency "minitest-rg", "~> 5.2"

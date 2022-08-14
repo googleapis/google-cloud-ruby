@@ -32,7 +32,7 @@ describe Google::Cloud::Bigtable::AppProfile, :delete, :mock_bigtable do
   it "can delete itself and do not ignore warnings" do
     ignore_warnings = false
     mock = Minitest::Mock.new
-    mock.expect :delete_app_profile, true, [name: app_profile_grpc.name, ignore_warnings: ignore_warnings]
+    mock.expect :delete_app_profile, true, name: app_profile_grpc.name, ignore_warnings: ignore_warnings
     bigtable.service.mocked_instances = mock
 
     result = app_profile.delete
@@ -44,7 +44,7 @@ describe Google::Cloud::Bigtable::AppProfile, :delete, :mock_bigtable do
     ignore_warnings = true
 
     mock = Minitest::Mock.new
-    mock.expect :delete_app_profile, true, [name: app_profile_grpc.name, ignore_warnings: ignore_warnings]
+    mock.expect :delete_app_profile, true, name: app_profile_grpc.name, ignore_warnings: ignore_warnings
     bigtable.service.mocked_instances = mock
 
     result = app_profile.delete(ignore_warnings: ignore_warnings)

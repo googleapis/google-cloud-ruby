@@ -30,7 +30,7 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "lists snapshots" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.snapshots
@@ -45,7 +45,7 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "lists snapshots with find_snapshots alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.find_snapshots
@@ -60,7 +60,7 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "lists snapshots with list_snapshots alias" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.list_snapshots
@@ -75,8 +75,8 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "paginates snapshots" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_snapshots, snapshots_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_snapshots, snapshots_without_token, project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     first_subs = pubsub.snapshots
@@ -95,7 +95,7 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "paginates snapshots with max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: 3, page_token: nil 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.snapshots max: 3
@@ -110,8 +110,8 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "paginates snapshots with next? and next" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_snapshots, snapshots_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_snapshots, snapshots_without_token, project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     first_subs = pubsub.snapshots
@@ -134,8 +134,8 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "paginates snapshots with next? and next and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
-    mock.expect :list_snapshots, snapshots_without_token, [project: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: 3, page_token: nil 
+    mock.expect :list_snapshots, snapshots_without_token, project: "projects/#{project}", page_size: 3, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     first_subs = pubsub.snapshots max: 3
@@ -158,8 +158,8 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "paginates snapshots with all" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_snapshots, snapshots_without_token, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_snapshots, snapshots_without_token, project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.snapshots.all.to_a
@@ -174,8 +174,8 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "paginates snapshots with all and max set" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: 3, page_token: nil]
-    mock.expect :list_snapshots, snapshots_without_token, [project: "projects/#{project}", page_size: 3, page_token: "next_page_token"]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: 3, page_token: nil 
+    mock.expect :list_snapshots, snapshots_without_token, project: "projects/#{project}", page_size: 3, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.snapshots(max: 3).all.to_a
@@ -190,8 +190,8 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "iterates snapshots with all using Enumerator" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_snapshots, snapshots_with_token_2, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_snapshots, snapshots_with_token_2, project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.snapshots.all.take(5)
@@ -206,8 +206,8 @@ describe Google::Cloud::PubSub::Project, :snapshots, :mock_pubsub do
 
   it "iterates snapshots with all and request_limit set" do
     mock = Minitest::Mock.new
-    mock.expect :list_snapshots, snapshots_with_token, [project: "projects/#{project}", page_size: nil, page_token: nil]
-    mock.expect :list_snapshots, snapshots_with_token_2, [project: "projects/#{project}", page_size: nil, page_token: "next_page_token"]
+    mock.expect :list_snapshots, snapshots_with_token, project: "projects/#{project}", page_size: nil, page_token: nil 
+    mock.expect :list_snapshots, snapshots_with_token_2, project: "projects/#{project}", page_size: nil, page_token: "next_page_token" 
     pubsub.service.mocked_subscriber = mock
 
     snapshots = pubsub.snapshots.all(request_limit: 1).to_a

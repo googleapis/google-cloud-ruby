@@ -26,9 +26,6 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/gkehub/v1beta1/membership.rb",
-    "proto_docs/google/iam/v1/iam_policy.rb",
-    "proto_docs/google/iam/v1/options.rb",
-    "proto_docs/google/iam/v1/policy.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
@@ -53,7 +50,6 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml",
-    ".owlbot.rb"
+    ".OwlBot.yaml"
   ]
 }

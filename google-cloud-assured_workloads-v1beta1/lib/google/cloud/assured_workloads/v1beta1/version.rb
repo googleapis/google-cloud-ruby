@@ -21,7 +21,7 @@ module Google
   module Cloud
     module AssuredWorkloads
       module V1beta1
-        VERSION = "0.9.2"
+        VERSION = "0.11.0"
       end
     end
   end

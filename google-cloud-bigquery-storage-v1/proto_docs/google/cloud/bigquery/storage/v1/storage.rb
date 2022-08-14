@@ -35,11 +35,23 @@ module Google
           #     Max initial number of streams. If unset or zero, the server will
           #     provide a value of streams so as to produce reasonable throughput. Must be
           #     non-negative. The number of streams may be lower than the requested number,
-          #     depending on the amount parallelism that is reasonable for the table. Error
-          #     will be returned if the max count is greater than the current system
-          #     max limit of 1,000.
+          #     depending on the amount parallelism that is reasonable for the table.
+          #     There is a default system max limit of 1,000.
           #
-          #     Streams must be read starting from offset 0.
+          #     This must be greater than or equal to preferred_min_stream_count.
+          #     Typically, clients should either leave this unset to let the system to
+          #     determine an upper bound OR set this a size for the maximum "units of work"
+          #     it can gracefully handle.
+          # @!attribute [rw] preferred_min_stream_count
+          #   @return [::Integer]
+          #     The minimum preferred stream count. This parameter can be used to inform
+          #     the service that there is a desired lower bound on the number of streams.
+          #     This is typically a target parallelism of the client (e.g. a Spark
+          #     cluster with N-workers would set this to a low multiple of N to ensure
+          #     good cluster utilization).
+          #
+          #     The system will make a best effort to provide at least this number of
+          #     streams, but in some cases might provide less.
           class CreateReadSessionRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -181,6 +193,9 @@ module Google
           # Due to the nature of AppendRows being a bidirectional streaming RPC, certain
           # parts of the AppendRowsRequest need only be specified for the first request
           # sent each time the gRPC network connection is opened/reopened.
+          #
+          # The size of a single AppendRowsRequest must be less than 10 MB in size.
+          # Requests larger than this return an error, typically `INVALID_ARGUMENT`.
           # @!attribute [rw] write_stream
           #   @return [::String]
           #     Required. The write_stream identifies the target of the append operation, and only
@@ -262,6 +277,15 @@ module Google
           #     If backend detects a schema update, pass it to user so that user can
           #     use it to input new type of message. It will be empty when no schema
           #     updates have occurred.
+          # @!attribute [rw] row_errors
+          #   @return [::Array<::Google::Cloud::Bigquery::Storage::V1::RowError>]
+          #     If a request failed due to corrupted rows, no rows in the batch will be
+          #     appended. The API will return row level error info, so that the caller can
+          #     remove the bad rows and retry the request.
+          # @!attribute [rw] write_stream
+          #   @return [::String]
+          #     The target of the append operation. Matches the write_stream in the
+          #     corresponding request.
           class AppendRowsResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -411,6 +435,30 @@ module Google
 
               # Offset out of range.
               OFFSET_OUT_OF_RANGE = 9
+            end
+          end
+
+          # The message that presents row level error info in a request.
+          # @!attribute [rw] index
+          #   @return [::Integer]
+          #     Index of the malformed row in the request.
+          # @!attribute [rw] code
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::RowError::RowErrorCode]
+          #     Structured error reason for a row error.
+          # @!attribute [rw] message
+          #   @return [::String]
+          #     Description of the issue encountered when processing the row.
+          class RowError
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Error code for `RowError`.
+            module RowErrorCode
+              # Default error.
+              ROW_ERROR_CODE_UNSPECIFIED = 0
+
+              # One or more fields in the row has errors.
+              FIELDS_ERROR = 1
             end
           end
         end

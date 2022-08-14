@@ -183,13 +183,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload lookup(project_id: nil, read_options: nil, keys: nil)
+            # @overload lookup(project_id: nil, database_id: nil, read_options: nil, keys: nil)
             #   Pass arguments to `lookup` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param read_options [::Google::Cloud::Datastore::V1::ReadOptions, ::Hash]
             #     The options for this lookup request.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
@@ -272,13 +277,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload run_query(project_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil)
+            # @overload run_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, query: nil, gql_query: nil)
             #   Pass arguments to `run_query` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param partition_id [::Google::Cloud::Datastore::V1::PartitionId, ::Hash]
             #     Entities are partitioned into subsets, identified by a partition ID.
             #     Queries are scoped to a single partition.
@@ -289,7 +299,7 @@ module Google
             #   @param query [::Google::Cloud::Datastore::V1::Query, ::Hash]
             #     The query to run.
             #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
-            #     The GQL query to run.
+            #     The GQL query to run. This query must be a non-aggregation query.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastore::V1::RunQueryResponse]
@@ -368,13 +378,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload begin_transaction(project_id: nil, transaction_options: nil)
+            # @overload begin_transaction(project_id: nil, database_id: nil, transaction_options: nil)
             #   Pass arguments to `begin_transaction` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param transaction_options [::Google::Cloud::Datastore::V1::TransactionOptions, ::Hash]
             #     Options for a new transaction.
             #
@@ -456,13 +471,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload commit(project_id: nil, mode: nil, transaction: nil, mutations: nil)
+            # @overload commit(project_id: nil, database_id: nil, mode: nil, transaction: nil, mutations: nil)
             #   Pass arguments to `commit` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param mode [::Google::Cloud::Datastore::V1::CommitRequest::Mode]
             #     The type of commit to perform. Defaults to `TRANSACTIONAL`.
             #   @param transaction [::String]
@@ -561,13 +581,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload rollback(project_id: nil, transaction: nil)
+            # @overload rollback(project_id: nil, database_id: nil, transaction: nil)
             #   Pass arguments to `rollback` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param transaction [::String]
             #     Required. The transaction identifier, returned by a call to
             #     {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
@@ -650,13 +675,18 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload allocate_ids(project_id: nil, keys: nil)
+            # @overload allocate_ids(project_id: nil, database_id: nil, keys: nil)
             #   Pass arguments to `allocate_ids` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
             #     Required. A list of keys with incomplete key paths for which to allocate IDs.
             #     No key may be reserved/read-only.
@@ -747,7 +777,10 @@ module Google
             #   @param project_id [::String]
             #     Required. The ID of the project against which to make the request.
             #   @param database_id [::String]
-            #     If not empty, the ID of the database against which to make the request.
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
             #   @param keys [::Array<::Google::Cloud::Datastore::V1::Key, ::Hash>]
             #     Required. A list of keys with complete key paths whose numeric IDs should not be
             #     auto-allocated.

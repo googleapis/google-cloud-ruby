@@ -106,6 +106,39 @@ def create_secret project_id:, secret_id:
   secret
 end
 
+def create_ummr_secret project_id:, secret_id:, locations:
+  # project_id = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # secret_id  = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+  # locations = ["location1", "location2"]    # (e.g. [ "us-east1" ])
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the parent project.
+  parent = client.project_path project: project_id
+
+  # Create the secret.
+  secret = client.create_secret(
+    parent:    parent,
+    secret_id: secret_id,
+    secret:    {
+      replication: {
+        user_managed: {
+          replicas: locations.map { |x| { location: x } }
+        }
+      }
+    }
+  )
+
+  # Print the new secret name.
+  puts "Created secret with user managed replication: #{secret.name}"
+
+  secret
+end
+
 def delete_secret project_id:, secret_id:
   # [START secretmanager_delete_secret]
   # project_id = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
@@ -430,6 +463,40 @@ def update_secret project_id:, secret_id:
   secret
 end
 
+def update_secret_with_alias project_id:, secret_id:
+  # [START secretmanager_update_secret_with_alias]
+  # project_id = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
+  # secret_id  = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+
+  # Require the Secret Manager client library.
+  require "google/cloud/secret_manager"
+
+  # Create a Secret Manager client.
+  client = Google::Cloud::SecretManager.secret_manager_service
+
+  # Build the resource name of the secret.
+  name = client.secret_path project: project_id, secret: secret_id
+
+  # Create the secret.
+  secret = client.update_secret(
+    secret: {
+      name: name,
+      version_aliases: {
+        test: 1
+      }
+    },
+    update_mask: {
+      paths: ["version_aliases"]
+    }
+  )
+
+  # Print the updated secret name.
+  puts "Updated secret: #{secret.name}"
+  # [END secretmanager_update_secret_with_alias]
+
+  secret
+end
+
 if $PROGRAM_NAME == __FILE__
   args    = ARGV.dup
   command = args.shift
@@ -450,6 +517,12 @@ if $PROGRAM_NAME == __FILE__
     create_secret(
       project_id: ENV["GOOGLE_CLOUD_PROJECT"],
       secret_id:  args.shift
+    )
+  when "create_ummr_secret"
+    create_ummr_secret(
+      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
+      secret_id:  args.shift,
+      locations:  args
     )
   when "delete_secret"
     delete_secret(
@@ -519,6 +592,7 @@ if $PROGRAM_NAME == __FILE__
         access_secret_version <secret> <version>           Access a secret version
         add_secret_version <secret>                        Add a new secret version
         create_secret <secret>                             Create a new secret
+        create_ummr_secret <secret> <locations>            Create a new secret with user managed replication
         delete_secret <secret>                             Delete an existing secret
         destroy_secret_version <secret> <version>          Destroy a secret version
         disable_secret_version <secret> <version>          Disable a secret version

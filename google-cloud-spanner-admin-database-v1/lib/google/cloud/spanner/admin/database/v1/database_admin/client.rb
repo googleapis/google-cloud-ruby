@@ -144,6 +144,11 @@ module Google
                       initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
                     }
 
+                    default_config.rpcs.list_database_roles.timeout = 3600.0
+                    default_config.rpcs.list_database_roles.retry_policy = {
+                      initial_delay: 1.0, max_delay: 32.0, multiplier: 1.3, retry_codes: [14, 4]
+                    }
+
                     default_config
                   end
                   yield @configure if block_given?
@@ -2254,6 +2259,107 @@ module Google
                 end
 
                 ##
+                # Lists Cloud Spanner database roles.
+                #
+                # @overload list_database_roles(request, options = nil)
+                #   Pass arguments to `list_database_roles` via a request object, either of type
+                #   {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest} or an equivalent Hash.
+                #
+                #   @param request [::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest, ::Hash]
+                #     A request object representing the call parameters. Required. To specify no
+                #     parameters, or to keep all the default parameter values, pass an empty Hash.
+                #   @param options [::Gapic::CallOptions, ::Hash]
+                #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+                #
+                # @overload list_database_roles(parent: nil, page_size: nil, page_token: nil)
+                #   Pass arguments to `list_database_roles` via keyword arguments. Note that at
+                #   least one keyword argument is required. To specify no parameters, or to keep all
+                #   the default parameter values, pass an empty Hash as a request object (see above).
+                #
+                #   @param parent [::String]
+                #     Required. The database whose roles should be listed.
+                #     Values are of the form
+                #     `projects/<project>/instances/<instance>/databases/<database>/databaseRoles`.
+                #   @param page_size [::Integer]
+                #     Number of database roles to be returned in the response. If 0 or less,
+                #     defaults to the server's maximum allowed page size.
+                #   @param page_token [::String]
+                #     If non-empty, `page_token` should contain a
+                #     {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse#next_page_token next_page_token} from a
+                #     previous {::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesResponse ListDatabaseRolesResponse}.
+                #
+                # @yield [response, operation] Access the result along with the RPC operation
+                # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Spanner::Admin::Database::V1::DatabaseRole>]
+                # @yieldparam operation [::GRPC::ActiveCall::Operation]
+                #
+                # @return [::Gapic::PagedEnumerable<::Google::Cloud::Spanner::Admin::Database::V1::DatabaseRole>]
+                #
+                # @raise [::Google::Cloud::Error] if the RPC is aborted.
+                #
+                # @example Basic example
+                #   require "google/cloud/spanner/admin/database/v1"
+                #
+                #   # Create a client object. The client can be reused for multiple calls.
+                #   client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+                #
+                #   # Create a request. To set request fields, pass in keyword arguments.
+                #   request = Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest.new
+                #
+                #   # Call the list_database_roles method.
+                #   result = client.list_database_roles request
+                #
+                #   # The returned object is of type Gapic::PagedEnumerable. You can
+                #   # iterate over all elements by calling #each, and the enumerable
+                #   # will lazily make API calls to fetch subsequent pages. Other
+                #   # methods are also available for managing paging directly.
+                #   result.each do |response|
+                #     # Each element is of type ::Google::Cloud::Spanner::Admin::Database::V1::DatabaseRole.
+                #     p response
+                #   end
+                #
+                def list_database_roles request, options = nil
+                  raise ::ArgumentError, "request must be provided" if request.nil?
+
+                  request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Spanner::Admin::Database::V1::ListDatabaseRolesRequest
+
+                  # Converts hash and nil to an options object
+                  options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                  # Customize the options with defaults
+                  metadata = @config.rpcs.list_database_roles.metadata.to_h
+
+                  # Set x-goog-api-client and x-goog-user-project headers
+                  metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                    lib_name: @config.lib_name, lib_version: @config.lib_version,
+                    gapic_version: ::Google::Cloud::Spanner::Admin::Database::V1::VERSION
+                  metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                  header_params = {}
+                  if request.parent
+                    header_params["parent"] = request.parent
+                  end
+
+                  request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                  metadata[:"x-goog-request-params"] ||= request_params_header
+
+                  options.apply_defaults timeout:      @config.rpcs.list_database_roles.timeout,
+                                         metadata:     metadata,
+                                         retry_policy: @config.rpcs.list_database_roles.retry_policy
+
+                  options.apply_defaults timeout:      @config.timeout,
+                                         metadata:     @config.metadata,
+                                         retry_policy: @config.retry_policy
+
+                  @database_admin_stub.call_rpc :list_database_roles, request, options: options do |response, operation|
+                    response = ::Gapic::PagedEnumerable.new @database_admin_stub, :list_database_roles, request, response, operation, options
+                    yield response, operation if block_given?
+                    return response
+                  end
+                rescue ::GRPC::BadStatus => e
+                  raise ::Google::Cloud::Error.from_error(e)
+                end
+
+                ##
                 # Configuration class for the DatabaseAdmin API.
                 #
                 # This class represents the configuration for DatabaseAdmin,
@@ -2478,6 +2584,11 @@ module Google
                     # @return [::Gapic::Config::Method]
                     #
                     attr_reader :list_backup_operations
+                    ##
+                    # RPC-specific configuration for `list_database_roles`
+                    # @return [::Gapic::Config::Method]
+                    #
+                    attr_reader :list_database_roles
 
                     # @private
                     def initialize parent_rpcs = nil
@@ -2517,6 +2628,8 @@ module Google
                       @list_database_operations = ::Gapic::Config::Method.new list_database_operations_config
                       list_backup_operations_config = parent_rpcs.list_backup_operations if parent_rpcs.respond_to? :list_backup_operations
                       @list_backup_operations = ::Gapic::Config::Method.new list_backup_operations_config
+                      list_database_roles_config = parent_rpcs.list_database_roles if parent_rpcs.respond_to? :list_database_roles
+                      @list_database_roles = ::Gapic::Config::Method.new list_database_roles_config
 
                       yield self if block_given?
                     end

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-analytics-admin-v1alpha",
-    "version": "0.11.1",
+    "version": "0.13.0",
     "language": "RUBY",
     "apis": [
       {
@@ -2835,6 +2835,326 @@
         "method": {
           "short_name": "GetDataStream",
           "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetDataStream",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAudience_sync",
+      "title": "Snippet for get_audience in AnalyticsAdminService",
+      "description": "Basic snippet for get_audience in AnalyticsAdminService",
+      "file": "analytics_admin_service/get_audience.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_audience",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_audience",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetAudienceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::Audience",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetAudience",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetAudience",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ListAudiences_sync",
+      "title": "Snippet for list_audiences in AnalyticsAdminService",
+      "description": "Basic snippet for list_audiences in AnalyticsAdminService",
+      "file": "analytics_admin_service/list_audiences.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_audiences",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#list_audiences",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ListAudiencesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::ListAudiencesResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ListAudiences",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ListAudiences",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateAudience_sync",
+      "title": "Snippet for create_audience in AnalyticsAdminService",
+      "description": "Basic snippet for create_audience in AnalyticsAdminService",
+      "file": "analytics_admin_service/create_audience.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_audience",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_audience",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::CreateAudienceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::Audience",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "CreateAudience",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.CreateAudience",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAudience_sync",
+      "title": "Snippet for update_audience in AnalyticsAdminService",
+      "description": "Basic snippet for update_audience in AnalyticsAdminService",
+      "file": "analytics_admin_service/update_audience.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_audience",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_audience",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateAudienceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::Audience",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAudience",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateAudience",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_ArchiveAudience_sync",
+      "title": "Snippet for archive_audience in AnalyticsAdminService",
+      "description": "Basic snippet for archive_audience in AnalyticsAdminService",
+      "file": "analytics_admin_service/archive_audience.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "archive_audience",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#archive_audience",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "ArchiveAudience",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.ArchiveAudience",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAttributionSettings_sync",
+      "title": "Snippet for get_attribution_settings in AnalyticsAdminService",
+      "description": "Basic snippet for get_attribution_settings in AnalyticsAdminService",
+      "file": "analytics_admin_service/get_attribution_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attribution_settings",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_attribution_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::AttributionSettings",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "GetAttributionSettings",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.GetAttributionSettings",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateAttributionSettings_sync",
+      "title": "Snippet for update_attribution_settings in AnalyticsAdminService",
+      "description": "Basic snippet for update_attribution_settings in AnalyticsAdminService",
+      "file": "analytics_admin_service/update_attribution_settings.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_attribution_settings",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_attribution_settings",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::UpdateAttributionSettingsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::AttributionSettings",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAttributionSettings",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.UpdateAttributionSettings",
+          "service": {
+            "short_name": "AnalyticsAdminService",
+            "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "analyticsadmin_v1alpha_generated_AnalyticsAdminService_RunAccessReport_sync",
+      "title": "Snippet for run_access_report in AnalyticsAdminService",
+      "description": "Basic snippet for run_access_report in AnalyticsAdminService",
+      "file": "analytics_admin_service/run_access_report.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_access_report",
+        "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#run_access_report",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Analytics::Admin::V1alpha::RunAccessReportRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Analytics::Admin::V1alpha::RunAccessReportResponse",
+        "client": {
+          "short_name": "AnalyticsAdminService::Client",
+          "full_name": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client"
+        },
+        "method": {
+          "short_name": "RunAccessReport",
+          "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService.RunAccessReport",
           "service": {
             "short_name": "AnalyticsAdminService",
             "full_name": "google.analytics.admin.v1alpha.AnalyticsAdminService"

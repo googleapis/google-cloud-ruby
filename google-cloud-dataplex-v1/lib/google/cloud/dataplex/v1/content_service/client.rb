@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/dataplex/v1/content_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -63,6 +65,34 @@ module Google
                                   namespace.pop
                                 end
                 default_config = Client::Configuration.new parent_config
+
+                default_config.rpcs.create_content.timeout = 60.0
+
+                default_config.rpcs.update_content.timeout = 60.0
+
+                default_config.rpcs.delete_content.timeout = 60.0
+
+                default_config.rpcs.get_content.timeout = 60.0
+                default_config.rpcs.get_content.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_iam_policy.timeout = 60.0
+                default_config.rpcs.get_iam_policy.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.set_iam_policy.timeout = 60.0
+
+                default_config.rpcs.test_iam_permissions.timeout = 60.0
+                default_config.rpcs.test_iam_permissions.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.list_content.timeout = 60.0
+                default_config.rpcs.list_content.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
 
                 default_config
               end
@@ -133,6 +163,18 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @content_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Dataplex::V1::ContentService::Stub,
                 credentials:  credentials,
@@ -141,6 +183,20 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -501,6 +557,301 @@ module Google
             end
 
             ##
+            # Gets the access control policy for a contentitem resource. A `NOT_FOUND`
+            # error is returned if the resource does not exist. An empty policy is
+            # returned if the resource exists but does not have a policy set on it.
+            #
+            # Caller must have Google IAM `dataplex.content.getIamPolicy` permission
+            # on the resource.
+            #
+            # @overload get_iam_policy(request, options = nil)
+            #   Pass arguments to `get_iam_policy` via a request object, either of type
+            #   {::Google::Iam::V1::GetIamPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::GetIamPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_iam_policy(resource: nil, options: nil)
+            #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy is being requested.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param options [::Google::Iam::V1::GetPolicyOptions, ::Hash]
+            #     OPTIONAL: A `GetPolicyOptions` object for specifying options to
+            #     `GetIamPolicy`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::ContentService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::GetIamPolicyRequest.new
+            #
+            #   # Call the get_iam_policy method.
+            #   result = client.get_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
+            def get_iam_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::GetIamPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_iam_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @content_service_stub.call_rpc :get_iam_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Sets the access control policy on the specified contentitem resource.
+            # Replaces any existing policy.
+            #
+            # Caller must have Google IAM `dataplex.content.setIamPolicy` permission
+            # on the resource.
+            #
+            # @overload set_iam_policy(request, options = nil)
+            #   Pass arguments to `set_iam_policy` via a request object, either of type
+            #   {::Google::Iam::V1::SetIamPolicyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::SetIamPolicyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload set_iam_policy(resource: nil, policy: nil, update_mask: nil)
+            #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy is being specified.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param policy [::Google::Iam::V1::Policy, ::Hash]
+            #     REQUIRED: The complete policy to be applied to the `resource`. The size of
+            #     the policy is limited to a few 10s of KB. An empty policy is a
+            #     valid policy but certain Cloud Platform services (such as Projects)
+            #     might reject them.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     OPTIONAL: A FieldMask specifying which fields of the policy to modify. Only
+            #     the fields in the mask will be modified. If no mask is provided, the
+            #     following default mask is used:
+            #
+            #     `paths: "bindings, etag"`
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::Policy]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::Policy]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::ContentService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::SetIamPolicyRequest.new
+            #
+            #   # Call the set_iam_policy method.
+            #   result = client.set_iam_policy request
+            #
+            #   # The returned object is of type Google::Iam::V1::Policy.
+            #   p result
+            #
+            def set_iam_policy request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::SetIamPolicyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.set_iam_policy.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @content_service_stub.call_rpc :set_iam_policy, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Returns the caller's permissions on a resource.
+            # If the resource does not exist, an empty set of
+            # permissions is returned (a `NOT_FOUND` error is not returned).
+            #
+            # A caller is not required to have Google IAM permission to make this
+            # request.
+            #
+            # Note: This operation is designed to be used for building permission-aware
+            # UIs and command-line tools, not for authorization checking. This operation
+            # may "fail open" without warning.
+            #
+            # @overload test_iam_permissions(request, options = nil)
+            #   Pass arguments to `test_iam_permissions` via a request object, either of type
+            #   {::Google::Iam::V1::TestIamPermissionsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Iam::V1::TestIamPermissionsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload test_iam_permissions(resource: nil, permissions: nil)
+            #   Pass arguments to `test_iam_permissions` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param resource [::String]
+            #     REQUIRED: The resource for which the policy detail is being requested.
+            #     See the operation documentation for the appropriate value for this field.
+            #   @param permissions [::Array<::String>]
+            #     The set of permissions to check for the `resource`. Permissions with
+            #     wildcards (such as '*' or 'storage.*') are not allowed. For more
+            #     information see
+            #     [IAM Overview](https://cloud.google.com/iam/docs/overview#permissions).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Iam::V1::TestIamPermissionsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Iam::V1::TestIamPermissionsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/dataplex/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Dataplex::V1::ContentService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Iam::V1::TestIamPermissionsRequest.new
+            #
+            #   # Call the test_iam_permissions method.
+            #   result = client.test_iam_permissions request
+            #
+            #   # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+            #   p result
+            #
+            def test_iam_permissions request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V1::TestIamPermissionsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.test_iam_permissions.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Dataplex::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.resource
+                header_params["resource"] = request.resource
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.test_iam_permissions.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.test_iam_permissions.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @content_service_stub.call_rpc :test_iam_permissions, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # List content.
             #
             # @overload list_content(request, options = nil)
@@ -768,6 +1119,21 @@ module Google
                 #
                 attr_reader :get_content
                 ##
+                # RPC-specific configuration for `get_iam_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_iam_policy
+                ##
+                # RPC-specific configuration for `set_iam_policy`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :set_iam_policy
+                ##
+                # RPC-specific configuration for `test_iam_permissions`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :test_iam_permissions
+                ##
                 # RPC-specific configuration for `list_content`
                 # @return [::Gapic::Config::Method]
                 #
@@ -783,6 +1149,12 @@ module Google
                   @delete_content = ::Gapic::Config::Method.new delete_content_config
                   get_content_config = parent_rpcs.get_content if parent_rpcs.respond_to? :get_content
                   @get_content = ::Gapic::Config::Method.new get_content_config
+                  get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                  @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
+                  set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                  @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
+                  test_iam_permissions_config = parent_rpcs.test_iam_permissions if parent_rpcs.respond_to? :test_iam_permissions
+                  @test_iam_permissions = ::Gapic::Config::Method.new test_iam_permissions_config
                   list_content_config = parent_rpcs.list_content if parent_rpcs.respond_to? :list_content
                   @list_content = ::Gapic::Config::Method.new list_content_config
 

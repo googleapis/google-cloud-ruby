@@ -43,6 +43,10 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     The ID of the project to which the entities belong.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     If not empty, the ID of the database to which the entities
+        #     belong.
         # @!attribute [rw] namespace_id
         #   @return [::String]
         #     If not empty, the ID of the namespace to which the entities belong.

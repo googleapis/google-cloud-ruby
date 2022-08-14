@@ -1,5 +1,20 @@
 # Release History
 
+### 0.8.1 (2022-07-28)
+
+#### Documentation
+
+* Fixed some cross-reference links ([#18879](https://github.com/googleapis/google-cloud-ruby/issues/18879)) 
+
+### 0.8.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
 ### 0.7.0 / 2022-03-07
 
 #### Features

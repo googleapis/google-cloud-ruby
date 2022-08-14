@@ -15,6 +15,8 @@
 require_relative "helper"
 require_relative "../subscriptions.rb"
 require_relative "../pubsub_create_subscription_with_filter.rb"
+require_relative "../pubsub_subscriber_exactly_once.rb"
+require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
 
 describe "subscriptions" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -98,6 +100,28 @@ describe "subscriptions" do
     end
   end
 
+  it "supports pubsub_subscriber_async_pull_with_ack_response" do
+    project_id = pubsub.project
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+
+    @topic.subscribe subscription_id, enable_exactly_once_delivery: true
+
+    @topic.publish "This is a test message."
+    sleep 5
+
+    expect_with_retry "pubsub_subscriber_async_pull_with_ack_response" do
+      out, _err = capture_io do
+        PubsubSubscriberExactlyOnce.new.subscriber_exactly_once project_id: project_id,
+                                                                topic_id: topic_id,
+                                                                subscription_id: subscription_id
+      end
+
+      assert_includes out, "Received message: This is a test message."
+      assert_includes out, "Acknowledge result's status:"
+    end
+  end
+
   it "supports pubsub_subscriber_async_pull, pubsub_quickstart_subscriber" do
     @topic.publish "This is a test message."
     sleep 5
@@ -177,6 +201,20 @@ describe "subscriptions" do
                                                                              topic_id: topic_id,
                                                                              subscription_id: subscription_id,
                                                                              filter: filter
+    end
+  end 
+
+  it "supports creating subscription with exactly once delivery enabled" do
+    project_id = pubsub.project
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+
+    assert_output "Created subscription with exactly once delivery enabled: #{subscription_id}\n" do     
+      PubsubCreateSubscriptionWithExactlyOnceDelivery.new.create_subscription_with_exactly_once_delivery(
+        project_id: project_id,
+        topic_id: topic_id,
+        subscription_id: subscription_id
+      )
     end
   end 
 end

@@ -135,7 +135,7 @@ module Google
                             processing_units: nil, labels: nil,
                             call_options: nil
           opts = default_options call_options: call_options
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
 
           create_obj = Admin::Instance::V1::Instance.new({
             display_name: name, config: instance_config_path(config),
@@ -604,7 +604,7 @@ module Google
             opts[:timeout] = call_options[:timeout] if call_options[:timeout]
             opts[:retry_policy] = call_options[:retry_policy] if call_options[:retry_policy]
           end
-          return opts unless opts.empty?
+          ::Gapic::CallOptions.new(**opts)
         end
 
         def partition_options partition_size_bytes, max_partitions

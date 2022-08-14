@@ -46,7 +46,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, ack_deadline_seconds: 30
     update_mask = Google::Protobuf::FieldMask.new paths: ["ack_deadline_seconds"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.deadline = 30
@@ -63,7 +63,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, retain_acked_messages: false
     update_mask = Google::Protobuf::FieldMask.new paths: ["retain_acked_messages"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.retain_acked = false
@@ -80,7 +80,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, message_retention_duration: Google::Cloud::PubSub::Convert.number_to_duration(600.2)
     update_mask = Google::Protobuf::FieldMask.new paths: ["message_retention_duration"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.retention = 600.2
@@ -97,7 +97,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, labels: new_labels
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.labels = new_labels
@@ -115,7 +115,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
 
     update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.labels = {}
@@ -140,7 +140,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
     mpc_res = nil
     mock = Minitest::Mock.new
-    mock.expect :modify_push_config, mpc_res, [subscription: subscription_path(sub_name), push_config: push_config]
+    mock.expect :modify_push_config, mpc_res, subscription: subscription_path(sub_name), push_config: push_config
     pubsub.service.mocked_subscriber = mock
 
     subscription.endpoint = new_push_endpoint
@@ -158,7 +158,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, expiration_policy: expiration_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["expiration_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     pubsub.service.mocked_subscriber = mock
 
     subscription.expires_in = week_seconds
@@ -174,7 +174,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, expiration_policy: expiration_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["expiration_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     pubsub.service.mocked_subscriber = mock
 
     subscription.expires_in = nil
@@ -202,7 +202,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     )
     update_mask = Google::Protobuf::FieldMask.new paths: ["push_config"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.push_config do |pc|
@@ -225,7 +225,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, dead_letter_policy: dead_letter_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.dead_letter_topic = new_dead_letter_topic
@@ -242,7 +242,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       name: sub_path, dead_letter_policy: dead_letter_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.dead_letter_max_delivery_attempts = 7
@@ -258,7 +258,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, dead_letter_policy: nil
     update_mask = Google::Protobuf::FieldMask.new paths: ["dead_letter_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     _(subscription.dead_letter_topic).wont_be :nil?
@@ -285,7 +285,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
@@ -301,7 +301,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
     update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
     update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
     mock = Minitest::Mock.new
-    mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+    mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
     subscription.service.mocked_subscriber = mock
 
     subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
@@ -325,7 +325,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       sub_grpc.ack_deadline_seconds = 30
       update_mask = Google::Protobuf::FieldMask.new paths: ["ack_deadline_seconds"]
       mock = Minitest::Mock.new
-      mock.expect :update_subscription, sub_grpc, [subscription: update_sub, update_mask: update_mask]
+      mock.expect :update_subscription, sub_grpc, subscription: update_sub, update_mask: update_mask
       subscription.service.mocked_subscriber = mock
 
       subscription.deadline = 30
@@ -347,7 +347,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       sub_grpc.retain_acked_messages = true
       update_mask = Google::Protobuf::FieldMask.new paths: ["retain_acked_messages"]
       mock = Minitest::Mock.new
-      mock.expect :update_subscription, sub_grpc, [subscription: update_sub, update_mask: update_mask]
+      mock.expect :update_subscription, sub_grpc, subscription: update_sub, update_mask: update_mask
       subscription.service.mocked_subscriber = mock
 
       subscription.retain_acked = true
@@ -369,7 +369,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       sub_grpc.message_retention_duration = Google::Cloud::PubSub::Convert.number_to_duration 600.2
       update_mask = Google::Protobuf::FieldMask.new paths: ["message_retention_duration"]
       mock = Minitest::Mock.new
-      mock.expect :update_subscription, sub_grpc, [subscription: update_sub, update_mask: update_mask]
+      mock.expect :update_subscription, sub_grpc, subscription: update_sub, update_mask: update_mask
       subscription.service.mocked_subscriber = mock
 
       subscription.retention = 600.2
@@ -391,7 +391,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       sub_grpc.labels = new_labels_map
       update_mask = Google::Protobuf::FieldMask.new paths: ["labels"]
       mock = Minitest::Mock.new
-      mock.expect :update_subscription, sub_grpc, [subscription: update_sub, update_mask: update_mask]
+      mock.expect :update_subscription, sub_grpc, subscription: update_sub, update_mask: update_mask
       subscription.service.mocked_subscriber = mock
 
       subscription.labels = new_labels
@@ -411,7 +411,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
       update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
       mock = Minitest::Mock.new
-      mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+      mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
       subscription.service.mocked_subscriber = mock
 
       subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: new_retry_minimum_backoff, maximum_backoff: retry_maximum_backoff
@@ -431,7 +431,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       update_sub = Google::Cloud::PubSub::V1::Subscription.new name: sub_path, retry_policy: retry_policy
       update_mask = Google::Protobuf::FieldMask.new paths: ["retry_policy"]
       mock = Minitest::Mock.new
-      mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+      mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
       subscription.service.mocked_subscriber = mock
 
       subscription.retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: retry_minimum_backoff, maximum_backoff: new_retry_maximum_backoff
@@ -450,7 +450,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
       push_config = Google::Cloud::PubSub::V1::PushConfig.new(push_endpoint: new_push_endpoint)
       mpc_res = nil
       mock = Minitest::Mock.new
-      mock.expect :modify_push_config, mpc_res, [subscription: subscription_path(sub_name), push_config: push_config]
+      mock.expect :modify_push_config, mpc_res, subscription: subscription_path(sub_name), push_config: push_config
       pubsub.service.mocked_subscriber = mock
 
       subscription.endpoint = new_push_endpoint
@@ -468,7 +468,7 @@ describe Google::Cloud::PubSub::Subscription, :update, :mock_pubsub do
         name: sub_path, expiration_policy: expiration_policy
       update_mask = Google::Protobuf::FieldMask.new paths: ["expiration_policy"]
       mock = Minitest::Mock.new
-      mock.expect :update_subscription, update_sub, [subscription: update_sub, update_mask: update_mask]
+      mock.expect :update_subscription, update_sub, subscription: update_sub, update_mask: update_mask
       pubsub.service.mocked_subscriber = mock
 
       subscription.expires_in = week_seconds

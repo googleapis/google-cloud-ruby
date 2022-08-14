@@ -62,6 +62,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DATA_DESTRUCTION, 29
       value :DOMAIN_POLICY_MODIFICATION, 30
       value :IMPAIR_DEFENSES, 31
+      value :NETWORK_SERVICE_DISCOVERY, 32
     end
   end
 end

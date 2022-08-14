@@ -216,7 +216,7 @@ module Google
         def labels= labels
           @grpc.labels = Google::Protobuf::Map.new(
             :string, :string,
-            Hash[labels.map { |k, v| [String(k), String(v)] }]
+            labels.to_h { |k, v| [String(k), String(v)] }
           )
         end
 

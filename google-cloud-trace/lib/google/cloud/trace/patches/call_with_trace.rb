@@ -54,9 +54,9 @@ module GRPC
       ##
       # @private Reverse lookup from numeric status code to readable string.
       def self.status_code_to_label code
-        @lookup ||= Hash[GRPC::Core::StatusCodes.constants.map do |c|
+        @lookup ||= GRPC::Core::StatusCodes.constants.to_h do |c|
           [GRPC::Core::StatusCodes.const_get(c), c.to_s]
-        end]
+        end
 
         @lookup[code]
       end

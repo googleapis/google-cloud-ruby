@@ -24,7 +24,7 @@ module Google
         def self.hash_to_struct hash
           # TODO: ArgumentError if hash is not a Hash
           Google::Protobuf::Struct.new \
-            fields: Hash[hash.map { |k, v| [String(k), object_to_value(v)] }]
+            fields: hash.to_h { |k, v| [String(k), object_to_value(v)] }
         end
 
         ##
@@ -65,8 +65,7 @@ module Google
           if map.respond_to? :to_h
             map.to_h
           else
-            # Enumerable doesn't have to_h on ruby 2.0...
-            Hash[map.to_a]
+            map.to_a.to_h
           end
         end
       end

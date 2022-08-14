@@ -158,6 +158,7 @@
     "lib/google/cloud/aiplatform/v1/pipeline_state_pb.rb",
     "lib/google/cloud/aiplatform/v1/prediction_service_pb.rb",
     "lib/google/cloud/aiplatform/v1/prediction_service_services_pb.rb",
+    "lib/google/cloud/aiplatform/v1/saved_query_pb.rb",
     "lib/google/cloud/aiplatform/v1/specialist_pool_pb.rb",
     "lib/google/cloud/aiplatform/v1/specialist_pool_service_pb.rb",
     "lib/google/cloud/aiplatform/v1/specialist_pool_service_services_pb.rb",
@@ -238,6 +239,7 @@
     "proto_docs/google/cloud/aiplatform/v1/pipeline_service.rb",
     "proto_docs/google/cloud/aiplatform/v1/pipeline_state.rb",
     "proto_docs/google/cloud/aiplatform/v1/prediction_service.rb",
+    "proto_docs/google/cloud/aiplatform/v1/saved_query.rb",
     "proto_docs/google/cloud/aiplatform/v1/schema/predict/instance/image_classification.rb",
     "proto_docs/google/cloud/aiplatform/v1/schema/predict/instance/image_object_detection.rb",
     "proto_docs/google/cloud/aiplatform/v1/schema/predict/instance/image_segmentation.rb",
@@ -310,6 +312,7 @@
     "snippets/dataset_service/list_annotations.rb",
     "snippets/dataset_service/list_data_items.rb",
     "snippets/dataset_service/list_datasets.rb",
+    "snippets/dataset_service/list_saved_queries.rb",
     "snippets/dataset_service/update_dataset.rb",
     "snippets/endpoint_service/create_endpoint.rb",
     "snippets/endpoint_service/delete_endpoint.rb",
@@ -414,6 +417,7 @@
     "snippets/metadata_service/update_execution.rb",
     "snippets/migration_service/batch_migrate_resources.rb",
     "snippets/migration_service/search_migratable_resources.rb",
+    "snippets/model_service/batch_import_model_evaluation_slices.rb",
     "snippets/model_service/delete_model.rb",
     "snippets/model_service/delete_model_version.rb",
     "snippets/model_service/export_model.rb",
@@ -536,7 +540,6 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml",
-    ".owlbot.rb"
+    ".OwlBot.yaml"
   ]
 }

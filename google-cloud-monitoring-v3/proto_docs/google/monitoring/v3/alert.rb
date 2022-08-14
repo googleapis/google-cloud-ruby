@@ -32,7 +32,7 @@ module Google
         #
         #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[ALERT_POLICY_ID]
         #
-        #     `[ALERT_POLICY_ID]` is assigned by Stackdriver Monitoring when the policy
+        #     `[ALERT_POLICY_ID]` is assigned by Cloud Monitoring when the policy
         #     is created. When calling the
         #     {::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#create_alert_policy alertPolicies.create}
         #     method, do not include the `name` field in the alerting policy passed as
@@ -118,7 +118,8 @@ module Google
           #     The text of the documentation, interpreted according to `mime_type`.
           #     The content may not exceed 8,192 Unicode characters and may not exceed
           #     more than 10,240 bytes when encoded in UTF-8 format, whichever is
-          #     smaller.
+          #     smaller. This text can be [templatized by using
+          #     variables](https://cloud.google.com/monitoring/alerts/doc-variables).
           # @!attribute [rw] mime_type
           #   @return [::String]
           #     The format of the `content` field. Presently, only the value
@@ -139,13 +140,13 @@ module Google
           #
           #         projects/[PROJECT_ID_OR_NUMBER]/alertPolicies/[POLICY_ID]/conditions/[CONDITION_ID]
           #
-          #     `[CONDITION_ID]` is assigned by Stackdriver Monitoring when the
+          #     `[CONDITION_ID]` is assigned by Cloud Monitoring when the
           #     condition is created as part of a new or updated alerting policy.
           #
           #     When calling the
           #     {::Google::Cloud::Monitoring::V3::AlertPolicyService::Client#create_alert_policy alertPolicies.create}
           #     method, do not include the `name` field in the conditions of the
-          #     requested alerting policy. Stackdriver Monitoring creates the
+          #     requested alerting policy. Cloud Monitoring creates the
           #     condition identifiers and includes them in the new policy.
           #
           #     When calling the
@@ -279,6 +280,10 @@ module Google
             #     time series that have been identified by `filter` and `aggregations`,
             #     or by the ratio, if `denominator_filter` and `denominator_aggregations`
             #     are specified.
+            # @!attribute [rw] evaluation_missing_data
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::EvaluationMissingData]
+            #     A condition control that determines how metric-threshold conditions
+            #     are evaluated when data stops arriving.
             class MetricThreshold
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -396,9 +401,33 @@ module Google
             #     time series that have been identified by `filter` and `aggregations`,
             #     or by the ratio, if `denominator_filter` and `denominator_aggregations`
             #     are specified.
+            # @!attribute [rw] evaluation_missing_data
+            #   @return [::Google::Cloud::Monitoring::V3::AlertPolicy::Condition::EvaluationMissingData]
+            #     A condition control that determines how metric-threshold conditions
+            #     are evaluated when data stops arriving.
             class MonitoringQueryLanguageCondition
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # A condition control that determines how metric-threshold conditions
+            # are evaluated when data stops arriving.
+            # This control doesn't affect metric-absence policies.
+            module EvaluationMissingData
+              # An unspecified evaluation missing data option.  Equivalent to
+              # EVALUATION_MISSING_DATA_NO_OP.
+              EVALUATION_MISSING_DATA_UNSPECIFIED = 0
+
+              # If there is no data to evaluate the condition, then evaluate the
+              # condition as false.
+              EVALUATION_MISSING_DATA_INACTIVE = 1
+
+              # If there is no data to evaluate the condition, then evaluate the
+              # condition as true.
+              EVALUATION_MISSING_DATA_ACTIVE = 2
+
+              # Do not evaluate the condition to any value if there is no data.
+              EVALUATION_MISSING_DATA_NO_OP = 3
             end
           end
 

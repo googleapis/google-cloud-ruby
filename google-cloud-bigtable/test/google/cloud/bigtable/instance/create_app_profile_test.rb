@@ -32,14 +32,11 @@ describe Google::Cloud::Bigtable::Instance, :create_app_profile, :mock_bigtable 
     mock = Minitest::Mock.new
     app_profile_req = app_profile_resp.dup
     app_profile_req.name = ""
-    mock.expect :create_app_profile,
-                app_profile_resp,
-                [
-                  parent: instance_path(instance_id),
-                  app_profile_id: app_profile_id,
-                  app_profile: app_profile_req,
-                  ignore_warnings: false
-                ]
+    mock.expect :create_app_profile, app_profile_resp,
+                parent: instance_path(instance_id),
+                app_profile_id: app_profile_id,
+                app_profile: app_profile_req,
+                ignore_warnings: false
     bigtable.service.mocked_instances = mock
 
     instance_grpc = Google::Cloud::Bigtable::Admin::V2::Instance.new(name: instance_path(instance_id))

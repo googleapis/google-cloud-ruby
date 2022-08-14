@@ -99,6 +99,11 @@
               "methods": [
                 "list_backup_operations"
               ]
+            },
+            "ListDatabaseRoles": {
+              "methods": [
+                "list_database_roles"
+              ]
             }
           }
         }

@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :read_session, :message, 2, "google.cloud.bigquery.storage.v1.ReadSession"
       optional :max_stream_count, :int32, 3
+      optional :preferred_min_stream_count, :int32, 4
     end
     add_message "google.cloud.bigquery.storage.v1.ReadRowsRequest" do
       optional :read_stream, :string, 1
@@ -76,6 +77,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.bigquery.storage.v1.AppendRowsResponse" do
       optional :updated_schema, :message, 3, "google.cloud.bigquery.storage.v1.TableSchema"
+      repeated :row_errors, :message, 4, "google.cloud.bigquery.storage.v1.RowError"
+      optional :write_stream, :string, 5
       oneof :response do
         optional :append_result, :message, 1, "google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult"
         optional :error, :message, 2, "google.rpc.Status"
@@ -125,6 +128,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :OFFSET_ALREADY_EXISTS, 8
       value :OFFSET_OUT_OF_RANGE, 9
     end
+    add_message "google.cloud.bigquery.storage.v1.RowError" do
+      optional :index, :int64, 1
+      optional :code, :enum, 2, "google.cloud.bigquery.storage.v1.RowError.RowErrorCode"
+      optional :message, :string, 3
+    end
+    add_enum "google.cloud.bigquery.storage.v1.RowError.RowErrorCode" do
+      value :ROW_ERROR_CODE_UNSPECIFIED, 0
+      value :FIELDS_ERROR, 1
+    end
   end
 end
 
@@ -155,6 +167,8 @@ module Google
           FlushRowsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.FlushRowsResponse").msgclass
           StorageError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.StorageError").msgclass
           StorageError::StorageErrorCode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.StorageError.StorageErrorCode").enummodule
+          RowError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.RowError").msgclass
+          RowError::RowErrorCode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.storage.v1.RowError.RowErrorCode").enummodule
         end
       end
     end

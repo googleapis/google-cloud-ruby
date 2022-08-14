@@ -207,14 +207,14 @@ class MockPubsub < Minitest::Spec
                                topic_name,
                                push_config: nil,
                                ack_deadline_seconds: nil,
-                               retain_acked_messages: false,
+                               retain_acked_messages: nil,
                                message_retention_duration: nil,
                                labels: nil,
                                enable_message_ordering: nil,
                                filter: nil,
                                dead_letter_policy: nil,
                                retry_policy: nil
-    [
+    {
       name: subscription_path(sub_name),
       topic: topic_path(topic_name),
       push_config: push_config,
@@ -226,7 +226,7 @@ class MockPubsub < Minitest::Spec
       filter: filter,
       dead_letter_policy: dead_letter_policy,
       retry_policy: retry_policy
-    ]
+    }.compact
   end
 
   def snapshots_hash topic_name, num_snapshots, token = nil

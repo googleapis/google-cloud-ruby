@@ -70,9 +70,9 @@ module Google
                                   end
                   default_config = Client::Configuration.new parent_config
 
-                  default_config.rpcs.create_write_stream.timeout = 600.0
+                  default_config.rpcs.create_write_stream.timeout = 1200.0
                   default_config.rpcs.create_write_stream.retry_policy = {
-                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                    initial_delay: 10.0, max_delay: 120.0, multiplier: 1.3, retry_codes: [4, 14, 8]
                   }
 
                   default_config.rpcs.append_rows.timeout = 86_400.0

@@ -809,8 +809,8 @@ module Google
             #     returned. The maximum value is 1000; values above 1000 will be coerced to
             #     1000.
             #   @param page_token [::String]
-            #     Required. A page token, received from a previous `ListUtilizationReports` call.
-            #     Provide this to retrieve the subsequent page.
+            #     Required. A page token, received from a previous `ListUtilizationReports`
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to `ListUtilizationReports`
             #     must match the call that provided the page token.
@@ -1001,8 +1001,8 @@ module Google
             #   @param utilization_report [::Google::Cloud::VMMigration::V1::UtilizationReport, ::Hash]
             #     Required. The report to create.
             #   @param utilization_report_id [::String]
-            #     Required. The ID to use for the report, which will become the final component of
-            #     the reports's resource name.
+            #     Required. The ID to use for the report, which will become the final
+            #     component of the reports's resource name.
             #
             #     This value maximum length is 63 characters, and valid characters
             #     are /[a-z][0-9]-/. It must start with an english letter and must not
@@ -1222,13 +1222,13 @@ module Google
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of connectors.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of connectors to return. The service may return
-            #     fewer than this value. If unspecified, at most 500 sources will be
+            #     Optional. The maximum number of connectors to return. The service may
+            #     return fewer than this value. If unspecified, at most 500 sources will be
             #     returned. The maximum value is 1000; values above 1000 will be coerced to
             #     1000.
             #   @param page_token [::String]
-            #     Required. A page token, received from a previous `ListDatacenterConnectors` call.
-            #     Provide this to retrieve the subsequent page.
+            #     Required. A page token, received from a previous `ListDatacenterConnectors`
+            #     call. Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
             #     `ListDatacenterConnectors` must match the call that provided the page
@@ -1616,6 +1616,114 @@ module Google
             end
 
             ##
+            # Upgrades the appliance relate to this DatacenterConnector to the in-place
+            # updateable version.
+            #
+            # @overload upgrade_appliance(request, options = nil)
+            #   Pass arguments to `upgrade_appliance` via a request object, either of type
+            #   {::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload upgrade_appliance(datacenter_connector: nil, request_id: nil)
+            #   Pass arguments to `upgrade_appliance` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param datacenter_connector [::String]
+            #     Required. The DatacenterConnector name.
+            #   @param request_id [::String]
+            #     A request ID to identify requests. Specify a unique request ID
+            #     so that if you must retry your request, the server will know to ignore
+            #     the request if it has already been completed. The server will guarantee
+            #     that for at least 60 minutes after the first request.
+            #
+            #     For example, consider a situation where you make an initial request and t
+            #     he request times out. If you make the request again with the same request
+            #     ID, the server can check if original operation with the same request ID
+            #     was received, and if so, will ignore the second request. This prevents
+            #     clients from accidentally creating duplicate commitments.
+            #
+            #     The request ID must be a valid UUID with the exception that zero UUID is
+            #     not supported (00000000-0000-0000-0000-000000000000).
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/vm_migration/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::VMMigration::V1::UpgradeApplianceRequest.new
+            #
+            #   # Call the upgrade_appliance method.
+            #   result = client.upgrade_appliance request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def upgrade_appliance request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::VMMigration::V1::UpgradeApplianceRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.upgrade_appliance.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::VMMigration::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.datacenter_connector
+                header_params["datacenter_connector"] = request.datacenter_connector
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.upgrade_appliance.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.upgrade_appliance.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @vm_migration_stub.call_rpc :upgrade_appliance, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a new MigratingVm in a given Source.
             #
             # @overload create_migrating_vm(request, options = nil)
@@ -1739,7 +1847,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_migrating_vms(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            # @overload list_migrating_vms(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil, view: nil)
             #   Pass arguments to `list_migrating_vms` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1747,10 +1855,10 @@ module Google
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of MigratingVms.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of migrating VMs to return. The service may return
-            #     fewer than this value. If unspecified, at most 500 migrating VMs will be
-            #     returned. The maximum value is 1000; values above 1000 will be coerced to
-            #     1000.
+            #     Optional. The maximum number of migrating VMs to return. The service may
+            #     return fewer than this value. If unspecified, at most 500 migrating VMs
+            #     will be returned. The maximum value is 1000; values above 1000 will be
+            #     coerced to 1000.
             #   @param page_token [::String]
             #     Required. A page token, received from a previous `ListMigratingVms` call.
             #     Provide this to retrieve the subsequent page.
@@ -1761,6 +1869,8 @@ module Google
             #     Optional. The filter request.
             #   @param order_by [::String]
             #     Optional. the order by fields for the result.
+            #   @param view [::Google::Cloud::VMMigration::V1::MigratingVmView]
+            #     Optional. The level of details of each migrating VM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::VMMigration::V1::MigratingVm>]
@@ -1846,13 +1956,15 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload get_migrating_vm(name: nil)
+            # @overload get_migrating_vm(name: nil, view: nil)
             #   Pass arguments to `get_migrating_vm` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
             #     Required. The name of the MigratingVm.
+            #   @param view [::Google::Cloud::VMMigration::V1::MigratingVmView]
+            #     Optional. The level of details of the migrating VM.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::VMMigration::V1::MigratingVm]
@@ -2728,10 +2840,10 @@ module Google
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of source VMs.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of clone jobs to return. The service may return
-            #     fewer than this value. If unspecified, at most 500 clone jobs will be
-            #     returned. The maximum value is 1000; values above 1000 will be coerced to
-            #     1000.
+            #     Optional. The maximum number of clone jobs to return. The service may
+            #     return fewer than this value. If unspecified, at most 500 clone jobs will
+            #     be returned. The maximum value is 1000; values above 1000 will be coerced
+            #     to 1000.
             #   @param page_token [::String]
             #     Required. A page token, received from a previous `ListCloneJobs` call.
             #     Provide this to retrieve the subsequent page.
@@ -3126,10 +3238,10 @@ module Google
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of migrating VMs.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of cutover jobs to return. The service may return
-            #     fewer than this value. If unspecified, at most 500 cutover jobs will be
-            #     returned. The maximum value is 1000; values above 1000 will be coerced to
-            #     1000.
+            #     Optional. The maximum number of cutover jobs to return. The service may
+            #     return fewer than this value. If unspecified, at most 500 cutover jobs will
+            #     be returned. The maximum value is 1000; values above 1000 will be coerced
+            #     to 1000.
             #   @param page_token [::String]
             #     Required. A page token, received from a previous `ListCutoverJobs` call.
             #     Provide this to retrieve the subsequent page.
@@ -4754,6 +4866,11 @@ module Google
                 #
                 attr_reader :delete_datacenter_connector
                 ##
+                # RPC-specific configuration for `upgrade_appliance`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :upgrade_appliance
+                ##
                 # RPC-specific configuration for `create_migrating_vm`
                 # @return [::Gapic::Config::Method]
                 #
@@ -4929,6 +5046,8 @@ module Google
                   @create_datacenter_connector = ::Gapic::Config::Method.new create_datacenter_connector_config
                   delete_datacenter_connector_config = parent_rpcs.delete_datacenter_connector if parent_rpcs.respond_to? :delete_datacenter_connector
                   @delete_datacenter_connector = ::Gapic::Config::Method.new delete_datacenter_connector_config
+                  upgrade_appliance_config = parent_rpcs.upgrade_appliance if parent_rpcs.respond_to? :upgrade_appliance
+                  @upgrade_appliance = ::Gapic::Config::Method.new upgrade_appliance_config
                   create_migrating_vm_config = parent_rpcs.create_migrating_vm if parent_rpcs.respond_to? :create_migrating_vm
                   @create_migrating_vm = ::Gapic::Config::Method.new create_migrating_vm_config
                   list_migrating_vms_config = parent_rpcs.list_migrating_vms if parent_rpcs.respond_to? :list_migrating_vms

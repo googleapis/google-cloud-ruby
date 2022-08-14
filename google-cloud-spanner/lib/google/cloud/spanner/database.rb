@@ -288,12 +288,9 @@ module Google
 
         # @private
         DATBASE_OPERATION_METADAT_FILTER_TEMPLATE = [
-          "(metadata.@type:CreateDatabaseMetadata AND " \
-          "metadata.database:%<database_id>s)",
-          "(metadata.@type:RestoreDatabaseMetadata AND "\
-          "metadata.name:%<database_id>s)",
-          "(metadata.@type:UpdateDatabaseDdl AND "\
-          "metadata.database:%<database_id>s)"
+          "(metadata.@type:CreateDatabaseMetadata AND metadata.database:%<database_id>s)",
+          "(metadata.@type:RestoreDatabaseMetadata AND metadata.name:%<database_id>s)",
+          "(metadata.@type:UpdateDatabaseDdl AND metadata.database:%<database_id>s)"
         ].join(" OR ")
 
         ##

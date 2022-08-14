@@ -94,6 +94,7 @@
     "snippets/bigtable_table_admin/set_iam_policy.rb",
     "snippets/bigtable_table_admin/snapshot_table.rb",
     "snippets/bigtable_table_admin/test_iam_permissions.rb",
+    "snippets/bigtable_table_admin/undelete_table.rb",
     "snippets/bigtable_table_admin/update_backup.rb",
     "snippets/snippet_metadata_google.bigtable.admin.v2.json",
     "test/google/cloud/bigtable/admin/v2/bigtable_instance_admin_operations_test.rb",

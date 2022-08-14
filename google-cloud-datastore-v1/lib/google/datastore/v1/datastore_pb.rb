@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/datastore/v1/datastore.proto", :syntax => :proto3) do
     add_message "google.datastore.v1.LookupRequest" do
       optional :project_id, :string, 8
+      optional :database_id, :string, 9
       optional :read_options, :message, 1, "google.datastore.v1.ReadOptions"
       repeated :keys, :message, 3, "google.datastore.v1.Key"
     end
@@ -25,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.datastore.v1.RunQueryRequest" do
       optional :project_id, :string, 8
+      optional :database_id, :string, 9
       optional :partition_id, :message, 2, "google.datastore.v1.PartitionId"
       optional :read_options, :message, 1, "google.datastore.v1.ReadOptions"
       oneof :query_type do
@@ -38,6 +40,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.datastore.v1.BeginTransactionRequest" do
       optional :project_id, :string, 8
+      optional :database_id, :string, 9
       optional :transaction_options, :message, 10, "google.datastore.v1.TransactionOptions"
     end
     add_message "google.datastore.v1.BeginTransactionResponse" do
@@ -45,12 +48,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.datastore.v1.RollbackRequest" do
       optional :project_id, :string, 8
+      optional :database_id, :string, 9
       optional :transaction, :bytes, 1
     end
     add_message "google.datastore.v1.RollbackResponse" do
     end
     add_message "google.datastore.v1.CommitRequest" do
       optional :project_id, :string, 8
+      optional :database_id, :string, 9
       optional :mode, :enum, 5, "google.datastore.v1.CommitRequest.Mode"
       repeated :mutations, :message, 6, "google.datastore.v1.Mutation"
       oneof :transaction_selector do
@@ -69,6 +74,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.datastore.v1.AllocateIdsRequest" do
       optional :project_id, :string, 8
+      optional :database_id, :string, 9
       repeated :keys, :message, 1, "google.datastore.v1.Key"
     end
     add_message "google.datastore.v1.AllocateIdsResponse" do

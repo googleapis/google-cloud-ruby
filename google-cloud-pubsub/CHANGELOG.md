@@ -1,5 +1,22 @@
 # Release History
 
+### 2.12.0 (2022-08-09)
+
+#### Features
+
+* bump the minimum required version of pubsub v1 ([#18983](https://github.com/googleapis/google-cloud-ruby/issues/18983)) 
+#### Bug Fixes
+
+* honour async options of topic ([#18953](https://github.com/googleapis/google-cloud-ruby/issues/18953)) 
+
+### 2.11.0 (2022-08-01)
+
+#### Features
+
+* create exactly once delivery enabled subscription ([#18824](https://github.com/googleapis/google-cloud-ruby/issues/18824)) 
+* Let user register callback and get acknowledgement result ([#18702](https://github.com/googleapis/google-cloud-ruby/issues/18702)) 
+* retry transient failures in ack/modack in timed unary buffer ([#18395](https://github.com/googleapis/google-cloud-ruby/issues/18395)) 
+
 ### 2.10.0 (2022-06-14)
 
 #### Features

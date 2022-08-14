@@ -50,6 +50,11 @@
                 "list_data_items"
               ]
             },
+            "ListSavedQueries": {
+              "methods": [
+                "list_saved_queries"
+              ]
+            },
             "GetAnnotationSpec": {
               "methods": [
                 "get_annotation_spec"
@@ -704,6 +709,11 @@
             "ImportModelEvaluation": {
               "methods": [
                 "import_model_evaluation"
+              ]
+            },
+            "BatchImportModelEvaluationSlices": {
+              "methods": [
+                "batch_import_model_evaluation_slices"
               ]
             },
             "GetModelEvaluation": {

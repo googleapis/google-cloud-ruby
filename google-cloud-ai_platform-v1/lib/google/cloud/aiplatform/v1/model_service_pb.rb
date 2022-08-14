@@ -93,6 +93,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :model_evaluation, :message, 2, "google.cloud.aiplatform.v1.ModelEvaluation"
     end
+    add_message "google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest" do
+      optional :parent, :string, 1
+      repeated :model_evaluation_slices, :message, 2, "google.cloud.aiplatform.v1.ModelEvaluationSlice"
+    end
+    add_message "google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesResponse" do
+      repeated :imported_model_evaluation_slices, :string, 1
+    end
     add_message "google.cloud.aiplatform.v1.GetModelEvaluationRequest" do
       optional :name, :string, 1
     end
@@ -146,6 +153,8 @@ module Google
         ExportModelOperationMetadata::OutputInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelOperationMetadata.OutputInfo").msgclass
         ExportModelResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ExportModelResponse").msgclass
         ImportModelEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ImportModelEvaluationRequest").msgclass
+        BatchImportModelEvaluationSlicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesRequest").msgclass
+        BatchImportModelEvaluationSlicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.BatchImportModelEvaluationSlicesResponse").msgclass
         GetModelEvaluationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetModelEvaluationRequest").msgclass
         ListModelEvaluationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelEvaluationsRequest").msgclass
         ListModelEvaluationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ListModelEvaluationsResponse").msgclass

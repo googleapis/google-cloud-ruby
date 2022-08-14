@@ -1,5 +1,26 @@
 # Changelog
 
+### 0.4.0 (2022-07-19)
+
+#### Features
+
+* Added router appliance next hop type  ([#18825](https://github.com/googleapis/google-cloud-ruby/issues/18825)) 
+
+### 0.3.0 (2022-07-05)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.2.0 (2022-06-28)
+
+#### Features
+
+* introduce a projects_missing_permissions field in the AbortInfo structure 
+
 ### 0.1.3 / 2022-01-11
 
 #### Bug Fixes

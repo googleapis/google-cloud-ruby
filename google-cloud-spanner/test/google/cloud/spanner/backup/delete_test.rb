@@ -28,7 +28,7 @@ describe Google::Cloud::Spanner::Backup, :delete, :mock_spanner do
 
   it "can delete itself" do
     mock = Minitest::Mock.new
-    mock.expect :delete_backup, nil, [{ name: backup_grpc.name }, nil]
+    mock.expect :delete_backup, nil, [{ name: backup_grpc.name }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     _(backup.delete).must_equal true

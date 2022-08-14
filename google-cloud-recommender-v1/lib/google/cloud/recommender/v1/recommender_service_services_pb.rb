@@ -90,6 +90,18 @@ module Google
             # Requires the recommender.*.update IAM permission for the specified
             # recommender.
             rpc :MarkRecommendationFailed, ::Google::Cloud::Recommender::V1::MarkRecommendationFailedRequest, ::Google::Cloud::Recommender::V1::Recommendation
+            # Gets the requested Recommender Config. There is only one instance of the
+            # config for each Recommender.
+            rpc :GetRecommenderConfig, ::Google::Cloud::Recommender::V1::GetRecommenderConfigRequest, ::Google::Cloud::Recommender::V1::RecommenderConfig
+            # Updates a Recommender Config. This will create a new revision of the
+            # config.
+            rpc :UpdateRecommenderConfig, ::Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest, ::Google::Cloud::Recommender::V1::RecommenderConfig
+            # Gets the requested InsightTypeConfig. There is only one instance of the
+            # config for each InsightType.
+            rpc :GetInsightTypeConfig, ::Google::Cloud::Recommender::V1::GetInsightTypeConfigRequest, ::Google::Cloud::Recommender::V1::InsightTypeConfig
+            # Updates an InsightTypeConfig change. This will create a new revision of the
+            # config.
+            rpc :UpdateInsightTypeConfig, ::Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest, ::Google::Cloud::Recommender::V1::InsightTypeConfig
           end
 
           Stub = Service.rpc_stub_class

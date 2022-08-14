@@ -41,7 +41,7 @@ module Google
         #     existing Job.
         #
         #     The name must match the regular expression
-        #     `[a-z]([-a-z0-9]{0,38}[a-z0-9])?`
+        #     `[a-z]([-a-z0-9]{0,1022}[a-z0-9])?`
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Dataflow::V1beta3::JobType]
         #     The type of Cloud Dataflow job.

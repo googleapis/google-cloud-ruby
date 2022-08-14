@@ -1,5 +1,17 @@
 # Release History
 
+### 0.42.1 (2022-07-28)
+
+#### Documentation
+
+* Fix example in FaradayMiddleware ([#18850](https://github.com/googleapis/google-cloud-ruby/issues/18850)) 
+
+### 0.42.0 (2022-07-08)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18455](https://github.com/googleapis/google-cloud-ruby/issues/18455)) 
+
 ### 0.41.4 (2022-05-27)
 
 #### Bug Fixes

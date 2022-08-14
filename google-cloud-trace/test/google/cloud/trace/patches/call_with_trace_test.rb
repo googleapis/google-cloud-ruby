@@ -61,7 +61,7 @@ describe GRPC::Core::CallWithTrace do
     it "calls add_request_labels with first message" do
       add_labels_called = false
 
-      stubbed_add_labels = ->(_, message, _) do
+      stubbed_add_labels = proc do |_, message|
         _(message).must_equal "grpc-test-message"
         add_labels_called = true
       end

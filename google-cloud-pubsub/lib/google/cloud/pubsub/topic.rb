@@ -364,7 +364,7 @@ module Google
         ##
         # Creates a new {Subscription} object on the current Topic.
         #
-        # @param [String] subscription_name Name of the new subscription. Required.
+        # @option options [String] subscription_name Name of the new subscription. Required.
         #   The value can be a simple subscription ID (relative name), in which
         #   case the current project ID will be supplied, or a fully-qualified
         #   subscription name in the form
@@ -375,26 +375,27 @@ module Google
         #   underscores (`_`), periods (`.`), tildes (`~`), plus (`+`) or percent
         #   signs (`%`). It must be between 3 and 255 characters in length, and
         #   it must not start with `goog`.
-        # @param [Integer] deadline The maximum number of seconds after a
+        # @option options [Integer] deadline The maximum number of seconds after a
         #   subscriber receives a message before the subscriber should
         #   acknowledge the message.
-        # @param [Boolean] retain_acked Indicates whether to retain acknowledged
+        # @option options [Boolean] retain_acked Indicates whether to retain acknowledged
         #   messages. If `true`, then messages are not expunged from the
         #   subscription's backlog, even if they are acknowledged, until they
         #   fall out of the `retention` window. Default is `false`.
-        # @param [Numeric] retention How long to retain unacknowledged messages
+        # @option options [Numeric] retention How long to retain unacknowledged messages
         #   in the subscription's backlog, from the moment a message is
         #   published. If `retain_acked` is `true`, then this also configures
         #   the retention of acknowledged messages, and thus configures how far
         #   back in time a {Subscription#seek} can be done. Cannot be more than
         #   604,800 seconds (7 days) or less than 600 seconds (10 minutes).
         #   Default is 604,800 seconds (7 days).
-        # @param [String] endpoint A URL locating the endpoint to which messages
+        # @option options [String] endpoint A URL locating the endpoint to which messages
         #   should be pushed. The parameters `push_config` and `endpoint` should not both be provided.
-        # @param [Google::Cloud::PubSub::Subscription::PushConfig] push_config The configuration for a push delivery
-        #   endpoint that should contain the endpoint, and can contain authentication data (OIDC token authentication).
-        #   The parameters `push_config` and `endpoint` should not both be provided.
-        # @param [Hash] labels A hash of user-provided labels associated with
+        # @option options [Google::Cloud::PubSub::Subscription::PushConfig] push_config
+        #  The configuration for a push delivery endpoint that should contain the endpoint,
+        #  and can contain authentication data (OIDC token authentication).
+        #  The parameters `push_config` and `endpoint` should not both be provided.
+        # @option options [Hash] labels A hash of user-provided labels associated with
         #   the subscription. You can use these to organize and group your
         #   subscriptions. Label keys and values can be no longer than 63
         #   characters, can only contain lowercase letters, numeric characters,
@@ -402,25 +403,29 @@ module Google
         #   values are optional. Label keys must start with a letter and each
         #   label in the list must have a different key. See [Creating and
         #   Managing Labels](https://cloud.google.com/pubsub/docs/labels).
-        # @param [Boolean] message_ordering Whether to enable message ordering
+        # @option options [Boolean] message_ordering Whether to enable message ordering
         #   on the subscription.
-        # @param [String] filter An expression written in the Cloud Pub/Sub filter language. If non-empty, then only
-        #   {Message} instances whose `attributes` field matches the filter are delivered on this subscription. If
+        # @option options [String] filter An expression written in the Cloud Pub/Sub filter language.
+        #   If non-empty, then only {Message} instances whose `attributes` field
+        #   matches the filter are delivered on this subscription. If
         #   empty, then no messages are filtered out. Optional.
-        # @param [Topic] dead_letter_topic The {Topic} to which dead letter messages for the subscription should be
-        #   published. Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
+        # @option options [Topic] dead_letter_topic
+        #   The {Topic} to which dead letter messages for the subscription should be published.
+        #   Dead lettering is done on a best effort basis. The same message might be dead lettered multiple
         #   times. The Cloud Pub/Sub service account associated with the enclosing subscription's parent project (i.e.,
         #   `service-{project_number}@gcp-sa-pubsub.iam.gserviceaccount.com`) must have permission to Publish() to
         #   this topic.
         #
         #   The operation will fail if the topic does not exist. Users should ensure that there is a subscription
         #   attached to this topic since messages published to a topic with no subscriptions are lost.
-        # @param [Integer] dead_letter_max_delivery_attempts The maximum number of delivery attempts for any message in
-        #   the subscription's dead letter policy. Dead lettering is done on a best effort basis. The same message might
+        # @option options [Integer] dead_letter_max_delivery_attempts
+        #   The maximum number of delivery attempts for any message in the subscription's dead letter policy.
+        #   Dead lettering is done on a best effort basis. The same message might
         #   be dead lettered multiple times. The value must be between 5 and 100. If this parameter is 0, a default
         #   value of 5 is used. The `dead_letter_topic` must also be set.
-        # @param [RetryPolicy] retry_policy A policy that specifies how Cloud Pub/Sub retries message delivery for
-        #   this subscription. If not set, the default retry policy is applied. This generally implies that messages
+        # @option options [RetryPolicy] retry_policy
+        #   A policy that specifies how Cloud Pub/Sub retries message delivery for this subscription.
+        #   If not set, the default retry policy is applied. This generally implies that messages
         #   will be retried as soon as possible for healthy subscribers. Retry Policy will be triggered on NACKs or
         #   acknowledgement deadline exceeded events for a given message.
         #
@@ -486,41 +491,23 @@ module Google
         #   retry_policy = Google::Cloud::PubSub::RetryPolicy.new minimum_backoff: 5, maximum_backoff: 300
         #   sub = topic.subscribe "my-topic-sub", retry_policy: retry_policy
         #
-        def subscribe subscription_name,
-                      deadline: nil,
-                      retain_acked: false,
-                      retention: nil,
-                      endpoint: nil,
-                      push_config: nil,
-                      labels: nil,
-                      message_ordering: nil,
-                      filter: nil,
-                      dead_letter_topic: nil,
-                      dead_letter_max_delivery_attempts: nil,
-                      retry_policy: nil
+        def subscribe subscription_name, **options
           ensure_service!
-          if push_config && endpoint
+          if options[:push_config] && options[:endpoint]
             raise ArgumentError, "endpoint and push_config were both provided. Please provide only one."
           end
-          push_config = Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: endpoint if endpoint
+          if options[:endpoint]
+            options[:push_config] =
+              Google::Cloud::PubSub::Subscription::PushConfig.new endpoint: options[:endpoint]
+          end
 
-          options = {
-            deadline:                          deadline,
-            retain_acked:                      retain_acked,
-            retention:                         retention,
-            labels:                            labels,
-            message_ordering:                  message_ordering,
-            filter:                            filter,
-            dead_letter_max_delivery_attempts: dead_letter_max_delivery_attempts
-          }
-
-          options[:dead_letter_topic_name] = dead_letter_topic.name if dead_letter_topic
+          options[:dead_letter_topic_name] = options[:dead_letter_topic].name if options[:dead_letter_topic]
           if options[:dead_letter_max_delivery_attempts] && !options[:dead_letter_topic_name]
             # Service error message "3:Invalid resource name given (name=)." does not identify param.
             raise ArgumentError, "dead_letter_topic is required with dead_letter_max_delivery_attempts"
           end
-          options[:push_config] = push_config.to_grpc if push_config
-          options[:retry_policy] = retry_policy.to_grpc if retry_policy
+          options[:push_config] = options[:push_config].to_grpc if options[:push_config]
+          options[:retry_policy] = options[:retry_policy].to_grpc if options[:retry_policy]
           grpc = service.create_subscription name, subscription_name, options
           Subscription.from_grpc grpc, service
         end
@@ -1078,7 +1065,7 @@ module Google
         # @private New reference {Topic} object without making an HTTP request.
         def self.from_name name, service, options = {}
           name = service.topic_path name, options
-          from_grpc(nil, service).tap do |t|
+          from_grpc(nil, service, async: options[:async]).tap do |t|
             t.instance_variable_set :@resource_name, name
           end
         end

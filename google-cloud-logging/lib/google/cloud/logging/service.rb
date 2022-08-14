@@ -102,7 +102,7 @@ module Google
             entry.log_name = log_path entry.log_name
           end
           resource = resource.to_grpc if resource
-          labels = Hash[labels.map { |k, v| [String(k), String(v)] }] if labels
+          labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
           logging.write_log_entries entries:         entries,
                                     log_name:        log_path(log_name),
                                     resource:        resource,
@@ -123,7 +123,8 @@ module Google
         end
 
         def list_resource_descriptors token: nil, max: nil
-          logging.list_monitored_resource_descriptors page_size: max, page_token: token
+          paged_enum = logging.list_monitored_resource_descriptors page_size: max, page_token: token
+          paged_enum.response
         end
 
         def list_sinks token: nil, max: nil

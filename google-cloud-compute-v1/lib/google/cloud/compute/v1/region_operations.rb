@@ -22,13 +22,15 @@ require "gapic/config/method"
 require "google/cloud/compute/v1/version"
 
 require "google/cloud/compute/v1/region_operations/credentials"
-require "google/cloud/compute/v1/region_operations/rest/nonstandard_lro"
 require "google/cloud/compute/v1/region_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
+        ##
+        # The RegionOperations API.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/region_operations"

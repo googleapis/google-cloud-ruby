@@ -659,12 +659,12 @@ module Google
           # Describes a Target Proxy which uses this Certificate Map.
           # @!attribute [rw] target_https_proxy
           #   @return [::String]
-          #     A name must be in the format
-          #     `projects/*/locations/*/targetHttpsProxies/*`.
+          #     This field returns the resource name in the following format:
+          #     `//compute.googleapis.com/projects/*/global/targetHttpsProxies/*`.
           # @!attribute [rw] target_ssl_proxy
           #   @return [::String]
-          #     A name must be in the format
-          #     `projects/*/locations/*/targetSslProxies/*`.
+          #     This field returns the resource name in the following format:
+          #     `//compute.googleapis.com/projects/*/global/targetSslProxies/*`.
           # @!attribute [rw] ip_configs
           #   @return [::Array<::Google::Cloud::CertificateManager::V1::CertificateMap::GclbTarget::IpConfig>]
           #     IP configurations for this Target Proxy where the

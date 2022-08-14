@@ -16,7 +16,9 @@ for this library, google-cloud-monitoring, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-monitoring-v3](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest).
+[google-cloud-monitoring-v3](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest),
+[google-cloud-monitoring-dashboard-v1](https://googleapis.dev/ruby/google-cloud-monitoring-dashboard-v1/latest),
+[google-cloud-monitoring-metrics_scope-v1](https://googleapis.dev/ruby/google-cloud-monitoring-metrics_scope-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/monitoring)
 for more usage information.
@@ -70,14 +72,14 @@ end
 
 ## Supported Ruby Versions
 
-This library is supported on Ruby 2.5+.
+This library is supported on Ruby 2.6+.
 
 Google provides official support for Ruby versions that are actively supported
 by Ruby Core—that is, Ruby versions that are either in normal maintenance or
-in security maintenance, and not end of life. Currently, this means Ruby 2.5
-and later. Older versions of Ruby _may_ still work, but are unsupported and not
-recommended. See https://www.ruby-lang.org/en/downloads/branches/ for details
-about the Ruby support schedule.
+in security maintenance, and not end of life. Older versions of Ruby _may_
+still work, but are unsupported and not recommended. See
+https://www.ruby-lang.org/en/downloads/branches/ for details about the Ruby
+support schedule.
 
 ## Which client should I use?
 

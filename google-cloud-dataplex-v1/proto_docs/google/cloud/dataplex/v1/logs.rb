@@ -102,6 +102,10 @@ module Google
           # @!attribute [rw] type
           #   @return [::Google::Cloud::Dataplex::V1::DiscoveryEvent::EntityType]
           #     The type of the containing entity resource.
+          # @!attribute [rw] sampled_data_locations
+          #   @return [::Array<::String>]
+          #     The locations of the data items (e.g., a Cloud Storage objects) sampled
+          #     for metadata inference.
           class PartitionDetails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

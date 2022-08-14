@@ -2754,7 +2754,7 @@ module Google
         def patch_gapi! *attributes
           return if attributes.empty?
           ensure_service!
-          patch_args = Hash[attributes.map { |attr| [attr, @gapi.send(attr)] }]
+          patch_args = attributes.to_h { |attr| [attr, @gapi.send(attr)] }
           patch_gapi = Google::Apis::BigqueryV2::Dataset.new(**patch_args)
           patch_gapi.etag = etag if etag
           @gapi = service.patch_dataset dataset_id, patch_gapi

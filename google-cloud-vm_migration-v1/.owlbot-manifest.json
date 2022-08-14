@@ -79,6 +79,7 @@
     "snippets/vm_migration/update_migrating_vm.rb",
     "snippets/vm_migration/update_source.rb",
     "snippets/vm_migration/update_target_project.rb",
+    "snippets/vm_migration/upgrade_appliance.rb",
     "test/google/cloud/vm_migration/v1/vm_migration_operations_test.rb",
     "test/google/cloud/vm_migration/v1/vm_migration_paths_test.rb",
     "test/google/cloud/vm_migration/v1/vm_migration_test.rb",

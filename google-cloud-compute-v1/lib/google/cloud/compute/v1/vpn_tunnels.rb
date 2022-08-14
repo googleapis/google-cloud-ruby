@@ -28,6 +28,9 @@ module Google
   module Cloud
     module Compute
       module V1
+        ##
+        # The VpnTunnels API.
+        #
         # To load this service and instantiate a REST client:
         #
         #     require "google/cloud/compute/v1/vpn_tunnels"

@@ -1,5 +1,23 @@
 # Release History
 
+### 0.20.1 (2022-08-14)
+
+#### Bug Fixes
+
+* Update timeout and retry settings for batch_get_effective_iam_policies ([#18997](https://github.com/googleapis/google-cloud-ruby/issues/18997)) 
+#### Documentation
+
+* Document relationship clauses in search queries 
+
+### 0.20.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
 ### 0.19.0 (2022-06-08)
 
 #### Features

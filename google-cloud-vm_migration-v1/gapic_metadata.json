@@ -80,6 +80,11 @@
                 "delete_datacenter_connector"
               ]
             },
+            "UpgradeAppliance": {
+              "methods": [
+                "upgrade_appliance"
+              ]
+            },
             "CreateMigratingVm": {
               "methods": [
                 "create_migrating_vm"

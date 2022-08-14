@@ -34,7 +34,7 @@ module Google
           #     automatically assigned and currently cannot be specified or updated.
           # @!attribute [rw] data_format
           #   @return [::Google::Cloud::Bigquery::Storage::V1::DataFormat]
-          #     Immutable. Data format of the output data.
+          #     Immutable. Data format of the output data. DATA_FORMAT_UNSPECIFIED not supported.
           # @!attribute [r] avro_schema
           #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSchema]
           #     Output only. Avro schema.
@@ -185,6 +185,7 @@ module Google
 
           # Data format for input or output data.
           module DataFormat
+            # Data format is unspecified.
             DATA_FORMAT_UNSPECIFIED = 0
 
             # Avro is a standard open source row based file format.

@@ -95,6 +95,9 @@ module Google
                 channel_args: @config.channel_args,
                 interceptors: @config.interceptors
               )
+
+              # Used by an LRO wrapper for some methods of this service
+              @operations_client = self
             end
 
             # Service calls
@@ -563,6 +566,14 @@ module Google
                 lib_name: @config.lib_name, lib_version: @config.lib_version,
                 gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
 
               options.apply_defaults timeout:      @config.rpcs.wait_operation.timeout,
                                      metadata:     metadata,

@@ -19,7 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/model_service_pb"
 require "google/cloud/location"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -420,6 +420,7 @@ module Google
             #         * A key including a space must be quoted. `labels."a key"`.
             #
             #     Some examples:
+            #
             #       * `model=1234`
             #       * `displayName="myDisplayName"`
             #       * `labels.myKey="myValue"`
@@ -436,6 +437,7 @@ module Google
             #     A comma-separated list of fields to order by, sorted in ascending order.
             #     Use "desc" after a field name for descending.
             #     Supported fields:
+            #
             #       * `display_name`
             #       * `create_time`
             #       * `update_time`
@@ -550,6 +552,7 @@ module Google
             #         * A key including a space must be quoted. `labels."a key"`.
             #
             #     Some examples:
+            #
             #       * `labels.myKey="myValue"`
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Mask specifying which fields to read.
@@ -1217,6 +1220,95 @@ module Google
             end
 
             ##
+            # Imports a list of externally generated ModelEvaluationSlice.
+            #
+            # @overload batch_import_model_evaluation_slices(request, options = nil)
+            #   Pass arguments to `batch_import_model_evaluation_slices` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload batch_import_model_evaluation_slices(parent: nil, model_evaluation_slices: nil)
+            #   Pass arguments to `batch_import_model_evaluation_slices` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The name of the parent ModelEvaluation resource.
+            #     Format:
+            #     `projects/{project}/locations/{location}/models/{model}/evaluations/{evaluation}`
+            #   @param model_evaluation_slices [::Array<::Google::Cloud::AIPlatform::V1::ModelEvaluationSlice, ::Hash>]
+            #     Required. Model evaluation slice resource to be imported.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest.new
+            #
+            #   # Call the batch_import_model_evaluation_slices method.
+            #   result = client.batch_import_model_evaluation_slices request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse.
+            #   p result
+            #
+            def batch_import_model_evaluation_slices request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.batch_import_model_evaluation_slices.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.batch_import_model_evaluation_slices.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.batch_import_model_evaluation_slices.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @model_service_stub.call_rpc :batch_import_model_evaluation_slices, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets a ModelEvaluation.
             #
             # @overload get_model_evaluation(request, options = nil)
@@ -1787,6 +1879,11 @@ module Google
                 #
                 attr_reader :import_model_evaluation
                 ##
+                # RPC-specific configuration for `batch_import_model_evaluation_slices`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :batch_import_model_evaluation_slices
+                ##
                 # RPC-specific configuration for `get_model_evaluation`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1829,6 +1926,8 @@ module Google
                   @export_model = ::Gapic::Config::Method.new export_model_config
                   import_model_evaluation_config = parent_rpcs.import_model_evaluation if parent_rpcs.respond_to? :import_model_evaluation
                   @import_model_evaluation = ::Gapic::Config::Method.new import_model_evaluation_config
+                  batch_import_model_evaluation_slices_config = parent_rpcs.batch_import_model_evaluation_slices if parent_rpcs.respond_to? :batch_import_model_evaluation_slices
+                  @batch_import_model_evaluation_slices = ::Gapic::Config::Method.new batch_import_model_evaluation_slices_config
                   get_model_evaluation_config = parent_rpcs.get_model_evaluation if parent_rpcs.respond_to? :get_model_evaluation
                   @get_model_evaluation = ::Gapic::Config::Method.new get_model_evaluation_config
                   list_model_evaluations_config = parent_rpcs.list_model_evaluations if parent_rpcs.respond_to? :list_model_evaluations

@@ -25,6 +25,12 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
         # @!attribute [rw] read_options
         #   @return [::Google::Cloud::Datastore::V1::ReadOptions]
         #     The options for this lookup request.
@@ -64,6 +70,12 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
         # @!attribute [rw] partition_id
         #   @return [::Google::Cloud::Datastore::V1::PartitionId]
         #     Entities are partitioned into subsets, identified by a partition ID.
@@ -78,7 +90,7 @@ module Google
         #     The query to run.
         # @!attribute [rw] gql_query
         #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
-        #     The GQL query to run.
+        #     The GQL query to run. This query must be a non-aggregation query.
         class RunQueryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -100,6 +112,12 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
         # @!attribute [rw] transaction_options
         #   @return [::Google::Cloud::Datastore::V1::TransactionOptions]
         #     Options for a new transaction.
@@ -121,6 +139,12 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     Required. The transaction identifier, returned by a call to
@@ -141,6 +165,12 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
         # @!attribute [rw] mode
         #   @return [::Google::Cloud::Datastore::V1::CommitRequest::Mode]
         #     The type of commit to perform. Defaults to `TRANSACTIONAL`.
@@ -204,6 +234,12 @@ module Google
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Required. The ID of the project against which to make the request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
         #     Required. A list of keys with incomplete key paths for which to allocate IDs.
@@ -229,7 +265,10 @@ module Google
         #     Required. The ID of the project against which to make the request.
         # @!attribute [rw] database_id
         #   @return [::String]
-        #     If not empty, the ID of the database against which to make the request.
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
         # @!attribute [rw] keys
         #   @return [::Array<::Google::Cloud::Datastore::V1::Key>]
         #     Required. A list of keys with complete key paths whose numeric IDs should not be

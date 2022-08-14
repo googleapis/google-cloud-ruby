@@ -8,6 +8,7 @@ require 'google/cloud/securitycenter/v1/file_pb'
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/securitycenter/v1/process.proto", :syntax => :proto3) do
     add_message "google.cloud.securitycenter.v1.Process" do
+      optional :name, :string, 12
       optional :binary, :message, 3, "google.cloud.securitycenter.v1.File"
       repeated :libraries, :message, 4, "google.cloud.securitycenter.v1.File"
       optional :script, :message, 5, "google.cloud.securitycenter.v1.File"

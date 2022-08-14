@@ -282,7 +282,7 @@ module Google
           initial_splits = initial_splits.map { |key| { key: key } } if initial_splits
 
           tables.create_table(
-            {
+            **{
               parent:         instance_path(instance_id),
               table_id:       table_id,
               table:          table,
@@ -649,11 +649,15 @@ module Google
         end
 
         def read_rows instance_id, table_id, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil
-          client.read_rows table_name:     table_path(instance_id, table_id),
-                           rows:           rows,
-                           filter:         filter,
-                           rows_limit:     rows_limit,
-                           app_profile_id: app_profile_id
+          client.read_rows(
+            **{
+              table_name:     table_path(instance_id, table_id),
+              rows:           rows,
+              filter:         filter,
+              rows_limit:     rows_limit,
+              app_profile_id: app_profile_id
+            }
+          )
         end
 
         def sample_row_keys table_name, app_profile_id: nil
@@ -662,7 +666,7 @@ module Google
 
         def mutate_row table_name, row_key, mutations, app_profile_id: nil
           client.mutate_row(
-            {
+            **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
               row_key:        row_key,
@@ -673,7 +677,7 @@ module Google
 
         def mutate_rows table_name, entries, app_profile_id: nil
           client.mutate_rows(
-            {
+            **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
               entries:        entries
@@ -688,7 +692,7 @@ module Google
                                  true_mutations: nil,
                                  false_mutations: nil
           client.check_and_mutate_row(
-            {
+            **{
               table_name:       table_name,
               app_profile_id:   app_profile_id,
               row_key:          row_key,
@@ -701,7 +705,7 @@ module Google
 
         def read_modify_write_row table_name, row_key, rules, app_profile_id: nil
           client.read_modify_write_row(
-            {
+            **{
               table_name:     table_name,
               app_profile_id: app_profile_id,
               row_key:        row_key,

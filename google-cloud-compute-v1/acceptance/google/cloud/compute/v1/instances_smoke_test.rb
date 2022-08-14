@@ -77,13 +77,6 @@ class InstancesSmokeTest < Minitest::Test
     assert_match(/The resource '[^']+' was not found/, exception.message)
   end
 
-  def test_client_error_no_prj
-    exception = assert_raises Google::Cloud::InvalidArgumentError do
-      @client.get instance: "nonexists1123512345", zone: @default_zone
-    end
-    assert exception.message.include?("An error has occurred when making a REST request: Invalid resource field value in the request.")
-  end
-
   def test_update_desc_to_empty
     # We test here: 1)set body field to empty string
     #               2)optional body field not set

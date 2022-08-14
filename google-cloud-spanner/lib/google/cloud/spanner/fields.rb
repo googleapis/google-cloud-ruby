@@ -331,7 +331,7 @@ module Google
         #
         def to_h
           raise DuplicateNameError if duplicate_names?
-          Hash[pairs]
+          pairs.to_h
         end
 
         # @private

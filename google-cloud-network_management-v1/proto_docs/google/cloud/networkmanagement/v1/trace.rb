@@ -408,6 +408,11 @@ module Google
 
             # Next hop is the forwarding rule of an Internal Load Balancer.
             NEXT_HOP_ILB = 10
+
+            # Next hop is a
+            # [router appliance
+            # instance](https://cloud.google.com/network-connectivity/docs/network-connectivity-center/concepts/ra-overview).
+            NEXT_HOP_ROUTER_APPLIANCE = 11
           end
         end
 
@@ -710,6 +715,11 @@ module Google
         # @!attribute [rw] resource_uri
         #   @return [::String]
         #     URI of the resource that caused the abort.
+        # @!attribute [rw] projects_missing_permission
+        #   @return [::Array<::String>]
+        #     List of project IDs that the user has specified in the request but does
+        #     not have permission to access network configs. Analysis is aborted in this
+        #     case with the PERMISSION_DENIED cause.
         class AbortInfo
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -775,6 +785,9 @@ module Google
             # Aborted because the destination network does not match the destination
             # endpoint.
             MISMATCHED_DESTINATION_NETWORK = 14
+
+            # Aborted because the test scenario is not supported.
+            UNSUPPORTED = 15
           end
         end
 
@@ -827,9 +840,7 @@ module Google
 
             # Instance with only an internal IP address tries to access external hosts,
             # but Cloud NAT is not enabled in the subnet, unless special configurations
-            # on a VM allow this connection. For more details, see [Special
-            # configurations for VM
-            # instances](https://cloud.google.com/vpc/docs/special-configurations).
+            # on a VM allow this connection.
             NO_EXTERNAL_ADDRESS = 9
 
             # Destination internal address cannot be resolved to a known target. If

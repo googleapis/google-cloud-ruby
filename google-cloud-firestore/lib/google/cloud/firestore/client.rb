@@ -164,8 +164,7 @@ module Google
         #
         def col_group collection_id
           if collection_id.include? "/"
-            raise ArgumentError, "Invalid collection_id: '#{collection_id}', " \
-              "must not contain '/'."
+            raise ArgumentError, "Invalid collection_id: '#{collection_id}', must not contain '/'."
           end
 
           CollectionGroup.from_collection_id service.documents_path, collection_id, self

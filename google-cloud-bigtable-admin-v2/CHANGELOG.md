@@ -1,5 +1,26 @@
 # Release History
 
+### 0.14.0 (2022-07-28)
+
+#### Features
+
+* Support for the satisfies_pzs field on Instsance ([#18872](https://github.com/googleapis/google-cloud-ruby/issues/18872)) 
+
+### 0.13.0 (2022-07-01)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
+### 0.12.0 (2022-06-30)
+
+#### Features
+
+* Support for undelete_table 
+
 ### 0.11.0 (2022-05-19)
 
 #### Features

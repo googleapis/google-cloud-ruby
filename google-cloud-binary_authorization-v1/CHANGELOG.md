@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.2.1 (2022-07-28)
+
+#### Documentation
+
+* Fixed some cross-reference links ([#18878](https://github.com/googleapis/google-cloud-ruby/issues/18878)) 
+
+### 0.2.0 (2022-07-02)
+
+#### Features
+
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+
 ### 0.1.2 / 2022-01-11
 
 #### Documentation

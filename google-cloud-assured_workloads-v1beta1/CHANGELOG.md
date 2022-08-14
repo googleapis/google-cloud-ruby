@@ -1,5 +1,22 @@
 # Release History
 
+### 0.11.0 (2022-07-25)
+
+#### Features
+
+* Support for a new call analyzing whether a workload can be moved 
+* Support for new calls for restricting services and resources allowed in the workload environment ([#18845](https://github.com/googleapis/google-cloud-ruby/issues/18845)) 
+
+### 0.10.0 (2022-07-01)
+
+#### Features
+
+* Support for the ITAR compliance regime 
+* Updated minimum Ruby version to 2.6 ([#18443](https://github.com/googleapis/google-cloud-ruby/issues/18443)) 
+#### Bug Fixes
+
+* Fixed a crash when making certain long-running-operations status calls ([#18441](https://github.com/googleapis/google-cloud-ruby/issues/18441)) 
+
 ### 0.9.2 (2022-06-15)
 
 #### Bug Fixes
