@@ -1,5 +1,14 @@
 # Release History
 
+### 0.20.1 (2022-08-14)
+
+#### Bug Fixes
+
+* Update timeout and retry settings for batch_get_effective_iam_policies ([#18997](https://github.com/googleapis/google-cloud-ruby/issues/18997)) 
+#### Documentation
+
+* Document relationship clauses in search queries 
+
 ### 0.20.0 (2022-07-01)
 
 #### Features
