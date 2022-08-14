@@ -107,7 +107,7 @@ credentials are discovered.
 To configure your system for this, simply:
 
 1. [Download and install the Cloud SDK](https://cloud.google.com/sdk)
-2. Authenticate using OAuth 2.0 `$ gcloud auth login`
+2. Authenticate using OAuth 2.0 `$ gcloud auth application-default login`
 3. Write code as if already authenticated.
 
 **NOTE:** This is _not_ recommended for running in production. The Cloud SDK
