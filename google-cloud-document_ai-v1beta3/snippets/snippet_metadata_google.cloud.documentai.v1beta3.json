@@ -132,6 +132,46 @@
       ]
     },
     {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_ListProcessorTypes_sync",
+      "title": "Snippet for list_processor_types in DocumentProcessorService",
+      "description": "Basic snippet for list_processor_types in DocumentProcessorService",
+      "file": "document_processor_service/list_processor_types.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_processor_types",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#list_processor_types",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesResponse",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "ListProcessorTypes",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.ListProcessorTypes",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_ListProcessors_sync",
       "title": "Snippet for list_processors in DocumentProcessorService",
       "description": "Basic snippet for list_processors in DocumentProcessorService",
@@ -167,6 +207,246 @@
         {
           "start": 20,
           "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_GetProcessor_sync",
+      "title": "Snippet for get_processor in DocumentProcessorService",
+      "description": "Basic snippet for get_processor in DocumentProcessorService",
+      "file": "document_processor_service/get_processor.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_processor",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#get_processor",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::GetProcessorRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1beta3::Processor",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "GetProcessor",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.GetProcessor",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_GetProcessorVersion_sync",
+      "title": "Snippet for get_processor_version in DocumentProcessorService",
+      "description": "Basic snippet for get_processor_version in DocumentProcessorService",
+      "file": "document_processor_service/get_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#get_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::GetProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "GetProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.GetProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_ListProcessorVersions_sync",
+      "title": "Snippet for list_processor_versions in DocumentProcessorService",
+      "description": "Basic snippet for list_processor_versions in DocumentProcessorService",
+      "file": "document_processor_service/list_processor_versions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_processor_versions",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#list_processor_versions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsResponse",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "ListProcessorVersions",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.ListProcessorVersions",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_DeleteProcessorVersion_sync",
+      "title": "Snippet for delete_processor_version in DocumentProcessorService",
+      "description": "Basic snippet for delete_processor_version in DocumentProcessorService",
+      "file": "document_processor_service/delete_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#delete_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::DeleteProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "DeleteProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.DeleteProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_DeployProcessorVersion_sync",
+      "title": "Snippet for deploy_processor_version in DocumentProcessorService",
+      "description": "Basic snippet for deploy_processor_version in DocumentProcessorService",
+      "file": "document_processor_service/deploy_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "deploy_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#deploy_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::DeployProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "DeployProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.DeployProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_UndeployProcessorVersion_sync",
+      "title": "Snippet for undeploy_processor_version in DocumentProcessorService",
+      "description": "Basic snippet for undeploy_processor_version in DocumentProcessorService",
+      "file": "document_processor_service/undeploy_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "undeploy_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#undeploy_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::UndeployProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "UndeployProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.UndeployProcessorVersion",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
           "type": "FULL"
         }
       ]
@@ -315,6 +595,46 @@
         "method": {
           "short_name": "DisableProcessor",
           "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.DisableProcessor",
+          "service": {
+            "short_name": "DocumentProcessorService",
+            "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "documentai_v1beta3_generated_DocumentProcessorService_SetDefaultProcessorVersion_sync",
+      "title": "Snippet for set_default_processor_version in DocumentProcessorService",
+      "description": "Basic snippet for set_default_processor_version in DocumentProcessorService",
+      "file": "document_processor_service/set_default_processor_version.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_default_processor_version",
+        "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client#set_default_processor_version",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::DocumentAI::V1beta3::SetDefaultProcessorVersionRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "DocumentProcessorService::Client",
+          "full_name": "::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client"
+        },
+        "method": {
+          "short_name": "SetDefaultProcessorVersion",
+          "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService.SetDefaultProcessorVersion",
           "service": {
             "short_name": "DocumentProcessorService",
             "full_name": "google.cloud.documentai.v1beta3.DocumentProcessorService"
