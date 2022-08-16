@@ -327,7 +327,7 @@ def run_linkinator dir
     "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
     "^https://rubygems.org/gems/#{dir_without_version}"
   ]
-  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", skip_regexes.join(" ")]
+  linkinator_cmd = ["npx", "linkinator", "./doc", "--retry-errors", "--skip", skip_regexes.join(" ")]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
