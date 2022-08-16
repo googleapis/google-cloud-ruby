@@ -16,8 +16,8 @@
 require "google/cloud/pubsub"
 
 # Shows how to register callback to acknowledge method and access the result passed in
-class PubsubSubscriberExactlyOnce
-  def subscriber_exactly_once project_id:, topic_id:, subscription_id:
+class PubsubSubscriberExactlyOnceDelivery
+  def subscriber_exactly_once_delivery project_id:, topic_id:, subscription_id:
     pubsub = Google::Cloud::Pubsub.new project_id: project_id
     topic = pubsub.topic topic_id
     subscription = pubsub.subscription subscription_id
@@ -42,13 +42,13 @@ class PubsubSubscriberExactlyOnce
     project_id = "your-project-id"
     topic_id = "your-topic-id"
     subscription_id = "id-for-new-subcription" # subscription with exactly once delivery enabled
-    PubsubSubscriberExactlyOnce.new.subscriber_exactly_once project_id: project_id,
-                                                            topic_id: topic_id,
-                                                            subscription_id: subscription_id
+    PubsubSubscriberExactlyOnceDelivery.new.subscriber_exactly_once_delivery project_id: project_id,
+                                                                             topic_id: topic_id,
+                                                                             subscription_id: subscription_id
   end
 end
 
 if $PROGRAM_NAME == __FILE__
-  PubsubSubscriberExactlyOnce.run
+  PubsubSubscriberExactlyOnceDelivery.run
 end
 # [END pubsub_subscriber_exactly_once]
