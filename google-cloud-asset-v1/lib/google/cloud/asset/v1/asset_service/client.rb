@@ -112,8 +112,8 @@ module Google
 
                 default_config.rpcs.analyze_iam_policy_longrunning.timeout = 60.0
 
-                default_config.rpcs.batch_get_effective_iam_policies.timeout = 300.0
-                default_config.rpcs.batch_get_effective_iam_policies.retry_policy = {
+                default_config.rpcs.query_assets.timeout = 200.0
+                default_config.rpcs.query_assets.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
@@ -1857,6 +1857,158 @@ module Google
             end
 
             ##
+            # Issue a job that queries assets using a SQL statement compatible with
+            # [BigQuery Standard
+            # SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+            #
+            # If the query execution finishes within timeout and there's no pagination,
+            # the full query results will be returned in the `QueryAssetsResponse`.
+            #
+            # Otherwise, full query results can be obtained by issuing extra requests
+            # with the `job_reference` from the a previous `QueryAssets` call.
+            #
+            # Note, the query result has approximately 10 GB limitation enforced by
+            # BigQuery
+            # https://cloud.google.com/bigquery/docs/best-practices-performance-output,
+            # queries return larger results will result in errors.
+            #
+            # @overload query_assets(request, options = nil)
+            #   Pass arguments to `query_assets` via a request object, either of type
+            #   {::Google::Cloud::Asset::V1::QueryAssetsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Asset::V1::QueryAssetsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload query_assets(parent: nil, statement: nil, job_reference: nil, page_size: nil, page_token: nil, timeout: nil, read_time_window: nil, read_time: nil, output_config: nil)
+            #   Pass arguments to `query_assets` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The relative name of the root asset. This can only be an
+            #     organization number (such as "organizations/123"), a project ID (such as
+            #     "projects/my-project-id"), or a project number (such as "projects/12345"),
+            #     or a folder number (such as "folders/123").
+            #
+            #     Only assets belonging to the `parent` will be returned.
+            #   @param statement [::String]
+            #     Optional. A SQL statement that's compatible with [BigQuery Standard
+            #     SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
+            #   @param job_reference [::String]
+            #     Optional. Reference to the query job, which is from the
+            #     `QueryAssetsResponse` of previous `QueryAssets` call.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of rows to return in the results. Responses
+            #     are limited to 10 MB and 1000 rows.
+            #
+            #     By default, the maximum row count is 1000. When the byte or row count limit
+            #     is reached, the rest of the query results will be paginated.
+            #
+            #     The field will be ignored when [output_config] is specified.
+            #   @param page_token [::String]
+            #     Optional. A page token received from previous `QueryAssets`.
+            #
+            #     The field will be ignored when [output_config] is specified.
+            #   @param timeout [::Google::Protobuf::Duration, ::Hash]
+            #     Optional. Specifies the maximum amount of time that the client is willing
+            #     to wait for the query to complete. By default, this limit is 5 min for the
+            #     first query, and 1 minute for the following queries. If the query is
+            #     complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
+            #     false.
+            #
+            #     Like BigQuery [jobs.query
+            #     API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
+            #     The call is not guaranteed to wait for the specified timeout; it typically
+            #     returns after around 200 seconds (200,000 milliseconds), even if the query
+            #     is not complete.
+            #
+            #     The field will be ignored when [output_config] is specified.
+            #   @param read_time_window [::Google::Cloud::Asset::V1::TimeWindow, ::Hash]
+            #     Optional. [start_time] is required. [start_time] must be less than
+            #     [end_time] Defaults [end_time] to now if [start_time] is set and
+            #     [end_time] isn't. Maximum permitted time range is 7 days.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Optional. Queries cloud assets as they appeared at the specified point in
+            #     time.
+            #   @param output_config [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig, ::Hash]
+            #     Optional. Destination where the query results will be saved.
+            #
+            #     When this field is specified, the query results won't be saved in the
+            #     [QueryAssetsResponse.query_result]. Instead
+            #     [QueryAssetsResponse.output_config] will be set.
+            #
+            #     Meanwhile, [QueryAssetsResponse.job_reference] will be set and can be used
+            #     to check the status of the query job when passed to a following
+            #     [QueryAssets] API call.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Asset::V1::QueryAssetsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Asset::V1::QueryAssetsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/asset/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Asset::V1::AssetService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Asset::V1::QueryAssetsRequest.new
+            #
+            #   # Call the query_assets method.
+            #   result = client.query_assets request
+            #
+            #   # The returned object is of type Google::Cloud::Asset::V1::QueryAssetsResponse.
+            #   p result
+            #
+            def query_assets request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Asset::V1::QueryAssetsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.query_assets.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Asset::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.query_assets.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.query_assets.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @asset_service_stub.call_rpc :query_assets, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Creates a saved query in a parent project/folder/organization.
             #
             # @overload create_saved_query(request, options = nil)
@@ -2646,6 +2798,11 @@ module Google
                 #
                 attr_reader :analyze_move
                 ##
+                # RPC-specific configuration for `query_assets`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :query_assets
+                ##
                 # RPC-specific configuration for `create_saved_query`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2704,6 +2861,8 @@ module Google
                   @analyze_iam_policy_longrunning = ::Gapic::Config::Method.new analyze_iam_policy_longrunning_config
                   analyze_move_config = parent_rpcs.analyze_move if parent_rpcs.respond_to? :analyze_move
                   @analyze_move = ::Gapic::Config::Method.new analyze_move_config
+                  query_assets_config = parent_rpcs.query_assets if parent_rpcs.respond_to? :query_assets
+                  @query_assets = ::Gapic::Config::Method.new query_assets_config
                   create_saved_query_config = parent_rpcs.create_saved_query if parent_rpcs.respond_to? :create_saved_query
                   @create_saved_query = ::Gapic::Config::Method.new create_saved_query_config
                   get_saved_query_config = parent_rpcs.get_saved_query if parent_rpcs.respond_to? :get_saved_query
