@@ -24,7 +24,8 @@ class PubsubSubscriberExactlyOnceDelivery
     subscriber   = subscription.listen do |received_message|
       puts "Received message: #{received_message.data}"
 
-      # Pass in callback to access the acknowledge result
+      # Pass in callback to access the acknowledge result.
+      # For subscription with Exactly once delivery disabled the result will be success always.
       received_message.acknowledge! do |result|
         puts "Acknowledge result's status: #{result.status}"
       end
