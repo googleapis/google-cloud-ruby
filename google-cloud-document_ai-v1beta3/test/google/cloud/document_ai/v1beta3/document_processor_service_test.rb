@@ -59,6 +59,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     name = "hello world"
     document = {}
     skip_human_review = true
+    field_mask = {}
 
     process_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :process_document, name
@@ -68,6 +69,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["document"]
       assert_equal true, request["skip_human_review"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["field_mask"]
       refute_nil options
     end
 
@@ -78,31 +80,31 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       end
 
       # Use hash object
-      client.process_document({ inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review }) do |response, operation|
+      client.process_document({ inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review, field_mask: field_mask }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.process_document inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review do |response, operation|
+      client.process_document inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review, field_mask: field_mask do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.process_document ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review) do |response, operation|
+      client.process_document ::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review, field_mask: field_mask) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.process_document({ inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review }, grpc_options) do |response, operation|
+      client.process_document({ inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review, field_mask: field_mask }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.process_document(::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review), grpc_options) do |response, operation|
+      client.process_document(::Google::Cloud::DocumentAI::V1beta3::ProcessRequest.new(inline_document: inline_document, name: name, document: document, skip_human_review: skip_human_review, field_mask: field_mask), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -243,6 +245,73 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     end
   end
 
+  def test_list_processor_types
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_processor_types_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_processor_types, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_processor_types_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_processor_types({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_processor_types parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_processor_types ::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_processor_types({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_processor_types(::Google::Cloud::DocumentAI::V1beta3::ListProcessorTypesRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_processor_types_client_stub.call_rpc_count
+    end
+  end
+
   def test_list_processors
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::DocumentAI::V1beta3::ListProcessorsResponse.new
@@ -307,6 +376,378 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
 
       # Verify method calls
       assert_equal 5, list_processors_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_processor
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DocumentAI::V1beta3::Processor.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_processor_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_processor, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::GetProcessorRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_processor_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_processor({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_processor name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_processor ::Google::Cloud::DocumentAI::V1beta3::GetProcessorRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_processor({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_processor(::Google::Cloud::DocumentAI::V1beta3::GetProcessorRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_processor_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_processor_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DocumentAI::V1beta3::ProcessorVersion.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_processor_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_processor_version, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::GetProcessorVersionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_processor_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_processor_version({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_processor_version name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_processor_version ::Google::Cloud::DocumentAI::V1beta3::GetProcessorVersionRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_processor_version({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_processor_version(::Google::Cloud::DocumentAI::V1beta3::GetProcessorVersionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_processor_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_processor_versions
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+
+    list_processor_versions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_processor_versions, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_processor_versions_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_processor_versions({ parent: parent, page_size: page_size, page_token: page_token }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_processor_versions parent: parent, page_size: page_size, page_token: page_token do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_processor_versions ::Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_processor_versions({ parent: parent, page_size: page_size, page_token: page_token }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_processor_versions(::Google::Cloud::DocumentAI::V1beta3::ListProcessorVersionsRequest.new(parent: parent, page_size: page_size, page_token: page_token), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_processor_versions_client_stub.call_rpc_count
+    end
+  end
+
+  def test_delete_processor_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    delete_processor_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_processor_version, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::DeleteProcessorVersionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_processor_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_processor_version({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_processor_version name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_processor_version ::Google::Cloud::DocumentAI::V1beta3::DeleteProcessorVersionRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_processor_version({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_processor_version(::Google::Cloud::DocumentAI::V1beta3::DeleteProcessorVersionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_processor_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_deploy_processor_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    deploy_processor_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :deploy_processor_version, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::DeployProcessorVersionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, deploy_processor_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.deploy_processor_version({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.deploy_processor_version name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.deploy_processor_version ::Google::Cloud::DocumentAI::V1beta3::DeployProcessorVersionRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.deploy_processor_version({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.deploy_processor_version(::Google::Cloud::DocumentAI::V1beta3::DeployProcessorVersionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, deploy_processor_version_client_stub.call_rpc_count
+    end
+  end
+
+  def test_undeploy_processor_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    undeploy_processor_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :undeploy_processor_version, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::UndeployProcessorVersionRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, undeploy_processor_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.undeploy_processor_version({ name: name }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.undeploy_processor_version name: name do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.undeploy_processor_version ::Google::Cloud::DocumentAI::V1beta3::UndeployProcessorVersionRequest.new(name: name) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.undeploy_processor_version({ name: name }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.undeploy_processor_version(::Google::Cloud::DocumentAI::V1beta3::UndeployProcessorVersionRequest.new(name: name), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, undeploy_processor_version_client_stub.call_rpc_count
     end
   end
 
@@ -559,6 +1000,71 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     end
   end
 
+  def test_set_default_processor_version
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    processor = "hello world"
+    default_processor_version = "hello world"
+
+    set_default_processor_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :set_default_processor_version, name
+      assert_kind_of ::Google::Cloud::DocumentAI::V1beta3::SetDefaultProcessorVersionRequest, request
+      assert_equal "hello world", request["processor"]
+      assert_equal "hello world", request["default_processor_version"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, set_default_processor_version_client_stub do
+      # Create client
+      client = ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.set_default_processor_version({ processor: processor, default_processor_version: default_processor_version }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.set_default_processor_version processor: processor, default_processor_version: default_processor_version do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.set_default_processor_version ::Google::Cloud::DocumentAI::V1beta3::SetDefaultProcessorVersionRequest.new(processor: processor, default_processor_version: default_processor_version) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.set_default_processor_version({ processor: processor, default_processor_version: default_processor_version }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.set_default_processor_version(::Google::Cloud::DocumentAI::V1beta3::SetDefaultProcessorVersionRequest.new(processor: processor, default_processor_version: default_processor_version), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, set_default_processor_version_client_stub.call_rpc_count
+    end
+  end
+
   def test_review_document
     # Create GRPC objects.
     grpc_response = ::Google::Longrunning::Operation.new
@@ -572,6 +1078,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
     document = {}
     enable_schema_validation = true
     priority = :DEFAULT
+    document_schema = {}
 
     review_document_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :review_document, name
@@ -582,6 +1089,7 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::Document), request["document"]
       assert_equal true, request["enable_schema_validation"]
       assert_equal :DEFAULT, request["priority"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::DocumentAI::V1beta3::DocumentSchema), request["document_schema"]
       refute_nil options
     end
 
@@ -592,35 +1100,35 @@ class ::Google::Cloud::DocumentAI::V1beta3::DocumentProcessorService::ClientTest
       end
 
       # Use hash object
-      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority }) do |response, operation|
+      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority, document_schema: document_schema }) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.review_document inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority do |response, operation|
+      client.review_document inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority, document_schema: document_schema do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.review_document ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority) do |response, operation|
+      client.review_document ::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority, document_schema: document_schema) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority }, grpc_options) do |response, operation|
+      client.review_document({ inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority, document_schema: document_schema }, grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.review_document(::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority), grpc_options) do |response, operation|
+      client.review_document(::Google::Cloud::DocumentAI::V1beta3::ReviewDocumentRequest.new(inline_document: inline_document, human_review_config: human_review_config, document: document, enable_schema_validation: enable_schema_validation, priority: priority, document_schema: document_schema), grpc_options) do |response, operation|
         assert_kind_of Gapic::Operation, response
         assert_equal grpc_response, response.grpc_op
         assert_equal grpc_operation, operation
