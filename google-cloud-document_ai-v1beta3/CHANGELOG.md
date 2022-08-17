@@ -1,5 +1,20 @@
 # Release History
 
+### 0.13.0 (2022-08-17)
+
+#### Features
+
+* Added corrected_key_text and corrected_value_text to the FormField type 
+* Added detected_barcodes to the Page type 
+* Added field_mask argument to process requests 
+* Added integer_value and float_value to the NormalizedValue type 
+* Added parent_ids to the Revision type 
+* Support for fetching processor resources ([#19026](https://github.com/googleapis/google-cloud-ruby/issues/19026)) 
+* Support for listing processor types 
+* Support for listing, fetching, deleting, deploying, and undeploying processor versions 
+* Support for location management calls 
+* Support for setting the default processor version 
+
 ### 0.12.0 (2022-07-02)
 
 #### Features
