@@ -63,6 +63,10 @@
       "component": "google-cloud-api_gateway-v1",
       "version_file": "lib/google/cloud/api_gateway/v1/version.rb"
     },
+    "google-cloud-api_keys": {
+      "component": "google-cloud-api_keys",
+      "version_file": "lib/google/cloud/api_keys/version.rb"
+    },
     "google-cloud-api_keys-v2": {
       "component": "google-cloud-api_keys-v2",
       "version_file": "lib/google/cloud/api_keys/v2/version.rb"
