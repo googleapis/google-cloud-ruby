@@ -1,0 +1,251 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.appengine.v1",
+  "libraryPackage": "::Google::Cloud::AppEngine::V1",
+  "services": {
+    "Applications": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::Applications::Client",
+          "rpcs": {
+            "GetApplication": {
+              "methods": [
+                "get_application"
+              ]
+            },
+            "CreateApplication": {
+              "methods": [
+                "create_application"
+              ]
+            },
+            "UpdateApplication": {
+              "methods": [
+                "update_application"
+              ]
+            },
+            "RepairApplication": {
+              "methods": [
+                "repair_application"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Services": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::Services::Client",
+          "rpcs": {
+            "ListServices": {
+              "methods": [
+                "list_services"
+              ]
+            },
+            "GetService": {
+              "methods": [
+                "get_service"
+              ]
+            },
+            "UpdateService": {
+              "methods": [
+                "update_service"
+              ]
+            },
+            "DeleteService": {
+              "methods": [
+                "delete_service"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Versions": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::Versions::Client",
+          "rpcs": {
+            "ListVersions": {
+              "methods": [
+                "list_versions"
+              ]
+            },
+            "GetVersion": {
+              "methods": [
+                "get_version"
+              ]
+            },
+            "CreateVersion": {
+              "methods": [
+                "create_version"
+              ]
+            },
+            "UpdateVersion": {
+              "methods": [
+                "update_version"
+              ]
+            },
+            "DeleteVersion": {
+              "methods": [
+                "delete_version"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Instances": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::Instances::Client",
+          "rpcs": {
+            "ListInstances": {
+              "methods": [
+                "list_instances"
+              ]
+            },
+            "GetInstance": {
+              "methods": [
+                "get_instance"
+              ]
+            },
+            "DeleteInstance": {
+              "methods": [
+                "delete_instance"
+              ]
+            },
+            "DebugInstance": {
+              "methods": [
+                "debug_instance"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "Firewall": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::Firewall::Client",
+          "rpcs": {
+            "ListIngressRules": {
+              "methods": [
+                "list_ingress_rules"
+              ]
+            },
+            "BatchUpdateIngressRules": {
+              "methods": [
+                "batch_update_ingress_rules"
+              ]
+            },
+            "CreateIngressRule": {
+              "methods": [
+                "create_ingress_rule"
+              ]
+            },
+            "GetIngressRule": {
+              "methods": [
+                "get_ingress_rule"
+              ]
+            },
+            "UpdateIngressRule": {
+              "methods": [
+                "update_ingress_rule"
+              ]
+            },
+            "DeleteIngressRule": {
+              "methods": [
+                "delete_ingress_rule"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AuthorizedDomains": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::AuthorizedDomains::Client",
+          "rpcs": {
+            "ListAuthorizedDomains": {
+              "methods": [
+                "list_authorized_domains"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "AuthorizedCertificates": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::AuthorizedCertificates::Client",
+          "rpcs": {
+            "ListAuthorizedCertificates": {
+              "methods": [
+                "list_authorized_certificates"
+              ]
+            },
+            "GetAuthorizedCertificate": {
+              "methods": [
+                "get_authorized_certificate"
+              ]
+            },
+            "CreateAuthorizedCertificate": {
+              "methods": [
+                "create_authorized_certificate"
+              ]
+            },
+            "UpdateAuthorizedCertificate": {
+              "methods": [
+                "update_authorized_certificate"
+              ]
+            },
+            "DeleteAuthorizedCertificate": {
+              "methods": [
+                "delete_authorized_certificate"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "DomainMappings": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::AppEngine::V1::DomainMappings::Client",
+          "rpcs": {
+            "ListDomainMappings": {
+              "methods": [
+                "list_domain_mappings"
+              ]
+            },
+            "GetDomainMapping": {
+              "methods": [
+                "get_domain_mapping"
+              ]
+            },
+            "CreateDomainMapping": {
+              "methods": [
+                "create_domain_mapping"
+              ]
+            },
+            "UpdateDomainMapping": {
+              "methods": [
+                "update_domain_mapping"
+              ]
+            },
+            "DeleteDomainMapping": {
+              "methods": [
+                "delete_domain_mapping"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
