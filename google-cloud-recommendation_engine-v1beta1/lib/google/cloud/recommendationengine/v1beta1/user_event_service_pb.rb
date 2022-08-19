@@ -11,7 +11,6 @@ require 'google/cloud/recommendationengine/v1beta1/import_pb'
 require 'google/cloud/recommendationengine/v1beta1/user_event_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/type/date_pb'
 require 'google/api/client_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

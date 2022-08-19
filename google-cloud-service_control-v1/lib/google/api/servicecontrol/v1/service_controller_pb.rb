@@ -7,7 +7,6 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/servicecontrol/v1/check_error_pb'
 require 'google/api/servicecontrol/v1/operation_pb'
-require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
