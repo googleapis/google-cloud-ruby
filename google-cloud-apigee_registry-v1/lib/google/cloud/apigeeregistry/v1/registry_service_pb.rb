@@ -39,6 +39,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.apigeeregistry.v1.DeleteApiRequest" do
       optional :name, :string, 1
+      optional :force, :bool, 2
     end
     add_message "google.cloud.apigeeregistry.v1.ListApiVersionsRequest" do
       optional :parent, :string, 1
@@ -65,6 +66,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.apigeeregistry.v1.DeleteApiVersionRequest" do
       optional :name, :string, 1
+      optional :force, :bool, 2
     end
     add_message "google.cloud.apigeeregistry.v1.ListApiSpecsRequest" do
       optional :parent, :string, 1
