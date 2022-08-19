@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/field_behavior_pb'
 require 'google/datastore/v1/entity_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
