@@ -15,7 +15,7 @@
 require_relative "helper"
 require_relative "../subscriptions.rb"
 require_relative "../pubsub_create_subscription_with_filter.rb"
-require_relative "../pubsub_subscriber_exactly_once.rb"
+require_relative "../pubsub_subscriber_exactly_once_delivery.rb"
 require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
 
 describe "subscriptions" do
@@ -112,9 +112,9 @@ describe "subscriptions" do
 
     expect_with_retry "pubsub_subscriber_async_pull_with_ack_response" do
       out, _err = capture_io do
-        PubsubSubscriberExactlyOnce.new.subscriber_exactly_once project_id: project_id,
-                                                                topic_id: topic_id,
-                                                                subscription_id: subscription_id
+        PubsubSubscriberExactlyOnceDelivery.new.subscriber_exactly_once_delivery project_id: project_id,
+                                                                                 topic_id: topic_id,
+                                                                                 subscription_id: subscription_id
       end
 
       assert_includes out, "Received message: This is a test message."
