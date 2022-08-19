@@ -9,6 +9,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :ip_addresses, :string, 1
       repeated :domains, :string, 2
       repeated :signatures, :message, 3, "google.cloud.securitycenter.v1.Indicator.ProcessSignature"
+      repeated :uris, :string, 4
     end
     add_message "google.cloud.securitycenter.v1.Indicator.ProcessSignature" do
       oneof :signature do

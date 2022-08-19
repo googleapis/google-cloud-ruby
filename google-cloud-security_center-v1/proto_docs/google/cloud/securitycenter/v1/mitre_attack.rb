@@ -198,6 +198,12 @@ module Google
 
             # T1046
             NETWORK_SERVICE_DISCOVERY = 32
+
+            # T1134
+            ACCESS_TOKEN_MANIPULATION = 33
+
+            # T1548
+            ABUSE_ELEVATION_CONTROL_MECHANISM = 34
           end
         end
       end
