@@ -1,5 +1,11 @@
 # Release History
 
+### 2.12.1 (2022-08-21)
+
+#### Bug Fixes
+
+* update non EOS ack to return Success always ([#19023](https://github.com/googleapis/google-cloud-ruby/issues/19023)) 
+
 ### 2.12.0 (2022-08-09)
 
 #### Features
