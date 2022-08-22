@@ -58,7 +58,7 @@ describe "HMAC Snippets" do
     mock.expect :list_project_hmac_keys,
                 hmac_keys_metadata_gapi,
                 [project], max_results: nil, page_token: nil, service_account_email: nil,
-                show_deleted_keys: nil, user_project: nil
+                show_deleted_keys: nil, user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     Google::Cloud::Storage.stub :new, storage do
@@ -74,7 +74,7 @@ describe "HMAC Snippets" do
 
   it "create_hmac_key" do
     mock = Minitest::Mock.new
-    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: nil
+    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     Google::Cloud::Storage.stub :new, storage do
@@ -90,7 +90,7 @@ describe "HMAC Snippets" do
 
   it "get_hmac_key" do
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     Google::Cloud::Storage.stub :new, storage do
@@ -107,10 +107,10 @@ describe "HMAC Snippets" do
     mock = Minitest::Mock.new
     inactive_gapi = hmac_key_metadata_gapi.dup
     inactive_gapi.state = "INACTIVE"
-    mock.expect :get_project_hmac_key, inactive_gapi, [project, access_id], user_project: nil
+    mock.expect :get_project_hmac_key, inactive_gapi, [project, access_id], user_project: nil, options: {}
     # Expect any HmacKeyMetadata rather than `hmac_key_metadata_gapi` due to mock matching error.
     mock.expect :update_project_hmac_key, hmac_key_metadata_gapi,
-                [project, access_id, Google::Apis::StorageV1::HmacKeyMetadata], user_project: nil
+                [project, access_id, Google::Apis::StorageV1::HmacKeyMetadata], user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     Google::Cloud::Storage.stub :new, storage do
@@ -125,12 +125,12 @@ describe "HMAC Snippets" do
 
   it "deactivate_hmac_key" do
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
     inactive_gapi = hmac_key_metadata_gapi.dup
     inactive_gapi.state = "INACTIVE"
     # Expect any HmacKeyMetadata rather than `inactive_gapi` due to mock matching error.
     mock.expect :update_project_hmac_key, inactive_gapi,
-                [project, access_id, Google::Apis::StorageV1::HmacKeyMetadata], user_project: nil
+                [project, access_id, Google::Apis::StorageV1::HmacKeyMetadata], user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     Google::Cloud::Storage.stub :new, storage do
@@ -145,9 +145,9 @@ describe "HMAC Snippets" do
 
   it "delete_hmac_key" do
     mock = Minitest::Mock.new
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil
-    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil
-    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
+    mock.expect :delete_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
+    mock.expect :get_project_hmac_key, hmac_key_metadata_gapi, [project, access_id], user_project: nil, options: {}
     storage.service.mocked_service = mock
 
     Google::Cloud::Storage.stub :new, storage do
