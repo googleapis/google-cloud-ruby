@@ -1069,9 +1069,9 @@ module Google
         #     that it originates from.
         # @!attribute [rw] query_record
         #   @return [::String]
-        #     Name of the query record.
+        #     The name of the answer record.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/queryRecords/\\{query_record}
+        #     projects/\\{project}/locations/\\{location}/answerRecords/\\{answer_record}
         # @!attribute [rw] source
         #   @return [::String]
         #     The knowledge document that this answer was extracted from.
@@ -1109,9 +1109,9 @@ module Google
         #     it originates from.
         # @!attribute [rw] query_record
         #   @return [::String]
-        #     Name of the query record.
+        #     The name of the answer record.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/queryRecords/\\{query_record}.
+        #     projects/\\{project}/locations/\\{location}/answerRecords/\\{answer_record}
         # @!attribute [rw] source
         #   @return [::String]
         #     The knowledge document that this answer was extracted from.
@@ -1146,9 +1146,9 @@ module Google
         #     which it originates.
         # @!attribute [rw] query_record
         #   @return [::String]
-        #     Name of the query record.
+        #     The name of the answer record.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/queryRecords/\\{query_record}
+        #     projects/\\{project}/locations/\\{location}/answerRecords/\\{answer_record}
         class SmartReplyData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1178,9 +1178,9 @@ module Google
         #     document from which it originates.
         # @!attribute [rw] query_record
         #   @return [::String]
-        #     Name of the query record.
+        #     The name of the answer record.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/queryRecords/\\{query_record}
+        #     projects/\\{project}/locations/\\{location}/answerRecords/\\{answer_record}
         class SmartComposeSuggestionData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
