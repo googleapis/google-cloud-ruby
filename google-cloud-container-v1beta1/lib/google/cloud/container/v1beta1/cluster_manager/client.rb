@@ -2554,7 +2554,7 @@ module Google
             #   @param name [::String]
             #     The name (project, location, cluster, node pool id) of the node pool to
             #     complete upgrade.
-            #     Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+            #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]

@@ -35,6 +35,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :row_restriction, :string, 2
       oneof :output_format_serialization_options do
         optional :arrow_serialization_options, :message, 3, "google.cloud.bigquery.storage.v1.ArrowSerializationOptions"
+        optional :avro_serialization_options, :message, 4, "google.cloud.bigquery.storage.v1.AvroSerializationOptions"
       end
     end
     add_message "google.cloud.bigquery.storage.v1.ReadStream" do

@@ -39,6 +39,37 @@ module Google
             end
 
             ##
+            # Create a fully-qualified AttributionSettings resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/attributionSettings`
+            #
+            # @param property [String]
+            #
+            # @return [::String]
+            def attribution_settings_path property:
+              "properties/#{property}/attributionSettings"
+            end
+
+            ##
+            # Create a fully-qualified Audience resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `properties/{property}/audiences/{audience}`
+            #
+            # @param property [String]
+            # @param audience [String]
+            #
+            # @return [::String]
+            def audience_path property:, audience:
+              raise ::ArgumentError, "property cannot contain /" if property.to_s.include? "/"
+
+              "properties/#{property}/audiences/#{audience}"
+            end
+
+            ##
             # Create a fully-qualified ConversionEvent resource string.
             #
             # The resource will be in the following format:

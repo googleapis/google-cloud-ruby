@@ -79,13 +79,14 @@ def create_instance project:, zone:, instance_name:,
     # Send the insert request.
     operation = client.insert request
     # Wait for the create operation to complete.
-    operation = wait_until_done operation: operation.operation, project: project
+    operation = wait_until_done operation: operation
 
-    if operation.error.nil?
-      warn "Warning during creation:", operation.warnings unless operation.warnings.empty?
-      puts "Instance #{instance_name} created."
-    else
+    if operation.error?
       warn "Error during creation:", operation.error
+    else
+      compute_operation = operation.operation
+      warn "Warning during creation:", compute_operation.warnings unless compute_operation.warnings.empty?
+      puts "Instance #{instance_name} created."
     end
   rescue ::Google::Cloud::Error => e
     warn "Exception during creation:", e
@@ -162,13 +163,14 @@ def delete_instance project:, zone:, instance_name:
     # Make the request to delete a VM instance.
     operation = client.delete project: project, zone: zone, instance: instance_name
     # Wait for the delete operation to complete.
-    operation = wait_until_done operation: operation.operation, project: project
+    operation = wait_until_done operation: operation
 
-    if operation.error.nil?
-      warn "Warning during deletion:", operation.warnings unless operation.warnings.empty?
-      puts "Instance #{instance_name} deleted."
-    else
+    if operation.error?
       warn "Error during deletion:", operation.error
+    else
+      compute_operation = operation.operation
+      warn "Warning during creation:", compute_operation.warnings unless compute_operation.warnings.empty?
+      puts "Instance #{instance_name} deleted."
     end
   rescue ::Google::Cloud::Error => e
     warn "Exception during deletion:", e
@@ -182,35 +184,11 @@ require "time"
 # Waits for an operation to be completed. Calling this method
 # will block until the operation is finished or timed out.
 #
-# @param [::Google::Cloud::Compute::V1::Operation] operation The operation to wait for.
-# @param [String] project project ID or project number of the Cloud project you want to use.
+# @param [::Gapic::GenericLRO::Operation] operation The operation to wait for.
 # @param [Numeric] timeout seconds until timeout (default is 3 minutes)
-# @return [::Google::Cloud::Compute::V1::Operation] Finished Operation object.
-def wait_until_done operation:, project:, timeout: 3 * 60
-  request = { operation: operation.name, project: project }
-  if !operation.zone.empty?
-    client = ::Google::Cloud::Compute::V1::ZoneOperations::Rest::Client.new
-    # Operation#zone returns a full URL address of a zone, so we need to extract just the name.
-    request[:zone] = operation.zone.rpartition("/").last
-  elsif !operation.region.empty?
-    client = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new
-    # Operation#region returns a full URL address of a region, so we need to extract just the name.
-    request[:region] = operation.region.rpartition("/").last
-  else
-    client = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new
-  end
-  deadline = Time.now + timeout
-  # Wait until the operation is not RUNNING.
-  # #wait is on a best-effort basis and does not guarantee to block until either
-  # the operation is DONE or the deadline is reached.
-  while operation.status == :RUNNING
-    now = Time.now
-    if now > deadline
-      raise "operation timed out"
-    end
-    options = { timeout: deadline - now }
-    operation = client.wait request, options
-  end
-  operation
+# @return [::Gapic::GenericLRO::Operation] Finished Operation object.
+def wait_until_done operation:, timeout: 3 * 60
+  retry_policy = ::Gapic::Operation::RetryPolicy.new initial_delay: 0.2, multiplier: 2, max_delay: 1, timeout: timeout
+  operation.wait_until_done! retry_policy: retry_policy
 end
 # [END compute_instances_operation_check]

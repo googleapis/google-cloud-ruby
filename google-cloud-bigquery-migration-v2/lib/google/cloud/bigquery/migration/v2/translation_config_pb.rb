@@ -34,6 +34,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :sql_server_dialect, :message, 11, "google.cloud.bigquery.migration.v2.SQLServerDialect"
         optional :postgresql_dialect, :message, 12, "google.cloud.bigquery.migration.v2.PostgresqlDialect"
         optional :presto_dialect, :message, 13, "google.cloud.bigquery.migration.v2.PrestoDialect"
+        optional :mysql_dialect, :message, 14, "google.cloud.bigquery.migration.v2.MySQLDialect"
       end
     end
     add_message "google.cloud.bigquery.migration.v2.BigQueryDialect" do
@@ -67,6 +68,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.migration.v2.PostgresqlDialect" do
     end
     add_message "google.cloud.bigquery.migration.v2.PrestoDialect" do
+    end
+    add_message "google.cloud.bigquery.migration.v2.MySQLDialect" do
     end
     add_message "google.cloud.bigquery.migration.v2.ObjectNameMappingList" do
       repeated :name_map, :message, 1, "google.cloud.bigquery.migration.v2.ObjectNameMapping"
@@ -126,6 +129,7 @@ module Google
           SQLServerDialect = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.migration.v2.SQLServerDialect").msgclass
           PostgresqlDialect = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.migration.v2.PostgresqlDialect").msgclass
           PrestoDialect = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.migration.v2.PrestoDialect").msgclass
+          MySQLDialect = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.migration.v2.MySQLDialect").msgclass
           ObjectNameMappingList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.migration.v2.ObjectNameMappingList").msgclass
           ObjectNameMapping = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.migration.v2.ObjectNameMapping").msgclass
           NameMappingKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.migration.v2.NameMappingKey").msgclass

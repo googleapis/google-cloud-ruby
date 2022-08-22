@@ -229,11 +229,13 @@ class MockStorage < Minitest::Spec
 
   def get_bucket_args if_metageneration_match: nil,
                       if_metageneration_not_match: nil,
-                      user_project: nil
+                      user_project: nil,
+                      options: {}
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
-      user_project: user_project
+      user_project: user_project,
+      options: options
     }
   end
 
@@ -241,23 +243,27 @@ class MockStorage < Minitest::Spec
                         if_metageneration_not_match: nil,
                         predefined_acl: nil,
                         predefined_default_object_acl: nil,
-                        user_project: nil
+                        user_project: nil,
+                        options: {}
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       predefined_acl: predefined_acl,
       predefined_default_object_acl: predefined_default_object_acl,
-      user_project: user_project
+      user_project: user_project,
+      options: options
     }
   end
 
   def delete_bucket_args if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
-                         user_project: nil
+                         user_project: nil,
+                         options: {}
     {
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
-      user_project: user_project
+      user_project: user_project,
+      options: options
     }
   end
 
@@ -313,7 +319,8 @@ class MockStorage < Minitest::Spec
                         if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
                         predefined_acl: nil,
-                        user_project: nil
+                        user_project: nil,
+                        options: {}
     opts = {
       generation: generation,
       if_generation_match: if_generation_match,
@@ -321,7 +328,8 @@ class MockStorage < Minitest::Spec
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
       predefined_acl: predefined_acl,
-      user_project: user_project
+      user_project: user_project,
+      options: options
     }
   end
 
@@ -330,14 +338,16 @@ class MockStorage < Minitest::Spec
                          if_generation_not_match: nil,
                          if_metageneration_match: nil,
                          if_metageneration_not_match: nil,
-                         user_project: nil
+                         user_project: nil,
+                         options: {}
     {
       generation: generation,
       if_generation_match: if_generation_match,
       if_generation_not_match: if_generation_not_match,
       if_metageneration_match: if_metageneration_match,
       if_metageneration_not_match: if_metageneration_not_match,
-      user_project: user_project
+      user_project: user_project,
+      options: options
     }
   end
 

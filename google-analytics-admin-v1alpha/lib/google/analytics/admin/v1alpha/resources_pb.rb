@@ -20,6 +20,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.analytics.admin.v1alpha.Property" do
       optional :name, :string, 1
+      optional :property_type, :enum, 14, "google.analytics.admin.v1alpha.PropertyType"
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
       optional :parent, :string, 2
@@ -109,6 +110,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.analytics.admin.v1alpha.PropertySummary" do
       optional :property, :string, 1
       optional :display_name, :string, 2
+      optional :property_type, :enum, 3, "google.analytics.admin.v1alpha.PropertyType"
+      optional :parent, :string, 4
     end
     add_message "google.analytics.admin.v1alpha.MeasurementProtocolSecret" do
       optional :name, :string, 1
@@ -144,6 +147,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :custom_metric, :message, 14, "google.analytics.admin.v1alpha.CustomMetric"
         optional :data_retention_settings, :message, 15, "google.analytics.admin.v1alpha.DataRetentionSettings"
         optional :data_stream, :message, 18, "google.analytics.admin.v1alpha.DataStream"
+        optional :attribution_settings, :message, 20, "google.analytics.admin.v1alpha.AttributionSettings"
       end
     end
     add_message "google.analytics.admin.v1alpha.DisplayVideo360AdvertiserLink" do
@@ -238,6 +242,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :THIRTY_EIGHT_MONTHS, 5
       value :FIFTY_MONTHS, 6
     end
+    add_message "google.analytics.admin.v1alpha.AttributionSettings" do
+      optional :name, :string, 1
+      optional :acquisition_conversion_event_lookback_window, :enum, 2, "google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow"
+      optional :other_conversion_event_lookback_window, :enum, 3, "google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow"
+      optional :reporting_attribution_model, :enum, 4, "google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel"
+    end
+    add_enum "google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow" do
+      value :ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED, 0
+      value :ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_7_DAYS, 1
+      value :ACQUISITION_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS, 2
+    end
+    add_enum "google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow" do
+      value :OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_UNSPECIFIED, 0
+      value :OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_30_DAYS, 1
+      value :OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_60_DAYS, 2
+      value :OTHER_CONVERSION_EVENT_LOOKBACK_WINDOW_90_DAYS, 3
+    end
+    add_enum "google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel" do
+      value :REPORTING_ATTRIBUTION_MODEL_UNSPECIFIED, 0
+      value :CROSS_CHANNEL_DATA_DRIVEN, 1
+      value :CROSS_CHANNEL_LAST_CLICK, 2
+      value :CROSS_CHANNEL_FIRST_CLICK, 3
+      value :CROSS_CHANNEL_LINEAR, 4
+      value :CROSS_CHANNEL_POSITION_BASED, 5
+      value :CROSS_CHANNEL_TIME_DECAY, 6
+      value :ADS_PREFERRED_LAST_CLICK, 7
+    end
     add_enum "google.analytics.admin.v1alpha.IndustryCategory" do
       value :INDUSTRY_CATEGORY_UNSPECIFIED, 0
       value :AUTOMOTIVE, 1
@@ -298,7 +329,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DATA_RETENTION_SETTINGS, 13
       value :DISPLAY_VIDEO_360_ADVERTISER_LINK, 14
       value :DISPLAY_VIDEO_360_ADVERTISER_LINK_PROPOSAL, 15
+      value :SEARCH_ADS_360_LINK, 16
       value :DATA_STREAM, 18
+      value :ATTRIBUTION_SETTINGS, 20
     end
     add_enum "google.analytics.admin.v1alpha.GoogleSignalsState" do
       value :GOOGLE_SIGNALS_STATE_UNSPECIFIED, 0
@@ -323,6 +356,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DECLINED, 4
       value :EXPIRED, 5
       value :OBSOLETE, 6
+    end
+    add_enum "google.analytics.admin.v1alpha.PropertyType" do
+      value :PROPERTY_TYPE_UNSPECIFIED, 0
+      value :PROPERTY_TYPE_ORDINARY, 1
+      value :PROPERTY_TYPE_SUBPROPERTY, 2
+      value :PROPERTY_TYPE_ROLLUP, 3
     end
   end
 end
@@ -363,6 +402,10 @@ module Google
         CustomMetric::RestrictedMetricType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.CustomMetric.RestrictedMetricType").enummodule
         DataRetentionSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataRetentionSettings").msgclass
         DataRetentionSettings::RetentionDuration = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.DataRetentionSettings.RetentionDuration").enummodule
+        AttributionSettings = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings").msgclass
+        AttributionSettings::AcquisitionConversionEventLookbackWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.AcquisitionConversionEventLookbackWindow").enummodule
+        AttributionSettings::OtherConversionEventLookbackWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.OtherConversionEventLookbackWindow").enummodule
+        AttributionSettings::ReportingAttributionModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.AttributionSettings.ReportingAttributionModel").enummodule
         IndustryCategory = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.IndustryCategory").enummodule
         ServiceLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ServiceLevel").enummodule
         ActorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.ActorType").enummodule
@@ -372,6 +415,7 @@ module Google
         GoogleSignalsConsent = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.GoogleSignalsConsent").enummodule
         LinkProposalInitiatingProduct = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.LinkProposalInitiatingProduct").enummodule
         LinkProposalState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.LinkProposalState").enummodule
+        PropertyType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.analytics.admin.v1alpha.PropertyType").enummodule
       end
     end
   end

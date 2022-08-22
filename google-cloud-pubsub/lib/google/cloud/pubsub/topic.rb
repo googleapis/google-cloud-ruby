@@ -1065,7 +1065,7 @@ module Google
         # @private New reference {Topic} object without making an HTTP request.
         def self.from_name name, service, options = {}
           name = service.topic_path name, options
-          from_grpc(nil, service).tap do |t|
+          from_grpc(nil, service, async: options[:async]).tap do |t|
             t.instance_variable_set :@resource_name, name
           end
         end

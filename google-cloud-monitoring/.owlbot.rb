@@ -12,34 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Modify the gemspec so it includes the dashboard and metricsscope gems
-OwlBot.modifier path: "google-cloud-monitoring.gemspec" do |content|
-  content.sub(
-    %r{\n  gem.add_dependency "google-cloud-monitoring-v3", "([^\n]+)"\n\n}m,
-    "\n  gem.add_dependency \"google-cloud-monitoring-v3\", \"\\1\"" \
-    "\n  gem.add_dependency \"google-cloud-monitoring-dashboard-v1\", \">= 0.5\", \"< 2.a\"" \
-    "\n  gem.add_dependency \"google-cloud-monitoring-metrics_scope-v1\", \">= 0.0\", \"< 2.a\"\n\n"
-  )
-end
-
-# Modify the Gemfile so includes the dashboard and metricsscope gems
-OwlBot.modifier path: "Gemfile" do |content|
-  content.sub(
-    "\ngem \"google-cloud-monitoring-v3\", path: \"../google-cloud-monitoring-v3\"\n",
-    "\ngem \"google-cloud-monitoring-v3\", path: \"../google-cloud-monitoring-v3\"" \
-    "\ngem \"google-cloud-monitoring-dashboard-v1\", path: \"../google-cloud-monitoring-dashboard-v1\"" \
-    "\ngem \"google-cloud-monitoring-metrics_scope-v1\", path: \"../google-cloud-monitoring-metrics_scope-v1\"\n"
-  )
-end
-
-# Modify the entrypoint so it requires dashboard and metricsscope
-OwlBot.modifier path: "lib/google-cloud-monitoring.rb" do |content|
-  content.sub(
-    "\nrequire \"google/cloud/monitoring\" unless defined? Google::Cloud::Monitoring::VERSION\n",
-    "\nrequire \"google/cloud/monitoring\" unless defined? Google::Cloud::Monitoring::VERSION" \
-    "\nrequire \"google/cloud/monitoring/dashboard\" unless defined? Google::Cloud::Monitoring::Dashboard::VERSION" \
-    "\nrequire \"google/cloud/monitoring/metrics_scope\" unless defined? Google::Cloud::Monitoring::MetricsScope::VERSION\n"
-  )
-end
+OwlBot.prepare_multi_wrapper [
+  "google-cloud-monitoring",
+  "google-cloud-monitoring-dashboard",
+  "google-cloud-monitoring-metrics_scope"
+]
 
 OwlBot.move_files

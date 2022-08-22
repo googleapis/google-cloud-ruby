@@ -78,9 +78,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -93,27 +91,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListTargetHttpsProxiesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListTargetHttpsProxiesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListTargetHttpsProxiesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListTargetHttpsProxiesRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -134,9 +132,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     request_id = "hello world"
     target_https_proxy = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -149,27 +145,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.delete({ project: project, request_id: request_id, target_https_proxy: target_https_proxy }) do |result, response|
+      client.delete({ project: project, request_id: request_id, target_https_proxy: target_https_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, request_id: request_id, target_https_proxy: target_https_proxy do |result, response|
+      client.delete project: project, request_id: request_id, target_https_proxy: target_https_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, request_id: request_id, target_https_proxy: target_https_proxy }, call_options) do |result, response|
+      client.delete({ project: project, request_id: request_id, target_https_proxy: target_https_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -189,9 +185,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     project = "hello world"
     target_https_proxy = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -204,27 +198,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.get({ project: project, target_https_proxy: target_https_proxy }) do |result, response|
+      client.get({ project: project, target_https_proxy: target_https_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, target_https_proxy: target_https_proxy do |result, response|
+      client.get project: project, target_https_proxy: target_https_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetTargetHttpsProxyRequest.new(project: project, target_https_proxy: target_https_proxy) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetTargetHttpsProxyRequest.new(project: project, target_https_proxy: target_https_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, target_https_proxy: target_https_proxy }, call_options) do |result, response|
+      client.get({ project: project, target_https_proxy: target_https_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetTargetHttpsProxyRequest.new(project: project, target_https_proxy: target_https_proxy), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetTargetHttpsProxyRequest.new(project: project, target_https_proxy: target_https_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -245,9 +239,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     request_id = "hello world"
     target_https_proxy_resource = {}
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -260,27 +252,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.insert({ project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource }) do |result, response|
+      client.insert({ project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource do |result, response|
+      client.insert project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource }, call_options) do |result, response|
+      client.insert({ project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy_resource: target_https_proxy_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -304,9 +296,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     project = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -319,27 +309,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListTargetHttpsProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListTargetHttpsProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListTargetHttpsProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListTargetHttpsProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -361,9 +351,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     target_https_proxy = "hello world"
     target_https_proxy_resource = {}
 
-    patch_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -376,27 +364,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.patch({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource }) do |result, response|
+      client.patch({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource do |result, response|
+      client.patch project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource }, call_options) do |result, response|
+      client.patch({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, target_https_proxy_resource: target_https_proxy_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -418,9 +406,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     target_https_proxies_set_certificate_map_request_resource = {}
     target_https_proxy = "hello world"
 
-    set_certificate_map_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_certificate_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -433,27 +419,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.set_certificate_map({ project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy }) do |result, response|
+      client.set_certificate_map({ project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_certificate_map project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy do |result, response|
+      client.set_certificate_map project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_certificate_map ::Google::Cloud::Compute::V1::SetCertificateMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy) do |result, response|
+      client.set_certificate_map ::Google::Cloud::Compute::V1::SetCertificateMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_certificate_map({ project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy }, call_options) do |result, response|
+      client.set_certificate_map({ project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_certificate_map(::Google::Cloud::Compute::V1::SetCertificateMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy), call_options) do |result, response|
+      client.set_certificate_map(::Google::Cloud::Compute::V1::SetCertificateMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_certificate_map_request_resource: target_https_proxies_set_certificate_map_request_resource, target_https_proxy: target_https_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -475,9 +461,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     target_https_proxies_set_quic_override_request_resource = {}
     target_https_proxy = "hello world"
 
-    set_quic_override_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_quic_override_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -490,27 +474,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.set_quic_override({ project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy }) do |result, response|
+      client.set_quic_override({ project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_quic_override project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy do |result, response|
+      client.set_quic_override project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_quic_override ::Google::Cloud::Compute::V1::SetQuicOverrideTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy) do |result, response|
+      client.set_quic_override ::Google::Cloud::Compute::V1::SetQuicOverrideTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_quic_override({ project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy }, call_options) do |result, response|
+      client.set_quic_override({ project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_quic_override(::Google::Cloud::Compute::V1::SetQuicOverrideTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy), call_options) do |result, response|
+      client.set_quic_override(::Google::Cloud::Compute::V1::SetQuicOverrideTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_quic_override_request_resource: target_https_proxies_set_quic_override_request_resource, target_https_proxy: target_https_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -532,9 +516,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     target_https_proxies_set_ssl_certificates_request_resource = {}
     target_https_proxy = "hello world"
 
-    set_ssl_certificates_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_ssl_certificates_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -547,27 +529,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.set_ssl_certificates({ project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy }) do |result, response|
+      client.set_ssl_certificates({ project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_ssl_certificates project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy do |result, response|
+      client.set_ssl_certificates project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_ssl_certificates ::Google::Cloud::Compute::V1::SetSslCertificatesTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy) do |result, response|
+      client.set_ssl_certificates ::Google::Cloud::Compute::V1::SetSslCertificatesTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_ssl_certificates({ project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy }, call_options) do |result, response|
+      client.set_ssl_certificates({ project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_ssl_certificates(::Google::Cloud::Compute::V1::SetSslCertificatesTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy), call_options) do |result, response|
+      client.set_ssl_certificates(::Google::Cloud::Compute::V1::SetSslCertificatesTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxies_set_ssl_certificates_request_resource: target_https_proxies_set_ssl_certificates_request_resource, target_https_proxy: target_https_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -589,9 +571,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     ssl_policy_reference_resource = {}
     target_https_proxy = "hello world"
 
-    set_ssl_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_ssl_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -604,27 +584,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.set_ssl_policy({ project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy }) do |result, response|
+      client.set_ssl_policy({ project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_ssl_policy project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy do |result, response|
+      client.set_ssl_policy project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_ssl_policy ::Google::Cloud::Compute::V1::SetSslPolicyTargetHttpsProxyRequest.new(project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy) do |result, response|
+      client.set_ssl_policy ::Google::Cloud::Compute::V1::SetSslPolicyTargetHttpsProxyRequest.new(project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_ssl_policy({ project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy }, call_options) do |result, response|
+      client.set_ssl_policy({ project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_ssl_policy(::Google::Cloud::Compute::V1::SetSslPolicyTargetHttpsProxyRequest.new(project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy), call_options) do |result, response|
+      client.set_ssl_policy(::Google::Cloud::Compute::V1::SetSslPolicyTargetHttpsProxyRequest.new(project: project, request_id: request_id, ssl_policy_reference_resource: ssl_policy_reference_resource, target_https_proxy: target_https_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -646,9 +626,7 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
     target_https_proxy = "hello world"
     url_map_reference_resource = {}
 
-    set_url_map_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_url_map_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -661,27 +639,27 @@ class ::Google::Cloud::Compute::V1::TargetHttpsProxies::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.set_url_map({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource }) do |result, response|
+      client.set_url_map({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_url_map project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource do |result, response|
+      client.set_url_map project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_url_map ::Google::Cloud::Compute::V1::SetUrlMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource) do |result, response|
+      client.set_url_map ::Google::Cloud::Compute::V1::SetUrlMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_url_map({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource }, call_options) do |result, response|
+      client.set_url_map({ project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_url_map(::Google::Cloud::Compute::V1::SetUrlMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource), call_options) do |result, response|
+      client.set_url_map(::Google::Cloud::Compute::V1::SetUrlMapTargetHttpsProxyRequest.new(project: project, request_id: request_id, target_https_proxy: target_https_proxy, url_map_reference_resource: url_map_reference_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

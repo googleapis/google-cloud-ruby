@@ -63,6 +63,7 @@
     "snippets/asset_service/list_assets.rb",
     "snippets/asset_service/list_feeds.rb",
     "snippets/asset_service/list_saved_queries.rb",
+    "snippets/asset_service/query_assets.rb",
     "snippets/asset_service/search_all_iam_policies.rb",
     "snippets/asset_service/search_all_resources.rb",
     "snippets/asset_service/update_feed.rb",

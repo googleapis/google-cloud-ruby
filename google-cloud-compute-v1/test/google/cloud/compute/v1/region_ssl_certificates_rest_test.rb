@@ -75,9 +75,7 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
     request_id = "hello world"
     ssl_certificate = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -90,27 +88,27 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
       end
 
       # Use hash object
-      client.delete({ project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate }) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate do |result, response|
+      client.delete project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate }, call_options) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate: ssl_certificate), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -131,9 +129,7 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
     region = "hello world"
     ssl_certificate = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -146,27 +142,27 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
       end
 
       # Use hash object
-      client.get({ project: project, region: region, ssl_certificate: ssl_certificate }) do |result, response|
+      client.get({ project: project, region: region, ssl_certificate: ssl_certificate }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, region: region, ssl_certificate: ssl_certificate do |result, response|
+      client.get project: project, region: region, ssl_certificate: ssl_certificate do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionSslCertificateRequest.new(project: project, region: region, ssl_certificate: ssl_certificate) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetRegionSslCertificateRequest.new(project: project, region: region, ssl_certificate: ssl_certificate) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, region: region, ssl_certificate: ssl_certificate }, call_options) do |result, response|
+      client.get({ project: project, region: region, ssl_certificate: ssl_certificate }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionSslCertificateRequest.new(project: project, region: region, ssl_certificate: ssl_certificate), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetRegionSslCertificateRequest.new(project: project, region: region, ssl_certificate: ssl_certificate), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -188,9 +184,7 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
     request_id = "hello world"
     ssl_certificate_resource = {}
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -203,27 +197,27 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
       end
 
       # Use hash object
-      client.insert({ project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource }) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource do |result, response|
+      client.insert project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource }, call_options) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertRegionSslCertificateRequest.new(project: project, region: region, request_id: request_id, ssl_certificate_resource: ssl_certificate_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -248,9 +242,7 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -263,27 +255,27 @@ class ::Google::Cloud::Compute::V1::RegionSslCertificates::ClientTest < Minitest
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionSslCertificatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListRegionSslCertificatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionSslCertificatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListRegionSslCertificatesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

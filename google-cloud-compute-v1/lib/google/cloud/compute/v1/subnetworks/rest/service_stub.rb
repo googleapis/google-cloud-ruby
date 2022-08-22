@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the Subnetworks service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -500,7 +500,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/subnetworks",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -521,9 +521,9 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["subnetwork", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["subnetwork", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -545,9 +545,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork}/expandIpCidrRange",
                                                           body: "subnetworks_expand_ip_cidr_range_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["subnetwork", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["subnetwork", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -568,9 +568,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["subnetwork", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["subnetwork", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -591,9 +591,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{resource}/getIamPolicy",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -615,8 +615,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks",
                                                           body: "subnetwork_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -637,8 +637,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -659,7 +659,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/subnetworks/listUsable",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -681,9 +681,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork}",
                                                           body: "subnetwork_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["subnetwork", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["subnetwork", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -705,9 +705,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{resource}/setIamPolicy",
                                                           body: "region_set_policy_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -729,9 +729,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{subnetwork}/setPrivateIpGoogleAccess",
                                                           body: "subnetworks_set_private_ip_google_access_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["subnetwork", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["subnetwork", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -753,9 +753,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/subnetworks/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

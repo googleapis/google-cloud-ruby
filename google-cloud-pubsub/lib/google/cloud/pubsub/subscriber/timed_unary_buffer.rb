@@ -35,11 +35,11 @@ module Google
 
           PERMANENT_FAILURE = "PERMANENT_FAILURE".freeze
           # Google::Cloud::Unavailable error is already retried at gapic level
-          RETRIABLE_ERRORS = [Google::Cloud::CanceledError,
-                              Google::Cloud::DeadlineExceededError,
-                              Google::Cloud::InternalError,
-                              Google::Cloud::ResourceExhaustedError,
-                              Google::Cloud::InvalidArgumentError].freeze
+          EXACTLY_ONCE_DELIVERY_POSSIBLE_RETRIABLE_ERRORS = [Google::Cloud::CanceledError,
+                                                             Google::Cloud::DeadlineExceededError,
+                                                             Google::Cloud::InternalError,
+                                                             Google::Cloud::ResourceExhaustedError,
+                                                             Google::Cloud::InvalidArgumentError].freeze
           MAX_RETRY_DURATION = 600 # 600s since the server allows ack/modacks for 10 mins max
           MAX_TRIES = 15
           BASE_INTERVAL = 1
@@ -128,7 +128,7 @@ module Google
                 begin
                   @subscriber.service.acknowledge ack_req.subscription, *ack_req.ack_ids
                   handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS), ack_req.ack_ids
-                rescue *RETRIABLE_ERRORS => e
+                rescue *EXACTLY_ONCE_DELIVERY_POSSIBLE_RETRIABLE_ERRORS => e
                   handle_failure e, ack_req.ack_ids if @subscriber.exactly_once_delivery_enabled
                 rescue StandardError => e
                   handle_callback construct_result(e), ack_req.ack_ids
@@ -146,7 +146,7 @@ module Google
                   handle_callback AcknowledgeResult.new(AcknowledgeResult::SUCCESS),
                                   mod_ack_req.ack_ids,
                                   modack: true
-                rescue *RETRIABLE_ERRORS => e
+                rescue *EXACTLY_ONCE_DELIVERY_POSSIBLE_RETRIABLE_ERRORS => e
                   if @subscriber.exactly_once_delivery_enabled
                     handle_failure e, mod_ack_req.ack_ids, mod_ack_req.ack_deadline_seconds
                   end
@@ -276,7 +276,7 @@ module Google
                                   max_interval: MAX_INTERVAL,
                                   multiplier: MULTIPLIER,
                                   max_elapsed_time: MAX_RETRY_DURATION,
-                                  on: RETRIABLE_ERRORS do
+                                  on: EXACTLY_ONCE_DELIVERY_POSSIBLE_RETRIABLE_ERRORS do
                 return if ack_ids.nil?
                 begin
                   yield ack_ids

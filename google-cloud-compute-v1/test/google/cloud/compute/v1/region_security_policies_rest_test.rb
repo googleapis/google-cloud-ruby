@@ -75,9 +75,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
     request_id = "hello world"
     security_policy = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -90,27 +88,27 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
       end
 
       # Use hash object
-      client.delete({ project: project, region: region, request_id: request_id, security_policy: security_policy }) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, security_policy: security_policy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, region: region, request_id: request_id, security_policy: security_policy do |result, response|
+      client.delete project: project, region: region, request_id: request_id, security_policy: security_policy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, region: region, request_id: request_id, security_policy: security_policy }, call_options) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, security_policy: security_policy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -131,9 +129,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
     region = "hello world"
     security_policy = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -146,27 +142,27 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
       end
 
       # Use hash object
-      client.get({ project: project, region: region, security_policy: security_policy }) do |result, response|
+      client.get({ project: project, region: region, security_policy: security_policy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, region: region, security_policy: security_policy do |result, response|
+      client.get project: project, region: region, security_policy: security_policy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionSecurityPolicyRequest.new(project: project, region: region, security_policy: security_policy) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetRegionSecurityPolicyRequest.new(project: project, region: region, security_policy: security_policy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, region: region, security_policy: security_policy }, call_options) do |result, response|
+      client.get({ project: project, region: region, security_policy: security_policy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionSecurityPolicyRequest.new(project: project, region: region, security_policy: security_policy), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetRegionSecurityPolicyRequest.new(project: project, region: region, security_policy: security_policy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -189,9 +185,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
     security_policy_resource = {}
     validate_only = true
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -204,27 +198,27 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
       end
 
       # Use hash object
-      client.insert({ project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only }) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only do |result, response|
+      client.insert project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only }, call_options) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy_resource: security_policy_resource, validate_only: validate_only), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -249,9 +243,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -264,27 +256,27 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionSecurityPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListRegionSecurityPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionSecurityPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListRegionSecurityPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -307,9 +299,7 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
     security_policy = "hello world"
     security_policy_resource = {}
 
-    patch_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -322,27 +312,27 @@ class ::Google::Cloud::Compute::V1::RegionSecurityPolicies::ClientTest < Minites
       end
 
       # Use hash object
-      client.patch({ project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource }) do |result, response|
+      client.patch({ project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource do |result, response|
+      client.patch project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource }, call_options) do |result, response|
+      client.patch({ project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchRegionSecurityPolicyRequest.new(project: project, region: region, request_id: request_id, security_policy: security_policy, security_policy_resource: security_policy_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

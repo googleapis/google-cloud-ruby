@@ -101,7 +101,7 @@ describe "Spanner Batch Client", :execute_partition, :spanner do
 
   it "reads all by default in pg" do
     skip if emulator_enabled?
-    skip "Skipped due to https://b.corp.google.com/issues/216209306"
+    skip "Skipped due to b/216209306"
     _(pg_batch_snapshot.timestamp).must_be_kind_of Time
     serialized_snapshot = pg_batch_snapshot.dump
 

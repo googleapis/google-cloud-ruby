@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the InterconnectAttachments service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -278,7 +278,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/interconnectAttachments",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -299,9 +299,9 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/interconnectAttachments/{interconnect_attachment}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["interconnect_attachment", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["interconnect_attachment", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -322,9 +322,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/interconnectAttachments/{interconnect_attachment}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["interconnect_attachment", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["interconnect_attachment", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -346,8 +346,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/interconnectAttachments",
                                                           body: "interconnect_attachment_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -368,8 +368,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/interconnectAttachments",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -391,9 +391,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/regions/{region}/interconnectAttachments/{interconnect_attachment}",
                                                           body: "interconnect_attachment_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["region", %r{[^/]+}, false],
-                                                            ["interconnect_attachment", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["interconnect_attachment", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

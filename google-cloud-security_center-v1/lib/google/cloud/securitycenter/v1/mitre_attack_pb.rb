@@ -63,6 +63,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DOMAIN_POLICY_MODIFICATION, 30
       value :IMPAIR_DEFENSES, 31
       value :NETWORK_SERVICE_DISCOVERY, 32
+      value :ACCESS_TOKEN_MANIPULATION, 33
+      value :ABUSE_ELEVATION_CONTROL_MECHANISM, 34
     end
   end
 end

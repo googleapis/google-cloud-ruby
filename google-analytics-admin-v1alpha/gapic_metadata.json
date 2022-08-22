@@ -364,6 +364,46 @@
               "methods": [
                 "get_data_stream"
               ]
+            },
+            "GetAudience": {
+              "methods": [
+                "get_audience"
+              ]
+            },
+            "ListAudiences": {
+              "methods": [
+                "list_audiences"
+              ]
+            },
+            "CreateAudience": {
+              "methods": [
+                "create_audience"
+              ]
+            },
+            "UpdateAudience": {
+              "methods": [
+                "update_audience"
+              ]
+            },
+            "ArchiveAudience": {
+              "methods": [
+                "archive_audience"
+              ]
+            },
+            "GetAttributionSettings": {
+              "methods": [
+                "get_attribution_settings"
+              ]
+            },
+            "UpdateAttributionSettings": {
+              "methods": [
+                "update_attribution_settings"
+              ]
+            },
+            "RunAccessReport": {
+              "methods": [
+                "run_access_report"
+              ]
             }
           }
         }

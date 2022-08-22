@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the Reservations service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -426,7 +426,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/reservations",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -447,9 +447,9 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["reservation", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["reservation", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -470,9 +470,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["reservation", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["reservation", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -493,9 +493,9 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/getIamPolicy",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -517,8 +517,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations",
                                                           body: "reservation_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -539,8 +539,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -562,9 +562,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}/resize",
                                                           body: "reservations_resize_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["reservation", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["reservation", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -586,9 +586,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/setIamPolicy",
                                                           body: "zone_set_policy_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -610,9 +610,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{resource}/testIamPermissions",
                                                           body: "test_permissions_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["resource", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["resource", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -634,9 +634,9 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/zones/{zone}/reservations/{reservation}",
                                                           body: "reservation_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["zone", %r{[^/]+}, false],
-                                                            ["reservation", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["zone", %r{^[^/]+/?$}, false],
+                                                            ["reservation", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

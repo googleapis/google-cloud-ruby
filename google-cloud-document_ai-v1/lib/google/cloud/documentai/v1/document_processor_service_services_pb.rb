@@ -41,6 +41,40 @@ module Google
             # LRO endpoint to batch process many documents. The output is written
             # to Cloud Storage as JSON in the [Document] format.
             rpc :BatchProcessDocuments, ::Google::Cloud::DocumentAI::V1::BatchProcessRequest, ::Google::Longrunning::Operation
+            # Fetches processor types. Note that we do not use ListProcessorTypes here
+            # because it is not paginated.
+            rpc :FetchProcessorTypes, ::Google::Cloud::DocumentAI::V1::FetchProcessorTypesRequest, ::Google::Cloud::DocumentAI::V1::FetchProcessorTypesResponse
+            # Lists the processor types that exist.
+            rpc :ListProcessorTypes, ::Google::Cloud::DocumentAI::V1::ListProcessorTypesRequest, ::Google::Cloud::DocumentAI::V1::ListProcessorTypesResponse
+            # Lists all processors which belong to this project.
+            rpc :ListProcessors, ::Google::Cloud::DocumentAI::V1::ListProcessorsRequest, ::Google::Cloud::DocumentAI::V1::ListProcessorsResponse
+            # Gets a processor detail.
+            rpc :GetProcessor, ::Google::Cloud::DocumentAI::V1::GetProcessorRequest, ::Google::Cloud::DocumentAI::V1::Processor
+            # Gets a processor version detail.
+            rpc :GetProcessorVersion, ::Google::Cloud::DocumentAI::V1::GetProcessorVersionRequest, ::Google::Cloud::DocumentAI::V1::ProcessorVersion
+            # Lists all versions of a processor.
+            rpc :ListProcessorVersions, ::Google::Cloud::DocumentAI::V1::ListProcessorVersionsRequest, ::Google::Cloud::DocumentAI::V1::ListProcessorVersionsResponse
+            # Deletes the processor version, all artifacts under the processor version
+            # will be deleted.
+            rpc :DeleteProcessorVersion, ::Google::Cloud::DocumentAI::V1::DeleteProcessorVersionRequest, ::Google::Longrunning::Operation
+            # Deploys the processor version.
+            rpc :DeployProcessorVersion, ::Google::Cloud::DocumentAI::V1::DeployProcessorVersionRequest, ::Google::Longrunning::Operation
+            # Undeploys the processor version.
+            rpc :UndeployProcessorVersion, ::Google::Cloud::DocumentAI::V1::UndeployProcessorVersionRequest, ::Google::Longrunning::Operation
+            # Creates a processor from the type processor that the user chose.
+            # The processor will be at "ENABLED" state by default after its creation.
+            rpc :CreateProcessor, ::Google::Cloud::DocumentAI::V1::CreateProcessorRequest, ::Google::Cloud::DocumentAI::V1::Processor
+            # Deletes the processor, unloads all deployed model artifacts if it was
+            # enabled and then deletes all artifacts associated with this processor.
+            rpc :DeleteProcessor, ::Google::Cloud::DocumentAI::V1::DeleteProcessorRequest, ::Google::Longrunning::Operation
+            # Enables a processor
+            rpc :EnableProcessor, ::Google::Cloud::DocumentAI::V1::EnableProcessorRequest, ::Google::Longrunning::Operation
+            # Disables a processor
+            rpc :DisableProcessor, ::Google::Cloud::DocumentAI::V1::DisableProcessorRequest, ::Google::Longrunning::Operation
+            # Set the default (active) version of a [Processor][google.cloud.documentai.v1.Processor] that will be used in
+            # [ProcessDocument][google.cloud.documentai.v1.DocumentProcessorService.ProcessDocument] and
+            # [BatchProcessDocuments][google.cloud.documentai.v1.DocumentProcessorService.BatchProcessDocuments].
+            rpc :SetDefaultProcessorVersion, ::Google::Cloud::DocumentAI::V1::SetDefaultProcessorVersionRequest, ::Google::Longrunning::Operation
             # Send a document for Human Review. The input document should be processed by
             # the specified processor.
             rpc :ReviewDocument, ::Google::Cloud::DocumentAI::V1::ReviewDocumentRequest, ::Google::Longrunning::Operation

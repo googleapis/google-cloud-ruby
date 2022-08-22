@@ -889,18 +889,21 @@ module Google
             # enqueued and processed downstream. As a consequence, when a response is
             # returned, updates are not immediately manifested in the
             # {::Google::Cloud::Retail::V2::Product Product} queried by
-            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
-            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+            # or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
             # When inventory is updated with
-            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product CreateProduct} and
-            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product UpdateProduct}, the
-            # specified inventory field value(s) will overwrite any existing value(s)
+            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product ProductService.CreateProduct}
+            # and
+            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct},
+            # the specified inventory field value(s) will overwrite any existing value(s)
             # while ignoring the last update time for this field. Furthermore, the last
             # update time for the specified inventory fields will be overwritten to the
             # time of the
-            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product CreateProduct} or
-            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product UpdateProduct}
+            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product ProductService.CreateProduct}
+            # or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
             # request.
             #
             # If no inventory fields are set in
@@ -912,10 +915,10 @@ module Google
             # then any existing inventory information will be preserved.
             #
             # Pre-existing inventory information can only be updated with
-            # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory SetInventory},
+            # {::Google::Cloud::Retail::V2::ProductService::Client#set_inventory ProductService.SetInventory},
             # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces},
             # and
-            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places RemoveFulfillmentPlaces}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
@@ -938,6 +941,7 @@ module Google
             #   @param inventory [::Google::Cloud::Retail::V2::Product, ::Hash]
             #     Required. The inventory information to update. The allowable fields to
             #     update are:
+            #
             #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
             #     * {::Google::Cloud::Retail::V2::Product#availability Product.availability}
             #     * {::Google::Cloud::Retail::V2::Product#available_quantity Product.available_quantity}
@@ -945,8 +949,9 @@ module Google
             #     The updated inventory fields must be specified in
             #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask}.
             #
-            #     If [SetInventoryRequest.inventory.name][] is empty or invalid, an
-            #     INVALID_ARGUMENT error is returned.
+            #     If
+            #     {::Google::Cloud::Retail::V2::Product#name SetInventoryRequest.inventory.name}
+            #     is empty or invalid, an INVALID_ARGUMENT error is returned.
             #
             #     If the caller does not have permission to update the
             #     {::Google::Cloud::Retail::V2::Product Product} named in
@@ -969,7 +974,8 @@ module Google
             #     * Adds "fulfillment_info" in
             #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask}
             #     * Specifies only the desired fulfillment types and corresponding place IDs
-            #     to update in [SetInventoryRequest.inventory.fulfillment_info][]
+            #     to update in
+            #     {::Google::Cloud::Retail::V2::Product#fulfillment_info SetInventoryRequest.inventory.fulfillment_info}
             #
             #     The caller can clear all place IDs from a subset of fulfillment types in
             #     the following ways:
@@ -977,9 +983,9 @@ module Google
             #     * Adds "fulfillment_info" in
             #     {::Google::Cloud::Retail::V2::SetInventoryRequest#set_mask SetInventoryRequest.set_mask}
             #     * Specifies only the desired fulfillment types to clear in
-            #     [SetInventoryRequest.inventory.fulfillment_info][]
+            #     {::Google::Cloud::Retail::V2::Product#fulfillment_info SetInventoryRequest.inventory.fulfillment_info}
             #     * Checks that only the desired fulfillment info types have empty
-            #     [SetInventoryRequest.inventory.fulfillment_info.place_ids][]
+            #     {::Google::Cloud::Retail::V2::FulfillmentInfo#place_ids SetInventoryRequest.inventory.fulfillment_info.place_ids}
             #
             #     The last update time is recorded for the following inventory fields:
             #     * {::Google::Cloud::Retail::V2::Product#price_info Product.price_info}
@@ -988,7 +994,9 @@ module Google
             #     * {::Google::Cloud::Retail::V2::Product#fulfillment_info Product.fulfillment_info}
             #
             #     If a full overwrite of inventory information while ignoring timestamps is
-            #     needed, [UpdateProduct][] should be invoked instead.
+            #     needed,
+            #     {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
+            #     should be invoked instead.
             #   @param set_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Indicates which inventory fields in the provided
             #     {::Google::Cloud::Retail::V2::Product Product} to update.
@@ -1091,8 +1099,9 @@ module Google
             # enqueued and processed downstream. As a consequence, when a response is
             # returned, the added place IDs are not immediately manifested in the
             # {::Google::Cloud::Retail::V2::Product Product} queried by
-            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
-            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+            # or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
@@ -1139,7 +1148,8 @@ module Google
             #     If this field is set to an invalid value other than these, an
             #     INVALID_ARGUMENT error is returned.
             #
-            #     This field directly corresponds to [Product.fulfillment_info.type][].
+            #     This field directly corresponds to
+            #     {::Google::Cloud::Retail::V2::FulfillmentInfo#type Product.fulfillment_info.type}.
             #   @param place_ids [::Array<::String>]
             #     Required. The IDs for this
             #     {::Google::Cloud::Retail::V2::AddFulfillmentPlacesRequest#type type}, such as
@@ -1250,8 +1260,9 @@ module Google
             # enqueued and processed downstream. As a consequence, when a response is
             # returned, the removed place IDs are not immediately manifested in the
             # {::Google::Cloud::Retail::V2::Product Product} queried by
-            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
-            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+            # or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
@@ -1406,13 +1417,15 @@ module Google
             # and processed downstream. As a consequence, when a response is returned,
             # updates are not immediately manifested in the
             # {::Google::Cloud::Retail::V2::Product Product} queried by
-            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
-            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+            # or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
             # Local inventory information can only be modified using this method.
-            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product CreateProduct} and
-            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product UpdateProduct} has no
-            # effect on local inventories.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product ProductService.CreateProduct}
+            # and
+            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
+            # has no effect on local inventories.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
@@ -1552,13 +1565,15 @@ module Google
             # enqueued and processed downstream. As a consequence, when a response is
             # returned, removals are not immediately manifested in the
             # {::Google::Cloud::Retail::V2::Product Product} queried by
-            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product GetProduct} or
-            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ListProducts}.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
+            # or
+            # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
             # Local inventory information can only be removed using this method.
-            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product CreateProduct} and
-            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product UpdateProduct} has no
-            # effect on local inventories.
+            # {::Google::Cloud::Retail::V2::ProductService::Client#create_product ProductService.CreateProduct}
+            # and
+            # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
+            # has no effect on local inventories.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.

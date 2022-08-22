@@ -13,6 +13,7 @@ require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
 require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
+require 'google/protobuf/struct_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/rpc/status_pb'
 require 'google/type/expr_pb'
@@ -297,6 +298,53 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.asset.v1.MoveImpact" do
       optional :detail, :string, 1
     end
+    add_message "google.cloud.asset.v1.QueryAssetsOutputConfig" do
+      optional :bigquery_destination, :message, 1, "google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination"
+    end
+    add_message "google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination" do
+      optional :dataset, :string, 1
+      optional :table, :string, 2
+      optional :write_disposition, :string, 3
+    end
+    add_message "google.cloud.asset.v1.QueryAssetsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 4
+      optional :page_token, :string, 5
+      optional :timeout, :message, 6, "google.protobuf.Duration"
+      optional :output_config, :message, 9, "google.cloud.asset.v1.QueryAssetsOutputConfig"
+      oneof :query do
+        optional :statement, :string, 2
+        optional :job_reference, :string, 3
+      end
+      oneof :time do
+        optional :read_time_window, :message, 7, "google.cloud.asset.v1.TimeWindow"
+        optional :read_time, :message, 8, "google.protobuf.Timestamp"
+      end
+    end
+    add_message "google.cloud.asset.v1.QueryAssetsResponse" do
+      optional :job_reference, :string, 1
+      optional :done, :bool, 2
+      oneof :response do
+        optional :error, :message, 3, "google.rpc.Status"
+        optional :query_result, :message, 4, "google.cloud.asset.v1.QueryResult"
+        optional :output_config, :message, 5, "google.cloud.asset.v1.QueryAssetsOutputConfig"
+      end
+    end
+    add_message "google.cloud.asset.v1.QueryResult" do
+      repeated :rows, :message, 1, "google.protobuf.Struct"
+      optional :schema, :message, 2, "google.cloud.asset.v1.TableSchema"
+      optional :next_page_token, :string, 3
+      optional :total_rows, :int64, 4
+    end
+    add_message "google.cloud.asset.v1.TableSchema" do
+      repeated :fields, :message, 1, "google.cloud.asset.v1.TableFieldSchema"
+    end
+    add_message "google.cloud.asset.v1.TableFieldSchema" do
+      optional :field, :string, 1
+      optional :type, :string, 2
+      optional :mode, :string, 3
+      repeated :fields, :message, 4, "google.cloud.asset.v1.TableFieldSchema"
+    end
     add_message "google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest" do
       optional :scope, :string, 1
       repeated :names, :string, 3
@@ -384,6 +432,13 @@ module Google
         MoveAnalysis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveAnalysis").msgclass
         MoveAnalysisResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveAnalysisResult").msgclass
         MoveImpact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.MoveImpact").msgclass
+        QueryAssetsOutputConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.QueryAssetsOutputConfig").msgclass
+        QueryAssetsOutputConfig::BigQueryDestination = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.QueryAssetsOutputConfig.BigQueryDestination").msgclass
+        QueryAssetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.QueryAssetsRequest").msgclass
+        QueryAssetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.QueryAssetsResponse").msgclass
+        QueryResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.QueryResult").msgclass
+        TableSchema = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.TableSchema").msgclass
+        TableFieldSchema = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.TableFieldSchema").msgclass
         BatchGetEffectiveIamPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetEffectiveIamPoliciesRequest").msgclass
         BatchGetEffectiveIamPoliciesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse").msgclass
         BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.asset.v1.BatchGetEffectiveIamPoliciesResponse.EffectiveIamPolicy").msgclass

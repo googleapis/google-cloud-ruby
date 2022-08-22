@@ -896,6 +896,78 @@ class ::Google::Cloud::Asset::V1::AssetService::ClientTest < Minitest::Test
     end
   end
 
+  def test_query_assets
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Asset::V1::QueryAssetsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    statement = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    timeout = {}
+    read_time_window = {}
+    output_config = {}
+
+    query_assets_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :query_assets, name
+      assert_kind_of ::Google::Cloud::Asset::V1::QueryAssetsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal "hello world", request["statement"]
+      assert_equal :statement, request.query
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::Duration), request["timeout"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::TimeWindow), request["read_time_window"]
+      assert_equal :read_time_window, request.time
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Asset::V1::QueryAssetsOutputConfig), request["output_config"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, query_assets_client_stub do
+      # Create client
+      client = ::Google::Cloud::Asset::V1::AssetService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.query_assets parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.query_assets ::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.query_assets({ parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.query_assets(::Google::Cloud::Asset::V1::QueryAssetsRequest.new(parent: parent, statement: statement, page_size: page_size, page_token: page_token, timeout: timeout, read_time_window: read_time_window, output_config: output_config), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, query_assets_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_saved_query
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Asset::V1::SavedQuery.new

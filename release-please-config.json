@@ -63,6 +63,14 @@
       "component": "google-cloud-api_gateway-v1",
       "version_file": "lib/google/cloud/api_gateway/v1/version.rb"
     },
+    "google-cloud-api_keys": {
+      "component": "google-cloud-api_keys",
+      "version_file": "lib/google/cloud/api_keys/version.rb"
+    },
+    "google-cloud-api_keys-v2": {
+      "component": "google-cloud-api_keys-v2",
+      "version_file": "lib/google/cloud/api_keys/v2/version.rb"
+    },
     "google-cloud-apigee_connect": {
       "component": "google-cloud-apigee_connect",
       "version_file": "lib/google/cloud/apigee_connect/version.rb"
@@ -146,6 +154,10 @@
     "google-cloud-batch-v1": {
       "component": "google-cloud-batch-v1",
       "version_file": "lib/google/cloud/batch/v1/version.rb"
+    },
+    "google-cloud-beyond_corp": {
+      "component": "google-cloud-beyond_corp",
+      "version_file": "lib/google/cloud/beyond_corp/version.rb"
     },
     "google-cloud-beyond_corp-app_connections-v1": {
       "component": "google-cloud-beyond_corp-app_connections-v1",

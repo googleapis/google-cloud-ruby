@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.0 (2022-08-09)
+
+#### Features
+
+* Added advanced OCR options to TextDetectionParams ([#18978](https://github.com/googleapis/google-cloud-ruby/issues/18978)) 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features
