@@ -369,6 +369,126 @@ class ::Google::Cloud::AIPlatform::V1::IndexService::ClientTest < Minitest::Test
     end
   end
 
+  def test_upsert_datapoints
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::UpsertDatapointsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    index = "hello world"
+    datapoints = [{}]
+
+    upsert_datapoints_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :upsert_datapoints, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest, request
+      assert_equal "hello world", request["index"]
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::IndexDatapoint, request["datapoints"].first
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, upsert_datapoints_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::IndexService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.upsert_datapoints({ index: index, datapoints: datapoints }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.upsert_datapoints index: index, datapoints: datapoints do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.upsert_datapoints ::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest.new(index: index, datapoints: datapoints) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.upsert_datapoints({ index: index, datapoints: datapoints }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.upsert_datapoints(::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest.new(index: index, datapoints: datapoints), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, upsert_datapoints_client_stub.call_rpc_count
+    end
+  end
+
+  def test_remove_datapoints
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::RemoveDatapointsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    index = "hello world"
+    datapoint_ids = ["hello world"]
+
+    remove_datapoints_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :remove_datapoints, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest, request
+      assert_equal "hello world", request["index"]
+      assert_equal ["hello world"], request["datapoint_ids"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, remove_datapoints_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::IndexService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.remove_datapoints({ index: index, datapoint_ids: datapoint_ids }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.remove_datapoints index: index, datapoint_ids: datapoint_ids do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.remove_datapoints ::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest.new(index: index, datapoint_ids: datapoint_ids) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.remove_datapoints({ index: index, datapoint_ids: datapoint_ids }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.remove_datapoints(::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest.new(index: index, datapoint_ids: datapoint_ids), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, remove_datapoints_client_stub.call_rpc_count
+    end
+  end
+
   def test_configure
     grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
 

@@ -22,6 +22,31 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 9
       optional :create_time, :message, 10, "google.protobuf.Timestamp"
       optional :update_time, :message, 11, "google.protobuf.Timestamp"
+      optional :index_stats, :message, 14, "google.cloud.aiplatform.v1.IndexStats"
+      optional :index_update_method, :enum, 16, "google.cloud.aiplatform.v1.Index.IndexUpdateMethod"
+    end
+    add_enum "google.cloud.aiplatform.v1.Index.IndexUpdateMethod" do
+      value :INDEX_UPDATE_METHOD_UNSPECIFIED, 0
+      value :BATCH_UPDATE, 1
+      value :STREAM_UPDATE, 2
+    end
+    add_message "google.cloud.aiplatform.v1.IndexDatapoint" do
+      optional :datapoint_id, :string, 1
+      repeated :feature_vector, :float, 2
+      repeated :restricts, :message, 4, "google.cloud.aiplatform.v1.IndexDatapoint.Restriction"
+      optional :crowding_tag, :message, 5, "google.cloud.aiplatform.v1.IndexDatapoint.CrowdingTag"
+    end
+    add_message "google.cloud.aiplatform.v1.IndexDatapoint.Restriction" do
+      optional :namespace, :string, 1
+      repeated :allow_list, :string, 2
+      repeated :deny_list, :string, 3
+    end
+    add_message "google.cloud.aiplatform.v1.IndexDatapoint.CrowdingTag" do
+      optional :crowding_attribute, :string, 1
+    end
+    add_message "google.cloud.aiplatform.v1.IndexStats" do
+      optional :vectors_count, :int64, 1
+      optional :shards_count, :int32, 2
     end
   end
 end
@@ -31,6 +56,11 @@ module Google
     module AIPlatform
       module V1
         Index = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Index").msgclass
+        Index::IndexUpdateMethod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Index.IndexUpdateMethod").enummodule
+        IndexDatapoint = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.IndexDatapoint").msgclass
+        IndexDatapoint::Restriction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.IndexDatapoint.Restriction").msgclass
+        IndexDatapoint::CrowdingTag = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.IndexDatapoint.CrowdingTag").msgclass
+        IndexStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.IndexStats").msgclass
       end
     end
   end

@@ -275,8 +275,7 @@ module Google
         # Response message for {::Google::Cloud::AIPlatform::V1::DatasetService::Client#list_saved_queries DatasetService.ListSavedQueries}.
         # @!attribute [rw] saved_queries
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::SavedQuery>]
-        #     A list of SavedQueries that matches the specified filter in the
-        #     request.
+        #     A list of SavedQueries that match the specified filter in the request.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     The standard List next-page token.

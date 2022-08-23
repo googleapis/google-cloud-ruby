@@ -47,6 +47,7 @@ module Google
         #   @return [::String]
         #     Required. Problem type of the SavedQuery.
         #     Allowed values:
+        #
         #     * IMAGE_CLASSIFICATION_SINGLE_LABEL
         #     * IMAGE_CLASSIFICATION_MULTI_LABEL
         #     * IMAGE_BOUNDING_POLY
@@ -62,7 +63,7 @@ module Google
         #     Output only. Number of AnnotationSpecs in the context of the SavedQuery.
         # @!attribute [rw] etag
         #   @return [::String]
-        #     Used to perform consistent read-modify-write updates. If not set, a blind
+        #     Used to perform a consistent read-modify-write update. If not set, a blind
         #     "overwrite" update happens.
         # @!attribute [r] support_automl_training
         #   @return [::Boolean]
