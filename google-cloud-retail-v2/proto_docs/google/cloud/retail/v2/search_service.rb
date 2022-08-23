@@ -138,7 +138,9 @@ module Google
         #     Boost specification to boost certain products. See more details at this
         #     [user guide](https://cloud.google.com/retail/docs/boosting).
         #
-        #     Notice that if both [ServingConfig.boost_control_ids][] and
+        #     Notice that if both
+        #     {::Google::Cloud::Retail::V2::ServingConfig#boost_control_ids ServingConfig.boost_control_ids}
+        #     and
         #     {::Google::Cloud::Retail::V2::SearchRequest#boost_spec SearchRequest.boost_spec}
         #     are set, the boost conditions from both places are evaluated. If a search
         #     request matches multiple boost conditions, the final boost score is equal
@@ -241,6 +243,15 @@ module Google
         # @!attribute [rw] personalization_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec]
         #     The specification for personalization.
+        #
+        #     Notice that if both
+        #     {::Google::Cloud::Retail::V2::ServingConfig#personalization_spec ServingConfig.personalization_spec}
+        #     and
+        #     {::Google::Cloud::Retail::V2::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     are set.
+        #     {::Google::Cloud::Retail::V2::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     will override
+        #     {::Google::Cloud::Retail::V2::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels applied to a resource must meet the following requirements:
@@ -625,7 +636,8 @@ module Google
               # {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode::AUTO Mode.AUTO}.
               MODE_UNSPECIFIED = 0
 
-              # Let CRS decide whether to use personalization.
+              # Let CRS decide whether to use personalization based on quality of user
+              # event data.
               AUTO = 1
 
               # Disable personalization.
@@ -829,6 +841,21 @@ module Google
           #     {::Google::Protobuf::Value google.protobuf.Value}. For example,
           #     `{key: "pickupInStore.store1" value { number_value: 10 }}` means a there
           #     are 10 variants in this product are available in the store "store1".
+          # @!attribute [rw] personal_labels
+          #   @return [::Array<::String>]
+          #     Specifies previous events related to this product for this user based on
+          #     {::Google::Cloud::Retail::V2::UserEvent UserEvent} with same
+          #     {::Google::Cloud::Retail::V2::SearchRequest#visitor_id SearchRequest.visitor_id}
+          #     or {::Google::Cloud::Retail::V2::UserInfo#user_id UserInfo.user_id}.
+          #
+          #     This is set only when
+          #     {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec#mode SearchRequest.PersonalizationSpec.mode}
+          #     is
+          #     {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode::AUTO SearchRequest.PersonalizationSpec.Mode.AUTO}.
+          #
+          #     Possible values:
+          #
+          #     * `purchased`: Indicates that this product has been purchased before.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

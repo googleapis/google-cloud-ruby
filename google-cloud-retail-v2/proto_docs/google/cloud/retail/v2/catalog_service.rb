@@ -158,6 +158,139 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
+
+        # Request for
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#get_completion_config CatalogService.GetCompletionConfig}
+        # method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Full CompletionConfig resource name. Format:
+        #     projects/\\{project_number}/locations/\\{location_id}/catalogs/\\{catalog_id}/completionConfig
+        class GetCompletionConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#update_completion_config CatalogService.UpdateCompletionConfig}
+        # method.
+        # @!attribute [rw] completion_config
+        #   @return [::Google::Cloud::Retail::V2::CompletionConfig]
+        #     Required. The {::Google::Cloud::Retail::V2::CompletionConfig CompletionConfig}
+        #     to update.
+        #
+        #     If the caller does not have permission to update the
+        #     {::Google::Cloud::Retail::V2::CompletionConfig CompletionConfig}, then a
+        #     PERMISSION_DENIED error is returned.
+        #
+        #     If the {::Google::Cloud::Retail::V2::CompletionConfig CompletionConfig} to
+        #     update does not exist, a NOT_FOUND error is returned.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Indicates which fields in the provided
+        #     {::Google::Cloud::Retail::V2::CompletionConfig CompletionConfig} to update. The
+        #     following are the only supported fields:
+        #
+        #     * {::Google::Cloud::Retail::V2::CompletionConfig#matching_order CompletionConfig.matching_order}
+        #     * {::Google::Cloud::Retail::V2::CompletionConfig#max_suggestions CompletionConfig.max_suggestions}
+        #     * {::Google::Cloud::Retail::V2::CompletionConfig#min_prefix_length CompletionConfig.min_prefix_length}
+        #     * {::Google::Cloud::Retail::V2::CompletionConfig#auto_learning CompletionConfig.auto_learning}
+        #
+        #     If not set, all supported fields are updated.
+        class UpdateCompletionConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#get_attributes_config CatalogService.GetAttributesConfig}
+        # method.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Full AttributesConfig resource name. Format:
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
+        class GetAttributesConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#update_attributes_config CatalogService.UpdateAttributesConfig}
+        # method.
+        # @!attribute [rw] attributes_config
+        #   @return [::Google::Cloud::Retail::V2::AttributesConfig]
+        #     Required. The {::Google::Cloud::Retail::V2::AttributesConfig AttributesConfig}
+        #     to update.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Indicates which fields in the provided
+        #     {::Google::Cloud::Retail::V2::AttributesConfig AttributesConfig} to update. The
+        #     following is the only supported field:
+        #
+        #     * {::Google::Cloud::Retail::V2::AttributesConfig#catalog_attributes AttributesConfig.catalog_attributes}
+        #
+        #     If not set, all supported fields are updated.
+        class UpdateAttributesConfigRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#add_catalog_attribute CatalogService.AddCatalogAttribute}
+        # method.
+        # @!attribute [rw] attributes_config
+        #   @return [::String]
+        #     Required. Full AttributesConfig resource name. Format:
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
+        # @!attribute [rw] catalog_attribute
+        #   @return [::Google::Cloud::Retail::V2::CatalogAttribute]
+        #     Required. The {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute}
+        #     to add.
+        class AddCatalogAttributeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#remove_catalog_attribute CatalogService.RemoveCatalogAttribute}
+        # method.
+        # @!attribute [rw] attributes_config
+        #   @return [::String]
+        #     Required. Full AttributesConfig resource name. Format:
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     Required. The attribute name key of the
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute} to remove.
+        class RemoveCatalogAttributeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for
+        # {::Google::Cloud::Retail::V2::CatalogService::Client#replace_catalog_attribute CatalogService.ReplaceCatalogAttribute}
+        # method.
+        # @!attribute [rw] attributes_config
+        #   @return [::String]
+        #     Required. Full AttributesConfig resource name. Format:
+        #     `projects/{project_number}/locations/{location_id}/catalogs/{catalog_id}/attributesConfig`
+        # @!attribute [rw] catalog_attribute
+        #   @return [::Google::Cloud::Retail::V2::CatalogAttribute]
+        #     Required. The updated
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute}.
+        # @!attribute [rw] update_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Indicates which fields in the provided
+        #     {::Google::Cloud::Retail::V2::CatalogAttribute CatalogAttribute} to update. The
+        #     following are NOT supported:
+        #
+        #     * {::Google::Cloud::Retail::V2::CatalogAttribute#key CatalogAttribute.key}
+        #
+        #     If not set, all supported fields are updated.
+        class ReplaceCatalogAttributeRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
       end
     end
   end

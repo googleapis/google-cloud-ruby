@@ -782,29 +782,24 @@ module Google
             #   @param errors_config [::Google::Cloud::Retail::V2::ImportErrorsConfig, ::Hash]
             #     The desired location of errors incurred during the Import.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Indicates which fields in the provided imported 'products' to update. If
-            #     not set, will by default update all fields.
+            #     Indicates which fields in the provided imported `products` to update. If
+            #     not set, all fields are updated.
             #   @param reconciliation_mode [::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode]
             #     The mode of reconciliation between existing products and the products to be
             #     imported. Defaults to
             #     {::Google::Cloud::Retail::V2::ImportProductsRequest::ReconciliationMode::INCREMENTAL ReconciliationMode.INCREMENTAL}.
             #   @param notification_pubsub_topic [::String]
             #     Full Pub/Sub topic name for receiving notification. If this field is set,
-            #     when the import is finished, a notification will be sent to
-            #     specified Pub/Sub topic. The message data will be JSON string of a
+            #     when the import is finished, a notification is sent to
+            #     specified Pub/Sub topic. The message data is JSON string of a
             #     {::Google::Longrunning::Operation Operation}.
             #
             #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`. It has
             #     to be within the same project as
             #     {::Google::Cloud::Retail::V2::ImportProductsRequest#parent ImportProductsRequest.parent}.
-            #     Make sure that both
-            #     `cloud-retail-customer-data-access@system.gserviceaccount.com` and
-            #     `service-<project number>@gcp-sa-retail.iam.gserviceaccount.com`
-            #     have the `pubsub.topics.publish` IAM permission on the topic.
-            #
-            #     Only supported when
-            #     {::Google::Cloud::Retail::V2::ImportProductsRequest#reconciliation_mode ImportProductsRequest.reconciliation_mode}
-            #     is set to `FULL`.
+            #     Make sure that `service-<project
+            #     number>@gcp-sa-retail.iam.gserviceaccount.com` has the
+            #     `pubsub.topics.publish` IAM permission on the topic.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -919,6 +914,13 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#add_fulfillment_places ProductService.AddFulfillmentPlaces},
             # and
             # {::Google::Cloud::Retail::V2::ProductService::Client#remove_fulfillment_places ProductService.RemoveFulfillmentPlaces}.
+            #
+            # The returned [Operation][]s will be obsolete after 1 day, and
+            # [GetOperation][] API will return NOT_FOUND afterwards.
+            #
+            # If conflicting updates are issued, the [Operation][]s associated with the
+            # stale updates will not be marked as [done][Operation.done] until being
+            # obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
@@ -1103,6 +1105,13 @@ module Google
             # or
             # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
             #
+            # The returned [Operation][]s will be obsolete after 1 day, and
+            # [GetOperation][] API will return NOT_FOUND afterwards.
+            #
+            # If conflicting updates are issued, the [Operation][]s associated with the
+            # stale updates will not be marked as [done][Operation.done] until being
+            # obsolete.
+            #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
             #
@@ -1263,6 +1272,13 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}
             # or
             # {::Google::Cloud::Retail::V2::ProductService::Client#list_products ProductService.ListProducts}.
+            #
+            # The returned [Operation][]s will be obsolete after 1 day, and
+            # [GetOperation][] API will return NOT_FOUND afterwards.
+            #
+            # If conflicting updates are issued, the [Operation][]s associated with the
+            # stale updates will not be marked as [done][Operation.done] until being
+            # obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
@@ -1427,6 +1443,13 @@ module Google
             # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
             # has no effect on local inventories.
             #
+            # The returned [Operation][]s will be obsolete after 1 day, and
+            # [GetOperation][] API will return NOT_FOUND afterwards.
+            #
+            # If conflicting updates are issued, the [Operation][]s associated with the
+            # stale updates will not be marked as [done][Operation.done] until being
+            # obsolete.
+            #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.
             #
@@ -1574,6 +1597,13 @@ module Google
             # and
             # {::Google::Cloud::Retail::V2::ProductService::Client#update_product ProductService.UpdateProduct}
             # has no effect on local inventories.
+            #
+            # The returned [Operation][]s will be obsolete after 1 day, and
+            # [GetOperation][] API will return NOT_FOUND afterwards.
+            #
+            # If conflicting updates are issued, the [Operation][]s associated with the
+            # stale updates will not be marked as [done][Operation.done] until being
+            # obsolete.
             #
             # This feature is only available for users who have Retail Search enabled.
             # Please enable Retail Search on Cloud Console before using this feature.

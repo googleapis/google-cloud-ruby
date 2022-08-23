@@ -18,9 +18,11 @@
 
 require "google/cloud/retail/v2/catalog_service"
 require "google/cloud/retail/v2/completion_service"
+require "google/cloud/retail/v2/control_service"
 require "google/cloud/retail/v2/prediction_service"
 require "google/cloud/retail/v2/product_service"
 require "google/cloud/retail/v2/search_service"
+require "google/cloud/retail/v2/serving_config_service"
 require "google/cloud/retail/v2/user_event_service"
 require "google/cloud/retail/v2/version"
 

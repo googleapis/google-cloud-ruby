@@ -493,9 +493,9 @@ module Google
             # synchronous. Events that already exist are skipped.
             # Use this method for backfilling historical user events.
             #
-            # Operation.response is of type ImportResponse. Note that it is
+            # `Operation.response` is of type `ImportResponse`. Note that it is
             # possible for a subset of the items to be successfully inserted.
-            # Operation.metadata is of type ImportMetadata.
+            # `Operation.metadata` is of type `ImportMetadata`.
             #
             # @overload import_user_events(request, options = nil)
             #   Pass arguments to `import_user_events` via a request object, either of type

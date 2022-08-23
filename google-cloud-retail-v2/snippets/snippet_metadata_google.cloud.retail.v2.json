@@ -172,6 +172,286 @@
       ]
     },
     {
+      "region_tag": "retail_v2_generated_CatalogService_GetCompletionConfig_sync",
+      "title": "Snippet for get_completion_config in CatalogService",
+      "description": "Basic snippet for get_completion_config in CatalogService",
+      "file": "catalog_service/get_completion_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_completion_config",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#get_completion_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::GetCompletionConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::CompletionConfig",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "GetCompletionConfig",
+          "full_name": "google.cloud.retail.v2.CatalogService.GetCompletionConfig",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_UpdateCompletionConfig_sync",
+      "title": "Snippet for update_completion_config in CatalogService",
+      "description": "Basic snippet for update_completion_config in CatalogService",
+      "file": "catalog_service/update_completion_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_completion_config",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#update_completion_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateCompletionConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::CompletionConfig",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "UpdateCompletionConfig",
+          "full_name": "google.cloud.retail.v2.CatalogService.UpdateCompletionConfig",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_GetAttributesConfig_sync",
+      "title": "Snippet for get_attributes_config in CatalogService",
+      "description": "Basic snippet for get_attributes_config in CatalogService",
+      "file": "catalog_service/get_attributes_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_attributes_config",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#get_attributes_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::GetAttributesConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::AttributesConfig",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "GetAttributesConfig",
+          "full_name": "google.cloud.retail.v2.CatalogService.GetAttributesConfig",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_UpdateAttributesConfig_sync",
+      "title": "Snippet for update_attributes_config in CatalogService",
+      "description": "Basic snippet for update_attributes_config in CatalogService",
+      "file": "catalog_service/update_attributes_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_attributes_config",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#update_attributes_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateAttributesConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::AttributesConfig",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "UpdateAttributesConfig",
+          "full_name": "google.cloud.retail.v2.CatalogService.UpdateAttributesConfig",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_AddCatalogAttribute_sync",
+      "title": "Snippet for add_catalog_attribute in CatalogService",
+      "description": "Basic snippet for add_catalog_attribute in CatalogService",
+      "file": "catalog_service/add_catalog_attribute.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_catalog_attribute",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#add_catalog_attribute",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::AddCatalogAttributeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::AttributesConfig",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "AddCatalogAttribute",
+          "full_name": "google.cloud.retail.v2.CatalogService.AddCatalogAttribute",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_RemoveCatalogAttribute_sync",
+      "title": "Snippet for remove_catalog_attribute in CatalogService",
+      "description": "Basic snippet for remove_catalog_attribute in CatalogService",
+      "file": "catalog_service/remove_catalog_attribute.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_catalog_attribute",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#remove_catalog_attribute",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::AttributesConfig",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "RemoveCatalogAttribute",
+          "full_name": "google.cloud.retail.v2.CatalogService.RemoveCatalogAttribute",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_CatalogService_ReplaceCatalogAttribute_sync",
+      "title": "Snippet for replace_catalog_attribute in CatalogService",
+      "description": "Basic snippet for replace_catalog_attribute in CatalogService",
+      "file": "catalog_service/replace_catalog_attribute.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "replace_catalog_attribute",
+        "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client#replace_catalog_attribute",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::AttributesConfig",
+        "client": {
+          "short_name": "CatalogService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::CatalogService::Client"
+        },
+        "method": {
+          "short_name": "ReplaceCatalogAttribute",
+          "full_name": "google.cloud.retail.v2.CatalogService.ReplaceCatalogAttribute",
+          "service": {
+            "short_name": "CatalogService",
+            "full_name": "google.cloud.retail.v2.CatalogService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "retail_v2_generated_CompletionService_CompleteQuery_sync",
       "title": "Snippet for complete_query in CompletionService",
       "description": "Basic snippet for complete_query in CompletionService",
@@ -247,6 +527,206 @@
         {
           "start": 20,
           "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ControlService_CreateControl_sync",
+      "title": "Snippet for create_control in ControlService",
+      "description": "Basic snippet for create_control in ControlService",
+      "file": "control_service/create_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_control",
+        "full_name": "::Google::Cloud::Retail::V2::ControlService::Client#create_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::CreateControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ControlService::Client"
+        },
+        "method": {
+          "short_name": "CreateControl",
+          "full_name": "google.cloud.retail.v2.ControlService.CreateControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.retail.v2.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ControlService_DeleteControl_sync",
+      "title": "Snippet for delete_control in ControlService",
+      "description": "Basic snippet for delete_control in ControlService",
+      "file": "control_service/delete_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_control",
+        "full_name": "::Google::Cloud::Retail::V2::ControlService::Client#delete_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::DeleteControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ControlService::Client"
+        },
+        "method": {
+          "short_name": "DeleteControl",
+          "full_name": "google.cloud.retail.v2.ControlService.DeleteControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.retail.v2.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ControlService_UpdateControl_sync",
+      "title": "Snippet for update_control in ControlService",
+      "description": "Basic snippet for update_control in ControlService",
+      "file": "control_service/update_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_control",
+        "full_name": "::Google::Cloud::Retail::V2::ControlService::Client#update_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ControlService::Client"
+        },
+        "method": {
+          "short_name": "UpdateControl",
+          "full_name": "google.cloud.retail.v2.ControlService.UpdateControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.retail.v2.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ControlService_GetControl_sync",
+      "title": "Snippet for get_control in ControlService",
+      "description": "Basic snippet for get_control in ControlService",
+      "file": "control_service/get_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_control",
+        "full_name": "::Google::Cloud::Retail::V2::ControlService::Client#get_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::GetControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::Control",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ControlService::Client"
+        },
+        "method": {
+          "short_name": "GetControl",
+          "full_name": "google.cloud.retail.v2.ControlService.GetControl",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.retail.v2.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ControlService_ListControls_sync",
+      "title": "Snippet for list_controls in ControlService",
+      "description": "Basic snippet for list_controls in ControlService",
+      "file": "control_service/list_controls.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_controls",
+        "full_name": "::Google::Cloud::Retail::V2::ControlService::Client#list_controls",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ListControlsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ListControlsResponse",
+        "client": {
+          "short_name": "ControlService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ControlService::Client"
+        },
+        "method": {
+          "short_name": "ListControls",
+          "full_name": "google.cloud.retail.v2.ControlService.ListControls",
+          "service": {
+            "short_name": "ControlService",
+            "full_name": "google.cloud.retail.v2.ControlService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
           "type": "FULL"
         }
       ]
@@ -767,6 +1247,286 @@
         {
           "start": 20,
           "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ServingConfigService_CreateServingConfig_sync",
+      "title": "Snippet for create_serving_config in ServingConfigService",
+      "description": "Basic snippet for create_serving_config in ServingConfigService",
+      "file": "serving_config_service/create_serving_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_serving_config",
+        "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client#create_serving_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::CreateServingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "CreateServingConfig",
+          "full_name": "google.cloud.retail.v2.ServingConfigService.CreateServingConfig",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.retail.v2.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ServingConfigService_DeleteServingConfig_sync",
+      "title": "Snippet for delete_serving_config in ServingConfigService",
+      "description": "Basic snippet for delete_serving_config in ServingConfigService",
+      "file": "serving_config_service/delete_serving_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_serving_config",
+        "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client#delete_serving_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::DeleteServingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "DeleteServingConfig",
+          "full_name": "google.cloud.retail.v2.ServingConfigService.DeleteServingConfig",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.retail.v2.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ServingConfigService_UpdateServingConfig_sync",
+      "title": "Snippet for update_serving_config in ServingConfigService",
+      "description": "Basic snippet for update_serving_config in ServingConfigService",
+      "file": "serving_config_service/update_serving_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_serving_config",
+        "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client#update_serving_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::UpdateServingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "UpdateServingConfig",
+          "full_name": "google.cloud.retail.v2.ServingConfigService.UpdateServingConfig",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.retail.v2.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ServingConfigService_GetServingConfig_sync",
+      "title": "Snippet for get_serving_config in ServingConfigService",
+      "description": "Basic snippet for get_serving_config in ServingConfigService",
+      "file": "serving_config_service/get_serving_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_serving_config",
+        "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client#get_serving_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::GetServingConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "GetServingConfig",
+          "full_name": "google.cloud.retail.v2.ServingConfigService.GetServingConfig",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.retail.v2.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ServingConfigService_ListServingConfigs_sync",
+      "title": "Snippet for list_serving_configs in ServingConfigService",
+      "description": "Basic snippet for list_serving_configs in ServingConfigService",
+      "file": "serving_config_service/list_serving_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_serving_configs",
+        "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client#list_serving_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::ListServingConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ListServingConfigsResponse",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "ListServingConfigs",
+          "full_name": "google.cloud.retail.v2.ServingConfigService.ListServingConfigs",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.retail.v2.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ServingConfigService_AddControl_sync",
+      "title": "Snippet for add_control in ServingConfigService",
+      "description": "Basic snippet for add_control in ServingConfigService",
+      "file": "serving_config_service/add_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "add_control",
+        "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client#add_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::AddControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "AddControl",
+          "full_name": "google.cloud.retail.v2.ServingConfigService.AddControl",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.retail.v2.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "retail_v2_generated_ServingConfigService_RemoveControl_sync",
+      "title": "Snippet for remove_control in ServingConfigService",
+      "description": "Basic snippet for remove_control in ServingConfigService",
+      "file": "serving_config_service/remove_control.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_control",
+        "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client#remove_control",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Retail::V2::RemoveControlRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Retail::V2::ServingConfig",
+        "client": {
+          "short_name": "ServingConfigService::Client",
+          "full_name": "::Google::Cloud::Retail::V2::ServingConfigService::Client"
+        },
+        "method": {
+          "short_name": "RemoveControl",
+          "full_name": "google.cloud.retail.v2.ServingConfigService.RemoveControl",
+          "service": {
+            "short_name": "ServingConfigService",
+            "full_name": "google.cloud.retail.v2.ServingConfigService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
           "type": "FULL"
         }
       ]

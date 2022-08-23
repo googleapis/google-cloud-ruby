@@ -118,6 +118,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :matching_variant_count, :int32, 3
       map :matching_variant_fields, :string, :message, 4, "google.protobuf.FieldMask"
       map :variant_rollup_values, :string, :message, 5, "google.protobuf.Value"
+      repeated :personal_labels, :string, 7
     end
     add_message "google.cloud.retail.v2.SearchResponse.Facet" do
       optional :key, :string, 1
