@@ -27,12 +27,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :data_object do
         optional :oracle_rdbms, :message, 100, "google.cloud.datastream.v1.OracleRdbms"
         optional :mysql_rdbms, :message, 101, "google.cloud.datastream.v1.MysqlRdbms"
+        optional :postgresql_rdbms, :message, 102, "google.cloud.datastream.v1.PostgresqlRdbms"
       end
     end
     add_message "google.cloud.datastream.v1.DiscoverConnectionProfileResponse" do
       oneof :data_object do
         optional :oracle_rdbms, :message, 100, "google.cloud.datastream.v1.OracleRdbms"
         optional :mysql_rdbms, :message, 101, "google.cloud.datastream.v1.MysqlRdbms"
+        optional :postgresql_rdbms, :message, 102, "google.cloud.datastream.v1.PostgresqlRdbms"
       end
     end
     add_message "google.cloud.datastream.v1.FetchStaticIpsRequest" do

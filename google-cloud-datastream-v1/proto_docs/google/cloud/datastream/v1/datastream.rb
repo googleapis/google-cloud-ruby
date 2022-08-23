@@ -45,6 +45,9 @@ module Google
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
         #     MySQL RDBMS to enrich with child data objects and metadata.
+        # @!attribute [rw] postgresql_rdbms
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
+        #     PostgreSQL RDBMS to enrich with child data objects and metadata.
         class DiscoverConnectionProfileRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -57,6 +60,9 @@ module Google
         # @!attribute [rw] mysql_rdbms
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
         #     Enriched MySQL RDBMS object.
+        # @!attribute [rw] postgresql_rdbms
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
+        #     Enriched PostgreSQL RDBMS object.
         class DiscoverConnectionProfileResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
