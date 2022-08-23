@@ -98,6 +98,12 @@ module Google
           @project.database instance_id, database_id
         end
 
+        # The Spanner session creator role.
+        # @return [String]
+        def database_role
+         @database_role
+        end
+
         # A hash of values to specify the custom query options for executing
         # SQL query.
         # @return [Hash]
