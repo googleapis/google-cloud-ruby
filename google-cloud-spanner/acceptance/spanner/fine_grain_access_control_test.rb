@@ -24,6 +24,7 @@ describe "Fine Grained Access Control", :spanner do
   let(:database_id) { $spanner_database_id }
 
   before do
+    skip if emulator_enabled?
     db_client.delete table_name # remove all data
     db_client.insert table_name, [
       { id: 1, bool: false },
