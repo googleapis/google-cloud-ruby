@@ -41,7 +41,6 @@
     "snippets/assured_workloads_service/get_workload.rb",
     "snippets/assured_workloads_service/list_workloads.rb",
     "snippets/assured_workloads_service/restrict_allowed_resources.rb",
-    "snippets/assured_workloads_service/restrict_allowed_services.rb",
     "snippets/assured_workloads_service/update_workload.rb",
     "snippets/snippet_metadata_google.cloud.assuredworkloads.v1beta1.json",
     "test/google/cloud/assured_workloads/v1beta1/assured_workloads_service_operations_test.rb",
