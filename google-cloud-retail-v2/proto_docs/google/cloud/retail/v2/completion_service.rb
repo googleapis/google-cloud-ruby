@@ -87,7 +87,8 @@ module Google
         # @!attribute [rw] max_suggestions
         #   @return [::Integer]
         #     Completion max suggestions. If left unset or set to 0, then will fallback
-        #     to the configured value [CompletionConfig.max_suggestions][].
+        #     to the configured value
+        #     {::Google::Cloud::Retail::V2::CompletionConfig#max_suggestions CompletionConfig.max_suggestions}.
         #
         #     The maximum allowed max suggestions is 20. If it is set higher, it will be
         #     capped by 20.

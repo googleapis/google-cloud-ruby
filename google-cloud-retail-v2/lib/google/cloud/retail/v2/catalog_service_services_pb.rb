@@ -76,6 +76,44 @@ module Google
             # [CatalogService.SetDefaultBranch][google.cloud.retail.v2.CatalogService.SetDefaultBranch]
             # method under a specified parent catalog.
             rpc :GetDefaultBranch, ::Google::Cloud::Retail::V2::GetDefaultBranchRequest, ::Google::Cloud::Retail::V2::GetDefaultBranchResponse
+            # Gets a [CompletionConfig][google.cloud.retail.v2.CompletionConfig].
+            rpc :GetCompletionConfig, ::Google::Cloud::Retail::V2::GetCompletionConfigRequest, ::Google::Cloud::Retail::V2::CompletionConfig
+            # Updates the [CompletionConfig][google.cloud.retail.v2.CompletionConfig]s.
+            rpc :UpdateCompletionConfig, ::Google::Cloud::Retail::V2::UpdateCompletionConfigRequest, ::Google::Cloud::Retail::V2::CompletionConfig
+            # Gets an [AttributesConfig][google.cloud.retail.v2.AttributesConfig].
+            rpc :GetAttributesConfig, ::Google::Cloud::Retail::V2::GetAttributesConfigRequest, ::Google::Cloud::Retail::V2::AttributesConfig
+            # Updates the [AttributesConfig][google.cloud.retail.v2.AttributesConfig].
+            #
+            # The catalog attributes in the request will be updated in the catalog, or
+            # inserted if they do not exist. Existing catalog attributes not included in
+            # the request will remain unchanged. Attributes that are assigned to
+            # products, but do not exist at the catalog level, are always included in the
+            # response. The product attribute is assigned default values for missing
+            # catalog attribute fields, e.g., searchable and dynamic facetable options.
+            rpc :UpdateAttributesConfig, ::Google::Cloud::Retail::V2::UpdateAttributesConfigRequest, ::Google::Cloud::Retail::V2::AttributesConfig
+            # Adds the specified
+            # [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to the
+            # [AttributesConfig][google.cloud.retail.v2.AttributesConfig].
+            #
+            # If the [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to add
+            # already exists, an ALREADY_EXISTS error is returned.
+            rpc :AddCatalogAttribute, ::Google::Cloud::Retail::V2::AddCatalogAttributeRequest, ::Google::Cloud::Retail::V2::AttributesConfig
+            # Removes the specified
+            # [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] from the
+            # [AttributesConfig][google.cloud.retail.v2.AttributesConfig].
+            #
+            # If the [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to
+            # remove does not exist, a NOT_FOUND error is returned.
+            rpc :RemoveCatalogAttribute, ::Google::Cloud::Retail::V2::RemoveCatalogAttributeRequest, ::Google::Cloud::Retail::V2::AttributesConfig
+            # Replaces the specified
+            # [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] in the
+            # [AttributesConfig][google.cloud.retail.v2.AttributesConfig] by updating the
+            # catalog attribute with the same
+            # [CatalogAttribute.key][google.cloud.retail.v2.CatalogAttribute.key].
+            #
+            # If the [CatalogAttribute][google.cloud.retail.v2.CatalogAttribute] to
+            # replace does not exist, a NOT_FOUND error is returned.
+            rpc :ReplaceCatalogAttribute, ::Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest, ::Google::Cloud::Retail::V2::AttributesConfig
           end
 
           Stub = Service.rpc_stub_class

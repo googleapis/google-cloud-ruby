@@ -244,7 +244,8 @@ module Google
             #       [guidelines](https://cloud.google.com/retail/docs/completion-overview#generated-completion-dataset).
             #   @param max_suggestions [::Integer]
             #     Completion max suggestions. If left unset or set to 0, then will fallback
-            #     to the configured value [CompletionConfig.max_suggestions][].
+            #     to the configured value
+            #     {::Google::Cloud::Retail::V2::CompletionConfig#max_suggestions CompletionConfig.max_suggestions}.
             #
             #     The maximum allowed max suggestions is 20. If it is set higher, it will be
             #     capped by 20.
@@ -347,8 +348,8 @@ module Google
             #     Required. The desired input location of the data.
             #   @param notification_pubsub_topic [::String]
             #     Pub/Sub topic for receiving notification. If this field is set,
-            #     when the import is finished, a notification will be sent to
-            #     specified Pub/Sub topic. The message data will be JSON string of a
+            #     when the import is finished, a notification is sent to
+            #     specified Pub/Sub topic. The message data is JSON string of a
             #     {::Google::Longrunning::Operation Operation}.
             #     Format of the Pub/Sub topic is `projects/{project}/topics/{topic}`.
             #

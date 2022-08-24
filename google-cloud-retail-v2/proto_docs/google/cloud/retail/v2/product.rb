@@ -114,7 +114,7 @@ module Google
         #     Non-existent product ids are allowed.
         #     The {::Google::Cloud::Retail::V2::Product#type type} of the members must be
         #     either {::Google::Cloud::Retail::V2::Product::Type::PRIMARY Type.PRIMARY} or
-        #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT} otherwise and
+        #     {::Google::Cloud::Retail::V2::Product::Type::VARIANT Type.VARIANT} otherwise an
         #     INVALID_ARGUMENT error is thrown. Should not set it for other types. A
         #     maximum of 1000 values are allowed. Otherwise, an INVALID_ARGUMENT error is
         #     return.
@@ -474,6 +474,12 @@ module Google
         #     Note: This field is OUTPUT_ONLY for
         #     {::Google::Cloud::Retail::V2::ProductService::Client#get_product ProductService.GetProduct}.
         #     Do not set this field in API requests.
+        # @!attribute [r] local_inventories
+        #   @return [::Array<::Google::Cloud::Retail::V2::LocalInventory>]
+        #     Output only. A list of local inventories specific to different places.
+        #
+        #     This is only available for users who have Retail Search enabled, and it can
+        #     be managed by [AddLocalInventories][] and [RemoveLocalInventories][] APIs.
         class Product
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -46,6 +46,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :publish_time, :message, 33, "google.protobuf.Timestamp"
       optional :retrievable_fields, :message, 30, "google.protobuf.FieldMask"
       repeated :variants, :message, 31, "google.cloud.retail.v2.Product"
+      repeated :local_inventories, :message, 35, "google.cloud.retail.v2.LocalInventory"
       oneof :expiration do
         optional :expire_time, :message, 16, "google.protobuf.Timestamp"
         optional :ttl, :message, 17, "google.protobuf.Duration"

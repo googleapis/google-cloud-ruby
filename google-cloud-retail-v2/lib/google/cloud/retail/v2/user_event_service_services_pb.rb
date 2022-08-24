@@ -50,9 +50,9 @@ module Google
             # synchronous. Events that already exist are skipped.
             # Use this method for backfilling historical user events.
             #
-            # Operation.response is of type ImportResponse. Note that it is
+            # `Operation.response` is of type `ImportResponse`. Note that it is
             # possible for a subset of the items to be successfully inserted.
-            # Operation.metadata is of type ImportMetadata.
+            # `Operation.metadata` is of type `ImportMetadata`.
             rpc :ImportUserEvents, ::Google::Cloud::Retail::V2::ImportUserEventsRequest, ::Google::Longrunning::Operation
             # Starts a user event rejoin operation with latest product catalog. Events
             # will not be annotated with detailed product information if product is
