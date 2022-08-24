@@ -347,7 +347,6 @@ module Google
         # @!attribute [rw] read_consistency
         #   @return [::Google::Cloud::Datastore::V1::ReadOptions::ReadConsistency]
         #     The non-transactional read consistency to use.
-        #     Cannot be set to `STRONG` for global queries.
         # @!attribute [rw] transaction
         #   @return [::String]
         #     The identifier of the transaction in which to read. A
