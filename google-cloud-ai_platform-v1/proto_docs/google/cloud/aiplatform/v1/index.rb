@@ -79,6 +79,13 @@ module Google
         #     timestamp, yet that does not mean their results are not already reflected
         #     in the Index. Result of any successfully completed Operation on the Index
         #     is reflected in it.
+        # @!attribute [r] index_stats
+        #   @return [::Google::Cloud::AIPlatform::V1::IndexStats]
+        #     Output only. Stats of the index resource.
+        # @!attribute [rw] index_update_method
+        #   @return [::Google::Cloud::AIPlatform::V1::Index::IndexUpdateMethod]
+        #     Immutable. The update method to use with this Index. If not set, BATCH_UPDATE will be
+        #     used by default.
         class Index
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -91,6 +98,87 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # The update method of an Index.
+          module IndexUpdateMethod
+            # Should not be used.
+            INDEX_UPDATE_METHOD_UNSPECIFIED = 0
+
+            # BatchUpdate: user can call UpdateIndex with files on Cloud Storage of
+            # datapoints to update.
+            BATCH_UPDATE = 1
+
+            # StreamUpdate: user can call UpsertDatapoints/DeleteDatapoints to update
+            # the Index and the updates will be applied in corresponding
+            # DeployedIndexes in nearly real-time.
+            STREAM_UPDATE = 2
+          end
+        end
+
+        # A datapoint of Index.
+        # @!attribute [rw] datapoint_id
+        #   @return [::String]
+        #     Required. Unique identifier of the datapoint.
+        # @!attribute [rw] feature_vector
+        #   @return [::Array<::Float>]
+        #     Required. Feature embedding vector. An array of numbers with the length of
+        #     [NearestNeighborSearchConfig.dimensions].
+        # @!attribute [rw] restricts
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint::Restriction>]
+        #     Optional. List of Restrict of the datapoint, used to perform "restricted searches"
+        #     where boolean rule are used to filter the subset of the database eligible
+        #     for matching.
+        #     See: https://cloud.google.com/vertex-ai/docs/matching-engine/filtering
+        # @!attribute [rw] crowding_tag
+        #   @return [::Google::Cloud::AIPlatform::V1::IndexDatapoint::CrowdingTag]
+        #     Optional. CrowdingTag of the datapoint, the number of neighbors to return in each
+        #     crowding can be configured during query.
+        class IndexDatapoint
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Restriction of a datapoint which describe its attributes(tokens) from each
+          # of several attribute categories(namespaces).
+          # @!attribute [rw] namespace
+          #   @return [::String]
+          #     The namespace of this restriction. eg: color.
+          # @!attribute [rw] allow_list
+          #   @return [::Array<::String>]
+          #     The attributes to allow in this namespace. eg: 'red'
+          # @!attribute [rw] deny_list
+          #   @return [::Array<::String>]
+          #     The attributes to deny in this namespace. eg: 'blue'
+          class Restriction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Crowding tag is a constraint on a neighbor list produced by nearest
+          # neighbor search requiring that no more than some value k' of the k
+          # neighbors returned have the same value of crowding_attribute.
+          # @!attribute [rw] crowding_attribute
+          #   @return [::String]
+          #     The attribute value used for crowding.  The maximum number of neighbors
+          #     to return per crowding attribute value
+          #     (per_crowding_attribute_num_neighbors) is configured per-query. This
+          #     field is ignored if per_crowding_attribute_num_neighbors is larger than
+          #     the total number of neighbors to return for a given query.
+          class CrowdingTag
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Stats of the Index.
+        # @!attribute [r] vectors_count
+        #   @return [::Integer]
+        #     Output only. The number of vectors in the Index.
+        # @!attribute [r] shards_count
+        #   @return [::Integer]
+        #     Output only. The number of shards in the Index.
+        class IndexStats
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end

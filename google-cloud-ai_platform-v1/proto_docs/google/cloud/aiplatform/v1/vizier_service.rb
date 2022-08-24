@@ -106,7 +106,7 @@ module Google
         #     Format: `projects/{project}/locations/{location}/studies/{study}`
         # @!attribute [rw] suggestion_count
         #   @return [::Integer]
-        #     Required. The number of suggestions requested.
+        #     Required. The number of suggestions requested. It must be positive.
         # @!attribute [rw] client_id
         #   @return [::String]
         #     Required. The identifier of the client that is requesting the suggestion.

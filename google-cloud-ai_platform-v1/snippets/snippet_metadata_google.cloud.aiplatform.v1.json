@@ -2132,6 +2132,86 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_IndexService_UpsertDatapoints_sync",
+      "title": "Snippet for upsert_datapoints in IndexService",
+      "description": "Basic snippet for upsert_datapoints in IndexService",
+      "file": "index_service/upsert_datapoints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upsert_datapoints",
+        "full_name": "::Google::Cloud::AIPlatform::V1::IndexService::Client#upsert_datapoints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::UpsertDatapointsResponse",
+        "client": {
+          "short_name": "IndexService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::IndexService::Client"
+        },
+        "method": {
+          "short_name": "UpsertDatapoints",
+          "full_name": "google.cloud.aiplatform.v1.IndexService.UpsertDatapoints",
+          "service": {
+            "short_name": "IndexService",
+            "full_name": "google.cloud.aiplatform.v1.IndexService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "aiplatform_v1_generated_IndexService_RemoveDatapoints_sync",
+      "title": "Snippet for remove_datapoints in IndexService",
+      "description": "Basic snippet for remove_datapoints in IndexService",
+      "file": "index_service/remove_datapoints.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_datapoints",
+        "full_name": "::Google::Cloud::AIPlatform::V1::IndexService::Client#remove_datapoints",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::RemoveDatapointsResponse",
+        "client": {
+          "short_name": "IndexService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::IndexService::Client"
+        },
+        "method": {
+          "short_name": "RemoveDatapoints",
+          "full_name": "google.cloud.aiplatform.v1.IndexService.RemoveDatapoints",
+          "service": {
+            "short_name": "IndexService",
+            "full_name": "google.cloud.aiplatform.v1.IndexService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_JobService_CreateCustomJob_sync",
       "title": "Snippet for create_custom_job in JobService",
       "description": "Basic snippet for create_custom_job in JobService",

@@ -664,7 +664,7 @@ module Google
             #     Required. The project and location that the Study belongs to.
             #     Format: `projects/{project}/locations/{location}/studies/{study}`
             #   @param suggestion_count [::Integer]
-            #     Required. The number of suggestions requested.
+            #     Required. The number of suggestions requested. It must be positive.
             #   @param client_id [::String]
             #     Required. The identifier of the client that is requesting the suggestion.
             #
