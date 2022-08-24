@@ -101,7 +101,7 @@ module Google
         # The Spanner session creator role.
         # @return [String]
         def database_role
-         @database_role
+          @database_role
         end
 
         # A hash of values to specify the custom query options for executing

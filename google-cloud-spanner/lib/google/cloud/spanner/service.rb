@@ -303,7 +303,7 @@ module Google
         end
 
         def batch_create_sessions database_name, session_count, labels: nil,
-                                  call_options: nil, database_role: nil                     
+                                  call_options: nil, database_role: nil
           opts = default_options session_name: database_name,
                                  call_options: call_options
           session = V1::Session.new labels: labels, creator_role: database_role if labels || database_role

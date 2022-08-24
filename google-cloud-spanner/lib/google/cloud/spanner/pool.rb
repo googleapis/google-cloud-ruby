@@ -277,7 +277,7 @@ module Google
         end
 
         def create_keepalive_task!
-          @keepalive_task = Concurrent::TimerTask.new(execution_interval: 300) do
+          @keepalive_task = Concurrent::TimerTask.new execution_interval: 300 do
             keepalive_or_release!
           end
           @keepalive_task.execute
