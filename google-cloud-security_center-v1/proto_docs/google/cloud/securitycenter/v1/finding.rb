@@ -122,8 +122,8 @@ module Google
         #     Output only. The most recent time this finding was muted or unmuted.
         # @!attribute [r] external_systems
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ExternalSystem}]
-        #     Output only. Third party SIEM/SOAR fields within SCC, contains external system
-        #     information and external system finding fields.
+        #     Output only. Third party SIEM/SOAR fields within SCC, contains external
+        #     system information and external system finding fields.
         # @!attribute [rw] mitre_attack
         #   @return [::Google::Cloud::SecurityCenter::V1::MitreAttack]
         #     MITRE ATT&CK tactics and techniques related to this finding.
@@ -146,9 +146,9 @@ module Google
         #     Represents operating system processes associated with the Finding.
         # @!attribute [r] contacts
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::SecurityCenter::V1::ContactDetails}]
-        #     Output only. Map containing the point of contacts for the given finding. The key
-        #     represents the type of contact, while the value contains a list of all the
-        #     contacts that pertain. Please refer to:
+        #     Output only. Map containing the point of contacts for the given finding.
+        #     The key represents the type of contact, while the value contains a list of
+        #     all the contacts that pertain. Please refer to:
         #     https://cloud.google.com/resource-manager/docs/managing-notification-contacts#notification-categories
         #
         #         {
@@ -186,6 +186,9 @@ module Google
         # @!attribute [rw] kubernetes
         #   @return [::Google::Cloud::SecurityCenter::V1::Kubernetes]
         #     Kubernetes resources associated with the finding.
+        # @!attribute [rw] database
+        #   @return [::Google::Cloud::SecurityCenter::V1::Database]
+        #     Database associated with the finding.
         class Finding
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
