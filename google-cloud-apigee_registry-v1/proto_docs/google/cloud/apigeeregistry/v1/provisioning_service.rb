@@ -92,7 +92,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Format: `projects/*/locations/*/instance`.
-        #     Currently only locations/global is supported.
+        #     Currently only `locations/global` is supported.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Creation timestamp.

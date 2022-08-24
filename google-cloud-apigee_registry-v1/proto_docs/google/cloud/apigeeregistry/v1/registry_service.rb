@@ -25,7 +25,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of APIs.
-        #     Format: projects/*/locations/*
+        #     Format: `projects/*/locations/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of APIs to return.
@@ -65,7 +65,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the API to retrieve.
-        #     Format: projects/*/locations/*/apis/*
+        #     Format: `projects/*/locations/*/apis/*`
         class GetApiRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -75,14 +75,14 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of APIs.
-        #     Format: projects/*/locations/*
+        #     Format: `projects/*/locations/*`
         # @!attribute [rw] api
         #   @return [::Google::Cloud::ApigeeRegistry::V1::Api]
         #     Required. The API to create.
         # @!attribute [rw] api_id
         #   @return [::String]
-        #     Required. The ID to use for the api, which will become the final component of
-        #     the api's resource name.
+        #     Required. The ID to use for the API, which will become the final component of
+        #     the API's resource name.
         #
         #     This value should be 4-63 characters, and valid characters
         #     are /[a-z][0-9]-/.
@@ -99,16 +99,16 @@ module Google
         #     Required. The API to update.
         #
         #     The `name` field is used to identify the API to update.
-        #     Format: projects/*/locations/*/apis/*
+        #     Format: `projects/*/locations/*/apis/*`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated. If omitted, all fields are updated that
         #     are set in the request message (fields set to default values are ignored).
-        #     If a "*" is specified, all fields are updated, including fields that are
-        #     unspecified/default in the request.
+        #     If an asterisk "*" is specified, all fields are updated, including fields
+        #     that are unspecified/default in the request.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and the api is not found, a new api will be created.
+        #     If set to true, and the API is not found, a new API will be created.
         #     In this situation, `update_mask` is ignored.
         class UpdateApiRequest
           include ::Google::Protobuf::MessageExts
@@ -119,7 +119,11 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the API to delete.
-        #     Format: projects/*/locations/*/apis/*
+        #     Format: `projects/*/locations/*/apis/*`
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     If set to true, any child resources will also be deleted.
+        #     (Otherwise, the request will only work if there are no child resources.)
         class DeleteApiRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -129,7 +133,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of versions.
-        #     Format: projects/*/locations/*/apis/*
+        #     Format: `projects/*/locations/*/apis/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of versions to return.
@@ -169,7 +173,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the version to retrieve.
-        #     Format: projects/*/locations/*/apis/*/versions/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*`
         class GetApiVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -179,7 +183,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of versions.
-        #     Format: projects/*/locations/*/apis/*
+        #     Format: `projects/*/locations/*/apis/*`
         # @!attribute [rw] api_version
         #   @return [::Google::Cloud::ApigeeRegistry::V1::ApiVersion]
         #     Required. The version to create.
@@ -203,13 +207,13 @@ module Google
         #     Required. The version to update.
         #
         #     The `name` field is used to identify the version to update.
-        #     Format: projects/*/locations/*/apis/*/versions/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated. If omitted, all fields are updated that
         #     are set in the request message (fields set to default values are ignored).
-        #     If a "*" is specified, all fields are updated, including fields that are
-        #     unspecified/default in the request.
+        #     If an asterisk "*" is specified, all fields are updated, including fields
+        #     that are unspecified/default in the request.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and the version is not found, a new version will be
@@ -223,7 +227,11 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the version to delete.
-        #     Format: projects/*/locations/*/apis/*/versions/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*`
+        # @!attribute [rw] force
+        #   @return [::Boolean]
+        #     If set to true, any child resources will also be deleted.
+        #     (Otherwise, the request will only work if there are no child resources.)
         class DeleteApiVersionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -233,7 +241,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of specs.
-        #     Format: projects/*/locations/*/apis/*/versions/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of specs to return.
@@ -273,7 +281,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spec to retrieve.
-        #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
         class GetApiSpecRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -283,7 +291,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spec whose contents should be retrieved.
-        #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
         class GetApiSpecContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -293,7 +301,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of specs.
-        #     Format: projects/*/locations/*/apis/*/versions/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*`
         # @!attribute [rw] api_spec
         #   @return [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
         #     Required. The spec to create.
@@ -317,13 +325,13 @@ module Google
         #     Required. The spec to update.
         #
         #     The `name` field is used to identify the spec to update.
-        #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated. If omitted, all fields are updated that
         #     are set in the request message (fields set to default values are ignored).
-        #     If a "*" is specified, all fields are updated, including fields that are
-        #     unspecified/default in the request.
+        #     If an asterisk "*" is specified, all fields are updated, including fields
+        #     that are unspecified/default in the request.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and the spec is not found, a new spec will be created.
@@ -337,7 +345,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the spec to delete.
-        #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+        #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     If set to true, any child resources will also be deleted.
@@ -398,7 +406,7 @@ module Google
         #     Required. The revision ID to roll back to.
         #     It must be a revision of the same spec.
         #
-        #       Example: c7cfa2a8
+        #       Example: `c7cfa2a8`
         class RollbackApiSpecRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -411,7 +419,7 @@ module Google
         #     with a revision ID explicitly included.
         #
         #     Example:
-        #     projects/sample/locations/global/apis/petstore/versions/1.0.0/specs/openapi.yaml@c7cfa2a8
+        #     `projects/sample/locations/global/apis/petstore/versions/1.0.0/specs/openapi.yaml@c7cfa2a8`
         class DeleteApiSpecRevisionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -421,7 +429,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of deployments.
-        #     Format: projects/*/locations/*/apis/*
+        #     Format: `projects/*/locations/*/apis/*`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of deployments to return.
@@ -461,7 +469,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the deployment to retrieve.
-        #     Format: projects/*/locations/*/apis/*/deployments/*
+        #     Format: `projects/*/locations/*/apis/*/deployments/*`
         class GetApiDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -471,7 +479,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of deployments.
-        #     Format: projects/*/locations/*/apis/*
+        #     Format: `projects/*/locations/*/apis/*`
         # @!attribute [rw] api_deployment
         #   @return [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
         #     Required. The deployment to create.
@@ -495,13 +503,13 @@ module Google
         #     Required. The deployment to update.
         #
         #     The `name` field is used to identify the deployment to update.
-        #     Format: projects/*/locations/*/apis/*/deployments/*
+        #     Format: `projects/*/locations/*/apis/*/deployments/*`
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The list of fields to be updated. If omitted, all fields are updated that
         #     are set in the request message (fields set to default values are ignored).
-        #     If a "*" is specified, all fields are updated, including fields that are
-        #     unspecified/default in the request.
+        #     If an asterisk "*" is specified, all fields are updated, including fields
+        #     that are unspecified/default in the request.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
         #     If set to true, and the deployment is not found, a new deployment will be
@@ -515,7 +523,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the deployment to delete.
-        #     Format: projects/*/locations/*/apis/*/deployments/*
+        #     Format: `projects/*/locations/*/apis/*/deployments/*`
         # @!attribute [rw] force
         #   @return [::Boolean]
         #     If set to true, any child resources will also be deleted.
@@ -576,7 +584,7 @@ module Google
         #     Required. The revision ID to roll back to.
         #     It must be a revision of the same deployment.
         #
-        #       Example: c7cfa2a8
+        #       Example: `c7cfa2a8`
         class RollbackApiDeploymentRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -589,7 +597,7 @@ module Google
         #     with a revision ID explicitly included.
         #
         #     Example:
-        #     projects/sample/locations/global/apis/petstore/deployments/prod@c7cfa2a8
+        #     `projects/sample/locations/global/apis/petstore/deployments/prod@c7cfa2a8`
         class DeleteApiDeploymentRevisionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -599,7 +607,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of artifacts.
-        #     Format: \\{parent}
+        #     Format: `{parent}`
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     The maximum number of artifacts to return.
@@ -639,7 +647,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the artifact to retrieve.
-        #     Format: \\{parent}/artifacts/*
+        #     Format: `{parent}/artifacts/*`
         class GetArtifactRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -649,7 +657,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the artifact whose contents should be retrieved.
-        #     Format: \\{parent}/artifacts/*
+        #     Format: `{parent}/artifacts/*`
         class GetArtifactContentsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -659,7 +667,7 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The parent, which owns this collection of artifacts.
-        #     Format: \\{parent}
+        #     Format: `{parent}`
         # @!attribute [rw] artifact
         #   @return [::Google::Cloud::ApigeeRegistry::V1::Artifact]
         #     Required. The artifact to create.
@@ -683,7 +691,7 @@ module Google
         #     Required. The artifact to replace.
         #
         #     The `name` field is used to identify the artifact to replace.
-        #     Format: \\{parent}/artifacts/*
+        #     Format: `{parent}/artifacts/*`
         class ReplaceArtifactRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -693,7 +701,7 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The name of the artifact to delete.
-        #     Format: \\{parent}/artifacts/*
+        #     Format: `{parent}/artifacts/*`
         class DeleteArtifactRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
