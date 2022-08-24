@@ -174,66 +174,6 @@ class ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Clien
     end
   end
 
-  def test_restrict_allowed_services
-    # Create GRPC objects.
-    grpc_response = ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesResponse.new
-    grpc_operation = GRPC::ActiveCall::Operation.new nil
-    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
-    grpc_options = {}
-
-    # Create request parameters for a unary method.
-    name = "hello world"
-    restriction_type = :RESTRICTION_TYPE_UNSPECIFIED
-
-    restrict_allowed_services_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
-      assert_equal :restrict_allowed_services, name
-      assert_kind_of ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest, request
-      assert_equal "hello world", request["name"]
-      assert_equal :RESTRICTION_TYPE_UNSPECIFIED, request["restriction_type"]
-      refute_nil options
-    end
-
-    Gapic::ServiceStub.stub :new, restrict_allowed_services_client_stub do
-      # Create client
-      client = ::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new do |config|
-        config.credentials = grpc_channel
-      end
-
-      # Use hash object
-      client.restrict_allowed_services({ name: name, restriction_type: restriction_type }) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use named arguments
-      client.restrict_allowed_services name: name, restriction_type: restriction_type do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object
-      client.restrict_allowed_services ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest.new(name: name, restriction_type: restriction_type) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use hash object with options
-      client.restrict_allowed_services({ name: name, restriction_type: restriction_type }, grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Use protobuf object with options
-      client.restrict_allowed_services(::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest.new(name: name, restriction_type: restriction_type), grpc_options) do |response, operation|
-        assert_equal grpc_response, response
-        assert_equal grpc_operation, operation
-      end
-
-      # Verify method calls
-      assert_equal 5, restrict_allowed_services_client_stub.call_rpc_count
-    end
-  end
-
   def test_restrict_allowed_resources
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesResponse.new

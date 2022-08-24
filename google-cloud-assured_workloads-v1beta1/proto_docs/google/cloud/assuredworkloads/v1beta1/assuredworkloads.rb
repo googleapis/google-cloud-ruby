@@ -55,43 +55,6 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request for restricting list of available services in Workload environment.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The resource name of the Workload. This is the workloads's
-        #     relative path in the API, formatted as
-        #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
-        #     For example,
-        #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
-        # @!attribute [rw] restriction_type
-        #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest::RestrictionType]
-        #     Required. The type of restriction for using gcp services in the Workload environment.
-        class RestrictAllowedServicesRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # The type of restriction.
-          module RestrictionType
-            # Unknown restriction type.
-            RESTRICTION_TYPE_UNSPECIFIED = 0
-
-            # Allow the use all services. This effectively remove all restrictions
-            # placed on the Folder.
-            ALLOW_ALL_GCP_SERVICES = 1
-
-            # Based on Workload's compliance regime, allowed list changes.
-            # See - https://cloud.google.com/assured-workloads/docs/supported-products
-            # for the list of allowed services.
-            ALLOW_COMPLIANT_SERVICES = 2
-          end
-        end
-
-        # Response for restricting the list of allowed services.
-        class RestrictAllowedServicesResponse
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
         # Request for restricting list of available resources in Workload environment.
         # @!attribute [rw] name
         #   @return [::String]
@@ -158,42 +121,41 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request to check if source workload can be moved to target workload.
+        # A request to analyze a hypothetical move of a source project or project-based
+        # workload to a target (destination) folder-based workload.
         # @!attribute [rw] source
         #   @return [::String]
-        #     The Source is project based Workload to be moved. This is the workloads's
-        #     relative path in the API, formatted as
-        #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
-        #     For example,
-        #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
+        #     The source type is a project-based workload. Specify the workloads's
+        #     relative resource name, formatted as:
+        #     "organizations/\\{ORGANIZATION_ID}/locations/\\{LOCATION_ID}/workloads/\\{WORKLOAD_ID}"
+        #     For example:
+        #     "organizations/123/locations/us-east1/workloads/assured-workload-1"
         # @!attribute [rw] project
         #   @return [::String]
-        #     The Source is a project based to be moved.
-        #     This is the project's relative path in the API, formatted as
-        #     "cloudresourcemanager.googleapis.com/projects/\\{project_number}"
-        #     "projects/\\{project_number}"
-        #     "cloudresourcemanager.googleapis.com/projects/\\{project_id}"
-        #     "projects/\\{project_id}"
-        #     For example,
-        #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
+        #     The source type is a project. Specify the project's relative resource
+        #     name, formatted as either a project number or a project ID:
+        #     "projects/\\{PROJECT_NUMBER}" or "projects/\\{PROJECT_ID}"
+        #     For example:
+        #     "projects/951040570662" when specifying a project number, or
+        #     "projects/my-project-123" when specifying a project ID.
         # @!attribute [rw] target
         #   @return [::String]
-        #     Required. The resource name of the Workload to fetch. This is the workloads's
-        #     relative path in the API, formatted as
-        #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
-        #     For example,
-        #     "organizations/123/locations/us-east1/workloads/assured-workload-2".
+        #     Required. The resource ID of the folder-based destination workload. This workload is
+        #     where the source project will hypothetically be moved to. Specify the
+        #     workload's relative resource name, formatted as:
+        #     "organizations/\\{ORGANIZATION_ID}/locations/\\{LOCATION_ID}/workloads/\\{WORKLOAD_ID}"
+        #     For example:
+        #     "organizations/123/locations/us-east1/workloads/assured-workload-2"
         class AnalyzeWorkloadMoveRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response with the analysis if the source workload can be moved to the target
-        # workload
+        # A response that includes the analysis of the hypothetical resource move.
         # @!attribute [rw] blockers
         #   @return [::Array<::String>]
-        #     List of blockers that prevent moving the source workload to the target
-        #     workload
+        #     A list of blockers that should be addressed before moving the source
+        #     project or project-based workload to the destination folder-based workload.
         class AnalyzeWorkloadMoveResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -262,9 +224,9 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Immutable. The Workload creation timestamp.
-        # @!attribute [rw] billing_account
+        # @!attribute [r] billing_account
         #   @return [::String]
-        #     Input only. The billing account used for the resources which are
+        #     Output only. The billing account used for the resources which are
         #     direct children of workload. This billing account is initially associated
         #     with the resources created as part of Workload creation.
         #     After the initial creation of these resources, the customer can change
@@ -521,6 +483,9 @@ module Google
 
             # International Traffic in Arms Regulations
             ITAR = 10
+
+            # Assured Workloads for Australia Regions and Support controls
+            AU_REGIONS_AND_US_SUPPORT = 11
           end
 
           # Key Access Justifications(KAJ) Enrollment State.

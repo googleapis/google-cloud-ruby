@@ -92,46 +92,6 @@
       ]
     },
     {
-      "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedServices_sync",
-      "title": "Snippet for restrict_allowed_services in AssuredWorkloadsService",
-      "description": "Basic snippet for restrict_allowed_services in AssuredWorkloadsService",
-      "file": "assured_workloads_service/restrict_allowed_services.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "restrict_allowed_services",
-        "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#restrict_allowed_services",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesResponse",
-        "client": {
-          "short_name": "AssuredWorkloadsService::Client",
-          "full_name": "::Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client"
-        },
-        "method": {
-          "short_name": "RestrictAllowedServices",
-          "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService.RestrictAllowedServices",
-          "service": {
-            "short_name": "AssuredWorkloadsService",
-            "full_name": "google.cloud.assuredworkloads.v1beta1.AssuredWorkloadsService"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 32,
-          "type": "FULL"
-        }
-      ]
-    },
-    {
       "region_tag": "assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_sync",
       "title": "Snippet for restrict_allowed_resources in AssuredWorkloadsService",
       "description": "Basic snippet for restrict_allowed_resources in AssuredWorkloadsService",

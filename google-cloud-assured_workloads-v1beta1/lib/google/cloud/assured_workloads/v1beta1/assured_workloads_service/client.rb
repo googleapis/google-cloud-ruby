@@ -351,14 +351,6 @@ module Google
                 gapic_version: ::Google::Cloud::AssuredWorkloads::V1beta1::VERSION
               metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
 
-              header_params = {}
-              if request.workload&.name
-                header_params["workload.name"] = request.workload.name
-              end
-
-              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-              metadata[:"x-goog-request-params"] ||= request_params_header
-
               options.apply_defaults timeout:      @config.rpcs.update_workload.timeout,
                                      metadata:     metadata,
                                      retry_policy: @config.rpcs.update_workload.retry_policy
@@ -368,94 +360,6 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @assured_workloads_service_stub.call_rpc :update_workload, request, options: options do |response, operation|
-                yield response, operation if block_given?
-                return response
-              end
-            rescue ::GRPC::BadStatus => e
-              raise ::Google::Cloud::Error.from_error(e)
-            end
-
-            ##
-            # Restrict the list of services allowed in the Workload environment.
-            # The current list of allowed services can be found at
-            # https://cloud.google.com/assured-workloads/docs/supported-products
-            # In addition to assuredworkloads.workload.update permission, the user should
-            # also have orgpolicy.policy.set permission on the folder resource
-            # to use this functionality.
-            #
-            # @overload restrict_allowed_services(request, options = nil)
-            #   Pass arguments to `restrict_allowed_services` via a request object, either of type
-            #   {::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest} or an equivalent Hash.
-            #
-            #   @param request [::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest, ::Hash]
-            #     A request object representing the call parameters. Required. To specify no
-            #     parameters, or to keep all the default parameter values, pass an empty Hash.
-            #   @param options [::Gapic::CallOptions, ::Hash]
-            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-            #
-            # @overload restrict_allowed_services(name: nil, restriction_type: nil)
-            #   Pass arguments to `restrict_allowed_services` via keyword arguments. Note that at
-            #   least one keyword argument is required. To specify no parameters, or to keep all
-            #   the default parameter values, pass an empty Hash as a request object (see above).
-            #
-            #   @param name [::String]
-            #     Required. The resource name of the Workload. This is the workloads's
-            #     relative path in the API, formatted as
-            #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
-            #     For example,
-            #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
-            #   @param restriction_type [::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest::RestrictionType]
-            #     Required. The type of restriction for using gcp services in the Workload environment.
-            #
-            # @yield [response, operation] Access the result along with the RPC operation
-            # @yieldparam response [::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesResponse]
-            # @yieldparam operation [::GRPC::ActiveCall::Operation]
-            #
-            # @return [::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesResponse]
-            #
-            # @raise [::Google::Cloud::Error] if the RPC is aborted.
-            #
-            # @example Basic example
-            #   require "google/cloud/assured_workloads/v1beta1"
-            #
-            #   # Create a client object. The client can be reused for multiple calls.
-            #   client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
-            #
-            #   # Create a request. To set request fields, pass in keyword arguments.
-            #   request = Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest.new
-            #
-            #   # Call the restrict_allowed_services method.
-            #   result = client.restrict_allowed_services request
-            #
-            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesResponse.
-            #   p result
-            #
-            def restrict_allowed_services request, options = nil
-              raise ::ArgumentError, "request must be provided" if request.nil?
-
-              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest
-
-              # Converts hash and nil to an options object
-              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-              # Customize the options with defaults
-              metadata = @config.rpcs.restrict_allowed_services.metadata.to_h
-
-              # Set x-goog-api-client and x-goog-user-project headers
-              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                lib_name: @config.lib_name, lib_version: @config.lib_version,
-                gapic_version: ::Google::Cloud::AssuredWorkloads::V1beta1::VERSION
-              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-              options.apply_defaults timeout:      @config.rpcs.restrict_allowed_services.timeout,
-                                     metadata:     metadata,
-                                     retry_policy: @config.rpcs.restrict_allowed_services.retry_policy
-
-              options.apply_defaults timeout:      @config.timeout,
-                                     metadata:     @config.metadata,
-                                     retry_policy: @config.retry_policy
-
-              @assured_workloads_service_stub.call_rpc :restrict_allowed_services, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -736,8 +640,8 @@ module Google
             end
 
             ##
-            # Analyze if the source Assured Workloads can be moved to the target Assured
-            # Workload
+            # A request to analyze a hypothetical move of a source project or
+            # project-based workload to a target (destination) folder-based workload.
             #
             # @overload analyze_workload_move(request, options = nil)
             #   Pass arguments to `analyze_workload_move` via a request object, either of type
@@ -755,26 +659,25 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param source [::String]
-            #     The Source is project based Workload to be moved. This is the workloads's
-            #     relative path in the API, formatted as
-            #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
-            #     For example,
-            #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
+            #     The source type is a project-based workload. Specify the workloads's
+            #     relative resource name, formatted as:
+            #     "organizations/\\{ORGANIZATION_ID}/locations/\\{LOCATION_ID}/workloads/\\{WORKLOAD_ID}"
+            #     For example:
+            #     "organizations/123/locations/us-east1/workloads/assured-workload-1"
             #   @param project [::String]
-            #     The Source is a project based to be moved.
-            #     This is the project's relative path in the API, formatted as
-            #     "cloudresourcemanager.googleapis.com/projects/\\{project_number}"
-            #     "projects/\\{project_number}"
-            #     "cloudresourcemanager.googleapis.com/projects/\\{project_id}"
-            #     "projects/\\{project_id}"
-            #     For example,
-            #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
+            #     The source type is a project. Specify the project's relative resource
+            #     name, formatted as either a project number or a project ID:
+            #     "projects/\\{PROJECT_NUMBER}" or "projects/\\{PROJECT_ID}"
+            #     For example:
+            #     "projects/951040570662" when specifying a project number, or
+            #     "projects/my-project-123" when specifying a project ID.
             #   @param target [::String]
-            #     Required. The resource name of the Workload to fetch. This is the workloads's
-            #     relative path in the API, formatted as
-            #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
-            #     For example,
-            #     "organizations/123/locations/us-east1/workloads/assured-workload-2".
+            #     Required. The resource ID of the folder-based destination workload. This workload is
+            #     where the source project will hypothetically be moved to. Specify the
+            #     workload's relative resource name, formatted as:
+            #     "organizations/\\{ORGANIZATION_ID}/locations/\\{LOCATION_ID}/workloads/\\{WORKLOAD_ID}"
+            #     For example:
+            #     "organizations/123/locations/us-east1/workloads/assured-workload-2"
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveResponse]
@@ -1072,11 +975,6 @@ module Google
                 #
                 attr_reader :update_workload
                 ##
-                # RPC-specific configuration for `restrict_allowed_services`
-                # @return [::Gapic::Config::Method]
-                #
-                attr_reader :restrict_allowed_services
-                ##
                 # RPC-specific configuration for `restrict_allowed_resources`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1108,8 +1006,6 @@ module Google
                   @create_workload = ::Gapic::Config::Method.new create_workload_config
                   update_workload_config = parent_rpcs.update_workload if parent_rpcs.respond_to? :update_workload
                   @update_workload = ::Gapic::Config::Method.new update_workload_config
-                  restrict_allowed_services_config = parent_rpcs.restrict_allowed_services if parent_rpcs.respond_to? :restrict_allowed_services
-                  @restrict_allowed_services = ::Gapic::Config::Method.new restrict_allowed_services_config
                   restrict_allowed_resources_config = parent_rpcs.restrict_allowed_resources if parent_rpcs.respond_to? :restrict_allowed_resources
                   @restrict_allowed_resources = ::Gapic::Config::Method.new restrict_allowed_resources_config
                   delete_workload_config = parent_rpcs.delete_workload if parent_rpcs.respond_to? :delete_workload

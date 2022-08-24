@@ -40,13 +40,6 @@ module Google
             # For force updates don't set etag field in the Workload.
             # Only one update operation per workload can be in progress.
             rpc :UpdateWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::UpdateWorkloadRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::Workload
-            # Restrict the list of services allowed in the Workload environment.
-            # The current list of allowed services can be found at
-            # https://cloud.google.com/assured-workloads/docs/supported-products
-            # In addition to assuredworkloads.workload.update permission, the user should
-            # also have orgpolicy.policy.set permission on the folder resource
-            # to use this functionality.
-            rpc :RestrictAllowedServices, ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedServicesResponse
             # Restrict the list of resources allowed in the Workload environment.
             # The current list of allowed products can be found at
             # https://cloud.google.com/assured-workloads/docs/supported-products
@@ -63,8 +56,8 @@ module Google
             rpc :DeleteWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest, ::Google::Protobuf::Empty
             # Gets Assured Workload associated with a CRM Node
             rpc :GetWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::Workload
-            # Analyze if the source Assured Workloads can be moved to the target Assured
-            # Workload
+            # A request to analyze a hypothetical move of a source project or
+            # project-based workload to a target (destination) folder-based workload.
             rpc :AnalyzeWorkloadMove, ::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveResponse
             # Lists Assured Workloads under a CRM Node.
             rpc :ListWorkloads, ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsResponse

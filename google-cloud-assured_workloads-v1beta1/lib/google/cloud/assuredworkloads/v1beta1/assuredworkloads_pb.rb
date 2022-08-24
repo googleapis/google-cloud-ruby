@@ -20,17 +20,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :workload, :message, 1, "google.cloud.assuredworkloads.v1beta1.Workload"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
-    add_message "google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest" do
-      optional :name, :string, 1
-      optional :restriction_type, :enum, 2, "google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType"
-    end
-    add_enum "google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType" do
-      value :RESTRICTION_TYPE_UNSPECIFIED, 0
-      value :ALLOW_ALL_GCP_SERVICES, 1
-      value :ALLOW_COMPLIANT_SERVICES, 2
-    end
-    add_message "google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse" do
-    end
     add_message "google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest" do
       optional :name, :string, 1
       optional :restriction_type, :enum, 2, "google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType"
@@ -151,6 +140,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EU_REGIONS_AND_SUPPORT, 8
       value :CA_REGIONS_AND_SUPPORT, 9
       value :ITAR, 10
+      value :AU_REGIONS_AND_US_SUPPORT, 11
     end
     add_enum "google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState" do
       value :KAJ_ENROLLMENT_STATE_UNSPECIFIED, 0
@@ -173,9 +163,6 @@ module Google
       module V1beta1
         CreateWorkloadRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest").msgclass
         UpdateWorkloadRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest").msgclass
-        RestrictAllowedServicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest").msgclass
-        RestrictAllowedServicesRequest::RestrictionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesRequest.RestrictionType").enummodule
-        RestrictAllowedServicesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedServicesResponse").msgclass
         RestrictAllowedResourcesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest").msgclass
         RestrictAllowedResourcesRequest::RestrictionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType").enummodule
         RestrictAllowedResourcesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse").msgclass
