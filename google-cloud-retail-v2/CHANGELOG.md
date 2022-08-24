@@ -1,5 +1,16 @@
 # Release History
 
+### 0.11.0 (2022-08-24)
+
+#### Features
+
+* Support adding and removing controls for serving configs 
+* Support adding, removing, and replacing of catalog attributes 
+* Support CRUD operations on control resources 
+* Support CRUD operations on serving configs 
+* Support getting and updating of attributes config 
+* Support getting and updating of completion config ([#19051](https://github.com/googleapis/google-cloud-ruby/issues/19051)) 
+
 ### 0.10.0 (2022-08-03)
 
 #### Features
