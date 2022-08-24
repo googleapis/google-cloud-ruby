@@ -19,6 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/datastream/v1/datastream_pb"
 require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -171,6 +172,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @datastream_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Datastream::V1::Datastream::Stub,
                 credentials:  credentials,
@@ -193,6 +200,13 @@ module Google
             # @return [Google::Cloud::Location::Locations::Client]
             #
             attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -745,7 +759,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil)
+            # @overload discover_connection_profile(parent: nil, connection_profile: nil, connection_profile_name: nil, full_hierarchy: nil, hierarchy_depth: nil, oracle_rdbms: nil, mysql_rdbms: nil, postgresql_rdbms: nil)
             #   Pass arguments to `discover_connection_profile` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -766,6 +780,8 @@ module Google
             #     Oracle RDBMS to enrich with child data objects and metadata.
             #   @param mysql_rdbms [::Google::Cloud::Datastream::V1::MysqlRdbms, ::Hash]
             #     MySQL RDBMS to enrich with child data objects and metadata.
+            #   @param postgresql_rdbms [::Google::Cloud::Datastream::V1::PostgresqlRdbms, ::Hash]
+            #     PostgreSQL RDBMS to enrich with child data objects and metadata.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse]

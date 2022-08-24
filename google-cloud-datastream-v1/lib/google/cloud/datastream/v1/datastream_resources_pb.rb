@@ -25,9 +25,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :password, :string, 4
       optional :ssl_config, :message, 5, "google.cloud.datastream.v1.MysqlSslConfig"
     end
+    add_message "google.cloud.datastream.v1.PostgresqlProfile" do
+      optional :hostname, :string, 1
+      optional :port, :int32, 2
+      optional :username, :string, 3
+      optional :password, :string, 4
+      optional :database, :string, 5
+    end
     add_message "google.cloud.datastream.v1.GcsProfile" do
       optional :bucket, :string, 1
       optional :root_path, :string, 2
+    end
+    add_message "google.cloud.datastream.v1.BigQueryProfile" do
     end
     add_message "google.cloud.datastream.v1.StaticServiceIpConnectivity" do
     end
@@ -92,6 +101,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :oracle_profile, :message, 100, "google.cloud.datastream.v1.OracleProfile"
         optional :gcs_profile, :message, 101, "google.cloud.datastream.v1.GcsProfile"
         optional :mysql_profile, :message, 102, "google.cloud.datastream.v1.MysqlProfile"
+        optional :bigquery_profile, :message, 103, "google.cloud.datastream.v1.BigQueryProfile"
+        optional :postgresql_profile, :message, 104, "google.cloud.datastream.v1.PostgresqlProfile"
       end
       oneof :connectivity do
         optional :static_service_ip_connectivity, :message, 200, "google.cloud.datastream.v1.StaticServiceIpConnectivity"
@@ -124,6 +135,42 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.datastream.v1.OracleSourceConfig" do
       optional :include_objects, :message, 1, "google.cloud.datastream.v1.OracleRdbms"
       optional :exclude_objects, :message, 2, "google.cloud.datastream.v1.OracleRdbms"
+      optional :max_concurrent_cdc_tasks, :int32, 3
+      oneof :large_objects_handling do
+        optional :drop_large_objects, :message, 100, "google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects"
+        optional :stream_large_objects, :message, 102, "google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects"
+      end
+    end
+    add_message "google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects" do
+    end
+    add_message "google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects" do
+    end
+    add_message "google.cloud.datastream.v1.PostgresqlColumn" do
+      optional :column, :string, 1
+      optional :data_type, :string, 2
+      optional :length, :int32, 3
+      optional :precision, :int32, 4
+      optional :scale, :int32, 5
+      optional :primary_key, :bool, 7
+      optional :nullable, :bool, 8
+      optional :ordinal_position, :int32, 9
+    end
+    add_message "google.cloud.datastream.v1.PostgresqlTable" do
+      optional :table, :string, 1
+      repeated :postgresql_columns, :message, 2, "google.cloud.datastream.v1.PostgresqlColumn"
+    end
+    add_message "google.cloud.datastream.v1.PostgresqlSchema" do
+      optional :schema, :string, 1
+      repeated :postgresql_tables, :message, 2, "google.cloud.datastream.v1.PostgresqlTable"
+    end
+    add_message "google.cloud.datastream.v1.PostgresqlRdbms" do
+      repeated :postgresql_schemas, :message, 1, "google.cloud.datastream.v1.PostgresqlSchema"
+    end
+    add_message "google.cloud.datastream.v1.PostgresqlSourceConfig" do
+      optional :include_objects, :message, 1, "google.cloud.datastream.v1.PostgresqlRdbms"
+      optional :exclude_objects, :message, 2, "google.cloud.datastream.v1.PostgresqlRdbms"
+      optional :replication_slot, :string, 3
+      optional :publication, :string, 4
     end
     add_message "google.cloud.datastream.v1.MysqlColumn" do
       optional :column, :string, 1
@@ -148,12 +195,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.datastream.v1.MysqlSourceConfig" do
       optional :include_objects, :message, 1, "google.cloud.datastream.v1.MysqlRdbms"
       optional :exclude_objects, :message, 2, "google.cloud.datastream.v1.MysqlRdbms"
+      optional :max_concurrent_cdc_tasks, :int32, 3
     end
     add_message "google.cloud.datastream.v1.SourceConfig" do
       optional :source_connection_profile, :string, 1
       oneof :source_stream_config do
         optional :oracle_source_config, :message, 100, "google.cloud.datastream.v1.OracleSourceConfig"
         optional :mysql_source_config, :message, 101, "google.cloud.datastream.v1.MysqlSourceConfig"
+        optional :postgresql_source_config, :message, 102, "google.cloud.datastream.v1.PostgresqlSourceConfig"
       end
     end
     add_message "google.cloud.datastream.v1.AvroFileFormat" do
@@ -181,10 +230,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :json_file_format, :message, 101, "google.cloud.datastream.v1.JsonFileFormat"
       end
     end
+    add_message "google.cloud.datastream.v1.BigQueryDestinationConfig" do
+      optional :data_freshness, :message, 300, "google.protobuf.Duration"
+      oneof :dataset_config do
+        optional :single_target_dataset, :message, 201, "google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset"
+        optional :source_hierarchy_datasets, :message, 202, "google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets"
+      end
+    end
+    add_message "google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset" do
+      optional :dataset_id, :string, 1
+    end
+    add_message "google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets" do
+      optional :dataset_template, :message, 2, "google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate"
+    end
+    add_message "google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate" do
+      optional :location, :string, 1
+      optional :dataset_id_prefix, :string, 2
+      optional :kms_key_name, :string, 3
+    end
     add_message "google.cloud.datastream.v1.DestinationConfig" do
       optional :destination_connection_profile, :string, 1
       oneof :destination_stream_config do
         optional :gcs_destination_config, :message, 100, "google.cloud.datastream.v1.GcsDestinationConfig"
+        optional :bigquery_destination_config, :message, 101, "google.cloud.datastream.v1.BigQueryDestinationConfig"
       end
     end
     add_message "google.cloud.datastream.v1.Stream" do
@@ -207,6 +275,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :excluded_objects do
         optional :oracle_excluded_objects, :message, 1, "google.cloud.datastream.v1.OracleRdbms"
         optional :mysql_excluded_objects, :message, 2, "google.cloud.datastream.v1.MysqlRdbms"
+        optional :postgresql_excluded_objects, :message, 3, "google.cloud.datastream.v1.PostgresqlRdbms"
       end
     end
     add_message "google.cloud.datastream.v1.Stream.BackfillNoneStrategy" do
@@ -235,9 +304,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :source_identifier do
         optional :oracle_identifier, :message, 1, "google.cloud.datastream.v1.SourceObjectIdentifier.OracleObjectIdentifier"
         optional :mysql_identifier, :message, 2, "google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier"
+        optional :postgresql_identifier, :message, 3, "google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier"
       end
     end
     add_message "google.cloud.datastream.v1.SourceObjectIdentifier.OracleObjectIdentifier" do
+      optional :schema, :string, 1
+      optional :table, :string, 2
+    end
+    add_message "google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier" do
       optional :schema, :string, 1
       optional :table, :string, 2
     end
@@ -309,7 +383,9 @@ module Google
       module V1
         OracleProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.OracleProfile").msgclass
         MysqlProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.MysqlProfile").msgclass
+        PostgresqlProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.PostgresqlProfile").msgclass
         GcsProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.GcsProfile").msgclass
+        BigQueryProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.BigQueryProfile").msgclass
         StaticServiceIpConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.StaticServiceIpConnectivity").msgclass
         ForwardSshTunnelConnectivity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.ForwardSshTunnelConnectivity").msgclass
         VpcPeeringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.VpcPeeringConfig").msgclass
@@ -324,6 +400,13 @@ module Google
         OracleSchema = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.OracleSchema").msgclass
         OracleRdbms = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.OracleRdbms").msgclass
         OracleSourceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.OracleSourceConfig").msgclass
+        OracleSourceConfig::DropLargeObjects = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.OracleSourceConfig.DropLargeObjects").msgclass
+        OracleSourceConfig::StreamLargeObjects = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.OracleSourceConfig.StreamLargeObjects").msgclass
+        PostgresqlColumn = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.PostgresqlColumn").msgclass
+        PostgresqlTable = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.PostgresqlTable").msgclass
+        PostgresqlSchema = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.PostgresqlSchema").msgclass
+        PostgresqlRdbms = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.PostgresqlRdbms").msgclass
+        PostgresqlSourceConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.PostgresqlSourceConfig").msgclass
         MysqlColumn = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.MysqlColumn").msgclass
         MysqlTable = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.MysqlTable").msgclass
         MysqlDatabase = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.MysqlDatabase").msgclass
@@ -335,6 +418,10 @@ module Google
         JsonFileFormat::SchemaFileFormat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.JsonFileFormat.SchemaFileFormat").enummodule
         JsonFileFormat::JsonCompression = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.JsonFileFormat.JsonCompression").enummodule
         GcsDestinationConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.GcsDestinationConfig").msgclass
+        BigQueryDestinationConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.BigQueryDestinationConfig").msgclass
+        BigQueryDestinationConfig::SingleTargetDataset = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.BigQueryDestinationConfig.SingleTargetDataset").msgclass
+        BigQueryDestinationConfig::SourceHierarchyDatasets = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets").msgclass
+        BigQueryDestinationConfig::SourceHierarchyDatasets::DatasetTemplate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.BigQueryDestinationConfig.SourceHierarchyDatasets.DatasetTemplate").msgclass
         DestinationConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.DestinationConfig").msgclass
         Stream = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.Stream").msgclass
         Stream::BackfillAllStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.Stream.BackfillAllStrategy").msgclass
@@ -343,6 +430,7 @@ module Google
         StreamObject = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.StreamObject").msgclass
         SourceObjectIdentifier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.SourceObjectIdentifier").msgclass
         SourceObjectIdentifier::OracleObjectIdentifier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.SourceObjectIdentifier.OracleObjectIdentifier").msgclass
+        SourceObjectIdentifier::PostgresqlObjectIdentifier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.SourceObjectIdentifier.PostgresqlObjectIdentifier").msgclass
         SourceObjectIdentifier::MysqlObjectIdentifier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.SourceObjectIdentifier.MysqlObjectIdentifier").msgclass
         BackfillJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.BackfillJob").msgclass
         BackfillJob::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.datastream.v1.BackfillJob.State").enummodule
