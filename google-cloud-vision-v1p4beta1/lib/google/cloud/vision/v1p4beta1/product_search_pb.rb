@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/vision/v1p4beta1/geometry_pb'
 require 'google/cloud/vision/v1p4beta1/product_search_service_pb'

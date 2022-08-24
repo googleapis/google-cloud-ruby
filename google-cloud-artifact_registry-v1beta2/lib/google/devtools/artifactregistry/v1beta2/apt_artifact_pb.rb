@@ -3,10 +3,8 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
-require 'google/longrunning/operations_pb'
 require 'google/rpc/status_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do

@@ -9,7 +9,6 @@ require 'google/protobuf/duration_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/clouddms/v1/clouddms_resources.proto", :syntax => :proto3) do

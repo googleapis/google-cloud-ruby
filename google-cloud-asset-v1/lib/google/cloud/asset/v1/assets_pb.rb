@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/orgpolicy/v1/orgpolicy_pb'
 require 'google/cloud/osconfig/v1/inventory_pb'

@@ -6,7 +6,6 @@ require 'google/protobuf'
 require 'google/devtools/source/v1/source_context_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/protobuf/wrappers_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/devtools/clouddebugger/v2/data.proto", :syntax => :proto3) do
