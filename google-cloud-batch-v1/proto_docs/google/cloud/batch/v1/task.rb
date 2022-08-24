@@ -128,6 +128,13 @@ module Google
         #     The always_run flag does not override the Task's overall max_run_duration.
         #     If the max_run_duration has expired then no further Runnables will execute,
         #     not even always_run Runnables.
+        # @!attribute [rw] environment
+        #   @return [::Google::Cloud::Batch::V1::Environment]
+        #     Environment variables for this Runnable (overrides variables set for the
+        #     whole Task or TaskGroup).
+        # @!attribute [rw] timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Timeout for this Runnable.
         class Runnable
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -239,6 +246,9 @@ module Google
         # @!attribute [rw] volumes
         #   @return [::Array<::Google::Cloud::Batch::V1::Volume>]
         #     Volumes to mount before running Tasks using this TaskSpec.
+        # @!attribute [rw] environment
+        #   @return [::Google::Cloud::Batch::V1::Environment]
+        #     Environment variables to set before running the Task.
         class TaskSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
