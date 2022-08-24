@@ -40,13 +40,22 @@ module Google
         #     Minimum throughput of the connector in Mbps. Default and min is 200.
         # @!attribute [rw] max_throughput
         #   @return [::Integer]
-        #     Maximum throughput of the connector in Mbps. Default is 200, max is 1000.
+        #     Maximum throughput of the connector in Mbps. Default is 300, max is 1000.
         # @!attribute [r] connected_projects
         #   @return [::Array<::String>]
         #     Output only. List of projects using the connector.
         # @!attribute [rw] subnet
         #   @return [::Google::Cloud::VpcAccess::V1::Connector::Subnet]
         #     The subnet in which to house the VPC Access Connector.
+        # @!attribute [rw] machine_type
+        #   @return [::String]
+        #     Machine type of VM Instance underlying connector. Default is e2-micro
+        # @!attribute [rw] min_instances
+        #   @return [::Integer]
+        #     Minimum value of instances in autoscaling group underlying the connector.
+        # @!attribute [rw] max_instances
+        #   @return [::Integer]
+        #     Maximum value of instances in autoscaling group underlying the connector.
         class Connector
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
