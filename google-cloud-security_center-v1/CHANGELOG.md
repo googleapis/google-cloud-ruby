@@ -1,5 +1,13 @@
 # Release History
 
+### 0.19.0 (2022-08-24)
+
+#### Features
+
+* added ACCESS_TOKEN_MANIPULATION and ABUSE_ELEVATION_CONTROL_MECHANISM mitre attack techniques 
+* Added database information to Findings ([#19055](https://github.com/googleapis/google-cloud-ruby/issues/19055)) 
+* added uris field to indicator of compromise ([#19038](https://github.com/googleapis/google-cloud-ruby/issues/19038)) 
+
 ### 0.18.0 (2022-07-25)
 
 #### Features
