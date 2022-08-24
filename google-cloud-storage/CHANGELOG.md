@@ -1,5 +1,11 @@
 # Release History
 
+### 1.39.0 (2022-08-24)
+
+#### Features
+
+* add support for conditional idempotent operations ([#18834](https://github.com/googleapis/google-cloud-ruby/issues/18834)) 
+
 ### 1.38.0 (2022-07-31)
 
 #### Features
