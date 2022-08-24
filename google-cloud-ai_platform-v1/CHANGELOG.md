@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.11.0 (2022-08-24)
+
+#### Features
+
+* Support for index_stats and index_update_method 
+* Support for upserting and removing datapoints ([#19053](https://github.com/googleapis/google-cloud-ruby/issues/19053)) 
+
 ### 0.10.0 (2022-08-01)
 
 #### Features
