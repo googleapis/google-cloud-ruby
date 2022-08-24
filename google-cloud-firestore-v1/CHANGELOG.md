@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 (2022-08-24)
+
+#### Documentation
+
+* Clarifications in the order_by field of a query ([#19056](https://github.com/googleapis/google-cloud-ruby/issues/19056)) 
+
 ### 0.7.0 (2022-07-02)
 
 #### Features
