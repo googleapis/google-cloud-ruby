@@ -2,16 +2,13 @@
 
 ### 0.12.0 (2022-08-25)
 
-### ⚠ BREAKING CHANGES
-
-* Removed restrict_allowed_services call (#19058)
-
 #### Features
 
 * Added Australia Regions compliance regime 
+
 #### Bug Fixes
 
-* Removed restrict_allowed_services call ([#19058](https://github.com/googleapis/google-cloud-ruby/issues/19058)) 
+* BREAKING CHANGE: Removed restrict_allowed_services call
 
 ### 0.11.0 (2022-07-25)
 
