@@ -7,8 +7,7 @@ set -eo pipefail
 export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
-python3 -m pip install git+https://github.com/googleapis/releasetool
-python3 -m pip install gcp-docuploader
+python3 -m pip install --require-hashes -r .kokoro/releases-requirements.txt
 gem install --no-document toys
 
 python3 -m releasetool publish-reporter-script > /tmp/publisher-script; source /tmp/publisher-script
