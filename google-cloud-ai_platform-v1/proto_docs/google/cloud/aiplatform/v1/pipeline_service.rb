@@ -218,6 +218,9 @@ module Google
         #       * `update_time`
         #       * `end_time`
         #       * `start_time`
+        # @!attribute [rw] read_mask
+        #   @return [::Google::Protobuf::FieldMask]
+        #     Mask specifying which fields to read.
         class ListPipelineJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
