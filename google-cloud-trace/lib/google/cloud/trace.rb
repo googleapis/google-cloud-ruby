@@ -144,6 +144,8 @@ module Google
       # * `on_error` - (Proc) A Proc to be run when an error is encountered
       #   during the reporting of traces by the middleware. The Proc must take
       #   the error object as the single argument.
+      # * `default_labels` - (Hash) A Hash that contains the default labels
+      #   which will be added to every root span.
       #
       # See the {file:INSTRUMENTATION.md Configuration Guide} for full
       # configuration parameters.
