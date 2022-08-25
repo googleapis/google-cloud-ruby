@@ -1,5 +1,11 @@
 # Release History
 
+### 0.20.0 (2022-08-25)
+
+#### Features
+
+* Added attributes providing context about the principals associated with a finding ([#19069](https://github.com/googleapis/google-cloud-ruby/issues/19069)) 
+
 ### 0.19.0 (2022-08-24)
 
 #### Features
