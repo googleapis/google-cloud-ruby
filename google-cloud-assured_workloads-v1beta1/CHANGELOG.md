@@ -1,5 +1,15 @@
 # Release History
 
+### 0.12.0 (2022-08-25)
+
+#### Features
+
+* Added Australia Regions compliance regime 
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Removed restrict_allowed_services call
+
 ### 0.11.0 (2022-07-25)
 
 #### Features
