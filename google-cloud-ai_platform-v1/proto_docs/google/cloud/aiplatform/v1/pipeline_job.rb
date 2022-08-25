@@ -142,9 +142,26 @@ module Google
           #     However, if a pipeline is set to PIPELINE_FAILURE_POLICY_FAIL_FAST, it
           #     will stop scheduling any new tasks when a task has failed. Any scheduled
           #     tasks will continue to completion.
+          # @!attribute [rw] input_artifacts
+          #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::AIPlatform::V1::PipelineJob::RuntimeConfig::InputArtifact}]
+          #     The runtime artifacts of the PipelineJob. The key will be the input
+          #     artifact name and the value would be one of the InputArtifact.
           class RuntimeConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # The type of an input artifact.
+            # @!attribute [rw] artifact_id
+            #   @return [::String]
+            #     Artifact resource id from MLMD. Which is the last portion of an
+            #     artifact resource
+            #     name(projects/\\{project}/locations/\\{location}/metadataStores/default/artifacts/\\{artifact_id}).
+            #     The artifact must stay within the same project, location and default
+            #     metadatastore as the pipeline.
+            class InputArtifact
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
 
             # @!attribute [rw] key
             #   @return [::String]
@@ -160,6 +177,15 @@ module Google
             # @!attribute [rw] value
             #   @return [::Google::Protobuf::Value]
             class ParameterValuesEntry
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # @!attribute [rw] key
+            #   @return [::String]
+            # @!attribute [rw] value
+            #   @return [::Google::Cloud::AIPlatform::V1::PipelineJob::RuntimeConfig::InputArtifact]
+            class InputArtifactsEntry
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end

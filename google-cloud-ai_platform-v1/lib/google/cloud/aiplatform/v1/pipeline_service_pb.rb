@@ -53,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 3
       optional :page_token, :string, 4
       optional :order_by, :string, 6
+      optional :read_mask, :message, 7, "google.protobuf.FieldMask"
     end
     add_message "google.cloud.aiplatform.v1.ListPipelineJobsResponse" do
       repeated :pipeline_jobs, :message, 1, "google.cloud.aiplatform.v1.PipelineJob"
