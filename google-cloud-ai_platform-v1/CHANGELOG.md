@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.12.0 (2022-08-25)
+
+#### Features
+
+* Support for input artifacts for pipeline jobs 
+* Support read mask when listing pipeline jobs ([#19071](https://github.com/googleapis/google-cloud-ruby/issues/19071)) 
+
 ### 0.11.0 (2022-08-24)
 
 #### Features
