@@ -37,6 +37,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.spanner.v1.TypeAnnotationCode" do
       value :TYPE_ANNOTATION_CODE_UNSPECIFIED, 0
       value :PG_NUMERIC, 2
+      value :PG_JSONB, 3
     end
   end
 end
