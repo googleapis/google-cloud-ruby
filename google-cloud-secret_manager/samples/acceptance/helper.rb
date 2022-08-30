@@ -17,3 +17,47 @@ require "minitest/focus"
 require "minitest/rg"
 
 require "google/cloud/secret_manager"
+
+require_relative "../../../.toys/.lib/sample_loader"
+
+class SecretManagerSnippetSpec < Minitest::Spec
+  let(:client) { Google::Cloud::SecretManager.secret_manager_service }
+  let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
+
+  let(:secret_id) { "ruby-quickstart-#{(Time.now.to_f * 1000).to_i}" }
+  let(:secret_name) { "projects/#{project_id}/secrets/#{secret_id}" }
+
+  let(:iam_user) { "user:sethvargo@google.com" }
+
+  let :secret do
+    client.create_secret(
+      parent:    "projects/#{project_id}",
+      secret_id: secret_id,
+      secret:    {
+        replication: {
+          automatic: {}
+        }
+      }
+    )
+  end
+
+  let :secret_version do
+    client.add_secret_version(
+      parent:  secret.name,
+      payload: {
+        data: "hello world!"
+      }
+    )
+  end
+
+  let(:version_id) { URI(secret_version.name).path.split("/").last }
+  let(:version_name) { "projects/#{project_id}/secrets/#{secret_id}/versions/#{version_id}" }
+
+  after do
+    client.delete_secret name: secret_name
+  rescue Google::Cloud::NotFoundError
+    # Do nothing
+  end
+
+  register_spec_type(self) { |*descs| descs.include? :secret_manager_snippet }
+end

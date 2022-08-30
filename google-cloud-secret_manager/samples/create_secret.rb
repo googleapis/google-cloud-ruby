@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,23 +12,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START secretmanager_quickstart]
+# [START secretmanager_create_secret]
 require "google/cloud/secret_manager"
 
 ##
-# Secret manager quickstart
+# Create a secret
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param secret_id [String] Your secret name (e.g. "my-secret")
 #
-def quickstart project_id:, secret_id:
-  # Create the Secret Manager client.
+def create_secret project_id:, secret_id:
+  # Create a Secret Manager client.
   client = Google::Cloud::SecretManager.secret_manager_service
 
-  # Build the parent name from the project.
-  parent = "projects/#{project_id}"
+  # Build the resource name of the parent project.
+  parent = client.project_path project: project_id
 
-  # Create the parent secret.
+  # Create the secret.
   secret = client.create_secret(
     parent:    parent,
     secret_id: secret_id,
@@ -39,22 +39,7 @@ def quickstart project_id:, secret_id:
     }
   )
 
-  # Add a secret version.
-  version = client.add_secret_version(
-    parent:  secret.name,
-    payload: {
-      data: "hello world!"
-    }
-  )
-
-  # Access the secret version.
-  response = client.access_secret_version name: version.name
-
-  # Print the secret payload.
-  #
-  # WARNING: Do not print the secret in a production environment - this
-  # snippet is showing how to access the secret material.
-  payload = response.payload.data
-  puts "Plaintext: #{payload}"
+  # Print the new secret name.
+  puts "Created secret: #{secret.name}"
 end
-# [END secretmanager_quickstart]
+# [END secretmanager_create_secret]

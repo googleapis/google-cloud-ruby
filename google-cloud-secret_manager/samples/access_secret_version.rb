@@ -1,4 +1,4 @@
-# Copyright 2020 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,49 +12,35 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START secretmanager_quickstart]
+# [START secretmanager_access_secret_version]
 require "google/cloud/secret_manager"
 
 ##
-# Secret manager quickstart
+# Access a specific version of a secret
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param secret_id [String] Your secret name (e.g. "my-secret")
+# @param version_id [String] The version (e.g. "5" or "latest")
 #
-def quickstart project_id:, secret_id:
-  # Create the Secret Manager client.
+def access_secret_version project_id:, secret_id:, version_id:
+  # Create a Secret Manager client.
   client = Google::Cloud::SecretManager.secret_manager_service
 
-  # Build the parent name from the project.
-  parent = "projects/#{project_id}"
-
-  # Create the parent secret.
-  secret = client.create_secret(
-    parent:    parent,
-    secret_id: secret_id,
-    secret:    {
-      replication: {
-        automatic: {}
-      }
-    }
-  )
-
-  # Add a secret version.
-  version = client.add_secret_version(
-    parent:  secret.name,
-    payload: {
-      data: "hello world!"
-    }
+  # Build the resource name of the secret version.
+  name = client.secret_version_path(
+    project:        project_id,
+    secret:         secret_id,
+    secret_version: version_id
   )
 
   # Access the secret version.
-  response = client.access_secret_version name: version.name
+  version = client.access_secret_version name: name
 
   # Print the secret payload.
   #
-  # WARNING: Do not print the secret in a production environment - this
-  # snippet is showing how to access the secret material.
-  payload = response.payload.data
+  # WARNING: Do not print the secret payload in a production environment - this
+  # snippet is merely showing how to access the secret material.
+  payload = version.payload.data
   puts "Plaintext: #{payload}"
 end
-# [END secretmanager_quickstart]
+# [END secretmanager_access_secret_version]
