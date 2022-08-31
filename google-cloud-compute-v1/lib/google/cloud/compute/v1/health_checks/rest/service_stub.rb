@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the HealthChecks service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -315,7 +315,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/healthChecks",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -336,8 +336,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/healthChecks/{health_check}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["health_check", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["health_check", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -358,8 +358,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/healthChecks/{health_check}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["health_check", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["health_check", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -381,7 +381,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/healthChecks",
                                                           body: "health_check_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -402,7 +402,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/healthChecks",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -424,8 +424,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/healthChecks/{health_check}",
                                                           body: "health_check_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["health_check", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["health_check", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -447,8 +447,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/healthChecks/{health_check}",
                                                           body: "health_check_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["health_check", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["health_check", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

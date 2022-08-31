@@ -35,6 +35,9 @@ module Google
         #   @return [::Array<::Google::Cloud::SecurityCenter::V1::Indicator::ProcessSignature>]
         #     The list of matched signatures indicating that the given
         #     process is present in the environment.
+        # @!attribute [rw] uris
+        #   @return [::Array<::String>]
+        #     The list of URIs associated to the Findings.
         class Indicator
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.1 (2022-08-01)
+
+#### Documentation
+
+* update authentication link in readme ([#18947](https://github.com/googleapis/google-cloud-ruby/issues/18947)) 
+
 ### 0.3.0 (2022-07-01)
 
 #### Features

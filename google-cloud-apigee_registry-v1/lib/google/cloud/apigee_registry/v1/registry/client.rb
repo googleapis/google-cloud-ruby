@@ -19,7 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/apigeeregistry/v1/registry_service_pb"
 require "google/cloud/location"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -342,7 +342,7 @@ module Google
             # Service calls
 
             ##
-            # ListApis returns matching APIs.
+            # Returns matching APIs.
             #
             # @overload list_apis(request, options = nil)
             #   Pass arguments to `list_apis` via a request object, either of type
@@ -361,7 +361,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of APIs.
-            #     Format: projects/*/locations/*
+            #     Format: `projects/*/locations/*`
             #   @param page_size [::Integer]
             #     The maximum number of APIs to return.
             #     The service may return fewer than this value.
@@ -449,7 +449,7 @@ module Google
             end
 
             ##
-            # GetApi returns a specified API.
+            # Returns a specified API.
             #
             # @overload get_api(request, options = nil)
             #   Pass arguments to `get_api` via a request object, either of type
@@ -468,7 +468,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the API to retrieve.
-            #     Format: projects/*/locations/*/apis/*
+            #     Format: `projects/*/locations/*/apis/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::Api]
@@ -535,7 +535,7 @@ module Google
             end
 
             ##
-            # CreateApi creates a specified API.
+            # Creates a specified API.
             #
             # @overload create_api(request, options = nil)
             #   Pass arguments to `create_api` via a request object, either of type
@@ -554,12 +554,12 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of APIs.
-            #     Format: projects/*/locations/*
+            #     Format: `projects/*/locations/*`
             #   @param api [::Google::Cloud::ApigeeRegistry::V1::Api, ::Hash]
             #     Required. The API to create.
             #   @param api_id [::String]
-            #     Required. The ID to use for the api, which will become the final component of
-            #     the api's resource name.
+            #     Required. The ID to use for the API, which will become the final component of
+            #     the API's resource name.
             #
             #     This value should be 4-63 characters, and valid characters
             #     are /[a-z][0-9]-/.
@@ -631,7 +631,7 @@ module Google
             end
 
             ##
-            # UpdateApi can be used to modify a specified API.
+            # Used to modify a specified API.
             #
             # @overload update_api(request, options = nil)
             #   Pass arguments to `update_api` via a request object, either of type
@@ -652,14 +652,14 @@ module Google
             #     Required. The API to update.
             #
             #     The `name` field is used to identify the API to update.
-            #     Format: projects/*/locations/*/apis/*
+            #     Format: `projects/*/locations/*/apis/*`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated. If omitted, all fields are updated that
             #     are set in the request message (fields set to default values are ignored).
-            #     If a "*" is specified, all fields are updated, including fields that are
-            #     unspecified/default in the request.
+            #     If an asterisk "*" is specified, all fields are updated, including fields
+            #     that are unspecified/default in the request.
             #   @param allow_missing [::Boolean]
-            #     If set to true, and the api is not found, a new api will be created.
+            #     If set to true, and the API is not found, a new API will be created.
             #     In this situation, `update_mask` is ignored.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -727,7 +727,7 @@ module Google
             end
 
             ##
-            # DeleteApi removes a specified API and all of the resources that it
+            # Removes a specified API and all of the resources that it
             # owns.
             #
             # @overload delete_api(request, options = nil)
@@ -740,14 +740,17 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_api(name: nil)
+            # @overload delete_api(name: nil, force: nil)
             #   Pass arguments to `delete_api` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
             #     Required. The name of the API to delete.
-            #     Format: projects/*/locations/*/apis/*
+            #     Format: `projects/*/locations/*/apis/*`
+            #   @param force [::Boolean]
+            #     If set to true, any child resources will also be deleted.
+            #     (Otherwise, the request will only work if there are no child resources.)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -814,7 +817,7 @@ module Google
             end
 
             ##
-            # ListApiVersions returns matching versions.
+            # Returns matching versions.
             #
             # @overload list_api_versions(request, options = nil)
             #   Pass arguments to `list_api_versions` via a request object, either of type
@@ -833,7 +836,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of versions.
-            #     Format: projects/*/locations/*/apis/*
+            #     Format: `projects/*/locations/*/apis/*`
             #   @param page_size [::Integer]
             #     The maximum number of versions to return.
             #     The service may return fewer than this value.
@@ -921,7 +924,7 @@ module Google
             end
 
             ##
-            # GetApiVersion returns a specified version.
+            # Returns a specified version.
             #
             # @overload get_api_version(request, options = nil)
             #   Pass arguments to `get_api_version` via a request object, either of type
@@ -940,7 +943,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the version to retrieve.
-            #     Format: projects/*/locations/*/apis/*/versions/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::ApiVersion]
@@ -1007,7 +1010,7 @@ module Google
             end
 
             ##
-            # CreateApiVersion creates a specified version.
+            # Creates a specified version.
             #
             # @overload create_api_version(request, options = nil)
             #   Pass arguments to `create_api_version` via a request object, either of type
@@ -1026,7 +1029,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of versions.
-            #     Format: projects/*/locations/*/apis/*
+            #     Format: `projects/*/locations/*/apis/*`
             #   @param api_version [::Google::Cloud::ApigeeRegistry::V1::ApiVersion, ::Hash]
             #     Required. The version to create.
             #   @param api_version_id [::String]
@@ -1103,7 +1106,7 @@ module Google
             end
 
             ##
-            # UpdateApiVersion can be used to modify a specified version.
+            # Used to modify a specified version.
             #
             # @overload update_api_version(request, options = nil)
             #   Pass arguments to `update_api_version` via a request object, either of type
@@ -1124,12 +1127,12 @@ module Google
             #     Required. The version to update.
             #
             #     The `name` field is used to identify the version to update.
-            #     Format: projects/*/locations/*/apis/*/versions/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated. If omitted, all fields are updated that
             #     are set in the request message (fields set to default values are ignored).
-            #     If a "*" is specified, all fields are updated, including fields that are
-            #     unspecified/default in the request.
+            #     If an asterisk "*" is specified, all fields are updated, including fields
+            #     that are unspecified/default in the request.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the version is not found, a new version will be
             #     created. In this situation, `update_mask` is ignored.
@@ -1199,7 +1202,7 @@ module Google
             end
 
             ##
-            # DeleteApiVersion removes a specified version and all of the resources that
+            # Removes a specified version and all of the resources that
             # it owns.
             #
             # @overload delete_api_version(request, options = nil)
@@ -1212,14 +1215,17 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload delete_api_version(name: nil)
+            # @overload delete_api_version(name: nil, force: nil)
             #   Pass arguments to `delete_api_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
             #     Required. The name of the version to delete.
-            #     Format: projects/*/locations/*/apis/*/versions/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*`
+            #   @param force [::Boolean]
+            #     If set to true, any child resources will also be deleted.
+            #     (Otherwise, the request will only work if there are no child resources.)
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]
@@ -1286,7 +1292,7 @@ module Google
             end
 
             ##
-            # ListApiSpecs returns matching specs.
+            # Returns matching specs.
             #
             # @overload list_api_specs(request, options = nil)
             #   Pass arguments to `list_api_specs` via a request object, either of type
@@ -1305,7 +1311,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of specs.
-            #     Format: projects/*/locations/*/apis/*/versions/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*`
             #   @param page_size [::Integer]
             #     The maximum number of specs to return.
             #     The service may return fewer than this value.
@@ -1393,7 +1399,7 @@ module Google
             end
 
             ##
-            # GetApiSpec returns a specified spec.
+            # Returns a specified spec.
             #
             # @overload get_api_spec(request, options = nil)
             #   Pass arguments to `get_api_spec` via a request object, either of type
@@ -1412,7 +1418,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the spec to retrieve.
-            #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
@@ -1479,7 +1485,7 @@ module Google
             end
 
             ##
-            # GetApiSpecContents returns the contents of a specified spec.
+            # Returns the contents of a specified spec.
             # If specs are stored with GZip compression, the default behavior
             # is to return the spec uncompressed (the mime_type response field
             # indicates the exact format returned).
@@ -1501,7 +1507,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the spec whose contents should be retrieved.
-            #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Api::HttpBody]
@@ -1568,7 +1574,7 @@ module Google
             end
 
             ##
-            # CreateApiSpec creates a specified spec.
+            # Creates a specified spec.
             #
             # @overload create_api_spec(request, options = nil)
             #   Pass arguments to `create_api_spec` via a request object, either of type
@@ -1587,7 +1593,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of specs.
-            #     Format: projects/*/locations/*/apis/*/versions/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*`
             #   @param api_spec [::Google::Cloud::ApigeeRegistry::V1::ApiSpec, ::Hash]
             #     Required. The spec to create.
             #   @param api_spec_id [::String]
@@ -1664,7 +1670,7 @@ module Google
             end
 
             ##
-            # UpdateApiSpec can be used to modify a specified spec.
+            # Used to modify a specified spec.
             #
             # @overload update_api_spec(request, options = nil)
             #   Pass arguments to `update_api_spec` via a request object, either of type
@@ -1685,12 +1691,12 @@ module Google
             #     Required. The spec to update.
             #
             #     The `name` field is used to identify the spec to update.
-            #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated. If omitted, all fields are updated that
             #     are set in the request message (fields set to default values are ignored).
-            #     If a "*" is specified, all fields are updated, including fields that are
-            #     unspecified/default in the request.
+            #     If an asterisk "*" is specified, all fields are updated, including fields
+            #     that are unspecified/default in the request.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the spec is not found, a new spec will be created.
             #     In this situation, `update_mask` is ignored.
@@ -1760,8 +1766,8 @@ module Google
             end
 
             ##
-            # DeleteApiSpec removes a specified spec, all revisions, and all child
-            # resources (e.g. artifacts).
+            # Removes a specified spec, all revisions, and all child
+            # resources (e.g., artifacts).
             #
             # @overload delete_api_spec(request, options = nil)
             #   Pass arguments to `delete_api_spec` via a request object, either of type
@@ -1780,7 +1786,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the spec to delete.
-            #     Format: projects/*/locations/*/apis/*/versions/*/specs/*
+            #     Format: `projects/*/locations/*/apis/*/versions/*/specs/*`
             #   @param force [::Boolean]
             #     If set to true, any child resources will also be deleted.
             #     (Otherwise, the request will only work if there are no child resources.)
@@ -1850,7 +1856,7 @@ module Google
             end
 
             ##
-            # TagApiSpecRevision adds a tag to a specified revision of a spec.
+            # Adds a tag to a specified revision of a spec.
             #
             # @overload tag_api_spec_revision(request, options = nil)
             #   Pass arguments to `tag_api_spec_revision` via a request object, either of type
@@ -1938,7 +1944,7 @@ module Google
             end
 
             ##
-            # ListApiSpecRevisions lists all revisions of a spec.
+            # Lists all revisions of a spec.
             # Revisions are returned in descending order of revision creation time.
             #
             # @overload list_api_spec_revisions(request, options = nil)
@@ -2036,7 +2042,7 @@ module Google
             end
 
             ##
-            # RollbackApiSpec sets the current revision to a specified prior revision.
+            # Sets the current revision to a specified prior revision.
             # Note that this creates a new revision with a new revision ID.
             #
             # @overload rollback_api_spec(request, options = nil)
@@ -2060,7 +2066,7 @@ module Google
             #     Required. The revision ID to roll back to.
             #     It must be a revision of the same spec.
             #
-            #       Example: c7cfa2a8
+            #       Example: `c7cfa2a8`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
@@ -2127,7 +2133,7 @@ module Google
             end
 
             ##
-            # DeleteApiSpecRevision deletes a revision of a spec.
+            # Deletes a revision of a spec.
             #
             # @overload delete_api_spec_revision(request, options = nil)
             #   Pass arguments to `delete_api_spec_revision` via a request object, either of type
@@ -2149,7 +2155,7 @@ module Google
             #     with a revision ID explicitly included.
             #
             #     Example:
-            #     projects/sample/locations/global/apis/petstore/versions/1.0.0/specs/openapi.yaml@c7cfa2a8
+            #     `projects/sample/locations/global/apis/petstore/versions/1.0.0/specs/openapi.yaml@c7cfa2a8`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::ApiSpec]
@@ -2216,7 +2222,7 @@ module Google
             end
 
             ##
-            # ListApiDeployments returns matching deployments.
+            # Returns matching deployments.
             #
             # @overload list_api_deployments(request, options = nil)
             #   Pass arguments to `list_api_deployments` via a request object, either of type
@@ -2235,7 +2241,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of deployments.
-            #     Format: projects/*/locations/*/apis/*
+            #     Format: `projects/*/locations/*/apis/*`
             #   @param page_size [::Integer]
             #     The maximum number of deployments to return.
             #     The service may return fewer than this value.
@@ -2323,7 +2329,7 @@ module Google
             end
 
             ##
-            # GetApiDeployment returns a specified deployment.
+            # Returns a specified deployment.
             #
             # @overload get_api_deployment(request, options = nil)
             #   Pass arguments to `get_api_deployment` via a request object, either of type
@@ -2342,7 +2348,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the deployment to retrieve.
-            #     Format: projects/*/locations/*/apis/*/deployments/*
+            #     Format: `projects/*/locations/*/apis/*/deployments/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
@@ -2409,7 +2415,7 @@ module Google
             end
 
             ##
-            # CreateApiDeployment creates a specified deployment.
+            # Creates a specified deployment.
             #
             # @overload create_api_deployment(request, options = nil)
             #   Pass arguments to `create_api_deployment` via a request object, either of type
@@ -2428,7 +2434,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of deployments.
-            #     Format: projects/*/locations/*/apis/*
+            #     Format: `projects/*/locations/*/apis/*`
             #   @param api_deployment [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment, ::Hash]
             #     Required. The deployment to create.
             #   @param api_deployment_id [::String]
@@ -2505,7 +2511,7 @@ module Google
             end
 
             ##
-            # UpdateApiDeployment can be used to modify a specified deployment.
+            # Used to modify a specified deployment.
             #
             # @overload update_api_deployment(request, options = nil)
             #   Pass arguments to `update_api_deployment` via a request object, either of type
@@ -2526,12 +2532,12 @@ module Google
             #     Required. The deployment to update.
             #
             #     The `name` field is used to identify the deployment to update.
-            #     Format: projects/*/locations/*/apis/*/deployments/*
+            #     Format: `projects/*/locations/*/apis/*/deployments/*`
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The list of fields to be updated. If omitted, all fields are updated that
             #     are set in the request message (fields set to default values are ignored).
-            #     If a "*" is specified, all fields are updated, including fields that are
-            #     unspecified/default in the request.
+            #     If an asterisk "*" is specified, all fields are updated, including fields
+            #     that are unspecified/default in the request.
             #   @param allow_missing [::Boolean]
             #     If set to true, and the deployment is not found, a new deployment will be
             #     created. In this situation, `update_mask` is ignored.
@@ -2601,8 +2607,8 @@ module Google
             end
 
             ##
-            # DeleteApiDeployment removes a specified deployment, all revisions, and all
-            # child resources (e.g. artifacts).
+            # Removes a specified deployment, all revisions, and all
+            # child resources (e.g., artifacts).
             #
             # @overload delete_api_deployment(request, options = nil)
             #   Pass arguments to `delete_api_deployment` via a request object, either of type
@@ -2621,7 +2627,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the deployment to delete.
-            #     Format: projects/*/locations/*/apis/*/deployments/*
+            #     Format: `projects/*/locations/*/apis/*/deployments/*`
             #   @param force [::Boolean]
             #     If set to true, any child resources will also be deleted.
             #     (Otherwise, the request will only work if there are no child resources.)
@@ -2691,7 +2697,7 @@ module Google
             end
 
             ##
-            # TagApiDeploymentRevision adds a tag to a specified revision of a
+            # Adds a tag to a specified revision of a
             # deployment.
             #
             # @overload tag_api_deployment_revision(request, options = nil)
@@ -2780,7 +2786,7 @@ module Google
             end
 
             ##
-            # ListApiDeploymentRevisions lists all revisions of a deployment.
+            # Lists all revisions of a deployment.
             # Revisions are returned in descending order of revision creation time.
             #
             # @overload list_api_deployment_revisions(request, options = nil)
@@ -2878,7 +2884,7 @@ module Google
             end
 
             ##
-            # RollbackApiDeployment sets the current revision to a specified prior
+            # Sets the current revision to a specified prior
             # revision. Note that this creates a new revision with a new revision ID.
             #
             # @overload rollback_api_deployment(request, options = nil)
@@ -2902,7 +2908,7 @@ module Google
             #     Required. The revision ID to roll back to.
             #     It must be a revision of the same deployment.
             #
-            #       Example: c7cfa2a8
+            #       Example: `c7cfa2a8`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
@@ -2969,7 +2975,7 @@ module Google
             end
 
             ##
-            # DeleteApiDeploymentRevision deletes a revision of a deployment.
+            # Deletes a revision of a deployment.
             #
             # @overload delete_api_deployment_revision(request, options = nil)
             #   Pass arguments to `delete_api_deployment_revision` via a request object, either of type
@@ -2991,7 +2997,7 @@ module Google
             #     with a revision ID explicitly included.
             #
             #     Example:
-            #     projects/sample/locations/global/apis/petstore/deployments/prod@c7cfa2a8
+            #     `projects/sample/locations/global/apis/petstore/deployments/prod@c7cfa2a8`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::ApiDeployment]
@@ -3058,7 +3064,7 @@ module Google
             end
 
             ##
-            # ListArtifacts returns matching artifacts.
+            # Returns matching artifacts.
             #
             # @overload list_artifacts(request, options = nil)
             #   Pass arguments to `list_artifacts` via a request object, either of type
@@ -3077,7 +3083,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of artifacts.
-            #     Format: \\{parent}
+            #     Format: `{parent}`
             #   @param page_size [::Integer]
             #     The maximum number of artifacts to return.
             #     The service may return fewer than this value.
@@ -3165,7 +3171,7 @@ module Google
             end
 
             ##
-            # GetArtifact returns a specified artifact.
+            # Returns a specified artifact.
             #
             # @overload get_artifact(request, options = nil)
             #   Pass arguments to `get_artifact` via a request object, either of type
@@ -3184,7 +3190,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the artifact to retrieve.
-            #     Format: \\{parent}/artifacts/*
+            #     Format: `{parent}/artifacts/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::Artifact]
@@ -3251,7 +3257,7 @@ module Google
             end
 
             ##
-            # GetArtifactContents returns the contents of a specified artifact.
+            # Returns the contents of a specified artifact.
             # If artifacts are stored with GZip compression, the default behavior
             # is to return the artifact uncompressed (the mime_type response field
             # indicates the exact format returned).
@@ -3273,7 +3279,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the artifact whose contents should be retrieved.
-            #     Format: \\{parent}/artifacts/*
+            #     Format: `{parent}/artifacts/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Api::HttpBody]
@@ -3340,7 +3346,7 @@ module Google
             end
 
             ##
-            # CreateArtifact creates a specified artifact.
+            # Creates a specified artifact.
             #
             # @overload create_artifact(request, options = nil)
             #   Pass arguments to `create_artifact` via a request object, either of type
@@ -3359,7 +3365,7 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The parent, which owns this collection of artifacts.
-            #     Format: \\{parent}
+            #     Format: `{parent}`
             #   @param artifact [::Google::Cloud::ApigeeRegistry::V1::Artifact, ::Hash]
             #     Required. The artifact to create.
             #   @param artifact_id [::String]
@@ -3436,7 +3442,7 @@ module Google
             end
 
             ##
-            # ReplaceArtifact can be used to replace a specified artifact.
+            # Used to replace a specified artifact.
             #
             # @overload replace_artifact(request, options = nil)
             #   Pass arguments to `replace_artifact` via a request object, either of type
@@ -3457,7 +3463,7 @@ module Google
             #     Required. The artifact to replace.
             #
             #     The `name` field is used to identify the artifact to replace.
-            #     Format: \\{parent}/artifacts/*
+            #     Format: `{parent}/artifacts/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::ApigeeRegistry::V1::Artifact]
@@ -3524,7 +3530,7 @@ module Google
             end
 
             ##
-            # DeleteArtifact removes a specified artifact.
+            # Removes a specified artifact.
             #
             # @overload delete_artifact(request, options = nil)
             #   Pass arguments to `delete_artifact` via a request object, either of type
@@ -3543,7 +3549,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The name of the artifact to delete.
-            #     Format: \\{parent}/artifacts/*
+            #     Format: `{parent}/artifacts/*`
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Protobuf::Empty]

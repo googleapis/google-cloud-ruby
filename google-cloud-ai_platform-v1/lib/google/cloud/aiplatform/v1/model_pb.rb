@@ -54,6 +54,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DEPLOYMENT_RESOURCES_TYPE_UNSPECIFIED, 0
       value :DEDICATED_RESOURCES, 1
       value :AUTOMATIC_RESOURCES, 2
+      value :SHARED_RESOURCES, 3
     end
     add_message "google.cloud.aiplatform.v1.PredictSchemata" do
       optional :instance_schema_uri, :string, 1

@@ -7,7 +7,6 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/servicedirectory/v1beta1/endpoint_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/servicedirectory/v1beta1/service.proto", :syntax => :proto3) do

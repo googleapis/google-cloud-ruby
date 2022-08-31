@@ -12,6 +12,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :user_agent_family, :string, 4
       optional :service_name, :string, 5
       optional :method_name, :string, 6
+      optional :principal_subject, :string, 7
+      optional :service_account_key_name, :string, 8
+      repeated :service_account_delegation_info, :message, 9, "google.cloud.securitycenter.v1.ServiceAccountDelegationInfo"
+    end
+    add_message "google.cloud.securitycenter.v1.ServiceAccountDelegationInfo" do
+      optional :principal_email, :string, 1
+      optional :principal_subject, :string, 2
     end
     add_message "google.cloud.securitycenter.v1.Geolocation" do
       optional :region_code, :string, 1
@@ -24,6 +31,7 @@ module Google
     module SecurityCenter
       module V1
         Access = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Access").msgclass
+        ServiceAccountDelegationInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.ServiceAccountDelegationInfo").msgclass
         Geolocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.securitycenter.v1.Geolocation").msgclass
       end
     end

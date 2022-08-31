@@ -115,8 +115,8 @@ module Google
         #     effectively policy is the union of both the policy set on this resource
         #     and each policy set on all of the resource's ancestry resource levels in
         #     the hierarchy. See
-        #     [this topic](https://cloud.google.com/iam/docs/policies#inheritance) for
-        #     more information.
+        #     [this topic](https://cloud.google.com/iam/help/allow-policies/inheritance)
+        #     for more information.
         # @!attribute [rw] org_policy
         #   @return [::Array<::Google::Cloud::OrgPolicy::V1::Policy>]
         #     A representation of an [organization
@@ -297,6 +297,7 @@ module Google
         end
 
         # A result of Resource Search, containing information of a cloud resource.
+        # Next ID: 29
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:

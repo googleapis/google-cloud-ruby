@@ -22,6 +22,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :parent, :string, 1
       optional :read_session, :message, 2, "google.cloud.bigquery.storage.v1.ReadSession"
       optional :max_stream_count, :int32, 3
+      optional :preferred_min_stream_count, :int32, 4
     end
     add_message "google.cloud.bigquery.storage.v1.ReadRowsRequest" do
       optional :read_stream, :string, 1
@@ -77,6 +78,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.bigquery.storage.v1.AppendRowsResponse" do
       optional :updated_schema, :message, 3, "google.cloud.bigquery.storage.v1.TableSchema"
       repeated :row_errors, :message, 4, "google.cloud.bigquery.storage.v1.RowError"
+      optional :write_stream, :string, 5
       oneof :response do
         optional :append_result, :message, 1, "google.cloud.bigquery.storage.v1.AppendRowsResponse.AppendResult"
         optional :error, :message, 2, "google.rpc.Status"

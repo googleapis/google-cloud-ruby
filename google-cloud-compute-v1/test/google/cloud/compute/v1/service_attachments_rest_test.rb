@@ -78,9 +78,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -93,27 +91,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListServiceAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListServiceAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListServiceAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListServiceAttachmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -135,9 +133,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     request_id = "hello world"
     service_attachment = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -150,27 +146,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.delete({ project: project, region: region, request_id: request_id, service_attachment: service_attachment }) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, service_attachment: service_attachment }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete project: project, region: region, request_id: request_id, service_attachment: service_attachment do |result, response|
+      client.delete project: project, region: region, request_id: request_id, service_attachment: service_attachment do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ project: project, region: region, request_id: request_id, service_attachment: service_attachment }, call_options) do |result, response|
+      client.delete({ project: project, region: region, request_id: request_id, service_attachment: service_attachment }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -191,9 +187,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     region = "hello world"
     service_attachment = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,27 +200,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.get({ project: project, region: region, service_attachment: service_attachment }) do |result, response|
+      client.get({ project: project, region: region, service_attachment: service_attachment }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get project: project, region: region, service_attachment: service_attachment do |result, response|
+      client.get project: project, region: region, service_attachment: service_attachment do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetServiceAttachmentRequest.new(project: project, region: region, service_attachment: service_attachment) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetServiceAttachmentRequest.new(project: project, region: region, service_attachment: service_attachment) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ project: project, region: region, service_attachment: service_attachment }, call_options) do |result, response|
+      client.get({ project: project, region: region, service_attachment: service_attachment }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetServiceAttachmentRequest.new(project: project, region: region, service_attachment: service_attachment), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetServiceAttachmentRequest.new(project: project, region: region, service_attachment: service_attachment), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -248,9 +242,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     region = "hello world"
     resource = "hello world"
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -263,27 +255,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource do |result, response|
+      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyServiceAttachmentRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource) do |result, response|
+      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyServiceAttachmentRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }, call_options) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyServiceAttachmentRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource), call_options) do |result, response|
+      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyServiceAttachmentRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, region: region, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -305,9 +297,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     request_id = "hello world"
     service_attachment_resource = {}
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -320,27 +310,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.insert({ project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource }) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource do |result, response|
+      client.insert project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource }, call_options) do |result, response|
+      client.insert({ project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment_resource: service_attachment_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -365,9 +355,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -380,27 +368,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListServiceAttachmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListServiceAttachmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListServiceAttachmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListServiceAttachmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -423,9 +411,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     service_attachment = "hello world"
     service_attachment_resource = {}
 
-    patch_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -438,27 +424,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.patch({ project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource }) do |result, response|
+      client.patch({ project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource do |result, response|
+      client.patch project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource }, call_options) do |result, response|
+      client.patch({ project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchServiceAttachmentRequest.new(project: project, region: region, request_id: request_id, service_attachment: service_attachment, service_attachment_resource: service_attachment_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -480,9 +466,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     region_set_policy_request_resource = {}
     resource = "hello world"
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -495,27 +479,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }) do |result, response|
+      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_iam_policy project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource do |result, response|
+      client.set_iam_policy project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyServiceAttachmentRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource) do |result, response|
+      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyServiceAttachmentRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }, call_options) do |result, response|
+      client.set_iam_policy({ project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyServiceAttachmentRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource), call_options) do |result, response|
+      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyServiceAttachmentRequest.new(project: project, region: region, region_set_policy_request_resource: region_set_policy_request_resource, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -537,9 +521,7 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
     resource = "hello world"
     test_permissions_request_resource = {}
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -552,27 +534,27 @@ class ::Google::Cloud::Compute::V1::ServiceAttachments::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |result, response|
+      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |result, response|
+      client.test_iam_permissions project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsServiceAttachmentRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |result, response|
+      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsServiceAttachmentRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |result, response|
+      client.test_iam_permissions({ project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsServiceAttachmentRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |result, response|
+      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsServiceAttachmentRequest.new(project: project, region: region, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

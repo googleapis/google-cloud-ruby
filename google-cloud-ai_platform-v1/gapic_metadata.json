@@ -319,6 +319,16 @@
               "methods": [
                 "delete_index"
               ]
+            },
+            "UpsertDatapoints": {
+              "methods": [
+                "upsert_datapoints"
+              ]
+            },
+            "RemoveDatapoints": {
+              "methods": [
+                "remove_datapoints"
+              ]
             }
           }
         }

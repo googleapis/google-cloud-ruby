@@ -31,8 +31,8 @@ module Google
         #     Required. Assured Workload to create
         # @!attribute [rw] external_id
         #   @return [::String]
-        #     Optional. A identifier associated with the workload and underlying projects
-        #     which allows for the break down of billing costs for a workload. The value
+        #     Optional. A identifier associated with the workload and underlying projects which
+        #     allows for the break down of billing costs for a workload. The value
         #     provided for the identifier will add a label to the workload and contained
         #     projects with the identifier as the value.
         class CreateWorkloadRequest
@@ -44,13 +44,51 @@ module Google
         # @!attribute [rw] workload
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload]
         #     Required. The workload to update.
-        #     The workload’s `name` field is used to identify the workload to be updated.
+        #     The workload's `name` field is used to identify the workload to be updated.
         #     Format:
         #     organizations/\\{org_id}/locations/\\{location_id}/workloads/\\{workload_id}
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. The list of fields to be updated.
         class UpdateWorkloadRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for restricting list of available resources in Workload environment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Workload. This is the workloads's
+        #     relative path in the API, formatted as
+        #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
+        #     For example,
+        #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
+        # @!attribute [rw] restriction_type
+        #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest::RestrictionType]
+        #     Required. The type of restriction for using gcp products in the Workload environment.
+        class RestrictAllowedResourcesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of restriction.
+          module RestrictionType
+            # Unknown restriction type.
+            RESTRICTION_TYPE_UNSPECIFIED = 0
+
+            # Allow the use all of all gcp products, irrespective of the compliance
+            # posture. This effectively removes gcp.restrictServiceUsage OrgPolicy
+            # on the AssuredWorkloads Folder.
+            ALLOW_ALL_GCP_RESOURCES = 1
+
+            # Based on Workload's compliance regime, allowed list changes.
+            # See - https://cloud.google.com/assured-workloads/docs/supported-products
+            # for the list of supported resources.
+            ALLOW_COMPLIANT_RESOURCES = 2
+          end
+        end
+
+        # Response for restricting the list of allowed resources.
+        class RestrictAllowedResourcesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -73,12 +111,52 @@ module Google
         # Request for fetching a workload.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the Workload to fetch. This is the
-        #     workloads's relative path in the API, formatted as
+        #     Required. The resource name of the Workload to fetch. This is the workloads's
+        #     relative path in the API, formatted as
         #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
         #     For example,
         #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
         class GetWorkloadRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A request to analyze a hypothetical move of a source project or project-based
+        # workload to a target (destination) folder-based workload.
+        # @!attribute [rw] source
+        #   @return [::String]
+        #     The source type is a project-based workload. Specify the workloads's
+        #     relative resource name, formatted as:
+        #     "organizations/\\{ORGANIZATION_ID}/locations/\\{LOCATION_ID}/workloads/\\{WORKLOAD_ID}"
+        #     For example:
+        #     "organizations/123/locations/us-east1/workloads/assured-workload-1"
+        # @!attribute [rw] project
+        #   @return [::String]
+        #     The source type is a project. Specify the project's relative resource
+        #     name, formatted as either a project number or a project ID:
+        #     "projects/\\{PROJECT_NUMBER}" or "projects/\\{PROJECT_ID}"
+        #     For example:
+        #     "projects/951040570662" when specifying a project number, or
+        #     "projects/my-project-123" when specifying a project ID.
+        # @!attribute [rw] target
+        #   @return [::String]
+        #     Required. The resource ID of the folder-based destination workload. This workload is
+        #     where the source project will hypothetically be moved to. Specify the
+        #     workload's relative resource name, formatted as:
+        #     "organizations/\\{ORGANIZATION_ID}/locations/\\{LOCATION_ID}/workloads/\\{WORKLOAD_ID}"
+        #     For example:
+        #     "organizations/123/locations/us-east1/workloads/assured-workload-2"
+        class AnalyzeWorkloadMoveRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A response that includes the analysis of the hypothetical resource move.
+        # @!attribute [rw] blockers
+        #   @return [::Array<::String>]
+        #     A list of blockers that should be addressed before moving the source
+        #     project or project-based workload to the destination folder-based workload.
+        class AnalyzeWorkloadMoveResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -146,9 +224,9 @@ module Google
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Immutable. The Workload creation timestamp.
-        # @!attribute [rw] billing_account
+        # @!attribute [r] billing_account
         #   @return [::String]
-        #     Input only. The billing account used for the resources which are
+        #     Output only. The billing account used for the resources which are
         #     direct children of workload. This billing account is initially associated
         #     with the resources created as part of Workload creation.
         #     After the initial creation of these resources, the customer can change
@@ -158,20 +236,16 @@ module Google
         #     `billingAccounts/012345-567890-ABCDEF`.
         # @!attribute [rw] il4_settings
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::IL4Settings]
-        #     Required. Input only. Immutable. Settings specific to resources needed
-        #     for IL4.
+        #     Input only. Immutable. Settings specific to resources needed for IL4.
         # @!attribute [rw] cjis_settings
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::CJISSettings]
-        #     Required. Input only. Immutable. Settings specific to resources needed
-        #     for CJIS.
+        #     Input only. Immutable. Settings specific to resources needed for CJIS.
         # @!attribute [rw] fedramp_high_settings
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::FedrampHighSettings]
-        #     Required. Input only. Immutable. Settings specific to resources needed
-        #     for FedRAMP High.
+        #     Input only. Immutable. Settings specific to resources needed for FedRAMP High.
         # @!attribute [rw] fedramp_moderate_settings
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::FedrampModerateSettings]
-        #     Required. Input only. Immutable. Settings specific to resources needed
-        #     for FedRAMP Moderate.
+        #     Input only. Immutable. Settings specific to resources needed for FedRAMP Moderate.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. ETag of the workload, it is calculated on the basis
@@ -181,22 +255,24 @@ module Google
         #     Optional. Labels applied to the workload.
         # @!attribute [rw] provisioned_resources_parent
         #   @return [::String]
-        #     Input only. The parent resource for the resources managed by this Assured
-        #     Workload. May be either empty or a folder resource which is a child of the
+        #     Input only. The parent resource for the resources managed by this Assured Workload. May
+        #     be either empty or a folder resource which is a child of the
         #     Workload parent. If not specified all resources are created under the
         #     parent organization.
         #     Format:
         #     folders/\\{folder_id}
         # @!attribute [rw] kms_settings
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
-        #     Input only. Settings used to create a CMEK crypto key. When set a project
-        #     with a KMS CMEK key is provisioned. This field is mandatory for a subset of
-        #     Compliance Regimes.
+        #     Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS
+        #     CMEK key is provisioned.
+        #     This field is deprecated as of Feb 28, 2022.
+        #     In order to create a Keyring, callers should specify,
+        #     ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
         # @!attribute [rw] resource_settings
         #   @return [::Array<::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ResourceSettings>]
-        #     Input only. Resource properties that are used to customize workload
-        #     resources. These properties (such as custom project id) will be used to
-        #     create workload resources if possible. This field is optional.
+        #     Input only. Resource properties that are used to customize workload resources.
+        #     These properties (such as custom project id) will be used to create
+        #     workload resources if possible. This field is optional.
         # @!attribute [r] kaj_enrollment_state
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KajEnrollmentState]
         #     Output only. Represents the KAJ enrollment state of the given workload.
@@ -248,14 +324,13 @@ module Google
           # Settings specific to the Key Management Service.
           # @!attribute [rw] next_rotation_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Required. Input only. Immutable. The time at which the Key Management
-          #     Service will automatically create a new version of the crypto key and
-          #     mark it as the primary.
+          #     Required. Input only. Immutable. The time at which the Key Management Service will automatically create a
+          #     new version of the crypto key and mark it as the primary.
           # @!attribute [rw] rotation_period
           #   @return [::Google::Protobuf::Duration]
-          #     Required. Input only. Immutable. [next_rotation_time] will be advanced by
-          #     this period when the Key Management Service automatically rotates a key.
-          #     Must be at least 24 hours and at most 876,000 hours.
+          #     Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key
+          #     Management Service automatically rotates a key. Must be at least 24 hours
+          #     and at most 876,000 hours.
           class KMSSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -264,8 +339,7 @@ module Google
           # Settings specific to resources needed for IL4.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
-          #     Required. Input only. Immutable. Settings used to create a CMEK crypto
-          #     key.
+          #     Input only. Immutable. Settings used to create a CMEK crypto key.
           class IL4Settings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -274,8 +348,7 @@ module Google
           # Settings specific to resources needed for CJIS.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
-          #     Required. Input only. Immutable. Settings used to create a CMEK crypto
-          #     key.
+          #     Input only. Immutable. Settings used to create a CMEK crypto key.
           class CJISSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -284,8 +357,7 @@ module Google
           # Settings specific to resources needed for FedRAMP High.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
-          #     Required. Input only. Immutable. Settings used to create a CMEK crypto
-          #     key.
+          #     Input only. Immutable. Settings used to create a CMEK crypto key.
           class FedrampHighSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -294,8 +366,7 @@ module Google
           # Settings specific to resources needed for FedRAMP Moderate.
           # @!attribute [rw] kms_settings
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::KMSSettings]
-          #     Required. Input only. Immutable. Settings used to create a CMEK crypto
-          #     key.
+          #     Input only. Immutable. Settings used to create a CMEK crypto key.
           class FedrampModerateSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -307,6 +378,8 @@ module Google
           #     Resource identifier.
           #     For a project this represents project_id. If the project is already
           #     taken, the workload creation will fail.
+          #     For KeyRing, this represents the keyring_id.
+          #     For a folder, don't set this value as folder_id is assigned by Google.
           # @!attribute [rw] resource_type
           #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ResourceInfo::ResourceType]
           #     Indicates the type of resource. This field should be specified to
@@ -410,6 +483,9 @@ module Google
 
             # International Traffic in Arms Regulations
             ITAR = 10
+
+            # Assured Workloads for Australia Regions and Support controls
+            AU_REGIONS_AND_US_SUPPORT = 11
           end
 
           # Key Access Justifications(KAJ) Enrollment State.
@@ -437,12 +513,12 @@ module Google
         #     Optional. The parent of the workload.
         # @!attribute [rw] compliance_regime
         #   @return [::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ComplianceRegime]
-        #     Optional. Compliance controls that should be applied to the resources
-        #     managed by the workload.
+        #     Optional. Compliance controls that should be applied to the resources managed by
+        #     the workload.
         # @!attribute [rw] resource_settings
         #   @return [::Array<::Google::Cloud::AssuredWorkloads::V1beta1::Workload::ResourceSettings>]
-        #     Optional. Resource properties in the input that are used for
-        #     creating/customizing workload resources.
+        #     Optional. Resource properties in the input that are used for creating/customizing
+        #     workload resources.
         class CreateWorkloadOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

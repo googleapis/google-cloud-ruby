@@ -131,6 +131,46 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#upsert_datapoints IndexService.UpsertDatapoints}
+        # @!attribute [rw] index
+        #   @return [::String]
+        #     Required. The name of the Index resource to be updated.
+        #     Format:
+        #     `projects/{project}/locations/{location}/indexes/{index}`
+        # @!attribute [rw] datapoints
+        #   @return [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint>]
+        #     A list of datapoints to be created/updated.
+        class UpsertDatapointsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#upsert_datapoints IndexService.UpsertDatapoints}
+        class UpsertDatapointsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#remove_datapoints IndexService.RemoveDatapoints}
+        # @!attribute [rw] index
+        #   @return [::String]
+        #     Required. The name of the Index resource to be updated.
+        #     Format:
+        #     `projects/{project}/locations/{location}/indexes/{index}`
+        # @!attribute [rw] datapoint_ids
+        #   @return [::Array<::String>]
+        #     A list of datapoint ids to be deleted.
+        class RemoveDatapointsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::AIPlatform::V1::IndexService::Client#remove_datapoints IndexService.RemoveDatapoints}
+        class RemoveDatapointsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Runtime operation metadata with regard to Matching Engine Index.
         # @!attribute [rw] content_validation_stats
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::NearestNeighborSearchOperationMetadata::ContentValidationStats>]

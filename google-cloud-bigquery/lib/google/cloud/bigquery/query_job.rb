@@ -1193,7 +1193,7 @@ module Google
           #
           def external= value
             external_table_pairs = value.map { |name, obj| [String(name), obj.to_gapi] }
-            external_table_hash = Hash[external_table_pairs]
+            external_table_hash = external_table_pairs.to_h
             @gapi.configuration.query.table_definitions = external_table_hash
           end
 

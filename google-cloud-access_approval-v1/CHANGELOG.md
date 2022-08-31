@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.1 (2022-08-26)
+
+#### Documentation
+
+* Added Dataproc and Secret Manager to the list of supported services ([#19084](https://github.com/googleapis/google-cloud-ruby/issues/19084)) 
+
 ### 0.7.0 (2022-07-01)
 
 #### Features

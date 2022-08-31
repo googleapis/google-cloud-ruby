@@ -87,7 +87,7 @@ def create_firewall_rule project:, name:, network: "global/networks/default"
   client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
   operation = client.insert request
 
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_firewall_create]
 
@@ -96,10 +96,20 @@ end
 #
 # @param [String] project project ID or project number of the Cloud project you want to use.
 # @param [String] name name of the rule you want to modify.
+# @param [Google::Protobuf::RepeatedField] allowed the repeated instances of the Allowed field in the rule.
+#         Compute errors out if allowed is empty.
 # @param [Integer] priority the new priority to be set for the rule.
-def patch_firewall_priority project:, name:, priority:
+def patch_firewall_priority project:, name:, allowed:, priority:
+  allowed_arr = allowed.map do |instance|
+    {
+      I_p_protocol: instance.I_p_protocol,
+      ports: instance.ports.to_a
+    }
+  end.to_a
+
   rule = {
-    priority: priority
+    priority: priority,
+    allowed: allowed_arr
   }
 
   request = {
@@ -113,7 +123,7 @@ def patch_firewall_priority project:, name:, priority:
   client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
   operation = client.patch request
 
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_firewall_patch]
 
@@ -127,6 +137,6 @@ def delete_firewall_rule project:, name:
   client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
   operation = client.delete project: project, firewall: name
 
-  wait_until_done project: project, operation: operation.operation
+  wait_until_done operation: operation
 end
 # [END compute_firewall_delete]

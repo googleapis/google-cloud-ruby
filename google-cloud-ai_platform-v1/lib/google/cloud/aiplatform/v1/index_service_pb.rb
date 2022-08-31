@@ -47,6 +47,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.DeleteIndexRequest" do
       optional :name, :string, 1
     end
+    add_message "google.cloud.aiplatform.v1.UpsertDatapointsRequest" do
+      optional :index, :string, 1
+      repeated :datapoints, :message, 2, "google.cloud.aiplatform.v1.IndexDatapoint"
+    end
+    add_message "google.cloud.aiplatform.v1.UpsertDatapointsResponse" do
+    end
+    add_message "google.cloud.aiplatform.v1.RemoveDatapointsRequest" do
+      optional :index, :string, 1
+      repeated :datapoint_ids, :string, 2
+    end
+    add_message "google.cloud.aiplatform.v1.RemoveDatapointsResponse" do
+    end
     add_message "google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata" do
       repeated :content_validation_stats, :message, 1, "google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata.ContentValidationStats"
       optional :data_bytes_count, :int64, 2
@@ -89,6 +101,10 @@ module Google
         UpdateIndexRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UpdateIndexRequest").msgclass
         UpdateIndexOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UpdateIndexOperationMetadata").msgclass
         DeleteIndexRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.DeleteIndexRequest").msgclass
+        UpsertDatapointsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UpsertDatapointsRequest").msgclass
+        UpsertDatapointsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.UpsertDatapointsResponse").msgclass
+        RemoveDatapointsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.RemoveDatapointsRequest").msgclass
+        RemoveDatapointsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.RemoveDatapointsResponse").msgclass
         NearestNeighborSearchOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata").msgclass
         NearestNeighborSearchOperationMetadata::RecordError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata.RecordError").msgclass
         NearestNeighborSearchOperationMetadata::RecordError::RecordErrorType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.NearestNeighborSearchOperationMetadata.RecordError.RecordErrorType").enummodule

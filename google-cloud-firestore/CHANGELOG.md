@@ -1,5 +1,11 @@
 # Release History
 
+### 2.7.2 (2022-08-24)
+
+#### Documentation
+
+* fix firestore emulator guide ([#19045](https://github.com/googleapis/google-cloud-ruby/issues/19045)) 
+
 ### 2.7.1 (2022-07-15)
 
 #### Bug Fixes

@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.1 (2022-07-28)
+
+#### Documentation
+
+* Fixed some cross-reference links ([#18879](https://github.com/googleapis/google-cloud-ruby/issues/18879)) 
+
 ### 0.8.0 (2022-07-02)
 
 #### Features

@@ -45,6 +45,10 @@ module Google
             # An Index can only be deleted when all its
             # [DeployedIndexes][google.cloud.aiplatform.v1.Index.deployed_indexes] had been undeployed.
             rpc :DeleteIndex, ::Google::Cloud::AIPlatform::V1::DeleteIndexRequest, ::Google::Longrunning::Operation
+            # Add/update Datapoints into an Index.
+            rpc :UpsertDatapoints, ::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest, ::Google::Cloud::AIPlatform::V1::UpsertDatapointsResponse
+            # Remove Datapoints from an Index.
+            rpc :RemoveDatapoints, ::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest, ::Google::Cloud::AIPlatform::V1::RemoveDatapointsResponse
           end
 
           Stub = Service.rpc_stub_class

@@ -32,7 +32,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
     updated_gapi = dataset_gapi.dup
     updated_gapi.friendly_name = new_dataset_name
     patch_dataset_gapi = Google::Apis::BigqueryV2::Dataset.new friendly_name: new_dataset_name, etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_dataset_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     _(dataset.name).must_be_nil
 
@@ -51,7 +51,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
     updated_gapi = dataset_gapi.dup
     updated_gapi.description = new_description
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new description: new_description, etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     _(dataset.description).must_be_nil
 
@@ -72,7 +72,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
     updated_gapi = dataset_gapi.dup
     updated_gapi.default_table_expiration_ms = new_default_expiration
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_table_expiration_ms: new_default_expiration, etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     _(dataset.default_expiration).must_be_nil
 
@@ -93,7 +93,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
     updated_gapi = dataset_gapi.dup
     updated_gapi.labels = new_labels
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new labels: new_labels, etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     _(dataset.labels).must_be_nil
 
@@ -112,7 +112,7 @@ describe Google::Cloud::Bigquery::Dataset, :reference, :update, :mock_bigquery d
     updated_gapi = dataset_gapi.dup
     updated_gapi.default_encryption_configuration = Google::Apis::BigqueryV2::EncryptionConfiguration.new kms_key_name: kms_key
     patch_gapi = Google::Apis::BigqueryV2::Dataset.new default_encryption_configuration: updated_gapi.default_encryption_configuration, etag: dataset_gapi.etag
-    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi, {options: {header: {"If-Match" => dataset_gapi.etag}}}]
+    mock.expect :patch_dataset, updated_gapi, [project, dataset_id, patch_gapi], options: {header: {"If-Match" => dataset_gapi.etag}}
 
     _(dataset.default_encryption).must_be_nil
 

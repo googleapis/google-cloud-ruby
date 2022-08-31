@@ -307,11 +307,13 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    force = true
 
     delete_api_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_api, name
       assert_kind_of ::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -322,31 +324,31 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete_api({ name: name }) do |response, operation|
+      client.delete_api({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api name: name do |response, operation|
+      client.delete_api name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api ::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name) do |response, operation|
+      client.delete_api ::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api({ name: name }, grpc_options) do |response, operation|
+      client.delete_api({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api(::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_api(::Google::Cloud::ApigeeRegistry::V1::DeleteApiRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
@@ -616,11 +618,13 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
 
     # Create request parameters for a unary method.
     name = "hello world"
+    force = true
 
     delete_api_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :delete_api_version, name
       assert_kind_of ::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal true, request["force"]
       refute_nil options
     end
 
@@ -631,31 +635,31 @@ class ::Google::Cloud::ApigeeRegistry::V1::Registry::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete_api_version({ name: name }) do |response, operation|
+      client.delete_api_version({ name: name, force: force }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.delete_api_version name: name do |response, operation|
+      client.delete_api_version name: name, force: force do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.delete_api_version ::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name) do |response, operation|
+      client.delete_api_version ::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name, force: force) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.delete_api_version({ name: name }, grpc_options) do |response, operation|
+      client.delete_api_version({ name: name, force: force }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.delete_api_version(::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name), grpc_options) do |response, operation|
+      client.delete_api_version(::Google::Cloud::ApigeeRegistry::V1::DeleteApiVersionRequest.new(name: name, force: force), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

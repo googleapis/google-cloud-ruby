@@ -87,6 +87,9 @@ module Google
           # @!attribute [rw] presto_dialect
           #   @return [::Google::Cloud::Bigquery::Migration::V2::PrestoDialect]
           #     The Presto dialect
+          # @!attribute [rw] mysql_dialect
+          #   @return [::Google::Cloud::Bigquery::Migration::V2::MySQLDialect]
+          #     The MySQL dialect
           class Dialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -181,6 +184,12 @@ module Google
 
           # The dialect definition for Presto.
           class PrestoDialect
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The dialect definition for MySQL.
+          class MySQLDialect
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

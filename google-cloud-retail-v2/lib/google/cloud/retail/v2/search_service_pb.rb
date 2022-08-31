@@ -49,8 +49,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :restricted_values, :string, 3
       repeated :prefixes, :string, 8
       repeated :contains, :string, 9
+      optional :case_insensitive, :bool, 10
       optional :order_by, :string, 4
       optional :query, :string, 5
+      optional :return_min_max, :bool, 11
     end
     add_message "google.cloud.retail.v2.SearchRequest.DynamicFacetSpec" do
       optional :mode, :enum, 1, "google.cloud.retail.v2.SearchRequest.DynamicFacetSpec.Mode"
@@ -116,6 +118,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :matching_variant_count, :int32, 3
       map :matching_variant_fields, :string, :message, 4, "google.protobuf.FieldMask"
       map :variant_rollup_values, :string, :message, 5, "google.protobuf.Value"
+      repeated :personal_labels, :string, 7
     end
     add_message "google.cloud.retail.v2.SearchResponse.Facet" do
       optional :key, :string, 1
@@ -124,6 +127,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.retail.v2.SearchResponse.Facet.FacetValue" do
       optional :count, :int64, 3
+      optional :min_value, :double, 5
+      optional :max_value, :double, 6
       oneof :facet_value do
         optional :value, :string, 1
         optional :interval, :message, 2, "google.cloud.retail.v2.Interval"

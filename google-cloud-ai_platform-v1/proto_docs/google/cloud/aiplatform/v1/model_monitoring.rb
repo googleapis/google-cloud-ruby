@@ -21,7 +21,8 @@ module Google
   module Cloud
     module AIPlatform
       module V1
-        # Next ID: 8
+        # The objective configuration for model monitoring, including the information
+        # needed to detect anomalies for one particular model.
         # @!attribute [rw] training_dataset
         #   @return [::Google::Cloud::AIPlatform::V1::ModelMonitoringObjectiveConfig::TrainingDataset]
         #     Training dataset for models. This field has to be set only if
@@ -202,7 +203,6 @@ module Google
           end
         end
 
-        # Next ID: 3
         # @!attribute [rw] email_alert_config
         #   @return [::Google::Cloud::AIPlatform::V1::ModelMonitoringAlertConfig::EmailAlertConfig]
         #     Email alert config.
@@ -228,7 +228,6 @@ module Google
         end
 
         # The config for feature monitoring threshold.
-        # Next ID: 3
         # @!attribute [rw] value
         #   @return [::Float]
         #     Specify a threshold value that can trigger the alert.
@@ -246,7 +245,6 @@ module Google
 
         # Sampling Strategy for logging, can be for both training and prediction
         # dataset.
-        # Next ID: 2
         # @!attribute [rw] random_sample_config
         #   @return [::Google::Cloud::AIPlatform::V1::SamplingStrategy::RandomSampleConfig]
         #     Random sample config. Will support more sampling strategies later.

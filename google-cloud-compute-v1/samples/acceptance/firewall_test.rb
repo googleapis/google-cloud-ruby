@@ -50,7 +50,7 @@ class ComputeFirewallTest < Minitest::Test
     client = ::Google::Cloud::Compute::V1::Firewalls::Rest::Client.new
     firewall = client.get project: project, firewall: firewall_name
     assert_equal 1000, firewall.priority
-    patch_firewall_priority project: project, name: firewall_name, priority: 500
+    patch_firewall_priority project: project, name: firewall_name, allowed: firewall.allowed, priority: 500
     firewall = client.get project: project, firewall: firewall_name
     assert_equal 500, firewall.priority
     delete_firewall_rule project: project, name: firewall_name

@@ -127,7 +127,7 @@ module Google
         #   change.done? #=> true
         #
         def wait_until_done!
-          backoff = ->(retries) { sleep 2 * retries + 5 }
+          backoff = ->(retries) { sleep((2 * retries) + 5) }
           retries = 0
           until done?
             backoff.call retries

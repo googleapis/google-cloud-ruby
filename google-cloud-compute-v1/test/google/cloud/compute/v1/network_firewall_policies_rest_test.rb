@@ -76,9 +76,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     replace_existing_association = true
     request_id = "hello world"
 
-    add_association_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    add_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -91,27 +89,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.add_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id }) do |result, response|
+      client.add_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.add_association firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id do |result, response|
+      client.add_association firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.add_association ::Google::Cloud::Compute::V1::AddAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id) do |result, response|
+      client.add_association ::Google::Cloud::Compute::V1::AddAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.add_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id }, call_options) do |result, response|
+      client.add_association({ firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.add_association(::Google::Cloud::Compute::V1::AddAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id), call_options) do |result, response|
+      client.add_association(::Google::Cloud::Compute::V1::AddAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_association_resource: firewall_policy_association_resource, project: project, replace_existing_association: replace_existing_association, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -135,9 +133,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     request_id = "hello world"
 
-    add_rule_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    add_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -150,27 +146,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.add_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id }) do |result, response|
+      client.add_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.add_rule firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id do |result, response|
+      client.add_rule firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.add_rule ::Google::Cloud::Compute::V1::AddRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id) do |result, response|
+      client.add_rule ::Google::Cloud::Compute::V1::AddRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.add_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id }, call_options) do |result, response|
+      client.add_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.add_rule(::Google::Cloud::Compute::V1::AddRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id), call_options) do |result, response|
+      client.add_rule(::Google::Cloud::Compute::V1::AddRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, max_priority: max_priority, min_priority: min_priority, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -192,9 +188,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     request_id = "hello world"
     source_firewall_policy = "hello world"
 
-    clone_rules_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    clone_rules_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -207,27 +201,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.clone_rules({ firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy }) do |result, response|
+      client.clone_rules({ firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.clone_rules firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy do |result, response|
+      client.clone_rules firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.clone_rules ::Google::Cloud::Compute::V1::CloneRulesNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy) do |result, response|
+      client.clone_rules ::Google::Cloud::Compute::V1::CloneRulesNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.clone_rules({ firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy }, call_options) do |result, response|
+      client.clone_rules({ firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.clone_rules(::Google::Cloud::Compute::V1::CloneRulesNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy), call_options) do |result, response|
+      client.clone_rules(::Google::Cloud::Compute::V1::CloneRulesNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id, source_firewall_policy: source_firewall_policy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -248,9 +242,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     request_id = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -263,27 +255,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.delete({ firewall_policy: firewall_policy, project: project, request_id: request_id }) do |result, response|
+      client.delete({ firewall_policy: firewall_policy, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete firewall_policy: firewall_policy, project: project, request_id: request_id do |result, response|
+      client.delete firewall_policy: firewall_policy, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ firewall_policy: firewall_policy, project: project, request_id: request_id }, call_options) do |result, response|
+      client.delete({ firewall_policy: firewall_policy, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -303,9 +295,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     firewall_policy = "hello world"
     project = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -318,27 +308,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.get({ firewall_policy: firewall_policy, project: project }) do |result, response|
+      client.get({ firewall_policy: firewall_policy, project: project }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get firewall_policy: firewall_policy, project: project do |result, response|
+      client.get firewall_policy: firewall_policy, project: project do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ firewall_policy: firewall_policy, project: project }, call_options) do |result, response|
+      client.get({ firewall_policy: firewall_policy, project: project }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, project: project), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -359,9 +349,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     name = "hello world"
     project = "hello world"
 
-    get_association_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -374,27 +362,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.get_association({ firewall_policy: firewall_policy, name: name, project: project }) do |result, response|
+      client.get_association({ firewall_policy: firewall_policy, name: name, project: project }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_association firewall_policy: firewall_policy, name: name, project: project do |result, response|
+      client.get_association firewall_policy: firewall_policy, name: name, project: project do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_association ::Google::Cloud::Compute::V1::GetAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project) do |result, response|
+      client.get_association ::Google::Cloud::Compute::V1::GetAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_association({ firewall_policy: firewall_policy, name: name, project: project }, call_options) do |result, response|
+      client.get_association({ firewall_policy: firewall_policy, name: name, project: project }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_association(::Google::Cloud::Compute::V1::GetAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project), call_options) do |result, response|
+      client.get_association(::Google::Cloud::Compute::V1::GetAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -415,9 +403,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     resource = "hello world"
 
-    get_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -430,27 +416,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource do |result, response|
+      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyNetworkFirewallPolicyRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource) do |result, response|
+      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyNetworkFirewallPolicyRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }, call_options) do |result, response|
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyNetworkFirewallPolicyRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource), call_options) do |result, response|
+      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyNetworkFirewallPolicyRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -471,9 +457,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     priority = 42
     project = "hello world"
 
-    get_rule_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -486,27 +470,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.get_rule({ firewall_policy: firewall_policy, priority: priority, project: project }) do |result, response|
+      client.get_rule({ firewall_policy: firewall_policy, priority: priority, project: project }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get_rule firewall_policy: firewall_policy, priority: priority, project: project do |result, response|
+      client.get_rule firewall_policy: firewall_policy, priority: priority, project: project do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get_rule ::Google::Cloud::Compute::V1::GetRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project) do |result, response|
+      client.get_rule ::Google::Cloud::Compute::V1::GetRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get_rule({ firewall_policy: firewall_policy, priority: priority, project: project }, call_options) do |result, response|
+      client.get_rule({ firewall_policy: firewall_policy, priority: priority, project: project }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get_rule(::Google::Cloud::Compute::V1::GetRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project), call_options) do |result, response|
+      client.get_rule(::Google::Cloud::Compute::V1::GetRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -527,9 +511,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -542,27 +524,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.insert({ firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }) do |result, response|
+      client.insert({ firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id do |result, response|
+      client.insert firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertNetworkFirewallPolicyRequest.new(firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertNetworkFirewallPolicyRequest.new(firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }, call_options) do |result, response|
+      client.insert({ firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertNetworkFirewallPolicyRequest.new(firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertNetworkFirewallPolicyRequest.new(firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -586,9 +568,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -601,27 +581,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListNetworkFirewallPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -643,9 +623,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     request_id = "hello world"
 
-    patch_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -658,27 +636,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.patch({ firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }) do |result, response|
+      client.patch({ firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id do |result, response|
+      client.patch firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id) do |result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }, call_options) do |result, response|
+      client.patch({ firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id), call_options) do |result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_resource: firewall_policy_resource, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -701,9 +679,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     request_id = "hello world"
 
-    patch_rule_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    patch_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -716,27 +692,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.patch_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id }) do |result, response|
+      client.patch_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch_rule firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id do |result, response|
+      client.patch_rule firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch_rule ::Google::Cloud::Compute::V1::PatchRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id) do |result, response|
+      client.patch_rule ::Google::Cloud::Compute::V1::PatchRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id }, call_options) do |result, response|
+      client.patch_rule({ firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch_rule(::Google::Cloud::Compute::V1::PatchRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id), call_options) do |result, response|
+      client.patch_rule(::Google::Cloud::Compute::V1::PatchRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, firewall_policy_rule_resource: firewall_policy_rule_resource, priority: priority, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -758,9 +734,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     request_id = "hello world"
 
-    remove_association_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    remove_association_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -773,27 +747,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.remove_association({ firewall_policy: firewall_policy, name: name, project: project, request_id: request_id }) do |result, response|
+      client.remove_association({ firewall_policy: firewall_policy, name: name, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.remove_association firewall_policy: firewall_policy, name: name, project: project, request_id: request_id do |result, response|
+      client.remove_association firewall_policy: firewall_policy, name: name, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.remove_association ::Google::Cloud::Compute::V1::RemoveAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project, request_id: request_id) do |result, response|
+      client.remove_association ::Google::Cloud::Compute::V1::RemoveAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.remove_association({ firewall_policy: firewall_policy, name: name, project: project, request_id: request_id }, call_options) do |result, response|
+      client.remove_association({ firewall_policy: firewall_policy, name: name, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.remove_association(::Google::Cloud::Compute::V1::RemoveAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project, request_id: request_id), call_options) do |result, response|
+      client.remove_association(::Google::Cloud::Compute::V1::RemoveAssociationNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, name: name, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -815,9 +789,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     request_id = "hello world"
 
-    remove_rule_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    remove_rule_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -830,27 +802,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.remove_rule({ firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id }) do |result, response|
+      client.remove_rule({ firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.remove_rule firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id do |result, response|
+      client.remove_rule firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.remove_rule ::Google::Cloud::Compute::V1::RemoveRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id) do |result, response|
+      client.remove_rule ::Google::Cloud::Compute::V1::RemoveRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.remove_rule({ firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id }, call_options) do |result, response|
+      client.remove_rule({ firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.remove_rule(::Google::Cloud::Compute::V1::RemoveRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id), call_options) do |result, response|
+      client.remove_rule(::Google::Cloud::Compute::V1::RemoveRuleNetworkFirewallPolicyRequest.new(firewall_policy: firewall_policy, priority: priority, project: project, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -871,9 +843,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     project = "hello world"
     resource = "hello world"
 
-    set_iam_policy_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -886,27 +856,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }) do |result, response|
+      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_iam_policy global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource do |result, response|
+      client.set_iam_policy global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyNetworkFirewallPolicyRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource) do |result, response|
+      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyNetworkFirewallPolicyRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }, call_options) do |result, response|
+      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyNetworkFirewallPolicyRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource), call_options) do |result, response|
+      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyNetworkFirewallPolicyRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -927,9 +897,7 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
     resource = "hello world"
     test_permissions_request_resource = {}
 
-    test_iam_permissions_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    test_iam_permissions_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -942,27 +910,27 @@ class ::Google::Cloud::Compute::V1::NetworkFirewallPolicies::ClientTest < Minite
       end
 
       # Use hash object
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |result, response|
+      client.test_iam_permissions project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsNetworkFirewallPolicyRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |result, response|
+      client.test_iam_permissions ::Google::Cloud::Compute::V1::TestIamPermissionsNetworkFirewallPolicyRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |result, response|
+      client.test_iam_permissions({ project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsNetworkFirewallPolicyRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |result, response|
+      client.test_iam_permissions(::Google::Cloud::Compute::V1::TestIamPermissionsNetworkFirewallPolicyRequest.new(project: project, resource: resource, test_permissions_request_resource: test_permissions_request_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

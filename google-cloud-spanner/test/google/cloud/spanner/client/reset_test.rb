@@ -23,7 +23,7 @@ describe Google::Cloud::Spanner::Client, :close, :mock_spanner do
   }
   let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
   let(:default_options) {
-    { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
+    ::Gapic::CallOptions.new metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) }
   }
   let(:batch_create_sessions_grpc) {
     Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.new session: [session_grpc]

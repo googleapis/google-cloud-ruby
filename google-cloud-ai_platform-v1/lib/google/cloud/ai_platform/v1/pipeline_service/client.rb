@@ -19,7 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/pipeline_service_pb"
 require "google/cloud/location"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -386,21 +386,22 @@ module Google
             #     Format: `projects/{project}/locations/{location}`
             #   @param filter [::String]
             #     The standard list filter.
+            #
             #     Supported fields:
             #
-            #       * `display_name` supports = and !=.
-            #
-            #       * `state` supports = and !=.
+            #       * `display_name` supports `=`, `!=` comparisons, and `:` wildcard.
+            #       * `state` supports `=`, `!=` comparisons.
+            #       * `training_task_definition` `=`, `!=` comparisons, and `:` wildcard.
+            #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
+            #         `create_time` must be in RFC 3339 format.
             #
             #     Some examples of using the filter are:
             #
-            #      * `state="PIPELINE_STATE_SUCCEEDED" AND display_name="my_pipeline"`
-            #
-            #      * `state="PIPELINE_STATE_RUNNING" OR display_name="my_pipeline"`
-            #
-            #      * `NOT display_name="my_pipeline"`
-            #
-            #      * `state="PIPELINE_STATE_FAILED"`
+            #       * `state="PIPELINE_STATE_SUCCEEDED" AND display_name:"my_pipeline_*"`
+            #       * `state!="PIPELINE_STATE_FAILED" OR display_name="my_pipeline"`
+            #       * `NOT display_name="my_pipeline"`
+            #       * `create_time>"2021-05-18T00:00:00Z"`
+            #       * `training_task_definition:"*automl_text_classification*"`
             #   @param page_size [::Integer]
             #     The standard list page size.
             #   @param page_token [::String]
@@ -868,7 +869,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_pipeline_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil)
+            # @overload list_pipeline_jobs(parent: nil, filter: nil, page_size: nil, page_token: nil, order_by: nil, read_mask: nil)
             #   Pass arguments to `list_pipeline_jobs` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -883,8 +884,8 @@ module Google
             #     * `pipeline_name`: Supports `=` and `!=` comparisons.
             #     * `display_name`: Supports `=`, `!=` comparisons, and `:` wildcard.
             #     * `pipeline_job_user_id`: Supports `=`, `!=` comparisons, and `:` wildcard.
-            #      for example, can check if pipeline's display_name contains *step* by doing
-            #       display_name:\"*step*\"
+            #       for example, can check if pipeline's display_name contains *step* by
+            #       doing display_name:\"*step*\"
             #     * `state`: Supports `=` and `!=` comparisons.
             #     * `create_time`: Supports `=`, `!=`, `<`, `>`, `<=`, and `>=` comparisons.
             #       Values must be in RFC 3339 format.
@@ -895,7 +896,7 @@ module Google
             #     * `labels`: Supports key-value equality and key presence.
             #     * `template_uri`: Supports `=`, `!=` comparisons, and `:` wildcard.
             #     * `template_metadata.version`: Supports `=`, `!=` comparisons, and `:`
-            #     wildcard.
+            #       wildcard.
             #
             #     Filter expressions can be combined together using logical operators
             #     (`AND` & `OR`).
@@ -927,10 +928,13 @@ module Google
             #     there are multiple jobs having the same create time, order them by the end
             #     time in ascending order. if order_by is not specified, it will order by
             #     default order is create time in descending order. Supported fields:
+            #
             #       * `create_time`
             #       * `update_time`
             #       * `end_time`
             #       * `start_time`
+            #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Mask specifying which fields to read.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::PipelineJob>]

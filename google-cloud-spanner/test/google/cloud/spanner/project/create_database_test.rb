@@ -38,7 +38,7 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
       )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [], encryption_config: nil }, nil]
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [], encryption_config: nil }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = spanner.create_database instance_id, database_id
@@ -60,7 +60,7 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
     )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"], encryption_config: nil }, nil]
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: ["CREATE TABLE table1;", "CREATE TABLE table2;"], encryption_config: nil }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = spanner.create_database instance_id, database_id, statements: [
@@ -87,7 +87,7 @@ describe Google::Cloud::Spanner::Project, :create_database, :mock_spanner do
         metadata_type: Google::Cloud::Spanner::Admin::Database::V1::CreateDatabaseMetadata
     )
     mock = Minitest::Mock.new
-    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [], encryption_config: { kms_key_name: kms_key_name } }, nil]
+    mock.expect :create_database, create_res, [{ parent: instance_path(instance_id), create_statement: "CREATE DATABASE `#{database_id}`", extra_statements: [], encryption_config: { kms_key_name: kms_key_name } }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     job = spanner.create_database instance_id, database_id, encryption_config: { kms_key_name: kms_key_name }

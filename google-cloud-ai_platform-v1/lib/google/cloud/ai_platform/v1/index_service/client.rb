@@ -19,7 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/index_service_pb"
 require "google/cloud/location"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -666,6 +666,184 @@ module Google
             end
 
             ##
+            # Add/update Datapoints into an Index.
+            #
+            # @overload upsert_datapoints(request, options = nil)
+            #   Pass arguments to `upsert_datapoints` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload upsert_datapoints(index: nil, datapoints: nil)
+            #   Pass arguments to `upsert_datapoints` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param index [::String]
+            #     Required. The name of the Index resource to be updated.
+            #     Format:
+            #     `projects/{project}/locations/{location}/indexes/{index}`
+            #   @param datapoints [::Array<::Google::Cloud::AIPlatform::V1::IndexDatapoint, ::Hash>]
+            #     A list of datapoints to be created/updated.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::UpsertDatapointsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::UpsertDatapointsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::IndexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest.new
+            #
+            #   # Call the upsert_datapoints method.
+            #   result = client.upsert_datapoints request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::UpsertDatapointsResponse.
+            #   p result
+            #
+            def upsert_datapoints request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::UpsertDatapointsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.upsert_datapoints.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.index
+                header_params["index"] = request.index
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.upsert_datapoints.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.upsert_datapoints.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @index_service_stub.call_rpc :upsert_datapoints, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Remove Datapoints from an Index.
+            #
+            # @overload remove_datapoints(request, options = nil)
+            #   Pass arguments to `remove_datapoints` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_datapoints(index: nil, datapoint_ids: nil)
+            #   Pass arguments to `remove_datapoints` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param index [::String]
+            #     Required. The name of the Index resource to be updated.
+            #     Format:
+            #     `projects/{project}/locations/{location}/indexes/{index}`
+            #   @param datapoint_ids [::Array<::String>]
+            #     A list of datapoint ids to be deleted.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::RemoveDatapointsResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::RemoveDatapointsResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::IndexService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest.new
+            #
+            #   # Call the remove_datapoints method.
+            #   result = client.remove_datapoints request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::RemoveDatapointsResponse.
+            #   p result
+            #
+            def remove_datapoints request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::RemoveDatapointsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_datapoints.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.index
+                header_params["index"] = request.index
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.remove_datapoints.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_datapoints.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @index_service_stub.call_rpc :remove_datapoints, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the IndexService API.
             #
             # This class represents the configuration for IndexService,
@@ -825,6 +1003,16 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_index
+                ##
+                # RPC-specific configuration for `upsert_datapoints`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :upsert_datapoints
+                ##
+                # RPC-specific configuration for `remove_datapoints`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_datapoints
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -838,6 +1026,10 @@ module Google
                   @update_index = ::Gapic::Config::Method.new update_index_config
                   delete_index_config = parent_rpcs.delete_index if parent_rpcs.respond_to? :delete_index
                   @delete_index = ::Gapic::Config::Method.new delete_index_config
+                  upsert_datapoints_config = parent_rpcs.upsert_datapoints if parent_rpcs.respond_to? :upsert_datapoints
+                  @upsert_datapoints = ::Gapic::Config::Method.new upsert_datapoints_config
+                  remove_datapoints_config = parent_rpcs.remove_datapoints if parent_rpcs.respond_to? :remove_datapoints
+                  @remove_datapoints = ::Gapic::Config::Method.new remove_datapoints_config
 
                   yield self if block_given?
                 end

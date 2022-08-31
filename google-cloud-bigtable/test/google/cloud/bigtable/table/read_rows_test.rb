@@ -41,13 +41,11 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
     get_res = [Google::Cloud::Bigtable::V2::ReadRowsResponse.new(chunks: chunks)]
 
     mock.expect :read_rows, get_res,
-                [
-                  table_name: table_path(instance_id, table_id),
-                  rows: Google::Cloud::Bigtable::V2::RowSet.new,
-                  filter: nil,
-                  rows_limit: nil,
-                  app_profile_id: nil
-                ]
+                table_name: table_path(instance_id, table_id),
+                rows: Google::Cloud::Bigtable::V2::RowSet.new,
+                filter: nil,
+                rows_limit: nil,
+                app_profile_id: nil
 
     expected_row = Google::Cloud::Bigtable::Row.new("RK")
     expected_row.cells["A"] << Google::Cloud::Bigtable::Row::Cell.new(
@@ -194,16 +192,14 @@ describe Google::Cloud::Bigtable::Table, :read_rows, :mock_bigtable do
   it "read rows using row keys" do
     mock = Minitest::Mock.new
     mock.expect :read_rows, [],
-                [
-                  table_name: "projects/test/instances/test-instance/tables/test-table",
-                  rows: Google::Cloud::Bigtable::V2::RowSet.new(
-                    row_keys: ["A", "B"],
-                    row_ranges: []
-                  ),
-                  filter: nil,
-                  rows_limit: nil,
-                  app_profile_id: nil
-                ]
+                table_name: "projects/test/instances/test-instance/tables/test-table",
+                rows: Google::Cloud::Bigtable::V2::RowSet.new(
+                  row_keys: ["A", "B"],
+                  row_ranges: []
+                ),
+                filter: nil,
+                rows_limit: nil,
+                app_profile_id: nil
 
     bigtable.service.mocked_client = mock
     table = bigtable.table(instance_id, table_id)

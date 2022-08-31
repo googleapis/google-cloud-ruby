@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the SslPolicies service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -278,8 +278,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/sslPolicies/{ssl_policy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["ssl_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["ssl_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -300,8 +300,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/sslPolicies/{ssl_policy}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["ssl_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["ssl_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -323,7 +323,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/sslPolicies",
                                                           body: "ssl_policy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -344,7 +344,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/sslPolicies",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -365,7 +365,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/sslPolicies/listAvailableFeatures",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -387,8 +387,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/sslPolicies/{ssl_policy}",
                                                           body: "ssl_policy_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["ssl_policy", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["ssl_policy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

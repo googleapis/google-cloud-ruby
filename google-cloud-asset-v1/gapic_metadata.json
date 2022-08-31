@@ -75,6 +75,11 @@
                 "analyze_move"
               ]
             },
+            "QueryAssets": {
+              "methods": [
+                "query_assets"
+              ]
+            },
             "CreateSavedQuery": {
               "methods": [
                 "create_saved_query"

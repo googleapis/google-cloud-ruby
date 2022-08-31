@@ -44,6 +44,24 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+
+          # Contains options specific to Avro Serialization.
+          # @!attribute [rw] enable_display_name_attribute
+          #   @return [::Boolean]
+          #     Enable displayName attribute in Avro schema.
+          #
+          #     The Avro specification requires field names to be alphanumeric.  By
+          #     default, in cases when column names do not conform to these requirements
+          #     (e.g. non-ascii unicode codepoints) and Avro is requested as an output
+          #     format, the CreateReadSession call will fail.
+          #
+          #     Setting this field to true, populates avro field names with a placeholder
+          #     value and populates a "displayName" attribute for every avro field with the
+          #     original column name.
+          class AvroSerializationOptions
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
         end
       end
     end

@@ -56,6 +56,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :threshold_value, :double, 5
       optional :duration, :message, 6, "google.protobuf.Duration"
       optional :trigger, :message, 7, "google.monitoring.v3.AlertPolicy.Condition.Trigger"
+      optional :evaluation_missing_data, :enum, 11, "google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData"
     end
     add_message "google.monitoring.v3.AlertPolicy.Condition.MetricAbsence" do
       optional :filter, :string, 1
@@ -71,6 +72,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :query, :string, 1
       optional :duration, :message, 2, "google.protobuf.Duration"
       optional :trigger, :message, 3, "google.monitoring.v3.AlertPolicy.Condition.Trigger"
+      optional :evaluation_missing_data, :enum, 4, "google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData"
+    end
+    add_enum "google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData" do
+      value :EVALUATION_MISSING_DATA_UNSPECIFIED, 0
+      value :EVALUATION_MISSING_DATA_INACTIVE, 1
+      value :EVALUATION_MISSING_DATA_ACTIVE, 2
+      value :EVALUATION_MISSING_DATA_NO_OP, 3
     end
     add_message "google.monitoring.v3.AlertPolicy.AlertStrategy" do
       optional :notification_rate_limit, :message, 1, "google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit"
@@ -100,6 +108,7 @@ module Google
         AlertPolicy::Condition::MetricAbsence = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MetricAbsence").msgclass
         AlertPolicy::Condition::LogMatch = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.LogMatch").msgclass
         AlertPolicy::Condition::MonitoringQueryLanguageCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.MonitoringQueryLanguageCondition").msgclass
+        AlertPolicy::Condition::EvaluationMissingData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.Condition.EvaluationMissingData").enummodule
         AlertPolicy::AlertStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.AlertStrategy").msgclass
         AlertPolicy::AlertStrategy::NotificationRateLimit = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.AlertStrategy.NotificationRateLimit").msgclass
         AlertPolicy::ConditionCombinerType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.monitoring.v3.AlertPolicy.ConditionCombinerType").enummodule

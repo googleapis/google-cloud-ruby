@@ -37,7 +37,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :current_sync_info, :message, 13, "google.cloud.vmmigration.v1.ReplicationCycle"
       optional :group, :string, 15
       map :labels, :string, :string, 16
+      repeated :recent_clone_jobs, :message, 17, "google.cloud.vmmigration.v1.CloneJob"
       optional :error, :message, 19, "google.rpc.Status"
+      repeated :recent_cutover_jobs, :message, 20, "google.cloud.vmmigration.v1.CutoverJob"
       oneof :target_vm_defaults do
         optional :compute_engine_target_defaults, :message, 26, "google.cloud.vmmigration.v1.ComputeEngineTargetDefaults"
       end
@@ -58,6 +60,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.vmmigration.v1.CloneJob" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 22, "google.protobuf.Timestamp"
       optional :name, :string, 3
       optional :state, :enum, 12, "google.cloud.vmmigration.v1.CloneJob.State"
       optional :state_time, :message, 14, "google.protobuf.Timestamp"
@@ -78,6 +81,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.vmmigration.v1.CutoverJob" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 16, "google.protobuf.Timestamp"
       optional :name, :string, 3
       optional :state, :enum, 5, "google.cloud.vmmigration.v1.CutoverJob.State"
       optional :state_time, :message, 6, "google.protobuf.Timestamp"
@@ -151,6 +155,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 7, "google.cloud.vmmigration.v1.DatacenterConnector.State"
       optional :state_time, :message, 8, "google.protobuf.Timestamp"
       optional :error, :message, 11, "google.rpc.Status"
+      optional :appliance_infrastructure_version, :string, 13
+      optional :appliance_software_version, :string, 14
+      optional :available_versions, :message, 15, "google.cloud.vmmigration.v1.AvailableUpdates"
+      optional :upgrade_status, :message, 16, "google.cloud.vmmigration.v1.UpgradeStatus"
     end
     add_enum "google.cloud.vmmigration.v1.DatacenterConnector.State" do
       value :STATE_UNSPECIFIED, 0
@@ -158,6 +166,29 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :OFFLINE, 2
       value :FAILED, 3
       value :ACTIVE, 4
+    end
+    add_message "google.cloud.vmmigration.v1.UpgradeStatus" do
+      optional :version, :string, 1
+      optional :state, :enum, 2, "google.cloud.vmmigration.v1.UpgradeStatus.State"
+      optional :error, :message, 3, "google.rpc.Status"
+      optional :start_time, :message, 4, "google.protobuf.Timestamp"
+      optional :previous_version, :string, 5
+    end
+    add_enum "google.cloud.vmmigration.v1.UpgradeStatus.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :RUNNING, 1
+      value :FAILED, 2
+      value :SUCCEEDED, 3
+    end
+    add_message "google.cloud.vmmigration.v1.AvailableUpdates" do
+      optional :new_deployable_appliance, :message, 1, "google.cloud.vmmigration.v1.ApplianceVersion"
+      optional :in_place_update, :message, 2, "google.cloud.vmmigration.v1.ApplianceVersion"
+    end
+    add_message "google.cloud.vmmigration.v1.ApplianceVersion" do
+      optional :version, :string, 1
+      optional :uri, :string, 2
+      optional :critical, :bool, 3
+      optional :release_notes_uri, :string, 4
     end
     add_message "google.cloud.vmmigration.v1.ListSourcesRequest" do
       optional :parent, :string, 1
@@ -313,6 +344,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :request_id, :string, 2
     end
+    add_message "google.cloud.vmmigration.v1.UpgradeApplianceRequest" do
+      optional :datacenter_connector, :string, 1
+      optional :request_id, :string, 2
+    end
+    add_message "google.cloud.vmmigration.v1.UpgradeApplianceResponse" do
+    end
     add_message "google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest" do
       optional :parent, :string, 1
       optional :page_size, :int32, 2
@@ -337,6 +374,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :secure_boot, :bool, 14
       optional :boot_option, :enum, 15, "google.cloud.vmmigration.v1.ComputeEngineBootOption"
       map :metadata, :string, :string, 16
+      repeated :additional_licenses, :string, 17
+      optional :hostname, :string, 18
     end
     add_message "google.cloud.vmmigration.v1.ComputeEngineTargetDetails" do
       optional :vm_name, :string, 1
@@ -355,6 +394,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :secure_boot, :bool, 14
       optional :boot_option, :enum, 15, "google.cloud.vmmigration.v1.ComputeEngineBootOption"
       map :metadata, :string, :string, 16
+      repeated :additional_licenses, :string, 17
+      optional :hostname, :string, 18
     end
     add_message "google.cloud.vmmigration.v1.NetworkInterface" do
       optional :network, :string, 1
@@ -414,6 +455,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_token, :string, 3
       optional :filter, :string, 4
       optional :order_by, :string, 5
+      optional :view, :enum, 6, "google.cloud.vmmigration.v1.MigratingVmView"
     end
     add_message "google.cloud.vmmigration.v1.ListMigratingVmsResponse" do
       repeated :migrating_vms, :message, 1, "google.cloud.vmmigration.v1.MigratingVm"
@@ -422,6 +464,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.vmmigration.v1.GetMigratingVmRequest" do
       optional :name, :string, 1
+      optional :view, :enum, 2, "google.cloud.vmmigration.v1.MigratingVmView"
     end
     add_message "google.cloud.vmmigration.v1.UpdateMigratingVmRequest" do
       optional :update_mask, :message, 1, "google.protobuf.FieldMask"
@@ -589,11 +632,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CLONE_ERROR, 6
       value :CUTOVER_ERROR, 7
       value :UTILIZATION_REPORT_ERROR, 8
+      value :APPLIANCE_UPGRADE_ERROR, 9
     end
     add_enum "google.cloud.vmmigration.v1.UtilizationReportView" do
       value :UTILIZATION_REPORT_VIEW_UNSPECIFIED, 0
       value :BASIC, 1
       value :FULL, 2
+    end
+    add_enum "google.cloud.vmmigration.v1.MigratingVmView" do
+      value :MIGRATING_VM_VIEW_UNSPECIFIED, 0
+      value :MIGRATING_VM_VIEW_BASIC, 1
+      value :MIGRATING_VM_VIEW_FULL, 2
     end
     add_enum "google.cloud.vmmigration.v1.ComputeEngineDiskType" do
       value :COMPUTE_ENGINE_DISK_TYPE_UNSPECIFIED, 0
@@ -636,6 +685,10 @@ module Google
         VmwareSourceDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.VmwareSourceDetails").msgclass
         DatacenterConnector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.DatacenterConnector").msgclass
         DatacenterConnector::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.DatacenterConnector.State").enummodule
+        UpgradeStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UpgradeStatus").msgclass
+        UpgradeStatus::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UpgradeStatus.State").enummodule
+        AvailableUpdates = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.AvailableUpdates").msgclass
+        ApplianceVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ApplianceVersion").msgclass
         ListSourcesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ListSourcesRequest").msgclass
         ListSourcesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ListSourcesResponse").msgclass
         GetSourceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.GetSourceRequest").msgclass
@@ -662,6 +715,8 @@ module Google
         GetDatacenterConnectorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.GetDatacenterConnectorRequest").msgclass
         CreateDatacenterConnectorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.CreateDatacenterConnectorRequest").msgclass
         DeleteDatacenterConnectorRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.DeleteDatacenterConnectorRequest").msgclass
+        UpgradeApplianceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UpgradeApplianceRequest").msgclass
+        UpgradeApplianceResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UpgradeApplianceResponse").msgclass
         ListDatacenterConnectorsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ListDatacenterConnectorsRequest").msgclass
         ComputeEngineTargetDefaults = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ComputeEngineTargetDefaults").msgclass
         ComputeEngineTargetDetails = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ComputeEngineTargetDetails").msgclass
@@ -716,6 +771,7 @@ module Google
         MigrationError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigrationError").msgclass
         MigrationError::ErrorCode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigrationError.ErrorCode").enummodule
         UtilizationReportView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.UtilizationReportView").enummodule
+        MigratingVmView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.MigratingVmView").enummodule
         ComputeEngineDiskType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ComputeEngineDiskType").enummodule
         ComputeEngineLicenseType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ComputeEngineLicenseType").enummodule
         ComputeEngineBootOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.vmmigration.v1.ComputeEngineBootOption").enummodule

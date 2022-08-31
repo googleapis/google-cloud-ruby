@@ -242,6 +242,36 @@ module Google
             rpc :ListDataStreams, ::Google::Analytics::Admin::V1alpha::ListDataStreamsRequest, ::Google::Analytics::Admin::V1alpha::ListDataStreamsResponse
             # Lookup for a single DataStream.
             rpc :GetDataStream, ::Google::Analytics::Admin::V1alpha::GetDataStreamRequest, ::Google::Analytics::Admin::V1alpha::DataStream
+            # Lookup for a single Audience.
+            # Audiences created before 2020 may not be supported.
+            rpc :GetAudience, ::Google::Analytics::Admin::V1alpha::GetAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
+            # Lists Audiences on a property.
+            # Audiences created before 2020 may not be supported.
+            rpc :ListAudiences, ::Google::Analytics::Admin::V1alpha::ListAudiencesRequest, ::Google::Analytics::Admin::V1alpha::ListAudiencesResponse
+            # Creates an Audience.
+            rpc :CreateAudience, ::Google::Analytics::Admin::V1alpha::CreateAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
+            # Updates an Audience on a property.
+            rpc :UpdateAudience, ::Google::Analytics::Admin::V1alpha::UpdateAudienceRequest, ::Google::Analytics::Admin::V1alpha::Audience
+            # Archives an Audience on a property.
+            rpc :ArchiveAudience, ::Google::Analytics::Admin::V1alpha::ArchiveAudienceRequest, ::Google::Protobuf::Empty
+            # Lookup for a AttributionSettings singleton.
+            rpc :GetAttributionSettings, ::Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest, ::Google::Analytics::Admin::V1alpha::AttributionSettings
+            # Updates attribution settings on a property.
+            rpc :UpdateAttributionSettings, ::Google::Analytics::Admin::V1alpha::UpdateAttributionSettingsRequest, ::Google::Analytics::Admin::V1alpha::AttributionSettings
+            # Returns a customized report of data access records. The report provides
+            # records of each time a user reads Google Analytics reporting data. Access
+            # records are retained for up to 2 years.
+            #
+            # Data Access Reports can be requested for a property. The property must be
+            # in Google Analytics 360. This method is only available to Administrators.
+            #
+            # These data access records include GA4 UI Reporting, GA4 UI Explorations,
+            # GA4 Data API, and other products like Firebase & Admob that can retrieve
+            # data from Google Analytics through a linkage. These records don't include
+            # property configuration changes like adding a stream or changing a
+            # property's time zone. For configuration change history, see
+            # [searchChangeHistoryEvents](https://developers.google.com/analytics/devguides/config/admin/v1/rest/v1alpha/accounts/searchChangeHistoryEvents).
+            rpc :RunAccessReport, ::Google::Analytics::Admin::V1alpha::RunAccessReportRequest, ::Google::Analytics::Admin::V1alpha::RunAccessReportResponse
           end
 
           Stub = Service.rpc_stub_class

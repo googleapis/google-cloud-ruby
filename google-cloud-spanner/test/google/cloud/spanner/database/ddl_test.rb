@@ -26,7 +26,7 @@ describe Google::Cloud::Spanner::Database, :ddl, :mock_spanner do
       statements: statements
     )
     mock = Minitest::Mock.new
-    mock.expect :get_database_ddl, update_res, [{ database: database_path(instance_id, database_id) }, nil]
+    mock.expect :get_database_ddl, update_res, [{ database: database_path(instance_id, database_id) }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     ddl = database.ddl
@@ -51,7 +51,7 @@ describe Google::Cloud::Spanner::Database, :ddl, :mock_spanner do
       statements: statements.reverse
     )
     mock = Minitest::Mock.new
-    mock.expect :get_database_ddl, update_res, [{ database: database_path(instance_id, database_id) }, nil]
+    mock.expect :get_database_ddl, update_res, [{ database: database_path(instance_id, database_id) }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     ddl = database.ddl force: true

@@ -174,7 +174,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param placement [::String]
-            #     Required. The resource name of the search engine placement, such as
+            #     Required. The resource name of the Retail Search serving config, such as
+            #     `projects/*/locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+            #     or the name of the legacy placement resource, such as
             #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
             #     This field is used to identify the serving configuration name and the set
             #     of models that will be used to make the search.
@@ -272,7 +274,9 @@ module Google
             #     Boost specification to boost certain products. See more details at this
             #     [user guide](https://cloud.google.com/retail/docs/boosting).
             #
-            #     Notice that if both [ServingConfig.boost_control_ids][] and
+            #     Notice that if both
+            #     {::Google::Cloud::Retail::V2::ServingConfig#boost_control_ids ServingConfig.boost_control_ids}
+            #     and
             #     {::Google::Cloud::Retail::V2::SearchRequest#boost_spec SearchRequest.boost_spec}
             #     are set, the boost conditions from both places are evaluated. If a search
             #     request matches multiple boost conditions, the final boost score is equal
@@ -370,6 +374,15 @@ module Google
             #     request triggers both product search and faceted search.
             #   @param personalization_spec [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec, ::Hash]
             #     The specification for personalization.
+            #
+            #     Notice that if both
+            #     {::Google::Cloud::Retail::V2::ServingConfig#personalization_spec ServingConfig.personalization_spec}
+            #     and
+            #     {::Google::Cloud::Retail::V2::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+            #     are set.
+            #     {::Google::Cloud::Retail::V2::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+            #     will override
+            #     {::Google::Cloud::Retail::V2::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
             #   @param labels [::Hash{::String => ::String}]
             #     The labels applied to a resource must meet the following requirements:
             #

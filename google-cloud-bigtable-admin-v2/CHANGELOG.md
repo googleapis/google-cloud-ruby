@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2022-07-28)
+
+#### Features
+
+* Support for the satisfies_pzs field on Instsance ([#18872](https://github.com/googleapis/google-cloud-ruby/issues/18872)) 
+
 ### 0.13.0 (2022-07-01)
 
 #### Features

@@ -16,7 +16,9 @@ for this library, google-cloud-monitoring, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
-[google-cloud-monitoring-v3](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest).
+[google-cloud-monitoring-v3](https://googleapis.dev/ruby/google-cloud-monitoring-v3/latest),
+[google-cloud-monitoring-dashboard-v1](https://googleapis.dev/ruby/google-cloud-monitoring-dashboard-v1/latest),
+[google-cloud-monitoring-metrics_scope-v1](https://googleapis.dev/ruby/google-cloud-monitoring-metrics_scope-v1/latest).
 
 See also the [Product Documentation](https://cloud.google.com/monitoring)
 for more usage information.

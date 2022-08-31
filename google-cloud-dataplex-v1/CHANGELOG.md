@@ -1,5 +1,16 @@
 # Changelog
 
+### 0.4.0 (2022-07-19)
+
+#### Features
+
+* Added ContainerImageRuntime#image 
+* Added filter argument to list_sessions request 
+* Added project and KMS key to ExecutionSpec 
+* Added sampled_data_locations to partition details 
+* Added support for Locations and IAMPolicy auxiliary clients ([#18838](https://github.com/googleapis/google-cloud-ruby/issues/18838)) 
+* Support for returning task execution status 
+
 ### 0.3.0 (2022-07-02)
 
 #### Features

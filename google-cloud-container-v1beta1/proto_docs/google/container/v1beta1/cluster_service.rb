@@ -1092,7 +1092,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # IP stack type
+          # Possible values for IP stack type
           module StackType
             # By default, the clusters will be IPV4 only
             STACK_TYPE_UNSPECIFIED = 0
@@ -1120,8 +1120,9 @@ module Google
         # Configuration for Binary Authorization.
         # @!attribute [rw] enabled
         #   @return [::Boolean]
-        #     Enable Binary Authorization for this cluster. If enabled, all container
-        #     images will be validated by Binary Authorization.
+        #     This field is deprecated. Leave this unset and instead configure
+        #     BinaryAuthorization using evaluation_mode. If evaluation_mode is set to
+        #     anything other than EVALUATION_MODE_UNSPECIFIED, this field is ignored.
         # @!attribute [rw] evaluation_mode
         #   @return [::Google::Cloud::Container::V1beta1::BinaryAuthorization::EvaluationMode]
         #     Mode of operation for binauthz policy evaluation. Currently the only
@@ -1641,7 +1642,7 @@ module Google
         # Subset of NodeConfig message that has defaults.
         # @!attribute [rw] gcfs_config
         #   @return [::Google::Cloud::Container::V1beta1::GcfsConfig]
-        #     GCFS (Google Container File System, a.k.a. Riptide) options.
+        #     GCFS (Google Container File System, also known as Riptide) options.
         class NodeConfigDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3377,7 +3378,7 @@ module Google
         #   @return [::String]
         #     The name (project, location, cluster, node pool id) of the node pool to
         #     complete upgrade.
-        #     Specified in the format 'projects/*/locations/*/clusters/*/nodePools/*'.
+        #     Specified in the format `projects/*/locations/*/clusters/*/nodePools/*`.
         class CompleteNodePoolUpgradeRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3508,7 +3509,8 @@ module Google
         #     information, read [how to specify min CPU
         #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
         #     This field is deprecated, min_cpu_platform should be specified using
-        #     cloud.google.com/requested-min-cpu-platform label selector on the pod.
+        #     https://cloud.google.com/requested-min-cpu-platform label selector on the
+        #     pod.
         #     To unset the min cpu platform field pass "automatic"
         #     as field value.
         # @!attribute [rw] disk_size_gb
@@ -3946,7 +3948,7 @@ module Google
         #     Specified in the format `projects/*/locations/*`.
         # @!attribute [rw] recommended
         #   @return [::Boolean]
-        #     Whether the location is recomended for GKE cluster scheduling.
+        #     Whether the location is recommended for GKE cluster scheduling.
         class Location
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -78,9 +78,7 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -93,27 +91,27 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRegionCommitmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListRegionCommitmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRegionCommitmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListRegionCommitmentsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -134,9 +132,7 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
     project = "hello world"
     region = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -149,27 +145,27 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.get({ commitment: commitment, project: project, region: region }) do |result, response|
+      client.get({ commitment: commitment, project: project, region: region }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get commitment: commitment, project: project, region: region do |result, response|
+      client.get commitment: commitment, project: project, region: region do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetRegionCommitmentRequest.new(commitment: commitment, project: project, region: region) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetRegionCommitmentRequest.new(commitment: commitment, project: project, region: region) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ commitment: commitment, project: project, region: region }, call_options) do |result, response|
+      client.get({ commitment: commitment, project: project, region: region }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetRegionCommitmentRequest.new(commitment: commitment, project: project, region: region), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetRegionCommitmentRequest.new(commitment: commitment, project: project, region: region), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -191,9 +187,7 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
     region = "hello world"
     request_id = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -206,27 +200,27 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.insert({ commitment_resource: commitment_resource, project: project, region: region, request_id: request_id }) do |result, response|
+      client.insert({ commitment_resource: commitment_resource, project: project, region: region, request_id: request_id }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert commitment_resource: commitment_resource, project: project, region: region, request_id: request_id do |result, response|
+      client.insert commitment_resource: commitment_resource, project: project, region: region, request_id: request_id do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertRegionCommitmentRequest.new(commitment_resource: commitment_resource, project: project, region: region, request_id: request_id) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertRegionCommitmentRequest.new(commitment_resource: commitment_resource, project: project, region: region, request_id: request_id) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ commitment_resource: commitment_resource, project: project, region: region, request_id: request_id }, call_options) do |result, response|
+      client.insert({ commitment_resource: commitment_resource, project: project, region: region, request_id: request_id }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertRegionCommitmentRequest.new(commitment_resource: commitment_resource, project: project, region: region, request_id: request_id), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertRegionCommitmentRequest.new(commitment_resource: commitment_resource, project: project, region: region, request_id: request_id), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -251,9 +245,7 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
     region = "hello world"
     return_partial_success = true
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -266,27 +258,27 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListRegionCommitmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListRegionCommitmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListRegionCommitmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListRegionCommitmentsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -311,9 +303,7 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
     request_id = "hello world"
     update_mask = "hello world"
 
-    update_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :patch, verb
-
+    update_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -326,27 +316,27 @@ class ::Google::Cloud::Compute::V1::RegionCommitments::ClientTest < Minitest::Te
       end
 
       # Use hash object
-      client.update({ commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }) do |result, response|
+      client.update({ commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.update commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask do |result, response|
+      client.update commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.update ::Google::Cloud::Compute::V1::UpdateRegionCommitmentRequest.new(commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask) do |result, response|
+      client.update ::Google::Cloud::Compute::V1::UpdateRegionCommitmentRequest.new(commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.update({ commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }, call_options) do |result, response|
+      client.update({ commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.update(::Google::Cloud::Compute::V1::UpdateRegionCommitmentRequest.new(commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask), call_options) do |result, response|
+      client.update(::Google::Cloud::Compute::V1::UpdateRegionCommitmentRequest.new(commitment: commitment, commitment_resource: commitment_resource, paths: paths, project: project, region: region, request_id: request_id, update_mask: update_mask), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

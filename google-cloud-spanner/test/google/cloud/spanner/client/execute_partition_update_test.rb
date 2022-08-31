@@ -26,7 +26,7 @@ describe Google::Cloud::Spanner::Client, :execute_partition_update, :mock_spanne
   let(:tx_selector) { Google::Cloud::Spanner::V1::TransactionSelector.new id: transaction_id }
   let(:pdml_tx_opts) { Google::Cloud::Spanner::V1::TransactionOptions.new(partitioned_dml: Google::Cloud::Spanner::V1::TransactionOptions::PartitionedDml.new) }
   let(:client) { spanner.client instance_id, database_id, pool: { min: 0 } }
-  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
+  let(:default_options) { ::Gapic::CallOptions.new metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:results_grpc) {
     Google::Cloud::Spanner::V1::PartialResultSet.new(
       metadata: Google::Cloud::Spanner::V1::ResultSetMetadata.new(

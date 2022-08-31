@@ -490,6 +490,7 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
     page_size = 42
     page_token = "hello world"
     order_by = "hello world"
+    read_mask = {}
 
     list_pipeline_jobs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_pipeline_jobs, name
@@ -499,6 +500,7 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["order_by"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["read_mask"]
       refute_nil options
     end
 
@@ -509,35 +511,35 @@ class ::Google::Cloud::AIPlatform::V1::PipelineService::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }) do |response, operation|
+      client.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_pipeline_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by do |response, operation|
+      client.list_pipeline_jobs parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_pipeline_jobs ::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by) do |response, operation|
+      client.list_pipeline_jobs ::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by }, grpc_options) do |response, operation|
+      client.list_pipeline_jobs({ parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_pipeline_jobs(::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by), grpc_options) do |response, operation|
+      client.list_pipeline_jobs(::Google::Cloud::AIPlatform::V1::ListPipelineJobsRequest.new(parent: parent, filter: filter, page_size: page_size, page_token: page_token, order_by: order_by, read_mask: read_mask), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

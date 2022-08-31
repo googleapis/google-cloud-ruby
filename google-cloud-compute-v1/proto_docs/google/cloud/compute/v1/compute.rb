@@ -2045,6 +2045,10 @@ module Google
         end
 
         # An instance-attached disk resource.
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     [Output Only] The architecture of the attached disk. Valid values are ARM64 or X86_64.
+        #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] auto_delete
         #   @return [::Boolean]
         #     Specifies whether the disk will be auto-deleted when the instance is deleted (but not when the disk is detached from the instance).
@@ -2097,6 +2101,21 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
+          # [Output Only] The architecture of the attached disk. Valid values are ARM64 or X86_64.
+          module Architecture
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ARCHITECTURE = 0
+
+            # Default value indicating Architecture is not set.
+            ARCHITECTURE_UNSPECIFIED = 394750507
+
+            # Machines with architecture ARM64
+            ARM64 = 62547450
+
+            # Machines with architecture X86_64
+            X86_64 = 425300551
+          end
+
           # Specifies the disk interface to use for attaching this disk, which is either SCSI or NVME. The default is SCSI. Persistent disks must always use SCSI and the request will fail if you attempt to attach a persistent disk in any other format than SCSI. Local SSDs can use either NVME or SCSI. For performance characteristics of SCSI over NVMe, see Local SSD performance.
           module Interface
             # A value indicating that the enum field is not set.
@@ -2131,6 +2150,10 @@ module Google
         end
 
         # [Input Only] Specifies the parameters for a new disk that will be created alongside the new instance. Use initialization parameters to create boot disks or local SSDs attached to the new instance. This field is persisted and returned for instanceTemplate and not returned in the context of instance. This property is mutually exclusive with the source property; you can only define one or the other, but not both.
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     The architecture of the attached disk. Valid values are arm64 or x86_64.
+        #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] description
         #   @return [::String]
         #     An optional description. Provide this property when creating the disk.
@@ -2182,6 +2205,21 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The architecture of the attached disk. Valid values are arm64 or x86_64.
+          module Architecture
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ARCHITECTURE = 0
+
+            # Default value indicating Architecture is not set.
+            ARCHITECTURE_UNSPECIFIED = 394750507
+
+            # Machines with architecture ARM64
+            ARM64 = 62547450
+
+            # Machines with architecture X86_64
+            X86_64 = 425300551
           end
 
           # Specifies which action to take on instance update with this disk. Default is to use the existing disk.
@@ -2707,7 +2745,7 @@ module Google
         #     Defines a maximum target for requests per second (RPS). For usage guidelines, see Rate balancing mode and Utilization balancing mode. Not available if the backend's balancingMode is CONNECTION.
         # @!attribute [rw] max_utilization
         #   @return [::Float]
-        #     Optional parameter to define a target capacity for the UTILIZATIONbalancing mode. The valid range is [0.0, 1.0]. For usage guidelines, see Utilization balancing mode.
+        #     Optional parameter to define a target capacity for the UTILIZATION balancing mode. The valid range is [0.0, 1.0]. For usage guidelines, see Utilization balancing mode.
         class Backend
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3693,7 +3731,7 @@ module Google
         #     The instance properties defining the VM instances to be created. Required if sourceInstanceTemplate is not provided.
         # @!attribute [rw] location_policy
         #   @return [::Google::Cloud::Compute::V1::LocationPolicy]
-        #     Policy for chosing target zone.
+        #     Policy for chosing target zone. For more information, see Create VMs in bulk .
         # @!attribute [rw] min_count
         #   @return [::Integer]
         #     The minimum number of instances to create. If no min_count is specified then count is used as the default value. If min_count instances cannot be created, then no instances will be created and instances already created will be deleted.
@@ -3952,6 +3990,8 @@ module Google
             UNDEFINED_STATUS = 0
 
             ACTIVE = 314733318
+
+            CANCELLED = 41957681
 
             CREATING = 455564985
 
@@ -5869,6 +5909,10 @@ module Google
         end
 
         # Represents a Persistent Disk resource. Google Compute Engine has two Disk resources: * [Zonal](/compute/docs/reference/rest/v1/disks) * [Regional](/compute/docs/reference/rest/v1/regionDisks) Persistent disks are required for running your VM instances. Create both boot and non-boot (data) persistent disks. For more information, read Persistent Disks. For more storage options, read Storage options. The disks resource represents a zonal persistent disk. For more information, read Zonal persistent disks. The regionDisks resource represents a regional persistent disk. For more information, read Regional resources.
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     The architecture of the disk. Valid values are ARM64 or X86_64.
+        #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -5989,6 +6033,21 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The architecture of the disk. Valid values are ARM64 or X86_64.
+          module Architecture
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ARCHITECTURE = 0
+
+            # Default value indicating Architecture is not set.
+            ARCHITECTURE_UNSPECIFIED = 394750507
+
+            # Machines with architecture ARM64
+            ARM64 = 62547450
+
+            # Machines with architecture X86_64
+            X86_64 = 425300551
           end
 
           # [Output Only] The status of disk creation. - CREATING: Disk is provisioning. - RESTORING: Source data is being copied into the disk. - FAILED: Disk creation failed. - READY: Disk is ready for use. - DELETING: Disk is deleting.
@@ -6365,9 +6424,47 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] error_info
+        #   @return [::Google::Cloud::Compute::V1::ErrorInfo]
+        # @!attribute [rw] help
+        #   @return [::Google::Cloud::Compute::V1::Help]
+        # @!attribute [rw] localized_message
+        #   @return [::Google::Cloud::Compute::V1::LocalizedMessage]
+        class ErrorDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes the cause of the error with structured details. Example of an error when contacting the "pubsub.googleapis.com" API when it is not enabled: { "reason": "API_DISABLED" "domain": "googleapis.com" "metadata": { "resource": "projects/123", "service": "pubsub.googleapis.com" } } This response indicates that the pubsub.googleapis.com API is not enabled. Example of an error that is returned when attempting to create a Spanner instance in a region that is out of stock: { "reason": "STOCKOUT" "domain": "spanner.googleapis.com", "metadata": { "availableRegions": "us-central1,us-east2" } }
+        # @!attribute [rw] domain
+        #   @return [::String]
+        #     The logical grouping to which the "reason" belongs. The error domain is typically the registered service name of the tool or product that generates the error. Example: "pubsub.googleapis.com". If the error is generated by some common infrastructure, the error domain must be a globally unique value that identifies the infrastructure. For Google API infrastructure, the error domain is "googleapis.com".
+        # @!attribute [rw] metadatas
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Additional structured details about this error. Keys should match /[a-zA-Z0-9-_]/ and be limited to 64 characters in length. When identifying the current value of an exceeded limit, the units should be contained in the key, not the value. For example, rather than \\{"instanceLimit": "100/request"}, should be returned as, \\{"instanceLimitPerRequest": "100"}, if the client exceeds the number of instances that can be created in a single (batch) request.
+        # @!attribute [rw] reason
+        #   @return [::String]
+        #     The reason of the error. This is a constant value that identifies the proximate cause of the error. Error reasons are unique within a particular domain of errors. This should be at most 63 characters and match /[A-Z0-9_]+/.
+        class ErrorInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class MetadatasEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # @!attribute [rw] code
         #   @return [::String]
         #     [Output Only] The error type identifier for this error.
+        # @!attribute [rw] error_details
+        #   @return [::Array<::Google::Cloud::Compute::V1::ErrorDetails>]
+        #     [Output Only] An optional list of messages that contain the error details. There is a set of defined message types to use for providing details.The syntax depends on the error code. For example, QuotaExceededInfo will have details when the error code is QUOTA_EXCEEDED.
         # @!attribute [rw] location
         #   @return [::String]
         #     [Output Only] Indicates the field in the request that caused the error. This property is optional.
@@ -6978,7 +7075,7 @@ module Google
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
         # @!attribute [rw] ip_version
         #   @return [::String]
-        #     The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for an external global forwarding rule.
+        #     The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.
         #     Check the IpVersion enum for the list of possible values.
         # @!attribute [rw] is_mirroring_collector
         #   @return [::Boolean]
@@ -7077,7 +7174,7 @@ module Google
             UDP = 83873
           end
 
-          # The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6. This can only be specified for an external global forwarding rule.
+          # The IP Version that will be used by this forwarding rule. Valid options are IPV4 or IPV6.
           module IpVersion
             # A value indicating that the enum field is not set.
             UNDEFINED_IP_VERSION = 0
@@ -7134,6 +7231,9 @@ module Google
 
             # The connection has been closed by the producer and will not serve traffic going forward.
             CLOSED = 380163436
+
+            # The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
+            NEEDS_ATTENTION = 344491452
 
             # The connection is pending acceptance by the producer.
             PENDING = 35394935
@@ -9742,6 +9842,27 @@ module Google
           end
         end
 
+        # Provides links to documentation or for performing an out of band action. For example, if a quota check failed with an error indicating the calling project hasn't enabled the accessed service, this can contain a URL pointing directly to the right place in the developer console to flip the bit.
+        # @!attribute [rw] links
+        #   @return [::Array<::Google::Cloud::Compute::V1::HelpLink>]
+        #     URL(s) pointing to additional information on handling the current error.
+        class Help
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Describes a URL link.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Describes what the link offers.
+        # @!attribute [rw] url
+        #   @return [::String]
+        #     The URL of the link.
+        class HelpLink
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # UrlMaps A host-matching rule for a URL. If matched, will use the named PathMatcher to select the BackendService.
         # @!attribute [rw] description
         #   @return [::String]
@@ -10019,6 +10140,10 @@ module Google
         end
 
         # Represents an Image resource. You can use images to create boot disks for your VM instances. For more information, read Images.
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     The architecture of the image. Valid values are ARM64 or X86_64.
+        #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] archive_size_bytes
         #   @return [::Integer]
         #     Size of the image tar.gz archive stored in Google Cloud Storage (in bytes).
@@ -10125,6 +10250,21 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # The architecture of the image. Valid values are ARM64 or X86_64.
+          module Architecture
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ARCHITECTURE = 0
+
+            # Default value indicating Architecture is not set.
+            ARCHITECTURE_UNSPECIFIED = 394750507
+
+            # Machines with architecture ARM64
+            ARM64 = 62547450
+
+            # Machines with architecture X86_64
+            X86_64 = 425300551
           end
 
           # The type of the image used to create this disk. The default and only valid value is RAW.
@@ -11413,6 +11553,10 @@ module Google
         # @!attribute [rw] id
         #   @return [::Integer]
         #     [Output Only] The unique identifier for the resource. This identifier is defined by the server.
+        # @!attribute [rw] key_revocation_action_type
+        #   @return [::String]
+        #     KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+        #     Check the KeyRevocationActionType enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#instance for instances.
@@ -11510,6 +11654,21 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+          module KeyRevocationActionType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
+
+            # Default value. This value is unused.
+            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467110106
+
+            # Indicates user chose no operation.
+            NONE = 2402104
+
+            # Indicates user chose to opt for VM shutdown on key revocation.
+            STOP = 2555906
           end
 
           # The private IPv6 google access type for the VM. If not specified, use INHERIT_FROM_SUBNETWORK as default.
@@ -12465,6 +12624,10 @@ module Google
         # @!attribute [rw] guest_accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
         #     A list of guest accelerator cards' type and count to use for instances created from these properties.
+        # @!attribute [rw] key_revocation_action_type
+        #   @return [::String]
+        #     KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+        #     Check the KeyRevocationActionType enum for the list of possible values.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels to apply to instances that are created from these properties.
@@ -12528,6 +12691,21 @@ module Google
           class ResourceManagerTagsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+          module KeyRevocationActionType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
+
+            # Default value. This value is unused.
+            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467110106
+
+            # Indicates user chose no operation.
+            NONE = 2402104
+
+            # Indicates user chose to opt for VM shutdown on key revocation.
+            STOP = 2555906
           end
 
           # The private IPv6 google access type for VMs. If not specified, use INHERIT_FROM_SUBNETWORK as default. Note that for MachineImage, this is not supported yet.
@@ -16445,6 +16623,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Provides a localized error message that is safe to return to the user which can be attached to an RPC error.
+        # @!attribute [rw] locale
+        #   @return [::String]
+        #     The locale used following the specification defined at http://www.rfc-editor.org/rfc/bcp/bcp47.txt. Examples are: "en-US", "fr-CH", "es-MX"
+        # @!attribute [rw] message
+        #   @return [::String]
+        #     The localized error message in the above locale.
+        class LocalizedMessage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Configuration for location policy among multiple possible locations (e.g. preferences for zone selection among zones in a single region).
         # @!attribute [rw] locations
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Compute::V1::LocationPolicyLocation}]
@@ -16482,15 +16672,18 @@ module Google
           end
         end
 
+        # @!attribute [rw] constraints
+        #   @return [::Google::Cloud::Compute::V1::LocationPolicyLocationConstraints]
+        #     Constraints that the caller requires on the result distribution in this zone.
         # @!attribute [rw] preference
         #   @return [::String]
-        #     Preference for a given location.
+        #     Preference for a given location. Set to either ALLOW or DENY.
         #     Check the Preference enum for the list of possible values.
         class LocationPolicyLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Preference for a given location.
+          # Preference for a given location. Set to either ALLOW or DENY.
           module Preference
             # A value indicating that the enum field is not set.
             UNDEFINED_PREFERENCE = 0
@@ -16504,6 +16697,15 @@ module Google
             # Default value, unused.
             PREFERENCE_UNSPECIFIED = 496219571
           end
+        end
+
+        # Per-zone constraints on location policy for this zone.
+        # @!attribute [rw] max_count
+        #   @return [::Integer]
+        #     Maximum number of items that are allowed to be placed in this zone. The value must be non-negative.
+        class LocationPolicyLocationConstraints
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # This is deprecated and has no effect. Do not use.
@@ -17114,6 +17316,9 @@ module Google
         # @!attribute [rw] enable_ula_internal_ipv6
         #   @return [::Boolean]
         #     Enable ULA internal ipv6 on this network. Enabling this feature will assign a /48 from google defined ULA prefix fd20::/20. .
+        # @!attribute [rw] firewall_policy
+        #   @return [::String]
+        #     [Output Only] URL of the firewall policy the network is associated with.
         # @!attribute [rw] gateway_i_pv4
         #   @return [::String]
         #     [Output Only] The gateway address for default routing out of the network, selected by GCP.
@@ -17418,7 +17623,7 @@ module Google
         #     Optional serving service. The service name is case-sensitive and must be 1-63 characters long. Example value: "default", "my-service".
         # @!attribute [rw] url_mask
         #   @return [::String]
-        #     A template to parse service and version fields from a request URL. URL mask allows for routing to multiple App Engine services without having to create multiple Network Endpoint Groups and backend services. For example, the request URLs "foo1-dot-appname.appspot.com/v1" and "foo1-dot-appname.appspot.com/v2" can be backed by the same Serverless NEG with URL mask "-dot-appname.appspot.com/". The URL mask will parse them to { service = "foo1", version = "v1" } and { service = "foo1", version = "v2" } respectively.
+        #     A template to parse service and version fields from a request URL. URL mask allows for routing to multiple App Engine services without having to create multiple Network Endpoint Groups and backend services. For example, the request URLs "foo1-dot-appname.appspot.com/v1" and "foo1-dot-appname.appspot.com/v2" can be backed by the same Serverless NEG with URL mask "<service>-dot-appname.appspot.com/<version>". The URL mask will parse them to { service = "foo1", version = "v1" } and { service = "foo1", version = "v2" } respectively.
         # @!attribute [rw] version
         #   @return [::String]
         #     Optional serving version. The version name is case-sensitive and must be 1-100 characters long. Example value: "v1", "v2".
@@ -17433,7 +17638,7 @@ module Google
         #     A user-defined name of the Cloud Function. The function name is case-sensitive and must be 1-63 characters long. Example value: "func1".
         # @!attribute [rw] url_mask
         #   @return [::String]
-        #     A template to parse function field from a request URL. URL mask allows for routing to multiple Cloud Functions without having to create multiple Network Endpoint Groups and backend services. For example, request URLs " mydomain.com/function1" and "mydomain.com/function2" can be backed by the same Serverless NEG with URL mask "/". The URL mask will parse them to { function = "function1" } and { function = "function2" } respectively.
+        #     A template to parse function field from a request URL. URL mask allows for routing to multiple Cloud Functions without having to create multiple Network Endpoint Groups and backend services. For example, request URLs " mydomain.com/function1" and "mydomain.com/function2" can be backed by the same Serverless NEG with URL mask "/<function>". The URL mask will parse them to { function = "function1" } and { function = "function2" } respectively.
         class NetworkEndpointGroupCloudFunction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21367,7 +21572,7 @@ module Google
 
         # @!attribute [rw] ssl_certificates
         #   @return [::Array<::String>]
-        #     New set of SslCertificate resources to associate with this TargetHttpsProxy resource. Currently exactly one SslCertificate resource must be specified.
+        #     New set of SslCertificate resources to associate with this TargetHttpsProxy resource.
         class RegionTargetHttpsProxiesSetSslCertificatesRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -21651,7 +21856,7 @@ module Google
         # A policy that specifies how requests intended for the route's backends are shadowed to a separate mirrored backend service. The load balancer doesn't wait for responses from the shadow service. Before sending traffic to the shadow service, the host or authority header is suffixed with -shadow.
         # @!attribute [rw] backend_service
         #   @return [::String]
-        #     The full or partial URL to the BackendService resource being mirrored to.
+        #     The full or partial URL to the BackendService resource being mirrored to. The backend service configured for a mirroring policy must reference backends that are of the same type as the original backend service matched in the URL map. Serverless NEG backends are not currently supported as a mirrored backend service.
         class RequestMirrorPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -23405,6 +23610,10 @@ module Google
         end
 
         # An instance-attached disk resource.
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     [Output Only] The architecture of the attached disk.
+        #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#savedDisk for attached disks.
@@ -23421,6 +23630,21 @@ module Google
         class SavedDisk
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The architecture of the attached disk.
+          module Architecture
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ARCHITECTURE = 0
+
+            # Default value indicating Architecture is not set.
+            ARCHITECTURE_UNSPECIFIED = 394750507
+
+            # Machines with architecture ARM64
+            ARM64 = 62547450
+
+            # Machines with architecture X86_64
+            X86_64 = 425300551
+          end
 
           # [Output Only] An indicator whether storageBytes is in a stable state or it is being adjusted as a result of shared storage reallocation. This status can either be UPDATING, meaning the size of the snapshot is being updated, or UP_TO_DATE, meaning the size of the snapshot is up-to-date.
           module StorageBytesStatus
@@ -23466,7 +23690,7 @@ module Google
           end
         end
 
-        # Sets the scheduling options for an Instance. NextID: 21
+        # Sets the scheduling options for an Instance.
         # @!attribute [rw] automatic_restart
         #   @return [::Boolean]
         #     Specifies whether the instance should be automatically restarted if it is terminated by Compute Engine (not terminated by a user). You can only set the automatic restart option for standard instances. Preemptible instances cannot be automatically restarted. By default, this is set to true so an instance is automatically restarted if it is terminated by Compute Engine.
@@ -24208,6 +24432,9 @@ module Google
 
             # The connection has been closed by the producer.
             CLOSED = 380163436
+
+            # The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
+            NEEDS_ATTENTION = 344491452
 
             # The connection is pending acceptance by the producer.
             PENDING = 35394935
@@ -25676,12 +25903,19 @@ module Google
         end
 
         # Represents a Persistent Disk Snapshot resource. You can use snapshots to back up data on a regular interval. For more information, read Creating persistent disk snapshots.
+        # @!attribute [rw] architecture
+        #   @return [::String]
+        #     [Output Only] The architecture of the snapshot. Valid values are ARM64 or X86_64.
+        #     Check the Architecture enum for the list of possible values.
         # @!attribute [rw] auto_created
         #   @return [::Boolean]
         #     [Output Only] Set to true if snapshots are automatically created by applying resource policy on the target disk.
         # @!attribute [rw] chain_name
         #   @return [::String]
         #     Creates the new snapshot in the snapshot chain labeled with the specified name. The chain name must be 1-63 characters long and comply with RFC1035. This is an uncommon option only for advanced service owners who needs to create separate snapshot chains, for example, for chargeback tracking. When you describe your snapshot resource, this field is visible only if it has a non-empty value.
+        # @!attribute [rw] creation_size_bytes
+        #   @return [::Integer]
+        #     [Output Only] Size in bytes of the snapshot at creation time.
         # @!attribute [rw] creation_timestamp
         #   @return [::String]
         #     [Output Only] Creation timestamp in RFC3339 text format.
@@ -25727,6 +25961,10 @@ module Google
         # @!attribute [rw] snapshot_encryption_key
         #   @return [::Google::Cloud::Compute::V1::CustomerEncryptionKey]
         #     Encrypts the snapshot using a customer-supplied encryption key. After you encrypt a snapshot using a customer-supplied key, you must provide the same key if you use the snapshot later. For example, you must provide the encryption key when you create a disk from the encrypted snapshot in a future request. Customer-supplied encryption keys do not protect access to metadata of the snapshot. If you do not provide an encryption key when creating the snapshot, then the snapshot will be encrypted using an automatically generated key and you do not need to provide a key to use the snapshot later.
+        # @!attribute [rw] snapshot_type
+        #   @return [::String]
+        #     Indicates the type of the snapshot.
+        #     Check the SnapshotType enum for the list of possible values.
         # @!attribute [rw] source_disk
         #   @return [::String]
         #     The source disk used to create this snapshot.
@@ -25736,6 +25974,12 @@ module Google
         # @!attribute [rw] source_disk_id
         #   @return [::String]
         #     [Output Only] The ID value of the disk used to create this snapshot. This value may be used to determine whether the snapshot was taken from the current or a previous instance of a given disk name.
+        # @!attribute [rw] source_snapshot_schedule_policy
+        #   @return [::String]
+        #     [Output Only] URL of the resource policy which created this scheduled snapshot.
+        # @!attribute [rw] source_snapshot_schedule_policy_id
+        #   @return [::String]
+        #     [Output Only] ID of the resource policy which created this scheduled snapshot.
         # @!attribute [rw] status
         #   @return [::String]
         #     [Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.
@@ -25761,6 +26005,31 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # [Output Only] The architecture of the snapshot. Valid values are ARM64 or X86_64.
+          module Architecture
+            # A value indicating that the enum field is not set.
+            UNDEFINED_ARCHITECTURE = 0
+
+            # Default value indicating Architecture is not set.
+            ARCHITECTURE_UNSPECIFIED = 394750507
+
+            # Machines with architecture ARM64
+            ARM64 = 62547450
+
+            # Machines with architecture X86_64
+            X86_64 = 425300551
+          end
+
+          # Indicates the type of the snapshot.
+          module SnapshotType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_SNAPSHOT_TYPE = 0
+
+            ARCHIVE = 506752162
+
+            STANDARD = 484642493
           end
 
           # [Output Only] The status of the snapshot. This can be CREATING, DELETING, FAILED, READY, or UPLOADING.
@@ -25855,6 +26124,10 @@ module Google
         # @!attribute [rw] guest_accelerators
         #   @return [::Array<::Google::Cloud::Compute::V1::AcceleratorConfig>]
         #     A list of guest accelerator cards' type and count to use for instances created from this machine image.
+        # @!attribute [rw] key_revocation_action_type
+        #   @return [::String]
+        #     KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+        #     Check the KeyRevocationActionType enum for the list of possible values.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels to apply to instances that are created from this machine image.
@@ -25890,6 +26163,21 @@ module Google
           class LabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # KeyRevocationActionType of the instance. Supported options are "STOP" and "NONE". The default value is "NONE" if it is not specified.
+          module KeyRevocationActionType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_KEY_REVOCATION_ACTION_TYPE = 0
+
+            # Default value. This value is unused.
+            KEY_REVOCATION_ACTION_TYPE_UNSPECIFIED = 467110106
+
+            # Indicates user chose no operation.
+            NONE = 2402104
+
+            # Indicates user chose to opt for VM shutdown on key revocation.
+            STOP = 2555906
           end
         end
 
@@ -27106,7 +27394,7 @@ module Google
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
         # @!attribute [rw] nat_policy
         #   @return [::String]
-        #     NAT option controlling how IPs are NAT'ed to the instance. Currently only NO_NAT (default value) is supported.
+        #     Must have a value of NO_NAT. Protocol forwarding delivers packets while preserving the destination IP address of the forwarding rule referencing the target instance.
         #     Check the NatPolicy enum for the list of possible values.
         # @!attribute [rw] network
         #   @return [::String]
@@ -27121,7 +27409,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # NAT option controlling how IPs are NAT'ed to the instance. Currently only NO_NAT (default value) is supported.
+          # Must have a value of NO_NAT. Protocol forwarding delivers packets while preserving the destination IP address of the forwarding rule referencing the target instance.
           module NatPolicy
             # A value indicating that the enum field is not set.
             UNDEFINED_NAT_POLICY = 0
@@ -29051,6 +29339,9 @@ module Google
         # @!attribute [rw] num_total_nat_ports
         #   @return [::Integer]
         #     Total number of ports across all NAT IPs allocated to this interface. It equals to the aggregated port number in the field nat_ip_port_ranges.
+        # @!attribute [rw] rule_mappings
+        #   @return [::Array<::Google::Cloud::Compute::V1::VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings>]
+        #     Information about mappings provided by rules in this NAT.
         # @!attribute [rw] source_alias_ip_range
         #   @return [::String]
         #     Alias IP range for this interface endpoint. It will be a private (RFC 1918) IP range. Examples: "10.33.4.55/32", or "192.168.5.0/24".
@@ -29058,6 +29349,27 @@ module Google
         #   @return [::String]
         #     Primary IP of the VM for this NIC.
         class VmEndpointNatMappingsInterfaceNatMappings
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Contains information of NAT Mappings provided by a NAT Rule.
+        # @!attribute [rw] drain_nat_ip_port_ranges
+        #   @return [::Array<::String>]
+        #     List of all drain IP:port-range mappings assigned to this interface by this rule. These ranges are inclusive, that is, both the first and the last ports can be used for NAT. Example: ["2.2.2.2:12345-12355", "1.1.1.1:2234-2234"].
+        # @!attribute [rw] nat_ip_port_ranges
+        #   @return [::Array<::String>]
+        #     A list of all IP:port-range mappings assigned to this interface by this rule. These ranges are inclusive, that is, both the first and the last ports can be used for NAT. Example: ["2.2.2.2:12345-12355", "1.1.1.1:2234-2234"].
+        # @!attribute [rw] num_total_drain_nat_ports
+        #   @return [::Integer]
+        #     Total number of drain ports across all NAT IPs allocated to this interface by this rule. It equals the aggregated port number in the field drain_nat_ip_port_ranges.
+        # @!attribute [rw] num_total_nat_ports
+        #   @return [::Integer]
+        #     Total number of ports across all NAT IPs allocated to this interface by this rule. It equals the aggregated port number in the field nat_ip_port_ranges.
+        # @!attribute [rw] rule_number
+        #   @return [::Integer]
+        #     Rule number of the NAT Rule.
+        class VmEndpointNatMappingsInterfaceNatMappingsNatRuleMappings
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -29613,6 +29925,9 @@ module Google
             # The operation involved use of an injected kernel, which is deprecated.
             INJECTED_KERNELS_DEPRECATED = 417377419
 
+            # A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.
+            INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB = 401542606
+
             # When deploying a deployment with a exceedingly large number of resources
             LARGE_DEPLOYMENT_WARNING = 481440678
 
@@ -29711,6 +30026,9 @@ module Google
 
             # The operation involved use of an injected kernel, which is deprecated.
             INJECTED_KERNELS_DEPRECATED = 417377419
+
+            # A WEIGHTED_MAGLEV backend service is associated with a health check that is not of type HTTP/HTTPS/HTTP2.
+            INVALID_HEALTH_CHECK_FOR_DYNAMIC_WIEGHTED_LB = 401542606
 
             # When deploying a deployment with a exceedingly large number of resources
             LARGE_DEPLOYMENT_WARNING = 481440678

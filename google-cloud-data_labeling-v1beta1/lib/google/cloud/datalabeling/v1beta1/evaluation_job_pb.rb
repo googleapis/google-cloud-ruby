@@ -3,7 +3,6 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/datalabeling/v1beta1/dataset_pb'
 require 'google/cloud/datalabeling/v1beta1/evaluation_pb'

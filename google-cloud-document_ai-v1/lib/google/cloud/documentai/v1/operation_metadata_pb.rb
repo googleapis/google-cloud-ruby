@@ -10,6 +10,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.documentai.v1.CommonOperationMetadata" do
       optional :state, :enum, 1, "google.cloud.documentai.v1.CommonOperationMetadata.State"
       optional :state_message, :string, 2
+      optional :resource, :string, 5
       optional :create_time, :message, 3, "google.protobuf.Timestamp"
       optional :update_time, :message, 4, "google.protobuf.Timestamp"
     end

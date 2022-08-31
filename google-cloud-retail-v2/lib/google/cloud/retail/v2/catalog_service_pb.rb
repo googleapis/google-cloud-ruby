@@ -41,6 +41,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :set_time, :message, 2, "google.protobuf.Timestamp"
       optional :note, :string, 3
     end
+    add_message "google.cloud.retail.v2.GetCompletionConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.retail.v2.UpdateCompletionConfigRequest" do
+      optional :completion_config, :message, 1, "google.cloud.retail.v2.CompletionConfig"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.retail.v2.GetAttributesConfigRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.retail.v2.UpdateAttributesConfigRequest" do
+      optional :attributes_config, :message, 1, "google.cloud.retail.v2.AttributesConfig"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.cloud.retail.v2.AddCatalogAttributeRequest" do
+      optional :attributes_config, :string, 1
+      optional :catalog_attribute, :message, 2, "google.cloud.retail.v2.CatalogAttribute"
+    end
+    add_message "google.cloud.retail.v2.RemoveCatalogAttributeRequest" do
+      optional :attributes_config, :string, 1
+      optional :key, :string, 2
+    end
+    add_message "google.cloud.retail.v2.ReplaceCatalogAttributeRequest" do
+      optional :attributes_config, :string, 1
+      optional :catalog_attribute, :message, 2, "google.cloud.retail.v2.CatalogAttribute"
+      optional :update_mask, :message, 3, "google.protobuf.FieldMask"
+    end
   end
 end
 
@@ -54,6 +81,13 @@ module Google
         SetDefaultBranchRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.SetDefaultBranchRequest").msgclass
         GetDefaultBranchRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.GetDefaultBranchRequest").msgclass
         GetDefaultBranchResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.GetDefaultBranchResponse").msgclass
+        GetCompletionConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.GetCompletionConfigRequest").msgclass
+        UpdateCompletionConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UpdateCompletionConfigRequest").msgclass
+        GetAttributesConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.GetAttributesConfigRequest").msgclass
+        UpdateAttributesConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.UpdateAttributesConfigRequest").msgclass
+        AddCatalogAttributeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.AddCatalogAttributeRequest").msgclass
+        RemoveCatalogAttributeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.RemoveCatalogAttributeRequest").msgclass
+        ReplaceCatalogAttributeRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.retail.v2.ReplaceCatalogAttributeRequest").msgclass
       end
     end
   end

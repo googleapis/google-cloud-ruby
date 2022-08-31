@@ -20,7 +20,6 @@
   ],
   "static": [
     ".OwlBot.yaml",
-    ".owlbot.rb",
     "MIGRATING.md",
     "acceptance/dialogflow_smoke_test.rb",
     "acceptance/helper.rb"

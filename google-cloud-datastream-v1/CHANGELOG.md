@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.4.0 (2022-08-24)
+
+#### Features
+
+* Support for IAM calls 
+* Support for PostgreSQL source types ([#19054](https://github.com/googleapis/google-cloud-ruby/issues/19054)) 
+
 ### 0.3.0 (2022-07-02)
 
 #### Features

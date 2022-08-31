@@ -1,5 +1,23 @@
 # Release History
 
+### 0.21.0 (2022-08-17)
+
+#### Features
+
+* Support for asset query system ([#19014](https://github.com/googleapis/google-cloud-ruby/issues/19014)) 
+#### Bug Fixes
+
+* Configure timeouts and retries for batch_get_effective_iam_policies ([#19025](https://github.com/googleapis/google-cloud-ruby/issues/19025)) 
+
+### 0.20.1 (2022-08-14)
+
+#### Bug Fixes
+
+* Update timeout and retry settings for batch_get_effective_iam_policies ([#18997](https://github.com/googleapis/google-cloud-ruby/issues/18997)) 
+#### Documentation
+
+* Document relationship clauses in search queries 
+
 ### 0.20.0 (2022-07-01)
 
 #### Features

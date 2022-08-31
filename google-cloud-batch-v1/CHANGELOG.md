@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.3.0 (2022-08-25)
+
+#### Features
+
+* Added disk interface field ([#19070](https://github.com/googleapis/google-cloud-ruby/issues/19070)) 
+* Added the option to install GPU drivers 
+* Support setting a timeout for a Runnable 
+* Support setting environment variables 
+
 ### 0.2.0 (2022-07-01)
 
 #### Features
