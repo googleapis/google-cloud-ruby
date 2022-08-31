@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/bigquery/dataexchange/v1beta1/dataexchange_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -28,11 +29,12 @@ module Google
             ##
             # Client for the AnalyticsHubService service.
             #
-            # The AnalyticsHubService API facilitates data sharing within and across
-            # organizations. It allows data providers to publish Listings --- a
-            # discoverable and searchable SKU representing a dataset. Data consumers can
-            # subscribe to Listings. Upon subscription, AnalyticsHub provisions a "Linked
-            # Datasets" surfacing the data in the consumer's project.
+            # The `AnalyticsHubService` API facilitates data sharing within and across
+            # organizations. It allows data providers to publish listings that reference
+            # shared datasets. With Analytics Hub, users can discover and search for
+            # listings that they have access to. Subscribers can view and subscribe to
+            # listings. When you subscribe to a listing, Analytics Hub creates a linked
+            # dataset in your project.
             #
             class Client
               include Paths
@@ -143,6 +145,12 @@ module Google
                 @quota_project_id = @config.quota_project
                 @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+                @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                  config.credentials = credentials
+                  config.quota_project = @quota_project_id
+                  config.endpoint = @config.endpoint
+                end
+
                 @analytics_hub_service_stub = ::Gapic::ServiceStub.new(
                   ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Stub,
                   credentials:  credentials,
@@ -152,10 +160,17 @@ module Google
                 )
               end
 
+              ##
+              # Get the associated client for mix-in of the Locations.
+              #
+              # @return [Google::Cloud::Location::Locations::Client]
+              #
+              attr_reader :location_client
+
               # Service calls
 
               ##
-              # Lists DataExchanges in a given project and location.
+              # Lists all data exchanges in a given project and location.
               #
               # @overload list_data_exchanges(request, options = nil)
               #   Pass arguments to `list_data_exchanges` via a request object, either of type
@@ -173,7 +188,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent resource path of the DataExchanges.
+              #     Required. The parent resource path of the data exchanges.
               #     e.g. `projects/myproject/locations/US`.
               #   @param page_size [::Integer]
               #     The maximum number of results to return in a single response page. Leverage
@@ -254,7 +269,8 @@ module Google
               end
 
               ##
-              # Lists DataExchanges from projects in a given organization and location.
+              # Lists all data exchanges from projects in a given organization and
+              # location.
               #
               # @overload list_org_data_exchanges(request, options = nil)
               #   Pass arguments to `list_org_data_exchanges` via a request object, either of type
@@ -353,7 +369,7 @@ module Google
               end
 
               ##
-              # Gets details of a single DataExchange.
+              # Gets the details of a data exchange.
               #
               # @overload get_data_exchange(request, options = nil)
               #   Pass arguments to `get_data_exchange` via a request object, either of type
@@ -371,7 +387,7 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. The resource name of the DataExchange.
+              #     Required. The resource name of the data exchange.
               #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
@@ -439,7 +455,7 @@ module Google
               end
 
               ##
-              # Creates a new DataExchange in a given project and location.
+              # Creates a new data exchange.
               #
               # @overload create_data_exchange(request, options = nil)
               #   Pass arguments to `create_data_exchange` via a request object, either of type
@@ -457,16 +473,16 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param parent [::String]
-              #     Required. The parent resource path of the DataExchange.
+              #     Required. The parent resource path of the data exchange.
               #     e.g. `projects/myproject/locations/US`.
               #   @param data_exchange_id [::String]
-              #     Required. The ID of the DataExchange to create.
+              #     Required. The ID of the data exchange.
               #     Must contain only Unicode letters, numbers (0-9), underscores (_).
               #     Should not use characters that require URL-escaping, or characters
               #     outside of ASCII, spaces.
               #     Max length: 100 bytes.
               #   @param data_exchange [::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange, ::Hash]
-              #     Required. The DataExchange to create.
+              #     Required. The data exchange to create.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange]
@@ -533,7 +549,7 @@ module Google
               end
 
               ##
-              # Updates the parameters of a single DataExchange.
+              # Updates an existing data exchange.
               #
               # @overload update_data_exchange(request, options = nil)
               #   Pass arguments to `update_data_exchange` via a request object, either of type
@@ -551,12 +567,11 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. Field mask is used to specify the fields to be overwritten in the
-              #     DataExchange resource by the update.
-              #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request.
+              #     Required. Field mask specifies the fields to update in the data exchange
+              #     resource. The fields specified in the
+              #     `updateMask` are relative to the resource and are not a full request.
               #   @param data_exchange [::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange, ::Hash]
-              #     Required. The DataExchange to update.
+              #     Required. The data exchange to update.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange]
@@ -623,7 +638,7 @@ module Google
               end
 
               ##
-              # Deletes a single DataExchange.
+              # Deletes an existing data exchange.
               #
               # @overload delete_data_exchange(request, options = nil)
               #   Pass arguments to `delete_data_exchange` via a request object, either of type
@@ -641,8 +656,8 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param name [::String]
-              #     Required. Resource name of the DataExchange to delete.
-              #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+              #     Required. The full name of the data exchange resource that you want to delete.
+              #     For example, `projects/myproject/locations/US/dataExchanges/123`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Protobuf::Empty]
@@ -709,7 +724,7 @@ module Google
               end
 
               ##
-              # Lists Listings in a given project and location.
+              # Lists all listings in a given project and location.
               #
               # @overload list_listings(request, options = nil)
               #   Pass arguments to `list_listings` via a request object, either of type
@@ -808,7 +823,7 @@ module Google
               end
 
               ##
-              # Gets details of a single Listing.
+              # Gets the details of a listing.
               #
               # @overload get_listing(request, options = nil)
               #   Pass arguments to `get_listing` via a request object, either of type
@@ -894,7 +909,7 @@ module Google
               end
 
               ##
-              # Creates a new Listing in a given project and location.
+              # Creates a new listing.
               #
               # @overload create_listing(request, options = nil)
               #   Pass arguments to `create_listing` via a request object, either of type
@@ -915,7 +930,7 @@ module Google
               #     Required. The parent resource path of the listing.
               #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
               #   @param listing_id [::String]
-              #     Required. The ID of the Listing to create.
+              #     Required. The ID of the listing to create.
               #     Must contain only Unicode letters, numbers (0-9), underscores (_).
               #     Should not use characters that require URL-escaping, or characters
               #     outside of ASCII, spaces.
@@ -988,7 +1003,7 @@ module Google
               end
 
               ##
-              # Updates the parameters of a single Listing.
+              # Updates an existing listing.
               #
               # @overload update_listing(request, options = nil)
               #   Pass arguments to `update_listing` via a request object, either of type
@@ -1006,10 +1021,9 @@ module Google
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
               #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-              #     Required. Field mask is used to specify the fields to be overwritten in the
-              #     Listing resource by the update.
-              #     The fields specified in the update_mask are relative to the resource, not
-              #     the full request.
+              #     Required. Field mask specifies the fields to update in the listing resource. The
+              #     fields specified in the `updateMask` are relative to the resource and are
+              #     not a full request.
               #   @param listing [::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing, ::Hash]
               #     Required. The listing to update.
               #
@@ -1078,8 +1092,7 @@ module Google
               end
 
               ##
-              # Deletes a single Listing, as long as there are no subscriptions
-              # associated with the source of this Listing.
+              # Deletes a listing.
               #
               # @overload delete_listing(request, options = nil)
               #   Pass arguments to `delete_listing` via a request object, either of type
@@ -1165,10 +1178,11 @@ module Google
               end
 
               ##
-              # Subscribes to a single Listing.
+              # Subscribes to a listing.
               #
-              # Data Exchange currently supports one type of Listing: a BigQuery dataset.
-              # Upon subscription to a Listing for a BigQuery dataset, Data Exchange
+              # Currently, with Analytics Hub, you can create listings that
+              # reference only BigQuery datasets.
+              # Upon subscription to a listing for a BigQuery dataset, Analytics Hub
               # creates a linked dataset in the subscriber's project.
               #
               # @overload subscribe_listing(request, options = nil)
@@ -1181,16 +1195,16 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload subscribe_listing(name: nil, destination_dataset: nil)
+              # @overload subscribe_listing(destination_dataset: nil, name: nil)
               #   Pass arguments to `subscribe_listing` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param name [::String]
-              #     Required. Resource name of the listing to subscribe to.
-              #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
               #   @param destination_dataset [::Google::Cloud::Bigquery::DataExchange::V1beta1::DestinationDataset, ::Hash]
               #     BigQuery destination dataset to create for the subscriber.
+              #   @param name [::String]
+              #     Required. Resource name of the listing that you want to subscribe to.
+              #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingResponse]
@@ -1257,7 +1271,7 @@ module Google
               end
 
               ##
-              # Gets the IAM policy for a dataExchange or a listing.
+              # Gets the IAM policy.
               #
               # @overload get_iam_policy(request, options = nil)
               #   Pass arguments to `get_iam_policy` via a request object, either of type
@@ -1346,7 +1360,7 @@ module Google
               end
 
               ##
-              # Sets the IAM policy for a dataExchange or a listing.
+              # Sets the IAM policy.
               #
               # @overload set_iam_policy(request, options = nil)
               #   Pass arguments to `set_iam_policy` via a request object, either of type
@@ -1443,8 +1457,7 @@ module Google
               end
 
               ##
-              # Returns the permissions that a caller has on a specified dataExchange or
-              # listing.
+              # Returns the permissions that a caller has.
               #
               # @overload test_iam_permissions(request, options = nil)
               #   Pass arguments to `test_iam_permissions` via a request object, either of type

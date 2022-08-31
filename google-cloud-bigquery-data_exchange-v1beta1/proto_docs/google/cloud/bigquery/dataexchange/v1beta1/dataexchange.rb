@@ -22,9 +22,9 @@ module Google
     module Bigquery
       module DataExchange
         module V1beta1
-          # A data exchange is a container that enables data sharing.
-          # It contains a set of listings of the data sources along with descriptive
-          # information of the data exchange.
+          # A data exchange is a container that lets you share data. Along with the
+          # descriptive information about the data exchange, it contains listings that
+          # reference shared datasets.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The resource name of the data exchange.
@@ -33,21 +33,19 @@ module Google
           #   @return [::String]
           #     Required. Human-readable display name of the data exchange. The display name must
           #     contain only Unicode letters, numbers (0-9), underscores (_), dashes (-),
-          #     spaces ( ), and can't start or end with spaces.
+          #     spaces ( ), ampersands (&) and must not start or end with spaces.
           #     Default value is an empty string.
           #     Max length: 63 bytes.
           # @!attribute [rw] description
           #   @return [::String]
-          #     Optional. Short description of the data exchange that can consist of sentences
-          #     or paragraphs. The description must not contain Unicode non-characters as
-          #     well as C0 and C1 control codes except tabs (HT), new lines (LF), carriage
-          #     returns (CR), and page breaks (FF).
+          #     Optional. Description of the data exchange. The description must not contain Unicode
+          #     non-characters as well as C0 and C1 control codes except tabs (HT),
+          #     new lines (LF), carriage returns (CR), and page breaks (FF).
           #     Default value is an empty string.
           #     Max length: 2000 bytes.
           # @!attribute [rw] primary_contact
           #   @return [::String]
-          #     Optional. Email, URL or other reference of the primary point of contact of the data
-          #     exchange
+          #     Optional. Email or URL of the primary point of contact of the data exchange.
           #     Max Length: 1000 bytes.
           # @!attribute [rw] documentation
           #   @return [::String]
@@ -60,40 +58,40 @@ module Google
           #     Optional. Base64 encoded image representing the data exchange. Max Size: 3.0MiB
           #     Expected image dimensions are 512x512 pixels, however the API only
           #     performs validation on size of the encoded data.
-          #     Note: For byte fields, the contents of the field are base64-encoded (which
+          #     Note: For byte fields, the content of the fields are base64-encoded (which
           #     increases the size of the data by 33-36%) when using JSON on the wire.
           class DataExchange
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Contains details of the Data Provider.
+          # Contains details of the data provider.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Optional. Name of the Data Provider.
+          #     Optional. Name of the data provider.
           # @!attribute [rw] primary_contact
           #   @return [::String]
-          #     Optional. Email or URL of the Data Provider.
+          #     Optional. Email or URL of the data provider.
           #     Max Length: 1000 bytes.
           class DataProvider
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Contains details of the Publisher.
+          # Contains details of the listing publisher.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Optional. Name of the listing Publisher.
+          #     Optional. Name of the listing publisher.
           # @!attribute [rw] primary_contact
           #   @return [::String]
-          #     Optional. Email or URL of the listing Publisher.
+          #     Optional. Email or URL of the listing publisher.
           #     Max Length: 1000 bytes.
           class Publisher
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Defines the Destination BigQuery Dataset Reference.
+          # Contains the reference that identifies a destination bigquery dataset.
           # @!attribute [rw] dataset_id
           #   @return [::String]
           #     Required. A unique ID for this dataset, without the project name. The ID
@@ -107,7 +105,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Defines the Destination BigQuery Dataset.
+          # Defines the destination bigquery dataset.
           # @!attribute [rw] dataset_reference
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::DestinationDatasetReference]
           #     Required. A reference that identifies the destination dataset.
@@ -147,6 +145,9 @@ module Google
           # subscribe to. It contains a reference to the data source along with
           # descriptive information that will help subscribers find and subscribe the
           # data.
+          # @!attribute [rw] bigquery_dataset
+          #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing::BigQueryDatasetSource]
+          #     Required. Shared dataset i.e. BigQuery dataset source.
           # @!attribute [r] name
           #   @return [::String]
           #     Output only. The resource name of the listing.
@@ -155,15 +156,14 @@ module Google
           #   @return [::String]
           #     Required. Human-readable display name of the listing. The display name must contain
           #     only Unicode letters, numbers (0-9), underscores (_), dashes (-), spaces
-          #     ( ), and can't start or end with spaces.
+          #     ( ), ampersands (&) and can't start or end with spaces.
           #     Default value is an empty string.
           #     Max length: 63 bytes.
           # @!attribute [rw] description
           #   @return [::String]
-          #     Optional. Short description of the listing that can consist of sentences or
-          #     paragraphs. The description must not contain Unicode non-characters as
-          #     well as C0 and C1 control codes except tabs (HT), new lines (LF), carriage
-          #     returns (CR), and page breaks (FF).
+          #     Optional. Short description of the listing. The description must not contain
+          #     Unicode non-characters and C0 and C1 control codes except tabs (HT),
+          #     new lines (LF), carriage returns (CR), and page breaks (FF).
           #     Default value is an empty string.
           #     Max length: 2000 bytes.
           # @!attribute [rw] primary_contact
@@ -173,12 +173,9 @@ module Google
           # @!attribute [rw] documentation
           #   @return [::String]
           #     Optional. Documentation describing the listing.
-          # @!attribute [rw] bigquery_dataset
-          #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing::BigQueryDatasetSource]
-          #     Required. Shared dataset i.e. BigQuery dataset source.
           # @!attribute [r] state
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing::State]
-          #     Output only. Current state of the Listing.
+          #     Output only. Current state of the listing.
           # @!attribute [rw] icon
           #   @return [::String]
           #     Optional. Base64 encoded image representing the listing. Max Size: 3.0MiB
@@ -188,13 +185,13 @@ module Google
           #     increases the size of the data by 33-36%) when using JSON on the wire.
           # @!attribute [rw] data_provider
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::DataProvider]
-          #     Optional. The details of the Data Provider who owns the source data.
+          #     Optional. Details of the data provider who owns the source data.
           # @!attribute [rw] categories
-          #   @return [::Array<::Google::Cloud::Bigquery::DataExchange::Common::Category>]
-          #     Optional. Categories of the Listing. Up to two categories are allowed.
+          #   @return [::Array<::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing::Category>]
+          #     Optional. Categories of the listing. Up to two categories are allowed.
           # @!attribute [rw] publisher
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::Publisher]
-          #     Optional. The details of the Publisher who owns the listing and has rights to share
+          #     Optional. Details of the publisher who owns the listing and who can share
           #     the source data.
           # @!attribute [rw] request_access
           #   @return [::String]
@@ -205,12 +202,13 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # A reference to a Shared dataset. It's an existing BigQuery dataset with a
-            # collection of objects, such as tables and views, that you want to share
+            # A reference to a shared dataset. It is an existing BigQuery dataset with a
+            # collection of objects such as tables and views that you want to share
             # with subscribers.
-            # Upon subscription to a Listing, Data Exchange creates a Linked dataset in
+            # When subscriber's subscribe to a listing, Analytics Hub creates a linked
+            # dataset in
             # the subscriber's project. A Linked dataset is an opaque, read-only BigQuery
-            # dataset that serves as a "symbolic link" to a shared dataset.
+            # dataset that serves as a _symbolic link_ to a shared dataset.
             # @!attribute [rw] dataset
             #   @return [::String]
             #     Resource name of the dataset source for this listing.
@@ -220,21 +218,64 @@ module Google
               extend ::Google::Protobuf::MessageExts::ClassMethods
             end
 
-            # State of the Listing
+            # State of the listing.
             module State
               # Default value. This value is unused.
               STATE_UNSPECIFIED = 0
 
               # Subscribable state. Users with dataexchange.listings.subscribe permission
-              # can subscribe to this Listing.
+              # can subscribe to this listing.
               ACTIVE = 1
+            end
+
+            # Listing categories.
+            module Category
+              CATEGORY_UNSPECIFIED = 0
+
+              CATEGORY_OTHERS = 1
+
+              CATEGORY_ADVERTISING_AND_MARKETING = 2
+
+              CATEGORY_COMMERCE = 3
+
+              CATEGORY_CLIMATE_AND_ENVIRONMENT = 4
+
+              CATEGORY_DEMOGRAPHICS = 5
+
+              CATEGORY_ECONOMICS = 6
+
+              CATEGORY_EDUCATION = 7
+
+              CATEGORY_ENERGY = 8
+
+              CATEGORY_FINANCIAL = 9
+
+              CATEGORY_GAMING = 10
+
+              CATEGORY_GEOSPATIAL = 11
+
+              CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE = 12
+
+              CATEGORY_MEDIA = 13
+
+              CATEGORY_PUBLIC_SECTOR = 14
+
+              CATEGORY_RETAIL = 15
+
+              CATEGORY_SPORTS = 16
+
+              CATEGORY_SCIENCE_AND_RESEARCH = 17
+
+              CATEGORY_TRANSPORTATION_AND_LOGISTICS = 18
+
+              CATEGORY_TRAVEL_AND_TOURISM = 19
             end
           end
 
-          # Message for requesting list of DataExchanges.
+          # Message for requesting the list of data exchanges.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The parent resource path of the DataExchanges.
+          #     Required. The parent resource path of the data exchanges.
           #     e.g. `projects/myproject/locations/US`.
           # @!attribute [rw] page_size
           #   @return [::Integer]
@@ -249,10 +290,10 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for response to listing DataExchanges.
+          # Message for response to the list of data exchanges.
           # @!attribute [rw] data_exchanges
           #   @return [::Array<::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange>]
-          #     The list of DataExchange.
+          #     The list of data exchanges.
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     A token to request the next page of results.
@@ -261,8 +302,8 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for requesting list of DataExchanges from projects in an organization
-          # and location.
+          # Message for requesting the list of data exchanges from projects in an
+          # organization and location.
           # @!attribute [rw] organization
           #   @return [::String]
           #     Required. The organization resource path of the projects containing DataExchanges.
@@ -280,11 +321,11 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for response to listing DataExchanges in an organization and
+          # Message for response to listing data exchanges in an organization and
           # location.
           # @!attribute [rw] data_exchanges
           #   @return [::Array<::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange>]
-          #     The list of DataExchange.
+          #     The list of data exchanges.
           # @!attribute [rw] next_page_token
           #   @return [::String]
           #     A token to request the next page of results.
@@ -293,62 +334,61 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for getting a DataExchange.
+          # Message for getting a data exchange.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. The resource name of the DataExchange.
+          #     Required. The resource name of the data exchange.
           #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
           class GetDataExchangeRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for creating a DataExchange.
+          # Message for creating a data exchange.
           # @!attribute [rw] parent
           #   @return [::String]
-          #     Required. The parent resource path of the DataExchange.
+          #     Required. The parent resource path of the data exchange.
           #     e.g. `projects/myproject/locations/US`.
           # @!attribute [rw] data_exchange_id
           #   @return [::String]
-          #     Required. The ID of the DataExchange to create.
+          #     Required. The ID of the data exchange.
           #     Must contain only Unicode letters, numbers (0-9), underscores (_).
           #     Should not use characters that require URL-escaping, or characters
           #     outside of ASCII, spaces.
           #     Max length: 100 bytes.
           # @!attribute [rw] data_exchange
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange]
-          #     Required. The DataExchange to create.
+          #     Required. The data exchange to create.
           class CreateDataExchangeRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for updating a DataExchange.
+          # Message for updating a data exchange.
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
-          #     Required. Field mask is used to specify the fields to be overwritten in the
-          #     DataExchange resource by the update.
-          #     The fields specified in the update_mask are relative to the resource, not
-          #     the full request.
+          #     Required. Field mask specifies the fields to update in the data exchange
+          #     resource. The fields specified in the
+          #     `updateMask` are relative to the resource and are not a full request.
           # @!attribute [rw] data_exchange
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange]
-          #     Required. The DataExchange to update.
+          #     Required. The data exchange to update.
           class UpdateDataExchangeRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for deleting a DataExchange.
+          # Message for deleting a data exchange.
           # @!attribute [rw] name
           #   @return [::String]
-          #     Required. Resource name of the DataExchange to delete.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
+          #     Required. The full name of the data exchange resource that you want to delete.
+          #     For example, `projects/myproject/locations/US/dataExchanges/123`.
           class DeleteDataExchangeRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for requesting list of Listings.
+          # Message for requesting the list of listings.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource path of the listing.
@@ -366,7 +406,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for response to listing Listings.
+          # Message for response to the list of Listings.
           # @!attribute [rw] listings
           #   @return [::Array<::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing>]
           #     The list of Listing.
@@ -378,7 +418,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for getting a Listing.
+          # Message for getting a listing.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. The resource name of the listing.
@@ -388,14 +428,14 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for creating a Listing.
+          # Message for creating a listing.
           # @!attribute [rw] parent
           #   @return [::String]
           #     Required. The parent resource path of the listing.
           #     e.g. `projects/myproject/locations/US/dataExchanges/123`.
           # @!attribute [rw] listing_id
           #   @return [::String]
-          #     Required. The ID of the Listing to create.
+          #     Required. The ID of the listing to create.
           #     Must contain only Unicode letters, numbers (0-9), underscores (_).
           #     Should not use characters that require URL-escaping, or characters
           #     outside of ASCII, spaces.
@@ -411,10 +451,9 @@ module Google
           # Message for updating a Listing.
           # @!attribute [rw] update_mask
           #   @return [::Google::Protobuf::FieldMask]
-          #     Required. Field mask is used to specify the fields to be overwritten in the
-          #     Listing resource by the update.
-          #     The fields specified in the update_mask are relative to the resource, not
-          #     the full request.
+          #     Required. Field mask specifies the fields to update in the listing resource. The
+          #     fields specified in the `updateMask` are relative to the resource and are
+          #     not a full request.
           # @!attribute [rw] listing
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing]
           #     Required. The listing to update.
@@ -423,7 +462,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for deleting a Listing.
+          # Message for deleting a listing.
           # @!attribute [rw] name
           #   @return [::String]
           #     Required. Resource name of the listing to delete.
@@ -433,21 +472,20 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for subscribing a Listing.
-          # @!attribute [rw] name
-          #   @return [::String]
-          #     Required. Resource name of the listing to subscribe to.
-          #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
+          # Message for subscribing to a listing.
           # @!attribute [rw] destination_dataset
           #   @return [::Google::Cloud::Bigquery::DataExchange::V1beta1::DestinationDataset]
           #     BigQuery destination dataset to create for the subscriber.
+          # @!attribute [rw] name
+          #   @return [::String]
+          #     Required. Resource name of the listing that you want to subscribe to.
+          #     e.g. `projects/myproject/locations/US/dataExchanges/123/listings/456`.
           class SubscribeListingRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Message for response to subscribing a Listing.
-          # Empty for now.
+          # Message for response when you subscribe to a listing.
           class SubscribeListingResponse
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -732,15 +732,15 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
     grpc_options = {}
 
     # Create request parameters for a unary method.
-    name = "hello world"
     destination_dataset = {}
+    name = "hello world"
 
     subscribe_listing_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :subscribe_listing, name
       assert_kind_of ::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest, request
-      assert_equal "hello world", request["name"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigquery::DataExchange::V1beta1::DestinationDataset), request["destination_dataset"]
       assert_equal :destination_dataset, request.destination
+      assert_equal "hello world", request["name"]
       refute_nil options
     end
 
@@ -751,31 +751,31 @@ class ::Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Cli
       end
 
       # Use hash object
-      client.subscribe_listing({ name: name, destination_dataset: destination_dataset }) do |response, operation|
+      client.subscribe_listing({ destination_dataset: destination_dataset, name: name }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.subscribe_listing name: name, destination_dataset: destination_dataset do |response, operation|
+      client.subscribe_listing destination_dataset: destination_dataset, name: name do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.subscribe_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(name: name, destination_dataset: destination_dataset) do |response, operation|
+      client.subscribe_listing ::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(destination_dataset: destination_dataset, name: name) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.subscribe_listing({ name: name, destination_dataset: destination_dataset }, grpc_options) do |response, operation|
+      client.subscribe_listing({ destination_dataset: destination_dataset, name: name }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.subscribe_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(name: name, destination_dataset: destination_dataset), grpc_options) do |response, operation|
+      client.subscribe_listing(::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest.new(destination_dataset: destination_dataset, name: name), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
