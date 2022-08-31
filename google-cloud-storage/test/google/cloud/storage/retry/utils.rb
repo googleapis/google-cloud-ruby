@@ -47,7 +47,7 @@ class MethodMapping
       :get_hmac_key,
       :hmac_key_reload
     ],
-    "storage.hmacKey.create" => [:create_hmac_key],
+    "storage.hmacKey.create" => [:create_hmaac_key],
     "storage.hmacKey.list" => [:list_hmac_keys],
     "storage.notifications.delete" => [:delete_notification],
     "storage.notifications.get" => [
@@ -323,7 +323,9 @@ class MethodMapping
     default_acl.add_owner entity
   end
 
-  def self.create_hmac_key client, _preconditions, **resources
+  def self.create_hmaac_key client, _preconditions, **resources
+    puts "sandeeeeep"
+    puts "before: #{client.service.request_options.inspect}"
     client.create_hmac_key CONF_TEST_SERVICE_ACCOUNT_EMAIL
   end
 
