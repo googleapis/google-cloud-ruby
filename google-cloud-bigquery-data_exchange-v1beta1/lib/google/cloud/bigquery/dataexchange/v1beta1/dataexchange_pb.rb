@@ -7,7 +7,6 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
-require 'google/cloud/bigquery/dataexchange/common/common_pb'
 require 'google/iam/v1/iam_policy_pb'
 require 'google/iam/v1/policy_pb'
 require 'google/protobuf/empty_pb'
@@ -53,7 +52,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :state, :enum, 7, "google.cloud.bigquery.dataexchange.v1beta1.Listing.State"
       optional :icon, :bytes, 8
       optional :data_provider, :message, 9, "google.cloud.bigquery.dataexchange.v1beta1.DataProvider"
-      repeated :categories, :enum, 10, "google.cloud.bigquery.dataexchange.common.Category"
+      repeated :categories, :enum, 10, "google.cloud.bigquery.dataexchange.v1beta1.Listing.Category"
       optional :publisher, :message, 11, "google.cloud.bigquery.dataexchange.v1beta1.Publisher"
       optional :request_access, :string, 12
       oneof :source do
@@ -66,6 +65,28 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.bigquery.dataexchange.v1beta1.Listing.State" do
       value :STATE_UNSPECIFIED, 0
       value :ACTIVE, 1
+    end
+    add_enum "google.cloud.bigquery.dataexchange.v1beta1.Listing.Category" do
+      value :CATEGORY_UNSPECIFIED, 0
+      value :CATEGORY_OTHERS, 1
+      value :CATEGORY_ADVERTISING_AND_MARKETING, 2
+      value :CATEGORY_COMMERCE, 3
+      value :CATEGORY_CLIMATE_AND_ENVIRONMENT, 4
+      value :CATEGORY_DEMOGRAPHICS, 5
+      value :CATEGORY_ECONOMICS, 6
+      value :CATEGORY_EDUCATION, 7
+      value :CATEGORY_ENERGY, 8
+      value :CATEGORY_FINANCIAL, 9
+      value :CATEGORY_GAMING, 10
+      value :CATEGORY_GEOSPATIAL, 11
+      value :CATEGORY_HEALTHCARE_AND_LIFE_SCIENCE, 12
+      value :CATEGORY_MEDIA, 13
+      value :CATEGORY_PUBLIC_SECTOR, 14
+      value :CATEGORY_RETAIL, 15
+      value :CATEGORY_SPORTS, 16
+      value :CATEGORY_SCIENCE_AND_RESEARCH, 17
+      value :CATEGORY_TRANSPORTATION_AND_LOGISTICS, 18
+      value :CATEGORY_TRAVEL_AND_TOURISM, 19
     end
     add_message "google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest" do
       optional :parent, :string, 1
@@ -148,6 +169,7 @@ module Google
           Listing = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.dataexchange.v1beta1.Listing").msgclass
           Listing::BigQueryDatasetSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.dataexchange.v1beta1.Listing.BigQueryDatasetSource").msgclass
           Listing::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.dataexchange.v1beta1.Listing.State").enummodule
+          Listing::Category = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.dataexchange.v1beta1.Listing.Category").enummodule
           ListDataExchangesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesRequest").msgclass
           ListDataExchangesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.dataexchange.v1beta1.ListDataExchangesResponse").msgclass
           ListOrgDataExchangesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.bigquery.dataexchange.v1beta1.ListOrgDataExchangesRequest").msgclass

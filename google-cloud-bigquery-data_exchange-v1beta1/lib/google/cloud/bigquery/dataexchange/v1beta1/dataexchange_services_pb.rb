@@ -25,11 +25,12 @@ module Google
       module DataExchange
         module V1beta1
           module AnalyticsHubService
-            # The AnalyticsHubService API facilitates data sharing within and across
-            # organizations. It allows data providers to publish Listings --- a
-            # discoverable and searchable SKU representing a dataset. Data consumers can
-            # subscribe to Listings. Upon subscription, AnalyticsHub provisions a "Linked
-            # Datasets" surfacing the data in the consumer's project.
+            # The `AnalyticsHubService` API facilitates data sharing within and across
+            # organizations. It allows data providers to publish listings that reference
+            # shared datasets. With Analytics Hub, users can discover and search for
+            # listings that they have access to. Subscribers can view and subscribe to
+            # listings. When you subscribe to a listing, Analytics Hub creates a linked
+            # dataset in your project.
             class Service
 
               include ::GRPC::GenericService
@@ -38,41 +39,41 @@ module Google
               self.unmarshal_class_method = :decode
               self.service_name = 'google.cloud.bigquery.dataexchange.v1beta1.AnalyticsHubService'
 
-              # Lists DataExchanges in a given project and location.
+              # Lists all data exchanges in a given project and location.
               rpc :ListDataExchanges, ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListDataExchangesResponse
-              # Lists DataExchanges from projects in a given organization and location.
+              # Lists all data exchanges from projects in a given organization and
+              # location.
               rpc :ListOrgDataExchanges, ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListOrgDataExchangesResponse
-              # Gets details of a single DataExchange.
+              # Gets the details of a data exchange.
               rpc :GetDataExchange, ::Google::Cloud::Bigquery::DataExchange::V1beta1::GetDataExchangeRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange
-              # Creates a new DataExchange in a given project and location.
+              # Creates a new data exchange.
               rpc :CreateDataExchange, ::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateDataExchangeRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange
-              # Updates the parameters of a single DataExchange.
+              # Updates an existing data exchange.
               rpc :UpdateDataExchange, ::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateDataExchangeRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::DataExchange
-              # Deletes a single DataExchange.
+              # Deletes an existing data exchange.
               rpc :DeleteDataExchange, ::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteDataExchangeRequest, ::Google::Protobuf::Empty
-              # Lists Listings in a given project and location.
+              # Lists all listings in a given project and location.
               rpc :ListListings, ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::ListListingsResponse
-              # Gets details of a single Listing.
+              # Gets the details of a listing.
               rpc :GetListing, ::Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing
-              # Creates a new Listing in a given project and location.
+              # Creates a new listing.
               rpc :CreateListing, ::Google::Cloud::Bigquery::DataExchange::V1beta1::CreateListingRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing
-              # Updates the parameters of a single Listing.
+              # Updates an existing listing.
               rpc :UpdateListing, ::Google::Cloud::Bigquery::DataExchange::V1beta1::UpdateListingRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::Listing
-              # Deletes a single Listing, as long as there are no subscriptions
-              # associated with the source of this Listing.
+              # Deletes a listing.
               rpc :DeleteListing, ::Google::Cloud::Bigquery::DataExchange::V1beta1::DeleteListingRequest, ::Google::Protobuf::Empty
-              # Subscribes to a single Listing.
+              # Subscribes to a listing.
               #
-              # Data Exchange currently supports one type of Listing: a BigQuery dataset.
-              # Upon subscription to a Listing for a BigQuery dataset, Data Exchange
+              # Currently, with Analytics Hub, you can create listings that
+              # reference only BigQuery datasets.
+              # Upon subscription to a listing for a BigQuery dataset, Analytics Hub
               # creates a linked dataset in the subscriber's project.
               rpc :SubscribeListing, ::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingRequest, ::Google::Cloud::Bigquery::DataExchange::V1beta1::SubscribeListingResponse
-              # Gets the IAM policy for a dataExchange or a listing.
+              # Gets the IAM policy.
               rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
-              # Sets the IAM policy for a dataExchange or a listing.
+              # Sets the IAM policy.
               rpc :SetIamPolicy, ::Google::Iam::V1::SetIamPolicyRequest, ::Google::Iam::V1::Policy
-              # Returns the permissions that a caller has on a specified dataExchange or
-              # listing.
+              # Returns the permissions that a caller has.
               rpc :TestIamPermissions, ::Google::Iam::V1::TestIamPermissionsRequest, ::Google::Iam::V1::TestIamPermissionsResponse
             end
 
