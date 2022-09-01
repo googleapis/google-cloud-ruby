@@ -1169,10 +1169,22 @@ module Google
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!
           updater.check_for_mutable_lifecycle!
-          return if updater.updates.empty?
-          patch_gapi! updater.updates,
-                      if_metageneration_match: if_metageneration_match,
-                      if_metageneration_not_match: if_metageneration_not_match
+
+          attributes = Array(updater.updates)
+          attributes.flatten!
+          return if attributes.empty?
+          ensure_service!
+          update_args = Hash[attributes.map do |attr|
+            [attr, @gapi.send(attr)]
+          end]
+          update_gapi = API::Bucket.new(**update_args)
+          service.update_bucket name,
+                                update_gapi,
+                                if_metageneration_match: if_metageneration_match,
+                                if_metageneration_not_match: if_metageneration_not_match,
+                                user_project: user_project
+          @lazy = nil
+          self
         end
 
         ##

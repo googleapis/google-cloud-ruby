@@ -75,13 +75,13 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
     mock.verify
   end
 
-  it "updates its versioning with if_metageneration_match" do
+  focus; it "updates its versioning with if_metageneration_match" do
     mock = Minitest::Mock.new
     patch_versioning_gapi = Google::Apis::StorageV1::Bucket::Versioning.new enabled: true
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new versioning: patch_versioning_gapi
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
       random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, versioning: true).to_json
-    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(if_metageneration_match: metageneration)
+    mock.expect :update_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(if_metageneration_match: metageneration)
 
     bucket.service.mocked_service = mock
 
