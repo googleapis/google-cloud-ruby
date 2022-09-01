@@ -1,5 +1,11 @@
 # Release History
 
+### 0.4.1 (2022-08-31)
+
+#### Documentation
+
+* Include reference documentation for ScanRunLog ([#19089](https://github.com/googleapis/google-cloud-ruby/issues/19089)) 
+
 ### 0.4.0 (2022-07-08)
 
 #### Features
