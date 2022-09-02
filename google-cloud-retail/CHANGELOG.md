@@ -1,5 +1,11 @@
 # Release History
 
+### 1.4.0 (2022-09-02)
+
+#### Features
+
+* Support for the ControlService and ServingConfigService ([#19050](https://github.com/googleapis/google-cloud-ruby/issues/19050)) 
+
 ### 1.3.0 (2022-07-07)
 
 #### Features
