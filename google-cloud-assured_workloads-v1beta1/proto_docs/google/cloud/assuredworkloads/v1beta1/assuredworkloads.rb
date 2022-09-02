@@ -285,6 +285,12 @@ module Google
         #     Output only. Represents the SAA enrollment response of the given workload.
         #     SAA enrollment response is queried during GetWorkload call.
         #     In failure cases, user friendly error message is shown in SAA details page.
+        # @!attribute [r] compliant_but_disallowed_services
+        #   @return [::Array<::String>]
+        #     Output only. Urls for services which are compliant for this Assured Workload, but which
+        #     are currently disallowed by the ResourceUsageRestriction org policy.
+        #     Invoke RestrictAllowedResources endpoint to allow your project developers
+        #     to use these services in their environment."
         class Workload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
