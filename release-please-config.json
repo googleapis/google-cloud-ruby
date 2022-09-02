@@ -1279,6 +1279,10 @@
       "component": "google-iam-v1beta",
       "version_file": "lib/google/iam/v1beta/version.rb"
     },
+    "google-iam-v2": {
+      "component": "google-iam-v2",
+      "version_file": "lib/google/iam/v2/version.rb"
+    },
     "google-identity-access_context_manager": {
       "component": "google-identity-access_context_manager",
       "version_file": "lib/google/identity/access_context_manager/version.rb"
