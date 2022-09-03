@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.1 (2022-09-02)
+
+#### Bug Fixes
+
+* Updates to retry delay and retryable error codes ([#19099](https://github.com/googleapis/google-cloud-ruby/issues/19099)) 
+
 ### 0.3.0 (2022-08-24)
 
 #### Features
