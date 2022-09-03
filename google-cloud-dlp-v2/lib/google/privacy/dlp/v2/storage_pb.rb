@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/resource_pb'
 require 'google/protobuf/timestamp_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
@@ -10,6 +11,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.privacy.dlp.v2.InfoType" do
       optional :name, :string, 1
       optional :version, :string, 2
+    end
+    add_message "google.privacy.dlp.v2.SensitivityScore" do
+      optional :score, :enum, 1, "google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel"
+    end
+    add_enum "google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel" do
+      value :SENSITIVITY_SCORE_UNSPECIFIED, 0
+      value :SENSITIVITY_LOW, 10
+      value :SENSITIVITY_MODERATE, 20
+      value :SENSITIVITY_HIGH, 30
     end
     add_message "google.privacy.dlp.v2.StoredType" do
       optional :name, :string, 1
@@ -212,6 +222,8 @@ module Google
     module Dlp
       module V2
         InfoType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InfoType").msgclass
+        SensitivityScore = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.SensitivityScore").msgclass
+        SensitivityScore::SensitivityScoreLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.SensitivityScore.SensitivityScoreLevel").enummodule
         StoredType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.StoredType").msgclass
         CustomInfoType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CustomInfoType").msgclass
         CustomInfoType::Dictionary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.CustomInfoType.Dictionary").msgclass
