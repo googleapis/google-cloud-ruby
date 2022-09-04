@@ -27,7 +27,7 @@ jobs:
         include:
           - os: ubuntu-latest
             ruby: "2.6"
-            task: "--test"
+            task: "--test --samples-latest"
           - os: ubuntu-latest
             ruby: "2.7"
             task: "--test"
