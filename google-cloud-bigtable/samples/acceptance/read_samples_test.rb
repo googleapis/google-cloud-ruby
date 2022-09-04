@@ -106,6 +106,27 @@ OUTPUT
     assert_match expected, out
   end
 
+  it "reads_rows_sleep" do
+    out, _err = capture_io do
+      reads_rows_sleep bigtable_instance_id, @table_id
+    end
+    expected = <<~OUTPUT
+Reading data for phone#4c410523#20190501:
+Column Family stats_summary
+\tconnected_cell: 1 @#{@timestamp}
+\tconnected_wifi: 1 @#{@timestamp}
+\tos_build: PQ2A.190405.003 @#{@timestamp}
+
+Reading data for phone#4c410523#20190502:
+Column Family stats_summary
+\tconnected_cell: 1 @#{@timestamp}
+\tconnected_wifi: 1 @#{@timestamp}
+\tos_build: PQ2A.190405.004 @#{@timestamp}
+OUTPUT
+
+    assert_match expected, out
+  end
+
   it "reads_row_range" do
     out, _err = capture_io do
       reads_row_range bigtable_instance_id, @table_id
