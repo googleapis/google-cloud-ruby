@@ -106,6 +106,55 @@ OUTPUT
     assert_match expected, out
   end
 
+  it "reads_rows_nil" do
+    out, _err = capture_io do
+      reads_rows_nil bigtable_instance_id, @table_id
+    end
+    expected = <<~OUTPUT
+Reading data for phone#4c410523#20190501:
+Column Family stats_summary
+\tconnected_cell: 1 @#{@timestamp}
+\tconnected_wifi: 1 @#{@timestamp}
+\tos_build: PQ2A.190405.003 @#{@timestamp}
+
+Reading data for phone#4c410523#20190502:
+Column Family stats_summary
+\tconnected_cell: 1 @#{@timestamp}
+\tconnected_wifi: 1 @#{@timestamp}
+\tos_build: PQ2A.190405.004 @#{@timestamp}
+
+Reading data for phone#4c410523#20190505:
+Column Family stats_summary
+\tconnected_cell: 0 @#{@timestamp}
+\tconnected_wifi: 1 @#{@timestamp}
+\tos_build: PQ2A.190406.000 @#{@timestamp}
+
+Reading data for phone#5c10102#20190501:
+Column Family stats_summary
+\tconnected_cell: 1 @#{@timestamp}
+\tconnected_wifi: 1 @#{@timestamp}
+\tos_build: PQ2A.190401.002 @#{@timestamp}
+
+Reading data for phone#5c10102#20190502:
+Column Family stats_summary
+\tconnected_cell: 1 @#{@timestamp}
+\tconnected_wifi: 0 @#{@timestamp}
+\tos_build: PQ2A.190406.000 @#{@timestamp}
+OUTPUT
+
+    assert_match expected, out
+  end
+
+  it "reads_rows_empty" do
+    out, _err = capture_io do
+      reads_rows_empty bigtable_instance_id, @table_id
+    end
+    expected = <<~OUTPUT
+OUTPUT
+
+    assert_match expected, out
+  end
+
   it "reads_rows_sleep" do
     Google::Cloud::Bigtable::V2::Bigtable::Client.configure do
       # reads_rows_sleep is expected to return two elements
