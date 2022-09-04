@@ -101,9 +101,10 @@ Column Family stats_summary
 \tconnected_cell: 1 @#{@timestamp}
 \tconnected_wifi: 1 @#{@timestamp}
 \tos_build: PQ2A.190405.004 @#{@timestamp}
+
 OUTPUT
 
-    assert_match expected, out
+    assert_equal expected, out
   end
 
   it "reads_rows_nil" do
@@ -140,9 +141,16 @@ Column Family stats_summary
 \tconnected_cell: 1 @#{@timestamp}
 \tconnected_wifi: 0 @#{@timestamp}
 \tos_build: PQ2A.190406.000 @#{@timestamp}
+
+Reading data for phone001#5c10102#20190502:
+Column Family stats_summary
+\tconnected_cell: 1 @#{@timestamp}
+\tconnected_wifi: 0 @#{@timestamp}
+\tos_build: PQ2A.190406.000 @#{@timestamp}
+
 OUTPUT
 
-    assert_match expected, out
+    assert_equal expected, out
   end
 
   it "reads_rows_empty" do
@@ -152,7 +160,7 @@ OUTPUT
     expected = <<~OUTPUT
 OUTPUT
 
-    assert_match expected, out
+    assert_equal expected, out
   end
 
   it "reads_rows_sleep" do
@@ -178,9 +186,10 @@ Column Family stats_summary
 \tconnected_cell: 1 @#{@timestamp}
 \tconnected_wifi: 1 @#{@timestamp}
 \tos_build: PQ2A.190405.004 @#{@timestamp}
+
 OUTPUT
 
-    assert_match expected, out
+    assert_equal expected, out
   end
 
   it "reads_row_range" do
