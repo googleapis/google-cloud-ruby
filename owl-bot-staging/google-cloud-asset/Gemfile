@@ -1,0 +1,5 @@
+source "https://rubygems.org"
+
+gemspec
+
+gem "google-cloud-asset-v1", path: "../google-cloud-asset-v1"

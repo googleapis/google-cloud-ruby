@@ -1,0 +1,17 @@
+{
+    "api_id": "gkebackup.googleapis.com",
+    "api_shortname": "gkebackup",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-gke_backup/latest",
+    "distribution_name": "google-cloud-gke_backup",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "gkebackup",
+    "name_pretty": "Backup for GKE API",
+    "product_documentation": "https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "Backup for GKE lets you protect, manage, and restore your containerized applications and data for stateful workloads running on Google Kubernetes Engine clusters.",
+    "ruby-cloud-product-url": "https://cloud.google.com/kubernetes-engine/docs/add-on/backup-for-gke/",
+    "library_type": "GAPIC_AUTO"
+}
