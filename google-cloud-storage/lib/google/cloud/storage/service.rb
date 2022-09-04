@@ -655,13 +655,13 @@ module Google
         # Creates a new HMAC key for the specified service account.
         # Returns Google::Apis::StorageV1::HmacKey.
         def create_hmac_key service_account_email, project_id: nil,
-                            user_project: nil
-          puts "after: #{service.request_options.inspect}"
+                            user_project: nil, options: {}
+          options[:retries] = 0
           execute do
             service.create_project_hmac_key \
               (project_id || @project), service_account_email,
               user_project: user_project(user_project),
-              options: {retries: 0}
+              options: options
           end
         end
 

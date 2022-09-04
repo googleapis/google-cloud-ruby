@@ -324,8 +324,6 @@ class MethodMapping
   end
 
   def self.create_hmaac_key client, _preconditions, **resources
-    puts "sandeeeeep"
-    puts "before: #{client.service.request_options.inspect}"
     client.create_hmac_key CONF_TEST_SERVICE_ACCOUNT_EMAIL
   end
 

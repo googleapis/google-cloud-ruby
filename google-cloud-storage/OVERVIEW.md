@@ -593,6 +593,8 @@ service = storage.service
 service.get_bucket bucket_name, options: {retries: 0}
 ```
 
+For those API requests which are never idempotent, the library passes retries=0 by default, suppressing any retries.
+
 See the [Storage status and error
 codes](https://cloud.google.com/storage/docs/json_api/v1/status-codes)
 for a list of error conditions.
