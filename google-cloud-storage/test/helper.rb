@@ -239,6 +239,18 @@ class MockStorage < Minitest::Spec
     }
   end
 
+  def update_bucket_args if_metageneration_match: nil,
+                         if_metageneration_not_match: nil,
+                         user_project: nil,
+                         options: {}
+    {
+      if_metageneration_match: if_metageneration_match,
+      if_metageneration_not_match: if_metageneration_not_match,
+      user_project: user_project,
+      options: options
+    }
+  end
+
   def patch_bucket_args if_metageneration_match: nil,
                         if_metageneration_not_match: nil,
                         predefined_acl: nil,
