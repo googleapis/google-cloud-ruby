@@ -58,6 +58,32 @@ def reads_rows instance_id, table_id
   # [END bigtable_reads_rows]
 end
 
+def reads_rows_nil instance_id, table_id
+  # [START bigtable_reads_rows]
+  # instance_id = "my-instance"
+  # table_id    = "my-table"
+  bigtable = Google::Cloud::Bigtable.new
+  table = bigtable.table instance_id, table_id
+
+  table.read_rows(keys: nil).each do |row|
+    print_row row
+  end
+  # [END bigtable_reads_rows]
+end
+
+def reads_rows_empty instance_id, table_id
+  # [START bigtable_reads_rows]
+  # instance_id = "my-instance"
+  # table_id    = "my-table"
+  bigtable = Google::Cloud::Bigtable.new
+  table = bigtable.table instance_id, table_id
+
+  table.read_rows(keys: []).each do |row|
+    print_row row
+  end
+  # [END bigtable_reads_rows]
+end
+
 def reads_rows_sleep instance_id, table_id
   # [START bigtable_reads_rows_sleep]
   # instance_id = "my-instance"
