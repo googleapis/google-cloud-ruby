@@ -107,6 +107,13 @@ OUTPUT
   end
 
   it "reads_rows_sleep" do
+    Google::Cloud::Bigtable::V2::Bigtable::Client.configure do
+      # reads_rows_sleep is expected to return two elements
+      # let it timeout when processing 2nd element
+      # reproduce make sure its retry doesn't read extra (i.e. 3rd) element
+      config.rpcs.read_rows.timeout = 1.5
+    end
+
     out, _err = capture_io do
       reads_rows_sleep bigtable_instance_id, @table_id
     end
