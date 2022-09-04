@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-essential_contacts-v1", path: "../google-cloud-essential_contacts-v1"

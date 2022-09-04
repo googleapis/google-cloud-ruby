@@ -1,5 +1,0 @@
-source "https://rubygems.org"
-
-gemspec
-
-gem "google-cloud-service_control-v1", path: "../google-cloud-service_control-v1"
