@@ -91,13 +91,10 @@ def reads_rows_sleep instance_id, table_id
   bigtable = Google::Cloud::Bigtable.new
   table = bigtable.table instance_id, table_id
 
-  enumerator = table.read_rows(keys: ["phone#4c410523#20190501", "phone#4c410523#20190502"])
-  2.times do
+  table.read_rows(keys: ["phone#4c410523#20190501", "phone#4c410523#20190502"]).each do |row|
     print_row(enumerator.next)
+    sleep(1)
   end
-  
-  sleep(2)
-  print_row(enumerator.next)
   # [END bigtable_reads_rows_sleep]
 end
 
