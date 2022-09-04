@@ -22,7 +22,6 @@ on:
 
 jobs:
   CI:
-    if: ${{ github.repository == 'googleapis/google-cloud-ruby' }}
     strategy:
       matrix:
         include:
