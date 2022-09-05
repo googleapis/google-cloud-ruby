@@ -569,7 +569,7 @@ module Google
         #   end
         #
         def client instance_id, database_id, pool: {}, labels: nil,
-                   query_options: nil
+                   query_options: nil, database_role: nil
           # Convert from possible Google::Protobuf::Map
           labels = labels.to_h { |k, v| [String(k), String(v)] } if labels
           # Configs set by environment variables take over client-level configs.
@@ -581,7 +581,8 @@ module Google
           Client.new self, instance_id, database_id,
                      session_labels: labels,
                      pool_opts: valid_session_pool_options(pool),
-                     query_options: query_options
+                     query_options: query_options,
+                     database_role: database_role
         end
 
         ##
