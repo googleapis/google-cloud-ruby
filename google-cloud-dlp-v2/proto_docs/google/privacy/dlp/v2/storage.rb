@@ -37,6 +37,35 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Score is a summary of all elements in the data profile.
+        # A higher number means more sensitive.
+        # @!attribute [rw] score
+        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore::SensitivityScoreLevel]
+        #     The score applied to the resource.
+        class SensitivityScore
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Various score levels for resources.
+          module SensitivityScoreLevel
+            # Unused.
+            SENSITIVITY_SCORE_UNSPECIFIED = 0
+
+            # No sensitive information detected. Limited access.
+            SENSITIVITY_LOW = 10
+
+            # Medium risk - PII, potentially sensitive data, or fields with free-text
+            # data that are at higher risk of having intermittent sensitive data.
+            # Consider limiting access.
+            SENSITIVITY_MODERATE = 20
+
+            # High risk – SPII may be present. Exfiltration of data may lead to user
+            # data loss. Re-identification of users may be possible. Consider limiting
+            # usage and or removing SPII.
+            SENSITIVITY_HIGH = 30
+          end
+        end
+
         # A reference to a StoredInfoType to use with scanning.
         # @!attribute [rw] name
         #   @return [::String]
@@ -363,7 +392,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Options defining a file or a set of files within a Google Cloud Storage
+        # Options defining a file or a set of files within a Cloud Storage
         # bucket.
         # @!attribute [rw] file_set
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions::FileSet]
@@ -517,7 +546,7 @@ module Google
         #     Google Cloud Datastore options.
         # @!attribute [rw] cloud_storage_options
         #   @return [::Google::Cloud::Dlp::V2::CloudStorageOptions]
-        #     Google Cloud Storage options.
+        #     Cloud Storage options.
         # @!attribute [rw] big_query_options
         #   @return [::Google::Cloud::Dlp::V2::BigQueryOptions]
         #     BigQuery options.
@@ -531,7 +560,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Configuration of the timespan of the items to include in scanning.
-          # Currently only supported when inspecting Google Cloud Storage and BigQuery.
+          # Currently only supported when inspecting Cloud Storage and BigQuery.
           # @!attribute [rw] start_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Exclude files, tables, or rows older than this value.
@@ -545,7 +574,8 @@ module Google
           #     Specification of the field containing the timestamp of scanned items.
           #     Used for data sources like Datastore and BigQuery.
           #
-          #     For BigQuery:
+          #     <b>For BigQuery</b>
+          #
           #     If this value is not specified and the table was modified between the
           #     given start and end times, the entire table will be scanned. If this
           #     value is specified, then rows are filtered based on the given start and
@@ -554,17 +584,34 @@ module Google
           #     Valid data types of the provided BigQuery column are: `INTEGER`, `DATE`,
           #     `TIMESTAMP`, and `DATETIME`.
           #
-          #     For Datastore:
+          #     If your BigQuery table is [partitioned at ingestion
+          #     time](https://cloud.google.com/bigquery/docs/partitioned-tables#ingestion_time),
+          #     you can use any of the following pseudo-columns as your timestamp field.
+          #     When used with Cloud DLP, these pseudo-column names are case sensitive.
+          #
+          #     <ul>
+          #     <li><code>_PARTITIONTIME</code></li>
+          #     <li><code>_PARTITIONDATE</code></li>
+          #     <li><code>_PARTITION_LOAD_TIME</code></li>
+          #     </ul>
+          #
+          #     <b>For Datastore</b>
+          #
           #     If this value is specified, then entities are filtered based on the given
           #     start and end times. If an entity does not contain the provided timestamp
           #     property or contains empty or invalid values, then it is included.
           #     Valid data types of the provided timestamp property are: `TIMESTAMP`.
+          #
+          #     See the
+          #     [known issue](https://cloud.google.com/dlp/docs/known-issues#bq-timespan)
+          #     related to this operation.
           # @!attribute [rw] enable_auto_population_of_timespan_config
           #   @return [::Boolean]
           #     When the job is started by a JobTrigger we will automatically figure out
           #     a valid start_time to avoid scanning files that have not been modified
           #     since the last time the JobTrigger executed. This will be based on the
-          #     time of the execution of the last run of the JobTrigger.
+          #     time of the execution of the last run of the JobTrigger or the timespan
+          #     end_time used in the last run of the JobTrigger.
           class TimespanConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
