@@ -22,7 +22,7 @@ describe "Fine Grained Access Control", :spanner do
   let(:admin) { $spanner_db_admin }
   let(:instance_id) { $spanner_instance_id }
   let(:database_id) { $spanner_database_id }
-  let(:role) {"selector"}
+  let(:role) { "selector" }
 
   before do
     skip if emulator_enabled?
