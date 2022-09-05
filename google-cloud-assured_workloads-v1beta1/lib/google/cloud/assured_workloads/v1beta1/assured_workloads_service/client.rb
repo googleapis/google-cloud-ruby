@@ -640,8 +640,8 @@ module Google
             end
 
             ##
-            # A request to analyze a hypothetical move of a source project or
-            # project-based workload to a target (destination) folder-based workload.
+            # Analyze if the source Assured Workloads can be moved to the target Assured
+            # Workload
             #
             # @overload analyze_workload_move(request, options = nil)
             #   Pass arguments to `analyze_workload_move` via a request object, either of type

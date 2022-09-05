@@ -56,8 +56,8 @@ module Google
             rpc :DeleteWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::DeleteWorkloadRequest, ::Google::Protobuf::Empty
             # Gets Assured Workload associated with a CRM Node
             rpc :GetWorkload, ::Google::Cloud::AssuredWorkloads::V1beta1::GetWorkloadRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::Workload
-            # A request to analyze a hypothetical move of a source project or
-            # project-based workload to a target (destination) folder-based workload.
+            # Analyze if the source Assured Workloads can be moved to the target Assured
+            # Workload
             rpc :AnalyzeWorkloadMove, ::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::AnalyzeWorkloadMoveResponse
             # Lists Assured Workloads under a CRM Node.
             rpc :ListWorkloads, ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsRequest, ::Google::Cloud::AssuredWorkloads::V1beta1::ListWorkloadsResponse
