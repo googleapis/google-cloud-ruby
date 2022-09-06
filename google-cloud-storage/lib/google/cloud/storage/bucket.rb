@@ -302,6 +302,20 @@ module Google
         end
 
         ##
+        # Returns the list of regional locations for custom dual-region buckets.
+        #
+        # @return [String, nil] Returns nil if the property has not been set before creation,
+        # if the bucket's resource has not been loaded from the server,
+        # or if the bucket is not a dual-regions bucket.
+
+        # @see https://cloud.google.com/storage/docs/json_api/v1/buckets and
+        # https://cloud.google.com/storage/docs/locations
+        #
+        def data_locations
+          @gapi.custom_placement_config&.data_locations
+        end
+
+        ##
         # The destination bucket name for the bucket's logs.
         #
         # @return [String]

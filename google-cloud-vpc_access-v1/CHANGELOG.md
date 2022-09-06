@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.3.0 (2022-08-24)
+
+#### Features
+
+* Support for locations operations 
+* Support machine type and instance scaling parameters for connectors ([#19052](https://github.com/googleapis/google-cloud-ruby/issues/19052)) 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features

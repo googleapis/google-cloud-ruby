@@ -21,8 +21,8 @@ module Google
   module Cloud
     module ApigeeRegistry
       module V1
-        # An Api is a top-level description of an API.
-        # Apis are produced by producers and are commitments to provide services.
+        # A top-level description of an API.
+        # Produced by producers and are commitments to provide services.
         # @!attribute [rw] name
         #   @return [::String]
         #     Resource name.
@@ -42,15 +42,15 @@ module Google
         #   @return [::String]
         #     A user-definable description of the availability of this service.
         #     Format: free-form, but we expect single words that describe availability,
-        #     e.g. "NONE", "TESTING", "PREVIEW", "GENERAL", "DEPRECATED", "SHUTDOWN".
+        #     e.g., "NONE", "TESTING", "PREVIEW", "GENERAL", "DEPRECATED", "SHUTDOWN".
         # @!attribute [rw] recommended_version
         #   @return [::String]
         #     The recommended version of the API.
-        #     Format: apis/\\{api}/versions/\\{version}
+        #     Format: `apis/{api}/versions/{version}`
         # @!attribute [rw] recommended_deployment
         #   @return [::String]
         #     The recommended deployment of the API.
-        #     Format: apis/\\{api}/deployments/\\{deployment}
+        #     Format: `apis/{api}/deployments/{deployment}`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels attach identifying metadata to resources. Identifying metadata can
@@ -58,13 +58,13 @@ module Google
         #
         #     Label keys and values can be no longer than 64 characters
         #     (Unicode codepoints), can only contain lowercase letters, numeric
-        #     characters, underscores and dashes. International characters are allowed.
+        #     characters, underscores, and dashes. International characters are allowed.
         #     No more than 64 user labels can be associated with one resource (System
         #     labels are excluded).
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
         #     System reserved label keys are prefixed with
-        #     "apigeeregistry.googleapis.com/" and cannot be changed.
+        #     `apigeeregistry.googleapis.com/` and cannot be changed.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Annotations attach non-identifying metadata to resources.
@@ -95,7 +95,7 @@ module Google
           end
         end
 
-        # An ApiVersion describes a particular version of an API.
+        # Describes a particular version of an API.
         # ApiVersions are what consumers actually use.
         # @!attribute [rw] name
         #   @return [::String]
@@ -116,7 +116,7 @@ module Google
         #   @return [::String]
         #     A user-definable description of the lifecycle phase of this API version.
         #     Format: free-form, but we expect single words that describe API maturity,
-        #     e.g. "CONCEPT", "DESIGN", "DEVELOPMENT", "STAGING", "PRODUCTION",
+        #     e.g., "CONCEPT", "DESIGN", "DEVELOPMENT", "STAGING", "PRODUCTION",
         #     "DEPRECATED", "RETIRED".
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
@@ -131,7 +131,7 @@ module Google
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
         #     System reserved label keys are prefixed with
-        #     "apigeeregistry.googleapis.com/" and cannot be changed.
+        #     `apigeeregistry.googleapis.com/` and cannot be changed.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Annotations attach non-identifying metadata to resources.
@@ -162,11 +162,11 @@ module Google
           end
         end
 
-        # An ApiSpec describes a version of an API in a structured way.
+        # Describes a version of an API in a structured way.
         # ApiSpecs provide formal descriptions that consumers can use to use a version.
         # ApiSpec resources are intended to be fully-resolved descriptions of an
         # ApiVersion. When specs consist of multiple files, these should be bundled
-        # together (e.g. in a zip archive) and stored as a unit. Multiple specs can
+        # together (e.g., in a zip archive) and stored as a unit. Multiple specs can
         # exist to provide representations in different API description formats.
         # Synchronization of these representations would be provided by tooling and
         # background services.
@@ -197,8 +197,8 @@ module Google
         #   @return [::String]
         #     A style (format) descriptor for this spec that is specified as a Media Type
         #     (https://en.wikipedia.org/wiki/Media_type). Possible values include
-        #     "application/vnd.apigee.proto", "application/vnd.apigee.openapi", and
-        #     "application/vnd.apigee.graphql", with possible suffixes representing
+        #     `application/vnd.apigee.proto`, `application/vnd.apigee.openapi`, and
+        #     `application/vnd.apigee.graphql`, with possible suffixes representing
         #     compression types. These hypothetical names are defined in the vendor tree
         #     defined in RFC6838 (https://tools.ietf.org/html/rfc6838) and are not final.
         #     Content types can specify compression. Currently only GZip compression is
@@ -235,7 +235,7 @@ module Google
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
         #     System reserved label keys are prefixed with
-        #     "apigeeregistry.googleapis.com/" and cannot be changed.
+        #     `apigeeregistry.googleapis.com/` and cannot be changed.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Annotations attach non-identifying metadata to resources.
@@ -266,7 +266,7 @@ module Google
           end
         end
 
-        # An ApiDeployment describes a service running at particular address that
+        # Describes a service running at particular address that
         # provides a particular version of an API. ApiDeployments have revisions which
         # correspond to different configurations of a single deployment in time.
         # Revision identifiers should be updated whenever the served API spec or
@@ -296,16 +296,16 @@ module Google
         #     Output only. Last update timestamp: when the represented revision was last modified.
         # @!attribute [rw] api_spec_revision
         #   @return [::String]
-        #     The full resource name (including revision id) of the spec of the API being
+        #     The full resource name (including revision ID) of the spec of the API being
         #     served by the deployment. Changes to this value will update the revision.
-        #     Format: apis/\\{api}/deployments/\\{deployment}
+        #     Format: `apis/{api}/deployments/{deployment}`
         # @!attribute [rw] endpoint_uri
         #   @return [::String]
         #     The address where the deployment is serving. Changes to this value will
         #     update the revision.
         # @!attribute [rw] external_channel_uri
         #   @return [::String]
-        #     The address of the external channel of the API (e.g. the Developer
+        #     The address of the external channel of the API (e.g., the Developer
         #     Portal). Changes to this value will not affect the revision.
         # @!attribute [rw] intended_audience
         #   @return [::String]
@@ -328,7 +328,7 @@ module Google
         #
         #     See https://goo.gl/xmQnxf for more information and examples of labels.
         #     System reserved label keys are prefixed with
-        #     "apigeeregistry.googleapis.com/" and cannot be changed.
+        #     `apigeeregistry.googleapis.com/` and cannot be changed.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Annotations attach non-identifying metadata to resources.
@@ -363,8 +363,8 @@ module Google
         # and are used to store metadata that is too large or numerous to be stored
         # directly on the resource. Since artifacts are stored separately from parent
         # resources, they should generally be used for metadata that is needed
-        # infrequently, i.e. not for display in primary views of the resource but
-        # perhaps displayed or downloaded upon request. The ListArtifacts method
+        # infrequently, i.e., not for display in primary views of the resource but
+        # perhaps displayed or downloaded upon request. The `ListArtifacts` method
         # allows artifacts to be quickly enumerated and checked for presence without
         # downloading their (potentially-large) contents.
         # @!attribute [rw] name

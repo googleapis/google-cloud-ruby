@@ -1,5 +1,34 @@
 # Changelog
 
+### 0.12.0 (2022-08-25)
+
+#### Features
+
+* Support for input artifacts for pipeline jobs 
+* Support read mask when listing pipeline jobs ([#19071](https://github.com/googleapis/google-cloud-ruby/issues/19071)) 
+
+### 0.11.0 (2022-08-24)
+
+#### Features
+
+* Support for index_stats and index_update_method 
+* Support for upserting and removing datapoints ([#19053](https://github.com/googleapis/google-cloud-ruby/issues/19053)) 
+
+### 0.10.0 (2022-08-01)
+
+#### Features
+
+* add SHARED_RESOURCES to DeploymentResourcesType  
+#### Documentation
+
+* cleanup docs 
+
+### 0.9.1 (2022-07-27)
+
+#### Bug Fixes
+
+* Set x-goog-request-params on long-running-operations calls ([#18877](https://github.com/googleapis/google-cloud-ruby/issues/18877)) 
+
 ### 0.9.0 (2022-07-01)
 
 #### Features

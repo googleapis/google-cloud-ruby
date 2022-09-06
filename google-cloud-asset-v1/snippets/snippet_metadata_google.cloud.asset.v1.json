@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-asset-v1",
-    "version": "0.20.0",
+    "version": "0.21.0",
     "language": "RUBY",
     "apis": [
       {
@@ -515,6 +515,46 @@
         "method": {
           "short_name": "AnalyzeMove",
           "full_name": "google.cloud.asset.v1.AssetService.AnalyzeMove",
+          "service": {
+            "short_name": "AssetService",
+            "full_name": "google.cloud.asset.v1.AssetService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudasset_v1_generated_AssetService_QueryAssets_sync",
+      "title": "Snippet for query_assets in AssetService",
+      "description": "Basic snippet for query_assets in AssetService",
+      "file": "asset_service/query_assets.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "query_assets",
+        "full_name": "::Google::Cloud::Asset::V1::AssetService::Client#query_assets",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Asset::V1::QueryAssetsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Asset::V1::QueryAssetsResponse",
+        "client": {
+          "short_name": "AssetService::Client",
+          "full_name": "::Google::Cloud::Asset::V1::AssetService::Client"
+        },
+        "method": {
+          "short_name": "QueryAssets",
+          "full_name": "google.cloud.asset.v1.AssetService.QueryAssets",
           "service": {
             "short_name": "AssetService",
             "full_name": "google.cloud.asset.v1.AssetService"

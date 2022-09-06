@@ -54,10 +54,9 @@ module Google
         end
 
         def self.format_row row, fields
-          row_pairs = fields.zip(row[:f]).map do |f, v|
+          fields.zip(row[:f]).to_h do |f, v|
             [f.name.to_sym, format_value(v, f)]
           end
-          Hash[row_pairs]
         end
 
         # rubocop:disable all
@@ -123,10 +122,9 @@ module Google
             array_values = json_value.map { |v| to_query_param_value v, type }
             Google::Apis::BigqueryV2::QueryParameterValue.new array_values: array_values
           when Hash
-            struct_pairs = json_value.map do |k, v|
+            struct_values = json_value.to_h do |k, v|
               [String(k), to_query_param_value(v, type)]
             end
-            struct_values = Hash[struct_pairs]
             Google::Apis::BigqueryV2::QueryParameterValue.new struct_values: struct_values
           else
             # Everything else is converted to a string, per the API expectations.
@@ -239,7 +237,7 @@ module Google
             type = extract_array_type type
             value.map { |x| to_json_value x, type }
           elsif Hash === value
-            Hash[value.map { |k, v| [k.to_s, to_json_value(v, type)] }]
+            value.to_h { |k, v| [k.to_s, to_json_value(v, type)] }
           else
             value
           end
@@ -266,7 +264,7 @@ module Google
         end
 
         def self.to_json_row row
-          Hash[row.map { |k, v| [k.to_s, to_json_value(v)] }]
+          row.to_h { |k, v| [k.to_s, to_json_value(v)] }
         end
 
         def self.resolve_legacy_sql standard_sql, legacy_sql

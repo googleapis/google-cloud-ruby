@@ -29,7 +29,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
   it "updates its uniform_bucket_level_access" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, uniform_bucket_level_access: true, locked_time: true),
-                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args
+                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args(options: {retries: 0})
     bucket.service.mocked_service = mock
 
     _(bucket.uniform_bucket_level_access?).must_equal false
@@ -45,7 +45,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
   it "updates its uniform_bucket_level_access with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, uniform_bucket_level_access: true, locked_time: true),
-                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args(user_project: "test")
+                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args(user_project: "test", options: {retries: 0})
 
     bucket_user_project.service.mocked_service = mock
 
@@ -67,7 +67,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
   it "updates its DEPRECATED policy_only" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, uniform_bucket_level_access: true, locked_time: true),
-                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args
+                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args(options: {retries: 0})
     bucket.service.mocked_service = mock
 
     _(bucket.policy_only?).must_equal false
@@ -83,7 +83,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :mock_sto
   it "updates its DEPRECATED policy_only with user_project set to true" do
     mock = Minitest::Mock.new
     mock.expect :patch_bucket, resp_bucket_gapi(bucket_hash, uniform_bucket_level_access: true, locked_time: true),
-                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args(user_project: "test")
+                [bucket_name, patch_bucket_gapi(uniform_bucket_level_access: true)], **patch_bucket_args(user_project: "test", options: {retries: 0})
 
     bucket_user_project.service.mocked_service = mock
 

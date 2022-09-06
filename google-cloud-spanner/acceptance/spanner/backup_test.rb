@@ -19,7 +19,6 @@ describe "Spanner Database Backup", :spanner do
   let(:instance_id) { $spanner_instance_id }
   let(:database_id) { $spanner_database_id }
   let(:expire_time) { Time.now + 36_000 }
-  let(:version_time) { Time.now }
 
   it "creates, get, updates, restore and delete a database backup" do
     skip if emulator_enabled?
@@ -27,6 +26,7 @@ describe "Spanner Database Backup", :spanner do
     backup_id = "#{$spanner_database_id}-crud"
     database = spanner.database instance_id, database_id
     _(database).wont_be :nil?
+    version_time = database.earliest_version_time
 
     encryption_config = { encryption_type: :GOOGLE_DEFAULT_ENCRYPTION }
 
@@ -53,7 +53,7 @@ describe "Spanner Database Backup", :spanner do
     _(backup.expire_time.to_i).must_equal expire_time.to_i
     _(backup.version_time.to_i).must_equal version_time.to_i
     _(backup.create_time).must_be_kind_of Time
-    _(backup.size_in_bytes).must_be :>, 0
+    _(backup.size_in_bytes).must_be :>=, 0
     _(backup.encryption_info).must_be_kind_of Google::Cloud::Spanner::Admin::Database::V1::EncryptionInfo
     _(backup.encryption_info.encryption_type).must_equal :GOOGLE_DEFAULT_ENCRYPTION
 
@@ -70,7 +70,7 @@ describe "Spanner Database Backup", :spanner do
     _(backup.expire_time.to_i).must_equal expire_time.to_i
     _(backup.version_time.to_i).must_equal version_time.to_i
     _(backup.create_time).must_be_kind_of Time
-    _(backup.size_in_bytes).must_be :>, 0
+    _(backup.size_in_bytes).must_be :>=, 0
 
     # Update
     backup.expire_time = expire_time + 3600

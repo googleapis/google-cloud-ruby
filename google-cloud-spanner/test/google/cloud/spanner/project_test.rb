@@ -15,8 +15,29 @@
 require "helper"
 
 describe Google::Cloud::Spanner::Project, :mock_spanner do
+  let(:instance_id) { "my-instance-id" }
+  let(:database_id) { "my-database-id" }
+  let(:session_id) { "session123" }
+  let(:session_grpc) {
+    Google::Cloud::Spanner::V1::Session.new name: session_path(instance_id, database_id, session_id)
+  }
+  let(:session) { Google::Cloud::Spanner::Session.from_grpc session_grpc, spanner.service }
+  let(:batch_create_sessions_grpc) {
+    Google::Cloud::Spanner::V1::BatchCreateSessionsResponse.new session: [session_grpc]
+  }
+
   it "knows the project identifier" do
     _(spanner).must_be_kind_of Google::Cloud::Spanner::Project
     _(spanner.project_id).must_equal project
+  end
+
+  it "creates client with database role" do
+    mock = Minitest::Mock.new
+    request_session = Google::Cloud::Spanner::V1::Session.new labels: nil, creator_role: "test_role"
+    mock.expect :batch_create_sessions, batch_create_sessions_grpc, [Hash,::Gapic::CallOptions]
+    spanner.service.mocked_service = mock
+
+    client = spanner.client instance_id, database_id, pool: { min: 1, max: 1 }, database_role: "test-role"
+    _(client.database_role).must_equal "test-role"
   end
 end

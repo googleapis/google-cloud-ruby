@@ -293,20 +293,20 @@ module Google
         end
 
         def create_session database_name, labels: nil,
-                           call_options: nil
+                           call_options: nil, database_role: nil
           opts = default_options session_name: database_name,
                                  call_options: call_options
-          session = V1::Session.new labels: labels if labels
+          session = V1::Session.new labels: labels, creator_role: database_role if labels || database_role
           service.create_session(
             { database: database_name, session: session }, opts
           )
         end
 
         def batch_create_sessions database_name, session_count, labels: nil,
-                                  call_options: nil
+                                  call_options: nil, database_role: nil
           opts = default_options session_name: database_name,
                                  call_options: call_options
-          session = V1::Session.new labels: labels if labels
+          session = V1::Session.new labels: labels, creator_role: database_role if labels || database_role
           # The response may have fewer sessions than requested in the RPC.
           request = {
             database: database_name,
@@ -604,7 +604,7 @@ module Google
             opts[:timeout] = call_options[:timeout] if call_options[:timeout]
             opts[:retry_policy] = call_options[:retry_policy] if call_options[:retry_policy]
           end
-          return opts unless opts.empty?
+          ::Gapic::CallOptions.new(**opts)
         end
 
         def partition_options partition_size_bytes, max_partitions

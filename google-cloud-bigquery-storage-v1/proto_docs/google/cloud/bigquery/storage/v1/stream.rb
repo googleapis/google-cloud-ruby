@@ -88,10 +88,53 @@ module Google
             # Options dictating how we read a table.
             # @!attribute [rw] selected_fields
             #   @return [::Array<::String>]
-            #     Names of the fields in the table that should be read. If empty, all
-            #     fields will be read. If the specified field is a nested field, all
-            #     the sub-fields in the field will be selected. The output field order is
-            #     unrelated to the order of fields in selected_fields.
+            #     Optional. The names of the fields in the table to be returned. If no
+            #     field names are specified, then all fields in the table are returned.
+            #
+            #     Nested fields -- the child elements of a STRUCT field -- can be selected
+            #     individually using their fully-qualified names, and will be returned as
+            #     record fields containing only the selected nested fields. If a STRUCT
+            #     field is specified in the selected fields list, all of the child elements
+            #     will be returned.
+            #
+            #     As an example, consider a table with the following schema:
+            #
+            #       {
+            #           "name": "struct_field",
+            #           "type": "RECORD",
+            #           "mode": "NULLABLE",
+            #           "fields": [
+            #               {
+            #                   "name": "string_field1",
+            #                   "type": "STRING",
+            #     .              "mode": "NULLABLE"
+            #               },
+            #               {
+            #                   "name": "string_field2",
+            #                   "type": "STRING",
+            #                   "mode": "NULLABLE"
+            #               }
+            #           ]
+            #       }
+            #
+            #     Specifying "struct_field" in the selected fields list will result in a
+            #     read session schema with the following logical structure:
+            #
+            #       struct_field {
+            #           string_field1
+            #           string_field2
+            #       }
+            #
+            #     Specifying "struct_field.string_field1" in the selected fields list will
+            #     result in a read session schema with the following logical structure:
+            #
+            #       struct_field {
+            #           string_field1
+            #       }
+            #
+            #     The order of the fields in the read session schema is derived from the
+            #     table schema and does not correspond to the order in which the fields are
+            #     specified in this list.
             # @!attribute [rw] row_restriction
             #   @return [::String]
             #     SQL text filtering statement, similar to a WHERE clause in a query.
@@ -107,6 +150,9 @@ module Google
             # @!attribute [rw] arrow_serialization_options
             #   @return [::Google::Cloud::Bigquery::Storage::V1::ArrowSerializationOptions]
             #     Optional. Options specific to the Apache Arrow output format.
+            # @!attribute [rw] avro_serialization_options
+            #   @return [::Google::Cloud::Bigquery::Storage::V1::AvroSerializationOptions]
+            #     Optional. Options specific to the Apache Avro output format
             class TableReadOptions
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

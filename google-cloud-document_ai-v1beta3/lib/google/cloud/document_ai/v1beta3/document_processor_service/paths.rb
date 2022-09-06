@@ -79,6 +79,27 @@ module Google
               "projects/#{project}/locations/#{location}/processors/#{processor}"
             end
 
+            ##
+            # Create a fully-qualified ProcessorVersion resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/processors/{processor}/processorVersions/{processor_version}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param processor [String]
+            # @param processor_version [String]
+            #
+            # @return [::String]
+            def processor_version_path project:, location:, processor:, processor_version:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "processor cannot contain /" if processor.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/processors/#{processor}/processorVersions/#{processor_version}"
+            end
+
             extend self
           end
         end

@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.3.1 (2022-09-02)
+
+#### Bug Fixes
+
+* Updates to retry delay and retryable error codes ([#19099](https://github.com/googleapis/google-cloud-ruby/issues/19099)) 
+
+### 0.3.0 (2022-08-24)
+
+#### Features
+
+* added support for the "force" argument for delete operations ([#19042](https://github.com/googleapis/google-cloud-ruby/issues/19042)) 
+
 ### 0.2.0 (2022-07-01)
 
 #### Features

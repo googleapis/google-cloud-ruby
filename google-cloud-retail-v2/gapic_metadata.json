@@ -29,6 +29,41 @@
               "methods": [
                 "get_default_branch"
               ]
+            },
+            "GetCompletionConfig": {
+              "methods": [
+                "get_completion_config"
+              ]
+            },
+            "UpdateCompletionConfig": {
+              "methods": [
+                "update_completion_config"
+              ]
+            },
+            "GetAttributesConfig": {
+              "methods": [
+                "get_attributes_config"
+              ]
+            },
+            "UpdateAttributesConfig": {
+              "methods": [
+                "update_attributes_config"
+              ]
+            },
+            "AddCatalogAttribute": {
+              "methods": [
+                "add_catalog_attribute"
+              ]
+            },
+            "RemoveCatalogAttribute": {
+              "methods": [
+                "remove_catalog_attribute"
+              ]
+            },
+            "ReplaceCatalogAttribute": {
+              "methods": [
+                "replace_catalog_attribute"
+              ]
             }
           }
         }
@@ -47,6 +82,40 @@
             "ImportCompletionData": {
               "methods": [
                 "import_completion_data"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ControlService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ControlService::Client",
+          "rpcs": {
+            "CreateControl": {
+              "methods": [
+                "create_control"
+              ]
+            },
+            "DeleteControl": {
+              "methods": [
+                "delete_control"
+              ]
+            },
+            "UpdateControl": {
+              "methods": [
+                "update_control"
+              ]
+            },
+            "GetControl": {
+              "methods": [
+                "get_control"
+              ]
+            },
+            "ListControls": {
+              "methods": [
+                "list_controls"
               ]
             }
           }
@@ -139,6 +208,50 @@
             "Search": {
               "methods": [
                 "search"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "ServingConfigService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Cloud::Retail::V2::ServingConfigService::Client",
+          "rpcs": {
+            "CreateServingConfig": {
+              "methods": [
+                "create_serving_config"
+              ]
+            },
+            "DeleteServingConfig": {
+              "methods": [
+                "delete_serving_config"
+              ]
+            },
+            "UpdateServingConfig": {
+              "methods": [
+                "update_serving_config"
+              ]
+            },
+            "GetServingConfig": {
+              "methods": [
+                "get_serving_config"
+              ]
+            },
+            "ListServingConfigs": {
+              "methods": [
+                "list_serving_configs"
+              ]
+            },
+            "AddControl": {
+              "methods": [
+                "add_control"
+              ]
+            },
+            "RemoveControl": {
+              "methods": [
+                "remove_control"
               ]
             }
           }

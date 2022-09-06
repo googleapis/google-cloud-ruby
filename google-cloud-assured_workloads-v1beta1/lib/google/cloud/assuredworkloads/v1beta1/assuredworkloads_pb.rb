@@ -3,13 +3,9 @@
 
 require 'google/protobuf'
 
-require 'google/api/annotations_pb'
-require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
-require 'google/longrunning/operations_pb'
 require 'google/protobuf/duration_pb'
-require 'google/protobuf/empty_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 
@@ -24,12 +20,33 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :workload, :message, 1, "google.cloud.assuredworkloads.v1beta1.Workload"
       optional :update_mask, :message, 2, "google.protobuf.FieldMask"
     end
+    add_message "google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest" do
+      optional :name, :string, 1
+      optional :restriction_type, :enum, 2, "google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType"
+    end
+    add_enum "google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType" do
+      value :RESTRICTION_TYPE_UNSPECIFIED, 0
+      value :ALLOW_ALL_GCP_RESOURCES, 1
+      value :ALLOW_COMPLIANT_RESOURCES, 2
+    end
+    add_message "google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse" do
+    end
     add_message "google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest" do
       optional :name, :string, 1
       optional :etag, :string, 2
     end
     add_message "google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest" do
       optional :name, :string, 1
+    end
+    add_message "google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest" do
+      optional :target, :string, 2
+      oneof :projectOrWorkloadResource do
+        optional :source, :string, 1
+        optional :project, :string, 3
+      end
+    end
+    add_message "google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse" do
+      repeated :blockers, :string, 1
     end
     add_message "google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest" do
       optional :parent, :string, 1
@@ -56,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kaj_enrollment_state, :enum, 17, "google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState"
       optional :enable_sovereign_controls, :bool, 18
       optional :saa_enrollment_response, :message, 20, "google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse"
+      repeated :compliant_but_disallowed_services, :string, 24
       oneof :compliance_regime_settings do
         optional :il4_settings, :message, 7, "google.cloud.assuredworkloads.v1beta1.Workload.IL4Settings"
         optional :cjis_settings, :message, 8, "google.cloud.assuredworkloads.v1beta1.Workload.CJISSettings"
@@ -123,6 +141,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EU_REGIONS_AND_SUPPORT, 8
       value :CA_REGIONS_AND_SUPPORT, 9
       value :ITAR, 10
+      value :AU_REGIONS_AND_US_SUPPORT, 11
     end
     add_enum "google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState" do
       value :KAJ_ENROLLMENT_STATE_UNSPECIFIED, 0
@@ -145,8 +164,13 @@ module Google
       module V1beta1
         CreateWorkloadRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.CreateWorkloadRequest").msgclass
         UpdateWorkloadRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.UpdateWorkloadRequest").msgclass
+        RestrictAllowedResourcesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest").msgclass
+        RestrictAllowedResourcesRequest::RestrictionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesRequest.RestrictionType").enummodule
+        RestrictAllowedResourcesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.RestrictAllowedResourcesResponse").msgclass
         DeleteWorkloadRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.DeleteWorkloadRequest").msgclass
         GetWorkloadRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.GetWorkloadRequest").msgclass
+        AnalyzeWorkloadMoveRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveRequest").msgclass
+        AnalyzeWorkloadMoveResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.AnalyzeWorkloadMoveResponse").msgclass
         ListWorkloadsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.ListWorkloadsRequest").msgclass
         ListWorkloadsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.ListWorkloadsResponse").msgclass
         Workload = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1beta1.Workload").msgclass

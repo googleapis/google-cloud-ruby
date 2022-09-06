@@ -14,10 +14,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require "json"
-require "set"
-
 TASKS = ["test", "rubocop", "build", "yard", "linkinator", "acceptance", "samples-master", "samples-latest"]
+ISSUE_TASKS = ["bundle", "test", "rubocop", "build", "yard", "linkinator"]
+FAILURES_REPORT_PATH = "tmp/ci-failures.json"
 
 desc "Run CI tasks."
 
@@ -58,6 +57,9 @@ end
 flag :load_kokoro_context do |f|
   f.desc "Load Kokoro credentials and environment info"
 end
+flag :failures_report, "--failures-report[=PATH]" do |f|
+  f.desc "Generate failures report file"
+end
 
 at_least_one_required desc: "Tasks" do
   flag :do_bundle, "--[no-]bundle" do |f|
@@ -78,8 +80,15 @@ end
 
 include :exec
 include :terminal, styled: true
+include :fileutils
 
 def run
+  require "json"
+  require "set"
+
+  set :failures_report, true if github_event_name == "schedule"
+  set :failures_report, FAILURES_REPORT_PATH if failures_report == true
+
   if load_kokoro_context
     require "repo_context"
     RepoContext.load_kokoro_env
@@ -101,14 +110,8 @@ def run
   end
 
   dirs.shuffle.each { |dir| run_in_dir dir }
-  puts
-  if @errors.empty?
-    puts "CI passed", :bold, :green
-  else
-    puts "FAILURES:", :bold, :red
-    @errors.each { |err| puts err, :yellow }
-    exit 1
-  end
+
+  handle_results
 end
 
 def setup_auth_env
@@ -299,7 +302,7 @@ def run_in_dir dir
       puts "#{dir}: bundle ...", :bold, :cyan
       result = exec ["bundle", @bundle_task]
       unless result.success?
-        @errors << "#{dir}: bundle"
+        @errors << [dir, "bundle"]
         next
       end
     end
@@ -311,7 +314,7 @@ def run_in_dir dir
       else
         exec(["bundle", "exec", "rake", task.tr("-", ":")], env: @auth_env).success?
       end
-      @errors << "#{dir}: #{task}" unless success
+      @errors << [dir, task] unless success
     end
   end
 end
@@ -324,7 +327,7 @@ def run_linkinator dir
     "^https://cloud\\.google\\.com/ruby/docs/reference/#{dir}/latest$",
     "^https://rubygems.org/gems/#{dir_without_version}"
   ]
-  linkinator_cmd = ["npx", "linkinator", "./doc", "--skip", skip_regexes.join(" ")]
+  linkinator_cmd = ["npx", "linkinator", "./doc", "--retry-errors", "--skip", skip_regexes.join(" ")]
   result = exec linkinator_cmd, out: :capture, err: [:child, :out]
   puts result.captured_out
   checked_links = result.captured_out.split "\n"
@@ -333,4 +336,97 @@ def run_linkinator dir
     puts link, :yellow
   end
   checked_links.empty?
+end
+
+def handle_results
+  puts
+  if @errors.empty?
+    puts "CI passed", :bold, :green
+  else
+    puts "FAILURES:", :bold, :red
+    @errors.each { |dir, task| puts "#{dir}: #{task}", :yellow }
+    if failures_report
+      mkdir_p File.dirname failures_report
+      File.write failures_report, generate_failures_json
+    end
+    puts "Wrote failures report file to #{failures_report}"
+    exit 1
+  end
+end
+
+def generate_failures_json
+  failures_by_dir = {}
+  @errors.each do |dir, task|
+    (failures_by_dir[dir] ||= []) << task if ISSUE_TASKS.include? task
+  end
+  JSON.generate failures_by_dir
+end
+
+tool "report-failures" do
+  flag :report_path, "--report-path=PATH", default: FAILURES_REPORT_PATH
+
+  include :exec, e: true
+  include :terminal
+
+  def run
+    require "digest/md5"
+    require "json"
+    failures_json = File.read report_path rescue ""
+    if failures_json.empty?
+      puts "No failures report at #{report_path}", :yellow
+      exit 1
+    end
+    failures_by_dir = JSON.parse failures_json
+    failures_by_dir.each do |dir, tasks|
+      issue_id = find_existing_issue dir
+      if issue_id
+        update_issue issue_id, dir, tasks
+      else
+        create_new_issue dir, tasks
+      end
+    end
+  end
+
+  def find_existing_issue dir
+    encoded_dir = encode_str dir
+    result = capture [
+      "gh", "issue", "list",
+      "--repo", "googleapis/google-cloud-ruby",
+      "--search", "#{encoded_dir} in:body state:open type:issue label:\"nightly failure\"",
+      "--json", "number"
+    ]
+    result = JSON.parse result rescue []
+    result.first["number"] unless result.empty?
+  end
+  
+  def update_issue issue_id, dir, tasks
+    body = create_body dir, tasks
+    exec [
+      "gh", "issue", "comment", issue_id.to_s,
+      "--repo", "googleapis/google-cloud-ruby",
+      "--body", body
+    ]
+    puts "Added to issue #{issue_id}: reported #{dir}: #{tasks.join ', '}", :yellow
+  end
+  
+  def create_new_issue dir, tasks
+    body = "#{create_body dir, tasks}\n\n#{encode_str dir}"
+    exec [
+      "gh", "issue", "create",
+      "--repo", "googleapis/google-cloud-ruby",
+      "--title", "[Nightly CI Failures] Failures detected for #{dir}",
+      "--label", "type: bug,priority: p1,nightly failure",
+      "--body", body,
+    ]
+    puts "Created new issue for #{dir}: #{tasks.join ', '}", :yellow
+  end
+  
+  def encode_str str
+    "report_key_#{Digest::MD5.hexdigest str}"
+  end
+  
+  def create_body dir, tasks
+    now = Time.now.utc.strftime "%Y-%m-%d %H:%M:%S"
+    "At #{now} UTC, detected failures in #{dir} for: #{tasks.join ', '}"
+  end
 end

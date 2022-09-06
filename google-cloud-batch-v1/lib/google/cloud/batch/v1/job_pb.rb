@@ -83,6 +83,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.batch.v1.AllocationPolicy.Disk" do
       optional :type, :string, 1
       optional :size_gb, :int64, 2
+      optional :disk_interface, :string, 6
       oneof :data_source do
         optional :image, :string, 4
         optional :snapshot, :string, 5
@@ -98,6 +99,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.batch.v1.AllocationPolicy.Accelerator" do
       optional :type, :string, 1
       optional :count, :int64, 2
+      optional :install_gpu_drivers, :bool, 3
     end
     add_message "google.cloud.batch.v1.AllocationPolicy.InstancePolicy" do
       optional :machine_type, :string, 2

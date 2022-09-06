@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the GlobalPublicDelegatedPrefixes service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -241,8 +241,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/publicDelegatedPrefixes/{public_delegated_prefix}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["public_delegated_prefix", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["public_delegated_prefix", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -263,8 +263,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/publicDelegatedPrefixes/{public_delegated_prefix}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["public_delegated_prefix", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["public_delegated_prefix", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -286,7 +286,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/publicDelegatedPrefixes",
                                                           body: "public_delegated_prefix_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -307,7 +307,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/publicDelegatedPrefixes",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -329,8 +329,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/publicDelegatedPrefixes/{public_delegated_prefix}",
                                                           body: "public_delegated_prefix_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["public_delegated_prefix", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["public_delegated_prefix", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

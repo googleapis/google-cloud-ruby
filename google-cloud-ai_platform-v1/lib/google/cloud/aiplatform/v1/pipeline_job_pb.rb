@@ -42,6 +42,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gcs_output_directory, :string, 2
       map :parameter_values, :string, :message, 3, "google.protobuf.Value"
       optional :failure_policy, :enum, 4, "google.cloud.aiplatform.v1.PipelineFailurePolicy"
+      map :input_artifacts, :string, :message, 5, "google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig.InputArtifact"
+    end
+    add_message "google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig.InputArtifact" do
+      oneof :kind do
+        optional :artifact_id, :string, 1
+      end
     end
     add_message "google.cloud.aiplatform.v1.PipelineTemplateMetadata" do
       optional :version, :string, 3
@@ -108,6 +114,7 @@ module Google
       module V1
         PipelineJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineJob").msgclass
         PipelineJob::RuntimeConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig").msgclass
+        PipelineJob::RuntimeConfig::InputArtifact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineJob.RuntimeConfig.InputArtifact").msgclass
         PipelineTemplateMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineTemplateMetadata").msgclass
         PipelineJobDetail = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineJobDetail").msgclass
         PipelineTaskDetail = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PipelineTaskDetail").msgclass

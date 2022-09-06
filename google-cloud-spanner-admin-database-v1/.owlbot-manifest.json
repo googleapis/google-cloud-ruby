@@ -54,6 +54,7 @@
     "snippets/database_admin/list_backup_operations.rb",
     "snippets/database_admin/list_backups.rb",
     "snippets/database_admin/list_database_operations.rb",
+    "snippets/database_admin/list_database_roles.rb",
     "snippets/database_admin/list_databases.rb",
     "snippets/database_admin/restore_database.rb",
     "snippets/database_admin/set_iam_policy.rb",

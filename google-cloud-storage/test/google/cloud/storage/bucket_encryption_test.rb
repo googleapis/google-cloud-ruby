@@ -40,7 +40,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
         mock = Minitest::Mock.new
         mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: key_options)
+          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, options: key_options.merge(retries: 0))
 
         bucket.service.mocked_service = mock
 
@@ -75,7 +75,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
     it "gets and sets its encryption config" do
       mock = Minitest::Mock.new
       patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(kms_key)
-      mock.expect :patch_bucket, patch_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args
+      mock.expect :patch_bucket, patch_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
       bucket.service.mocked_service = mock
 
@@ -92,7 +92,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
       bucket_with_key = Google::Cloud::Storage::Bucket.from_gapi bucket_gapi_with_key, storage.service
       patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new encryption: encryption_gapi(nil)
       mock = Minitest::Mock.new
-      mock.expect :patch_bucket, bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args
+      mock.expect :patch_bucket, bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
 
       bucket_with_key.service.mocked_service = mock
 
@@ -111,7 +111,7 @@ describe Google::Cloud::Storage::Bucket, :encryption, :mock_storage do
 
         mock = Minitest::Mock.new
         mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),
-          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, kms_key_name: kms_key)
+          [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, kms_key_name: kms_key, options: {retries: 0})
 
         bucket.service.mocked_service = mock
 

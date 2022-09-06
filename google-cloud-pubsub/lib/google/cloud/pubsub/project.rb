@@ -160,7 +160,7 @@ module Google
         #
         def topic topic_name, project: nil, skip_lookup: nil, async: nil
           ensure_service!
-          options = { project: project }
+          options = { project: project, async: async }
           return Topic.from_name topic_name, service, options if skip_lookup
           grpc = service.get_topic topic_name, options
           Topic.from_grpc grpc, service, async: async

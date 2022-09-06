@@ -19,7 +19,7 @@
 require "google/cloud/errors"
 require "google/cloud/aiplatform/v1/vizier_service_pb"
 require "google/cloud/location"
-require "google/iam/v1/iam_policy"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -664,7 +664,7 @@ module Google
             #     Required. The project and location that the Study belongs to.
             #     Format: `projects/{project}/locations/{location}/studies/{study}`
             #   @param suggestion_count [::Integer]
-            #     Required. The number of suggestions requested.
+            #     Required. The number of suggestions requested. It must be positive.
             #   @param client_id [::String]
             #     Required. The identifier of the client that is requesting the suggestion.
             #

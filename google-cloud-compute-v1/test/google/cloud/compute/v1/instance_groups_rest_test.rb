@@ -76,9 +76,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    add_instances_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    add_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -91,27 +89,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.add_instances({ instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.add_instances({ instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.add_instances instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone do |result, response|
+      client.add_instances instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.add_instances ::Google::Cloud::Compute::V1::AddInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.add_instances ::Google::Cloud::Compute::V1::AddInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.add_instances({ instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.add_instances({ instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.add_instances(::Google::Cloud::Compute::V1::AddInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.add_instances(::Google::Cloud::Compute::V1::AddInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_add_instances_request_resource: instance_groups_add_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -136,9 +134,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     project = "hello world"
     return_partial_success = true
 
-    aggregated_list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    aggregated_list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -151,27 +147,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |result, response|
+      client.aggregated_list filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInstanceGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |result, response|
+      client.aggregated_list ::Google::Cloud::Compute::V1::AggregatedListInstanceGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |result, response|
+      client.aggregated_list({ filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInstanceGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |result, response|
+      client.aggregated_list(::Google::Cloud::Compute::V1::AggregatedListInstanceGroupsRequest.new(filter: filter, include_all_scopes: include_all_scopes, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -193,9 +189,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    delete_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :delete, verb
-
+    delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -208,27 +202,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.delete({ instance_group: instance_group, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.delete({ instance_group: instance_group, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete instance_group: instance_group, project: project, request_id: request_id, zone: zone do |result, response|
+      client.delete instance_group: instance_group, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteInstanceGroupRequest.new(instance_group: instance_group, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteInstanceGroupRequest.new(instance_group: instance_group, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ instance_group: instance_group, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.delete({ instance_group: instance_group, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteInstanceGroupRequest.new(instance_group: instance_group, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteInstanceGroupRequest.new(instance_group: instance_group, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -249,9 +243,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     project = "hello world"
     zone = "hello world"
 
-    get_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -264,27 +256,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.get({ instance_group: instance_group, project: project, zone: zone }) do |result, response|
+      client.get({ instance_group: instance_group, project: project, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get instance_group: instance_group, project: project, zone: zone do |result, response|
+      client.get instance_group: instance_group, project: project, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetInstanceGroupRequest.new(instance_group: instance_group, project: project, zone: zone) do |result, response|
+      client.get ::Google::Cloud::Compute::V1::GetInstanceGroupRequest.new(instance_group: instance_group, project: project, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ instance_group: instance_group, project: project, zone: zone }, call_options) do |result, response|
+      client.get({ instance_group: instance_group, project: project, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetInstanceGroupRequest.new(instance_group: instance_group, project: project, zone: zone), call_options) do |result, response|
+      client.get(::Google::Cloud::Compute::V1::GetInstanceGroupRequest.new(instance_group: instance_group, project: project, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -306,9 +298,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    insert_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -321,27 +311,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.insert({ instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.insert({ instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone do |result, response|
+      client.insert instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertInstanceGroupRequest.new(instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertInstanceGroupRequest.new(instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.insert({ instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertInstanceGroupRequest.new(instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertInstanceGroupRequest.new(instance_group_resource: instance_group_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -366,9 +356,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     return_partial_success = true
     zone = "hello world"
 
-    list_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :get, verb
-
+    list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -381,27 +369,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |result, response|
+      client.list ::Google::Cloud::Compute::V1::ListInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |result, response|
+      client.list(::Google::Cloud::Compute::V1::ListInstanceGroupsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -428,9 +416,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     return_partial_success = true
     zone = "hello world"
 
-    list_instances_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    list_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -443,27 +429,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.list_instances({ filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |result, response|
+      client.list_instances({ filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list_instances filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |result, response|
+      client.list_instances filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list_instances ::Google::Cloud::Compute::V1::ListInstancesInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |result, response|
+      client.list_instances ::Google::Cloud::Compute::V1::ListInstancesInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list_instances({ filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |result, response|
+      client.list_instances({ filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list_instances(::Google::Cloud::Compute::V1::ListInstancesInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |result, response|
+      client.list_instances(::Google::Cloud::Compute::V1::ListInstancesInstanceGroupsRequest.new(filter: filter, instance_group: instance_group, instance_groups_list_instances_request_resource: instance_groups_list_instances_request_resource, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -486,9 +472,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    remove_instances_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    remove_instances_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -501,27 +485,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.remove_instances({ instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.remove_instances({ instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.remove_instances instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone do |result, response|
+      client.remove_instances instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.remove_instances ::Google::Cloud::Compute::V1::RemoveInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.remove_instances ::Google::Cloud::Compute::V1::RemoveInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.remove_instances({ instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.remove_instances({ instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.remove_instances(::Google::Cloud::Compute::V1::RemoveInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.remove_instances(::Google::Cloud::Compute::V1::RemoveInstancesInstanceGroupRequest.new(instance_group: instance_group, instance_groups_remove_instances_request_resource: instance_groups_remove_instances_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -544,9 +528,7 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
     request_id = "hello world"
     zone = "hello world"
 
-    set_named_ports_client_stub = ClientStub.new http_response do |verb, uri:, body:, params:, options:|
-      assert_equal :post, verb
-
+    set_named_ports_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
       assert options.metadata[:"x-goog-api-client"].include? "rest"
       refute options.metadata[:"x-goog-api-client"].include? "grpc"
@@ -559,27 +541,27 @@ class ::Google::Cloud::Compute::V1::InstanceGroups::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.set_named_ports({ instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone }) do |result, response|
+      client.set_named_ports({ instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.set_named_ports instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone do |result, response|
+      client.set_named_ports instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.set_named_ports ::Google::Cloud::Compute::V1::SetNamedPortsInstanceGroupRequest.new(instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone) do |result, response|
+      client.set_named_ports ::Google::Cloud::Compute::V1::SetNamedPortsInstanceGroupRequest.new(instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.set_named_ports({ instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |result, response|
+      client.set_named_ports({ instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.set_named_ports(::Google::Cloud::Compute::V1::SetNamedPortsInstanceGroupRequest.new(instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |result, response|
+      client.set_named_ports(::Google::Cloud::Compute::V1::SetNamedPortsInstanceGroupRequest.new(instance_group: instance_group, instance_groups_set_named_ports_request_resource: instance_groups_set_named_ports_request_resource, project: project, request_id: request_id, zone: zone), call_options) do |_result, response|
         assert_equal http_response, response
       end
 

@@ -26,7 +26,6 @@
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/resource.rb",
     "proto_docs/google/cloud/certificatemanager/v1/certificate_manager.rb",
-    "proto_docs/google/cloud/location/locations.rb",
     "proto_docs/google/longrunning/operations.rb",
     "proto_docs/google/protobuf/any.rb",
     "proto_docs/google/protobuf/duration.rb",
@@ -62,7 +61,6 @@
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml",
-    ".owlbot.rb"
+    ".OwlBot.yaml"
   ]
 }

@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the Firewalls service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -278,8 +278,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/firewalls/{firewall}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["firewall", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["firewall", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -300,8 +300,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/firewalls/{firewall}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["firewall", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["firewall", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -323,7 +323,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/firewalls",
                                                           body: "firewall_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -344,7 +344,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/firewalls",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -366,8 +366,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/firewalls/{firewall}",
                                                           body: "firewall_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["firewall", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["firewall", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -389,8 +389,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/firewalls/{firewall}",
                                                           body: "firewall_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["firewall", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["firewall", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

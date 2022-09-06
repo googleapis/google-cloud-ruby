@@ -26,8 +26,8 @@ module Google
           module Rest
             ##
             # REST service stub for the UrlMaps service.
-            # service stub contains baseline method implementations
-            # including transcoding, making the REST call and deserialing the response
+            # Service stub contains baseline method implementations
+            # including transcoding, making the REST call, and deserialing the response.
             #
             class ServiceStub
               def initialize endpoint:, credentials:
@@ -389,7 +389,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/aggregated/urlMaps",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -410,8 +410,8 @@ module Google
                                                           uri_method: :delete,
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps/{url_map}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["url_map", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["url_map", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -432,8 +432,8 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps/{url_map}",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["url_map", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["url_map", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -455,7 +455,7 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps",
                                                           body: "url_map_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -477,8 +477,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps/{url_map}/invalidateCache",
                                                           body: "cache_invalidation_rule_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["url_map", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["url_map", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -499,7 +499,7 @@ module Google
                                                           uri_method: :get,
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -521,8 +521,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps/{url_map}",
                                                           body: "url_map_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["url_map", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["url_map", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -544,8 +544,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps/{url_map}",
                                                           body: "url_map_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["url_map", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["url_map", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -567,8 +567,8 @@ module Google
                                                           uri_template: "/compute/v1/projects/{project}/global/urlMaps/{url_map}/validate",
                                                           body: "url_maps_validate_request_resource",
                                                           matches: [
-                                                            ["project", %r{[^/]+}, false],
-                                                            ["url_map", %r{[^/]+}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["url_map", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -274,18 +274,27 @@ module Google
 
           # @!attribute [rw] allowed_locations
           #   @return [::Array<::String>]
-          #     A list of allowed location names represented by internal URLs,
-          #     First location in the list must be a region.
-          #     for example,
-          #     ["regions/us-central1"] allow VMs in region us-central1,
-          #     ["regions/us-central1", "zones/us-central1-a"] only allow VMs in zone
-          #     us-central1-a.
+          #     A list of allowed location names represented by internal URLs.
+          #     Each location can be a region or a zone.
+          #     Only one region or multiple zones in one region is supported now.
+          #     For example,
+          #     ["regions/us-central1"] allow VMs in any zones in region us-central1.
+          #     ["zones/us-central1-a", "zones/us-central1-c"] only allow VMs
+          #     in zones us-central1-a and us-central1-c.
+          #     All locations end up in different regions would cause errors.
+          #     For example,
+          #     ["regions/us-central1", "zones/us-central1-a", "zones/us-central1-b",
+          #     "zones/us-west1-a"] contains 2 regions "us-central1" and
+          #     "us-west1". An error is expected in this case.
           class LocationPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A new persistent disk.
+          # A new persistent disk or a local ssd.
+          # A VM can only have one local SSD setting but multiple local SSD partitions.
+          # https://cloud.google.com/compute/docs/disks#pdspecs.
+          # https://cloud.google.com/compute/docs/disks#localssds.
           # @!attribute [rw] image
           #   @return [::String]
           #     Name of a public or custom image used as the data source.
@@ -295,17 +304,25 @@ module Google
           # @!attribute [rw] type
           #   @return [::String]
           #     Disk type as shown in `gcloud compute disk-types list`
-          #     For example, "pd-ssd", "pd-standard", "pd-balanced".
+          #     For example, "pd-ssd", "pd-standard", "pd-balanced", "local-ssd".
           # @!attribute [rw] size_gb
           #   @return [::Integer]
           #     Disk size in GB.
           #     This field is ignored if `data_source` is `disk` or `image`.
+          #     If `type` is `local-ssd`, size_gb should be a multiple of 375GB,
+          #     otherwise, the final size will be the next greater multiple of 375 GB.
+          # @!attribute [rw] disk_interface
+          #   @return [::String]
+          #     Local SSDs are available through both "SCSI" and "NVMe" interfaces.
+          #     If not indicated, "NVMe" will be the default one for local ssds.
+          #     We only support "SCSI" for persistent disks now.
           class Disk
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A new or an existing persistent disk attached to a VM instance.
+          # A new or an existing persistent disk or a local ssd attached to a VM
+          # instance.
           # @!attribute [rw] new_disk
           #   @return [::Google::Cloud::Batch::V1::AllocationPolicy::Disk]
           # @!attribute [rw] existing_disk
@@ -328,6 +345,8 @@ module Google
           # @!attribute [rw] count
           #   @return [::Integer]
           #     The number of accelerators of this type.
+          # @!attribute [rw] install_gpu_drivers
+          #   @return [::Boolean]
           class Accelerator
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

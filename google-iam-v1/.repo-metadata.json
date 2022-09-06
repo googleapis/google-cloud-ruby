@@ -1,4 +1,5 @@
 {
+    "api_shortname": "unknown",
     "client_documentation": "https://googleapis.dev/ruby/google-iam-v1/latest",
     "distribution_name": "google-iam-v1",
     "is_cloud": false,

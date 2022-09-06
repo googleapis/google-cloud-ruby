@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.8.2 (2022-08-24)
+
+#### Documentation
+
+* Correct query_record field descriptions to clarify that they contain answer record resource names ([#19048](https://github.com/googleapis/google-cloud-ruby/issues/19048)) 
+
+### 0.8.1 (2022-07-29)
+
+#### Documentation
+
+* Fixes to a few attribute descriptions ([#18928](https://github.com/googleapis/google-cloud-ruby/issues/18928)) 
+
 ### 0.8.0 (2022-07-02)
 
 #### Features

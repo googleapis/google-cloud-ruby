@@ -167,6 +167,13 @@ module Google
           # {::Google::Cloud::Spanner::V1::TypeCode::NUMERIC NUMERIC} when a client interacts with PostgreSQL-enabled
           # Spanner databases.
           PG_NUMERIC = 2
+
+          # PostgreSQL compatible JSONB type. This annotation needs to be applied to
+          # {::Google::Cloud::Spanner::V1::Type Type} instances having {::Google::Cloud::Spanner::V1::TypeCode::JSON JSON}
+          # type code to specify that values of this type should be treated as
+          # PostgreSQL JSONB values. Currently this annotation is always needed for
+          # {::Google::Cloud::Spanner::V1::TypeCode::JSON JSON} when a client interacts with PostgreSQL-enabled
+          # Spanner databases.
           PG_JSONB = 3
         end
       end

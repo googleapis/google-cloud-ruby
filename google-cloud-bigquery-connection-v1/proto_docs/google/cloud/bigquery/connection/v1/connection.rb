@@ -120,6 +120,9 @@ module Google
           # @!attribute [rw] aws
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsProperties]
           #     Amazon Web Services (AWS) properties.
+          # @!attribute [rw] azure
+          #   @return [::Google::Cloud::Bigquery::Connection::V1::AzureProperties]
+          #     Azure properties.
           # @!attribute [rw] cloud_spanner
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSpannerProperties]
           #     Cloud Spanner properties.
@@ -153,6 +156,13 @@ module Google
           # @!attribute [rw] credential
           #   @return [::Google::Cloud::Bigquery::Connection::V1::CloudSqlCredential]
           #     Input only. Cloud SQL credential.
+          # @!attribute [r] service_account_id
+          #   @return [::String]
+          #     Output only. The account ID of the service used for the purpose of this connection.
+          #
+          #     When the connection is used in the context of an operation in
+          #     BigQuery, this service account will serve as identity being used for
+          #     connecting to the CloudSQL instance specified in this connection.
           class CloudSqlProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -199,6 +209,7 @@ module Google
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsCrossAccountRole]
           #     Authentication using Google owned AWS IAM user's access key to assume
           #     into customer's AWS IAM Role.
+          #     Deprecated, do not use.
           # @!attribute [rw] access_role
           #   @return [::Google::Cloud::Bigquery::Connection::V1::AwsAccessRole]
           #     Authentication using Google owned service account to assume into
@@ -238,6 +249,37 @@ module Google
           #     A unique Google-owned and Google-generated identity for the Connection.
           #     This identity will be used to access the user's AWS IAM Role.
           class AwsAccessRole
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Container for connection properties specific to Azure.
+          # @!attribute [r] application
+          #   @return [::String]
+          #     Output only. The name of the Azure Active Directory Application.
+          # @!attribute [r] client_id
+          #   @return [::String]
+          #     Output only. The client id of the Azure Active Directory Application.
+          # @!attribute [r] object_id
+          #   @return [::String]
+          #     Output only. The object id of the Azure Active Directory Application.
+          # @!attribute [rw] customer_tenant_id
+          #   @return [::String]
+          #     The id of customer's directory that host the data.
+          # @!attribute [rw] redirect_uri
+          #   @return [::String]
+          #     The URL user will be redirected to after granting consent during connection
+          #     setup.
+          # @!attribute [rw] federated_application_client_id
+          #   @return [::String]
+          #     The client id of the user's Azure Active Directory Application used for a
+          #     federated connection.
+          # @!attribute [r] identity
+          #   @return [::String]
+          #     Output only. A unique Google-owned and Google-generated identity for the Connection.
+          #     This identity will be used to access the user's Azure Active Directory
+          #     Application.
+          class AzureProperties
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

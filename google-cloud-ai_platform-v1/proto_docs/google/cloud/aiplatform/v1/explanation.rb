@@ -188,7 +188,7 @@ module Google
         #     Required. Parameters that configure explaining of the Model's predictions.
         # @!attribute [rw] metadata
         #   @return [::Google::Cloud::AIPlatform::V1::ExplanationMetadata]
-        #     Required. Metadata describing the Model's input and output for explanation.
+        #     Optional. Metadata describing the Model's input and output for explanation.
         class ExplanationSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -231,7 +231,7 @@ module Google
         #     explaining.
         #
         #     If not populated, returns attributions for {::Google::Cloud::AIPlatform::V1::ExplanationParameters#top_k top_k} indices of outputs.
-        #     If neither top_k nor output_indeices is populated, returns the argmax
+        #     If neither top_k nor output_indices is populated, returns the argmax
         #     index of the outputs.
         #
         #     Only applicable to Models that predict multiple outputs (e,g, multi-class

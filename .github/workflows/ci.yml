@@ -16,6 +16,9 @@ on:
       base:
         description: "Commit reference from which to evaluate diffs"
         required: false
+      flags:
+        description: "Extra flags to pass to toys ci"
+        required: false
 
 jobs:
   CI:
@@ -60,4 +63,11 @@ jobs:
     - name: Install tools
       run: "gem install --no-document toys && npm install linkinator"
     - name: Test ${{ matrix.task }}
-      run: toys ci -v ${{ matrix.task }} --github-event-name=${{ github.event_name }} --github-event-payload=${{ github.event_path }}
+      run: |
+        toys ci -v ${{ matrix.task }} --github-event-name=${{ github.event_name }} --github-event-payload=${{ github.event_path }} ${{ github.event.inputs.flags }}
+    - name: Open Issues
+      if: ${{ failure() }}
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        toys ci report-failures -v

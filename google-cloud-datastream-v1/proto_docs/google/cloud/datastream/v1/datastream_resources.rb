@@ -75,6 +75,27 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # PostgreSQL database profile.
+        # @!attribute [rw] hostname
+        #   @return [::String]
+        #     Required. Hostname for the PostgreSQL connection.
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port for the PostgreSQL connection, default value is 5432.
+        # @!attribute [rw] username
+        #   @return [::String]
+        #     Required. Username for the PostgreSQL connection.
+        # @!attribute [rw] password
+        #   @return [::String]
+        #     Required. Password for the PostgreSQL connection.
+        # @!attribute [rw] database
+        #   @return [::String]
+        #     Required. Database for the PostgreSQL connection.
+        class PostgresqlProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Cloud Storage bucket profile.
         # @!attribute [rw] bucket
         #   @return [::String]
@@ -83,6 +104,12 @@ module Google
         #   @return [::String]
         #     The root path inside the Cloud Storage bucket.
         class GcsProfile
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # BigQuery warehouse profile.
+        class BigQueryProfile
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -150,8 +177,7 @@ module Google
         #     Output only. The state of the Private Connection.
         # @!attribute [r] error
         #   @return [::Google::Cloud::Datastream::V1::Error]
-        #     Output only. In case of error, the details of the error in a user-friendly
-        #     format.
+        #     Output only. In case of error, the details of the error in a user-friendly format.
         # @!attribute [rw] vpc_peering_config
         #   @return [::Google::Cloud::Datastream::V1::VpcPeeringConfig]
         #     VPC Peering Config.
@@ -256,8 +282,8 @@ module Google
         #     Output only. Indicates whether the client_certificate field is set.
         # @!attribute [rw] ca_certificate
         #   @return [::String]
-        #     Input only. PEM-encoded certificate of the CA that signed the source
-        #     database server's certificate.
+        #     Input only. PEM-encoded certificate of the CA that signed the source database
+        #     server's certificate.
         # @!attribute [r] ca_certificate_set
         #   @return [::Boolean]
         #     Output only. Indicates whether the ca_certificate field is set.
@@ -292,6 +318,12 @@ module Google
         # @!attribute [rw] mysql_profile
         #   @return [::Google::Cloud::Datastream::V1::MysqlProfile]
         #     MySQL ConnectionProfile configuration.
+        # @!attribute [rw] bigquery_profile
+        #   @return [::Google::Cloud::Datastream::V1::BigQueryProfile]
+        #     BigQuery Connection Profile configuration.
+        # @!attribute [rw] postgresql_profile
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlProfile]
+        #     PostgreSQL Connection Profile configuration.
         # @!attribute [rw] static_service_ip_connectivity
         #   @return [::Google::Cloud::Datastream::V1::StaticServiceIpConnectivity]
         #     Static Service IP connectivity.
@@ -355,7 +387,7 @@ module Google
         # @!attribute [rw] oracle_columns
         #   @return [::Array<::Google::Cloud::Datastream::V1::OracleColumn>]
         #     Oracle columns in the schema.
-        #     When unspecified as part of inclue/exclude lists, includes/excludes
+        #     When unspecified as part of include/exclude objects, includes/excludes
         #     everything.
         class OracleTable
           include ::Google::Protobuf::MessageExts
@@ -390,7 +422,114 @@ module Google
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::OracleRdbms]
         #     Oracle objects to exclude from the stream.
+        # @!attribute [rw] max_concurrent_cdc_tasks
+        #   @return [::Integer]
+        #     Maximum number of concurrent CDC tasks. The number should be non negative.
+        #     If not set (or set to 0), the system's default value will be used.
+        # @!attribute [rw] drop_large_objects
+        #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::DropLargeObjects]
+        #     Drop large object values.
+        # @!attribute [rw] stream_large_objects
+        #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig::StreamLargeObjects]
+        #     Stream large object values.
         class OracleSourceConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration to drop large object values.
+          class DropLargeObjects
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Configuration to stream large object values.
+          class StreamLargeObjects
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # PostgreSQL Column.
+        # @!attribute [rw] column
+        #   @return [::String]
+        #     Column name.
+        # @!attribute [rw] data_type
+        #   @return [::String]
+        #     The PostgreSQL data type.
+        # @!attribute [rw] length
+        #   @return [::Integer]
+        #     Column length.
+        # @!attribute [rw] precision
+        #   @return [::Integer]
+        #     Column precision.
+        # @!attribute [rw] scale
+        #   @return [::Integer]
+        #     Column scale.
+        # @!attribute [rw] primary_key
+        #   @return [::Boolean]
+        #     Whether or not the column represents a primary key.
+        # @!attribute [rw] nullable
+        #   @return [::Boolean]
+        #     Whether or not the column can accept a null value.
+        # @!attribute [rw] ordinal_position
+        #   @return [::Integer]
+        #     The ordinal position of the column in the table.
+        class PostgresqlColumn
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PostgreSQL table.
+        # @!attribute [rw] table
+        #   @return [::String]
+        #     Table name.
+        # @!attribute [rw] postgresql_columns
+        #   @return [::Array<::Google::Cloud::Datastream::V1::PostgresqlColumn>]
+        #     PostgreSQL columns in the schema.
+        #     When unspecified as part of include/exclude objects,
+        #     includes/excludes everything.
+        class PostgresqlTable
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PostgreSQL schema.
+        # @!attribute [rw] schema
+        #   @return [::String]
+        #     Schema name.
+        # @!attribute [rw] postgresql_tables
+        #   @return [::Array<::Google::Cloud::Datastream::V1::PostgresqlTable>]
+        #     Tables in the schema.
+        class PostgresqlSchema
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PostgreSQL database structure.
+        # @!attribute [rw] postgresql_schemas
+        #   @return [::Array<::Google::Cloud::Datastream::V1::PostgresqlSchema>]
+        #     PostgreSQL schemas in the database server.
+        class PostgresqlRdbms
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # PostgreSQL data source configuration
+        # @!attribute [rw] include_objects
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
+        #     PostgreSQL objects to include in the stream.
+        # @!attribute [rw] exclude_objects
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
+        #     PostgreSQL objects to exclude from the stream.
+        # @!attribute [rw] replication_slot
+        #   @return [::String]
+        #     Required. The name of the logical replication slot that's configured with the
+        #     pgoutput plugin.
+        # @!attribute [rw] publication
+        #   @return [::String]
+        #     Required. The name of the publication that includes the set of all tables that are
+        #     defined in the stream's include_objects.
+        class PostgresqlSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -430,7 +569,7 @@ module Google
         # @!attribute [rw] mysql_columns
         #   @return [::Array<::Google::Cloud::Datastream::V1::MysqlColumn>]
         #     MySQL columns in the database.
-        #     When unspecified as part of include/exclude lists, includes/excludes
+        #     When unspecified as part of include/exclude objects, includes/excludes
         #     everything.
         class MysqlTable
           include ::Google::Protobuf::MessageExts
@@ -465,6 +604,10 @@ module Google
         # @!attribute [rw] exclude_objects
         #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
         #     MySQL objects to exclude from the stream.
+        # @!attribute [rw] max_concurrent_cdc_tasks
+        #   @return [::Integer]
+        #     Maximum number of concurrent CDC tasks. The number should be non negative.
+        #     If not set (or set to 0), the system's default value will be used.
         class MysqlSourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -477,10 +620,13 @@ module Google
         #     Format: `projects/{project}/locations/{location}/connectionProfiles/{name}`
         # @!attribute [rw] oracle_source_config
         #   @return [::Google::Cloud::Datastream::V1::OracleSourceConfig]
-        #     Oracle data source configuration
+        #     Oracle data source configuration.
         # @!attribute [rw] mysql_source_config
         #   @return [::Google::Cloud::Datastream::V1::MysqlSourceConfig]
-        #     MySQL data source configuration
+        #     MySQL data source configuration.
+        # @!attribute [rw] postgresql_source_config
+        #   @return [::Google::Cloud::Datastream::V1::PostgresqlSourceConfig]
+        #     PostgreSQL data source configuration.
         class SourceConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -550,6 +696,65 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # @!attribute [rw] single_target_dataset
+        #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::SingleTargetDataset]
+        #     Single destination dataset.
+        # @!attribute [rw] source_hierarchy_datasets
+        #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::SourceHierarchyDatasets]
+        #     Source hierarchy datasets.
+        # @!attribute [rw] data_freshness
+        #   @return [::Google::Protobuf::Duration]
+        #     The guaranteed data freshness (in seconds) when querying tables created by
+        #     the stream. Editing this field will only affect new tables created in the
+        #     future, but existing tables will not be impacted. Lower values mean that
+        #     queries will return fresher data, but may result in higher cost.
+        class BigQueryDestinationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A single target dataset to which all data will be streamed.
+          # @!attribute [rw] dataset_id
+          #   @return [::String]
+          class SingleTargetDataset
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Destination datasets are created so that hierarchy of the destination data
+          # objects matches the source hierarchy.
+          # @!attribute [rw] dataset_template
+          #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig::SourceHierarchyDatasets::DatasetTemplate]
+          class SourceHierarchyDatasets
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Dataset template used for dynamic dataset creation.
+            # @!attribute [rw] location
+            #   @return [::String]
+            #     Required. The geographic location where the dataset should reside. See
+            #     https://cloud.google.com/bigquery/docs/locations for supported
+            #     locations.
+            # @!attribute [rw] dataset_id_prefix
+            #   @return [::String]
+            #     If supplied, every created dataset will have its name prefixed by the
+            #     provided value. The prefix and name will be separated by an underscore.
+            #     i.e. <prefix>_<dataset_name>.
+            # @!attribute [rw] kms_key_name
+            #   @return [::String]
+            #     Describes the Cloud KMS encryption key that will be used to
+            #     protect destination BigQuery table. The BigQuery Service Account
+            #     associated with your project requires access to this encryption key.
+            #     i.e.
+            #     projects/\\{project}/locations/\\{location}/keyRings/\\{key_ring}/cryptoKeys/\\{cryptoKey}.
+            #     See https://cloud.google.com/bigquery/docs/customer-managed-encryption
+            #     for more information.
+            class DatasetTemplate
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
         # The configuration of the stream destination.
         # @!attribute [rw] destination_connection_profile
         #   @return [::String]
@@ -558,6 +763,9 @@ module Google
         # @!attribute [rw] gcs_destination_config
         #   @return [::Google::Cloud::Datastream::V1::GcsDestinationConfig]
         #     A configuration for how data should be loaded to Cloud Storage.
+        # @!attribute [rw] bigquery_destination_config
+        #   @return [::Google::Cloud::Datastream::V1::BigQueryDestinationConfig]
+        #     BigQuery destination configuration.
         class DestinationConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -616,6 +824,9 @@ module Google
           # @!attribute [rw] mysql_excluded_objects
           #   @return [::Google::Cloud::Datastream::V1::MysqlRdbms]
           #     MySQL data source objects to avoid backfilling.
+          # @!attribute [rw] postgresql_excluded_objects
+          #   @return [::Google::Cloud::Datastream::V1::PostgresqlRdbms]
+          #     PostgreSQL data source objects to avoid backfilling.
           class BackfillAllStrategy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -705,6 +916,9 @@ module Google
         # @!attribute [rw] mysql_identifier
         #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::MysqlObjectIdentifier]
         #     Mysql data source object identifier.
+        # @!attribute [rw] postgresql_identifier
+        #   @return [::Google::Cloud::Datastream::V1::SourceObjectIdentifier::PostgresqlObjectIdentifier]
+        #     PostgreSQL data source object identifier.
         class SourceObjectIdentifier
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -717,6 +931,18 @@ module Google
           #   @return [::String]
           #     Required. The table name.
           class OracleObjectIdentifier
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # PostgreSQL data source object identifier.
+          # @!attribute [rw] schema
+          #   @return [::String]
+          #     Required. The schema name.
+          # @!attribute [rw] table
+          #   @return [::String]
+          #     Required. The table name.
+          class PostgresqlObjectIdentifier
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end

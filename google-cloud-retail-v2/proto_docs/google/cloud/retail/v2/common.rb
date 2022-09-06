@@ -21,6 +21,274 @@ module Google
   module Cloud
     module Retail
       module V2
+        # Metadata that is used to define a condition that triggers an action.
+        # A valid condition must specify at least one of 'query_terms' or
+        # 'products_filter'. If multiple fields are specified, the condition is met if
+        # all the fields are satisfied e.g. if a set of query terms and product_filter
+        # are set, then only items matching the product_filter for requests with a
+        # query matching the query terms wil get boosted.
+        # @!attribute [rw] query_terms
+        #   @return [::Array<::Google::Cloud::Retail::V2::Condition::QueryTerm>]
+        #     A list (up to 10 entries) of terms to match the query on. If not
+        #     specified, match all queries.
+        #     If many query terms are specified, the condition
+        #     is matched if any of the terms is a match (i.e. using the OR operator).
+        # @!attribute [rw] active_time_range
+        #   @return [::Array<::Google::Cloud::Retail::V2::Condition::TimeRange>]
+        #     Range of time(s) specifying when Condition is active.
+        #     Condition true if any time range matches.
+        class Condition
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Query terms that we want to match on.
+          # @!attribute [rw] value
+          #   @return [::String]
+          #     The value of the term to match on.
+          #     Value cannot be empty.
+          #     Value can have at most 3 terms if specified as a partial match. Each
+          #     space separated string is considered as one term.
+          #     Example) "a b c" is 3 terms and allowed, " a b c d" is 4 terms and not
+          #     allowed for partial match.
+          # @!attribute [rw] full_match
+          #   @return [::Boolean]
+          #     Whether this is supposed to be a full or partial match.
+          class QueryTerm
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Used for time-dependent conditions.
+          # Example: Want to have rule applied for week long sale.
+          # @!attribute [rw] start_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     Start of time range. Range is inclusive.
+          # @!attribute [rw] end_time
+          #   @return [::Google::Protobuf::Timestamp]
+          #     End of time range. Range is inclusive.
+          class TimeRange
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # A rule is a condition-action pair
+        # * A condition defines when a rule is to be triggered.
+        # * An action specifies what occurs on that trigger.
+        # Currently rules only work for {::Google::Cloud::Retail::V2::Control controls} with
+        # {::Google::Cloud::Retail::V2::SolutionType::SOLUTION_TYPE_SEARCH SOLUTION_TYPE_SEARCH}.
+        # @!attribute [rw] boost_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::BoostAction]
+        #     A boost action.
+        # @!attribute [rw] redirect_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::RedirectAction]
+        #     Redirects a shopper to a specific page.
+        # @!attribute [rw] oneway_synonyms_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::OnewaySynonymsAction]
+        #     Treats specific term as a synonym with a group of terms.
+        #     Group of terms will not be treated as synonyms with the specific term.
+        # @!attribute [rw] do_not_associate_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::DoNotAssociateAction]
+        #     Prevents term from being associated with other terms.
+        # @!attribute [rw] replacement_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::ReplacementAction]
+        #     Replaces specific terms in the query.
+        # @!attribute [rw] ignore_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::IgnoreAction]
+        #     Ignores specific terms from query during search.
+        # @!attribute [rw] filter_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::FilterAction]
+        #     Filters results.
+        # @!attribute [rw] twoway_synonyms_action
+        #   @return [::Google::Cloud::Retail::V2::Rule::TwowaySynonymsAction]
+        #     Treats a set of terms as synonyms of one another.
+        # @!attribute [rw] condition
+        #   @return [::Google::Cloud::Retail::V2::Condition]
+        #     Required. The condition that triggers the rule.
+        #     If the condition is empty, the rule will always apply.
+        class Rule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A boost action to apply to results matching condition specified above.
+          # @!attribute [rw] boost
+          #   @return [::Float]
+          #     Strength of the condition boost, which must be in [-1, 1]. Negative
+          #     boost means demotion. Default is 0.0.
+          #
+          #     Setting to 1.0 gives the item a big promotion. However, it does not
+          #     necessarily mean that the boosted item will be the top result at all
+          #     times, nor that other items will be excluded. Results could still be
+          #     shown even when none of them matches the condition. And results that
+          #     are significantly more relevant to the search query can still trump
+          #     your heavily favored but irrelevant items.
+          #
+          #     Setting to -1.0 gives the item a big demotion. However, results that
+          #     are deeply relevant might still be shown. The item will have an
+          #     upstream battle to get a fairly high ranking, but it is not blocked out
+          #     completely.
+          #
+          #     Setting to 0.0 means no boost applied. The boosting condition is
+          #     ignored.
+          # @!attribute [rw] products_filter
+          #   @return [::String]
+          #     The filter can have a max size of 5000 characters.
+          #     An expression which specifies which products to apply an action to.
+          #     The syntax and supported fields are the same as a filter expression. See
+          #     {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter} for
+          #     detail syntax and limitations.
+          #
+          #     Examples:
+          #
+          #     * To boost products with product ID "product_1" or "product_2", and
+          #     color
+          #       "Red" or "Blue":<br>
+          #       *(id: ANY("product_1", "product_2"))<br>*
+          #       *AND<br>*
+          #       *(colorFamilies: ANY("Red", "Blue"))<br>*
+          class BoostAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # * Rule Condition:
+          #   - No
+          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
+          #   provided is a global match.
+          #   - 1 or more
+          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}
+          #   provided are combined with OR operator.
+          # * Action Input: The request query and filter that are applied to the
+          # retrieved products, in addition to any filters already provided with the
+          # SearchRequest. The AND operator is used to combine the query's existing
+          # filters with the filter rule(s). NOTE: May result in 0 results when
+          # filters conflict.
+          # * Action Result: Filters the returned objects to be ONLY those that passed
+          # the filter.
+          # @!attribute [rw] filter
+          #   @return [::String]
+          #     A filter to apply on the matching condition results. Supported features:
+          #
+          #     * {::Google::Cloud::Retail::V2::Rule::FilterAction#filter filter} must be set.
+          #     * Filter syntax is identical to
+          #     {::Google::Cloud::Retail::V2::SearchRequest#filter SearchRequest.filter}. See
+          #     more
+          #       details at the Retail Search
+          #       [user guide](/retail/search/docs/filter-and-order#filter).
+          #     * To filter products with product ID "product_1" or "product_2", and
+          #     color
+          #       "Red" or "Blue":<br>
+          #       *(id: ANY("product_1", "product_2"))<br>*
+          #       *AND<br>*
+          #       *(colorFamilies: ANY("Red", "Blue"))<br>*
+          class FilterAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Redirects a shopper to a specific page.
+          #
+          # * Rule Condition:
+          #   - Must specify
+          #   {::Google::Cloud::Retail::V2::Condition#query_terms Condition.query_terms}.
+          # * Action Input: Request Query
+          # * Action Result: Redirects shopper to provided uri.
+          # @!attribute [rw] redirect_uri
+          #   @return [::String]
+          #     URL must have length equal or less than 2000 characters.
+          class RedirectAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Creates a set of terms that will be treated as synonyms of each other.
+          # Example: synonyms of "sneakers" and "shoes".
+          #  * "sneakers" will use a synonym of "shoes".
+          #  * "shoes" will use a synonym of "sneakers".
+          # @!attribute [rw] synonyms
+          #   @return [::Array<::String>]
+          #     Defines a set of synonyms.
+          #     Can specify up to 100 synonyms.
+          #     Must specify at least 2 synonyms.
+          class TwowaySynonymsAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Maps a set of terms to a set of synonyms.
+          # Set of synonyms will be treated as synonyms of each query term only.
+          # `query_terms` will not be treated as synonyms of each other.
+          # Example: "sneakers" will use a synonym of "shoes".
+          # "shoes" will not use a synonym of "sneakers".
+          # @!attribute [rw] query_terms
+          #   @return [::Array<::String>]
+          #     Terms from the search query.
+          #     Will treat synonyms as their synonyms.
+          #     Not themselves synonyms of the synonyms.
+          #     Can specify up to 100 terms.
+          # @!attribute [rw] synonyms
+          #   @return [::Array<::String>]
+          #     Defines a set of synonyms.
+          #     Cannot contain duplicates.
+          #     Can specify up to 100 synonyms.
+          # @!attribute [rw] oneway_terms
+          #   @return [::Array<::String>]
+          #     Will be [deprecated = true] post migration;
+          class OnewaySynonymsAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Prevents `query_term` from being associated with specified terms during
+          # search.
+          # Example: Don't associate "gShoe" and "cheap".
+          # @!attribute [rw] query_terms
+          #   @return [::Array<::String>]
+          #     Terms from the search query.
+          #     Will not consider do_not_associate_terms for search if in search query.
+          #     Can specify up to 100 terms.
+          # @!attribute [rw] do_not_associate_terms
+          #   @return [::Array<::String>]
+          #     Cannot contain duplicates or the query term.
+          #     Can specify up to 100 terms.
+          # @!attribute [rw] terms
+          #   @return [::Array<::String>]
+          #     Will be [deprecated = true] post migration;
+          class DoNotAssociateAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Replaces a term in the query. Multiple replacement candidates can be
+          # specified. All `query_terms` will be replaced with the replacement term.
+          # Example: Replace "gShoe" with "google shoe".
+          # @!attribute [rw] query_terms
+          #   @return [::Array<::String>]
+          #     Terms from the search query.
+          #     Will be replaced by replacement term.
+          #     Can specify up to 100 terms.
+          # @!attribute [rw] replacement_term
+          #   @return [::String]
+          #     Term that will be used for replacement.
+          # @!attribute [rw] term
+          #   @return [::String]
+          #     Will be [deprecated = true] post migration;
+          class ReplacementAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Prevents a term in the query from being used in search.
+          # Example: Don't search for "shoddy".
+          # @!attribute [rw] ignore_terms
+          #   @return [::Array<::String>]
+          #     Terms to ignore in the search query.
+          class IgnoreAction
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
         # An intended audience of the {::Google::Cloud::Retail::V2::Product Product} for
         # whom it's sold.
         # @!attribute [rw] genders
@@ -116,8 +384,8 @@ module Google
         # @!attribute [rw] searchable
         #   @return [::Boolean]
         #     This field is normally ignored unless
-        #     [AttributesConfig.attribute_config_level][] of the
-        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is set to the deprecated
+        #     {::Google::Cloud::Retail::V2::AttributesConfig#attribute_config_level AttributesConfig.attribute_config_level}
+        #     of the {::Google::Cloud::Retail::V2::Catalog Catalog} is set to the deprecated
         #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG' mode. For information about product-level
         #     attribute configuration, see [Configuration
         #     modes](https://cloud.google.com/retail/docs/attribute-config#config-modes).
@@ -131,8 +399,8 @@ module Google
         # @!attribute [rw] indexable
         #   @return [::Boolean]
         #     This field is normally ignored unless
-        #     [AttributesConfig.attribute_config_level][] of the
-        #     {::Google::Cloud::Retail::V2::Catalog Catalog} is set to the deprecated
+        #     {::Google::Cloud::Retail::V2::AttributesConfig#attribute_config_level AttributesConfig.attribute_config_level}
+        #     of the {::Google::Cloud::Retail::V2::Catalog Catalog} is set to the deprecated
         #     'PRODUCT_LEVEL_ATTRIBUTE_CONFIG' mode. For information about product-level
         #     attribute configuration, see [Configuration
         #     modes](https://cloud.google.com/retail/docs/attribute-config#config-modes).
@@ -506,6 +774,48 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # At which level we offer configuration for attributes.
+        module AttributeConfigLevel
+          # Value used when unset. In this case, server behavior defaults to
+          # {::Google::Cloud::Retail::V2::AttributeConfigLevel::CATALOG_LEVEL_ATTRIBUTE_CONFIG CATALOG_LEVEL_ATTRIBUTE_CONFIG}.
+          ATTRIBUTE_CONFIG_LEVEL_UNSPECIFIED = 0
+
+          # At this level, we honor the attribute configurations set in
+          # {::Google::Cloud::Retail::V2::Product#attributes Product.attributes}.
+          PRODUCT_LEVEL_ATTRIBUTE_CONFIG = 1
+
+          # At this level, we honor the attribute configurations set in
+          # [CatalogConfig.attribute_configs][].
+          CATALOG_LEVEL_ATTRIBUTE_CONFIG = 2
+        end
+
+        # The type of solution.
+        module SolutionType
+          # Default value.
+          SOLUTION_TYPE_UNSPECIFIED = 0
+
+          # Used for Recommendations AI.
+          SOLUTION_TYPE_RECOMMENDATION = 1
+
+          # Used for Retail Search.
+          SOLUTION_TYPE_SEARCH = 2
+        end
+
+        # The use case of Cloud Retail Search.
+        module SearchSolutionUseCase
+          # The value when it's unspecified. In this case, server behavior defaults to
+          # {::Google::Cloud::Retail::V2::SearchSolutionUseCase::SEARCH_SOLUTION_USE_CASE_SEARCH SEARCH_SOLUTION_USE_CASE_SEARCH}.
+          SEARCH_SOLUTION_USE_CASE_UNSPECIFIED = 0
+
+          # Search use case. Expects the traffic has a non-empty
+          # {::Google::Cloud::Retail::V2::SearchRequest#query query}.
+          SEARCH_SOLUTION_USE_CASE_SEARCH = 1
+
+          # Browse use case. Expects the traffic has an empty
+          # {::Google::Cloud::Retail::V2::SearchRequest#query query}.
+          SEARCH_SOLUTION_USE_CASE_BROWSE = 2
         end
       end
     end

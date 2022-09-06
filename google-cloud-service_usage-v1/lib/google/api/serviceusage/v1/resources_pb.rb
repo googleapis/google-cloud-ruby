@@ -11,7 +11,6 @@ require 'google/api/monitoring_pb'
 require 'google/api/quota_pb'
 require 'google/api/usage_pb'
 require 'google/protobuf/api_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/api/serviceusage/v1/resources.proto", :syntax => :proto3) do

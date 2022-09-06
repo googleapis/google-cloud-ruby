@@ -1,5 +1,17 @@
 # Release History
 
+### 0.14.0 (2022-08-18)
+
+#### Features
+
+* Support for setting Apache Avro output format options ([#19034](https://github.com/googleapis/google-cloud-ruby/issues/19034)) 
+
+### 0.13.0 (2022-07-28)
+
+#### Features
+
+* add support of preferred_min_stream_count 
+
 ### 0.12.0 (2022-07-01)
 
 #### Features

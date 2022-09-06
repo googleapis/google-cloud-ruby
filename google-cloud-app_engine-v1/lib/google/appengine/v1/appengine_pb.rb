@@ -5,7 +5,6 @@ require 'google/protobuf'
 
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
-require 'google/api/resource_pb'
 require 'google/appengine/v1/application_pb'
 require 'google/appengine/v1/certificate_pb'
 require 'google/appengine/v1/domain_pb'

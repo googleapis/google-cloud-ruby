@@ -19,6 +19,7 @@ require "minitest/focus"
 require "minitest/hooks/default"
 require "selenium-webdriver"
 require "webrick"
+require "fileutils"
 
 describe "Create Assessment" do
   let(:client) { ::Google::Cloud::RecaptchaEnterprise.recaptcha_enterprise_service }
@@ -46,7 +47,7 @@ describe "Create Assessment" do
   after :all do
     shutdown_server
     @driver.close
-    File.delete html_file if File.exist? html_file
+    FileUtils.rm_f html_file
     client.delete_key name: @key.name
   end
 

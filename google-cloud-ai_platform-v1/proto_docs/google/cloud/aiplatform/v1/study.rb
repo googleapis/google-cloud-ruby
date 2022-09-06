@@ -203,7 +203,7 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::ObservationNoise]
         #     The observation noise level of the study.
         #     Currently only supported by the Vertex AI Vizier service. Not supported by
-        #     HyperparamterTuningJob or TrainingPipeline.
+        #     HyperparameterTuningJob or TrainingPipeline.
         # @!attribute [rw] measurement_selection_type
         #   @return [::Google::Cloud::AIPlatform::V1::StudySpec::MeasurementSelectionType]
         #     Describe which measurement selection type will be used
@@ -282,7 +282,7 @@ module Google
             #     offered starting point.
             #
             #     Currently only supported by the Vertex AI Vizier service. Not supported
-            #     by HyperparamterTuningJob or TrainingPipeline.
+            #     by HyperparameterTuningJob or TrainingPipeline.
             class DoubleValueSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -302,7 +302,7 @@ module Google
             #     offered starting point.
             #
             #     Currently only supported by the Vertex AI Vizier service. Not supported
-            #     by HyperparamterTuningJob or TrainingPipeline.
+            #     by HyperparameterTuningJob or TrainingPipeline.
             class IntegerValueSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -318,8 +318,8 @@ module Google
             #     relatively good starting point.  Unset value signals that there is no
             #     offered starting point.
             #
-            #     Currently only supported by the Vizier service. Not supported by
-            #     HyperparamterTuningJob or TrainingPipeline.
+            #     Currently only supported by the Vertex AI Vizier service. Not supported
+            #     by HyperparameterTuningJob or TrainingPipeline.
             class CategoricalValueSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -339,8 +339,8 @@ module Google
             #     offered starting point.  It automatically rounds to the
             #     nearest feasible discrete point.
             #
-            #     Currently only supported by the Vizier service. Not supported by
-            #     HyperparamterTuningJob or TrainingPipeline.
+            #     Currently only supported by the Vertex AI Vizier service. Not supported
+            #     by HyperparameterTuningJob or TrainingPipeline.
             class DiscreteValueSpec
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

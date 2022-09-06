@@ -204,7 +204,12 @@ module Google
         #
         def acknowledge! &block
           ensure_subscription!
-          subscription.acknowledge ack_id, &block
+          if subscription.respond_to?(:exactly_once_delivery_enabled) && subscription.exactly_once_delivery_enabled
+            subscription.acknowledge ack_id, &block
+          else
+            subscription.acknowledge ack_id
+            yield AcknowledgeResult.new(AcknowledgeResult::SUCCESS) if block_given?
+          end
         end
         alias ack! acknowledge!
 
@@ -265,7 +270,12 @@ module Google
         #
         def modify_ack_deadline! new_deadline, &block
           ensure_subscription!
-          subscription.modify_ack_deadline new_deadline, ack_id, &block
+          if subscription.respond_to?(:exactly_once_delivery_enabled) && subscription.exactly_once_delivery_enabled
+            subscription.modify_ack_deadline new_deadline, ack_id, &block
+          else
+            subscription.modify_ack_deadline new_deadline, ack_id
+            yield AcknowledgeResult.new(AcknowledgeResult::SUCCESS) if block_given?
+          end
         end
 
         ##

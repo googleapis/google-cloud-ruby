@@ -40,6 +40,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ignore_exit_status, :bool, 3
       optional :background, :bool, 4
       optional :always_run, :bool, 5
+      optional :environment, :message, 7, "google.cloud.batch.v1.Environment"
+      optional :timeout, :message, 8, "google.protobuf.Duration"
       oneof :executable do
         optional :container, :message, 1, "google.cloud.batch.v1.Runnable.Container"
         optional :script, :message, 2, "google.cloud.batch.v1.Runnable.Script"
@@ -73,6 +75,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :lifecycle_policies, :message, 9, "google.cloud.batch.v1.LifecyclePolicy"
       map :environments, :string, :string, 6
       repeated :volumes, :message, 7, "google.cloud.batch.v1.Volume"
+      optional :environment, :message, 10, "google.cloud.batch.v1.Environment"
     end
     add_message "google.cloud.batch.v1.LifecyclePolicy" do
       optional :action, :enum, 1, "google.cloud.batch.v1.LifecyclePolicy.Action"

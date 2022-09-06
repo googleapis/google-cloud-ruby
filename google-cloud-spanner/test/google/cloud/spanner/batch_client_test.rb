@@ -27,7 +27,7 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   let(:batch_tx_hash) { { session: Base64.strict_encode64(session_grpc.to_proto), transaction: Base64.strict_encode64(transaction_grpc.to_proto) } }
   let(:snp_opts) { Google::Cloud::Spanner::V1::TransactionOptions::ReadOnly.new return_read_timestamp: true }
   let(:tx_opts) { Google::Cloud::Spanner::V1::TransactionOptions.new read_only: snp_opts }
-  let(:default_options) { { metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } } }
+  let(:default_options) { ::Gapic::CallOptions.new metadata: { "google-cloud-resource-prefix" => database_path(instance_id, database_id) } }
   let(:batch_client) { spanner.batch_client instance_id, database_id }
 
   let(:labels) { { "env" => "production" } }
@@ -48,7 +48,7 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   it "retrieves the instance" do
     get_res = Google::Cloud::Spanner::Admin::Instance::V1::Instance.new instance_hash(name: instance_id)
     mock = Minitest::Mock.new
-    mock.expect :get_instance, get_res, [{ name: instance_path(instance_id) }, nil]
+    mock.expect :get_instance, get_res, [{ name: instance_path(instance_id) }, ::Gapic::CallOptions]
     spanner.service.mocked_instances = mock
 
     instance = spanner.instance instance_id
@@ -67,7 +67,7 @@ describe Google::Cloud::Spanner::BatchClient, :mock_spanner do
   it "retrieves the database" do
     get_res = Google::Cloud::Spanner::Admin::Database::V1::Database.new database_hash(instance_id: instance_id, database_id: database_id)
     mock = Minitest::Mock.new
-    mock.expect :get_database, get_res, [{ name: database_path(instance_id, database_id) }, nil]
+    mock.expect :get_database, get_res, [{ name: database_path(instance_id, database_id) }, ::Gapic::CallOptions]
     spanner.service.mocked_databases = mock
 
     database = batch_client.database

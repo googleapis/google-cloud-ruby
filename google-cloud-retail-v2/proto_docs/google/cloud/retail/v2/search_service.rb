@@ -25,7 +25,9 @@ module Google
         # {::Google::Cloud::Retail::V2::SearchService::Client#search SearchService.Search} method.
         # @!attribute [rw] placement
         #   @return [::String]
-        #     Required. The resource name of the search engine placement, such as
+        #     Required. The resource name of the Retail Search serving config, such as
+        #     `projects/*/locations/global/catalogs/default_catalog/servingConfigs/default_serving_config`
+        #     or the name of the legacy placement resource, such as
         #     `projects/*/locations/global/catalogs/default_catalog/placements/default_search`.
         #     This field is used to identify the serving configuration name and the set
         #     of models that will be used to make the search.
@@ -136,7 +138,9 @@ module Google
         #     Boost specification to boost certain products. See more details at this
         #     [user guide](https://cloud.google.com/retail/docs/boosting).
         #
-        #     Notice that if both [ServingConfig.boost_control_ids][] and
+        #     Notice that if both
+        #     {::Google::Cloud::Retail::V2::ServingConfig#boost_control_ids ServingConfig.boost_control_ids}
+        #     and
         #     {::Google::Cloud::Retail::V2::SearchRequest#boost_spec SearchRequest.boost_spec}
         #     are set, the boost conditions from both places are evaluated. If a search
         #     request matches multiple boost conditions, the final boost score is equal
@@ -239,6 +243,15 @@ module Google
         # @!attribute [rw] personalization_spec
         #   @return [::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec]
         #     The specification for personalization.
+        #
+        #     Notice that if both
+        #     {::Google::Cloud::Retail::V2::ServingConfig#personalization_spec ServingConfig.personalization_spec}
+        #     and
+        #     {::Google::Cloud::Retail::V2::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     are set.
+        #     {::Google::Cloud::Retail::V2::SearchRequest#personalization_spec SearchRequest.personalization_spec}
+        #     will override
+        #     {::Google::Cloud::Retail::V2::ServingConfig#personalization_spec ServingConfig.personalization_spec}.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     The labels applied to a resource must meet the following requirements:
@@ -431,16 +444,24 @@ module Google
             #     "Women > Dress" and "Men > Shoe". If set "contains" to "Shoe", the
             #     "categories" facet will give only "Women > Shoe" and "Men > Shoe".
             #     Only supported on textual fields. Maximum is 10.
+            # @!attribute [rw] case_insensitive
+            #   @return [::Boolean]
+            #     True to make facet keys case insensitive when getting faceting
+            #     values with prefixes or contains; false otherwise.
             # @!attribute [rw] order_by
             #   @return [::String]
-            #     The order in which [Facet.values][] are returned.
+            #     The order in which
+            #     {::Google::Cloud::Retail::V2::SearchResponse::Facet#values SearchResponse.Facet.values}
+            #     are returned.
             #
             #     Allowed values are:
             #
-            #     * "count desc", which means order by [Facet.FacetValue.count][]
+            #     * "count desc", which means order by
+            #     {::Google::Cloud::Retail::V2::SearchResponse::Facet::FacetValue#count SearchResponse.Facet.values.count}
             #     descending.
             #
-            #     * "value desc", which means order by [Facet.FacetValue.value][]
+            #     * "value desc", which means order by
+            #     {::Google::Cloud::Retail::V2::SearchResponse::Facet::FacetValue#value SearchResponse.Facet.values.value}
             #     descending.
             #       Only applies to textual facets.
             #
@@ -461,9 +482,11 @@ module Google
             #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#key FacetKey.key}
             #     when query is specified.
             #
-            #     In the response, [FacetValue.value][] will be always "1" and
-            #     [FacetValue.count][] will be the number of results that matches the
-            #     query.
+            #     In the response,
+            #     {::Google::Cloud::Retail::V2::SearchResponse::Facet::FacetValue#value SearchResponse.Facet.values.value}
+            #     will be always "1" and
+            #     {::Google::Cloud::Retail::V2::SearchResponse::Facet::FacetValue#count SearchResponse.Facet.values.count}
+            #     will be the number of results that match the query.
             #
             #     For example, you can set a customized facet for "shipToStore",
             #     where
@@ -473,6 +496,10 @@ module Google
             #     is "availability: ANY(\"IN_STOCK\") AND shipToStore: ANY(\"123\")".
             #     Then the facet will count the products that are both in stock and ship
             #     to store "123".
+            # @!attribute [rw] return_min_max
+            #   @return [::Boolean]
+            #     Returns the min and max value for each numerical facet intervals.
+            #     Ignored for textual facets.
             class FacetKey
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -579,7 +606,8 @@ module Google
 
             # Enum describing under which condition query expansion should occur.
             module Condition
-              # Unspecified query expansion condition. This defaults to
+              # Unspecified query expansion condition. In this case, server behavior
+              # defaults to
               # {::Google::Cloud::Retail::V2::SearchRequest::QueryExpansionSpec::Condition::DISABLED Condition.DISABLED}.
               CONDITION_UNSPECIFIED = 0
 
@@ -604,11 +632,12 @@ module Google
 
             # The personalization mode of each search request.
             module Mode
-              # Default value. Defaults to
+              # Default value. In this case, server behavior defaults to
               # {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode::AUTO Mode.AUTO}.
               MODE_UNSPECIFIED = 0
 
-              # Let CRS decide whether to use personalization.
+              # Let CRS decide whether to use personalization based on quality of user
+              # event data.
               AUTO = 1
 
               # Disable personalization.
@@ -628,7 +657,8 @@ module Google
 
             # Enum describing under which mode spell correction should occur.
             module Mode
-              # Unspecified spell correction mode. This defaults to
+              # Unspecified spell correction mode. In this case, server behavior
+              # defaults to
               # {::Google::Cloud::Retail::V2::SearchRequest::SpellCorrectionSpec::Mode::AUTO Mode.AUTO}.
               MODE_UNSPECIFIED = 0
 
@@ -704,7 +734,7 @@ module Google
         #   @return [::String]
         #     Contains the spell corrected query, if found. If the spell correction type
         #     is AUTOMATIC, then the search results are based on corrected_query.
-        #     Otherwise the original query will be used for search.
+        #     Otherwise the original query is used for search.
         # @!attribute [rw] attribution_token
         #   @return [::String]
         #     A unique search token. This should be included in the
@@ -811,6 +841,21 @@ module Google
           #     {::Google::Protobuf::Value google.protobuf.Value}. For example,
           #     `{key: "pickupInStore.store1" value { number_value: 10 }}` means a there
           #     are 10 variants in this product are available in the store "store1".
+          # @!attribute [rw] personal_labels
+          #   @return [::Array<::String>]
+          #     Specifies previous events related to this product for this user based on
+          #     {::Google::Cloud::Retail::V2::UserEvent UserEvent} with same
+          #     {::Google::Cloud::Retail::V2::SearchRequest#visitor_id SearchRequest.visitor_id}
+          #     or {::Google::Cloud::Retail::V2::UserInfo#user_id UserInfo.user_id}.
+          #
+          #     This is set only when
+          #     {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec#mode SearchRequest.PersonalizationSpec.mode}
+          #     is
+          #     {::Google::Cloud::Retail::V2::SearchRequest::PersonalizationSpec::Mode::AUTO SearchRequest.PersonalizationSpec.Mode.AUTO}.
+          #
+          #     Possible values:
+          #
+          #     * `purchased`: Indicates that this product has been purchased before.
           class SearchResult
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -859,6 +904,20 @@ module Google
             # @!attribute [rw] count
             #   @return [::Integer]
             #     Number of items that have this facet value.
+            # @!attribute [rw] min_value
+            #   @return [::Float]
+            #     The minimum value in the
+            #     {::Google::Cloud::Retail::V2::SearchResponse::Facet::FacetValue#interval FacetValue.interval}.
+            #     Only supported on numerical facets and returned if
+            #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#return_min_max SearchRequest.FacetSpec.FacetKey.return_min_max}
+            #     is true.
+            # @!attribute [rw] max_value
+            #   @return [::Float]
+            #     The maximum value in the
+            #     {::Google::Cloud::Retail::V2::SearchResponse::Facet::FacetValue#interval FacetValue.interval}.
+            #     Only supported on numerical facets and returned if
+            #     {::Google::Cloud::Retail::V2::SearchRequest::FacetSpec::FacetKey#return_min_max SearchRequest.FacetSpec.FacetKey.return_min_max}
+            #     is true.
             class FacetValue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

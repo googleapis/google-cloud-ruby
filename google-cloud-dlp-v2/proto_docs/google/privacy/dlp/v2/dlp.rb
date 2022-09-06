@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Dlp
       module V2
-        # List of exclude infoTypes.
+        # List of excluded infoTypes.
         # @!attribute [rw] info_types
         #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
         #     InfoType list in ExclusionRule rule drops a finding when it overlaps or
@@ -107,6 +107,12 @@ module Google
         #   @return [::Google::Cloud::Dlp::V2::InspectConfig::FindingLimits]
         #     Configuration to control the number of findings returned.
         #     This is not used for data profiling.
+        #
+        #     When redacting sensitive data from images, finding limits don't apply. They
+        #     can cause unexpected or inconsistent results, where only some data is
+        #     redacted. Don't include finding limits in
+        #     {::Google::Cloud::Dlp::V2::DlpService::Client#redact_image RedactImage}
+        #     requests. Otherwise, Cloud DLP returns an error.
         # @!attribute [rw] include_quote
         #   @return [::Boolean]
         #     When true, a contextual quote from the data that triggered a finding is
@@ -134,6 +140,12 @@ module Google
 
           # Configuration to control the number of findings returned for inspection.
           # This is not used for de-identification or data profiling.
+          #
+          # When redacting sensitive data from images, finding limits don't apply. They
+          # can cause unexpected or inconsistent results, where only some data is
+          # redacted. Don't include finding limits in
+          # {::Google::Cloud::Dlp::V2::DlpService::Client#redact_image RedactImage}
+          # requests. Otherwise, Cloud DLP returns an error.
           # @!attribute [rw] max_findings_per_item
           #   @return [::Integer]
           #     Max number of findings that will be returned for each item scanned.
@@ -399,7 +411,7 @@ module Google
         #     * Datastore namespace: \\{namespace}
         #
         #     Nested names could be absent if the embedded object has no string
-        #     identifier (for an example an image contained within a document).
+        #     identifier (for example, an image contained within a document).
         # @!attribute [rw] record_location
         #   @return [::Google::Cloud::Dlp::V2::RecordLocation]
         #     Location within a row or record of a database table.
@@ -414,14 +426,14 @@ module Google
         #     Location within the metadata for inspected content.
         # @!attribute [rw] container_timestamp
         #   @return [::Google::Protobuf::Timestamp]
-        #     Findings container modification timestamp, if applicable.
-        #     For Google Cloud Storage contains last file modification timestamp.
-        #     For BigQuery table contains last_modified_time property.
-        #     For Datastore - not populated.
+        #     Finding container modification timestamp, if applicable. For Cloud Storage,
+        #     this field contains the last file modification timestamp. For a BigQuery
+        #     table, this field contains the last_modified_time property. For Datastore,
+        #     this field isn't populated.
         # @!attribute [rw] container_version
         #   @return [::String]
-        #     Findings container version, if available
-        #     ("generation" for Google Cloud Storage).
+        #     Finding container version, if available
+        #     ("generation" for Cloud Storage).
         class ContentLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -490,7 +502,7 @@ module Google
         # Examples of a container include a file, table, or database record.
         # @!attribute [rw] type
         #   @return [::String]
-        #     Container type, for example BigQuery or Google Cloud Storage.
+        #     Container type, for example BigQuery or Cloud Storage.
         # @!attribute [rw] project_id
         #   @return [::String]
         #     Project where the finding was found.
@@ -500,33 +512,35 @@ module Google
         #     A string representation of the full container name.
         #     Examples:
         #     - BigQuery: 'Project:DataSetId.TableId'
-        #     - Google Cloud Storage: 'gs://Bucket/folders/filename.txt'
+        #     - Cloud Storage: 'gs://Bucket/folders/filename.txt'
         # @!attribute [rw] root_path
         #   @return [::String]
         #     The root of the container.
         #     Examples:
+        #
         #     - For BigQuery table `project_id:dataset_id.table_id`, the root is
         #      `dataset_id`
-        #     - For Google Cloud Storage file `gs://bucket/folder/filename.txt`, the root
+        #     - For Cloud Storage file `gs://bucket/folder/filename.txt`, the root
         #      is `gs://bucket`
         # @!attribute [rw] relative_path
         #   @return [::String]
         #     The rest of the path after the root.
         #     Examples:
+        #
         #     - For BigQuery table `project_id:dataset_id.table_id`, the relative path is
         #      `table_id`
-        #     - Google Cloud Storage file `gs://bucket/folder/filename.txt`, the relative
+        #     - For Cloud Storage file `gs://bucket/folder/filename.txt`, the relative
         #      path is `folder/filename.txt`
         # @!attribute [rw] update_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Findings container modification timestamp, if applicable.
-        #     For Google Cloud Storage contains last file modification timestamp.
-        #     For BigQuery table contains last_modified_time property.
-        #     For Datastore - not populated.
+        #     Findings container modification timestamp, if applicable. For Cloud
+        #     Storage, this field contains the last file modification timestamp. For a
+        #     BigQuery table, this field contains the last_modified_time property. For
+        #     Datastore, this field isn't populated.
         # @!attribute [rw] version
         #   @return [::String]
         #     Findings container version, if available
-        #     ("generation" for Google Cloud Storage).
+        #     ("generation" for Cloud Storage).
         class Container
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -664,7 +678,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request to de-identify a list of items.
+        # Request to de-identify a ContentItem.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Parent resource name.
@@ -791,7 +805,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Results of re-identifying a item.
+        # Results of re-identifying an item.
         # @!attribute [rw] item
         #   @return [::Google::Cloud::Dlp::V2::ContentItem]
         #     The re-identified item.
@@ -859,8 +873,8 @@ module Google
         #     Store findings in an existing table or a new table in an existing
         #     dataset. If table_id is not set a new one will be generated
         #     for you with the following format:
-        #     dlp_googleapis_yyyy_mm_dd_[dlp_job_id]. Pacific timezone will be used for
-        #     generating the date details.
+        #     dlp_googleapis_yyyy_mm_dd_[dlp_job_id]. Pacific time zone will be used
+        #     for generating the date details.
         #
         #     For Inspect, each column in an existing output table must have the same
         #     name, type, and mode of a field in the `Finding` object.
@@ -896,7 +910,7 @@ module Google
             # `timestamp`.
             BASIC_COLUMNS = 1
 
-            # Schema tailored to findings from scanning Google Cloud Storage.
+            # Schema tailored to findings from scanning Cloud Storage.
             GCS_COLUMNS = 2
 
             # Schema tailored to findings from scanning Google Datastore.
@@ -1000,6 +1014,9 @@ module Google
         #   @return [::String]
         #     Description of the infotype. Translated when language is provided in the
         #     request.
+        # @!attribute [rw] versions
+        #   @return [::Array<::Google::Cloud::Dlp::V2::VersionDescription>]
+        #     A list of available versions for the infotype.
         # @!attribute [rw] categories
         #   @return [::Array<::Google::Cloud::Dlp::V2::InfoTypeCategory>]
         #     The category of the infoType.
@@ -1199,6 +1216,18 @@ module Google
             # the circumstances surrounding an entity or an event.
             CONTEXTUAL_INFORMATION = 7
           end
+        end
+
+        # Details about each available version for an infotype.
+        # @!attribute [rw] version
+        #   @return [::String]
+        #     Name of the version
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Description of the version.
+        class VersionDescription
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for the list of infoTypes.
@@ -1767,10 +1796,10 @@ module Google
             # @!attribute [rw] estimated_probability
             #   @return [::Float]
             #     The estimated probability that a given individual sharing these
-            #     quasi-identifier values is in the dataset. This value, typically called
-            #     δ, is the ratio between the number of records in the dataset with these
-            #     quasi-identifier values, and the total number of individuals (inside
-            #     *and* outside the dataset) with these quasi-identifier values.
+            #     quasi-identifier values is in the dataset. This value, typically
+            #     called δ, is the ratio between the number of records in the dataset
+            #     with these quasi-identifier values, and the total number of individuals
+            #     (inside *and* outside the dataset) with these quasi-identifier values.
             #     For example, if there are 15 individuals in the dataset who share the
             #     same quasi-identifier values, and an estimated 100 people in the entire
             #     population with these values, then δ is 0.15.
@@ -1916,6 +1945,9 @@ module Google
         #     Treat the dataset as structured. Transformations can be applied to
         #     specific locations within structured datasets, such as transforming
         #     a column within a table.
+        # @!attribute [rw] image_transformations
+        #   @return [::Google::Cloud::Dlp::V2::ImageTransformations]
+        #     Treat the dataset as an image and redact.
         # @!attribute [rw] transformation_error_handling
         #   @return [::Google::Cloud::Dlp::V2::TransformationErrorHandling]
         #     Mode for handling transformation errors. If left unspecified, the default
@@ -1923,6 +1955,58 @@ module Google
         class DeidentifyConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A type of transformation that is applied over images.
+        # @!attribute [rw] transforms
+        #   @return [::Array<::Google::Cloud::Dlp::V2::ImageTransformations::ImageTransformation>]
+        class ImageTransformations
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Configuration for determining how redaction of images should occur.
+          # @!attribute [rw] selected_info_types
+          #   @return [::Google::Cloud::Dlp::V2::ImageTransformations::ImageTransformation::SelectedInfoTypes]
+          #     Apply transformation to the selected info_types.
+          # @!attribute [rw] all_info_types
+          #   @return [::Google::Cloud::Dlp::V2::ImageTransformations::ImageTransformation::AllInfoTypes]
+          #     Apply transformation to all findings not specified in other
+          #     ImageTransformation's selected_info_types. Only one instance is allowed
+          #     within the ImageTransformations message.
+          # @!attribute [rw] all_text
+          #   @return [::Google::Cloud::Dlp::V2::ImageTransformations::ImageTransformation::AllText]
+          #     Apply transformation to all text that doesn't match an infoType. Only
+          #     one instance is allowed within the ImageTransformations message.
+          # @!attribute [rw] redaction_color
+          #   @return [::Google::Cloud::Dlp::V2::Color]
+          #     The color to use when redacting content from an image. If not
+          #     specified, the default is black.
+          class ImageTransformation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Apply transformation to the selected info_types.
+            # @!attribute [rw] info_types
+            #   @return [::Array<::Google::Cloud::Dlp::V2::InfoType>]
+            #     Required. InfoTypes to apply the transformation to. Required. Provided InfoType
+            #     must be unique within the ImageTransformations message.
+            class SelectedInfoTypes
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Apply transformation to all findings.
+            class AllInfoTypes
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Apply to all text.
+            class AllText
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
         end
 
         # How to handle transformation errors during de-identification. A
@@ -2111,7 +2195,7 @@ module Google
         #     plaintext would be used as is for encryption.
         #
         #     Note that case (1) is expected when an `InfoTypeTransformation` is
-        #     applied to both structured and non-structured `ContentItem`s.
+        #     applied to both structured and unstructured `ContentItem`s.
         class CryptoDeterministicConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2164,7 +2248,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Convenience enum for indication common characters to not transform.
+          # Convenience enum for indicating common characters to not transform.
           module CommonCharsToIgnore
             # Unused.
             COMMON_CHARS_TO_IGNORE_UNSPECIFIED = 0
@@ -2202,6 +2286,21 @@ module Google
         #   @return [::Integer]
         #     Number of characters to mask. If not set, all matching chars will be
         #     masked. Skipped characters do not count towards this tally.
+        #
+        #     If `number_to_mask` is negative, this denotes inverse masking. Cloud DLP
+        #     masks all but a number of characters.
+        #     For example, suppose you have the following values:
+        #
+        #     - `masking_character` is `*`
+        #     - `number_to_mask` is `-4`
+        #     - `reverse_order` is `false`
+        #     - `CharsToIgnore` includes `-`
+        #     - Input string is `1234-5678-9012-3456`
+        #
+        #     The resulting de-identified string is
+        #     `****-****-****-3456`. Cloud DLP masks all but the last four characters.
+        #     If `reverse_order` is `true`, all but the first four characters are masked
+        #     as `1234-****-****-****`.
         # @!attribute [rw] reverse_order
         #   @return [::Boolean]
         #     Mask characters in reverse order. For example, if `masking_character` is
@@ -2320,7 +2419,7 @@ module Google
         #     a default tweak will be used.
         #
         #     Note that case (1) is expected when an `InfoTypeTransformation` is
-        #     applied to both structured and non-structured `ContentItem`s.
+        #     applied to both structured and unstructured `ContentItem`s.
         #     Currently, the referenced field may be of value type integer or string.
         #
         #     The tweak is constructed as a sequence of bytes in big endian byte order
@@ -2379,7 +2478,7 @@ module Google
 
           # These are commonly used subsets of the alphabet that the FFX mode
           # natively supports. In the algorithm, the alphabet is selected using
-          # the "radix". Therefore each corresponds to particular radix.
+          # the "radix". Therefore each corresponds to a particular radix.
           module FfxCommonNativeAlphabet
             # Unused.
             FFX_COMMON_NATIVE_ALPHABET_UNSPECIFIED = 0
@@ -2627,7 +2726,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # An expression, consisting or an operator and conditions.
+          # An expression, consisting of an operator and conditions.
           # @!attribute [rw] logical_operator
           #   @return [::Google::Cloud::Dlp::V2::RecordCondition::Expressions::LogicalOperator]
           #     The operator to apply to the result of conditions. Default and currently
@@ -2722,10 +2821,137 @@ module Google
           end
         end
 
+        # A flattened description of a `PrimitiveTransformation` or
+        # `RecordSuppression`.
+        # @!attribute [rw] type
+        #   @return [::Google::Cloud::Dlp::V2::TransformationType]
+        #     The transformation type.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     A description of the transformation. This is empty for a
+        #     RECORD_SUPPRESSION, or is the output of calling toString() on the
+        #     `PrimitiveTransformation` protocol buffer message for any other type of
+        #     transformation.
+        # @!attribute [rw] condition
+        #   @return [::String]
+        #     A human-readable string representation of the `RecordCondition`
+        #     corresponding to this transformation. Set if a `RecordCondition` was used
+        #     to determine whether or not to apply this transformation.
+        #
+        #     Examples:
+        #         * (age_field > 85)
+        #         * (age_field <= 18)
+        #         * (zip_field exists)
+        #         * (zip_field == 01234) && (city_field != "Springville")
+        #         * (zip_field == 01234) && (age_field <= 18) && (city_field exists)
+        # @!attribute [rw] info_type
+        #   @return [::Google::Cloud::Dlp::V2::InfoType]
+        #     Set if the transformation was limited to a specific `InfoType`.
+        class TransformationDescription
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Details about a single transformation. This object contains a description of
+        # the transformation, information about whether the transformation was
+        # successfully applied, and the precise location where the transformation
+        # occurred. These details are stored in a user-specified BigQuery table.
+        # @!attribute [rw] resource_name
+        #   @return [::String]
+        #     The name of the job that completed the transformation.
+        # @!attribute [rw] container_name
+        #   @return [::String]
+        #     The top level name of the container where the transformation is located
+        #     (this will be the source file name or table name).
+        # @!attribute [rw] transformation
+        #   @return [::Array<::Google::Cloud::Dlp::V2::TransformationDescription>]
+        #     Description of transformation. This would only contain more than one
+        #     element if there were multiple matching transformations and which one to
+        #     apply was ambiguous. Not set for states that contain no transformation,
+        #     currently only state that contains no transformation is
+        #     TransformationResultStateType.METADATA_UNRETRIEVABLE.
+        # @!attribute [rw] status_details
+        #   @return [::Google::Cloud::Dlp::V2::TransformationResultStatus]
+        #     Status of the transformation, if transformation was not successful, this
+        #     will specify what caused it to fail, otherwise it will show that the
+        #     transformation was successful.
+        # @!attribute [rw] transformed_bytes
+        #   @return [::Integer]
+        #     The number of bytes that were transformed. If transformation was
+        #     unsuccessful or did not take place because there was no content to
+        #     transform, this will be zero.
+        # @!attribute [rw] transformation_location
+        #   @return [::Google::Cloud::Dlp::V2::TransformationLocation]
+        #     The precise location of the transformed content in the original container.
+        class TransformationDetails
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies the location of a transformation.
+        # @!attribute [rw] finding_id
+        #   @return [::String]
+        #     For infotype transformations, link to the corresponding findings ID so
+        #     that location information does not need to be duplicated. Each findings
+        #     ID correlates to an entry in the findings output table, this table only
+        #     gets created when users specify to save findings (add the save findings
+        #     action to the request).
+        # @!attribute [rw] record_transformation
+        #   @return [::Google::Cloud::Dlp::V2::RecordTransformation]
+        #     For record transformations, provide a field and container information.
+        # @!attribute [rw] container_type
+        #   @return [::Google::Cloud::Dlp::V2::TransformationContainerType]
+        #     Information about the functionality of the container where this finding
+        #     occurred, if available.
+        class TransformationLocation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] field_id
+        #   @return [::Google::Cloud::Dlp::V2::FieldId]
+        #     For record transformations, provide a field.
+        # @!attribute [rw] container_timestamp
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Findings container modification timestamp, if applicable.
+        # @!attribute [rw] container_version
+        #   @return [::String]
+        #     Container version, if available ("generation" for Cloud Storage).
+        class RecordTransformation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] result_status_type
+        #   @return [::Google::Cloud::Dlp::V2::TransformationResultStatusType]
+        #     Transformation result status type, this will be either SUCCESS, or it will
+        #     be the reason for why the transformation was not completely successful.
+        # @!attribute [rw] details
+        #   @return [::Google::Rpc::Status]
+        #     Detailed error codes and messages
+        class TransformationResultStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Config for storing transformation details.
+        # @!attribute [rw] table
+        #   @return [::Google::Cloud::Dlp::V2::BigQueryTable]
+        #     The BigQuery table in which to store the output. This may be an existing
+        #     table or in a new table in an existing dataset.
+        #     If table_id is not set a new one will be generated for you with the
+        #     following format:
+        #     dlp_googleapis_transformation_details_yyyy_mm_dd_[dlp_job_id]. Pacific
+        #     time zone will be used for generating the date details.
+        class TransformationDetailsStorageConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Schedule for inspect job triggers.
         # @!attribute [rw] recurrence_period_duration
         #   @return [::Google::Protobuf::Duration]
-        #     With this option a job is started a regular periodic basis. For
+        #     With this option a job is started on a regular periodic basis. For
         #     example: every day (86400 seconds).
         #
         #     A scheduled start time will be skipped if the previous
@@ -2899,13 +3125,16 @@ module Google
         #     Save resulting findings in a provided location.
         # @!attribute [rw] pub_sub
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishToPubSub]
-        #     Publish a notification to a pubsub topic.
+        #     Publish a notification to a Pub/Sub topic.
         # @!attribute [rw] publish_summary_to_cscc
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishSummaryToCscc]
         #     Publish summary to Cloud Security Command Center (Alpha).
         # @!attribute [rw] publish_findings_to_cloud_data_catalog
         #   @return [::Google::Cloud::Dlp::V2::Action::PublishFindingsToCloudDataCatalog]
         #     Publish findings to Cloud Datahub.
+        # @!attribute [rw] deidentify
+        #   @return [::Google::Cloud::Dlp::V2::Action::Deidentify]
+        #     Create a de-identified copy of the input data.
         # @!attribute [rw] job_notification_emails
         #   @return [::Google::Cloud::Dlp::V2::Action::JobNotificationEmails]
         #     Enable email notification for project owners and editors on job's
@@ -2929,7 +3158,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Publish a message into given Pub/Sub topic when DlpJob has completed. The
+          # Publish a message into a given Pub/Sub topic when DlpJob has completed. The
           # message contains a single field, `DlpJobName`, which is equal to the
           # finished job's
           # [`DlpJob.name`](https://cloud.google.com/dlp/docs/reference/rest/v2/projects.dlpJobs#DlpJob).
@@ -2950,33 +3179,91 @@ module Google
           # This action is only available for projects which are parts of
           # an organization and whitelisted for the alpha Cloud Security Command
           # Center.
-          # The action will publish count of finding instances and their info types.
-          # The summary of findings will be persisted in CSCC and are governed by CSCC
-          # service-specific policy, see https://cloud.google.com/terms/service-terms
-          # Only a single instance of this action can be specified.
-          # Compatible with: Inspect
+          # The action will publish the count of finding instances and their info
+          # types. The summary of findings will be persisted in CSCC and are governed
+          # by CSCC service-specific policy, see
+          # https://cloud.google.com/terms/service-terms Only a single instance of this
+          # action can be specified. Compatible with: Inspect
           class PublishSummaryToCscc
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Publish findings of a DlpJob to Data Catalog. Labels summarizing the
-          # results of the DlpJob will be applied to the entry for the resource scanned
-          # in Data Catalog. Any labels previously written by another DlpJob will
-          # be deleted. InfoType naming patterns are strictly enforced when using this
-          # feature. Note that the findings will be persisted in Data Catalog
-          # storage and are governed by Data Catalog service-specific policy, see
-          # https://cloud.google.com/terms/service-terms
-          # Only a single instance of this action can be specified and only allowed if
-          # all resources being scanned are BigQuery tables.
+          # Publish findings of a DlpJob to Data Catalog. In Data Catalog, tag
+          # templates are applied to the resource that Cloud DLP scanned. Data
+          # Catalog tag templates are stored in the same project and region where the
+          # BigQuery table exists. For Cloud DLP to create and apply the tag template,
+          # the Cloud DLP service agent must have the
+          # `roles/datacatalog.tagTemplateOwner` permission on the project. The tag
+          # template contains fields summarizing the results of the DlpJob. Any field
+          # values previously written by another DlpJob are deleted. [InfoType naming
+          # patterns][google.privacy.dlp.v2.InfoType] are strictly enforced when using
+          # this feature.
+          #
+          # Findings are persisted in Data Catalog storage and are governed by
+          # service-specific policies for Data Catalog. For more information, see
+          # [Service Specific Terms](https://cloud.google.com/terms/service-terms).
+          #
+          # Only a single instance of this action can be specified. This action is
+          # allowed only if all resources being scanned are BigQuery tables.
           # Compatible with: Inspect
           class PublishFindingsToCloudDataCatalog
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # Enable email notification to project owners and editors on jobs's
-          # completion/failure.
+          # Create a de-identified copy of the requested table or files.
+          #
+          # A TransformationDetail will be created for each transformation.
+          #
+          # If any rows in BigQuery are skipped during de-identification
+          # (transformation errors or row size exceeds BigQuery insert API limits) they
+          # are placed in the failure output table. If the original row exceeds
+          # the BigQuery insert API limit it will be truncated when written to the
+          # failure output table. The failure output table can be set in the
+          # action.deidentify.output.big_query_output.deidentified_failure_output_table
+          # field, if no table is set, a table will be automatically created in the
+          # same project and dataset as the original table.
+          #
+          # Compatible with: Inspect
+          # @!attribute [rw] transformation_config
+          #   @return [::Google::Cloud::Dlp::V2::TransformationConfig]
+          #     User specified deidentify templates and configs for structured,
+          #     unstructured, and image files.
+          # @!attribute [rw] transformation_details_storage_config
+          #   @return [::Google::Cloud::Dlp::V2::TransformationDetailsStorageConfig]
+          #     Config for storing transformation details. This is separate from the
+          #     de-identified content, and contains metadata about the successful
+          #     transformations and/or failures that occurred while de-identifying. This
+          #     needs to be set in order for users to access information about the status
+          #     of each transformation (see
+          #     {::Google::Cloud::Dlp::V2::TransformationDetails TransformationDetails}
+          #     message for more information about what is noted).
+          # @!attribute [rw] cloud_storage_output
+          #   @return [::String]
+          #     Required. User settable Cloud Storage bucket and folders to store de-identified
+          #     files. This field must be set for cloud storage deidentification. The
+          #     output Cloud Storage bucket must be different from the input bucket.
+          #     De-identified files will overwrite files in the output path.
+          #
+          #     Form of: gs://bucket/folder/ or gs://bucket
+          # @!attribute [rw] file_types_to_transform
+          #   @return [::Array<::Google::Cloud::Dlp::V2::FileType>]
+          #     List of user-specified file type groups to transform. If specified, only
+          #     the files with these filetypes will be transformed. If empty, all
+          #     supported files will be transformed. Supported types may be automatically
+          #     added over time. If a file type is set in this field that isn't supported
+          #     by the Deidentify action then the job will fail and will not be
+          #     successfully created/started. Currently the only filetypes supported are:
+          #     IMAGES, TEXT_FILES, CSV, TSV.
+          class Deidentify
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Sends an email when the job completes. The email goes to IAM project owners
+          # and technical [Essential
+          # Contacts](https://cloud.google.com/resource-manager/docs/managing-notification-contacts).
           class JobNotificationEmails
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2990,6 +3277,37 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # User specified templates and configs for how to deidentify structured,
+        # unstructures, and image files. User must provide either a unstructured
+        # deidentify template or at least one redact image config.
+        # @!attribute [rw] deidentify_template
+        #   @return [::String]
+        #     De-identify template.
+        #     If this template is specified, it will serve as the default de-identify
+        #     template. This template cannot contain `record_transformations` since it
+        #     can be used for unstructured content such as free-form text files. If this
+        #     template is not set, a default `ReplaceWithInfoTypeConfig` will be used to
+        #     de-identify unstructured content.
+        # @!attribute [rw] structured_deidentify_template
+        #   @return [::String]
+        #     Structured de-identify template.
+        #     If this template is specified, it will serve as the de-identify template
+        #     for structured content such as delimited files and tables. If this template
+        #     is not set but the `deidentify_template` is set, then `deidentify_template`
+        #     will also apply to the structured content. If neither template is set, a
+        #     default `ReplaceWithInfoTypeConfig` will be used to de-identify structured
+        #     content.
+        # @!attribute [rw] image_redact_template
+        #   @return [::String]
+        #     Image redact template.
+        #     If this template is specified, it will serve as the de-identify template
+        #     for images. If this template is not set, all findings in the image will be
+        #     redacted with a black box.
+        class TransformationConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request message for CreateInspectTemplate.
@@ -3089,7 +3407,7 @@ module Google
         #     to `ListInspectTemplates`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Size of the page, can be limited by server. If zero server returns
+        #     Size of the page, can be limited by the server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -3102,10 +3420,10 @@ module Google
         #
         #     Supported fields are:
         #
-        #     - `create_time`: corresponds to time the template was created.
-        #     - `update_time`: corresponds to time the template was last updated.
-        #     - `name`: corresponds to template's name.
-        #     - `display_name`: corresponds to template's display name.
+        #     - `create_time`: corresponds to the time the template was created.
+        #     - `update_time`: corresponds to the time the template was last updated.
+        #     - `name`: corresponds to the template's name.
+        #     - `display_name`: corresponds to the template's display name.
         # @!attribute [rw] location_id
         #   @return [::String]
         #     Deprecated. This field has no effect.
@@ -3290,11 +3608,11 @@ module Google
         #
         #     Supported fields are:
         #
-        #     - `create_time`: corresponds to time the JobTrigger was created.
-        #     - `update_time`: corresponds to time the JobTrigger was last updated.
+        #     - `create_time`: corresponds to the time the JobTrigger was created.
+        #     - `update_time`: corresponds to the time the JobTrigger was last updated.
         #     - `last_run_time`: corresponds to the last time the JobTrigger ran.
-        #     - `name`: corresponds to JobTrigger's name.
-        #     - `display_name`: corresponds to JobTrigger's display name.
+        #     - `name`: corresponds to the JobTrigger's name.
+        #     - `display_name`: corresponds to the JobTrigger's display name.
         #     - `status`: corresponds to JobTrigger's status.
         # @!attribute [rw] filter
         #   @return [::String]
@@ -3565,7 +3883,7 @@ module Google
             # The job is no longer running.
             DONE = 3
 
-            # The job was canceled before it could complete.
+            # The job was canceled before it could be completed.
             CANCELED = 4
 
             # The job had an error and did not complete.
@@ -3573,7 +3891,7 @@ module Google
 
             # The job is currently accepting findings via hybridInspect.
             # A hybrid job in ACTIVE state may continue to have findings added to it
-            # through calling of hybridInspect. After the job has finished no more
+            # through the calling of hybridInspect. After the job has finished no more
             # calls to hybridInspect may be made. ACTIVE jobs can transition to DONE.
             ACTIVE = 6
           end
@@ -3620,13 +3938,13 @@ module Google
         #     * Supported fields/values for inspect jobs:
         #         - `state` - PENDING|RUNNING|CANCELED|FINISHED|FAILED
         #         - `inspected_storage` - DATASTORE|CLOUD_STORAGE|BIGQUERY
-        #         - `trigger_name` - The resource name of the trigger that created job.
-        #         - 'end_time` - Corresponds to time the job finished.
-        #         - 'start_time` - Corresponds to time the job finished.
+        #         - `trigger_name` - The name of the trigger that created the job.
+        #         - 'end_time` - Corresponds to the time the job finished.
+        #         - 'start_time` - Corresponds to the time the job finished.
         #     * Supported fields for risk analysis jobs:
         #         - `state` - RUNNING|CANCELED|FINISHED|FAILED
-        #         - 'end_time` - Corresponds to time the job finished.
-        #         - 'start_time` - Corresponds to time the job finished.
+        #         - 'end_time` - Corresponds to the time the job finished.
+        #         - 'start_time` - Corresponds to the time the job finished.
         #     * The operator must be `=` or `!=`.
         #
         #     Examples:
@@ -3657,9 +3975,9 @@ module Google
         #
         #     Supported fields are:
         #
-        #     - `create_time`: corresponds to time the job was created.
-        #     - `end_time`: corresponds to time the job ended.
-        #     - `name`: corresponds to job's name.
+        #     - `create_time`: corresponds to the time the job was created.
+        #     - `end_time`: corresponds to the time the job ended.
+        #     - `name`: corresponds to the job's name.
         #     - `state`: corresponds to `state`
         # @!attribute [rw] location_id
         #   @return [::String]
@@ -3805,7 +4123,7 @@ module Google
         #     to `ListDeidentifyTemplates`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Size of the page, can be limited by server. If zero server returns
+        #     Size of the page, can be limited by the server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -3818,10 +4136,10 @@ module Google
         #
         #     Supported fields are:
         #
-        #     - `create_time`: corresponds to time the template was created.
-        #     - `update_time`: corresponds to time the template was last updated.
-        #     - `name`: corresponds to template's name.
-        #     - `display_name`: corresponds to template's display name.
+        #     - `create_time`: corresponds to the time the template was created.
+        #     - `update_time`: corresponds to the time the template was last updated.
+        #     - `name`: corresponds to the template's name.
+        #     - `display_name`: corresponds to the template's display name.
         # @!attribute [rw] location_id
         #   @return [::String]
         #     Deprecated. This field has no effect.
@@ -3858,12 +4176,12 @@ module Google
         # Configuration for a custom dictionary created from a data source of any size
         # up to the maximum size defined in the
         # [limits](https://cloud.google.com/dlp/limits) page. The artifacts of
-        # dictionary creation are stored in the specified Google Cloud Storage
+        # dictionary creation are stored in the specified Cloud Storage
         # location. Consider using `CustomInfoType.Dictionary` for smaller dictionaries
         # that satisfy the size requirements.
         # @!attribute [rw] output_path
         #   @return [::Google::Cloud::Dlp::V2::CloudStoragePath]
-        #     Location to store dictionary artifacts in Google Cloud Storage. These files
+        #     Location to store dictionary artifacts in Cloud Storage. These files
         #     will only be accessible by project owners and the DLP API. If any of these
         #     artifacts are modified, the dictionary is considered invalid and can no
         #     longer be used.
@@ -3940,7 +4258,7 @@ module Google
         #     appearing first.
         #
         #     For example, some of the data for stored custom dictionaries is put in
-        #     the user's Google Cloud Storage bucket, and if this data is modified or
+        #     the user's Cloud Storage bucket, and if this data is modified or
         #     deleted by the user or another system, the dictionary becomes invalid.
         #
         #     If any errors occur, fix the problem indicated by the error message and
@@ -4055,10 +4373,6 @@ module Google
         #       `projects/`<var>PROJECT_ID</var>`/locations/`<var>LOCATION_ID</var>
         #     + Projects scope, no location specified (defaults to global):<br/>
         #       `projects/`<var>PROJECT_ID</var>
-        #     + Organizations scope, location specified:<br/>
-        #       `organizations/`<var>ORG_ID</var>`/locations/`<var>LOCATION_ID</var>
-        #     + Organizations scope, no location specified (defaults to global):<br/>
-        #       `organizations/`<var>ORG_ID</var>
         #
         #     The following example `parent` string specifies a parent project with the
         #     identifier `example-project`, and specifies the `europe-west3` location
@@ -4071,7 +4385,7 @@ module Google
         #     to `ListStoredInfoTypes`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Size of the page, can be limited by server. If zero server returns
+        #     Size of the page, can be limited by the server. If zero server returns
         #     a page of max size 100.
         # @!attribute [rw] order_by
         #   @return [::String]
@@ -4084,7 +4398,7 @@ module Google
         #
         #     Supported fields are:
         #
-        #     - `create_time`: corresponds to time the most recent version of the
+        #     - `create_time`: corresponds to the time the most recent version of the
         #     resource was created.
         #     - `state`: corresponds to the state of the resource.
         #     - `name`: corresponds to resource name.
@@ -4221,36 +4535,7 @@ module Google
         end
 
         # Score is a summary of all elements in the data profile.
-        # A higher number means more sensitive.
-        # @!attribute [rw] score
-        #   @return [::Google::Cloud::Dlp::V2::SensitivityScore::SensitivityScoreLevel]
-        #     The score applied to the resource.
-        class SensitivityScore
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          # Various score levels for resources.
-          module SensitivityScoreLevel
-            # Unused.
-            SENSITIVITY_SCORE_UNSPECIFIED = 0
-
-            # No sensitive information detected. Limited access.
-            SENSITIVITY_LOW = 10
-
-            # Medium risk - PII, potentially sensitive data, or fields with free-text
-            # data that are at higher risk of having intermittent sensitive data.
-            # Consider limiting access.
-            SENSITIVITY_MODERATE = 20
-
-            # High risk – SPII may be present. Exfiltration of data may lead to user
-            # data loss. Re-identification of users may be possible. Consider limiting
-            # usage and or removing SPII.
-            SENSITIVITY_HIGH = 30
-          end
-        end
-
-        # Score is a summary of all elements in the data profile.
-        # A higher number means more risky.
+        # A higher number means more risk.
         # @!attribute [rw] score
         #   @return [::Google::Cloud::Dlp::V2::DataRiskLevel::DataRiskLevelScore]
         #     The score applied to the resource.
@@ -4269,8 +4554,8 @@ module Google
             RISK_LOW = 10
 
             # Medium risk - Sensitive data may be present but additional access or fine
-            # grain access restrictions appears to be present.  Consider limiting
-            # access even further or transforming data to mask.
+            # grain access restrictions appear to be present.  Consider limiting
+            # access even further or transform data to mask.
             RISK_MODERATE = 20
 
             # High risk – SPII may be present. Access controls may include public
@@ -4417,6 +4702,10 @@ module Google
         # @!attribute [rw] info_type
         #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The infoType.
+        # @!attribute [rw] estimated_prevalence
+        #   @return [::Integer]
+        #     Approximate percentage of non-null rows that contained data detected by
+        #     this infotype.
         class InfoTypeSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -4426,12 +4715,16 @@ module Google
         # @!attribute [rw] info_type
         #   @return [::Google::Cloud::Dlp::V2::InfoType]
         #     The other infoType.
+        # @!attribute [rw] estimated_prevalence
+        #   @return [::Integer]
+        #     Approximate percentage of non-null rows that contained data detected by
+        #     this infotype.
         class OtherInfoTypeSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A condition for determining whether a PubSub should be triggered.
+        # A condition for determining whether a Pub/Sub should be triggered.
         # @!attribute [rw] expressions
         #   @return [::Google::Cloud::Dlp::V2::DataProfilePubSubCondition::PubSubExpressions]
         #     An expression.
@@ -4488,10 +4781,9 @@ module Google
           end
         end
 
-        # The message that will be published to a Pub/Sub topic.
+        # Pub/Sub topic message for a DataProfileAction.PubSubNotification event.
         # To receive a message of protocol buffer schema type, convert the message data
         # to an object of this proto class.
-        # https://cloud.google.com/pubsub/docs/samples/pubsub-subscribe-proto-messages
         # @!attribute [rw] profile
         #   @return [::Google::Cloud::Dlp::V2::TableDataProfile]
         #     If `DetailLevel` is `TABLE_PROFILE` this will be fully populated.
@@ -4503,6 +4795,91 @@ module Google
         class DataProfilePubSubMessage
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Enum of possible outcomes of transformations. SUCCESS if transformation and
+        # storing of transformation was successful, otherwise, reason for not
+        # transforming.
+        module TransformationResultStatusType
+          STATE_TYPE_UNSPECIFIED = 0
+
+          # This will be set when a finding could not be transformed (i.e. outside user
+          # set bucket range).
+          INVALID_TRANSFORM = 1
+
+          # This will be set when a BigQuery transformation was successful but could
+          # not be stored back in BigQuery because the transformed row exceeds
+          # BigQuery's max row size.
+          BIGQUERY_MAX_ROW_SIZE_EXCEEDED = 2
+
+          # This will be set when there is a finding in the custom metadata of a file,
+          # but at the write time of the transformed file, this key / value pair is
+          # unretrievable.
+          METADATA_UNRETRIEVABLE = 3
+
+          # This will be set when the transformation and storing of it is successful.
+          SUCCESS = 4
+        end
+
+        # Describes functionality of a given container in its original format.
+        module TransformationContainerType
+          TRANSFORM_UNKNOWN_CONTAINER = 0
+
+          TRANSFORM_BODY = 1
+
+          TRANSFORM_METADATA = 2
+
+          TRANSFORM_TABLE = 3
+        end
+
+        # An enum of rules that can be used to transform a value. Can be a
+        # record suppression, or one of the transformation rules specified under
+        # `PrimitiveTransformation`.
+        module TransformationType
+          # Unused
+          TRANSFORMATION_TYPE_UNSPECIFIED = 0
+
+          # Record suppression
+          RECORD_SUPPRESSION = 1
+
+          # Replace value
+          REPLACE_VALUE = 2
+
+          # Replace value using a dictionary.
+          REPLACE_DICTIONARY = 15
+
+          # Redact
+          REDACT = 3
+
+          # Character mask
+          CHARACTER_MASK = 4
+
+          # FFX-FPE
+          CRYPTO_REPLACE_FFX_FPE = 5
+
+          # Fixed size bucketing
+          FIXED_SIZE_BUCKETING = 6
+
+          # Bucketing
+          BUCKETING = 7
+
+          # Replace with info type
+          REPLACE_WITH_INFO_TYPE = 8
+
+          # Time part
+          TIME_PART = 9
+
+          # Crypto hash
+          CRYPTO_HASH = 10
+
+          # Date shift
+          DATE_SHIFT = 12
+
+          # Deterministic crypto
+          CRYPTO_DETERMINISTIC_CONFIG = 13
+
+          # Redact image
+          REDACT_IMAGE = 14
         end
 
         # Operators available for comparing the value of fields.

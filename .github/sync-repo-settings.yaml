@@ -10,7 +10,7 @@ branchProtectionRules:
     - 'CI (ubuntu-latest, 2.6, --test)'
     - 'CI (ubuntu-latest, 2.7, --test)'
     - 'CI (ubuntu-latest, 3.0, --rubocop --build --test)'
-    # - 'CI (ubuntu-latest, 3.0, --yard --linkinator)'
+    - 'CI (ubuntu-latest, 3.0, --yard --linkinator)'
     - 'CI (ubuntu-latest, 3.1, --test)'
   requiredApprovingReviewCount: 1
   requiresCodeOwnerReviews: true
@@ -18,7 +18,7 @@ branchProtectionRules:
 permissionRules:
   - team: yoshi-admins
     permission: admin
-  - team: yoshi-ruby-admins
+  - team: ruby-admins
     permission: admin
-  - team: yoshi-ruby
+  - team: ruby-team
     permission: push

@@ -123,7 +123,8 @@ module Google
         end
 
         def list_resource_descriptors token: nil, max: nil
-          logging.list_monitored_resource_descriptors page_size: max, page_token: token
+          paged_enum = logging.list_monitored_resource_descriptors page_size: max, page_token: token
+          paged_enum.response
         end
 
         def list_sinks token: nil, max: nil

@@ -47,6 +47,7 @@ module Google
         #   @return [::String]
         #     Required. Problem type of the SavedQuery.
         #     Allowed values:
+        #
         #     * IMAGE_CLASSIFICATION_SINGLE_LABEL
         #     * IMAGE_CLASSIFICATION_MULTI_LABEL
         #     * IMAGE_BOUNDING_POLY

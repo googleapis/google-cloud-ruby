@@ -8,7 +8,6 @@ require 'google/api/resource_pb'
 require 'google/cloud/networksecurity/v1beta1/tls_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
-require 'google/api/annotations_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/networksecurity/v1beta1/client_tls_policy.proto", :syntax => :proto3) do
