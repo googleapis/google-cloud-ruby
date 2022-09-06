@@ -65,7 +65,7 @@ describe "Spanner Client", :types, :json, :spanner do
 
     id = SecureRandom.int64
     db.upsert table_name, { id: id, json: nil }
-    results = db.execute_query "SELECT id, json FROM #{table_name} WHERE id = $1",  params: { p1: id }
+    results = db.execute_query "SELECT id, json FROM #{table_name} WHERE id = $1", params: { p1: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, json: :JSON })
@@ -89,7 +89,7 @@ describe "Spanner Client", :types, :json, :spanner do
 
     id = SecureRandom.int64
     db.upsert table_name, { id: id, json_array: json_array_params }
-    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1",  params: { p1: id }
+    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1", params: { p1: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, json_array: [:JSON] })
@@ -115,7 +115,7 @@ describe "Spanner Client", :types, :json, :spanner do
     id = SecureRandom.int64
     params = [nil].concat json_array_params
     db.upsert table_name, { id: id, json_array: params }
-    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1",  params: { p1: id }
+    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1", params: { p1: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, json_array: [:JSON] })
@@ -139,7 +139,7 @@ describe "Spanner Client", :types, :json, :spanner do
 
     id = SecureRandom.int64
     db.upsert table_name, { id: id, json_array: [] }
-    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1",  params: { p1: id }
+    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1", params: { p1: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, json_array: [:JSON] })
@@ -163,7 +163,7 @@ describe "Spanner Client", :types, :json, :spanner do
 
     id = SecureRandom.int64
     db.upsert table_name, { id: id, json_array: nil }
-    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1",  params: { p1: id }
+    results = db.execute_query "SELECT id, json_array FROM #{table_name} WHERE id = $1", params: { p1: id }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
     _(results.fields.to_h).must_equal({ id: :INT64, json_array: [:JSON] })
