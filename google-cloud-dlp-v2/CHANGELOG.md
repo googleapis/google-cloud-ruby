@@ -1,5 +1,16 @@
 # Release History
 
+### 0.13.0 (2022-09-07)
+
+#### Features
+
+* add support for deidentify 
+* add VersionDescription to InfoTypeDescription 
+* move sensitivityscore to storage 
+#### Documentation
+
+* update auth doc with application-default 
+
 ### 0.12.0 (2022-07-19)
 
 #### Features
