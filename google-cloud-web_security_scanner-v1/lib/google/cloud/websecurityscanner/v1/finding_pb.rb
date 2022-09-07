@@ -27,6 +27,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :vulnerable_headers, :message, 15, "google.cloud.websecurityscanner.v1.VulnerableHeaders"
       optional :vulnerable_parameters, :message, 13, "google.cloud.websecurityscanner.v1.VulnerableParameters"
       optional :xss, :message, 14, "google.cloud.websecurityscanner.v1.Xss"
+      optional :xxe, :message, 18, "google.cloud.websecurityscanner.v1.Xxe"
     end
     add_enum "google.cloud.websecurityscanner.v1.Finding.Severity" do
       value :SEVERITY_UNSPECIFIED, 0
