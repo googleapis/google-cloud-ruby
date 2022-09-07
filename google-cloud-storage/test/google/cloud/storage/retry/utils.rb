@@ -59,9 +59,9 @@ class MethodMapping
       :list_notifications,
       :bucket_notifications
     ],
-    # "storage.object_acl.list" => [:list_file_acls],
-    "storage.objects.download" => [
-      :client_download_blob_to_file,
+    "storage.object_acl.list" => [:list_file_acls],
+    "storage.objects.get" => [
+      :get_object,
       :blob_download_to_filename,
       :blob_download_to_filename_chunked,
       :blob_download_as_bytes,
@@ -244,17 +244,29 @@ class MethodMapping
 
   def self.bucket_acl_public client, _preconditions, **resources
     bucket = resources[:bucket]
-    bucket.acl.public!
+    if _preconditions
+      bucket.acl.public! if_metageneration_match: bucket.metageneration
+    else
+      bucket.acl.public!
+    end
   end
 
   def self.bucket_acl_private client, _preconditions, **resources
     bucket = resources[:bucket]
-    bucket.acl.private!
+    if _preconditions
+      bucket.acl.private! if_metageneration_match: bucket.metageneration
+    else
+      bucket.acl.private!
+    end
   end
 
   def self.default_acl_owner_full client, _preconditions, **resources
     bucket = resources[:bucket]
-    bucket.default_acl.owner_full!
+    if _preconditions
+      bucket.default_acl.owner_full! if_metageneration_match: bucket.metageneration
+    else
+      bucket.default_acl.owner_full!
+    end
   end
 
   def self.set_bucket_policy client, preconditions, **resources
@@ -351,5 +363,13 @@ class MethodMapping
     else
       bucket.create_file file, CONF_TEST_FILE_PATH
     end
+  end
+
+  def self.get_object client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    file = bucket.file object.name
+    puts "object: #{file.inspect}"
+    res = file.download
   end
 end

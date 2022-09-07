@@ -125,7 +125,7 @@ class ConformanceTest < MockStorage
     storage.service.service.request_options.header["x-retry-test-id"] = id
     MethodMapping.send(lib_func, storage.service, preconditions, 
                        bucket: @bucket, hmac_key: @hmac_key,
-                       notification: @notification, object: nil)
+                       notification: @notification, object: @object)
   end
 
   # Delete the Retry Test resource by id.
