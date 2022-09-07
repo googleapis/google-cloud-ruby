@@ -1,5 +1,11 @@
 # Release History
 
+### 2.15.0 (2022-09-07)
+
+#### Features
+
+* Support fine grained access control ([#19067](https://github.com/googleapis/google-cloud-ruby/issues/19067)) 
+
 ### 2.14.0 (2022-07-08)
 
 #### Features
