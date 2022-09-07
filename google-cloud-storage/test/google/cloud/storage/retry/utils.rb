@@ -44,6 +44,7 @@ class MethodMapping
     "storage.buckets.lockRetentionPolicy" => [:bucket_lock_retention_policy],
     "storage.buckets.testIamPermissions" => [:test_bucket_permissions, :test_permissions],
     "storage.default_object_acl.list" => [:list_default_acls],
+    "storage.hmacKey.create" => [:create_hmac_key],
     "storage.hmacKey.delete" => [:delete_hmac_key],
     "storage.hmacKey.get" => [
       :get_hmac_key,
@@ -60,6 +61,7 @@ class MethodMapping
       :bucket_notifications
     ],
     "storage.object_acl.list" => [:list_file_acls],
+    "storage.object_acl.delete" => [:delete_file_acl],
     "storage.objects.get" => [
       :get_object,
       :blob_download_to_filename,
@@ -91,8 +93,14 @@ class MethodMapping
       :insert_notification,
       :create_notification
     ],
-    "storage.bucket_acl.delete" => [:delete_bucket_acl, :delete_acl],
-    "storage.bucket_acl.insert" => [:insert_bucket_acl, :insert_acl],
+    "storage.bucket_acl.delete" => [
+      :delete_bucket_acl,
+      :delete_acl
+    ],
+    "storage.bucket_acl.insert" => [
+      :insert_bucket_acl,
+      :insert_acl
+    ],
     "storage.default_object_acl.delete" => [
       :delete_bucket_default_acl,
       :delete_default_acl
@@ -231,11 +239,11 @@ class MethodMapping
     client.project_service_account
   end
 
-  def self.patch_bucket client, preconditions, **resources
+  def self.patch_bucket client, _preconditions, **resources
     bucket = resources[:bucket]
     metageneration = resources[:bucket].metageneration
     bucket_gapi = Google::Apis::StorageV1::Bucket.new storage_class: "COLDLINE"
-    if preconditions
+    if _preconditions
       client.patch_bucket bucket.name, bucket_gapi, if_metageneration_match: metageneration
     else
       client.patch_bucket bucket.name, bucket_gapi
@@ -369,7 +377,13 @@ class MethodMapping
     bucket = resources[:bucket]
     object = resources[:object]
     file = bucket.file object.name
-    puts "object: #{file.inspect}"
     res = file.download
+  end
+
+  def self.delete_file_acl client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    entity = "allAuthenticatedUsers"
+    client.delete_file_acl bucket.name, object.name, entity
   end
 end

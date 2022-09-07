@@ -32,7 +32,7 @@ class ConformanceTest < MockStorage
     @hmac_key = storage.create_hmac_key storage.service_account_email
     @hmac_key.inactive!
     @notification = storage.service.insert_notification @bucket.name, pubsub_topic_name
-    # @object = @bucket.create_file file_obj, file_name
+    @object = @bucket.create_file file_obj, file_name
   end
 
   def self.run_tests test
