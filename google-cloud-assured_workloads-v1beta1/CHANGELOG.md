@@ -1,5 +1,14 @@
 # Release History
 
+### 0.13.0 (2022-09-07)
+
+#### Features
+
+* add compliant_but_disallowed_services to Workload 
+#### Documentation
+
+* update auth doc with application-default 
+
 ### 0.12.0 (2022-08-25)
 
 #### Features
