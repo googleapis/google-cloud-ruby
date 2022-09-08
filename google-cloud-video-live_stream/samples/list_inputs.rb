@@ -12,14 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START livestream_list_inputs]
+require "google/cloud/video/live_stream"
+
+##
+# List the input endpoints
+#
+# @param project_id [String] Your Google Cloud project (e.g. "my-project")
+# @param location [String] The location (e.g. "us-central1")
+#
 def list_inputs project_id:, location:
-  # [START livestream_list_inputs]
-  # project_id = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
-  # location   = "YOUR-INPUT-LOCATION"  # (e.g. "us-central1")
-
-  # Require the Live Stream client library.
-  require "google/cloud/video/live_stream"
-
   # Create a Live Stream client.
   client = Google::Cloud::Video::LiveStream.livestream_service
 
@@ -35,28 +37,4 @@ def list_inputs project_id:, location:
     puts input.name.to_s
   end
   # [END livestream_list_inputs]
-end
-
-
-if $PROGRAM_NAME == __FILE__
-  args    = ARGV.dup
-  command = args.shift
-
-  case command
-  when "list_inputs"
-    list_inputs(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      location:  args.shift
-    )
-  else
-    puts <<~USAGE
-      Usage: bundle exec ruby #{__FILE__} [command] [arguments]
-
-      Commands:
-        list_inputs <location>  List all inputs for a given location
-
-      Environment variables:
-        GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run snippets
-    USAGE
-  end
 end

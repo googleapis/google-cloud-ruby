@@ -12,15 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# [START livestream_delete_input]
+require "google/cloud/video/live_stream"
+
+##
+# Delete an input endpoint
+#
+# @param project_id [String] Your Google Cloud project (e.g. "my-project")
+# @param location [String] The location (e.g. "us-central1")
+# @param input_id [String] Your input name (e.g. "my-input")
+#
 def delete_input project_id:, location:, input_id:
-  # [START livestream_delete_input]
-  # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
-  # location    = "YOUR-INPUT-LOCATION"  # (e.g. "us-central1")
-  # input_id    = "YOUR-INPUT"  # (e.g. "my-input")
-
-  # Require the Live Stream client library.
-  require "google/cloud/video/live_stream"
-
   # Create a Live Stream client.
   client = Google::Cloud::Video::LiveStream.livestream_service
 
@@ -38,29 +40,4 @@ def delete_input project_id:, location:, input_id:
   # Print a success message.
   puts "Deleted input"
   # [END livestream_delete_input]
-end
-
-
-if $PROGRAM_NAME == __FILE__
-  args    = ARGV.dup
-  command = args.shift
-
-  case command
-  when "delete_input"
-    delete_input(
-      project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-      location:  args.shift,
-      input_id:  args.shift
-    )
-  else
-    puts <<~USAGE
-      Usage: bundle exec ruby #{__FILE__} [command] [arguments]
-
-      Commands:
-        delete_input <location> <input_id>  Delete an input
-
-      Environment variables:
-        GOOGLE_CLOUD_PROJECT    ID of the Google Cloud project to run snippets
-    USAGE
-  end
 end
