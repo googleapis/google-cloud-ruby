@@ -727,7 +727,7 @@ module Google
                           if_metageneration_not_match: nil,
                           user_project: nil,
                           options: {}
-          
+
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
 
           if options[:retries].nil?
