@@ -401,7 +401,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload get_write_stream(name: nil)
+              # @overload get_write_stream(name: nil, view: nil)
               #   Pass arguments to `get_write_stream` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -409,6 +409,9 @@ module Google
               #   @param name [::String]
               #     Required. Name of the stream to get, in the form of
               #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
+              #   @param view [::Google::Cloud::Bigquery::Storage::V1::WriteStreamView]
+              #     Indicates whether to get full or partial view of the WriteStream. If
+              #     not set, view returned will be basic.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Bigquery::Storage::V1::WriteStream]

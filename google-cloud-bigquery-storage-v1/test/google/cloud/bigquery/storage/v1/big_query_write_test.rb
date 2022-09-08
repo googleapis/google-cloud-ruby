@@ -211,11 +211,13 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
 
     # Create request parameters for a unary method.
     name = "hello world"
+    view = :WRITE_STREAM_VIEW_UNSPECIFIED
 
     get_write_stream_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :get_write_stream, name
       assert_kind_of ::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest, request
       assert_equal "hello world", request["name"]
+      assert_equal :WRITE_STREAM_VIEW_UNSPECIFIED, request["view"]
       refute_nil options
     end
 
@@ -226,31 +228,31 @@ class ::Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::ClientTest < Minite
       end
 
       # Use hash object
-      client.get_write_stream({ name: name }) do |response, operation|
+      client.get_write_stream({ name: name, view: view }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.get_write_stream name: name do |response, operation|
+      client.get_write_stream name: name, view: view do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.get_write_stream ::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name) do |response, operation|
+      client.get_write_stream ::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name, view: view) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.get_write_stream({ name: name }, grpc_options) do |response, operation|
+      client.get_write_stream({ name: name, view: view }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.get_write_stream(::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name), grpc_options) do |response, operation|
+      client.get_write_stream(::Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new(name: name, view: view), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
