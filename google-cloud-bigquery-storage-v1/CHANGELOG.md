@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.0 (2022-09-08)
+
+#### Features
+
+* add location to WriteStream and add WriteStreamView support ([#19129](https://github.com/googleapis/google-cloud-ruby/issues/19129)) 
+
 ### 0.14.0 (2022-08-18)
 
 #### Features
