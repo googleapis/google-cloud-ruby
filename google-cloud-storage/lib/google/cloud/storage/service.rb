@@ -299,6 +299,10 @@ module Google
               topic: topic_path(topic_name) }.delete_if { |_k, v| v.nil? }
           new_notification = Google::Apis::StorageV1::Notification.new(**params)
 
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
+
           execute do
             service.insert_notification \
               bucket_name, new_notification,
@@ -656,6 +660,11 @@ module Google
         # Returns Google::Apis::StorageV1::HmacKey.
         def create_hmac_key service_account_email, project_id: nil,
                             user_project: nil, options: {}
+
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
+
           execute do
             service.create_project_hmac_key \
               (project_id || @project), service_account_email,
