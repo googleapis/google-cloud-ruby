@@ -74,7 +74,8 @@ describe "HMAC Snippets" do
 
   it "create_hmac_key" do
     mock = Minitest::Mock.new
-    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: nil, options: {retries: 0}
+    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: nil,
+options: { retries: 0 }
     storage.service.mocked_service = mock
 
     Google::Cloud::Storage.stub :new, storage do
