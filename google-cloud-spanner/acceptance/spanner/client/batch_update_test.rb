@@ -121,7 +121,6 @@ describe "Spanner Client", :batch_update, :spanner do
 
     it "executes multiple DML statements in a batch with syntax error for #{dialect}" do
       prior_results = db[dialect].execute_sql "SELECT * FROM accounts"
-      p prior_results
       _(prior_results.rows.count).must_equal 3
 
       timestamp = db[dialect].transaction do |tx|

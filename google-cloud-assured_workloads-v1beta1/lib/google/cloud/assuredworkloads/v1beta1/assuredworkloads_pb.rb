@@ -73,6 +73,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kaj_enrollment_state, :enum, 17, "google.cloud.assuredworkloads.v1beta1.Workload.KajEnrollmentState"
       optional :enable_sovereign_controls, :bool, 18
       optional :saa_enrollment_response, :message, 20, "google.cloud.assuredworkloads.v1beta1.Workload.SaaEnrollmentResponse"
+      repeated :compliant_but_disallowed_services, :string, 24
       oneof :compliance_regime_settings do
         optional :il4_settings, :message, 7, "google.cloud.assuredworkloads.v1beta1.Workload.IL4Settings"
         optional :cjis_settings, :message, 8, "google.cloud.assuredworkloads.v1beta1.Workload.CJISSettings"

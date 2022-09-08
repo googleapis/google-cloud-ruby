@@ -198,6 +198,11 @@ module Google
           # @!attribute [rw] write_mode
           #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStream::WriteMode]
           #     Immutable. Mode of the stream.
+          # @!attribute [rw] location
+          #   @return [::String]
+          #     Immutable. The geographic location where the stream's dataset resides. See
+          #     https://cloud.google.com/bigquery/docs/locations for supported
+          #     locations.
           class WriteStream
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -241,6 +246,23 @@ module Google
             # Arrow is a standard open source column-based message format.
             # See https://arrow.apache.org/ for more details.
             ARROW = 2
+          end
+
+          # WriteStreamView is a view enum that controls what details about a write
+          # stream should be returned.
+          module WriteStreamView
+            # The default / unset value.
+            WRITE_STREAM_VIEW_UNSPECIFIED = 0
+
+            # The BASIC projection returns basic metadata about a write stream.  The
+            # basic view does not include schema information.  This is the default view
+            # returned by GetWriteStream.
+            BASIC = 1
+
+            # The FULL projection returns all available write stream metadata, including
+            # the schema.  CreateWriteStream returns the full projection of write stream
+            # metadata.
+            FULL = 2
           end
         end
       end

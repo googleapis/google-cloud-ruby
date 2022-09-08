@@ -1,5 +1,13 @@
 # Release History
 
+### 0.5.0 (2022-09-08)
+
+#### Features
+
+* add ignore_http_status_errors to ScanConfig 
+* add NO_STARTING_URL_FOUND_FOR_MANAGED_SCAN to scanRunWarningTrace 
+* add xxe to Finding in WebSecurityScanner 
+
 ### 0.4.1 (2022-08-31)
 
 #### Documentation

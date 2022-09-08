@@ -68,171 +68,171 @@ module Google
 
                 default_config.rpcs.list_apis.timeout = 60.0
                 default_config.rpcs.list_apis.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.get_api.timeout = 60.0
                 default_config.rpcs.get_api.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.create_api.timeout = 60.0
                 default_config.rpcs.create_api.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.update_api.timeout = 60.0
                 default_config.rpcs.update_api.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.delete_api.timeout = 60.0
                 default_config.rpcs.delete_api.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.list_api_versions.timeout = 60.0
                 default_config.rpcs.list_api_versions.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.get_api_version.timeout = 60.0
                 default_config.rpcs.get_api_version.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.create_api_version.timeout = 60.0
                 default_config.rpcs.create_api_version.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.update_api_version.timeout = 60.0
                 default_config.rpcs.update_api_version.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.delete_api_version.timeout = 60.0
                 default_config.rpcs.delete_api_version.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.list_api_specs.timeout = 60.0
                 default_config.rpcs.list_api_specs.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.get_api_spec.timeout = 60.0
                 default_config.rpcs.get_api_spec.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.get_api_spec_contents.timeout = 60.0
                 default_config.rpcs.get_api_spec_contents.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.create_api_spec.timeout = 60.0
                 default_config.rpcs.create_api_spec.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.update_api_spec.timeout = 60.0
                 default_config.rpcs.update_api_spec.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.delete_api_spec.timeout = 60.0
                 default_config.rpcs.delete_api_spec.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.tag_api_spec_revision.timeout = 60.0
                 default_config.rpcs.tag_api_spec_revision.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.list_api_spec_revisions.timeout = 60.0
                 default_config.rpcs.list_api_spec_revisions.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.rollback_api_spec.timeout = 60.0
 
                 default_config.rpcs.delete_api_spec_revision.timeout = 60.0
                 default_config.rpcs.delete_api_spec_revision.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.list_api_deployments.timeout = 60.0
                 default_config.rpcs.list_api_deployments.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.get_api_deployment.timeout = 60.0
                 default_config.rpcs.get_api_deployment.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.create_api_deployment.timeout = 60.0
                 default_config.rpcs.create_api_deployment.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.update_api_deployment.timeout = 60.0
                 default_config.rpcs.update_api_deployment.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.delete_api_deployment.timeout = 60.0
                 default_config.rpcs.delete_api_deployment.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.tag_api_deployment_revision.timeout = 60.0
                 default_config.rpcs.tag_api_deployment_revision.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.list_api_deployment_revisions.timeout = 60.0
                 default_config.rpcs.list_api_deployment_revisions.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.rollback_api_deployment.timeout = 60.0
 
                 default_config.rpcs.delete_api_deployment_revision.timeout = 60.0
                 default_config.rpcs.delete_api_deployment_revision.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.list_artifacts.timeout = 60.0
                 default_config.rpcs.list_artifacts.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.get_artifact.timeout = 60.0
                 default_config.rpcs.get_artifact.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.get_artifact_contents.timeout = 60.0
                 default_config.rpcs.get_artifact_contents.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.create_artifact.timeout = 60.0
                 default_config.rpcs.create_artifact.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.replace_artifact.timeout = 60.0
                 default_config.rpcs.replace_artifact.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config.rpcs.delete_artifact.timeout = 60.0
                 default_config.rpcs.delete_artifact.retry_policy = {
-                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                  initial_delay: 0.2, max_delay: 60.0, multiplier: 1.3, retry_codes: [10, 1, 4, 14]
                 }
 
                 default_config

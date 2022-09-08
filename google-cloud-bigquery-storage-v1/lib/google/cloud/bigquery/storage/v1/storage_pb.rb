@@ -89,6 +89,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.bigquery.storage.v1.GetWriteStreamRequest" do
       optional :name, :string, 1
+      optional :view, :enum, 3, "google.cloud.bigquery.storage.v1.WriteStreamView"
     end
     add_message "google.cloud.bigquery.storage.v1.BatchCommitWriteStreamsRequest" do
       optional :parent, :string, 1

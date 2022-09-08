@@ -13,7 +13,6 @@
 # limitations under the License.
 
 require_relative "helper"
-require_relative "../quickstart"
 
 describe "Secret Manager Quickstart" do
   let(:client) { Google::Cloud::SecretManager.secret_manager_service }
@@ -29,20 +28,20 @@ describe "Secret Manager Quickstart" do
   end
 
   it "creates and accesses a secret" do
+    sample = SampleLoader.load "quickstart.rb"
+
     assert_output "Plaintext: hello world!\n" do
-      quickstart project_id: project_id, secret_id: secret_id
+      sample.run project_id: project_id, secret_id: secret_id
     end
 
     secret = client.get_secret name: secret_name
-    _(secret).wont_be_nil
+    refute_nil secret
 
     versions = client.list_secret_versions parent: secret_name
-    _(versions.to_a.length).must_be :>, 0
+    refute_empty versions.to_a
 
-    version = client.access_secret_version(
-      name: "#{secret_name}/versions/latest"
-    )
-    _(version).wont_be_nil
-    _(version.payload.data).must_equal("hello world!")
+    version = client.access_secret_version name: "#{secret_name}/versions/latest"
+    refute_nil version
+    assert_equal "hello world!", version.payload.data
   end
 end

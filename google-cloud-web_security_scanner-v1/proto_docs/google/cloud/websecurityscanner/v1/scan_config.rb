@@ -68,6 +68,9 @@ module Google
         #   @return [::Boolean]
         #     Whether the scan configuration has enabled static IP address scan feature.
         #     If enabled, the scanner will access applications from static IP addresses.
+        # @!attribute [rw] ignore_http_status_errors
+        #   @return [::Boolean]
+        #     Whether to keep scanning even if most requests return HTTP error codes.
         class ScanConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"
-  gem.description   = "Beyondcorp Enterprise provides identity and context aware access controls for enterprise resources and enables zero-trust access. Using the Beyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem connectivity using the App Connector hybrid connectivity solution. Note that google-cloud-beyond_corp-app_gateways-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-beyond_corp-app_gateways instead. See the readme for more details."
+  gem.description   = "Beyondcorp Enterprise provides identity and context aware access controls for enterprise resources and enables zero-trust access. Using the Beyondcorp Enterprise APIs, enterprises can set up multi-cloud and on-prem connectivity using the App Connector hybrid connectivity solution. Note that google-cloud-beyond_corp-app_gateways-v1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-beyond_corp instead. See the readme for more details."
   gem.summary       = "API Client library for the BeyondCorp AppGateways V1 API"
   gem.homepage      = "https://github.com/googleapis/google-cloud-ruby"
   gem.license       = "Apache-2.0"

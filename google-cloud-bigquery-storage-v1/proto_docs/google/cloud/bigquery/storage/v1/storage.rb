@@ -306,6 +306,10 @@ module Google
           #   @return [::String]
           #     Required. Name of the stream to get, in the form of
           #     `projects/{project}/datasets/{dataset}/tables/{table}/streams/{stream}`.
+          # @!attribute [rw] view
+          #   @return [::Google::Cloud::Bigquery::Storage::V1::WriteStreamView]
+          #     Indicates whether to get full or partial view of the WriteStream. If
+          #     not set, view returned will be basic.
           class GetWriteStreamRequest
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

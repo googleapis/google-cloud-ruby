@@ -1,4 +1,4 @@
-# Copyright 2020 Google, Inc
+# Copyright 2020 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -12,14 +12,16 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-def quickstart project_id: nil, secret_id: nil
-  # [START secretmanager_quickstart]
-  # project_id  = "YOUR-GOOGLE-CLOUD-PROJECT"  # (e.g. "my-project")
-  # secret_id   = "YOUR-SECRET-ID"             # (e.g. "my-secret")
+# [START secretmanager_quickstart]
+require "google/cloud/secret_manager"
 
-  # Import the Secret Manager client library.
-  require "google/cloud/secret_manager"
-
+##
+# Secret manager quickstart
+#
+# @param project_id [String] Your Google Cloud project (e.g. "my-project")
+# @param secret_id [String] Your secret name (e.g. "my-secret")
+#
+def quickstart project_id:, secret_id:
   # Create the Secret Manager client.
   client = Google::Cloud::SecretManager.secret_manager_service
 
@@ -54,12 +56,5 @@ def quickstart project_id: nil, secret_id: nil
   # snippet is showing how to access the secret material.
   payload = response.payload.data
   puts "Plaintext: #{payload}"
-  # [END secretmanager_quickstart]
 end
-
-if $PROGRAM_NAME == __FILE__
-  quickstart(
-    project_id: ENV["GOOGLE_CLOUD_PROJECT"],
-    secret_id:  "my-secret-#{Time.now.to_i}"
-  )
-end
+# [END secretmanager_quickstart]

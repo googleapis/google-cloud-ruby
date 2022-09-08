@@ -349,8 +349,8 @@ module Google
           #
           #   bucket.acl.auth!
           #
-          def auth!
-            update_predefined_acl! "authenticatedRead"
+          def auth! if_metageneration_match: nil
+            update_predefined_acl! "authenticatedRead", if_metageneration_match: if_metageneration_match
           end
           alias authenticatedRead! auth!
           alias auth_read! auth!
@@ -370,8 +370,8 @@ module Google
           #
           #   bucket.acl.private!
           #
-          def private!
-            update_predefined_acl! "private"
+          def private! if_metageneration_match: nil
+            update_predefined_acl! "private", if_metageneration_match: if_metageneration_match
           end
 
           ##
@@ -387,8 +387,8 @@ module Google
           #
           #   bucket.acl.project_private!
           #
-          def project_private!
-            update_predefined_acl! "projectPrivate"
+          def project_private! if_metageneration_match: nil
+            update_predefined_acl! "projectPrivate", if_metageneration_match: if_metageneration_match
           end
           alias projectPrivate! project_private!
 
@@ -405,8 +405,8 @@ module Google
           #
           #   bucket.acl.public!
           #
-          def public!
-            update_predefined_acl! "publicRead"
+          def public! if_metageneration_match: nil
+            update_predefined_acl! "publicRead", if_metageneration_match: if_metageneration_match
           end
           alias publicRead! public!
           alias public_read! public!
@@ -423,8 +423,8 @@ module Google
           #
           #   bucket.acl.public_write!
           #
-          def public_write!
-            update_predefined_acl! "publicReadWrite"
+          def public_write! if_metageneration_match: nil
+            update_predefined_acl! "publicReadWrite", if_metageneration_match: if_metageneration_match
           end
           alias publicReadWrite! public_write!
 
@@ -437,9 +437,10 @@ module Google
             self
           end
 
-          def update_predefined_acl! acl_role
+          def update_predefined_acl! acl_role, if_metageneration_match: nil
             @service.patch_bucket @bucket, predefined_acl: acl_role,
-                                           user_project: user_project
+                                           user_project: user_project,
+                                           if_metageneration_match: if_metageneration_match
             clear!
           end
 
@@ -714,8 +715,8 @@ module Google
           #
           #   bucket.default_acl.auth!
           #
-          def auth!
-            update_predefined_default_acl! "authenticatedRead"
+          def auth! if_metageneration_match: nil
+            update_predefined_default_acl! "authenticatedRead", if_metageneration_match: if_metageneration_match
           end
           alias authenticatedRead! auth!
           alias auth_read! auth!
@@ -735,8 +736,8 @@ module Google
           #
           #   bucket.default_acl.owner_full!
           #
-          def owner_full!
-            update_predefined_default_acl! "bucketOwnerFullControl"
+          def owner_full! if_metageneration_match: nil
+            update_predefined_default_acl! "bucketOwnerFullControl", if_metageneration_match: if_metageneration_match
           end
           alias bucketOwnerFullControl! owner_full!
 
@@ -753,8 +754,8 @@ module Google
           #
           #   bucket.default_acl.owner_read!
           #
-          def owner_read!
-            update_predefined_default_acl! "bucketOwnerRead"
+          def owner_read! if_metageneration_match: nil
+            update_predefined_default_acl! "bucketOwnerRead", if_metageneration_match: if_metageneration_match
           end
           alias bucketOwnerRead! owner_read!
 
@@ -771,8 +772,8 @@ module Google
           #
           #   bucket.default_acl.private!
           #
-          def private!
-            update_predefined_default_acl! "private"
+          def private! if_metageneration_match: nil
+            update_predefined_default_acl! "private", if_metageneration_match: if_metageneration_match
           end
 
           ##
@@ -788,8 +789,8 @@ module Google
           #
           #   bucket.default_acl.project_private!
           #
-          def project_private!
-            update_predefined_default_acl! "projectPrivate"
+          def project_private! if_metageneration_match: nil
+            update_predefined_default_acl! "projectPrivate", if_metageneration_match: if_metageneration_match
           end
           alias projectPrivate! project_private!
 
@@ -806,8 +807,8 @@ module Google
           #
           #   bucket.default_acl.public!
           #
-          def public!
-            update_predefined_default_acl! "publicRead"
+          def public! if_metageneration_match: nil
+            update_predefined_default_acl! "publicRead", if_metageneration_match: if_metageneration_match
           end
           alias publicRead! public!
           alias public_read! public!
@@ -820,9 +821,10 @@ module Google
             self
           end
 
-          def update_predefined_default_acl! acl_role
+          def update_predefined_default_acl! acl_role, if_metageneration_match: nil
             @service.patch_bucket @bucket, predefined_default_acl: acl_role,
-                                           user_project: user_project
+                                           user_project: user_project,
+                                           if_metageneration_match: if_metageneration_match
             clear!
           end
 

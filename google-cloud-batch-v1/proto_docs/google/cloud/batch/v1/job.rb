@@ -347,8 +347,6 @@ module Google
           #     The number of accelerators of this type.
           # @!attribute [rw] install_gpu_drivers
           #   @return [::Boolean]
-          #     When true, Batch will install the GPU drivers.
-          #     This field will be ignored if specified.
           class Accelerator
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
