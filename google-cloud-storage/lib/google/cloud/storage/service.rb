@@ -721,6 +721,7 @@ module Google
           end
         end
 
+        ## Updates a bucket
         def update_bucket bucket_name,
                           bucket_gapi = nil,
                           if_metageneration_match: nil,
