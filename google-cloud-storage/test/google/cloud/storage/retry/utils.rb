@@ -62,6 +62,7 @@ class MethodMapping
     ],
     "storage.object_acl.list" => [:list_file_acls],
     "storage.object_acl.delete" => [:delete_file_acl],
+    "storage.object_acl.insert" => [:insert_file_acl],
     "storage.objects.get" => [
       :get_object,
       :blob_download_to_filename,
@@ -74,6 +75,11 @@ class MethodMapping
     "storage.objects.insert" => [
       :insert_object
     ],
+    "storage.objects.compose" => [:compose_file],
+    "storage.objects.delete" => [:delete_file],
+    "storage.objects.list" => [:list_files],
+    "storage.objects.patch" => [:patch_file],
+    "storage.objects.rewrite" => [:rewrite_file],
     "storage.serviceaccount.get" => [:project_service_account],
     "storage.buckets.patch" => [
       :patch_bucket,
@@ -385,5 +391,44 @@ class MethodMapping
     object = resources[:object]
     entity = "allAuthenticatedUsers"
     client.delete_file_acl bucket.name, object.name, entity
+  end
+
+  def self.insert_file_acl client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    entity = "allAuthenticatedUsers"
+    role = "READER"
+    client.insert_file_acl bucket.name, object.name, entity, role
+  end
+
+  def self.compose_file client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    object_2 = bucket.create_file StringIO.new(CONF_TEST_FILE_CONTENT), "my-test-file-2"
+    destination = "new-composite-object"
+    bucket.compose [object.name, object_2.name], destination 
+  end
+
+  def self.delete_file client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    client.delete_file bucket.name, object.name
+  end
+
+  def self.list_files client, _preconditions, **resources
+    bucket = resources[:bucket]
+    client.list_files bucket.name
+  end
+
+  def self.patch_file client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    client.patch_file bucket.name, object.name 
+  end
+
+  def self.rewrite_file client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    client.rewrite_file bucket.name, object.name, "destination-bucket", "destination-object"
   end
 end

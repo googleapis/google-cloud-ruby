@@ -76,7 +76,8 @@ class ConformanceTest < MockStorage
     end
 
     def delete_resources
-      @hmac_key.delete unless @hmac_key.deleted?
+      storage.service.delete_hmac_key @hmac_key.access_id
+      @bucket.files.all { |f| f.delete rescue nil }
       @bucket.delete if @bucket.exists?
     end
   end
