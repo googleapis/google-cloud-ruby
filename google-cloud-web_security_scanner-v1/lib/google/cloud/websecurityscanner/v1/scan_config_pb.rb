@@ -21,6 +21,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :risk_level, :enum, 12, "google.cloud.websecurityscanner.v1.ScanConfig.RiskLevel"
       optional :managed_scan, :bool, 13
       optional :static_ip_scan, :bool, 14
+      optional :ignore_http_status_errors, :bool, 15
     end
     add_message "google.cloud.websecurityscanner.v1.ScanConfig.Authentication" do
       oneof :authentication do
