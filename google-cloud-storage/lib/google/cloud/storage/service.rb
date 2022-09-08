@@ -729,10 +729,8 @@ module Google
                           options: {}
           
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
-          # bucket_gapi.acl = [] if predefined_acl
-          # bucket_gapi.default_object_acl = [] if predefined_default_acl
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_metageneration_match: if_metageneration_match
             options = is_idempotent ? {} : { retries: 0 }
           end
