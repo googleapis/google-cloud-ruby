@@ -196,6 +196,9 @@ module Google
         def insert_bucket_acl bucket_name, entity, role, user_project: nil, options: {}
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::BucketAccessControl.new(**params)
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.insert_bucket_access_control \
               bucket_name, new_acl, user_project: user_project(user_project),
@@ -206,6 +209,9 @@ module Google
         ##
         # Permanently deletes a bucket ACL.
         def delete_bucket_acl bucket_name, entity, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_bucket_access_control \
               bucket_name, entity, user_project: user_project(user_project),

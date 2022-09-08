@@ -77,7 +77,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
       [bucket_name], user_project: nil, options: {}
     mock.expect :insert_bucket_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(writer_acl.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "WRITER")], user_project: nil, options: {}
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "WRITER")], user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -113,7 +113,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock.expect :get_bucket, bucket_gapi, [bucket_name], **get_bucket_args(user_project: "test")
     mock.expect :insert_bucket_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(acl_hash.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "READER")], user_project: "test", options: {}
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "READER")], user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -144,7 +144,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
       [bucket_name], user_project: "test", options: {}
     mock.expect :insert_bucket_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(acl_hash.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "WRITER")], user_project: "test", options: {}
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "WRITER")], user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -180,7 +180,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
     mock.expect :get_bucket, bucket_gapi, [bucket_name], **get_bucket_args(user_project: "test")
     mock.expect :insert_bucket_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(acl_hash.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "OWNER")], user_project: "test", options: {}
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: entity, role: "OWNER")], user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -200,7 +200,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
       Google::Apis::StorageV1::BucketAccessControls.from_json(random_bucket_acl_hash(bucket_name).to_json),
       [bucket_name], user_project: nil, options: {}
     mock.expect :delete_bucket_access_control, nil,
-      [bucket_name, existing_reader_entity], user_project: nil, options: {}
+      [bucket_name, existing_reader_entity], user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -228,7 +228,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :mock_storage do
       Google::Apis::StorageV1::BucketAccessControls.from_json(random_bucket_acl_hash(bucket_name).to_json),
       [bucket_name], user_project: "test", options: {}
     mock.expect :delete_bucket_access_control, nil,
-      [bucket_name, existing_reader_entity], user_project: "test", options: {}
+      [bucket_name, existing_reader_entity], user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 
