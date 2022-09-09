@@ -41,7 +41,7 @@ describe "Asset Quickstart" do
     topic
   end
   let :asset_names do
-   ["//storage.googleapis.com/#{bucket.name}"]
+    ["//storage.googleapis.com/#{bucket.name}"]
   end
   let :dataset do
     create_dataset_helper "ruby_asset_sample_#{SecureRandom.hex}"
@@ -72,7 +72,7 @@ describe "Asset Quickstart" do
   describe "batch_get_history" do
     it "puts asset history" do
       out, _err = capture_io do
-        retry_action Google::Cloud::InvalidArgumentError do 
+        retry_action Google::Cloud::InvalidArgumentError do
           batch_get_history project_id: project_id, asset_names: asset_names
         end
       end

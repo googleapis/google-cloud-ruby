@@ -18,7 +18,7 @@ require "google/cloud/storage"
 require "minitest/autorun"
 require "securerandom"
 
-RESOURCE_EXHAUSTION_FAILURE_MESSAGE = "Maybe take a break from creating and deleting buckets for a bit"
+RESOURCE_EXHAUSTION_FAILURE_MESSAGE = "Maybe take a break from creating and deleting buckets for a bit".freeze
 
 def create_bucket_helper bucket_name
   storage_client = Google::Cloud::Storage.new
