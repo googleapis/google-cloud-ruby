@@ -121,11 +121,11 @@ module Google
       end
 
       ##
-      # Returns the `::Google::Rpc::ErrorInfo` object present in the `status_details` or `details` array,
-      # given that the following is true:
-      #   * either `status_details` exists and is an array
+      # Returns the `::Google::Rpc::ErrorInfo` object present in the `status_details`
+      # or `details` array, given that the following is true:
+      #   * either `status_details` or `details` exists and is an array
       #   * there is exactly one `::Google::Rpc::ErrorInfo` object in that array.
-      # Looks in `status_details` first, then in details.
+      # Looks in `status_details` first, then in `details`.
       #
       # @return [::Google::Rpc::ErrorInfo, nil]
       def error_info
