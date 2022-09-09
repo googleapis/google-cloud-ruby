@@ -130,7 +130,7 @@ module Google
       # @return [::Google::Rpc::ErrorInfo, nil]
       def error_info
         @error_info ||= begin
-          check_property = -> (prop) do
+          check_property = lambda do |prop|
             if prop.is_a? Array
               error_infos = prop.find_all { |status| status.is_a?(::Google::Rpc::ErrorInfo) }
               if error_infos.length == 1
