@@ -23,6 +23,8 @@ module Google
       ##
       # Construct a new Google::Cloud::Error object, optionally passing in a
       # message.
+      #
+      # @param msg [String, nil] an error message
       def initialize msg = nil
         super
       end
@@ -119,19 +121,26 @@ module Google
       end
 
       ##
-      # Returns the `::Google::Rpc::ErrorInfo` object present in `status_details` array,
+      # Returns the `::Google::Rpc::ErrorInfo` object present in the `status_details` or `details` array,
       # given that the following is true:
-      #   * `status_details` exists and is an array
-      #   * there is exactly one `::Google::Rpc::ErrorInfo` object in the `status_details` array
+      #   * either `status_details` exists and is an array
+      #   * there is exactly one `::Google::Rpc::ErrorInfo` object in that array.
+      # Looks in `status_details` first, then in details.
       #
       # @return [::Google::Rpc::ErrorInfo, nil]
       def error_info
-        @error_info ||= if status_details.is_a? Array
-                          error_infos = status_details.find_all { |status| status.is_a?(::Google::Rpc::ErrorInfo) }
-                          if error_infos.length == 1
-                            error_infos[0]
-                          end
-                        end
+        @error_info ||= begin
+          check_property = -> (prop) do
+            if prop.is_a? Array
+              error_infos = prop.find_all { |status| status.is_a?(::Google::Rpc::ErrorInfo) }
+              if error_infos.length == 1
+                error_infos[0]
+              end
+            end
+          end
+
+          check_property.call(status_details) || check_property.call(details)
+        end
       end
 
       ##
@@ -273,12 +282,6 @@ module Google
     end
 
     ##
-    # Unauthenticated indicates the request does not have valid
-    # authentication credentials for the operation.
-    class UnauthenticatedError < Error
-    end
-
-    ##
     # ResourceExhausted indicates some resource has been exhausted, perhaps
     # a per-user quota, or perhaps the entire file system is out of space.
     class ResourceExhaustedError < Error
@@ -362,6 +365,12 @@ module Google
     ##
     # DataLoss indicates unrecoverable data loss or corruption.
     class DataLossError < Error
+    end
+
+    ##
+    # Unauthenticated indicates the request does not have valid
+    # authentication credentials for the operation.
+    class UnauthenticatedError < Error
     end
   end
 end
