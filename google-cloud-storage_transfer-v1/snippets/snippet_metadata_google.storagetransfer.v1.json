@@ -332,6 +332,46 @@
       ]
     },
     {
+      "region_tag": "storagetransfer_v1_generated_StorageTransferService_DeleteTransferJob_sync",
+      "title": "Snippet for delete_transfer_job in StorageTransferService",
+      "description": "Basic snippet for delete_transfer_job in StorageTransferService",
+      "file": "storage_transfer_service/delete_transfer_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_transfer_job",
+        "full_name": "::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#delete_transfer_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Protobuf::Empty",
+        "client": {
+          "short_name": "StorageTransferService::Client",
+          "full_name": "::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client"
+        },
+        "method": {
+          "short_name": "DeleteTransferJob",
+          "full_name": "google.storagetransfer.v1.StorageTransferService.DeleteTransferJob",
+          "service": {
+            "short_name": "StorageTransferService",
+            "full_name": "google.storagetransfer.v1.StorageTransferService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "storagetransfer_v1_generated_StorageTransferService_CreateAgentPool_sync",
       "title": "Snippet for create_agent_pool in StorageTransferService",
       "description": "Basic snippet for create_agent_pool in StorageTransferService",

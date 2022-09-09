@@ -29,6 +29,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :job_name, :string, 1
       optional :project_id, :string, 2
     end
+    add_message "google.storagetransfer.v1.DeleteTransferJobRequest" do
+      optional :job_name, :string, 1
+      optional :project_id, :string, 2
+    end
     add_message "google.storagetransfer.v1.ListTransferJobsRequest" do
       optional :filter, :string, 1
       optional :page_size, :int32, 4
@@ -84,6 +88,7 @@ module Google
         CreateTransferJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.CreateTransferJobRequest").msgclass
         UpdateTransferJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.UpdateTransferJobRequest").msgclass
         GetTransferJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.GetTransferJobRequest").msgclass
+        DeleteTransferJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.DeleteTransferJobRequest").msgclass
         ListTransferJobsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.ListTransferJobsRequest").msgclass
         ListTransferJobsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.ListTransferJobsResponse").msgclass
         PauseTransferOperationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.PauseTransferOperationRequest").msgclass

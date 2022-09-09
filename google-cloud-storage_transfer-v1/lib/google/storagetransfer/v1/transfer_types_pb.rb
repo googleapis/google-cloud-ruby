@@ -54,6 +54,41 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.storagetransfer.v1.PosixFilesystem" do
       optional :root_directory, :string, 1
     end
+    add_message "google.storagetransfer.v1.AwsS3CompatibleData" do
+      optional :bucket_name, :string, 1
+      optional :path, :string, 2
+      optional :endpoint, :string, 3
+      optional :region, :string, 5
+      oneof :data_provider do
+        optional :s3_metadata, :message, 4, "google.storagetransfer.v1.S3CompatibleMetadata"
+      end
+    end
+    add_message "google.storagetransfer.v1.S3CompatibleMetadata" do
+      optional :auth_method, :enum, 1, "google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod"
+      optional :request_model, :enum, 2, "google.storagetransfer.v1.S3CompatibleMetadata.RequestModel"
+      optional :protocol, :enum, 3, "google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol"
+      optional :list_api, :enum, 4, "google.storagetransfer.v1.S3CompatibleMetadata.ListApi"
+    end
+    add_enum "google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod" do
+      value :AUTH_METHOD_UNSPECIFIED, 0
+      value :AUTH_METHOD_AWS_SIGNATURE_V4, 1
+      value :AUTH_METHOD_AWS_SIGNATURE_V2, 2
+    end
+    add_enum "google.storagetransfer.v1.S3CompatibleMetadata.RequestModel" do
+      value :REQUEST_MODEL_UNSPECIFIED, 0
+      value :REQUEST_MODEL_VIRTUAL_HOSTED_STYLE, 1
+      value :REQUEST_MODEL_PATH_STYLE, 2
+    end
+    add_enum "google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol" do
+      value :NETWORK_PROTOCOL_UNSPECIFIED, 0
+      value :NETWORK_PROTOCOL_HTTPS, 1
+      value :NETWORK_PROTOCOL_HTTP, 2
+    end
+    add_enum "google.storagetransfer.v1.S3CompatibleMetadata.ListApi" do
+      value :LIST_API_UNSPECIFIED, 0
+      value :LIST_OBJECTS_V2, 1
+      value :LIST_OBJECTS, 2
+    end
     add_message "google.storagetransfer.v1.AgentPool" do
       optional :name, :string, 2
       optional :display_name, :string, 3
@@ -98,6 +133,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :http_data_source, :message, 3, "google.storagetransfer.v1.HttpData"
         optional :posix_data_source, :message, 14, "google.storagetransfer.v1.PosixFilesystem"
         optional :azure_blob_storage_data_source, :message, 8, "google.storagetransfer.v1.AzureBlobStorageData"
+        optional :aws_s3_compatible_data_source, :message, 19, "google.storagetransfer.v1.AwsS3CompatibleData"
       end
       oneof :intermediate_data_location do
         optional :gcs_intermediate_data_location, :message, 16, "google.storagetransfer.v1.GcsData"
@@ -294,6 +330,12 @@ module Google
         AzureBlobStorageData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.AzureBlobStorageData").msgclass
         HttpData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.HttpData").msgclass
         PosixFilesystem = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.PosixFilesystem").msgclass
+        AwsS3CompatibleData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.AwsS3CompatibleData").msgclass
+        S3CompatibleMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.S3CompatibleMetadata").msgclass
+        S3CompatibleMetadata::AuthMethod = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.S3CompatibleMetadata.AuthMethod").enummodule
+        S3CompatibleMetadata::RequestModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.S3CompatibleMetadata.RequestModel").enummodule
+        S3CompatibleMetadata::NetworkProtocol = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.S3CompatibleMetadata.NetworkProtocol").enummodule
+        S3CompatibleMetadata::ListApi = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.S3CompatibleMetadata.ListApi").enummodule
         AgentPool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.AgentPool").msgclass
         AgentPool::BandwidthLimit = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.AgentPool.BandwidthLimit").msgclass
         AgentPool::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.storagetransfer.v1.AgentPool.State").enummodule

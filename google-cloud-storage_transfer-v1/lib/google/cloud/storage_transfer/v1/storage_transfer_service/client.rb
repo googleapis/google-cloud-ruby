@@ -66,7 +66,12 @@ module Google
                                 end
                 default_config = Client::Configuration.new parent_config
 
-                default_config.timeout = 30.0
+                default_config.timeout = 60.0
+                default_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 2, retry_codes: [14]
+                }
+
+                default_config.rpcs.create_transfer_job.timeout = 60.0
 
                 default_config
               end
@@ -371,7 +376,7 @@ module Google
             #     other fields are rejected with the error
             #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a job status
             #     to {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
-            #     `storagetransfer.jobs.delete` permissions.
+            #     `storagetransfer.jobs.delete` permission.
             #   @param update_transfer_job_field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     The field mask of the fields in `transferJob` that are to be updated in
             #     this request.  Fields in `transferJob` that can be updated are:
@@ -896,6 +901,95 @@ module Google
 
               @storage_transfer_service_stub.call_rpc :run_transfer_job, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a transfer job. Deleting a transfer job sets its status to
+            # {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED}.
+            #
+            # @overload delete_transfer_job(request, options = nil)
+            #   Pass arguments to `delete_transfer_job` via a request object, either of type
+            #   {::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_transfer_job(job_name: nil, project_id: nil)
+            #   Pass arguments to `delete_transfer_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param job_name [::String]
+            #     Required. The job to delete.
+            #   @param project_id [::String]
+            #     Required. The ID of the Google Cloud project that owns the
+            #     job.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Protobuf::Empty]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Protobuf::Empty]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/storage_transfer/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest.new
+            #
+            #   # Call the delete_transfer_job method.
+            #   result = client.delete_transfer_job request
+            #
+            #   # The returned object is of type Google::Protobuf::Empty.
+            #   p result
+            #
+            def delete_transfer_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_transfer_job.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::StorageTransfer::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.job_name
+                header_params["job_name"] = request.job_name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_transfer_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_transfer_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @storage_transfer_service_stub.call_rpc :delete_transfer_job, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -1559,6 +1653,11 @@ module Google
                 #
                 attr_reader :run_transfer_job
                 ##
+                # RPC-specific configuration for `delete_transfer_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_transfer_job
+                ##
                 # RPC-specific configuration for `create_agent_pool`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1602,6 +1701,8 @@ module Google
                   @resume_transfer_operation = ::Gapic::Config::Method.new resume_transfer_operation_config
                   run_transfer_job_config = parent_rpcs.run_transfer_job if parent_rpcs.respond_to? :run_transfer_job
                   @run_transfer_job = ::Gapic::Config::Method.new run_transfer_job_config
+                  delete_transfer_job_config = parent_rpcs.delete_transfer_job if parent_rpcs.respond_to? :delete_transfer_job
+                  @delete_transfer_job = ::Gapic::Config::Method.new delete_transfer_job_config
                   create_agent_pool_config = parent_rpcs.create_agent_pool if parent_rpcs.respond_to? :create_agent_pool
                   @create_agent_pool = ::Gapic::Config::Method.new create_agent_pool_config
                   update_agent_pool_config = parent_rpcs.update_agent_pool if parent_rpcs.respond_to? :update_agent_pool
