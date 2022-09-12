@@ -721,15 +721,19 @@ module Google
           end
         end
 
-        ## Updates a bucket
+        ##
+        # Updates a bucket, including its ACL metadata.
         def update_bucket bucket_name,
                           bucket_gapi = nil,
+                          predefined_acl: nil,
+                          predefined_default_acl: nil, 
                           if_metageneration_match: nil,
                           if_metageneration_not_match: nil,
                           user_project: nil,
                           options: {}
-
           bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
+          bucket_gapi.acl = [] if predefined_acl
+          bucket_gapi.default_object_acl = [] if predefined_default_acl
 
           if options[:retries].nil?
             is_idempotent = retry? if_metageneration_match: if_metageneration_match
