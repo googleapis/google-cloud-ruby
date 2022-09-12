@@ -726,7 +726,7 @@ module Google
         def update_bucket bucket_name,
                           bucket_gapi = nil,
                           predefined_acl: nil,
-                          predefined_default_acl: nil, 
+                          predefined_default_acl: nil,
                           if_metageneration_match: nil,
                           if_metageneration_not_match: nil,
                           user_project: nil,
