@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/firestore/v1/firestore_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -111,6 +112,11 @@ module Google
 
                 default_config.rpcs.run_query.timeout = 300.0
                 default_config.rpcs.run_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
+                }
+
+                default_config.rpcs.run_aggregation_query.timeout = 300.0
+                default_config.rpcs.run_aggregation_query.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [8, 14, 13, 4]
                 }
 
@@ -210,6 +216,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @firestore_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Firestore::V1::Firestore::Stub,
                 credentials:  credentials,
@@ -218,6 +230,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -1124,6 +1143,127 @@ module Google
             end
 
             ##
+            # Runs an aggregation query.
+            #
+            # Rather than producing {::Google::Cloud::Firestore::V1::Document Document} results like {::Google::Cloud::Firestore::V1::Firestore::Client#run_query Firestore.RunQuery},
+            # this API allows running an aggregation to produce a series of
+            # {::Google::Cloud::Firestore::V1::AggregationResult AggregationResult} server-side.
+            #
+            # High-Level Example:
+            #
+            # ```
+            # -- Return the number of documents in table given a filter.
+            # SELECT COUNT(*) FROM ( SELECT * FROM k where a = true );
+            # ```
+            #
+            # @overload run_aggregation_query(request, options = nil)
+            #   Pass arguments to `run_aggregation_query` via a request object, either of type
+            #   {::Google::Cloud::Firestore::V1::RunAggregationQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Firestore::V1::RunAggregationQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload run_aggregation_query(parent: nil, structured_aggregation_query: nil, transaction: nil, new_transaction: nil, read_time: nil)
+            #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource name. In the format:
+            #     `projects/{project_id}/databases/{database_id}/documents` or
+            #     `projects/{project_id}/databases/{database_id}/documents/{document_path}`.
+            #     For example:
+            #     `projects/my-project/databases/my-database/documents` or
+            #     `projects/my-project/databases/my-database/documents/chatrooms/my-chatroom`
+            #   @param structured_aggregation_query [::Google::Cloud::Firestore::V1::StructuredAggregationQuery, ::Hash]
+            #     An aggregation query.
+            #   @param transaction [::String]
+            #     Run the aggregation within an already active transaction.
+            #
+            #     The value here is the opaque transaction ID to execute the query in.
+            #   @param new_transaction [::Google::Cloud::Firestore::V1::TransactionOptions, ::Hash]
+            #     Starts a new transaction as part of the query, defaulting to read-only.
+            #
+            #     The new transaction ID will be returned as the first response in the
+            #     stream.
+            #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
+            #     Executes the query at the given timestamp.
+            #
+            #     Requires:
+            #
+            #     * Cannot be more than 270 seconds in the past.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Enumerable<::Google::Cloud::Firestore::V1::RunAggregationQueryResponse>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/firestore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Firestore::V1::Firestore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Firestore::V1::RunAggregationQueryRequest.new
+            #
+            #   # Call the run_aggregation_query method.
+            #   result = client.run_aggregation_query request
+            #
+            #   # The returned object is a streamed enumerable yielding elements of
+            #   # type ::Google::Cloud::Firestore::V1::RunAggregationQueryResponse.
+            #   result.each do |response|
+            #     p response
+            #   end
+            #
+            def run_aggregation_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Firestore::V1::RunAggregationQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.run_aggregation_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Firestore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.run_aggregation_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.run_aggregation_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @firestore_stub.call_rpc :run_aggregation_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Partitions a query by returning partition cursors that can be used to run
             # the query in parallel. The returned partition cursors are split points that
             # can be used by RunQuery as starting/end points for the query results.
@@ -1897,6 +2037,11 @@ module Google
                 #
                 attr_reader :run_query
                 ##
+                # RPC-specific configuration for `run_aggregation_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :run_aggregation_query
+                ##
                 # RPC-specific configuration for `partition_query`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1947,6 +2092,8 @@ module Google
                   @rollback = ::Gapic::Config::Method.new rollback_config
                   run_query_config = parent_rpcs.run_query if parent_rpcs.respond_to? :run_query
                   @run_query = ::Gapic::Config::Method.new run_query_config
+                  run_aggregation_query_config = parent_rpcs.run_aggregation_query if parent_rpcs.respond_to? :run_aggregation_query
+                  @run_aggregation_query = ::Gapic::Config::Method.new run_aggregation_query_config
                   partition_query_config = parent_rpcs.partition_query if parent_rpcs.respond_to? :partition_query
                   @partition_query = ::Gapic::Config::Method.new partition_query_config
                   write_config = parent_rpcs.write if parent_rpcs.respond_to? :write
