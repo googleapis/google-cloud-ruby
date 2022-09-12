@@ -743,6 +743,8 @@ module Google
           execute do
             service.update_bucket bucket_name,
                                   bucket_gapi,
+                                  predefined_acl: predefined_acl,
+                                  predefined_default_object_acl: predefined_default_acl, 
                                   if_metageneration_match: if_metageneration_match,
                                   if_metageneration_not_match: if_metageneration_not_match,
                                   user_project: user_project(user_project),
