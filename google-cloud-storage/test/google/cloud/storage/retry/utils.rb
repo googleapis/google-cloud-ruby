@@ -125,6 +125,7 @@ class MethodMapping
 
   def self.delete_bucket client, _preconditions, **resources
     bucket = resources[:bucket]
+    bucket.files.all { |f| f.delete rescue nil }
     bucket.delete
   end
 
