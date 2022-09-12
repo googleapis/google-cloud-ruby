@@ -232,6 +232,9 @@ module Google
         ##
         # Creates a new default ACL.
         def insert_default_acl bucket_name, entity, role, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           param = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**param)
           execute do
@@ -244,6 +247,9 @@ module Google
         ##
         # Permanently deletes a default ACL.
         def delete_default_acl bucket_name, entity, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_default_object_access_control \
               bucket_name, entity, user_project: user_project(user_project),
@@ -639,6 +645,9 @@ module Google
         def insert_file_acl bucket_name, file_name, entity, role,
                             generation: nil, user_project: nil,
                             options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**params)
           execute do
@@ -653,6 +662,9 @@ module Google
         # Permanently deletes a file ACL.
         def delete_file_acl bucket_name, file_name, entity, generation: nil,
                             user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_object_access_control \
               bucket_name, file_name, entity,

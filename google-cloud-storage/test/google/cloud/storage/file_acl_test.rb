@@ -81,7 +81,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
       [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :insert_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: nil, options: {}
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -119,7 +119,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
       [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :insert_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: generation, user_project: nil, options: {}
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: generation, user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -156,7 +156,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
       [bucket_name, file_name], user_project: "test", options: {}
     mock.expect :insert_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: "test", options: {}
+      [bucket_name, file_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], generation: nil, user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -182,7 +182,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :delete_object_access_control, nil,
-      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: nil, options: {}
+      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -209,7 +209,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name], user_project: nil, options: {}
     mock.expect :delete_object_access_control, nil,
-      [bucket_name, file_name, existing_reader_entity], generation: generation, user_project: nil, options: {}
+      [bucket_name, file_name, existing_reader_entity], generation: generation, user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -235,7 +235,7 @@ describe Google::Cloud::Storage::File, :acl, :mock_storage do
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_file_acl_hash(bucket_name, file_name).to_json),
       [bucket_name, file_name], user_project: "test", options: {}
     mock.expect :delete_object_access_control, nil,
-      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: "test", options: {}
+      [bucket_name, file_name, existing_reader_entity], generation: nil, user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 
