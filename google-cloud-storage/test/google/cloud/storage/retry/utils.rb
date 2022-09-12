@@ -65,12 +65,8 @@ class MethodMapping
     "storage.object_acl.insert" => [:insert_file_acl],
     "storage.objects.get" => [
       :get_object,
-      :blob_download_to_filename,
-      :blob_download_to_filename_chunked,
-      :blob_download_as_bytes,
-      :blob_download_as_bytes_w_range,
-      :blob_download_as_text,
-      :blobreader_read,
+      :get_file,
+      :download_file
     ],
     "storage.objects.insert" => [
       :insert_object
@@ -383,8 +379,19 @@ class MethodMapping
     bucket = resources[:bucket]
     object = resources[:object]
     file = bucket.file object.name
-    res = file.download
   end
+
+  def self.get_file client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    client.get_file bucket.name, object.name
+  end
+
+  def self.download_file client, _preconditions, **resources
+    bucket = resources[:bucket]
+    object = resources[:object]
+    res = object.download
+  end  
 
   def self.delete_file_acl client, _preconditions, **resources
     bucket = resources[:bucket]
@@ -406,13 +413,21 @@ class MethodMapping
     object = resources[:object]
     object_2 = bucket.create_file StringIO.new(CONF_TEST_FILE_CONTENT), "my-test-file-2"
     destination = "new-composite-object"
-    bucket.compose [object.name, object_2.name], destination 
+    if _preconditions
+      bucket.compose [object.name, object_2.name], destination, if_generation_match: object.generation
+    else
+      bucket.compose [object.name, object_2.name], destination
+    end
   end
 
   def self.delete_file client, _preconditions, **resources
     bucket = resources[:bucket]
     object = resources[:object]
-    client.delete_file bucket.name, object.name
+    if _preconditions
+      client.delete_file bucket.name, object.name, if_generation_match: object.generation
+    else
+      client.delete_file bucket.name, object.name
+    end
   end
 
   def self.list_files client, _preconditions, **resources
@@ -423,12 +438,20 @@ class MethodMapping
   def self.patch_file client, _preconditions, **resources
     bucket = resources[:bucket]
     object = resources[:object]
-    client.patch_file bucket.name, object.name 
+    if _preconditions
+      client.patch_file bucket.name, object.name, if_metageneration_match: object.metageneration
+    else
+      client.patch_file bucket.name, object.name
+    end
   end
 
   def self.rewrite_file client, _preconditions, **resources
     bucket = resources[:bucket]
     object = resources[:object]
-    client.rewrite_file bucket.name, object.name, "destination-bucket", "destination-object"
+    if _preconditions
+      client.rewrite_file bucket.name, object.name, "destination-bucket", "destination-object", if_generation_match: object.generation
+    else
+      client.rewrite_file bucket.name, object.name, "destination-bucket", "destination-object"
+    end
   end
 end
