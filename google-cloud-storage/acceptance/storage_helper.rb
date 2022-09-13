@@ -105,16 +105,17 @@ module Acceptance
   end
 end
 
-def safe_gcs_execute retries: 20, delay: 2
+def safe_gcs_execute retries: 7
   current_retries = 0
   loop do
     begin
       return yield
     rescue Google::Cloud::ResourceExhaustedError
       raise unless current_retries >= retries
-
-      sleep delay
+      
       current_retries += 1
+      max_sleep_seconds = Float(2 ** current_retries)
+      sleep rand(0..max_sleep_seconds)
     end
   end
 end
