@@ -1,5 +1,11 @@
 # Release History
 
+### 1.3.0 (2022-09-13)
+
+#### Features
+
+* surface error info from details in addition to status_details ([#19138](https://github.com/googleapis/google-cloud-ruby/issues/19138)) 
+
 ### 1.2.0 / 2021-09-20
 
 #### Features
