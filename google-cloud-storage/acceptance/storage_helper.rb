@@ -114,9 +114,20 @@ def safe_gcs_execute retries: 8
       raise unless current_retries >= retries
       
       current_retries += 1
-      sleep 2 ** current_retries
+      sleep get_retry_delay(current_retries)
+      # random_adder = rand(0.0..3.0)
+      # sleep (2 ** current_retries) + random_adder
+      # max_sleep_seconds = Float(2 ** current_retries)
+      # sleep rand(0..max_sleep_seconds)
     end
   end
+end
+
+def get_retry_delay current_retries, delay_multiplier: 3
+  random_adder = rand(0.0..3.0)
+  wait_time = (delay_multiplier ** current_retries) + 1 + random_adder
+  max_allowed_delay = 75.0
+  [wait_time, max_allowed_delay].min
 end
 
 # Create buckets to be shared with all the tests
