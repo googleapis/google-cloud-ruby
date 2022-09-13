@@ -29,6 +29,10 @@ describe Google::Cloud::Storage::File, :acl, :storage do
 
   let(:user_val) { "user-test@example.com" }
 
+  before(:each) do
+    sleep 1
+  end
+
   before do
     # always create the bucket and set default acl to auth
     bucket.default_acl.auth!

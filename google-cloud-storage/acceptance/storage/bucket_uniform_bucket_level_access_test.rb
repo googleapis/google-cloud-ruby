@@ -29,6 +29,10 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   let(:user_val) { "user-test@example.com" }
 
+  before(:each) do
+    sleep 1
+  end
+
   after do
     # always reset the uniform_bucket_level_access and public_access_prevention
     # always reset the bucket permissions

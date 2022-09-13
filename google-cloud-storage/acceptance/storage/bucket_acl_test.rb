@@ -22,6 +22,10 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
   end
   let(:user_val) { "user-test@example.com" }
 
+  before(:each) do
+    sleep 1
+  end
+
   before do
     # always reset the bucket permissions
     bucket.acl.private!
