@@ -114,8 +114,7 @@ def safe_gcs_execute retries: 8
       raise unless current_retries >= retries
       
       current_retries += 1
-      max_sleep_seconds = Float(2 ** current_retries)
-      sleep rand(0..max_sleep_seconds)
+      sleep 2 ** current_retries
     end
   end
 end
