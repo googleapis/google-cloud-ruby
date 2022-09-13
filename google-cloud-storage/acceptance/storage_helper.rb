@@ -107,6 +107,7 @@ end
 
 def safe_gcs_execute retries: 20, delay: 2
   current_retries = 0
+  delay = 5
   loop do
     begin
       return yield
