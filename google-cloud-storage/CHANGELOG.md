@@ -1,5 +1,11 @@
 # Release History
 
+### 1.40.0 (2022-09-13)
+
+#### Features
+
+* Update all patch bucket helper methods to accept preconditions ([#19117](https://github.com/googleapis/google-cloud-ruby/issues/19117)) 
+
 ### 1.39.0 (2022-08-24)
 
 #### Features
