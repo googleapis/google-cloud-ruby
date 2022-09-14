@@ -29,7 +29,6 @@ jobs:
           ruby-version: '2.6'
       - run: ruby --version
       - run: bundle install
-      - run: ls
-      - run: bundle exec rake test TEST=../../google-cloud-storage/test/google/cloud/storage/retry/conformance_test.rb
+      - run: bundle exec rake test TEST=test/google/cloud/storage/retry/conformance_test.rb
         env:
           STORAGE_EMULATOR_HOST: localhost:9000
