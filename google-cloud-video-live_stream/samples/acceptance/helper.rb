@@ -39,7 +39,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
       input_id: input_id
     )
     operation.wait_until_done!
-    input = operation.response
+    operation.response
   end
 
   after do
