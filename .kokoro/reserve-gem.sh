@@ -8,4 +8,4 @@ export GEM_HOME=$HOME/.gem
 export PATH=$GEM_HOME/bin:$PATH
 
 gem install --no-document toys
-toys reserve-gem -v --release < /dev/null
+toys reserve-gem -v --release $RELEASE_PACKAGE < /dev/null
