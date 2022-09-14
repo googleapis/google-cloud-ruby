@@ -10,15 +10,16 @@
     "LICENSE.md",
     "README.md",
     "Rakefile",
-    "google-iam.gemspec",
-    "lib/google-iam.rb",
+    "google-iam-client.gemspec",
+    "lib/google-iam-client.rb",
     "lib/google/iam.rb",
-    "lib/google/iam/version.rb",
     "test/google/iam/client_test.rb",
     "test/google/iam/version_test.rb",
     "test/helper.rb"
   ],
   "static": [
-    ".OwlBot.yaml"
+    ".OwlBot.yaml",
+    ".owlbot.rb",
+    "lib/google/iam/client/version.rb"
   ]
 }

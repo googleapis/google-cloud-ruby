@@ -1,11 +1,11 @@
 # -*- ruby -*-
 # encoding: utf-8
 
-require File.expand_path("lib/google/iam/version", __dir__)
+require File.expand_path("lib/google/iam/client/version", __dir__)
 
 Gem::Specification.new do |gem|
-  gem.name          = "google-iam"
-  gem.version       = Google::Iam::VERSION
+  gem.name          = "google-iam-client"
+  gem.version       = Google::Iam::Client::VERSION
 
   gem.authors       = ["Google LLC"]
   gem.email         = "googleapis-packages@google.com"

@@ -3,7 +3,7 @@ inherit_gem:
 
 AllCops:
   Exclude:
-    - "google-iam.gemspec"
+    - "google-iam-client.gemspec"
     - "Rakefile"
     - "acceptance/**/*"
     - "test/**/*"
@@ -32,7 +32,7 @@ Metrics/PerceivedComplexity:
 
 Naming/FileName:
   Exclude:
-    - "lib/google-iam.rb"
+    - "lib/google-iam-client.rb"
 
 Style/BlockDelimiters:
   Exclude:

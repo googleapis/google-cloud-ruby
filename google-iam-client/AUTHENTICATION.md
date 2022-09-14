@@ -1,6 +1,6 @@
 # Authentication
 
-In general, the google-iam library uses
+In general, the google-iam-client library uses
 [Service Account](https://cloud.google.com/iam/docs/creating-managing-service-accounts)
 credentials to connect to Google Cloud services. When running within
 [Google Cloud Platform environments](#google-cloud-platform-environments) the
@@ -32,7 +32,7 @@ client = Google::Iam.policies
 
 ## Credential Lookup
 
-The google-iam library aims to make authentication
+The google-iam-client library aims to make authentication
 as simple as possible, and provides several mechanisms to configure your system
 without requiring **Service Account Credentials** directly in code.
 
@@ -62,7 +62,7 @@ the READMEs for the individual service gems for details.) The path to the
 **Credentials JSON** itself can be stored for environments such as Docker
 containers where writing files is difficult or not encouraged.
 
-The environment variables that google-iam
+The environment variables that google-iam-client
 checks for credentials are configured on the service Credentials class (such as
 `::Google::Iam::V2::Policies::Credentials`):
 
@@ -122,7 +122,7 @@ To configure your system for this, simply:
 
 Google Cloud requires **Service Account Credentials** to
 connect to the APIs. You will use the **JSON key file** to
-connect to most services with google-iam.
+connect to most services with google-iam-client.
 
 If you are not running this client within
 [Google Cloud Platform environments](#google-cloud-platform-environments), you

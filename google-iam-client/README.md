@@ -6,13 +6,13 @@ Manages identity and access control policies for Google Cloud Platform resources
 
 Actual client classes for the various versions of this API are defined in
 _versioned_ client gems, with names of the form `google-iam-v*`.
-The gem `google-iam` is the main client library that brings the
+The gem `google-iam-client` is the main client library that brings the
 verisoned gems in as dependencies, and provides high-level methods for
 constructing clients. More information on versioned clients can be found below
 in the section titled *Which client should I use?*.
 
-View the [Client Library Documentation](https://googleapis.dev/ruby/google-iam/latest)
-for this library, google-iam, to see the convenience methods for
+View the [Client Library Documentation](https://googleapis.dev/ruby/google-iam-client/latest)
+for this library, google-iam-client, to see the convenience methods for
 constructing client objects. Reference documentation for the client objects
 themselves can be found in the client library documentation for the versioned
 client gems:
@@ -24,7 +24,7 @@ for more usage information.
 ## Quick Start
 
 ```
-$ gem install google-iam
+$ gem install google-iam-client
 ```
 
 In order to use this library, you first need to go through the following steps:
@@ -74,7 +74,7 @@ support schedule.
 ## Which client should I use?
 
 Most modern Ruby client libraries for Google APIs come in two flavors: the main
-client library with a name such as `google-iam`,
+client library with a name such as `google-iam-client`,
 and lower-level _versioned_ client libraries with names such as
 `google-iam-v2`.
 _In most cases, you should install the main client._
@@ -101,7 +101,7 @@ service version.
 
 We recommend that most users install the main client gem for a service. You can
 identify this gem as the one _without_ a version in its name, e.g.
-`google-iam`.
+`google-iam-client`.
 The main client is recommended because it will embody the best practices for
 accessing the service, and may also provide more convenient interfaces or
 tighter integration into frameworks and third-party libraries. In addition, the
