@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.2.1 (2022-09-14)
+
+#### Documentation
+
+* Add Live Stream samples and tests ([#19102](https://github.com/googleapis/google-cloud-ruby/issues/19102)) 
+
 ### 0.2.0 (2022-07-08)
 
 #### Features
