@@ -135,7 +135,7 @@ module Google
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_metageneration_match: if_metageneration_match
             options = is_idempotent ? {} : { retries: 0 }
           end
@@ -385,7 +385,7 @@ module Google
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
           else
@@ -460,7 +460,7 @@ module Google
                          options: {}
           key_options = rewrite_key_options source_key, destination_key
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options : key_options.merge(retries: 0)
           else
@@ -508,7 +508,7 @@ module Google
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
           else
@@ -565,7 +565,7 @@ module Google
                        options: {}
           file_gapi ||= Google::Apis::StorageV1::Object.new
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_metageneration_match: if_metageneration_match
             options = is_idempotent ? {} : { retries: 0 }
           end
@@ -597,7 +597,7 @@ module Google
                         user_project: nil,
                         options: {}
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
             options = is_idempotent ? {} : { retries: 0 }
           end
