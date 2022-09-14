@@ -544,6 +544,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
     end
   end
 
+  def test_region_ssl_policies
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::Compute.region_ssl_policies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client, client
+    end
+  end
+
   def test_region_target_http_proxies
     Gapic::ServiceStub.stub :new, :stub do
       client = Google::Cloud::Compute.region_target_http_proxies do |config|
@@ -559,6 +568,15 @@ class Google::Cloud::Compute::ClientConstructionMinitest < Minitest::Test
         config.credentials = :dummy_credentials
       end
       assert_kind_of Google::Cloud::Compute::V1::RegionTargetHttpsProxies::Rest::Client, client
+    end
+  end
+
+  def test_region_target_tcp_proxies
+    Gapic::ServiceStub.stub :new, :stub do
+      client = Google::Cloud::Compute.region_target_tcp_proxies do |config|
+        config.credentials = :dummy_credentials
+      end
+      assert_kind_of Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client, client
     end
   end
 
