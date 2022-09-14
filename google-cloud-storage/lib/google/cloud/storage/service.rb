@@ -64,6 +64,7 @@ module Google
           @service.request_options.base_interval = base_interval if base_interval
           @service.request_options.max_interval = max_interval if max_interval
           @service.request_options.multiplier = multiplier if multiplier
+          @service.request_options.add_invocation_id_header = true
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
         end
