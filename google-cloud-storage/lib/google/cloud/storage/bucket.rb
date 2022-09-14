@@ -1178,11 +1178,11 @@ module Google
             [attr, @gapi.send(attr)]
           end]
           update_gapi = API::Bucket.new(**update_args)
-          service.update_bucket name,
-                                update_gapi,
-                                if_metageneration_match: if_metageneration_match,
-                                if_metageneration_not_match: if_metageneration_not_match,
-                                user_project: user_project
+          @gapi = service.update_bucket name,
+                                        update_gapi,
+                                        if_metageneration_match: if_metageneration_match,
+                                        if_metageneration_not_match: if_metageneration_not_match,
+                                        user_project: user_project
           @lazy = nil
           self
         end
