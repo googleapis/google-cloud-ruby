@@ -107,11 +107,11 @@ module Acceptance
 end
 
 def safe_gcs_execute retries: 10
-  MAX_RETRIES = 10
+  max_retries = 10
   Retriable.retriable(
     on: Google::Cloud::ResourceExhaustedError,
     multiplier: 2,
-    tries: [retries, MAX_RETRIES].min,
+    tries: [retries, max_retries].min,
     max_interval: 30
   ) do
     return yield
