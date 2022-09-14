@@ -61,7 +61,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(one_off_bucket.website_404).must_equal "not_found.html"
     _(one_off_bucket.requester_pays).must_equal true
     # labels with symbols are not strings
-    _(one_off_bucket.labels).must_equal({ :foo => :bar })
+    _(one_off_bucket.labels).must_equal({ "foo" => "bar" })
     _(one_off_bucket.location_type).must_equal "multi-region"
 
     one_off_bucket_copy = storage.bucket one_off_bucket_name, user_project: true
