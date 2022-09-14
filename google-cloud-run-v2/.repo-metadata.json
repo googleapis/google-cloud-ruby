@@ -11,7 +11,7 @@
     "release_level": "preview",
     "repo": "googleapis/google-cloud-ruby",
     "requires_billing": true,
-    "ruby-cloud-description": "Cloud Run deploys and manages user provided container images that scale automatically based on incoming requests. Note that google-cloud-run-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-run instead. See the readme for more details.",
+    "ruby-cloud-description": "Cloud Run deploys and manages user provided container images that scale automatically based on incoming requests. Note that google-cloud-run-v2 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-run-client instead. See the readme for more details.",
     "ruby-cloud-product-url": "https://cloud.google.com/run/",
     "library_type": "GAPIC_AUTO"
 }
