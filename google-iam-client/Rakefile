@@ -35,7 +35,7 @@ namespace :test do
   task :coverage do
     require "simplecov"
     SimpleCov.start do
-      command_name "google-iam"
+      command_name "google-iam-client"
       track_files "lib/**/*.rb"
       add_filter "test/"
     end
@@ -55,7 +55,7 @@ namespace :smoke_test do
   task :coverage do
     require "simplecov"
     SimpleCov.start do
-      command_name "google-iam"
+      command_name "google-iam-client"
       track_files "lib/**/*.rb"
       add_filter "test/"
     end
@@ -65,7 +65,7 @@ namespace :smoke_test do
 end
 
 # Acceptance tests
-desc "Run the google-iam acceptance tests."
+desc "Run the google-iam-client acceptance tests."
 task :acceptance, :project, :keyfile do |t, args|
   project = args[:project]
   project ||=
@@ -101,7 +101,7 @@ namespace :acceptance do
     if File.directory? "acceptance"
       Rake::Task[:smoke_test].invoke
     else
-      puts "The google-iam gem has no acceptance tests."
+      puts "The google-iam-client gem has no acceptance tests."
     end
   end
 
@@ -129,7 +129,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-iam gem has no samples to test."
+      puts "The google-iam-client gem has no samples to test."
     end
   end
 
@@ -143,7 +143,7 @@ namespace :samples do
         end
       end
     else
-      puts "The google-iam gem has no samples to test."
+      puts "The google-iam-client gem has no samples to test."
     end
   end
 end
@@ -156,17 +156,17 @@ end
 
 desc "Run yard-doctest example tests."
 task :doctest do
-  puts "The google-iam gem does not have doctest tests."
+  puts "The google-iam-client gem does not have doctest tests."
 end
 
 desc "Run the CI build"
 task :ci do
-  header "BUILDING google-iam"
-  header "google-iam rubocop", "*"
+  header "BUILDING google-iam-client"
+  header "google-iam-client rubocop", "*"
   Rake::Task[:rubocop].invoke
-  header "google-iam yard", "*"
+  header "google-iam-client yard", "*"
   Rake::Task[:yard].invoke
-  header "google-iam test", "*"
+  header "google-iam-client test", "*"
   Rake::Task[:test].invoke
 end
 
@@ -174,13 +174,13 @@ namespace :ci do
   desc "Run the CI build, with smoke tests."
   task :smoke_test do
     Rake::Task[:ci].invoke
-    header "google-iam smoke_test", "*"
+    header "google-iam-client smoke_test", "*"
     Rake::Task[:smoke_test].invoke
   end
   desc "Run the CI build, with acceptance tests."
   task :acceptance do
     Rake::Task[:ci].invoke
-    header "google-iam acceptance", "*"
+    header "google-iam-client acceptance", "*"
     Rake::Task[:acceptance].invoke
   end
   task :a do
