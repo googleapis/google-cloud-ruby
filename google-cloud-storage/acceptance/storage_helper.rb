@@ -110,9 +110,9 @@ def safe_gcs_execute retries: 10
   max_retries = 10
   Retriable.retriable(
     on: Google::Cloud::ResourceExhaustedError,
-    multiplier: 2,
+    multiplier: 3,
     tries: [retries, max_retries].min,
-    max_interval: 30
+    max_interval: 40
   ) do
     return yield
   end
