@@ -1,0 +1,13 @@
+{
+    "api_shortname": "unknown",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-bigquery-datapolicies-v1beta1/latest",
+    "distribution_name": "google-cloud-bigquery-datapolicies-v1beta1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name_pretty": "Google Cloud Bigquery Datapolicies V1beta1 API",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-bigquery-datapolicies-v1beta1 is the official client library for the Google Cloud Bigquery Datapolicies V1beta1 API. Note that google-cloud-bigquery-datapolicies-v1beta1 is a version-specific client library. For most uses, we recommend installing the main client library google-cloud-bigquery-datapolicies instead. See the readme for more details.",
+    "library_type": "GAPIC_AUTO"
+}
