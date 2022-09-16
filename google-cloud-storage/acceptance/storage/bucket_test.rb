@@ -29,7 +29,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
 
   before do
     # always reset the bucket permissions
-    bucket.acl.private!
+    safe_gcs_execute { bucket.acl.private! }
   end
 
   it "creates and gets and updates and deletes a bucket" do

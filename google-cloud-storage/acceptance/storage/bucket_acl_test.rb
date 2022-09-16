@@ -24,7 +24,7 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
 
   before do
     # always reset the bucket permissions
-    bucket.acl.private!
+    safe_gcs_execute { bucket.acl.private! }
   end
 
   it "adds a reader" do
@@ -117,18 +117,18 @@ describe Google::Cloud::Storage::Bucket, :acl, :storage do
   end
 
   it "sets predefined ACL rules" do
-    bucket.acl.authenticatedRead!
-    bucket.acl.auth!
-    bucket.acl.auth_read!
-    bucket.acl.authenticated!
-    bucket.acl.authenticated_read!
-    bucket.acl.private!
-    bucket.acl.projectPrivate!
-    bucket.acl.project_private!
-    bucket.acl.publicRead!
-    bucket.acl.public!
-    bucket.acl.public_read!
-    bucket.acl.publicReadWrite!
-    bucket.acl.public_write!
+    safe_gcs_execute { bucket.acl.authenticatedRead! }
+    safe_gcs_execute { bucket.acl.auth! }
+    safe_gcs_execute { bucket.acl.auth_read! }
+    safe_gcs_execute { bucket.acl.authenticated! }
+    safe_gcs_execute { bucket.acl.authenticated_read! }
+    safe_gcs_execute { bucket.acl.private! }
+    safe_gcs_execute { bucket.acl.projectPrivate! }
+    safe_gcs_execute { bucket.acl.project_private! }
+    safe_gcs_execute { bucket.acl.publicRead! }
+    safe_gcs_execute { bucket.acl.public! }
+    safe_gcs_execute { bucket.acl.public_read! }
+    safe_gcs_execute { bucket.acl.publicReadWrite! }
+    safe_gcs_execute { bucket.acl.public_write! }
   end
 end

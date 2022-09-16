@@ -41,8 +41,10 @@ describe "ACL Snippets" do
 
   after do
     bucket.files.each(&:delete)
+    sleep 1
     # always reset the bucket permissions
     bucket.default_acl.private!
+    sleep 1
     bucket.acl.private!
   end
 
