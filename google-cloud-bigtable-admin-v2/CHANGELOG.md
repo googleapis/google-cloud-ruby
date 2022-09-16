@@ -1,5 +1,12 @@
 # Release History
 
+### 0.15.0 (2022-09-16)
+
+#### Features
+
+* Support for Table#deletion_protection 
+* Support for update_table call ([#19149](https://github.com/googleapis/google-cloud-ruby/issues/19149)) 
+
 ### 0.14.0 (2022-07-28)
 
 #### Features
