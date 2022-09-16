@@ -23,6 +23,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :column_families, :string, :message, 3, "google.bigtable.admin.v2.ColumnFamily"
       optional :granularity, :enum, 4, "google.bigtable.admin.v2.Table.TimestampGranularity"
       optional :restore_info, :message, 6, "google.bigtable.admin.v2.RestoreInfo"
+      optional :deletion_protection, :bool, 9
     end
     add_message "google.bigtable.admin.v2.Table.ClusterState" do
       optional :replication_state, :enum, 1, "google.bigtable.admin.v2.Table.ClusterState.ReplicationState"

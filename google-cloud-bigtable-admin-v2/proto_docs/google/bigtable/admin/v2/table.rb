@@ -63,6 +63,14 @@ module Google
           #   @return [::Google::Cloud::Bigtable::Admin::V2::RestoreInfo]
           #     Output only. If this table was restored from another data source (e.g. a backup), this
           #     field will be populated with information about the restore.
+          # @!attribute [rw] deletion_protection
+          #   @return [::Boolean]
+          #     Set to true to make the table protected against data loss. i.e. deleting
+          #     the following resources through Admin APIs are prohibited:
+          #       - The table.
+          #       - The column families in the table.
+          #       - The instance containing the table.
+          #     Note one can still delete the data stored in the table through Data APIs.
           class Table
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

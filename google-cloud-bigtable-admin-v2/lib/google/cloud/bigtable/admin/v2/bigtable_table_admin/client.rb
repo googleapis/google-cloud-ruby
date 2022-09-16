@@ -651,6 +651,111 @@ module Google
               end
 
               ##
+              # Updates a specified table.
+              #
+              # @overload update_table(request, options = nil)
+              #   Pass arguments to `update_table` via a request object, either of type
+              #   {::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+              #
+              # @overload update_table(table: nil, update_mask: nil)
+              #   Pass arguments to `update_table` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param table [::Google::Cloud::Bigtable::Admin::V2::Table, ::Hash]
+              #     Required. The table to update.
+              #     The table's `name` field is used to identify the table to update.
+              #     Format:
+              #     `projects/{project}/instances/{instance}/tables/[_a-zA-Z0-9][-_.a-zA-Z0-9]*`
+              #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+              #     Required. The list of fields to update.
+              #     A mask specifying which fields (e.g. `deletion_protection`) in the `table`
+              #     field should be updated. This mask is relative to the `table` field, not to
+              #     the request message. The wildcard (*) path is currently not supported.
+              #     Currently UpdateTable is only supported for the following field:
+              #      * `deletion_protection`
+              #     If `column_families` is set in `update_mask`, it will return an
+              #     UNIMPLEMENTED error.
+              #
+              # @yield [response, operation] Access the result along with the RPC operation
+              # @yieldparam response [::Gapic::Operation]
+              # @yieldparam operation [::GRPC::ActiveCall::Operation]
+              #
+              # @return [::Gapic::Operation]
+              #
+              # @raise [::Google::Cloud::Error] if the RPC is aborted.
+              #
+              # @example Basic example
+              #   require "google/cloud/bigtable/admin/v2"
+              #
+              #   # Create a client object. The client can be reused for multiple calls.
+              #   client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+              #
+              #   # Create a request. To set request fields, pass in keyword arguments.
+              #   request = Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest.new
+              #
+              #   # Call the update_table method.
+              #   result = client.update_table request
+              #
+              #   # The returned object is of type Gapic::Operation. You can use this
+              #   # object to check the status of an operation, cancel it, or wait
+              #   # for results. Here is how to block until completion:
+              #   result.wait_until_done! timeout: 60
+              #   if result.response?
+              #     p result.response
+              #   else
+              #     puts "Error!"
+              #   end
+              #
+              def update_table request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                metadata = @config.rpcs.update_table.metadata.to_h
+
+                # Set x-goog-api-client and x-goog-user-project headers
+                metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Bigtable::Admin::V2::VERSION
+                metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+                header_params = {}
+                if request.table&.name
+                  header_params["table.name"] = request.table.name
+                end
+
+                request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+                metadata[:"x-goog-request-params"] ||= request_params_header
+
+                options.apply_defaults timeout:      @config.rpcs.update_table.timeout,
+                                       metadata:     metadata,
+                                       retry_policy: @config.rpcs.update_table.retry_policy
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata,
+                                       retry_policy: @config.retry_policy
+
+                @bigtable_table_admin_stub.call_rpc :update_table, request, options: options do |response, operation|
+                  response = ::Gapic::Operation.new response, @operations_client, options: options
+                  yield response, operation if block_given?
+                  return response
+                end
+              rescue ::GRPC::BadStatus => e
+                raise ::Google::Cloud::Error.from_error(e)
+              end
+
+              ##
               # Permanently deletes a specified table and all of its data.
               #
               # @overload delete_table(request, options = nil)
@@ -2696,6 +2801,11 @@ module Google
                   #
                   attr_reader :get_table
                   ##
+                  # RPC-specific configuration for `update_table`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :update_table
+                  ##
                   # RPC-specific configuration for `delete_table`
                   # @return [::Gapic::Config::Method]
                   #
@@ -2801,6 +2911,8 @@ module Google
                     @list_tables = ::Gapic::Config::Method.new list_tables_config
                     get_table_config = parent_rpcs.get_table if parent_rpcs.respond_to? :get_table
                     @get_table = ::Gapic::Config::Method.new get_table_config
+                    update_table_config = parent_rpcs.update_table if parent_rpcs.respond_to? :update_table
+                    @update_table = ::Gapic::Config::Method.new update_table_config
                     delete_table_config = parent_rpcs.delete_table if parent_rpcs.respond_to? :delete_table
                     @delete_table = ::Gapic::Config::Method.new delete_table_config
                     undelete_table_config = parent_rpcs.undelete_table if parent_rpcs.respond_to? :undelete_table

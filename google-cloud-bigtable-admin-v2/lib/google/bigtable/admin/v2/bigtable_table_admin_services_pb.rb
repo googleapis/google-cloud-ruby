@@ -55,6 +55,8 @@ module Google
               rpc :ListTables, ::Google::Cloud::Bigtable::Admin::V2::ListTablesRequest, ::Google::Cloud::Bigtable::Admin::V2::ListTablesResponse
               # Gets metadata information about the specified table.
               rpc :GetTable, ::Google::Cloud::Bigtable::Admin::V2::GetTableRequest, ::Google::Cloud::Bigtable::Admin::V2::Table
+              # Updates a specified table.
+              rpc :UpdateTable, ::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest, ::Google::Longrunning::Operation
               # Permanently deletes a specified table and all of its data.
               rpc :DeleteTable, ::Google::Cloud::Bigtable::Admin::V2::DeleteTableRequest, ::Google::Protobuf::Empty
               # Restores a specified table which was accidentally deleted.
