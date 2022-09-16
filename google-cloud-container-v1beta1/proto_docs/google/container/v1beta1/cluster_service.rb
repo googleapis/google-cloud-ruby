@@ -259,7 +259,7 @@ module Google
         #     `minCpuPlatform: "Intel Haswell"` or
         #     `minCpuPlatform: "Intel Sandy Bridge"`. For more
         #     information, read [how to specify min CPU
-        #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+        #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform).
         # @!attribute [rw] workload_metadata_config
         #   @return [::Google::Cloud::Container::V1beta1::WorkloadMetadataConfig]
         #     The workload metadata configuration for this node.
@@ -307,6 +307,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::ConfidentialNodes]
         #     Confidential nodes config.
         #     All the nodes in the node pool will be Confidential VM once enabled.
+        # @!attribute [rw] logging_config
+        #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
+        #     Logging configuration.
         class NodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -485,8 +488,9 @@ module Google
         # @!attribute [rw] key
         #   @return [::String]
         #     Corresponds to the label key of a reservation resource. To target a
-        #     SPECIFIC_RESERVATION by name, specify "googleapis.com/reservation-name" as
-        #     the key and specify the name of your reservation as its value.
+        #     SPECIFIC_RESERVATION by name, specify
+        #     "compute.googleapis.com/reservation-name" as the key and specify the name
+        #     of your reservation as its value.
         # @!attribute [rw] values
         #   @return [::Array<::String>]
         #     Corresponds to the label value(s) of reservation resource(s).
@@ -1643,6 +1647,9 @@ module Google
         # @!attribute [rw] gcfs_config
         #   @return [::Google::Cloud::Container::V1beta1::GcfsConfig]
         #     GCFS (Google Container File System, also known as Riptide) options.
+        # @!attribute [rw] logging_config
+        #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
+        #     Logging configuration for node pools.
         class NodeConfigDefaults
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1849,6 +1856,9 @@ module Google
         # @!attribute [rw] desired_protect_config
         #   @return [::Google::Cloud::Container::V1beta1::ProtectConfig]
         #     Enable/Disable Protect API features for the cluster.
+        # @!attribute [rw] desired_node_pool_logging_config
+        #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
+        #     The desired node pool logging configuration defaults for the cluster.
         class ClusterUpdate
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2198,6 +2208,9 @@ module Google
         # @!attribute [rw] gvnic
         #   @return [::Google::Cloud::Container::V1beta1::VirtualNIC]
         #     Enable or disable gvnic on the node pool.
+        # @!attribute [rw] logging_config
+        #   @return [::Google::Cloud::Container::V1beta1::NodePoolLoggingConfig]
+        #     Logging configuration.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -3507,7 +3520,7 @@ module Google
         #     minCpuPlatform: Intel Haswell or
         #     minCpuPlatform: Intel Sandy Bridge. For more
         #     information, read [how to specify min CPU
-        #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform)
+        #     platform](https://cloud.google.com/compute/docs/instances/specify-min-cpu-platform).
         #     This field is deprecated, min_cpu_platform should be specified using
         #     https://cloud.google.com/requested-min-cpu-platform label selector on the
         #     pod.
@@ -4790,6 +4803,36 @@ module Google
         class MonitoringConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # NodePoolLoggingConfig specifies logging configuration for nodepools.
+        # @!attribute [rw] variant_config
+        #   @return [::Google::Cloud::Container::V1beta1::LoggingVariantConfig]
+        #     Logging variant configuration.
+        class NodePoolLoggingConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # LoggingVariantConfig specifies the behaviour of the logging component.
+        # @!attribute [rw] variant
+        #   @return [::Google::Cloud::Container::V1beta1::LoggingVariantConfig::Variant]
+        #     Logging variant deployed on nodes.
+        class LoggingVariantConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Logging component variants.
+          module Variant
+            # Default value. This shouldn't be used.
+            VARIANT_UNSPECIFIED = 0
+
+            # default logging variant.
+            DEFAULT = 1
+
+            # maximum logging throughput variant.
+            MAX_THROUGHPUT = 2
+          end
         end
 
         # MonitoringComponentConfig is cluster monitoring component configuration.
