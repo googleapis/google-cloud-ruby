@@ -1,0 +1,40 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "gapic_metadata.json",
+    "google-cloud-security-public_ca-v1beta1.gemspec",
+    "lib/google-cloud-security-public_ca-v1beta1.rb",
+    "lib/google/cloud/security/public_ca/v1beta1.rb",
+    "lib/google/cloud/security/public_ca/v1beta1/public_certificate_authority_service.rb",
+    "lib/google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/client.rb",
+    "lib/google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/credentials.rb",
+    "lib/google/cloud/security/public_ca/v1beta1/public_certificate_authority_service/paths.rb",
+    "lib/google/cloud/security/public_ca/v1beta1/version.rb",
+    "lib/google/cloud/security/publicca/v1beta1/resources_pb.rb",
+    "lib/google/cloud/security/publicca/v1beta1/service_pb.rb",
+    "lib/google/cloud/security/publicca/v1beta1/service_services_pb.rb",
+    "proto_docs/README.md",
+    "proto_docs/google/api/field_behavior.rb",
+    "proto_docs/google/api/resource.rb",
+    "proto_docs/google/cloud/security/publicca/v1beta1/resources.rb",
+    "proto_docs/google/cloud/security/publicca/v1beta1/service.rb",
+    "snippets/Gemfile",
+    "snippets/public_certificate_authority_service/create_external_account_key.rb",
+    "snippets/snippet_metadata_google.cloud.security.publicca.v1beta1.json",
+    "test/google/cloud/security/public_ca/v1beta1/public_certificate_authority_service_paths_test.rb",
+    "test/google/cloud/security/public_ca/v1beta1/public_certificate_authority_service_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
