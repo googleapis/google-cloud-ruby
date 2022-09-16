@@ -1,5 +1,26 @@
 # Release History
 
+### 1.7.0 (2022-09-16)
+
+#### Features
+
+* Support for additional Disk params 
+* Support for AdvancedMachineFeatures#visible_core_count 
+* Support for AttachedDisk#force_attach 
+* Support for BackendBucket#compression_mode 
+* Support for BackendService#compression_mode 
+* Support for Commitment#merge_source_commitments and Commitment#split_source_commitment 
+* Support for getting an aggregated list of SslPolicy resources 
+* Support for managing access control policies on backend services 
+* Support for managing RegionSslPolicies 
+* Support for managing RegionTargetTcpProxies 
+* Support for NodeGroup#share_settings 
+* Support for NodeGroupNode#consumed_resources, NodeGroupNode#instance_consumption_data, and NodeGroupNode#total_resources 
+* Support for SecurityPolicyAdvancedOptionsConfig#json_custom_config 
+* Support for setting labels on various resource types ([#19164](https://github.com/googleapis/google-cloud-ruby/issues/19164)) 
+* Support for SslPolicy#region 
+* Support for TargetTclPolicy#region 
+
 ### 1.6.0 (2022-08-09)
 
 #### Features
