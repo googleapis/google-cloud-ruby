@@ -1,5 +1,15 @@
 # Release History
 
+### 1.41.0 (2022-09-16)
+
+#### Features
+
+* add retry support for non-idempotent operations ([#19134](https://github.com/googleapis/google-cloud-ruby/issues/19134)) 
+#### Bug Fixes
+
+* Correct options checks in retry operations ([#19135](https://github.com/googleapis/google-cloud-ruby/issues/19135)) 
+* Update api for bucket update ([#19110](https://github.com/googleapis/google-cloud-ruby/issues/19110)) 
+
 ### 1.40.0 (2022-09-13)
 
 #### Features
