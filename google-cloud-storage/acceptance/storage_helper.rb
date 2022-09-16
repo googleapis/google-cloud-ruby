@@ -106,7 +106,7 @@ module Acceptance
   end
 end
 
-def safe_gcs_execute retries: 3
+def safe_gcs_execute retries: 5
   max_retries = 10
   Retriable.retriable(
     on: Google::Cloud::ResourceExhaustedError,

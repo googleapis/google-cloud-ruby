@@ -37,8 +37,8 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
     # always reset the uniform_bucket_level_access and public_access_prevention
     # always reset the bucket permissions
     safe_gcs_execute { bucket.uniform_bucket_level_access = false if bucket.uniform_bucket_level_access? }
-    bucket.public_access_prevention = :inherited if bucket.public_access_prevention_enforced?
-    bucket.default_acl.private!
+    safe_gcs_execute { bucket.public_access_prevention = :inherited if bucket.public_access_prevention_enforced? }
+    safe_gcs_execute { bucket.default_acl.private! }
     bucket.files.all { |f| f.delete rescue nil }
   end
 
