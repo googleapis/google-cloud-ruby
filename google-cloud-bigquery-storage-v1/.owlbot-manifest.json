@@ -14,6 +14,7 @@
     "google-cloud-bigquery-storage-v1.gemspec",
     "lib/google-cloud-bigquery-storage-v1.rb",
     "lib/google/cloud/bigquery/storage/v1.rb",
+    "lib/google/cloud/bigquery/storage/v1/annotations_pb.rb",
     "lib/google/cloud/bigquery/storage/v1/arrow_pb.rb",
     "lib/google/cloud/bigquery/storage/v1/avro_pb.rb",
     "lib/google/cloud/bigquery/storage/v1/big_query_read.rb",
