@@ -59,7 +59,7 @@ module Google
         #     other fields are rejected with the error
         #     {::Google::Rpc::Code::INVALID_ARGUMENT INVALID_ARGUMENT}. Updating a job status
         #     to {::Google::Cloud::StorageTransfer::V1::TransferJob::Status::DELETED DELETED} requires
-        #     `storagetransfer.jobs.delete` permissions.
+        #     `storagetransfer.jobs.delete` permission.
         # @!attribute [rw] update_transfer_job_field_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     The field mask of the fields in `transferJob` that are to be updated in
@@ -86,6 +86,19 @@ module Google
         #     Required. The ID of the Google Cloud project that owns the
         #     job.
         class GetTransferJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request passed to DeleteTransferJob.
+        # @!attribute [rw] job_name
+        #   @return [::String]
+        #     Required. The job to delete.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. The ID of the Google Cloud project that owns the
+        #     job.
+        class DeleteTransferJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

@@ -535,6 +535,66 @@ class ::Google::Cloud::StorageTransfer::V1::StorageTransferService::ClientTest <
     end
   end
 
+  def test_delete_transfer_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Protobuf::Empty.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    job_name = "hello world"
+    project_id = "hello world"
+
+    delete_transfer_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :delete_transfer_job, name
+      assert_kind_of ::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest, request
+      assert_equal "hello world", request["job_name"]
+      assert_equal "hello world", request["project_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, delete_transfer_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.delete_transfer_job({ job_name: job_name, project_id: project_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.delete_transfer_job job_name: job_name, project_id: project_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.delete_transfer_job ::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest.new(job_name: job_name, project_id: project_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.delete_transfer_job({ job_name: job_name, project_id: project_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.delete_transfer_job(::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest.new(job_name: job_name, project_id: project_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, delete_transfer_job_client_stub.call_rpc_count
+    end
+  end
+
   def test_create_agent_pool
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::StorageTransfer::V1::AgentPool.new

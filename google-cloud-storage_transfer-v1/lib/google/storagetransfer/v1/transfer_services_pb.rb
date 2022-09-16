@@ -67,6 +67,9 @@ module Google
             # TransferJob has a maximum of one active TransferOperation. If this method
             # is called while a TransferOperation is active, an error will be returned.
             rpc :RunTransferJob, ::Google::Cloud::StorageTransfer::V1::RunTransferJobRequest, ::Google::Longrunning::Operation
+            # Deletes a transfer job. Deleting a transfer job sets its status to
+            # [DELETED][google.storagetransfer.v1.TransferJob.Status.DELETED].
+            rpc :DeleteTransferJob, ::Google::Cloud::StorageTransfer::V1::DeleteTransferJobRequest, ::Google::Protobuf::Empty
             # Creates an agent pool resource.
             rpc :CreateAgentPool, ::Google::Cloud::StorageTransfer::V1::CreateAgentPoolRequest, ::Google::Cloud::StorageTransfer::V1::AgentPool
             # Updates an existing agent pool resource.
