@@ -1,5 +1,11 @@
 # Release History
 
+### 0.8.0 (2022-09-16)
+
+#### Features
+
+* Support for managing instance configs ([#19172](https://github.com/googleapis/google-cloud-ruby/issues/19172)) 
+
 ### 0.7.0 (2022-07-08)
 
 #### Features
