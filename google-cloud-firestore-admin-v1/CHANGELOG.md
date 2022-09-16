@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 (2022-09-16)
+
+#### Features
+
+* Support for the locations client ([#19141](https://github.com/googleapis/google-cloud-ruby/issues/19141)) 
+
 ### 0.6.0 (2022-07-02)
 
 #### Features
