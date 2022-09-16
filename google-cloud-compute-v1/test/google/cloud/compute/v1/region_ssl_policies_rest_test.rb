@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/interconnects"
+require "google/cloud/compute/v1/region_ssl_policies"
 
 
-class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::RegionSslPolicies::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -70,9 +70,10 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    interconnect = "hello world"
     project = "hello world"
+    region = "hello world"
     request_id = "hello world"
+    ssl_policy = "hello world"
 
     delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -82,32 +83,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, delete_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.delete({ interconnect: interconnect, project: project, request_id: request_id }) do |_result, response|
+      client.delete({ project: project, region: region, request_id: request_id, ssl_policy: ssl_policy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete interconnect: interconnect, project: project, request_id: request_id do |_result, response|
+      client.delete project: project, region: region, request_id: request_id, ssl_policy: ssl_policy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteInterconnectRequest.new(interconnect: interconnect, project: project, request_id: request_id) do |_result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteRegionSslPolicyRequest.new(project: project, region: region, request_id: request_id, ssl_policy: ssl_policy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ interconnect: interconnect, project: project, request_id: request_id }, call_options) do |_result, response|
+      client.delete({ project: project, region: region, request_id: request_id, ssl_policy: ssl_policy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteInterconnectRequest.new(interconnect: interconnect, project: project, request_id: request_id), call_options) do |_result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteRegionSslPolicyRequest.new(project: project, region: region, request_id: request_id, ssl_policy: ssl_policy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -118,14 +119,15 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
 
   def test_get
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Interconnect.new
+    client_result = ::Google::Cloud::Compute::V1::SslPolicy.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
 
     # Create request parameters for a unary method.
-    interconnect = "hello world"
     project = "hello world"
+    region = "hello world"
+    ssl_policy = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -135,90 +137,37 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, get_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.get({ interconnect: interconnect, project: project }) do |_result, response|
+      client.get({ project: project, region: region, ssl_policy: ssl_policy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get interconnect: interconnect, project: project do |_result, response|
+      client.get project: project, region: region, ssl_policy: ssl_policy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
+      client.get ::Google::Cloud::Compute::V1::GetRegionSslPolicyRequest.new(project: project, region: region, ssl_policy: ssl_policy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ interconnect: interconnect, project: project }, call_options) do |_result, response|
+      client.get({ project: project, region: region, ssl_policy: ssl_policy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
+      client.get(::Google::Cloud::Compute::V1::GetRegionSslPolicyRequest.new(project: project, region: region, ssl_policy: ssl_policy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Verify method calls
       assert_equal 5, get_client_stub.call_count
-    end
-  end
-
-  def test_get_diagnostics
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::InterconnectsGetDiagnosticsResponse.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    interconnect = "hello world"
-    project = "hello world"
-
-    get_diagnostics_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    Gapic::Rest::ClientStub.stub :new, get_diagnostics_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
-
-      # Use hash object
-      client.get_diagnostics({ interconnect: interconnect, project: project }) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use named arguments
-      client.get_diagnostics interconnect: interconnect, project: project do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object
-      client.get_diagnostics ::Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest.new(interconnect: interconnect, project: project) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use hash object with options
-      client.get_diagnostics({ interconnect: interconnect, project: project }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object with options
-      client.get_diagnostics(::Google::Cloud::Compute::V1::GetDiagnosticsInterconnectRequest.new(interconnect: interconnect, project: project), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Verify method calls
-      assert_equal 5, get_diagnostics_client_stub.call_count
     end
   end
 
@@ -230,9 +179,10 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    interconnect_resource = {}
     project = "hello world"
+    region = "hello world"
     request_id = "hello world"
+    ssl_policy_resource = {}
 
     insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -242,32 +192,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, insert_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.insert({ interconnect_resource: interconnect_resource, project: project, request_id: request_id }) do |_result, response|
+      client.insert({ project: project, region: region, request_id: request_id, ssl_policy_resource: ssl_policy_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert interconnect_resource: interconnect_resource, project: project, request_id: request_id do |_result, response|
+      client.insert project: project, region: region, request_id: request_id, ssl_policy_resource: ssl_policy_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertInterconnectRequest.new(interconnect_resource: interconnect_resource, project: project, request_id: request_id) do |_result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertRegionSslPolicyRequest.new(project: project, region: region, request_id: request_id, ssl_policy_resource: ssl_policy_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ interconnect_resource: interconnect_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+      client.insert({ project: project, region: region, request_id: request_id, ssl_policy_resource: ssl_policy_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertInterconnectRequest.new(interconnect_resource: interconnect_resource, project: project, request_id: request_id), call_options) do |_result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertRegionSslPolicyRequest.new(project: project, region: region, request_id: request_id, ssl_policy_resource: ssl_policy_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -278,7 +228,7 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
 
   def test_list
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::InterconnectList.new
+    client_result = ::Google::Cloud::Compute::V1::SslPoliciesList.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
@@ -289,6 +239,7 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
     order_by = "hello world"
     page_token = "hello world"
     project = "hello world"
+    region = "hello world"
     return_partial_success = true
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -299,37 +250,95 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, list_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+      client.list ::Google::Cloud::Compute::V1::ListRegionSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListInterconnectsRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+      client.list(::Google::Cloud::Compute::V1::ListRegionSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Verify method calls
       assert_equal 5, list_client_stub.call_count
+    end
+  end
+
+  def test_list_available_features
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::SslPoliciesListAvailableFeaturesResponse.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    filter = "hello world"
+    max_results = 42
+    order_by = "hello world"
+    page_token = "hello world"
+    project = "hello world"
+    region = "hello world"
+    return_partial_success = true
+
+    list_available_features_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    Gapic::Rest::ClientStub.stub :new, list_available_features_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.list_available_features({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.list_available_features filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.list_available_features ::Google::Cloud::Compute::V1::ListAvailableFeaturesRegionSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.list_available_features({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.list_available_features(::Google::Cloud::Compute::V1::ListAvailableFeaturesRegionSslPoliciesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, list_available_features_client_stub.call_count
     end
   end
 
@@ -341,10 +350,11 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    interconnect = "hello world"
-    interconnect_resource = {}
     project = "hello world"
+    region = "hello world"
     request_id = "hello world"
+    ssl_policy = "hello world"
+    ssl_policy_resource = {}
 
     patch_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -354,32 +364,32 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, patch_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.patch({ interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id }) do |_result, response|
+      client.patch({ project: project, region: region, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.patch interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id do |_result, response|
+      client.patch project: project, region: region, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.patch ::Google::Cloud::Compute::V1::PatchInterconnectRequest.new(interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id) do |_result, response|
+      client.patch ::Google::Cloud::Compute::V1::PatchRegionSslPolicyRequest.new(project: project, region: region, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.patch({ interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+      client.patch({ project: project, region: region, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.patch(::Google::Cloud::Compute::V1::PatchInterconnectRequest.new(interconnect: interconnect, interconnect_resource: interconnect_resource, project: project, request_id: request_id), call_options) do |_result, response|
+      client.patch(::Google::Cloud::Compute::V1::PatchRegionSslPolicyRequest.new(project: project, region: region, request_id: request_id, ssl_policy: ssl_policy, ssl_policy_resource: ssl_policy_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -388,66 +398,12 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
     end
   end
 
-  def test_set_labels
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    global_set_labels_request_resource = {}
-    project = "hello world"
-    resource = "hello world"
-
-    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
-
-      # Use hash object
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use named arguments
-      client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object
-      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsInterconnectRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use hash object with options
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object with options
-      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsInterconnectRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Verify method calls
-      assert_equal 5, set_labels_client_stub.call_count
-    end
-  end
-
   def test_configure
     credentials_token = :dummy_value
 
     client = block_config = config = nil
     Gapic::Rest::ClientStub.stub :new, nil do
-      client = ::Google::Cloud::Compute::V1::Interconnects::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client.new do |config|
         config.credentials = credentials_token
       end
     end
@@ -457,6 +413,6 @@ class ::Google::Cloud::Compute::V1::Interconnects::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Cloud::Compute::V1::Interconnects::Rest::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Compute::V1::RegionSslPolicies::Rest::Client::Configuration, config
   end
 end

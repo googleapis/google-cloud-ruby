@@ -399,6 +399,62 @@ class ::Google::Cloud::Compute::V1::InterconnectAttachments::ClientTest < Minite
     end
   end
 
+  def test_set_labels
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Operation.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    project = "hello world"
+    region = "hello world"
+    region_set_labels_request_resource = {}
+    request_id = "hello world"
+    resource = "hello world"
+
+    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::InterconnectAttachments::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.set_labels project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsInterconnectAttachmentRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.set_labels({ project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource }, call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsInterconnectAttachmentRequest.new(project: project, region: region, region_set_labels_request_resource: region_set_labels_request_resource, request_id: request_id, resource: resource), call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, set_labels_client_stub.call_count
+    end
+  end
+
   def test_configure
     credentials_token = :dummy_value
 

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -22,10 +22,10 @@ module Google
   module Cloud
     module Compute
       module V1
-        module GlobalAddresses
+        module RegionTargetTcpProxies
           module Rest
             ##
-            # REST service stub for the GlobalAddresses service.
+            # REST service stub for the RegionTargetTcpProxies service.
             # Service stub contains baseline method implementations
             # including transcoding, making the REST call, and deserialing the response.
             #
@@ -41,7 +41,7 @@ module Google
               ##
               # Baseline implementation for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRegionTargetTcpProxyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -78,16 +78,16 @@ module Google
               ##
               # Baseline implementation for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetGlobalAddressRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRegionTargetTcpProxyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Address]
+              # @yieldparam result [::Google::Cloud::Compute::V1::TargetTcpProxy]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Address]
+              # @return [::Google::Cloud::Compute::V1::TargetTcpProxy]
               #   A result object deserialized from the server's reply
               def get request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -106,7 +106,7 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
-                result = ::Google::Cloud::Compute::V1::Address.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::TargetTcpProxy.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -115,7 +115,7 @@ module Google
               ##
               # Baseline implementation for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertGlobalAddressRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertRegionTargetTcpProxyRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
@@ -152,16 +152,16 @@ module Google
               ##
               # Baseline implementation for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListGlobalAddressesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListRegionTargetTcpProxiesRequest]
               #   A request object representing the call parameters. Required.
               # @param options [::Gapic::CallOptions]
               #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
               #
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::AddressList]
+              # @yieldparam result [::Google::Cloud::Compute::V1::TargetTcpProxyList]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::AddressList]
+              # @return [::Google::Cloud::Compute::V1::TargetTcpProxyList]
               #   A result object deserialized from the server's reply
               def list request_pb, options = nil
                 raise ::ArgumentError, "request must be provided" if request_pb.nil?
@@ -180,44 +180,7 @@ module Google
                   params:  query_string_params,
                   options: options
                 )
-                result = ::Google::Cloud::Compute::V1::AddressList.decode_json response.body, ignore_unknown_fields: true
-
-                yield result, response if block_given?
-                result
-              end
-
-              ##
-              # Baseline implementation for the set_labels REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest]
-              #   A request object representing the call parameters. Required.
-              # @param options [::Gapic::CallOptions]
-              #   Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Google::Cloud::Compute::V1::Operation]
-              #   A result object deserialized from the server's reply
-              def set_labels request_pb, options = nil
-                raise ::ArgumentError, "request must be provided" if request_pb.nil?
-
-                verb, uri, query_string_params, body = transcode_set_labels_request request_pb
-                query_string_params = if query_string_params.any?
-                                        query_string_params.to_h { |p| p.split("=", 2) }
-                                      else
-                                        {}
-                                      end
-
-                response = @client_stub.make_http_request(
-                  verb,
-                  uri:     uri,
-                  body:    body || "",
-                  params:  query_string_params,
-                  options: options
-                )
-                result = ::Google::Cloud::Compute::V1::Operation.decode_json response.body, ignore_unknown_fields: true
+                result = ::Google::Cloud::Compute::V1::TargetTcpProxyList.decode_json response.body, ignore_unknown_fields: true
 
                 yield result, response if block_given?
                 result
@@ -231,7 +194,7 @@ module Google
               #
               # GRPC transcoding helper method for the delete REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::DeleteRegionTargetTcpProxyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -239,10 +202,11 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :delete,
-                                                          uri_template: "/compute/v1/projects/{project}/global/addresses/{address}",
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies/{target_tcp_proxy}",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
-                                                            ["address", %r{^[^/]+/?$}, false]
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["target_tcp_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -253,7 +217,7 @@ module Google
               #
               # GRPC transcoding helper method for the get REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::GetGlobalAddressRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::GetRegionTargetTcpProxyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -261,10 +225,11 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/addresses/{address}",
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies/{target_tcp_proxy}",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
-                                                            ["address", %r{^[^/]+/?$}, false]
+                                                            ["region", %r{^[^/]+/?$}, false],
+                                                            ["target_tcp_proxy", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -275,7 +240,7 @@ module Google
               #
               # GRPC transcoding helper method for the insert REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::InsertGlobalAddressRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::InsertRegionTargetTcpProxyRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -283,10 +248,11 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/addresses",
-                                                          body: "address_resource",
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies",
+                                                          body: "target_tcp_proxy_resource",
                                                           matches: [
-                                                            ["project", %r{^[^/]+/?$}, false]
+                                                            ["project", %r{^[^/]+/?$}, false],
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb
@@ -297,7 +263,7 @@ module Google
               #
               # GRPC transcoding helper method for the list REST call
               #
-              # @param request_pb [::Google::Cloud::Compute::V1::ListGlobalAddressesRequest]
+              # @param request_pb [::Google::Cloud::Compute::V1::ListRegionTargetTcpProxiesRequest]
               #   A request object representing the call parameters. Required.
               # @return [Array(String, [String, nil], Hash{String => String})]
               #   Uri, Body, Query string parameters
@@ -305,32 +271,10 @@ module Google
                 transcoder = Gapic::Rest::GrpcTranscoder.new
                                                         .with_bindings(
                                                           uri_method: :get,
-                                                          uri_template: "/compute/v1/projects/{project}/global/addresses",
-                                                          matches: [
-                                                            ["project", %r{^[^/]+/?$}, false]
-                                                          ]
-                                                        )
-                transcoder.transcode request_pb
-              end
-
-              ##
-              # @private
-              #
-              # GRPC transcoding helper method for the set_labels REST call
-              #
-              # @param request_pb [::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest]
-              #   A request object representing the call parameters. Required.
-              # @return [Array(String, [String, nil], Hash{String => String})]
-              #   Uri, Body, Query string parameters
-              def transcode_set_labels_request request_pb
-                transcoder = Gapic::Rest::GrpcTranscoder.new
-                                                        .with_bindings(
-                                                          uri_method: :post,
-                                                          uri_template: "/compute/v1/projects/{project}/global/addresses/{resource}/setLabels",
-                                                          body: "global_set_labels_request_resource",
+                                                          uri_template: "/compute/v1/projects/{project}/regions/{region}/targetTcpProxies",
                                                           matches: [
                                                             ["project", %r{^[^/]+/?$}, false],
-                                                            ["resource", %r{^[^/]+/?$}, false]
+                                                            ["region", %r{^[^/]+/?$}, false]
                                                           ]
                                                         )
                 transcoder.transcode request_pb

@@ -391,6 +391,60 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
     end
   end
 
+  def test_get_iam_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    options_requested_policy_version = 42
+    project = "hello world"
+    resource = "hello world"
+
+    get_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    Gapic::Rest::ClientStub.stub :new, get_iam_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::BackendServices::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.get_iam_policy options_requested_policy_version: options_requested_policy_version, project: project, resource: resource do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.get_iam_policy ::Google::Cloud::Compute::V1::GetIamPolicyBackendServiceRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.get_iam_policy({ options_requested_policy_version: options_requested_policy_version, project: project, resource: resource }, call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.get_iam_policy(::Google::Cloud::Compute::V1::GetIamPolicyBackendServiceRequest.new(options_requested_policy_version: options_requested_policy_version, project: project, resource: resource), call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, get_iam_policy_client_stub.call_count
+    end
+  end
+
   def test_insert
     # Create test objects.
     client_result = ::Google::Cloud::Compute::V1::Operation.new
@@ -609,6 +663,60 @@ class ::Google::Cloud::Compute::V1::BackendServices::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, set_edge_security_policy_client_stub.call_count
+    end
+  end
+
+  def test_set_iam_policy
+    # Create test objects.
+    client_result = ::Google::Cloud::Compute::V1::Policy.new
+    http_response = OpenStruct.new body: client_result.to_json
+
+    call_options = {}
+
+    # Create request parameters for a unary method.
+    global_set_policy_request_resource = {}
+    project = "hello world"
+    resource = "hello world"
+
+    set_iam_policy_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
+      assert options.metadata.key? :"x-goog-api-client"
+      assert options.metadata[:"x-goog-api-client"].include? "rest"
+      refute options.metadata[:"x-goog-api-client"].include? "grpc"
+    end
+
+    Gapic::Rest::ClientStub.stub :new, set_iam_policy_client_stub do
+      # Create client
+      client = ::Google::Cloud::Compute::V1::BackendServices::Rest::Client.new do |config|
+        config.credentials = :dummy_value
+      end
+
+      # Use hash object
+      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use named arguments
+      client.set_iam_policy global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object
+      client.set_iam_policy ::Google::Cloud::Compute::V1::SetIamPolicyBackendServiceRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use hash object with options
+      client.set_iam_policy({ global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource }, call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Use protobuf object with options
+      client.set_iam_policy(::Google::Cloud::Compute::V1::SetIamPolicyBackendServiceRequest.new(global_set_policy_request_resource: global_set_policy_request_resource, project: project, resource: resource), call_options) do |_result, response|
+        assert_equal http_response, response
+      end
+
+      # Verify method calls
+      assert_equal 5, set_iam_policy_client_stub.call_count
     end
   end
 

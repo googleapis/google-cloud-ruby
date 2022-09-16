@@ -19,10 +19,10 @@
 require "helper"
 require "gapic/rest"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/global_addresses"
+require "google/cloud/compute/v1/region_target_tcp_proxies"
 
 
-class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
+class ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::ClientTest < Minitest::Test
   class ClientStub
     attr_accessor :call_count, :requests
 
@@ -70,9 +70,10 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    address = "hello world"
     project = "hello world"
+    region = "hello world"
     request_id = "hello world"
+    target_tcp_proxy = "hello world"
 
     delete_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -82,32 +83,32 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, delete_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.delete({ address: address, project: project, request_id: request_id }) do |_result, response|
+      client.delete({ project: project, region: region, request_id: request_id, target_tcp_proxy: target_tcp_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.delete address: address, project: project, request_id: request_id do |_result, response|
+      client.delete project: project, region: region, request_id: request_id, target_tcp_proxy: target_tcp_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.delete ::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest.new(address: address, project: project, request_id: request_id) do |_result, response|
+      client.delete ::Google::Cloud::Compute::V1::DeleteRegionTargetTcpProxyRequest.new(project: project, region: region, request_id: request_id, target_tcp_proxy: target_tcp_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.delete({ address: address, project: project, request_id: request_id }, call_options) do |_result, response|
+      client.delete({ project: project, region: region, request_id: request_id, target_tcp_proxy: target_tcp_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.delete(::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest.new(address: address, project: project, request_id: request_id), call_options) do |_result, response|
+      client.delete(::Google::Cloud::Compute::V1::DeleteRegionTargetTcpProxyRequest.new(project: project, region: region, request_id: request_id, target_tcp_proxy: target_tcp_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -118,14 +119,15 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
 
   def test_get
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Address.new
+    client_result = ::Google::Cloud::Compute::V1::TargetTcpProxy.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
 
     # Create request parameters for a unary method.
-    address = "hello world"
     project = "hello world"
+    region = "hello world"
+    target_tcp_proxy = "hello world"
 
     get_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -135,32 +137,32 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, get_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.get({ address: address, project: project }) do |_result, response|
+      client.get({ project: project, region: region, target_tcp_proxy: target_tcp_proxy }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.get address: address, project: project do |_result, response|
+      client.get project: project, region: region, target_tcp_proxy: target_tcp_proxy do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.get ::Google::Cloud::Compute::V1::GetGlobalAddressRequest.new(address: address, project: project) do |_result, response|
+      client.get ::Google::Cloud::Compute::V1::GetRegionTargetTcpProxyRequest.new(project: project, region: region, target_tcp_proxy: target_tcp_proxy) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.get({ address: address, project: project }, call_options) do |_result, response|
+      client.get({ project: project, region: region, target_tcp_proxy: target_tcp_proxy }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.get(::Google::Cloud::Compute::V1::GetGlobalAddressRequest.new(address: address, project: project), call_options) do |_result, response|
+      client.get(::Google::Cloud::Compute::V1::GetRegionTargetTcpProxyRequest.new(project: project, region: region, target_tcp_proxy: target_tcp_proxy), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -177,9 +179,10 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
     call_options = {}
 
     # Create request parameters for a unary method.
-    address_resource = {}
     project = "hello world"
+    region = "hello world"
     request_id = "hello world"
+    target_tcp_proxy_resource = {}
 
     insert_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
       assert options.metadata.key? :"x-goog-api-client"
@@ -189,32 +192,32 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, insert_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.insert({ address_resource: address_resource, project: project, request_id: request_id }) do |_result, response|
+      client.insert({ project: project, region: region, request_id: request_id, target_tcp_proxy_resource: target_tcp_proxy_resource }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.insert address_resource: address_resource, project: project, request_id: request_id do |_result, response|
+      client.insert project: project, region: region, request_id: request_id, target_tcp_proxy_resource: target_tcp_proxy_resource do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.insert ::Google::Cloud::Compute::V1::InsertGlobalAddressRequest.new(address_resource: address_resource, project: project, request_id: request_id) do |_result, response|
+      client.insert ::Google::Cloud::Compute::V1::InsertRegionTargetTcpProxyRequest.new(project: project, region: region, request_id: request_id, target_tcp_proxy_resource: target_tcp_proxy_resource) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.insert({ address_resource: address_resource, project: project, request_id: request_id }, call_options) do |_result, response|
+      client.insert({ project: project, region: region, request_id: request_id, target_tcp_proxy_resource: target_tcp_proxy_resource }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.insert(::Google::Cloud::Compute::V1::InsertGlobalAddressRequest.new(address_resource: address_resource, project: project, request_id: request_id), call_options) do |_result, response|
+      client.insert(::Google::Cloud::Compute::V1::InsertRegionTargetTcpProxyRequest.new(project: project, region: region, request_id: request_id, target_tcp_proxy_resource: target_tcp_proxy_resource), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -225,7 +228,7 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
 
   def test_list
     # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::AddressList.new
+    client_result = ::Google::Cloud::Compute::V1::TargetTcpProxyList.new
     http_response = OpenStruct.new body: client_result.to_json
 
     call_options = {}
@@ -236,6 +239,7 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
     order_by = "hello world"
     page_token = "hello world"
     project = "hello world"
+    region = "hello world"
     return_partial_success = true
 
     list_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
@@ -246,32 +250,32 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
 
     Gapic::Rest::ClientStub.stub :new, list_client_stub do
       # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.new do |config|
         config.credentials = :dummy_value
       end
 
       # Use hash object
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }) do |_result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use named arguments
-      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success do |_result, response|
+      client.list filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object
-      client.list ::Google::Cloud::Compute::V1::ListGlobalAddressesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success) do |_result, response|
+      client.list ::Google::Cloud::Compute::V1::ListRegionTargetTcpProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use hash object with options
-      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success }, call_options) do |_result, response|
+      client.list({ filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success }, call_options) do |_result, response|
         assert_equal http_response, response
       end
 
       # Use protobuf object with options
-      client.list(::Google::Cloud::Compute::V1::ListGlobalAddressesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, return_partial_success: return_partial_success), call_options) do |_result, response|
+      client.list(::Google::Cloud::Compute::V1::ListRegionTargetTcpProxiesRequest.new(filter: filter, max_results: max_results, order_by: order_by, page_token: page_token, project: project, region: region, return_partial_success: return_partial_success), call_options) do |_result, response|
         assert_equal http_response, response
       end
 
@@ -280,66 +284,12 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
     end
   end
 
-  def test_set_labels
-    # Create test objects.
-    client_result = ::Google::Cloud::Compute::V1::Operation.new
-    http_response = OpenStruct.new body: client_result.to_json
-
-    call_options = {}
-
-    # Create request parameters for a unary method.
-    global_set_labels_request_resource = {}
-    project = "hello world"
-    resource = "hello world"
-
-    set_labels_client_stub = ClientStub.new http_response do |_verb, uri:, body:, params:, options:|
-      assert options.metadata.key? :"x-goog-api-client"
-      assert options.metadata[:"x-goog-api-client"].include? "rest"
-      refute options.metadata[:"x-goog-api-client"].include? "grpc"
-    end
-
-    Gapic::Rest::ClientStub.stub :new, set_labels_client_stub do
-      # Create client
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
-        config.credentials = :dummy_value
-      end
-
-      # Use hash object
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use named arguments
-      client.set_labels global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object
-      client.set_labels ::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use hash object with options
-      client.set_labels({ global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource }, call_options) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Use protobuf object with options
-      client.set_labels(::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest.new(global_set_labels_request_resource: global_set_labels_request_resource, project: project, resource: resource), call_options) do |_result, response|
-        assert_equal http_response, response
-      end
-
-      # Verify method calls
-      assert_equal 5, set_labels_client_stub.call_count
-    end
-  end
-
   def test_configure
     credentials_token = :dummy_value
 
     client = block_config = config = nil
     Gapic::Rest::ClientStub.stub :new, nil do
-      client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+      client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.new do |config|
         config.credentials = credentials_token
       end
     end
@@ -349,6 +299,6 @@ class ::Google::Cloud::Compute::V1::GlobalAddresses::ClientTest < Minitest::Test
     end
 
     assert_same block_config, config
-    assert_kind_of ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client::Configuration, config
+    assert_kind_of ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client::Configuration, config
   end
 end

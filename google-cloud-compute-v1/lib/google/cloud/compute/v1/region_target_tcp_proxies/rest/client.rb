@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# Copyright 2021 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,34 +18,34 @@
 
 require "google/cloud/errors"
 require "google/cloud/compute/v1/compute_pb"
-require "google/cloud/compute/v1/global_addresses/rest/service_stub"
-require "google/cloud/compute/v1/global_operations/rest"
+require "google/cloud/compute/v1/region_target_tcp_proxies/rest/service_stub"
+require "google/cloud/compute/v1/region_operations/rest"
 
 module Google
   module Cloud
     module Compute
       module V1
-        module GlobalAddresses
+        module RegionTargetTcpProxies
           module Rest
             ##
-            # REST client for the GlobalAddresses service.
+            # REST client for the RegionTargetTcpProxies service.
             #
-            # The GlobalAddresses API.
+            # The RegionTargetTcpProxies API.
             #
             class Client
               # @private
-              attr_reader :global_addresses_stub
+              attr_reader :region_target_tcp_proxies_stub
 
               ##
-              # Configure the GlobalAddresses Client class.
+              # Configure the RegionTargetTcpProxies Client class.
               #
-              # See {::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @example
               #
-              #   # Modify the configuration for all GlobalAddresses clients
-              #   ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.configure do |config|
+              #   # Modify the configuration for all RegionTargetTcpProxies clients
+              #   ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.configure do |config|
               #     config.timeout = 10.0
               #   end
               #
@@ -79,8 +79,6 @@ module Google
                     initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                   }
 
-                  default_config.rpcs.set_labels.timeout = 600.0
-
                   default_config
                 end
                 yield @configure if block_given?
@@ -88,13 +86,13 @@ module Google
               end
 
               ##
-              # Configure the GlobalAddresses Client instance.
+              # Configure the RegionTargetTcpProxies Client instance.
               #
               # The configuration is set to the derived mode, meaning that values can be changed,
               # but structural changes (adding new fields, etc.) are not allowed. Structural changes
               # should be made on {Client.configure}.
               #
-              # See {::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client::Configuration}
+              # See {::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client::Configuration}
               # for a description of the configuration fields.
               #
               # @yield [config] Configure the Client client.
@@ -108,19 +106,19 @@ module Google
               end
 
               ##
-              # Create a new GlobalAddresses REST client object.
+              # Create a new RegionTargetTcpProxies REST client object.
               #
               # @example
               #
               #   # Create a client using the default configuration
-              #   client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new
+              #   client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.new
               #
               #   # Create a client using a custom configuration
-              #   client = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::Client.new do |config|
+              #   client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::Client.new do |config|
               #     config.timeout = 10.0
               #   end
               #
-              # @yield [config] Configure the GlobalAddresses client.
+              # @yield [config] Configure the RegionTargetTcpProxies client.
               # @yieldparam config [Client::Configuration]
               #
               def initialize
@@ -137,31 +135,31 @@ module Google
                   credentials = Credentials.new credentials, scope: @config.scope
                 end
 
-                @global_operations = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client.new do |config|
+                @region_operations = ::Google::Cloud::Compute::V1::RegionOperations::Rest::Client.new do |config|
                   config.credentials = credentials
                   config.endpoint = @config.endpoint
                 end
 
-                @global_addresses_stub = ::Google::Cloud::Compute::V1::GlobalAddresses::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
+                @region_target_tcp_proxies_stub = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Rest::ServiceStub.new endpoint: @config.endpoint, credentials: credentials
               end
 
               ##
-              # Get the associated client for long-running operations via GlobalOperations.
+              # Get the associated client for long-running operations via RegionOperations.
               #
-              # @return [::Google::Cloud::Compute::V1::GlobalOperations::Rest::Client]
+              # @return [::Google::Cloud::Compute::V1::RegionOperations::Rest::Client]
               #
-              attr_reader :global_operations
+              attr_reader :region_operations
 
               # Service calls
 
               ##
-              # Deletes the specified address resource.
+              # Deletes the specified TargetTcpProxy resource.
               #
               # @overload delete(request, options = nil)
               #   Pass arguments to `delete` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::DeleteRegionTargetTcpProxyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::DeleteRegionTargetTcpProxyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -169,17 +167,19 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload delete(address: nil, project: nil, request_id: nil)
+              # @overload delete(project: nil, region: nil, request_id: nil, target_tcp_proxy: nil)
               #   Pass arguments to `delete` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param address [::String]
-              #     Name of the address resource to delete.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region scoping this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param target_tcp_proxy [::String]
+              #     Name of the TargetTcpProxy resource to delete.
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -190,7 +190,7 @@ module Google
               def delete request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteGlobalAddressRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::DeleteRegionTargetTcpProxyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -210,12 +210,13 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @global_addresses_stub.delete request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @region_target_tcp_proxies_stub.delete request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
+                    client: region_operations,
                     request_values: {
-                      "project" => request.project
+                      "project" => request.project,
+                      "region" => request.region
                     },
                     options: options
                   )
@@ -228,13 +229,13 @@ module Google
               end
 
               ##
-              # Returns the specified address resource. Gets a list of available addresses by making a list() request.
+              # Returns the specified TargetTcpProxy resource.
               #
               # @overload get(request, options = nil)
               #   Pass arguments to `get` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::GetGlobalAddressRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::GetRegionTargetTcpProxyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::GetGlobalAddressRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::GetRegionTargetTcpProxyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -242,26 +243,28 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload get(address: nil, project: nil)
+              # @overload get(project: nil, region: nil, target_tcp_proxy: nil)
               #   Pass arguments to `get` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param address [::String]
-              #     Name of the address resource to return.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region scoping this request.
+              #   @param target_tcp_proxy [::String]
+              #     Name of the TargetTcpProxy resource to return.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Google::Cloud::Compute::V1::Address]
+              # @yieldparam result [::Google::Cloud::Compute::V1::TargetTcpProxy]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Google::Cloud::Compute::V1::Address]
+              # @return [::Google::Cloud::Compute::V1::TargetTcpProxy]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def get request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetGlobalAddressRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetRegionTargetTcpProxyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -281,7 +284,7 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @global_addresses_stub.get request, options do |result, response|
+                @region_target_tcp_proxies_stub.get request, options do |result, response|
                   yield result, response if block_given?
                   return result
                 end
@@ -291,13 +294,13 @@ module Google
               end
 
               ##
-              # Creates an address resource in the specified project by using the data included in the request.
+              # Creates a TargetTcpProxy resource in the specified project and region using the data included in the request.
               #
               # @overload insert(request, options = nil)
               #   Pass arguments to `insert` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::InsertGlobalAddressRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::InsertRegionTargetTcpProxyRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::InsertGlobalAddressRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::InsertRegionTargetTcpProxyRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -305,17 +308,19 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload insert(address_resource: nil, project: nil, request_id: nil)
+              # @overload insert(project: nil, region: nil, request_id: nil, target_tcp_proxy_resource: nil)
               #   Pass arguments to `insert` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
               #
-              #   @param address_resource [::Google::Cloud::Compute::V1::Address, ::Hash]
-              #     The body resource for this request
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region scoping this request.
               #   @param request_id [::String]
               #     An optional request ID to identify requests. Specify a unique request ID so that if you must retry your request, the server will know to ignore the request if it has already been completed. For example, consider a situation where you make an initial request and the request times out. If you make the request again with the same request ID, the server can check if original operation with the same request ID was received, and if so, will ignore the second request. This prevents clients from accidentally creating duplicate commitments. The request ID must be a valid UUID with the exception that zero UUID is not supported ( 00000000-0000-0000-0000-000000000000).
+              #   @param target_tcp_proxy_resource [::Google::Cloud::Compute::V1::TargetTcpProxy, ::Hash]
+              #     The body resource for this request
               # @yield [result, response] Access the result along with the Faraday response object
               # @yieldparam result [::Gapic::GenericLRO::Operation]
               # @yieldparam response [::Faraday::Response]
@@ -326,7 +331,7 @@ module Google
               def insert request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertGlobalAddressRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::InsertRegionTargetTcpProxyRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -346,12 +351,13 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @global_addresses_stub.insert request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
+                @region_target_tcp_proxies_stub.insert request, options do |result, response|
+                  result = ::Google::Cloud::Compute::V1::RegionOperations::Rest::NonstandardLro.create_operation(
                     operation: result,
-                    client: global_operations,
+                    client: region_operations,
                     request_values: {
-                      "project" => request.project
+                      "project" => request.project,
+                      "region" => request.region
                     },
                     options: options
                   )
@@ -364,13 +370,13 @@ module Google
               end
 
               ##
-              # Retrieves a list of global addresses.
+              # Retrieves a list of TargetTcpProxy resources available to the specified project in a given region.
               #
               # @overload list(request, options = nil)
               #   Pass arguments to `list` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::ListGlobalAddressesRequest} or an equivalent Hash.
+              #   {::Google::Cloud::Compute::V1::ListRegionTargetTcpProxiesRequest} or an equivalent Hash.
               #
-              #   @param request [::Google::Cloud::Compute::V1::ListGlobalAddressesRequest, ::Hash]
+              #   @param request [::Google::Cloud::Compute::V1::ListRegionTargetTcpProxiesRequest, ::Hash]
               #     A request object representing the call parameters. Required. To specify no
               #     parameters, or to keep all the default parameter values, pass an empty Hash.
               #   @param options [::Gapic::CallOptions, ::Hash]
@@ -378,7 +384,7 @@ module Google
               #     Note: currently retry functionality is not implemented. While it is possible
               #     to set it using ::Gapic::CallOptions, it will not be applied
               #
-              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, return_partial_success: nil)
+              # @overload list(filter: nil, max_results: nil, order_by: nil, page_token: nil, project: nil, region: nil, return_partial_success: nil)
               #   Pass arguments to `list` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -393,19 +399,21 @@ module Google
               #     Specifies a page token to use. Set `pageToken` to the `nextPageToken` returned by a previous list request to get the next page of results.
               #   @param project [::String]
               #     Project ID for this request.
+              #   @param region [::String]
+              #     Name of the region scoping this request.
               #   @param return_partial_success [::Boolean]
               #     Opt-in for partial success behavior which provides partial results in case of failure. The default value is false.
               # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Address>]
+              # @yieldparam result [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::TargetTcpProxy>]
               # @yieldparam response [::Faraday::Response]
               #
-              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::Address>]
+              # @return [::Gapic::Rest::PagedEnumerable<::Google::Cloud::Compute::V1::TargetTcpProxy>]
               #
               # @raise [::Google::Cloud::Error] if the REST call is aborted.
               def list request, options = nil
                 raise ::ArgumentError, "request must be provided" if request.nil?
 
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListGlobalAddressesRequest
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::ListRegionTargetTcpProxiesRequest
 
                 # Converts hash and nil to an options object
                 options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
@@ -425,8 +433,8 @@ module Google
                 options.apply_defaults timeout:      @config.timeout,
                                        metadata:     @config.metadata
 
-                @global_addresses_stub.list request, options do |result, response|
-                  result = ::Gapic::Rest::PagedEnumerable.new @global_addresses_stub, :list, "items", request, result, options
+                @region_target_tcp_proxies_stub.list request, options do |result, response|
+                  result = ::Gapic::Rest::PagedEnumerable.new @region_target_tcp_proxies_stub, :list, "items", request, result, options
                   yield result, response if block_given?
                   return result
                 end
@@ -436,82 +444,9 @@ module Google
               end
 
               ##
-              # Sets the labels on a GlobalAddress. To learn more about labels, read the Labeling Resources documentation.
+              # Configuration class for the RegionTargetTcpProxies REST API.
               #
-              # @overload set_labels(request, options = nil)
-              #   Pass arguments to `set_labels` via a request object, either of type
-              #   {::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest} or an equivalent Hash.
-              #
-              #   @param request [::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest, ::Hash]
-              #     A request object representing the call parameters. Required. To specify no
-              #     parameters, or to keep all the default parameter values, pass an empty Hash.
-              #   @param options [::Gapic::CallOptions, ::Hash]
-              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
-              #     Note: currently retry functionality is not implemented. While it is possible
-              #     to set it using ::Gapic::CallOptions, it will not be applied
-              #
-              # @overload set_labels(global_set_labels_request_resource: nil, project: nil, resource: nil)
-              #   Pass arguments to `set_labels` via keyword arguments. Note that at
-              #   least one keyword argument is required. To specify no parameters, or to keep all
-              #   the default parameter values, pass an empty Hash as a request object (see above).
-              #
-              #   @param global_set_labels_request_resource [::Google::Cloud::Compute::V1::GlobalSetLabelsRequest, ::Hash]
-              #     The body resource for this request
-              #   @param project [::String]
-              #     Project ID for this request.
-              #   @param resource [::String]
-              #     Name or id of the resource for this request.
-              # @yield [result, response] Access the result along with the Faraday response object
-              # @yieldparam result [::Gapic::GenericLRO::Operation]
-              # @yieldparam response [::Faraday::Response]
-              #
-              # @return [::Gapic::GenericLRO::Operation]
-              #
-              # @raise [::Google::Cloud::Error] if the REST call is aborted.
-              def set_labels request, options = nil
-                raise ::ArgumentError, "request must be provided" if request.nil?
-
-                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetLabelsGlobalAddressRequest
-
-                # Converts hash and nil to an options object
-                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-                # Customize the options with defaults
-                call_metadata = @config.rpcs.set_labels.metadata.to_h
-
-                # Set x-goog-api-client header
-                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-                  lib_name: @config.lib_name, lib_version: @config.lib_version,
-                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
-                  transports_version_send: [:rest]
-
-                options.apply_defaults timeout:      @config.rpcs.set_labels.timeout,
-                                       metadata:     call_metadata
-
-                options.apply_defaults timeout:      @config.timeout,
-                                       metadata:     @config.metadata
-
-                @global_addresses_stub.set_labels request, options do |result, response|
-                  result = ::Google::Cloud::Compute::V1::GlobalOperations::Rest::NonstandardLro.create_operation(
-                    operation: result,
-                    client: global_operations,
-                    request_values: {
-                      "project" => request.project
-                    },
-                    options: options
-                  )
-                  yield result, response if block_given?
-                  return result
-                end
-              rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
-              end
-
-              ##
-              # Configuration class for the GlobalAddresses REST API.
-              #
-              # This class represents the configuration for GlobalAddresses REST,
+              # This class represents the configuration for RegionTargetTcpProxies REST,
               # providing control over credentials, timeouts, retry behavior, logging.
               #
               # Configuration can be applied globally to all clients, or to a single client
@@ -521,13 +456,13 @@ module Google
               #
               # To modify the global config, setting the timeout for all calls to 10 seconds:
               #
-              #     ::Google::Cloud::Compute::V1::GlobalAddresses::Client.configure do |config|
+              #     ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Client.configure do |config|
               #       config.timeout = 10.0
               #     end
               #
               # To apply the above configuration only to a new client:
               #
-              #     client = ::Google::Cloud::Compute::V1::GlobalAddresses::Client.new do |config|
+              #     client = ::Google::Cloud::Compute::V1::RegionTargetTcpProxies::Client.new do |config|
               #       config.timeout = 10.0
               #     end
               #
@@ -595,7 +530,7 @@ module Google
                 end
 
                 ##
-                # Configuration RPC class for the GlobalAddresses API.
+                # Configuration RPC class for the RegionTargetTcpProxies API.
                 #
                 # Includes fields providing the configuration for each RPC in this service.
                 # Each configuration object is of type `Gapic::Config::Method` and includes
@@ -627,11 +562,6 @@ module Google
                   # @return [::Gapic::Config::Method]
                   #
                   attr_reader :list
-                  ##
-                  # RPC-specific configuration for `set_labels`
-                  # @return [::Gapic::Config::Method]
-                  #
-                  attr_reader :set_labels
 
                   # @private
                   def initialize parent_rpcs = nil
@@ -643,8 +573,6 @@ module Google
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
-                    set_labels_config = parent_rpcs.set_labels if parent_rpcs.respond_to? :set_labels
-                    @set_labels = ::Gapic::Config::Method.new set_labels_config
 
                     yield self if block_given?
                   end
