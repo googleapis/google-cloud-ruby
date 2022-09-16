@@ -1,0 +1,24 @@
+{
+  "generated": [
+    ".gitignore",
+    ".repo-metadata.json",
+    ".rubocop.yml",
+    ".yardopts",
+    "AUTHENTICATION.md",
+    "CHANGELOG.md",
+    "Gemfile",
+    "LICENSE.md",
+    "README.md",
+    "Rakefile",
+    "google-cloud-bigquery-data_policies.gemspec",
+    "lib/google-cloud-bigquery-data_policies.rb",
+    "lib/google/cloud/bigquery/data_policies.rb",
+    "lib/google/cloud/bigquery/data_policies/version.rb",
+    "test/google/cloud/bigquery/data_policies/client_test.rb",
+    "test/google/cloud/bigquery/data_policies/version_test.rb",
+    "test/helper.rb"
+  ],
+  "static": [
+    ".OwlBot.yaml"
+  ]
+}
