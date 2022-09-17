@@ -19,6 +19,7 @@ describe "#update_input", :live_stream_snippet do
     sample = SampleLoader.load "update_input.rb"
 
     refute_nil input
+    instance_variable_set "@input_created", true
 
     out, _err = capture_io do
       sample.run project_id: project_id, location: location_id, input_id: input_id
