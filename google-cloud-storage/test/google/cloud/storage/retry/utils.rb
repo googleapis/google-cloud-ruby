@@ -280,7 +280,7 @@ class MethodMapping
     end
   end
 
-  def self.set_bucket_policy client, preconditions, **resources
+  def self.set_bucket_policy client, _preconditions, **resources
     bucket_name = resources[:bucket].name
     role = "roles/storage.objectViewer"
     member = "serviceAccount:#{CONF_TEST_SERVICE_ACCOUNT_EMAIL}"
@@ -289,16 +289,16 @@ class MethodMapping
     policy.bindings.append({"role": role, "members": [member]})
 
     # IAM policies have no metageneration, clear ETag to avoid checking that it matches.
-    policy.etag = nil unless preconditions
+    policy.etag = nil unless _preconditions
     client.set_bucket_policy bucket_name, policy
   end
 
-  def self.update_hmac_key client, preconditions, **resources
+  def self.update_hmac_key client, _preconditions, **resources
     access_id = resources[:hmac_key].access_id
     etag = resources[:hmac_key].etag
 
     hmac_key = Google::Apis::StorageV1::HmacKeyMetadata.new access_id: access_id, state: "INACTIVE"
-    hmac_key.etag = etag if preconditions
+    hmac_key.etag = etag if _preconditions
     client.update_hmac_key access_id, hmac_key
   end
 
@@ -415,9 +415,13 @@ class MethodMapping
     object_2 = bucket.create_file StringIO.new(CONF_TEST_FILE_CONTENT), "my-test-file-2"
     destination = "new-composite-object"
     if _preconditions
-      bucket.compose [object.name, object_2.name], destination, if_generation_match: object.generation
+      bucket.compose [object.name, object_2.name], destination, if_generation_match: 0 do |f|
+        f.content_type = "text/plain"
+      end
     else
-      bucket.compose [object.name, object_2.name], destination
+      bucket.compose [object.name, object_2.name], destination do |f|
+        f.content_type = "text/plain"
+      end
     end
   end
 

@@ -77,16 +77,11 @@
       "cases": [
         {
           "instructions": ["return-503"]
-        },
-        {
-          "instructions": ["return-reset-connection"]
         }
       ],
       "methods": [
         {"name": "storage.buckets.patch",         "resources": ["BUCKET"]},
-        {"name": "storage.buckets.setIamPolicy",  "resources": ["BUCKET"]},
         {"name": "storage.buckets.update",        "resources": ["BUCKET"]},
-        {"name": "storage.hmacKey.update",        "resources": ["HMAC_KEY"]},
         {"name": "storage.objects.compose",       "resources": ["BUCKET", "OBJECT"]},
         {"name": "storage.objects.copy",          "resources": ["BUCKET", "OBJECT"]},
         {"name": "storage.objects.delete",        "resources": ["BUCKET", "OBJECT"]},
@@ -104,9 +99,6 @@
       "cases": [
         {
           "instructions": ["return-503"]
-        },
-        {
-          "instructions": ["return-reset-connection"]
         }
       ],
       "methods": [
@@ -258,23 +250,6 @@
         {"name": "storage.objects.insert", "group": "storage.resumable.upload", "resources": ["BUCKET"]}
       ],
       "preconditionProvided": true,
-      "expectSuccess": true
-    },
-    {
-      "id": 8,
-      "description": "downloads_handle_complex_retries",
-      "cases": [
-        {
-          "instructions": ["return-broken-stream", "return-broken-stream"]
-        },
-        {
-          "instructions": ["return-broken-stream-after-256K"]
-        }
-      ],
-      "methods": [
-        {"name": "storage.objects.get", "group": "storage.objects.download", "resources": ["BUCKET", "OBJECT"]}
-      ],
-      "preconditionProvided": false,
       "expectSuccess": true
     }
   ]
