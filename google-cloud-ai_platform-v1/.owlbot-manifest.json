@@ -414,6 +414,7 @@
     "snippets/metadata_service/query_artifact_lineage_subgraph.rb",
     "snippets/metadata_service/query_context_lineage_subgraph.rb",
     "snippets/metadata_service/query_execution_inputs_and_outputs.rb",
+    "snippets/metadata_service/remove_context_children.rb",
     "snippets/metadata_service/update_artifact.rb",
     "snippets/metadata_service/update_context.rb",
     "snippets/metadata_service/update_execution.rb",

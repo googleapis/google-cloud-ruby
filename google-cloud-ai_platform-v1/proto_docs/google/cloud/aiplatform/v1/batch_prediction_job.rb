@@ -33,7 +33,7 @@ module Google
         #     Required. The user-defined name of this BatchPredictionJob.
         # @!attribute [rw] model
         #   @return [::String]
-        #     The name of the Model resoure that produces the predictions via this job,
+        #     The name of the Model resource that produces the predictions via this job,
         #     must share the same ancestor Location.
         #     Starting this job has no impact on any existing deployments of the Model
         #     and their resources.

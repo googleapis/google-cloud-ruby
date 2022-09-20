@@ -391,6 +391,9 @@ module Google
             #       * `state` supports `=`, `!=` comparisons.
             #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
             #         `create_time` must be in RFC 3339 format.
+            #       * `labels` supports general map functions that is:
+            #         `labels.key=value` - key:value equality
+            #         `labels.key:* - key existence
             #
             #     Some examples of using the filter are:
             #
@@ -398,6 +401,8 @@ module Google
             #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
             #       * `NOT display_name="my_job"`
             #       * `create_time>"2021-05-18T00:00:00Z"`
+            #       * `labels.keyA=valueA`
+            #       * `labels.keyB:*`
             #   @param page_size [::Integer]
             #     The standard list page size.
             #   @param page_token [::String]
@@ -875,6 +880,9 @@ module Google
             #       * `state` supports `=`, `!=` comparisons.
             #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
             #         `create_time` must be in RFC 3339 format.
+            #       * `labels` supports general map functions that is:
+            #         `labels.key=value` - key:value equality
+            #         `labels.key:* - key existence
             #
             #     Some examples of using the filter are:
             #
@@ -882,6 +890,8 @@ module Google
             #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
             #       * `NOT display_name="my_job"`
             #       * `create_time>"2021-05-18T00:00:00Z"`
+            #       * `labels.keyA=valueA`
+            #       * `labels.keyB:*`
             #   @param page_size [::Integer]
             #     The standard list page size.
             #   @param page_token [::String]
@@ -1354,6 +1364,9 @@ module Google
             #       * `state` supports `=`, `!=` comparisons.
             #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
             #         `create_time` must be in RFC 3339 format.
+            #       * `labels` supports general map functions that is:
+            #         `labels.key=value` - key:value equality
+            #         `labels.key:* - key existence
             #
             #     Some examples of using the filter are:
             #
@@ -1361,6 +1374,8 @@ module Google
             #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
             #       * `NOT display_name="my_job"`
             #       * `create_time>"2021-05-18T00:00:00Z"`
+            #       * `labels.keyA=valueA`
+            #       * `labels.keyB:*`
             #   @param page_size [::Integer]
             #     The standard list page size.
             #   @param page_token [::String]
@@ -1840,6 +1855,9 @@ module Google
             #       * `state` supports `=`, `!=` comparisons.
             #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
             #         `create_time` must be in RFC 3339 format.
+            #       * `labels` supports general map functions that is:
+            #         `labels.key=value` - key:value equality
+            #         `labels.key:* - key existence
             #
             #     Some examples of using the filter are:
             #
@@ -1847,6 +1865,8 @@ module Google
             #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
             #       * `NOT display_name="my_job"`
             #       * `create_time>"2021-05-18T00:00:00Z"`
+            #       * `labels.keyA=valueA`
+            #       * `labels.keyB:*`
             #   @param page_size [::Integer]
             #     The standard list page size.
             #   @param page_token [::String]
@@ -2442,6 +2462,9 @@ module Google
             #       * `state` supports `=`, `!=` comparisons.
             #       * `create_time` supports `=`, `!=`,`<`, `<=`,`>`, `>=` comparisons.
             #         `create_time` must be in RFC 3339 format.
+            #       * `labels` supports general map functions that is:
+            #         `labels.key=value` - key:value equality
+            #         `labels.key:* - key existence
             #
             #     Some examples of using the filter are:
             #
@@ -2449,6 +2472,8 @@ module Google
             #       * `state!="JOB_STATE_FAILED" OR display_name="my_job"`
             #       * `NOT display_name="my_job"`
             #       * `create_time>"2021-05-18T00:00:00Z"`
+            #       * `labels.keyA=valueA`
+            #       * `labels.keyB:*`
             #   @param page_size [::Integer]
             #     The standard list page size.
             #   @param page_token [::String]
