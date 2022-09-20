@@ -117,6 +117,25 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.create_saved_query.timeout = 60.0
+
+                default_config.rpcs.get_saved_query.timeout = 60.0
+                default_config.rpcs.get_saved_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.list_saved_queries.timeout = 60.0
+                default_config.rpcs.list_saved_queries.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
+                default_config.rpcs.update_saved_query.timeout = 60.0
+
+                default_config.rpcs.delete_saved_query.timeout = 60.0
+                default_config.rpcs.delete_saved_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                }
+
                 default_config.rpcs.batch_get_effective_iam_policies.timeout = 300.0
                 default_config.rpcs.batch_get_effective_iam_policies.retry_policy = {
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
