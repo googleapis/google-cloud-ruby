@@ -17,6 +17,8 @@ require "net/http"
 require_relative "../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb"
 require_relative "./utils.rb"
 
+Google::Apis.logger.level = Logger::DEBUG
+
 class ConformanceTest < MockStorage
 
   HOST = "http://localhost:9000/"
@@ -102,6 +104,7 @@ class ConformanceTest < MockStorage
     headers = {"Content-Type" => "application/json"}
     data = {"instructions" => {method_name => instructions.to_a}}.to_json
     http = Net::HTTP.new uri.host, uri.port
+    http.set_debug_output($stdout)
     request = Net::HTTP::Post.new uri.request_uri, headers
     request.body = data
     http.request request
