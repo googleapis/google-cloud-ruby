@@ -34,6 +34,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
   let(:bucket_lifecycle_created_before) { Date.parse "2013-01-15" }
   let(:bucket_lifecycle_custom_time_before) { Date.parse "2019-01-15" }
   let(:bucket_lifecycle_noncurrent_time_before) { Date.parse "2020-01-15" }
+  let(:bucket_autoclass) { { enabled: true } }
   let(:bucket_lifecycle_gapi) do
     lifecycle_gapi lifecycle_rule_gapi("SetStorageClass",
                                        storage_class: "NEARLINE",
@@ -48,7 +49,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
                                        num_newer_versions: 3)
   end
   let(:bucket_lifecycle_hash) { JSON.parse bucket_lifecycle_gapi.to_json }
-  let(:bucket_hash) { random_bucket_hash name: bucket_name, url_root: bucket_url_root, location: bucket_location, storage_class: bucket_storage_class }
+  let(:bucket_hash) { random_bucket_hash name: bucket_name, url_root: bucket_url_root, location: bucket_location, storage_class: bucket_storage_class, autoclass: bucket_autoclass }
   let(:bucket_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_hash.to_json }
   let(:bucket) { Google::Cloud::Storage::Bucket.from_gapi bucket_gapi, storage.service }
 
@@ -57,6 +58,22 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
   let(:bucket_with_cors_gapi) { Google::Apis::StorageV1::Bucket.from_json bucket_with_cors_hash.to_json }
   let(:bucket_with_cors) { Google::Cloud::Storage::Bucket.from_gapi bucket_with_cors_gapi, storage.service }
   let(:metageneration) { 6 }
+
+  it "updates its autoclass config" do
+    mock = Minitest::Mock.new
+    patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new autoclass: {enabled: false }
+    returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
+      random_bucket_hash(name: bucket_name, url_root: bucket_url, location: bucket_location, storage_class: bucket_storage_class, logging_prefix: bucket_logging_prefix, autoclass: { enabled: false }).to_json
+    mock.expect :patch_bucket, returned_bucket_gapi, [bucket_name, patch_bucket_gapi], **patch_bucket_args(options: {retries: 0})
+
+    bucket.service.mocked_service = mock
+
+    _(bucket.autoclass.enabled).must_equal true
+    bucket.autoclass = false
+    _(bucket.autoclass.enabled).must_equal false
+
+    mock.verify
+  end
 
   it "updates its versioning" do
     mock = Minitest::Mock.new

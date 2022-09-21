@@ -327,6 +327,10 @@ module Google
         #   other than the current project, and that project is authorized for
         #   the currently authenticated service account, transit costs will be
         #   billed to the given project. The default is `nil`.
+        # @param [Object] autoclass The bucket's autoclass configuration.
+        #   Buckets can have either StorageClass OLM rules or Autoclass, but
+        #   not both. When Autoclass is enabled on a bucket, adding StorageClass
+        #   OLM rules will result in failure.
         #
         #   The value provided will be applied to all operations on the returned
         #   bucket instance and its files.
@@ -380,24 +384,20 @@ module Google
           params = {
             name: bucket_name,
             location: location,
-            custom_placement_config: custom_placement_config
+            custom_placement_config: custom_placement_config,
+            autoclass: autoclass
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class
           updater = Bucket::Updater.new(new_bucket).tap do |b|
-            b.autoclass = autoclass unless autoclass.nil?
             b.logging_bucket = logging_bucket unless logging_bucket.nil?
             b.logging_prefix = logging_prefix unless logging_prefix.nil?
-            unless storage_class.nil? && not(autoclass.nil?)
-              puts "Setting the storage class"
-            end
-            b.storage_class = storage_class unless storage_class.nil? && not(autoclass.nil?)
+            b.storage_class = storage_class unless storage_class.nil? || not(autoclass.nil?)
             b.website_main = website_main unless website_main.nil?
             b.website_404 = website_404 unless website_404.nil?
             b.versioning = versioning unless versioning.nil?
             b.requester_pays = requester_pays unless requester_pays.nil?
           end
-          return
           yield updater if block_given?
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!

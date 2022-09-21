@@ -55,13 +55,14 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   let(:bucket_website_404) { "404.html" }
   let(:bucket_requester_pays) { true }
   let(:bucket_labels) { { "env" => "production", "foo" => "bar" } }
+  let(:bucket_autoclass) { { "enabled" => true } }
   let(:generation) { 1234567890 }
   let(:metageneration) { 6 }
   let :bucket_complete_hash do
     h = random_bucket_hash name: bucket_name, url_root: bucket_url_root,
                            location: bucket_location, storage_class: bucket_storage_class, versioning: bucket_versioning,
                            logging_bucket: bucket_logging_bucket, logging_prefix: bucket_logging_prefix, website_main: bucket_website_main,
-                           website_404: bucket_website_404, cors: bucket_cors, requester_pays: bucket_requester_pays, lifecycle: bucket_lifecycle
+                           website_404: bucket_website_404, cors: bucket_cors, requester_pays: bucket_requester_pays, lifecycle: bucket_lifecycle, autoclass: bucket_autoclass
     h[:labels] = bucket_labels
     h
   end
@@ -90,6 +91,11 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
     _(bucket.labels).must_equal Hash.new
     # a complete bucket has a labels hash with the correct values
     _(bucket_complete.labels).must_equal bucket_labels
+  end
+
+  it "knows its autoclass config" do
+    # a complete bucket has a autoclass config enabled
+    _(bucket_complete.autoclass.enabled).must_equal bucket_autoclass["enabled"]
   end
 
   it "returns frozen cors" do

@@ -109,8 +109,16 @@ module Google
           @gapi.id
         end
 
+        ##
+        # The autoclass configuration of the bucket
+        #
+        # @return [Google::Apis::StorageV1::Bucket::Autoclass]
+        #
         def autoclass
-          @gapi.autoclass
+          unless @gapi.autoclass.nil?
+            return @gapi.autoclass
+          end
+          nil
         end
 
         ##
@@ -410,6 +418,24 @@ module Google
           @gapi.storage_class = storage_class_for new_storage_class
           patch_gapi! :storage_class
         end
+
+        ##
+        # Updates the bucket's autoclass configuration. This defines the default class for objects in the
+        # bucket and down/up-grades the storage class of objects based on the access patterns.
+        # Accepted values are `:false`, and `:true`.
+        # rubocop:todo update the link
+        # For more information, see [Storage
+        # Classes](https://cloud.google.com/storage/docs/add_the_endpoint).
+        #
+        # @param [Symbol, String] toggle for autoclass configuration of the bucket.
+        #
+        def autoclass= toggle
+          unless @gapi.autoclass.nil?
+            @gapi.autoclass = {enabled: toggle}
+            patch_gapi! :autoclass
+          end
+        end
+
 
         ##
         # Whether [Object

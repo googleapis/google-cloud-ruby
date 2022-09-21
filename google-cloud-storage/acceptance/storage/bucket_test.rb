@@ -271,6 +271,35 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(random_bucket).must_be :nil?
   end
 
+  focus; it "creates new bucket with autoclass config and then updates it" do
+    one_off_bucket_name = "#{bucket_name}_one_off"
+
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
+
+    autoclass_config = {enabled: true}
+
+    one_off_bucket = safe_gcs_execute { storage.create_bucket one_off_bucket_name, user_project: true, autoclass: autoclass_config }
+    _(storage.bucket(one_off_bucket_name)).wont_be :nil?
+    _(one_off_bucket.user_project).must_equal true
+    _(one_off_bucket.autoclass.enabled).must_equal true
+    prev_toggle_time = one_off_bucket.autoclass.toggle_time
+
+    one_off_bucket.update do |b|
+      b.autoclass= false
+    end
+    _(one_off_bucket.autoclass.enabled).must_equal false
+
+    one_off_bucket_copy = storage.bucket one_off_bucket_name, user_project: true
+    _(one_off_bucket_copy).wont_be :nil?
+    _(one_off_bucket_copy.user_project).must_equal true
+    _(one_off_bucket_copy.autoclass.enabled).must_equal false
+    refute one_off_bucket_copy.autoclass.toggle_time == prev_toggle_time
+
+    one_off_bucket.files.all &:delete
+    safe_gcs_execute { one_off_bucket.delete }
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
+  end
+
   describe "anonymous project" do
     it "raises when creating a bucket without authentication" do
       anonymous_storage = Google::Cloud::Storage.anonymous
