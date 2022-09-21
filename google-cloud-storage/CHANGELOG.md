@@ -1,5 +1,11 @@
 # Release History
 
+### 1.42.0 (2022-09-21)
+
+#### Features
+
+* send invocation_id header in all requests ([#19161](https://github.com/googleapis/google-cloud-ruby/issues/19161)) 
+
 ### 1.41.0 (2022-09-16)
 
 #### Features
