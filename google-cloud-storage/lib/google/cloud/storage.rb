@@ -102,7 +102,8 @@ module Google
         base_interval     ||= configure.base_interval
         max_interval      ||= configure.max_interval
         multiplier        ||= configure.multiplier
-
+        puts "herere"
+        return
         unless credentials.is_a? Google::Auth::Credentials
           credentials = Storage::Credentials.new credentials, scope: scope
         end

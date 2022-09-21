@@ -375,7 +375,8 @@ module Google
                           website_404: nil,
                           versioning: nil,
                           requester_pays: nil,
-                          user_project: nil
+                          user_project: nil,
+                          autoclass: nil
           params = {
             name: bucket_name,
             location: location,
@@ -384,14 +385,19 @@ module Google
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
           storage_class = storage_class_for storage_class
           updater = Bucket::Updater.new(new_bucket).tap do |b|
+            b.autoclass = autoclass unless autoclass.nil?
             b.logging_bucket = logging_bucket unless logging_bucket.nil?
             b.logging_prefix = logging_prefix unless logging_prefix.nil?
-            b.storage_class = storage_class unless storage_class.nil?
+            unless storage_class.nil? && not(autoclass.nil?)
+              puts "Setting the storage class"
+            end
+            b.storage_class = storage_class unless storage_class.nil? && not(autoclass.nil?)
             b.website_main = website_main unless website_main.nil?
             b.website_404 = website_404 unless website_404.nil?
             b.versioning = versioning unless versioning.nil?
             b.requester_pays = requester_pays unless requester_pays.nil?
           end
+          return
           yield updater if block_given?
           updater.check_for_changed_labels!
           updater.check_for_mutable_cors!

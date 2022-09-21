@@ -109,6 +109,10 @@ module Google
           @gapi.id
         end
 
+        def autoclass
+          @gapi.autoclass
+        end
+
         ##
         # The name of the bucket.
         #
