@@ -12,7 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 require "google/cloud/storage/bucket/acl"
 require "google/cloud/storage/bucket/list"
 require "google/cloud/storage/bucket/cors"
@@ -431,11 +430,10 @@ module Google
         #
         def autoclass= toggle
           unless @gapi.autoclass.nil?
-            @gapi.autoclass = {enabled: toggle}
+            @gapi.autoclass = { enabled: toggle }
             patch_gapi! :autoclass
           end
         end
-
 
         ##
         # Whether [Object
@@ -565,6 +563,7 @@ module Google
         def requester_pays
           @gapi.billing&.requester_pays
         end
+
         alias requester_pays? requester_pays
 
         ##
@@ -1287,12 +1286,13 @@ module Google
                   versions: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
-                                          token: token, max: max,
-                                          versions: versions,
-                                          user_project: user_project
+                                    token: token, max: max,
+                                    versions: versions,
+                                    user_project: user_project
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions, user_project: user_project
         end
+
         alias find_files files
 
         ##
@@ -1356,16 +1356,17 @@ module Google
                                  user_project: user_project
           end
           gapi = service.get_file name, path, generation: generation,
-                                              if_generation_match: if_generation_match,
-                                              if_generation_not_match: if_generation_not_match,
-                                              if_metageneration_match: if_metageneration_match,
-                                              if_metageneration_not_match: if_metageneration_not_match,
-                                              key: encryption_key,
-                                              user_project: user_project
+                                  if_generation_match: if_generation_match,
+                                  if_generation_not_match: if_generation_not_match,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
+                                  key: encryption_key,
+                                  user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil
         end
+
         alias find_file file
 
         ##
@@ -1639,6 +1640,7 @@ module Google
                                      user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
+
         alias upload_file create_file
         alias new_file create_file
 
@@ -1772,6 +1774,7 @@ module Google
                                       user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
+
         alias compose_file compose
         alias combine compose
 
@@ -2568,7 +2571,7 @@ module Google
           warn "DEPRECATED: 'force' in Bucket#policy" unless force.nil?
           ensure_service!
           gapi = service.get_bucket_policy name, requested_policy_version: requested_policy_version,
-                                                 user_project: user_project
+                                           user_project: user_project
           policy = if requested_policy_version.nil? || requested_policy_version == 1
                      PolicyV1.from_gapi gapi
                    else
@@ -2663,6 +2666,7 @@ module Google
                                            user_project: user_project
           new_policy.class.from_gapi gapi
         end
+
         alias policy= update_policy
 
         ##
@@ -2727,6 +2731,7 @@ module Google
                                    user_project: user_project
           end
         end
+
         alias find_notifications notifications
 
         ##
@@ -2757,8 +2762,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-        alias find_notification notification
 
+        alias find_notification notification
 
         ##
         # Creates a new Pub/Sub notification subscription for the bucket.
@@ -2833,12 +2838,13 @@ module Google
           ensure_service!
 
           gapi = service.insert_notification name, topic, custom_attrs: custom_attrs,
-                                                          event_types: event_types,
-                                                          prefix: prefix,
-                                                          payload: payload,
-                                                          user_project: user_project
+                                             event_types: event_types,
+                                             prefix: prefix,
+                                             payload: payload,
+                                             user_project: user_project
           Notification.from_gapi name, gapi, service, user_project: user_project
         end
+
         alias new_notification create_notification
 
         ##
@@ -2851,6 +2857,7 @@ module Google
           @lazy = nil
           self
         end
+
         alias refresh! reload!
 
         ##

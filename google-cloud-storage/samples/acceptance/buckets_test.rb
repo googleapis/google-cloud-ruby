@@ -49,10 +49,9 @@ require_relative "../storage_set_retention_policy"
 require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
 
-
 describe "Buckets Snippets" do
-  let(:storage_client)   { Google::Cloud::Storage.new }
-  let(:kms_key)          { get_kms_key storage_client.project }
+  let(:storage_client) { Google::Cloud::Storage.new }
+  let(:kms_key) { get_kms_key storage_client.project }
   let(:retention_period) { rand 1..99 }
   let(:bucket) { fixture_bucket }
 
@@ -109,7 +108,6 @@ describe "Buckets Snippets" do
 
       refute storage_client.bucket bucket_name
 
-
       delete_bucket_helper bucket_name
       delete_bucket_helper secondary_bucket_name
     end
@@ -145,11 +143,11 @@ describe "Buckets Snippets" do
   end
 
   describe "autoclass" do
-    focus; it "get_autoclass, set_autoclass" do
+    it "get_autoclass, set_autoclass" do
       bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
 
-      bucket = storage_client.create_bucket bucket_name, autoclass: {enabled: true}
+      bucket = storage_client.create_bucket bucket_name, autoclass: { enabled: true }
       _(bucket.autoclass.nil?).must_equal false
 
       bucket = get_autoclass bucket_name: bucket_name
@@ -165,7 +163,6 @@ describe "Buckets Snippets" do
       delete_bucket_helper bucket_name
     end
   end
-
 
   describe "cors" do
     it "cors_configuration, remove_cors_configuration" do
@@ -257,7 +254,7 @@ describe "Buckets Snippets" do
 
       # set_bucket_default_kms_key
       assert_output "Default KMS key for #{bucket.name} was set to #{kms_key}\n" do
-        set_bucket_default_kms_key bucket_name:     bucket.name,
+        set_bucket_default_kms_key bucket_name: bucket.name,
                                    default_kms_key: kms_key
       end
 
@@ -283,7 +280,7 @@ describe "Buckets Snippets" do
       assert_output "Added label #{label_key} with value #{label_value} to #{bucket.name}\n" do
         add_bucket_label bucket_name: bucket.name,
                          label_value: label_value,
-                         label_key:   label_key
+                         label_key: label_key
       end
 
       bucket.refresh!
@@ -292,7 +289,7 @@ describe "Buckets Snippets" do
       # remove_bucket_label
       assert_output "Deleted label #{label_key} from #{bucket.name}\n" do
         remove_bucket_label bucket_name: bucket.name,
-                            label_key:   label_key
+                            label_key: label_key
       end
 
       bucket.refresh!
@@ -328,7 +325,7 @@ describe "Buckets Snippets" do
     it "set_retention_policy, get_retention_policy, remove_retention_policy" do
       # set_retention_policy
       assert_output "Retention period for #{bucket.name} is now #{retention_period} seconds.\n" do
-        set_retention_policy bucket_name:      bucket.name,
+        set_retention_policy bucket_name: bucket.name,
                              retention_period: retention_period
       end
 
@@ -446,9 +443,9 @@ describe "Buckets Snippets" do
                      "and #{not_found_page} as the 404 page\n"
 
       assert_output expected_out do
-        define_bucket_website_configuration bucket_name:      bucket.name,
+        define_bucket_website_configuration bucket_name: bucket.name,
                                             main_page_suffix: main_page_suffix,
-                                            not_found_page:   not_found_page
+                                            not_found_page: not_found_page
       end
 
       bucket.refresh!

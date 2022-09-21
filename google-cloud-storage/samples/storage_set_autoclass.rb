@@ -23,11 +23,11 @@ def set_autoclass bucket_name:, toggle:
 
   storage = Google::Cloud::Storage.new
   bucket = storage.bucket bucket_name
-  bucket.autoclass= toggle
+  bucket.autoclass = toggle
   unless bucket.autoclass.nil?
     puts "Autoclass enabled is set to #{bucket.autoclass.enabled} for #{bucket.name} at #{bucket.autoclass.toggle_time}."
   end
-  return bucket
+  bucket
 end
 # [END storage_set_autoclass]
 
