@@ -46,6 +46,9 @@ require_relative "../storage_set_bucket_default_kms_key"
 require_relative "../storage_set_public_access_prevention_enforced"
 require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
+require_relative "../storage_get_autoclass"
+require_relative "../storage_set_autoclass"
+
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -140,6 +143,29 @@ describe "Buckets Snippets" do
       delete_bucket_helper bucket_name
     end
   end
+
+  describe "autoclass" do
+    focus; it "get_autoclass, set_autoclass" do
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+
+      bucket = storage_client.create_bucket bucket_name, autoclass: {enabled: true}
+      _(bucket.autoclass.nil?).must_equal false
+
+      bucket = get_autoclass bucket_name: bucket_name
+      _(bucket.autoclass.nil?).must_equal false
+      _(bucket.autoclass.enabled).must_equal true
+      prev_toggle_time = bucket.autoclass.toggle_time
+
+      bucket = set_autoclass bucket_name: bucket_name, toggle: false
+      _(bucket.autoclass.nil?).must_equal false
+      _(bucket.autoclass.enabled).must_equal false
+      refute bucket.autoclass.toggle_time == prev_toggle_time
+
+      delete_bucket_helper bucket_name
+    end
+  end
+
 
   describe "cors" do
     it "cors_configuration, remove_cors_configuration" do
