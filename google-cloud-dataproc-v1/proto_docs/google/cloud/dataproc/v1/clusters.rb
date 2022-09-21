@@ -165,6 +165,9 @@ module Google
         # @!attribute [rw] metastore_config
         #   @return [::Google::Cloud::Dataproc::V1::MetastoreConfig]
         #     Optional. Metastore configuration.
+        # @!attribute [rw] dataproc_metric_config
+        #   @return [::Google::Cloud::Dataproc::V1::DataprocMetricConfig]
+        #     Optional. Dataproc metrics configuration.
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -907,6 +910,54 @@ module Google
         #
         #     * `projects/[project_id]/locations/[dataproc_region]/services/[service-name]`
         class MetastoreConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Specifies Dataproc OSS Metric.
+        # @!attribute [rw] metric_source
+        #   @return [::Google::Cloud::Dataproc::V1::Metric::MetricSource]
+        #     Required. Specified source of metric collection
+        # @!attribute [rw] metric_overrides
+        #   @return [::Array<::String>]
+        #     Optional. The set of available OSS metrics to collect from the metric
+        #     source.
+        class Metric
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          module MetricSource
+            # Unspecified metric source
+            METRIC_SOURCE_UNSPECIFIED = 0
+
+            # Default monitoring agent metrics. If this source is enabled,
+            # Dataproc enables the monitoring agent in Compute Engine, and collects
+            # default monitoring agent metrics, which are published with an
+            # agent.googleapis.com prefix.
+            MONITORING_AGENT_DEFAULTS = 1
+
+            # HDFS metric source
+            HDFS = 2
+
+            # SPARK metric source
+            SPARK = 3
+
+            # YARN metric source
+            YARN = 4
+
+            # Spark History Server metric source
+            SPARK_HISTORY_SERVER = 5
+
+            # Hiveserver2 metric source
+            HIVESERVER2 = 6
+          end
+        end
+
+        # Specifies a Dataproc metric config
+        # @!attribute [rw] metrics
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::Metric>]
+        #     Configuration set of metrics to collect from the cluster
+        class DataprocMetricConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
