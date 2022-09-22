@@ -429,10 +429,11 @@ module Google
         # @param [Symbol, String] toggle for autoclass configuration of the bucket.
         #
         def autoclass= toggle
-          return unless @gapi.autoclass.nil? do
-            @gapi.autoclass = { enabled: toggle }
-            patch_gapi! :autoclass
+          if @gapi.autoclass.nil?
+            return
           end
+          @gapi.autoclass = { enabled: toggle }
+          patch_gapi! :autoclass
         end
 
         ##

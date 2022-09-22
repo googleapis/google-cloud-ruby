@@ -83,7 +83,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket.location_type).must_equal bucket_location_type
   end
 
-  focus; it "creates a bucket with autoclass config" do
+  it "creates a bucket with autoclass config" do
     mock = Minitest::Mock.new
     created_bucket = create_bucket_gapi bucket_name, autoclass: bucket_autoclass
     resp_bucket = bucket_with_location created_bucket
