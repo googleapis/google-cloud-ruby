@@ -239,6 +239,10 @@ module Google
         #   @return [::Google::Cloud::AIPlatform::V1::EncryptionSpec]
         #     Customer-managed encryption key spec for a Model. If set, this
         #     Model and all sub-resources of this Model will be secured by this key.
+        # @!attribute [r] model_source_info
+        #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo]
+        #     Output only. Source of a model. It can either be automl training pipeline, custom
+        #     training pipeline, BigQuery ML, or existing Vertex AI Model.
         class Model
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -585,6 +589,30 @@ module Google
         class Port
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Detail description of the source information of the model.
+        # @!attribute [rw] source_type
+        #   @return [::Google::Cloud::AIPlatform::V1::ModelSourceInfo::ModelSourceType]
+        #     Type of the model source.
+        class ModelSourceInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Source of the model.
+          module ModelSourceType
+            # Should not be used.
+            MODEL_SOURCE_TYPE_UNSPECIFIED = 0
+
+            # The Model is uploaded by automl training pipeline.
+            AUTOML = 1
+
+            # The Model is uploaded by user or custom training pipeline.
+            CUSTOM = 2
+
+            # The Model is registered and sync'ed from BigQuery ML.
+            BQML = 3
+          end
         end
       end
     end
