@@ -210,46 +210,6 @@
           "type": "FULL"
         }
       ]
-    },
-    {
-      "region_tag": "iam_v2_generated_Policies_ListApplicablePolicies_sync",
-      "title": "Snippet for list_applicable_policies in Policies",
-      "description": "Basic snippet for list_applicable_policies in Policies",
-      "file": "policies/list_applicable_policies.rb",
-      "language": "RUBY",
-      "client_method": {
-        "short_name": "list_applicable_policies",
-        "full_name": "::Google::Iam::V2::Policies::Client#list_applicable_policies",
-        "async": false,
-        "parameters": [
-          {
-            "type": "::Google::Iam::V2::ListApplicablePoliciesRequest",
-            "name": "request"
-          }
-        ],
-        "result_type": "::Google::Iam::V2::ListApplicablePoliciesResponse",
-        "client": {
-          "short_name": "Policies::Client",
-          "full_name": "::Google::Iam::V2::Policies::Client"
-        },
-        "method": {
-          "short_name": "ListApplicablePolicies",
-          "full_name": "google.iam.v2.Policies.ListApplicablePolicies",
-          "service": {
-            "short_name": "Policies",
-            "full_name": "google.iam.v2.Policies"
-          }
-        }
-      },
-      "canonical": true,
-      "origin": "API_DEFINITION",
-      "segments": [
-        {
-          "start": 20,
-          "end": 38,
-          "type": "FULL"
-        }
-      ]
     }
   ]
 }

@@ -55,17 +55,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :etag, :string, 2
     end
-    add_message "google.iam.v2.ListApplicablePoliciesRequest" do
-      optional :attachment_point, :string, 1
-      optional :filter, :string, 2
-      optional :page_token, :string, 3
-      optional :page_size, :int32, 4
-    end
-    add_message "google.iam.v2.ListApplicablePoliciesResponse" do
-      repeated :policies, :message, 1, "google.iam.v2.Policy"
-      repeated :inaccessible, :string, 2
-      optional :next_page_token, :string, 3
-    end
     add_message "google.iam.v2.PolicyOperationMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
     end
@@ -83,8 +72,6 @@ module Google
       CreatePolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.iam.v2.CreatePolicyRequest").msgclass
       UpdatePolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.iam.v2.UpdatePolicyRequest").msgclass
       DeletePolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.iam.v2.DeletePolicyRequest").msgclass
-      ListApplicablePoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.iam.v2.ListApplicablePoliciesRequest").msgclass
-      ListApplicablePoliciesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.iam.v2.ListApplicablePoliciesResponse").msgclass
       PolicyOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.iam.v2.PolicyOperationMetadata").msgclass
     end
   end
