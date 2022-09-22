@@ -272,7 +272,7 @@ describe "Buckets Snippets" do
   end
 
   describe "labels" do
-    it "add_bucket_label, remove_bucket_label" do
+    focus; it "add_bucket_label, remove_bucket_label" do
       # add_bucket_label
       label_key = "label_key"
       label_value = "label_value"
@@ -293,6 +293,7 @@ describe "Buckets Snippets" do
       end
 
       bucket.refresh!
+      puts bucket.labels
       assert bucket.labels.empty?
     end
   end
