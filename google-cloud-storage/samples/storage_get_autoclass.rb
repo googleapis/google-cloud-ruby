@@ -23,7 +23,8 @@ def get_autoclass bucket_name:
   bucket = storage.bucket bucket_name
 
   unless bucket.autoclass.nil?
-    puts "Autoclass enabled is set to #{bucket.autoclass.enabled} for #{bucket.name} at #{bucket.autoclass.toggle_time}."
+    puts "Autoclass enabled is set to #{bucket.autoclass.enabled} for #{bucket.name}."
+    puts "Autoclass toggle_time is set to #{bucket.autoclass.toggle_time} for #{bucket.name}."
   end
   bucket
 end

@@ -383,18 +383,18 @@ module Google
                           requester_pays: nil,
                           user_project: nil,
                           autoclass: nil
+          storage_class = storage_class_for storage_class
           params = {
             name: bucket_name,
             location: location,
             custom_placement_config: custom_placement_config,
-            autoclass: autoclass
+            autoclass: autoclass,
+            storage_class: autoclass.nil? ? storage_class : nil
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
-          storage_class = storage_class_for storage_class
           updater = Bucket::Updater.new(new_bucket).tap do |b|
             b.logging_bucket = logging_bucket unless logging_bucket.nil?
             b.logging_prefix = logging_prefix unless logging_prefix.nil?
-            b.storage_class = storage_class unless storage_class.nil? || !autoclass.nil?
             b.website_main = website_main unless website_main.nil?
             b.website_404 = website_404 unless website_404.nil?
             b.versioning = versioning unless versioning.nil?
