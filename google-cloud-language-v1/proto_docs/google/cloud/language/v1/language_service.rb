@@ -21,8 +21,6 @@ module Google
   module Cloud
     module Language
       module V1
-        # ################################################################ #
-        #
         # Represents the input to API methods.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Language::V1::Document::Type]
@@ -72,8 +70,8 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1::Sentiment]
         #     For calls to [AnalyzeSentiment][] or if
-        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest.Features.extract_document_sentiment}
-        #     is set to true, this field will contain the sentiment for the sentence.
+        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_document_sentiment AnnotateTextRequest.Features.extract_document_sentiment} is set to
+        #     true, this field will contain the sentiment for the sentence.
         class Sentence
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -110,9 +108,9 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1::Sentiment]
         #     For calls to [AnalyzeEntitySentiment][] or if
-        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment}
-        #     is set to true, this field will contain the aggregate sentiment expressed
-        #     for this entity in the provided document.
+        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment} is set to
+        #     true, this field will contain the aggregate sentiment expressed for this
+        #     entity in the provided document.
         class Entity
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -854,9 +852,9 @@ module Google
         # @!attribute [rw] sentiment
         #   @return [::Google::Cloud::Language::V1::Sentiment]
         #     For calls to [AnalyzeEntitySentiment][] or if
-        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment}
-        #     is set to true, this field will contain the sentiment expressed for this
-        #     mention of the entity in the provided document.
+        #     {::Google::Cloud::Language::V1::AnnotateTextRequest::Features#extract_entity_sentiment AnnotateTextRequest.Features.extract_entity_sentiment} is set to
+        #     true, this field will contain the sentiment expressed for this mention of
+        #     the entity in the provided document.
         class EntityMention
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -881,9 +879,7 @@ module Google
         # @!attribute [rw] begin_offset
         #   @return [::Integer]
         #     The API calculates the beginning offset of the content in the original
-        #     document according to the
-        #     {::Google::Cloud::Language::V1::EncodingType EncodingType} specified in the API
-        #     request.
+        #     document according to the {::Google::Cloud::Language::V1::EncodingType EncodingType} specified in the API request.
         class TextSpan
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -966,8 +962,7 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
-        #     for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
         # @!attribute [rw] sentences
         #   @return [::Array<::Google::Cloud::Language::V1::Sentence>]
         #     The sentiment for all the sentences in the document.
@@ -996,8 +991,7 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
-        #     for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
         class AnalyzeEntitySentimentResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1023,8 +1017,7 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
-        #     for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
         class AnalyzeEntitiesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1053,8 +1046,7 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
-        #     for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
         class AnalyzeSyntaxResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1147,8 +1139,7 @@ module Google
         #   @return [::String]
         #     The language of the text, which will be the same as the language specified
         #     in the request or, if not specified, the automatically-detected language.
-        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field
-        #     for more details.
+        #     See {::Google::Cloud::Language::V1::Document#language Document.language} field for more details.
         # @!attribute [rw] categories
         #   @return [::Array<::Google::Cloud::Language::V1::ClassificationCategory>]
         #     Categories identified in the input document.
