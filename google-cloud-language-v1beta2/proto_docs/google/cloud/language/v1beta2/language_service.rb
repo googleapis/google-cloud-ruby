@@ -21,8 +21,6 @@ module Google
   module Cloud
     module Language
       module V1beta2
-        # ################################################################ #
-        #
         # Represents the input to API methods.
         # @!attribute [rw] type
         #   @return [::Google::Cloud::Language::V1beta2::Document::Type]
