@@ -33,11 +33,19 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/language/v1beta2"
 
 client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
+request = ::Google::Cloud::Language::V1beta2::AnalyzeSentimentRequest.new # (request fields as keyword arguments...)
+response = client.analyze_sentiment request
+```
+
+## Example
+```ruby
+content = "It's great! Hello world!"
+client = ::Google::Cloud::Language::V1beta2::LanguageService::Client.new
 type = ::Google::Cloud::Language::V1beta2::Document::Type::PLAIN_TEXT
-document = ::Google::Cloud::Language::V1beta2::Document.new(content:, type:, language: "ja")
+document = ::Google::Cloud::Language::V1beta2::Document.new(content:, type:, language: "en")
 request = ::Google::Cloud::Language::V1beta2::AnalyzeSentimentRequest.new(document:)
-res = client.analyze_sentiment(request)
-puts(res)
+response = client.analyze_sentiment(request)
+puts(response)
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-language-v1beta2/latest)
