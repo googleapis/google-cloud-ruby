@@ -17,6 +17,8 @@ require_relative "../subscriptions.rb"
 require_relative "../pubsub_create_subscription_with_filter.rb"
 require_relative "../pubsub_subscriber_exactly_once_delivery.rb"
 require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
+require_relative "../pubsub_create_bigquery_subscription.rb"
+require "google/cloud/bigquery"
 
 describe "subscriptions" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -214,6 +216,22 @@ describe "subscriptions" do
         project_id: project_id,
         topic_id: topic_id,
         subscription_id: subscription_id
+      )
+    end
+  end 
+
+  it "supports creating bigquery subscription" do
+    project_id = pubsub.project
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+    table_id = create_table 
+
+    assert_output "BigQuery subscription created: #{subscription_id}.\nTable for subscription is: #{table_id}\n" do     
+      pubsub_create_bigquery_subscription(
+        project_id: project_id,
+        topic_id: topic_id,
+        subscription_id: subscription_id,
+        bigquery_table_id: table_id
       )
     end
   end 
