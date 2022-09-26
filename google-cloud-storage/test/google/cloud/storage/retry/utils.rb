@@ -454,9 +454,9 @@ class MethodMapping
     bucket = resources[:bucket]
     object = resources[:object]
     if _preconditions
-      client.rewrite_file bucket.name, object.name, "destination-bucket", "destination-object", if_generation_match: object.generation
+      client.rewrite_file bucket.name, object.name, bucket.name, "destination-object", if_generation_match: 0
     else
-      client.rewrite_file bucket.name, object.name, "destination-bucket", "destination-object"
+      client.rewrite_file bucket.name, object.name, bucket.name, "destination-object"
     end
   end
 end
