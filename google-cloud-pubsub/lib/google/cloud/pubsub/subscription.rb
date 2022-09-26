@@ -303,7 +303,7 @@ module Google
           config.freeze
         end
 
-         ##
+        ##
         # Inspect the Subscription's bigquery configuration settings. The
         # configuration can be changed by modifying the values in the method's
         # block.
