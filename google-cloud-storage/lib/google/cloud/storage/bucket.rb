@@ -110,6 +110,15 @@ module Google
         end
 
         ##
+        # The autoclass configuration of the bucket
+        #
+        # @return [Google::Apis::StorageV1::Bucket::Autoclass]
+        #
+        def autoclass
+          @gapi.autoclass
+        end
+
+        ##
         # The name of the bucket.
         #
         # @return [String]
@@ -405,6 +414,35 @@ module Google
         def storage_class= new_storage_class
           @gapi.storage_class = storage_class_for new_storage_class
           patch_gapi! :storage_class
+        end
+
+        ##
+        # Whether Autoclass is enabled for the bucket.
+        #
+        # @return [Boolean]
+        #
+        def autoclass?
+          @gapi.autoclass&.enabled?
+        end
+
+        ##
+        # Updates the bucket's autoclass configuration. This defines the default class for objects in the
+        # bucket and down/up-grades the storage class of objects based on the access patterns.
+        # Accepted values are `:false`, and `:true`.
+        # rubocop:todo update the link
+        # For more information, see [Storage
+        # Classes](https://cloud.google.com/storage/docs/add_the_endpoint).
+        #
+        # @param [Boolean] toggle for autoclass configuration of the bucket.
+        #
+        def autoclass_enabled= toggle
+          # rubocop:todo delete the if clause when the Autoclass is released for existing bucket
+          if @gapi.autoclass.nil?
+            return
+          end
+
+          @gapi.autoclass = { enabled: toggle }
+          patch_gapi! :autoclass
         end
 
         ##
