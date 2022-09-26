@@ -324,7 +324,7 @@ module Google
         #   sub.bigquery_config.use_topic_schema #=> true
         #   sub.bigquery_config.write_metadata #=> false
         #
-        # @example Update the push configuration by passing a block:
+        # @example Update the bigquery configuration by passing a block:
         #   require "google/cloud/pubsub"
         #
         #   pubsub = Google::Cloud::PubSub.new

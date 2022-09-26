@@ -91,12 +91,11 @@ describe Google::Cloud::PubSub::Subscription, :attributes, :mock_pubsub do
   end
 
   it "can update bigquery config" do
-    mpc_res = nil
     mock = Minitest::Mock.new
     mask = Google::Protobuf::FieldMask.new paths: ["bigquery_config"]
     new_config = Google::Cloud::PubSub::V1::BigQueryConfig.new table: table_id, write_metadata: false
     mock.expect :update_subscription, 
-                mpc_res, 
+                nil, 
                 subscription: Google::Cloud::PubSub::V1::Subscription.new(name: "projects/test/subscriptions/#{sub_name}", 
                                                                           bigquery_config: new_config), 
                 update_mask: mask
