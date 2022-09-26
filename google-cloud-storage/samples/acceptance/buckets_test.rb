@@ -291,7 +291,7 @@ describe "Buckets Snippets" do
         remove_bucket_label bucket_name: bucket.name,
                             label_key: label_key
       end
-
+      sleep(10)
       bucket.refresh!
       puts bucket.labels
       assert bucket.labels.empty?
