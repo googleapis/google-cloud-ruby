@@ -19,7 +19,7 @@ describe "#get_input", :live_stream_snippet do
     sample = SampleLoader.load "get_input.rb"
 
     refute_nil input
-    instance_variable_set "@input_created", true
+    @input_created = true
 
     assert_output(/Input: #{input.name}/) do
       sample.run project_id: project_id, location: location_id, input_id: input_id

@@ -57,5 +57,5 @@ def update_channel project_id:, location:, channel_id:, input_id:
   # Print the channel name.
   puts "Updated channel: #{operation.response.name}"
   puts "Updated input_attachments config: #{operation.response.input_attachments[0].key}"
-  # [END livestream_update_channel]
 end
+# [END livestream_update_channel]

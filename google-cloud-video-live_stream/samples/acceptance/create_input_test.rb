@@ -21,7 +21,7 @@ describe "#create_input", :live_stream_snippet do
     out, _err = capture_io do
       sample.run project_id: project_id, location: location_id, input_id: input_id
     end
-    instance_variable_set "@input_created", true
+    @input_created = true
     input_id_regex = Regexp.escape input_id
     assert_match %r{Input: projects/\S+/locations/#{location_id}/inputs/#{input_id_regex}}, out
   end

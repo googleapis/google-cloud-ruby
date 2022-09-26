@@ -20,11 +20,11 @@ describe "#stop_channel", :live_stream_snippet do
 
     refute_nil input
     refute_nil started_channel
-    instance_variable_set "@input_created", true
+    @input_created = true
 
     assert_output(/Stopped channel/) do
       sample.run project_id: project_id, location: location_id, channel_id: channel_id
     end
-    instance_variable_set "@channel_created_stopped", true
+    @channel_created_stopped = true
   end
 end

@@ -39,5 +39,5 @@ def start_channel project_id:, location:, channel_id:
 
   # Print a success message.
   puts "Started channel"
-  # [END livestream_start_channel]
 end
+# [END livestream_start_channel]

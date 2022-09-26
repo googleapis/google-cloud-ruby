@@ -20,8 +20,8 @@ describe "#get_channel", :live_stream_snippet do
 
     refute_nil input
     refute_nil channel
-    instance_variable_set "@input_created", true
-    instance_variable_set "@channel_created_stopped", true
+    @input_created = true
+    @channel_created_stopped = true
 
     assert_output(/Channel: #{channel.name}/) do
       sample.run project_id: project_id, location: location_id, channel_id: channel_id

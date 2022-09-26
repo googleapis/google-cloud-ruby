@@ -20,7 +20,7 @@ describe "#delete_channel", :live_stream_snippet do
 
     refute_nil input
     refute_nil channel
-    instance_variable_set "@input_created", true
+    @input_created = true
 
     client.get_channel name: channel_name
 

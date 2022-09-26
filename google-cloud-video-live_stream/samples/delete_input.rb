@@ -39,5 +39,5 @@ def delete_input project_id:, location:, input_id:
 
   # Print a success message.
   puts "Deleted input"
-  # [END livestream_delete_input]
 end
+# [END livestream_delete_input]

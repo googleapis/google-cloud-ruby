@@ -19,7 +19,7 @@ describe "#list_inputs", :live_stream_snippet do
     sample = SampleLoader.load "list_inputs.rb"
 
     refute_nil input
-    instance_variable_set "@input_created", true
+    @input_created = true
 
     assert_output(/Inputs:\n#{input.name}/) do
       sample.run project_id: project_id, location: location_id

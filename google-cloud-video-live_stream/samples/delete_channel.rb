@@ -39,5 +39,5 @@ def delete_channel project_id:, location:, channel_id:
 
   # Print a success message.
   puts "Deleted channel"
-  # [END livestream_delete_channel]
 end
+# [END livestream_delete_channel]

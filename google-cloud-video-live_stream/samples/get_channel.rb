@@ -34,5 +34,5 @@ def get_channel project_id:, location:, channel_id:
 
   # Print the channel name.
   puts "Channel: #{channel.name}"
-  # [END livestream_get_channel]
 end
+# [END livestream_get_channel]

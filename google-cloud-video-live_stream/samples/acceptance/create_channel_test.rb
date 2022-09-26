@@ -19,12 +19,12 @@ describe "#create_channel", :live_stream_snippet do
     sample = SampleLoader.load "create_channel.rb"
 
     refute_nil input
-    instance_variable_set "@input_created", true
+    @input_created = true
 
     out, _err = capture_io do
       sample.run project_id: project_id, location: location_id, channel_id: channel_id, input_id: input_id, output_uri: output_uri
     end
-    instance_variable_set "@channel_created_stopped", true
+    @channel_created_stopped = true
     channel_id_regex = Regexp.escape channel_id
     assert_match %r{Channel: projects/\S+/locations/#{location_id}/channels/#{channel_id_regex}}, out
   end

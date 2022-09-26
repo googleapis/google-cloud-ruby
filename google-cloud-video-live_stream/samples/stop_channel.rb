@@ -39,5 +39,5 @@ def stop_channel project_id:, location:, channel_id:
 
   # Print a success message.
   puts "Stopped channel"
-  # [END livestream_stop_channel]
 end
+# [END livestream_stop_channel]

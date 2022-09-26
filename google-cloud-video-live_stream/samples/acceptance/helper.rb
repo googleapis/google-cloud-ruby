@@ -22,7 +22,7 @@ require_relative "../../../.toys/.lib/sample_loader"
 require_relative "channel_definition"
 require_relative "input_definition"
 
-DELETION_THRESHOLD_TIME_HOURS_IN_SECONDS = 10_800
+DELETION_THRESHOLD_TIME_HOURS_IN_KILOSECONDS = 10_800_000
 
 class LiveStreamSnippetSpec < Minitest::Spec
   let(:client) { Google::Cloud::Video::LiveStream.livestream_service }
@@ -43,6 +43,11 @@ class LiveStreamSnippetSpec < Minitest::Spec
   let(:channel_name) { "projects/#{project_id}/locations/#{location_id}/channels/#{channel_id}" }
   let(:output_uri) { "gs://my-bucket/my-output-folder/" }
 
+  attr_writer :channel_created_started
+  attr_writer :channel_created_stopped
+  attr_writer :input_created
+  attr_writer :update_input_created
+
   before do
     @channel_created_started = false
     @channel_created_stopped = false
@@ -53,8 +58,8 @@ class LiveStreamSnippetSpec < Minitest::Spec
     response.each do |channel|
       tmp = channel.name.to_s.split "-"
       create_time = tmp.last.to_i
-      now = (Time.now.to_f * 1000).to_i
-      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_SECONDS)
+      now = (Time.now.to_f * 1000).to_i # Kiloseconds, preserves float value for precision
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_KILOSECONDS)
       begin
         operation = client.stop_channel name: channel.name.to_s
         operation.wait_until_done!
@@ -74,7 +79,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
       tmp = input.name.to_s.split "-"
       create_time = tmp.last.to_i
       now = (Time.now.to_f * 1000).to_i
-      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_SECONDS)
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_KILOSECONDS)
       begin
         operation = client.delete_input name: input.name.to_s
         operation.wait_until_done!

@@ -36,5 +36,5 @@ def list_inputs project_id:, location:
   response.each do |input|
     puts input.name.to_s
   end
-  # [END livestream_list_inputs]
 end
+# [END livestream_list_inputs]

@@ -112,5 +112,5 @@ def create_channel project_id:, location:, channel_id:, input_id:, output_uri:
 
   # Print the channel name.
   puts "Channel: #{operation.response.name}"
-  # [END livestream_create_channel]
 end
+# [END livestream_create_channel]

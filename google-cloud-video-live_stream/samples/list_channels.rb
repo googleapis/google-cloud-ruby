@@ -36,5 +36,5 @@ def list_channels project_id:, location:
   response.each do |channel|
     puts channel.name.to_s
   end
-  # [END livestream_list_channels]
 end
+# [END livestream_list_channels]
