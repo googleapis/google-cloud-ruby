@@ -32,6 +32,7 @@ describe "subscriptions" do
 
   after :all do
     @topic.delete
+    cleanup_bq
   end
 
   before do

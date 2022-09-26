@@ -18,6 +18,9 @@ require "minitest/hooks/default"
 require "google/cloud/pubsub"
 require "securerandom"
 
+$tables = []
+$datasets = []
+
 def random_topic_id
   "ruby-pubsub-samples-test-topic-#{SecureRandom.hex 4}"
 end
@@ -51,7 +54,14 @@ def create_table
     updater.timestamp "publish_time",  mode: :required
   end
 
+  $tables << table
+  $datasets << dataset
   table.id
+end
+
+def cleanup_bq
+  $tables.each(&:delete)
+  $datasets.each(&:delete)
 end
 
 # Pub/Sub calls may not respond immediately.
