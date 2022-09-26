@@ -28,8 +28,8 @@ def pubsub_create_bigquery_subscription project_id:, topic_id:, subscription_id:
   topic = pubsub.topic topic_id
   subscription = topic.subscribe subscription_id, 
                                   bigquery_config: {
-                                  table: bigquery_table_id,
-                                  write_metadata: true
+                                    table: bigquery_table_id,
+                                    write_metadata: true
                                   }
   puts "BigQuery subscription created: #{subscription_id}."
   puts "Table for subscription is: #{bigquery_table_id}"
