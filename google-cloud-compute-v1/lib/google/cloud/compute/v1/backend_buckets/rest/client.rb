@@ -233,8 +233,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -306,8 +309,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -381,8 +387,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -444,8 +453,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -517,8 +529,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -589,8 +604,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -664,8 +682,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -739,8 +760,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
@@ -814,8 +838,11 @@ module Google
                   return result
                 end
               rescue ::Faraday::Error => e
-                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
-                raise ::Google::Cloud::Error.from_error(gapic_error)
+                begin
+                  raise ::Gapic::Rest::Error.wrap_faraday_error e
+                rescue ::Gapic::Rest::Error => gapic_err
+                  raise ::Google::Cloud::Error.from_error gapic_err.cause
+                end
               end
 
               ##
