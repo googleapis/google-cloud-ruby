@@ -41,7 +41,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :lifecycle_config, :message, 17, "google.cloud.dataproc.v1.LifecycleConfig"
       optional :endpoint_config, :message, 19, "google.cloud.dataproc.v1.EndpointConfig"
       optional :metastore_config, :message, 20, "google.cloud.dataproc.v1.MetastoreConfig"
-      optional :dataproc_metric_config, :message, 21, "google.cloud.dataproc.v1.DataprocMetricConfig"
+      optional :dataproc_metric_config, :message, 23, "google.cloud.dataproc.v1.DataprocMetricConfig"
     end
     add_message "google.cloud.dataproc.v1.VirtualClusterConfig" do
       optional :staging_bucket, :string, 1
@@ -194,11 +194,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.dataproc.v1.MetastoreConfig" do
       optional :dataproc_metastore_service, :string, 1
     end
-    add_message "google.cloud.dataproc.v1.Metric" do
-      optional :metric_source, :enum, 1, "google.cloud.dataproc.v1.Metric.MetricSource"
+    add_message "google.cloud.dataproc.v1.DataprocMetricConfig" do
+      repeated :metrics, :message, 1, "google.cloud.dataproc.v1.DataprocMetricConfig.Metric"
+    end
+    add_message "google.cloud.dataproc.v1.DataprocMetricConfig.Metric" do
+      optional :metric_source, :enum, 1, "google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource"
       repeated :metric_overrides, :string, 2
     end
-    add_enum "google.cloud.dataproc.v1.Metric.MetricSource" do
+    add_enum "google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource" do
       value :METRIC_SOURCE_UNSPECIFIED, 0
       value :MONITORING_AGENT_DEFAULTS, 1
       value :HDFS, 2
@@ -206,9 +209,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :YARN, 4
       value :SPARK_HISTORY_SERVER, 5
       value :HIVESERVER2, 6
-    end
-    add_message "google.cloud.dataproc.v1.DataprocMetricConfig" do
-      repeated :metrics, :message, 1, "google.cloud.dataproc.v1.Metric"
     end
     add_message "google.cloud.dataproc.v1.ClusterMetrics" do
       map :hdfs_metrics, :string, :int64, 1
@@ -320,9 +320,9 @@ module Google
         SoftwareConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.SoftwareConfig").msgclass
         LifecycleConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.LifecycleConfig").msgclass
         MetastoreConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.MetastoreConfig").msgclass
-        Metric = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Metric").msgclass
-        Metric::MetricSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.Metric.MetricSource").enummodule
         DataprocMetricConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DataprocMetricConfig").msgclass
+        DataprocMetricConfig::Metric = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DataprocMetricConfig.Metric").msgclass
+        DataprocMetricConfig::MetricSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.DataprocMetricConfig.MetricSource").enummodule
         ClusterMetrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.ClusterMetrics").msgclass
         CreateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.CreateClusterRequest").msgclass
         UpdateClusterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataproc.v1.UpdateClusterRequest").msgclass

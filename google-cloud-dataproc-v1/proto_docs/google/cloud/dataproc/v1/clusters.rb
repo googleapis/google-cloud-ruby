@@ -167,7 +167,7 @@ module Google
         #     Optional. Metastore configuration.
         # @!attribute [rw] dataproc_metric_config
         #   @return [::Google::Cloud::Dataproc::V1::DataprocMetricConfig]
-        #     Optional. Dataproc metrics configuration.
+        #     Optional. The config for Dataproc metrics.
         class ClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -914,52 +914,85 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Specifies Dataproc OSS Metric.
-        # @!attribute [rw] metric_source
-        #   @return [::Google::Cloud::Dataproc::V1::Metric::MetricSource]
-        #     Required. Specified source of metric collection
-        # @!attribute [rw] metric_overrides
-        #   @return [::Array<::String>]
-        #     Optional. The set of available OSS metrics to collect from the metric
-        #     source.
-        class Metric
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-
-          module MetricSource
-            # Unspecified metric source
-            METRIC_SOURCE_UNSPECIFIED = 0
-
-            # Default monitoring agent metrics. If this source is enabled,
-            # Dataproc enables the monitoring agent in Compute Engine, and collects
-            # default monitoring agent metrics, which are published with an
-            # agent.googleapis.com prefix.
-            MONITORING_AGENT_DEFAULTS = 1
-
-            # HDFS metric source
-            HDFS = 2
-
-            # SPARK metric source
-            SPARK = 3
-
-            # YARN metric source
-            YARN = 4
-
-            # Spark History Server metric source
-            SPARK_HISTORY_SERVER = 5
-
-            # Hiveserver2 metric source
-            HIVESERVER2 = 6
-          end
-        end
-
-        # Specifies a Dataproc metric config
+        # Dataproc metric config.
         # @!attribute [rw] metrics
-        #   @return [::Array<::Google::Cloud::Dataproc::V1::Metric>]
-        #     Configuration set of metrics to collect from the cluster
+        #   @return [::Array<::Google::Cloud::Dataproc::V1::DataprocMetricConfig::Metric>]
+        #     Required. Metrics sources to enable.
         class DataprocMetricConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # A Dataproc OSS metric.
+          # @!attribute [rw] metric_source
+          #   @return [::Google::Cloud::Dataproc::V1::DataprocMetricConfig::MetricSource]
+          #     Required. Default metrics are collected unless `metricOverrides` are
+          #     specified for the metric source (see [Available OSS metrics]
+          #     (https://cloud.google.com/dataproc/docs/guides/monitoring#available_oss_metrics)
+          #     for more information).
+          # @!attribute [rw] metric_overrides
+          #   @return [::Array<::String>]
+          #     Optional. Specify one or more [available OSS metrics]
+          #     (https://cloud.google.com/dataproc/docs/guides/monitoring#available_oss_metrics)
+          #     to collect for the metric course (for the `SPARK` metric source, any
+          #     [Spark metric]
+          #     (https://spark.apache.org/docs/latest/monitoring.html#metrics) can be
+          #     specified).
+          #
+          #     Provide metrics in the following format:
+          #     <code><var>METRIC_SOURCE</var>:<var>INSTANCE</var>:<var>GROUP</var>:<var>METRIC</var></code>
+          #     Use camelcase as appropriate.
+          #
+          #     Examples:
+          #
+          #     ```
+          #     yarn:ResourceManager:QueueMetrics:AppsCompleted
+          #     spark:driver:DAGScheduler:job.allJobs
+          #     sparkHistoryServer:JVM:Memory:NonHeapMemoryUsage.committed
+          #     hiveserver2:JVM:Memory:NonHeapMemoryUsage.used
+          #     ```
+          #
+          #     Notes:
+          #
+          #     * Only the specified overridden metrics will be collected for the
+          #       metric source. For example, if one or more `spark:executive` metrics
+          #       are listed as metric overrides, other `SPARK` metrics will not be
+          #       collected. The collection of the default metrics for other OSS metric
+          #       sources is unaffected. For example, if both `SPARK` andd `YARN` metric
+          #       sources are enabled, and overrides are provided for Spark metrics only,
+          #       all default YARN metrics will be collected.
+          class Metric
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A source for the collection of Dataproc OSS metrics (see [available OSS
+          # metrics]
+          # (https://cloud.google.com//dataproc/docs/guides/monitoring#available_oss_metrics)).
+          module MetricSource
+            # Required unspecified metric source.
+            METRIC_SOURCE_UNSPECIFIED = 0
+
+            # Default monitoring agent metrics. If this source is enabled,
+            # Dataproc enables the monitoring agent in Compute Engine,
+            # and collects default monitoring agent metrics, which are published
+            # with an `agent.googleapis.com` prefix.
+            MONITORING_AGENT_DEFAULTS = 1
+
+            # HDFS metric source.
+            HDFS = 2
+
+            # Spark metric source.
+            SPARK = 3
+
+            # YARN metric source.
+            YARN = 4
+
+            # Spark History Server metric source.
+            SPARK_HISTORY_SERVER = 5
+
+            # Hiveserver2 metric source.
+            HIVESERVER2 = 6
+          end
         end
 
         # Contains cluster daemon metrics, such as HDFS and YARN stats.
