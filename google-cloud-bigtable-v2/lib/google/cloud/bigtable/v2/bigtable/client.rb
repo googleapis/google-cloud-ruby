@@ -176,7 +176,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload read_rows(table_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil)
+            # @overload read_rows(table_name: nil, app_profile_id: nil, rows: nil, filter: nil, rows_limit: nil, request_stats_view: nil)
             #   Pass arguments to `read_rows` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -186,8 +186,8 @@ module Google
             #     Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
-            #     This value specifies routing for replication. If not specified, the
-            #     "default" application profile will be used.
+            #     This value specifies routing for replication. This API only accepts the
+            #     empty value of app_profile_id.
             #   @param rows [::Google::Cloud::Bigtable::V2::RowSet, ::Hash]
             #     The row keys and/or ranges to read sequentially. If not specified, reads
             #     from all rows.
@@ -197,6 +197,8 @@ module Google
             #   @param rows_limit [::Integer]
             #     The read will stop after committing to N rows' worth of results. The
             #     default (zero) is to return all results.
+            #   @param request_stats_view [::Google::Cloud::Bigtable::V2::ReadRowsRequest::RequestStatsView]
+            #     The view into RequestStats, as described above.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Enumerable<::Google::Cloud::Bigtable::V2::ReadRowsResponse>]
@@ -389,8 +391,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the mutation should be applied.
-            #     Values are of the form
+            #     Required. The unique name of the table to which the mutation should be
+            #     applied. Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
@@ -398,9 +400,9 @@ module Google
             #   @param row_key [::String]
             #     Required. The key of the row to which the mutation should be applied.
             #   @param mutations [::Array<::Google::Cloud::Bigtable::V2::Mutation, ::Hash>]
-            #     Required. Changes to be atomically applied to the specified row. Entries are applied
-            #     in order, meaning that earlier mutations can be masked by later ones.
-            #     Must contain at least one entry and at most 100000.
+            #     Required. Changes to be atomically applied to the specified row. Entries
+            #     are applied in order, meaning that earlier mutations can be masked by later
+            #     ones. Must contain at least one entry and at most 100000.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::MutateRowResponse]
@@ -491,7 +493,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the mutations should be applied.
+            #     Required. The unique name of the table to which the mutations should be
+            #     applied.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -592,15 +595,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the conditional mutation should be
-            #     applied.
-            #     Values are of the form
+            #     Required. The unique name of the table to which the conditional mutation
+            #     should be applied. Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
             #   @param row_key [::String]
-            #     Required. The key of the row to which the conditional mutation should be applied.
+            #     Required. The key of the row to which the conditional mutation should be
+            #     applied.
             #   @param predicate_filter [::Google::Cloud::Bigtable::V2::RowFilter, ::Hash]
             #     The filter to be applied to the contents of the specified row. Depending
             #     on whether or not any results are yielded, either `true_mutations` or
@@ -707,8 +710,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The unique name of the instance to check permissions for as well as
-            #     respond. Values are of the form `projects/<project>/instances/<instance>`.
+            #     Required. The unique name of the instance to check permissions for as well
+            #     as respond. Values are of the form
+            #     `projects/<project>/instances/<instance>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
@@ -804,19 +808,19 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param table_name [::String]
-            #     Required. The unique name of the table to which the read/modify/write rules should be
-            #     applied.
-            #     Values are of the form
+            #     Required. The unique name of the table to which the read/modify/write rules
+            #     should be applied. Values are of the form
             #     `projects/<project>/instances/<instance>/tables/<table>`.
             #   @param app_profile_id [::String]
             #     This value specifies routing for replication. If not specified, the
             #     "default" application profile will be used.
             #   @param row_key [::String]
-            #     Required. The key of the row to which the read/modify/write rules should be applied.
+            #     Required. The key of the row to which the read/modify/write rules should be
+            #     applied.
             #   @param rules [::Array<::Google::Cloud::Bigtable::V2::ReadModifyWriteRule, ::Hash>]
-            #     Required. Rules specifying how the specified row's contents are to be transformed
-            #     into writes. Entries are applied in order, meaning that earlier rules will
-            #     affect the results of later ones.
+            #     Required. Rules specifying how the specified row's contents are to be
+            #     transformed into writes. Entries are applied in order, meaning that earlier
+            #     rules will affect the results of later ones.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Bigtable::V2::ReadModifyWriteRowResponse]
