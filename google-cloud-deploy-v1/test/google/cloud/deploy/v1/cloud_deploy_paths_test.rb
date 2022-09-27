@@ -71,6 +71,18 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientPathsTest < Minitest::Test
     end
   end
 
+  def test_job_run_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.job_run_path project: "value0", location: "value1", delivery_pipeline: "value2", release: "value3", rollout: "value4", job_run: "value5"
+      assert_equal "projects/value0/locations/value1/deliveryPipelines/value2/releases/value3/rollouts/value4/jobRuns/value5", path
+    end
+  end
+
   def test_location_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do

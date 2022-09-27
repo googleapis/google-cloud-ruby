@@ -933,6 +933,64 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
     end
   end
 
+  def test_abandon_release
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::AbandonReleaseResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    abandon_release_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :abandon_release, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::AbandonReleaseRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, abandon_release_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.abandon_release({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.abandon_release name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.abandon_release ::Google::Cloud::Deploy::V1::AbandonReleaseRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.abandon_release({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.abandon_release(::Google::Cloud::Deploy::V1::AbandonReleaseRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, abandon_release_client_stub.call_rpc_count
+    end
+  end
+
   def test_approve_rollout
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::Deploy::V1::ApproveRolloutResponse.new
@@ -1190,6 +1248,197 @@ class ::Google::Cloud::Deploy::V1::CloudDeploy::ClientTest < Minitest::Test
 
       # Verify method calls
       assert_equal 5, create_rollout_client_stub.call_rpc_count
+    end
+  end
+
+  def test_retry_job
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::RetryJobResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    rollout = "hello world"
+    phase_id = "hello world"
+    job_id = "hello world"
+
+    retry_job_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :retry_job, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::RetryJobRequest, request
+      assert_equal "hello world", request["rollout"]
+      assert_equal "hello world", request["phase_id"]
+      assert_equal "hello world", request["job_id"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, retry_job_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.retry_job({ rollout: rollout, phase_id: phase_id, job_id: job_id }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.retry_job rollout: rollout, phase_id: phase_id, job_id: job_id do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.retry_job ::Google::Cloud::Deploy::V1::RetryJobRequest.new(rollout: rollout, phase_id: phase_id, job_id: job_id) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.retry_job({ rollout: rollout, phase_id: phase_id, job_id: job_id }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.retry_job(::Google::Cloud::Deploy::V1::RetryJobRequest.new(rollout: rollout, phase_id: phase_id, job_id: job_id), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, retry_job_client_stub.call_rpc_count
+    end
+  end
+
+  def test_list_job_runs
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::ListJobRunsResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    parent = "hello world"
+    page_size = 42
+    page_token = "hello world"
+    filter = "hello world"
+    order_by = "hello world"
+
+    list_job_runs_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :list_job_runs, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::ListJobRunsRequest, request
+      assert_equal "hello world", request["parent"]
+      assert_equal 42, request["page_size"]
+      assert_equal "hello world", request["page_token"]
+      assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, list_job_runs_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.list_job_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.list_job_runs parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.list_job_runs ::Google::Cloud::Deploy::V1::ListJobRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.list_job_runs({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.list_job_runs(::Google::Cloud::Deploy::V1::ListJobRunsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
+        assert_kind_of Gapic::PagedEnumerable, response
+        assert_equal grpc_response, response.response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, list_job_runs_client_stub.call_rpc_count
+    end
+  end
+
+  def test_get_job_run
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::Deploy::V1::JobRun.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    name = "hello world"
+
+    get_job_run_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :get_job_run, name
+      assert_kind_of ::Google::Cloud::Deploy::V1::GetJobRunRequest, request
+      assert_equal "hello world", request["name"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, get_job_run_client_stub do
+      # Create client
+      client = ::Google::Cloud::Deploy::V1::CloudDeploy::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.get_job_run({ name: name }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.get_job_run name: name do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.get_job_run ::Google::Cloud::Deploy::V1::GetJobRunRequest.new(name: name) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.get_job_run({ name: name }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.get_job_run(::Google::Cloud::Deploy::V1::GetJobRunRequest.new(name: name), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, get_job_run_client_stub.call_rpc_count
     end
   end
 
