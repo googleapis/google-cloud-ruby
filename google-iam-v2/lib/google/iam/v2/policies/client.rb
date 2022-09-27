@@ -202,8 +202,9 @@ module Google
           #   the default parameter values, pass an empty Hash as a request object (see above).
           #
           #   @param parent [::String]
-          #     Required. The resource that the policy is attached to, along with the kind
-          #     of policy to list. Format: `policies/{attachment_point}/denypolicies`
+          #     Required. The resource that the policy is attached to, along with the kind of policy
+          #     to list. Format:
+          #     `policies/{attachment_point}/denypolicies`
           #
           #
           #     The attachment point is identified by its URL-encoded full resource name,
@@ -217,9 +218,8 @@ module Google
           #     The maximum number of policies to return. IAM ignores this value and uses
           #     the value 1000.
           #   @param page_token [::String]
-          #     A page token received in a
-          #     {::Google::Iam::V2::ListPoliciesResponse ListPoliciesResponse}. Provide this
-          #     token to retrieve the next page.
+          #     A page token received in a {::Google::Iam::V2::ListPoliciesResponse ListPoliciesResponse}. Provide this token to
+          #     retrieve the next page.
           #
           # @yield [response, operation] Access the result along with the RPC operation
           # @yieldparam response [::Gapic::PagedEnumerable<::Google::Iam::V2::Policy>]
@@ -405,8 +405,8 @@ module Google
           #   the default parameter values, pass an empty Hash as a request object (see above).
           #
           #   @param parent [::String]
-          #     Required. The resource that the policy is attached to, along with the kind
-          #     of policy to create. Format: `policies/{attachment_point}/denypolicies`
+          #     Required. The resource that the policy is attached to, along with the kind of policy
+          #     to create. Format: `policies/{attachment_point}/denypolicies`
           #
           #
           #     The attachment point is identified by its URL-encoded full resource name,
@@ -503,8 +503,7 @@ module Google
           #
           # To update a policy, you should use a read-modify-write loop:
           #
-          # 1. Use {::Google::Iam::V2::Policies::Client#get_policy GetPolicy} to read the current
-          # version of the policy.
+          # 1. Use {::Google::Iam::V2::Policies::Client#get_policy GetPolicy} to read the current version of the policy.
           # 2. Modify the policy as needed.
           # 3. Use `UpdatePolicy` to write the updated policy.
           #
@@ -634,9 +633,9 @@ module Google
           #     For organizations and folders, use the numeric ID in the full resource
           #     name. For projects, you can use the alphanumeric or the numeric ID.
           #   @param etag [::String]
-          #     Optional. The expected `etag` of the policy to delete. If the value does
-          #     not match the value that is stored in IAM, the request fails with a `409`
-          #     error code and `ABORTED` status.
+          #     Optional. The expected `etag` of the policy to delete. If the value does not match
+          #     the value that is stored in IAM, the request fails with a `409` error code
+          #     and `ABORTED` status.
           #
           #     If you omit this field, the policy is deleted regardless of its current
           #     `etag`.
@@ -706,130 +705,6 @@ module Google
 
             @policies_stub.call_rpc :delete_policy, request, options: options do |response, operation|
               response = ::Gapic::Operation.new response, @operations_client, options: options
-              yield response, operation if block_given?
-              return response
-            end
-          rescue ::GRPC::BadStatus => e
-            raise ::Google::Cloud::Error.from_error(e)
-          end
-
-          ##
-          # Retrieves all the policies that are attached to the specified resource,
-          # or anywhere in the ancestry of the resource. For example, for a project
-          # this endpoint would return all the `denyPolicy` kind policies attached to
-          # the project, its parent folder (if any), and its parent organization (if
-          # any).
-          # The endpoint requires the same permissions that it would take to call
-          # `ListPolicies` or `GetPolicy`.
-          #
-          # The main reason to use this endpoint is as a policy admin to debug access
-          # issues for a resource.
-          #
-          # @overload list_applicable_policies(request, options = nil)
-          #   Pass arguments to `list_applicable_policies` via a request object, either of type
-          #   {::Google::Iam::V2::ListApplicablePoliciesRequest} or an equivalent Hash.
-          #
-          #   @param request [::Google::Iam::V2::ListApplicablePoliciesRequest, ::Hash]
-          #     A request object representing the call parameters. Required. To specify no
-          #     parameters, or to keep all the default parameter values, pass an empty Hash.
-          #   @param options [::Gapic::CallOptions, ::Hash]
-          #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
-          #
-          # @overload list_applicable_policies(attachment_point: nil, filter: nil, page_token: nil, page_size: nil)
-          #   Pass arguments to `list_applicable_policies` via keyword arguments. Note that at
-          #   least one keyword argument is required. To specify no parameters, or to keep all
-          #   the default parameter values, pass an empty Hash as a request object (see above).
-          #
-          #   @param attachment_point [::String]
-          #     Required. The Cloud resource at which the applicable policies are to be
-          #     retrieved. Format: `{attachment-point}` Use the URL-encoded full resource
-          #     name, which means that the forward-slash character, `/`, must be written as
-          #     `%2F`. For example,
-          #     `cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project`.
-          #   @param filter [::String]
-          #     Filtering currently only supports the kind of policies to return, and
-          #     must be in the format “kind:[policyKind1] OR kind:[policyKind2]”.  New
-          #     policy kinds may be added in the future without notice.
-          #
-          #     Example value: “kind:denyPolicies”
-          #   @param page_token [::String]
-          #     If present, then retrieve the batch of results following the results from
-          #     the preceding call to this method.  `page_token` must be the value of
-          #     `next_page_token`
-          #     {::Google::Iam::V2::ListApplicablePoliciesResponse#next_page_token ListApplicablePoliciesResponse.next_page_token}
-          #     from the previous response.  The values of other method parameters should
-          #     be identical to those in the previous call.
-          #   @param page_size [::Integer]
-          #     Limit on the number of policies to include in the response.
-          #     Further policies can subsequently be obtained by including the
-          #     [ListApplicablePoliciesResponse.next_page_token][google.iam.admin.v1.ListApplicablePoliciesResponse.next_page_token]
-          #     in a subsequent request.
-          #     The minimum is 25, and the maximum is 100.
-          #
-          # @yield [response, operation] Access the result along with the RPC operation
-          # @yieldparam response [::Gapic::PagedEnumerable<::Google::Iam::V2::Policy>]
-          # @yieldparam operation [::GRPC::ActiveCall::Operation]
-          #
-          # @return [::Gapic::PagedEnumerable<::Google::Iam::V2::Policy>]
-          #
-          # @raise [::Google::Cloud::Error] if the RPC is aborted.
-          #
-          # @example Basic example
-          #   require "google/iam/v2"
-          #
-          #   # Create a client object. The client can be reused for multiple calls.
-          #   client = Google::Iam::V2::Policies::Client.new
-          #
-          #   # Create a request. To set request fields, pass in keyword arguments.
-          #   request = Google::Iam::V2::ListApplicablePoliciesRequest.new
-          #
-          #   # Call the list_applicable_policies method.
-          #   result = client.list_applicable_policies request
-          #
-          #   # The returned object is of type Gapic::PagedEnumerable. You can
-          #   # iterate over all elements by calling #each, and the enumerable
-          #   # will lazily make API calls to fetch subsequent pages. Other
-          #   # methods are also available for managing paging directly.
-          #   result.each do |response|
-          #     # Each element is of type ::Google::Iam::V2::Policy.
-          #     p response
-          #   end
-          #
-          def list_applicable_policies request, options = nil
-            raise ::ArgumentError, "request must be provided" if request.nil?
-
-            request = ::Gapic::Protobuf.coerce request, to: ::Google::Iam::V2::ListApplicablePoliciesRequest
-
-            # Converts hash and nil to an options object
-            options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
-
-            # Customize the options with defaults
-            metadata = @config.rpcs.list_applicable_policies.metadata.to_h
-
-            # Set x-goog-api-client and x-goog-user-project headers
-            metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
-              lib_name: @config.lib_name, lib_version: @config.lib_version,
-              gapic_version: ::Google::Iam::V2::VERSION
-            metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
-
-            header_params = {}
-            if request.attachment_point
-              header_params["attachment_point"] = request.attachment_point
-            end
-
-            request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
-            metadata[:"x-goog-request-params"] ||= request_params_header
-
-            options.apply_defaults timeout:      @config.rpcs.list_applicable_policies.timeout,
-                                   metadata:     metadata,
-                                   retry_policy: @config.rpcs.list_applicable_policies.retry_policy
-
-            options.apply_defaults timeout:      @config.timeout,
-                                   metadata:     @config.metadata,
-                                   retry_policy: @config.retry_policy
-
-            @policies_stub.call_rpc :list_applicable_policies, request, options: options do |response, operation|
-              response = ::Gapic::PagedEnumerable.new @policies_stub, :list_applicable_policies, request, response, operation, options
               yield response, operation if block_given?
               return response
             end
@@ -997,11 +872,6 @@ module Google
               # @return [::Gapic::Config::Method]
               #
               attr_reader :delete_policy
-              ##
-              # RPC-specific configuration for `list_applicable_policies`
-              # @return [::Gapic::Config::Method]
-              #
-              attr_reader :list_applicable_policies
 
               # @private
               def initialize parent_rpcs = nil
@@ -1015,8 +885,6 @@ module Google
                 @update_policy = ::Gapic::Config::Method.new update_policy_config
                 delete_policy_config = parent_rpcs.delete_policy if parent_rpcs.respond_to? :delete_policy
                 @delete_policy = ::Gapic::Config::Method.new delete_policy_config
-                list_applicable_policies_config = parent_rpcs.list_applicable_policies if parent_rpcs.respond_to? :list_applicable_policies
-                @list_applicable_policies = ::Gapic::Config::Method.new list_applicable_policies_config
 
                 yield self if block_given?
               end

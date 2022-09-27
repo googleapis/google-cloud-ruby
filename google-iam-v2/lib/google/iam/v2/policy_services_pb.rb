@@ -48,8 +48,7 @@ module Google
           #
           # To update a policy, you should use a read-modify-write loop:
           #
-          # 1. Use [GetPolicy][google.iam.v2.Policies.GetPolicy] to read the current
-          # version of the policy.
+          # 1. Use [GetPolicy][google.iam.v2.Policies.GetPolicy] to read the current version of the policy.
           # 2. Modify the policy as needed.
           # 3. Use `UpdatePolicy` to write the updated policy.
           #
@@ -57,17 +56,6 @@ module Google
           rpc :UpdatePolicy, ::Google::Iam::V2::UpdatePolicyRequest, ::Google::Longrunning::Operation
           # Deletes a policy. This action is permanent.
           rpc :DeletePolicy, ::Google::Iam::V2::DeletePolicyRequest, ::Google::Longrunning::Operation
-          # Retrieves all the policies that are attached to the specified resource,
-          # or anywhere in the ancestry of the resource. For example, for a project
-          # this endpoint would return all the `denyPolicy` kind policies attached to
-          # the project, its parent folder (if any), and its parent organization (if
-          # any).
-          # The endpoint requires the same permissions that it would take to call
-          # `ListPolicies` or `GetPolicy`.
-          #
-          # The main reason to use this endpoint is as a policy admin to debug access
-          # issues for a resource.
-          rpc :ListApplicablePolicies, ::Google::Iam::V2::ListApplicablePoliciesRequest, ::Google::Iam::V2::ListApplicablePoliciesResponse
         end
 
         Stub = Service.rpc_stub_class
