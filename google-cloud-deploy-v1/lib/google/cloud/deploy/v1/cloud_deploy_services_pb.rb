@@ -60,6 +60,8 @@ module Google
             rpc :GetRelease, ::Google::Cloud::Deploy::V1::GetReleaseRequest, ::Google::Cloud::Deploy::V1::Release
             # Creates a new Release in a given project and location.
             rpc :CreateRelease, ::Google::Cloud::Deploy::V1::CreateReleaseRequest, ::Google::Longrunning::Operation
+            # Abandons a Release in the Delivery Pipeline.
+            rpc :AbandonRelease, ::Google::Cloud::Deploy::V1::AbandonReleaseRequest, ::Google::Cloud::Deploy::V1::AbandonReleaseResponse
             # Approves a Rollout.
             rpc :ApproveRollout, ::Google::Cloud::Deploy::V1::ApproveRolloutRequest, ::Google::Cloud::Deploy::V1::ApproveRolloutResponse
             # Lists Rollouts in a given project and location.
@@ -68,6 +70,12 @@ module Google
             rpc :GetRollout, ::Google::Cloud::Deploy::V1::GetRolloutRequest, ::Google::Cloud::Deploy::V1::Rollout
             # Creates a new Rollout in a given project and location.
             rpc :CreateRollout, ::Google::Cloud::Deploy::V1::CreateRolloutRequest, ::Google::Longrunning::Operation
+            # Retries the specified Job in a Rollout.
+            rpc :RetryJob, ::Google::Cloud::Deploy::V1::RetryJobRequest, ::Google::Cloud::Deploy::V1::RetryJobResponse
+            # Lists JobRuns in a given project and location.
+            rpc :ListJobRuns, ::Google::Cloud::Deploy::V1::ListJobRunsRequest, ::Google::Cloud::Deploy::V1::ListJobRunsResponse
+            # Gets details of a single JobRun.
+            rpc :GetJobRun, ::Google::Cloud::Deploy::V1::GetJobRunRequest, ::Google::Cloud::Deploy::V1::JobRun
             # Gets the configuration for a location.
             rpc :GetConfig, ::Google::Cloud::Deploy::V1::GetConfigRequest, ::Google::Cloud::Deploy::V1::Config
           end

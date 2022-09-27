@@ -38,9 +38,7 @@ module Google
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User annotations. These attributes can only be set and used by the
-        #     user, and not by Google Cloud Deploy. See
-        #     https://google.aip.dev/128#annotations for more details such as format and
-        #     size limitations.
+        #     user, and not by Google Cloud Deploy.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels are attributes that can be set and used by both the
@@ -73,6 +71,10 @@ module Google
         #     This checksum is computed by the server based on the value of other
         #     fields, and may be sent on update and delete requests to ensure the
         #     client has an up-to-date value before proceeding.
+        # @!attribute [rw] suspended
+        #   @return [::Boolean]
+        #     When suspended, no new releases or rollouts can be created,
+        #     but in-progress ones will complete.
         class DeliveryPipeline
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -119,7 +121,29 @@ module Google
         #   @return [::Array<::String>]
         #     Skaffold profiles to use when rendering the manifest for this stage's
         #     `Target`.
+        # @!attribute [rw] strategy
+        #   @return [::Google::Cloud::Deploy::V1::Strategy]
+        #     Optional. The strategy to use for a `Rollout` to this stage.
         class Stage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Strategy contains deployment strategy information.
+        # @!attribute [rw] standard
+        #   @return [::Google::Cloud::Deploy::V1::Standard]
+        #     Standard deployment strategy executes a single deploy and allows
+        #     verifying the deployment.
+        class Strategy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Standard represents the standard deployment strategy.
+        # @!attribute [rw] verify
+        #   @return [::Boolean]
+        #     Whether to verify a deployment.
+        class Standard
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -394,6 +418,9 @@ module Google
         # @!attribute [rw] anthos_cluster
         #   @return [::Google::Cloud::Deploy::V1::AnthosCluster]
         #     Information specifying an Anthos Cluster.
+        # @!attribute [rw] run
+        #   @return [::Google::Cloud::Deploy::V1::CloudRunLocation]
+        #     Information specifying a Cloud Run deployment target.
         # @!attribute [rw] etag
         #   @return [::String]
         #     Optional. This checksum is computed by the server based on the value of other
@@ -458,6 +485,11 @@ module Google
         #     either be a bucket ("gs://my-bucket") or a path within a bucket
         #     ("gs://my-bucket/my-dir").
         #     If unspecified, a default bucket located in the same region will be used.
+        # @!attribute [rw] execution_timeout
+        #   @return [::Google::Protobuf::Duration]
+        #     Optional. Execution timeout for a Cloud Build Execution. This must be between 10m and
+        #     24h in seconds format.
+        #     If unspecified, a default timeout of 1h is used.
         class ExecutionConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -472,6 +504,9 @@ module Google
 
             # Use for deploying and deployment hooks.
             DEPLOY = 2
+
+            # Use for deployment verification.
+            VERIFY = 3
           end
         end
 
@@ -540,6 +575,16 @@ module Google
         #     configuration. Format is
         #     `projects/{project}/locations/{location}/memberships/{membership_name}`.
         class AnthosCluster
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Information specifying where to deploy a Cloud Run Service.
+        # @!attribute [rw] location
+        #   @return [::String]
+        #     Required. The location for the Cloud Run Service. Format must be
+        #     `projects/{project}/locations/{location}`.
+        class CloudRunLocation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -747,6 +792,9 @@ module Google
         #     * Each resource is limited to a maximum of 64 labels.
         #
         #     Both keys and values are additionally constrained to be <= 128 bytes.
+        # @!attribute [r] abandoned
+        #   @return [::Boolean]
+        #     Output only. Indicates whether this is an abandoned release.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Time at which the `Release` was created.
@@ -810,6 +858,9 @@ module Google
           #   @return [::Google::Cloud::Deploy::V1::Release::TargetRender::FailureCause]
           #     Output only. Reason this render failed. This will always be unspecified while the
           #     render in progress.
+          # @!attribute [r] failure_message
+          #   @return [::String]
+          #     Output only. Additional information about the render failure, if available.
           class TargetRender
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -835,7 +886,7 @@ module Google
               FAILURE_CAUSE_UNSPECIFIED = 0
 
               # Cloud Build is not available, either because it is not enabled or
-              # because Cloud Deploy has insufficient permissions. See [required
+              # because Google Cloud Deploy has insufficient permissions. See [required
               # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
               CLOUD_BUILD_UNAVAILABLE = 1
 
@@ -1079,7 +1130,7 @@ module Google
         #     Output only. Current state of the `Rollout`.
         # @!attribute [r] failure_reason
         #   @return [::String]
-        #     Output only. Reason the build failed. Empty if the build succeeded.
+        #     Output only. Additional information about the rollout failure, if available.
         # @!attribute [r] deploying_build
         #   @return [::String]
         #     Output only. The resource name of the Cloud Build `Build` object that is used to deploy
@@ -1092,8 +1143,14 @@ module Google
         #     client has an up-to-date value before proceeding.
         # @!attribute [r] deploy_failure_cause
         #   @return [::Google::Cloud::Deploy::V1::Rollout::FailureCause]
-        #     Output only. The reason this deploy failed. This will always be unspecified while the
-        #     deploy in progress.
+        #     Output only. The reason this rollout failed. This will always be unspecified while the
+        #     rollout is in progress.
+        # @!attribute [r] phases
+        #   @return [::Array<::Google::Cloud::Deploy::V1::Phase>]
+        #     Output only. The phases that represent the workflows of this `Rollout`.
+        # @!attribute [r] metadata
+        #   @return [::Google::Cloud::Deploy::V1::Metadata]
+        #     Output only. Metadata contains information about the rollout.
         class Rollout
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1162,7 +1219,7 @@ module Google
             PENDING_RELEASE = 7
           end
 
-          # Well-known deployment failures.
+          # Well-known rollout failures.
           module FailureCause
             # No reason for failure is specified.
             FAILURE_CAUSE_UNSPECIFIED = 0
@@ -1181,7 +1238,155 @@ module Google
 
             # Release is in a failed state.
             RELEASE_FAILED = 4
+
+            # Release is abandoned.
+            RELEASE_ABANDONED = 5
+
+            # No skaffold verify configuration was found.
+            VERIFICATION_CONFIG_NOT_FOUND = 6
           end
+        end
+
+        # Metadata includes information associated with a `Rollout`.
+        # @!attribute [r] cloud_run
+        #   @return [::Google::Cloud::Deploy::V1::CloudRunMetadata]
+        #     Output only. The name of the Cloud Run Service that is associated with a `Rollout`.
+        class Metadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # DeployJobRunMetadata surfaces information associated with a `DeployJobRun` to
+        # the user.
+        # @!attribute [r] cloud_run
+        #   @return [::Google::Cloud::Deploy::V1::CloudRunMetadata]
+        #     Output only. The name of the Cloud Run Service that is associated with a `DeployJobRun`.
+        class DeployJobRunMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # CloudRunMetadata contains information from a Cloud Run deployment.
+        # @!attribute [r] service
+        #   @return [::String]
+        #     Output only. The name of the Cloud Run Service that is associated with a `Rollout`.
+        #     Format is projects/\\{project}/locations/\\{location}/services/\\{service}.
+        # @!attribute [r] service_urls
+        #   @return [::Array<::String>]
+        #     Output only. The Cloud Run Service urls that are associated with a `Rollout`.
+        # @!attribute [r] revision
+        #   @return [::String]
+        #     Output only. The Cloud Run Revision id associated with a `Rollout`.
+        class CloudRunMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Phase represents a collection of jobs that are logically grouped together
+        # for a `Rollout`.
+        # @!attribute [r] id
+        #   @return [::String]
+        #     Output only. The ID of the Phase.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Deploy::V1::Phase::State]
+        #     Output only. Current state of the Phase.
+        # @!attribute [r] deployment_jobs
+        #   @return [::Google::Cloud::Deploy::V1::DeploymentJobs]
+        #     Output only. Deployment job composition.
+        class Phase
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Valid states of a Phase.
+          module State
+            # The Phase has an unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # The Phase is waiting for an earlier Phase(s) to complete.
+            PENDING = 1
+
+            # The Phase is in progress.
+            IN_PROGRESS = 2
+
+            # The Phase has succeeded.
+            SUCCEEDED = 3
+
+            # The Phase has failed.
+            FAILED = 4
+
+            # The Phase was aborted.
+            ABORTED = 5
+          end
+        end
+
+        # Deployment job composition.
+        # @!attribute [r] deploy_job
+        #   @return [::Google::Cloud::Deploy::V1::Job]
+        #     Output only. The deploy Job. This is the first job run in the phase.
+        # @!attribute [r] verify_job
+        #   @return [::Google::Cloud::Deploy::V1::Job]
+        #     Output only. The verify Job. Runs after a deploy if the deploy succeeds.
+        class DeploymentJobs
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Job represents an operation for a `Rollout`.
+        # @!attribute [r] id
+        #   @return [::String]
+        #     Output only. The ID of the Job.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Deploy::V1::Job::State]
+        #     Output only. The current state of the Job.
+        # @!attribute [r] job_run
+        #   @return [::String]
+        #     Output only. The name of the `JobRun` responsible for the most recent invocation of this
+        #     Job.
+        # @!attribute [r] deploy_job
+        #   @return [::Google::Cloud::Deploy::V1::DeployJob]
+        #     Output only. A deploy Job.
+        # @!attribute [r] verify_job
+        #   @return [::Google::Cloud::Deploy::V1::VerifyJob]
+        #     Output only. A verify Job.
+        class Job
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Valid states of a Job.
+          module State
+            # The Job has an unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # The Job is waiting for an earlier Phase(s) or Job(s) to complete.
+            PENDING = 1
+
+            # The Job is disabled.
+            DISABLED = 2
+
+            # The Job is in progress.
+            IN_PROGRESS = 3
+
+            # The Job succeeded.
+            SUCCEEDED = 4
+
+            # The Job failed.
+            FAILED = 5
+
+            # The Job was aborted.
+            ABORTED = 6
+          end
+        end
+
+        # A deploy Job.
+        class DeployJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A verify Job.
+        class VerifyJob
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # ListRolloutsRequest is the request object used by `ListRollouts`.
@@ -1320,6 +1525,243 @@ module Google
 
         # The response object from `ApproveRollout`.
         class ApproveRolloutResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # RetryJobRequest is the request object used by `RetryJob`.
+        # @!attribute [rw] rollout
+        #   @return [::String]
+        #     Required. Name of the Rollout. Format is
+        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+        #     releases/\\{release}/rollouts/\\{rollout}.
+        # @!attribute [rw] phase_id
+        #   @return [::String]
+        #     Required. The phase ID the Job to retry belongs to.
+        # @!attribute [rw] job_id
+        #   @return [::String]
+        #     Required. The job ID for the Job to retry.
+        class RetryJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object from 'RetryJob'.
+        class RetryJobResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The request object used by `AbandonRelease`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the Release. Format is
+        #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+        #     releases/\\{release}.
+        class AbandonReleaseRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response object for `AbandonRelease`.
+        class AbandonReleaseResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A `JobRun` resource in the Google Cloud Deploy API.
+        #
+        # A `JobRun` contains information of a single `Rollout` job evaluation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Optional. Name of the `JobRun`. Format is projects/\\{project}/locations/\\{location}/
+        #     deliveryPipelines/\\{deliveryPipeline}/releases/\\{releases}/rollouts/
+        #     \\{rollouts}/jobRuns/\\{uuid}.
+        # @!attribute [r] uid
+        #   @return [::String]
+        #     Output only. Unique identifier of the `JobRun`.
+        # @!attribute [r] phase_id
+        #   @return [::String]
+        #     Output only. ID of the `Rollout` phase this `JobRun` belongs in.
+        # @!attribute [r] job_id
+        #   @return [::String]
+        #     Output only. ID of the `Rollout` job this `JobRun` corresponds to.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the `JobRun` was created.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the `JobRun` was started.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time at which the `JobRun` ended.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::Deploy::V1::JobRun::State]
+        #     Output only. The current state of the `JobRun`.
+        # @!attribute [r] deploy_job_run
+        #   @return [::Google::Cloud::Deploy::V1::DeployJobRun]
+        #     Output only. Information specific to a deploy `JobRun`.
+        # @!attribute [r] verify_job_run
+        #   @return [::Google::Cloud::Deploy::V1::VerifyJobRun]
+        #     Output only. Information specific to a verify `JobRun`.
+        # @!attribute [r] etag
+        #   @return [::String]
+        #     Output only. This checksum is computed by the server based on the value of other
+        #     fields, and may be sent on update and delete requests to ensure the
+        #     client has an up-to-date value before proceeding.
+        class JobRun
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Valid states of a `JobRun`.
+          module State
+            # The `JobRun` has an unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # The `JobRun` is in progress.
+            IN_PROGRESS = 1
+
+            # The `JobRun` has succeeded.
+            SUCCEEDED = 2
+
+            # The `JobRun` has failed.
+            FAILED = 3
+          end
+        end
+
+        # DeployJobRun contains information specific to a deploy `JobRun`.
+        # @!attribute [r] build
+        #   @return [::String]
+        #     Output only. The resource name of the Cloud Build `Build` object that is used to deploy.
+        #     Format is projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        # @!attribute [r] failure_cause
+        #   @return [::Google::Cloud::Deploy::V1::DeployJobRun::FailureCause]
+        #     Output only. The reason the deploy failed. This will always be unspecified while the
+        #     deploy is in progress or if it succeeded.
+        # @!attribute [r] failure_message
+        #   @return [::String]
+        #     Output only. Additional information about the deploy failure, if available.
+        # @!attribute [r] metadata
+        #   @return [::Google::Cloud::Deploy::V1::DeployJobRunMetadata]
+        #     Output only. Metadata containing information about the deploy job run.
+        class DeployJobRun
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Well-known deploy failures.
+          module FailureCause
+            # No reason for failure is specified.
+            FAILURE_CAUSE_UNSPECIFIED = 0
+
+            # Cloud Build is not available, either because it is not enabled or because
+            # Google Cloud Deploy has insufficient permissions. See [Required
+            # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+            CLOUD_BUILD_UNAVAILABLE = 1
+
+            # The deploy operation did not complete successfully; check Cloud Build
+            # logs.
+            EXECUTION_FAILED = 2
+
+            # The deploy build did not complete within the alloted time.
+            DEADLINE_EXCEEDED = 3
+          end
+        end
+
+        # VerifyJobRun contains information specific to a verify `JobRun`.
+        # @!attribute [r] build
+        #   @return [::String]
+        #     Output only. The resource name of the Cloud Build `Build` object that is used to verify.
+        #     Format is projects/\\{project}/locations/\\{location}/builds/\\{build}.
+        # @!attribute [r] artifact_uri
+        #   @return [::String]
+        #     Output only. URI of a directory containing the verify artifacts. This contains the
+        #     Skaffold event log.
+        # @!attribute [r] event_log_path
+        #   @return [::String]
+        #     Output only. File path of the Skaffold event log relative to the artifact URI.
+        # @!attribute [r] failure_cause
+        #   @return [::Google::Cloud::Deploy::V1::VerifyJobRun::FailureCause]
+        #     Output only. The reason the verify failed. This will always be unspecified while the
+        #     verify is in progress or if it succeeded.
+        # @!attribute [r] failure_message
+        #   @return [::String]
+        #     Output only. Additional information about the verify failure, if available.
+        class VerifyJobRun
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Well-known verify failures.
+          module FailureCause
+            # No reason for failure is specified.
+            FAILURE_CAUSE_UNSPECIFIED = 0
+
+            # Cloud Build is not available, either because it is not enabled or because
+            # Google Cloud Deploy has insufficient permissions. See [required
+            # permission](/deploy/docs/cloud-deploy-service-account#required_permissions).
+            CLOUD_BUILD_UNAVAILABLE = 1
+
+            # The verify operation did not complete successfully; check Cloud Build
+            # logs.
+            EXECUTION_FAILED = 2
+
+            # The verify build did not complete within the alloted time.
+            DEADLINE_EXCEEDED = 3
+
+            # No Skaffold verify configuration was found.
+            VERIFICATION_CONFIG_NOT_FOUND = 4
+          end
+        end
+
+        # ListJobRunsRequest is the request object used by `ListJobRuns`.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The `Rollout` which owns this collection of `JobRun` objects.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. The maximum number of `JobRun` objects to return. The service may return
+        #     fewer than this value. If unspecified, at most 50 `JobRun` objects will be
+        #     returned. The maximum value is 1000; values above 1000 will be set to 1000.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. A page token, received from a previous `ListJobRuns` call. Provide this
+        #     to retrieve the subsequent page.
+        #
+        #     When paginating, all other provided parameters match the call that provided
+        #     the page token.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. Filter results to be returned. See https://google.aip.dev/160 for more
+        #     details.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+        class ListJobRunsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # ListJobRunsResponse is the response object returned by `ListJobRuns`.
+        # @!attribute [rw] job_runs
+        #   @return [::Array<::Google::Cloud::Deploy::V1::JobRun>]
+        #     The `JobRun` objects.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     A token, which can be sent as `page_token` to retrieve the next page. If
+        #     this field is omitted, there are no subsequent pages.
+        # @!attribute [rw] unreachable
+        #   @return [::Array<::String>]
+        #     Locations that could not be reached
+        class ListJobRunsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GetJobRunRequest is the request object used by `GetJobRun`.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. Name of the `JobRun`. Format must be
+        #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}/releases/\\{release_name}/rollouts/\\{rollout_name}/jobRuns/\\{job_run_name}.
+        class GetJobRunRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

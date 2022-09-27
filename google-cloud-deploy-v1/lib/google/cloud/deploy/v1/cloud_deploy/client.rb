@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/deploy/v1/cloud_deploy_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -109,6 +111,8 @@ module Google
 
                 default_config.rpcs.create_release.timeout = 60.0
 
+                default_config.rpcs.abandon_release.timeout = 60.0
+
                 default_config.rpcs.approve_rollout.timeout = 60.0
 
                 default_config.rpcs.list_rollouts.timeout = 60.0
@@ -122,6 +126,18 @@ module Google
                 }
 
                 default_config.rpcs.create_rollout.timeout = 60.0
+
+                default_config.rpcs.retry_job.timeout = 60.0
+
+                default_config.rpcs.list_job_runs.timeout = 60.0
+                default_config.rpcs.list_job_runs.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_job_run.timeout = 60.0
+                default_config.rpcs.get_job_run.retry_policy = {
+                  initial_delay: 1.0, max_delay: 60.0, multiplier: 1.3, retry_codes: [14]
+                }
 
                 default_config.rpcs.get_config.timeout = 60.0
                 default_config.rpcs.get_config.retry_policy = {
@@ -203,6 +219,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @cloud_deploy_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Deploy::V1::CloudDeploy::Stub,
                 credentials:  credentials,
@@ -218,6 +246,20 @@ module Google
             # @return [::Google::Cloud::Deploy::V1::CloudDeploy::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -1629,6 +1671,93 @@ module Google
             end
 
             ##
+            # Abandons a Release in the Delivery Pipeline.
+            #
+            # @overload abandon_release(request, options = nil)
+            #   Pass arguments to `abandon_release` via a request object, either of type
+            #   {::Google::Cloud::Deploy::V1::AbandonReleaseRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Deploy::V1::AbandonReleaseRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload abandon_release(name: nil)
+            #   Pass arguments to `abandon_release` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the Release. Format is
+            #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+            #     releases/\\{release}.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Deploy::V1::AbandonReleaseResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Deploy::V1::AbandonReleaseResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::AbandonReleaseRequest.new
+            #
+            #   # Call the abandon_release method.
+            #   result = client.abandon_release request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::AbandonReleaseResponse.
+            #   p result
+            #
+            def abandon_release request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::AbandonReleaseRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.abandon_release.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Deploy::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.abandon_release.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.abandon_release.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_deploy_stub.call_rpc :abandon_release, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Approves a Rollout.
             #
             # @overload approve_rollout(request, options = nil)
@@ -2027,6 +2156,290 @@ module Google
             end
 
             ##
+            # Retries the specified Job in a Rollout.
+            #
+            # @overload retry_job(request, options = nil)
+            #   Pass arguments to `retry_job` via a request object, either of type
+            #   {::Google::Cloud::Deploy::V1::RetryJobRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Deploy::V1::RetryJobRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload retry_job(rollout: nil, phase_id: nil, job_id: nil)
+            #   Pass arguments to `retry_job` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param rollout [::String]
+            #     Required. Name of the Rollout. Format is
+            #     projects/\\{project}/locations/\\{location}/deliveryPipelines/\\{deliveryPipeline}/
+            #     releases/\\{release}/rollouts/\\{rollout}.
+            #   @param phase_id [::String]
+            #     Required. The phase ID the Job to retry belongs to.
+            #   @param job_id [::String]
+            #     Required. The job ID for the Job to retry.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Deploy::V1::RetryJobResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Deploy::V1::RetryJobResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::RetryJobRequest.new
+            #
+            #   # Call the retry_job method.
+            #   result = client.retry_job request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::RetryJobResponse.
+            #   p result
+            #
+            def retry_job request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::RetryJobRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.retry_job.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Deploy::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.rollout
+                header_params["rollout"] = request.rollout
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.retry_job.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.retry_job.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_deploy_stub.call_rpc :retry_job, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists JobRuns in a given project and location.
+            #
+            # @overload list_job_runs(request, options = nil)
+            #   Pass arguments to `list_job_runs` via a request object, either of type
+            #   {::Google::Cloud::Deploy::V1::ListJobRunsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Deploy::V1::ListJobRunsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_job_runs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_job_runs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The `Rollout` which owns this collection of `JobRun` objects.
+            #   @param page_size [::Integer]
+            #     Optional. The maximum number of `JobRun` objects to return. The service may return
+            #     fewer than this value. If unspecified, at most 50 `JobRun` objects will be
+            #     returned. The maximum value is 1000; values above 1000 will be set to 1000.
+            #   @param page_token [::String]
+            #     Optional. A page token, received from a previous `ListJobRuns` call. Provide this
+            #     to retrieve the subsequent page.
+            #
+            #     When paginating, all other provided parameters match the call that provided
+            #     the page token.
+            #   @param filter [::String]
+            #     Optional. Filter results to be returned. See https://google.aip.dev/160 for more
+            #     details.
+            #   @param order_by [::String]
+            #     Optional. Field to sort by. See https://google.aip.dev/132#ordering for more details.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Deploy::V1::JobRun>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::Deploy::V1::JobRun>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::ListJobRunsRequest.new
+            #
+            #   # Call the list_job_runs method.
+            #   result = client.list_job_runs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::Deploy::V1::JobRun.
+            #     p response
+            #   end
+            #
+            def list_job_runs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::ListJobRunsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_job_runs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Deploy::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_job_runs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_job_runs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_deploy_stub.call_rpc :list_job_runs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @cloud_deploy_stub, :list_job_runs, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single JobRun.
+            #
+            # @overload get_job_run(request, options = nil)
+            #   Pass arguments to `get_job_run` via a request object, either of type
+            #   {::Google::Cloud::Deploy::V1::GetJobRunRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Deploy::V1::GetJobRunRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_job_run(name: nil)
+            #   Pass arguments to `get_job_run` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Name of the `JobRun`. Format must be
+            #     projects/\\{project_id}/locations/\\{location_name}/deliveryPipelines/\\{pipeline_name}/releases/\\{release_name}/rollouts/\\{rollout_name}/jobRuns/\\{job_run_name}.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Deploy::V1::JobRun]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Deploy::V1::JobRun]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/deploy/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Deploy::V1::GetJobRunRequest.new
+            #
+            #   # Call the get_job_run method.
+            #   result = client.get_job_run request
+            #
+            #   # The returned object is of type Google::Cloud::Deploy::V1::JobRun.
+            #   p result
+            #
+            def get_job_run request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Deploy::V1::GetJobRunRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_job_run.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Deploy::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_job_run.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_job_run.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @cloud_deploy_stub.call_rpc :get_job_run, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Gets the configuration for a location.
             #
             # @overload get_config(request, options = nil)
@@ -2312,6 +2725,11 @@ module Google
                 #
                 attr_reader :create_release
                 ##
+                # RPC-specific configuration for `abandon_release`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :abandon_release
+                ##
                 # RPC-specific configuration for `approve_rollout`
                 # @return [::Gapic::Config::Method]
                 #
@@ -2331,6 +2749,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :create_rollout
+                ##
+                # RPC-specific configuration for `retry_job`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :retry_job
+                ##
+                # RPC-specific configuration for `list_job_runs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_job_runs
+                ##
+                # RPC-specific configuration for `get_job_run`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_job_run
                 ##
                 # RPC-specific configuration for `get_config`
                 # @return [::Gapic::Config::Method]
@@ -2365,6 +2798,8 @@ module Google
                   @get_release = ::Gapic::Config::Method.new get_release_config
                   create_release_config = parent_rpcs.create_release if parent_rpcs.respond_to? :create_release
                   @create_release = ::Gapic::Config::Method.new create_release_config
+                  abandon_release_config = parent_rpcs.abandon_release if parent_rpcs.respond_to? :abandon_release
+                  @abandon_release = ::Gapic::Config::Method.new abandon_release_config
                   approve_rollout_config = parent_rpcs.approve_rollout if parent_rpcs.respond_to? :approve_rollout
                   @approve_rollout = ::Gapic::Config::Method.new approve_rollout_config
                   list_rollouts_config = parent_rpcs.list_rollouts if parent_rpcs.respond_to? :list_rollouts
@@ -2373,6 +2808,12 @@ module Google
                   @get_rollout = ::Gapic::Config::Method.new get_rollout_config
                   create_rollout_config = parent_rpcs.create_rollout if parent_rpcs.respond_to? :create_rollout
                   @create_rollout = ::Gapic::Config::Method.new create_rollout_config
+                  retry_job_config = parent_rpcs.retry_job if parent_rpcs.respond_to? :retry_job
+                  @retry_job = ::Gapic::Config::Method.new retry_job_config
+                  list_job_runs_config = parent_rpcs.list_job_runs if parent_rpcs.respond_to? :list_job_runs
+                  @list_job_runs = ::Gapic::Config::Method.new list_job_runs_config
+                  get_job_run_config = parent_rpcs.get_job_run if parent_rpcs.respond_to? :get_job_run
+                  @get_job_run = ::Gapic::Config::Method.new get_job_run_config
                   get_config_config = parent_rpcs.get_config if parent_rpcs.respond_to? :get_config
                   @get_config = ::Gapic::Config::Method.new get_config_config
 

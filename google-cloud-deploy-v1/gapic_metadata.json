@@ -75,6 +75,11 @@
                 "create_release"
               ]
             },
+            "AbandonRelease": {
+              "methods": [
+                "abandon_release"
+              ]
+            },
             "ApproveRollout": {
               "methods": [
                 "approve_rollout"
@@ -93,6 +98,21 @@
             "CreateRollout": {
               "methods": [
                 "create_rollout"
+              ]
+            },
+            "RetryJob": {
+              "methods": [
+                "retry_job"
+              ]
+            },
+            "ListJobRuns": {
+              "methods": [
+                "list_job_runs"
+              ]
+            },
+            "GetJobRun": {
+              "methods": [
+                "get_job_run"
               ]
             },
             "GetConfig": {

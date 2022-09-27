@@ -8,6 +8,7 @@ require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/longrunning/operations_pb'
+require 'google/protobuf/duration_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
 require 'google/type/date_pb'
@@ -24,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :update_time, :message, 7, "google.protobuf.Timestamp"
       optional :condition, :message, 11, "google.cloud.deploy.v1.PipelineCondition"
       optional :etag, :string, 10
+      optional :suspended, :bool, 12
       oneof :pipeline do
         optional :serial_pipeline, :message, 8, "google.cloud.deploy.v1.SerialPipeline"
       end
@@ -34,6 +36,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.deploy.v1.Stage" do
       optional :target_id, :string, 1
       repeated :profiles, :string, 2
+      optional :strategy, :message, 5, "google.cloud.deploy.v1.Strategy"
+    end
+    add_message "google.cloud.deploy.v1.Strategy" do
+      oneof :deployment_strategy do
+        optional :standard, :message, 1, "google.cloud.deploy.v1.Standard"
+      end
+    end
+    add_message "google.cloud.deploy.v1.Standard" do
+      optional :verify, :bool, 1
     end
     add_message "google.cloud.deploy.v1.PipelineReadyCondition" do
       optional :status, :bool, 3
@@ -100,6 +111,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :deployment_target do
         optional :gke, :message, 15, "google.cloud.deploy.v1.GkeCluster"
         optional :anthos_cluster, :message, 17, "google.cloud.deploy.v1.AnthosCluster"
+        optional :run, :message, 18, "google.cloud.deploy.v1.CloudRunLocation"
       end
     end
     add_message "google.cloud.deploy.v1.ExecutionConfig" do
@@ -107,6 +119,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :worker_pool, :string, 4
       optional :service_account, :string, 5
       optional :artifact_storage, :string, 6
+      optional :execution_timeout, :message, 7, "google.protobuf.Duration"
       oneof :execution_environment do
         optional :default_pool, :message, 2, "google.cloud.deploy.v1.DefaultPool"
         optional :private_pool, :message, 3, "google.cloud.deploy.v1.PrivatePool"
@@ -116,6 +129,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EXECUTION_ENVIRONMENT_USAGE_UNSPECIFIED, 0
       value :RENDER, 1
       value :DEPLOY, 2
+      value :VERIFY, 3
     end
     add_message "google.cloud.deploy.v1.DefaultPool" do
       optional :service_account, :string, 1
@@ -132,6 +146,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.deploy.v1.AnthosCluster" do
       optional :membership, :string, 1
+    end
+    add_message "google.cloud.deploy.v1.CloudRunLocation" do
+      optional :location, :string, 1
     end
     add_message "google.cloud.deploy.v1.ListTargetsRequest" do
       optional :parent, :string, 1
@@ -175,6 +192,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :description, :string, 3
       map :annotations, :string, :string, 4
       map :labels, :string, :string, 5
+      optional :abandoned, :bool, 23
       optional :create_time, :message, 6, "google.protobuf.Timestamp"
       optional :render_start_time, :message, 7, "google.protobuf.Timestamp"
       optional :render_end_time, :message, 8, "google.protobuf.Timestamp"
@@ -193,6 +211,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :rendering_build, :string, 1
       optional :rendering_state, :enum, 2, "google.cloud.deploy.v1.Release.TargetRender.TargetRenderState"
       optional :failure_cause, :enum, 4, "google.cloud.deploy.v1.Release.TargetRender.FailureCause"
+      optional :failure_message, :string, 5
     end
     add_enum "google.cloud.deploy.v1.Release.TargetRender.TargetRenderState" do
       value :TARGET_RENDER_STATE_UNSPECIFIED, 0
@@ -262,6 +281,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :deploying_build, :string, 17
       optional :etag, :string, 16
       optional :deploy_failure_cause, :enum, 19, "google.cloud.deploy.v1.Rollout.FailureCause"
+      repeated :phases, :message, 23, "google.cloud.deploy.v1.Phase"
+      optional :metadata, :message, 24, "google.cloud.deploy.v1.Metadata"
     end
     add_enum "google.cloud.deploy.v1.Rollout.ApprovalState" do
       value :APPROVAL_STATE_UNSPECIFIED, 0
@@ -286,6 +307,60 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EXECUTION_FAILED, 2
       value :DEADLINE_EXCEEDED, 3
       value :RELEASE_FAILED, 4
+      value :RELEASE_ABANDONED, 5
+      value :VERIFICATION_CONFIG_NOT_FOUND, 6
+    end
+    add_message "google.cloud.deploy.v1.Metadata" do
+      optional :cloud_run, :message, 1, "google.cloud.deploy.v1.CloudRunMetadata"
+    end
+    add_message "google.cloud.deploy.v1.DeployJobRunMetadata" do
+      optional :cloud_run, :message, 1, "google.cloud.deploy.v1.CloudRunMetadata"
+    end
+    add_message "google.cloud.deploy.v1.CloudRunMetadata" do
+      optional :service, :string, 1
+      repeated :service_urls, :string, 2
+      optional :revision, :string, 3
+    end
+    add_message "google.cloud.deploy.v1.Phase" do
+      optional :id, :string, 1
+      optional :state, :enum, 3, "google.cloud.deploy.v1.Phase.State"
+      oneof :jobs do
+        optional :deployment_jobs, :message, 4, "google.cloud.deploy.v1.DeploymentJobs"
+      end
+    end
+    add_enum "google.cloud.deploy.v1.Phase.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :PENDING, 1
+      value :IN_PROGRESS, 2
+      value :SUCCEEDED, 3
+      value :FAILED, 4
+      value :ABORTED, 5
+    end
+    add_message "google.cloud.deploy.v1.DeploymentJobs" do
+      optional :deploy_job, :message, 1, "google.cloud.deploy.v1.Job"
+      optional :verify_job, :message, 2, "google.cloud.deploy.v1.Job"
+    end
+    add_message "google.cloud.deploy.v1.Job" do
+      optional :id, :string, 1
+      optional :state, :enum, 2, "google.cloud.deploy.v1.Job.State"
+      optional :job_run, :string, 3
+      oneof :job_type do
+        optional :deploy_job, :message, 4, "google.cloud.deploy.v1.DeployJob"
+        optional :verify_job, :message, 5, "google.cloud.deploy.v1.VerifyJob"
+      end
+    end
+    add_enum "google.cloud.deploy.v1.Job.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :PENDING, 1
+      value :DISABLED, 2
+      value :IN_PROGRESS, 3
+      value :SUCCEEDED, 4
+      value :FAILED, 5
+      value :ABORTED, 6
+    end
+    add_message "google.cloud.deploy.v1.DeployJob" do
+    end
+    add_message "google.cloud.deploy.v1.VerifyJob" do
     end
     add_message "google.cloud.deploy.v1.ListRolloutsRequest" do
       optional :parent, :string, 1
@@ -324,6 +399,80 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.deploy.v1.ApproveRolloutResponse" do
     end
+    add_message "google.cloud.deploy.v1.RetryJobRequest" do
+      optional :rollout, :string, 1
+      optional :phase_id, :string, 2
+      optional :job_id, :string, 3
+    end
+    add_message "google.cloud.deploy.v1.RetryJobResponse" do
+    end
+    add_message "google.cloud.deploy.v1.AbandonReleaseRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.deploy.v1.AbandonReleaseResponse" do
+    end
+    add_message "google.cloud.deploy.v1.JobRun" do
+      optional :name, :string, 1
+      optional :uid, :string, 2
+      optional :phase_id, :string, 3
+      optional :job_id, :string, 4
+      optional :create_time, :message, 5, "google.protobuf.Timestamp"
+      optional :start_time, :message, 6, "google.protobuf.Timestamp"
+      optional :end_time, :message, 7, "google.protobuf.Timestamp"
+      optional :state, :enum, 8, "google.cloud.deploy.v1.JobRun.State"
+      optional :etag, :string, 11
+      oneof :job_run do
+        optional :deploy_job_run, :message, 9, "google.cloud.deploy.v1.DeployJobRun"
+        optional :verify_job_run, :message, 10, "google.cloud.deploy.v1.VerifyJobRun"
+      end
+    end
+    add_enum "google.cloud.deploy.v1.JobRun.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :IN_PROGRESS, 1
+      value :SUCCEEDED, 2
+      value :FAILED, 3
+    end
+    add_message "google.cloud.deploy.v1.DeployJobRun" do
+      optional :build, :string, 1
+      optional :failure_cause, :enum, 2, "google.cloud.deploy.v1.DeployJobRun.FailureCause"
+      optional :failure_message, :string, 3
+      optional :metadata, :message, 4, "google.cloud.deploy.v1.DeployJobRunMetadata"
+    end
+    add_enum "google.cloud.deploy.v1.DeployJobRun.FailureCause" do
+      value :FAILURE_CAUSE_UNSPECIFIED, 0
+      value :CLOUD_BUILD_UNAVAILABLE, 1
+      value :EXECUTION_FAILED, 2
+      value :DEADLINE_EXCEEDED, 3
+    end
+    add_message "google.cloud.deploy.v1.VerifyJobRun" do
+      optional :build, :string, 1
+      optional :artifact_uri, :string, 2
+      optional :event_log_path, :string, 3
+      optional :failure_cause, :enum, 4, "google.cloud.deploy.v1.VerifyJobRun.FailureCause"
+      optional :failure_message, :string, 5
+    end
+    add_enum "google.cloud.deploy.v1.VerifyJobRun.FailureCause" do
+      value :FAILURE_CAUSE_UNSPECIFIED, 0
+      value :CLOUD_BUILD_UNAVAILABLE, 1
+      value :EXECUTION_FAILED, 2
+      value :DEADLINE_EXCEEDED, 3
+      value :VERIFICATION_CONFIG_NOT_FOUND, 4
+    end
+    add_message "google.cloud.deploy.v1.ListJobRunsRequest" do
+      optional :parent, :string, 1
+      optional :page_size, :int32, 2
+      optional :page_token, :string, 3
+      optional :filter, :string, 4
+      optional :order_by, :string, 5
+    end
+    add_message "google.cloud.deploy.v1.ListJobRunsResponse" do
+      repeated :job_runs, :message, 1, "google.cloud.deploy.v1.JobRun"
+      optional :next_page_token, :string, 2
+      repeated :unreachable, :string, 3
+    end
+    add_message "google.cloud.deploy.v1.GetJobRunRequest" do
+      optional :name, :string, 1
+    end
     add_message "google.cloud.deploy.v1.Config" do
       optional :name, :string, 1
       repeated :supported_versions, :message, 2, "google.cloud.deploy.v1.SkaffoldVersion"
@@ -346,6 +495,8 @@ module Google
         DeliveryPipeline = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DeliveryPipeline").msgclass
         SerialPipeline = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.SerialPipeline").msgclass
         Stage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Stage").msgclass
+        Strategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Strategy").msgclass
+        Standard = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Standard").msgclass
         PipelineReadyCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.PipelineReadyCondition").msgclass
         TargetsPresentCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.TargetsPresentCondition").msgclass
         PipelineCondition = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.PipelineCondition").msgclass
@@ -362,6 +513,7 @@ module Google
         PrivatePool = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.PrivatePool").msgclass
         GkeCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GkeCluster").msgclass
         AnthosCluster = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.AnthosCluster").msgclass
+        CloudRunLocation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.CloudRunLocation").msgclass
         ListTargetsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListTargetsRequest").msgclass
         ListTargetsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListTargetsResponse").msgclass
         GetTargetRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GetTargetRequest").msgclass
@@ -383,6 +535,16 @@ module Google
         Rollout::ApprovalState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Rollout.ApprovalState").enummodule
         Rollout::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Rollout.State").enummodule
         Rollout::FailureCause = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Rollout.FailureCause").enummodule
+        Metadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Metadata").msgclass
+        DeployJobRunMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DeployJobRunMetadata").msgclass
+        CloudRunMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.CloudRunMetadata").msgclass
+        Phase = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Phase").msgclass
+        Phase::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Phase.State").enummodule
+        DeploymentJobs = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DeploymentJobs").msgclass
+        Job = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Job").msgclass
+        Job::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Job.State").enummodule
+        DeployJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DeployJob").msgclass
+        VerifyJob = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.VerifyJob").msgclass
         ListRolloutsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListRolloutsRequest").msgclass
         ListRolloutsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListRolloutsResponse").msgclass
         GetRolloutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GetRolloutRequest").msgclass
@@ -390,6 +552,19 @@ module Google
         OperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.OperationMetadata").msgclass
         ApproveRolloutRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ApproveRolloutRequest").msgclass
         ApproveRolloutResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ApproveRolloutResponse").msgclass
+        RetryJobRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.RetryJobRequest").msgclass
+        RetryJobResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.RetryJobResponse").msgclass
+        AbandonReleaseRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.AbandonReleaseRequest").msgclass
+        AbandonReleaseResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.AbandonReleaseResponse").msgclass
+        JobRun = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.JobRun").msgclass
+        JobRun::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.JobRun.State").enummodule
+        DeployJobRun = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DeployJobRun").msgclass
+        DeployJobRun::FailureCause = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.DeployJobRun.FailureCause").enummodule
+        VerifyJobRun = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.VerifyJobRun").msgclass
+        VerifyJobRun::FailureCause = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.VerifyJobRun.FailureCause").enummodule
+        ListJobRunsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListJobRunsRequest").msgclass
+        ListJobRunsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.ListJobRunsResponse").msgclass
+        GetJobRunRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GetJobRunRequest").msgclass
         Config = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.Config").msgclass
         SkaffoldVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.SkaffoldVersion").msgclass
         GetConfigRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.deploy.v1.GetConfigRequest").msgclass
