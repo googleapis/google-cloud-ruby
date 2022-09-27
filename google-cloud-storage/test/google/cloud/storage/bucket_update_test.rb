@@ -59,7 +59,7 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
   let(:bucket_with_cors) { Google::Cloud::Storage::Bucket.from_gapi bucket_with_cors_gapi, storage.service }
   let(:metageneration) { 6 }
 
-  focus; it "updates its autoclass config" do
+  it "updates its autoclass config" do
     mock = Minitest::Mock.new
     patch_bucket_gapi = Google::Apis::StorageV1::Bucket.new autoclass: { enabled: false }
     returned_bucket_gapi = Google::Apis::StorageV1::Bucket.from_json \
