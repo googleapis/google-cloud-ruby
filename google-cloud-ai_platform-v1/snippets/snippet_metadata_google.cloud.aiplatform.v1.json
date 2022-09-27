@@ -4052,6 +4052,46 @@
       ]
     },
     {
+      "region_tag": "aiplatform_v1_generated_MetadataService_RemoveContextChildren_sync",
+      "title": "Snippet for remove_context_children in MetadataService",
+      "description": "Basic snippet for remove_context_children in MetadataService",
+      "file": "metadata_service/remove_context_children.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "remove_context_children",
+        "full_name": "::Google::Cloud::AIPlatform::V1::MetadataService::Client#remove_context_children",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse",
+        "client": {
+          "short_name": "MetadataService::Client",
+          "full_name": "::Google::Cloud::AIPlatform::V1::MetadataService::Client"
+        },
+        "method": {
+          "short_name": "RemoveContextChildren",
+          "full_name": "google.cloud.aiplatform.v1.MetadataService.RemoveContextChildren",
+          "service": {
+            "short_name": "MetadataService",
+            "full_name": "google.cloud.aiplatform.v1.MetadataService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "aiplatform_v1_generated_MetadataService_QueryContextLineageSubgraph_sync",
       "title": "Snippet for query_context_lineage_subgraph in MetadataService",
       "description": "Basic snippet for query_context_lineage_subgraph in MetadataService",

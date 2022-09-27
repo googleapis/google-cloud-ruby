@@ -40,6 +40,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :etag, :string, 16
       map :labels, :string, :string, 17
       optional :encryption_spec, :message, 24, "google.cloud.aiplatform.v1.EncryptionSpec"
+      optional :model_source_info, :message, 38, "google.cloud.aiplatform.v1.ModelSourceInfo"
     end
     add_message "google.cloud.aiplatform.v1.Model.ExportFormat" do
       optional :id, :string, 1
@@ -73,6 +74,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.aiplatform.v1.Port" do
       optional :container_port, :int32, 3
     end
+    add_message "google.cloud.aiplatform.v1.ModelSourceInfo" do
+      optional :source_type, :enum, 1, "google.cloud.aiplatform.v1.ModelSourceInfo.ModelSourceType"
+    end
+    add_enum "google.cloud.aiplatform.v1.ModelSourceInfo.ModelSourceType" do
+      value :MODEL_SOURCE_TYPE_UNSPECIFIED, 0
+      value :AUTOML, 1
+      value :CUSTOM, 2
+      value :BQML, 3
+    end
   end
 end
 
@@ -87,6 +97,8 @@ module Google
         PredictSchemata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.PredictSchemata").msgclass
         ModelContainerSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelContainerSpec").msgclass
         Port = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.Port").msgclass
+        ModelSourceInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelSourceInfo").msgclass
+        ModelSourceInfo::ModelSourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.ModelSourceInfo.ModelSourceType").enummodule
       end
     end
   end

@@ -108,7 +108,6 @@ module Google
         end
 
         # Represents the spec of a CustomJob.
-        # Next Id: 15
         # @!attribute [rw] worker_pool_specs
         #   @return [::Array<::Google::Cloud::AIPlatform::V1::WorkerPoolSpec>]
         #     Required. The spec of the worker pools including machine type and Docker image.

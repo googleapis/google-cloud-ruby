@@ -60,6 +60,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
       optional :filter, :string, 4
+      optional :order_by, :string, 5
     end
     add_message "google.cloud.aiplatform.v1.ListArtifactsResponse" do
       repeated :artifacts, :message, 1, "google.cloud.aiplatform.v1.Artifact"
@@ -99,6 +100,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
       optional :filter, :string, 4
+      optional :order_by, :string, 5
     end
     add_message "google.cloud.aiplatform.v1.ListContextsResponse" do
       repeated :contexts, :message, 1, "google.cloud.aiplatform.v1.Context"
@@ -139,6 +141,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.AddContextChildrenResponse" do
     end
+    add_message "google.cloud.aiplatform.v1.RemoveContextChildrenRequest" do
+      optional :context, :string, 1
+      repeated :child_contexts, :string, 2
+    end
+    add_message "google.cloud.aiplatform.v1.RemoveContextChildrenResponse" do
+    end
     add_message "google.cloud.aiplatform.v1.QueryContextLineageSubgraphRequest" do
       optional :context, :string, 1
     end
@@ -155,6 +163,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :page_size, :int32, 2
       optional :page_token, :string, 3
       optional :filter, :string, 4
+      optional :order_by, :string, 5
     end
     add_message "google.cloud.aiplatform.v1.ListExecutionsResponse" do
       repeated :executions, :message, 1, "google.cloud.aiplatform.v1.Execution"
@@ -249,6 +258,8 @@ module Google
         AddContextArtifactsAndExecutionsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.AddContextArtifactsAndExecutionsResponse").msgclass
         AddContextChildrenRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.AddContextChildrenRequest").msgclass
         AddContextChildrenResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.AddContextChildrenResponse").msgclass
+        RemoveContextChildrenRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.RemoveContextChildrenRequest").msgclass
+        RemoveContextChildrenResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.RemoveContextChildrenResponse").msgclass
         QueryContextLineageSubgraphRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.QueryContextLineageSubgraphRequest").msgclass
         CreateExecutionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.CreateExecutionRequest").msgclass
         GetExecutionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.aiplatform.v1.GetExecutionRequest").msgclass
