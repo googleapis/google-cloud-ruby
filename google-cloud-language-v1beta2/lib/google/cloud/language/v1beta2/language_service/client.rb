@@ -416,7 +416,7 @@ module Google
 
             ##
             # Analyzes the syntax of the text and provides sentence boundaries and
-            # tokenization along with part-of-speech tags, dependency trees, and other
+            # tokenization along with part of speech tags, dependency trees, and other
             # properties.
             #
             # @overload analyze_syntax(request, options = nil)
@@ -508,13 +508,16 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload classify_text(document: nil)
+            # @overload classify_text(document: nil, classification_model_options: nil)
             #   Pass arguments to `classify_text` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param document [::Google::Cloud::Language::V1beta2::Document, ::Hash]
             #     Required. Input document.
+            #   @param classification_model_options [::Google::Cloud::Language::V1beta2::ClassificationModelOptions, ::Hash]
+            #     Model options to use for classification. Defaults to v1 options if not
+            #     specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Language::V1beta2::ClassifyTextResponse]
