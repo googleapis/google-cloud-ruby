@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.1 (2022-09-28)
+
+#### Bug Fixes
+
+* Configured timeouts and retry policies for saved query calls ([#19201](https://github.com/googleapis/google-cloud-ruby/issues/19201)) 
+
 ### 0.21.0 (2022-08-17)
 
 #### Features
