@@ -143,17 +143,17 @@ describe "Buckets Snippets" do
   end
 
   describe "autoclass" do
-    focus; it "get_autoclass, set_autoclass" do
+    it "get_autoclass, set_autoclass" do
       bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
 
       storage_client.create_bucket bucket_name, autoclass_enabled: true
 
-      assert_output(/autoclass config set to true./)  do
+      assert_output(/autoclass config set to true./) do
         get_autoclass bucket_name: bucket_name
       end
 
-      assert_output(/autoclass config set to false./)  do
+      assert_output(/autoclass config set to false./) do
         set_autoclass bucket_name: bucket_name, toggle: false
       end
 

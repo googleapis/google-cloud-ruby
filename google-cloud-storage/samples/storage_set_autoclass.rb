@@ -23,7 +23,6 @@ require "google/cloud/storage"
 # @param toggle [Boolean] if true, enables Autoclass; if false, disables Autoclass
 #
 def set_autoclass bucket_name:, toggle:
-
   # Initialize client
   storage = Google::Cloud::Storage.new
 

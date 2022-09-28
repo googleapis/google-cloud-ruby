@@ -22,7 +22,6 @@ require "google/cloud/storage"
 # @param bucket_name [String] The ID of your GCS bucket (e.g. "your-unique-bucket-name")
 #
 def get_autoclass bucket_name:
-
   # Initialize client
   storage = Google::Cloud::Storage.new
 
