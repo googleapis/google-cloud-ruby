@@ -421,7 +421,7 @@ module Google
         #
         # @return [Boolean]
         #
-        def autoclass?
+        def autoclass_enabled
           @gapi.autoclass&.enabled?
         end
 
