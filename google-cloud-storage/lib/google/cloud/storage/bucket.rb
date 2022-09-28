@@ -426,7 +426,16 @@ module Google
         end
 
         ##
-        # Updates the bucket's autoclass configuration. This defines the default class for objects in the
+        # Toggle time of the autoclass
+        #
+        # @return [DateTime]
+        #
+        def autoclass_toggle_time
+          @gapi.autoclass&.toggle_time
+        end
+
+        ##
+        # Updates bucket's autoclass configuration. This defines the default class for objects in the
         # bucket and down/up-grades the storage class of objects based on the access patterns.
         # Accepted values are `:false`, and `:true`.
         # rubocop:todo update the link
@@ -436,13 +445,9 @@ module Google
         # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
         def autoclass_enabled= toggle
-          # rubocop:todo delete the if clause when the Autoclass is released for existing bucket
-          if @gapi.autoclass.nil?
-            return
-          end
-
-          @gapi.autoclass = { enabled: toggle }
-          patch_gapi! :autoclass
+            @gapi.autoclass ||= API::Bucket::Autoclass.new
+            @gapi.autoclass.enabled = toggle
+            patch_gapi! :autoclass
         end
 
         ##

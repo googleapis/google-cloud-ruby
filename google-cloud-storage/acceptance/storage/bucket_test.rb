@@ -280,7 +280,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(one_off_bucket_name)).wont_be :nil?
     _(one_off_bucket.user_project).must_equal true
     _(one_off_bucket.autoclass?).must_equal true
-    prev_toggle_time = one_off_bucket.autoclass.toggle_time
+    prev_toggle_time = one_off_bucket.autoclass_toggle_time
 
     one_off_bucket.update do |b|
       b.autoclass_enabled= false
@@ -291,7 +291,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(one_off_bucket_copy).wont_be :nil?
     _(one_off_bucket_copy.user_project).must_equal true
     _(one_off_bucket_copy.autoclass?).must_equal false
-    refute one_off_bucket_copy.autoclass.toggle_time == prev_toggle_time
+    refute one_off_bucket_copy.autoclass_toggle_time == prev_toggle_time
 
     one_off_bucket.files.all &:delete
     safe_gcs_execute { one_off_bucket.delete }

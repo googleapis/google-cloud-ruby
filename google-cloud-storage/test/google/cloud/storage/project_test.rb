@@ -96,8 +96,8 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
     _(bucket.name).must_equal bucket_name
-    puts bucket.autoclass
-    _(bucket.autoclass[:enabled]).must_equal bucket_autoclass_enabled
+    _(bucket.autoclass?).must_equal bucket_autoclass_enabled
+    _(bucket.autoclass.enabled).must_equal bucket_autoclass_enabled
   end
 
   it "creates a bucket with storage_class" do
@@ -844,7 +844,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
       name: name, location: location, storage_class: storage_class,
       versioning: versioning, logging: logging, website: website,
       cors_configurations: cors, billing: billing, lifecycle: lifecycle,
-      autoclass: autoclass_enabled.nil? ? nil : { enabled: autoclass_enabled }
+      autoclass: autoclass_enabled.nil? ? nil : Google::Apis::StorageV1::Bucket::Autoclass.new(enabled: autoclass_enabled)
     }.delete_if { |_, v| v.nil? }
     Google::Apis::StorageV1::Bucket.new **options
   end
