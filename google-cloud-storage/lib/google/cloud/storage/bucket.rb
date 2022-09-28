@@ -445,9 +445,9 @@ module Google
         # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
         def autoclass_enabled= toggle
-            @gapi.autoclass ||= API::Bucket::Autoclass.new
-            @gapi.autoclass.enabled = toggle
-            patch_gapi! :autoclass
+          @gapi.autoclass ||= API::Bucket::Autoclass.new
+          @gapi.autoclass.enabled = toggle
+          patch_gapi! :autoclass
         end
 
         ##
