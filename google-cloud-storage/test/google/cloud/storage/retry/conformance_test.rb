@@ -17,8 +17,6 @@ require "net/http"
 require_relative "../../../../../conformance/v1/proto/google/cloud/conformance/storage/v1/tests_pb"
 require_relative "./utils.rb"
 
-Google::Apis.logger.level = Logger::DEBUG
-
 class ConformanceTest < MockStorage
 
   HOST = "http://localhost:9000/"
@@ -59,7 +57,7 @@ class ConformanceTest < MockStorage
 
       success_result = true
       begin
-        run_retry_test test_id, lib_func, scenario["preconditionProvided"], method.resources
+        run_retry_test test_id, lib_func, scenario.preconditionProvided, method.resources
       rescue => e
         success_result = false
       end
@@ -90,21 +88,23 @@ class ConformanceTest < MockStorage
 ##################################################################################################
 
 ##
-# The Retry Test API in the testbench is used to run the retry conformance tests. It offers a 
-# mechanism to describe more complex
-# retry scenarios while sending a single, constant header through all the HTTP requests from a
-# test program. The Retry Test API can be accessed by adding the path "/retry-test" to the host. # See also: https://github.com/googleapis/storage-testbench
+# The Retry Test API in the testbench is used to run the retry conformance tests.
+# It offers a mechanism to describe more complex retry scenarios while sending
+# a single, constant header through all the HTTP requests from a test program.
+# The Retry Test API can be accessed by adding the path "/retry-test" to the host.
+# See also: https://github.com/googleapis/storage-testbench
 ##
 
-  # For each test case, initialize a Retry Test resource by loading a set of instructions to the testbench host.
-  # The instructions include an API method and a list of errors. An unique id is created for each Retry Test resource.
+  # For each test case, initialize a Retry Test resource by loading a set of
+  # instructions to the testbench host.
+  # The instructions include an API method and a list of errors. An unique id
+  # is created for each Retry Test resource.
   def create_retry_test method_name, instructions
     retry_test_uri = HOST + "retry_test"
     uri = URI.parse retry_test_uri
     headers = {"Content-Type" => "application/json"}
     data = {"instructions" => {method_name => instructions.to_a}}.to_json
     http = Net::HTTP.new uri.host, uri.port
-    http.set_debug_output($stdout)
     request = Net::HTTP::Post.new uri.request_uri, headers
     request.body = data
     http.request request

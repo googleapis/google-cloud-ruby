@@ -33,7 +33,7 @@ namespace :test do
   end
 end
 
-#Conformance Tests
+# Conformance Tests
 namespace :conformance do
   desc "Run storage conformance tests."
   task :run do
