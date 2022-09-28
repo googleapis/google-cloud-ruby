@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.13.0 (2022-09-28)
+
+#### Features
+
+* Import calls report the number rows that weren't ingested due to having feature timestamps outside the retention boundary 
+* Model now includes information about its source 
+* Support for changing the order of results in list calls 
+* Support for the remove_context_children call ([#19203](https://github.com/googleapis/google-cloud-ruby/issues/19203)) 
+
 ### 0.12.0 (2022-08-25)
 
 #### Features
