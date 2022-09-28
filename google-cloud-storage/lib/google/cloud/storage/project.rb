@@ -739,10 +739,6 @@ module Google
         def acl_rule option_name
           Bucket::Acl.predefined_rule_for option_name
         end
-
-        def autoclass_for autoclass_enabled
-          autoclass_enabled.nil? ? nil : { enabled: autoclass_enabled }
-        end
       end
     end
   end

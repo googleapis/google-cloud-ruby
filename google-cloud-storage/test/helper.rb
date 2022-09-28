@@ -64,6 +64,7 @@ class MockStorage < Minitest::Spec
                          rpo: "DEFAULT",
                          autoclass_enabled: nil
     versioning_config = { "enabled" => versioning } if versioning
+    autoclass_config = { enabled: autoclass_enabled } unless autoclass_enabled.nil?
     { "kind" => "storage#bucket",
       "id" => name,
       "selfLink" => "#{url_root}/b/#{name}",
@@ -83,7 +84,7 @@ class MockStorage < Minitest::Spec
       "website" => website_hash(website_main, website_404),
       "billing" => billing_hash(requester_pays),
       "etag" => "CAE=",
-      "autoclass" => autoclass_enabled.nil? ? nil : { enabled: autoclass_enabled } }.delete_if { |_, v| v.nil? }
+      "autoclass" => autoclass_config }.delete_if { |_, v| v.nil? }
   end
 
   def logging_hash(bucket, prefix)

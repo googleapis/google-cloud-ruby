@@ -68,9 +68,9 @@ describe Google::Cloud::Storage::Bucket, :update, :mock_storage do
 
     bucket.service.mocked_service = mock
 
-    _(bucket.autoclass.enabled).must_equal true
+    _(bucket.autoclass?).must_equal true
     bucket.autoclass_enabled= false
-    _(bucket.autoclass.enabled).must_equal false
+    _(bucket.autoclass?).must_equal false
 
     mock.verify
   end
