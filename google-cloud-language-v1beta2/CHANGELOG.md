@@ -1,5 +1,13 @@
 # Release History
 
+### 0.6.0 (2022-09-28)
+
+#### Features
+
+* Support for boilerplate handling 
+* Support for setting model options when classifying text ([#19205](https://github.com/googleapis/google-cloud-ruby/issues/19205)) 
+* Support for specifying a web URI as a hint for document analysis 
+
 ### 0.5.0 (2022-07-02)
 
 #### Features
