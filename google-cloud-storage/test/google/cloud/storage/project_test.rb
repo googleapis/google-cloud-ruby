@@ -839,12 +839,12 @@ describe Google::Cloud::Storage::Project, :mock_storage do
                          cors: nil,
                          billing: nil,
                          lifecycle: nil,
-                         autoclass_enabled: nil
+                         autoclass_enabled: false
     options = {
       name: name, location: location, storage_class: storage_class,
       versioning: versioning, logging: logging, website: website,
       cors_configurations: cors, billing: billing, lifecycle: lifecycle,
-      autoclass: autoclass_enabled.nil? ? nil : Google::Apis::StorageV1::Bucket::Autoclass.new(enabled: autoclass_enabled)
+      autoclass: Google::Apis::StorageV1::Bucket::Autoclass.new( enabled: autoclass_enabled )
     }.delete_if { |_, v| v.nil? }
     Google::Apis::StorageV1::Bucket.new **options
   end
