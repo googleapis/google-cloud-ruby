@@ -39,7 +39,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "creates an HMAC key" do
     mock = Minitest::Mock.new
-    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: nil, options: {}
+    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: nil, options: {retries: 0}
     storage.service.mocked_service = mock
 
     hmac_key = storage.create_hmac_key service_account_email
@@ -53,7 +53,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
   it "creates an HMAC key with project_id set to another project ID" do
     mock = Minitest::Mock.new
     hmac_key_gapi.metadata.project_id = other_project_id
-    mock.expect :create_project_hmac_key, hmac_key_gapi, [other_project_id, service_account_email], user_project: nil, options: {}
+    mock.expect :create_project_hmac_key, hmac_key_gapi, [other_project_id, service_account_email], user_project: nil, options: {retries: 0}
     storage.service.mocked_service = mock
 
     hmac_key = storage.create_hmac_key service_account_email, project_id: other_project_id
@@ -66,7 +66,7 @@ describe Google::Cloud::Storage::Project, :hmac_keys, :mock_storage do
 
   it "creates an HMAC key with user_project set to another project ID" do
     mock = Minitest::Mock.new
-    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: other_project_id, options: {}
+    mock.expect :create_project_hmac_key, hmac_key_gapi, ["test", service_account_email], user_project: other_project_id, options: {retries: 0}
     storage.service.mocked_service = mock
 
     hmac_key = storage.create_hmac_key service_account_email, user_project: other_project_id

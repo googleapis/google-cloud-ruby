@@ -53,6 +53,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gvnic, :message, 29, "google.container.v1.VirtualNIC"
       optional :spot, :bool, 32
       optional :confidential_nodes, :message, 35, "google.container.v1.ConfidentialNodes"
+      optional :logging_config, :message, 38, "google.container.v1.NodePoolLoggingConfig"
     end
     add_message "google.container.v1.AdvancedMachineFeatures" do
       proto3_optional :threads_per_core, :int64, 1
@@ -309,6 +310,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.container.v1.NodeConfigDefaults" do
       optional :gcfs_config, :message, 1, "google.container.v1.GcfsConfig"
+      optional :logging_config, :message, 3, "google.container.v1.NodePoolLoggingConfig"
     end
     add_message "google.container.v1.ClusterUpdate" do
       optional :desired_node_version, :string, 4
@@ -345,6 +347,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_master_version, :string, 100
       optional :desired_gcfs_config, :message, 109, "google.container.v1.GcfsConfig"
       optional :desired_node_pool_auto_config_network_tags, :message, 110, "google.container.v1.NetworkTags"
+      optional :desired_node_pool_logging_config, :message, 116, "google.container.v1.NodePoolLoggingConfig"
     end
     add_message "google.container.v1.Operation" do
       optional :name, :string, 1
@@ -442,6 +445,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :gcfs_config, :message, 22, "google.container.v1.GcfsConfig"
       optional :confidential_nodes, :message, 23, "google.container.v1.ConfidentialNodes"
       optional :gvnic, :message, 29, "google.container.v1.VirtualNIC"
+      optional :logging_config, :message, 32, "google.container.v1.NodePoolLoggingConfig"
     end
     add_message "google.container.v1.SetNodePoolAutoscalingRequest" do
       optional :project_id, :string, 1
@@ -1051,6 +1055,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :component_config, :message, 1, "google.container.v1.MonitoringComponentConfig"
       optional :managed_prometheus_config, :message, 2, "google.container.v1.ManagedPrometheusConfig"
     end
+    add_message "google.container.v1.NodePoolLoggingConfig" do
+      optional :variant_config, :message, 1, "google.container.v1.LoggingVariantConfig"
+    end
+    add_message "google.container.v1.LoggingVariantConfig" do
+      optional :variant, :enum, 1, "google.container.v1.LoggingVariantConfig.Variant"
+    end
+    add_enum "google.container.v1.LoggingVariantConfig.Variant" do
+      value :VARIANT_UNSPECIFIED, 0
+      value :DEFAULT, 1
+      value :MAX_THROUGHPUT, 2
+    end
     add_message "google.container.v1.MonitoringComponentConfig" do
       repeated :enable_components, :enum, 1, "google.container.v1.MonitoringComponentConfig.Component"
     end
@@ -1257,6 +1272,9 @@ module Google
         LoggingComponentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LoggingComponentConfig").msgclass
         LoggingComponentConfig::Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LoggingComponentConfig.Component").enummodule
         MonitoringConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MonitoringConfig").msgclass
+        NodePoolLoggingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePoolLoggingConfig").msgclass
+        LoggingVariantConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LoggingVariantConfig").msgclass
+        LoggingVariantConfig::Variant = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LoggingVariantConfig.Variant").enummodule
         MonitoringComponentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MonitoringComponentConfig").msgclass
         MonitoringComponentConfig::Component = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MonitoringComponentConfig.Component").enummodule
         ManagedPrometheusConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ManagedPrometheusConfig").msgclass

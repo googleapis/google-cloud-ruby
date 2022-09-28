@@ -1,5 +1,11 @@
 # Release History
 
+### 0.10.0 (2022-09-16)
+
+#### Features
+
+* Support for high throughput logging config ([#19180](https://github.com/googleapis/google-cloud-ruby/issues/19180)) 
+
 ### 0.9.1 (2022-08-04)
 
 #### Documentation

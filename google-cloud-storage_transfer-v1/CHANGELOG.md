@@ -1,5 +1,15 @@
 # Changelog
 
+### 0.4.0 (2022-09-16)
+
+#### Features
+
+* Support for AWS S3 compatible data 
+* Support for delete_transfer_job call ([#19139](https://github.com/googleapis/google-cloud-ruby/issues/19139)) 
+#### Bug Fixes
+
+* Adjusted the default retry configuration 
+
 ### 0.3.0 (2022-07-08)
 
 #### Features

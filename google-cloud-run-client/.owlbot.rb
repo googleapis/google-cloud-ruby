@@ -36,7 +36,7 @@ file_paths = [
   %r{^test/.+\.rb$}
 ]
 OwlBot.modifier path: file_paths, name: "Rename gem" do |content|
-  content.gsub(/google-cloud-run(?=[^-])/, "google-cloud-run-client")
+  content.gsub(/(?<=[^-\w])google-cloud-run(?=[^-\w])/, "google-cloud-run-client")
          .gsub("google/cloud/run/version", "google/cloud/run/client/version")
          .gsub("Google::Cloud::Run::VERSION", "Google::Cloud::Run::Client::VERSION")
 end

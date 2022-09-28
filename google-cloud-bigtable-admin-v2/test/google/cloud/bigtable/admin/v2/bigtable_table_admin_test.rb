@@ -307,6 +307,71 @@ class ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::ClientTest < Min
     end
   end
 
+  def test_update_table
+    # Create GRPC objects.
+    grpc_response = ::Google::Longrunning::Operation.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    table = {}
+    update_mask = {}
+
+    update_table_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :update_table, name
+      assert_kind_of ::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest, request
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::Admin::V2::Table), request["table"]
+      assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Protobuf::FieldMask), request["update_mask"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, update_table_client_stub do
+      # Create client
+      client = ::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.update_table({ table: table, update_mask: update_mask }) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.update_table table: table, update_mask: update_mask do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.update_table ::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest.new(table: table, update_mask: update_mask) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.update_table({ table: table, update_mask: update_mask }, grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.update_table(::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest.new(table: table, update_mask: update_mask), grpc_options) do |response, operation|
+        assert_kind_of Gapic::Operation, response
+        assert_equal grpc_response, response.grpc_op
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, update_table_client_stub.call_rpc_count
+    end
+  end
+
   def test_delete_table
     # Create GRPC objects.
     grpc_response = ::Google::Protobuf::Empty.new

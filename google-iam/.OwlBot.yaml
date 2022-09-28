@@ -1,3 +1,0 @@
-deep-copy-regex:
-  - source: /google/iam/[^/]+-ruby/(.*)
-    dest: /owl-bot-staging/google-iam/$1

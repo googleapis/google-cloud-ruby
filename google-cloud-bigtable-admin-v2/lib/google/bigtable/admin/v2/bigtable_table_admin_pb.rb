@@ -74,6 +74,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :view, :enum, 2, "google.bigtable.admin.v2.Table.View"
     end
+    add_message "google.bigtable.admin.v2.UpdateTableRequest" do
+      optional :table, :message, 1, "google.bigtable.admin.v2.Table"
+      optional :update_mask, :message, 2, "google.protobuf.FieldMask"
+    end
+    add_message "google.bigtable.admin.v2.UpdateTableMetadata" do
+      optional :name, :string, 1
+      optional :start_time, :message, 2, "google.protobuf.Timestamp"
+      optional :end_time, :message, 3, "google.protobuf.Timestamp"
+    end
     add_message "google.bigtable.admin.v2.DeleteTableRequest" do
       optional :name, :string, 1
     end
@@ -192,6 +201,8 @@ module Google
           ListTablesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesRequest").msgclass
           ListTablesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.ListTablesResponse").msgclass
           GetTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.GetTableRequest").msgclass
+          UpdateTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateTableRequest").msgclass
+          UpdateTableMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UpdateTableMetadata").msgclass
           DeleteTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.DeleteTableRequest").msgclass
           UndeleteTableRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UndeleteTableRequest").msgclass
           UndeleteTableMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.admin.v2.UndeleteTableMetadata").msgclass

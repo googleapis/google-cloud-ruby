@@ -144,6 +144,11 @@
                 "get_table"
               ]
             },
+            "UpdateTable": {
+              "methods": [
+                "update_table"
+              ]
+            },
             "DeleteTable": {
               "methods": [
                 "delete_table"

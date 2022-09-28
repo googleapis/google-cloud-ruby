@@ -74,6 +74,11 @@ module Google
 
                   default_config.rpcs.get_health.timeout = 600.0
 
+                  default_config.rpcs.get_iam_policy.timeout = 600.0
+                  default_config.rpcs.get_iam_policy.retry_policy = {
+                    initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
+                  }
+
                   default_config.rpcs.insert.timeout = 600.0
 
                   default_config.rpcs.list.timeout = 600.0
@@ -82,6 +87,8 @@ module Google
                   }
 
                   default_config.rpcs.patch.timeout = 600.0
+
+                  default_config.rpcs.set_iam_policy.timeout = 600.0
 
                   default_config.rpcs.update.timeout = 600.0
 
@@ -366,6 +373,73 @@ module Google
               end
 
               ##
+              # Gets the access control policy for a resource. May be empty if no such policy or resource exists.
+              #
+              # @overload get_iam_policy(request, options = nil)
+              #   Pass arguments to `get_iam_policy` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::GetIamPolicyRegionBackendServiceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::GetIamPolicyRegionBackendServiceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload get_iam_policy(options_requested_policy_version: nil, project: nil, region: nil, resource: nil)
+              #   Pass arguments to `get_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param options_requested_policy_version [::Integer]
+              #     Requested IAM Policy version.
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def get_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::GetIamPolicyRegionBackendServiceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.get_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.get_iam_policy.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @region_backend_services_stub.get_iam_policy request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
               # Creates a regional BackendService resource in the specified project using the data included in the request. For more information, see Backend services overview.
               #
               # @overload insert(request, options = nil)
@@ -594,6 +668,73 @@ module Google
               end
 
               ##
+              # Sets the access control policy on the specified resource. Replaces any existing policy.
+              #
+              # @overload set_iam_policy(request, options = nil)
+              #   Pass arguments to `set_iam_policy` via a request object, either of type
+              #   {::Google::Cloud::Compute::V1::SetIamPolicyRegionBackendServiceRequest} or an equivalent Hash.
+              #
+              #   @param request [::Google::Cloud::Compute::V1::SetIamPolicyRegionBackendServiceRequest, ::Hash]
+              #     A request object representing the call parameters. Required. To specify no
+              #     parameters, or to keep all the default parameter values, pass an empty Hash.
+              #   @param options [::Gapic::CallOptions, ::Hash]
+              #     Overrides the default settings for this call, e.g, timeout, retries etc. Optional.
+              #     Note: currently retry functionality is not implemented. While it is possible
+              #     to set it using ::Gapic::CallOptions, it will not be applied
+              #
+              # @overload set_iam_policy(project: nil, region: nil, region_set_policy_request_resource: nil, resource: nil)
+              #   Pass arguments to `set_iam_policy` via keyword arguments. Note that at
+              #   least one keyword argument is required. To specify no parameters, or to keep all
+              #   the default parameter values, pass an empty Hash as a request object (see above).
+              #
+              #   @param project [::String]
+              #     Project ID for this request.
+              #   @param region [::String]
+              #     The name of the region for this request.
+              #   @param region_set_policy_request_resource [::Google::Cloud::Compute::V1::RegionSetPolicyRequest, ::Hash]
+              #     The body resource for this request
+              #   @param resource [::String]
+              #     Name or id of the resource for this request.
+              # @yield [result, response] Access the result along with the Faraday response object
+              # @yieldparam result [::Google::Cloud::Compute::V1::Policy]
+              # @yieldparam response [::Faraday::Response]
+              #
+              # @return [::Google::Cloud::Compute::V1::Policy]
+              #
+              # @raise [::Google::Cloud::Error] if the REST call is aborted.
+              def set_iam_policy request, options = nil
+                raise ::ArgumentError, "request must be provided" if request.nil?
+
+                request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Compute::V1::SetIamPolicyRegionBackendServiceRequest
+
+                # Converts hash and nil to an options object
+                options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+                # Customize the options with defaults
+                call_metadata = @config.rpcs.set_iam_policy.metadata.to_h
+
+                # Set x-goog-api-client header
+                call_metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                  lib_name: @config.lib_name, lib_version: @config.lib_version,
+                  gapic_version: ::Google::Cloud::Compute::V1::VERSION,
+                  transports_version_send: [:rest]
+
+                options.apply_defaults timeout:      @config.rpcs.set_iam_policy.timeout,
+                                       metadata:     call_metadata
+
+                options.apply_defaults timeout:      @config.timeout,
+                                       metadata:     @config.metadata
+
+                @region_backend_services_stub.set_iam_policy request, options do |result, response|
+                  yield result, response if block_given?
+                  return result
+                end
+              rescue ::Faraday::Error => e
+                gapic_error = ::Gapic::Rest::Error.wrap_faraday_error e
+                raise ::Google::Cloud::Error.from_error(gapic_error)
+              end
+
+              ##
               # Updates the specified regional BackendService resource with the data included in the request. For more information, see Backend services overview .
               #
               # @overload update(request, options = nil)
@@ -786,6 +927,11 @@ module Google
                   #
                   attr_reader :get_health
                   ##
+                  # RPC-specific configuration for `get_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :get_iam_policy
+                  ##
                   # RPC-specific configuration for `insert`
                   # @return [::Gapic::Config::Method]
                   #
@@ -801,6 +947,11 @@ module Google
                   #
                   attr_reader :patch
                   ##
+                  # RPC-specific configuration for `set_iam_policy`
+                  # @return [::Gapic::Config::Method]
+                  #
+                  attr_reader :set_iam_policy
+                  ##
                   # RPC-specific configuration for `update`
                   # @return [::Gapic::Config::Method]
                   #
@@ -814,12 +965,16 @@ module Google
                     @get = ::Gapic::Config::Method.new get_config
                     get_health_config = parent_rpcs.get_health if parent_rpcs.respond_to? :get_health
                     @get_health = ::Gapic::Config::Method.new get_health_config
+                    get_iam_policy_config = parent_rpcs.get_iam_policy if parent_rpcs.respond_to? :get_iam_policy
+                    @get_iam_policy = ::Gapic::Config::Method.new get_iam_policy_config
                     insert_config = parent_rpcs.insert if parent_rpcs.respond_to? :insert
                     @insert = ::Gapic::Config::Method.new insert_config
                     list_config = parent_rpcs.list if parent_rpcs.respond_to? :list
                     @list = ::Gapic::Config::Method.new list_config
                     patch_config = parent_rpcs.patch if parent_rpcs.respond_to? :patch
                     @patch = ::Gapic::Config::Method.new patch_config
+                    set_iam_policy_config = parent_rpcs.set_iam_policy if parent_rpcs.respond_to? :set_iam_policy
+                    @set_iam_policy = ::Gapic::Config::Method.new set_iam_policy_config
                     update_config = parent_rpcs.update if parent_rpcs.respond_to? :update
                     @update = ::Gapic::Config::Method.new update_config
 

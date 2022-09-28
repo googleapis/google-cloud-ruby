@@ -55,22 +55,67 @@ module Google
         #         `WHERE __name__ > ... AND a > 1 ORDER BY a ASC, __name__ ASC`
         # @!attribute [rw] start_at
         #   @return [::Google::Cloud::Firestore::V1::Cursor]
-        #     A starting point for the query results.
+        #     A potential prefix of a position in the result set to start the query at.
+        #
+        #     The ordering of the result set is based on the `ORDER BY` clause of the
+        #     original query.
+        #
+        #     ```
+        #     SELECT * FROM k WHERE a = 1 AND b > 2 ORDER BY b ASC, __name__ ASC;
+        #     ```
+        #
+        #     This query's results are ordered by `(b ASC, __name__ ASC)`.
+        #
+        #     Cursors can reference either the full ordering or a prefix of the location,
+        #     though it cannot reference more fields than what are in the provided
+        #     `ORDER BY`.
+        #
+        #     Continuing off the example above, attaching the following start cursors
+        #     will have varying impact:
+        #
+        #     - `START BEFORE (2, /k/123)`: start the query right before `a = 1 AND
+        #        b > 2 AND __name__ > /k/123`.
+        #     - `START AFTER (10)`: start the query right after `a = 1 AND b > 10`.
+        #
+        #     Unlike `OFFSET` which requires scanning over the first N results to skip,
+        #     a start cursor allows the query to begin at a logical position. This
+        #     position is not required to match an actual result, it will scan forward
+        #     from this position to find the next document.
+        #
+        #     Requires:
+        #
+        #     * The number of values cannot be greater than the number of fields
+        #       specified in the `ORDER BY` clause.
         # @!attribute [rw] end_at
         #   @return [::Google::Cloud::Firestore::V1::Cursor]
-        #     A end point for the query results.
+        #     A potential prefix of a position in the result set to end the query at.
+        #
+        #     This is similar to `START_AT` but with it controlling the end position
+        #     rather than the start position.
+        #
+        #     Requires:
+        #
+        #     * The number of values cannot be greater than the number of fields
+        #       specified in the `ORDER BY` clause.
         # @!attribute [rw] offset
         #   @return [::Integer]
-        #     The number of results to skip.
+        #     The number of documents to skip before returning the first result.
         #
-        #     Applies before limit, but after all other constraints. Must be >= 0 if
-        #     specified.
+        #     This applies after the constraints specified by the `WHERE`, `START AT`, &
+        #     `END AT` but before the `LIMIT` clause.
+        #
+        #     Requires:
+        #
+        #     * The value must be greater than or equal to zero if specified.
         # @!attribute [rw] limit
         #   @return [::Google::Protobuf::Int32Value]
         #     The maximum number of results to return.
         #
         #     Applies after all other constraints.
-        #     Must be >= 0 if specified.
+        #
+        #     Requires:
+        #
+        #     * The value must be greater than or equal to zero if specified.
         class StructuredQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -272,9 +317,14 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A reference to a field, such as `max(messages.time) as max_time`.
+          # A reference to a field in a document, ex: `stats.operations`.
           # @!attribute [rw] field_path
           #   @return [::String]
+          #     The relative path of the document being referenced.
+          #
+          #     Requires:
+          #
+          #     * Conform to {::Google::Cloud::Firestore::V1::Document#fields document field name} limitations.
           class FieldReference
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -302,6 +352,93 @@ module Google
 
             # Descending.
             DESCENDING = 2
+          end
+        end
+
+        # Firestore query for running an aggregation over a {::Google::Cloud::Firestore::V1::StructuredQuery StructuredQuery}.
+        # @!attribute [rw] structured_query
+        #   @return [::Google::Cloud::Firestore::V1::StructuredQuery]
+        #     Nested structured query.
+        # @!attribute [rw] aggregations
+        #   @return [::Array<::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation>]
+        #     Optional. Series of aggregations to apply over the results of the `structured_query`.
+        #
+        #     Requires:
+        #
+        #     * A minimum of one and maximum of five aggregations per query.
+        class StructuredAggregationQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines a aggregation that produces a single result.
+          # @!attribute [rw] count
+          #   @return [::Google::Cloud::Firestore::V1::StructuredAggregationQuery::Aggregation::Count]
+          #     Count aggregator.
+          # @!attribute [rw] alias
+          #   @return [::String]
+          #     Optional. Optional name of the field to store the result of the aggregation into.
+          #
+          #     If not provided, Firestore will pick a default name following the format
+          #     `field_<incremental_id++>`. For example:
+          #
+          #     ```
+          #     AGGREGATE
+          #       COUNT_UP_TO(1) AS count_up_to_1,
+          #       COUNT_UP_TO(2),
+          #       COUNT_UP_TO(3) AS count_up_to_3,
+          #       COUNT_UP_TO(4)
+          #     OVER (
+          #       ...
+          #     );
+          #     ```
+          #
+          #     becomes:
+          #
+          #     ```
+          #     AGGREGATE
+          #       COUNT_UP_TO(1) AS count_up_to_1,
+          #       COUNT_UP_TO(2) AS field_1,
+          #       COUNT_UP_TO(3) AS count_up_to_3,
+          #       COUNT_UP_TO(4) AS field_2
+          #     OVER (
+          #       ...
+          #     );
+          #     ```
+          #
+          #     Requires:
+          #
+          #     * Must be unique across all aggregation aliases.
+          #     * Conform to {::Google::Cloud::Firestore::V1::Document#fields document field name} limitations.
+          class Aggregation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Count of documents that match the query.
+            #
+            # The `COUNT(*)` aggregation function operates on the entire document
+            # so it does not require a field reference.
+            # @!attribute [rw] up_to
+            #   @return [::Google::Protobuf::Int64Value]
+            #     Optional. Optional constraint on the maximum number of documents to count.
+            #
+            #     This provides a way to set an upper bound on the number of documents
+            #     to scan, limiting latency and cost.
+            #
+            #     Unspecified is interpreted as no bound.
+            #
+            #     High-Level Example:
+            #
+            #     ```
+            #     AGGREGATE COUNT_UP_TO(1000) OVER ( SELECT * FROM k );
+            #     ```
+            #
+            #     Requires:
+            #
+            #     * Must be greater than zero when present.
+            class Count
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
           end
         end
 

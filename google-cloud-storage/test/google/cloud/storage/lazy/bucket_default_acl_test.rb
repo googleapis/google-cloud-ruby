@@ -69,7 +69,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
       [bucket_name], user_project: nil, options: {}
     mock.expect :insert_default_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], user_project: nil, options: {}
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -105,7 +105,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
       [bucket_name], user_project: "test", options: {}
     mock.expect :insert_default_object_access_control,
       Google::Apis::StorageV1::BucketAccessControl.from_json(reader_acl.to_json),
-      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], user_project: "test", options: {}
+      [bucket_name, Google::Apis::StorageV1::BucketAccessControl.new(entity: reader_entity, role: "READER")], user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -130,7 +130,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name], user_project: nil, options: {}
     mock.expect :delete_default_object_access_control, nil,
-      [bucket_name, existing_reader_entity], user_project: nil, options: {}
+      [bucket_name, existing_reader_entity], user_project: nil, options: {retries: 0}
 
     storage.service.mocked_service = mock
 
@@ -155,7 +155,7 @@ describe Google::Cloud::Storage::Bucket, :default_acl, :lazy, :mock_storage do
       Google::Apis::StorageV1::ObjectAccessControls.from_json(random_default_acl_hash(bucket_name).to_json),
       [bucket_name], user_project: "test", options: {}
     mock.expect :delete_default_object_access_control, nil,
-      [bucket_name, existing_reader_entity], user_project: "test", options: {}
+      [bucket_name, existing_reader_entity], user_project: "test", options: {retries: 0}
 
     storage.service.mocked_service = mock
 

@@ -50,6 +50,11 @@
                 "run_transfer_job"
               ]
             },
+            "DeleteTransferJob": {
+              "methods": [
+                "delete_transfer_job"
+              ]
+            },
             "CreateAgentPool": {
               "methods": [
                 "create_agent_pool"

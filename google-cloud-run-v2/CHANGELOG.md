@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.3.1 (2022-09-15)
+
+#### Documentation
+
+* Fix the main client gem name listed in the readme ([#19166](https://github.com/googleapis/google-cloud-ruby/issues/19166)) 
+
 ### 0.3.0 (2022-07-07)
 
 #### Features

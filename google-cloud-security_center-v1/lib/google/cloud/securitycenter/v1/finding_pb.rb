@@ -51,6 +51,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :processes, :message, 30, "google.cloud.securitycenter.v1.Process"
       map :contacts, :string, :message, 33, "google.cloud.securitycenter.v1.ContactDetails"
       repeated :compliances, :message, 34, "google.cloud.securitycenter.v1.Compliance"
+      optional :parent_display_name, :string, 36
       optional :description, :string, 37
       optional :exfiltration, :message, 38, "google.cloud.securitycenter.v1.Exfiltration"
       repeated :iam_bindings, :message, 39, "google.cloud.securitycenter.v1.IamBinding"

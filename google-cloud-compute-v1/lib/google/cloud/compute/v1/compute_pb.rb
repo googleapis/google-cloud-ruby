@@ -292,6 +292,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :enable_nested_virtualization, :bool, 16639365
       proto3_optional :enable_uefi_networking, :bool, 334485668
       proto3_optional :threads_per_core, :int32, 352611671
+      proto3_optional :visible_core_count, :int32, 193198684
     end
     add_message "google.cloud.compute.v1.AggregatedListAcceleratorTypesRequest" do
       proto3_optional :filter, :string, 336120696
@@ -545,6 +546,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :project, :string, 227560217
       proto3_optional :return_partial_success, :bool, 517198390
     end
+    add_message "google.cloud.compute.v1.AggregatedListSslPoliciesRequest" do
+      proto3_optional :filter, :string, 336120696
+      proto3_optional :include_all_scopes, :bool, 391327988
+      proto3_optional :max_results, :uint32, 54715419
+      proto3_optional :order_by, :string, 160562920
+      proto3_optional :page_token, :string, 19994697
+      optional :project, :string, 227560217
+      proto3_optional :return_partial_success, :bool, 517198390
+    end
     add_message "google.cloud.compute.v1.AggregatedListSubnetworksRequest" do
       proto3_optional :filter, :string, 336120696
       proto3_optional :include_all_scopes, :bool, 391327988
@@ -696,6 +706,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :device_name, :string, 67541716
       proto3_optional :disk_encryption_key, :message, 271660677, "google.cloud.compute.v1.CustomerEncryptionKey"
       proto3_optional :disk_size_gb, :int64, 316263735
+      proto3_optional :force_attach, :bool, 142758425
       repeated :guest_os_features, :message, 79294545, "google.cloud.compute.v1.GuestOsFeature"
       proto3_optional :index, :int32, 100346066
       proto3_optional :initialize_params, :message, 17697045, "google.cloud.compute.v1.AttachedDiskInitializeParams"
@@ -738,6 +749,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :licenses, :string, 337642578
       proto3_optional :on_update_action, :string, 202451980
       proto3_optional :provisioned_iops, :int64, 186769108
+      map :resource_manager_tags, :string, :string, 377671164
       repeated :resource_policies, :string, 22220385
       proto3_optional :source_image, :string, 50443319
       proto3_optional :source_image_encryption_key, :message, 381503659, "google.cloud.compute.v1.CustomerEncryptionKey"
@@ -933,6 +945,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.compute.v1.BackendBucket" do
       proto3_optional :bucket_name, :string, 283610048
       proto3_optional :cdn_policy, :message, 213976452, "google.cloud.compute.v1.BackendBucketCdnPolicy"
+      proto3_optional :compression_mode, :string, 95520988
       proto3_optional :creation_timestamp, :string, 30525366
       repeated :custom_response_headers, :string, 387539094
       proto3_optional :description, :string, 422937596
@@ -942,6 +955,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :kind, :string, 3292052
       proto3_optional :name, :string, 3373707
       proto3_optional :self_link, :string, 456214797
+    end
+    add_enum "google.cloud.compute.v1.BackendBucket.CompressionMode" do
+      value :UNDEFINED_COMPRESSION_MODE, 0
+      value :AUTOMATIC, 165298699
+      value :DISABLED, 516696700
     end
     add_message "google.cloud.compute.v1.BackendBucketCdnPolicy" do
       repeated :bypass_cache_on_request_headers, :message, 486203082, "google.cloud.compute.v1.BackendBucketCdnPolicyBypassCacheOnRequestHeader"
@@ -988,6 +1006,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :backends, :message, 510839903, "google.cloud.compute.v1.Backend"
       proto3_optional :cdn_policy, :message, 213976452, "google.cloud.compute.v1.BackendServiceCdnPolicy"
       proto3_optional :circuit_breakers, :message, 421340061, "google.cloud.compute.v1.CircuitBreakers"
+      proto3_optional :compression_mode, :string, 95520988
       proto3_optional :connection_draining, :message, 461096747, "google.cloud.compute.v1.ConnectionDraining"
       proto3_optional :connection_tracking_policy, :message, 143994969, "google.cloud.compute.v1.BackendServiceConnectionTrackingPolicy"
       proto3_optional :consistent_hash, :message, 905883, "google.cloud.compute.v1.ConsistentHashLoadBalancerSettings"
@@ -1022,6 +1041,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :session_affinity, :string, 463888561
       proto3_optional :subsetting, :message, 450283536, "google.cloud.compute.v1.Subsetting"
       proto3_optional :timeout_sec, :int32, 79994995
+    end
+    add_enum "google.cloud.compute.v1.BackendService.CompressionMode" do
+      value :UNDEFINED_COMPRESSION_MODE, 0
+      value :AUTOMATIC, 165298699
+      value :DISABLED, 516696700
     end
     add_enum "google.cloud.compute.v1.BackendService.LoadBalancingScheme" do
       value :UNDEFINED_LOAD_BALANCING_SCHEME, 0
@@ -1336,12 +1360,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :id, :uint64, 3355
       proto3_optional :kind, :string, 3292052
       proto3_optional :license_resource, :message, 437955148, "google.cloud.compute.v1.LicenseResourceCommitment"
+      repeated :merge_source_commitments, :string, 188093761
       proto3_optional :name, :string, 3373707
       proto3_optional :plan, :string, 3443497
       proto3_optional :region, :string, 138946292
       repeated :reservations, :message, 399717927, "google.cloud.compute.v1.Reservation"
       repeated :resources, :message, 164412965, "google.cloud.compute.v1.ResourceCommitment"
       proto3_optional :self_link, :string, 456214797
+      proto3_optional :split_source_commitment, :string, 402611156
       proto3_optional :start_timestamp, :string, 83645817
       proto3_optional :status, :string, 181260274
       proto3_optional :status_message, :string, 297428154
@@ -1804,6 +1830,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :request_id, :string, 37109963
       optional :ssl_certificate, :string, 46443492
     end
+    add_message "google.cloud.compute.v1.DeleteRegionSslPolicyRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :request_id, :string, 37109963
+      optional :ssl_policy, :string, 295190213
+    end
     add_message "google.cloud.compute.v1.DeleteRegionTargetHttpProxyRequest" do
       optional :project, :string, 227560217
       optional :region, :string, 138946292
@@ -1815,6 +1847,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region, :string, 138946292
       proto3_optional :request_id, :string, 37109963
       optional :target_https_proxy, :string, 52336748
+    end
+    add_message "google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :request_id, :string, 37109963
+      optional :target_tcp_proxy, :string, 503065442
     end
     add_message "google.cloud.compute.v1.DeleteRegionUrlMapRequest" do
       optional :project, :string, 227560217
@@ -2026,6 +2064,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :location_hint, :string, 350519505
       proto3_optional :name, :string, 3373707
       proto3_optional :options, :string, 361137822
+      proto3_optional :params, :message, 78313862, "google.cloud.compute.v1.DiskParams"
       proto3_optional :physical_block_size_bytes, :int64, 420007943
       proto3_optional :provisioned_iops, :int64, 186769108
       proto3_optional :region, :string, 138946292
@@ -2098,6 +2137,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.compute.v1.DiskMoveRequest" do
       proto3_optional :destination_zone, :string, 131854653
       proto3_optional :target_disk, :string, 62433163
+    end
+    add_message "google.cloud.compute.v1.DiskParams" do
+      map :resource_manager_tags, :string, :string, 377671164
     end
     add_message "google.cloud.compute.v1.DiskType" do
       proto3_optional :creation_timestamp, :string, 30525366
@@ -2645,6 +2687,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region, :string, 138946292
       optional :target_pool, :string, 62796298
     end
+    add_message "google.cloud.compute.v1.GetIamPolicyBackendServiceRequest" do
+      proto3_optional :options_requested_policy_version, :int32, 499220029
+      optional :project, :string, 227560217
+      optional :resource, :string, 195806222
+    end
     add_message "google.cloud.compute.v1.GetIamPolicyDiskRequest" do
       proto3_optional :options_requested_policy_version, :int32, 499220029
       optional :project, :string, 227560217
@@ -2693,6 +2740,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :zone, :string, 3744684
     end
     add_message "google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest" do
+      proto3_optional :options_requested_policy_version, :int32, 499220029
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :resource, :string, 195806222
+    end
+    add_message "google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest" do
       proto3_optional :options_requested_policy_version, :int32, 499220029
       optional :project, :string, 227560217
       optional :region, :string, 138946292
@@ -2936,6 +2989,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region, :string, 138946292
       optional :ssl_certificate, :string, 46443492
     end
+    add_message "google.cloud.compute.v1.GetRegionSslPolicyRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :ssl_policy, :string, 295190213
+    end
     add_message "google.cloud.compute.v1.GetRegionTargetHttpProxyRequest" do
       optional :project, :string, 227560217
       optional :region, :string, 138946292
@@ -2945,6 +3003,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :project, :string, 227560217
       optional :region, :string, 138946292
       optional :target_https_proxy, :string, 52336748
+    end
+    add_message "google.cloud.compute.v1.GetRegionTargetTcpProxyRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :target_tcp_proxy, :string, 503065442
     end
     add_message "google.cloud.compute.v1.GetRegionUrlMapRequest" do
       optional :project, :string, 227560217
@@ -3771,6 +3834,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :request_id, :string, 37109963
       optional :ssl_certificate_resource, :message, 180709897, "google.cloud.compute.v1.SslCertificate"
     end
+    add_message "google.cloud.compute.v1.InsertRegionSslPolicyRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :request_id, :string, 37109963
+      optional :ssl_policy_resource, :message, 274891848, "google.cloud.compute.v1.SslPolicy"
+    end
     add_message "google.cloud.compute.v1.InsertRegionTargetHttpProxyRequest" do
       optional :project, :string, 227560217
       optional :region, :string, 138946292
@@ -3782,6 +3851,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region, :string, 138946292
       proto3_optional :request_id, :string, 37109963
       optional :target_https_proxy_resource, :message, 433657473, "google.cloud.compute.v1.TargetHttpsProxy"
+    end
+    add_message "google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :request_id, :string, 37109963
+      optional :target_tcp_proxy_resource, :message, 145913931, "google.cloud.compute.v1.TargetTcpProxy"
     end
     add_message "google.cloud.compute.v1.InsertRegionUrlMapRequest" do
       optional :project, :string, 227560217
@@ -3983,6 +4058,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :self_link, :string, 456214797
       repeated :unreachables, :string, 243372063
       proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
+    end
+    add_message "google.cloud.compute.v1.InstanceConsumptionData" do
+      proto3_optional :consumption_info, :message, 146354898, "google.cloud.compute.v1.InstanceConsumptionInfo"
+      proto3_optional :instance, :string, 18257045
+    end
+    add_message "google.cloud.compute.v1.InstanceConsumptionInfo" do
+      proto3_optional :guest_cpus, :int32, 393356754
+      proto3_optional :local_ssd_gb, :int32, 329237578
+      proto3_optional :memory_mb, :int32, 116001171
+      proto3_optional :min_node_cpus, :int32, 317231675
     end
     add_message "google.cloud.compute.v1.InstanceGroup" do
       proto3_optional :creation_timestamp, :string, 30525366
@@ -4788,6 +4873,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :return_partial_success, :bool, 517198390
       optional :zone, :string, 3744684
     end
+    add_message "google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest" do
+      proto3_optional :filter, :string, 336120696
+      proto3_optional :max_results, :uint32, 54715419
+      proto3_optional :order_by, :string, 160562920
+      proto3_optional :page_token, :string, 19994697
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :return_partial_success, :bool, 517198390
+    end
     add_message "google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest" do
       proto3_optional :filter, :string, 336120696
       proto3_optional :max_results, :uint32, 54715419
@@ -5372,6 +5466,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region, :string, 138946292
       proto3_optional :return_partial_success, :bool, 517198390
     end
+    add_message "google.cloud.compute.v1.ListRegionSslPoliciesRequest" do
+      proto3_optional :filter, :string, 336120696
+      proto3_optional :max_results, :uint32, 54715419
+      proto3_optional :order_by, :string, 160562920
+      proto3_optional :page_token, :string, 19994697
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :return_partial_success, :bool, 517198390
+    end
     add_message "google.cloud.compute.v1.ListRegionTargetHttpProxiesRequest" do
       proto3_optional :filter, :string, 336120696
       proto3_optional :max_results, :uint32, 54715419
@@ -5382,6 +5485,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :return_partial_success, :bool, 517198390
     end
     add_message "google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest" do
+      proto3_optional :filter, :string, 336120696
+      proto3_optional :max_results, :uint32, 54715419
+      proto3_optional :order_by, :string, 160562920
+      proto3_optional :page_token, :string, 19994697
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :return_partial_success, :bool, 517198390
+    end
+    add_message "google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest" do
       proto3_optional :filter, :string, 336120696
       proto3_optional :max_results, :uint32, 54715419
       proto3_optional :order_by, :string, 160562920
@@ -6125,6 +6237,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :name, :string, 3373707
       proto3_optional :node_template, :string, 323154455
       proto3_optional :self_link, :string, 456214797
+      proto3_optional :share_settings, :message, 266668163, "google.cloud.compute.v1.ShareSettings"
       proto3_optional :size, :int32, 3530753
       proto3_optional :status, :string, 181260274
       proto3_optional :zone, :string, 3744684
@@ -6178,8 +6291,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.compute.v1.NodeGroupNode" do
       repeated :accelerators, :message, 269577064, "google.cloud.compute.v1.AcceleratorConfig"
+      proto3_optional :consumed_resources, :message, 334527118, "google.cloud.compute.v1.InstanceConsumptionInfo"
       proto3_optional :cpu_overcommit_type, :string, 247727959
       repeated :disks, :message, 95594102, "google.cloud.compute.v1.LocalDisk"
+      repeated :instance_consumption_data, :message, 84715576, "google.cloud.compute.v1.InstanceConsumptionData"
       repeated :instances, :string, 29097598
       proto3_optional :name, :string, 3373707
       proto3_optional :node_type, :string, 465832791
@@ -6187,6 +6302,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :server_binding, :message, 208179593, "google.cloud.compute.v1.ServerBinding"
       proto3_optional :server_id, :string, 339433367
       proto3_optional :status, :string, 181260274
+      proto3_optional :total_resources, :message, 97406698, "google.cloud.compute.v1.InstanceConsumptionInfo"
     end
     add_enum "google.cloud.compute.v1.NodeGroupNode.CpuOvercommitType" do
       value :UNDEFINED_CPU_OVERCOMMIT_TYPE, 0
@@ -6692,6 +6808,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :request_id, :string, 37109963
       optional :security_policy, :string, 171082513
       optional :security_policy_resource, :message, 216159612, "google.cloud.compute.v1.SecurityPolicy"
+    end
+    add_message "google.cloud.compute.v1.PatchRegionSslPolicyRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      proto3_optional :request_id, :string, 37109963
+      optional :ssl_policy, :string, 295190213
+      optional :ssl_policy_resource, :message, 274891848, "google.cloud.compute.v1.SslPolicy"
     end
     add_message "google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest" do
       optional :project, :string, 227560217
@@ -8191,6 +8314,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :STANDARD, 484642493
     end
     add_message "google.cloud.compute.v1.SecurityPolicyAdvancedOptionsConfig" do
+      proto3_optional :json_custom_config, :message, 111570105, "google.cloud.compute.v1.SecurityPolicyAdvancedOptionsConfigJsonCustomConfig"
       proto3_optional :json_parsing, :string, 282493529
       proto3_optional :log_level, :string, 140582601
     end
@@ -8203,6 +8327,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UNDEFINED_LOG_LEVEL, 0
       value :NORMAL, 161067239
       value :VERBOSE, 532219234
+    end
+    add_message "google.cloud.compute.v1.SecurityPolicyAdvancedOptionsConfigJsonCustomConfig" do
+      repeated :content_types, :string, 17428787
     end
     add_message "google.cloud.compute.v1.SecurityPolicyDdosProtectionConfig" do
       proto3_optional :ddos_protection, :string, 275173268
@@ -8451,6 +8578,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :request_id, :string, 37109963
       optional :security_policy_reference_resource, :message, 204135024, "google.cloud.compute.v1.SecurityPolicyReference"
     end
+    add_message "google.cloud.compute.v1.SetIamPolicyBackendServiceRequest" do
+      optional :global_set_policy_request_resource, :message, 337048498, "google.cloud.compute.v1.GlobalSetPolicyRequest"
+      optional :project, :string, 227560217
+      optional :resource, :string, 195806222
+    end
     add_message "google.cloud.compute.v1.SetIamPolicyDiskRequest" do
       optional :project, :string, 227560217
       optional :resource, :string, 195806222
@@ -8499,6 +8631,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :zone_set_policy_request_resource, :message, 382082107, "google.cloud.compute.v1.ZoneSetPolicyRequest"
     end
     add_message "google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :region_set_policy_request_resource, :message, 276489091, "google.cloud.compute.v1.RegionSetPolicyRequest"
+      optional :resource, :string, 195806222
+    end
+    add_message "google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest" do
       optional :project, :string, 227560217
       optional :region, :string, 138946292
       optional :region_set_policy_request_resource, :message, 276489091, "google.cloud.compute.v1.RegionSetPolicyRequest"
@@ -8559,6 +8697,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :region_instance_group_managers_set_template_request_resource, :message, 187310412, "google.cloud.compute.v1.RegionInstanceGroupManagersSetTemplateRequest"
       proto3_optional :request_id, :string, 37109963
     end
+    add_message "google.cloud.compute.v1.SetLabelsAddressRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :region_set_labels_request_resource, :message, 259357782, "google.cloud.compute.v1.RegionSetLabelsRequest"
+      proto3_optional :request_id, :string, 37109963
+      optional :resource, :string, 195806222
+    end
     add_message "google.cloud.compute.v1.SetLabelsDiskRequest" do
       optional :project, :string, 227560217
       proto3_optional :request_id, :string, 37109963
@@ -8578,6 +8723,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :request_id, :string, 37109963
       optional :resource, :string, 195806222
     end
+    add_message "google.cloud.compute.v1.SetLabelsGlobalAddressRequest" do
+      optional :global_set_labels_request_resource, :message, 319917189, "google.cloud.compute.v1.GlobalSetLabelsRequest"
+      optional :project, :string, 227560217
+      optional :resource, :string, 195806222
+    end
     add_message "google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest" do
       optional :global_set_labels_request_resource, :message, 319917189, "google.cloud.compute.v1.GlobalSetLabelsRequest"
       optional :project, :string, 227560217
@@ -8595,6 +8745,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :request_id, :string, 37109963
       optional :zone, :string, 3744684
     end
+    add_message "google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :region_set_labels_request_resource, :message, 259357782, "google.cloud.compute.v1.RegionSetLabelsRequest"
+      proto3_optional :request_id, :string, 37109963
+      optional :resource, :string, 195806222
+    end
+    add_message "google.cloud.compute.v1.SetLabelsInterconnectRequest" do
+      optional :global_set_labels_request_resource, :message, 319917189, "google.cloud.compute.v1.GlobalSetLabelsRequest"
+      optional :project, :string, 227560217
+      optional :resource, :string, 195806222
+    end
     add_message "google.cloud.compute.v1.SetLabelsRegionDiskRequest" do
       optional :project, :string, 227560217
       optional :region, :string, 138946292
@@ -8602,12 +8764,31 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :request_id, :string, 37109963
       optional :resource, :string, 195806222
     end
+    add_message "google.cloud.compute.v1.SetLabelsSecurityPolicyRequest" do
+      optional :global_set_labels_request_resource, :message, 319917189, "google.cloud.compute.v1.GlobalSetLabelsRequest"
+      optional :project, :string, 227560217
+      optional :resource, :string, 195806222
+    end
     add_message "google.cloud.compute.v1.SetLabelsSnapshotRequest" do
       optional :global_set_labels_request_resource, :message, 319917189, "google.cloud.compute.v1.GlobalSetLabelsRequest"
       optional :project, :string, 227560217
       optional :resource, :string, 195806222
     end
+    add_message "google.cloud.compute.v1.SetLabelsTargetVpnGatewayRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :region_set_labels_request_resource, :message, 259357782, "google.cloud.compute.v1.RegionSetLabelsRequest"
+      proto3_optional :request_id, :string, 37109963
+      optional :resource, :string, 195806222
+    end
     add_message "google.cloud.compute.v1.SetLabelsVpnGatewayRequest" do
+      optional :project, :string, 227560217
+      optional :region, :string, 138946292
+      optional :region_set_labels_request_resource, :message, 259357782, "google.cloud.compute.v1.RegionSetLabelsRequest"
+      proto3_optional :request_id, :string, 37109963
+      optional :resource, :string, 195806222
+    end
+    add_message "google.cloud.compute.v1.SetLabelsVpnTunnelRequest" do
       optional :project, :string, 227560217
       optional :region, :string, 138946292
       optional :region_set_labels_request_resource, :message, 259357782, "google.cloud.compute.v1.RegionSetLabelsRequest"
@@ -8818,6 +8999,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.compute.v1.ShareSettings.ShareType" do
       value :UNDEFINED_SHARE_TYPE, 0
       value :LOCAL, 72607563
+      value :ORGANIZATION, 274978099
       value :SHARE_TYPE_UNSPECIFIED, 494771730
       value :SPECIFIC_PROJECTS, 347838695
     end
@@ -9003,6 +9185,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :ssl_certificates, :message, 366006543, "google.cloud.compute.v1.SslCertificate"
       proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
     end
+    add_message "google.cloud.compute.v1.SslPoliciesAggregatedList" do
+      proto3_optional :etag, :string, 3123477
+      proto3_optional :id, :string, 3355
+      map :items, :string, :message, 100526016, "google.cloud.compute.v1.SslPoliciesScopedList"
+      proto3_optional :kind, :string, 3292052
+      proto3_optional :next_page_token, :string, 79797525
+      proto3_optional :self_link, :string, 456214797
+      repeated :unreachables, :string, 243372063
+      proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
+    end
     add_message "google.cloud.compute.v1.SslPoliciesList" do
       proto3_optional :id, :string, 3355
       repeated :items, :message, 100526016, "google.cloud.compute.v1.SslPolicy"
@@ -9013,6 +9205,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.compute.v1.SslPoliciesListAvailableFeaturesResponse" do
       repeated :features, :string, 246211645
+    end
+    add_message "google.cloud.compute.v1.SslPoliciesScopedList" do
+      repeated :ssl_policies, :message, 209941027, "google.cloud.compute.v1.SslPolicy"
+      proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
     end
     add_message "google.cloud.compute.v1.SslPolicy" do
       proto3_optional :creation_timestamp, :string, 30525366
@@ -9025,6 +9221,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :min_tls_version, :string, 8155943
       proto3_optional :name, :string, 3373707
       proto3_optional :profile, :string, 227445161
+      proto3_optional :region, :string, 138946292
       proto3_optional :self_link, :string, 456214797
       repeated :warnings, :message, 498091095, "google.cloud.compute.v1.Warnings"
     end
@@ -9511,6 +9708,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :name, :string, 3373707
       proto3_optional :proxy_bind, :bool, 286025582
       proto3_optional :proxy_header, :string, 160374142
+      proto3_optional :region, :string, 138946292
       proto3_optional :self_link, :string, 456214797
       proto3_optional :service, :string, 373540533
     end
@@ -10392,6 +10590,7 @@ module Google
         AggregatedListSecurityPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListSecurityPoliciesRequest").msgclass
         AggregatedListServiceAttachmentsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListServiceAttachmentsRequest").msgclass
         AggregatedListSslCertificatesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListSslCertificatesRequest").msgclass
+        AggregatedListSslPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListSslPoliciesRequest").msgclass
         AggregatedListSubnetworksRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListSubnetworksRequest").msgclass
         AggregatedListTargetHttpProxiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListTargetHttpProxiesRequest").msgclass
         AggregatedListTargetHttpsProxiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListTargetHttpsProxiesRequest").msgclass
@@ -10444,6 +10643,7 @@ module Google
         Backend = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Backend").msgclass
         Backend::BalancingMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Backend.BalancingMode").enummodule
         BackendBucket = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendBucket").msgclass
+        BackendBucket::CompressionMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendBucket.CompressionMode").enummodule
         BackendBucketCdnPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendBucketCdnPolicy").msgclass
         BackendBucketCdnPolicy::CacheMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendBucketCdnPolicy.CacheMode").enummodule
         BackendBucketCdnPolicyBypassCacheOnRequestHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendBucketCdnPolicyBypassCacheOnRequestHeader").msgclass
@@ -10451,6 +10651,7 @@ module Google
         BackendBucketCdnPolicyNegativeCachingPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendBucketCdnPolicyNegativeCachingPolicy").msgclass
         BackendBucketList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendBucketList").msgclass
         BackendService = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendService").msgclass
+        BackendService::CompressionMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendService.CompressionMode").enummodule
         BackendService::LoadBalancingScheme = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendService.LoadBalancingScheme").enummodule
         BackendService::LocalityLbPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendService.LocalityLbPolicy").enummodule
         BackendService::Protocol = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.BackendService.Protocol").enummodule
@@ -10572,8 +10773,10 @@ module Google
         DeleteRegionOperationResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionOperationResponse").msgclass
         DeleteRegionSecurityPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionSecurityPolicyRequest").msgclass
         DeleteRegionSslCertificateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionSslCertificateRequest").msgclass
+        DeleteRegionSslPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionSslPolicyRequest").msgclass
         DeleteRegionTargetHttpProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionTargetHttpProxyRequest").msgclass
         DeleteRegionTargetHttpsProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionTargetHttpsProxyRequest").msgclass
+        DeleteRegionTargetTcpProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionTargetTcpProxyRequest").msgclass
         DeleteRegionUrlMapRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteRegionUrlMapRequest").msgclass
         DeleteReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteReservationRequest").msgclass
         DeleteResourcePolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DeleteResourcePolicyRequest").msgclass
@@ -10617,6 +10820,7 @@ module Google
         DiskInstantiationConfig::InstantiateFrom = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DiskInstantiationConfig.InstantiateFrom").enummodule
         DiskList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DiskList").msgclass
         DiskMoveRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DiskMoveRequest").msgclass
+        DiskParams = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DiskParams").msgclass
         DiskType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DiskType").msgclass
         DiskTypeAggregatedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DiskTypeAggregatedList").msgclass
         DiskTypeList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.DiskTypeList").msgclass
@@ -10706,6 +10910,7 @@ module Google
         GetHealthCheckRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetHealthCheckRequest").msgclass
         GetHealthRegionBackendServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetHealthRegionBackendServiceRequest").msgclass
         GetHealthTargetPoolRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetHealthTargetPoolRequest").msgclass
+        GetIamPolicyBackendServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyBackendServiceRequest").msgclass
         GetIamPolicyDiskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyDiskRequest").msgclass
         GetIamPolicyFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyFirewallPolicyRequest").msgclass
         GetIamPolicyImageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyImageRequest").msgclass
@@ -10716,6 +10921,7 @@ module Google
         GetIamPolicyNetworkFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyNetworkFirewallPolicyRequest").msgclass
         GetIamPolicyNodeGroupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyNodeGroupRequest").msgclass
         GetIamPolicyNodeTemplateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyNodeTemplateRequest").msgclass
+        GetIamPolicyRegionBackendServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyRegionBackendServiceRequest").msgclass
         GetIamPolicyRegionDiskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyRegionDiskRequest").msgclass
         GetIamPolicyRegionNetworkFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyRegionNetworkFirewallPolicyRequest").msgclass
         GetIamPolicyReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetIamPolicyReservationRequest").msgclass
@@ -10764,8 +10970,10 @@ module Google
         GetRegionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionRequest").msgclass
         GetRegionSecurityPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionSecurityPolicyRequest").msgclass
         GetRegionSslCertificateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionSslCertificateRequest").msgclass
+        GetRegionSslPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionSslPolicyRequest").msgclass
         GetRegionTargetHttpProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionTargetHttpProxyRequest").msgclass
         GetRegionTargetHttpsProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionTargetHttpsProxyRequest").msgclass
+        GetRegionTargetTcpProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionTargetTcpProxyRequest").msgclass
         GetRegionUrlMapRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetRegionUrlMapRequest").msgclass
         GetReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetReservationRequest").msgclass
         GetResourcePolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.GetResourcePolicyRequest").msgclass
@@ -10903,8 +11111,10 @@ module Google
         InsertRegionNotificationEndpointRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionNotificationEndpointRequest").msgclass
         InsertRegionSecurityPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionSecurityPolicyRequest").msgclass
         InsertRegionSslCertificateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionSslCertificateRequest").msgclass
+        InsertRegionSslPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionSslPolicyRequest").msgclass
         InsertRegionTargetHttpProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionTargetHttpProxyRequest").msgclass
         InsertRegionTargetHttpsProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionTargetHttpsProxyRequest").msgclass
+        InsertRegionTargetTcpProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionTargetTcpProxyRequest").msgclass
         InsertRegionUrlMapRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertRegionUrlMapRequest").msgclass
         InsertReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertReservationRequest").msgclass
         InsertResourcePolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InsertResourcePolicyRequest").msgclass
@@ -10932,6 +11142,8 @@ module Google
         Instance::PrivateIpv6GoogleAccess = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Instance.PrivateIpv6GoogleAccess").enummodule
         Instance::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Instance.Status").enummodule
         InstanceAggregatedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceAggregatedList").msgclass
+        InstanceConsumptionData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceConsumptionData").msgclass
+        InstanceConsumptionInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceConsumptionInfo").msgclass
         InstanceGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroup").msgclass
         InstanceGroupAggregatedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupAggregatedList").msgclass
         InstanceGroupList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupList").msgclass
@@ -11054,6 +11266,7 @@ module Google
         ListAddressesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListAddressesRequest").msgclass
         ListAssociationsFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListAssociationsFirewallPolicyRequest").msgclass
         ListAutoscalersRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListAutoscalersRequest").msgclass
+        ListAvailableFeaturesRegionSslPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListAvailableFeaturesRegionSslPoliciesRequest").msgclass
         ListAvailableFeaturesSslPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListAvailableFeaturesSslPoliciesRequest").msgclass
         ListBackendBucketsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListBackendBucketsRequest").msgclass
         ListBackendServicesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListBackendServicesRequest").msgclass
@@ -11120,8 +11333,10 @@ module Google
         ListRegionOperationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionOperationsRequest").msgclass
         ListRegionSecurityPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionSecurityPoliciesRequest").msgclass
         ListRegionSslCertificatesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionSslCertificatesRequest").msgclass
+        ListRegionSslPoliciesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionSslPoliciesRequest").msgclass
         ListRegionTargetHttpProxiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionTargetHttpProxiesRequest").msgclass
         ListRegionTargetHttpsProxiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionTargetHttpsProxiesRequest").msgclass
+        ListRegionTargetTcpProxiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionTargetTcpProxiesRequest").msgclass
         ListRegionUrlMapsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionUrlMapsRequest").msgclass
         ListRegionsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListRegionsRequest").msgclass
         ListReservationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ListReservationsRequest").msgclass
@@ -11303,6 +11518,7 @@ module Google
         PatchRegionInstanceGroupManagerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PatchRegionInstanceGroupManagerRequest").msgclass
         PatchRegionNetworkFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PatchRegionNetworkFirewallPolicyRequest").msgclass
         PatchRegionSecurityPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PatchRegionSecurityPolicyRequest").msgclass
+        PatchRegionSslPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PatchRegionSslPolicyRequest").msgclass
         PatchRegionTargetHttpsProxyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PatchRegionTargetHttpsProxyRequest").msgclass
         PatchRegionUrlMapRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PatchRegionUrlMapRequest").msgclass
         PatchRouterRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PatchRouterRequest").msgclass
@@ -11521,6 +11737,7 @@ module Google
         SecurityPolicyAdvancedOptionsConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SecurityPolicyAdvancedOptionsConfig").msgclass
         SecurityPolicyAdvancedOptionsConfig::JsonParsing = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SecurityPolicyAdvancedOptionsConfig.JsonParsing").enummodule
         SecurityPolicyAdvancedOptionsConfig::LogLevel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SecurityPolicyAdvancedOptionsConfig.LogLevel").enummodule
+        SecurityPolicyAdvancedOptionsConfigJsonCustomConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SecurityPolicyAdvancedOptionsConfigJsonCustomConfig").msgclass
         SecurityPolicyDdosProtectionConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SecurityPolicyDdosProtectionConfig").msgclass
         SecurityPolicyDdosProtectionConfig::DdosProtection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SecurityPolicyDdosProtectionConfig.DdosProtection").enummodule
         SecurityPolicyList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SecurityPolicyList").msgclass
@@ -11563,6 +11780,7 @@ module Google
         SetDiskAutoDeleteInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetDiskAutoDeleteInstanceRequest").msgclass
         SetEdgeSecurityPolicyBackendBucketRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetEdgeSecurityPolicyBackendBucketRequest").msgclass
         SetEdgeSecurityPolicyBackendServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetEdgeSecurityPolicyBackendServiceRequest").msgclass
+        SetIamPolicyBackendServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyBackendServiceRequest").msgclass
         SetIamPolicyDiskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyDiskRequest").msgclass
         SetIamPolicyFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyFirewallPolicyRequest").msgclass
         SetIamPolicyImageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyImageRequest").msgclass
@@ -11573,6 +11791,7 @@ module Google
         SetIamPolicyNetworkFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyNetworkFirewallPolicyRequest").msgclass
         SetIamPolicyNodeGroupRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyNodeGroupRequest").msgclass
         SetIamPolicyNodeTemplateRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyNodeTemplateRequest").msgclass
+        SetIamPolicyRegionBackendServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyRegionBackendServiceRequest").msgclass
         SetIamPolicyRegionDiskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyRegionDiskRequest").msgclass
         SetIamPolicyRegionNetworkFirewallPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyRegionNetworkFirewallPolicyRequest").msgclass
         SetIamPolicyReservationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicyReservationRequest").msgclass
@@ -11582,15 +11801,22 @@ module Google
         SetIamPolicySubnetworkRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetIamPolicySubnetworkRequest").msgclass
         SetInstanceTemplateInstanceGroupManagerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetInstanceTemplateInstanceGroupManagerRequest").msgclass
         SetInstanceTemplateRegionInstanceGroupManagerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetInstanceTemplateRegionInstanceGroupManagerRequest").msgclass
+        SetLabelsAddressRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsAddressRequest").msgclass
         SetLabelsDiskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsDiskRequest").msgclass
         SetLabelsExternalVpnGatewayRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsExternalVpnGatewayRequest").msgclass
         SetLabelsForwardingRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsForwardingRuleRequest").msgclass
+        SetLabelsGlobalAddressRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsGlobalAddressRequest").msgclass
         SetLabelsGlobalForwardingRuleRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsGlobalForwardingRuleRequest").msgclass
         SetLabelsImageRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsImageRequest").msgclass
         SetLabelsInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsInstanceRequest").msgclass
+        SetLabelsInterconnectAttachmentRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsInterconnectAttachmentRequest").msgclass
+        SetLabelsInterconnectRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsInterconnectRequest").msgclass
         SetLabelsRegionDiskRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsRegionDiskRequest").msgclass
+        SetLabelsSecurityPolicyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsSecurityPolicyRequest").msgclass
         SetLabelsSnapshotRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsSnapshotRequest").msgclass
+        SetLabelsTargetVpnGatewayRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsTargetVpnGatewayRequest").msgclass
         SetLabelsVpnGatewayRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsVpnGatewayRequest").msgclass
+        SetLabelsVpnTunnelRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetLabelsVpnTunnelRequest").msgclass
         SetMachineResourcesInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetMachineResourcesInstanceRequest").msgclass
         SetMachineTypeInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetMachineTypeInstanceRequest").msgclass
         SetMetadataInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SetMetadataInstanceRequest").msgclass
@@ -11648,8 +11874,10 @@ module Google
         SslCertificateManagedSslCertificate::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslCertificateManagedSslCertificate.Status").enummodule
         SslCertificateSelfManagedSslCertificate = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslCertificateSelfManagedSslCertificate").msgclass
         SslCertificatesScopedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslCertificatesScopedList").msgclass
+        SslPoliciesAggregatedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslPoliciesAggregatedList").msgclass
         SslPoliciesList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslPoliciesList").msgclass
         SslPoliciesListAvailableFeaturesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslPoliciesListAvailableFeaturesResponse").msgclass
+        SslPoliciesScopedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslPoliciesScopedList").msgclass
         SslPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslPolicy").msgclass
         SslPolicy::MinTlsVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslPolicy.MinTlsVersion").enummodule
         SslPolicy::Profile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.SslPolicy.Profile").enummodule

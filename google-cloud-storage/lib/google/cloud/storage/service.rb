@@ -64,6 +64,7 @@ module Google
           @service.request_options.base_interval = base_interval if base_interval
           @service.request_options.max_interval = max_interval if max_interval
           @service.request_options.multiplier = multiplier if multiplier
+          @service.request_options.add_invocation_id_header = true
           @service.authorization = @credentials.client if @credentials
           @service.root_url = host if host
         end
@@ -135,7 +136,7 @@ module Google
           bucket_gapi.acl = [] if predefined_acl
           bucket_gapi.default_object_acl = [] if predefined_default_acl
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_metageneration_match: if_metageneration_match
             options = is_idempotent ? {} : { retries: 0 }
           end
@@ -196,6 +197,9 @@ module Google
         def insert_bucket_acl bucket_name, entity, role, user_project: nil, options: {}
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::BucketAccessControl.new(**params)
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.insert_bucket_access_control \
               bucket_name, new_acl, user_project: user_project(user_project),
@@ -206,6 +210,9 @@ module Google
         ##
         # Permanently deletes a bucket ACL.
         def delete_bucket_acl bucket_name, entity, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_bucket_access_control \
               bucket_name, entity, user_project: user_project(user_project),
@@ -226,6 +233,9 @@ module Google
         ##
         # Creates a new default ACL.
         def insert_default_acl bucket_name, entity, role, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           param = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**param)
           execute do
@@ -238,6 +248,9 @@ module Google
         ##
         # Permanently deletes a default ACL.
         def delete_default_acl bucket_name, entity, user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_default_object_access_control \
               bucket_name, entity, user_project: user_project(user_project),
@@ -298,6 +311,10 @@ module Google
               payload_format: payload_format(payload),
               topic: topic_path(topic_name) }.delete_if { |_k, v| v.nil? }
           new_notification = Google::Apis::StorageV1::Notification.new(**params)
+
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
 
           execute do
             service.insert_notification \
@@ -385,7 +402,7 @@ module Google
           file_obj = Google::Apis::StorageV1::Object.new(**params)
           content_type ||= mime_type_for(path || Pathname(source).to_path)
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
           else
@@ -460,7 +477,7 @@ module Google
                          options: {}
           key_options = rewrite_key_options source_key, destination_key
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options : key_options.merge(retries: 0)
           else
@@ -508,7 +525,7 @@ module Google
           compose_req = Google::Apis::StorageV1::ComposeRequest.new source_objects: source_objects,
                                                                     destination: destination_gapi
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_generation_match: if_generation_match
             options = is_idempotent ? key_options(key) : key_options(key).merge(retries: 0)
           else
@@ -565,7 +582,7 @@ module Google
                        options: {}
           file_gapi ||= Google::Apis::StorageV1::Object.new
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? if_metageneration_match: if_metageneration_match
             options = is_idempotent ? {} : { retries: 0 }
           end
@@ -597,7 +614,7 @@ module Google
                         user_project: nil,
                         options: {}
 
-          if options[:retry].nil?
+          if options[:retries].nil?
             is_idempotent = retry? generation: generation, if_generation_match: if_generation_match
             options = is_idempotent ? {} : { retries: 0 }
           end
@@ -629,6 +646,9 @@ module Google
         def insert_file_acl bucket_name, file_name, entity, role,
                             generation: nil, user_project: nil,
                             options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           params = { entity: entity, role: role }.delete_if { |_k, v| v.nil? }
           new_acl = Google::Apis::StorageV1::ObjectAccessControl.new(**params)
           execute do
@@ -643,6 +663,9 @@ module Google
         # Permanently deletes a file ACL.
         def delete_file_acl bucket_name, file_name, entity, generation: nil,
                             user_project: nil, options: {}
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
           execute do
             service.delete_object_access_control \
               bucket_name, file_name, entity,
@@ -656,6 +679,11 @@ module Google
         # Returns Google::Apis::StorageV1::HmacKey.
         def create_hmac_key service_account_email, project_id: nil,
                             user_project: nil, options: {}
+
+          if options[:retries].nil?
+            options = options.merge({ retries: 0 })
+          end
+
           execute do
             service.create_project_hmac_key \
               (project_id || @project), service_account_email,
@@ -718,6 +746,37 @@ module Google
               (project_id || @project), access_id, hmac_key_metadata_object,
               user_project: user_project(user_project),
               options: options
+          end
+        end
+
+        ##
+        # Updates a bucket, including its ACL metadata.
+        def update_bucket bucket_name,
+                          bucket_gapi = nil,
+                          predefined_acl: nil,
+                          predefined_default_acl: nil,
+                          if_metageneration_match: nil,
+                          if_metageneration_not_match: nil,
+                          user_project: nil,
+                          options: {}
+          bucket_gapi ||= Google::Apis::StorageV1::Bucket.new
+          bucket_gapi.acl = [] if predefined_acl
+          bucket_gapi.default_object_acl = [] if predefined_default_acl
+
+          if options[:retries].nil?
+            is_idempotent = retry? if_metageneration_match: if_metageneration_match
+            options = is_idempotent ? {} : { retries: 0 }
+          end
+
+          execute do
+            service.update_bucket bucket_name,
+                                  bucket_gapi,
+                                  predefined_acl: predefined_acl,
+                                  predefined_default_object_acl: predefined_default_acl,
+                                  if_metageneration_match: if_metageneration_match,
+                                  if_metageneration_not_match: if_metageneration_not_match,
+                                  user_project: user_project(user_project),
+                                  options: options
           end
         end
 

@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/storage/bucket/acl"
 require "google/cloud/storage/bucket/list"
 require "google/cloud/storage/bucket/cors"
@@ -114,10 +115,7 @@ module Google
         # @return [Google::Apis::StorageV1::Bucket::Autoclass]
         #
         def autoclass
-          unless @gapi.autoclass.nil?
-            return @gapi.autoclass
-          end
-          nil
+          @gapi.autoclass
         end
 
         ##
@@ -419,20 +417,36 @@ module Google
         end
 
         ##
-        # Updates the bucket's autoclass configuration. This defines the default class for objects in the
+        # Whether Autoclass is enabled for the bucket.
+        #
+        # @return [Boolean]
+        #
+        def autoclass?
+          @gapi.autoclass&.enabled?
+        end
+
+        ##
+        # Toggle time of the autoclass
+        #
+        # @return [DateTime]
+        #
+        def autoclass_toggle_time
+          @gapi.autoclass&.toggle_time
+        end
+
+        ##
+        # Updates bucket's autoclass configuration. This defines the default class for objects in the
         # bucket and down/up-grades the storage class of objects based on the access patterns.
         # Accepted values are `:false`, and `:true`.
         # rubocop:todo update the link
         # For more information, see [Storage
         # Classes](https://cloud.google.com/storage/docs/add_the_endpoint).
         #
-        # @param [Symbol, String] toggle for autoclass configuration of the bucket.
+        # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
-        def autoclass= toggle
-          if @gapi.autoclass.nil?
-            return
-          end
-          @gapi.autoclass = { enabled: toggle }
+        def autoclass_enabled= toggle
+          @gapi.autoclass ||= API::Bucket::Autoclass.new
+          @gapi.autoclass.enabled = toggle
           patch_gapi! :autoclass
         end
 
@@ -564,7 +578,6 @@ module Google
         def requester_pays
           @gapi.billing&.requester_pays
         end
-
         alias requester_pays? requester_pays
 
         ##
@@ -1200,9 +1213,9 @@ module Google
           updater.check_for_mutable_cors!
           updater.check_for_mutable_lifecycle!
           return if updater.updates.empty?
-          patch_gapi! updater.updates,
-                      if_metageneration_match: if_metageneration_match,
-                      if_metageneration_not_match: if_metageneration_not_match
+          update_gapi! updater.updates,
+                       if_metageneration_match: if_metageneration_match,
+                       if_metageneration_not_match: if_metageneration_not_match
         end
 
         ##
@@ -1287,13 +1300,12 @@ module Google
                   versions: nil
           ensure_service!
           gapi = service.list_files name, prefix: prefix, delimiter: delimiter,
-                                    token: token, max: max,
-                                    versions: versions,
-                                    user_project: user_project
+                                          token: token, max: max,
+                                          versions: versions,
+                                          user_project: user_project
           File::List.from_gapi gapi, service, name, prefix, delimiter, max,
                                versions, user_project: user_project
         end
-
         alias find_files files
 
         ##
@@ -1357,17 +1369,16 @@ module Google
                                  user_project: user_project
           end
           gapi = service.get_file name, path, generation: generation,
-                                  if_generation_match: if_generation_match,
-                                  if_generation_not_match: if_generation_not_match,
-                                  if_metageneration_match: if_metageneration_match,
-                                  if_metageneration_not_match: if_metageneration_not_match,
-                                  key: encryption_key,
-                                  user_project: user_project
+                                              if_generation_match: if_generation_match,
+                                              if_generation_not_match: if_generation_not_match,
+                                              if_metageneration_match: if_metageneration_match,
+                                              if_metageneration_not_match: if_metageneration_not_match,
+                                              key: encryption_key,
+                                              user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         rescue Google::Cloud::NotFoundError
           nil
         end
-
         alias find_file file
 
         ##
@@ -1641,7 +1652,6 @@ module Google
                                      user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
-
         alias upload_file create_file
         alias new_file create_file
 
@@ -1775,7 +1785,6 @@ module Google
                                       user_project: user_project
           File.from_gapi gapi, service, user_project: user_project
         end
-
         alias compose_file compose
         alias combine compose
 
@@ -2572,7 +2581,7 @@ module Google
           warn "DEPRECATED: 'force' in Bucket#policy" unless force.nil?
           ensure_service!
           gapi = service.get_bucket_policy name, requested_policy_version: requested_policy_version,
-                                           user_project: user_project
+                                                 user_project: user_project
           policy = if requested_policy_version.nil? || requested_policy_version == 1
                      PolicyV1.from_gapi gapi
                    else
@@ -2667,7 +2676,6 @@ module Google
                                            user_project: user_project
           new_policy.class.from_gapi gapi
         end
-
         alias policy= update_policy
 
         ##
@@ -2732,7 +2740,6 @@ module Google
                                    user_project: user_project
           end
         end
-
         alias find_notifications notifications
 
         ##
@@ -2763,8 +2770,8 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-
         alias find_notification notification
+
 
         ##
         # Creates a new Pub/Sub notification subscription for the bucket.
@@ -2839,13 +2846,12 @@ module Google
           ensure_service!
 
           gapi = service.insert_notification name, topic, custom_attrs: custom_attrs,
-                                             event_types: event_types,
-                                             prefix: prefix,
-                                             payload: payload,
-                                             user_project: user_project
+                                                          event_types: event_types,
+                                                          prefix: prefix,
+                                                          payload: payload,
+                                                          user_project: user_project
           Notification.from_gapi name, gapi, service, user_project: user_project
         end
-
         alias new_notification create_notification
 
         ##
@@ -2858,7 +2864,6 @@ module Google
           @lazy = nil
           self
         end
-
         alias refresh! reload!
 
         ##
@@ -2939,6 +2944,26 @@ module Google
                                        if_metageneration_match: if_metageneration_match,
                                        if_metageneration_not_match: if_metageneration_not_match,
                                        user_project: user_project
+          @lazy = nil
+          self
+        end
+
+        def update_gapi! attributes,
+                         if_metageneration_match: nil,
+                         if_metageneration_not_match: nil
+          attributes = Array(attributes)
+          attributes.flatten!
+          return if attributes.empty?
+          ensure_service!
+          update_args = Hash[attributes.map do |attr|
+            [attr, @gapi.send(attr)]
+          end]
+          update_gapi = API::Bucket.new(**update_args)
+          @gapi = service.update_bucket name,
+                                        update_gapi,
+                                        if_metageneration_match: if_metageneration_match,
+                                        if_metageneration_not_match: if_metageneration_not_match,
+                                        user_project: user_project
           @lazy = nil
           self
         end

@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-bigtable-admin-v2",
-    "version": "0.14.0",
+    "version": "0.15.0",
     "language": "RUBY",
     "apis": [
       {
@@ -1007,6 +1007,46 @@
         {
           "start": 20,
           "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "bigtableadmin_v2_generated_BigtableTableAdmin_UpdateTable_sync",
+      "title": "Snippet for update_table in BigtableTableAdmin",
+      "description": "Basic snippet for update_table in BigtableTableAdmin",
+      "file": "bigtable_table_admin/update_table.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_table",
+        "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#update_table",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Bigtable::Admin::V2::UpdateTableRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "BigtableTableAdmin::Client",
+          "full_name": "::Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client"
+        },
+        "method": {
+          "short_name": "UpdateTable",
+          "full_name": "google.bigtable.admin.v2.BigtableTableAdmin.UpdateTable",
+          "service": {
+            "short_name": "BigtableTableAdmin",
+            "full_name": "google.bigtable.admin.v2.BigtableTableAdmin"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
           "type": "FULL"
         }
       ]

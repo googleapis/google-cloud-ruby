@@ -1,5 +1,27 @@
 # Release History
 
+### 1.42.0 (2022-09-21)
+
+#### Features
+
+* send invocation_id header in all requests ([#19161](https://github.com/googleapis/google-cloud-ruby/issues/19161)) 
+
+### 1.41.0 (2022-09-16)
+
+#### Features
+
+* add retry support for non-idempotent operations ([#19134](https://github.com/googleapis/google-cloud-ruby/issues/19134)) 
+#### Bug Fixes
+
+* Correct options checks in retry operations ([#19135](https://github.com/googleapis/google-cloud-ruby/issues/19135)) 
+* Update api for bucket update ([#19110](https://github.com/googleapis/google-cloud-ruby/issues/19110)) 
+
+### 1.40.0 (2022-09-13)
+
+#### Features
+
+* Update all patch bucket helper methods to accept preconditions ([#19117](https://github.com/googleapis/google-cloud-ruby/issues/19117)) 
+
 ### 1.39.0 (2022-08-24)
 
 #### Features

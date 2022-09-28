@@ -43,6 +43,7 @@
     "snippets/storage_transfer_service/create_agent_pool.rb",
     "snippets/storage_transfer_service/create_transfer_job.rb",
     "snippets/storage_transfer_service/delete_agent_pool.rb",
+    "snippets/storage_transfer_service/delete_transfer_job.rb",
     "snippets/storage_transfer_service/get_agent_pool.rb",
     "snippets/storage_transfer_service/get_google_service_account.rb",
     "snippets/storage_transfer_service/get_transfer_job.rb",

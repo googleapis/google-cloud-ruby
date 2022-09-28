@@ -1,5 +1,11 @@
 # Release History
 
+### 0.21.0 (2022-09-16)
+
+#### Features
+
+* Support for the source display name of a finding ([#19162](https://github.com/googleapis/google-cloud-ruby/issues/19162)) 
+
 ### 0.20.0 (2022-08-25)
 
 #### Features

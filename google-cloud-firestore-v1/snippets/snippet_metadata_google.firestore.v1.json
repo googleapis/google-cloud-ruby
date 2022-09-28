@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-firestore-v1",
-    "version": "0.7.1",
+    "version": "0.8.0",
     "language": "RUBY",
     "apis": [
       {
@@ -355,6 +355,46 @@
         "method": {
           "short_name": "RunQuery",
           "full_name": "google.firestore.v1.Firestore.RunQuery",
+          "service": {
+            "short_name": "Firestore",
+            "full_name": "google.firestore.v1.Firestore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 35,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "firestore_v1_generated_Firestore_RunAggregationQuery_sync",
+      "title": "Snippet for run_aggregation_query in Firestore",
+      "description": "Basic snippet for run_aggregation_query in Firestore",
+      "file": "firestore/run_aggregation_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_aggregation_query",
+        "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client#run_aggregation_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Firestore::V1::RunAggregationQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Firestore::V1::RunAggregationQueryResponse",
+        "client": {
+          "short_name": "Firestore::Client",
+          "full_name": "::Google::Cloud::Firestore::V1::Firestore::Client"
+        },
+        "method": {
+          "short_name": "RunAggregationQuery",
+          "full_name": "google.firestore.v1.Firestore.RunAggregationQuery",
           "service": {
             "short_name": "Firestore",
             "full_name": "google.firestore.v1.Firestore"

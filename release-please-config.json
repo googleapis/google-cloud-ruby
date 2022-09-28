@@ -199,6 +199,14 @@
       "component": "google-cloud-bigquery-data_exchange-v1beta1",
       "version_file": "lib/google/cloud/bigquery/data_exchange/v1beta1/version.rb"
     },
+    "google-cloud-bigquery-data_policies": {
+      "component": "google-cloud-bigquery-data_policies",
+      "version_file": "lib/google/cloud/bigquery/data_policies/version.rb"
+    },
+    "google-cloud-bigquery-data_policies-v1beta1": {
+      "component": "google-cloud-bigquery-data_policies-v1beta1",
+      "version_file": "lib/google/cloud/bigquery/data_policies/v1beta1/version.rb"
+    },
     "google-cloud-bigquery-data_transfer": {
       "component": "google-cloud-bigquery-data_transfer",
       "version_file": "lib/google/cloud/bigquery/data_transfer/version.rb"
@@ -967,6 +975,14 @@
       "component": "google-cloud-security-private_ca-v1beta1",
       "version_file": "lib/google/cloud/security/private_ca/v1beta1/version.rb"
     },
+    "google-cloud-security-public_ca": {
+      "component": "google-cloud-security-public_ca",
+      "version_file": "lib/google/cloud/security/public_ca/version.rb"
+    },
+    "google-cloud-security-public_ca-v1beta1": {
+      "component": "google-cloud-security-public_ca-v1beta1",
+      "version_file": "lib/google/cloud/security/public_ca/v1beta1/version.rb"
+    },
     "google-cloud-security_center": {
       "component": "google-cloud-security_center",
       "version_file": "lib/google/cloud/security_center/version.rb"
@@ -1263,9 +1279,9 @@
       "component": "google-cloud-workflows-v1beta",
       "version_file": "lib/google/cloud/workflows/v1beta/version.rb"
     },
-    "google-iam": {
-      "component": "google-iam",
-      "version_file": "lib/google/iam/version.rb"
+    "google-iam-client": {
+      "component": "google-iam-client",
+      "version_file": "lib/google/iam/client/version.rb"
     },
     "google-iam-credentials": {
       "component": "google-iam-credentials",

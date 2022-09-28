@@ -332,6 +332,109 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # An AwsS3CompatibleData resource.
+        # @!attribute [rw] bucket_name
+        #   @return [::String]
+        #     Required. Specifies the name of the bucket.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Specifies the root path to transfer objects.
+        #
+        #     Must be an empty string or full path name that ends with a '/'. This
+        #     field is treated as an object prefix. As such, it should generally not
+        #     begin with a '/'.
+        # @!attribute [rw] endpoint
+        #   @return [::String]
+        #     Required. Specifies the endpoint of the storage service.
+        # @!attribute [rw] region
+        #   @return [::String]
+        #     Specifies the region to sign requests with. This can be left blank if
+        #     requests should be signed with an empty region.
+        # @!attribute [rw] s3_metadata
+        #   @return [::Google::Cloud::StorageTransfer::V1::S3CompatibleMetadata]
+        #     A S3 compatible metadata.
+        class AwsS3CompatibleData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # S3CompatibleMetadata contains the metadata fields that apply to the basic
+        # types of S3-compatible data providers.
+        # @!attribute [rw] auth_method
+        #   @return [::Google::Cloud::StorageTransfer::V1::S3CompatibleMetadata::AuthMethod]
+        #     Specifies the authentication and authorization method used by the storage
+        #     service. When not specified, Transfer Service will attempt to determine
+        #     right auth method to use.
+        # @!attribute [rw] request_model
+        #   @return [::Google::Cloud::StorageTransfer::V1::S3CompatibleMetadata::RequestModel]
+        #     Specifies the API request model used to call the storage service. When not
+        #     specified, the default value of RequestModel
+        #     REQUEST_MODEL_VIRTUAL_HOSTED_STYLE is used.
+        # @!attribute [rw] protocol
+        #   @return [::Google::Cloud::StorageTransfer::V1::S3CompatibleMetadata::NetworkProtocol]
+        #     Specifies the network protocol of the agent. When not specified, the
+        #     default value of NetworkProtocol NETWORK_PROTOCOL_HTTPS is used.
+        # @!attribute [rw] list_api
+        #   @return [::Google::Cloud::StorageTransfer::V1::S3CompatibleMetadata::ListApi]
+        #     The Listing API to use for discovering objects. When not specified,
+        #     Transfer Service will attempt to determine the right API to use.
+        class S3CompatibleMetadata
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The authentication and authorization method used by the storage service.
+          module AuthMethod
+            # AuthMethod is not specified.
+            AUTH_METHOD_UNSPECIFIED = 0
+
+            # Auth requests with AWS SigV4.
+            AUTH_METHOD_AWS_SIGNATURE_V4 = 1
+
+            # Auth requests with AWS SigV2.
+            AUTH_METHOD_AWS_SIGNATURE_V2 = 2
+          end
+
+          # The request model of the API.
+          module RequestModel
+            # RequestModel is not specified.
+            REQUEST_MODEL_UNSPECIFIED = 0
+
+            # Perform requests using Virtual Hosted Style.
+            # Example: https://bucket-name.s3.region.amazonaws.com/key-name
+            REQUEST_MODEL_VIRTUAL_HOSTED_STYLE = 1
+
+            # Perform requests using Path Style.
+            # Example: https://s3.region.amazonaws.com/bucket-name/key-name
+            REQUEST_MODEL_PATH_STYLE = 2
+          end
+
+          # The agent network protocol to access the storage service.
+          module NetworkProtocol
+            # NetworkProtocol is not specified.
+            NETWORK_PROTOCOL_UNSPECIFIED = 0
+
+            # Perform requests using HTTPS.
+            NETWORK_PROTOCOL_HTTPS = 1
+
+            # Not recommended: This sends data in clear-text. This is only
+            # appropriate within a closed network or for publicly available data.
+            # Perform requests using HTTP.
+            NETWORK_PROTOCOL_HTTP = 2
+          end
+
+          # The Listing API to use for discovering objects.
+          module ListApi
+            # ListApi is not specified.
+            LIST_API_UNSPECIFIED = 0
+
+            # Perform listing using ListObjectsV2 API.
+            LIST_OBJECTS_V2 = 1
+
+            # Legacy ListObjects API.
+            LIST_OBJECTS = 2
+          end
+        end
+
         # Represents an On-Premises Agent pool.
         # @!attribute [rw] name
         #   @return [::String]
@@ -403,13 +506,12 @@ module Google
         #     exclusive.
         # @!attribute [rw] overwrite_when
         #   @return [::Google::Cloud::StorageTransfer::V1::TransferOptions::OverwriteWhen]
-        #     When to overwrite objects that already exist in the sink. If not set
+        #     When to overwrite objects that already exist in the sink. If not set,
         #     overwrite behavior is determined by
         #     {::Google::Cloud::StorageTransfer::V1::TransferOptions#overwrite_objects_already_existing_in_sink overwrite_objects_already_existing_in_sink}.
         # @!attribute [rw] metadata_options
         #   @return [::Google::Cloud::StorageTransfer::V1::MetadataOptions]
-        #     Represents the selected metadata options for a transfer job. This feature
-        #     is in Preview.
+        #     Represents the selected metadata options for a transfer job.
         class TransferOptions
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -417,17 +519,19 @@ module Google
           # Specifies when to overwrite an object in the sink when an object with
           # matching name is found in the source.
           module OverwriteWhen
-            # Indicate the option is not set.
+            # Overwrite behavior is unspecified.
             OVERWRITE_WHEN_UNSPECIFIED = 0
 
-            # Overwrite destination object with source if the two objects are
-            # different.
+            # Overwrites destination objects with the source objects, only if the
+            # objects have the same name but different HTTP ETags or checksum values.
             DIFFERENT = 1
 
-            # Never overwrite destination object.
+            # Never overwrites a destination object if a source object has the
+            # same name. In this case, the source object is not transferred.
             NEVER = 2
 
-            # Always overwrite destination object.
+            # Always overwrite the destination object with the source object, even if
+            # the HTTP Etags or checksum values are the same.
             ALWAYS = 3
           end
         end
@@ -454,6 +558,9 @@ module Google
         # @!attribute [rw] azure_blob_storage_data_source
         #   @return [::Google::Cloud::StorageTransfer::V1::AzureBlobStorageData]
         #     An Azure Blob Storage data source.
+        # @!attribute [rw] aws_s3_compatible_data_source
+        #   @return [::Google::Cloud::StorageTransfer::V1::AwsS3CompatibleData]
+        #     An AWS S3 compatible data source.
         # @!attribute [rw] gcs_intermediate_data_location
         #   @return [::Google::Cloud::StorageTransfer::V1::GcsData]
         #     Cloud Storage intermediate data location.

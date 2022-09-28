@@ -12,6 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+
 require "google/cloud/storage/errors"
 require "google/cloud/storage/service"
 require "google/cloud/storage/convert"
@@ -79,7 +80,6 @@ module Google
         def project_id
           service.project
         end
-
         alias project project_id
 
         ##
@@ -155,7 +155,6 @@ module Google
           Bucket::List.from_gapi \
             gapi, service, prefix, max, user_project: user_project
         end
-
         alias find_buckets buckets
 
         ##
@@ -231,7 +230,6 @@ module Google
         rescue Google::Cloud::NotFoundError
           nil
         end
-
         alias find_bucket bucket
 
         ##
@@ -329,7 +327,7 @@ module Google
         #   other than the current project, and that project is authorized for
         #   the currently authenticated service account, transit costs will be
         #   billed to the given project. The default is `nil`.
-        # @param [Object] autoclass The bucket's autoclass configuration.
+        # @param [Boolean] autoclass_enabled The bucket's autoclass configuration.
         #   Buckets can have either StorageClass OLM rules or Autoclass, but
         #   not both. When Autoclass is enabled on a bucket, adding StorageClass
         #   OLM rules will result in failure.
@@ -382,19 +380,19 @@ module Google
                           versioning: nil,
                           requester_pays: nil,
                           user_project: nil,
-                          autoclass: nil
-          storage_class = storage_class_for storage_class
+                          autoclass_enabled: false
           params = {
             name: bucket_name,
             location: location,
-            custom_placement_config: custom_placement_config,
-            autoclass: autoclass,
-            storage_class: autoclass.nil? ? storage_class : nil
+            custom_placement_config: custom_placement_config
           }.delete_if { |_, v| v.nil? }
           new_bucket = Google::Apis::StorageV1::Bucket.new(**params)
+          storage_class = storage_class_for storage_class
           updater = Bucket::Updater.new(new_bucket).tap do |b|
             b.logging_bucket = logging_bucket unless logging_bucket.nil?
             b.logging_prefix = logging_prefix unless logging_prefix.nil?
+            b.autoclass_enabled = autoclass_enabled
+            b.storage_class = storage_class unless storage_class.nil?
             b.website_main = website_main unless website_main.nil?
             b.website_404 = website_404 unless website_404.nil?
             b.versioning = versioning unless versioning.nil?
@@ -406,7 +404,7 @@ module Google
           updater.check_for_mutable_lifecycle!
           gapi = service.insert_bucket \
             new_bucket, acl: acl_rule(acl), default_acl: acl_rule(default_acl),
-            user_project: user_project
+                        user_project: user_project
           Bucket.from_gapi gapi, service, user_project: user_project
         end
 
