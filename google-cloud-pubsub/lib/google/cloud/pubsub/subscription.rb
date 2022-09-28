@@ -308,7 +308,6 @@ module Google
         # configuration can be changed by modifying the values in the method's
         # block.
         #
-        #
         # @yield [bigquery_config] a block for modifying the bigquery configuration
         # @yieldparam [Google::Cloud::PubSub::V1::BigQueryConfig] bigquery_config
         #
@@ -338,7 +337,7 @@ module Google
         def bigquery_config
           ensure_service!
 
-          config = reference? ? nil : @grpc.bigquery_config
+          config = reference? ? Google::Cloud::PubSub::V1::BigQueryConfig.new : @grpc.bigquery_config
 
           if block_given?
             old_config = config.dup

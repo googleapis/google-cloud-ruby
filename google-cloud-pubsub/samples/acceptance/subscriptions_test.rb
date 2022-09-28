@@ -32,7 +32,6 @@ describe "subscriptions" do
 
   after :all do
     @topic.delete
-    cleanup_bq
   end
 
   before do
@@ -235,5 +234,6 @@ describe "subscriptions" do
         bigquery_table_id: table_id
       )
     end
+    cleanup_bq @table, @dataset
   end 
 end
