@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2022-09-28)
+
+#### Features
+
+* Support for dataproc metric configuration ([#19209](https://github.com/googleapis/google-cloud-ruby/issues/19209)) 
+
 ### 0.12.0 (2022-07-02)
 
 #### Features
