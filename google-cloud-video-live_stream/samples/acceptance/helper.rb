@@ -22,7 +22,7 @@ require_relative "../../../.toys/.lib/sample_loader"
 require_relative "channel_definition"
 require_relative "input_definition"
 
-DELETION_THRESHOLD_TIME_HOURS_IN_KILOSECONDS = 10_800_000
+DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS = 10_800_000
 
 class LiveStreamSnippetSpec < Minitest::Spec
   let(:client) { Google::Cloud::Video::LiveStream.livestream_service }
@@ -58,8 +58,8 @@ class LiveStreamSnippetSpec < Minitest::Spec
     response.each do |channel|
       tmp = channel.name.to_s.split "-"
       create_time = tmp.last.to_i
-      now = (Time.now.to_f * 1000).to_i # Kiloseconds, preserves float value for precision
-      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_KILOSECONDS)
+      now = (Time.now.to_f * 1000).to_i # Milliseconds, preserves float value for precision
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
       begin
         operation = client.stop_channel name: channel.name.to_s
         operation.wait_until_done!
@@ -79,7 +79,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
       tmp = input.name.to_s.split "-"
       create_time = tmp.last.to_i
       now = (Time.now.to_f * 1000).to_i
-      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_KILOSECONDS)
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
       begin
         operation = client.delete_input name: input.name.to_s
         operation.wait_until_done!
@@ -127,7 +127,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
 
 
   after do
-    if @channel_created_started == true
+    if @channel_created_started
       begin
         operation = client.stop_channel name: channel_name
         operation.wait_until_done!
@@ -135,7 +135,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
         puts "Rescued: #{e.inspect}"
       end
     end
-    if @channel_created_started == true || @channel_created_stopped
+    if @channel_created_started || @channel_created_stopped
       begin
         operation = client.delete_channel name: channel_name
         operation.wait_until_done!
@@ -143,7 +143,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
         puts "Rescued: #{e.inspect}"
       end
     end
-    if @update_input_created == true
+    if @update_input_created
       begin
         operation = client.delete_input name: update_input_name
         operation.wait_until_done!
@@ -151,7 +151,7 @@ class LiveStreamSnippetSpec < Minitest::Spec
         puts "Rescued: #{e.inspect}"
       end
     end
-    if @input_created == true
+    if @input_created
       begin
         operation = client.delete_input name: input_name
         operation.wait_until_done!
