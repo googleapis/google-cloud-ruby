@@ -1,5 +1,11 @@
 # Release History
 
+### 1.7.1 (2022-09-28)
+
+#### Bug Fixes
+
+* Ensure exceptions have the correct cause ([#19227](https://github.com/googleapis/google-cloud-ruby/issues/19227)) 
+
 ### 1.7.0 (2022-09-16)
 
 #### Features
