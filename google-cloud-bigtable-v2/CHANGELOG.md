@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 (2022-09-28)
+
+#### Features
+
+* Return RequestStats when reading rows ([#19214](https://github.com/googleapis/google-cloud-ruby/issues/19214)) 
+
 ### 0.6.0 (2022-07-01)
 
 #### Features
