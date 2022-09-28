@@ -532,6 +532,46 @@
       ]
     },
     {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_AbandonRelease_sync",
+      "title": "Snippet for abandon_release in CloudDeploy",
+      "description": "Basic snippet for abandon_release in CloudDeploy",
+      "file": "cloud_deploy/abandon_release.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "abandon_release",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#abandon_release",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::AbandonReleaseRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::AbandonReleaseResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "AbandonRelease",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.AbandonRelease",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "clouddeploy_v1_generated_CloudDeploy_ApproveRollout_sync",
       "title": "Snippet for approve_rollout in CloudDeploy",
       "description": "Basic snippet for approve_rollout in CloudDeploy",
@@ -687,6 +727,126 @@
         {
           "start": 20,
           "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_RetryJob_sync",
+      "title": "Snippet for retry_job in CloudDeploy",
+      "description": "Basic snippet for retry_job in CloudDeploy",
+      "file": "cloud_deploy/retry_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retry_job",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#retry_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::RetryJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::RetryJobResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "RetryJob",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.RetryJob",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_ListJobRuns_sync",
+      "title": "Snippet for list_job_runs in CloudDeploy",
+      "description": "Basic snippet for list_job_runs in CloudDeploy",
+      "file": "cloud_deploy/list_job_runs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_job_runs",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#list_job_runs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::ListJobRunsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::ListJobRunsResponse",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "ListJobRuns",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.ListJobRuns",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "clouddeploy_v1_generated_CloudDeploy_GetJobRun_sync",
+      "title": "Snippet for get_job_run in CloudDeploy",
+      "description": "Basic snippet for get_job_run in CloudDeploy",
+      "file": "cloud_deploy/get_job_run.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_job_run",
+        "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client#get_job_run",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Deploy::V1::GetJobRunRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Deploy::V1::JobRun",
+        "client": {
+          "short_name": "CloudDeploy::Client",
+          "full_name": "::Google::Cloud::Deploy::V1::CloudDeploy::Client"
+        },
+        "method": {
+          "short_name": "GetJobRun",
+          "full_name": "google.cloud.deploy.v1.CloudDeploy.GetJobRun",
+          "service": {
+            "short_name": "CloudDeploy",
+            "full_name": "google.cloud.deploy.v1.CloudDeploy"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
           "type": "FULL"
         }
       ]

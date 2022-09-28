@@ -99,6 +99,31 @@ module Google
             end
 
             ##
+            # Create a fully-qualified JobRun resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/deliveryPipelines/{delivery_pipeline}/releases/{release}/rollouts/{rollout}/jobRuns/{job_run}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param delivery_pipeline [String]
+            # @param release [String]
+            # @param rollout [String]
+            # @param job_run [String]
+            #
+            # @return [::String]
+            def job_run_path project:, location:, delivery_pipeline:, release:, rollout:, job_run:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "delivery_pipeline cannot contain /" if delivery_pipeline.to_s.include? "/"
+              raise ::ArgumentError, "release cannot contain /" if release.to_s.include? "/"
+              raise ::ArgumentError, "rollout cannot contain /" if rollout.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/deliveryPipelines/#{delivery_pipeline}/releases/#{release}/rollouts/#{rollout}/jobRuns/#{job_run}"
+            end
+
+            ##
             # Create a fully-qualified Location resource string.
             #
             # The resource will be in the following format:

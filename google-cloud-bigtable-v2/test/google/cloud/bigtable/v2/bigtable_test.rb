@@ -60,6 +60,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
     rows = {}
     filter = {}
     rows_limit = 42
+    request_stats_view = :REQUEST_STATS_VIEW_UNSPECIFIED
 
     read_rows_client_stub = ClientStub.new [grpc_response].to_enum, grpc_operation do |name, request, options:|
       assert_equal :read_rows, name
@@ -69,6 +70,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowSet), request["rows"]
       assert_equal Gapic::Protobuf.coerce({}, to: ::Google::Cloud::Bigtable::V2::RowFilter), request["filter"]
       assert_equal 42, request["rows_limit"]
+      assert_equal :REQUEST_STATS_VIEW_UNSPECIFIED, request["request_stats_view"]
       refute_nil options
     end
 
@@ -79,7 +81,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object
-      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit }) do |response, operation|
+      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view }) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -88,7 +90,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use named arguments
-      client.read_rows table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit do |response, operation|
+      client.read_rows table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -97,7 +99,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object
-      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit) do |response, operation|
+      client.read_rows ::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -106,7 +108,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use hash object with options
-      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit }, grpc_options) do |response, operation|
+      client.read_rows({ table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view }, grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r
@@ -115,7 +117,7 @@ class ::Google::Cloud::Bigtable::V2::Bigtable::ClientTest < Minitest::Test
       end
 
       # Use protobuf object with options
-      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit), grpc_options) do |response, operation|
+      client.read_rows(::Google::Cloud::Bigtable::V2::ReadRowsRequest.new(table_name: table_name, app_profile_id: app_profile_id, rows: rows, filter: filter, rows_limit: rows_limit, request_stats_view: request_stats_view), grpc_options) do |response, operation|
         assert_kind_of Enumerable, response
         response.to_a.each do |r|
           assert_kind_of ::Google::Cloud::Bigtable::V2::ReadRowsResponse, r

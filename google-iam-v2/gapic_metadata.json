@@ -34,11 +34,6 @@
               "methods": [
                 "delete_policy"
               ]
-            },
-            "ListApplicablePolicies": {
-              "methods": [
-                "list_applicable_policies"
-              ]
             }
           }
         }

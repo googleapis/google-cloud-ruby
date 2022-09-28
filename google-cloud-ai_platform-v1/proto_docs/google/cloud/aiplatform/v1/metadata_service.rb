@@ -209,6 +209,14 @@ module Google
         #     logical operators (`AND` & `OR`).
         #
         #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     How the list of messages is ordered. Specify the values to order by and an
+        #     ordering operation. The default sorting order is ascending. To specify
+        #     descending order for a field, users append a " desc" suffix; for example:
+        #     "foo desc, bar".
+        #     Subfields are specified with a `.` character, such as foo.bar.
+        #     see https://google.aip.dev/132#ordering for more details.
         class ListArtifactsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -395,6 +403,14 @@ module Google
         #     logical operators (`AND` & `OR`).
         #
         #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     How the list of messages is ordered. Specify the values to order by and an
+        #     ordering operation. The default sorting order is ascending. To specify
+        #     descending order for a field, users append a " desc" suffix; for example:
+        #     "foo desc, bar".
+        #     Subfields are specified with a `.` character, such as foo.bar.
+        #     see https://google.aip.dev/132#ordering for more details.
         class ListContextsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -551,6 +567,28 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Request message for
+        # [MetadataService.DeleteContextChildrenRequest][].
+        # @!attribute [rw] context
+        #   @return [::String]
+        #     Required. The resource name of the parent Context.
+        #
+        #     Format:
+        #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+        # @!attribute [rw] child_contexts
+        #   @return [::Array<::String>]
+        #     The resource names of the child Contexts.
+        class RemoveContextChildrenRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#remove_context_children MetadataService.RemoveContextChildren}.
+        class RemoveContextChildrenResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # Request message for {::Google::Cloud::AIPlatform::V1::MetadataService::Client#query_context_lineage_subgraph MetadataService.QueryContextLineageSubgraph}.
         # @!attribute [rw] context
         #   @return [::String]
@@ -649,6 +687,14 @@ module Google
         #     Each of the above supported filters can be combined together using
         #     logical operators (`AND` & `OR`).
         #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+        # @!attribute [rw] order_by
+        #   @return [::String]
+        #     How the list of messages is ordered. Specify the values to order by and an
+        #     ordering operation. The default sorting order is ascending. To specify
+        #     descending order for a field, users append a " desc" suffix; for example:
+        #     "foo desc, bar".
+        #     Subfields are specified with a `.` character, such as foo.bar.
+        #     see https://google.aip.dev/132#ordering for more details.
         class ListExecutionsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

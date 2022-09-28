@@ -578,6 +578,11 @@
                 "add_context_children"
               ]
             },
+            "RemoveContextChildren": {
+              "methods": [
+                "remove_context_children"
+              ]
+            },
             "QueryContextLineageSubgraph": {
               "methods": [
                 "query_context_lineage_subgraph"

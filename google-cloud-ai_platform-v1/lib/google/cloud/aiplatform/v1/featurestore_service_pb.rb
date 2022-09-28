@@ -72,6 +72,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :imported_entity_count, :int64, 1
       optional :imported_feature_value_count, :int64, 2
       optional :invalid_row_count, :int64, 6
+      optional :timestamp_outside_retention_rows_count, :int64, 4
     end
     add_message "google.cloud.aiplatform.v1.BatchReadFeatureValuesRequest" do
       optional :featurestore, :string, 1
@@ -208,6 +209,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :imported_entity_count, :int64, 2
       optional :imported_feature_value_count, :int64, 3
       optional :invalid_row_count, :int64, 6
+      optional :timestamp_outside_retention_rows_count, :int64, 7
     end
     add_message "google.cloud.aiplatform.v1.ExportFeatureValuesOperationMetadata" do
       optional :generic_metadata, :message, 1, "google.cloud.aiplatform.v1.GenericOperationMetadata"

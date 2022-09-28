@@ -38,7 +38,6 @@
     "snippets/policies/create_policy.rb",
     "snippets/policies/delete_policy.rb",
     "snippets/policies/get_policy.rb",
-    "snippets/policies/list_applicable_policies.rb",
     "snippets/policies/list_policies.rb",
     "snippets/policies/update_policy.rb",
     "snippets/snippet_metadata_google.iam.v2.json",

@@ -76,6 +76,10 @@ module Google
             # have more than 10 parents, the request will fail with an INVALID_ARGUMENT
             # error.
             rpc :AddContextChildren, ::Google::Cloud::AIPlatform::V1::AddContextChildrenRequest, ::Google::Cloud::AIPlatform::V1::AddContextChildrenResponse
+            # Remove a set of children contexts from a parent Context. If any of the
+            # child Contexts were NOT added to the parent Context, they are
+            # simply skipped.
+            rpc :RemoveContextChildren, ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest, ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse
             # Retrieves Artifacts and Executions within the specified Context, connected
             # by Event edges and returned as a LineageSubgraph.
             rpc :QueryContextLineageSubgraph, ::Google::Cloud::AIPlatform::V1::QueryContextLineageSubgraphRequest, ::Google::Cloud::AIPlatform::V1::LineageSubgraph

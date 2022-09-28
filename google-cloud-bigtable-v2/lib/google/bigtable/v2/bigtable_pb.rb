@@ -9,6 +9,7 @@ require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/api/routing_pb'
 require 'google/bigtable/v2/data_pb'
+require 'google/bigtable/v2/request_stats_pb'
 require 'google/protobuf/wrappers_pb'
 require 'google/rpc/status_pb'
 
@@ -20,10 +21,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :rows, :message, 2, "google.bigtable.v2.RowSet"
       optional :filter, :message, 3, "google.bigtable.v2.RowFilter"
       optional :rows_limit, :int64, 4
+      optional :request_stats_view, :enum, 6, "google.bigtable.v2.ReadRowsRequest.RequestStatsView"
+    end
+    add_enum "google.bigtable.v2.ReadRowsRequest.RequestStatsView" do
+      value :REQUEST_STATS_VIEW_UNSPECIFIED, 0
+      value :REQUEST_STATS_NONE, 1
+      value :REQUEST_STATS_EFFICIENCY, 2
+      value :REQUEST_STATS_FULL, 3
     end
     add_message "google.bigtable.v2.ReadRowsResponse" do
       repeated :chunks, :message, 1, "google.bigtable.v2.ReadRowsResponse.CellChunk"
       optional :last_scanned_row_key, :bytes, 2
+      optional :request_stats, :message, 3, "google.bigtable.v2.RequestStats"
     end
     add_message "google.bigtable.v2.ReadRowsResponse.CellChunk" do
       optional :row_key, :bytes, 1
@@ -104,6 +113,7 @@ module Google
     module Bigtable
       module V2
         ReadRowsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsRequest").msgclass
+        ReadRowsRequest::RequestStatsView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsRequest.RequestStatsView").enummodule
         ReadRowsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse").msgclass
         ReadRowsResponse::CellChunk = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadRowsResponse.CellChunk").msgclass
         SampleRowKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.SampleRowKeysRequest").msgclass

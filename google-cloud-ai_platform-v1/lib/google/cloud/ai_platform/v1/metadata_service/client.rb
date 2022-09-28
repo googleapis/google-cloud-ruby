@@ -780,7 +780,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_artifacts(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            # @overload list_artifacts(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
             #   Pass arguments to `list_artifacts` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -827,6 +827,13 @@ module Google
             #     logical operators (`AND` & `OR`).
             #
             #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+            #   @param order_by [::String]
+            #     How the list of messages is ordered. Specify the values to order by and an
+            #     ordering operation. The default sorting order is ascending. To specify
+            #     descending order for a field, users append a " desc" suffix; for example:
+            #     "foo desc, bar".
+            #     Subfields are specified with a `.` character, such as foo.bar.
+            #     see https://google.aip.dev/132#ordering for more details.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Artifact>]
@@ -1393,7 +1400,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_contexts(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            # @overload list_contexts(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
             #   Pass arguments to `list_contexts` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1444,6 +1451,13 @@ module Google
             #     logical operators (`AND` & `OR`).
             #
             #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+            #   @param order_by [::String]
+            #     How the list of messages is ordered. Specify the values to order by and an
+            #     ordering operation. The default sorting order is ascending. To specify
+            #     descending order for a field, users append a " desc" suffix; for example:
+            #     "foo desc, bar".
+            #     Subfields are specified with a `.` character, such as foo.bar.
+            #     see https://google.aip.dev/132#ordering for more details.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Context>]
@@ -2011,6 +2025,98 @@ module Google
             end
 
             ##
+            # Remove a set of children contexts from a parent Context. If any of the
+            # child Contexts were NOT added to the parent Context, they are
+            # simply skipped.
+            #
+            # @overload remove_context_children(request, options = nil)
+            #   Pass arguments to `remove_context_children` via a request object, either of type
+            #   {::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload remove_context_children(context: nil, child_contexts: nil)
+            #   Pass arguments to `remove_context_children` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param context [::String]
+            #     Required. The resource name of the parent Context.
+            #
+            #     Format:
+            #     `projects/{project}/locations/{location}/metadataStores/{metadatastore}/contexts/{context}`
+            #   @param child_contexts [::Array<::String>]
+            #     The resource names of the child Contexts.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/ai_platform/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new
+            #
+            #   # Call the remove_context_children method.
+            #   result = client.remove_context_children request
+            #
+            #   # The returned object is of type Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse.
+            #   p result
+            #
+            def remove_context_children request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.remove_context_children.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AIPlatform::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.context
+                header_params["context"] = request.context
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.remove_context_children.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.remove_context_children.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @metadata_service_stub.call_rpc :remove_context_children, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Retrieves Artifacts and Executions within the specified Context, connected
             # by Event edges and returned as a LineageSubgraph.
             #
@@ -2302,7 +2408,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload list_executions(parent: nil, page_size: nil, page_token: nil, filter: nil)
+            # @overload list_executions(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
             #   Pass arguments to `list_executions` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -2348,6 +2454,13 @@ module Google
             #     Each of the above supported filters can be combined together using
             #     logical operators (`AND` & `OR`).
             #     For example: `display_name = "test" AND metadata.field1.bool_value = true`.
+            #   @param order_by [::String]
+            #     How the list of messages is ordered. Specify the values to order by and an
+            #     ordering operation. The default sorting order is ascending. To specify
+            #     descending order for a field, users append a " desc" suffix; for example:
+            #     "foo desc, bar".
+            #     Subfields are specified with a `.` character, such as foo.bar.
+            #     see https://google.aip.dev/132#ordering for more details.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AIPlatform::V1::Execution>]
@@ -3540,6 +3653,11 @@ module Google
                 #
                 attr_reader :add_context_children
                 ##
+                # RPC-specific configuration for `remove_context_children`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :remove_context_children
+                ##
                 # RPC-specific configuration for `query_context_lineage_subgraph`
                 # @return [::Gapic::Config::Method]
                 #
@@ -3643,6 +3761,8 @@ module Google
                   @add_context_artifacts_and_executions = ::Gapic::Config::Method.new add_context_artifacts_and_executions_config
                   add_context_children_config = parent_rpcs.add_context_children if parent_rpcs.respond_to? :add_context_children
                   @add_context_children = ::Gapic::Config::Method.new add_context_children_config
+                  remove_context_children_config = parent_rpcs.remove_context_children if parent_rpcs.respond_to? :remove_context_children
+                  @remove_context_children = ::Gapic::Config::Method.new remove_context_children_config
                   query_context_lineage_subgraph_config = parent_rpcs.query_context_lineage_subgraph if parent_rpcs.respond_to? :query_context_lineage_subgraph
                   @query_context_lineage_subgraph = ::Gapic::Config::Method.new query_context_lineage_subgraph_config
                   create_execution_config = parent_rpcs.create_execution if parent_rpcs.respond_to? :create_execution

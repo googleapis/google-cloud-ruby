@@ -436,6 +436,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    order_by = "hello world"
 
     list_artifacts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_artifacts, name
@@ -444,6 +445,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -454,35 +456,35 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_artifacts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_artifacts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_artifacts ::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_artifacts ::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_artifacts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_artifacts(::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      client.list_artifacts(::Google::Cloud::AIPlatform::V1::ListArtifactsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -819,6 +821,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    order_by = "hello world"
 
     list_contexts_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_contexts, name
@@ -827,6 +830,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -837,35 +841,35 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_contexts parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_contexts parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_contexts ::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_contexts ::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_contexts({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_contexts(::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      client.list_contexts(::Google::Cloud::AIPlatform::V1::ListContextsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
@@ -1194,6 +1198,66 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
     end
   end
 
+  def test_remove_context_children
+    # Create GRPC objects.
+    grpc_response = ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenResponse.new
+    grpc_operation = GRPC::ActiveCall::Operation.new nil
+    grpc_channel = GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    grpc_options = {}
+
+    # Create request parameters for a unary method.
+    context = "hello world"
+    child_contexts = ["hello world"]
+
+    remove_context_children_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
+      assert_equal :remove_context_children, name
+      assert_kind_of ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest, request
+      assert_equal "hello world", request["context"]
+      assert_equal ["hello world"], request["child_contexts"]
+      refute_nil options
+    end
+
+    Gapic::ServiceStub.stub :new, remove_context_children_client_stub do
+      # Create client
+      client = ::Google::Cloud::AIPlatform::V1::MetadataService::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      # Use hash object
+      client.remove_context_children({ context: context, child_contexts: child_contexts }) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use named arguments
+      client.remove_context_children context: context, child_contexts: child_contexts do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object
+      client.remove_context_children ::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new(context: context, child_contexts: child_contexts) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use hash object with options
+      client.remove_context_children({ context: context, child_contexts: child_contexts }, grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Use protobuf object with options
+      client.remove_context_children(::Google::Cloud::AIPlatform::V1::RemoveContextChildrenRequest.new(context: context, child_contexts: child_contexts), grpc_options) do |response, operation|
+        assert_equal grpc_response, response
+        assert_equal grpc_operation, operation
+      end
+
+      # Verify method calls
+      assert_equal 5, remove_context_children_client_stub.call_rpc_count
+    end
+  end
+
   def test_query_context_lineage_subgraph
     # Create GRPC objects.
     grpc_response = ::Google::Cloud::AIPlatform::V1::LineageSubgraph.new
@@ -1384,6 +1448,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
     page_size = 42
     page_token = "hello world"
     filter = "hello world"
+    order_by = "hello world"
 
     list_executions_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
       assert_equal :list_executions, name
@@ -1392,6 +1457,7 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
       assert_equal 42, request["page_size"]
       assert_equal "hello world", request["page_token"]
       assert_equal "hello world", request["filter"]
+      assert_equal "hello world", request["order_by"]
       refute_nil options
     end
 
@@ -1402,35 +1468,35 @@ class ::Google::Cloud::AIPlatform::V1::MetadataService::ClientTest < Minitest::T
       end
 
       # Use hash object
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }) do |response, operation|
+      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.list_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter do |response, operation|
+      client.list_executions parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.list_executions ::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter) do |response, operation|
+      client.list_executions ::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter }, grpc_options) do |response, operation|
+      client.list_executions({ parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by }, grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.list_executions(::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter), grpc_options) do |response, operation|
+      client.list_executions(::Google::Cloud::AIPlatform::V1::ListExecutionsRequest.new(parent: parent, page_size: page_size, page_token: page_token, filter: filter, order_by: order_by), grpc_options) do |response, operation|
         assert_kind_of Gapic::PagedEnumerable, response
         assert_equal grpc_response, response.response
         assert_equal grpc_operation, operation

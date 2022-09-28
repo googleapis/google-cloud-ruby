@@ -35,7 +35,7 @@ describe "Retry Samples" do
   it "configure_retries" do
     bucket.create_file local_file, remote_file_name
 
-    assert_output "Deleted #{remote_file_name} from bucket #{bucket.name}\n" do
+    assert_output "File #{remote_file_name} deleted with a customized retry strategy.\n" do
       configure_retries bucket_name: bucket.name, file_name: remote_file_name
     end
 

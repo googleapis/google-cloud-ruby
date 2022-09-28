@@ -22,26 +22,47 @@ def configure_retries bucket_name: nil, file_name: nil
 
   require "google/cloud/storage"
 
-  # Customize retry with the maximum retry attempt of 5 (default=3).
-  # Customize retry with a deadline of 500 seconds (default=900 seconds).
-  # Customize retry with an initial wait time of 1.5 (default=1.0).
-  # Customize retry with a wait time multiplier per iteration of 1.2 (default=2.0).
-  # Customize retry with a maximum wait time of 45.0 (default=60.0).
+  # Creates a client
   storage = Google::Cloud::Storage.new(
+
+    # The maximum number of automatic retries attempted before returning
+    # the error.
+    #
+    # Customize retry configuration with the maximum retry attempt of 5.
     retries: 5,
+
+    # The total time in seconds that requests are allowed to keep being retried.
+    # After max_elapsed_time, an error will be returned regardless of any
+    # retry attempts made during this time period.
+    #
+    # Customize retry configuration with maximum elapsed time of 500 seconds.
     max_elapsed_time: 500,
+
+    # The initial interval between the completion of failed requests, and the
+    # initiation of the subsequent retrying request.
+    #
+    # Customize retry configuration with an initial interval of 1.5 seconds.
     base_interval: 1.5,
+
+    # The maximum interval between requests. When this value is reached,
+    # multiplier will no longer be used to increase the interval.
+    #
+    # Customize retry configuration with maximum interval of 45.0 seconds.
     max_interval: 45,
+
+    # The multiplier by which to increase the interval between the completion
+    # of failed requests, and the initiation of the subsequent retrying request.
+    #
+    # Customize retry configuration with an interval multiplier per iteration of 1.2.
     multiplier: 1.2
   )
 
-  # Use the default retry configuration set during the client initialization above with 5 retries
+  # Uses the retry configuration set during the client initialization above with 5 retries
   file = storage.service.get_file bucket_name, file_name
 
   # Maximum retry attempt can be overridden for each operation using options parameter.
-  # We can disable the retry by setting the retries to 0.
-  storage.service.delete_file bucket_name, file_name, options: { retries: 0 }
-  puts "Deleted #{file.name} from bucket #{bucket_name}"
+  storage.service.delete_file bucket_name, file_name, options: { retries: 4 }
+  puts "File #{file.name} deleted with a customized retry strategy."
 end
 # [END storage_configure_retries]
 

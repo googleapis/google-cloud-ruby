@@ -247,6 +247,10 @@ module Google
         #     * Having a null entityId.
         #     * Having a null timestamp.
         #     * Not being parsable (applicable for CSV sources).
+        # @!attribute [rw] timestamp_outside_retention_rows_count
+        #   @return [::Integer]
+        #     The number rows that weren't ingested due to having feature timestamps
+        #     outside the retention boundary.
         class ImportFeatureValuesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -931,6 +935,10 @@ module Google
         #     * Having a null entityId.
         #     * Having a null timestamp.
         #     * Not being parsable (applicable for CSV sources).
+        # @!attribute [rw] timestamp_outside_retention_rows_count
+        #   @return [::Integer]
+        #     The number rows that weren't ingested due to having timestamps outside the
+        #     retention boundary.
         class ImportFeatureValuesOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

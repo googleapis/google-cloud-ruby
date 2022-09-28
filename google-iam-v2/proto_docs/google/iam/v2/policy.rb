@@ -37,12 +37,11 @@ module Google
       #     Responses always contain the numeric ID.
       # @!attribute [rw] uid
       #   @return [::String]
-      #     Immutable. The globally unique ID of the `Policy`. Assigned automatically
-      #     when the `Policy` is created.
+      #     Immutable. The globally unique ID of the `Policy`. Assigned automatically when the
+      #     `Policy` is created.
       # @!attribute [r] kind
       #   @return [::String]
-      #     Output only. The kind of the `Policy`. Always contains the value
-      #     `DenyPolicy`.
+      #     Output only. The kind of the `Policy`. Always contains the value `DenyPolicy`.
       # @!attribute [rw] display_name
       #   @return [::String]
       #     A user-specified description of the `Policy`. This value can be up to 63
@@ -67,16 +66,15 @@ module Google
       #     Output only. The time when the `Policy` was last updated.
       # @!attribute [r] delete_time
       #   @return [::Google::Protobuf::Timestamp]
-      #     Output only. The time when the `Policy` was deleted. Empty if the policy is
-      #     not deleted.
+      #     Output only. The time when the `Policy` was deleted. Empty if the policy is not deleted.
       # @!attribute [rw] rules
       #   @return [::Array<::Google::Iam::V2::PolicyRule>]
       #     A list of rules that specify the behavior of the `Policy`. All of the rules
       #     should be of the `kind` specified in the `Policy`.
       # @!attribute [rw] managing_authority
       #   @return [::String]
-      #     Immutable. Specifies that this policy is managed by an authority and can
-      #     only be modified by that authority. Usage is restricted.
+      #     Immutable. Specifies that this policy is managed by an authority and can only be
+      #     modified by that authority. Usage is restricted.
       class Policy
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -107,8 +105,9 @@ module Google
       # Request message for `ListPolicies`.
       # @!attribute [rw] parent
       #   @return [::String]
-      #     Required. The resource that the policy is attached to, along with the kind
-      #     of policy to list. Format: `policies/{attachment_point}/denypolicies`
+      #     Required. The resource that the policy is attached to, along with the kind of policy
+      #     to list. Format:
+      #     `policies/{attachment_point}/denypolicies`
       #
       #
       #     The attachment point is identified by its URL-encoded full resource name,
@@ -124,9 +123,8 @@ module Google
       #     the value 1000.
       # @!attribute [rw] page_token
       #   @return [::String]
-      #     A page token received in a
-      #     {::Google::Iam::V2::ListPoliciesResponse ListPoliciesResponse}. Provide this
-      #     token to retrieve the next page.
+      #     A page token received in a {::Google::Iam::V2::ListPoliciesResponse ListPoliciesResponse}. Provide this token to
+      #     retrieve the next page.
       class ListPoliciesRequest
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -138,8 +136,7 @@ module Google
       #     Metadata for the policies that are attached to the resource.
       # @!attribute [rw] next_page_token
       #   @return [::String]
-      #     A page token that you can use in a
-      #     {::Google::Iam::V2::ListPoliciesRequest ListPoliciesRequest} to retrieve the
+      #     A page token that you can use in a {::Google::Iam::V2::ListPoliciesRequest ListPoliciesRequest} to retrieve the
       #     next page. If this field is omitted, there are no additional pages.
       class ListPoliciesResponse
         include ::Google::Protobuf::MessageExts
@@ -167,8 +164,8 @@ module Google
       # Request message for `CreatePolicy`.
       # @!attribute [rw] parent
       #   @return [::String]
-      #     Required. The resource that the policy is attached to, along with the kind
-      #     of policy to create. Format: `policies/{attachment_point}/denypolicies`
+      #     Required. The resource that the policy is attached to, along with the kind of policy
+      #     to create. Format: `policies/{attachment_point}/denypolicies`
       #
       #
       #     The attachment point is identified by its URL-encoded full resource name,
@@ -220,82 +217,13 @@ module Google
       #     name. For projects, you can use the alphanumeric or the numeric ID.
       # @!attribute [rw] etag
       #   @return [::String]
-      #     Optional. The expected `etag` of the policy to delete. If the value does
-      #     not match the value that is stored in IAM, the request fails with a `409`
-      #     error code and `ABORTED` status.
+      #     Optional. The expected `etag` of the policy to delete. If the value does not match
+      #     the value that is stored in IAM, the request fails with a `409` error code
+      #     and `ABORTED` status.
       #
       #     If you omit this field, the policy is deleted regardless of its current
       #     `etag`.
       class DeletePolicyRequest
-        include ::Google::Protobuf::MessageExts
-        extend ::Google::Protobuf::MessageExts::ClassMethods
-      end
-
-      # `ListApplicablePoliciesRequest` represents the Request message for the
-      # `ListApplicablePolicies` method. It provides the input for a filterable query
-      # of Policies that apply to a certain GCP Resource, specified by the field
-      # `attachment_point`, found on this message.
-      # Example:
-      # ```
-      # {
-      #    attachment_point:
-      #    'cloudresourcemanager.googleapis.com%2Forganizations%2F212345678901'
-      #    filter: 'kind:denyPolicies'
-      # }
-      # ```
-      # @!attribute [rw] attachment_point
-      #   @return [::String]
-      #     Required. The Cloud resource at which the applicable policies are to be
-      #     retrieved. Format: `{attachment-point}` Use the URL-encoded full resource
-      #     name, which means that the forward-slash character, `/`, must be written as
-      #     `%2F`. For example,
-      #     `cloudresourcemanager.googleapis.com%2Fprojects%2Fmy-project`.
-      # @!attribute [rw] filter
-      #   @return [::String]
-      #     Filtering currently only supports the kind of policies to return, and
-      #     must be in the format “kind:[policyKind1] OR kind:[policyKind2]”.  New
-      #     policy kinds may be added in the future without notice.
-      #
-      #     Example value: “kind:denyPolicies”
-      # @!attribute [rw] page_token
-      #   @return [::String]
-      #     If present, then retrieve the batch of results following the results from
-      #     the preceding call to this method.  `page_token` must be the value of
-      #     `next_page_token`
-      #     {::Google::Iam::V2::ListApplicablePoliciesResponse#next_page_token ListApplicablePoliciesResponse.next_page_token}
-      #     from the previous response.  The values of other method parameters should
-      #     be identical to those in the previous call.
-      # @!attribute [rw] page_size
-      #   @return [::Integer]
-      #     Limit on the number of policies to include in the response.
-      #     Further policies can subsequently be obtained by including the
-      #     [ListApplicablePoliciesResponse.next_page_token][google.iam.admin.v1.ListApplicablePoliciesResponse.next_page_token]
-      #     in a subsequent request.
-      #     The minimum is 25, and the maximum is 100.
-      class ListApplicablePoliciesRequest
-        include ::Google::Protobuf::MessageExts
-        extend ::Google::Protobuf::MessageExts::ClassMethods
-      end
-
-      # Response message for [ListApplicablePolicies][] method.
-      # @!attribute [rw] policies
-      #   @return [::Array<::Google::Iam::V2::Policy>]
-      #     Ordered list starting from the resource on which this API was called
-      #     then proceeding up the hierarchy. Policies for the same attachment point
-      #     will be grouped, but no further ordering is guaranteed.
-      # @!attribute [rw] inaccessible
-      #   @return [::Array<::String>]
-      #     A list of resources that the caller does not have permission to retrieve.
-      #     List or Get can be used to get detailed error messages.
-      #     Get: `policies/{attachment-point}/denypolicies/{policy-id}`
-      #     List: `policies/{attachment-point}/denypolicies`
-      # @!attribute [rw] next_page_token
-      #   @return [::String]
-      #     A page token that can be used in a
-      #     {::Google::Iam::V2::ListApplicablePoliciesRequest ListApplicablePoliciesRequest}
-      #     to retrieve the next page. If this field is blank, there are no additional
-      #     pages.
-      class ListApplicablePoliciesResponse
         include ::Google::Protobuf::MessageExts
         extend ::Google::Protobuf::MessageExts::ClassMethods
       end
