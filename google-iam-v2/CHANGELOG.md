@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.1.2 (2022-09-28)
+
+#### Bug Fixes
+
+* Removed incorrect list_applicable_policies call ([#19212](https://github.com/googleapis/google-cloud-ruby/issues/19212)) 
+
 ### 0.1.1 (2022-09-15)
 
 #### Documentation
