@@ -20,16 +20,13 @@ describe "Retry Samples" do
   let(:remote_file_name) { "path/file_name_#{SecureRandom.hex}.txt" }
   let(:bucket) { @bucket }
 
-  before :all do
+  before do
     @bucket = create_bucket_helper random_bucket_name
-  end
-
-  after :all do
-    delete_bucket_helper @bucket.name
   end
 
   after do
     bucket.files.each(&:delete)
+    delete_bucket_helper @bucket.name
   end
 
   it "configure_retries" do

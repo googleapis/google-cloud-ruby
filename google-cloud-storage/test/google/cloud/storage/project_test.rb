@@ -96,7 +96,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
 
     _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
     _(bucket.name).must_equal bucket_name
-    _(bucket.autoclass?).must_equal bucket_autoclass_enabled
+    _(bucket.autoclass_enabled).must_equal bucket_autoclass_enabled
   end
 
   it "creates a bucket with storage_class" do

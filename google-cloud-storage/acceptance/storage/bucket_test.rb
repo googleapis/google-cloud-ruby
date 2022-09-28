@@ -279,18 +279,18 @@ describe Google::Cloud::Storage::Bucket, :storage do
     one_off_bucket = safe_gcs_execute { storage.create_bucket one_off_bucket_name, user_project: true, autoclass_enabled: true }
     _(storage.bucket(one_off_bucket_name)).wont_be :nil?
     _(one_off_bucket.user_project).must_equal true
-    _(one_off_bucket.autoclass?).must_equal true
+    _(one_off_bucket.autoclass_enabled).must_equal true
     prev_toggle_time = one_off_bucket.autoclass_toggle_time
 
     one_off_bucket.update do |b|
       b.autoclass_enabled= false
     end
-    _(one_off_bucket.autoclass?).must_equal false
+    _(one_off_bucket.autoclass_enabled).must_equal false
 
     one_off_bucket_copy = storage.bucket one_off_bucket_name, user_project: true
     _(one_off_bucket_copy).wont_be :nil?
     _(one_off_bucket_copy.user_project).must_equal true
-    _(one_off_bucket_copy.autoclass?).must_equal false
+    _(one_off_bucket_copy.autoclass_enabled).must_equal false
     refute one_off_bucket_copy.autoclass_toggle_time == prev_toggle_time
 
     one_off_bucket.files.all &:delete

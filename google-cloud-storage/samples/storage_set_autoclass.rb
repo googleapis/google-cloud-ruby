@@ -13,23 +13,31 @@
 # limitations under the License.
 
 # [START storage_set_autoclass]
+require "google/cloud/storage"
+
+##
+# This is a snippet for showcasing how to set the autoclass
+# configuration of a bucket.
+#
+# @param bucket_name [String] The ID of your GCS bucket (e.g. "your-unique-bucket-name")
+# @param toggle [Boolean] if true, enables Autoclass; if false, disables Autoclass
+#
 def set_autoclass bucket_name:, toggle:
-  # The ID of your GCS bucket
-  # bucket_name = "your-unique-bucket-name"
-  # Boolean toggle - if true, enables Autoclass; if false, disables Autoclass
-  # toggle = False
 
-  require "google/cloud/storage"
-
+  # Initialize client
   storage = Google::Cloud::Storage.new
+
+  # Fetch the GCS bucket
   bucket = storage.bucket bucket_name
-  bucket.autoclass = toggle
-  unless bucket.autoclass.nil?
-    puts "Autoclass enabled is set to #{bucket.autoclass.enabled} for #{bucket.name}."
-    puts "Autoclass toggle_time is set to #{bucket.autoclass.toggle_time} for #{bucket.name}."
-  end
-  bucket
+
+  # Update the autoclass configuration
+  bucket.autoclass_enabled = toggle
+
+  # Get autoclass config of the bucket
+  puts "Bucket #{bucket.name} has autoclass config set to #{bucket.autoclass_enabled}."
+  puts "Bucket #{bucket.name} has autoclass toggle time set to #{bucket.autoclass_toggle_time}."
 end
+
 # [END storage_set_autoclass]
 
 if $PROGRAM_NAME == __FILE__

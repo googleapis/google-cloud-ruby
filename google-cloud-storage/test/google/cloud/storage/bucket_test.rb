@@ -96,7 +96,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "knows its autoclass config" do
     # a complete bucket has a autoclass config enabled
-    _(bucket_complete.autoclass?).must_equal bucket_autoclass_enabled
+    _(bucket_complete.autoclass_enabled).must_equal bucket_autoclass_enabled
   end
 
   it "returns frozen cors" do

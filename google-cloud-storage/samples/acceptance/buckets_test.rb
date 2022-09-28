@@ -143,22 +143,19 @@ describe "Buckets Snippets" do
   end
 
   describe "autoclass" do
-    it "get_autoclass, set_autoclass" do
+    focus; it "get_autoclass, set_autoclass" do
       bucket_name = random_bucket_name
       refute storage_client.bucket bucket_name
 
-      bucket = storage_client.create_bucket bucket_name, autoclass: { enabled: true }
-      _(bucket.autoclass.nil?).must_equal false
+      storage_client.create_bucket bucket_name, autoclass_enabled: true
 
-      bucket = get_autoclass bucket_name: bucket_name
-      _(bucket.autoclass.nil?).must_equal false
-      _(bucket.autoclass.enabled).must_equal true
-      prev_toggle_time = bucket.autoclass.toggle_time
+      assert_output(/autoclass config set to true./)  do
+        get_autoclass bucket_name: bucket_name
+      end
 
-      bucket = set_autoclass bucket_name: bucket_name, toggle: false
-      _(bucket.autoclass.nil?).must_equal false
-      _(bucket.autoclass.enabled).must_equal false
-      refute bucket.autoclass.toggle_time == prev_toggle_time
+      assert_output(/autoclass config set to false./)  do
+        set_autoclass bucket_name: bucket_name, toggle: false
+      end
 
       delete_bucket_helper bucket_name
     end
