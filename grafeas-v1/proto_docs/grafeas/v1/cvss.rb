@@ -210,5 +210,14 @@ module Grafeas
         IMPACT_NONE = 3
       end
     end
+
+    # CVSS Version.
+    module CVSSVersion
+      CVSS_VERSION_UNSPECIFIED = 0
+
+      CVSS_VERSION_2 = 1
+
+      CVSS_VERSION_3 = 2
+    end
   end
 end

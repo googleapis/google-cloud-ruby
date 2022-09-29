@@ -106,6 +106,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IMPACT_LOW, 2
       value :IMPACT_NONE, 3
     end
+    add_enum "grafeas.v1.CVSSVersion" do
+      value :CVSS_VERSION_UNSPECIFIED, 0
+      value :CVSS_VERSION_2, 1
+      value :CVSS_VERSION_3, 2
+    end
   end
 end
 
@@ -126,5 +131,6 @@ module Grafeas
     CVSS::UserInteraction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.UserInteraction").enummodule
     CVSS::Scope = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.Scope").enummodule
     CVSS::Impact = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSS.Impact").enummodule
+    CVSSVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("grafeas.v1.CVSSVersion").enummodule
   end
 end
