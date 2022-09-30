@@ -77,6 +77,11 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
                 }
 
+                default_config.rpcs.run_aggregation_query.timeout = 60.0
+                default_config.rpcs.run_aggregation_query.retry_policy = {
+                  initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [14, 4]
+                }
+
                 default_config.rpcs.begin_transaction.timeout = 60.0
 
                 default_config.rpcs.commit.timeout = 60.0
@@ -358,6 +363,107 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @datastore_stub.call_rpc :run_query, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Runs an aggregation query.
+            #
+            # @overload run_aggregation_query(request, options = nil)
+            #   Pass arguments to `run_aggregation_query` via a request object, either of type
+            #   {::Google::Cloud::Datastore::V1::RunAggregationQueryRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Datastore::V1::RunAggregationQueryRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload run_aggregation_query(project_id: nil, database_id: nil, partition_id: nil, read_options: nil, aggregation_query: nil, gql_query: nil)
+            #   Pass arguments to `run_aggregation_query` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param project_id [::String]
+            #     Required. The ID of the project against which to make the request.
+            #   @param database_id [::String]
+            #     The ID of the database against which to make the request.
+            #
+            #     '(default)' is not allowed; please use empty string '' to refer the default
+            #     database.
+            #   @param partition_id [::Google::Cloud::Datastore::V1::PartitionId, ::Hash]
+            #     Entities are partitioned into subsets, identified by a partition ID.
+            #     Queries are scoped to a single partition.
+            #     This partition ID is normalized with the standard default context
+            #     partition ID.
+            #   @param read_options [::Google::Cloud::Datastore::V1::ReadOptions, ::Hash]
+            #     The options for this query.
+            #   @param aggregation_query [::Google::Cloud::Datastore::V1::AggregationQuery, ::Hash]
+            #     The query to run.
+            #   @param gql_query [::Google::Cloud::Datastore::V1::GqlQuery, ::Hash]
+            #     The GQL query to run. This query must be an aggregation query.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::Datastore::V1::RunAggregationQueryResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::Datastore::V1::RunAggregationQueryResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/datastore/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Datastore::V1::Datastore::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Datastore::V1::RunAggregationQueryRequest.new
+            #
+            #   # Call the run_aggregation_query method.
+            #   result = client.run_aggregation_query request
+            #
+            #   # The returned object is of type Google::Cloud::Datastore::V1::RunAggregationQueryResponse.
+            #   p result
+            #
+            def run_aggregation_query request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.run_aggregation_query.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Datastore::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.project_id
+                header_params["project_id"] = request.project_id
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.run_aggregation_query.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.run_aggregation_query.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @datastore_stub.call_rpc :run_aggregation_query, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -995,6 +1101,11 @@ module Google
                 #
                 attr_reader :run_query
                 ##
+                # RPC-specific configuration for `run_aggregation_query`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :run_aggregation_query
+                ##
                 # RPC-specific configuration for `begin_transaction`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1026,6 +1137,8 @@ module Google
                   @lookup = ::Gapic::Config::Method.new lookup_config
                   run_query_config = parent_rpcs.run_query if parent_rpcs.respond_to? :run_query
                   @run_query = ::Gapic::Config::Method.new run_query_config
+                  run_aggregation_query_config = parent_rpcs.run_aggregation_query if parent_rpcs.respond_to? :run_aggregation_query
+                  @run_aggregation_query = ::Gapic::Config::Method.new run_aggregation_query_config
                   begin_transaction_config = parent_rpcs.begin_transaction if parent_rpcs.respond_to? :begin_transaction
                   @begin_transaction = ::Gapic::Config::Method.new begin_transaction_config
                   commit_config = parent_rpcs.commit if parent_rpcs.respond_to? :commit

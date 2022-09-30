@@ -43,6 +43,8 @@ module Google
             rpc :Lookup, ::Google::Cloud::Datastore::V1::LookupRequest, ::Google::Cloud::Datastore::V1::LookupResponse
             # Queries for entities.
             rpc :RunQuery, ::Google::Cloud::Datastore::V1::RunQueryRequest, ::Google::Cloud::Datastore::V1::RunQueryResponse
+            # Runs an aggregation query.
+            rpc :RunAggregationQuery, ::Google::Cloud::Datastore::V1::RunAggregationQueryRequest, ::Google::Cloud::Datastore::V1::RunAggregationQueryResponse
             # Begins a new transaction.
             rpc :BeginTransaction, ::Google::Cloud::Datastore::V1::BeginTransactionRequest, ::Google::Cloud::Datastore::V1::BeginTransactionResponse
             # Commits a transaction, optionally creating, deleting or modifying some
