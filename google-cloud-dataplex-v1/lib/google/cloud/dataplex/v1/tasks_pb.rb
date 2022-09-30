@@ -25,6 +25,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :execution_status, :message, 201, "google.cloud.dataplex.v1.Task.ExecutionStatus"
       oneof :config do
         optional :spark, :message, 300, "google.cloud.dataplex.v1.Task.SparkTaskConfig"
+        optional :notebook, :message, 302, "google.cloud.dataplex.v1.Task.NotebookTaskConfig"
       end
     end
     add_message "google.cloud.dataplex.v1.Task.InfrastructureSpec" do
@@ -88,6 +89,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :sql_script, :string, 105
       end
     end
+    add_message "google.cloud.dataplex.v1.Task.NotebookTaskConfig" do
+      optional :notebook, :string, 4
+      optional :infrastructure_spec, :message, 3, "google.cloud.dataplex.v1.Task.InfrastructureSpec"
+      repeated :file_uris, :string, 5
+      repeated :archive_uris, :string, 6
+    end
     add_message "google.cloud.dataplex.v1.Task.ExecutionStatus" do
       optional :update_time, :message, 3, "google.protobuf.Timestamp"
       optional :latest_job, :message, 9, "google.cloud.dataplex.v1.Job"
@@ -132,6 +139,7 @@ module Google
         Task::TriggerSpec::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.TriggerSpec.Type").enummodule
         Task::ExecutionSpec = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.ExecutionSpec").msgclass
         Task::SparkTaskConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.SparkTaskConfig").msgclass
+        Task::NotebookTaskConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.NotebookTaskConfig").msgclass
         Task::ExecutionStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Task.ExecutionStatus").msgclass
         Job = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Job").msgclass
         Job::Service = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.dataplex.v1.Job.Service").enummodule

@@ -85,6 +85,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :user_id, :string, 2
       optional :session_id, :string, 3
       optional :type, :enum, 4, "google.cloud.dataplex.v1.SessionEvent.EventType"
+      optional :event_succeeded, :bool, 6
+      optional :warm_pool_enabled, :bool, 7
+      optional :unassigned_duration, :message, 8, "google.protobuf.Duration"
       oneof :detail do
         optional :query, :message, 5, "google.cloud.dataplex.v1.SessionEvent.QueryDetail"
       end
@@ -107,6 +110,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :START, 1
       value :STOP, 2
       value :QUERY, 3
+      value :CREATE, 4
     end
   end
 end
