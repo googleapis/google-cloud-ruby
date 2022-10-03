@@ -1,5 +1,11 @@
 # Release History
 
+### 0.18.0 (2022-10-03)
+
+#### Features
+
+* Include the conversation dataset name with dataset creation metadata ([#19247](https://github.com/googleapis/google-cloud-ruby/issues/19247)) 
+
 ### 0.17.1 (2022-07-28)
 
 #### Documentation
