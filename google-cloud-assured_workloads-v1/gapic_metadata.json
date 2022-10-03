@@ -20,6 +20,11 @@
                 "update_workload"
               ]
             },
+            "RestrictAllowedResources": {
+              "methods": [
+                "restrict_allowed_resources"
+              ]
+            },
             "DeleteWorkload": {
               "methods": [
                 "delete_workload"
@@ -33,6 +38,21 @@
             "ListWorkloads": {
               "methods": [
                 "list_workloads"
+              ]
+            },
+            "ListViolations": {
+              "methods": [
+                "list_violations"
+              ]
+            },
+            "GetViolation": {
+              "methods": [
+                "get_violation"
+              ]
+            },
+            "AcknowledgeViolation": {
+              "methods": [
+                "acknowledge_violation"
               ]
             }
           }

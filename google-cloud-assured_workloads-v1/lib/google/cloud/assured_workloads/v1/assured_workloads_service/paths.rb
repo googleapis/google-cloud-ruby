@@ -42,6 +42,27 @@ module Google
             end
 
             ##
+            # Create a fully-qualified Violation resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `organizations/{organization}/locations/{location}/workloads/{workload}/violations/{violation}`
+            #
+            # @param organization [String]
+            # @param location [String]
+            # @param workload [String]
+            # @param violation [String]
+            #
+            # @return [::String]
+            def violation_path organization:, location:, workload:, violation:
+              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+              raise ::ArgumentError, "workload cannot contain /" if workload.to_s.include? "/"
+
+              "organizations/#{organization}/locations/#{location}/workloads/#{workload}/violations/#{violation}"
+            end
+
+            ##
             # Create a fully-qualified Workload resource string.
             #
             # The resource will be in the following format:
