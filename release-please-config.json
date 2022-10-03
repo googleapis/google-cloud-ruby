@@ -183,6 +183,10 @@
       "component": "google-cloud-bigquery",
       "version_file": "lib/google/cloud/bigquery/version.rb"
     },
+    "google-cloud-bigquery-analytics_hub-v1": {
+      "component": "google-cloud-bigquery-analytics_hub-v1",
+      "version_file": "lib/google/cloud/bigquery/analytics_hub/v1/version.rb"
+    },
     "google-cloud-bigquery-connection": {
       "component": "google-cloud-bigquery-connection",
       "version_file": "lib/google/cloud/bigquery/connection/version.rb"
@@ -1066,6 +1070,10 @@
     "google-cloud-speech-v1p1beta1": {
       "component": "google-cloud-speech-v1p1beta1",
       "version_file": "lib/google/cloud/speech/v1p1beta1/version.rb"
+    },
+    "google-cloud-speech-v2": {
+      "component": "google-cloud-speech-v2",
+      "version_file": "lib/google/cloud/speech/v2/version.rb"
     },
     "google-cloud-storage": {
       "component": "google-cloud-storage",
