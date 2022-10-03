@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-10-03)
+
+#### Features
+
+* Support for Certificate Issuance Configs ([#19245](https://github.com/googleapis/google-cloud-ruby/issues/19245)) 
+
 ### 0.3.1 (2022-07-07)
 
 #### Documentation
