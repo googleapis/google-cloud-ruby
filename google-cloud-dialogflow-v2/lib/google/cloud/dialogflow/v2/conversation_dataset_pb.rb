@@ -64,6 +64,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :import_count, :int32, 3
     end
     add_message "google.cloud.dialogflow.v2.CreateConversationDatasetOperationMetadata" do
+      optional :conversation_dataset, :string, 1
     end
     add_message "google.cloud.dialogflow.v2.DeleteConversationDatasetOperationMetadata" do
     end
