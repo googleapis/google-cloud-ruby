@@ -109,6 +109,26 @@
               "methods": [
                 "delete_dns_authorization"
               ]
+            },
+            "ListCertificateIssuanceConfigs": {
+              "methods": [
+                "list_certificate_issuance_configs"
+              ]
+            },
+            "GetCertificateIssuanceConfig": {
+              "methods": [
+                "get_certificate_issuance_config"
+              ]
+            },
+            "CreateCertificateIssuanceConfig": {
+              "methods": [
+                "create_certificate_issuance_config"
+              ]
+            },
+            "DeleteCertificateIssuanceConfig": {
+              "methods": [
+                "delete_certificate_issuance_config"
+              ]
             }
           }
         }

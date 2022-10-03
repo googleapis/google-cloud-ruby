@@ -24,8 +24,8 @@ module Google
         # Request for the `ListCertificates` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location from which the certificate should be listed,
-        #     specified in the format `projects/*/locations/*`.
+        #     Required. The project and location from which the certificate should be
+        #     listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of certificates to return per call.
@@ -96,8 +96,8 @@ module Google
         #     Required. A definition of the certificate to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-        #     see
+        #     Required. The update mask applies to the resource. For the `FieldMask`
+        #     definition, see
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
         class UpdateCertificateRequest
           include ::Google::Protobuf::MessageExts
@@ -117,8 +117,8 @@ module Google
         # Request for the `ListCertificateMaps` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location from which the certificate maps should be listed,
-        #     specified in the format `projects/*/locations/*`.
+        #     Required. The project and location from which the certificate maps should
+        #     be listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of certificate maps to return per call.
@@ -189,8 +189,8 @@ module Google
         #     Required. A definition of the certificate map to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-        #     see
+        #     Required. The update mask applies to the resource. For the `FieldMask`
+        #     definition, see
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
         class UpdateCertificateMapRequest
           include ::Google::Protobuf::MessageExts
@@ -210,8 +210,8 @@ module Google
         # Request for the `ListCertificateMapEntries` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project, location and certificate map from which the certificate map
-        #     entries should be listed, specified in the format
+        #     Required. The project, location and certificate map from which the
+        #     certificate map entries should be listed, specified in the format
         #     `projects/*/locations/*/certificateMaps/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
@@ -287,8 +287,8 @@ module Google
         #     Required. A definition of the certificate map entry to create map entry.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-        #     see
+        #     Required. The update mask applies to the resource. For the `FieldMask`
+        #     definition, see
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
         class UpdateCertificateMapEntryRequest
           include ::Google::Protobuf::MessageExts
@@ -298,8 +298,8 @@ module Google
         # Request for the `DeleteCertificateMapEntry` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. A name of the certificate map entry to delete. Must be in the format
-        #     `projects/*/locations/*/certificateMaps/*/certificateMapEntries/*`.
+        #     Required. A name of the certificate map entry to delete. Must be in the
+        #     format `projects/*/locations/*/certificateMaps/*/certificateMapEntries/*`.
         class DeleteCertificateMapEntryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -308,8 +308,8 @@ module Google
         # Request for the `ListDnsAuthorizations` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The project and location from which the dns authorizations should be
-        #     listed, specified in the format `projects/*/locations/*`.
+        #     Required. The project and location from which the dns authorizations should
+        #     be listed, specified in the format `projects/*/locations/*`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of dns authorizations to return per call.
@@ -351,8 +351,8 @@ module Google
         # Request for the `GetDnsAuthorization` method.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. A name of the dns authorization to describe. Must be in the format
-        #     `projects/*/locations/*/dnsAuthorizations/*`.
+        #     Required. A name of the dns authorization to describe. Must be in the
+        #     format `projects/*/locations/*/dnsAuthorizations/*`.
         class GetDnsAuthorizationRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -361,8 +361,8 @@ module Google
         # Request for the `CreateDnsAuthorization` method.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent resource of the dns authorization. Must be in the format
-        #     `projects/*/locations/*`.
+        #     Required. The parent resource of the dns authorization. Must be in the
+        #     format `projects/*/locations/*`.
         # @!attribute [rw] dns_authorization_id
         #   @return [::String]
         #     Required. A user-provided name of the dns authorization.
@@ -380,8 +380,8 @@ module Google
         #     Required. A definition of the dns authorization to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-        #     see
+        #     Required. The update mask applies to the resource. For the `FieldMask`
+        #     definition, see
         #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
         class UpdateDnsAuthorizationRequest
           include ::Google::Protobuf::MessageExts
@@ -418,8 +418,9 @@ module Google
         #   @return [::Boolean]
         #     Identifies whether the user has requested cancellation
         #     of the operation. Operations that have successfully been cancelled
-        #     have [Operation.error][] value with a {::Google::Rpc::Status#code google.rpc.Status.code} of 1,
-        #     corresponding to `Code.CANCELLED`.
+        #     have [Operation.error][] value with a
+        #     {::Google::Rpc::Status#code google.rpc.Status.code} of 1, corresponding to
+        #     `Code.CANCELLED`.
         # @!attribute [rw] api_version
         #   @return [::String]
         #     API version used to start the operation.
@@ -453,10 +454,10 @@ module Google
         #     If set, contains configuration and state of a managed certificate.
         # @!attribute [r] san_dnsnames
         #   @return [::Array<::String>]
-        #     Output only. The list of Subject Alternative Names of dnsName type defined in the
-        #     certificate (see RFC 5280 4.2.1.6).
-        #     Managed certificates that haven't been provisioned yet have this field
-        #     populated with a value of the managed.domains field.
+        #     Output only. The list of Subject Alternative Names of dnsName type defined
+        #     in the certificate (see RFC 5280 4.2.1.6). Managed certificates that
+        #     haven't been provisioned yet have this field populated with a value of the
+        #     managed.domains field.
         # @!attribute [r] pem_certificate
         #   @return [::String]
         #     Output only. The PEM-encoded certificate chain.
@@ -490,34 +491,46 @@ module Google
           # automatically, for as long as it's authorized to do so.
           # @!attribute [rw] domains
           #   @return [::Array<::String>]
-          #     Immutable. The domains for which a managed SSL certificate will be generated.
-          #     Wildcard domains are only supported with DNS challenge resolution.
+          #     Immutable. The domains for which a managed SSL certificate will be
+          #     generated. Wildcard domains are only supported with DNS challenge
+          #     resolution.
           # @!attribute [rw] dns_authorizations
           #   @return [::Array<::String>]
-          #     Immutable. Authorizations that will be used for performing domain authorization.
+          #     Immutable. Authorizations that will be used for performing domain
+          #     authorization.
+          # @!attribute [rw] issuance_config
+          #   @return [::String]
+          #     The resource name for a
+          #     {::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig CertificateIssuanceConfig}
+          #     used to configure private PKI certificates in the format
+          #     `projects/*/locations/*/certificateIssuanceConfigs/*`.
+          #     If this field is not set, the certificates will instead be publicly
+          #     signed as documented at
+          #     https://cloud.google.com/load-balancing/docs/ssl-certificates/google-managed-certs#caa.
           # @!attribute [r] state
           #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::State]
           #     Output only. State of the managed certificate resource.
-          # @!attribute [rw] provisioning_issue
+          # @!attribute [r] provisioning_issue
           #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::ProvisioningIssue]
-          #     Information about issues with provisioning a Managed Certificate.
+          #     Output only. Information about issues with provisioning a Managed
+          #     Certificate.
           # @!attribute [r] authorization_attempt_info
           #   @return [::Array<::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo>]
-          #     Output only. Detailed state of the latest authorization attempt for each domain
-          #     specified for managed certificate resource.
+          #     Output only. Detailed state of the latest authorization attempt for each
+          #     domain specified for managed certificate resource.
           class ManagedCertificate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Information about issues with provisioning a Managed Certificate.
-            # @!attribute [rw] reason
+            # @!attribute [r] reason
             #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::ProvisioningIssue::Reason]
-            #     Reason for provisioning failures.
-            # @!attribute [rw] details
+            #     Output only. Reason for provisioning failures.
+            # @!attribute [r] details
             #   @return [::String]
-            #     Human readable explanation about the issue. Provided to help address
-            #     the configuration issues.
-            #     Not guaranteed to be stable. For programmatic access use Reason enum.
+            #     Output only. Human readable explanation about the issue. Provided to
+            #     help address the configuration issues. Not guaranteed to be stable. For
+            #     programmatic access use Reason enum.
             class ProvisioningIssue
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -542,17 +555,18 @@ module Google
             # @!attribute [rw] domain
             #   @return [::String]
             #     Domain name of the authorization attempt.
-            # @!attribute [rw] state
+            # @!attribute [r] state
             #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo::State]
-            #     State of the domain for managed certificate issuance.
+            #     Output only. State of the domain for managed certificate issuance.
             # @!attribute [r] failure_reason
             #   @return [::Google::Cloud::CertificateManager::V1::Certificate::ManagedCertificate::AuthorizationAttemptInfo::FailureReason]
-            #     Output only. Reason for failure of the authorization attempt for the domain.
-            # @!attribute [rw] details
+            #     Output only. Reason for failure of the authorization attempt for the
+            #     domain.
+            # @!attribute [r] details
             #   @return [::String]
-            #     Human readable explanation for reaching the state. Provided to help
-            #     address the configuration issues.
-            #     Not guaranteed to be stable. For programmatic access use Reason enum.
+            #     Output only. Human readable explanation for reaching the state.
+            #     Provided to help address the configuration issues. Not guaranteed to be
+            #     stable. For programmatic access use FailureReason enum.
             class AuthorizationAttemptInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -652,34 +666,38 @@ module Google
         # @!attribute [r] gclb_targets
         #   @return [::Array<::Google::Cloud::CertificateManager::V1::CertificateMap::GclbTarget>]
         #     Output only. A list of GCLB targets which use this Certificate Map.
+        #     A Target Proxy is only present on this list if it's attached to a
+        #     Forwarding Rule.
         class CertificateMap
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # Describes a Target Proxy which uses this Certificate Map.
-          # @!attribute [rw] target_https_proxy
+          # @!attribute [r] target_https_proxy
           #   @return [::String]
-          #     This field returns the resource name in the following format:
+          #     Output only. This field returns the resource name in the following
+          #     format:
           #     `//compute.googleapis.com/projects/*/global/targetHttpsProxies/*`.
-          # @!attribute [rw] target_ssl_proxy
+          # @!attribute [r] target_ssl_proxy
           #   @return [::String]
-          #     This field returns the resource name in the following format:
+          #     Output only. This field returns the resource name in the following
+          #     format:
           #     `//compute.googleapis.com/projects/*/global/targetSslProxies/*`.
-          # @!attribute [rw] ip_configs
+          # @!attribute [r] ip_configs
           #   @return [::Array<::Google::Cloud::CertificateManager::V1::CertificateMap::GclbTarget::IpConfig>]
-          #     IP configurations for this Target Proxy where the
+          #     Output only. IP configurations for this Target Proxy where the
           #     Certificate Map is serving.
           class GclbTarget
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
             # Defines IP configuration where this Certificate Map is serving.
-            # @!attribute [rw] ip_address
+            # @!attribute [r] ip_address
             #   @return [::String]
-            #     An external IP address.
-            # @!attribute [rw] ports
+            #     Output only. An external IP address.
+            # @!attribute [r] ports
             #   @return [::Array<::Integer>]
-            #     Ports.
+            #     Output only. Ports.
             class IpConfig
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -776,12 +794,14 @@ module Google
         #     One or more paragraphs of text description of a DnsAuthorization.
         # @!attribute [rw] domain
         #   @return [::String]
-        #     Required. Immutable. A domain which is being authorized. A DnsAuthorization resource covers a
-        #     single domain and its wildcard, e.g. authorization for `example.com` can
-        #     be used to issue certificates for `example.com` and `*.example.com`.
+        #     Required. Immutable. A domain which is being authorized. A DnsAuthorization
+        #     resource covers a single domain and its wildcard, e.g. authorization for
+        #     `example.com` can be used to issue certificates for `example.com` and
+        #     `*.example.com`.
         # @!attribute [r] dns_resource_record
         #   @return [::Google::Cloud::CertificateManager::V1::DnsAuthorization::DnsResourceRecord]
-        #     Output only. DNS Resource Record that needs to be added to DNS configuration.
+        #     Output only. DNS Resource Record that needs to be added to DNS
+        #     configuration.
         class DnsAuthorization
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

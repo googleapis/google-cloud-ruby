@@ -810,6 +810,166 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_ListCertificateIssuanceConfigs_sync",
+      "title": "Snippet for list_certificate_issuance_configs in CertificateManager",
+      "description": "Basic snippet for list_certificate_issuance_configs in CertificateManager",
+      "file": "certificate_manager/list_certificate_issuance_configs.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_certificate_issuance_configs",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_issuance_configs",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsResponse",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "ListCertificateIssuanceConfigs",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.ListCertificateIssuanceConfigs",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_GetCertificateIssuanceConfig_sync",
+      "title": "Snippet for get_certificate_issuance_config in CertificateManager",
+      "description": "Basic snippet for get_certificate_issuance_config in CertificateManager",
+      "file": "certificate_manager/get_certificate_issuance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_certificate_issuance_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#get_certificate_issuance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "GetCertificateIssuanceConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.GetCertificateIssuanceConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_CreateCertificateIssuanceConfig_sync",
+      "title": "Snippet for create_certificate_issuance_config in CertificateManager",
+      "description": "Basic snippet for create_certificate_issuance_config in CertificateManager",
+      "file": "certificate_manager/create_certificate_issuance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_certificate_issuance_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_issuance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "CreateCertificateIssuanceConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.CreateCertificateIssuanceConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "certificatemanager_v1_generated_CertificateManager_DeleteCertificateIssuanceConfig_sync",
+      "title": "Snippet for delete_certificate_issuance_config in CertificateManager",
+      "description": "Basic snippet for delete_certificate_issuance_config in CertificateManager",
+      "file": "certificate_manager/delete_certificate_issuance_config.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "delete_certificate_issuance_config",
+        "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client#delete_certificate_issuance_config",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CertificateManager::Client",
+          "full_name": "::Google::Cloud::CertificateManager::V1::CertificateManager::Client"
+        },
+        "method": {
+          "short_name": "DeleteCertificateIssuanceConfig",
+          "full_name": "google.cloud.certificatemanager.v1.CertificateManager.DeleteCertificateIssuanceConfig",
+          "service": {
+            "short_name": "CertificateManager",
+            "full_name": "google.cloud.certificatemanager.v1.CertificateManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

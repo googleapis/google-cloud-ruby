@@ -25,6 +25,25 @@ module Google
           # Path helper methods for the CertificateManager API.
           module Paths
             ##
+            # Create a fully-qualified CaPool resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/caPools/{ca_pool}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param ca_pool [String]
+            #
+            # @return [::String]
+            def ca_pool_path project:, location:, ca_pool:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/caPools/#{ca_pool}"
+            end
+
+            ##
             # Create a fully-qualified Certificate resource string.
             #
             # The resource will be in the following format:
@@ -41,6 +60,25 @@ module Google
               raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
 
               "projects/#{project}/locations/#{location}/certificates/#{certificate}"
+            end
+
+            ##
+            # Create a fully-qualified CertificateIssuanceConfig resource string.
+            #
+            # The resource will be in the following format:
+            #
+            # `projects/{project}/locations/{location}/certificateIssuanceConfigs/{certificate_issuance_config}`
+            #
+            # @param project [String]
+            # @param location [String]
+            # @param certificate_issuance_config [String]
+            #
+            # @return [::String]
+            def certificate_issuance_config_path project:, location:, certificate_issuance_config:
+              raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+              raise ::ArgumentError, "location cannot contain /" if location.to_s.include? "/"
+
+              "projects/#{project}/locations/#{location}/certificateIssuanceConfigs/#{certificate_issuance_config}"
             end
 
             ##
