@@ -85,7 +85,7 @@
   "google-cloud-beyond_corp-client_gateways-v1+FILLER": "0.0.0",
   "google-cloud-bigquery": "1.39.0",
   "google-cloud-bigquery+FILLER": "0.0.0",
-  "google-cloud-bigquery-analytics_hub-v1": "0.0.1",
+  "google-cloud-bigquery-analytics_hub-v1": "0.1.0",
   "google-cloud-bigquery-analytics_hub-v1+FILLER": "0.0.0",
   "google-cloud-bigquery-connection": "1.2.0",
   "google-cloud-bigquery-connection+FILLER": "0.0.0",
