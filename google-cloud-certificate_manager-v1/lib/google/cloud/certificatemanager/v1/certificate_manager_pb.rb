@@ -7,6 +7,7 @@ require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
+require 'google/cloud/certificatemanager/v1/certificate_issuance_config_pb'
 require 'google/longrunning/operations_pb'
 require 'google/protobuf/field_mask_pb'
 require 'google/protobuf/timestamp_pb'
@@ -152,6 +153,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.certificatemanager.v1.Certificate.ManagedCertificate" do
       repeated :domains, :string, 1
       repeated :dns_authorizations, :string, 2
+      optional :issuance_config, :string, 6
       optional :state, :enum, 4, "google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.State"
       optional :provisioning_issue, :message, 3, "google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.ProvisioningIssue"
       repeated :authorization_attempt_info, :message, 5, "google.cloud.certificatemanager.v1.Certificate.ManagedCertificate.AuthorizationAttemptInfo"

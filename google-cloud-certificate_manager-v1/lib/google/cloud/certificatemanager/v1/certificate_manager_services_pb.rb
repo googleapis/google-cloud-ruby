@@ -100,6 +100,14 @@ module Google
             rpc :UpdateDnsAuthorization, ::Google::Cloud::CertificateManager::V1::UpdateDnsAuthorizationRequest, ::Google::Longrunning::Operation
             # Deletes a single DnsAuthorization.
             rpc :DeleteDnsAuthorization, ::Google::Cloud::CertificateManager::V1::DeleteDnsAuthorizationRequest, ::Google::Longrunning::Operation
+            # Lists CertificateIssuanceConfigs in a given project and location.
+            rpc :ListCertificateIssuanceConfigs, ::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest, ::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsResponse
+            # Gets details of a single CertificateIssuanceConfig.
+            rpc :GetCertificateIssuanceConfig, ::Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest, ::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig
+            # Creates a new CertificateIssuanceConfig in a given project and location.
+            rpc :CreateCertificateIssuanceConfig, ::Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest, ::Google::Longrunning::Operation
+            # Deletes a single CertificateIssuanceConfig.
+            rpc :DeleteCertificateIssuanceConfig, ::Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class

@@ -190,6 +190,26 @@ module Google
                   initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
                 }
 
+                default_config.rpcs.list_certificate_issuance_configs.timeout = 60.0
+                default_config.rpcs.list_certificate_issuance_configs.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.get_certificate_issuance_config.timeout = 60.0
+                default_config.rpcs.get_certificate_issuance_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.create_certificate_issuance_config.timeout = 60.0
+                default_config.rpcs.create_certificate_issuance_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
+                default_config.rpcs.delete_certificate_issuance_config.timeout = 60.0
+                default_config.rpcs.delete_certificate_issuance_config.retry_policy = {
+                  initial_delay: 1.0, max_delay: 10.0, multiplier: 1.3, retry_codes: [14]
+                }
+
                 default_config
               end
               yield @configure if block_given?
@@ -315,8 +335,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location from which the certificate should be listed,
-            #     specified in the format `projects/*/locations/*`.
+            #     Required. The project and location from which the certificate should be
+            #     listed, specified in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
             #     Maximum number of certificates to return per call.
             #   @param page_token [::String]
@@ -606,8 +626,8 @@ module Google
             #   @param certificate [::Google::Cloud::CertificateManager::V1::Certificate, ::Hash]
             #     Required. A definition of the certificate to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-            #     see
+            #     Required. The update mask applies to the resource. For the `FieldMask`
+            #     definition, see
             #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -795,8 +815,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location from which the certificate maps should be listed,
-            #     specified in the format `projects/*/locations/*`.
+            #     Required. The project and location from which the certificate maps should
+            #     be listed, specified in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
             #     Maximum number of certificate maps to return per call.
             #   @param page_token [::String]
@@ -1086,8 +1106,8 @@ module Google
             #   @param certificate_map [::Google::Cloud::CertificateManager::V1::CertificateMap, ::Hash]
             #     Required. A definition of the certificate map to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-            #     see
+            #     Required. The update mask applies to the resource. For the `FieldMask`
+            #     definition, see
             #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1277,8 +1297,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project, location and certificate map from which the certificate map
-            #     entries should be listed, specified in the format
+            #     Required. The project, location and certificate map from which the
+            #     certificate map entries should be listed, specified in the format
             #     `projects/*/locations/*/certificateMaps/*`.
             #   @param page_size [::Integer]
             #     Maximum number of certificate map entries to return. The service may return
@@ -1573,8 +1593,8 @@ module Google
             #   @param certificate_map_entry [::Google::Cloud::CertificateManager::V1::CertificateMapEntry, ::Hash]
             #     Required. A definition of the certificate map entry to create map entry.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-            #     see
+            #     Required. The update mask applies to the resource. For the `FieldMask`
+            #     definition, see
             #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -1668,8 +1688,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. A name of the certificate map entry to delete. Must be in the format
-            #     `projects/*/locations/*/certificateMaps/*/certificateMapEntries/*`.
+            #     Required. A name of the certificate map entry to delete. Must be in the
+            #     format `projects/*/locations/*/certificateMaps/*/certificateMapEntries/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1762,8 +1782,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The project and location from which the dns authorizations should be
-            #     listed, specified in the format `projects/*/locations/*`.
+            #     Required. The project and location from which the dns authorizations should
+            #     be listed, specified in the format `projects/*/locations/*`.
             #   @param page_size [::Integer]
             #     Maximum number of dns authorizations to return per call.
             #   @param page_token [::String]
@@ -1867,8 +1887,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. A name of the dns authorization to describe. Must be in the format
-            #     `projects/*/locations/*/dnsAuthorizations/*`.
+            #     Required. A name of the dns authorization to describe. Must be in the
+            #     format `projects/*/locations/*/dnsAuthorizations/*`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::CertificateManager::V1::DnsAuthorization]
@@ -1953,8 +1973,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent resource of the dns authorization. Must be in the format
-            #     `projects/*/locations/*`.
+            #     Required. The parent resource of the dns authorization. Must be in the
+            #     format `projects/*/locations/*`.
             #   @param dns_authorization_id [::String]
             #     Required. A user-provided name of the dns authorization.
             #   @param dns_authorization [::Google::Cloud::CertificateManager::V1::DnsAuthorization, ::Hash]
@@ -2053,8 +2073,8 @@ module Google
             #   @param dns_authorization [::Google::Cloud::CertificateManager::V1::DnsAuthorization, ::Hash]
             #     Required. A definition of the dns authorization to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Required. The update mask applies to the resource. For the `FieldMask` definition,
-            #     see
+            #     Required. The update mask applies to the resource. For the `FieldMask`
+            #     definition, see
             #     https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#fieldmask.
             #
             # @yield [response, operation] Access the result along with the RPC operation
@@ -2215,6 +2235,390 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @certificate_manager_stub.call_rpc :delete_dns_authorization, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Lists CertificateIssuanceConfigs in a given project and location.
+            #
+            # @overload list_certificate_issuance_configs(request, options = nil)
+            #   Pass arguments to `list_certificate_issuance_configs` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_certificate_issuance_configs(parent: nil, page_size: nil, page_token: nil, filter: nil, order_by: nil)
+            #   Pass arguments to `list_certificate_issuance_configs` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The project and location from which the certificate should be
+            #     listed, specified in the format `projects/*/locations/*`.
+            #   @param page_size [::Integer]
+            #     Maximum number of certificate configs to return per call.
+            #   @param page_token [::String]
+            #     The value returned by the last `ListCertificateIssuanceConfigsResponse`.
+            #     Indicates that this is a continuation of a prior
+            #     `ListCertificateIssuanceConfigs` call, and that the system should return
+            #     the next page of data.
+            #   @param filter [::String]
+            #     Filter expression to restrict the Certificates Configs returned.
+            #   @param order_by [::String]
+            #     A list of Certificate Config field names used to specify the order of the
+            #     returned results. The default sorting order is ascending. To specify
+            #     descending order for a field, add a suffix " desc".
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest.new
+            #
+            #   # Call the list_certificate_issuance_configs method.
+            #   result = client.list_certificate_issuance_configs request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig.
+            #     p response
+            #   end
+            #
+            def list_certificate_issuance_configs request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::ListCertificateIssuanceConfigsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_certificate_issuance_configs.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.list_certificate_issuance_configs.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_certificate_issuance_configs.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :list_certificate_issuance_configs, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @certificate_manager_stub, :list_certificate_issuance_configs, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Gets details of a single CertificateIssuanceConfig.
+            #
+            # @overload get_certificate_issuance_config(request, options = nil)
+            #   Pass arguments to `get_certificate_issuance_config` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_certificate_issuance_config(name: nil)
+            #   Pass arguments to `get_certificate_issuance_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the certificate issuance config to describe. Must be in
+            #     the format `projects/*/locations/*/certificateIssuanceConfigs/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest.new
+            #
+            #   # Call the get_certificate_issuance_config method.
+            #   result = client.get_certificate_issuance_config request
+            #
+            #   # The returned object is of type Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig.
+            #   p result
+            #
+            def get_certificate_issuance_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::GetCertificateIssuanceConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_certificate_issuance_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.get_certificate_issuance_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_certificate_issuance_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :get_certificate_issuance_config, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Creates a new CertificateIssuanceConfig in a given project and location.
+            #
+            # @overload create_certificate_issuance_config(request, options = nil)
+            #   Pass arguments to `create_certificate_issuance_config` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload create_certificate_issuance_config(parent: nil, certificate_issuance_config_id: nil, certificate_issuance_config: nil)
+            #   Pass arguments to `create_certificate_issuance_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The parent resource of the certificate issuance config. Must be
+            #     in the format `projects/*/locations/*`.
+            #   @param certificate_issuance_config_id [::String]
+            #     Required. A user-provided name of the certificate config.
+            #   @param certificate_issuance_config [::Google::Cloud::CertificateManager::V1::CertificateIssuanceConfig, ::Hash]
+            #     Required. A definition of the certificate issuance config to create.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest.new
+            #
+            #   # Call the create_certificate_issuance_config method.
+            #   result = client.create_certificate_issuance_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def create_certificate_issuance_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::CreateCertificateIssuanceConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.create_certificate_issuance_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.parent
+                header_params["parent"] = request.parent
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.create_certificate_issuance_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.create_certificate_issuance_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :create_certificate_issuance_config, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Deletes a single CertificateIssuanceConfig.
+            #
+            # @overload delete_certificate_issuance_config(request, options = nil)
+            #   Pass arguments to `delete_certificate_issuance_config` via a request object, either of type
+            #   {::Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload delete_certificate_issuance_config(name: nil)
+            #   Pass arguments to `delete_certificate_issuance_config` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. A name of the certificate issuance config to delete. Must be in
+            #     the format `projects/*/locations/*/certificateIssuanceConfigs/*`.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/certificate_manager/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest.new
+            #
+            #   # Call the delete_certificate_issuance_config method.
+            #   result = client.delete_certificate_issuance_config request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def delete_certificate_issuance_config request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::CertificateManager::V1::DeleteCertificateIssuanceConfigRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.delete_certificate_issuance_config.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::CertificateManager::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.delete_certificate_issuance_config.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.delete_certificate_issuance_config.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @certificate_manager_stub.call_rpc :delete_certificate_issuance_config, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -2458,6 +2862,26 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :delete_dns_authorization
+                ##
+                # RPC-specific configuration for `list_certificate_issuance_configs`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_certificate_issuance_configs
+                ##
+                # RPC-specific configuration for `get_certificate_issuance_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_certificate_issuance_config
+                ##
+                # RPC-specific configuration for `create_certificate_issuance_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :create_certificate_issuance_config
+                ##
+                # RPC-specific configuration for `delete_certificate_issuance_config`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :delete_certificate_issuance_config
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -2501,6 +2925,14 @@ module Google
                   @update_dns_authorization = ::Gapic::Config::Method.new update_dns_authorization_config
                   delete_dns_authorization_config = parent_rpcs.delete_dns_authorization if parent_rpcs.respond_to? :delete_dns_authorization
                   @delete_dns_authorization = ::Gapic::Config::Method.new delete_dns_authorization_config
+                  list_certificate_issuance_configs_config = parent_rpcs.list_certificate_issuance_configs if parent_rpcs.respond_to? :list_certificate_issuance_configs
+                  @list_certificate_issuance_configs = ::Gapic::Config::Method.new list_certificate_issuance_configs_config
+                  get_certificate_issuance_config_config = parent_rpcs.get_certificate_issuance_config if parent_rpcs.respond_to? :get_certificate_issuance_config
+                  @get_certificate_issuance_config = ::Gapic::Config::Method.new get_certificate_issuance_config_config
+                  create_certificate_issuance_config_config = parent_rpcs.create_certificate_issuance_config if parent_rpcs.respond_to? :create_certificate_issuance_config
+                  @create_certificate_issuance_config = ::Gapic::Config::Method.new create_certificate_issuance_config_config
+                  delete_certificate_issuance_config_config = parent_rpcs.delete_certificate_issuance_config if parent_rpcs.respond_to? :delete_certificate_issuance_config
+                  @delete_certificate_issuance_config = ::Gapic::Config::Method.new delete_certificate_issuance_config_config
 
                   yield self if block_given?
                 end

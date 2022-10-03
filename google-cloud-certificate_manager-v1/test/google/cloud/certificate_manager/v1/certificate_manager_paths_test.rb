@@ -23,6 +23,18 @@ require "gapic/grpc/service_stub"
 require "google/cloud/certificate_manager/v1/certificate_manager"
 
 class ::Google::Cloud::CertificateManager::V1::CertificateManager::ClientPathsTest < Minitest::Test
+  def test_ca_pool_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.ca_pool_path project: "value0", location: "value1", ca_pool: "value2"
+      assert_equal "projects/value0/locations/value1/caPools/value2", path
+    end
+  end
+
   def test_certificate_path
     grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
     ::Gapic::ServiceStub.stub :new, nil do
@@ -32,6 +44,18 @@ class ::Google::Cloud::CertificateManager::V1::CertificateManager::ClientPathsTe
 
       path = client.certificate_path project: "value0", location: "value1", certificate: "value2"
       assert_equal "projects/value0/locations/value1/certificates/value2", path
+    end
+  end
+
+  def test_certificate_issuance_config_path
+    grpc_channel = ::GRPC::Core::Channel.new "localhost:8888", nil, :this_channel_is_insecure
+    ::Gapic::ServiceStub.stub :new, nil do
+      client = ::Google::Cloud::CertificateManager::V1::CertificateManager::Client.new do |config|
+        config.credentials = grpc_channel
+      end
+
+      path = client.certificate_issuance_config_path project: "value0", location: "value1", certificate_issuance_config: "value2"
+      assert_equal "projects/value0/locations/value1/certificateIssuanceConfigs/value2", path
     end
   end
 
