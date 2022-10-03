@@ -195,6 +195,11 @@ module Google
         end
 
         # Metadata for [ConversationDatasets][CreateConversationDataset].
+        # @!attribute [rw] conversation_dataset
+        #   @return [::String]
+        #     The resource name of the conversation dataset that will be created. Format:
+        #     `projects/<Project ID>/locations/<Location
+        #     ID>/conversationDatasets/<Conversation Dataset Id>`
         class CreateConversationDatasetOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
