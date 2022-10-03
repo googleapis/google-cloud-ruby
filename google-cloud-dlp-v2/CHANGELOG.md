@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.1 (2022-10-03)
+
+#### Documentation
+
+* Deprecate InfoTypeSummary#estimated_prevalence ([#19237](https://github.com/googleapis/google-cloud-ruby/issues/19237)) 
+
 ### 0.13.0 (2022-09-07)
 
 #### Features
