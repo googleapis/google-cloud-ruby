@@ -1,5 +1,14 @@
 # Changelog
 
+### 0.4.0 (2022-10-03)
+
+#### Features
+
+* Support for acknowledging an existing violation 
+* Support for listing the violations in the workload environment 
+* Support for restricting thie list of resources allowed in the workload environment ([#19243](https://github.com/googleapis/google-cloud-ruby/issues/19243)) 
+* Support for retrieving an assured workload violation by ID 
+
 ### 0.3.0 (2022-07-01)
 
 #### Features
