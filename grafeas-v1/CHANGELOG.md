@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 (2022-10-03)
+
+#### Features
+
+* add new analysis status and cvss version fields ([#19238](https://github.com/googleapis/google-cloud-ruby/issues/19238)) 
+
 ### 0.6.1 (2022-07-27)
 
 * No significant updates
