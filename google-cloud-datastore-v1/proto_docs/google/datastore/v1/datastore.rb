@@ -108,6 +108,48 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
+        # @!attribute [rw] project_id
+        #   @return [::String]
+        #     Required. The ID of the project against which to make the request.
+        # @!attribute [rw] database_id
+        #   @return [::String]
+        #     The ID of the database against which to make the request.
+        #
+        #     '(default)' is not allowed; please use empty string '' to refer the default
+        #     database.
+        # @!attribute [rw] partition_id
+        #   @return [::Google::Cloud::Datastore::V1::PartitionId]
+        #     Entities are partitioned into subsets, identified by a partition ID.
+        #     Queries are scoped to a single partition.
+        #     This partition ID is normalized with the standard default context
+        #     partition ID.
+        # @!attribute [rw] read_options
+        #   @return [::Google::Cloud::Datastore::V1::ReadOptions]
+        #     The options for this query.
+        # @!attribute [rw] aggregation_query
+        #   @return [::Google::Cloud::Datastore::V1::AggregationQuery]
+        #     The query to run.
+        # @!attribute [rw] gql_query
+        #   @return [::Google::Cloud::Datastore::V1::GqlQuery]
+        #     The GQL query to run. This query must be an aggregation query.
+        class RunAggregationQueryRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # The response for {::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query Datastore.RunAggregationQuery}.
+        # @!attribute [rw] batch
+        #   @return [::Google::Cloud::Datastore::V1::AggregationResultBatch]
+        #     A batch of aggregation results. Always present.
+        # @!attribute [rw] query
+        #   @return [::Google::Cloud::Datastore::V1::AggregationQuery]
+        #     The parsed form of the `GqlQuery` from the request, if it was set.
+        class RunAggregationQueryResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The request for {::Google::Cloud::Datastore::V1::Datastore::Client#begin_transaction Datastore.BeginTransaction}.
         # @!attribute [rw] project_id
         #   @return [::String]

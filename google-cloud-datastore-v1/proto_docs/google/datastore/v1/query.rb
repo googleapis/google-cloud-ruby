@@ -116,6 +116,96 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Datastore query for running an aggregation over a {::Google::Cloud::Datastore::V1::Query Query}.
+        # @!attribute [rw] nested_query
+        #   @return [::Google::Cloud::Datastore::V1::Query]
+        #     Nested query for aggregation
+        # @!attribute [rw] aggregations
+        #   @return [::Array<::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation>]
+        #     Optional. Series of aggregations to apply over the results of the `nested_query`.
+        #
+        #     Requires:
+        #
+        #     * A minimum of one and maximum of five aggregations per query.
+        class AggregationQuery
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Defines a aggregation that produces a single result.
+          # @!attribute [rw] count
+          #   @return [::Google::Cloud::Datastore::V1::AggregationQuery::Aggregation::Count]
+          #     Count aggregator.
+          # @!attribute [rw] alias
+          #   @return [::String]
+          #     Optional. Optional name of the property to store the result of the aggregation.
+          #
+          #     If not provided, Datastore will pick a default name following the format
+          #     `property_<incremental_id++>`. For example:
+          #
+          #     ```
+          #     AGGREGATE
+          #       COUNT_UP_TO(1) AS count_up_to_1,
+          #       COUNT_UP_TO(2),
+          #       COUNT_UP_TO(3) AS count_up_to_3,
+          #       COUNT_UP_TO(4)
+          #     OVER (
+          #       ...
+          #     );
+          #     ```
+          #
+          #     becomes:
+          #
+          #     ```
+          #     AGGREGATE
+          #       COUNT_UP_TO(1) AS count_up_to_1,
+          #       COUNT_UP_TO(2) AS property_1,
+          #       COUNT_UP_TO(3) AS count_up_to_3,
+          #       COUNT_UP_TO(4) AS property_2
+          #     OVER (
+          #       ...
+          #     );
+          #     ```
+          #
+          #     Requires:
+          #
+          #     * Must be unique across all aggregation aliases.
+          #     * Conform to {::Google::Cloud::Datastore::V1::Entity#properties entity property name} limitations.
+          class Aggregation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Count of entities that match the query.
+            #
+            # The `COUNT(*)` aggregation function operates on the entire entity
+            # so it does not require a field reference.
+            # @!attribute [rw] up_to
+            #   @return [::Google::Protobuf::Int64Value]
+            #     Optional. Optional constraint on the maximum number of entities to count.
+            #
+            #     This provides a way to set an upper bound on the number of entities
+            #     to scan, limiting latency and cost.
+            #
+            #     Unspecified is interpreted as no bound.
+            #
+            #     If a zero value is provided, a count result of zero should always be
+            #     expected.
+            #
+            #     High-Level Example:
+            #
+            #     ```
+            #     AGGREGATE COUNT_UP_TO(1000) OVER ( SELECT * FROM k );
+            #     ```
+            #
+            #     Requires:
+            #
+            #     * Must be non-negative when present.
+            class Count
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+          end
+        end
+
         # A representation of a kind.
         # @!attribute [rw] name
         #   @return [::String]
