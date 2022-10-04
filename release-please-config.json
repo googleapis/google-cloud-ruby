@@ -183,6 +183,10 @@
       "component": "google-cloud-bigquery",
       "version_file": "lib/google/cloud/bigquery/version.rb"
     },
+    "google-cloud-bigquery-analytics_hub": {
+      "component": "google-cloud-bigquery-analytics_hub",
+      "version_file": "lib/google/cloud/bigquery/analytics_hub/version.rb"
+    },
     "google-cloud-bigquery-analytics_hub-v1": {
       "component": "google-cloud-bigquery-analytics_hub-v1",
       "version_file": "lib/google/cloud/bigquery/analytics_hub/v1/version.rb"
