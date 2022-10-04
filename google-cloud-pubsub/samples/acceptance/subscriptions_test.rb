@@ -41,6 +41,7 @@ describe "subscriptions" do
   after do
     @subscription.delete if @subscription
     @subscription = nil
+    cleanup_bq @table, @dataset if @table 
   end
 
   it "supports pubsub_update_push_configuration, pubsub_list_subscriptions, pubsub_set_subscription_policy, pubsub_get_subscription_policy, " \
@@ -234,6 +235,5 @@ describe "subscriptions" do
         bigquery_table_id: table_id
       )
     end
-    cleanup_bq @table, @dataset
   end 
 end
