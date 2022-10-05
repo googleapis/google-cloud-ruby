@@ -3,6 +3,7 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
 require 'google/api/resource_pb'
 require 'google/cloud/orgpolicy/v1/orgpolicy_pb'
 require 'google/cloud/osconfig/v1/inventory_pb'
@@ -88,6 +89,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       map :labels, :string, :string, 7
       repeated :network_tags, :string, 8
       optional :kms_key, :string, 10
+      repeated :kms_keys, :string, 28
       optional :create_time, :message, 11, "google.protobuf.Timestamp"
       optional :update_time, :message, 12, "google.protobuf.Timestamp"
       optional :state, :string, 13
