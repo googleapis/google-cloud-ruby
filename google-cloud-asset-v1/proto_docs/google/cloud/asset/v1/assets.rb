@@ -297,7 +297,7 @@ module Google
         end
 
         # A result of Resource Search, containing information of a cloud resource.
-        # Next ID: 29
+        # Next ID: 31
         # @!attribute [rw] name
         #   @return [::String]
         #     The full resource name of this resource. Example:
@@ -308,15 +308,15 @@ module Google
         #
         #     To search against the `name`:
         #
-        #     * use a field query. Example: `name:instance1`
-        #     * use a free text query. Example: `instance1`
+        #     * Use a field query. Example: `name:instance1`
+        #     * Use a free text query. Example: `instance1`
         # @!attribute [rw] asset_type
         #   @return [::String]
         #     The type of this resource. Example: `compute.googleapis.com/Disk`.
         #
         #     To search against the `asset_type`:
         #
-        #     * specify the `asset_type` field in your search request.
+        #     * Specify the `asset_type` field in your search request.
         # @!attribute [rw] project
         #   @return [::String]
         #     The project that this resource belongs to, in the form of
@@ -325,9 +325,9 @@ module Google
         #
         #     To search against `project`:
         #
-        #     * use a field query. Example: `project:12345`
-        #     * use a free text query. Example: `12345`
-        #     * specify the `scope` field as this project in your search request.
+        #     * Use a field query. Example: `project:12345`
+        #     * Use a free text query. Example: `12345`
+        #     * Specify the `scope` field as this project in your search request.
         # @!attribute [rw] folders
         #   @return [::Array<::String>]
         #     The folder(s) that this resource belongs to, in the form of
@@ -336,9 +336,9 @@ module Google
         #
         #     To search against `folders`:
         #
-        #     * use a field query. Example: `folders:(123 OR 456)`
-        #     * use a free text query. Example: `123`
-        #     * specify the `scope` field as this folder in your search request.
+        #     * Use a field query. Example: `folders:(123 OR 456)`
+        #     * Use a free text query. Example: `123`
+        #     * Specify the `scope` field as this folder in your search request.
         # @!attribute [rw] organization
         #   @return [::String]
         #     The organization that this resource belongs to, in the form of
@@ -347,9 +347,9 @@ module Google
         #
         #     To search against `organization`:
         #
-        #     * use a field query. Example: `organization:123`
-        #     * use a free text query. Example: `123`
-        #     * specify the `scope` field as this organization in your search request.
+        #     * Use a field query. Example: `organization:123`
+        #     * Use a free text query. Example: `123`
+        #     * Specify the `scope` field as this organization in your search request.
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of this resource. This field is available only when the
@@ -357,8 +357,8 @@ module Google
         #
         #     To search against the `display_name`:
         #
-        #     * use a field query. Example: `displayName:"My Instance"`
-        #     * use a free text query. Example: `"My Instance"`
+        #     * Use a field query. Example: `displayName:"My Instance"`
+        #     * Use a free text query. Example: `"My Instance"`
         # @!attribute [rw] description
         #   @return [::String]
         #     One or more paragraphs of text description of this resource. Maximum length
@@ -367,8 +367,8 @@ module Google
         #
         #     To search against the `description`:
         #
-        #     * use a field query. Example: `description:"important instance"`
-        #     * use a free text query. Example: `"important instance"`
+        #     * Use a field query. Example: `description:"important instance"`
+        #     * Use a free text query. Example: `"important instance"`
         # @!attribute [rw] location
         #   @return [::String]
         #     Location can be `global`, regional like `us-east1`, or zonal like
@@ -377,8 +377,8 @@ module Google
         #
         #     To search against the `location`:
         #
-        #     * use a field query. Example: `location:us-west*`
-        #     * use a free text query. Example: `us-west*`
+        #     * Use a field query. Example: `location:us-west*`
+        #     * Use a free text query. Example: `us-west*`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels associated with this resource. See [Labelling and grouping GCP
@@ -388,11 +388,11 @@ module Google
         #
         #     To search against the `labels`:
         #
-        #     * use a field query:
+        #     * Use a field query:
         #         - query on any label's key or value. Example: `labels:prod`
         #         - query by a given label. Example: `labels.env:prod`
         #         - query by a given label's existence. Example: `labels.env:*`
-        #     * use a free text query. Example: `prod`
+        #     * Use a free text query. Example: `prod`
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Network tags associated with this resource. Like labels, network tags are a
@@ -403,21 +403,40 @@ module Google
         #
         #     To search against the `network_tags`:
         #
-        #     * use a field query. Example: `networkTags:internal`
-        #     * use a free text query. Example: `internal`
+        #     * Use a field query. Example: `networkTags:internal`
+        #     * Use a free text query. Example: `internal`
         # @!attribute [rw] kms_key
         #   @return [::String]
         #     The Cloud KMS
         #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
         #     name or
         #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
-        #     name. This field is available only when the resource's Protobuf contains
-        #     it.
+        #     name.
+        #
+        #     This field only presents for the purpose of backward compatibility. Please
+        #     use the `kms_keys` field to retrieve KMS key information. This field is
+        #     available only when the resource's Protobuf contains it and will only be
+        #     populated for [these resource
+        #     types](https://cloud.google.com/asset-inventory/docs/legacy-field-names#resource_types_with_the_to_be_deprecated_kmskey_field)
+        #     for backward compatible purposes.
         #
         #     To search against the `kms_key`:
         #
-        #     * use a field query. Example: `kmsKey:key`
-        #     * use a free text query. Example: `key`
+        #     * Use a field query. Example: `kmsKey:key`
+        #     * Use a free text query. Example: `key`
+        # @!attribute [rw] kms_keys
+        #   @return [::Array<::String>]
+        #     The Cloud KMS
+        #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
+        #     names or
+        #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
+        #     names. This field is available only when the resource's Protobuf contains
+        #     it.
+        #
+        #     To search against the `kms_keys`:
+        #
+        #     * Use a field query. Example: `kmsKeys:key`
+        #     * Use a free text query. Example: `key`
         # @!attribute [rw] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     The create timestamp of this resource, at which the resource was created.
@@ -426,7 +445,7 @@ module Google
         #
         #     To search against `create_time`:
         #
-        #     * use a field query.
+        #     * Use a field query.
         #         - value in seconds since unix epoch. Example: `createTime > 1609459200`
         #         - value in date string. Example: `createTime > 2021-01-01`
         #         - value in date-time string (must be quoted). Example: `createTime >
@@ -440,7 +459,7 @@ module Google
         #
         #     To search against `update_time`:
         #
-        #     * use a field query.
+        #     * Use a field query.
         #         - value in seconds since unix epoch. Example: `updateTime < 1609459200`
         #         - value in date string. Example: `updateTime < 2021-01-01`
         #         - value in date-time string (must be quoted). Example: `updateTime <
@@ -465,8 +484,8 @@ module Google
         #
         #     To search against the `state`:
         #
-        #     * use a field query. Example: `state:RUNNING`
-        #     * use a free text query. Example: `RUNNING`
+        #     * Use a field query. Example: `state:RUNNING`
+        #     * Use a free text query. Example: `RUNNING`
         # @!attribute [rw] additional_attributes
         #   @return [::Google::Protobuf::Struct]
         #     The additional searchable attributes of this resource. The attributes may
@@ -485,7 +504,7 @@ module Google
         #
         #     To search against the `additional_attributes`:
         #
-        #     * use a free text query to match the attributes values. Example: to search
+        #     * Use a free text query to match the attributes values. Example: to search
         #       `additional_attributes = { dnsName: "foobar" }`, you can issue a query
         #       `foobar`.
         # @!attribute [rw] parent_full_resource_name
@@ -493,9 +512,9 @@ module Google
         #     The full resource name of this resource's parent, if it has one.
         #     To search against the `parent_full_resource_name`:
         #
-        #     * use a field query. Example:
+        #     * Use a field query. Example:
         #     `parentFullResourceName:"project-name"`
-        #     * use a free text query. Example:
+        #     * Use a free text query. Example:
         #     `project-name`
         # @!attribute [rw] versioned_resources
         #   @return [::Array<::Google::Cloud::Asset::V1::VersionedResource>]
@@ -528,12 +547,12 @@ module Google
         #     TagKey namespaced names, in the format of \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}.
         #     To search against the `tagKeys`:
         #
-        #     * use a field query. Example:
+        #     * Use a field query. Example:
         #         - `tagKeys:"123456789/env*"`
         #         - `tagKeys="123456789/env"`
         #         - `tagKeys:"env"`
         #
-        #     * use a free text query. Example:
+        #     * Use a free text query. Example:
         #         - `env`
         # @!attribute [rw] tag_values
         #   @return [::Array<::String>]
@@ -541,24 +560,24 @@ module Google
         #     \\{ORG_ID}/\\{TAG_KEY_SHORT_NAME}/\\{TAG_VALUE_SHORT_NAME}.
         #     To search against the `tagValues`:
         #
-        #     * use a field query. Example:
+        #     * Use a field query. Example:
         #         - `tagValues:"env"`
         #         - `tagValues:"env/prod"`
         #         - `tagValues:"123456789/env/prod*"`
         #         - `tagValues="123456789/env/prod"`
         #
-        #     * use a free text query. Example:
+        #     * Use a free text query. Example:
         #         - `prod`
         # @!attribute [rw] tag_value_ids
         #   @return [::Array<::String>]
         #     TagValue IDs, in the format of tagValues/\\{TAG_VALUE_ID}.
         #     To search against the `tagValueIds`:
         #
-        #     * use a field query. Example:
+        #     * Use a field query. Example:
         #         - `tagValueIds:"456"`
         #         - `tagValueIds="tagValues/456"`
         #
-        #     * use a free text query. Example:
+        #     * Use a free text query. Example:
         #         - `456`
         # @!attribute [rw] parent_asset_type
         #   @return [::String]
@@ -566,9 +585,9 @@ module Google
         #
         #     To search against the `parent_asset_type`:
         #
-        #     * use a field query. Example:
+        #     * Use a field query. Example:
         #     `parentAssetType:"cloudresourcemanager.googleapis.com/Project"`
-        #     * use a free text query. Example:
+        #     * Use a free text query. Example:
         #     `cloudresourcemanager.googleapis.com/Project`
         class ResourceSearchResult
           include ::Google::Protobuf::MessageExts
@@ -827,28 +846,22 @@ module Google
         #   @return [::String]
         #     The [full resource
         #     name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
-        #     of the resource to which the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     policy attaches.
+        #     of the resource to which the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} policy attaches.
         # @!attribute [rw] iam_binding
         #   @return [::Google::Iam::V1::Binding]
         #     The Cloud IAM policy binding under analysis.
         # @!attribute [rw] access_control_lists
         #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::AccessControlList>]
-        #     The access control lists derived from the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     that match or potentially match resource and access selectors specified in
-        #     the request.
+        #     The access control lists derived from the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} that match or
+        #     potentially match resource and access selectors specified in the request.
         # @!attribute [rw] identity_list
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList]
-        #     The identity list derived from members of the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     that match or potentially match identity selector specified in the request.
+        #     The identity list derived from members of the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} that match or
+        #     potentially match identity selector specified in the request.
         # @!attribute [rw] fully_explored
         #   @return [::Boolean]
-        #     Represents whether all analyses on the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     have successfully finished.
+        #     Represents whether all analyses on the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} have successfully
+        #     finished.
         class IamPolicyAnalysisResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -945,10 +958,8 @@ module Google
           # @!attribute [rw] resource_edges
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
           #     Resource edges of the graph starting from the policy attached
-          #     resource to any descendant resources. The
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
-          #     contains the full resource name of a parent resource and
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
+          #     resource to any descendant resources. The {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node} contains
+          #     the full resource name of a parent resource and {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
           #     contains the full resource name of a child resource. This field is
           #     present only if the output_resource_edges option is enabled in request.
           # @!attribute [rw] condition_evaluation
@@ -970,15 +981,12 @@ module Google
           # @!attribute [rw] group_edges
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
           #     Group identity edges of the graph starting from the binding's
-          #     group members to any node of the
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList#identities identities}.
-          #     The
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
+          #     group members to any node of the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList#identities identities}. The {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
           #     contains a group, such as `group:parent@google.com`. The
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
-          #     contains a member of the group, such as `group:child@google.com` or
-          #     `user:foo@google.com`. This field is present only if the
-          #     output_group_edges option is enabled in request.
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node} contains a member of the group,
+          #     such as `group:child@google.com` or `user:foo@google.com`.
+          #     This field is present only if the output_group_edges option is enabled in
+          #     request.
           class IdentityList
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
