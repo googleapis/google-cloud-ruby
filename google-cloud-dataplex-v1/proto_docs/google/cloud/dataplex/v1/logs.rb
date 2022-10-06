@@ -255,9 +255,10 @@ module Google
         # @!attribute [rw] event_succeeded
         #   @return [::Boolean]
         #     The status of the event.
-        # @!attribute [rw] warm_pool_enabled
+        # @!attribute [rw] fast_startup_enabled
         #   @return [::Boolean]
-        #     If the session is a warm pooled session.
+        #     If the session is associated with an Environment with fast startup enabled,
+        #     and was pre-created before being assigned to a user.
         # @!attribute [rw] unassigned_duration
         #   @return [::Google::Protobuf::Duration]
         #     The idle duration of a warm pooled session before it is assigned to user.
