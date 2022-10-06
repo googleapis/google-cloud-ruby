@@ -26,8 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.bigtable.v2.ReadRowsRequest.RequestStatsView" do
       value :REQUEST_STATS_VIEW_UNSPECIFIED, 0
       value :REQUEST_STATS_NONE, 1
-      value :REQUEST_STATS_EFFICIENCY, 2
-      value :REQUEST_STATS_FULL, 3
+      value :REQUEST_STATS_FULL, 2
     end
     add_message "google.bigtable.v2.ReadRowsResponse" do
       repeated :chunks, :message, 1, "google.bigtable.v2.ReadRowsResponse.CellChunk"
