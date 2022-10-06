@@ -56,8 +56,8 @@ module Google
         #
         #     If unspecified, `startMinutesAgo` is defaulted to 29. Standard Analytics
         #     properties can request up to the last 30 minutes of event data
-        #     (`startMinutesAgo <= 29`), and Google Analytics 360 properties can request
-        #     up to the last 60 minutes of event data (`startMinutesAgo <= 59`).
+        #     (`startMinutesAgo <= 29`), and 360 Analytics properties can request up to
+        #     the last 60 minutes of event data (`startMinutesAgo <= 59`).
         # @!attribute [rw] end_minutes_ago
         #   @return [::Integer]
         #     The inclusive end minute for the query as a number of minutes before now.
@@ -67,8 +67,8 @@ module Google
         #
         #     If unspecified, `endMinutesAgo` is defaulted to 0. Standard Analytics
         #     properties can request any minute in the last 30 minutes of event data
-        #     (`endMinutesAgo <= 29`), and Google Analytics 360 properties can request
-        #     any minute in the last 60 minutes of event data (`endMinutesAgo <= 59`).
+        #     (`endMinutesAgo <= 29`), and 360 Analytics properties can request any
+        #     minute in the last 60 minutes of event data (`endMinutesAgo <= 59`).
         # @!attribute [rw] name
         #   @return [::String]
         #     Assigns a name to this minute range. The dimension `dateRange` is valued to
@@ -82,7 +82,7 @@ module Google
 
         # Dimensions are attributes of your data. For example, the dimension city
         # indicates the city from which an event originates. Dimension values in report
-        # responses are strings; for example, city could be "Paris" or "New York".
+        # responses are strings; for example, the city could be "Paris" or "New York".
         # Requests are allowed up to 9 dimensions.
         # @!attribute [rw] name
         #   @return [::String]
@@ -186,9 +186,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # To express dimension or metric filters.
-        # The fields in the same FilterExpression need to be either all dimensions or
-        # all metrics.
+        # To express dimension or metric filters. The fields in the same
+        # FilterExpression need to be either all dimensions or all metrics.
         # @!attribute [rw] and_group
         #   @return [::Google::Analytics::Data::V1beta::FilterExpressionList]
         #     The FilterExpressions in and_group have an AND relationship.
@@ -200,9 +199,8 @@ module Google
         #     The FilterExpression is NOT of not_expression.
         # @!attribute [rw] filter
         #   @return [::Google::Analytics::Data::V1beta::Filter]
-        #     A primitive filter.
-        #     All fields in filter in same FilterExpression needs to be either all
-        #     dimensions or metrics.
+        #     A primitive filter. In the same FilterExpression, all of the filter's
+        #     field names need to be either all dimensions or all metrics.
         class FilterExpression
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -220,8 +218,12 @@ module Google
         # An expression to filter dimension or metric values.
         # @!attribute [rw] field_name
         #   @return [::String]
-        #     The dimension name or metric name. Must be a name defined in dimensions
-        #     or metrics.
+        #     The dimension name or metric name.
+        #
+        #     In most methods, dimensions & metrics can be used for the first time in
+        #     this field. However in a RunPivotReportRequest, this field must be
+        #     additionally specified by name in the RunPivotReportRequest's dimensions or
+        #     metrics.
         # @!attribute [rw] string_filter
         #   @return [::Google::Analytics::Data::V1beta::Filter::StringFilter]
         #     Strings related filter.
@@ -269,10 +271,10 @@ module Google
               # Contains the string value.
               CONTAINS = 4
 
-              # Full regular expression match with the string value.
+              # Full match for the regular expression with the string value.
               FULL_REGEXP = 5
 
-              # Partial regular expression match with the string value.
+              # Partial match for the regular expression with the string value.
               PARTIAL_REGEXP = 6
             end
           end
@@ -336,7 +338,9 @@ module Google
           end
         end
 
-        # The sort options.
+        # Order bys define how rows will be sorted in the response. For example,
+        # ordering rows by descending event count is one ordering, and ordering rows by
+        # the event name string is a different ordering.
         # @!attribute [rw] metric
         #   @return [::Google::Analytics::Data::V1beta::OrderBy::MetricOrderBy]
         #     Sorts results by a metric's values.
@@ -644,6 +648,16 @@ module Google
         # @!attribute [rw] empty_reason
         #   @return [::String]
         #     If empty reason is specified, the report is empty for this reason.
+        # @!attribute [rw] subject_to_thresholding
+        #   @return [::Boolean]
+        #     If `subjectToThresholding` is true, this report is subject to thresholding
+        #     and only returns data that meets the minimum aggregation thresholds. It is
+        #     possible for a request to be subject to thresholding thresholding and no
+        #     data is absent from the report, and this happens when all data is above the
+        #     thresholds. To learn more, see [Data
+        #     thresholds](https://support.google.com/analytics/answer/9383630) and [About
+        #     Demographics and
+        #     Interests](https://support.google.com/analytics/answer/2799357).
         class ResponseMetaData
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -817,8 +831,8 @@ module Google
         #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
         #     Standard Analytics Properties can use up to 5,000 tokens per hour;
         #     Analytics 360 Properties can use 50,000 tokens per hour. An API request
-        #     consumes a single number of tokens, and that number is deducted from both
-        #     the hourly and daily quotas.
+        #     consumes a single number of tokens, and that number is deducted from all of
+        #     the hourly, daily, and per project hourly quotas.
         # @!attribute [rw] concurrent_requests
         #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
         #     Standard Analytics Properties can send up to 10 concurrent requests;
@@ -834,6 +848,14 @@ module Google
         #     thresholded dimensions per hour. In a batch request, each report request
         #     is individually counted for this quota if the request contains potentially
         #     thresholded dimensions.
+        # @!attribute [rw] tokens_per_project_per_hour
+        #   @return [::Google::Analytics::Data::V1beta::QuotaStatus]
+        #     Analytics Properties can use up to 25% of their tokens per project per
+        #     hour. This amounts to standard Analytics Properties can use up to 1,250
+        #     tokens per project per hour, and Analytics 360 Properties can use 12,500
+        #     tokens per project per hour. An API request consumes a single number of
+        #     tokens, and that number is deducted from all of the hourly, daily, and per
+        #     project hourly quotas.
         class PropertyQuota
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

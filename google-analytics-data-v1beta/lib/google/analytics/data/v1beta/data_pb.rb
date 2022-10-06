@@ -158,6 +158,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :currency_code, :string, 5
       proto3_optional :time_zone, :string, 6
       proto3_optional :empty_reason, :string, 7
+      proto3_optional :subject_to_thresholding, :bool, 8
     end
     add_message "google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse" do
       repeated :active_metric_restrictions, :message, 1, "google.analytics.data.v1beta.ResponseMetaData.SchemaRestrictionResponse.ActiveMetricRestriction"
@@ -206,6 +207,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :concurrent_requests, :message, 3, "google.analytics.data.v1beta.QuotaStatus"
       optional :server_errors_per_project_per_hour, :message, 4, "google.analytics.data.v1beta.QuotaStatus"
       optional :potentially_thresholded_requests_per_hour, :message, 5, "google.analytics.data.v1beta.QuotaStatus"
+      optional :tokens_per_project_per_hour, :message, 6, "google.analytics.data.v1beta.QuotaStatus"
     end
     add_message "google.analytics.data.v1beta.QuotaStatus" do
       optional :consumed, :int32, 1

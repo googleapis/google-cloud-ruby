@@ -77,7 +77,11 @@ module Google
 
                 default_config.rpcs.batch_run_pivot_reports.timeout = 60.0
 
+                default_config.rpcs.get_metadata.timeout = 60.0
+
                 default_config.rpcs.run_realtime_report.timeout = 60.0
+
+                default_config.rpcs.check_compatibility.timeout = 60.0
 
                 default_config
               end
@@ -168,6 +172,10 @@ module Google
             # event count. Dimensions break down metrics across some common criteria,
             # such as country or event name.
             #
+            # For a guide to constructing requests & understanding responses, see
+            # [Creating a
+            # Report](https://developers.google.com/analytics/devguides/reporting/data/v1/basics).
+            #
             # @overload run_report(request, options = nil)
             #   Pass arguments to `run_report` via a request object, either of type
             #   {::Google::Analytics::Data::V1beta::RunReportRequest} or an equivalent Hash.
@@ -208,8 +216,8 @@ module Google
             #     Filters](https://developers.google.com/analytics/devguides/reporting/data/v1/basics#dimension_filters)
             #     for examples. Metrics cannot be used in this filter.
             #   @param metric_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
-            #     The filter clause of metrics. Applied at post aggregation phase, similar to
-            #     SQL having-clause. Dimensions cannot be used in this filter.
+            #     The filter clause of metrics. Applied after aggregating the report's rows,
+            #     similar to SQL having-clause. Dimensions cannot be used in this filter.
             #   @param offset [::Integer]
             #     The row count of the start row. The first row is counted as row 0.
             #
@@ -749,9 +757,15 @@ module Google
             end
 
             ##
-            # The Google Analytics Realtime API returns a customized report of realtime
-            # event data for your property. These reports show events and usage from the
-            # last 30 minutes.
+            # Returns a customized report of realtime event data for your property.
+            # Events appear in realtime reports seconds after they have been sent to
+            # the Google Analytics. Realtime reports show events and usage data for the
+            # periods of time ranging from the present moment to 30 minutes ago (up to
+            # 60 minutes for Google Analytics 360 properties).
+            #
+            # For a guide to constructing realtime requests & understanding responses,
+            # see [Creating a Realtime
+            # Report](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-basics).
             #
             # @overload run_realtime_report(request, options = nil)
             #   Pass arguments to `run_realtime_report` via a request object, either of type
@@ -780,12 +794,10 @@ module Google
             #   @param metrics [::Array<::Google::Analytics::Data::V1beta::Metric, ::Hash>]
             #     The metrics requested and displayed.
             #   @param dimension_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
-            #     The filter clause of dimensions. Dimensions must be requested to be used in
-            #     this filter. Metrics cannot be used in this filter.
+            #     The filter clause of dimensions. Metrics cannot be used in this filter.
             #   @param metric_filter [::Google::Analytics::Data::V1beta::FilterExpression, ::Hash]
             #     The filter clause of metrics. Applied at post aggregation phase, similar to
-            #     SQL having-clause. Metrics must be requested to be used in this filter.
-            #     Dimensions cannot be used in this filter.
+            #     SQL having-clause. Dimensions cannot be used in this filter.
             #   @param limit [::Integer]
             #     The number of rows to return. If unspecified, 10,000 rows are returned. The
             #     API returns a maximum of 100,000 rows per request, no matter how many you
