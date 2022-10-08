@@ -137,6 +137,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :config_connector_config, :message, 10, "google.container.v1.ConfigConnectorConfig"
       optional :gce_persistent_disk_csi_driver_config, :message, 11, "google.container.v1.GcePersistentDiskCsiDriverConfig"
       optional :gcp_filestore_csi_driver_config, :message, 14, "google.container.v1.GcpFilestoreCsiDriverConfig"
+      optional :gke_backup_agent_config, :message, 16, "google.container.v1.GkeBackupAgentConfig"
     end
     add_message "google.container.v1.HttpLoadBalancing" do
       optional :disabled, :bool, 1
@@ -187,6 +188,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.container.v1.GcpFilestoreCsiDriverConfig" do
       optional :enabled, :bool, 1
     end
+    add_message "google.container.v1.GkeBackupAgentConfig" do
+      optional :enabled, :bool, 1
+    end
     add_message "google.container.v1.MasterAuthorizedNetworksConfig" do
       optional :enabled, :bool, 1
       repeated :cidr_blocks, :message, 2, "google.container.v1.MasterAuthorizedNetworksConfig.CidrBlock"
@@ -229,6 +233,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :services_ipv4_cidr_block, :string, 11
       optional :tpu_ipv4_cidr_block, :string, 13
       optional :use_routes, :bool, 15
+      optional :stack_type, :enum, 16, "google.container.v1.StackType"
+      optional :ipv6_access_type, :enum, 17, "google.container.v1.IPv6AccessType"
     end
     add_message "google.container.v1.Cluster" do
       optional :name, :string, 1
@@ -265,6 +271,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :release_channel, :message, 41, "google.container.v1.ReleaseChannel"
       optional :workload_identity_config, :message, 43, "google.container.v1.WorkloadIdentityConfig"
       optional :mesh_certificates, :message, 67, "google.container.v1.MeshCertificates"
+      optional :cost_management_config, :message, 45, "google.container.v1.CostManagementConfig"
       optional :notification_config, :message, 49, "google.container.v1.NotificationConfig"
       optional :confidential_nodes, :message, 50, "google.container.v1.ConfidentialNodes"
       optional :identity_service_config, :message, 54, "google.container.v1.IdentityServiceConfig"
@@ -322,6 +329,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :desired_workload_identity_config, :message, 47, "google.container.v1.WorkloadIdentityConfig"
       optional :desired_mesh_certificates, :message, 67, "google.container.v1.MeshCertificates"
       optional :desired_shielded_nodes, :message, 48, "google.container.v1.ShieldedNodes"
+      optional :desired_cost_management_config, :message, 49, "google.container.v1.CostManagementConfig"
       optional :desired_dns_config, :message, 53, "google.container.v1.DNSConfig"
       optional :desired_node_pool_autoscaling, :message, 9, "google.container.v1.NodePoolAutoscaling"
       repeated :desired_locations, :string, 10
@@ -898,6 +906,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :REGULAR, 2
       value :STABLE, 3
     end
+    add_message "google.container.v1.CostManagementConfig" do
+      optional :enabled, :bool, 1
+    end
     add_message "google.container.v1.IntraNodeVisibilityConfig" do
       optional :enabled, :bool, 1
     end
@@ -1100,6 +1111,16 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :BLUE_GREEN, 2
       value :SURGE, 3
     end
+    add_enum "google.container.v1.StackType" do
+      value :STACK_TYPE_UNSPECIFIED, 0
+      value :IPV4, 1
+      value :IPV4_IPV6, 2
+    end
+    add_enum "google.container.v1.IPv6AccessType" do
+      value :IPV6_ACCESS_TYPE_UNSPECIFIED, 0
+      value :INTERNAL, 1
+      value :EXTERNAL, 2
+    end
   end
 end
 
@@ -1141,6 +1162,7 @@ module Google
         ConfigConnectorConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ConfigConnectorConfig").msgclass
         GcePersistentDiskCsiDriverConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GcePersistentDiskCsiDriverConfig").msgclass
         GcpFilestoreCsiDriverConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GcpFilestoreCsiDriverConfig").msgclass
+        GkeBackupAgentConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GkeBackupAgentConfig").msgclass
         MasterAuthorizedNetworksConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MasterAuthorizedNetworksConfig").msgclass
         MasterAuthorizedNetworksConfig::CidrBlock = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.MasterAuthorizedNetworksConfig.CidrBlock").msgclass
         LegacyAbac = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.LegacyAbac").msgclass
@@ -1236,6 +1258,7 @@ module Google
         GetJSONWebKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.GetJSONWebKeysResponse").msgclass
         ReleaseChannel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ReleaseChannel").msgclass
         ReleaseChannel::Channel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ReleaseChannel.Channel").enummodule
+        CostManagementConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.CostManagementConfig").msgclass
         IntraNodeVisibilityConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.IntraNodeVisibilityConfig").msgclass
         ILBSubsettingConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.ILBSubsettingConfig").msgclass
         DNSConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DNSConfig").msgclass
@@ -1282,6 +1305,8 @@ module Google
         UpgradeResourceType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.UpgradeResourceType").enummodule
         DatapathProvider = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.DatapathProvider").enummodule
         NodePoolUpdateStrategy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePoolUpdateStrategy").enummodule
+        StackType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.StackType").enummodule
+        IPv6AccessType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.IPv6AccessType").enummodule
       end
     end
   end

@@ -643,6 +643,9 @@ module Google
         # @!attribute [rw] gcp_filestore_csi_driver_config
         #   @return [::Google::Cloud::Container::V1::GcpFilestoreCsiDriverConfig]
         #     Configuration for the GCP Filestore CSI driver.
+        # @!attribute [rw] gke_backup_agent_config
+        #   @return [::Google::Cloud::Container::V1::GkeBackupAgentConfig]
+        #     Configuration for the Backup for GKE agent addon.
         class AddonsConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -804,6 +807,15 @@ module Google
         #   @return [::Boolean]
         #     Whether the GCP Filestore CSI driver is enabled for this cluster.
         class GcpFilestoreCsiDriverConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Configuration for the Backup for GKE Agent.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the Backup for GKE agent is enabled for this cluster.
+        class GkeBackupAgentConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -1018,6 +1030,12 @@ module Google
         #     This is used in conjunction with use_ip_aliases. It cannot be true if
         #     use_ip_aliases is true. If both use_ip_aliases and use_routes are false,
         #     then the server picks the default IP allocation mode
+        # @!attribute [rw] stack_type
+        #   @return [::Google::Cloud::Container::V1::StackType]
+        #     The IP stack type of the cluster
+        # @!attribute [rw] ipv6_access_type
+        #   @return [::Google::Cloud::Container::V1::IPv6AccessType]
+        #     The ipv6 access type (internal or external) when create_subnetwork is true
         class IPAllocationPolicy
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1206,6 +1224,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::MeshCertificates]
         #     Configuration for issuance of mTLS keys and certificates to Kubernetes
         #     pods.
+        # @!attribute [rw] cost_management_config
+        #   @return [::Google::Cloud::Container::V1::CostManagementConfig]
+        #     Configuration for the fine-grained cost management feature.
         # @!attribute [rw] notification_config
         #   @return [::Google::Cloud::Container::V1::NotificationConfig]
         #     Notification configuration of the cluster.
@@ -1463,6 +1484,9 @@ module Google
         # @!attribute [rw] desired_shielded_nodes
         #   @return [::Google::Cloud::Container::V1::ShieldedNodes]
         #     Configuration for Shielded Nodes.
+        # @!attribute [rw] desired_cost_management_config
+        #   @return [::Google::Cloud::Container::V1::CostManagementConfig]
+        #     The desired configuration for the fine-grained cost management feature.
         # @!attribute [rw] desired_dns_config
         #   @return [::Google::Cloud::Container::V1::DNSConfig]
         #     DNSConfig contains clusterDNS config for this cluster.
@@ -3741,6 +3765,15 @@ module Google
           end
         end
 
+        # Configuration for fine-grained cost management feature.
+        # @!attribute [rw] enabled
+        #   @return [::Boolean]
+        #     Whether the feature is enabled or not.
+        class CostManagementConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # IntraNodeVisibilityConfig contains the desired config of the intra-node
         # visibility on this cluster.
         # @!attribute [rw] enabled
@@ -4385,6 +4418,30 @@ module Google
           # SURGE is the traditional way of upgrade a node pool.
           # max_surge and max_unavailable determines the level of upgrade parallelism.
           SURGE = 3
+        end
+
+        # Possible values for IP stack type
+        module StackType
+          # Default value, will be defaulted as IPV4 only
+          STACK_TYPE_UNSPECIFIED = 0
+
+          # Cluster is IPV4 only
+          IPV4 = 1
+
+          # Cluster can use both IPv4 and IPv6
+          IPV4_IPV6 = 2
+        end
+
+        # Possible values for IPv6 access type
+        module IPv6AccessType
+          # Default value, will be defaulted as type external.
+          IPV6_ACCESS_TYPE_UNSPECIFIED = 0
+
+          # Access type internal (all v6 addresses are internal IPs)
+          INTERNAL = 1
+
+          # Access type external (all v6 addresses are external IPs)
+          EXTERNAL = 2
         end
       end
     end
