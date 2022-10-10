@@ -28,10 +28,14 @@ describe "subscriptions" do
 
   before :all do
     @topic = pubsub.create_topic random_topic_id
+    @created_subscriptions = []
   end
 
   after :all do
     @topic.delete
+    @created_subscriptions.each do |sub|
+      pubsub.subscription(sub).delete
+    end
   end
 
   before do
@@ -107,6 +111,7 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
 
     @topic.subscribe subscription_id, enable_exactly_once_delivery: true
 
@@ -197,6 +202,7 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
     filter = "attributes.author=\"unknown\""
 
     assert_output "Created subscription with filtering enabled: #{subscription_id}\n" do     
@@ -211,6 +217,7 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
 
     assert_output "Created subscription with exactly once delivery enabled: #{subscription_id}\n" do     
       PubsubCreateSubscriptionWithExactlyOnceDelivery.new.create_subscription_with_exactly_once_delivery(
@@ -225,6 +232,7 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
     table_id = create_table 
 
     assert_output "BigQuery subscription created: #{subscription_id}.\nTable for subscription is: #{table_id}\n" do     
