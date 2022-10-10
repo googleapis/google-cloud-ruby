@@ -14,18 +14,18 @@
 
 require_relative "helper"
 
-describe "#update_input", :live_stream_snippet do
-  it "updates the input" do
-    sample = SampleLoader.load "update_input.rb"
+describe "#create_channel", :live_stream_snippet do
+  it "creates a channel" do
+    sample = SampleLoader.load "create_channel.rb"
 
     refute_nil input
     @input_created = true
 
     out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, input_id: input_id
+      sample.run project_id: project_id, location: location_id, channel_id: channel_id, input_id: input_id, output_uri: output_uri
     end
-
-    assert_match(/Updated input: #{input.name}/, out)
-    assert_match(/Updated pre-processing config: 5/, out)
+    @channel_created_stopped = true
+    channel_id_regex = Regexp.escape channel_id
+    assert_match %r{Channel: projects/\S+/locations/#{location_id}/channels/#{channel_id_regex}}, out
   end
 end

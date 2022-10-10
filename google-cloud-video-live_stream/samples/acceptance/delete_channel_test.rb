@@ -14,18 +14,22 @@
 
 require_relative "helper"
 
-describe "#update_input", :live_stream_snippet do
-  it "updates the input" do
-    sample = SampleLoader.load "update_input.rb"
+describe "#delete_channel", :live_stream_snippet do
+  it "deletes the channel" do
+    sample = SampleLoader.load "delete_channel.rb"
 
     refute_nil input
+    refute_nil channel
     @input_created = true
 
-    out, _err = capture_io do
-      sample.run project_id: project_id, location: location_id, input_id: input_id
+    client.get_channel name: channel_name
+
+    assert_output(/Deleted channel/) do
+      sample.run project_id: project_id, location: location_id, channel_id: channel_id
     end
 
-    assert_match(/Updated input: #{input.name}/, out)
-    assert_match(/Updated pre-processing config: 5/, out)
+    assert_raises Google::Cloud::NotFoundError do
+      client.get_channel name: channel_name
+    end
   end
 end

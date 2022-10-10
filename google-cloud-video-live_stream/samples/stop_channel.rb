@@ -12,36 +12,32 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# [START livestream_create_input]
+# [START livestream_stop_channel]
 require "google/cloud/video/live_stream"
 
 ##
-# Create an input endpoint
+# Stops a channel
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
-# @param input_id [String] Your input name (e.g. "my-input")
+# @param channel_id [String] Your channel name (e.g. "my-channel")
 #
-def create_input project_id:, location:, input_id:
+def stop_channel project_id:, location:, channel_id:
   # Create a Live Stream client.
   client = Google::Cloud::Video::LiveStream.livestream_service
 
-  # Build the resource name of the parent.
-  parent = client.location_path project: project_id, location: location
+  # Build the resource name of the channel.
+  name = client.channel_path project: project_id, location: location, channel: channel_id
 
-  # Set the input fields.
-  new_input = {
-    type: Google::Cloud::Video::LiveStream::V1::Input::Type::RTMP_PUSH
-  }
-
-  operation = client.create_input parent: parent, input: new_input, input_id: input_id
+  # Stop the channel.
+  operation = client.stop_channel name: name
 
   # The returned object is of type Gapic::Operation. You can use this
   # object to check the status of an operation, cancel it, or wait
   # for results. Here is how to block until completion:
   operation.wait_until_done!
 
-  # Print the input name.
-  puts "Input: #{operation.response.name}"
+  # Print a success message.
+  puts "Stopped channel"
 end
-# [END livestream_create_input]
+# [END livestream_stop_channel]

@@ -53,5 +53,5 @@ def update_input project_id:, location:, input_id:
   # Print the input name.
   puts "Updated input: #{operation.response.name}"
   puts "Updated pre-processing config: #{operation.response.preprocessing_config.crop.top_pixels}"
-  # [END livestream_update_input]
 end
+# [END livestream_update_input]
