@@ -21,6 +21,7 @@ require "google/cloud/video/live_stream"
 require_relative "../../../.toys/.lib/sample_loader"
 require_relative "channel_definition"
 require_relative "input_definition"
+require_relative "event_definition"
 
 DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS = 10_800_000
 
@@ -43,16 +44,21 @@ class LiveStreamSnippetSpec < Minitest::Spec
   let(:channel_name) { "projects/#{project_id}/locations/#{location_id}/channels/#{channel_id}" }
   let(:output_uri) { "gs://my-bucket/my-output-folder/" }
 
+  let(:event_id) { "my-event" }
+  let(:event_name) { "#{channel_name}/events/#{event_id}" }
+
   attr_writer :channel_created_started
   attr_writer :channel_created_stopped
   attr_writer :input_created
   attr_writer :update_input_created
+  attr_writer :event_created
 
   before do
     @channel_created_started = false
     @channel_created_stopped = false
     @input_created = false
     @update_input_created = false
+    @event_created = false
     # Remove old channels and inputs in the test project if they exist
     response = client.list_channels parent: location_path
     response.each do |channel|
@@ -60,6 +66,12 @@ class LiveStreamSnippetSpec < Minitest::Spec
       create_time = tmp.last.to_i
       now = (Time.now.to_f * 1000).to_i # Milliseconds, preserves float value for precision
       next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
+      begin
+        event_name = "#{channel.name}/events/#{event_id}"
+        client.delete_event name: event_name
+      rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
+        puts "Rescued: #{e.inspect}"
+      end
       begin
         operation = client.stop_channel name: channel.name.to_s
         operation.wait_until_done!
@@ -125,8 +137,24 @@ class LiveStreamSnippetSpec < Minitest::Spec
     operation.response
   end
 
+  let :started_channel_with_event do
+    input_path = client.input_path project: project_id, location: location_id, input: input_id
+    operation = client.create_channel parent: location_path, channel: channel_def(input_path, output_uri), channel_id: channel_id
+    operation.wait_until_done!
+    start = client.start_channel name: channel_name
+    start.wait_until_done!
+    client.create_event parent: channel_name, event: event_def, event_id: event_id
+    operation.response
+  end
 
   after do
+    if @event_created
+      begin
+        client.delete_event name: event_name
+      rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
     if @channel_created_started
       begin
         operation = client.stop_channel name: channel_name
