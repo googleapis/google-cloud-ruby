@@ -269,15 +269,14 @@ module Google
             #     Required. The resource name of the Assessment, in the format
             #     "projects/\\{project}/assessments/\\{assessment}".
             #   @param annotation [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-            #     Optional. The annotation that will be assigned to the Event. This field can
-            #     be left empty to provide reasons that apply to an event without concluding
-            #     whether the event is legitimate or fraudulent.
+            #     Optional. The annotation that will be assigned to the Event. This field can be left
+            #     empty to provide reasons that apply to an event without concluding whether
+            #     the event is legitimate or fraudulent.
             #   @param reasons [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-            #     Optional. Optional reasons for the annotation that will be assigned to the
-            #     Event.
+            #     Optional. Optional reasons for the annotation that will be assigned to the Event.
             #   @param hashed_account_id [::String]
-            #     Optional. Optional unique stable hashed user identifier to apply to the
-            #     assessment. This is an alternative to setting the hashed_account_id in
+            #     Optional. Unique stable hashed user identifier to apply to the assessment.
+            #     This is an alternative to setting the hashed_account_id in
             #     CreateAssessment, for example when the account identifier is not yet known
             #     in the initial request. It is recommended that the identifier is hashed
             #     using hmac-sha256 with stable secret.
@@ -534,6 +533,94 @@ module Google
             end
 
             ##
+            # Returns the secret key related to the specified public key.
+            # You must use the legacy secret key only in a 3rd party integration with
+            # legacy reCAPTCHA.
+            #
+            # @overload retrieve_legacy_secret_key(request, options = nil)
+            #   Pass arguments to `retrieve_legacy_secret_key` via a request object, either of type
+            #   {::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload retrieve_legacy_secret_key(key: nil)
+            #   Pass arguments to `retrieve_legacy_secret_key` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param key [::String]
+            #     Required. The public key name linked to the requested secret key in the format
+            #     "projects/\\{project}/keys/\\{key}".
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/recaptcha_enterprise/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyRequest.new
+            #
+            #   # Call the retrieve_legacy_secret_key method.
+            #   result = client.retrieve_legacy_secret_key request
+            #
+            #   # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyResponse.
+            #   p result
+            #
+            def retrieve_legacy_secret_key request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.retrieve_legacy_secret_key.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::RecaptchaEnterprise::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.key
+                header_params["key"] = request.key
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.retrieve_legacy_secret_key.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.retrieve_legacy_secret_key.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @recaptcha_enterprise_service_stub.call_rpc :retrieve_legacy_secret_key, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Returns the specified key.
             #
             # @overload get_key(request, options = nil)
@@ -640,8 +727,8 @@ module Google
             #   @param key [::Google::Cloud::RecaptchaEnterprise::V1::Key, ::Hash]
             #     Required. The key to update.
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. The mask to control which fields of the key get updated. If the
-            #     mask is not present, all fields will be updated.
+            #     Optional. The mask to control which fields of the key get updated. If the mask is not
+            #     present, all fields will be updated.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::RecaptchaEnterprise::V1::Key]
@@ -990,15 +1077,16 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project to list related account groups from, in
-            #     the format "projects/\\{project}".
+            #     Required. The name of the project to list related account groups from, in the format
+            #     "projects/\\{project}".
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service may return
-            #     fewer than this value. If unspecified, at most 50 groups will be returned.
-            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. The maximum number of groups to return. The service might return fewer than
+            #     this value.
+            #     If unspecified, at most 50 groups are returned.
+            #     The maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous `ListRelatedAccountGroups`
-            #     call. Provide this to retrieve the subsequent page.
+            #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
+            #     Provide this to retrieve the subsequent page.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroups` must match the call that provided the page
@@ -1076,7 +1164,7 @@ module Google
             end
 
             ##
-            # Get the memberships in a group of related accounts.
+            # Get memberships in a group of related accounts.
             #
             # @overload list_related_account_group_memberships(request, options = nil)
             #   Pass arguments to `list_related_account_group_memberships` via a request object, either of type
@@ -1097,13 +1185,13 @@ module Google
             #     Required. The resource name for the related account group in the format
             #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of accounts to return. The service may return
-            #     fewer than this value. If unspecified, at most 50 accounts will be
-            #     returned. The maximum value is 1000; values above 1000 will be coerced to
-            #     1000.
+            #     Optional. The maximum number of accounts to return. The service might return fewer
+            #     than this value.
+            #     If unspecified, at most 50 accounts are returned.
+            #     The maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
-            #     Optional. A page token, received from a previous
-            #     `ListRelatedAccountGroupMemberships` call.
+            #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
+            #     call.
             #
             #     When paginating, all other parameters provided to
             #     `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -1199,16 +1287,17 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param project [::String]
-            #     Required. The name of the project to search related account group
-            #     memberships from, in the format "projects/\\{project}".
+            #     Required. The name of the project to search related account group memberships from.
+            #     Specify the project name in the following format: "projects/\\{project}".
             #   @param hashed_account_id [::String]
-            #     Optional. The unique stable hashed user identifier we should search
-            #     connections to. The identifier should correspond to a `hashed_account_id`
-            #     provided in a previous CreateAssessment or AnnotateAssessment call.
+            #     Optional. The unique stable hashed user identifier we should search connections to.
+            #     The identifier should correspond to a `hashed_account_id` provided in a
+            #     previous `CreateAssessment` or `AnnotateAssessment` call.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of groups to return. The service may return
-            #     fewer than this value. If unspecified, at most 50 groups will be returned.
-            #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+            #     Optional. The maximum number of groups to return. The service might return fewer than
+            #     this value.
+            #     If unspecified, at most 50 groups are returned.
+            #     The maximum value is 1000; values above 1000 are coerced to 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous
             #     `SearchRelatedAccountGroupMemberships` call. Provide this to retrieve the
@@ -1445,6 +1534,11 @@ module Google
                 #
                 attr_reader :list_keys
                 ##
+                # RPC-specific configuration for `retrieve_legacy_secret_key`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :retrieve_legacy_secret_key
+                ##
                 # RPC-specific configuration for `get_key`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1495,6 +1589,8 @@ module Google
                   @create_key = ::Gapic::Config::Method.new create_key_config
                   list_keys_config = parent_rpcs.list_keys if parent_rpcs.respond_to? :list_keys
                   @list_keys = ::Gapic::Config::Method.new list_keys_config
+                  retrieve_legacy_secret_key_config = parent_rpcs.retrieve_legacy_secret_key if parent_rpcs.respond_to? :retrieve_legacy_secret_key
+                  @retrieve_legacy_secret_key = ::Gapic::Config::Method.new retrieve_legacy_secret_key_config
                   get_key_config = parent_rpcs.get_key if parent_rpcs.respond_to? :get_key
                   @get_key = ::Gapic::Config::Method.new get_key_config
                   update_key_config = parent_rpcs.update_key if parent_rpcs.respond_to? :update_key

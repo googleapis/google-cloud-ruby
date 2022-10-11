@@ -41,17 +41,16 @@ module Google
         #     "projects/\\{project}/assessments/\\{assessment}".
         # @!attribute [rw] annotation
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Annotation]
-        #     Optional. The annotation that will be assigned to the Event. This field can
-        #     be left empty to provide reasons that apply to an event without concluding
-        #     whether the event is legitimate or fraudulent.
+        #     Optional. The annotation that will be assigned to the Event. This field can be left
+        #     empty to provide reasons that apply to an event without concluding whether
+        #     the event is legitimate or fraudulent.
         # @!attribute [rw] reasons
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AnnotateAssessmentRequest::Reason>]
-        #     Optional. Optional reasons for the annotation that will be assigned to the
-        #     Event.
+        #     Optional. Optional reasons for the annotation that will be assigned to the Event.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. Optional unique stable hashed user identifier to apply to the
-        #     assessment. This is an alternative to setting the hashed_account_id in
+        #     Optional. Unique stable hashed user identifier to apply to the assessment.
+        #     This is an alternative to setting the hashed_account_id in
         #     CreateAssessment, for example when the account identifier is not yet known
         #     in the initial request. It is recommended that the identifier is hashed
         #     using hmac-sha256 with stable secret.
@@ -86,20 +85,37 @@ module Google
             # Default unspecified reason.
             REASON_UNSPECIFIED = 0
 
-            # Indicates a chargeback issued for the transaction with no other details.
-            # When possible, specify the type by using CHARGEBACK_FRAUD or
+            # Indicates that the transaction had a chargeback issued with no other
+            # details. When possible, specify the type by using CHARGEBACK_FRAUD or
             # CHARGEBACK_DISPUTE instead.
             CHARGEBACK = 1
 
-            # Indicates a chargeback related to an alleged unauthorized transaction
-            # from the cardholder's perspective (for example, the card number was
-            # stolen).
+            # Indicates that the transaction had a chargeback issued related to an
+            # alleged unauthorized transaction from the cardholder's perspective (for
+            # example, the card number was stolen).
             CHARGEBACK_FRAUD = 8
 
-            # Indicates a chargeback related to the cardholder having provided their
-            # card details but allegedly not being satisfied with the purchase
-            # (for example, misrepresentation, attempted cancellation).
+            # Indicates that the transaction had a chargeback issued related to the
+            # cardholder having provided their card details but allegedly not being
+            # satisfied with the purchase (for example, misrepresentation, attempted
+            # cancellation).
             CHARGEBACK_DISPUTE = 9
+
+            # Indicates that the completed payment transaction was refunded by the
+            # seller.
+            REFUND = 10
+
+            # Indicates that the completed payment transaction was determined to be
+            # fraudulent by the seller, and was cancelled and refunded as a result.
+            REFUND_FRAUD = 11
+
+            # Indicates that the payment transaction was accepted, and the user was
+            # charged.
+            TRANSACTION_ACCEPTED = 12
+
+            # Indicates that the payment transaction was declined, for example due to
+            # invalid card details.
+            TRANSACTION_DECLINED = 13
 
             # Indicates the transaction associated with the assessment is suspected of
             # being fraudulent based on the payment method, billing details, shipping
@@ -123,11 +139,40 @@ module Google
 
             # Indicates the user provided an incorrect password.
             INCORRECT_PASSWORD = 6
+
+            # Indicates that the user sent unwanted and abusive messages to other users
+            # of the platform, such as spam, scams, phishing, or social engineering.
+            SOCIAL_SPAM = 14
           end
         end
 
         # Empty response for AnnotateAssessment.
         class AnnotateAssessmentResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Private password leak verification info.
+        # @!attribute [rw] lookup_hash_prefix
+        #   @return [::String]
+        #     Optional. Exactly 26-bit prefix of the SHA-256 hash of the canonicalized username. It
+        #     is used to look up password leaks associated with that hash prefix.
+        # @!attribute [rw] encrypted_user_credentials_hash
+        #   @return [::String]
+        #     Optional. Encrypted Scrypt hash of the canonicalized username+password. It is
+        #     re-encrypted by the server and returned through
+        #     `reencrypted_user_credentials_hash`.
+        # @!attribute [r] encrypted_leak_match_prefixes
+        #   @return [::Array<::String>]
+        #     Output only. List of prefixes of the encrypted potential password leaks that matched the
+        #     given parameters. They must be compared with the client-side decryption
+        #     prefix of `reencrypted_user_credentials_hash`
+        # @!attribute [r] reencrypted_user_credentials_hash
+        #   @return [::String]
+        #     Output only. Corresponds to the re-encryption of the `encrypted_user_credentials_hash`
+        #     field. It is used to match potential password leaks within
+        #     `encrypted_leak_match_prefixes`.
+        class PrivatePasswordLeakVerification
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -148,11 +193,12 @@ module Google
         #     Output only. Properties of the provided event token.
         # @!attribute [rw] account_defender_assessment
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment]
-        #     Assessment returned by Account Defender when a hashed_account_id is
+        #     Assessment returned by account defender when a hashed_account_id is
         #     provided.
         # @!attribute [rw] private_password_leak_verification
         #   @return [::Google::Cloud::RecaptchaEnterprise::V1::PrivatePasswordLeakVerification]
-        #     Password leak verification info.
+        #     The private password leak verification field contains the parameters that
+        #     are used to to check for leaks privately without sharing user credentials.
         class Assessment
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -160,29 +206,28 @@ module Google
 
         # @!attribute [rw] token
         #   @return [::String]
-        #     Optional. The user response token provided by the reCAPTCHA client-side
-        #     integration on your site.
+        #     Optional. The user response token provided by the reCAPTCHA client-side integration
+        #     on your site.
         # @!attribute [rw] site_key
         #   @return [::String]
-        #     Optional. The site key that was used to invoke reCAPTCHA on your site and
-        #     generate the token.
+        #     Optional. The site key that was used to invoke reCAPTCHA on your site and generate
+        #     the token.
         # @!attribute [rw] user_agent
         #   @return [::String]
-        #     Optional. The user agent present in the request from the user's device
-        #     related to this event.
+        #     Optional. The user agent present in the request from the user's device related to
+        #     this event.
         # @!attribute [rw] user_ip_address
         #   @return [::String]
-        #     Optional. The IP address in the request from the user's device related to
-        #     this event.
+        #     Optional. The IP address in the request from the user's device related to this event.
         # @!attribute [rw] expected_action
         #   @return [::String]
-        #     Optional. The expected action for this type of event. This should be the
-        #     same action provided at token generation time on client-side platforms
-        #     already integrated with recaptcha enterprise.
+        #     Optional. The expected action for this type of event. This should be the same action
+        #     provided at token generation time on client-side platforms already
+        #     integrated with recaptcha enterprise.
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. Optional unique stable hashed user identifier for the request.
-        #     The identifier should ideally be hashed using sha256 with stable secret.
+        #     Optional. Unique stable hashed user identifier for the request. The identifier must
+        #     be hashed using hmac-sha256 with stable secret.
         class Event
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -240,7 +285,7 @@ module Google
         #     The timestamp corresponding to the generation of the token.
         # @!attribute [rw] hostname
         #   @return [::String]
-        #     The hostname of the page on which the token was generated.
+        #     The hostname of the page on which the token was generated (Web keys only).
         # @!attribute [rw] action
         #   @return [::String]
         #     Action name provided at token generation.
@@ -274,7 +319,7 @@ module Google
           end
         end
 
-        # Account Defender risk assessment.
+        # Account defender risk assessment.
         # @!attribute [rw] labels
         #   @return [::Array<::Google::Cloud::RecaptchaEnterprise::V1::AccountDefenderAssessment::AccountDefenderLabel>]
         #     Labels for this request.
@@ -282,7 +327,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Labels returned by Account Defender for this request.
+          # Labels returned by account defender for this request.
           module AccountDefenderLabel
             # Default unspecified type.
             ACCOUNT_DEFENDER_LABEL_UNSPECIFIED = 0
@@ -290,44 +335,19 @@ module Google
             # The request matches a known good profile for the user.
             PROFILE_MATCH = 1
 
-            # The request is potentially a suspicious login event and should be further
-            # verified either via multi-factor authentication or another system.
+            # The request is potentially a suspicious login event and must be further
+            # verified either through multi-factor authentication or another system.
             SUSPICIOUS_LOGIN_ACTIVITY = 2
 
             # The request matched a profile that previously had suspicious account
-            # creation behavior. This could mean this is a fake account.
+            # creation behavior. This can mean that this is a fake account.
             SUSPICIOUS_ACCOUNT_CREATION = 3
 
             # The account in the request has a high number of related accounts. It does
-            # not necessarily imply that the account is bad but could require
-            # investigating.
+            # not necessarily imply that the account is bad but can require further
+            # investigation.
             RELATED_ACCOUNTS_NUMBER_HIGH = 4
           end
-        end
-
-        # Private password leak verification info.
-        # @!attribute [rw] lookup_hash_prefix
-        #   @return [::String]
-        #     Exactly 26-bit prefix of the SHA-256 hash of the canonicalized username. It
-        #     is used to look up password leaks associated with that hash prefix.
-        # @!attribute [rw] encrypted_user_credentials_hash
-        #   @return [::String]
-        #     Encrypted Scrypt hash of the canonicalized username+password. It is
-        #     re-encrypted by the server and returned through
-        #     `reencrypted_user_credentials_hash`.
-        # @!attribute [r] encrypted_leak_match_prefixes
-        #   @return [::Array<::String>]
-        #     List of prefixes of the encrypted potential password leaks that matched the
-        #     given parameters. They should be compared with the client-side decryption
-        #     prefix of `reencrypted_user_credentials_hash`
-        # @!attribute [r] reencrypted_user_credentials_hash
-        #   @return [::String]
-        #     Corresponds to the re-encryption of the `encrypted_user_credentials_hash`
-        #     field. Used to match potential password leaks within
-        #     `encrypted_leak_match_prefixes`.
-        class PrivatePasswordLeakVerification
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The create key request message.
@@ -374,6 +394,16 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # The retrieve legacy secret key request message.
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     Required. The public key name linked to the requested secret key in the format
+        #     "projects/\\{project}/keys/\\{key}".
+        class RetrieveLegacySecretKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # The get key request message.
         # @!attribute [rw] name
         #   @return [::String]
@@ -390,8 +420,8 @@ module Google
         #     Required. The key to update.
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. The mask to control which fields of the key get updated. If the
-        #     mask is not present, all fields will be updated.
+        #     Optional. The mask to control which fields of the key get updated. If the mask is not
+        #     present, all fields will be updated.
         class UpdateKeyRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -445,6 +475,19 @@ module Google
         #     of day. Only challenge-based keys (CHECKBOX, INVISIBLE), will have
         #     challenge-based data.
         class Metrics
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Secret key is used only in legacy reCAPTCHA. It must be used in a 3rd party
+        # integration with legacy reCAPTCHA.
+        # @!attribute [rw] legacy_secret_key
+        #   @return [::String]
+        #     The secret key (also known as shared secret) authorizes communication
+        #     between your application backend and the reCAPTCHA Enterprise server to
+        #     create an assessment.
+        #     The secret key needs to be kept safe for security purposes.
+        class RetrieveLegacySecretKeyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -686,14 +729,14 @@ module Google
         #     `projects/{project}/relatedaccountgroups/{relatedaccountgroup}`.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of accounts to return. The service may return
-        #     fewer than this value. If unspecified, at most 50 accounts will be
-        #     returned. The maximum value is 1000; values above 1000 will be coerced to
-        #     1000.
+        #     Optional. The maximum number of accounts to return. The service might return fewer
+        #     than this value.
+        #     If unspecified, at most 50 accounts are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous
-        #     `ListRelatedAccountGroupMemberships` call.
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroupMemberships`
+        #     call.
         #
         #     When paginating, all other parameters provided to
         #     `ListRelatedAccountGroupMemberships` must match the call that provided the
@@ -719,17 +762,18 @@ module Google
         # The request message to list related account groups.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project to list related account groups from, in
-        #     the format "projects/\\{project}".
+        #     Required. The name of the project to list related account groups from, in the format
+        #     "projects/\\{project}".
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of groups to return. The service may return
-        #     fewer than this value. If unspecified, at most 50 groups will be returned.
-        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. The maximum number of groups to return. The service might return fewer than
+        #     this value.
+        #     If unspecified, at most 50 groups are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. A page token, received from a previous `ListRelatedAccountGroups`
-        #     call. Provide this to retrieve the subsequent page.
+        #     Optional. A page token, received from a previous `ListRelatedAccountGroups` call.
+        #     Provide this to retrieve the subsequent page.
         #
         #     When paginating, all other parameters provided to
         #     `ListRelatedAccountGroups` must match the call that provided the page
@@ -755,18 +799,19 @@ module Google
         # The request message to search related account group memberships.
         # @!attribute [rw] project
         #   @return [::String]
-        #     Required. The name of the project to search related account group
-        #     memberships from, in the format "projects/\\{project}".
+        #     Required. The name of the project to search related account group memberships from.
+        #     Specify the project name in the following format: "projects/\\{project}".
         # @!attribute [rw] hashed_account_id
         #   @return [::String]
-        #     Optional. The unique stable hashed user identifier we should search
-        #     connections to. The identifier should correspond to a `hashed_account_id`
-        #     provided in a previous CreateAssessment or AnnotateAssessment call.
+        #     Optional. The unique stable hashed user identifier we should search connections to.
+        #     The identifier should correspond to a `hashed_account_id` provided in a
+        #     previous `CreateAssessment` or `AnnotateAssessment` call.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of groups to return. The service may return
-        #     fewer than this value. If unspecified, at most 50 groups will be returned.
-        #     The maximum value is 1000; values above 1000 will be coerced to 1000.
+        #     Optional. The maximum number of groups to return. The service might return fewer than
+        #     this value.
+        #     If unspecified, at most 50 groups are returned.
+        #     The maximum value is 1000; values above 1000 are coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
         #     Optional. A page token, received from a previous
@@ -803,7 +848,7 @@ module Google
         #   @return [::String]
         #     The unique stable hashed user identifier of the member. The identifier
         #     corresponds to a `hashed_account_id` provided in a previous
-        #     CreateAssessment or AnnotateAssessment call.
+        #     `CreateAssessment` or `AnnotateAssessment` call.
         class RelatedAccountGroupMembership
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

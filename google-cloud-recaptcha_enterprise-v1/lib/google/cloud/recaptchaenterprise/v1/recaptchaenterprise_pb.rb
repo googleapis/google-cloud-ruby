@@ -35,14 +35,25 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CHARGEBACK, 1
       value :CHARGEBACK_FRAUD, 8
       value :CHARGEBACK_DISPUTE, 9
+      value :REFUND, 10
+      value :REFUND_FRAUD, 11
+      value :TRANSACTION_ACCEPTED, 12
+      value :TRANSACTION_DECLINED, 13
       value :PAYMENT_HEURISTICS, 2
       value :INITIATED_TWO_FACTOR, 7
       value :PASSED_TWO_FACTOR, 3
       value :FAILED_TWO_FACTOR, 4
       value :CORRECT_PASSWORD, 5
       value :INCORRECT_PASSWORD, 6
+      value :SOCIAL_SPAM, 14
     end
     add_message "google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse" do
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification" do
+      optional :lookup_hash_prefix, :bytes, 1
+      optional :encrypted_user_credentials_hash, :bytes, 2
+      repeated :encrypted_leak_match_prefixes, :bytes, 3
+      optional :reencrypted_user_credentials_hash, :bytes, 4
     end
     add_message "google.cloud.recaptchaenterprise.v1.Assessment" do
       optional :name, :string, 1
@@ -98,12 +109,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SUSPICIOUS_ACCOUNT_CREATION, 3
       value :RELATED_ACCOUNTS_NUMBER_HIGH, 4
     end
-    add_message "google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification" do
-      optional :lookup_hash_prefix, :bytes, 1
-      optional :encrypted_user_credentials_hash, :bytes, 2
-      repeated :encrypted_leak_match_prefixes, :bytes, 3
-      optional :reencrypted_user_credentials_hash, :bytes, 4
-    end
     add_message "google.cloud.recaptchaenterprise.v1.CreateKeyRequest" do
       optional :parent, :string, 1
       optional :key, :message, 2, "google.cloud.recaptchaenterprise.v1.Key"
@@ -116,6 +121,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.recaptchaenterprise.v1.ListKeysResponse" do
       repeated :keys, :message, 1, "google.cloud.recaptchaenterprise.v1.Key"
       optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest" do
+      optional :key, :string, 1
     end
     add_message "google.cloud.recaptchaenterprise.v1.GetKeyRequest" do
       optional :name, :string, 1
@@ -138,6 +146,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :start_time, :message, 1, "google.protobuf.Timestamp"
       repeated :score_metrics, :message, 2, "google.cloud.recaptchaenterprise.v1.ScoreMetrics"
       repeated :challenge_metrics, :message, 3, "google.cloud.recaptchaenterprise.v1.ChallengeMetrics"
+    end
+    add_message "google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse" do
+      optional :legacy_secret_key, :string, 1
     end
     add_message "google.cloud.recaptchaenterprise.v1.Key" do
       optional :name, :string, 1
@@ -262,6 +273,7 @@ module Google
         AnnotateAssessmentRequest::Annotation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Annotation").enummodule
         AnnotateAssessmentRequest::Reason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentRequest.Reason").enummodule
         AnnotateAssessmentResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AnnotateAssessmentResponse").msgclass
+        PrivatePasswordLeakVerification = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification").msgclass
         Assessment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Assessment").msgclass
         Event = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Event").msgclass
         RiskAnalysis = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RiskAnalysis").msgclass
@@ -270,16 +282,17 @@ module Google
         TokenProperties::InvalidReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.TokenProperties.InvalidReason").enummodule
         AccountDefenderAssessment = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment").msgclass
         AccountDefenderAssessment::AccountDefenderLabel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.AccountDefenderAssessment.AccountDefenderLabel").enummodule
-        PrivatePasswordLeakVerification = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.PrivatePasswordLeakVerification").msgclass
         CreateKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.CreateKeyRequest").msgclass
         ListKeysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListKeysRequest").msgclass
         ListKeysResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.ListKeysResponse").msgclass
+        RetrieveLegacySecretKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyRequest").msgclass
         GetKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.GetKeyRequest").msgclass
         UpdateKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.UpdateKeyRequest").msgclass
         DeleteKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.DeleteKeyRequest").msgclass
         MigrateKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.MigrateKeyRequest").msgclass
         GetMetricsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.GetMetricsRequest").msgclass
         Metrics = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Metrics").msgclass
+        RetrieveLegacySecretKeyResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.RetrieveLegacySecretKeyResponse").msgclass
         Key = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.Key").msgclass
         TestingOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.TestingOptions").msgclass
         TestingOptions::TestingChallenge = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.recaptchaenterprise.v1.TestingOptions.TestingChallenge").enummodule

@@ -30,6 +30,11 @@
                 "list_keys"
               ]
             },
+            "RetrieveLegacySecretKey": {
+              "methods": [
+                "retrieve_legacy_secret_key"
+              ]
+            },
             "GetKey": {
               "methods": [
                 "get_key"
