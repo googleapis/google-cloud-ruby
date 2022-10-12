@@ -73,7 +73,7 @@ module Google
         # Request for fetching a workload.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the Workload to fetch. This is the workloads's
+        #     Required. The resource name of the Workload to fetch. This is the workload's
         #     relative path in the API, formatted as
         #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
         #     For example,
@@ -117,7 +117,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An Workload object for managing highly regulated workloads of cloud
+        # A Workload object for managing highly regulated workloads of cloud
         # customers.
         # @!attribute [rw] name
         #   @return [::String]
@@ -244,6 +244,9 @@ module Google
           end
 
           # Settings specific to the Key Management Service.
+          # This message is deprecated.
+          # In order to create a Keyring, callers should specify,
+          # ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
           # @!attribute [rw] next_rotation_time
           #   @return [::Google::Protobuf::Timestamp]
           #     Required. Input only. Immutable. The time at which the Key Management Service will automatically create a
@@ -269,7 +272,7 @@ module Google
           # @!attribute [rw] resource_type
           #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload::ResourceInfo::ResourceType]
           #     Indicates the type of resource. This field should be specified to
-          #     correspond the id to the right project type (CONSUMER_PROJECT or
+          #     correspond the id to the right resource type (CONSUMER_FOLDER or
           #     ENCRYPTION_KEYS_PROJECT)
           # @!attribute [rw] display_name
           #   @return [::String]
@@ -370,7 +373,12 @@ module Google
             # International Traffic in Arms Regulations
             ITAR = 10
 
-            # Assured Workloads for Partners;
+            # Assured Workloads for Australia Regions and Support controls
+            # Available for public preview consumption.
+            # Don't create production workloads.
+            AU_REGIONS_AND_US_SUPPORT = 11
+
+            # Assured Workloads for Partners
             ASSURED_WORKLOADS_FOR_PARTNERS = 12
           end
 
@@ -388,10 +396,10 @@ module Google
 
           # Supported Assured Workloads Partners.
           module Partner
-            # Unknown compliance regime.
+            # Unknown partner regime/controls.
             PARTNER_UNSPECIFIED = 0
 
-            # S3NS regime
+            # S3NS regime/controls.
             LOCAL_CONTROLS_BY_S3NS = 1
           end
         end
@@ -465,7 +473,8 @@ module Google
         #     Required. Business justification explaining the need for violation acknowledgement
         # @!attribute [rw] non_compliant_org_policy
         #   @return [::String]
-        #     Optional. Name of the OrgPolicy which was modified with non-compliant change and
+        #     Optional. This field is deprecated and will be removed in future version of the API.
+        #     Name of the OrgPolicy which was modified with non-compliant change and
         #     resulted in this violation.
         #     Format:
         #     projects/\\{project_number}/policies/\\{constraint_name}
@@ -595,6 +604,11 @@ module Google
         #   @return [::Google::Protobuf::Timestamp]
         #     Optional. Timestamp when this violation was acknowledged last.
         #     This will be absent when acknowledged field is marked as false.
+        # @!attribute [r] exception_audit_log_link
+        #   @return [::String]
+        #     Output only. Immutable. Audit Log link to find business justification provided for violation
+        #     exception. Format:
+        #     https://console.cloud.google.com/logs/query;query=\\{logName}\\{protoPayload.resourceName}\\{protoPayload.methodName}\\{timeRange}\\{organization}
         class Violation
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
