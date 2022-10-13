@@ -19,6 +19,9 @@ require "google/cloud/storage"
 # This is a snippet for showcasing how to set the autoclass
 # configuration of a bucket.
 #
+# Note: Only patch requests that disable autoclass are currently supported.
+# To enable autoclass, you must set it at bucket creation time.
+#
 # @param bucket_name [String] The ID of your GCS bucket (e.g. "your-unique-bucket-name")
 # @param toggle [Boolean] if true, enables Autoclass; if false, disables Autoclass
 #
