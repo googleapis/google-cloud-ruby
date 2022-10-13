@@ -1629,9 +1629,24 @@ module Google
         #   @return [::Google::Cloud::Container::V1beta1::WorkloadConfig]
         #     WorkloadConfig defines which actions are enabled for a cluster's workload
         #     configurations.
+        # @!attribute [rw] workload_vulnerability_mode
+        #   @return [::Google::Cloud::Container::V1beta1::ProtectConfig::WorkloadVulnerabilityMode]
+        #     Sets which mode to use for Protect workload vulnerability scanning feature.
         class ProtectConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # WorkloadVulnerabilityMode defines mode to perform vulnerability scanning.
+          module WorkloadVulnerabilityMode
+            # Default value not specified.
+            WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED = 0
+
+            # Disables Workload Vulnerability Scanning feature on the cluster.
+            DISABLED = 1
+
+            # Applies basic vulnerability scanning settings for cluster workloads.
+            BASIC = 2
+          end
         end
 
         # Subset of Nodepool message that has defaults.

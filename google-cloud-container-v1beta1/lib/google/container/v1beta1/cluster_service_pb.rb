@@ -381,6 +381,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.container.v1beta1.ProtectConfig" do
       proto3_optional :workload_config, :message, 1, "google.container.v1beta1.WorkloadConfig"
+      proto3_optional :workload_vulnerability_mode, :enum, 2, "google.container.v1beta1.ProtectConfig.WorkloadVulnerabilityMode"
+    end
+    add_enum "google.container.v1beta1.ProtectConfig.WorkloadVulnerabilityMode" do
+      value :WORKLOAD_VULNERABILITY_MODE_UNSPECIFIED, 0
+      value :DISABLED, 1
+      value :BASIC, 2
     end
     add_message "google.container.v1beta1.NodePoolDefaults" do
       optional :node_config_defaults, :message, 1, "google.container.v1beta1.NodeConfigDefaults"
@@ -1321,6 +1327,7 @@ module Google
         WorkloadConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.WorkloadConfig").msgclass
         WorkloadConfig::Mode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.WorkloadConfig.Mode").enummodule
         ProtectConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ProtectConfig").msgclass
+        ProtectConfig::WorkloadVulnerabilityMode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.ProtectConfig.WorkloadVulnerabilityMode").enummodule
         NodePoolDefaults = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodePoolDefaults").msgclass
         NodeConfigDefaults = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodeConfigDefaults").msgclass
         NodePoolAutoConfig = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1beta1.NodePoolAutoConfig").msgclass
