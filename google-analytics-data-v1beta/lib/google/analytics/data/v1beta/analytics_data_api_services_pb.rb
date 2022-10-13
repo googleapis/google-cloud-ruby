@@ -40,6 +40,10 @@ module Google
             # measurements of user activity on your property, such as active users or
             # event count. Dimensions break down metrics across some common criteria,
             # such as country or event name.
+            #
+            # For a guide to constructing requests & understanding responses, see
+            # [Creating a
+            # Report](https://developers.google.com/analytics/devguides/reporting/data/v1/basics).
             rpc :RunReport, ::Google::Analytics::Data::V1beta::RunReportRequest, ::Google::Analytics::Data::V1beta::RunReportResponse
             # Returns a customized pivot report of your Google Analytics event data.
             # Pivot reports are more advanced and expressive formats than regular
@@ -64,9 +68,15 @@ module Google
             # `customEvent:levels_unlocked`. Universal metadata are dimensions and
             # metrics applicable to any property such as `country` and `totalUsers`.
             rpc :GetMetadata, ::Google::Analytics::Data::V1beta::GetMetadataRequest, ::Google::Analytics::Data::V1beta::Metadata
-            # The Google Analytics Realtime API returns a customized report of realtime
-            # event data for your property. These reports show events and usage from the
-            # last 30 minutes.
+            # Returns a customized report of realtime event data for your property.
+            # Events appear in realtime reports seconds after they have been sent to
+            # the Google Analytics. Realtime reports show events and usage data for the
+            # periods of time ranging from the present moment to 30 minutes ago (up to
+            # 60 minutes for Google Analytics 360 properties).
+            #
+            # For a guide to constructing realtime requests & understanding responses,
+            # see [Creating a Realtime
+            # Report](https://developers.google.com/analytics/devguides/reporting/data/v1/realtime-basics).
             rpc :RunRealtimeReport, ::Google::Analytics::Data::V1beta::RunRealtimeReportRequest, ::Google::Analytics::Data::V1beta::RunRealtimeReportResponse
             # This compatibility method lists dimensions and metrics that can be added to
             # a report request and maintain compatibility. This method fails if the

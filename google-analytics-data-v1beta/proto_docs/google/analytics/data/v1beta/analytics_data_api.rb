@@ -122,8 +122,8 @@ module Google
         #     for examples. Metrics cannot be used in this filter.
         # @!attribute [rw] metric_filter
         #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
-        #     The filter clause of metrics. Applied at post aggregation phase, similar to
-        #     SQL having-clause. Dimensions cannot be used in this filter.
+        #     The filter clause of metrics. Applied after aggregating the report's rows,
+        #     similar to SQL having-clause. Dimensions cannot be used in this filter.
         # @!attribute [rw] offset
         #   @return [::Integer]
         #     The row count of the start row. The first row is counted as row 0.
@@ -467,13 +467,11 @@ module Google
         #     The metrics requested and displayed.
         # @!attribute [rw] dimension_filter
         #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
-        #     The filter clause of dimensions. Dimensions must be requested to be used in
-        #     this filter. Metrics cannot be used in this filter.
+        #     The filter clause of dimensions. Metrics cannot be used in this filter.
         # @!attribute [rw] metric_filter
         #   @return [::Google::Analytics::Data::V1beta::FilterExpression]
         #     The filter clause of metrics. Applied at post aggregation phase, similar to
-        #     SQL having-clause. Metrics must be requested to be used in this filter.
-        #     Dimensions cannot be used in this filter.
+        #     SQL having-clause. Dimensions cannot be used in this filter.
         # @!attribute [rw] limit
         #   @return [::Integer]
         #     The number of rows to return. If unspecified, 10,000 rows are returned. The
