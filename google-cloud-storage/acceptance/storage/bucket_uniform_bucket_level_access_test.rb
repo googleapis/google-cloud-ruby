@@ -29,12 +29,16 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   let(:user_val) { "user-test@example.com" }
 
+  before do
+    sleep 1
+  end
+
   after do
     # always reset the uniform_bucket_level_access and public_access_prevention
     # always reset the bucket permissions
-    bucket.uniform_bucket_level_access = false if bucket.uniform_bucket_level_access?
-    bucket.public_access_prevention = :inherited if bucket.public_access_prevention_enforced?
-    bucket.default_acl.private!
+    safe_gcs_execute { bucket.uniform_bucket_level_access = false if bucket.uniform_bucket_level_access? }
+    safe_gcs_execute { bucket.public_access_prevention = :inherited if bucket.public_access_prevention_enforced? }
+    safe_gcs_execute { bucket.default_acl.private! }
     bucket.files.all { |f| f.delete rescue nil }
   end
 
@@ -160,7 +164,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
 
   it "sets DEPRECATED policy_only true and is unable to modify default ACL rules" do
     refute bucket.policy_only?
-    bucket.policy_only = true
+    safe_gcs_execute { bucket.policy_only = true }
     assert bucket.policy_only?
 
     err = expect do
@@ -241,7 +245,7 @@ describe Google::Cloud::Storage::Bucket, :uniform_bucket_level_access, :storage 
       bucket.public_access_prevention = "BAD VALUE"
     end.must_raise Google::Cloud::InvalidArgumentError
     # Verify the setting can be patched to enforced.
-    bucket.public_access_prevention = :enforced
+    safe_gcs_execute { bucket.public_access_prevention = :enforced }
     assert bucket.public_access_prevention_enforced?
     _(bucket.public_access_prevention).must_equal "enforced"
     # If PAP is enforced on a bucket, making the bucket public fails with a 412.
