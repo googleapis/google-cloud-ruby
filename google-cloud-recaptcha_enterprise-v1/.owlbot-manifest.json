@@ -39,6 +39,7 @@
     "snippets/recaptcha_enterprise_service/list_related_account_group_memberships.rb",
     "snippets/recaptcha_enterprise_service/list_related_account_groups.rb",
     "snippets/recaptcha_enterprise_service/migrate_key.rb",
+    "snippets/recaptcha_enterprise_service/retrieve_legacy_secret_key.rb",
     "snippets/recaptcha_enterprise_service/search_related_account_group_memberships.rb",
     "snippets/recaptcha_enterprise_service/update_key.rb",
     "snippets/snippet_metadata_google.cloud.recaptchaenterprise.v1.json",

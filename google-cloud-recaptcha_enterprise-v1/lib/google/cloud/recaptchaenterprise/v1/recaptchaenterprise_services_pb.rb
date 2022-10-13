@@ -42,6 +42,10 @@ module Google
             rpc :CreateKey, ::Google::Cloud::RecaptchaEnterprise::V1::CreateKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
             # Returns the list of all keys that belong to a project.
             rpc :ListKeys, ::Google::Cloud::RecaptchaEnterprise::V1::ListKeysRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListKeysResponse
+            # Returns the secret key related to the specified public key.
+            # You must use the legacy secret key only in a 3rd party integration with
+            # legacy reCAPTCHA.
+            rpc :RetrieveLegacySecretKey, ::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyResponse
             # Returns the specified key.
             rpc :GetKey, ::Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Key
             # Updates the specified key.
@@ -60,7 +64,7 @@ module Google
             rpc :GetMetrics, ::Google::Cloud::RecaptchaEnterprise::V1::GetMetricsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::Metrics
             # List groups of related accounts.
             rpc :ListRelatedAccountGroups, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupsResponse
-            # Get the memberships in a group of related accounts.
+            # Get memberships in a group of related accounts.
             rpc :ListRelatedAccountGroupMemberships, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupMembershipsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::ListRelatedAccountGroupMembershipsResponse
             # Search group memberships related to a given account.
             rpc :SearchRelatedAccountGroupMemberships, ::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest, ::Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsResponse

@@ -172,6 +172,46 @@
       ]
     },
     {
+      "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_RetrieveLegacySecretKey_sync",
+      "title": "Snippet for retrieve_legacy_secret_key in RecaptchaEnterpriseService",
+      "description": "Basic snippet for retrieve_legacy_secret_key in RecaptchaEnterpriseService",
+      "file": "recaptcha_enterprise_service/retrieve_legacy_secret_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "retrieve_legacy_secret_key",
+        "full_name": "::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#retrieve_legacy_secret_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::RecaptchaEnterprise::V1::RetrieveLegacySecretKeyResponse",
+        "client": {
+          "short_name": "RecaptchaEnterpriseService::Client",
+          "full_name": "::Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client"
+        },
+        "method": {
+          "short_name": "RetrieveLegacySecretKey",
+          "full_name": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService.RetrieveLegacySecretKey",
+          "service": {
+            "short_name": "RecaptchaEnterpriseService",
+            "full_name": "google.cloud.recaptchaenterprise.v1.RecaptchaEnterpriseService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_sync",
       "title": "Snippet for get_key in RecaptchaEnterpriseService",
       "description": "Basic snippet for get_key in RecaptchaEnterpriseService",
