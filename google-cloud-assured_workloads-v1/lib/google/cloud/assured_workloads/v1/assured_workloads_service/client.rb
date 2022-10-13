@@ -560,7 +560,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the Workload to fetch. This is the workloads's
+            #     Required. The resource name of the Workload to fetch. This is the workload's
             #     relative path in the API, formatted as
             #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
             #     For example,
@@ -938,7 +938,8 @@ module Google
             #   @param comment [::String]
             #     Required. Business justification explaining the need for violation acknowledgement
             #   @param non_compliant_org_policy [::String]
-            #     Optional. Name of the OrgPolicy which was modified with non-compliant change and
+            #     Optional. This field is deprecated and will be removed in future version of the API.
+            #     Name of the OrgPolicy which was modified with non-compliant change and
             #     resulted in this violation.
             #     Format:
             #     projects/\\{project_number}/policies/\\{constraint_name}

@@ -107,6 +107,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EU_REGIONS_AND_SUPPORT, 8
       value :CA_REGIONS_AND_SUPPORT, 9
       value :ITAR, 10
+      value :AU_REGIONS_AND_US_SUPPORT, 11
       value :ASSURED_WORKLOADS_FOR_PARTNERS, 12
     end
     add_enum "google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState" do
@@ -174,6 +175,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :remediation, :message, 13, "google.cloud.assuredworkloads.v1.Violation.Remediation"
       optional :acknowledged, :bool, 14
       proto3_optional :acknowledgement_time, :message, 15, "google.protobuf.Timestamp"
+      optional :exception_audit_log_link, :string, 16
     end
     add_message "google.cloud.assuredworkloads.v1.Violation.Remediation" do
       optional :instructions, :message, 1, "google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions"
