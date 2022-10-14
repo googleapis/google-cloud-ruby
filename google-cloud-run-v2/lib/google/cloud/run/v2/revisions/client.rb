@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/run/v2/revision_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -139,6 +140,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @revisions_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Run::V2::Revisions::Stub,
                 credentials:  credentials,
@@ -154,6 +161,13 @@ module Google
             # @return [::Google::Cloud::Run::V2::Revisions::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 

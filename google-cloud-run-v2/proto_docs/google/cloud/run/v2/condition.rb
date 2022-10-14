@@ -191,6 +191,9 @@ module Google
             # A task reached its retry limit and the last attempt failed due to the
             # user container exiting with a non-zero exit code.
             NON_ZERO_EXIT_CODE = 2
+
+            # The execution was cancelled by users.
+            CANCELLED = 3
           end
         end
       end

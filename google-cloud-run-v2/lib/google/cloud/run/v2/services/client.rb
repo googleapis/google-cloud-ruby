@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/cloud/run/v2/service_pb"
+require "google/cloud/location"
 
 module Google
   module Cloud
@@ -155,6 +156,12 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @services_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Run::V2::Services::Stub,
                 credentials:  credentials,
@@ -170,6 +177,13 @@ module Google
             # @return [::Google::Cloud::Run::V2::Services::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
 
             # Service calls
 
@@ -192,13 +206,15 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The location and project in which this service should be created.
-            #     Format: projects/\\{projectnumber}/locations/\\{location}
+            #     The location and project in which this service should be created.
+            #     Format: projects/\\{project}/locations/\\{location}
+            #     Only lowercase characters, digits, and hyphens.
             #   @param service [::Google::Cloud::Run::V2::Service, ::Hash]
             #     Required. The Service instance to create.
             #   @param service_id [::String]
-            #     Required. The unique identifier for the Service. The name of the service becomes
-            #     \\{parent}/services/\\{service_id}.
+            #     Required. The unique identifier for the Service. It must begin with letter,
+            #     and may not end with hyphen; must contain fewer than 50 characters.
+            #     The name of the service becomes \\{parent}/services/\\{service_id}.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated and default values
             #     populated, without persisting the request or creating any resources.
@@ -298,7 +314,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The full name of the Service.
-            #     Format: projects/\\{projectnumber}/locations/\\{location}/services/\\{service}
+            #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Run::V2::Service]
@@ -388,7 +404,7 @@ module Google
             #   @param parent [::String]
             #     Required. The location and project to list resources on.
             #     Location must be a valid GCP region, and may not be the "-" wildcard.
-            #     Format: projects/\\{projectnumber}/locations/\\{location}
+            #     Format: projects/\\{project}/locations/\\{location}
             #   @param page_size [::Integer]
             #     Maximum number of Services to return in this call.
             #   @param page_token [::String]
@@ -596,7 +612,7 @@ module Google
             #
             #   @param name [::String]
             #     Required. The full name of the Service.
-            #     Format: projects/\\{projectnumber}/locations/\\{location}/services/\\{service}
+            #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated without actually
             #     deleting any resources.
