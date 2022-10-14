@@ -112,10 +112,9 @@ module Google
 
         def list_logs resource: nil, token: nil, max: nil
           parent = resource || "projects/#{@project}"
-          paged_enum = logging.list_logs parent:     parent,
+          logging.list_logs parent:     parent,
                                          page_size:  max,
                                          page_token: token
-          paged_enum.response
         end
 
         def delete_log name
