@@ -80,7 +80,7 @@ module Google
                   initial_delay: 0.1, max_delay: 60.0, multiplier: 1.3, retry_codes: [4, 14]
                 }
 
-                default_config.rpcs.create_submission.timeout = 60.0
+                default_config.rpcs.create_submission.timeout = 600.0
 
                 default_config
               end
@@ -186,7 +186,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param threat_type [::Google::Cloud::WebRisk::V1::ThreatType]
-            #     Required. The threat list to update. Only a single ThreatType should be specified.
+            #     Required. The threat list to update. Only a single ThreatType should be specified
+            #     per request. If you want to handle multiple ThreatTypes, you must make one
+            #     request per ThreatType.
             #   @param version_token [::String]
             #     The current version token of the client for the requested list (the
             #     client version that was received from the last successful diff).
@@ -360,6 +362,8 @@ module Google
             #   @param hash_prefix [::String]
             #     A hash prefix, consisting of the most significant 4-32 bytes of a SHA256
             #     hash. For JSON requests, this field is base64-encoded.
+            #     Note that if this parameter is provided by a URI, it must be encoded using
+            #     the web safe base64 variant (RFC 4648).
             #   @param threat_types [::Array<::Google::Cloud::WebRisk::V1::ThreatType>]
             #     Required. The ThreatLists to search in. Multiple ThreatLists may be specified.
             #
@@ -425,7 +429,8 @@ module Google
             # content, the site will be added to the [Google's Social Engineering
             # lists](https://support.google.com/webmasters/answer/6350487/) in order to
             # protect users that could get exposed to this threat in the future. Only
-            # projects with CREATE_SUBMISSION_USERS visibility can use this method.
+            # allowlisted projects can use this method during Early Access. Please reach
+            # out to Sales or your customer engineer to obtain access.
             #
             # @overload create_submission(request, options = nil)
             #   Pass arguments to `create_submission` via a request object, either of type
