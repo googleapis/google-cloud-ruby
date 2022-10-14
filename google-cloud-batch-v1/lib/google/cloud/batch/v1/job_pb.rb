@@ -74,6 +74,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.batch.v1.AllocationPolicy" do
       optional :location, :message, 1, "google.cloud.batch.v1.AllocationPolicy.LocationPolicy"
       repeated :instances, :message, 8, "google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate"
+      optional :service_account, :message, 9, "google.cloud.batch.v1.ServiceAccount"
       map :labels, :string, :string, 6
       optional :network, :message, 7, "google.cloud.batch.v1.AllocationPolicy.NetworkPolicy"
     end
@@ -109,6 +110,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :disks, :message, 6, "google.cloud.batch.v1.AllocationPolicy.AttachedDisk"
     end
     add_message "google.cloud.batch.v1.AllocationPolicy.InstancePolicyOrTemplate" do
+      optional :install_gpu_drivers, :bool, 3
       oneof :policy_template do
         optional :policy, :message, 1, "google.cloud.batch.v1.AllocationPolicy.InstancePolicy"
         optional :instance_template, :string, 2
@@ -138,6 +140,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :require_hosts_file, :bool, 11
       optional :permissive_ssh, :bool, 12
     end
+    add_message "google.cloud.batch.v1.ServiceAccount" do
+      optional :email, :string, 1
+    end
   end
 end
 
@@ -166,6 +171,7 @@ module Google
         AllocationPolicy::NetworkPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.AllocationPolicy.NetworkPolicy").msgclass
         AllocationPolicy::ProvisioningModel = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.AllocationPolicy.ProvisioningModel").enummodule
         TaskGroup = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.TaskGroup").msgclass
+        ServiceAccount = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.batch.v1.ServiceAccount").msgclass
       end
     end
   end
