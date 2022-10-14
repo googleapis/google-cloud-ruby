@@ -113,8 +113,8 @@ module Google
         def list_logs resource: nil, token: nil, max: nil
           parent = resource || "projects/#{@project}"
           logging.list_logs parent:     parent,
-                                         page_size:  max,
-                                         page_token: token
+                            page_size:  max,
+                            page_token: token
         end
 
         def delete_log name
