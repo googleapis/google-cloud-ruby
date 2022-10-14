@@ -567,7 +567,7 @@ describe Google::Cloud::PubSub::FlowController, :mock_pubsub do
           flow_controller.send action, msg
         end
         all_done_event.set
-      rescue FlowControlLimitError => e
+      rescue Google::Cloud::PubSub::FlowControlLimitError => e
         error_event.set if error_event
       end
     end
