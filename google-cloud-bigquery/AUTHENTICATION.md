@@ -120,8 +120,6 @@ Developers service account.
 1. Activate the menu in the upper left and select **APIs & Services**. From
    here, you will enable the APIs that your application requires.
 
-   ![Enable the APIs that your application requires][enable-apis]
-
    *Note: You may need to enable billing in order to use these services.*
 
 1. Select **Credentials** from the side navigation.
