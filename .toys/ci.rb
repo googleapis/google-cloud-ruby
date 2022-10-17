@@ -60,6 +60,9 @@ end
 flag :failures_report, "--failures-report[=PATH]" do |f|
   f.desc "Generate failures report file"
 end
+flag :bundle_retry, "--bundle-retry=RETRIES", accept: Integer, default: 3 do |f|
+  f.desc "Number of times to retry bundler network operations (default: 3)"
+end
 
 at_least_one_required desc: "Tasks" do
   flag :do_bundle, "--[no-]bundle" do |f|
@@ -300,7 +303,7 @@ def run_in_dir dir
     if @bundle_task
       puts
       puts "#{dir}: bundle ...", :bold, :cyan
-      result = exec ["bundle", @bundle_task]
+      result = exec ["bundle", @bundle_task, "--retry=#{bundle_retry}"]
       unless result.success?
         @errors << [dir, "bundle"]
         next
