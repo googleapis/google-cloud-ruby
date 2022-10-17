@@ -7,28 +7,22 @@ require 'google/protobuf/duration_pb'
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/bigtable/v2/request_stats.proto", :syntax => :proto3) do
-    add_message "google.bigtable.v2.ReadIteratorStats" do
+    add_message "google.bigtable.v2.ReadIterationStats" do
       optional :rows_seen_count, :int64, 1
       optional :rows_returned_count, :int64, 2
       optional :cells_seen_count, :int64, 3
       optional :cells_returned_count, :int64, 4
-      optional :deletes_seen_count, :int64, 5
     end
     add_message "google.bigtable.v2.RequestLatencyStats" do
       optional :frontend_server_latency, :message, 1, "google.protobuf.Duration"
     end
-    add_message "google.bigtable.v2.ReadEfficiencyStats" do
-      optional :read_iterator_stats, :message, 1, "google.bigtable.v2.ReadIteratorStats"
-      optional :request_latency_stats, :message, 2, "google.bigtable.v2.RequestLatencyStats"
-    end
-    add_message "google.bigtable.v2.AllReadStats" do
-      optional :read_iterator_stats, :message, 1, "google.bigtable.v2.ReadIteratorStats"
+    add_message "google.bigtable.v2.FullReadStatsView" do
+      optional :read_iteration_stats, :message, 1, "google.bigtable.v2.ReadIterationStats"
       optional :request_latency_stats, :message, 2, "google.bigtable.v2.RequestLatencyStats"
     end
     add_message "google.bigtable.v2.RequestStats" do
-      oneof :stats do
-        optional :read_efficiency_stats, :message, 1, "google.bigtable.v2.ReadEfficiencyStats"
-        optional :all_read_stats, :message, 2, "google.bigtable.v2.AllReadStats"
+      oneof :stats_view do
+        optional :full_read_stats_view, :message, 1, "google.bigtable.v2.FullReadStatsView"
       end
     end
   end
@@ -38,10 +32,9 @@ module Google
   module Cloud
     module Bigtable
       module V2
-        ReadIteratorStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadIteratorStats").msgclass
+        ReadIterationStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadIterationStats").msgclass
         RequestLatencyStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RequestLatencyStats").msgclass
-        ReadEfficiencyStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.ReadEfficiencyStats").msgclass
-        AllReadStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.AllReadStats").msgclass
+        FullReadStatsView = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.FullReadStatsView").msgclass
         RequestStats = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.bigtable.v2.RequestStats").msgclass
       end
     end

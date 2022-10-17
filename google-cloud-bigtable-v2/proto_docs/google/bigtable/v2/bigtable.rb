@@ -61,12 +61,9 @@ module Google
             # RequestStats embedded message unset in the response.
             REQUEST_STATS_NONE = 1
 
-            # Include stats related to the efficiency of the read.
-            REQUEST_STATS_EFFICIENCY = 2
-
             # Include the full set of available RequestStats in the response,
             # applicable to this read.
-            REQUEST_STATS_FULL = 3
+            REQUEST_STATS_FULL = 2
           end
         end
 
@@ -212,8 +209,8 @@ module Google
         # Request message for Bigtable.MutateRow.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the mutation should be
-        #     applied. Values are of the form
+        #     Required. The unique name of the table to which the mutation should be applied.
+        #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
@@ -224,9 +221,9 @@ module Google
         #     Required. The key of the row to which the mutation should be applied.
         # @!attribute [rw] mutations
         #   @return [::Array<::Google::Cloud::Bigtable::V2::Mutation>]
-        #     Required. Changes to be atomically applied to the specified row. Entries
-        #     are applied in order, meaning that earlier mutations can be masked by later
-        #     ones. Must contain at least one entry and at most 100000.
+        #     Required. Changes to be atomically applied to the specified row. Entries are applied
+        #     in order, meaning that earlier mutations can be masked by later ones.
+        #     Must contain at least one entry and at most 100000.
         class MutateRowRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -241,8 +238,7 @@ module Google
         # Request message for BigtableService.MutateRows.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the mutations should be
-        #     applied.
+        #     Required. The unique name of the table to which the mutations should be applied.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -264,9 +260,10 @@ module Google
           #     The key of the row to which the `mutations` should be applied.
           # @!attribute [rw] mutations
           #   @return [::Array<::Google::Cloud::Bigtable::V2::Mutation>]
-          #     Required. Changes to be atomically applied to the specified row.
-          #     Mutations are applied in order, meaning that earlier mutations can be
-          #     masked by later ones. You must specify at least one mutation.
+          #     Required. Changes to be atomically applied to the specified row. Mutations are
+          #     applied in order, meaning that earlier mutations can be masked by
+          #     later ones.
+          #     You must specify at least one mutation.
           class Entry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -301,8 +298,9 @@ module Google
         # Request message for Bigtable.CheckAndMutateRow.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the conditional mutation
-        #     should be applied. Values are of the form
+        #     Required. The unique name of the table to which the conditional mutation should be
+        #     applied.
+        #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
@@ -310,8 +308,7 @@ module Google
         #     "default" application profile will be used.
         # @!attribute [rw] row_key
         #   @return [::String]
-        #     Required. The key of the row to which the conditional mutation should be
-        #     applied.
+        #     Required. The key of the row to which the conditional mutation should be applied.
         # @!attribute [rw] predicate_filter
         #   @return [::Google::Cloud::Bigtable::V2::RowFilter]
         #     The filter to be applied to the contents of the specified row. Depending
@@ -350,9 +347,8 @@ module Google
         # Request message for client connection keep-alive and warming.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The unique name of the instance to check permissions for as well
-        #     as respond. Values are of the form
-        #     `projects/<project>/instances/<instance>`.
+        #     Required. The unique name of the instance to check permissions for as well as
+        #     respond. Values are of the form `projects/<project>/instances/<instance>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
         #     This value specifies routing for replication. If not specified, the
@@ -371,8 +367,9 @@ module Google
         # Request message for Bigtable.ReadModifyWriteRow.
         # @!attribute [rw] table_name
         #   @return [::String]
-        #     Required. The unique name of the table to which the read/modify/write rules
-        #     should be applied. Values are of the form
+        #     Required. The unique name of the table to which the read/modify/write rules should be
+        #     applied.
+        #     Values are of the form
         #     `projects/<project>/instances/<instance>/tables/<table>`.
         # @!attribute [rw] app_profile_id
         #   @return [::String]
@@ -380,13 +377,12 @@ module Google
         #     "default" application profile will be used.
         # @!attribute [rw] row_key
         #   @return [::String]
-        #     Required. The key of the row to which the read/modify/write rules should be
-        #     applied.
+        #     Required. The key of the row to which the read/modify/write rules should be applied.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Bigtable::V2::ReadModifyWriteRule>]
-        #     Required. Rules specifying how the specified row's contents are to be
-        #     transformed into writes. Entries are applied in order, meaning that earlier
-        #     rules will affect the results of later ones.
+        #     Required. Rules specifying how the specified row's contents are to be transformed
+        #     into writes. Entries are applied in order, meaning that earlier rules will
+        #     affect the results of later ones.
         class ReadModifyWriteRowRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

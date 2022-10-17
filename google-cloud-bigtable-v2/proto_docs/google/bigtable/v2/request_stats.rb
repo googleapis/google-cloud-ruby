@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Bigtable
       module V2
-        # ReadIteratorStats captures information about the iteration of rows or cells
+        # ReadIterationStats captures information about the iteration of rows or cells
         # over the course of a read, e.g. how many results were scanned in a read
         # operation versus the results returned.
         # @!attribute [rw] rows_seen_count
@@ -38,10 +38,7 @@ module Google
         # @!attribute [rw] cells_returned_count
         #   @return [::Integer]
         #     The cells returned as part of the request.
-        # @!attribute [rw] deletes_seen_count
-        #   @return [::Integer]
-        #     The deletes seen as part of the request.
-        class ReadIteratorStats
+        class ReadIterationStats
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -61,14 +58,21 @@ module Google
         #     (https://cloud.google.com/bigtable/docs/monitoring-instance) as this value
         #     needs to be sent in the response before the latency measurement including
         #     that transmission is finalized.
+        #
+        #     Note: This value includes the end-to-end latency of contacting nodes in
+        #     the targeted cluster, e.g. measuring from when the first byte arrives at
+        #     the frontend server, to when this value is sent back as the last value in
+        #     the response, including any latency incurred by contacting nodes, waiting
+        #     for results from nodes, and finally sending results from nodes back to the
+        #     caller.
         class RequestLatencyStats
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # ReadEfficiencyStats captures information about the efficiency of a read.
-        # @!attribute [rw] read_iterator_stats
-        #   @return [::Google::Cloud::Bigtable::V2::ReadIteratorStats]
+        # FullReadStatsView captures all known information about a read.
+        # @!attribute [rw] read_iteration_stats
+        #   @return [::Google::Cloud::Bigtable::V2::ReadIterationStats]
         #     Iteration stats describe how efficient the read is, e.g. comparing
         #     rows seen vs. rows returned or cells seen vs cells returned can provide an
         #     indication of read efficiency (the higher the ratio of seen to retuned the
@@ -77,23 +81,7 @@ module Google
         #   @return [::Google::Cloud::Bigtable::V2::RequestLatencyStats]
         #     Request latency stats describe the time taken to complete a request, from
         #     the server side.
-        class ReadEfficiencyStats
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # AllReadStats captures all known information about a read.
-        # @!attribute [rw] read_iterator_stats
-        #   @return [::Google::Cloud::Bigtable::V2::ReadIteratorStats]
-        #     Iteration stats describe how efficient the read is, e.g. comparing
-        #     rows seen vs. rows returned or cells seen vs cells returned can provide an
-        #     indication of read efficiency (the higher the ratio of seen to retuned the
-        #     better).
-        # @!attribute [rw] request_latency_stats
-        #   @return [::Google::Cloud::Bigtable::V2::RequestLatencyStats]
-        #     Request latency stats describe the time taken to complete a request, from
-        #     the server side.
-        class AllReadStats
+        class FullReadStatsView
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -102,13 +90,8 @@ module Google
         # single request, helpful for evaluating the performance of the sent request.
         # Currently, there are the following supported methods:
         #   * google.bigtable.v2.ReadRows
-        # @!attribute [rw] read_efficiency_stats
-        #   @return [::Google::Cloud::Bigtable::V2::ReadEfficiencyStats]
-        #     Available with the
-        #     ReadRowsRequest.RequestStatsView.REQUEST_STATS_EFFICIENCY view, see
-        #     package google.bigtable.v2.
-        # @!attribute [rw] all_read_stats
-        #   @return [::Google::Cloud::Bigtable::V2::AllReadStats]
+        # @!attribute [rw] full_read_stats_view
+        #   @return [::Google::Cloud::Bigtable::V2::FullReadStatsView]
         #     Available with the ReadRowsRequest.RequestStatsView.REQUEST_STATS_FULL
         #     view, see package google.bigtable.v2.
         class RequestStats
