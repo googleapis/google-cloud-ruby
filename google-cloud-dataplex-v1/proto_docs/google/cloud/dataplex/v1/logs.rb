@@ -241,7 +241,8 @@ module Google
         #     The log message.
         # @!attribute [rw] user_id
         #   @return [::String]
-        #     The information about the user that created the session.
+        #     The information about the user that created the session. It will be the
+        #     email address of the user.
         # @!attribute [rw] session_id
         #   @return [::String]
         #     Unique identifier for the session.
@@ -251,6 +252,16 @@ module Google
         # @!attribute [rw] query
         #   @return [::Google::Cloud::Dataplex::V1::SessionEvent::QueryDetail]
         #     The execution details of the query.
+        # @!attribute [rw] event_succeeded
+        #   @return [::Boolean]
+        #     The status of the event.
+        # @!attribute [rw] fast_startup_enabled
+        #   @return [::Boolean]
+        #     If the session is associated with an Environment with fast startup enabled,
+        #     and was pre-created before being assigned to a user.
+        # @!attribute [rw] unassigned_duration
+        #   @return [::Google::Protobuf::Duration]
+        #     The idle duration of a warm pooled session before it is assigned to user.
         class SessionEvent
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -296,7 +307,7 @@ module Google
             # An unspecified event type.
             EVENT_TYPE_UNSPECIFIED = 0
 
-            # Event for start of a session.
+            # Event when the session is assigned to a user.
             START = 1
 
             # Event for stop of a session.
@@ -304,6 +315,10 @@ module Google
 
             # Query events in the session.
             QUERY = 3
+
+            # Event for creation of a cluster. It is not yet assigned to a user.
+            # This comes before START in the sequence
+            CREATE = 4
           end
         end
       end

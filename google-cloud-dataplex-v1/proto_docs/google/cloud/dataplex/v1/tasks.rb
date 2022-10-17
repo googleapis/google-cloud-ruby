@@ -61,6 +61,9 @@ module Google
         # @!attribute [rw] spark
         #   @return [::Google::Cloud::Dataplex::V1::Task::SparkTaskConfig]
         #     Config related to running custom Spark tasks.
+        # @!attribute [rw] notebook
+        #   @return [::Google::Cloud::Dataplex::V1::Task::NotebookTaskConfig]
+        #     Config related to running scheduled Notebooks.
         class Task
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -281,6 +284,30 @@ module Google
           #   @return [::Google::Cloud::Dataplex::V1::Task::InfrastructureSpec]
           #     Optional. Infrastructure specification for the execution.
           class SparkTaskConfig
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Config for running scheduled notebooks.
+          # @!attribute [rw] notebook
+          #   @return [::String]
+          #     Required. Path to input notebook. This can be the Cloud Storage URI of the notebook
+          #     file or the path to a Notebook Content. The execution args are accessible
+          #     as environment variables
+          #     (`TASK_key=value`).
+          # @!attribute [rw] infrastructure_spec
+          #   @return [::Google::Cloud::Dataplex::V1::Task::InfrastructureSpec]
+          #     Optional. Infrastructure specification for the execution.
+          # @!attribute [rw] file_uris
+          #   @return [::Array<::String>]
+          #     Optional. Cloud Storage URIs of files to be placed in the working directory of each
+          #     executor.
+          # @!attribute [rw] archive_uris
+          #   @return [::Array<::String>]
+          #     Optional. Cloud Storage URIs of archives to be extracted into the working directory
+          #     of each executor. Supported file types: .jar, .tar, .tar.gz, .tgz, and
+          #     .zip.
+          class NotebookTaskConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
