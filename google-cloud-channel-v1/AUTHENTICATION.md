@@ -27,7 +27,7 @@ export CHANNEL_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/channel/v1"
 
-client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new
+client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-channel-v1
 checks for credentials are configured on the service Credentials class (such as
-{::Google::Cloud::Channel::V1::CloudChannelService::Credentials}):
+{::Google::Cloud::Channel::V1::CloudChannelReportsService::Credentials}):
 
 * `CHANNEL_CREDENTIALS` - Path to JSON file, or JSON contents
 * `CHANNEL_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/channel/v1"
 
 ENV["CHANNEL_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new
+client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/channel/v1"
 
-client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new do |config|
+client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or globally for all clients:
 ```ruby
 require "google/cloud/channel/v1"
 
-::Google::Cloud::Channel::V1::CloudChannelService::Client.configure do |config|
+::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new
+client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
 ```
 
 ### Cloud SDK

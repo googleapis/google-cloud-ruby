@@ -12,6 +12,126 @@
   },
   "snippets": [
     {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_RunReportJob_sync",
+      "title": "Snippet for run_report_job in CloudChannelReportsService",
+      "description": "Basic snippet for run_report_job in CloudChannelReportsService",
+      "file": "cloud_channel_reports_service/run_report_job.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_report_job",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#run_report_job",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::RunReportJobRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudChannelReportsService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client"
+        },
+        "method": {
+          "short_name": "RunReportJob",
+          "full_name": "google.cloud.channel.v1.CloudChannelReportsService.RunReportJob",
+          "service": {
+            "short_name": "CloudChannelReportsService",
+            "full_name": "google.cloud.channel.v1.CloudChannelReportsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 39,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_FetchReportResults_sync",
+      "title": "Snippet for fetch_report_results in CloudChannelReportsService",
+      "description": "Basic snippet for fetch_report_results in CloudChannelReportsService",
+      "file": "cloud_channel_reports_service/fetch_report_results.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "fetch_report_results",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::FetchReportResultsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::FetchReportResultsResponse",
+        "client": {
+          "short_name": "CloudChannelReportsService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client"
+        },
+        "method": {
+          "short_name": "FetchReportResults",
+          "full_name": "google.cloud.channel.v1.CloudChannelReportsService.FetchReportResults",
+          "service": {
+            "short_name": "CloudChannelReportsService",
+            "full_name": "google.cloud.channel.v1.CloudChannelReportsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "cloudchannel_v1_generated_CloudChannelReportsService_ListReports_sync",
+      "title": "Snippet for list_reports in CloudChannelReportsService",
+      "description": "Basic snippet for list_reports in CloudChannelReportsService",
+      "file": "cloud_channel_reports_service/list_reports.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "list_reports",
+        "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client#list_reports",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Channel::V1::ListReportsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Channel::V1::ListReportsResponse",
+        "client": {
+          "short_name": "CloudChannelReportsService::Client",
+          "full_name": "::Google::Cloud::Channel::V1::CloudChannelReportsService::Client"
+        },
+        "method": {
+          "short_name": "ListReports",
+          "full_name": "google.cloud.channel.v1.CloudChannelReportsService.ListReports",
+          "service": {
+            "short_name": "CloudChannelReportsService",
+            "full_name": "google.cloud.channel.v1.CloudChannelReportsService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "cloudchannel_v1_generated_CloudChannelService_ListCustomers_sync",
       "title": "Snippet for list_customers in CloudChannelService",
       "description": "Basic snippet for list_customers in CloudChannelService",

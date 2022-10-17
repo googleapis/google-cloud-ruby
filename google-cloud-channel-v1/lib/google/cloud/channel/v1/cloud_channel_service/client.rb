@@ -1221,7 +1221,7 @@ module Google
             #     {::Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_skus CloudChannelService.ListTransferableSkus} call.
             #     Optional.
             #   @param auth_token [::String]
-            #     The super admin of the resold customer generates this token to
+            #     Optional. The super admin of the resold customer generates this token to
             #     authorize a reseller to access their Cloud Identity and purchase
             #     entitlements on their behalf. You can omit this token after authorization.
             #     See https://support.google.com/a/answer/7643790 for more details.
@@ -1314,7 +1314,8 @@ module Google
             #
             # * PERMISSION_DENIED:
             #     * The customer doesn't belong to the reseller and has no auth token.
-            #     * The supplied auth token is invalid.
+            #     * The customer provided incorrect reseller information when generating
+            #     auth token.
             #     * The reseller account making the request is different
             #     from the reseller account in the query.
             # * INVALID_ARGUMENT: Required request parameters are missing or invalid.
@@ -1356,7 +1357,7 @@ module Google
             #   @param sku [::String]
             #     Required. The SKU to look up Offers for.
             #   @param language_code [::String]
-            #     The BCP-47 language code. For example, "en-US". The
+            #     Optional. The BCP-47 language code. For example, "en-US". The
             #     response will localize in the corresponding language code, if specified.
             #     The default value is "en-US".
             #
