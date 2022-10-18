@@ -94,6 +94,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :MALWARE, 1
       value :SOCIAL_ENGINEERING, 2
       value :UNWANTED_SOFTWARE, 3
+      value :SOCIAL_ENGINEERING_EXTENDED_COVERAGE, 4
     end
     add_enum "google.cloud.webrisk.v1.CompressionType" do
       value :COMPRESSION_TYPE_UNSPECIFIED, 0
