@@ -271,7 +271,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(random_bucket).must_be :nil?
   end
 
-  it "creates new bucket with autoclass config and storage_class" do
+  it "does not create a new bucket when both autoclass and storage_class are specified" do
     one_off_bucket_name = "#{bucket_name}_one_off"
 
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
