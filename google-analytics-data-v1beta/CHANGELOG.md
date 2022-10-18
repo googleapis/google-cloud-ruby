@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 (2022-10-18)
+
+#### Features
+
+* add subject_to_thresholding field to ResponseMetadata type 
+* add tokens_per_project_per_hour field to PropertyQuota type 
+
 ### 0.5.0 (2022-07-01)
 
 #### Features
