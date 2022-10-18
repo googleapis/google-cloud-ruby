@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2022-10-18)
+
+#### Features
+
+* Added new searchable field "kms_keys", deprecating old field "kms_key" ([#19264](https://github.com/googleapis/google-cloud-ruby/issues/19264)) 
+
 ### 0.21.1 (2022-09-28)
 
 #### Bug Fixes
