@@ -50,8 +50,8 @@ require_relative "../storage_get_autoclass"
 require_relative "../storage_set_autoclass"
 
 describe "Buckets Snippets" do
-  let(:storage_client) { Google::Cloud::Storage.new }
-  let(:kms_key) { get_kms_key storage_client.project }
+  let(:storage_client)   { Google::Cloud::Storage.new }
+  let(:kms_key)          { get_kms_key storage_client.project }
   let(:retention_period) { rand 1..99 }
   let(:bucket) { fixture_bucket }
 
@@ -105,6 +105,7 @@ describe "Buckets Snippets" do
       assert_output "Deleted bucket: #{bucket_name}\n" do
         delete_bucket bucket_name: bucket_name
       end
+
 
       refute storage_client.bucket bucket_name
 
@@ -251,7 +252,7 @@ describe "Buckets Snippets" do
 
       # set_bucket_default_kms_key
       assert_output "Default KMS key for #{bucket.name} was set to #{kms_key}\n" do
-        set_bucket_default_kms_key bucket_name: bucket.name,
+        set_bucket_default_kms_key bucket_name:     bucket.name,
                                    default_kms_key: kms_key
       end
 
@@ -277,7 +278,7 @@ describe "Buckets Snippets" do
       assert_output "Added label #{label_key} with value #{label_value} to #{bucket.name}\n" do
         add_bucket_label bucket_name: bucket.name,
                          label_value: label_value,
-                         label_key: label_key
+                         label_key:   label_key
       end
 
       bucket.refresh!
@@ -286,7 +287,7 @@ describe "Buckets Snippets" do
       # remove_bucket_label
       assert_output "Deleted label #{label_key} from #{bucket.name}\n" do
         remove_bucket_label bucket_name: bucket.name,
-                            label_key: label_key
+                            label_key:   label_key
       end
 
       bucket.refresh!
@@ -322,7 +323,7 @@ describe "Buckets Snippets" do
     it "set_retention_policy, get_retention_policy, remove_retention_policy" do
       # set_retention_policy
       assert_output "Retention period for #{bucket.name} is now #{retention_period} seconds.\n" do
-        set_retention_policy bucket_name: bucket.name,
+        set_retention_policy bucket_name:      bucket.name,
                              retention_period: retention_period
       end
 
@@ -440,9 +441,9 @@ describe "Buckets Snippets" do
                      "and #{not_found_page} as the 404 page\n"
 
       assert_output expected_out do
-        define_bucket_website_configuration bucket_name: bucket.name,
+        define_bucket_website_configuration bucket_name:      bucket.name,
                                             main_page_suffix: main_page_suffix,
-                                            not_found_page: not_found_page
+                                            not_found_page:   not_found_page
       end
 
       bucket.refresh!
