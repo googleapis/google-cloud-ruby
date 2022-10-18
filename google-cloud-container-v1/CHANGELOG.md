@@ -1,5 +1,13 @@
 # Release History
 
+### 0.11.0 (2022-10-18)
+
+#### Features
+
+* add stacktype and IPV6AccessType to IPAllocationPolicy 
+* support cost management config 
+* support GKE backup agent config 
+
 ### 0.10.0 (2022-09-16)
 
 #### Features
