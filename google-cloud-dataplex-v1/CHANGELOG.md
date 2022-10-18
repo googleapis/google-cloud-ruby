@@ -1,5 +1,13 @@
 # Changelog
 
+### 0.5.0 (2022-10-18)
+
+#### Features
+
+* Add event_succeeded, fast_startup_enabled, unassigned_duration to SessionEvent 
+* Support notebook configurations ([#19242](https://github.com/googleapis/google-cloud-ruby/issues/19242)) 
+* Support the CREATE event type 
+
 ### 0.4.0 (2022-07-19)
 
 #### Features
