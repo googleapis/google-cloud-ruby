@@ -1,5 +1,14 @@
 # Release History
 
+### 0.7.1 (2022-10-18)
+
+#### Bug Fixes
+
+* BREAKING CHANGE: Removed RequestStats#read_efficiency_stats 
+* BREAKING CHANGE: Removed the REQUEST_STATS_EFFICIENCY RequestStatsView, and adjusted the ID of REQUEST_STATS_FULL accordingly. 
+* BREAKING CHANGE: Renamed AllReadStats to FullReadStatsView, and updated the field names in RequestStats. ([#19270](https://github.com/googleapis/google-cloud-ruby/issues/19270)) 
+* BREAKING CHANGE: Renamed ReadIteratorStats to ReadIterationStats and removed the deletes_seen_count field. 
+
 ### 0.7.0 (2022-09-28)
 
 #### Features
