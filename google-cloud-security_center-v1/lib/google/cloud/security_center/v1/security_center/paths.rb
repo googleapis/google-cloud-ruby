@@ -267,18 +267,53 @@ module Google
             ##
             # Create a fully-qualified NotificationConfig resource string.
             #
-            # The resource will be in the following format:
+            # @overload notification_config_path(organization:, notification_config:)
+            #   The resource will be in the following format:
             #
-            # `organizations/{organization}/notificationConfigs/{notification_config}`
+            #   `organizations/{organization}/notificationConfigs/{notification_config}`
             #
-            # @param organization [String]
-            # @param notification_config [String]
+            #   @param organization [String]
+            #   @param notification_config [String]
+            #
+            # @overload notification_config_path(folder:, notification_config:)
+            #   The resource will be in the following format:
+            #
+            #   `folders/{folder}/notificationConfigs/{notification_config}`
+            #
+            #   @param folder [String]
+            #   @param notification_config [String]
+            #
+            # @overload notification_config_path(project:, notification_config:)
+            #   The resource will be in the following format:
+            #
+            #   `projects/{project}/notificationConfigs/{notification_config}`
+            #
+            #   @param project [String]
+            #   @param notification_config [String]
             #
             # @return [::String]
-            def notification_config_path organization:, notification_config:
-              raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
+            def notification_config_path **args
+              resources = {
+                "notification_config:organization" => (proc do |organization:, notification_config:|
+                  raise ::ArgumentError, "organization cannot contain /" if organization.to_s.include? "/"
 
-              "organizations/#{organization}/notificationConfigs/#{notification_config}"
+                  "organizations/#{organization}/notificationConfigs/#{notification_config}"
+                end),
+                "folder:notification_config" => (proc do |folder:, notification_config:|
+                  raise ::ArgumentError, "folder cannot contain /" if folder.to_s.include? "/"
+
+                  "folders/#{folder}/notificationConfigs/#{notification_config}"
+                end),
+                "notification_config:project" => (proc do |project:, notification_config:|
+                  raise ::ArgumentError, "project cannot contain /" if project.to_s.include? "/"
+
+                  "projects/#{project}/notificationConfigs/#{notification_config}"
+                end)
+              }
+
+              resource = resources[args.keys.sort.join(":")]
+              raise ::ArgumentError, "no resource found for values #{args.keys}" if resource.nil?
+              resource.call(**args)
             end
 
             ##

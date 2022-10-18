@@ -116,6 +116,12 @@ class ::Google::Cloud::SecurityCenter::V1::SecurityCenter::ClientPathsTest < Min
 
       path = client.notification_config_path organization: "value0", notification_config: "value1"
       assert_equal "organizations/value0/notificationConfigs/value1", path
+
+      path = client.notification_config_path folder: "value0", notification_config: "value1"
+      assert_equal "folders/value0/notificationConfigs/value1", path
+
+      path = client.notification_config_path project: "value0", notification_config: "value1"
+      assert_equal "projects/value0/notificationConfigs/value1", path
     end
   end
 
