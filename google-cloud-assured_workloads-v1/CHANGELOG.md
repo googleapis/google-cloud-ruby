@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.5.0 (2022-10-18)
+
+#### Features
+
+* add new field for exception audit log link ([#19282](https://github.com/googleapis/google-cloud-ruby/issues/19282)) 
+
 ### 0.4.0 (2022-10-03)
 
 #### Features
