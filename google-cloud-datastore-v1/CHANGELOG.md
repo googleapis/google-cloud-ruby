@@ -1,5 +1,11 @@
 # Release History
 
+### 0.7.0 (2022-10-03)
+
+#### Features
+
+* Support for run_aggregation_query call ([#19239](https://github.com/googleapis/google-cloud-ruby/issues/19239)) 
+
 ### 0.6.0 (2022-07-02)
 
 #### Features

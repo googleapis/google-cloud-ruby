@@ -34,5 +34,5 @@ def get_input project_id:, location:, input_id:
 
   # Print the input name.
   puts "Input: #{input.name}"
-  # [END livestream_get_input]
 end
+# [END livestream_get_input]

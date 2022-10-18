@@ -31,8 +31,8 @@ module Google
         #     Required. Assured Workload to create
         # @!attribute [rw] external_id
         #   @return [::String]
-        #     Optional. A identifier associated with the workload and underlying projects
-        #     which allows for the break down of billing costs for a workload. The value
+        #     Optional. A identifier associated with the workload and underlying projects which
+        #     allows for the break down of billing costs for a workload. The value
         #     provided for the identifier will add a label to the workload and contained
         #     projects with the identifier as the value.
         class CreateWorkloadRequest
@@ -44,7 +44,7 @@ module Google
         # @!attribute [rw] workload
         #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload]
         #     Required. The workload to update.
-        #     The workload’s `name` field is used to identify the workload to be updated.
+        #     The workload's `name` field is used to identify the workload to be updated.
         #     Format:
         #     organizations/\\{org_id}/locations/\\{location_id}/workloads/\\{workload_id}
         # @!attribute [rw] update_mask
@@ -73,8 +73,8 @@ module Google
         # Request for fetching a workload.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the Workload to fetch. This is the
-        #     workloads's relative path in the API, formatted as
+        #     Required. The resource name of the Workload to fetch. This is the workload's
+        #     relative path in the API, formatted as
         #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
         #     For example,
         #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
@@ -117,7 +117,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An Workload object for managing highly regulated workloads of cloud
+        # A Workload object for managing highly regulated workloads of cloud
         # customers.
         # @!attribute [rw] name
         #   @return [::String]
@@ -148,7 +148,7 @@ module Google
         #     Output only. Immutable. The Workload creation timestamp.
         # @!attribute [rw] billing_account
         #   @return [::String]
-        #     Required. Input only. The billing account used for the resources which are
+        #     Optional. The billing account used for the resources which are
         #     direct children of workload. This billing account is initially associated
         #     with the resources created as part of Workload creation.
         #     After the initial creation of these resources, the customer can change
@@ -165,22 +165,24 @@ module Google
         #     Optional. Labels applied to the workload.
         # @!attribute [rw] provisioned_resources_parent
         #   @return [::String]
-        #     Input only. The parent resource for the resources managed by this Assured
-        #     Workload. May be either empty or a folder resource which is a child of the
+        #     Input only. The parent resource for the resources managed by this Assured Workload. May
+        #     be either empty or a folder resource which is a child of the
         #     Workload parent. If not specified all resources are created under the
         #     parent organization.
         #     Format:
         #     folders/\\{folder_id}
         # @!attribute [rw] kms_settings
         #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload::KMSSettings]
-        #     Input only. Settings used to create a CMEK crypto key. When set a project
-        #     with a KMS CMEK key is provisioned. This field is mandatory for a subset of
-        #     Compliance Regimes.
+        #     Input only. Settings used to create a CMEK crypto key. When set, a project with a KMS
+        #     CMEK key is provisioned.
+        #     This field is deprecated as of Feb 28, 2022.
+        #     In order to create a Keyring, callers should specify,
+        #     ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
         # @!attribute [rw] resource_settings
         #   @return [::Array<::Google::Cloud::AssuredWorkloads::V1::Workload::ResourceSettings>]
-        #     Input only. Resource properties that are used to customize workload
-        #     resources. These properties (such as custom project id) will be used to
-        #     create workload resources if possible. This field is optional.
+        #     Input only. Resource properties that are used to customize workload resources.
+        #     These properties (such as custom project id) will be used to create
+        #     workload resources if possible. This field is optional.
         # @!attribute [r] kaj_enrollment_state
         #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload::KajEnrollmentState]
         #     Output only. Represents the KAJ enrollment state of the given workload.
@@ -193,6 +195,15 @@ module Google
         #     Output only. Represents the SAA enrollment response of the given workload.
         #     SAA enrollment response is queried during GetWorkload call.
         #     In failure cases, user friendly error message is shown in SAA details page.
+        # @!attribute [r] compliant_but_disallowed_services
+        #   @return [::Array<::String>]
+        #     Output only. Urls for services which are compliant for this Assured Workload, but which
+        #     are currently disallowed by the ResourceUsageRestriction org policy.
+        #     Invoke RestrictAllowedResources endpoint to allow your project developers
+        #     to use these services in their environment."
+        # @!attribute [rw] partner
+        #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload::Partner]
+        #     Optional. Compliance Regime associated with this workload.
         class Workload
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -215,7 +226,14 @@ module Google
               RESOURCE_TYPE_UNSPECIFIED = 0
 
               # Consumer project.
+              # AssuredWorkloads Projects are no longer supported. This field will be
+              # ignored only in CreateWorkload requests. ListWorkloads and GetWorkload
+              # will continue to provide projects information.
+              # Use CONSUMER_FOLDER instead.
               CONSUMER_PROJECT = 1
+
+              # Consumer Folder.
+              CONSUMER_FOLDER = 4
 
               # Consumer project containing encryption keys.
               ENCRYPTION_KEYS_PROJECT = 2
@@ -226,16 +244,18 @@ module Google
           end
 
           # Settings specific to the Key Management Service.
+          # This message is deprecated.
+          # In order to create a Keyring, callers should specify,
+          # ENCRYPTION_KEYS_PROJECT or KEYRING in ResourceSettings.resource_type field.
           # @!attribute [rw] next_rotation_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     Required. Input only. Immutable. The time at which the Key Management
-          #     Service will automatically create a new version of the crypto key and
-          #     mark it as the primary.
+          #     Required. Input only. Immutable. The time at which the Key Management Service will automatically create a
+          #     new version of the crypto key and mark it as the primary.
           # @!attribute [rw] rotation_period
           #   @return [::Google::Protobuf::Duration]
-          #     Required. Input only. Immutable. [next_rotation_time] will be advanced by
-          #     this period when the Key Management Service automatically rotates a key.
-          #     Must be at least 24 hours and at most 876,000 hours.
+          #     Required. Input only. Immutable. [next_rotation_time] will be advanced by this period when the Key
+          #     Management Service automatically rotates a key. Must be at least 24 hours
+          #     and at most 876,000 hours.
           class KMSSettings
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -247,10 +267,12 @@ module Google
           #     Resource identifier.
           #     For a project this represents project_id. If the project is already
           #     taken, the workload creation will fail.
+          #     For KeyRing, this represents the keyring_id.
+          #     For a folder, don't set this value as folder_id is assigned by Google.
           # @!attribute [rw] resource_type
           #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload::ResourceInfo::ResourceType]
           #     Indicates the type of resource. This field should be specified to
-          #     correspond the id to the right project type (CONSUMER_PROJECT or
+          #     correspond the id to the right resource type (CONSUMER_FOLDER or
           #     ENCRYPTION_KEYS_PROJECT)
           # @!attribute [rw] display_name
           #   @return [::String]
@@ -350,6 +372,14 @@ module Google
 
             # International Traffic in Arms Regulations
             ITAR = 10
+
+            # Assured Workloads for Australia Regions and Support controls
+            # Available for public preview consumption.
+            # Don't create production workloads.
+            AU_REGIONS_AND_US_SUPPORT = 11
+
+            # Assured Workloads for Partners
+            ASSURED_WORKLOADS_FOR_PARTNERS = 12
           end
 
           # Key Access Justifications(KAJ) Enrollment State.
@@ -362,6 +392,15 @@ module Google
 
             # Complete State for KAJ Enrollment.
             KAJ_ENROLLMENT_STATE_COMPLETE = 2
+          end
+
+          # Supported Assured Workloads Partners.
+          module Partner
+            # Unknown partner regime/controls.
+            PARTNER_UNSPECIFIED = 0
+
+            # S3NS regime/controls.
+            LOCAL_CONTROLS_BY_S3NS = 1
           end
         end
 
@@ -377,11 +416,300 @@ module Google
         #     Optional. The parent of the workload.
         # @!attribute [rw] compliance_regime
         #   @return [::Google::Cloud::AssuredWorkloads::V1::Workload::ComplianceRegime]
-        #     Optional. Compliance controls that should be applied to the resources
-        #     managed by the workload.
+        #     Optional. Compliance controls that should be applied to the resources managed by
+        #     the workload.
         class CreateWorkloadOperationMetadata
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for restricting list of available resources in Workload environment.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Workload. This is the workloads's
+        #     relative path in the API, formatted as
+        #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
+        #     For example,
+        #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
+        # @!attribute [rw] restriction_type
+        #   @return [::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest::RestrictionType]
+        #     Required. The type of restriction for using gcp products in the Workload environment.
+        class RestrictAllowedResourcesRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # The type of restriction.
+          module RestrictionType
+            # Unknown restriction type.
+            RESTRICTION_TYPE_UNSPECIFIED = 0
+
+            # Allow the use all of all gcp products, irrespective of the compliance
+            # posture. This effectively removes gcp.restrictServiceUsage OrgPolicy
+            # on the AssuredWorkloads Folder.
+            ALLOW_ALL_GCP_RESOURCES = 1
+
+            # Based on Workload's compliance regime, allowed list changes.
+            # See - https://cloud.google.com/assured-workloads/docs/supported-products
+            # for the list of supported resources.
+            ALLOW_COMPLIANT_RESOURCES = 2
+          end
+        end
+
+        # Response for restricting the list of allowed resources.
+        class RestrictAllowedResourcesResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for acknowledging the violation
+        # Next Id: 4
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Violation to acknowledge.
+        #     Format:
+        #     organizations/\\{organization}/locations/\\{location}/workloads/\\{workload}/violations/\\{violation}
+        # @!attribute [rw] comment
+        #   @return [::String]
+        #     Required. Business justification explaining the need for violation acknowledgement
+        # @!attribute [rw] non_compliant_org_policy
+        #   @return [::String]
+        #     Optional. This field is deprecated and will be removed in future version of the API.
+        #     Name of the OrgPolicy which was modified with non-compliant change and
+        #     resulted in this violation.
+        #     Format:
+        #     projects/\\{project_number}/policies/\\{constraint_name}
+        #     folders/\\{folder_id}/policies/\\{constraint_name}
+        #     organizations/\\{organization_id}/policies/\\{constraint_name}
+        class AcknowledgeViolationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response for violation acknowledgement
+        class AcknowledgeViolationResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Interval defining a time window.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The start of the time window.
+        # @!attribute [rw] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     The end of the time window.
+        class TimeWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for fetching violations in an organization.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The Workload name.
+        #     Format `organizations/{org_id}/locations/{location}/workloads/{workload}`.
+        # @!attribute [rw] interval
+        #   @return [::Google::Cloud::AssuredWorkloads::V1::TimeWindow]
+        #     Optional. Specifies the time window for retrieving active Violations.
+        #     When specified, retrieves Violations that were active between start_time
+        #     and end_time.
+        # @!attribute [rw] page_size
+        #   @return [::Integer]
+        #     Optional. Page size.
+        # @!attribute [rw] page_token
+        #   @return [::String]
+        #     Optional. Page token returned from previous request.
+        # @!attribute [rw] filter
+        #   @return [::String]
+        #     Optional. A custom filter for filtering by the Violations properties.
+        class ListViolationsRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Response of ListViolations endpoint.
+        # @!attribute [rw] violations
+        #   @return [::Array<::Google::Cloud::AssuredWorkloads::V1::Violation>]
+        #     List of Violations under a Workload.
+        # @!attribute [rw] next_page_token
+        #   @return [::String]
+        #     The next page token. Returns empty if reached the last page.
+        class ListViolationsResponse
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for fetching a Workload Violation.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The resource name of the Violation to fetch (ie. Violation.name).
+        #     Format:
+        #     organizations/\\{organization}/locations/\\{location}/workloads/\\{workload}/violations/\\{violation}
+        class GetViolationRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Workload monitoring Violation.
+        # @!attribute [r] name
+        #   @return [::String]
+        #     Output only. Immutable. Name of the Violation.
+        #     Format:
+        #     organizations/\\{organization}/locations/\\{location}/workloads/\\{workload_id}/violations/\\{violations_id}
+        # @!attribute [r] description
+        #   @return [::String]
+        #     Output only. Description for the Violation.
+        #     e.g. OrgPolicy gcp.resourceLocations has non compliant value.
+        # @!attribute [r] begin_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time of the event which triggered the Violation.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The last time when the Violation record was updated.
+        # @!attribute [r] resolve_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. Time of the event which fixed the Violation.
+        #     If the violation is ACTIVE this will be empty.
+        # @!attribute [r] category
+        #   @return [::String]
+        #     Output only. Category under which this violation is mapped.
+        #     e.g. Location, Service Usage, Access, Encryption, etc.
+        # @!attribute [r] state
+        #   @return [::Google::Cloud::AssuredWorkloads::V1::Violation::State]
+        #     Output only. State of the violation
+        # @!attribute [r] org_policy_constraint
+        #   @return [::String]
+        #     Output only. Immutable. The org-policy-constraint that was incorrectly changed, which resulted in
+        #     this violation.
+        # @!attribute [r] audit_log_link
+        #   @return [::String]
+        #     Output only. Immutable. Audit Log Link for violated resource
+        #     Format:
+        #     https://console.cloud.google.com/logs/query;query=\\{logName}\\{protoPayload.resourceName}\\{timeRange}\\{folder}
+        # @!attribute [r] non_compliant_org_policy
+        #   @return [::String]
+        #     Output only. Immutable. Name of the OrgPolicy which was modified with non-compliant change and
+        #     resulted this violation.
+        #      Format:
+        #      projects/\\{project_number}/policies/\\{constraint_name}
+        #      folders/\\{folder_id}/policies/\\{constraint_name}
+        #      organizations/\\{organization_id}/policies/\\{constraint_name}
+        # @!attribute [r] remediation
+        #   @return [::Google::Cloud::AssuredWorkloads::V1::Violation::Remediation]
+        #     Output only. Compliance violation remediation
+        # @!attribute [r] acknowledged
+        #   @return [::Boolean]
+        #     Output only. A boolean that indicates if the violation is acknowledged
+        # @!attribute [rw] acknowledgement_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Optional. Timestamp when this violation was acknowledged last.
+        #     This will be absent when acknowledged field is marked as false.
+        # @!attribute [r] exception_audit_log_link
+        #   @return [::String]
+        #     Output only. Immutable. Audit Log link to find business justification provided for violation
+        #     exception. Format:
+        #     https://console.cloud.google.com/logs/query;query=\\{logName}\\{protoPayload.resourceName}\\{protoPayload.methodName}\\{timeRange}\\{organization}
+        class Violation
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Represents remediation guidance to resolve compliance violation for
+          # AssuredWorkload
+          # @!attribute [rw] instructions
+          #   @return [::Google::Cloud::AssuredWorkloads::V1::Violation::Remediation::Instructions]
+          #     Required. Remediation instructions to resolve violations
+          # @!attribute [rw] compliant_values
+          #   @return [::Array<::String>]
+          #     Values that can resolve the violation
+          #     For example: for list org policy violations, this will either be the list
+          #     of allowed or denied values
+          # @!attribute [r] remediation_type
+          #   @return [::Google::Cloud::AssuredWorkloads::V1::Violation::Remediation::RemediationType]
+          #     Output only. Reemediation type based on the type of org policy values violated
+          class Remediation
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Instructions to remediate violation
+            # @!attribute [rw] gcloud_instructions
+            #   @return [::Google::Cloud::AssuredWorkloads::V1::Violation::Remediation::Instructions::Gcloud]
+            #     Remediation instructions to resolve violation via gcloud cli
+            # @!attribute [rw] console_instructions
+            #   @return [::Google::Cloud::AssuredWorkloads::V1::Violation::Remediation::Instructions::Console]
+            #     Remediation instructions to resolve violation via cloud console
+            class Instructions
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Remediation instructions to resolve violation via gcloud cli
+              # @!attribute [rw] gcloud_commands
+              #   @return [::Array<::String>]
+              #     Gcloud command to resolve violation
+              # @!attribute [rw] steps
+              #   @return [::Array<::String>]
+              #     Steps to resolve violation via gcloud cli
+              # @!attribute [rw] additional_links
+              #   @return [::Array<::String>]
+              #     Additional urls for more information about steps
+              class Gcloud
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+
+              # Remediation instructions to resolve violation via cloud console
+              # @!attribute [rw] console_uris
+              #   @return [::Array<::String>]
+              #     Link to console page where violations can be resolved
+              # @!attribute [rw] steps
+              #   @return [::Array<::String>]
+              #     Steps to resolve violation via cloud console
+              # @!attribute [rw] additional_links
+              #   @return [::Array<::String>]
+              #     Additional urls for more information about steps
+              class Console
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
+            end
+
+            # Classifying remediation into various types based on the kind of
+            # violation. For example, violations caused due to changes in boolean org
+            # policy requires different remediation instructions compared to violation
+            # caused due to changes in allowed values of list org policy.
+            module RemediationType
+              # Unspecified remediation type
+              REMEDIATION_TYPE_UNSPECIFIED = 0
+
+              # Remediation type for boolean org policy
+              REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION = 1
+
+              # Remediation type for list org policy which have allowed values in the
+              # monitoring rule
+              REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION = 2
+
+              # Remediation type for list org policy which have denied values in the
+              # monitoring rule
+              REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION = 3
+
+              # Remediation type for gcp.restrictCmekCryptoKeyProjects
+              REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION = 4
+            end
+          end
+
+          # Violation State Values
+          module State
+            # Unspecified state.
+            STATE_UNSPECIFIED = 0
+
+            # Violation is resolved.
+            RESOLVED = 2
+
+            # Violation is Unresolved
+            UNRESOLVED = 3
+
+            # Violation is Exception
+            EXCEPTION = 4
+          end
         end
       end
     end

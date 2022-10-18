@@ -40,6 +40,13 @@ module Google
             # For force updates don't set etag field in the Workload.
             # Only one update operation per workload can be in progress.
             rpc :UpdateWorkload, ::Google::Cloud::AssuredWorkloads::V1::UpdateWorkloadRequest, ::Google::Cloud::AssuredWorkloads::V1::Workload
+            # Restrict the list of resources allowed in the Workload environment.
+            # The current list of allowed products can be found at
+            # https://cloud.google.com/assured-workloads/docs/supported-products
+            # In addition to assuredworkloads.workload.update permission, the user should
+            # also have orgpolicy.policy.set permission on the folder resource
+            # to use this functionality.
+            rpc :RestrictAllowedResources, ::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest, ::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesResponse
             # Deletes the workload. Make sure that workload's direct children are already
             # in a deleted state, otherwise the request will fail with a
             # FAILED_PRECONDITION error.
@@ -48,6 +55,19 @@ module Google
             rpc :GetWorkload, ::Google::Cloud::AssuredWorkloads::V1::GetWorkloadRequest, ::Google::Cloud::AssuredWorkloads::V1::Workload
             # Lists Assured Workloads under a CRM Node.
             rpc :ListWorkloads, ::Google::Cloud::AssuredWorkloads::V1::ListWorkloadsRequest, ::Google::Cloud::AssuredWorkloads::V1::ListWorkloadsResponse
+            # Lists the Violations in the AssuredWorkload Environment.
+            # Callers may also choose to read across multiple Workloads as per
+            # [AIP-159](https://google.aip.dev/159) by using '-' (the hyphen or dash
+            # character) as a wildcard character instead of workload-id in the parent.
+            # Format `organizations/{org_id}/locations/{location}/workloads/-`
+            rpc :ListViolations, ::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest, ::Google::Cloud::AssuredWorkloads::V1::ListViolationsResponse
+            # Retrieves Assured Workload Violation based on ID.
+            rpc :GetViolation, ::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest, ::Google::Cloud::AssuredWorkloads::V1::Violation
+            # Acknowledges an existing violation. By acknowledging a violation, users
+            # acknowledge the existence of a compliance violation in their workload and
+            # decide to ignore it due to a valid business justification. Acknowledgement
+            # is a permanent operation and it cannot be reverted.
+            rpc :AcknowledgeViolation, ::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest, ::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationResponse
           end
 
           Stub = Service.rpc_stub_class

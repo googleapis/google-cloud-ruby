@@ -4704,8 +4704,7 @@ module Google
         #     The infoType.
         # @!attribute [rw] estimated_prevalence
         #   @return [::Integer]
-        #     Approximate percentage of non-null rows that contained data detected by
-        #     this infotype.
+        #     Not populated for predicted infotypes.
         class InfoTypeSummary
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

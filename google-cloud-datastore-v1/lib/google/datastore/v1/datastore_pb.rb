@@ -6,6 +6,7 @@ require 'google/protobuf'
 require 'google/api/annotations_pb'
 require 'google/api/client_pb'
 require 'google/api/field_behavior_pb'
+require 'google/datastore/v1/aggregation_result_pb'
 require 'google/datastore/v1/entity_pb'
 require 'google/datastore/v1/query_pb'
 require 'google/protobuf/timestamp_pb'
@@ -37,6 +38,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.datastore.v1.RunQueryResponse" do
       optional :batch, :message, 1, "google.datastore.v1.QueryResultBatch"
       optional :query, :message, 2, "google.datastore.v1.Query"
+    end
+    add_message "google.datastore.v1.RunAggregationQueryRequest" do
+      optional :project_id, :string, 8
+      optional :database_id, :string, 9
+      optional :partition_id, :message, 2, "google.datastore.v1.PartitionId"
+      optional :read_options, :message, 1, "google.datastore.v1.ReadOptions"
+      oneof :query_type do
+        optional :aggregation_query, :message, 3, "google.datastore.v1.AggregationQuery"
+        optional :gql_query, :message, 7, "google.datastore.v1.GqlQuery"
+      end
+    end
+    add_message "google.datastore.v1.RunAggregationQueryResponse" do
+      optional :batch, :message, 1, "google.datastore.v1.AggregationResultBatch"
+      optional :query, :message, 2, "google.datastore.v1.AggregationQuery"
     end
     add_message "google.datastore.v1.BeginTransactionRequest" do
       optional :project_id, :string, 8
@@ -140,6 +155,8 @@ module Google
         LookupResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.LookupResponse").msgclass
         RunQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunQueryRequest").msgclass
         RunQueryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunQueryResponse").msgclass
+        RunAggregationQueryRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunAggregationQueryRequest").msgclass
+        RunAggregationQueryResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RunAggregationQueryResponse").msgclass
         BeginTransactionRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.BeginTransactionRequest").msgclass
         BeginTransactionResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.BeginTransactionResponse").msgclass
         RollbackRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.RollbackRequest").msgclass

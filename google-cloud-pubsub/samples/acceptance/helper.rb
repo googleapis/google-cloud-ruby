@@ -30,6 +30,35 @@ def random_subscription_id
   "ruby-pubsub-samples-test-subscription-#{SecureRandom.hex 4}"
 end
 
+def random_dataset_id
+  "rubypubsubsamplestestdataset#{SecureRandom.hex 4}"
+end
+
+def random_table_id
+  "ruby-pubsub-samples-test-table-#{SecureRandom.hex 4}"
+end
+
+def create_table
+  bigquery = Google::Cloud::Bigquery.new
+  @dataset = bigquery.create_dataset random_dataset_id
+  table_id = random_table_id
+
+  @table = @dataset.create_table table_id do |updater|
+    updater.string "data",  mode: :required
+    updater.string "message_id",  mode: :required
+    updater.string "attributes",  mode: :required
+    updater.string "subscription_name",  mode: :required
+    updater.timestamp "publish_time",  mode: :required
+  end
+
+  @table.id
+end
+
+def cleanup_bq table, dataset
+  table.delete
+  dataset.delete
+end
+
 # Pub/Sub calls may not respond immediately.
 # Wrap expectations that may require multiple attempts with this method.
 def expect_with_retry sample_name, attempts: 5

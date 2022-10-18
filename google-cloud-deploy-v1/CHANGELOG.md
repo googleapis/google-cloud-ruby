@@ -1,5 +1,22 @@
 # Changelog
 
+### 0.4.0 (2022-09-28)
+
+#### Features
+
+* Support for Cloud Run deployment targets 
+* Support for deployment strategies 
+* Support for phases and metadata for a Rollout 
+* Support for setting the timeout for a Cloud Build execution 
+* Support for suspended delivery pipelines 
+* Support for TargetRender failure messages 
+* Support for the abandon_release call ([#19226](https://github.com/googleapis/google-cloud-ruby/issues/19226)) 
+* Support for the auxiliary IAM Policy client 
+* Support for the auxiliary Location client 
+* Support for the get_job_run call 
+* Support for the list_job_runs call 
+* Support for the retry_job call 
+
 ### 0.3.0 (2022-07-02)
 
 #### Features

@@ -56,6 +56,8 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :kaj_enrollment_state, :enum, 17, "google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState"
       optional :enable_sovereign_controls, :bool, 18
       optional :saa_enrollment_response, :message, 20, "google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse"
+      repeated :compliant_but_disallowed_services, :string, 24
+      optional :partner, :enum, 25, "google.cloud.assuredworkloads.v1.Workload.Partner"
     end
     add_message "google.cloud.assuredworkloads.v1.Workload.ResourceInfo" do
       optional :resource_id, :int64, 1
@@ -64,6 +66,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_enum "google.cloud.assuredworkloads.v1.Workload.ResourceInfo.ResourceType" do
       value :RESOURCE_TYPE_UNSPECIFIED, 0
       value :CONSUMER_PROJECT, 1
+      value :CONSUMER_FOLDER, 4
       value :ENCRYPTION_KEYS_PROJECT, 2
       value :KEYRING, 3
     end
@@ -104,17 +107,107 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :EU_REGIONS_AND_SUPPORT, 8
       value :CA_REGIONS_AND_SUPPORT, 9
       value :ITAR, 10
+      value :AU_REGIONS_AND_US_SUPPORT, 11
+      value :ASSURED_WORKLOADS_FOR_PARTNERS, 12
     end
     add_enum "google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState" do
       value :KAJ_ENROLLMENT_STATE_UNSPECIFIED, 0
       value :KAJ_ENROLLMENT_STATE_PENDING, 1
       value :KAJ_ENROLLMENT_STATE_COMPLETE, 2
     end
+    add_enum "google.cloud.assuredworkloads.v1.Workload.Partner" do
+      value :PARTNER_UNSPECIFIED, 0
+      value :LOCAL_CONTROLS_BY_S3NS, 1
+    end
     add_message "google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata" do
       optional :create_time, :message, 1, "google.protobuf.Timestamp"
       optional :display_name, :string, 2
       optional :parent, :string, 3
       optional :compliance_regime, :enum, 4, "google.cloud.assuredworkloads.v1.Workload.ComplianceRegime"
+    end
+    add_message "google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest" do
+      optional :name, :string, 1
+      optional :restriction_type, :enum, 2, "google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType"
+    end
+    add_enum "google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType" do
+      value :RESTRICTION_TYPE_UNSPECIFIED, 0
+      value :ALLOW_ALL_GCP_RESOURCES, 1
+      value :ALLOW_COMPLIANT_RESOURCES, 2
+    end
+    add_message "google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse" do
+    end
+    add_message "google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest" do
+      optional :name, :string, 1
+      optional :comment, :string, 2
+      optional :non_compliant_org_policy, :string, 3
+    end
+    add_message "google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse" do
+    end
+    add_message "google.cloud.assuredworkloads.v1.TimeWindow" do
+      optional :start_time, :message, 1, "google.protobuf.Timestamp"
+      optional :end_time, :message, 2, "google.protobuf.Timestamp"
+    end
+    add_message "google.cloud.assuredworkloads.v1.ListViolationsRequest" do
+      optional :parent, :string, 1
+      optional :interval, :message, 2, "google.cloud.assuredworkloads.v1.TimeWindow"
+      optional :page_size, :int32, 3
+      optional :page_token, :string, 4
+      optional :filter, :string, 5
+    end
+    add_message "google.cloud.assuredworkloads.v1.ListViolationsResponse" do
+      repeated :violations, :message, 1, "google.cloud.assuredworkloads.v1.Violation"
+      optional :next_page_token, :string, 2
+    end
+    add_message "google.cloud.assuredworkloads.v1.GetViolationRequest" do
+      optional :name, :string, 1
+    end
+    add_message "google.cloud.assuredworkloads.v1.Violation" do
+      optional :name, :string, 1
+      optional :description, :string, 2
+      optional :begin_time, :message, 3, "google.protobuf.Timestamp"
+      optional :update_time, :message, 4, "google.protobuf.Timestamp"
+      optional :resolve_time, :message, 5, "google.protobuf.Timestamp"
+      optional :category, :string, 6
+      optional :state, :enum, 7, "google.cloud.assuredworkloads.v1.Violation.State"
+      optional :org_policy_constraint, :string, 8
+      optional :audit_log_link, :string, 11
+      optional :non_compliant_org_policy, :string, 12
+      optional :remediation, :message, 13, "google.cloud.assuredworkloads.v1.Violation.Remediation"
+      optional :acknowledged, :bool, 14
+      proto3_optional :acknowledgement_time, :message, 15, "google.protobuf.Timestamp"
+      optional :exception_audit_log_link, :string, 16
+    end
+    add_message "google.cloud.assuredworkloads.v1.Violation.Remediation" do
+      optional :instructions, :message, 1, "google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions"
+      repeated :compliant_values, :string, 2
+      optional :remediation_type, :enum, 3, "google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType"
+    end
+    add_message "google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions" do
+      optional :gcloud_instructions, :message, 1, "google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud"
+      optional :console_instructions, :message, 2, "google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console"
+    end
+    add_message "google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud" do
+      repeated :gcloud_commands, :string, 1
+      repeated :steps, :string, 2
+      repeated :additional_links, :string, 3
+    end
+    add_message "google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console" do
+      repeated :console_uris, :string, 1
+      repeated :steps, :string, 2
+      repeated :additional_links, :string, 3
+    end
+    add_enum "google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType" do
+      value :REMEDIATION_TYPE_UNSPECIFIED, 0
+      value :REMEDIATION_BOOLEAN_ORG_POLICY_VIOLATION, 1
+      value :REMEDIATION_LIST_ALLOWED_VALUES_ORG_POLICY_VIOLATION, 2
+      value :REMEDIATION_LIST_DENIED_VALUES_ORG_POLICY_VIOLATION, 3
+      value :REMEDIATION_RESTRICT_CMEK_CRYPTO_KEY_PROJECTS_ORG_POLICY_VIOLATION, 4
+    end
+    add_enum "google.cloud.assuredworkloads.v1.Violation.State" do
+      value :STATE_UNSPECIFIED, 0
+      value :RESOLVED, 2
+      value :UNRESOLVED, 3
+      value :EXCEPTION, 4
     end
   end
 end
@@ -139,7 +232,24 @@ module Google
         Workload::SaaEnrollmentResponse::SetupError = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.SaaEnrollmentResponse.SetupError").enummodule
         Workload::ComplianceRegime = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.ComplianceRegime").enummodule
         Workload::KajEnrollmentState = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.KajEnrollmentState").enummodule
+        Workload::Partner = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Workload.Partner").enummodule
         CreateWorkloadOperationMetadata = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.CreateWorkloadOperationMetadata").msgclass
+        RestrictAllowedResourcesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest").msgclass
+        RestrictAllowedResourcesRequest::RestrictionType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.RestrictAllowedResourcesRequest.RestrictionType").enummodule
+        RestrictAllowedResourcesResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.RestrictAllowedResourcesResponse").msgclass
+        AcknowledgeViolationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.AcknowledgeViolationRequest").msgclass
+        AcknowledgeViolationResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.AcknowledgeViolationResponse").msgclass
+        TimeWindow = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.TimeWindow").msgclass
+        ListViolationsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.ListViolationsRequest").msgclass
+        ListViolationsResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.ListViolationsResponse").msgclass
+        GetViolationRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.GetViolationRequest").msgclass
+        Violation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Violation").msgclass
+        Violation::Remediation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Violation.Remediation").msgclass
+        Violation::Remediation::Instructions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions").msgclass
+        Violation::Remediation::Instructions::Gcloud = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Gcloud").msgclass
+        Violation::Remediation::Instructions::Console = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Violation.Remediation.Instructions.Console").msgclass
+        Violation::Remediation::RemediationType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Violation.Remediation.RemediationType").enummodule
+        Violation::State = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.assuredworkloads.v1.Violation.State").enummodule
       end
     end
   end

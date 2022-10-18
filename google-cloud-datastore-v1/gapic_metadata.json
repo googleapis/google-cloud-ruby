@@ -20,6 +20,11 @@
                 "run_query"
               ]
             },
+            "RunAggregationQuery": {
+              "methods": [
+                "run_aggregation_query"
+              ]
+            },
             "BeginTransaction": {
               "methods": [
                 "begin_transaction"

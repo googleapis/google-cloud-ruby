@@ -183,8 +183,8 @@ module Google
             #   @param workload [::Google::Cloud::AssuredWorkloads::V1::Workload, ::Hash]
             #     Required. Assured Workload to create
             #   @param external_id [::String]
-            #     Optional. A identifier associated with the workload and underlying projects
-            #     which allows for the break down of billing costs for a workload. The value
+            #     Optional. A identifier associated with the workload and underlying projects which
+            #     allows for the break down of billing costs for a workload. The value
             #     provided for the identifier will add a label to the workload and contained
             #     projects with the identifier as the value.
             #
@@ -283,7 +283,7 @@ module Google
             #
             #   @param workload [::Google::Cloud::AssuredWorkloads::V1::Workload, ::Hash]
             #     Required. The workload to update.
-            #     The workload’s `name` field is used to identify the workload to be updated.
+            #     The workload's `name` field is used to identify the workload to be updated.
             #     Format:
             #     organizations/\\{org_id}/locations/\\{location_id}/workloads/\\{workload_id}
             #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
@@ -346,6 +346,102 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @assured_workloads_service_stub.call_rpc :update_workload, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Restrict the list of resources allowed in the Workload environment.
+            # The current list of allowed products can be found at
+            # https://cloud.google.com/assured-workloads/docs/supported-products
+            # In addition to assuredworkloads.workload.update permission, the user should
+            # also have orgpolicy.policy.set permission on the folder resource
+            # to use this functionality.
+            #
+            # @overload restrict_allowed_resources(request, options = nil)
+            #   Pass arguments to `restrict_allowed_resources` via a request object, either of type
+            #   {::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload restrict_allowed_resources(name: nil, restriction_type: nil)
+            #   Pass arguments to `restrict_allowed_resources` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the Workload. This is the workloads's
+            #     relative path in the API, formatted as
+            #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
+            #     For example,
+            #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
+            #   @param restriction_type [::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest::RestrictionType]
+            #     Required. The type of restriction for using gcp products in the Workload environment.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest.new
+            #
+            #   # Call the restrict_allowed_resources method.
+            #   result = client.restrict_allowed_resources request
+            #
+            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesResponse.
+            #   p result
+            #
+            def restrict_allowed_resources request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AssuredWorkloads::V1::RestrictAllowedResourcesRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.restrict_allowed_resources.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AssuredWorkloads::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.restrict_allowed_resources.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.restrict_allowed_resources.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assured_workloads_service_stub.call_rpc :restrict_allowed_resources, request, options: options do |response, operation|
                 yield response, operation if block_given?
                 return response
               end
@@ -464,8 +560,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The resource name of the Workload to fetch. This is the
-            #     workloads's relative path in the API, formatted as
+            #     Required. The resource name of the Workload to fetch. This is the workload's
+            #     relative path in the API, formatted as
             #     "organizations/\\{organization_id}/locations/\\{location_id}/workloads/\\{workload_id}".
             #     For example,
             #     "organizations/123/locations/us-east1/workloads/assured-workload-1".
@@ -637,6 +733,276 @@ module Google
             end
 
             ##
+            # Lists the Violations in the AssuredWorkload Environment.
+            # Callers may also choose to read across multiple Workloads as per
+            # [AIP-159](https://google.aip.dev/159) by using '-' (the hyphen or dash
+            # character) as a wildcard character instead of workload-id in the parent.
+            # Format `organizations/{org_id}/locations/{location}/workloads/-`
+            #
+            # @overload list_violations(request, options = nil)
+            #   Pass arguments to `list_violations` via a request object, either of type
+            #   {::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload list_violations(parent: nil, interval: nil, page_size: nil, page_token: nil, filter: nil)
+            #   Pass arguments to `list_violations` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param parent [::String]
+            #     Required. The Workload name.
+            #     Format `organizations/{org_id}/locations/{location}/workloads/{workload}`.
+            #   @param interval [::Google::Cloud::AssuredWorkloads::V1::TimeWindow, ::Hash]
+            #     Optional. Specifies the time window for retrieving active Violations.
+            #     When specified, retrieves Violations that were active between start_time
+            #     and end_time.
+            #   @param page_size [::Integer]
+            #     Optional. Page size.
+            #   @param page_token [::String]
+            #     Optional. Page token returned from previous request.
+            #   @param filter [::String]
+            #     Optional. A custom filter for filtering by the Violations properties.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::AssuredWorkloads::V1::Violation>]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::PagedEnumerable<::Google::Cloud::AssuredWorkloads::V1::Violation>]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest.new
+            #
+            #   # Call the list_violations method.
+            #   result = client.list_violations request
+            #
+            #   # The returned object is of type Gapic::PagedEnumerable. You can
+            #   # iterate over all elements by calling #each, and the enumerable
+            #   # will lazily make API calls to fetch subsequent pages. Other
+            #   # methods are also available for managing paging directly.
+            #   result.each do |response|
+            #     # Each element is of type ::Google::Cloud::AssuredWorkloads::V1::Violation.
+            #     p response
+            #   end
+            #
+            def list_violations request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AssuredWorkloads::V1::ListViolationsRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.list_violations.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AssuredWorkloads::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.list_violations.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.list_violations.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assured_workloads_service_stub.call_rpc :list_violations, request, options: options do |response, operation|
+                response = ::Gapic::PagedEnumerable.new @assured_workloads_service_stub, :list_violations, request, response, operation, options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Retrieves Assured Workload Violation based on ID.
+            #
+            # @overload get_violation(request, options = nil)
+            #   Pass arguments to `get_violation` via a request object, either of type
+            #   {::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload get_violation(name: nil)
+            #   Pass arguments to `get_violation` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the Violation to fetch (ie. Violation.name).
+            #     Format:
+            #     organizations/\\{organization}/locations/\\{location}/workloads/\\{workload}/violations/\\{violation}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AssuredWorkloads::V1::Violation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AssuredWorkloads::V1::Violation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1::GetViolationRequest.new
+            #
+            #   # Call the get_violation method.
+            #   result = client.get_violation request
+            #
+            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1::Violation.
+            #   p result
+            #
+            def get_violation request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AssuredWorkloads::V1::GetViolationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.get_violation.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AssuredWorkloads::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.get_violation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.get_violation.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assured_workloads_service_stub.call_rpc :get_violation, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Acknowledges an existing violation. By acknowledging a violation, users
+            # acknowledge the existence of a compliance violation in their workload and
+            # decide to ignore it due to a valid business justification. Acknowledgement
+            # is a permanent operation and it cannot be reverted.
+            #
+            # @overload acknowledge_violation(request, options = nil)
+            #   Pass arguments to `acknowledge_violation` via a request object, either of type
+            #   {::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload acknowledge_violation(name: nil, comment: nil, non_compliant_org_policy: nil)
+            #   Pass arguments to `acknowledge_violation` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. The resource name of the Violation to acknowledge.
+            #     Format:
+            #     organizations/\\{organization}/locations/\\{location}/workloads/\\{workload}/violations/\\{violation}
+            #   @param comment [::String]
+            #     Required. Business justification explaining the need for violation acknowledgement
+            #   @param non_compliant_org_policy [::String]
+            #     Optional. This field is deprecated and will be removed in future version of the API.
+            #     Name of the OrgPolicy which was modified with non-compliant change and
+            #     resulted in this violation.
+            #     Format:
+            #     projects/\\{project_number}/policies/\\{constraint_name}
+            #     folders/\\{folder_id}/policies/\\{constraint_name}
+            #     organizations/\\{organization_id}/policies/\\{constraint_name}
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationResponse]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationResponse]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/assured_workloads/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest.new
+            #
+            #   # Call the acknowledge_violation method.
+            #   result = client.acknowledge_violation request
+            #
+            #   # The returned object is of type Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationResponse.
+            #   p result
+            #
+            def acknowledge_violation request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::AssuredWorkloads::V1::AcknowledgeViolationRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.acknowledge_violation.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::AssuredWorkloads::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              options.apply_defaults timeout:      @config.rpcs.acknowledge_violation.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.acknowledge_violation.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @assured_workloads_service_stub.call_rpc :acknowledge_violation, request, options: options do |response, operation|
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the AssuredWorkloadsService API.
             #
             # This class represents the configuration for AssuredWorkloadsService,
@@ -782,6 +1148,11 @@ module Google
                 #
                 attr_reader :update_workload
                 ##
+                # RPC-specific configuration for `restrict_allowed_resources`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :restrict_allowed_resources
+                ##
                 # RPC-specific configuration for `delete_workload`
                 # @return [::Gapic::Config::Method]
                 #
@@ -796,6 +1167,21 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :list_workloads
+                ##
+                # RPC-specific configuration for `list_violations`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :list_violations
+                ##
+                # RPC-specific configuration for `get_violation`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :get_violation
+                ##
+                # RPC-specific configuration for `acknowledge_violation`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :acknowledge_violation
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -803,12 +1189,20 @@ module Google
                   @create_workload = ::Gapic::Config::Method.new create_workload_config
                   update_workload_config = parent_rpcs.update_workload if parent_rpcs.respond_to? :update_workload
                   @update_workload = ::Gapic::Config::Method.new update_workload_config
+                  restrict_allowed_resources_config = parent_rpcs.restrict_allowed_resources if parent_rpcs.respond_to? :restrict_allowed_resources
+                  @restrict_allowed_resources = ::Gapic::Config::Method.new restrict_allowed_resources_config
                   delete_workload_config = parent_rpcs.delete_workload if parent_rpcs.respond_to? :delete_workload
                   @delete_workload = ::Gapic::Config::Method.new delete_workload_config
                   get_workload_config = parent_rpcs.get_workload if parent_rpcs.respond_to? :get_workload
                   @get_workload = ::Gapic::Config::Method.new get_workload_config
                   list_workloads_config = parent_rpcs.list_workloads if parent_rpcs.respond_to? :list_workloads
                   @list_workloads = ::Gapic::Config::Method.new list_workloads_config
+                  list_violations_config = parent_rpcs.list_violations if parent_rpcs.respond_to? :list_violations
+                  @list_violations = ::Gapic::Config::Method.new list_violations_config
+                  get_violation_config = parent_rpcs.get_violation if parent_rpcs.respond_to? :get_violation
+                  @get_violation = ::Gapic::Config::Method.new get_violation_config
+                  acknowledge_violation_config = parent_rpcs.acknowledge_violation if parent_rpcs.respond_to? :acknowledge_violation
+                  @acknowledge_violation = ::Gapic::Config::Method.new acknowledge_violation_config
 
                   yield self if block_given?
                 end

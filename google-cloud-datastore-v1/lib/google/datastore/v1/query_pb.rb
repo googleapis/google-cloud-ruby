@@ -33,6 +33,21 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :offset, :int32, 10
       optional :limit, :message, 12, "google.protobuf.Int32Value"
     end
+    add_message "google.datastore.v1.AggregationQuery" do
+      repeated :aggregations, :message, 3, "google.datastore.v1.AggregationQuery.Aggregation"
+      oneof :query_type do
+        optional :nested_query, :message, 1, "google.datastore.v1.Query"
+      end
+    end
+    add_message "google.datastore.v1.AggregationQuery.Aggregation" do
+      optional :alias, :string, 7
+      oneof :operator do
+        optional :count, :message, 1, "google.datastore.v1.AggregationQuery.Aggregation.Count"
+      end
+    end
+    add_message "google.datastore.v1.AggregationQuery.Aggregation.Count" do
+      optional :up_to, :message, 1, "google.protobuf.Int64Value"
+    end
     add_message "google.datastore.v1.KindExpression" do
       optional :name, :string, 1
     end
@@ -121,6 +136,9 @@ module Google
         EntityResult = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.EntityResult").msgclass
         EntityResult::ResultType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.EntityResult.ResultType").enummodule
         Query = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Query").msgclass
+        AggregationQuery = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AggregationQuery").msgclass
+        AggregationQuery::Aggregation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AggregationQuery.Aggregation").msgclass
+        AggregationQuery::Aggregation::Count = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.AggregationQuery.Aggregation.Count").msgclass
         KindExpression = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.KindExpression").msgclass
         PropertyReference = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.PropertyReference").msgclass
         Projection = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.datastore.v1.Projection").msgclass

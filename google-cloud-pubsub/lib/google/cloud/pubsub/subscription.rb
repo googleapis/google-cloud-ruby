@@ -304,6 +304,56 @@ module Google
         end
 
         ##
+        # Inspect the Subscription's bigquery configuration settings. The
+        # configuration can be changed by modifying the values in the method's
+        # block.
+        #
+        # @yield [bigquery_config] a block for modifying the bigquery configuration
+        # @yieldparam [Google::Cloud::PubSub::V1::BigQueryConfig] bigquery_config
+        #
+        # @return [Google::Cloud::PubSub::V1::BigQueryConfig]
+        #
+        # @example
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #
+        #   sub = pubsub.subscription "my-topic-sub"
+        #   sub.bigquery_config.table #=> "my-project:dataset-id.table-id"
+        #   sub.bigquery_config.use_topic_schema #=> true
+        #   sub.bigquery_config.write_metadata #=> false
+        #
+        # @example Update the bigquery configuration by passing a block:
+        #   require "google/cloud/pubsub"
+        #
+        #   pubsub = Google::Cloud::PubSub.new
+        #   sub = pubsub.subscription "my-subscription"
+        #
+        #   sub.bigquery_config do |bc|
+        #     bc.write_metadata = true
+        #     bc.use_topic_schema = false
+        #   end
+        #
+        def bigquery_config
+          ensure_service!
+
+          config = reference? ? Google::Cloud::PubSub::V1::BigQueryConfig.new : @grpc.bigquery_config
+
+          if block_given?
+            old_config = config.dup
+            yield config
+            new_config = config
+
+            if old_config != new_config # has the object been changed?
+              update_grpc = Google::Cloud::PubSub::V1::Subscription.new name: name, bigquery_config: new_config
+              @grpc = service.update_subscription update_grpc, :bigquery_config
+            end
+          end
+
+          config.freeze
+        end
+
+        ##
         # A hash of user-provided labels associated with this subscription.
         # Labels can be used to organize and group subscriptions.See [Creating
         # and Managing Labels](https://cloud.google.com/pubsub/docs/labels).

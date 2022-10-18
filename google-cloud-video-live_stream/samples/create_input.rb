@@ -43,5 +43,5 @@ def create_input project_id:, location:, input_id:
 
   # Print the input name.
   puts "Input: #{operation.response.name}"
-  # [END livestream_create_input]
 end
+# [END livestream_create_input]

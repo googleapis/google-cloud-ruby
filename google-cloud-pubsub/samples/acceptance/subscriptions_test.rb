@@ -17,6 +17,8 @@ require_relative "../subscriptions.rb"
 require_relative "../pubsub_create_subscription_with_filter.rb"
 require_relative "../pubsub_subscriber_exactly_once_delivery.rb"
 require_relative "../pubsub_create_subscription_with_exactly_once_delivery.rb"
+require_relative "../pubsub_create_bigquery_subscription.rb"
+require "google/cloud/bigquery"
 
 describe "subscriptions" do
   let(:pubsub) { Google::Cloud::Pubsub.new }
@@ -26,10 +28,14 @@ describe "subscriptions" do
 
   before :all do
     @topic = pubsub.create_topic random_topic_id
+    @created_subscriptions = []
   end
 
   after :all do
     @topic.delete
+    @created_subscriptions.each do |sub|
+      pubsub.subscription(sub).delete
+    end
   end
 
   before do
@@ -39,6 +45,7 @@ describe "subscriptions" do
   after do
     @subscription.delete if @subscription
     @subscription = nil
+    cleanup_bq @table, @dataset if @table 
   end
 
   it "supports pubsub_update_push_configuration, pubsub_list_subscriptions, pubsub_set_subscription_policy, pubsub_get_subscription_policy, " \
@@ -104,6 +111,7 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
 
     @topic.subscribe subscription_id, enable_exactly_once_delivery: true
 
@@ -194,6 +202,7 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
     filter = "attributes.author=\"unknown\""
 
     assert_output "Created subscription with filtering enabled: #{subscription_id}\n" do     
@@ -208,12 +217,30 @@ describe "subscriptions" do
     project_id = pubsub.project
     topic_id = @topic.name
     subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
 
     assert_output "Created subscription with exactly once delivery enabled: #{subscription_id}\n" do     
       PubsubCreateSubscriptionWithExactlyOnceDelivery.new.create_subscription_with_exactly_once_delivery(
         project_id: project_id,
         topic_id: topic_id,
         subscription_id: subscription_id
+      )
+    end
+  end 
+
+  it "supports creating bigquery subscription" do
+    project_id = pubsub.project
+    topic_id = @topic.name
+    subscription_id = random_subscription_id
+    @created_subscriptions << subscription_id
+    table_id = create_table 
+
+    assert_output "BigQuery subscription created: #{subscription_id}.\nTable for subscription is: #{table_id}\n" do     
+      pubsub_create_bigquery_subscription(
+        project_id: project_id,
+        topic_id: topic_id,
+        subscription_id: subscription_id,
+        bigquery_table_id: table_id
       )
     end
   end 

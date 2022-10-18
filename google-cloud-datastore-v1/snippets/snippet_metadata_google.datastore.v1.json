@@ -1,7 +1,7 @@
 {
   "client_library": {
     "name": "google-cloud-datastore-v1",
-    "version": "0.6.0",
+    "version": "0.7.0",
     "language": "RUBY",
     "apis": [
       {
@@ -75,6 +75,46 @@
         "method": {
           "short_name": "RunQuery",
           "full_name": "google.datastore.v1.Datastore.RunQuery",
+          "service": {
+            "short_name": "Datastore",
+            "full_name": "google.datastore.v1.Datastore"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 32,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "datastore_v1_generated_Datastore_RunAggregationQuery_sync",
+      "title": "Snippet for run_aggregation_query in Datastore",
+      "description": "Basic snippet for run_aggregation_query in Datastore",
+      "file": "datastore/run_aggregation_query.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "run_aggregation_query",
+        "full_name": "::Google::Cloud::Datastore::V1::Datastore::Client#run_aggregation_query",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Datastore::V1::RunAggregationQueryRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Datastore::V1::RunAggregationQueryResponse",
+        "client": {
+          "short_name": "Datastore::Client",
+          "full_name": "::Google::Cloud::Datastore::V1::Datastore::Client"
+        },
+        "method": {
+          "short_name": "RunAggregationQuery",
+          "full_name": "google.datastore.v1.Datastore.RunAggregationQuery",
           "service": {
             "short_name": "Datastore",
             "full_name": "google.datastore.v1.Datastore"

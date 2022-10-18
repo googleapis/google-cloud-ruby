@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 (2022-09-28)
+
+#### Features
+
+* Support for setting model options when classifying text ([#19204](https://github.com/googleapis/google-cloud-ruby/issues/19204)) 
+
 ### 0.5.0 (2022-07-02)
 
 #### Features

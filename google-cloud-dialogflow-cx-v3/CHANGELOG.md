@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.1 (2022-10-03)
+
+#### Documentation
+
+* Update SecuritySettings#gcs_bucket description ([#19244](https://github.com/googleapis/google-cloud-ruby/issues/19244)) 
+
 ### 0.10.0 (2022-07-02)
 
 #### Features

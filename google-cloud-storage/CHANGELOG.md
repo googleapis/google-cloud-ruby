@@ -1,5 +1,11 @@
 # Release History
 
+### 1.43.0 (2022-09-30)
+
+#### Features
+
+* Add retry conformance test ([#18230](https://github.com/googleapis/google-cloud-ruby/issues/18230)) 
+
 ### 1.42.0 (2022-09-21)
 
 #### Features

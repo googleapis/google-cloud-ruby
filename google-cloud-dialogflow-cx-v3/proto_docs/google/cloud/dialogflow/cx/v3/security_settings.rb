@@ -205,10 +205,11 @@ module Google
             # Settings for exporting audio.
             # @!attribute [rw] gcs_bucket
             #   @return [::String]
-            #     Cloud Storage bucket to export audio record to. You need to grant
-            #     `service-<Conversation Project
-            #     Number>@gcp-sa-dialogflow.iam.gserviceaccount.com` the `Storage Object
-            #     Admin` role in this bucket.
+            #     Cloud Storage bucket to export audio record to.
+            #     Setting this field would grant the Storage Object Creator role to
+            #     the Dialogflow Service Agent.
+            #     API caller that tries to modify this field should have the permission of
+            #     storage.buckets.setIamPolicy.
             # @!attribute [rw] audio_export_pattern
             #   @return [::String]
             #     Filename pattern for exported audio.

@@ -544,13 +544,13 @@ module Google
             # Unspecified feature type.
             TYPE_UNSPECIFIED = 0
 
-            # Run article suggestion model.
+            # Run article suggestion model for chat.
             ARTICLE_SUGGESTION = 1
 
-            # Run FAQ model.
+            # Run FAQ model for chat.
             FAQ = 2
 
-            # Run smart reply model.
+            # Run smart reply model for chat.
             SMART_REPLY = 3
           end
         end
