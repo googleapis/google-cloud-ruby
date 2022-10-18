@@ -330,7 +330,8 @@ module Google
         # @param [Boolean] autoclass_enabled The bucket's autoclass configuration.
         #   Buckets can have either StorageClass OLM rules or Autoclass, but
         #   not both. When Autoclass is enabled on a bucket, adding StorageClass
-        #   OLM rules will result in failure.
+        #   OLM rules will result in failure. For more information, see
+        #   [Autoclass](https://cloud.google.com/storage/docs/autoclass).
         #
         #   The value provided will be applied to all operations on the returned
         #   bucket instance and its files.
