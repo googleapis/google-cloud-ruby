@@ -1,5 +1,11 @@
 # Release History
 
+### 2.13.0 (2022-10-18)
+
+#### Features
+
+* Added support for bigquery subscription ([#19221](https://github.com/googleapis/google-cloud-ruby/issues/19221)) 
+
 ### 2.12.1 (2022-08-21)
 
 #### Bug Fixes
