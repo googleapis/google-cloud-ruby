@@ -422,7 +422,7 @@ module Google
         # @return [Boolean]
         #
         def autoclass_enabled
-          @gapi.autoclass&.enabled
+          @gapi.autoclass&.enabled?
         end
 
         ##
@@ -438,9 +438,12 @@ module Google
         # Updates bucket's autoclass configuration. This defines the default class for objects in the
         # bucket and down/up-grades the storage class of objects based on the access patterns.
         # Accepted values are `:false`, and `:true`.
-        # rubocop:todo update the link
+        #
         # For more information, see [Storage
-        # Classes](https://cloud.google.com/storage/docs/add_the_endpoint).
+        # Classes](https://cloud.google.com/storage/docs/using-autoclass).
+        #
+        # Note: Only patch requests that disable autoclass are currently supported.
+        # To enable autoclass, you must set it at bucket creation time.
         #
         # @param [Boolean] toggle for autoclass configuration of the bucket.
         #
