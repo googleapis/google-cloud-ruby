@@ -1,5 +1,13 @@
 # Release History
 
+### 0.11.0 (2022-10-18)
+
+#### Features
+
+* add annotation reasons REFUND, REFUND_FRAUD, TRANSACTION_ACCEPTED, TRANSACTION_DECLINED and SOCIAL_SPAM 
+* support PrivatePasswordLeakVerification 
+* support RetrieveLegacySecretKey 
+
 ### 0.10.0 (2022-07-07)
 
 #### Features
