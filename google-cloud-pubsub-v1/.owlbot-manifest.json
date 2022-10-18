@@ -14,9 +14,6 @@
     "google-cloud-pubsub-v1.gemspec",
     "lib/google-cloud-pubsub-v1.rb",
     "lib/google/cloud/pubsub/v1.rb",
-    "lib/google/cloud/pubsub/v1/iam_policy.rb",
-    "lib/google/cloud/pubsub/v1/iam_policy/client.rb",
-    "lib/google/cloud/pubsub/v1/iam_policy/credentials.rb",
     "lib/google/cloud/pubsub/v1/publisher.rb",
     "lib/google/cloud/pubsub/v1/publisher/client.rb",
     "lib/google/cloud/pubsub/v1/publisher/credentials.rb",
@@ -83,7 +80,6 @@
     "snippets/subscriber/streaming_pull.rb",
     "snippets/subscriber/update_snapshot.rb",
     "snippets/subscriber/update_subscription.rb",
-    "test/google/cloud/pubsub/v1/iam_policy_test.rb",
     "test/google/cloud/pubsub/v1/publisher_paths_test.rb",
     "test/google/cloud/pubsub/v1/publisher_test.rb",
     "test/google/cloud/pubsub/v1/schema_service_paths_test.rb",
@@ -94,8 +90,12 @@
   ],
   "static": [
     ".OwlBot.yaml",
+    "lib/google/cloud/pubsub/v1/iam_policy.rb",
+    "lib/google/cloud/pubsub/v1/iam_policy/client.rb",
+    "lib/google/cloud/pubsub/v1/iam_policy/credentials.rb",
     "lib/google/cloud/pubsub/v1/publisher/helpers.rb",
     "lib/google/cloud/pubsub/v1/subscriber/helpers.rb",
+    "test/google/cloud/pubsub/v1/iam_policy_test.rb",
     "test/google/cloud/pubsub/v1/publisher/helpers_test.rb",
     "test/google/cloud/pubsub/v1/subscriber/helpers_test.rb"
   ]
