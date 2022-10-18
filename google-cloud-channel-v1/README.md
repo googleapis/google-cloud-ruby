@@ -32,9 +32,9 @@ In order to use this library, you first need to go through the following steps:
 ```ruby
 require "google/cloud/channel/v1"
 
-client = ::Google::Cloud::Channel::V1::CloudChannelService::Client.new
-request = ::Google::Cloud::Channel::V1::ListCustomersRequest.new # (request fields as keyword arguments...)
-response = client.list_customers request
+client = ::Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
+request = ::Google::Cloud::Channel::V1::RunReportJobRequest.new # (request fields as keyword arguments...)
+response = client.run_report_job request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-channel-v1/latest)
