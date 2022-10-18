@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2022-10-18)
+
+#### Features
+
+* support workload vulnerability mode 
+
 ### 0.11.0 (2022-09-16)
 
 #### Features
