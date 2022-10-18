@@ -256,6 +256,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Batch::V1::AllocationPolicy::InstancePolicyOrTemplate>]
         #     Describe instances that can be created by this AllocationPolicy.
         #     Only instances[0] is supported now.
+        # @!attribute [rw] service_account
+        #   @return [::Google::Cloud::Batch::V1::ServiceAccount]
+        #     Service account that VMs will run as.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels applied to all VM instances and other resources
@@ -331,7 +334,9 @@ module Google
           # @!attribute [rw] device_name
           #   @return [::String]
           #     Device name that the guest operating system will see.
-          #     If not specified, this is default to the disk name.
+          #     It is used by Runnable.volumes field to mount disks. So please specify
+          #     the device_name if you want Batch to help mount the disk, and it should
+          #     match the device_name field in volumes.
           class AttachedDisk
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -347,6 +352,7 @@ module Google
           #     The number of accelerators of this type.
           # @!attribute [rw] install_gpu_drivers
           #   @return [::Boolean]
+          #     Deprecated: please use instances[0].install_gpu_drivers instead.
           class Accelerator
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -388,6 +394,12 @@ module Google
           #     Name of an instance template used to create VMs.
           #     Named the field as 'instance_template' instead of 'template' to avoid
           #     c++ keyword conflict.
+          # @!attribute [rw] install_gpu_drivers
+          #   @return [::Boolean]
+          #     Set this field true if users want Batch to help fetch drivers from a
+          #     third party location and install them for GPUs specified in
+          #     policy.accelerators or instance_template on their behalf. Default is
+          #     false.
           class InstancePolicyOrTemplate
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -500,6 +512,18 @@ module Google
         #     When true, Batch will configure SSH to allow passwordless login between
         #     VMs running the Batch tasks in the same TaskGroup.
         class TaskGroup
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Carries information about a Google Cloud service account.
+        # @!attribute [rw] email
+        #   @return [::String]
+        #     Email address of the service account. If not specified, the default
+        #     Compute Engine service account for the project will be used. If instance
+        #     template is being used, the service account has to be specified in the
+        #     instance template and it has to match the email field here.
+        class ServiceAccount
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
