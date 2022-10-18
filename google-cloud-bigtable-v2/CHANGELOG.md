@@ -4,6 +4,8 @@
 
 #### Bug Fixes
 
+This release fixes the RequestStats interfaces. The wrong version of those interfaces were released in 0.7.0.
+
 * BREAKING CHANGE: Removed RequestStats#read_efficiency_stats 
 * BREAKING CHANGE: Removed the REQUEST_STATS_EFFICIENCY RequestStatsView, and adjusted the ID of REQUEST_STATS_FULL accordingly. 
 * BREAKING CHANGE: Renamed AllReadStats to FullReadStatsView, and updated the field names in RequestStats. ([#19270](https://github.com/googleapis/google-cloud-ruby/issues/19270)) 
