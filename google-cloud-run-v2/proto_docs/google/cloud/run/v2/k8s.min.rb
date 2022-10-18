@@ -74,6 +74,25 @@ module Google
         # @!attribute [rw] volume_mounts
         #   @return [::Array<::Google::Cloud::Run::V2::VolumeMount>]
         #     Volume to mount into the container's filesystem.
+        # @!attribute [rw] working_dir
+        #   @return [::String]
+        #     Container's working directory.
+        #     If not specified, the container runtime's default will be used, which
+        #     might be configured in the container image.
+        # @!attribute [rw] liveness_probe
+        #   @return [::Google::Cloud::Run::V2::Probe]
+        #     Periodic probe of container liveness.
+        #     Container will be restarted if the probe fails.
+        #     More info:
+        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+        # @!attribute [rw] startup_probe
+        #   @return [::Google::Cloud::Run::V2::Probe]
+        #     Startup probe of application within the container.
+        #     All other probes are disabled if a startup probe is provided, until it
+        #     succeeds. Container will not be added to service endpoints if the probe
+        #     fails.
+        #     More info:
+        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
         class Container
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -219,7 +238,7 @@ module Google
         # @!attribute [rw] default_mode
         #   @return [::Integer]
         #     Integer representation of mode bits to use on created files by default.
-        #     Must be a value between 0000 and 0777 (octal), defaulting to 0644.
+        #     Must be a value between 0000 and 0777 (octal), defaulting to 0444.
         #     Directories within the path are not affected by  this setting.
         #
         #     Notes
@@ -281,6 +300,79 @@ module Google
         #     how to connect Cloud SQL and Cloud Run. Format:
         #     \\{project}:\\{location}:\\{instance}
         class CloudSqlInstance
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Probe describes a health check to be performed against a container to
+        # determine whether it is alive or ready to receive traffic.
+        # @!attribute [rw] initial_delay_seconds
+        #   @return [::Integer]
+        #     Number of seconds after the container has started before the probe is
+        #     initiated.
+        #     Defaults to 0 seconds. Minimum value is 0. Maximum value for liveness probe
+        #     is 3600. Maximum value for startup probe is 240.
+        #     More info:
+        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+        # @!attribute [rw] timeout_seconds
+        #   @return [::Integer]
+        #     Number of seconds after which the probe times out.
+        #     Defaults to 1 second. Minimum value is 1. Maximum value is 3600.
+        #     Must be smaller than period_seconds.
+        #     More info:
+        #     https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle#container-probes
+        # @!attribute [rw] period_seconds
+        #   @return [::Integer]
+        #     How often (in seconds) to perform the probe.
+        #     Default to 10 seconds. Minimum value is 1. Maximum value for liveness probe
+        #     is 3600. Maximum value for startup probe is 240.
+        #     Must be greater or equal than timeout_seconds.
+        # @!attribute [rw] failure_threshold
+        #   @return [::Integer]
+        #     Minimum consecutive failures for the probe to be considered failed after
+        #     having succeeded. Defaults to 3. Minimum value is 1.
+        # @!attribute [rw] http_get
+        #   @return [::Google::Cloud::Run::V2::HTTPGetAction]
+        #     HTTPGet specifies the http request to perform.
+        #     Exactly one of HTTPGet or TCPSocket must be specified.
+        # @!attribute [rw] tcp_socket
+        #   @return [::Google::Cloud::Run::V2::TCPSocketAction]
+        #     TCPSocket specifies an action involving a TCP port.
+        #     Exactly one of HTTPGet or TCPSocket must be specified.
+        class Probe
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # HTTPGetAction describes an action based on HTTP Get requests.
+        # @!attribute [rw] path
+        #   @return [::String]
+        #     Path to access on the HTTP server. Defaults to '/'.
+        # @!attribute [rw] http_headers
+        #   @return [::Array<::Google::Cloud::Run::V2::HTTPHeader>]
+        #     Custom headers to set in the request. HTTP allows repeated headers.
+        class HTTPGetAction
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # HTTPHeader describes a custom header to be used in HTTP probes
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The header field name
+        # @!attribute [rw] value
+        #   @return [::String]
+        #     The header field value
+        class HTTPHeader
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # TCPSocketAction describes an action based on opening a socket
+        # @!attribute [rw] port
+        #   @return [::Integer]
+        #     Port number to access on the container. Must be in the range 1 to 65535.
+        class TCPSocketAction
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end

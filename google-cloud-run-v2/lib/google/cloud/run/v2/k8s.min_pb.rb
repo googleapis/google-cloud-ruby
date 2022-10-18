@@ -17,6 +17,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :resources, :message, 6, "google.cloud.run.v2.ResourceRequirements"
       repeated :ports, :message, 7, "google.cloud.run.v2.ContainerPort"
       repeated :volume_mounts, :message, 8, "google.cloud.run.v2.VolumeMount"
+      optional :working_dir, :string, 9
+      optional :liveness_probe, :message, 10, "google.cloud.run.v2.Probe"
+      optional :startup_probe, :message, 11, "google.cloud.run.v2.Probe"
     end
     add_message "google.cloud.run.v2.ResourceRequirements" do
       map :limits, :string, :string, 1
@@ -64,6 +67,27 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.run.v2.CloudSqlInstance" do
       repeated :instances, :string, 1
     end
+    add_message "google.cloud.run.v2.Probe" do
+      optional :initial_delay_seconds, :int32, 1
+      optional :timeout_seconds, :int32, 2
+      optional :period_seconds, :int32, 3
+      optional :failure_threshold, :int32, 4
+      oneof :probe_type do
+        optional :http_get, :message, 5, "google.cloud.run.v2.HTTPGetAction"
+        optional :tcp_socket, :message, 6, "google.cloud.run.v2.TCPSocketAction"
+      end
+    end
+    add_message "google.cloud.run.v2.HTTPGetAction" do
+      optional :path, :string, 1
+      repeated :http_headers, :message, 4, "google.cloud.run.v2.HTTPHeader"
+    end
+    add_message "google.cloud.run.v2.HTTPHeader" do
+      optional :name, :string, 1
+      optional :value, :string, 2
+    end
+    add_message "google.cloud.run.v2.TCPSocketAction" do
+      optional :port, :int32, 1
+    end
   end
 end
 
@@ -82,6 +106,10 @@ module Google
         SecretVolumeSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.SecretVolumeSource").msgclass
         VersionToPath = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.VersionToPath").msgclass
         CloudSqlInstance = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.CloudSqlInstance").msgclass
+        Probe = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.Probe").msgclass
+        HTTPGetAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.HTTPGetAction").msgclass
+        HTTPHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.HTTPHeader").msgclass
+        TCPSocketAction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.run.v2.TCPSocketAction").msgclass
       end
     end
   end
