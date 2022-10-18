@@ -271,6 +271,15 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(random_bucket).must_be :nil?
   end
 
+  it "creates new bucket with autoclass config and storage_class" do
+    one_off_bucket_name = "#{bucket_name}_one_off"
+
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
+
+    err = expect { storage.create_bucket one_off_bucket_name, user_project: true, autoclass_enabled: true, storage_class: "nearline" }.must_raise Google::Cloud::InvalidArgumentError
+    _(err.message).must_match /default storage class on bucket with Autoclass enabled to storage class other than STANDARD/
+  end
+
   it "creates new bucket with autoclass config and then updates it" do
     one_off_bucket_name = "#{bucket_name}_one_off"
 
