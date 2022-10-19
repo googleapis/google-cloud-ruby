@@ -1264,7 +1264,7 @@ module Google
         end
 
         # Cloud KMS metadata for the given
-        # [google.cloud.location.Location][google.cloud.location.Location].
+        # `::Google::Cloud::Location::Location`.
         # @!attribute [rw] hsm_available
         #   @return [::Boolean]
         #     Indicates whether {::Google::Cloud::Kms::V1::CryptoKey CryptoKeys} with

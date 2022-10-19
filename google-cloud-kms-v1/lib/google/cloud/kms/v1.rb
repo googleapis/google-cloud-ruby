@@ -18,7 +18,6 @@
 
 require "google/cloud/kms/v1/ekm_service"
 require "google/cloud/kms/v1/key_management_service"
-require "google/cloud/kms/v1/iam_policy"
 require "google/cloud/kms/v1/version"
 
 module Google
