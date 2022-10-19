@@ -18,6 +18,7 @@
 
 require "google/cloud/errors"
 require "google/pubsub/v1/pubsub_pb"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -179,6 +180,12 @@ module Google
               @quota_project_id = @config.quota_project
               @quota_project_id ||= credentials.quota_project_id if credentials.respond_to? :quota_project_id
 
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @publisher_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::PubSub::V1::Publisher::Stub,
                 credentials:  credentials,
@@ -187,6 +194,13 @@ module Google
                 interceptors: @config.interceptors
               )
             end
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 

@@ -186,30 +186,6 @@
           }
         }
       }
-    },
-    "IAMPolicy": {
-      "clients": {
-        "grpc": {
-          "libraryClient": "::Google::Cloud::PubSub::V1::IAMPolicy::Client",
-          "rpcs": {
-            "SetIamPolicy": {
-              "methods": [
-                "set_iam_policy"
-              ]
-            },
-            "GetIamPolicy": {
-              "methods": [
-                "get_iam_policy"
-              ]
-            },
-            "TestIamPermissions": {
-              "methods": [
-                "test_iam_permissions"
-              ]
-            }
-          }
-        }
-      }
     }
   }
 }

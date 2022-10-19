@@ -19,7 +19,6 @@
 require "google/cloud/pubsub/v1/schema_service"
 require "google/cloud/pubsub/v1/publisher"
 require "google/cloud/pubsub/v1/subscriber"
-require "google/cloud/pubsub/v1/iam_policy"
 require "google/cloud/pubsub/v1/version"
 
 module Google
