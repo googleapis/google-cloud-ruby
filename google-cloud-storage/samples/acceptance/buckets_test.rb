@@ -46,6 +46,8 @@ require_relative "../storage_set_bucket_default_kms_key"
 require_relative "../storage_set_public_access_prevention_enforced"
 require_relative "../storage_set_public_access_prevention_inherited"
 require_relative "../storage_set_retention_policy"
+require_relative "../storage_get_autoclass"
+require_relative "../storage_set_autoclass"
 
 describe "Buckets Snippets" do
   let(:storage_client)   { Google::Cloud::Storage.new }
@@ -104,8 +106,8 @@ describe "Buckets Snippets" do
         delete_bucket bucket_name: bucket_name
       end
 
-      refute storage_client.bucket bucket_name
 
+      refute storage_client.bucket bucket_name
 
       delete_bucket_helper bucket_name
       delete_bucket_helper secondary_bucket_name
@@ -136,6 +138,25 @@ describe "Buckets Snippets" do
       end
 
       refute_nil storage_client.bucket bucket_name
+
+      delete_bucket_helper bucket_name
+    end
+  end
+
+  describe "autoclass" do
+    it "get_autoclass, set_autoclass" do
+      bucket_name = random_bucket_name
+      refute storage_client.bucket bucket_name
+
+      storage_client.create_bucket bucket_name, autoclass_enabled: true
+
+      assert_output(/autoclass config set to true./) do
+        get_autoclass bucket_name: bucket_name
+      end
+
+      assert_output(/autoclass config set to false./) do
+        set_autoclass bucket_name: bucket_name, toggle: false
+      end
 
       delete_bucket_helper bucket_name
     end

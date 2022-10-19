@@ -271,6 +271,42 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(random_bucket).must_be :nil?
   end
 
+  it "does not create a new bucket when both autoclass and storage_class are specified" do
+    one_off_bucket_name = "#{bucket_name}_one_off"
+
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
+
+    err = expect { storage.create_bucket one_off_bucket_name, user_project: true, autoclass_enabled: true, storage_class: "nearline" }.must_raise Google::Cloud::InvalidArgumentError
+    _(err.message).must_match /default storage class on bucket with Autoclass enabled to storage class other than STANDARD/
+  end
+
+  it "creates new bucket with autoclass config and then updates it" do
+    one_off_bucket_name = "#{bucket_name}_one_off"
+
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
+
+    one_off_bucket = safe_gcs_execute { storage.create_bucket one_off_bucket_name, user_project: true, autoclass_enabled: true }
+    _(storage.bucket(one_off_bucket_name)).wont_be :nil?
+    _(one_off_bucket.user_project).must_equal true
+    _(one_off_bucket.autoclass_enabled).must_equal true
+    prev_toggle_time = one_off_bucket.autoclass_toggle_time
+
+    one_off_bucket.update do |b|
+      b.autoclass_enabled= false
+    end
+    _(one_off_bucket.autoclass_enabled).must_equal false
+
+    one_off_bucket_copy = storage.bucket one_off_bucket_name, user_project: true
+    _(one_off_bucket_copy).wont_be :nil?
+    _(one_off_bucket_copy.user_project).must_equal true
+    _(one_off_bucket_copy.autoclass_enabled).must_equal false
+    refute one_off_bucket_copy.autoclass_toggle_time == prev_toggle_time
+
+    one_off_bucket.files.all &:delete
+    safe_gcs_execute { one_off_bucket.delete }
+    _(storage.bucket(one_off_bucket_name)).must_be :nil?
+  end
+
   describe "anonymous project" do
     it "raises when creating a bucket without authentication" do
       anonymous_storage = Google::Cloud::Storage.anonymous
@@ -298,7 +334,7 @@ describe Google::Cloud::Storage::Bucket, :storage do
     _(storage.bucket(single_use_bucket_name)).must_be :nil?
   end
 
-  it "creates a dual region bucket" do    
+  it "creates a dual region bucket" do
     one_off_bucket_name = "multi_loc_#{bucket_name}"
     _(storage.bucket(one_off_bucket_name)).must_be :nil?
 

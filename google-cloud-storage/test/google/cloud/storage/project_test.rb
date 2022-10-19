@@ -28,6 +28,7 @@ describe Google::Cloud::Storage::Project, :mock_storage do
   let(:bucket_logging_prefix) { "AccessLog" }
   let(:bucket_website_main) { "index.html" }
   let(:bucket_website_404) { "404.html" }
+  let(:bucket_autoclass_enabled) { true }
   let(:bucket_requester_pays) { true }
   let(:bucket_cors) { [{ max_age_seconds: 300,
                          origin: ["http://example.org", "https://example.org"],
@@ -80,6 +81,22 @@ describe Google::Cloud::Storage::Project, :mock_storage do
     _(bucket.name).must_equal bucket_name
     _(bucket.location).must_equal bucket_location
     _(bucket.location_type).must_equal bucket_location_type
+  end
+
+  it "creates a bucket with autoclass config" do
+    mock = Minitest::Mock.new
+    created_bucket = create_bucket_gapi bucket_name, autoclass_enabled: bucket_autoclass_enabled
+    resp_bucket = bucket_with_location created_bucket
+    mock.expect :insert_bucket, resp_bucket, [project, created_bucket], predefined_acl: nil, predefined_default_object_acl: nil, user_project: nil, options: {}
+    storage.service.mocked_service = mock
+
+    bucket = storage.create_bucket bucket_name, autoclass_enabled: bucket_autoclass_enabled
+
+    mock.verify
+
+    _(bucket).must_be_kind_of Google::Cloud::Storage::Bucket
+    _(bucket.name).must_equal bucket_name
+    _(bucket.autoclass_enabled).must_equal bucket_autoclass_enabled
   end
 
   it "creates a bucket with storage_class" do
@@ -820,11 +837,13 @@ describe Google::Cloud::Storage::Project, :mock_storage do
                          website: nil,
                          cors: nil,
                          billing: nil,
-                         lifecycle: nil
+                         lifecycle: nil,
+                         autoclass_enabled: false
     options = {
       name: name, location: location, storage_class: storage_class,
       versioning: versioning, logging: logging, website: website,
-      cors_configurations: cors, billing: billing, lifecycle: lifecycle
+      cors_configurations: cors, billing: billing, lifecycle: lifecycle,
+      autoclass: Google::Apis::StorageV1::Bucket::Autoclass.new( enabled: autoclass_enabled )
     }.delete_if { |_, v| v.nil? }
     Google::Apis::StorageV1::Bucket.new **options
   end
