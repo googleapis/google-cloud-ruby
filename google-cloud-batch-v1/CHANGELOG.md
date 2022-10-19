@@ -1,5 +1,17 @@
 # Changelog
 
+### 0.4.0 (2022-10-19)
+
+#### Features
+
+* Enable install_gpu_drivers flag in v1 proto 
+* Enable install_gpu_drivers flag in v1 proto ([#19290](https://github.com/googleapis/google-cloud-ruby/issues/19290)) 
+#### Documentation
+
+* Refine comments for deprecated proto fields 
+* Refine GPU drivers installation proto description 
+* Update the API comments about the device_name 
+
 ### 0.3.0 (2022-08-25)
 
 #### Features
