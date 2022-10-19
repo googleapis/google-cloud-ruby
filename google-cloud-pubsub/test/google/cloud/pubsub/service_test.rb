@@ -18,7 +18,7 @@ require "google/cloud/pubsub/v1"
 
 describe Google::Cloud::PubSub::Service do
   let(:project) { "test" }
-  let(:credentials) { OpenStruct.new(project_id: "project-id") }
+  let(:credentials) { :this_channel_is_insecure }
   let(:timeout) { 123.4 }
   let(:endpoint) { "pubsub.googleapis.com" }
   let(:endpoint_2) { "localhost:4567" }
