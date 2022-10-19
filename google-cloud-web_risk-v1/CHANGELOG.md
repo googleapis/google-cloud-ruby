@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 (2022-10-19)
+
+#### Features
+
+* Add SOCIAL_ENGINEERING_EXTENDED_COVERAGE threat type ([#19287](https://github.com/googleapis/google-cloud-ruby/issues/19287)) 
+
 ### 0.5.0 (2022-07-08)
 
 #### Features
