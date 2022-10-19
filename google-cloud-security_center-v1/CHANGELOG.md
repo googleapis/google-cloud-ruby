@@ -1,5 +1,11 @@
 # Release History
 
+### 0.22.0 (2022-10-19)
+
+#### Features
+
+* Support for folder and project based notification config paths ([#19291](https://github.com/googleapis/google-cloud-ruby/issues/19291)) 
+
 ### 0.21.0 (2022-09-16)
 
 #### Features
