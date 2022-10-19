@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.4.0 (2022-10-19)
+
+#### Features
+
+* Adds Startup and Liveness probes to Cloud Run v2 API client libraries ([#19288](https://github.com/googleapis/google-cloud-ruby/issues/19288)) 
+
 ### 0.3.1 (2022-09-15)
 
 #### Documentation
