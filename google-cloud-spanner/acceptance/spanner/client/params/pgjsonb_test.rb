@@ -44,6 +44,7 @@ describe "Spanner Client", :params, :pgjsonb, :spanner do
   end
 
   it "queries and returns an array of json parameters" do
+    skip "Arrays not supported yet"
     results = db.execute_query "SELECT $1 AS value", params: { p1: json_array_params }, types: { p1: [:PG_JSONB] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -52,6 +53,7 @@ describe "Spanner Client", :params, :pgjsonb, :spanner do
   end
 
   it "queries and returns an array of json parameters with a nil value" do
+    skip "Arrays not supported yet"
     params = [nil].concat json_array_params
     results = db.execute_query "SELECT $1 AS value", params: { p1: params }, types: { p1: [:PG_JSONB] }
 
@@ -61,6 +63,7 @@ describe "Spanner Client", :params, :pgjsonb, :spanner do
   end
 
   it "queries and returns an empty array of json parameters" do
+    skip "Arrays not supported yet"
     results = db.execute_query "SELECT $1 AS value", params: { p1: [] }, types: { p1: [:PG_JSONB] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results
@@ -69,6 +72,7 @@ describe "Spanner Client", :params, :pgjsonb, :spanner do
   end
 
   it "queries and returns a NULL array of json parameters" do
+    skip "Arrays not supported yet"
     results = db.execute_query "SELECT $1 AS value", params: { p1: nil }, types: { p1: [:PG_JSONB] }
 
     _(results).must_be_kind_of Google::Cloud::Spanner::Results

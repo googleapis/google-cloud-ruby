@@ -76,7 +76,7 @@ module Acceptance
             numerics numeric[],
             dates DATE[],
             json jsonb,
-            json_array jsonb[],
+            -- json_array jsonb[],
             PRIMARY KEY(id)
         );
       STUFFS
