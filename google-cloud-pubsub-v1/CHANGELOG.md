@@ -1,5 +1,11 @@
 # Release History
 
+### 0.12.0 (2022-10-21)
+
+#### Features
+
+* Provide easier access to IAM functionality via the standard IAMPolicy client class ([#19315](https://github.com/googleapis/google-cloud-ruby/issues/19315)) 
+
 ### 0.11.0 (2022-07-07)
 
 #### Features
