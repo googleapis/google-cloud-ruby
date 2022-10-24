@@ -1,5 +1,11 @@
 # Release History
 
+### 0.13.0 (2022-10-24)
+
+#### Features
+
+* Support for specifying a read lock mode for a read-write transaction ([#19311](https://github.com/googleapis/google-cloud-ruby/issues/19311)) 
+
 ### 0.12.0 (2022-10-18)
 
 #### Features
