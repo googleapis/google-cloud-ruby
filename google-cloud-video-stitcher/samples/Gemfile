@@ -1,4 +1,4 @@
-# Copyright 2022 Google, Inc
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,10 +17,11 @@ source "https://rubygems.org"
 master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
 
 gem "google-cloud-video-stitcher", path: master ? "../../google-cloud-video-stitcher" : nil
+gem "google-cloud-video-stitcher-v1", path: master ? "../../google-cloud-video-stitcher-v1" : nil
 
 group :test do
-  gem "google-style", "~> 1.25.1"
-  gem "minitest", "~> 5.14"
+  gem "google-style", "~> 1.26.1"
+  gem "minitest", "~> 5.16"
   gem "minitest-focus", "~> 1.1"
   gem "minitest-rg", "~> 5.2"
   gem "rake"
