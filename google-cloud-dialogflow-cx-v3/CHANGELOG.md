@@ -1,5 +1,11 @@
 # Changelog
 
+### 0.10.2 (2022-10-24)
+
+#### Documentation
+
+* Clarified TTL as time-to-live ([#19334](https://github.com/googleapis/google-cloud-ruby/issues/19334)) 
+
 ### 0.10.1 (2022-10-03)
 
 #### Documentation
