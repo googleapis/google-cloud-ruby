@@ -219,6 +219,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :description, :string, 422937596
       proto3_optional :id, :uint64, 3355
       proto3_optional :ip_version, :string, 294959552
+      proto3_optional :ipv6_endpoint_type, :string, 97501004
       proto3_optional :kind, :string, 3292052
       proto3_optional :name, :string, 3373707
       proto3_optional :network, :string, 232872494
@@ -242,6 +243,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :IPV4, 2254341
       value :IPV6, 2254343
       value :UNSPECIFIED_VERSION, 21850000
+    end
+    add_enum "google.cloud.compute.v1.Address.Ipv6EndpointType" do
+      value :UNDEFINED_IPV6_ENDPOINT_TYPE, 0
+      value :NETLB, 74173363
+      value :VM, 2743
     end
     add_enum "google.cloud.compute.v1.Address.NetworkTier" do
       value :UNDEFINED_NETWORK_TIER, 0
@@ -2224,6 +2230,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :error_info, :message, 25251973, "google.cloud.compute.v1.ErrorInfo"
       proto3_optional :help, :message, 3198785, "google.cloud.compute.v1.Help"
       proto3_optional :localized_message, :message, 404537155, "google.cloud.compute.v1.LocalizedMessage"
+      proto3_optional :quota_info, :message, 93923861, "google.cloud.compute.v1.QuotaExceededInfo"
     end
     add_message "google.cloud.compute.v1.ErrorInfo" do
       proto3_optional :domain, :string, 284415172
@@ -4011,6 +4018,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :private_ipv6_google_access, :string, 48277006
       proto3_optional :reservation_affinity, :message, 157850683, "google.cloud.compute.v1.ReservationAffinity"
       repeated :resource_policies, :string, 22220385
+      proto3_optional :resource_status, :message, 249429315, "google.cloud.compute.v1.ResourceStatus"
       proto3_optional :satisfies_pzs, :bool, 480964267
       proto3_optional :scheduling, :message, 386688404, "google.cloud.compute.v1.Scheduling"
       proto3_optional :self_link, :string, 456214797
@@ -4113,6 +4121,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :instance_group, :string, 81095253
       proto3_optional :instance_template, :string, 309248228
       proto3_optional :kind, :string, 3292052
+      proto3_optional :list_managed_instances_results, :string, 296047156
       proto3_optional :name, :string, 3373707
       repeated :named_ports, :message, 427598732, "google.cloud.compute.v1.NamedPort"
       proto3_optional :region, :string, 138946292
@@ -4124,6 +4133,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :update_policy, :message, 175809896, "google.cloud.compute.v1.InstanceGroupManagerUpdatePolicy"
       repeated :versions, :message, 162430619, "google.cloud.compute.v1.InstanceGroupManagerVersion"
       proto3_optional :zone, :string, 3744684
+    end
+    add_enum "google.cloud.compute.v1.InstanceGroupManager.ListManagedInstancesResults" do
+      value :UNDEFINED_LIST_MANAGED_INSTANCES_RESULTS, 0
+      value :PAGELESS, 32183464
+      value :PAGINATED, 40190637
     end
     add_message "google.cloud.compute.v1.InstanceGroupManagerActionsSummary" do
       proto3_optional :abandoning, :int32, 440023373
@@ -6035,6 +6049,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :name, :string, 3373707
       proto3_optional :network, :string, 232872494
       proto3_optional :network_endpoint_type, :string, 118301523
+      proto3_optional :psc_data, :message, 71937481, "google.cloud.compute.v1.NetworkEndpointGroupPscData"
       proto3_optional :psc_target_service, :string, 269132134
       proto3_optional :region, :string, 138946292
       proto3_optional :self_link, :string, 456214797
@@ -6082,6 +6097,20 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :next_page_token, :string, 79797525
       proto3_optional :self_link, :string, 456214797
       proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
+    end
+    add_message "google.cloud.compute.v1.NetworkEndpointGroupPscData" do
+      proto3_optional :consumer_psc_address, :string, 452646572
+      proto3_optional :psc_connection_id, :uint64, 292082397
+      proto3_optional :psc_connection_status, :string, 184149172
+    end
+    add_enum "google.cloud.compute.v1.NetworkEndpointGroupPscData.PscConnectionStatus" do
+      value :UNDEFINED_PSC_CONNECTION_STATUS, 0
+      value :ACCEPTED, 246714279
+      value :CLOSED, 380163436
+      value :NEEDS_ATTENTION, 344491452
+      value :PENDING, 35394935
+      value :REJECTED, 174130302
+      value :STATUS_UNSPECIFIED, 42133066
     end
     add_message "google.cloud.compute.v1.NetworkEndpointGroupsAttachEndpointsRequest" do
       repeated :network_endpoints, :message, 149850285, "google.cloud.compute.v1.NetworkEndpoint"
@@ -7256,6 +7285,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :SSL_CERTIFICATES, 378372399
       value :STATIC_ADDRESSES, 93624049
       value :STATIC_BYOIP_ADDRESSES, 275809649
+      value :STATIC_EXTERNAL_IPV6_ADDRESS_RANGES, 472346774
       value :SUBNETWORKS, 421330469
       value :T2A_CPUS, 522170599
       value :T2D_CPUS, 71187140
@@ -7270,6 +7300,12 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :VPN_GATEWAYS, 35620282
       value :VPN_TUNNELS, 104327296
       value :XPN_SERVICE_PROJECTS, 95191981
+    end
+    add_message "google.cloud.compute.v1.QuotaExceededInfo" do
+      map :dimensions, :string, :string, 414334925
+      proto3_optional :limit, :double, 102976443
+      proto3_optional :limit_name, :string, 398197903
+      proto3_optional :metric_name, :string, 409881530
     end
     add_message "google.cloud.compute.v1.RawDisk" do
       proto3_optional :container_type, :string, 318809144
@@ -7809,6 +7845,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :TUESDAY, 277509677
       value :WEDNESDAY, 422029110
     end
+    add_message "google.cloud.compute.v1.ResourceStatus" do
+      proto3_optional :physical_host, :string, 464370704
+    end
     add_message "google.cloud.compute.v1.ResumeInstanceRequest" do
       optional :instance, :string, 18257045
       optional :project, :string, 227560217
@@ -7880,6 +7919,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :id, :uint64, 3355
       repeated :interfaces, :message, 12073562, "google.cloud.compute.v1.RouterInterface"
       proto3_optional :kind, :string, 3292052
+      repeated :md5_authentication_keys, :message, 71063322, "google.cloud.compute.v1.RouterMd5AuthenticationKey"
       proto3_optional :name, :string, 3373707
       repeated :nats, :message, 3373938, "google.cloud.compute.v1.RouterNat"
       proto3_optional :network, :string, 232872494
@@ -7927,6 +7967,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :ip_address, :string, 406272220
       proto3_optional :ipv6_nexthop_address, :string, 27968211
       proto3_optional :management_type, :string, 173703606
+      proto3_optional :md5_authentication_key_name, :string, 281075345
       proto3_optional :name, :string, 3373707
       proto3_optional :peer_asn, :uint32, 69573151
       proto3_optional :peer_ip_address, :string, 207735769
@@ -7986,6 +8027,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :next_page_token, :string, 79797525
       proto3_optional :self_link, :string, 456214797
       proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
+    end
+    add_message "google.cloud.compute.v1.RouterMd5AuthenticationKey" do
+      proto3_optional :key, :string, 106079
+      proto3_optional :name, :string, 3373707
     end
     add_message "google.cloud.compute.v1.RouterNat" do
       repeated :drain_nat_ips, :string, 504078535
@@ -8064,14 +8109,19 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.cloud.compute.v1.RouterStatusBgpPeerStatus" do
       repeated :advertised_routes, :message, 333393068, "google.cloud.compute.v1.Route"
       proto3_optional :bfd_status, :message, 395631729, "google.cloud.compute.v1.BfdStatus"
+      proto3_optional :enable_ipv6, :bool, 181467939
       proto3_optional :ip_address, :string, 406272220
+      proto3_optional :ipv6_nexthop_address, :string, 27968211
       proto3_optional :linked_vpn_tunnel, :string, 352296953
+      proto3_optional :md5_auth_enabled, :bool, 451152075
       proto3_optional :name, :string, 3373707
       proto3_optional :num_learned_routes, :uint32, 135457535
       proto3_optional :peer_ip_address, :string, 207735769
+      proto3_optional :peer_ipv6_nexthop_address, :string, 491486608
       proto3_optional :router_appliance_instance, :string, 468312989
       proto3_optional :state, :string, 109757585
       proto3_optional :status, :string, 181260274
+      proto3_optional :status_reason, :string, 342706993
       proto3_optional :uptime, :string, 235379688
       proto3_optional :uptime_seconds, :string, 104736040
     end
@@ -8080,6 +8130,11 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :DOWN, 2104482
       value :UNKNOWN, 433141802
       value :UP, 2715
+    end
+    add_enum "google.cloud.compute.v1.RouterStatusBgpPeerStatus.StatusReason" do
+      value :UNDEFINED_STATUS_REASON, 0
+      value :MD5_AUTH_INTERNAL_PROBLEM, 140462259
+      value :STATUS_REASON_UNSPECIFIED, 394331913
     end
     add_message "google.cloud.compute.v1.RouterStatusNatStatus" do
       repeated :auto_allocated_nat_ips, :string, 510794246
@@ -8397,7 +8452,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :ALL, 64897
       value :HTTP_COOKIE, 494981627
       value :HTTP_HEADER, 91597348
+      value :HTTP_PATH, 311503228
       value :IP, 2343
+      value :REGION_CODE, 79559768
+      value :SNI, 82254
       value :XFF_IP, 438707118
     end
     add_message "google.cloud.compute.v1.SecurityPolicyRuleRateLimitOptionsThreshold" do
@@ -10555,6 +10613,7 @@ module Google
         Address = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Address").msgclass
         Address::AddressType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Address.AddressType").enummodule
         Address::IpVersion = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Address.IpVersion").enummodule
+        Address::Ipv6EndpointType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Address.Ipv6EndpointType").enummodule
         Address::NetworkTier = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Address.NetworkTier").enummodule
         Address::Purpose = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Address.Purpose").enummodule
         Address::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Address.Status").enummodule
@@ -11148,6 +11207,7 @@ module Google
         InstanceGroupAggregatedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupAggregatedList").msgclass
         InstanceGroupList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupList").msgclass
         InstanceGroupManager = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupManager").msgclass
+        InstanceGroupManager::ListManagedInstancesResults = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupManager.ListManagedInstancesResults").enummodule
         InstanceGroupManagerActionsSummary = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupManagerActionsSummary").msgclass
         InstanceGroupManagerAggregatedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupManagerAggregatedList").msgclass
         InstanceGroupManagerAutoHealingPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.InstanceGroupManagerAutoHealingPolicy").msgclass
@@ -11413,6 +11473,8 @@ module Google
         NetworkEndpointGroupCloudFunction = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupCloudFunction").msgclass
         NetworkEndpointGroupCloudRun = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupCloudRun").msgclass
         NetworkEndpointGroupList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupList").msgclass
+        NetworkEndpointGroupPscData = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupPscData").msgclass
+        NetworkEndpointGroupPscData::PscConnectionStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupPscData.PscConnectionStatus").enummodule
         NetworkEndpointGroupsAttachEndpointsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupsAttachEndpointsRequest").msgclass
         NetworkEndpointGroupsDetachEndpointsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupsDetachEndpointsRequest").msgclass
         NetworkEndpointGroupsListEndpointsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.NetworkEndpointGroupsListEndpointsRequest").msgclass
@@ -11567,6 +11629,7 @@ module Google
         PublicDelegatedPrefixesScopedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.PublicDelegatedPrefixesScopedList").msgclass
         Quota = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Quota").msgclass
         Quota::Metric = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Quota.Metric").enummodule
+        QuotaExceededInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.QuotaExceededInfo").msgclass
         RawDisk = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RawDisk").msgclass
         RawDisk::ContainerType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RawDisk.ContainerType").enummodule
         RecreateInstancesInstanceGroupManagerRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RecreateInstancesInstanceGroupManagerRequest").msgclass
@@ -11661,6 +11724,7 @@ module Google
         ResourcePolicyWeeklyCycle = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ResourcePolicyWeeklyCycle").msgclass
         ResourcePolicyWeeklyCycleDayOfWeek = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ResourcePolicyWeeklyCycleDayOfWeek").msgclass
         ResourcePolicyWeeklyCycleDayOfWeek::Day = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ResourcePolicyWeeklyCycleDayOfWeek.Day").enummodule
+        ResourceStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ResourceStatus").msgclass
         ResumeInstanceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.ResumeInstanceRequest").msgclass
         Route = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Route").msgclass
         Route::RouteStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.Route.RouteStatus").enummodule
@@ -11684,6 +11748,7 @@ module Google
         RouterInterface = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterInterface").msgclass
         RouterInterface::ManagementType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterInterface.ManagementType").enummodule
         RouterList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterList").msgclass
+        RouterMd5AuthenticationKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterMd5AuthenticationKey").msgclass
         RouterNat = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterNat").msgclass
         RouterNat::EndpointTypes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterNat.EndpointTypes").enummodule
         RouterNat::NatIpAllocateOption = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterNat.NatIpAllocateOption").enummodule
@@ -11697,6 +11762,7 @@ module Google
         RouterStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterStatus").msgclass
         RouterStatusBgpPeerStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterStatusBgpPeerStatus").msgclass
         RouterStatusBgpPeerStatus::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterStatusBgpPeerStatus.Status").enummodule
+        RouterStatusBgpPeerStatus::StatusReason = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterStatusBgpPeerStatus.StatusReason").enummodule
         RouterStatusNatStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterStatusNatStatus").msgclass
         RouterStatusNatStatusNatRuleStatus = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterStatusNatStatusNatRuleStatus").msgclass
         RouterStatusResponse = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.RouterStatusResponse").msgclass

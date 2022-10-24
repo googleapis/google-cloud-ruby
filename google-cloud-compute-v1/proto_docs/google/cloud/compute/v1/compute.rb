@@ -647,6 +647,10 @@ module Google
         #   @return [::String]
         #     The IP version that will be used by this address. Valid options are IPV4 or IPV6. This can only be specified for a global address.
         #     Check the IpVersion enum for the list of possible values.
+        # @!attribute [rw] ipv6_endpoint_type
+        #   @return [::String]
+        #     The endpoint type of this address, which should be VM or NETLB. This is used for deciding which type of endpoint this address can be used after the external IPv6 address reservation.
+        #     Check the Ipv6EndpointType enum for the list of possible values.
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of the resource. Always compute#address for addresses.
@@ -711,6 +715,18 @@ module Google
             IPV6 = 2254343
 
             UNSPECIFIED_VERSION = 21850000
+          end
+
+          # The endpoint type of this address, which should be VM or NETLB. This is used for deciding which type of endpoint this address can be used after the external IPv6 address reservation.
+          module Ipv6EndpointType
+            # A value indicating that the enum field is not set.
+            UNDEFINED_IPV6_ENDPOINT_TYPE = 0
+
+            # Reserved IPv6 address can be used on network load balancer.
+            NETLB = 74173363
+
+            # Reserved IPv6 address can be used on VM.
+            VM = 2743
           end
 
           # This signifies the networking tier used for configuring this address and can only take the following values: PREMIUM or STANDARD. Internal IP addresses are always Premium Tier; global external IP addresses are always Premium Tier; regional external IP addresses can be either Standard or Premium Tier. If this field is not specified, it is assumed to be PREMIUM.
@@ -3068,7 +3084,7 @@ module Google
         #     The URL of the network to which this backend service belongs. This field can only be specified when the load balancing scheme is set to INTERNAL.
         # @!attribute [rw] outlier_detection
         #   @return [::Google::Cloud::Compute::V1::OutlierDetection]
-        #     Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service. If not set, this feature is considered disabled. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, or HTTP2, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
+        #     Settings controlling the eviction of unhealthy hosts from the load balancing pool for the backend service. If not set, this feature is considered disabled. This field is applicable to either: - A regional backend service with the service_protocol set to HTTP, HTTPS, HTTP2, or GRPC, and load_balancing_scheme set to INTERNAL_MANAGED. - A global backend service with the load_balancing_scheme set to INTERNAL_SELF_MANAGED.
         # @!attribute [rw] port
         #   @return [::Integer]
         #     Deprecated in favor of portName. The TCP port to connect on the backend. The default value is 80. For Internal TCP/UDP Load Balancing and Network Load Balancing, omit port.
@@ -6570,6 +6586,8 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Help]
         # @!attribute [rw] localized_message
         #   @return [::Google::Cloud::Compute::V1::LocalizedMessage]
+        # @!attribute [rw] quota_info
+        #   @return [::Google::Cloud::Compute::V1::QuotaExceededInfo]
         class ErrorDetails
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7281,6 +7299,7 @@ module Google
         #     This field identifies the subnetwork that the load balanced IP should belong to for this Forwarding Rule, used in internal load balancing and network load balancing with IPv6. If the network specified is in auto subnet mode, this field is optional. However, a subnetwork must be specified if the network is in custom subnet mode or when creating external forwarding rule with IPv6.
         # @!attribute [rw] target
         #   @return [::String]
+        #     The URL of the target resource to receive the matched traffic. For regional forwarding rules, this target must be in the same region as the forwarding rule. For global forwarding rules, this target must be a global load balancing resource. The forwarded traffic must be of a type appropriate to the target object. For more information, see the "Target" column in [Port specifications](https://cloud.google.com/load-balancing/docs/forwarding-rule-concepts#ip_address_specifications). For Private Service Connect forwarding rules that forward traffic to Google APIs, provide the name of a supported Google API bundle: - vpc-sc - APIs that support VPC Service Controls. - all-apis - All supported Google APIs.
         class ForwardingRule
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -7482,30 +7501,30 @@ module Google
         #     The gRPC service name for the health check. This field is optional. The value of grpc_service_name has the following meanings by convention: - Empty service_name means the overall status of all services at the backend. - Non-empty service_name means the health of that gRPC service, as defined by the owner of the service. The grpc_service_name can only be ASCII.
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     The port number for the health check request. Must be specified if port_name and port_specification are not set or if port_specification is USE_FIXED_PORT. Valid values are 1 through 65535.
+        #     The TCP port number to which the health check prober sends packets. Valid values are 1 through 65535.
         # @!attribute [rw] port_name
         #   @return [::String]
-        #     Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence. The port_name should conform to RFC1035.
+        #     Not supported.
         # @!attribute [rw] port_specification
         #   @return [::String]
-        #     Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, gRPC health check follows behavior specified in port and portName fields.
+        #     Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
         #     Check the PortSpecification enum for the list of possible values.
         class GRPCHealthCheck
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, gRPC health check follows behavior specified in port and portName fields.
+          # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
-            # The port number in port is used for health checking.
+            # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
             USE_FIXED_PORT = 190235748
 
-            # The portName is used for health checking.
+            # Not supported.
             USE_NAMED_PORT = 349300671
 
-            # For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+            # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
             USE_SERVING_PORT = 362637516
           end
         end
@@ -9534,16 +9553,16 @@ module Google
 
         # @!attribute [rw] host
         #   @return [::String]
-        #     The value of the host header in the HTTP/2 health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.
+        #     The value of the host header in the HTTP/2 health check request. If left empty (default value), the host header is set to the destination IP address to which health check packets are sent. The destination IP address depends on the type of load balancer. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#hc-packet-dest
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
+        #     The TCP port number to which the health check prober sends packets. The default value is 443. Valid values are 1 through 65535.
         # @!attribute [rw] port_name
         #   @return [::String]
-        #     Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.
+        #     Not supported.
         # @!attribute [rw] port_specification
         #   @return [::String]
-        #     Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP2 health check follows behavior specified in port and portName fields.
+        #     Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
         #     Check the PortSpecification enum for the list of possible values.
         # @!attribute [rw] proxy_header
         #   @return [::String]
@@ -9554,23 +9573,23 @@ module Google
         #     The request path of the HTTP/2 health check request. The default value is /.
         # @!attribute [rw] response
         #   @return [::String]
-        #     The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.
+        #     Creates a content-based HTTP/2 health check. In addition to the required HTTP 200 (OK) status code, you can configure the health check to pass only when the backend sends this specific ASCII response string within the first 1024 bytes of the HTTP response body. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-http
         class HTTP2HealthCheck
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP2 health check follows behavior specified in port and portName fields.
+          # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
-            # The port number in port is used for health checking.
+            # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
             USE_FIXED_PORT = 190235748
 
-            # The portName is used for health checking.
+            # Not supported.
             USE_NAMED_PORT = 349300671
 
-            # For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+            # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
             USE_SERVING_PORT = 362637516
           end
 
@@ -9587,16 +9606,16 @@ module Google
 
         # @!attribute [rw] host
         #   @return [::String]
-        #     The value of the host header in the HTTP health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.
+        #     The value of the host header in the HTTP health check request. If left empty (default value), the host header is set to the destination IP address to which health check packets are sent. The destination IP address depends on the type of load balancer. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#hc-packet-dest
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     The TCP port number for the health check request. The default value is 80. Valid values are 1 through 65535.
+        #     The TCP port number to which the health check prober sends packets. The default value is 80. Valid values are 1 through 65535.
         # @!attribute [rw] port_name
         #   @return [::String]
-        #     Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.
+        #     Not supported.
         # @!attribute [rw] port_specification
         #   @return [::String]
-        #     Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP health check follows behavior specified in port and portName fields.
+        #     Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Also supported in legacy HTTP health checks for target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
         #     Check the PortSpecification enum for the list of possible values.
         # @!attribute [rw] proxy_header
         #   @return [::String]
@@ -9607,23 +9626,23 @@ module Google
         #     The request path of the HTTP health check request. The default value is /.
         # @!attribute [rw] response
         #   @return [::String]
-        #     The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.
+        #     Creates a content-based HTTP health check. In addition to the required HTTP 200 (OK) status code, you can configure the health check to pass only when the backend sends this specific ASCII response string within the first 1024 bytes of the HTTP response body. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-http
         class HTTPHealthCheck
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTP health check follows behavior specified in port and portName fields.
+          # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Also supported in legacy HTTP health checks for target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
-            # The port number in port is used for health checking.
+            # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
             USE_FIXED_PORT = 190235748
 
-            # The portName is used for health checking.
+            # Not supported.
             USE_NAMED_PORT = 349300671
 
-            # For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+            # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
             USE_SERVING_PORT = 362637516
           end
 
@@ -9640,16 +9659,16 @@ module Google
 
         # @!attribute [rw] host
         #   @return [::String]
-        #     The value of the host header in the HTTPS health check request. If left empty (default value), the IP on behalf of which this health check is performed will be used.
+        #     The value of the host header in the HTTPS health check request. If left empty (default value), the host header is set to the destination IP address to which health check packets are sent. The destination IP address depends on the type of load balancer. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#hc-packet-dest
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
+        #     The TCP port number to which the health check prober sends packets. The default value is 443. Valid values are 1 through 65535.
         # @!attribute [rw] port_name
         #   @return [::String]
-        #     Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.
+        #     Not supported.
         # @!attribute [rw] port_specification
         #   @return [::String]
-        #     Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTPS health check follows behavior specified in port and portName fields.
+        #     Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
         #     Check the PortSpecification enum for the list of possible values.
         # @!attribute [rw] proxy_header
         #   @return [::String]
@@ -9660,23 +9679,23 @@ module Google
         #     The request path of the HTTPS health check request. The default value is /.
         # @!attribute [rw] response
         #   @return [::String]
-        #     The string to match anywhere in the first 1024 bytes of the response body. If left empty (the default value), the status code determines health. The response data can only be ASCII.
+        #     Creates a content-based HTTPS health check. In addition to the required HTTP 200 (OK) status code, you can configure the health check to pass only when the backend sends this specific ASCII response string within the first 1024 bytes of the HTTP response body. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-http
         class HTTPSHealthCheck
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, HTTPS health check follows behavior specified in port and portName fields.
+          # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
-            # The port number in port is used for health checking.
+            # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
             USE_FIXED_PORT = 190235748
 
-            # The portName is used for health checking.
+            # Not supported.
             USE_NAMED_PORT = 349300671
 
-            # For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+            # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
             USE_SERVING_PORT = 362637516
           end
 
@@ -11844,6 +11863,9 @@ module Google
         # @!attribute [rw] resource_policies
         #   @return [::Array<::String>]
         #     Resource policies applied to this instance.
+        # @!attribute [rw] resource_status
+        #   @return [::Google::Cloud::Compute::V1::ResourceStatus]
+        #     [Output Only] Specifies values set for instance attributes as compared to the values requested by user in the corresponding input only field.
         # @!attribute [rw] satisfies_pzs
         #   @return [::Boolean]
         #     [Output Only] Reserved for future use.
@@ -12163,6 +12185,10 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] The resource type, which is always compute#instanceGroupManager for managed instance groups.
+        # @!attribute [rw] list_managed_instances_results
+        #   @return [::String]
+        #     Pagination behavior of the listManagedInstances API method for this managed instance group.
+        #     Check the ListManagedInstancesResults enum for the list of possible values.
         # @!attribute [rw] name
         #   @return [::String]
         #     The name of the managed instance group. The name must be 1-63 characters long, and comply with RFC1035.
@@ -12199,6 +12225,18 @@ module Google
         class InstanceGroupManager
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Pagination behavior of the listManagedInstances API method for this managed instance group.
+          module ListManagedInstancesResults
+            # A value indicating that the enum field is not set.
+            UNDEFINED_LIST_MANAGED_INSTANCES_RESULTS = 0
+
+            # (Default) Pagination is disabled for the group's listManagedInstances API method. maxResults and pageToken query parameters are ignored and all instances are returned in a single response.
+            PAGELESS = 32183464
+
+            # Pagination is enabled for the group's listManagedInstances API method. maxResults and pageToken query parameters are respected.
+            PAGINATED = 40190637
+          end
         end
 
         # @!attribute [rw] abandoning
@@ -17871,6 +17909,8 @@ module Google
         #   @return [::String]
         #     Type of network endpoints in this network endpoint group. Can be one of GCE_VM_IP, GCE_VM_IP_PORT, NON_GCP_PRIVATE_IP_PORT, INTERNET_FQDN_PORT, INTERNET_IP_PORT, SERVERLESS, PRIVATE_SERVICE_CONNECT.
         #     Check the NetworkEndpointType enum for the list of possible values.
+        # @!attribute [rw] psc_data
+        #   @return [::Google::Cloud::Compute::V1::NetworkEndpointGroupPscData]
         # @!attribute [rw] psc_target_service
         #   @return [::String]
         #     The target service url used to set up private service connection to a Google API or a PSC Producer Service Attachment. An example value is: "asia-northeast3-cloudkms.googleapis.com"
@@ -18028,6 +18068,45 @@ module Google
         class NetworkEndpointGroupList
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # All data that is specifically relevant to only network endpoint groups of type PRIVATE_SERVICE_CONNECT.
+        # @!attribute [rw] consumer_psc_address
+        #   @return [::String]
+        #     [Output Only] Address allocated from given subnetwork for PSC. This IP address acts as a VIP for a PSC NEG, allowing it to act as an endpoint in L7 PSC-XLB.
+        # @!attribute [rw] psc_connection_id
+        #   @return [::Integer]
+        #     [Output Only] The PSC connection id of the PSC Network Endpoint Group Consumer.
+        # @!attribute [rw] psc_connection_status
+        #   @return [::String]
+        #     [Output Only] The connection status of the PSC Forwarding Rule.
+        #     Check the PscConnectionStatus enum for the list of possible values.
+        class NetworkEndpointGroupPscData
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # [Output Only] The connection status of the PSC Forwarding Rule.
+          module PscConnectionStatus
+            # A value indicating that the enum field is not set.
+            UNDEFINED_PSC_CONNECTION_STATUS = 0
+
+            # The connection has been accepted by the producer.
+            ACCEPTED = 246714279
+
+            # The connection has been closed by the producer and will not serve traffic going forward.
+            CLOSED = 380163436
+
+            # The connection has been accepted by the producer, but the producer needs to take further action before the forwarding rule can serve traffic.
+            NEEDS_ATTENTION = 344491452
+
+            # The connection is pending acceptance by the producer.
+            PENDING = 35394935
+
+            # The connection has been rejected by the producer.
+            REJECTED = 174130302
+
+            STATUS_UNSPECIFIED = 42133066
+          end
         end
 
         # @!attribute [rw] network_endpoints
@@ -19254,16 +19333,16 @@ module Google
         #     The base time that a host is ejected for. The real ejection time is equal to the base ejection time multiplied by the number of times the host has been ejected. Defaults to 30000ms or 30s.
         # @!attribute [rw] consecutive_errors
         #   @return [::Integer]
-        #     Number of errors before a host is ejected from the connection pool. When the backend host is accessed over HTTP, a 5xx return code qualifies as an error. Defaults to 5.
+        #     Number of errors before a host is ejected from the connection pool. When the backend host is accessed over HTTP, a 5xx return code qualifies as an error. Defaults to 5. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] consecutive_gateway_failure
         #   @return [::Integer]
-        #     The number of consecutive gateway failures (502, 503, 504 status or connection errors that are mapped to one of those status codes) before a consecutive gateway failure ejection occurs. Defaults to 3.
+        #     The number of consecutive gateway failures (502, 503, 504 status or connection errors that are mapped to one of those status codes) before a consecutive gateway failure ejection occurs. Defaults to 3. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] enforcing_consecutive_errors
         #   @return [::Integer]
-        #     The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive 5xx. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 0.
+        #     The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive 5xx. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 0. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] enforcing_consecutive_gateway_failure
         #   @return [::Integer]
-        #     The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive gateway failures. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100.
+        #     The percentage chance that a host will be actually ejected when an outlier status is detected through consecutive gateway failures. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100. Not supported when the backend service is referenced by a URL map that is bound to target gRPC proxy that has validateForProxyless field set to true.
         # @!attribute [rw] enforcing_success_rate
         #   @return [::Integer]
         #     The percentage chance that a host will be actually ejected when an outlier status is detected through success rate statistics. This setting can be used to disable ejection or to ramp it up slowly. Defaults to 100.
@@ -21349,6 +21428,8 @@ module Google
 
             STATIC_BYOIP_ADDRESSES = 275809649
 
+            STATIC_EXTERNAL_IPV6_ADDRESS_RANGES = 472346774
+
             SUBNETWORKS = 421330469
 
             T2A_CPUS = 522170599
@@ -21376,6 +21457,33 @@ module Google
             VPN_TUNNELS = 104327296
 
             XPN_SERVICE_PROJECTS = 95191981
+          end
+        end
+
+        # Additional details for quota exceeded error for resource quota.
+        # @!attribute [rw] dimensions
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The map holding related quota dimensions.
+        # @!attribute [rw] limit
+        #   @return [::Float]
+        #     Current effective quota limit. The limit's unit depends on the quota type or metric.
+        # @!attribute [rw] limit_name
+        #   @return [::String]
+        #     The name of the quota limit.
+        # @!attribute [rw] metric_name
+        #   @return [::String]
+        #     The Compute Engine quota metric name.
+        class QuotaExceededInfo
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class DimensionsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
@@ -22949,6 +23057,15 @@ module Google
           end
         end
 
+        # Contains output only fields. Use this sub-message for actual values set on Instance attributes as compared to the value requested by the user (intent) in their instance CRUD calls.
+        # @!attribute [rw] physical_host
+        #   @return [::String]
+        #     [Output Only] An opaque ID of the host on which the VM is running.
+        class ResourceStatus
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for Instances.Resume. See the method description for details.
         # @!attribute [rw] instance
         #   @return [::String]
@@ -23145,6 +23262,9 @@ module Google
         # @!attribute [rw] kind
         #   @return [::String]
         #     [Output Only] Type of resource. Always compute#router for routers.
+        # @!attribute [rw] md5_authentication_keys
+        #   @return [::Array<::Google::Cloud::Compute::V1::RouterMd5AuthenticationKey>]
+        #     Keys used for MD5 authentication.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of the resource. Provided by the client when the resource is created. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -23290,6 +23410,9 @@ module Google
         #   @return [::String]
         #     [Output Only] The resource that configures and manages this BGP peer. - MANAGED_BY_USER is the default value and can be managed by you or other users - MANAGED_BY_ATTACHMENT is a BGP peer that is configured and managed by Cloud Interconnect, specifically by an InterconnectAttachment of type PARTNER. Google automatically creates, updates, and deletes this type of BGP peer when the PARTNER InterconnectAttachment is created, updated, or deleted.
         #     Check the ManagementType enum for the list of possible values.
+        # @!attribute [rw] md5_authentication_key_name
+        #   @return [::String]
+        #     Present if MD5 authentication is enabled for the peering. Must be the name of one of the entries in the Router.md5_authentication_keys. The field must comply with RFC1035.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of this BGP peer. The name must be 1-63 characters long, and comply with RFC1035. Specifically, the name must be 1-63 characters long and match the regular expression `[a-z]([-a-z0-9]*[a-z0-9])?` which means the first character must be a lowercase letter, and all following characters must be a dash, lowercase letter, or digit, except the last character, which cannot be a dash.
@@ -23442,6 +23565,17 @@ module Google
         #   @return [::Google::Cloud::Compute::V1::Warning]
         #     [Output Only] Informational warning message.
         class RouterList
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # @!attribute [rw] key
+        #   @return [::String]
+        #     [Input only] Value of the key. For patch and update calls, it can be skipped to copy the value from the previous configuration. This is allowed if the key with the same name existed before the operation. Maximum length is 80 characters. Can only contain printable ASCII characters.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name used to identify the key. Must be unique within a router. Must be referenced by at least one bgpPeer. Must comply with RFC1035.
+        class RouterMd5AuthenticationKey
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
@@ -23657,12 +23791,21 @@ module Google
         #     Routes that were advertised to the remote BGP peer
         # @!attribute [rw] bfd_status
         #   @return [::Google::Cloud::Compute::V1::BfdStatus]
+        # @!attribute [rw] enable_ipv6
+        #   @return [::Boolean]
+        #     Enable IPv6 traffic over BGP Peer. If not specified, it is disabled by default.
         # @!attribute [rw] ip_address
         #   @return [::String]
         #     IP address of the local BGP interface.
+        # @!attribute [rw] ipv6_nexthop_address
+        #   @return [::String]
+        #     IPv6 address of the local BGP interface.
         # @!attribute [rw] linked_vpn_tunnel
         #   @return [::String]
         #     URL of the VPN tunnel that this BGP peer controls.
+        # @!attribute [rw] md5_auth_enabled
+        #   @return [::Boolean]
+        #     Informs whether MD5 authentication is enabled on this BGP peer.
         # @!attribute [rw] name
         #   @return [::String]
         #     Name of this BGP peer. Unique within the Routers resource.
@@ -23672,6 +23815,9 @@ module Google
         # @!attribute [rw] peer_ip_address
         #   @return [::String]
         #     IP address of the remote BGP interface.
+        # @!attribute [rw] peer_ipv6_nexthop_address
+        #   @return [::String]
+        #     IPv6 address of the remote BGP interface.
         # @!attribute [rw] router_appliance_instance
         #   @return [::String]
         #     [Output only] URI of the VM instance that is used as third-party router appliances such as Next Gen Firewalls, Virtual Routers, or Router Appliances. The VM instance is the peer side of the BGP session.
@@ -23682,6 +23828,10 @@ module Google
         #   @return [::String]
         #     Status of the BGP peer: \\{UP, DOWN}
         #     Check the Status enum for the list of possible values.
+        # @!attribute [rw] status_reason
+        #   @return [::String]
+        #     Indicates why particular status was returned.
+        #     Check the StatusReason enum for the list of possible values.
         # @!attribute [rw] uptime
         #   @return [::String]
         #     Time this session has been up. Format: 14 years, 51 weeks, 6 days, 23 hours, 59 minutes, 59 seconds
@@ -23702,6 +23852,17 @@ module Google
             UNKNOWN = 433141802
 
             UP = 2715
+          end
+
+          # Indicates why particular status was returned.
+          module StatusReason
+            # A value indicating that the enum field is not set.
+            UNDEFINED_STATUS_REASON = 0
+
+            # Indicates internal problems with configuration of MD5 authentication. This particular reason can only be returned when md5AuthEnabled is true and status is DOWN.
+            MD5_AUTH_INTERNAL_PROBLEM = 140462259
+
+            STATUS_REASON_UNSPECIFIED = 394331913
           end
         end
 
@@ -23842,13 +24003,13 @@ module Google
 
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     The TCP port number for the health check request. The default value is 443. Valid values are 1 through 65535.
+        #     The TCP port number to which the health check prober sends packets. The default value is 443. Valid values are 1 through 65535.
         # @!attribute [rw] port_name
         #   @return [::String]
-        #     Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.
+        #     Not supported.
         # @!attribute [rw] port_specification
         #   @return [::String]
-        #     Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, SSL health check follows behavior specified in port and portName fields.
+        #     Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
         #     Check the PortSpecification enum for the list of possible values.
         # @!attribute [rw] proxy_header
         #   @return [::String]
@@ -23856,26 +24017,26 @@ module Google
         #     Check the ProxyHeader enum for the list of possible values.
         # @!attribute [rw] request
         #   @return [::String]
-        #     The application data to send once the SSL connection has been established (default value is empty). If both request and response are empty, the connection establishment alone will indicate health. The request data can only be ASCII.
+        #     Instructs the health check prober to send this exact ASCII string, up to 1024 bytes in length, after establishing the TCP connection and SSL handshake.
         # @!attribute [rw] response
         #   @return [::String]
-        #     The bytes to match against the beginning of the response data. If left empty (the default value), any response will indicate health. The response data can only be ASCII.
+        #     Creates a content-based SSL health check. In addition to establishing a TCP connection and the TLS handshake, you can configure the health check to pass only when the backend sends this exact response ASCII string, up to 1024 bytes in length. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-ssl-tcp
         class SSLHealthCheck
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, SSL health check follows behavior specified in port and portName fields.
+          # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
-            # The port number in port is used for health checking.
+            # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
             USE_FIXED_PORT = 190235748
 
-            # The portName is used for health checking.
+            # Not supported.
             USE_NAMED_PORT = 349300671
 
-            # For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+            # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
             USE_SERVING_PORT = 362637516
           end
 
@@ -24287,7 +24448,7 @@ module Google
         #     [Output Only] URL of the region where the regional security policy resides. This field is not applicable to global security policies.
         # @!attribute [rw] rules
         #   @return [::Array<::Google::Cloud::Compute::V1::SecurityPolicyRule>]
-        #     A list of rules that belong to this policy. There must always be a default rule (rule with priority 2147483647 and match "*"). If no rules are provided when creating a security policy, a default rule with action "allow" will be added.
+        #     A list of rules that belong to this policy. There must always be a default rule which is a rule with priority 2147483647 and match all condition (for the match condition this means match "*" for srcIpRanges and for the networkMatch condition every field must be either match "*" or not set). If no rules are provided when creating a security policy, a default rule with action "allow" will be added.
         # @!attribute [rw] self_link
         #   @return [::String]
         #     [Output Only] Server-defined URL for the resource.
@@ -24534,7 +24695,7 @@ module Google
         #     Action to take for requests that are under the configured rate limit threshold. Valid option is "allow" only.
         # @!attribute [rw] enforce_on_key
         #   @return [::String]
-        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL.
+        #     Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates.
         #     Check the EnforceOnKey enum for the list of possible values.
         # @!attribute [rw] enforce_on_key_name
         #   @return [::String]
@@ -24552,7 +24713,7 @@ module Google
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL.
+          # Determines the key to enforce the rate_limit_threshold on. Possible values are: - ALL: A single rate limit threshold is applied to all the requests matching this rule. This is the default value if this field 'enforce_on_key' is not configured. - IP: The source IP address of the request is the key. Each IP has this limit enforced separately. - HTTP_HEADER: The value of the HTTP header whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the header value. If no such header is present in the request, the key type defaults to ALL. - XFF_IP: The first IP address (i.e. the originating client IP address) specified in the list of IPs under X-Forwarded-For HTTP header. If no such header is present or the value is not a valid IP, the key defaults to the source IP address of the request i.e. key type IP. - HTTP_COOKIE: The value of the HTTP cookie whose name is configured under "enforce_on_key_name". The key value is truncated to the first 128 bytes of the cookie value. If no such cookie is present in the request, the key type defaults to ALL. - HTTP_PATH: The URL path of the HTTP request. The key value is truncated to the first 128 bytes. - SNI: Server name indication in the TLS session of the HTTPS request. The key value is truncated to the first 128 bytes. The key type defaults to ALL on a HTTP session. - REGION_CODE: The country/region from which the request originates.
           module EnforceOnKey
             # A value indicating that the enum field is not set.
             UNDEFINED_ENFORCE_ON_KEY = 0
@@ -24563,7 +24724,13 @@ module Google
 
             HTTP_HEADER = 91597348
 
+            HTTP_PATH = 311503228
+
             IP = 2343
+
+            REGION_CODE = 79559768
+
+            SNI = 82254
 
             XFF_IP = 438707118
           end
@@ -27579,13 +27746,13 @@ module Google
 
         # @!attribute [rw] port
         #   @return [::Integer]
-        #     The TCP port number for the health check request. The default value is 80. Valid values are 1 through 65535.
+        #     The TCP port number to which the health check prober sends packets. The default value is 80. Valid values are 1 through 65535.
         # @!attribute [rw] port_name
         #   @return [::String]
-        #     Port name as defined in InstanceGroup#NamedPort#name. If both port and port_name are defined, port takes precedence.
+        #     Not supported.
         # @!attribute [rw] port_specification
         #   @return [::String]
-        #     Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, TCP health check follows behavior specified in port and portName fields.
+        #     Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
         #     Check the PortSpecification enum for the list of possible values.
         # @!attribute [rw] proxy_header
         #   @return [::String]
@@ -27593,26 +27760,26 @@ module Google
         #     Check the ProxyHeader enum for the list of possible values.
         # @!attribute [rw] request
         #   @return [::String]
-        #     The application data to send once the TCP connection has been established (default value is empty). If both request and response are empty, the connection establishment alone will indicate health. The request data can only be ASCII.
+        #     Instructs the health check prober to send this exact ASCII string, up to 1024 bytes in length, after establishing the TCP connection.
         # @!attribute [rw] response
         #   @return [::String]
-        #     The bytes to match against the beginning of the response data. If left empty (the default value), any response will indicate health. The response data can only be ASCII.
+        #     Creates a content-based TCP health check. In addition to establishing a TCP connection, you can configure the health check to pass only when the backend sends this exact response ASCII string, up to 1024 bytes in length. For details, see: https://cloud.google.com/load-balancing/docs/health-check-concepts#criteria-protocol-ssl-tcp
         class TCPHealthCheck
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Specifies how port is selected for health checking, can be one of following values: USE_FIXED_PORT: The port number in port is used for health checking. USE_NAMED_PORT: The portName is used for health checking. USE_SERVING_PORT: For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking. If not specified, TCP health check follows behavior specified in port and portName fields.
+          # Specifies how a port is selected for health checking. Can be one of the following values: USE_FIXED_PORT: Specifies a port number explicitly using the port field in the health check. Supported by backend services for pass-through load balancers and backend services for proxy load balancers. Not supported by target pools. The health check supports all backends supported by the backend service provided the backend can be health checked. For example, GCE_VM_IP network endpoint groups, GCE_VM_IP_PORT network endpoint groups, and instance group backends. USE_NAMED_PORT: Not supported. USE_SERVING_PORT: Provides an indirect method of specifying the health check port by referring to the backend service. Only supported by backend services for proxy load balancers. Not supported by target pools. Not supported by backend services for pass-through load balancers. Supports all backends that can be health checked; for example, GCE_VM_IP_PORT network endpoint groups and instance group backends. For GCE_VM_IP_PORT network endpoint group backends, the health check uses the port number specified for each endpoint in the network endpoint group. For instance group backends, the health check uses the port number determined by looking up the backend service's named port in the instance group's list of named ports.
           module PortSpecification
             # A value indicating that the enum field is not set.
             UNDEFINED_PORT_SPECIFICATION = 0
 
-            # The port number in port is used for health checking.
+            # The port number in the health check's port is used for health checking. Applies to network endpoint group and instance group backends.
             USE_FIXED_PORT = 190235748
 
-            # The portName is used for health checking.
+            # Not supported.
             USE_NAMED_PORT = 349300671
 
-            # For NetworkEndpointGroup, the port specified for each network endpoint is used for health checking. For other backends, the port or named port specified in the Backend Service is used for health checking.
+            # For network endpoint group backends, the health check uses the port number specified on each endpoint in the network endpoint group. For instance group backends, the health check uses the port number specified for the backend service's named port defined in the instance group's named ports.
             USE_SERVING_PORT = 362637516
           end
 
