@@ -1,5 +1,11 @@
 # Release History
 
+### 2.16.0 (2022-10-25)
+
+#### Features
+
+* support pg jsonb ([#19116](https://github.com/googleapis/google-cloud-ruby/issues/19116)) 
+
 ### 2.15.0 (2022-09-07)
 
 #### Features
