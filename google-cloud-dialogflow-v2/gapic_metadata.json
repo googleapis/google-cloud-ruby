@@ -284,6 +284,11 @@
                 "analyze_content"
               ]
             },
+            "StreamingAnalyzeContent": {
+              "methods": [
+                "streaming_analyze_content"
+              ]
+            },
             "SuggestArticles": {
               "methods": [
                 "suggest_articles"

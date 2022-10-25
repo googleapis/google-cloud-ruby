@@ -1772,6 +1772,46 @@
       ]
     },
     {
+      "region_tag": "dialogflow_v2_generated_Participants_StreamingAnalyzeContent_sync",
+      "title": "Snippet for streaming_analyze_content in Participants",
+      "description": "Basic snippet for streaming_analyze_content in Participants",
+      "file": "participants/streaming_analyze_content.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "streaming_analyze_content",
+        "full_name": "::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::Dialogflow::V2::StreamingAnalyzeContentResponse",
+        "client": {
+          "short_name": "Participants::Client",
+          "full_name": "::Google::Cloud::Dialogflow::V2::Participants::Client"
+        },
+        "method": {
+          "short_name": "StreamingAnalyzeContent",
+          "full_name": "google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent",
+          "service": {
+            "short_name": "Participants",
+            "full_name": "google.cloud.dialogflow.v2.Participants"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 41,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "dialogflow_v2_generated_Participants_SuggestArticles_sync",
       "title": "Snippet for suggest_articles in Participants",
       "description": "Basic snippet for suggest_articles in Participants",

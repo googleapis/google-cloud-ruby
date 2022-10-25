@@ -251,6 +251,7 @@
     "snippets/participants/create_participant.rb",
     "snippets/participants/get_participant.rb",
     "snippets/participants/list_participants.rb",
+    "snippets/participants/streaming_analyze_content.rb",
     "snippets/participants/suggest_articles.rb",
     "snippets/participants/suggest_faq_answers.rb",
     "snippets/participants/suggest_smart_replies.rb",
