@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       oneof :cdn_key_config do
         optional :google_cdn_key, :message, 5, "google.cloud.video.stitcher.v1.GoogleCdnKey"
         optional :akamai_cdn_key, :message, 6, "google.cloud.video.stitcher.v1.AkamaiCdnKey"
+        optional :media_cdn_key, :message, 8, "google.cloud.video.stitcher.v1.MediaCdnKey"
       end
     end
     add_message "google.cloud.video.stitcher.v1.GoogleCdnKey" do
@@ -22,6 +23,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.video.stitcher.v1.AkamaiCdnKey" do
       optional :token_key, :bytes, 1
+    end
+    add_message "google.cloud.video.stitcher.v1.MediaCdnKey" do
+      optional :private_key, :bytes, 1
+      optional :key_name, :string, 2
     end
   end
 end
@@ -34,6 +39,7 @@ module Google
           CdnKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.CdnKey").msgclass
           GoogleCdnKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.GoogleCdnKey").msgclass
           AkamaiCdnKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.AkamaiCdnKey").msgclass
+          MediaCdnKey = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.video.stitcher.v1.MediaCdnKey").msgclass
         end
       end
     end
