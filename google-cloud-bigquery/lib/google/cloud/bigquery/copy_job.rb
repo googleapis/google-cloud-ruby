@@ -17,6 +17,26 @@ require "google/cloud/bigquery/encryption_configuration"
 module Google
   module Cloud
     module Bigquery
+      
+      module OperationType
+ 
+        # Different operation types supported in table copy job.
+        # https://cloud.google.com/bigquery/docs/reference/rest/v2/Job#operationtype
+         
+        # The source and destination table have the same table type.
+        COPY = "COPY"
+    
+        # The source table type is TABLE and the destination table type is SNAPSHOT.
+        SNAPSHOT = "SNAPSHOT"
+    
+        # The source table type is SNAPSHOT and the destination table type is TABLE.
+        RESTORE = "RESTORE"
+
+        # The source and destination table have the same table type, but only bill for                 
+        # unique data.
+        CLONE = "CLONE"
+      end
+
       ##
       # # CopyJob
       #
@@ -157,7 +177,8 @@ module Google
             job_ref = service.job_ref_from options[:job_id], options[:prefix]
             copy_cfg = Google::Apis::BigqueryV2::JobConfigurationTableCopy.new(
               source_table:      source,
-              destination_table: target
+              destination_table: target,
+              operation_type:    options[:operation_type]
             )
             req = Google::Apis::BigqueryV2::Job.new(
               job_reference: job_ref,

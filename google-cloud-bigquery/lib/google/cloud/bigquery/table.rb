@@ -821,6 +821,40 @@ module Google
         end
 
         ##
+        # Checks if the table's type is `SNAPSHOT`, indicating that the table
+        # represents a BigQuery table snapshot.
+        #
+        # @see https://cloud.google.com/bigquery/docs/table-snapshots-intro
+        #
+        # @return [Boolean, nil] `true` when the type is `SNAPSHOT`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def snapshot?
+          return nil if reference?
+          @gapi.type == "SNAPSHOT"
+        end
+
+        ##
+        # Checks if the table's type is `CLONE`, indicating that the table
+        # represents a BigQuery table clone.
+        #
+        # @see https://cloud.google.com/bigquery/docs/table-clones-intro
+        #
+        # @return [Boolean, nil] `true` when the type is `CLONE`, `false`
+        #   otherwise, if the object is a resource (see {#resource?}); `nil` if
+        #   the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def clone?
+          return nil if reference?
+          @gapi.type == "CLONE"
+        end
+
+        ##
         # Checks if the table's type is `MATERIALIZED_VIEW`, indicating that
         # the table represents a BigQuery materialized view.
         # See {Dataset#create_materialized_view}.
@@ -1697,9 +1731,16 @@ module Google
         #
         # @!group Data
         #
-        def copy_job destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil
+        def copy_job destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil, operation_type: nil
           ensure_service!
-          options = { create: create, write: write, dryrun: dryrun, labels: labels, job_id: job_id, prefix: prefix }
+          options = { create: create, 
+                      write: write, 
+                      dryrun: dryrun, 
+                      labels: labels, 
+                      job_id: job_id, 
+                      prefix: prefix, 
+                      operation_type: operation_type 
+                    }
           updater = CopyJob::Updater.from_options(
             service,
             table_ref,
@@ -1780,10 +1821,35 @@ module Google
         # @!group Data
         #
         def copy destination_table, create: nil, write: nil, &block
-          job = copy_job destination_table, create: create, write: write, &block
-          job.wait_until_done!
-          ensure_job_succeeded! job
-          true
+          copy_job_with_operation_type destination_table, 
+                                       create, 
+                                       write, 
+                                       OperationType::COPY, 
+                                       &block
+        end
+
+        def clone destination_table, create: nil, write: nil, &block
+          copy_job_with_operation_type destination_table, 
+                                       create, 
+                                       write, 
+                                       OperationType::CLONE,
+                                       &block
+        end
+
+        def snapshot destination_table, create: nil, write: nil, &block
+          copy_job_with_operation_type destination_table, 
+                                       create, 
+                                       write, 
+                                       OperationType::SNAPSHOT,
+                                       &block
+        end
+
+        def restore destination_table, create: nil, write: nil, &block
+          copy_job_with_operation_type destination_table, 
+                                       create, 
+                                       write, 
+                                       OperationType::RESTORE,
+                                       &block
         end
 
         ##
@@ -2738,6 +2804,17 @@ module Google
         end
 
         protected
+
+        def copy_job_with_operation_type destination_table, create, write, operation_type, &block
+          job = copy_job destination_table,
+                         create: create, 
+                         write: write, 
+                         operation_type: operation_type,
+                         &block
+          job.wait_until_done!
+          ensure_job_succeeded! job
+          true
+        end
 
         ##
         # Raise an error unless an active service is available.
