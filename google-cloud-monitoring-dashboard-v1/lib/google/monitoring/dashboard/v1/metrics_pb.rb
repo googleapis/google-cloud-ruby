@@ -14,6 +14,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :time_series_filter, :message, 1, "google.monitoring.dashboard.v1.TimeSeriesFilter"
         optional :time_series_filter_ratio, :message, 2, "google.monitoring.dashboard.v1.TimeSeriesFilterRatio"
         optional :time_series_query_language, :string, 3
+        optional :prometheus_query, :string, 6
       end
     end
     add_message "google.monitoring.dashboard.v1.TimeSeriesFilter" do

@@ -25,8 +25,8 @@ module Google
           # Table display options that can be reused.
           # @!attribute [rw] shown_columns
           #   @return [::Array<::String>]
-          #     Optional. Columns to display in the table. Leave empty to display all available
-          #     columns. Note: This field is for future features and is not currently used.
+          #     Optional. This field is unused and has been replaced by
+          #     TimeSeriesTable.column_settings
           class TableDisplayOptions
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

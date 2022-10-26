@@ -32,7 +32,10 @@ module Google
           #     Parameters to fetch a ratio between two time series filters.
           # @!attribute [rw] time_series_query_language
           #   @return [::String]
-          #     A query used to fetch time series.
+          #     A query used to fetch time series with MQL.
+          # @!attribute [rw] prometheus_query
+          #   @return [::String]
+          #     A query used to fetch time series with PromQL.
           # @!attribute [rw] unit_override
           #   @return [::String]
           #     The unit of data contained in fetched time series. If non-empty, this
