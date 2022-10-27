@@ -75,6 +75,9 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :pull_timing, :message, 13, "google.devtools.cloudbuild.v1.TimeSpan"
       optional :timeout, :message, 11, "google.protobuf.Duration"
       optional :status, :enum, 12, "google.devtools.cloudbuild.v1.Build.Status"
+      optional :allow_failure, :bool, 14
+      optional :exit_code, :int32, 16
+      repeated :allow_exit_codes, :int32, 18
       optional :script, :string, 19
     end
     add_message "google.devtools.cloudbuild.v1.Volume" do
