@@ -277,6 +277,21 @@ module Google
         #     Output only. Status of the build step. At this time, build step status is
         #     only updated on build completion; step status is not updated in real-time
         #     as the build progresses.
+        # @!attribute [rw] allow_failure
+        #   @return [::Boolean]
+        #     Allow this build step to fail without failing the entire build.
+        #
+        #     If false, the entire build will fail if this step fails. Otherwise, the
+        #     build will succeed, but this step will still have a failure status.
+        #     Error information will be reported in the failure_detail field.
+        # @!attribute [r] exit_code
+        #   @return [::Integer]
+        #     Output only. Return code from running the step.
+        # @!attribute [rw] allow_exit_codes
+        #   @return [::Array<::Integer>]
+        #     Allow this build step to fail without failing the entire build if and
+        #     only if the exit code is one of the specified codes. If allow_failure
+        #     is also specified, this field will take precedence.
         # @!attribute [rw] script
         #   @return [::String]
         #     A shell script to be executed in the step.
