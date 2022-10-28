@@ -157,27 +157,27 @@ module Google
         ##
         # The Information about base table and snapshot time of the table.
         #
-        # @return [Google::Apis::BigqueryV2::SnapshotDefinition, nil]
-        # if the object is a resource (see {#resource?}); 
-        # or if the table is not a snapshot (see {#snapshot?}); `nil` 
+        # @return [Google::Apis::BigqueryV2::SnapshotDefinition, nil] Snapshot definition of table snapshot, or 
+        #   `nil` if not snapshot or the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def snapshot_definition
-          return reference.snapshot_definition if reference?
+          return nil if reference?
+          @gapi.snapshot_definition
         end
 
         ##
         # The Information about base table and clone time of the table.
         #
-        # @return [Google::Apis::BigqueryV2::CloneDefinition, nil]
-        # if the object is a resource (see {#resource?}); 
-        # or if the table is not a clone (see {#clone?}); `nil` 
+        # @return [Google::Apis::BigqueryV2::CloneDefinition, nil] Clone definition of table clone, or 
+        #   `nil` if not clone or the object is a reference (see {#reference?}).
         #
         # @!group Attributes
         #
         def clone_definition
-          return reference.clone_definition if reference?
+          return nil if reference?
+          @gapi.clone_definition
         end
 
         ##
@@ -877,7 +877,7 @@ module Google
         #
         def clone?
           return nil if reference?
-          @gapi.type == "CLONE"
+          !clone_table.gapi.clone_definition.nil?
         end
 
         ##
@@ -1848,9 +1848,9 @@ module Google
         #
         def copy destination_table, create: nil, write: nil, &block
           copy_job_with_operation_type destination_table, 
-                                       create, 
-                                       write, 
-                                       OperationType::COPY, 
+                                       create: create, 
+                                       write: write, 
+                                       operation_type: OperationType::COPY, 
                                        &block
         end
 
@@ -1876,23 +1876,7 @@ module Google
         #   Reference](https://cloud.google.com/bigquery/query-reference#from)
         #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
-        # @param [String] create Specifies whether the job is allowed to create
-        #   new tables. The default value is `needed`.
         #
-        #   The following values are supported:
-        #
-        #   * `needed` - Create the table if it does not exist.
-        #   * `never` - The table must already exist. A 'notFound' error is
-        #     raised if the table does not exist.
-        # @param [String] write Specifies how to handle data already present in
-        #   the destination table. The default value is `empty`.
-        #
-        #   The following values are supported:
-        #
-        #   * `truncate` - BigQuery overwrites the table data.
-        #   * `append` - BigQuery appends the data to the table.
-        #   * `empty` - An error will be returned if the destination table
-        #     already contains data.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1920,11 +1904,9 @@ module Google
         #
         # @!group Data
         #
-        def clone destination_table, create: nil, write: nil, &block
+        def clone destination_table, &block
           copy_job_with_operation_type destination_table, 
-                                       create, 
-                                       write, 
-                                       OperationType::CLONE,
+                                       operation_type: OperationType::CLONE,
                                        &block
         end
 
@@ -1949,23 +1931,7 @@ module Google
         #   Reference](https://cloud.google.com/bigquery/query-reference#from)
         #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
-        # @param [String] create Specifies whether the job is allowed to create
-        #   new tables. The default value is `needed`.
         #
-        #   The following values are supported:
-        #
-        #   * `needed` - Create the table if it does not exist.
-        #   * `never` - The table must already exist. A 'notFound' error is
-        #     raised if the table does not exist.
-        # @param [String] write Specifies how to handle data already present in
-        #   the destination table. The default value is `empty`.
-        #
-        #   The following values are supported:
-        #
-        #   * `truncate` - BigQuery overwrites the table data.
-        #   * `append` - BigQuery appends the data to the table.
-        #   * `empty` - An error will be returned if the destination table
-        #     already contains data.
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
         #   configuration object for setting additional options.
@@ -1993,11 +1959,9 @@ module Google
         #
         # @!group Data
         #
-        def snapshot destination_table, create: nil, write: nil, &block
+        def snapshot destination_table, &block
           copy_job_with_operation_type destination_table, 
-                                       create, 
-                                       write, 
-                                       OperationType::SNAPSHOT,
+                                       operation_type: OperationType::SNAPSHOT,
                                        &block
         end
 
@@ -2068,9 +2032,9 @@ module Google
         #
         def restore destination_table, create: nil, write: nil, &block
           copy_job_with_operation_type destination_table, 
-                                       create, 
-                                       write, 
-                                       OperationType::RESTORE,
+                                       create: create, 
+                                       write: write, 
+                                       operation_type: OperationType::RESTORE,
                                        &block
         end
 
@@ -3027,7 +2991,7 @@ module Google
 
         protected
 
-        def copy_job_with_operation_type destination_table, create, write, operation_type, &block
+        def copy_job_with_operation_type destination_table, create: nil, write: nil, operation_type: nil, &block
           job = copy_job destination_table,
                          create: create, 
                          write: write, 
