@@ -22,6 +22,7 @@ require "google/cloud/bigquery/routine"
 require "google/cloud/bigquery/external"
 require "google/cloud/bigquery/dataset/list"
 require "google/cloud/bigquery/dataset/access"
+require "google/cloud/bigquery/dataset/tag"
 require "google/cloud/bigquery/convert"
 require "google/apis/bigquery_v2"
 
@@ -464,6 +465,25 @@ module Google
             end
           end
           access_builder.freeze
+        end
+
+        ##
+        # Retrieves the tags associated with this dataset. Tag keys are
+        # globally unique, and managed via the resource manager API.
+        #
+        # @see https://cloud.google.com/resource-manager/docs/tags/tags-overview
+        # for more information.
+        #
+        # @return [Google::Cloud::Bigquery::Dataset::Tag] The list of tags.
+        #
+        def tags
+          ensure_full_data!
+          return nil if @gapi.tags.nil?
+          tags = []
+          @gapi.tags.each do |gapi|
+            tags.append Tag.from_gapi(gapi)
+          end
+          tags
         end
 
         ##
