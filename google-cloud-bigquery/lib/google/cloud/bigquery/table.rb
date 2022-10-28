@@ -1904,8 +1904,10 @@ module Google
         #
         # @!group Data
         #
-        def clone destination_table, &block
+        def clone destination_table, create: nil, write: nil, &block
           copy_job_with_operation_type destination_table, 
+                                       create: create,
+                                       write: write,
                                        operation_type: OperationType::CLONE,
                                        &block
         end

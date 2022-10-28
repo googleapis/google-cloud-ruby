@@ -94,6 +94,71 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     _(result).must_equal true
   end
 
+  it "can clone itself with create disposition" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    result = source_table.clone target_table, create: "CREATE_NEVER"
+    mock.verify
+
+    _(result).must_equal true
+  end
+
+  it "can clone itself with create disposition symbol" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    result = source_table.clone target_table, create: :never
+    mock.verify
+
+    _(result).must_equal true
+  end
+
+
+  it "can clone itself with write disposition" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    result = source_table.clone target_table, write: "WRITE_TRUNCATE"
+    mock.verify
+
+    _(result).must_equal true
+  end
+
+  it "can clone itself with write disposition symbol" do
+    mock = Minitest::Mock.new
+    bigquery.service.mocked_service = mock
+
+    job_gapi = copy_job_gapi(source_table, target_table)
+    job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
+    job_resp_gapi = job_gapi.dup
+    job_resp_gapi.status = status "done"
+    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
+
+    result = source_table.clone target_table, write: :truncate
+    mock.verify
+
+    _(result).must_equal true
+  end
+
   def copy_job_gapi source, target, job_id: "job_9876543210", location: "US"
     Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id, location: location)
   end
