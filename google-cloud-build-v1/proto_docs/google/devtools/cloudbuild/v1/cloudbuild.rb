@@ -184,6 +184,36 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
+        # Artifact uploaded using the PythonPackage directive.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of the uploaded artifact.
+        # @!attribute [rw] file_hashes
+        #   @return [::Google::Cloud::Build::V1::FileHashes]
+        #     Hash types and values of the Python Artifact.
+        # @!attribute [r] push_timing
+        #   @return [::Google::Cloud::Build::V1::TimeSpan]
+        #     Output only. Stores timing information for pushing the specified artifact.
+        class UploadedPythonPackage
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # A Maven artifact uploaded using the MavenArtifact directive.
+        # @!attribute [rw] uri
+        #   @return [::String]
+        #     URI of the uploaded artifact.
+        # @!attribute [rw] file_hashes
+        #   @return [::Google::Cloud::Build::V1::FileHashes]
+        #     Hash types and values of the Maven Artifact.
+        # @!attribute [r] push_timing
+        #   @return [::Google::Cloud::Build::V1::TimeSpan]
+        #     Output only. Stores timing information for pushing the specified artifact.
+        class UploadedMavenArtifact
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A step in the build pipeline.
         # @!attribute [rw] name
         #   @return [::String]
@@ -346,6 +376,12 @@ module Google
         # @!attribute [rw] artifact_timing
         #   @return [::Google::Cloud::Build::V1::TimeSpan]
         #     Time to push all non-container artifacts.
+        # @!attribute [rw] python_packages
+        #   @return [::Array<::Google::Cloud::Build::V1::UploadedPythonPackage>]
+        #     Python artifacts uploaded to Artifact Registry at the end of the build.
+        # @!attribute [rw] maven_artifacts
+        #   @return [::Array<::Google::Cloud::Build::V1::UploadedMavenArtifact>]
+        #     Maven artifacts uploaded to Artifact Registry at the end of the build.
         class Results
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -664,6 +700,24 @@ module Google
         #     Build resource's results field.
         #
         #     If any objects fail to be pushed, the build is marked FAILURE.
+        # @!attribute [rw] maven_artifacts
+        #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::MavenArtifact>]
+        #     A list of Maven artifacts to be uploaded to Artifact Registry upon
+        #     successful completion of all build steps.
+        #
+        #     Artifacts in the workspace matching specified paths globs will be uploaded
+        #     to the specified Artifact Registry repository using the builder service
+        #     account's credentials.
+        #
+        #     If any artifacts fail to be pushed, the build is marked FAILURE.
+        # @!attribute [rw] python_packages
+        #   @return [::Array<::Google::Cloud::Build::V1::Artifacts::PythonPackage>]
+        #     A list of Python packages to be uploaded to Artifact Registry upon
+        #     successful completion of all build steps.
+        #
+        #     The build service account credentials will be used to perform the upload.
+        #
+        #     If any objects fail to be pushed, the build is marked FAILURE.
         class Artifacts
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -685,6 +739,60 @@ module Google
           #   @return [::Google::Cloud::Build::V1::TimeSpan]
           #     Output only. Stores timing information for pushing all artifact objects.
           class ArtifactObjects
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # A Maven artifact to upload to Artifact Registry upon successful completion
+          # of all build steps.
+          # @!attribute [rw] repository
+          #   @return [::String]
+          #     Artifact Registry repository, in the form
+          #     "https://$REGION-maven.pkg.dev/$PROJECT/$REPOSITORY"
+          #
+          #     Artifact in the workspace specified by path will be uploaded to
+          #     Artifact Registry with this location as a prefix.
+          # @!attribute [rw] path
+          #   @return [::String]
+          #     Path to an artifact in the build's workspace to be uploaded to
+          #     Artifact Registry.
+          #     This can be either an absolute path,
+          #     e.g. /workspace/my-app/target/my-app-1.0.SNAPSHOT.jar
+          #     or a relative path from /workspace,
+          #     e.g. my-app/target/my-app-1.0.SNAPSHOT.jar.
+          # @!attribute [rw] artifact_id
+          #   @return [::String]
+          #     Maven `artifactId` value used when uploading the artifact to Artifact
+          #     Registry.
+          # @!attribute [rw] group_id
+          #   @return [::String]
+          #     Maven `groupId` value used when uploading the artifact to Artifact
+          #     Registry.
+          # @!attribute [rw] version
+          #   @return [::String]
+          #     Maven `version` value used when uploading the artifact to Artifact
+          #     Registry.
+          class MavenArtifact
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Python package to upload to Artifact Registry upon successful completion
+          # of all build steps. A package can encapsulate multiple objects to be
+          # uploaded to a single repository.
+          # @!attribute [rw] repository
+          #   @return [::String]
+          #     Artifact Registry repository, in the form
+          #     "https://$REGION-python.pkg.dev/$PROJECT/$REPOSITORY"
+          #
+          #     Files in the workspace matching any path pattern will be uploaded to
+          #     Artifact Registry with this location as a prefix.
+          # @!attribute [rw] paths
+          #   @return [::Array<::String>]
+          #     Path globs used to match files in the build's workspace. For Python/
+          #     Twine, this is usually `dist/*`, and sometimes additionally an `.asc`
+          #     file.
+          class PythonPackage
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
