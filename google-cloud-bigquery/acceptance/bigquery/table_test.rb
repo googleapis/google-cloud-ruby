@@ -812,7 +812,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     gs_url = "gs://#{file2.bucket}/#{file2.name}"
 
     # Test both by file object and URL as string
-    result = table.load [file1, gs_url]
+    result = safe_gcs_execute { table.load [file1, gs_url] }
     _(result).must_equal true
   end
 
@@ -1020,8 +1020,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       _(result).must_equal true
       table_snapshot = dataset.table target_snapshot_table
       _(table_snapshot.snapshot?).must_equal true
-    rescue => exception
-      raise exception
     ensure
       table_snapshot.delete  
     end
@@ -1033,8 +1031,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       _(result).must_equal true
       table_clone = dataset.table target_clone_table
       _(table_clone.clone?).must_equal true
-    rescue => exception
-      raise exception
     ensure
       table_clone.delete  
     end
@@ -1046,8 +1042,6 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       _(result).must_equal true
       restored_table = dataset.table target_clone_table
       _(restored_table.table?).must_equal true
-    rescue => exception
-      raise exception
     ensure
       restored_table.delete  
     end
