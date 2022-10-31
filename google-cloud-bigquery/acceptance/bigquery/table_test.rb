@@ -934,9 +934,11 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     Tempfile.open "empty_extract_file.json" do |tmp|
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      extract_job = table.extract_job extract_url do |j|
-        j.labels = labels
-      end
+      extract_job = safe_gcs_execute do
+                      table.extract_job extract_url do |j|
+                        j.labels = labels
+                      end
+                    end
 
       _(extract_job).must_be_kind_of Google::Cloud::Bigquery::ExtractJob
       _(extract_job.labels).must_equal labels
@@ -968,7 +970,9 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       extract_file = bucket.create_file tmp, dest_file_name
       job_id = "test_job_#{SecureRandom.urlsafe_base64(21)}" # client-generated
 
-      extract_job = table.extract_job extract_file, job_id: job_id
+      extract_job = safe_gcs_execute do 
+                      table.extract_job extract_file, job_id: job_id
+                    end
       _(extract_job.job_id).must_equal job_id
       extract_job.wait_until_done!
       _(extract_job).wont_be :failed?
@@ -987,7 +991,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
     Tempfile.open "empty_extract_file.json" do |tmp|
       dest_file_name = random_file_destination_name
       extract_url = "gs://#{bucket.name}/#{dest_file_name}"
-      result = table.extract extract_url
+      result = safe_gcs_execute { table.extract extract_url } 
       _(result).must_equal true
 
       extract_file = bucket.file dest_file_name
@@ -1005,7 +1009,7 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       dest_file_name = random_file_destination_name
       extract_file = bucket.create_file tmp, dest_file_name
 
-      result = table.extract extract_file
+      result = safe_gcs_execute { table.extract extract_file } 
       _(result).must_equal true
       # Refresh to get the latest file data
       extract_file = bucket.file dest_file_name
