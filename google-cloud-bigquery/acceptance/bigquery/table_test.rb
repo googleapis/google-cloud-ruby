@@ -96,6 +96,8 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
   let(:target_table_2_id) { "kittens_copy_2" }
   let(:target_table_3_id) { "kittens_copy_3" }
   let(:target_table_4_id) { "kittens_copy_4" }
+  let(:target_snapshot_table) { "kittens_copy_5" }
+  let(:target_clone_table) { "kittens_copy_6" }
   let(:labels) { { "foo" => "bar" } }
 
   it "has the attributes of a table" do
@@ -1009,6 +1011,45 @@ describe Google::Cloud::Bigquery::Table, :bigquery do
       extract_file = bucket.file dest_file_name
       downloaded_file = extract_file.download tmp.path
       _(downloaded_file.size).must_be :>, 0
+    end
+  end
+
+  it "creates snapshot of a table" do
+    begin
+      result = table.snapshot target_snapshot_table
+      _(result).must_equal true
+      table_snapshot = dataset.table target_snapshot_table
+      _(table_snapshot.snapshot?).must_equal true
+    rescue => exception
+      raise exception
+    ensure
+      table_snapshot.delete  
+    end
+  end
+
+  it "creates clone of a table" do
+    begin
+      result = table.clone target_clone_table
+      _(result).must_equal true
+      table_clone = dataset.table target_clone_table
+      _(table_clone.clone?).must_equal true
+    rescue => exception
+      raise exception
+    ensure
+      table_clone.delete  
+    end
+  end
+
+  it "restores snapshot into a table" do
+    begin
+      result = table.clone target_clone_table
+      _(result).must_equal true
+      restored_table = dataset.table target_clone_table
+      _(restored_table.table?).must_equal true
+    rescue => exception
+      raise exception
+    ensure
+      restored_table.delete  
     end
   end
 end
