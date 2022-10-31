@@ -157,7 +157,7 @@ module Google
         ##
         # The Information about base table and snapshot time of the table.
         #
-        # @return [Google::Apis::BigqueryV2::SnapshotDefinition, nil] Snapshot definition of table snapshot, or 
+        # @return [Google::Apis::BigqueryV2::SnapshotDefinition, nil] Snapshot definition of table snapshot, or
         #   `nil` if not snapshot or the object is a reference (see {#reference?}).
         #
         # @!group Attributes
@@ -170,7 +170,7 @@ module Google
         ##
         # The Information about base table and clone time of the table.
         #
-        # @return [Google::Apis::BigqueryV2::CloneDefinition, nil] Clone definition of table clone, or 
+        # @return [Google::Apis::BigqueryV2::CloneDefinition, nil] Clone definition of table clone, or
         #   `nil` if not clone or the object is a reference (see {#reference?}).
         #
         # @!group Attributes
@@ -1757,16 +1757,16 @@ module Google
         #
         # @!group Data
         #
-        def copy_job destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil, operation_type: nil
+        def copy_job destination_table, create: nil, write: nil, job_id: nil, prefix: nil, labels: nil, dryrun: nil,
+                     operation_type: nil
           ensure_service!
-          options = { create: create, 
-                      write: write, 
-                      dryrun: dryrun, 
-                      labels: labels, 
-                      job_id: job_id, 
-                      prefix: prefix, 
-                      operation_type: operation_type 
-                    }
+          options = { create: create,
+                      write: write,
+                      dryrun: dryrun,
+                      labels: labels,
+                      job_id: job_id,
+                      prefix: prefix,
+                      operation_type: operation_type }
           updater = CopyJob::Updater.from_options(
             service,
             table_ref,
@@ -1847,19 +1847,19 @@ module Google
         # @!group Data
         #
         def copy destination_table, create: nil, write: nil, &block
-          copy_job_with_operation_type destination_table, 
-                                       create: create, 
-                                       write: write, 
-                                       operation_type: OperationType::COPY, 
+          copy_job_with_operation_type destination_table,
+                                       create: create,
+                                       write: write,
+                                       operation_type: OperationType::COPY,
                                        &block
         end
 
         ##
         # Clones the data from the table to another table using a synchronous
-        # method that blocks for a response. 
-        # The source and destination table have the same table type, but only bill for                 
+        # method that blocks for a response.
+        # The source and destination table have the same table type, but only bill for
         # unique data.
-        # Timeouts and transient errors are generally handled as needed to complete the job. 
+        # Timeouts and transient errors are generally handled as needed to complete the job.
         # See also {#copy_job}.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
@@ -1905,7 +1905,7 @@ module Google
         # @!group Data
         #
         def clone destination_table, create: nil, write: nil, &block
-          copy_job_with_operation_type destination_table, 
+          copy_job_with_operation_type destination_table,
                                        create: create,
                                        write: write,
                                        operation_type: OperationType::CLONE,
@@ -1914,9 +1914,9 @@ module Google
 
         ##
         # Takes snapshot of the data from the table to another table using a synchronous
-        # method that blocks for a response. 
+        # method that blocks for a response.
         # The source table type is TABLE and the destination table type is SNAPSHOT.
-        # Timeouts and transient errors are generally handled as needed to complete the job. 
+        # Timeouts and transient errors are generally handled as needed to complete the job.
         # See also {#copy_job}.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
@@ -1962,16 +1962,16 @@ module Google
         # @!group Data
         #
         def snapshot destination_table, &block
-          copy_job_with_operation_type destination_table, 
+          copy_job_with_operation_type destination_table,
                                        operation_type: OperationType::SNAPSHOT,
                                        &block
         end
 
         ##
         # Restore the data from the table to another table using a synchronous
-        # method that blocks for a response. 
+        # method that blocks for a response.
         # The source table type is SNAPSHOT and the destination table type is TABLE.
-        # Timeouts and transient errors are generally handled as needed to complete the job. 
+        # Timeouts and transient errors are generally handled as needed to complete the job.
         # See also {#copy_job}.
         #
         # The geographic location for the job ("US", "EU", etc.) can be set via
@@ -2033,9 +2033,9 @@ module Google
         # @!group Data
         #
         def restore destination_table, create: nil, write: nil, &block
-          copy_job_with_operation_type destination_table, 
-                                       create: create, 
-                                       write: write, 
+          copy_job_with_operation_type destination_table,
+                                       create: create,
+                                       write: write,
                                        operation_type: OperationType::RESTORE,
                                        &block
         end
@@ -2995,8 +2995,8 @@ module Google
 
         def copy_job_with_operation_type destination_table, create: nil, write: nil, operation_type: nil, &block
           job = copy_job destination_table,
-                         create: create, 
-                         write: write, 
+                         create: create,
+                         write: write,
                          operation_type: operation_type,
                          &block
           job.wait_until_done!
