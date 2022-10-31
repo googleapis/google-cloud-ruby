@@ -1,0 +1,413 @@
+{
+  "schema": "1.0",
+  "comment": "This file maps proto services/RPCs to the corresponding library clients/methods",
+  "language": "ruby",
+  "protoPackage": "google.analytics.admin.v1alpha",
+  "libraryPackage": "::Google::Analytics::Admin::V1alpha",
+  "services": {
+    "AnalyticsAdminService": {
+      "clients": {
+        "grpc": {
+          "libraryClient": "::Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client",
+          "rpcs": {
+            "GetAccount": {
+              "methods": [
+                "get_account"
+              ]
+            },
+            "ListAccounts": {
+              "methods": [
+                "list_accounts"
+              ]
+            },
+            "DeleteAccount": {
+              "methods": [
+                "delete_account"
+              ]
+            },
+            "UpdateAccount": {
+              "methods": [
+                "update_account"
+              ]
+            },
+            "ProvisionAccountTicket": {
+              "methods": [
+                "provision_account_ticket"
+              ]
+            },
+            "ListAccountSummaries": {
+              "methods": [
+                "list_account_summaries"
+              ]
+            },
+            "GetProperty": {
+              "methods": [
+                "get_property"
+              ]
+            },
+            "ListProperties": {
+              "methods": [
+                "list_properties"
+              ]
+            },
+            "CreateProperty": {
+              "methods": [
+                "create_property"
+              ]
+            },
+            "DeleteProperty": {
+              "methods": [
+                "delete_property"
+              ]
+            },
+            "UpdateProperty": {
+              "methods": [
+                "update_property"
+              ]
+            },
+            "GetUserLink": {
+              "methods": [
+                "get_user_link"
+              ]
+            },
+            "BatchGetUserLinks": {
+              "methods": [
+                "batch_get_user_links"
+              ]
+            },
+            "ListUserLinks": {
+              "methods": [
+                "list_user_links"
+              ]
+            },
+            "AuditUserLinks": {
+              "methods": [
+                "audit_user_links"
+              ]
+            },
+            "CreateUserLink": {
+              "methods": [
+                "create_user_link"
+              ]
+            },
+            "BatchCreateUserLinks": {
+              "methods": [
+                "batch_create_user_links"
+              ]
+            },
+            "UpdateUserLink": {
+              "methods": [
+                "update_user_link"
+              ]
+            },
+            "BatchUpdateUserLinks": {
+              "methods": [
+                "batch_update_user_links"
+              ]
+            },
+            "DeleteUserLink": {
+              "methods": [
+                "delete_user_link"
+              ]
+            },
+            "BatchDeleteUserLinks": {
+              "methods": [
+                "batch_delete_user_links"
+              ]
+            },
+            "CreateFirebaseLink": {
+              "methods": [
+                "create_firebase_link"
+              ]
+            },
+            "DeleteFirebaseLink": {
+              "methods": [
+                "delete_firebase_link"
+              ]
+            },
+            "ListFirebaseLinks": {
+              "methods": [
+                "list_firebase_links"
+              ]
+            },
+            "GetGlobalSiteTag": {
+              "methods": [
+                "get_global_site_tag"
+              ]
+            },
+            "CreateGoogleAdsLink": {
+              "methods": [
+                "create_google_ads_link"
+              ]
+            },
+            "UpdateGoogleAdsLink": {
+              "methods": [
+                "update_google_ads_link"
+              ]
+            },
+            "DeleteGoogleAdsLink": {
+              "methods": [
+                "delete_google_ads_link"
+              ]
+            },
+            "ListGoogleAdsLinks": {
+              "methods": [
+                "list_google_ads_links"
+              ]
+            },
+            "GetDataSharingSettings": {
+              "methods": [
+                "get_data_sharing_settings"
+              ]
+            },
+            "GetMeasurementProtocolSecret": {
+              "methods": [
+                "get_measurement_protocol_secret"
+              ]
+            },
+            "ListMeasurementProtocolSecrets": {
+              "methods": [
+                "list_measurement_protocol_secrets"
+              ]
+            },
+            "CreateMeasurementProtocolSecret": {
+              "methods": [
+                "create_measurement_protocol_secret"
+              ]
+            },
+            "DeleteMeasurementProtocolSecret": {
+              "methods": [
+                "delete_measurement_protocol_secret"
+              ]
+            },
+            "UpdateMeasurementProtocolSecret": {
+              "methods": [
+                "update_measurement_protocol_secret"
+              ]
+            },
+            "AcknowledgeUserDataCollection": {
+              "methods": [
+                "acknowledge_user_data_collection"
+              ]
+            },
+            "SearchChangeHistoryEvents": {
+              "methods": [
+                "search_change_history_events"
+              ]
+            },
+            "GetGoogleSignalsSettings": {
+              "methods": [
+                "get_google_signals_settings"
+              ]
+            },
+            "UpdateGoogleSignalsSettings": {
+              "methods": [
+                "update_google_signals_settings"
+              ]
+            },
+            "CreateConversionEvent": {
+              "methods": [
+                "create_conversion_event"
+              ]
+            },
+            "GetConversionEvent": {
+              "methods": [
+                "get_conversion_event"
+              ]
+            },
+            "DeleteConversionEvent": {
+              "methods": [
+                "delete_conversion_event"
+              ]
+            },
+            "ListConversionEvents": {
+              "methods": [
+                "list_conversion_events"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "get_display_video360_advertiser_link"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinks": {
+              "methods": [
+                "list_display_video360_advertiser_links"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "create_display_video360_advertiser_link"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "delete_display_video360_advertiser_link"
+              ]
+            },
+            "UpdateDisplayVideo360AdvertiserLink": {
+              "methods": [
+                "update_display_video360_advertiser_link"
+              ]
+            },
+            "GetDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "get_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "ListDisplayVideo360AdvertiserLinkProposals": {
+              "methods": [
+                "list_display_video360_advertiser_link_proposals"
+              ]
+            },
+            "CreateDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "create_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "DeleteDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "delete_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "ApproveDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "approve_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "CancelDisplayVideo360AdvertiserLinkProposal": {
+              "methods": [
+                "cancel_display_video360_advertiser_link_proposal"
+              ]
+            },
+            "CreateCustomDimension": {
+              "methods": [
+                "create_custom_dimension"
+              ]
+            },
+            "UpdateCustomDimension": {
+              "methods": [
+                "update_custom_dimension"
+              ]
+            },
+            "ListCustomDimensions": {
+              "methods": [
+                "list_custom_dimensions"
+              ]
+            },
+            "ArchiveCustomDimension": {
+              "methods": [
+                "archive_custom_dimension"
+              ]
+            },
+            "GetCustomDimension": {
+              "methods": [
+                "get_custom_dimension"
+              ]
+            },
+            "CreateCustomMetric": {
+              "methods": [
+                "create_custom_metric"
+              ]
+            },
+            "UpdateCustomMetric": {
+              "methods": [
+                "update_custom_metric"
+              ]
+            },
+            "ListCustomMetrics": {
+              "methods": [
+                "list_custom_metrics"
+              ]
+            },
+            "ArchiveCustomMetric": {
+              "methods": [
+                "archive_custom_metric"
+              ]
+            },
+            "GetCustomMetric": {
+              "methods": [
+                "get_custom_metric"
+              ]
+            },
+            "GetDataRetentionSettings": {
+              "methods": [
+                "get_data_retention_settings"
+              ]
+            },
+            "UpdateDataRetentionSettings": {
+              "methods": [
+                "update_data_retention_settings"
+              ]
+            },
+            "CreateDataStream": {
+              "methods": [
+                "create_data_stream"
+              ]
+            },
+            "DeleteDataStream": {
+              "methods": [
+                "delete_data_stream"
+              ]
+            },
+            "UpdateDataStream": {
+              "methods": [
+                "update_data_stream"
+              ]
+            },
+            "ListDataStreams": {
+              "methods": [
+                "list_data_streams"
+              ]
+            },
+            "GetDataStream": {
+              "methods": [
+                "get_data_stream"
+              ]
+            },
+            "GetAudience": {
+              "methods": [
+                "get_audience"
+              ]
+            },
+            "ListAudiences": {
+              "methods": [
+                "list_audiences"
+              ]
+            },
+            "CreateAudience": {
+              "methods": [
+                "create_audience"
+              ]
+            },
+            "UpdateAudience": {
+              "methods": [
+                "update_audience"
+              ]
+            },
+            "ArchiveAudience": {
+              "methods": [
+                "archive_audience"
+              ]
+            },
+            "GetAttributionSettings": {
+              "methods": [
+                "get_attribution_settings"
+              ]
+            },
+            "UpdateAttributionSettings": {
+              "methods": [
+                "update_attribution_settings"
+              ]
+            },
+            "RunAccessReport": {
+              "methods": [
+                "run_access_report"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}
