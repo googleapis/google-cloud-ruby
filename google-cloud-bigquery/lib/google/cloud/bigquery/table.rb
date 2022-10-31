@@ -877,7 +877,7 @@ module Google
         #
         def clone?
           return nil if reference?
-          !clone_table.gapi.clone_definition.nil?
+          !@gapi.clone_definition.nil?
         end
 
         ##
