@@ -33,24 +33,29 @@ end
 flag :commit_message, "--message=MESSAGE" do
   desc "The conventional commit message"
 end
-flag :source_path, "--source-path=PATH" do
-  desc "Path to the googleapis-gen source repo"
-end
-flag :protos_path, "--protos-path=PATH" do
-  desc "Path to the googleapis protos repo or third_party directory"
-end
-flag :piper_client, "--piper-client=NAME" do
-  desc "Generate by running Bazel from the given piper client rather than using googleapis-gen"
+at_most_one desc: "Source" do
+  long_desc \
+    "Specify where the generated client comes from.",
+    "At most one of these flags can be set. If none is given, the googleapis-gen repo is cloned."
+  flag :googleapis_gen_github_token, "--googleapis-gen-github-token=TOKEN" do
+    default(ENV["GOOGLEAPIS_GEN_GITHUB_TOKEN"] || ENV["GITHUB_TOKEN"])
+    desc "GitHub token for cloning the googleapis-gen repository."
+  end
+  flag :source_path, "--source-path=PATH" do
+    desc "Path to the googleapis-gen source repo."
+  end
+  flag :protos_path, "--protos-path=PATH" do
+    desc "Generate by running Bazel from the given path to the googleapis protos repo or third_party directory."
+  end
+  flag :piper_client, "--piper-client=NAME" do
+    desc "Generate by running Bazel from the given piper client"
+  end
 end
 flag :combined_prs do
   desc "Combine all changes into a single pull request"
 end
 flag :enable_tests, "--test" do
   desc "Run CI on each library"
-end
-flag :googleapis_gen_github_token, "--googleapis-gen-github-token=TOKEN" do
-  default(ENV["GOOGLEAPIS_GEN_GITHUB_TOKEN"] || ENV["GITHUB_TOKEN"])
-  desc "GitHub token for cloning the googleapis-gen repository"
 end
 
 OWLBOT_CONFIG_FILE_NAME = ".OwlBot.yaml"
@@ -69,16 +74,18 @@ def run
   require "fileutils"
   require "tmpdir"
 
-  set :source_path, File.expand_path(source_path) if source_path
-  ensure_source_path
   gems = choose_gems
-  Dir.chdir context_directory
+  cd context_directory
   yoshi_utils.git_ensure_identity
   gem_info = collect_gem_info gems
 
   pull_images
-  run_bazel gem_info if piper_client || protos_path
-  run_owlbot gem_info
+  if piper_client || protos_path
+    set :source_path, run_bazel(gem_info)
+  else
+    set :source_path, source_path ? File.expand_path(source_path) : googleapis_gen_path
+  end
+  run_owlbot gem_info, use_bazel_bin: piper_client || protos_path
   verify_staging gems
   results = process_gems gems
   final_output results
@@ -106,7 +113,7 @@ def gems_from_subdirectory
 end
 
 def all_gems
-  Dir.chdir context_directory do
+  cd context_directory do
     gems = Dir.glob("*/#{OWLBOT_CONFIG_FILE_NAME}").map { |path| File.dirname path }
     gems.delete_if do |name|
       !File.file? File.join(context_directory, name, "#{name}.gemspec")
@@ -163,20 +170,19 @@ def run_bazel gem_info
   gem_info.each do |name, info|
     info[:bazel_targets].each do |library_path, bazel_target|
       exec ["bazel", "build", "//#{library_path}:#{bazel_target}"], chdir: bazel_base_dir
-      generated_dir = File.join bazel_base_dir, "bazel-bin", library_path, bazel_target
-      source_dir = File.join source_path, library_path, bazel_target
-      rm_rf source_dir
-      mkdir_p File.dirname source_dir
-      cp_r generated_dir, source_dir
     end
   end
-end
-
-def ensure_source_path
-  return if source_path
   temp_dir = Dir.mktmpdir
   at_exit { FileUtils.rm_rf temp_dir }
-  Dir.chdir temp_dir do
+  results_dir = File.join temp_dir, "bazel-bin"
+  cp_r File.join(bazel_base_dir, "bazel-bin"), results_dir
+  results_dir
+end
+
+def googleapis_gen_path
+  temp_dir = Dir.mktmpdir
+  at_exit { FileUtils.rm_rf temp_dir }
+  cd temp_dir do
     exec ["git", "init"]
     token = googleapis_gen_github_token || yoshi_utils.gh_cur_token
     error "No github token found to load googleapis-gen" unless token
@@ -192,26 +198,27 @@ def ensure_source_path
     exec ["git", "branch", "github-head", "FETCH_HEAD"]
     exec ["git", "switch", "github-head"]
   end
-  set :source_path, temp_dir
+  temp_dir
 end
 
-def run_owlbot gem_info
-  FileUtils.mkdir_p TMP_DIR_NAME
+def run_owlbot gem_info, use_bazel_bin:
+  mkdir_p TMP_DIR_NAME
   temp_config = File.join TMP_DIR_NAME, OWLBOT_CONFIG_FILE_NAME
-  FileUtils.rm_f temp_config
+  rm_f temp_config
   combined_deep_copy_regex = gem_info.values.map { |info| info[:deep_copy_regexes] }.flatten
   combined_config = {"deep-copy-regex" => combined_deep_copy_regex}
   File.open temp_config, "w" do |file|
     file.puts Psych.dump combined_config
   end
   cmd = [
-    "-v", "#{source_path}:/googleapis-gen",
-    "#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}", "copy-code",
+    "-v", "#{source_path}:/source-path",
+    "#{OWLBOT_CLI_IMAGE}:#{owlbot_cli_tag}",
+    (use_bazel_bin ? "copy-bazel-bin" : "copy-code"),
     "--config-file", temp_config,
-    "--source-repo", "/googleapis-gen"
+    (use_bazel_bin ? "--source-dir" : "--source-repo"), "/source-path"
   ]
   docker_run(*cmd)
-  FileUtils.rm_f ".gitconfig"
+  rm_f ".gitconfig"
 end
 
 def verify_staging gems
@@ -224,8 +231,8 @@ end
 
 def process_gems gems
   temp_staging_dir = File.join TMP_DIR_NAME, STAGING_DIR_NAME
-  FileUtils.rm_rf temp_staging_dir
-  FileUtils.mv STAGING_DIR_NAME, temp_staging_dir
+  rm_rf temp_staging_dir
+  mv STAGING_DIR_NAME, temp_staging_dir
   if combined_prs
     process_gems_combined_pr gems, temp_staging_dir
   else
@@ -276,11 +283,11 @@ def build_commit_message name
 end
 
 def process_single_gem name, temp_staging_dir
-  FileUtils.mkdir_p STAGING_DIR_NAME
-  FileUtils.mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
+  mkdir_p STAGING_DIR_NAME
+  mv File.join(temp_staging_dir, name), File.join(STAGING_DIR_NAME, name)
   docker_run "#{POSTPROCESSOR_IMAGE}:#{postprocessor_tag}", "--gem", name
   if enable_tests
-    Dir.chdir name do
+    cd name do
       exec ["bundle", "install"]
       exec ["bundle", "exec", "rake", "ci"]
     end
