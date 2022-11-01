@@ -19,15 +19,21 @@
 # [START clouddebugger_v2_generated_Controller_RegisterDebuggee_sync]
 require "google/cloud/debugger/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Debugger::V2::Controller::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Controller::Client#register_debuggee
+#
+def register_debuggee
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Debugger::V2::Controller::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Debugger::V2::RegisterDebuggeeRequest.new
 
-# Call the register_debuggee method.
-result = client.register_debuggee request
+  # Call the register_debuggee method.
+  result = client.register_debuggee request
 
-# The returned object is of type Google::Cloud::Debugger::V2::RegisterDebuggeeResponse.
-p result
+  # The returned object is of type Google::Cloud::Debugger::V2::RegisterDebuggeeResponse.
+  p result
+end
 # [END clouddebugger_v2_generated_Controller_RegisterDebuggee_sync]

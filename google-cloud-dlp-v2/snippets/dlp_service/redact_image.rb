@@ -19,15 +19,21 @@
 # [START dlp_v2_generated_DlpService_RedactImage_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#redact_image
+#
+def redact_image
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::RedactImageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::RedactImageRequest.new
 
-# Call the redact_image method.
-result = client.redact_image request
+  # Call the redact_image method.
+  result = client.redact_image request
 
-# The returned object is of type Google::Cloud::Dlp::V2::RedactImageResponse.
-p result
+  # The returned object is of type Google::Cloud::Dlp::V2::RedactImageResponse.
+  p result
+end
 # [END dlp_v2_generated_DlpService_RedactImage_sync]

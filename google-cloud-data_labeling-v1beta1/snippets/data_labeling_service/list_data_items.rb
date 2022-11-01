@@ -19,21 +19,27 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_ListDataItems_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#list_data_items
+#
+def list_data_items
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::ListDataItemsRequest.new
 
-# Call the list_data_items method.
-result = client.list_data_items request
+  # Call the list_data_items method.
+  result = client.list_data_items request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::DataItem.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::DataLabeling::V1beta1::DataItem.
+    p response
+  end
 end
 # [END datalabeling_v1beta1_generated_DataLabelingService_ListDataItems_sync]

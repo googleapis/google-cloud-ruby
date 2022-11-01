@@ -19,15 +19,21 @@
 # [START websecurityscanner_v1beta_generated_WebSecurityScanner_DeleteScanConfig_sync]
 require "google/cloud/web_security_scanner/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#delete_scan_config
+#
+def delete_scan_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebSecurityScanner::V1beta::DeleteScanConfigRequest.new
 
-# Call the delete_scan_config method.
-result = client.delete_scan_config request
+  # Call the delete_scan_config method.
+  result = client.delete_scan_config request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END websecurityscanner_v1beta_generated_WebSecurityScanner_DeleteScanConfig_sync]

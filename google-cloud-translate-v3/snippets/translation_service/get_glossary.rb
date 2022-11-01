@@ -19,15 +19,21 @@
 # [START translate_v3_generated_TranslationService_GetGlossary_sync]
 require "google/cloud/translate/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Translate::V3::TranslationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#get_glossary
+#
+def get_glossary
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Translate::V3::TranslationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Translate::V3::GetGlossaryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Translate::V3::GetGlossaryRequest.new
 
-# Call the get_glossary method.
-result = client.get_glossary request
+  # Call the get_glossary method.
+  result = client.get_glossary request
 
-# The returned object is of type Google::Cloud::Translate::V3::Glossary.
-p result
+  # The returned object is of type Google::Cloud::Translate::V3::Glossary.
+  p result
+end
 # [END translate_v3_generated_TranslationService_GetGlossary_sync]

@@ -19,22 +19,28 @@
 # [START speech_v2_generated_Speech_UpdatePhraseSet_sync]
 require "google/cloud/speech/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V2::Speech::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V2::Speech::Client#update_phrase_set
+#
+def update_phrase_set
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V2::Speech::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V2::UpdatePhraseSetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V2::UpdatePhraseSetRequest.new
 
-# Call the update_phrase_set method.
-result = client.update_phrase_set request
+  # Call the update_phrase_set method.
+  result = client.update_phrase_set request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END speech_v2_generated_Speech_UpdatePhraseSet_sync]

@@ -19,15 +19,21 @@
 # [START container_v1beta1_generated_ClusterManager_ListClusters_sync]
 require "google/cloud/container/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Container::V1beta1::ClusterManager::Client#list_clusters
+#
+def list_clusters
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Container::V1beta1::ClusterManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Container::V1beta1::ListClustersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Container::V1beta1::ListClustersRequest.new
 
-# Call the list_clusters method.
-result = client.list_clusters request
+  # Call the list_clusters method.
+  result = client.list_clusters request
 
-# The returned object is of type Google::Cloud::Container::V1beta1::ListClustersResponse.
-p result
+  # The returned object is of type Google::Cloud::Container::V1beta1::ListClustersResponse.
+  p result
+end
 # [END container_v1beta1_generated_ClusterManager_ListClusters_sync]

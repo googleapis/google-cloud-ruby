@@ -19,15 +19,21 @@
 # [START jobs_v4_generated_CompanyService_CreateCompany_sync]
 require "google/cloud/talent/v4"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4::CompanyService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4::CompanyService::Client#create_company
+#
+def create_company
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4::CompanyService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4::CreateCompanyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4::CreateCompanyRequest.new
 
-# Call the create_company method.
-result = client.create_company request
+  # Call the create_company method.
+  result = client.create_company request
 
-# The returned object is of type Google::Cloud::Talent::V4::Company.
-p result
+  # The returned object is of type Google::Cloud::Talent::V4::Company.
+  p result
+end
 # [END jobs_v4_generated_CompanyService_CreateCompany_sync]

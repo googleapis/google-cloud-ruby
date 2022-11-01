@@ -19,15 +19,21 @@
 # [START securitycenter_v1_generated_SecurityCenter_CreateFinding_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_finding
+#
+def create_finding
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::CreateFindingRequest.new
 
-# Call the create_finding method.
-result = client.create_finding request
+  # Call the create_finding method.
+  result = client.create_finding request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1::Finding.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1::Finding.
+  p result
+end
 # [END securitycenter_v1_generated_SecurityCenter_CreateFinding_sync]

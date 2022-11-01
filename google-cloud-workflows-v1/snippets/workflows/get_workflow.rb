@@ -19,15 +19,21 @@
 # [START workflows_v1_generated_Workflows_GetWorkflow_sync]
 require "google/cloud/workflows/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Workflows::V1::Workflows::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Workflows::V1::Workflows::Client#get_workflow
+#
+def get_workflow
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Workflows::V1::Workflows::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Workflows::V1::GetWorkflowRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Workflows::V1::GetWorkflowRequest.new
 
-# Call the get_workflow method.
-result = client.get_workflow request
+  # Call the get_workflow method.
+  result = client.get_workflow request
 
-# The returned object is of type Google::Cloud::Workflows::V1::Workflow.
-p result
+  # The returned object is of type Google::Cloud::Workflows::V1::Workflow.
+  p result
+end
 # [END workflows_v1_generated_Workflows_GetWorkflow_sync]

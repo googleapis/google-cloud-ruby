@@ -19,21 +19,27 @@
 # [START iam_v2_generated_Policies_ListPolicies_sync]
 require "google/iam/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::V2::Policies::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::V2::Policies::Client#list_policies
+#
+def list_policies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::V2::Policies::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V2::ListPoliciesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V2::ListPoliciesRequest.new
 
-# Call the list_policies method.
-result = client.list_policies request
+  # Call the list_policies method.
+  result = client.list_policies request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Iam::V2::Policy.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Iam::V2::Policy.
+    p response
+  end
 end
 # [END iam_v2_generated_Policies_ListPolicies_sync]

@@ -19,22 +19,28 @@
 # [START certificatemanager_v1_generated_CertificateManager_CreateCertificateMap_sync]
 require "google/cloud/certificate_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#create_certificate_map
+#
+def create_certificate_map
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CertificateManager::V1::CreateCertificateMapRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CertificateManager::V1::CreateCertificateMapRequest.new
 
-# Call the create_certificate_map method.
-result = client.create_certificate_map request
+  # Call the create_certificate_map method.
+  result = client.create_certificate_map request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END certificatemanager_v1_generated_CertificateManager_CreateCertificateMap_sync]

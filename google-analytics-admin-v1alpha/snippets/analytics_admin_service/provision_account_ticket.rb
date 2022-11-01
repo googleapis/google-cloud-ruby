@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_ProvisionAccountTicket_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#provision_account_ticket
+#
+def provision_account_ticket
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::ProvisionAccountTicketRequest.new
 
-# Call the provision_account_ticket method.
-result = client.provision_account_ticket request
+  # Call the provision_account_ticket method.
+  result = client.provision_account_ticket request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::ProvisionAccountTicketResponse.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_ProvisionAccountTicket_sync]

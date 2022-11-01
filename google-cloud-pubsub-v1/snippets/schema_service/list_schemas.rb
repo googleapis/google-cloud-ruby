@@ -19,21 +19,27 @@
 # [START pubsub_v1_generated_SchemaService_ListSchemas_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::SchemaService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::SchemaService::Client#list_schemas
+#
+def list_schemas
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::SchemaService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::ListSchemasRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::ListSchemasRequest.new
 
-# Call the list_schemas method.
-result = client.list_schemas request
+  # Call the list_schemas method.
+  result = client.list_schemas request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::PubSub::V1::Schema.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::PubSub::V1::Schema.
+    p response
+  end
 end
 # [END pubsub_v1_generated_SchemaService_ListSchemas_sync]

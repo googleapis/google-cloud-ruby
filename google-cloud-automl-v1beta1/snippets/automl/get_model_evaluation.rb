@@ -19,15 +19,21 @@
 # [START automl_v1beta1_generated_AutoML_GetModelEvaluation_sync]
 require "google/cloud/automl/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#get_model_evaluation
+#
+def get_model_evaluation
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1beta1::GetModelEvaluationRequest.new
 
-# Call the get_model_evaluation method.
-result = client.get_model_evaluation request
+  # Call the get_model_evaluation method.
+  result = client.get_model_evaluation request
 
-# The returned object is of type Google::Cloud::AutoML::V1beta1::ModelEvaluation.
-p result
+  # The returned object is of type Google::Cloud::AutoML::V1beta1::ModelEvaluation.
+  p result
+end
 # [END automl_v1beta1_generated_AutoML_GetModelEvaluation_sync]

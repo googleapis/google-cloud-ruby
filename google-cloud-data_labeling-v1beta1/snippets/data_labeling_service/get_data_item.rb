@@ -19,15 +19,21 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_GetDataItem_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_data_item
+#
+def get_data_item
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::GetDataItemRequest.new
 
-# Call the get_data_item method.
-result = client.get_data_item request
+  # Call the get_data_item method.
+  result = client.get_data_item request
 
-# The returned object is of type Google::Cloud::DataLabeling::V1beta1::DataItem.
-p result
+  # The returned object is of type Google::Cloud::DataLabeling::V1beta1::DataItem.
+  p result
+end
 # [END datalabeling_v1beta1_generated_DataLabelingService_GetDataItem_sync]

@@ -19,21 +19,27 @@
 # [START notebooks_v1_generated_NotebookService_ListSchedules_sync]
 require "google/cloud/notebooks/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::NotebookService::Client#list_schedules
+#
+def list_schedules
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Notebooks::V1::ListSchedulesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Notebooks::V1::ListSchedulesRequest.new
 
-# Call the list_schedules method.
-result = client.list_schedules request
+  # Call the list_schedules method.
+  result = client.list_schedules request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Notebooks::V1::Schedule.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Notebooks::V1::Schedule.
+    p response
+  end
 end
 # [END notebooks_v1_generated_NotebookService_ListSchedules_sync]

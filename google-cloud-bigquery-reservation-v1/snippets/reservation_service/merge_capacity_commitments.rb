@@ -19,15 +19,21 @@
 # [START bigqueryreservation_v1_generated_ReservationService_MergeCapacityCommitments_sync]
 require "google/cloud/bigquery/reservation/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#merge_capacity_commitments
+#
+def merge_capacity_commitments
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Reservation::V1::MergeCapacityCommitmentsRequest.new
 
-# Call the merge_capacity_commitments method.
-result = client.merge_capacity_commitments request
+  # Call the merge_capacity_commitments method.
+  result = client.merge_capacity_commitments request
 
-# The returned object is of type Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::CapacityCommitment.
+  p result
+end
 # [END bigqueryreservation_v1_generated_ReservationService_MergeCapacityCommitments_sync]

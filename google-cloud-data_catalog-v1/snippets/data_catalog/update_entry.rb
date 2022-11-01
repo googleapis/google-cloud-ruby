@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_DataCatalog_UpdateEntry_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#update_entry
+#
+def update_entry
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::UpdateEntryRequest.new
 
-# Call the update_entry method.
-result = client.update_entry request
+  # Call the update_entry method.
+  result = client.update_entry request
 
-# The returned object is of type Google::Cloud::DataCatalog::V1::Entry.
-p result
+  # The returned object is of type Google::Cloud::DataCatalog::V1::Entry.
+  p result
+end
 # [END datacatalog_v1_generated_DataCatalog_UpdateEntry_sync]

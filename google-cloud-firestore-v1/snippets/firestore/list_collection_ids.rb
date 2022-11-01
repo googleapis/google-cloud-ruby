@@ -19,15 +19,21 @@
 # [START firestore_v1_generated_Firestore_ListCollectionIds_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#list_collection_ids
+#
+def list_collection_ids
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::V1::ListCollectionIdsRequest.new
 
-# Call the list_collection_ids method.
-result = client.list_collection_ids request
+  # Call the list_collection_ids method.
+  result = client.list_collection_ids request
 
-# The returned object is of type Google::Cloud::Firestore::V1::ListCollectionIdsResponse.
-p result
+  # The returned object is of type Google::Cloud::Firestore::V1::ListCollectionIdsResponse.
+  p result
+end
 # [END firestore_v1_generated_Firestore_ListCollectionIds_sync]

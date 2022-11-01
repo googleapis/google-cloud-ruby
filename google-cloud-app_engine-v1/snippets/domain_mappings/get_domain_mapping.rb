@@ -19,15 +19,21 @@
 # [START appengine_v1_generated_DomainMappings_GetDomainMapping_sync]
 require "google/cloud/app_engine/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::DomainMappings::Client#get_domain_mapping
+#
+def get_domain_mapping
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AppEngine::V1::GetDomainMappingRequest.new
 
-# Call the get_domain_mapping method.
-result = client.get_domain_mapping request
+  # Call the get_domain_mapping method.
+  result = client.get_domain_mapping request
 
-# The returned object is of type Google::Cloud::AppEngine::V1::DomainMapping.
-p result
+  # The returned object is of type Google::Cloud::AppEngine::V1::DomainMapping.
+  p result
+end
 # [END appengine_v1_generated_DomainMappings_GetDomainMapping_sync]

@@ -19,21 +19,27 @@
 # [START dialogflow_v3_generated_SecuritySettingsService_ListSecuritySettings_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client#list_security_settings
+#
+def list_security_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::SecuritySettingsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::ListSecuritySettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::ListSecuritySettingsRequest.new
 
-# Call the list_security_settings method.
-result = client.list_security_settings request
+  # Call the list_security_settings method.
+  result = client.list_security_settings request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dialogflow::CX::V3::SecuritySettings.
+    p response
+  end
 end
 # [END dialogflow_v3_generated_SecuritySettingsService_ListSecuritySettings_sync]

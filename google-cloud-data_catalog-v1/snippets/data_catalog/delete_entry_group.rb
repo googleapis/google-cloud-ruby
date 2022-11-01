@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_DataCatalog_DeleteEntryGroup_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#delete_entry_group
+#
+def delete_entry_group
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::DeleteEntryGroupRequest.new
 
-# Call the delete_entry_group method.
-result = client.delete_entry_group request
+  # Call the delete_entry_group method.
+  result = client.delete_entry_group request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END datacatalog_v1_generated_DataCatalog_DeleteEntryGroup_sync]

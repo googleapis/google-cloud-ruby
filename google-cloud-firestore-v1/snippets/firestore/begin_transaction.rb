@@ -19,15 +19,21 @@
 # [START firestore_v1_generated_Firestore_BeginTransaction_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#begin_transaction
+#
+def begin_transaction
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::V1::BeginTransactionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::V1::BeginTransactionRequest.new
 
-# Call the begin_transaction method.
-result = client.begin_transaction request
+  # Call the begin_transaction method.
+  result = client.begin_transaction request
 
-# The returned object is of type Google::Cloud::Firestore::V1::BeginTransactionResponse.
-p result
+  # The returned object is of type Google::Cloud::Firestore::V1::BeginTransactionResponse.
+  p result
+end
 # [END firestore_v1_generated_Firestore_BeginTransaction_sync]

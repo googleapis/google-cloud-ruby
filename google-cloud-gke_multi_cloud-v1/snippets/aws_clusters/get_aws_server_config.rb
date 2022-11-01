@@ -19,15 +19,21 @@
 # [START gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_sync]
 require "google/cloud/gke_multi_cloud/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#get_aws_server_config
+#
+def get_aws_server_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeMultiCloud::V1::GetAwsServerConfigRequest.new
 
-# Call the get_aws_server_config method.
-result = client.get_aws_server_config request
+  # Call the get_aws_server_config method.
+  result = client.get_aws_server_config request
 
-# The returned object is of type Google::Cloud::GkeMultiCloud::V1::AwsServerConfig.
-p result
+  # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AwsServerConfig.
+  p result
+end
 # [END gkemulticloud_v1_generated_AwsClusters_GetAwsServerConfig_sync]

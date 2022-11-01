@@ -19,15 +19,21 @@
 # [START gkehub_v1beta1_generated_GkeHubMembershipService_GenerateConnectManifest_sync]
 require "google/cloud/gke_hub/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_connect_manifest
+#
+def generate_connect_manifest
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestRequest.new
 
-# Call the generate_connect_manifest method.
-result = client.generate_connect_manifest request
+  # Call the generate_connect_manifest method.
+  result = client.generate_connect_manifest request
 
-# The returned object is of type Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestResponse.
-p result
+  # The returned object is of type Google::Cloud::GkeHub::V1beta1::GenerateConnectManifestResponse.
+  p result
+end
 # [END gkehub_v1beta1_generated_GkeHubMembershipService_GenerateConnectManifest_sync]

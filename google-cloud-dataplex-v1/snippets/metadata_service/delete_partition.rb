@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_MetadataService_DeletePartition_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::MetadataService::Client#delete_partition
+#
+def delete_partition
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::DeletePartitionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::DeletePartitionRequest.new
 
-# Call the delete_partition method.
-result = client.delete_partition request
+  # Call the delete_partition method.
+  result = client.delete_partition request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dataplex_v1_generated_MetadataService_DeletePartition_sync]

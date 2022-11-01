@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_ModelService_BatchImportModelEvaluationSlices_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::ModelService::Client#batch_import_model_evaluation_slices
+#
+def batch_import_model_evaluation_slices
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesRequest.new
 
-# Call the batch_import_model_evaluation_slices method.
-result = client.batch_import_model_evaluation_slices request
+  # Call the batch_import_model_evaluation_slices method.
+  result = client.batch_import_model_evaluation_slices request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::BatchImportModelEvaluationSlicesResponse.
+  p result
+end
 # [END aiplatform_v1_generated_ModelService_BatchImportModelEvaluationSlices_sync]

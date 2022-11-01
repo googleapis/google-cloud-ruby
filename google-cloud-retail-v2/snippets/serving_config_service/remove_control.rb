@@ -19,15 +19,21 @@
 # [START retail_v2_generated_ServingConfigService_RemoveControl_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ServingConfigService::Client#remove_control
+#
+def remove_control
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::RemoveControlRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::RemoveControlRequest.new
 
-# Call the remove_control method.
-result = client.remove_control request
+  # Call the remove_control method.
+  result = client.remove_control request
 
-# The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
-p result
+  # The returned object is of type Google::Cloud::Retail::V2::ServingConfig.
+  p result
+end
 # [END retail_v2_generated_ServingConfigService_RemoveControl_sync]

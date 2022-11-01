@@ -19,15 +19,21 @@
 # [START beyondcorp_v1_generated_ClientGatewaysService_GetClientGateway_sync]
 require "google/cloud/beyond_corp/client_gateways/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client#get_client_gateway
+#
+def get_client_gateway
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGatewaysService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::ClientGateways::V1::GetClientGatewayRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::ClientGateways::V1::GetClientGatewayRequest.new
 
-# Call the get_client_gateway method.
-result = client.get_client_gateway request
+  # Call the get_client_gateway method.
+  result = client.get_client_gateway request
 
-# The returned object is of type Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGateway.
-p result
+  # The returned object is of type Google::Cloud::BeyondCorp::ClientGateways::V1::ClientGateway.
+  p result
+end
 # [END beyondcorp_v1_generated_ClientGatewaysService_GetClientGateway_sync]

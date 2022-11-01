@@ -19,15 +19,21 @@
 # [START gkehub_v1beta1_generated_GkeHubMembershipService_GenerateExclusivityManifest_sync]
 require "google/cloud/gke_hub/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#generate_exclusivity_manifest
+#
+def generate_exclusivity_manifest
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestRequest.new
 
-# Call the generate_exclusivity_manifest method.
-result = client.generate_exclusivity_manifest request
+  # Call the generate_exclusivity_manifest method.
+  result = client.generate_exclusivity_manifest request
 
-# The returned object is of type Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestResponse.
-p result
+  # The returned object is of type Google::Cloud::GkeHub::V1beta1::GenerateExclusivityManifestResponse.
+  p result
+end
 # [END gkehub_v1beta1_generated_GkeHubMembershipService_GenerateExclusivityManifest_sync]

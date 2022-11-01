@@ -19,15 +19,21 @@
 # [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_sync]
 require "google/cloud/recaptcha_enterprise/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#get_key
+#
+def get_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecaptchaEnterprise::V1::GetKeyRequest.new
 
-# Call the get_key method.
-result = client.get_key request
+  # Call the get_key method.
+  result = client.get_key request
 
-# The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::Key.
-p result
+  # The returned object is of type Google::Cloud::RecaptchaEnterprise::V1::Key.
+  p result
+end
 # [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_GetKey_sync]

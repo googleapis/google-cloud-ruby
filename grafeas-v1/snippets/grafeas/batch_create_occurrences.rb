@@ -19,15 +19,21 @@
 # [START grafeas_v1_generated_Grafeas_BatchCreateOccurrences_sync]
 require "grafeas/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Grafeas::V1::Grafeas::Client.new
+##
+# Example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#batch_create_occurrences
+#
+def batch_create_occurrences
+  # Create a client object. The client can be reused for multiple calls.
+  client = Grafeas::V1::Grafeas::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Grafeas::V1::BatchCreateOccurrencesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Grafeas::V1::BatchCreateOccurrencesRequest.new
 
-# Call the batch_create_occurrences method.
-result = client.batch_create_occurrences request
+  # Call the batch_create_occurrences method.
+  result = client.batch_create_occurrences request
 
-# The returned object is of type Grafeas::V1::BatchCreateOccurrencesResponse.
-p result
+  # The returned object is of type Grafeas::V1::BatchCreateOccurrencesResponse.
+  p result
+end
 # [END grafeas_v1_generated_Grafeas_BatchCreateOccurrences_sync]

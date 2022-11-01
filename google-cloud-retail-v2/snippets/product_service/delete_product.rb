@@ -19,15 +19,21 @@
 # [START retail_v2_generated_ProductService_DeleteProduct_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ProductService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ProductService::Client#delete_product
+#
+def delete_product
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ProductService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::DeleteProductRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::DeleteProductRequest.new
 
-# Call the delete_product method.
-result = client.delete_product request
+  # Call the delete_product method.
+  result = client.delete_product request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END retail_v2_generated_ProductService_DeleteProduct_sync]

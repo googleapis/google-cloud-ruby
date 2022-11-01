@@ -19,22 +19,28 @@
 # [START datafusion_v1_generated_DataFusion_RestartInstance_sync]
 require "google/cloud/data_fusion/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataFusion::V1::DataFusion::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataFusion::V1::DataFusion::Client#restart_instance
+#
+def restart_instance
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataFusion::V1::DataFusion::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataFusion::V1::RestartInstanceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataFusion::V1::RestartInstanceRequest.new
 
-# Call the restart_instance method.
-result = client.restart_instance request
+  # Call the restart_instance method.
+  result = client.restart_instance request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END datafusion_v1_generated_DataFusion_RestartInstance_sync]

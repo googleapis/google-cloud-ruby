@@ -19,15 +19,21 @@
 # [START dataform_v1beta1_generated_Dataform_CreateWorkspace_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#create_workspace
+#
+def create_workspace
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::CreateWorkspaceRequest.new
 
-# Call the create_workspace method.
-result = client.create_workspace request
+  # Call the create_workspace method.
+  result = client.create_workspace request
 
-# The returned object is of type Google::Cloud::Dataform::V1beta1::Workspace.
-p result
+  # The returned object is of type Google::Cloud::Dataform::V1beta1::Workspace.
+  p result
+end
 # [END dataform_v1beta1_generated_Dataform_CreateWorkspace_sync]

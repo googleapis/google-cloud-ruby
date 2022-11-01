@@ -19,15 +19,21 @@
 # [START jobs_v4beta1_generated_Completion_CompleteQuery_sync]
 require "google/cloud/talent/v4beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4beta1::Completion::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4beta1::Completion::Client#complete_query
+#
+def complete_query
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4beta1::Completion::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4beta1::CompleteQueryRequest.new
 
-# Call the complete_query method.
-result = client.complete_query request
+  # Call the complete_query method.
+  result = client.complete_query request
 
-# The returned object is of type Google::Cloud::Talent::V4beta1::CompleteQueryResponse.
-p result
+  # The returned object is of type Google::Cloud::Talent::V4beta1::CompleteQueryResponse.
+  p result
+end
 # [END jobs_v4beta1_generated_Completion_CompleteQuery_sync]

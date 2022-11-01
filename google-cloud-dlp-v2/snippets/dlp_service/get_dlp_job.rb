@@ -19,15 +19,21 @@
 # [START dlp_v2_generated_DlpService_GetDlpJob_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#get_dlp_job
+#
+def get_dlp_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::GetDlpJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::GetDlpJobRequest.new
 
-# Call the get_dlp_job method.
-result = client.get_dlp_job request
+  # Call the get_dlp_job method.
+  result = client.get_dlp_job request
 
-# The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
-p result
+  # The returned object is of type Google::Cloud::Dlp::V2::DlpJob.
+  p result
+end
 # [END dlp_v2_generated_DlpService_GetDlpJob_sync]

@@ -19,21 +19,27 @@
 # [START osconfig_v1_generated_OsConfigService_ListPatchJobInstanceDetails_sync]
 require "google/cloud/os_config/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1::OsConfigService::Client#list_patch_job_instance_details
+#
+def list_patch_job_instance_details
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsConfig::V1::ListPatchJobInstanceDetailsRequest.new
 
-# Call the list_patch_job_instance_details method.
-result = client.list_patch_job_instance_details request
+  # Call the list_patch_job_instance_details method.
+  result = client.list_patch_job_instance_details request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::OsConfig::V1::PatchJobInstanceDetails.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::OsConfig::V1::PatchJobInstanceDetails.
+    p response
+  end
 end
 # [END osconfig_v1_generated_OsConfigService_ListPatchJobInstanceDetails_sync]

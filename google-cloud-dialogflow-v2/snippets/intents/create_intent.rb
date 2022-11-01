@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Intents_CreateIntent_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Intents::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Intents::Client#create_intent
+#
+def create_intent
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Intents::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::CreateIntentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::CreateIntentRequest.new
 
-# Call the create_intent method.
-result = client.create_intent request
+  # Call the create_intent method.
+  result = client.create_intent request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::Intent.
+  p result
+end
 # [END dialogflow_v2_generated_Intents_CreateIntent_sync]

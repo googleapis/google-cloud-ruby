@@ -19,15 +19,21 @@
 # [START beyondcorp_v1_generated_AppConnectionsService_GetAppConnection_sync]
 require "google/cloud/beyond_corp/app_connections/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client#get_app_connection
+#
+def get_app_connection
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::AppConnections::V1::AppConnectionsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::AppConnections::V1::GetAppConnectionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::AppConnections::V1::GetAppConnectionRequest.new
 
-# Call the get_app_connection method.
-result = client.get_app_connection request
+  # Call the get_app_connection method.
+  result = client.get_app_connection request
 
-# The returned object is of type Google::Cloud::BeyondCorp::AppConnections::V1::AppConnection.
-p result
+  # The returned object is of type Google::Cloud::BeyondCorp::AppConnections::V1::AppConnection.
+  p result
+end
 # [END beyondcorp_v1_generated_AppConnectionsService_GetAppConnection_sync]

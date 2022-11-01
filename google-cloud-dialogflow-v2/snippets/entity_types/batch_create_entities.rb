@@ -19,22 +19,28 @@
 # [START dialogflow_v2_generated_EntityTypes_BatchCreateEntities_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::EntityTypes::Client#batch_create_entities
+#
+def batch_create_entities
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::BatchCreateEntitiesRequest.new
 
-# Call the batch_create_entities method.
-result = client.batch_create_entities request
+  # Call the batch_create_entities method.
+  result = client.batch_create_entities request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END dialogflow_v2_generated_EntityTypes_BatchCreateEntities_sync]

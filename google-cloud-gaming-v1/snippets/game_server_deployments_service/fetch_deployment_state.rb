@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_GameServerDeploymentsService_FetchDeploymentState_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#fetch_deployment_state
+#
+def fetch_deployment_state
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::FetchDeploymentStateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::FetchDeploymentStateRequest.new
 
-# Call the fetch_deployment_state method.
-result = client.fetch_deployment_state request
+  # Call the fetch_deployment_state method.
+  result = client.fetch_deployment_state request
 
-# The returned object is of type Google::Cloud::Gaming::V1::FetchDeploymentStateResponse.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::FetchDeploymentStateResponse.
+  p result
+end
 # [END gameservices_v1_generated_GameServerDeploymentsService_FetchDeploymentState_sync]

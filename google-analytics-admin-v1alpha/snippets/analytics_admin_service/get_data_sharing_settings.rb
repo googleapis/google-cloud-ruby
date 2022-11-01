@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDataSharingSettings_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_data_sharing_settings
+#
+def get_data_sharing_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::GetDataSharingSettingsRequest.new
 
-# Call the get_data_sharing_settings method.
-result = client.get_data_sharing_settings request
+  # Call the get_data_sharing_settings method.
+  result = client.get_data_sharing_settings request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::DataSharingSettings.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::DataSharingSettings.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetDataSharingSettings_sync]

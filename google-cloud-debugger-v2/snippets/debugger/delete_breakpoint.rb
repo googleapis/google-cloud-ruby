@@ -19,15 +19,21 @@
 # [START clouddebugger_v2_generated_Debugger_DeleteBreakpoint_sync]
 require "google/cloud/debugger/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Debugger::V2::Debugger::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Debugger::Client#delete_breakpoint
+#
+def delete_breakpoint
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Debugger::V2::Debugger::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Debugger::V2::DeleteBreakpointRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Debugger::V2::DeleteBreakpointRequest.new
 
-# Call the delete_breakpoint method.
-result = client.delete_breakpoint request
+  # Call the delete_breakpoint method.
+  result = client.delete_breakpoint request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END clouddebugger_v2_generated_Debugger_DeleteBreakpoint_sync]

@@ -19,15 +19,21 @@
 # [START datastream_v1_generated_Datastream_DiscoverConnectionProfile_sync]
 require "google/cloud/datastream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastream::V1::Datastream::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastream::V1::Datastream::Client#discover_connection_profile
+#
+def discover_connection_profile
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastream::V1::Datastream::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastream::V1::DiscoverConnectionProfileRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastream::V1::DiscoverConnectionProfileRequest.new
 
-# Call the discover_connection_profile method.
-result = client.discover_connection_profile request
+  # Call the discover_connection_profile method.
+  result = client.discover_connection_profile request
 
-# The returned object is of type Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse.
-p result
+  # The returned object is of type Google::Cloud::Datastream::V1::DiscoverConnectionProfileResponse.
+  p result
+end
 # [END datastream_v1_generated_Datastream_DiscoverConnectionProfile_sync]

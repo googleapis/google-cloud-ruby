@@ -19,15 +19,21 @@
 # [START vmmigration_v1_generated_VMMigration_GetTargetProject_sync]
 require "google/cloud/vm_migration/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#get_target_project
+#
+def get_target_project
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VMMigration::V1::GetTargetProjectRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VMMigration::V1::GetTargetProjectRequest.new
 
-# Call the get_target_project method.
-result = client.get_target_project request
+  # Call the get_target_project method.
+  result = client.get_target_project request
 
-# The returned object is of type Google::Cloud::VMMigration::V1::TargetProject.
-p result
+  # The returned object is of type Google::Cloud::VMMigration::V1::TargetProject.
+  p result
+end
 # [END vmmigration_v1_generated_VMMigration_GetTargetProject_sync]

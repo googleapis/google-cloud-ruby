@@ -19,21 +19,27 @@
 # [START apikeys_v2_generated_ApiKeys_ListKeys_sync]
 require "google/cloud/api_keys/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApiKeys::V2::ApiKeys::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApiKeys::V2::ApiKeys::Client#list_keys
+#
+def list_keys
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApiKeys::V2::ApiKeys::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApiKeys::V2::ListKeysRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApiKeys::V2::ListKeysRequest.new
 
-# Call the list_keys method.
-result = client.list_keys request
+  # Call the list_keys method.
+  result = client.list_keys request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ApiKeys::V2::Key.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ApiKeys::V2::Key.
+    p response
+  end
 end
 # [END apikeys_v2_generated_ApiKeys_ListKeys_sync]

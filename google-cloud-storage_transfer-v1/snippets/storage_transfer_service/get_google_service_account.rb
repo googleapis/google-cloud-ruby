@@ -19,15 +19,21 @@
 # [START storagetransfer_v1_generated_StorageTransferService_GetGoogleServiceAccount_sync]
 require "google/cloud/storage_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_google_service_account
+#
+def get_google_service_account
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::StorageTransfer::V1::GetGoogleServiceAccountRequest.new
 
-# Call the get_google_service_account method.
-result = client.get_google_service_account request
+  # Call the get_google_service_account method.
+  result = client.get_google_service_account request
 
-# The returned object is of type Google::Cloud::StorageTransfer::V1::GoogleServiceAccount.
-p result
+  # The returned object is of type Google::Cloud::StorageTransfer::V1::GoogleServiceAccount.
+  p result
+end
 # [END storagetransfer_v1_generated_StorageTransferService_GetGoogleServiceAccount_sync]

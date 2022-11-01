@@ -19,21 +19,27 @@
 # [START cloudchannel_v1_generated_CloudChannelReportsService_FetchReportResults_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelReportsService::Client#fetch_report_results
+#
+def fetch_report_results
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelReportsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::FetchReportResultsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::FetchReportResultsRequest.new
 
-# Call the fetch_report_results method.
-result = client.fetch_report_results request
+  # Call the fetch_report_results method.
+  result = client.fetch_report_results request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Channel::V1::Row.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Channel::V1::Row.
+    p response
+  end
 end
 # [END cloudchannel_v1_generated_CloudChannelReportsService_FetchReportResults_sync]

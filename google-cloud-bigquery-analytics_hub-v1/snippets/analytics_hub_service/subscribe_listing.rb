@@ -19,15 +19,21 @@
 # [START analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_sync]
 require "google/cloud/bigquery/analytics_hub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#subscribe_listing
+#
+def subscribe_listing
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingRequest.new
 
-# Call the subscribe_listing method.
-result = client.subscribe_listing request
+  # Call the subscribe_listing method.
+  result = client.subscribe_listing request
 
-# The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingResponse.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::SubscribeListingResponse.
+  p result
+end
 # [END analyticshub_v1_generated_AnalyticsHubService_SubscribeListing_sync]

@@ -19,15 +19,21 @@
 # [START iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_sync]
 require "google/cloud/iap/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client#get_tunnel_dest_group
+#
+def get_tunnel_dest_group
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iap::V1::IdentityAwareProxyAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iap::V1::GetTunnelDestGroupRequest.new
 
-# Call the get_tunnel_dest_group method.
-result = client.get_tunnel_dest_group request
+  # Call the get_tunnel_dest_group method.
+  result = client.get_tunnel_dest_group request
 
-# The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
-p result
+  # The returned object is of type Google::Cloud::Iap::V1::TunnelDestGroup.
+  p result
+end
 # [END iap_v1_generated_IdentityAwareProxyAdminService_GetTunnelDestGroup_sync]

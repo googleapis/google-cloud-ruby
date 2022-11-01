@@ -19,15 +19,21 @@
 # [START iamcredentials_v1_generated_IAMCredentials_SignJwt_sync]
 require "google/iam/credentials/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::Credentials::V1::IAMCredentials::Client#sign_jwt
+#
+def sign_jwt
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::Credentials::V1::SignJwtRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::Credentials::V1::SignJwtRequest.new
 
-# Call the sign_jwt method.
-result = client.sign_jwt request
+  # Call the sign_jwt method.
+  result = client.sign_jwt request
 
-# The returned object is of type Google::Iam::Credentials::V1::SignJwtResponse.
-p result
+  # The returned object is of type Google::Iam::Credentials::V1::SignJwtResponse.
+  p result
+end
 # [END iamcredentials_v1_generated_IAMCredentials_SignJwt_sync]

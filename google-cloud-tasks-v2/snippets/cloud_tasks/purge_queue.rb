@@ -19,15 +19,21 @@
 # [START cloudtasks_v2_generated_CloudTasks_PurgeQueue_sync]
 require "google/cloud/tasks/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2::CloudTasks::Client#purge_queue
+#
+def purge_queue
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2::PurgeQueueRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2::PurgeQueueRequest.new
 
-# Call the purge_queue method.
-result = client.purge_queue request
+  # Call the purge_queue method.
+  result = client.purge_queue request
 
-# The returned object is of type Google::Cloud::Tasks::V2::Queue.
-p result
+  # The returned object is of type Google::Cloud::Tasks::V2::Queue.
+  p result
+end
 # [END cloudtasks_v2_generated_CloudTasks_PurgeQueue_sync]

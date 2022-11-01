@@ -19,21 +19,27 @@
 # [START cloudasset_v1_generated_AssetService_SearchAllResources_sync]
 require "google/cloud/asset/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Asset::V1::AssetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#search_all_resources
+#
+def search_all_resources
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Asset::V1::AssetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Asset::V1::SearchAllResourcesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Asset::V1::SearchAllResourcesRequest.new
 
-# Call the search_all_resources method.
-result = client.search_all_resources request
+  # Call the search_all_resources method.
+  result = client.search_all_resources request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Asset::V1::ResourceSearchResult.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Asset::V1::ResourceSearchResult.
+    p response
+  end
 end
 # [END cloudasset_v1_generated_AssetService_SearchAllResources_sync]

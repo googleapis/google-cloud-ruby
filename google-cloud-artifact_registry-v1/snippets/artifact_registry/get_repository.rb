@@ -19,15 +19,21 @@
 # [START artifactregistry_v1_generated_ArtifactRegistry_GetRepository_sync]
 require "google/cloud/artifact_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client#get_repository
+#
+def get_repository
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ArtifactRegistry::V1::GetRepositoryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ArtifactRegistry::V1::GetRepositoryRequest.new
 
-# Call the get_repository method.
-result = client.get_repository request
+  # Call the get_repository method.
+  result = client.get_repository request
 
-# The returned object is of type Google::Cloud::ArtifactRegistry::V1::Repository.
-p result
+  # The returned object is of type Google::Cloud::ArtifactRegistry::V1::Repository.
+  p result
+end
 # [END artifactregistry_v1_generated_ArtifactRegistry_GetRepository_sync]

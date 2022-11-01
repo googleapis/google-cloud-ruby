@@ -19,15 +19,21 @@
 # [START cloudasset_v1_generated_AssetService_GetFeed_sync]
 require "google/cloud/asset/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Asset::V1::AssetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#get_feed
+#
+def get_feed
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Asset::V1::AssetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Asset::V1::GetFeedRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Asset::V1::GetFeedRequest.new
 
-# Call the get_feed method.
-result = client.get_feed request
+  # Call the get_feed method.
+  result = client.get_feed request
 
-# The returned object is of type Google::Cloud::Asset::V1::Feed.
-p result
+  # The returned object is of type Google::Cloud::Asset::V1::Feed.
+  p result
+end
 # [END cloudasset_v1_generated_AssetService_GetFeed_sync]

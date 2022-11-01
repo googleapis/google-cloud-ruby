@@ -19,22 +19,28 @@
 # [START beyondcorp_v1_generated_AppConnectorsService_DeleteAppConnector_sync]
 require "google/cloud/beyond_corp/app_connectors/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client#delete_app_connector
+#
+def delete_app_connector
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::AppConnectors::V1::AppConnectorsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::AppConnectors::V1::DeleteAppConnectorRequest.new
 
-# Call the delete_app_connector method.
-result = client.delete_app_connector request
+  # Call the delete_app_connector method.
+  result = client.delete_app_connector request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END beyondcorp_v1_generated_AppConnectorsService_DeleteAppConnector_sync]

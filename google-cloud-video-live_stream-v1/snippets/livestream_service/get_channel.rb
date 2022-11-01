@@ -19,15 +19,21 @@
 # [START livestream_v1_generated_LivestreamService_GetChannel_sync]
 require "google/cloud/video/live_stream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_channel
+#
+def get_channel
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::LiveStream::V1::GetChannelRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::LiveStream::V1::GetChannelRequest.new
 
-# Call the get_channel method.
-result = client.get_channel request
+  # Call the get_channel method.
+  result = client.get_channel request
 
-# The returned object is of type Google::Cloud::Video::LiveStream::V1::Channel.
-p result
+  # The returned object is of type Google::Cloud::Video::LiveStream::V1::Channel.
+  p result
+end
 # [END livestream_v1_generated_LivestreamService_GetChannel_sync]

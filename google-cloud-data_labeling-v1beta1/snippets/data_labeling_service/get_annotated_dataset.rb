@@ -19,15 +19,21 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_GetAnnotatedDataset_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_annotated_dataset
+#
+def get_annotated_dataset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::GetAnnotatedDatasetRequest.new
 
-# Call the get_annotated_dataset method.
-result = client.get_annotated_dataset request
+  # Call the get_annotated_dataset method.
+  result = client.get_annotated_dataset request
 
-# The returned object is of type Google::Cloud::DataLabeling::V1beta1::AnnotatedDataset.
-p result
+  # The returned object is of type Google::Cloud::DataLabeling::V1beta1::AnnotatedDataset.
+  p result
+end
 # [END datalabeling_v1beta1_generated_DataLabelingService_GetAnnotatedDataset_sync]

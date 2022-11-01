@@ -19,21 +19,27 @@
 # [START spanner_v1_generated_DatabaseAdmin_ListBackups_sync]
 require "google/cloud/spanner/admin/database/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#list_backups
+#
+def list_backups
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::Admin::Database::V1::ListBackupsRequest.new
 
-# Call the list_backups method.
-result = client.list_backups request
+  # Call the list_backups method.
+  result = client.list_backups request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Spanner::Admin::Database::V1::Backup.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Spanner::Admin::Database::V1::Backup.
+    p response
+  end
 end
 # [END spanner_v1_generated_DatabaseAdmin_ListBackups_sync]

@@ -19,21 +19,27 @@
 # [START beyondcorp_v1_generated_AppGatewaysService_ListAppGateways_sync]
 require "google/cloud/beyond_corp/app_gateways/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#list_app_gateways
+#
+def list_app_gateways
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::AppGateways::V1::ListAppGatewaysRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::AppGateways::V1::ListAppGatewaysRequest.new
 
-# Call the list_app_gateways method.
-result = client.list_app_gateways request
+  # Call the list_app_gateways method.
+  result = client.list_app_gateways request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::BeyondCorp::AppGateways::V1::AppGateway.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::BeyondCorp::AppGateways::V1::AppGateway.
+    p response
+  end
 end
 # [END beyondcorp_v1_generated_AppGatewaysService_ListAppGateways_sync]

@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_RunAccessReport_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#run_access_report
+#
+def run_access_report
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::RunAccessReportRequest.new
 
-# Call the run_access_report method.
-result = client.run_access_report request
+  # Call the run_access_report method.
+  result = client.run_access_report request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::RunAccessReportResponse.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::RunAccessReportResponse.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_RunAccessReport_sync]

@@ -19,15 +19,21 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_CreateDataset_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#create_dataset
+#
+def create_dataset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::CreateDatasetRequest.new
 
-# Call the create_dataset method.
-result = client.create_dataset request
+  # Call the create_dataset method.
+  result = client.create_dataset request
 
-# The returned object is of type Google::Cloud::DataLabeling::V1beta1::Dataset.
-p result
+  # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Dataset.
+  p result
+end
 # [END datalabeling_v1beta1_generated_DataLabelingService_CreateDataset_sync]

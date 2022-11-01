@@ -19,15 +19,21 @@
 # [START eventarcpublishing_v1_generated_Publisher_PublishChannelConnectionEvents_sync]
 require "google/cloud/eventarc/publishing/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Eventarc::Publishing::V1::Publisher::Client#publish_channel_connection_events
+#
+def publish_channel_connection_events
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Eventarc::Publishing::V1::Publisher::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsRequest.new
 
-# Call the publish_channel_connection_events method.
-result = client.publish_channel_connection_events request
+  # Call the publish_channel_connection_events method.
+  result = client.publish_channel_connection_events request
 
-# The returned object is of type Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsResponse.
-p result
+  # The returned object is of type Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsResponse.
+  p result
+end
 # [END eventarcpublishing_v1_generated_Publisher_PublishChannelConnectionEvents_sync]

@@ -19,15 +19,21 @@
 # [START apigeeregistry_v1_generated_Registry_UpdateApiDeployment_sync]
 require "google/cloud/apigee_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#update_api_deployment
+#
+def update_api_deployment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApigeeRegistry::V1::UpdateApiDeploymentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApigeeRegistry::V1::UpdateApiDeploymentRequest.new
 
-# Call the update_api_deployment method.
-result = client.update_api_deployment request
+  # Call the update_api_deployment method.
+  result = client.update_api_deployment request
 
-# The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
-p result
+  # The returned object is of type Google::Cloud::ApigeeRegistry::V1::ApiDeployment.
+  p result
+end
 # [END apigeeregistry_v1_generated_Registry_UpdateApiDeployment_sync]

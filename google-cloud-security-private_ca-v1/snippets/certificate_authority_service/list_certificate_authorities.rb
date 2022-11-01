@@ -19,21 +19,27 @@
 # [START privateca_v1_generated_CertificateAuthorityService_ListCertificateAuthorities_sync]
 require "google/cloud/security/private_ca/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client#list_certificate_authorities
+#
+def list_certificate_authorities
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Security::PrivateCA::V1::CertificateAuthorityService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Security::PrivateCA::V1::ListCertificateAuthoritiesRequest.new
 
-# Call the list_certificate_authorities method.
-result = client.list_certificate_authorities request
+  # Call the list_certificate_authorities method.
+  result = client.list_certificate_authorities request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Security::PrivateCA::V1::CertificateAuthority.
+    p response
+  end
 end
 # [END privateca_v1_generated_CertificateAuthorityService_ListCertificateAuthorities_sync]

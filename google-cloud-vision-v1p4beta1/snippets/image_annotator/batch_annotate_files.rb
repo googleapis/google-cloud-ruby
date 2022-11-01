@@ -19,15 +19,21 @@
 # [START vision_v1p4beta1_generated_ImageAnnotator_BatchAnnotateFiles_sync]
 require "google/cloud/vision/v1p4beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client#batch_annotate_files
+#
+def batch_annotate_files
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1p4beta1::ImageAnnotator::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1p4beta1::BatchAnnotateFilesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1p4beta1::BatchAnnotateFilesRequest.new
 
-# Call the batch_annotate_files method.
-result = client.batch_annotate_files request
+  # Call the batch_annotate_files method.
+  result = client.batch_annotate_files request
 
-# The returned object is of type Google::Cloud::Vision::V1p4beta1::BatchAnnotateFilesResponse.
-p result
+  # The returned object is of type Google::Cloud::Vision::V1p4beta1::BatchAnnotateFilesResponse.
+  p result
+end
 # [END vision_v1p4beta1_generated_ImageAnnotator_BatchAnnotateFiles_sync]

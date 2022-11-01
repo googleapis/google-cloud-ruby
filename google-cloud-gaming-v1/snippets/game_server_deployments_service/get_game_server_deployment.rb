@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeployment_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#get_game_server_deployment
+#
+def get_game_server_deployment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::GetGameServerDeploymentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::GetGameServerDeploymentRequest.new
 
-# Call the get_game_server_deployment method.
-result = client.get_game_server_deployment request
+  # Call the get_game_server_deployment method.
+  result = client.get_game_server_deployment request
 
-# The returned object is of type Google::Cloud::Gaming::V1::GameServerDeployment.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::GameServerDeployment.
+  p result
+end
 # [END gameservices_v1_generated_GameServerDeploymentsService_GetGameServerDeployment_sync]

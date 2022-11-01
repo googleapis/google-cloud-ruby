@@ -19,15 +19,21 @@
 # [START livestream_v1_generated_LivestreamService_GetInput_sync]
 require "google/cloud/video/live_stream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_input
+#
+def get_input
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::LiveStream::V1::GetInputRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::LiveStream::V1::GetInputRequest.new
 
-# Call the get_input method.
-result = client.get_input request
+  # Call the get_input method.
+  result = client.get_input request
 
-# The returned object is of type Google::Cloud::Video::LiveStream::V1::Input.
-p result
+  # The returned object is of type Google::Cloud::Video::LiveStream::V1::Input.
+  p result
+end
 # [END livestream_v1_generated_LivestreamService_GetInput_sync]

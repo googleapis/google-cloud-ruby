@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#modify_entry_contacts
+#
+def modify_entry_contacts
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::ModifyEntryContactsRequest.new
 
-# Call the modify_entry_contacts method.
-result = client.modify_entry_contacts request
+  # Call the modify_entry_contacts method.
+  result = client.modify_entry_contacts request
 
-# The returned object is of type Google::Cloud::DataCatalog::V1::Contacts.
-p result
+  # The returned object is of type Google::Cloud::DataCatalog::V1::Contacts.
+  p result
+end
 # [END datacatalog_v1_generated_DataCatalog_ModifyEntryContacts_sync]

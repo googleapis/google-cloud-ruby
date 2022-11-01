@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_GroupService_GetGroup_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::GroupService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::GroupService::Client#get_group
+#
+def get_group
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::GroupService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::GetGroupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::GetGroupRequest.new
 
-# Call the get_group method.
-result = client.get_group request
+  # Call the get_group method.
+  result = client.get_group request
 
-# The returned object is of type Google::Cloud::Monitoring::V3::Group.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::V3::Group.
+  p result
+end
 # [END monitoring_v3_generated_GroupService_GetGroup_sync]

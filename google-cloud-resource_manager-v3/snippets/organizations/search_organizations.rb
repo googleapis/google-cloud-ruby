@@ -19,21 +19,27 @@
 # [START cloudresourcemanager_v3_generated_Organizations_SearchOrganizations_sync]
 require "google/cloud/resource_manager/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceManager::V3::Organizations::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Organizations::Client#search_organizations
+#
+def search_organizations
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceManager::V3::Organizations::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceManager::V3::SearchOrganizationsRequest.new
 
-# Call the search_organizations method.
-result = client.search_organizations request
+  # Call the search_organizations method.
+  result = client.search_organizations request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ResourceManager::V3::Organization.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ResourceManager::V3::Organization.
+    p response
+  end
 end
 # [END cloudresourcemanager_v3_generated_Organizations_SearchOrganizations_sync]

@@ -19,15 +19,21 @@
 # [START resourcesettings_v1_generated_ResourceSettingsService_UpdateSetting_sync]
 require "google/cloud/resource_settings/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client#update_setting
+#
+def update_setting
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceSettings::V1::UpdateSettingRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceSettings::V1::UpdateSettingRequest.new
 
-# Call the update_setting method.
-result = client.update_setting request
+  # Call the update_setting method.
+  result = client.update_setting request
 
-# The returned object is of type Google::Cloud::ResourceSettings::V1::Setting.
-p result
+  # The returned object is of type Google::Cloud::ResourceSettings::V1::Setting.
+  p result
+end
 # [END resourcesettings_v1_generated_ResourceSettingsService_UpdateSetting_sync]

@@ -19,15 +19,21 @@
 # [START recommender_v1_generated_Recommender_UpdateInsightTypeConfig_sync]
 require "google/cloud/recommender/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Recommender::V1::Recommender::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#update_insight_type_config
+#
+def update_insight_type_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Recommender::V1::Recommender::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Recommender::V1::UpdateInsightTypeConfigRequest.new
 
-# Call the update_insight_type_config method.
-result = client.update_insight_type_config request
+  # Call the update_insight_type_config method.
+  result = client.update_insight_type_config request
 
-# The returned object is of type Google::Cloud::Recommender::V1::InsightTypeConfig.
-p result
+  # The returned object is of type Google::Cloud::Recommender::V1::InsightTypeConfig.
+  p result
+end
 # [END recommender_v1_generated_Recommender_UpdateInsightTypeConfig_sync]

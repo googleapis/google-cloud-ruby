@@ -19,15 +19,21 @@
 # [START cloudasset_v1_generated_AssetService_ListFeeds_sync]
 require "google/cloud/asset/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Asset::V1::AssetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#list_feeds
+#
+def list_feeds
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Asset::V1::AssetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Asset::V1::ListFeedsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Asset::V1::ListFeedsRequest.new
 
-# Call the list_feeds method.
-result = client.list_feeds request
+  # Call the list_feeds method.
+  result = client.list_feeds request
 
-# The returned object is of type Google::Cloud::Asset::V1::ListFeedsResponse.
-p result
+  # The returned object is of type Google::Cloud::Asset::V1::ListFeedsResponse.
+  p result
+end
 # [END cloudasset_v1_generated_AssetService_ListFeeds_sync]

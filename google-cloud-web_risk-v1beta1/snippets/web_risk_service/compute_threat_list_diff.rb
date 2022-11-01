@@ -19,15 +19,21 @@
 # [START webrisk_v1beta1_generated_WebRiskService_ComputeThreatListDiff_sync]
 require "google/cloud/web_risk/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebRisk::V1beta1::WebRiskService::Client#compute_threat_list_diff
+#
+def compute_threat_list_diff
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebRisk::V1beta1::WebRiskService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffRequest.new
 
-# Call the compute_threat_list_diff method.
-result = client.compute_threat_list_diff request
+  # Call the compute_threat_list_diff method.
+  result = client.compute_threat_list_diff request
 
-# The returned object is of type Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffResponse.
-p result
+  # The returned object is of type Google::Cloud::WebRisk::V1beta1::ComputeThreatListDiffResponse.
+  p result
+end
 # [END webrisk_v1beta1_generated_WebRiskService_ComputeThreatListDiff_sync]

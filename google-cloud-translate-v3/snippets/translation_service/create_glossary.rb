@@ -19,22 +19,28 @@
 # [START translate_v3_generated_TranslationService_CreateGlossary_sync]
 require "google/cloud/translate/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Translate::V3::TranslationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#create_glossary
+#
+def create_glossary
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Translate::V3::TranslationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Translate::V3::CreateGlossaryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Translate::V3::CreateGlossaryRequest.new
 
-# Call the create_glossary method.
-result = client.create_glossary request
+  # Call the create_glossary method.
+  result = client.create_glossary request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END translate_v3_generated_TranslationService_CreateGlossary_sync]

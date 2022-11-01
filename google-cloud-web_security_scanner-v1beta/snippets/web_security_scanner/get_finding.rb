@@ -19,15 +19,21 @@
 # [START websecurityscanner_v1beta_generated_WebSecurityScanner_GetFinding_sync]
 require "google/cloud/web_security_scanner/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_finding
+#
+def get_finding
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebSecurityScanner::V1beta::GetFindingRequest.new
 
-# Call the get_finding method.
-result = client.get_finding request
+  # Call the get_finding method.
+  result = client.get_finding request
 
-# The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::Finding.
-p result
+  # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::Finding.
+  p result
+end
 # [END websecurityscanner_v1beta_generated_WebSecurityScanner_GetFinding_sync]

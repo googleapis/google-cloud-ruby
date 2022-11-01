@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAttributionSettings_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#get_attribution_settings
+#
+def get_attribution_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::GetAttributionSettingsRequest.new
 
-# Call the get_attribution_settings method.
-result = client.get_attribution_settings request
+  # Call the get_attribution_settings method.
+  result = client.get_attribution_settings request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::AttributionSettings.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::AttributionSettings.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_GetAttributionSettings_sync]

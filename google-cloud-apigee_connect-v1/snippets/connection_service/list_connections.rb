@@ -19,21 +19,27 @@
 # [START apigeeconnect_v1_generated_ConnectionService_ListConnections_sync]
 require "google/cloud/apigee_connect/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApigeeConnect::V1::ConnectionService::Client#list_connections
+#
+def list_connections
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApigeeConnect::V1::ConnectionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApigeeConnect::V1::ListConnectionsRequest.new
 
-# Call the list_connections method.
-result = client.list_connections request
+  # Call the list_connections method.
+  result = client.list_connections request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ApigeeConnect::V1::Connection.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ApigeeConnect::V1::Connection.
+    p response
+  end
 end
 # [END apigeeconnect_v1_generated_ConnectionService_ListConnections_sync]

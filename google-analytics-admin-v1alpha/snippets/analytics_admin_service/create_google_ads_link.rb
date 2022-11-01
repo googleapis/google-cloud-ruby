@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateGoogleAdsLink_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_google_ads_link
+#
+def create_google_ads_link
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::CreateGoogleAdsLinkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::CreateGoogleAdsLinkRequest.new
 
-# Call the create_google_ads_link method.
-result = client.create_google_ads_link request
+  # Call the create_google_ads_link method.
+  result = client.create_google_ads_link request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::GoogleAdsLink.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::GoogleAdsLink.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateGoogleAdsLink_sync]

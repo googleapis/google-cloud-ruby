@@ -19,21 +19,27 @@
 # [START securitycenter_v1p1beta1_generated_SecurityCenter_GroupAssets_sync]
 require "google/cloud/security_center/v1p1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#group_assets
+#
+def group_assets
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1p1beta1::GroupAssetsRequest.new
 
-# Call the group_assets method.
-result = client.group_assets request
+  # Call the group_assets method.
+  result = client.group_assets request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::SecurityCenter::V1p1beta1::GroupResult.
+    p response
+  end
 end
 # [END securitycenter_v1p1beta1_generated_SecurityCenter_GroupAssets_sync]

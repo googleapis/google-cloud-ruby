@@ -19,21 +19,27 @@
 # [START networksecurity_v1beta1_generated_NetworkSecurity_ListServerTlsPolicies_sync]
 require "google/cloud/network_security/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#list_server_tls_policies
+#
+def list_server_tls_policies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::NetworkSecurity::V1beta1::ListServerTlsPoliciesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::NetworkSecurity::V1beta1::ListServerTlsPoliciesRequest.new
 
-# Call the list_server_tls_policies method.
-result = client.list_server_tls_policies request
+  # Call the list_server_tls_policies method.
+  result = client.list_server_tls_policies request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::NetworkSecurity::V1beta1::ServerTlsPolicy.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::NetworkSecurity::V1beta1::ServerTlsPolicy.
+    p response
+  end
 end
 # [END networksecurity_v1beta1_generated_NetworkSecurity_ListServerTlsPolicies_sync]
