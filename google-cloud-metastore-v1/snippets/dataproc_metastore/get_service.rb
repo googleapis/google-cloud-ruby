@@ -19,15 +19,21 @@
 # [START metastore_v1_generated_DataprocMetastore_GetService_sync]
 require "google/cloud/metastore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Metastore::V1::DataprocMetastore::Client#get_service
+#
+def get_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Metastore::V1::DataprocMetastore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Metastore::V1::GetServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Metastore::V1::GetServiceRequest.new
 
-# Call the get_service method.
-result = client.get_service request
+  # Call the get_service method.
+  result = client.get_service request
 
-# The returned object is of type Google::Cloud::Metastore::V1::Service.
-p result
+  # The returned object is of type Google::Cloud::Metastore::V1::Service.
+  p result
+end
 # [END metastore_v1_generated_DataprocMetastore_GetService_sync]

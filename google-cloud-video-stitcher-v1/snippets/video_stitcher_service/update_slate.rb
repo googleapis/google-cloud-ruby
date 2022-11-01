@@ -19,15 +19,21 @@
 # [START videostitcher_v1_generated_VideoStitcherService_UpdateSlate_sync]
 require "google/cloud/video/stitcher/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client#update_slate
+#
+def update_slate
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::Stitcher::V1::VideoStitcherService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::Stitcher::V1::UpdateSlateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::Stitcher::V1::UpdateSlateRequest.new
 
-# Call the update_slate method.
-result = client.update_slate request
+  # Call the update_slate method.
+  result = client.update_slate request
 
-# The returned object is of type Google::Cloud::Video::Stitcher::V1::Slate.
-p result
+  # The returned object is of type Google::Cloud::Video::Stitcher::V1::Slate.
+  p result
+end
 # [END videostitcher_v1_generated_VideoStitcherService_UpdateSlate_sync]

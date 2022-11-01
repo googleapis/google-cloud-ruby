@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_TensorboardService_GetTensorboardRun_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#get_tensorboard_run
+#
+def get_tensorboard_run
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetTensorboardRunRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetTensorboardRunRequest.new
 
-# Call the get_tensorboard_run method.
-result = client.get_tensorboard_run request
+  # Call the get_tensorboard_run method.
+  result = client.get_tensorboard_run request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardRun.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardRun.
+  p result
+end
 # [END aiplatform_v1_generated_TensorboardService_GetTensorboardRun_sync]

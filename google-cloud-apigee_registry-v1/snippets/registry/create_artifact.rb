@@ -19,15 +19,21 @@
 # [START apigeeregistry_v1_generated_Registry_CreateArtifact_sync]
 require "google/cloud/apigee_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Registry::Client#create_artifact
+#
+def create_artifact
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApigeeRegistry::V1::Registry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApigeeRegistry::V1::CreateArtifactRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApigeeRegistry::V1::CreateArtifactRequest.new
 
-# Call the create_artifact method.
-result = client.create_artifact request
+  # Call the create_artifact method.
+  result = client.create_artifact request
 
-# The returned object is of type Google::Cloud::ApigeeRegistry::V1::Artifact.
-p result
+  # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Artifact.
+  p result
+end
 # [END apigeeregistry_v1_generated_Registry_CreateArtifact_sync]

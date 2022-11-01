@@ -19,15 +19,21 @@
 # [START bigqueryconnection_v1_generated_ConnectionService_DeleteConnection_sync]
 require "google/cloud/bigquery/connection/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client#delete_connection
+#
+def delete_connection
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Connection::V1::ConnectionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Connection::V1::DeleteConnectionRequest.new
 
-# Call the delete_connection method.
-result = client.delete_connection request
+  # Call the delete_connection method.
+  result = client.delete_connection request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END bigqueryconnection_v1_generated_ConnectionService_DeleteConnection_sync]

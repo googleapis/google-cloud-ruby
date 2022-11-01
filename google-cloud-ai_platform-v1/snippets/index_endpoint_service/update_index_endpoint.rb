@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_IndexEndpointService_UpdateIndexEndpoint_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::IndexEndpointService::Client#update_index_endpoint
+#
+def update_index_endpoint
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::IndexEndpointService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::UpdateIndexEndpointRequest.new
 
-# Call the update_index_endpoint method.
-result = client.update_index_endpoint request
+  # Call the update_index_endpoint method.
+  result = client.update_index_endpoint request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::IndexEndpoint.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::IndexEndpoint.
+  p result
+end
 # [END aiplatform_v1_generated_IndexEndpointService_UpdateIndexEndpoint_sync]

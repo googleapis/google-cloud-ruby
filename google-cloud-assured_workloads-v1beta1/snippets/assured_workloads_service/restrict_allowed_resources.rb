@@ -19,15 +19,21 @@
 # [START assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_sync]
 require "google/cloud/assured_workloads/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client#restrict_allowed_resources
+#
+def restrict_allowed_resources
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AssuredWorkloads::V1beta1::AssuredWorkloadsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesRequest.new
 
-# Call the restrict_allowed_resources method.
-result = client.restrict_allowed_resources request
+  # Call the restrict_allowed_resources method.
+  result = client.restrict_allowed_resources request
 
-# The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesResponse.
-p result
+  # The returned object is of type Google::Cloud::AssuredWorkloads::V1beta1::RestrictAllowedResourcesResponse.
+  p result
+end
 # [END assuredworkloads_v1beta1_generated_AssuredWorkloadsService_RestrictAllowedResources_sync]

@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Versions_GetVersion_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Versions::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Versions::Client#get_version
+#
+def get_version
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Versions::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetVersionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetVersionRequest.new
 
-# Call the get_version method.
-result = client.get_version request
+  # Call the get_version method.
+  result = client.get_version request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::Version.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::Version.
+  p result
+end
 # [END dialogflow_v2_generated_Versions_GetVersion_sync]

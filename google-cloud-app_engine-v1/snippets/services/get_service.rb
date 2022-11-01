@@ -19,15 +19,21 @@
 # [START appengine_v1_generated_Services_GetService_sync]
 require "google/cloud/app_engine/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AppEngine::V1::Services::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::Services::Client#get_service
+#
+def get_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AppEngine::V1::Services::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AppEngine::V1::GetServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AppEngine::V1::GetServiceRequest.new
 
-# Call the get_service method.
-result = client.get_service request
+  # Call the get_service method.
+  result = client.get_service request
 
-# The returned object is of type Google::Cloud::AppEngine::V1::Service.
-p result
+  # The returned object is of type Google::Cloud::AppEngine::V1::Service.
+  p result
+end
 # [END appengine_v1_generated_Services_GetService_sync]

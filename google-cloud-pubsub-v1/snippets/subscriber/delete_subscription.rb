@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_Subscriber_DeleteSubscription_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Subscriber::Client#delete_subscription
+#
+def delete_subscription
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Subscriber::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::DeleteSubscriptionRequest.new
 
-# Call the delete_subscription method.
-result = client.delete_subscription request
+  # Call the delete_subscription method.
+  result = client.delete_subscription request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END pubsub_v1_generated_Subscriber_DeleteSubscription_sync]

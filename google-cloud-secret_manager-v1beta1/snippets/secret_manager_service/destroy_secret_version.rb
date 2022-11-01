@@ -19,15 +19,21 @@
 # [START secretmanager_v1beta1_generated_SecretManagerService_DestroySecretVersion_sync]
 require "google/cloud/secret_manager/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client#destroy_secret_version
+#
+def destroy_secret_version
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecretManager::V1beta1::SecretManagerService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecretManager::V1beta1::DestroySecretVersionRequest.new
 
-# Call the destroy_secret_version method.
-result = client.destroy_secret_version request
+  # Call the destroy_secret_version method.
+  result = client.destroy_secret_version request
 
-# The returned object is of type Google::Cloud::SecretManager::V1beta1::SecretVersion.
-p result
+  # The returned object is of type Google::Cloud::SecretManager::V1beta1::SecretVersion.
+  p result
+end
 # [END secretmanager_v1beta1_generated_SecretManagerService_DestroySecretVersion_sync]

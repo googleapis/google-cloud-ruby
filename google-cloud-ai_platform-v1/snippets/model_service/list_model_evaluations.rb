@@ -19,21 +19,27 @@
 # [START aiplatform_v1_generated_ModelService_ListModelEvaluations_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::ModelService::Client#list_model_evaluations
+#
+def list_model_evaluations
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::ModelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::ListModelEvaluationsRequest.new
 
-# Call the list_model_evaluations method.
-result = client.list_model_evaluations request
+  # Call the list_model_evaluations method.
+  result = client.list_model_evaluations request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelEvaluation.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AIPlatform::V1::ModelEvaluation.
+    p response
+  end
 end
 # [END aiplatform_v1_generated_ModelService_ListModelEvaluations_sync]

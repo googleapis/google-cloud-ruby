@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDisplayVideo360AdvertiserLink_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#update_display_video360_advertiser_link
+#
+def update_display_video360_advertiser_link
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::UpdateDisplayVideo360AdvertiserLinkRequest.new
 
-# Call the update_display_video360_advertiser_link method.
-result = client.update_display_video360_advertiser_link request
+  # Call the update_display_video360_advertiser_link method.
+  result = client.update_display_video360_advertiser_link request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::DisplayVideo360AdvertiserLink.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_UpdateDisplayVideo360AdvertiserLink_sync]

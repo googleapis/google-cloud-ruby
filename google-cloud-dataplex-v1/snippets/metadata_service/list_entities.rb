@@ -19,21 +19,27 @@
 # [START dataplex_v1_generated_MetadataService_ListEntities_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::MetadataService::Client#list_entities
+#
+def list_entities
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::ListEntitiesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::ListEntitiesRequest.new
 
-# Call the list_entities method.
-result = client.list_entities request
+  # Call the list_entities method.
+  result = client.list_entities request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dataplex::V1::Entity.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dataplex::V1::Entity.
+    p response
+  end
 end
 # [END dataplex_v1_generated_MetadataService_ListEntities_sync]

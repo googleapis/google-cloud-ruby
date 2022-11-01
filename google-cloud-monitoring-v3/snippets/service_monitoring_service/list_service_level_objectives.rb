@@ -19,21 +19,27 @@
 # [START monitoring_v3_generated_ServiceMonitoringService_ListServiceLevelObjectives_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client#list_service_level_objectives
+#
+def list_service_level_objectives
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::ServiceMonitoringService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::ListServiceLevelObjectivesRequest.new
 
-# Call the list_service_level_objectives method.
-result = client.list_service_level_objectives request
+  # Call the list_service_level_objectives method.
+  result = client.list_service_level_objectives request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Monitoring::V3::ServiceLevelObjective.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Monitoring::V3::ServiceLevelObjective.
+    p response
+  end
 end
 # [END monitoring_v3_generated_ServiceMonitoringService_ListServiceLevelObjectives_sync]

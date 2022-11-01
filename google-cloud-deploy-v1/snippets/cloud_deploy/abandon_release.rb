@@ -19,15 +19,21 @@
 # [START clouddeploy_v1_generated_CloudDeploy_AbandonRelease_sync]
 require "google/cloud/deploy/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#abandon_release
+#
+def abandon_release
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Deploy::V1::AbandonReleaseRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Deploy::V1::AbandonReleaseRequest.new
 
-# Call the abandon_release method.
-result = client.abandon_release request
+  # Call the abandon_release method.
+  result = client.abandon_release request
 
-# The returned object is of type Google::Cloud::Deploy::V1::AbandonReleaseResponse.
-p result
+  # The returned object is of type Google::Cloud::Deploy::V1::AbandonReleaseResponse.
+  p result
+end
 # [END clouddeploy_v1_generated_CloudDeploy_AbandonRelease_sync]

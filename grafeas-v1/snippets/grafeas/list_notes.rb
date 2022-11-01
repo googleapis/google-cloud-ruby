@@ -19,21 +19,27 @@
 # [START grafeas_v1_generated_Grafeas_ListNotes_sync]
 require "grafeas/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Grafeas::V1::Grafeas::Client.new
+##
+# Example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#list_notes
+#
+def list_notes
+  # Create a client object. The client can be reused for multiple calls.
+  client = Grafeas::V1::Grafeas::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Grafeas::V1::ListNotesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Grafeas::V1::ListNotesRequest.new
 
-# Call the list_notes method.
-result = client.list_notes request
+  # Call the list_notes method.
+  result = client.list_notes request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Grafeas::V1::Note.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Grafeas::V1::Note.
+    p response
+  end
 end
 # [END grafeas_v1_generated_Grafeas_ListNotes_sync]

@@ -19,15 +19,21 @@
 # [START assuredworkloads_v1_generated_AssuredWorkloadsService_DeleteWorkload_sync]
 require "google/cloud/assured_workloads/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client#delete_workload
+#
+def delete_workload
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AssuredWorkloads::V1::AssuredWorkloadsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AssuredWorkloads::V1::DeleteWorkloadRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AssuredWorkloads::V1::DeleteWorkloadRequest.new
 
-# Call the delete_workload method.
-result = client.delete_workload request
+  # Call the delete_workload method.
+  result = client.delete_workload request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END assuredworkloads_v1_generated_AssuredWorkloadsService_DeleteWorkload_sync]

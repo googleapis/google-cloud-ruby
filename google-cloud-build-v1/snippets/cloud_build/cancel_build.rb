@@ -19,15 +19,21 @@
 # [START cloudbuild_v1_generated_CloudBuild_CancelBuild_sync]
 require "google/cloud/build/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Build::V1::CloudBuild::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#cancel_build
+#
+def cancel_build
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Build::V1::CloudBuild::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Build::V1::CancelBuildRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Build::V1::CancelBuildRequest.new
 
-# Call the cancel_build method.
-result = client.cancel_build request
+  # Call the cancel_build method.
+  result = client.cancel_build request
 
-# The returned object is of type Google::Cloud::Build::V1::Build.
-p result
+  # The returned object is of type Google::Cloud::Build::V1::Build.
+  p result
+end
 # [END cloudbuild_v1_generated_CloudBuild_CancelBuild_sync]

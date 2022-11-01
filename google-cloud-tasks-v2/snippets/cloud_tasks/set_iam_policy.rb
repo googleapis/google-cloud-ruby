@@ -19,15 +19,21 @@
 # [START cloudtasks_v2_generated_CloudTasks_SetIamPolicy_sync]
 require "google/cloud/tasks/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2::CloudTasks::Client#set_iam_policy
+#
+def set_iam_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1::SetIamPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1::SetIamPolicyRequest.new
 
-# Call the set_iam_policy method.
-result = client.set_iam_policy request
+  # Call the set_iam_policy method.
+  result = client.set_iam_policy request
 
-# The returned object is of type Google::Iam::V1::Policy.
-p result
+  # The returned object is of type Google::Iam::V1::Policy.
+  p result
+end
 # [END cloudtasks_v2_generated_CloudTasks_SetIamPolicy_sync]

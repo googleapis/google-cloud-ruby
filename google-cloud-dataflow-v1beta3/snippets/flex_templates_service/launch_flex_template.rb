@@ -19,15 +19,21 @@
 # [START dataflow_v1beta3_generated_FlexTemplatesService_LaunchFlexTemplate_sync]
 require "google/cloud/dataflow/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client#launch_flex_template
+#
+def launch_flex_template
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataflow::V1beta3::FlexTemplatesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateRequest.new
 
-# Call the launch_flex_template method.
-result = client.launch_flex_template request
+  # Call the launch_flex_template method.
+  result = client.launch_flex_template request
 
-# The returned object is of type Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataflow::V1beta3::LaunchFlexTemplateResponse.
+  p result
+end
 # [END dataflow_v1beta3_generated_FlexTemplatesService_LaunchFlexTemplate_sync]

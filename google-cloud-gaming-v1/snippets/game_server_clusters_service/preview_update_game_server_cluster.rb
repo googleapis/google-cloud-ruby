@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_GameServerClustersService_PreviewUpdateGameServerCluster_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerClustersService::Client#preview_update_game_server_cluster
+#
+def preview_update_game_server_cluster
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerClustersService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterRequest.new
 
-# Call the preview_update_game_server_cluster method.
-result = client.preview_update_game_server_cluster request
+  # Call the preview_update_game_server_cluster method.
+  result = client.preview_update_game_server_cluster request
 
-# The returned object is of type Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterResponse.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::PreviewUpdateGameServerClusterResponse.
+  p result
+end
 # [END gameservices_v1_generated_GameServerClustersService_PreviewUpdateGameServerCluster_sync]

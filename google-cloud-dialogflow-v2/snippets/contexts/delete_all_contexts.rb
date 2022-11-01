@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Contexts_DeleteAllContexts_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Contexts::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Contexts::Client#delete_all_contexts
+#
+def delete_all_contexts
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Contexts::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::DeleteAllContextsRequest.new
 
-# Call the delete_all_contexts method.
-result = client.delete_all_contexts request
+  # Call the delete_all_contexts method.
+  result = client.delete_all_contexts request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dialogflow_v2_generated_Contexts_DeleteAllContexts_sync]

@@ -19,15 +19,21 @@
 # [START language_v1beta2_generated_LanguageService_AnnotateText_sync]
 require "google/cloud/language/v1beta2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Language::V1beta2::LanguageService::Client#annotate_text
+#
+def annotate_text
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Language::V1beta2::LanguageService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Language::V1beta2::AnnotateTextRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Language::V1beta2::AnnotateTextRequest.new
 
-# Call the annotate_text method.
-result = client.annotate_text request
+  # Call the annotate_text method.
+  result = client.annotate_text request
 
-# The returned object is of type Google::Cloud::Language::V1beta2::AnnotateTextResponse.
-p result
+  # The returned object is of type Google::Cloud::Language::V1beta2::AnnotateTextResponse.
+  p result
+end
 # [END language_v1beta2_generated_LanguageService_AnnotateText_sync]

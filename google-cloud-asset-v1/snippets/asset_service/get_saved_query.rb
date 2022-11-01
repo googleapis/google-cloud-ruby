@@ -19,15 +19,21 @@
 # [START cloudasset_v1_generated_AssetService_GetSavedQuery_sync]
 require "google/cloud/asset/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Asset::V1::AssetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#get_saved_query
+#
+def get_saved_query
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Asset::V1::AssetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Asset::V1::GetSavedQueryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Asset::V1::GetSavedQueryRequest.new
 
-# Call the get_saved_query method.
-result = client.get_saved_query request
+  # Call the get_saved_query method.
+  result = client.get_saved_query request
 
-# The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
-p result
+  # The returned object is of type Google::Cloud::Asset::V1::SavedQuery.
+  p result
+end
 # [END cloudasset_v1_generated_AssetService_GetSavedQuery_sync]

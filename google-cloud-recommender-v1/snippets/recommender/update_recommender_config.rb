@@ -19,15 +19,21 @@
 # [START recommender_v1_generated_Recommender_UpdateRecommenderConfig_sync]
 require "google/cloud/recommender/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Recommender::V1::Recommender::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#update_recommender_config
+#
+def update_recommender_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Recommender::V1::Recommender::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Recommender::V1::UpdateRecommenderConfigRequest.new
 
-# Call the update_recommender_config method.
-result = client.update_recommender_config request
+  # Call the update_recommender_config method.
+  result = client.update_recommender_config request
 
-# The returned object is of type Google::Cloud::Recommender::V1::RecommenderConfig.
-p result
+  # The returned object is of type Google::Cloud::Recommender::V1::RecommenderConfig.
+  p result
+end
 # [END recommender_v1_generated_Recommender_UpdateRecommenderConfig_sync]

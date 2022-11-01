@@ -19,15 +19,21 @@
 # [START speech_v1_generated_Adaptation_GetPhraseSet_sync]
 require "google/cloud/speech/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V1::Adaptation::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V1::Adaptation::Client#get_phrase_set
+#
+def get_phrase_set
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V1::Adaptation::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V1::GetPhraseSetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V1::GetPhraseSetRequest.new
 
-# Call the get_phrase_set method.
-result = client.get_phrase_set request
+  # Call the get_phrase_set method.
+  result = client.get_phrase_set request
 
-# The returned object is of type Google::Cloud::Speech::V1::PhraseSet.
-p result
+  # The returned object is of type Google::Cloud::Speech::V1::PhraseSet.
+  p result
+end
 # [END speech_v1_generated_Adaptation_GetPhraseSet_sync]

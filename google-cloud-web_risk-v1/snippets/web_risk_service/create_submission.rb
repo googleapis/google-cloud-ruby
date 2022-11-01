@@ -19,15 +19,21 @@
 # [START webrisk_v1_generated_WebRiskService_CreateSubmission_sync]
 require "google/cloud/web_risk/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebRisk::V1::WebRiskService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebRisk::V1::WebRiskService::Client#create_submission
+#
+def create_submission
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebRisk::V1::WebRiskService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebRisk::V1::CreateSubmissionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebRisk::V1::CreateSubmissionRequest.new
 
-# Call the create_submission method.
-result = client.create_submission request
+  # Call the create_submission method.
+  result = client.create_submission request
 
-# The returned object is of type Google::Cloud::WebRisk::V1::Submission.
-p result
+  # The returned object is of type Google::Cloud::WebRisk::V1::Submission.
+  p result
+end
 # [END webrisk_v1_generated_WebRiskService_CreateSubmission_sync]

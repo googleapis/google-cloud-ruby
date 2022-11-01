@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#delete_device_registry
+#
+def delete_device_registry
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::DeleteDeviceRegistryRequest.new
 
-# Call the delete_device_registry method.
-result = client.delete_device_registry request
+  # Call the delete_device_registry method.
+  result = client.delete_device_registry request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_DeleteDeviceRegistry_sync]

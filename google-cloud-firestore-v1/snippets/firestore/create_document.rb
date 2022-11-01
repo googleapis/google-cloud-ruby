@@ -19,15 +19,21 @@
 # [START firestore_v1_generated_Firestore_CreateDocument_sync]
 require "google/cloud/firestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Firestore::V1::Firestore::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Firestore::V1::Firestore::Client#create_document
+#
+def create_document
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Firestore::V1::Firestore::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Firestore::V1::CreateDocumentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Firestore::V1::CreateDocumentRequest.new
 
-# Call the create_document method.
-result = client.create_document request
+  # Call the create_document method.
+  result = client.create_document request
 
-# The returned object is of type Google::Cloud::Firestore::V1::Document.
-p result
+  # The returned object is of type Google::Cloud::Firestore::V1::Document.
+  p result
+end
 # [END firestore_v1_generated_Firestore_CreateDocument_sync]

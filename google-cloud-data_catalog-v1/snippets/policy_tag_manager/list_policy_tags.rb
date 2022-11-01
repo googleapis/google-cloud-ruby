@@ -19,21 +19,27 @@
 # [START datacatalog_v1_generated_PolicyTagManager_ListPolicyTags_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#list_policy_tags
+#
+def list_policy_tags
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::ListPolicyTagsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::ListPolicyTagsRequest.new
 
-# Call the list_policy_tags method.
-result = client.list_policy_tags request
+  # Call the list_policy_tags method.
+  result = client.list_policy_tags request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::DataCatalog::V1::PolicyTag.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::DataCatalog::V1::PolicyTag.
+    p response
+  end
 end
 # [END datacatalog_v1_generated_PolicyTagManager_ListPolicyTags_sync]

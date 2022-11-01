@@ -19,22 +19,28 @@
 # [START bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateAppProfile_sync]
 require "google/cloud/bigtable/admin/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#update_app_profile
+#
+def update_app_profile
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::Admin::V2::UpdateAppProfileRequest.new
 
-# Call the update_app_profile method.
-result = client.update_app_profile request
+  # Call the update_app_profile method.
+  result = client.update_app_profile request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END bigtableadmin_v2_generated_BigtableInstanceAdmin_UpdateAppProfile_sync]

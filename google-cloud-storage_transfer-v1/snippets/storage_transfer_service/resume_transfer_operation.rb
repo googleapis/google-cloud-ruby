@@ -19,15 +19,21 @@
 # [START storagetransfer_v1_generated_StorageTransferService_ResumeTransferOperation_sync]
 require "google/cloud/storage_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#resume_transfer_operation
+#
+def resume_transfer_operation
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::StorageTransfer::V1::ResumeTransferOperationRequest.new
 
-# Call the resume_transfer_operation method.
-result = client.resume_transfer_operation request
+  # Call the resume_transfer_operation method.
+  result = client.resume_transfer_operation request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END storagetransfer_v1_generated_StorageTransferService_ResumeTransferOperation_sync]

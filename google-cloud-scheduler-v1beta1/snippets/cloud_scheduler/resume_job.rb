@@ -19,15 +19,21 @@
 # [START cloudscheduler_v1beta1_generated_CloudScheduler_ResumeJob_sync]
 require "google/cloud/scheduler/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client#resume_job
+#
+def resume_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Scheduler::V1beta1::CloudScheduler::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Scheduler::V1beta1::ResumeJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Scheduler::V1beta1::ResumeJobRequest.new
 
-# Call the resume_job method.
-result = client.resume_job request
+  # Call the resume_job method.
+  result = client.resume_job request
 
-# The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
-p result
+  # The returned object is of type Google::Cloud::Scheduler::V1beta1::Job.
+  p result
+end
 # [END cloudscheduler_v1beta1_generated_CloudScheduler_ResumeJob_sync]

@@ -19,15 +19,21 @@
 # [START osconfig_v1_generated_OsConfigService_PausePatchDeployment_sync]
 require "google/cloud/os_config/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1::OsConfigService::Client#pause_patch_deployment
+#
+def pause_patch_deployment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsConfig::V1::OsConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsConfig::V1::PausePatchDeploymentRequest.new
 
-# Call the pause_patch_deployment method.
-result = client.pause_patch_deployment request
+  # Call the pause_patch_deployment method.
+  result = client.pause_patch_deployment request
 
-# The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
-p result
+  # The returned object is of type Google::Cloud::OsConfig::V1::PatchDeployment.
+  p result
+end
 # [END osconfig_v1_generated_OsConfigService_PausePatchDeployment_sync]

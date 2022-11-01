@@ -19,15 +19,21 @@
 # [START livestream_v1_generated_LivestreamService_GetEvent_sync]
 require "google/cloud/video/live_stream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#get_event
+#
+def get_event
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::LiveStream::V1::GetEventRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::LiveStream::V1::GetEventRequest.new
 
-# Call the get_event method.
-result = client.get_event request
+  # Call the get_event method.
+  result = client.get_event request
 
-# The returned object is of type Google::Cloud::Video::LiveStream::V1::Event.
-p result
+  # The returned object is of type Google::Cloud::Video::LiveStream::V1::Event.
+  p result
+end
 # [END livestream_v1_generated_LivestreamService_GetEvent_sync]

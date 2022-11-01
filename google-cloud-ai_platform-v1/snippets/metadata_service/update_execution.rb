@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_MetadataService_UpdateExecution_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::MetadataService::Client#update_execution
+#
+def update_execution
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::UpdateExecutionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::UpdateExecutionRequest.new
 
-# Call the update_execution method.
-result = client.update_execution request
+  # Call the update_execution method.
+  result = client.update_execution request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Execution.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Execution.
+  p result
+end
 # [END aiplatform_v1_generated_MetadataService_UpdateExecution_sync]

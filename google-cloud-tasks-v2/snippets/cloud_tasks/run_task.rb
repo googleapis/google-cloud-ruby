@@ -19,15 +19,21 @@
 # [START cloudtasks_v2_generated_CloudTasks_RunTask_sync]
 require "google/cloud/tasks/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2::CloudTasks::Client#run_task
+#
+def run_task
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2::RunTaskRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2::RunTaskRequest.new
 
-# Call the run_task method.
-result = client.run_task request
+  # Call the run_task method.
+  result = client.run_task request
 
-# The returned object is of type Google::Cloud::Tasks::V2::Task.
-p result
+  # The returned object is of type Google::Cloud::Tasks::V2::Task.
+  p result
+end
 # [END cloudtasks_v2_generated_CloudTasks_RunTask_sync]

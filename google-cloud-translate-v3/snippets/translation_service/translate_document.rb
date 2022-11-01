@@ -19,15 +19,21 @@
 # [START translate_v3_generated_TranslationService_TranslateDocument_sync]
 require "google/cloud/translate/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Translate::V3::TranslationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Translate::V3::TranslationService::Client#translate_document
+#
+def translate_document
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Translate::V3::TranslationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Translate::V3::TranslateDocumentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Translate::V3::TranslateDocumentRequest.new
 
-# Call the translate_document method.
-result = client.translate_document request
+  # Call the translate_document method.
+  result = client.translate_document request
 
-# The returned object is of type Google::Cloud::Translate::V3::TranslateDocumentResponse.
-p result
+  # The returned object is of type Google::Cloud::Translate::V3::TranslateDocumentResponse.
+  p result
+end
 # [END translate_v3_generated_TranslationService_TranslateDocument_sync]

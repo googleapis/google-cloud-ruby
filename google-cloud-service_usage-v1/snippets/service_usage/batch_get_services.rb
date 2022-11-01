@@ -19,15 +19,21 @@
 # [START serviceusage_v1_generated_ServiceUsage_BatchGetServices_sync]
 require "google/cloud/service_usage/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#batch_get_services
+#
+def batch_get_services
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceUsage::V1::BatchGetServicesRequest.new
 
-# Call the batch_get_services method.
-result = client.batch_get_services request
+  # Call the batch_get_services method.
+  result = client.batch_get_services request
 
-# The returned object is of type Google::Cloud::ServiceUsage::V1::BatchGetServicesResponse.
-p result
+  # The returned object is of type Google::Cloud::ServiceUsage::V1::BatchGetServicesResponse.
+  p result
+end
 # [END serviceusage_v1_generated_ServiceUsage_BatchGetServices_sync]

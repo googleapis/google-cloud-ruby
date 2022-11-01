@@ -19,15 +19,21 @@
 # [START analyticsdata_v1beta_generated_AnalyticsData_CheckCompatibility_sync]
 require "google/analytics/data/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Data::V1beta::AnalyticsData::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Data::V1beta::AnalyticsData::Client#check_compatibility
+#
+def check_compatibility
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Data::V1beta::AnalyticsData::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Data::V1beta::CheckCompatibilityRequest.new
 
-# Call the check_compatibility method.
-result = client.check_compatibility request
+  # Call the check_compatibility method.
+  result = client.check_compatibility request
 
-# The returned object is of type Google::Analytics::Data::V1beta::CheckCompatibilityResponse.
-p result
+  # The returned object is of type Google::Analytics::Data::V1beta::CheckCompatibilityResponse.
+  p result
+end
 # [END analyticsdata_v1beta_generated_AnalyticsData_CheckCompatibility_sync]

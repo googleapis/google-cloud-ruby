@@ -19,15 +19,21 @@
 # [START cloudtrace_v2_generated_TraceService_CreateSpan_sync]
 require "google/cloud/trace/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Trace::V2::TraceService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Trace::V2::TraceService::Client#create_span
+#
+def create_span
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Trace::V2::TraceService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Trace::V2::Span.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Trace::V2::Span.new
 
-# Call the create_span method.
-result = client.create_span request
+  # Call the create_span method.
+  result = client.create_span request
 
-# The returned object is of type Google::Cloud::Trace::V2::Span.
-p result
+  # The returned object is of type Google::Cloud::Trace::V2::Span.
+  p result
+end
 # [END cloudtrace_v2_generated_TraceService_CreateSpan_sync]

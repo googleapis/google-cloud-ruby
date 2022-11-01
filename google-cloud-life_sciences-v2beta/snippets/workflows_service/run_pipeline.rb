@@ -19,22 +19,28 @@
 # [START lifesciences_v2beta_generated_WorkflowsService_RunPipeline_sync]
 require "google/cloud/life_sciences/v2beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client#run_pipeline
+#
+def run_pipeline
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::LifeSciences::V2beta::WorkflowsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::LifeSciences::V2beta::RunPipelineRequest.new
 
-# Call the run_pipeline method.
-result = client.run_pipeline request
+  # Call the run_pipeline method.
+  result = client.run_pipeline request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END lifesciences_v2beta_generated_WorkflowsService_RunPipeline_sync]

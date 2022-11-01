@@ -19,15 +19,21 @@
 # [START bigquerystorage_v1_generated_BigQueryWrite_GetWriteStream_sync]
 require "google/cloud/bigquery/storage/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#get_write_stream
+#
+def get_write_stream
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Storage::V1::GetWriteStreamRequest.new
 
-# Call the get_write_stream method.
-result = client.get_write_stream request
+  # Call the get_write_stream method.
+  result = client.get_write_stream request
 
-# The returned object is of type Google::Cloud::Bigquery::Storage::V1::WriteStream.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Storage::V1::WriteStream.
+  p result
+end
 # [END bigquerystorage_v1_generated_BigQueryWrite_GetWriteStream_sync]

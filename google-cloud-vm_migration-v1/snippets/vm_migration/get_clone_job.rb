@@ -19,15 +19,21 @@
 # [START vmmigration_v1_generated_VMMigration_GetCloneJob_sync]
 require "google/cloud/vm_migration/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#get_clone_job
+#
+def get_clone_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VMMigration::V1::GetCloneJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VMMigration::V1::GetCloneJobRequest.new
 
-# Call the get_clone_job method.
-result = client.get_clone_job request
+  # Call the get_clone_job method.
+  result = client.get_clone_job request
 
-# The returned object is of type Google::Cloud::VMMigration::V1::CloneJob.
-p result
+  # The returned object is of type Google::Cloud::VMMigration::V1::CloneJob.
+  p result
+end
 # [END vmmigration_v1_generated_VMMigration_GetCloneJob_sync]

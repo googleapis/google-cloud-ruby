@@ -19,15 +19,21 @@
 # [START location_v0_generated_Locations_GetLocation_sync]
 require "google/cloud/location"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Location::Locations::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Location::Locations::Client#get_location
+#
+def get_location
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Location::Locations::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Location::GetLocationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Location::GetLocationRequest.new
 
-# Call the get_location method.
-result = client.get_location request
+  # Call the get_location method.
+  result = client.get_location request
 
-# The returned object is of type Google::Cloud::Location::Location.
-p result
+  # The returned object is of type Google::Cloud::Location::Location.
+  p result
+end
 # [END location_v0_generated_Locations_GetLocation_sync]

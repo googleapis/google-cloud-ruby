@@ -19,15 +19,21 @@
 # [START cloudbuild_v1_generated_CloudBuild_UpdateBuildTrigger_sync]
 require "google/cloud/build/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Build::V1::CloudBuild::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#update_build_trigger
+#
+def update_build_trigger
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Build::V1::CloudBuild::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Build::V1::UpdateBuildTriggerRequest.new
 
-# Call the update_build_trigger method.
-result = client.update_build_trigger request
+  # Call the update_build_trigger method.
+  result = client.update_build_trigger request
 
-# The returned object is of type Google::Cloud::Build::V1::BuildTrigger.
-p result
+  # The returned object is of type Google::Cloud::Build::V1::BuildTrigger.
+  p result
+end
 # [END cloudbuild_v1_generated_CloudBuild_UpdateBuildTrigger_sync]

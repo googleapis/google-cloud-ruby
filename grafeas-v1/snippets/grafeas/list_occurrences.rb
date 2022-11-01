@@ -19,21 +19,27 @@
 # [START grafeas_v1_generated_Grafeas_ListOccurrences_sync]
 require "grafeas/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Grafeas::V1::Grafeas::Client.new
+##
+# Example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#list_occurrences
+#
+def list_occurrences
+  # Create a client object. The client can be reused for multiple calls.
+  client = Grafeas::V1::Grafeas::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Grafeas::V1::ListOccurrencesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Grafeas::V1::ListOccurrencesRequest.new
 
-# Call the list_occurrences method.
-result = client.list_occurrences request
+  # Call the list_occurrences method.
+  result = client.list_occurrences request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Grafeas::V1::Occurrence.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Grafeas::V1::Occurrence.
+    p response
+  end
 end
 # [END grafeas_v1_generated_Grafeas_ListOccurrences_sync]

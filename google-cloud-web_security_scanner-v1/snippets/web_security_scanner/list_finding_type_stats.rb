@@ -19,15 +19,21 @@
 # [START websecurityscanner_v1_generated_WebSecurityScanner_ListFindingTypeStats_sync]
 require "google/cloud/web_security_scanner/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#list_finding_type_stats
+#
+def list_finding_type_stats
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsRequest.new
 
-# Call the list_finding_type_stats method.
-result = client.list_finding_type_stats request
+  # Call the list_finding_type_stats method.
+  result = client.list_finding_type_stats request
 
-# The returned object is of type Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsResponse.
-p result
+  # The returned object is of type Google::Cloud::WebSecurityScanner::V1::ListFindingTypeStatsResponse.
+  p result
+end
 # [END websecurityscanner_v1_generated_WebSecurityScanner_ListFindingTypeStats_sync]

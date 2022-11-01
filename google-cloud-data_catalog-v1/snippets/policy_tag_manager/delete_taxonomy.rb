@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_PolicyTagManager_DeleteTaxonomy_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#delete_taxonomy
+#
+def delete_taxonomy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::DeleteTaxonomyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::DeleteTaxonomyRequest.new
 
-# Call the delete_taxonomy method.
-result = client.delete_taxonomy request
+  # Call the delete_taxonomy method.
+  result = client.delete_taxonomy request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END datacatalog_v1_generated_PolicyTagManager_DeleteTaxonomy_sync]

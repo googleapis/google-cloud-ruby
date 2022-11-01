@@ -19,15 +19,21 @@
 # [START vmmigration_v1_generated_VMMigration_FetchInventory_sync]
 require "google/cloud/vm_migration/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VMMigration::V1::VMMigration::Client#fetch_inventory
+#
+def fetch_inventory
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VMMigration::V1::VMMigration::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VMMigration::V1::FetchInventoryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VMMigration::V1::FetchInventoryRequest.new
 
-# Call the fetch_inventory method.
-result = client.fetch_inventory request
+  # Call the fetch_inventory method.
+  result = client.fetch_inventory request
 
-# The returned object is of type Google::Cloud::VMMigration::V1::FetchInventoryResponse.
-p result
+  # The returned object is of type Google::Cloud::VMMigration::V1::FetchInventoryResponse.
+  p result
+end
 # [END vmmigration_v1_generated_VMMigration_FetchInventory_sync]

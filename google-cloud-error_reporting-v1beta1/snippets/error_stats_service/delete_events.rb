@@ -19,15 +19,21 @@
 # [START clouderrorreporting_v1beta1_generated_ErrorStatsService_DeleteEvents_sync]
 require "google/cloud/error_reporting/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client#delete_events
+#
+def delete_events
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ErrorReporting::V1beta1::ErrorStatsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ErrorReporting::V1beta1::DeleteEventsRequest.new
 
-# Call the delete_events method.
-result = client.delete_events request
+  # Call the delete_events method.
+  result = client.delete_events request
 
-# The returned object is of type Google::Cloud::ErrorReporting::V1beta1::DeleteEventsResponse.
-p result
+  # The returned object is of type Google::Cloud::ErrorReporting::V1beta1::DeleteEventsResponse.
+  p result
+end
 # [END clouderrorreporting_v1beta1_generated_ErrorStatsService_DeleteEvents_sync]

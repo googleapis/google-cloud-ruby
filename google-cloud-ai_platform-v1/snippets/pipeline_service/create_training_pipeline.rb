@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_PipelineService_CreateTrainingPipeline_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::PipelineService::Client#create_training_pipeline
+#
+def create_training_pipeline
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::CreateTrainingPipelineRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::CreateTrainingPipelineRequest.new
 
-# Call the create_training_pipeline method.
-result = client.create_training_pipeline request
+  # Call the create_training_pipeline method.
+  result = client.create_training_pipeline request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::TrainingPipeline.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::TrainingPipeline.
+  p result
+end
 # [END aiplatform_v1_generated_PipelineService_CreateTrainingPipeline_sync]

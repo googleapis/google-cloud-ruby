@@ -19,21 +19,27 @@
 # [START cloudasset_v1_generated_AssetService_ListAssets_sync]
 require "google/cloud/asset/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Asset::V1::AssetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#list_assets
+#
+def list_assets
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Asset::V1::AssetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Asset::V1::ListAssetsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Asset::V1::ListAssetsRequest.new
 
-# Call the list_assets method.
-result = client.list_assets request
+  # Call the list_assets method.
+  result = client.list_assets request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Asset::V1::Asset.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Asset::V1::Asset.
+    p response
+  end
 end
 # [END cloudasset_v1_generated_AssetService_ListAssets_sync]

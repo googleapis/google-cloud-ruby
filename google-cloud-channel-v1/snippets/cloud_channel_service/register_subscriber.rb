@@ -19,15 +19,21 @@
 # [START cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#register_subscriber
+#
+def register_subscriber
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::RegisterSubscriberRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::RegisterSubscriberRequest.new
 
-# Call the register_subscriber method.
-result = client.register_subscriber request
+  # Call the register_subscriber method.
+  result = client.register_subscriber request
 
-# The returned object is of type Google::Cloud::Channel::V1::RegisterSubscriberResponse.
-p result
+  # The returned object is of type Google::Cloud::Channel::V1::RegisterSubscriberResponse.
+  p result
+end
 # [END cloudchannel_v1_generated_CloudChannelService_RegisterSubscriber_sync]

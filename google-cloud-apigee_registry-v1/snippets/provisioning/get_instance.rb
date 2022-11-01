@@ -19,15 +19,21 @@
 # [START apigeeregistry_v1_generated_Provisioning_GetInstance_sync]
 require "google/cloud/apigee_registry/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApigeeRegistry::V1::Provisioning::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApigeeRegistry::V1::Provisioning::Client#get_instance
+#
+def get_instance
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApigeeRegistry::V1::Provisioning::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApigeeRegistry::V1::GetInstanceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApigeeRegistry::V1::GetInstanceRequest.new
 
-# Call the get_instance method.
-result = client.get_instance request
+  # Call the get_instance method.
+  result = client.get_instance request
 
-# The returned object is of type Google::Cloud::ApigeeRegistry::V1::Instance.
-p result
+  # The returned object is of type Google::Cloud::ApigeeRegistry::V1::Instance.
+  p result
+end
 # [END apigeeregistry_v1_generated_Provisioning_GetInstance_sync]

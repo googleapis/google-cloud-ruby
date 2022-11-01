@@ -19,15 +19,21 @@
 # [START grafeas_v1_generated_Grafeas_UpdateOccurrence_sync]
 require "grafeas/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Grafeas::V1::Grafeas::Client.new
+##
+# Example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#update_occurrence
+#
+def update_occurrence
+  # Create a client object. The client can be reused for multiple calls.
+  client = Grafeas::V1::Grafeas::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Grafeas::V1::UpdateOccurrenceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Grafeas::V1::UpdateOccurrenceRequest.new
 
-# Call the update_occurrence method.
-result = client.update_occurrence request
+  # Call the update_occurrence method.
+  result = client.update_occurrence request
 
-# The returned object is of type Grafeas::V1::Occurrence.
-p result
+  # The returned object is of type Grafeas::V1::Occurrence.
+  p result
+end
 # [END grafeas_v1_generated_Grafeas_UpdateOccurrence_sync]

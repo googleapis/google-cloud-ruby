@@ -19,15 +19,21 @@
 # [START speech_v1_generated_Adaptation_DeleteCustomClass_sync]
 require "google/cloud/speech/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V1::Adaptation::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V1::Adaptation::Client#delete_custom_class
+#
+def delete_custom_class
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V1::Adaptation::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V1::DeleteCustomClassRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V1::DeleteCustomClassRequest.new
 
-# Call the delete_custom_class method.
-result = client.delete_custom_class request
+  # Call the delete_custom_class method.
+  result = client.delete_custom_class request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END speech_v1_generated_Adaptation_DeleteCustomClass_sync]

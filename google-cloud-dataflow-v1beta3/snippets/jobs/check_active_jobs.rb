@@ -19,15 +19,21 @@
 # [START dataflow_v1beta3_generated_Jobs_CheckActiveJobs_sync]
 require "google/cloud/dataflow/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataflow::V1beta3::Jobs::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Jobs::Client#check_active_jobs
+#
+def check_active_jobs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataflow::V1beta3::Jobs::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataflow::V1beta3::CheckActiveJobsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataflow::V1beta3::CheckActiveJobsRequest.new
 
-# Call the check_active_jobs method.
-result = client.check_active_jobs request
+  # Call the check_active_jobs method.
+  result = client.check_active_jobs request
 
-# The returned object is of type Google::Cloud::Dataflow::V1beta3::CheckActiveJobsResponse.
-p result
+  # The returned object is of type Google::Cloud::Dataflow::V1beta3::CheckActiveJobsResponse.
+  p result
+end
 # [END dataflow_v1beta3_generated_Jobs_CheckActiveJobs_sync]

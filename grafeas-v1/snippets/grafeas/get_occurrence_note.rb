@@ -19,15 +19,21 @@
 # [START grafeas_v1_generated_Grafeas_GetOccurrenceNote_sync]
 require "grafeas/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Grafeas::V1::Grafeas::Client.new
+##
+# Example demonstrating basic usage of
+# Grafeas::V1::Grafeas::Client#get_occurrence_note
+#
+def get_occurrence_note
+  # Create a client object. The client can be reused for multiple calls.
+  client = Grafeas::V1::Grafeas::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Grafeas::V1::GetOccurrenceNoteRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Grafeas::V1::GetOccurrenceNoteRequest.new
 
-# Call the get_occurrence_note method.
-result = client.get_occurrence_note request
+  # Call the get_occurrence_note method.
+  result = client.get_occurrence_note request
 
-# The returned object is of type Grafeas::V1::Note.
-p result
+  # The returned object is of type Grafeas::V1::Note.
+  p result
+end
 # [END grafeas_v1_generated_Grafeas_GetOccurrenceNote_sync]

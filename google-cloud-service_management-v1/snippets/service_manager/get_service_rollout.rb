@@ -19,15 +19,21 @@
 # [START servicemanagement_v1_generated_ServiceManager_GetServiceRollout_sync]
 require "google/cloud/service_management/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceManagement::V1::ServiceManager::Client#get_service_rollout
+#
+def get_service_rollout
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceManagement::V1::GetServiceRolloutRequest.new
 
-# Call the get_service_rollout method.
-result = client.get_service_rollout request
+  # Call the get_service_rollout method.
+  result = client.get_service_rollout request
 
-# The returned object is of type Google::Cloud::ServiceManagement::V1::Rollout.
-p result
+  # The returned object is of type Google::Cloud::ServiceManagement::V1::Rollout.
+  p result
+end
 # [END servicemanagement_v1_generated_ServiceManager_GetServiceRollout_sync]

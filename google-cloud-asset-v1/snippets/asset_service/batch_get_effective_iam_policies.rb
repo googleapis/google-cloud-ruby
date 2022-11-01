@@ -19,15 +19,21 @@
 # [START cloudasset_v1_generated_AssetService_BatchGetEffectiveIamPolicies_sync]
 require "google/cloud/asset/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Asset::V1::AssetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies
+#
+def batch_get_effective_iam_policies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Asset::V1::AssetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest.new
 
-# Call the batch_get_effective_iam_policies method.
-result = client.batch_get_effective_iam_policies request
+  # Call the batch_get_effective_iam_policies method.
+  result = client.batch_get_effective_iam_policies request
 
-# The returned object is of type Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse.
-p result
+  # The returned object is of type Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse.
+  p result
+end
 # [END cloudasset_v1_generated_AssetService_BatchGetEffectiveIamPolicies_sync]

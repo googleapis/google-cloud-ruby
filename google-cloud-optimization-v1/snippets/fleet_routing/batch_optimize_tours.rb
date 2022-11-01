@@ -19,22 +19,28 @@
 # [START cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_sync]
 require "google/cloud/optimization/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Optimization::V1::FleetRouting::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Optimization::V1::FleetRouting::Client#batch_optimize_tours
+#
+def batch_optimize_tours
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Optimization::V1::FleetRouting::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Optimization::V1::BatchOptimizeToursRequest.new
 
-# Call the batch_optimize_tours method.
-result = client.batch_optimize_tours request
+  # Call the batch_optimize_tours method.
+  result = client.batch_optimize_tours request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END cloudoptimization_v1_generated_FleetRouting_BatchOptimizeTours_sync]

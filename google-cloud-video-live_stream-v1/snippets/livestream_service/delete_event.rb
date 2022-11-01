@@ -19,15 +19,21 @@
 # [START livestream_v1_generated_LivestreamService_DeleteEvent_sync]
 require "google/cloud/video/live_stream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::LiveStream::V1::LivestreamService::Client#delete_event
+#
+def delete_event
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::LiveStream::V1::LivestreamService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::LiveStream::V1::DeleteEventRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::LiveStream::V1::DeleteEventRequest.new
 
-# Call the delete_event method.
-result = client.delete_event request
+  # Call the delete_event method.
+  result = client.delete_event request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END livestream_v1_generated_LivestreamService_DeleteEvent_sync]

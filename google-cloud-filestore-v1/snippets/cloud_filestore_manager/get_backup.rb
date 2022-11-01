@@ -19,15 +19,21 @@
 # [START file_v1_generated_CloudFilestoreManager_GetBackup_sync]
 require "google/cloud/filestore/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Filestore::V1::CloudFilestoreManager::Client#get_backup
+#
+def get_backup
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Filestore::V1::CloudFilestoreManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Filestore::V1::GetBackupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Filestore::V1::GetBackupRequest.new
 
-# Call the get_backup method.
-result = client.get_backup request
+  # Call the get_backup method.
+  result = client.get_backup request
 
-# The returned object is of type Google::Cloud::Filestore::V1::Backup.
-p result
+  # The returned object is of type Google::Cloud::Filestore::V1::Backup.
+  p result
+end
 # [END file_v1_generated_CloudFilestoreManager_GetBackup_sync]

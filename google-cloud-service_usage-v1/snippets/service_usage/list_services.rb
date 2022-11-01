@@ -19,21 +19,27 @@
 # [START serviceusage_v1_generated_ServiceUsage_ListServices_sync]
 require "google/cloud/service_usage/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceUsage::V1::ServiceUsage::Client#list_services
+#
+def list_services
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceUsage::V1::ServiceUsage::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceUsage::V1::ListServicesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceUsage::V1::ListServicesRequest.new
 
-# Call the list_services method.
-result = client.list_services request
+  # Call the list_services method.
+  result = client.list_services request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ServiceUsage::V1::Service.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ServiceUsage::V1::Service.
+    p response
+  end
 end
 # [END serviceusage_v1_generated_ServiceUsage_ListServices_sync]

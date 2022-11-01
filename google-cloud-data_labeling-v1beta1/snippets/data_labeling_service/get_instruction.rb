@@ -19,15 +19,21 @@
 # [START datalabeling_v1beta1_generated_DataLabelingService_GetInstruction_sync]
 require "google/cloud/data_labeling/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client#get_instruction
+#
+def get_instruction
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataLabeling::V1beta1::DataLabelingService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataLabeling::V1beta1::GetInstructionRequest.new
 
-# Call the get_instruction method.
-result = client.get_instruction request
+  # Call the get_instruction method.
+  result = client.get_instruction request
 
-# The returned object is of type Google::Cloud::DataLabeling::V1beta1::Instruction.
-p result
+  # The returned object is of type Google::Cloud::DataLabeling::V1beta1::Instruction.
+  p result
+end
 # [END datalabeling_v1beta1_generated_DataLabelingService_GetInstruction_sync]

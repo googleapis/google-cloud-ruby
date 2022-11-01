@@ -19,21 +19,27 @@
 # [START datafusion_v1_generated_DataFusion_ListAvailableVersions_sync]
 require "google/cloud/data_fusion/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataFusion::V1::DataFusion::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataFusion::V1::DataFusion::Client#list_available_versions
+#
+def list_available_versions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataFusion::V1::DataFusion::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataFusion::V1::ListAvailableVersionsRequest.new
 
-# Call the list_available_versions method.
-result = client.list_available_versions request
+  # Call the list_available_versions method.
+  result = client.list_available_versions request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::DataFusion::V1::Version.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::DataFusion::V1::Version.
+    p response
+  end
 end
 # [END datafusion_v1_generated_DataFusion_ListAvailableVersions_sync]

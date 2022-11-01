@@ -19,21 +19,27 @@
 # [START bigquerymigration_v2_generated_MigrationService_ListMigrationWorkflows_sync]
 require "google/cloud/bigquery/migration/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Migration::V2::MigrationService::Client#list_migration_workflows
+#
+def list_migration_workflows
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Migration::V2::ListMigrationWorkflowsRequest.new
 
-# Call the list_migration_workflows method.
-result = client.list_migration_workflows request
+  # Call the list_migration_workflows method.
+  result = client.list_migration_workflows request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Bigquery::Migration::V2::MigrationWorkflow.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Bigquery::Migration::V2::MigrationWorkflow.
+    p response
+  end
 end
 # [END bigquerymigration_v2_generated_MigrationService_ListMigrationWorkflows_sync]

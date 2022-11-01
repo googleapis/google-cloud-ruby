@@ -19,15 +19,21 @@
 # [START bigtableadmin_v2_generated_BigtableTableAdmin_DeleteSnapshot_sync]
 require "google/cloud/bigtable/admin/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client#delete_snapshot
+#
+def delete_snapshot
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::Admin::V2::BigtableTableAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::Admin::V2::DeleteSnapshotRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::Admin::V2::DeleteSnapshotRequest.new
 
-# Call the delete_snapshot method.
-result = client.delete_snapshot request
+  # Call the delete_snapshot method.
+  result = client.delete_snapshot request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END bigtableadmin_v2_generated_BigtableTableAdmin_DeleteSnapshot_sync]

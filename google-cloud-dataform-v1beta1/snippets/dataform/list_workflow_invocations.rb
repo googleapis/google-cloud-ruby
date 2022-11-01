@@ -19,21 +19,27 @@
 # [START dataform_v1beta1_generated_Dataform_ListWorkflowInvocations_sync]
 require "google/cloud/dataform/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataform::V1beta1::Dataform::Client#list_workflow_invocations
+#
+def list_workflow_invocations
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataform::V1beta1::Dataform::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataform::V1beta1::ListWorkflowInvocationsRequest.new
 
-# Call the list_workflow_invocations method.
-result = client.list_workflow_invocations request
+  # Call the list_workflow_invocations method.
+  result = client.list_workflow_invocations request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dataform::V1beta1::WorkflowInvocation.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dataform::V1beta1::WorkflowInvocation.
+    p response
+  end
 end
 # [END dataform_v1beta1_generated_Dataform_ListWorkflowInvocations_sync]

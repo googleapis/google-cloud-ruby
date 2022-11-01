@@ -19,22 +19,28 @@
 # [START run_v2_generated_Services_DeleteService_sync]
 require "google/cloud/run/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Run::V2::Services::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Run::V2::Services::Client#delete_service
+#
+def delete_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Run::V2::Services::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Run::V2::DeleteServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Run::V2::DeleteServiceRequest.new
 
-# Call the delete_service method.
-result = client.delete_service request
+  # Call the delete_service method.
+  result = client.delete_service request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END run_v2_generated_Services_DeleteService_sync]

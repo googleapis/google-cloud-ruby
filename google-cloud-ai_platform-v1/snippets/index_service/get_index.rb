@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_IndexService_GetIndex_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::IndexService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::IndexService::Client#get_index
+#
+def get_index
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::IndexService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetIndexRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetIndexRequest.new
 
-# Call the get_index method.
-result = client.get_index request
+  # Call the get_index method.
+  result = client.get_index request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Index.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Index.
+  p result
+end
 # [END aiplatform_v1_generated_IndexService_GetIndex_sync]

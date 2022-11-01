@@ -19,21 +19,27 @@
 # [START securitycenter_v1_generated_SecurityCenter_ListBigQueryExports_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#list_big_query_exports
+#
+def list_big_query_exports
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::ListBigQueryExportsRequest.new
 
-# Call the list_big_query_exports method.
-result = client.list_big_query_exports request
+  # Call the list_big_query_exports method.
+  result = client.list_big_query_exports request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::SecurityCenter::V1::BigQueryExport.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::SecurityCenter::V1::BigQueryExport.
+    p response
+  end
 end
 # [END securitycenter_v1_generated_SecurityCenter_ListBigQueryExports_sync]

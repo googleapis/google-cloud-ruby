@@ -19,21 +19,27 @@
 # [START dlp_v2_generated_DlpService_ListInspectTemplates_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#list_inspect_templates
+#
+def list_inspect_templates
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::ListInspectTemplatesRequest.new
 
-# Call the list_inspect_templates method.
-result = client.list_inspect_templates request
+  # Call the list_inspect_templates method.
+  result = client.list_inspect_templates request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dlp::V2::InspectTemplate.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dlp::V2::InspectTemplate.
+    p response
+  end
 end
 # [END dlp_v2_generated_DlpService_ListInspectTemplates_sync]

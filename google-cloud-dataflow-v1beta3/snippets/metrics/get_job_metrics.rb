@@ -19,15 +19,21 @@
 # [START dataflow_v1beta3_generated_Metrics_GetJobMetrics_sync]
 require "google/cloud/dataflow/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataflow::V1beta3::Metrics::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Metrics::Client#get_job_metrics
+#
+def get_job_metrics
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataflow::V1beta3::Metrics::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataflow::V1beta3::GetJobMetricsRequest.new
 
-# Call the get_job_metrics method.
-result = client.get_job_metrics request
+  # Call the get_job_metrics method.
+  result = client.get_job_metrics request
 
-# The returned object is of type Google::Cloud::Dataflow::V1beta3::JobMetrics.
-p result
+  # The returned object is of type Google::Cloud::Dataflow::V1beta3::JobMetrics.
+  p result
+end
 # [END dataflow_v1beta3_generated_Metrics_GetJobMetrics_sync]

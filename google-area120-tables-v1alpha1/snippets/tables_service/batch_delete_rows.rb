@@ -19,15 +19,21 @@
 # [START area120tables_v1alpha1_generated_TablesService_BatchDeleteRows_sync]
 require "google/area120/tables/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Area120::Tables::V1alpha1::TablesService::Client#batch_delete_rows
+#
+def batch_delete_rows
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Area120::Tables::V1alpha1::TablesService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Area120::Tables::V1alpha1::BatchDeleteRowsRequest.new
 
-# Call the batch_delete_rows method.
-result = client.batch_delete_rows request
+  # Call the batch_delete_rows method.
+  result = client.batch_delete_rows request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END area120tables_v1alpha1_generated_TablesService_BatchDeleteRows_sync]

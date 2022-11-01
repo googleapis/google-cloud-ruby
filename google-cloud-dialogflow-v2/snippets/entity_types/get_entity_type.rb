@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_EntityTypes_GetEntityType_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::EntityTypes::Client#get_entity_type
+#
+def get_entity_type
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::EntityTypes::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetEntityTypeRequest.new
 
-# Call the get_entity_type method.
-result = client.get_entity_type request
+  # Call the get_entity_type method.
+  result = client.get_entity_type request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::EntityType.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::EntityType.
+  p result
+end
 # [END dialogflow_v2_generated_EntityTypes_GetEntityType_sync]

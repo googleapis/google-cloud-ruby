@@ -19,15 +19,21 @@
 # [START bigtable_v2_generated_Bigtable_PingAndWarm_sync]
 require "google/cloud/bigtable/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#ping_and_warm
+#
+def ping_and_warm
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::V2::PingAndWarmRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::V2::PingAndWarmRequest.new
 
-# Call the ping_and_warm method.
-result = client.ping_and_warm request
+  # Call the ping_and_warm method.
+  result = client.ping_and_warm request
 
-# The returned object is of type Google::Cloud::Bigtable::V2::PingAndWarmResponse.
-p result
+  # The returned object is of type Google::Cloud::Bigtable::V2::PingAndWarmResponse.
+  p result
+end
 # [END bigtable_v2_generated_Bigtable_PingAndWarm_sync]

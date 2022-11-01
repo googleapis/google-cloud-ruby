@@ -19,15 +19,21 @@
 # [START domains_v1beta1_generated_Domains_RetrieveAuthorizationCode_sync]
 require "google/cloud/domains/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Domains::V1beta1::Domains::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Domains::V1beta1::Domains::Client#retrieve_authorization_code
+#
+def retrieve_authorization_code
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Domains::V1beta1::Domains::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Domains::V1beta1::RetrieveAuthorizationCodeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Domains::V1beta1::RetrieveAuthorizationCodeRequest.new
 
-# Call the retrieve_authorization_code method.
-result = client.retrieve_authorization_code request
+  # Call the retrieve_authorization_code method.
+  result = client.retrieve_authorization_code request
 
-# The returned object is of type Google::Cloud::Domains::V1beta1::AuthorizationCode.
-p result
+  # The returned object is of type Google::Cloud::Domains::V1beta1::AuthorizationCode.
+  p result
+end
 # [END domains_v1beta1_generated_Domains_RetrieveAuthorizationCode_sync]

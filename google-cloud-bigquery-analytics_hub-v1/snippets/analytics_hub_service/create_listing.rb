@@ -19,15 +19,21 @@
 # [START analyticshub_v1_generated_AnalyticsHubService_CreateListing_sync]
 require "google/cloud/bigquery/analytics_hub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client#create_listing
+#
+def create_listing
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::AnalyticsHub::V1::AnalyticsHubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::AnalyticsHub::V1::CreateListingRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::AnalyticsHub::V1::CreateListingRequest.new
 
-# Call the create_listing method.
-result = client.create_listing request
+  # Call the create_listing method.
+  result = client.create_listing request
 
-# The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::Listing.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::AnalyticsHub::V1::Listing.
+  p result
+end
 # [END analyticshub_v1_generated_AnalyticsHubService_CreateListing_sync]

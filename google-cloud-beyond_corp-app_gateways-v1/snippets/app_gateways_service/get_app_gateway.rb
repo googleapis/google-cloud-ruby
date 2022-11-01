@@ -19,15 +19,21 @@
 # [START beyondcorp_v1_generated_AppGatewaysService_GetAppGateway_sync]
 require "google/cloud/beyond_corp/app_gateways/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client#get_app_gateway
+#
+def get_app_gateway
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BeyondCorp::AppGateways::V1::AppGatewaysService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BeyondCorp::AppGateways::V1::GetAppGatewayRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BeyondCorp::AppGateways::V1::GetAppGatewayRequest.new
 
-# Call the get_app_gateway method.
-result = client.get_app_gateway request
+  # Call the get_app_gateway method.
+  result = client.get_app_gateway request
 
-# The returned object is of type Google::Cloud::BeyondCorp::AppGateways::V1::AppGateway.
-p result
+  # The returned object is of type Google::Cloud::BeyondCorp::AppGateways::V1::AppGateway.
+  p result
+end
 # [END beyondcorp_v1_generated_AppGatewaysService_GetAppGateway_sync]

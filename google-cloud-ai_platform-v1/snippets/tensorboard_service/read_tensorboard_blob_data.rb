@@ -19,18 +19,24 @@
 # [START aiplatform_v1_generated_TensorboardService_ReadTensorboardBlobData_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#read_tensorboard_blob_data
+#
+def read_tensorboard_blob_data
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataRequest.new
 
-# Call the read_tensorboard_blob_data method.
-result = client.read_tensorboard_blob_data request
+  # Call the read_tensorboard_blob_data method.
+  result = client.read_tensorboard_blob_data request
 
-# The returned object is a streamed enumerable yielding elements of
-# type ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse.
-result.each do |response|
-  p response
+  # The returned object is a streamed enumerable yielding elements of
+  # type ::Google::Cloud::AIPlatform::V1::ReadTensorboardBlobDataResponse.
+  result.each do |response|
+    p response
+  end
 end
 # [END aiplatform_v1_generated_TensorboardService_ReadTensorboardBlobData_sync]
