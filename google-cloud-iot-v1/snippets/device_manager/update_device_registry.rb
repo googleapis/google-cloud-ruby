@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#update_device_registry
+#
+def update_device_registry
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::UpdateDeviceRegistryRequest.new
 
-# Call the update_device_registry method.
-result = client.update_device_registry request
+  # Call the update_device_registry method.
+  result = client.update_device_registry request
 
-# The returned object is of type Google::Cloud::Iot::V1::DeviceRegistry.
-p result
+  # The returned object is of type Google::Cloud::Iot::V1::DeviceRegistry.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_UpdateDeviceRegistry_sync]

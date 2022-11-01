@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_DataplexService_GetAsset_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#get_asset
+#
+def get_asset
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::GetAssetRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::GetAssetRequest.new
 
-# Call the get_asset method.
-result = client.get_asset request
+  # Call the get_asset method.
+  result = client.get_asset request
 
-# The returned object is of type Google::Cloud::Dataplex::V1::Asset.
-p result
+  # The returned object is of type Google::Cloud::Dataplex::V1::Asset.
+  p result
+end
 # [END dataplex_v1_generated_DataplexService_GetAsset_sync]

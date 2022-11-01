@@ -19,15 +19,21 @@
 # [START websecurityscanner_v1beta_generated_WebSecurityScanner_GetScanRun_sync]
 require "google/cloud/web_security_scanner/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client#get_scan_run
+#
+def get_scan_run
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebSecurityScanner::V1beta::WebSecurityScanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebSecurityScanner::V1beta::GetScanRunRequest.new
 
-# Call the get_scan_run method.
-result = client.get_scan_run request
+  # Call the get_scan_run method.
+  result = client.get_scan_run request
 
-# The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanRun.
-p result
+  # The returned object is of type Google::Cloud::WebSecurityScanner::V1beta::ScanRun.
+  p result
+end
 # [END websecurityscanner_v1beta_generated_WebSecurityScanner_GetScanRun_sync]

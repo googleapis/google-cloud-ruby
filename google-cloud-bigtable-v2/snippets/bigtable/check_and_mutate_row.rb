@@ -19,15 +19,21 @@
 # [START bigtable_v2_generated_Bigtable_CheckAndMutateRow_sync]
 require "google/cloud/bigtable/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::V2::Bigtable::Client#check_and_mutate_row
+#
+def check_and_mutate_row
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::V2::Bigtable::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::V2::CheckAndMutateRowRequest.new
 
-# Call the check_and_mutate_row method.
-result = client.check_and_mutate_row request
+  # Call the check_and_mutate_row method.
+  result = client.check_and_mutate_row request
 
-# The returned object is of type Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse.
-p result
+  # The returned object is of type Google::Cloud::Bigtable::V2::CheckAndMutateRowResponse.
+  p result
+end
 # [END bigtable_v2_generated_Bigtable_CheckAndMutateRow_sync]

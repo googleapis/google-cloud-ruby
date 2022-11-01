@@ -19,15 +19,21 @@
 # [START connectgateway_v1beta1_generated_GatewayService_DeleteResource_sync]
 require "google/cloud/gke_connect/gateway/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client#delete_resource
+#
+def delete_resource
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeConnect::Gateway::V1beta1::GatewayService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Api::HttpBody.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Api::HttpBody.new
 
-# Call the delete_resource method.
-result = client.delete_resource request
+  # Call the delete_resource method.
+  result = client.delete_resource request
 
-# The returned object is of type Google::Api::HttpBody.
-p result
+  # The returned object is of type Google::Api::HttpBody.
+  p result
+end
 # [END connectgateway_v1beta1_generated_GatewayService_DeleteResource_sync]

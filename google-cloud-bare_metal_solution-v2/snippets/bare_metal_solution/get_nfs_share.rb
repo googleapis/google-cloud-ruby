@@ -19,15 +19,21 @@
 # [START baremetalsolution_v2_generated_BareMetalSolution_GetNfsShare_sync]
 require "google/cloud/bare_metal_solution/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#get_nfs_share
+#
+def get_nfs_share
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BareMetalSolution::V2::GetNfsShareRequest.new
 
-# Call the get_nfs_share method.
-result = client.get_nfs_share request
+  # Call the get_nfs_share method.
+  result = client.get_nfs_share request
 
-# The returned object is of type Google::Cloud::BareMetalSolution::V2::NfsShare.
-p result
+  # The returned object is of type Google::Cloud::BareMetalSolution::V2::NfsShare.
+  p result
+end
 # [END baremetalsolution_v2_generated_BareMetalSolution_GetNfsShare_sync]

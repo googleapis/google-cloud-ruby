@@ -19,21 +19,27 @@
 # [START accessapproval_v1_generated_AccessApproval_ListApprovalRequests_sync]
 require "google/cloud/access_approval/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AccessApproval::V1::AccessApproval::Client#list_approval_requests
+#
+def list_approval_requests
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AccessApproval::V1::ListApprovalRequestsMessage.new
 
-# Call the list_approval_requests method.
-result = client.list_approval_requests request
+  # Call the list_approval_requests method.
+  result = client.list_approval_requests request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AccessApproval::V1::ApprovalRequest.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AccessApproval::V1::ApprovalRequest.
+    p response
+  end
 end
 # [END accessapproval_v1_generated_AccessApproval_ListApprovalRequests_sync]

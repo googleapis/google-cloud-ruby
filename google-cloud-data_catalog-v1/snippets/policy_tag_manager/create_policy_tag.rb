@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_PolicyTagManager_CreatePolicyTag_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::PolicyTagManager::Client#create_policy_tag
+#
+def create_policy_tag
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::PolicyTagManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::CreatePolicyTagRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::CreatePolicyTagRequest.new
 
-# Call the create_policy_tag method.
-result = client.create_policy_tag request
+  # Call the create_policy_tag method.
+  result = client.create_policy_tag request
 
-# The returned object is of type Google::Cloud::DataCatalog::V1::PolicyTag.
-p result
+  # The returned object is of type Google::Cloud::DataCatalog::V1::PolicyTag.
+  p result
+end
 # [END datacatalog_v1_generated_PolicyTagManager_CreatePolicyTag_sync]

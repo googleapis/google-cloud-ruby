@@ -19,15 +19,21 @@
 # [START oslogin_v1beta_generated_OsLoginService_GetSshPublicKey_sync]
 require "google/cloud/os_login/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsLogin::V1beta::OsLoginService::Client#get_ssh_public_key
+#
+def get_ssh_public_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsLogin::V1beta::OsLoginService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsLogin::V1beta::GetSshPublicKeyRequest.new
 
-# Call the get_ssh_public_key method.
-result = client.get_ssh_public_key request
+  # Call the get_ssh_public_key method.
+  result = client.get_ssh_public_key request
 
-# The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
-p result
+  # The returned object is of type Google::Cloud::OsLogin::Common::SshPublicKey.
+  p result
+end
 # [END oslogin_v1beta_generated_OsLoginService_GetSshPublicKey_sync]

@@ -19,15 +19,21 @@
 # [START automl_v1beta1_generated_AutoML_UpdateTableSpec_sync]
 require "google/cloud/automl/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#update_table_spec
+#
+def update_table_spec
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1beta1::UpdateTableSpecRequest.new
 
-# Call the update_table_spec method.
-result = client.update_table_spec request
+  # Call the update_table_spec method.
+  result = client.update_table_spec request
 
-# The returned object is of type Google::Cloud::AutoML::V1beta1::TableSpec.
-p result
+  # The returned object is of type Google::Cloud::AutoML::V1beta1::TableSpec.
+  p result
+end
 # [END automl_v1beta1_generated_AutoML_UpdateTableSpec_sync]

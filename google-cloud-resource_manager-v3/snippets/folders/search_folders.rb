@@ -19,21 +19,27 @@
 # [START cloudresourcemanager_v3_generated_Folders_SearchFolders_sync]
 require "google/cloud/resource_manager/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceManager::V3::Folders::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Folders::Client#search_folders
+#
+def search_folders
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceManager::V3::Folders::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceManager::V3::SearchFoldersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceManager::V3::SearchFoldersRequest.new
 
-# Call the search_folders method.
-result = client.search_folders request
+  # Call the search_folders method.
+  result = client.search_folders request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ResourceManager::V3::Folder.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ResourceManager::V3::Folder.
+    p response
+  end
 end
 # [END cloudresourcemanager_v3_generated_Folders_SearchFolders_sync]

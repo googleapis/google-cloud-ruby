@@ -19,15 +19,21 @@
 # [START container_v1_generated_ClusterManager_SetLegacyAbac_sync]
 require "google/cloud/container/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Container::V1::ClusterManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Container::V1::ClusterManager::Client#set_legacy_abac
+#
+def set_legacy_abac
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Container::V1::ClusterManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Container::V1::SetLegacyAbacRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Container::V1::SetLegacyAbacRequest.new
 
-# Call the set_legacy_abac method.
-result = client.set_legacy_abac request
+  # Call the set_legacy_abac method.
+  result = client.set_legacy_abac request
 
-# The returned object is of type Google::Cloud::Container::V1::Operation.
-p result
+  # The returned object is of type Google::Cloud::Container::V1::Operation.
+  p result
+end
 # [END container_v1_generated_ClusterManager_SetLegacyAbac_sync]

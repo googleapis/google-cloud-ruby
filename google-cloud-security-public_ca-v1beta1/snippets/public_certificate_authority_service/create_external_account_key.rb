@@ -19,15 +19,21 @@
 # [START publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_sync]
 require "google/cloud/security/public_ca/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client#create_external_account_key
+#
+def create_external_account_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Security::PublicCA::V1beta1::PublicCertificateAuthorityService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Security::PublicCA::V1beta1::CreateExternalAccountKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Security::PublicCA::V1beta1::CreateExternalAccountKeyRequest.new
 
-# Call the create_external_account_key method.
-result = client.create_external_account_key request
+  # Call the create_external_account_key method.
+  result = client.create_external_account_key request
 
-# The returned object is of type Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey.
-p result
+  # The returned object is of type Google::Cloud::Security::PublicCA::V1beta1::ExternalAccountKey.
+  p result
+end
 # [END publicca_v1beta1_generated_PublicCertificateAuthorityService_CreateExternalAccountKey_sync]

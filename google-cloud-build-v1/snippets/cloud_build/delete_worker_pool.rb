@@ -19,22 +19,28 @@
 # [START cloudbuild_v1_generated_CloudBuild_DeleteWorkerPool_sync]
 require "google/cloud/build/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Build::V1::CloudBuild::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#delete_worker_pool
+#
+def delete_worker_pool
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Build::V1::CloudBuild::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Build::V1::DeleteWorkerPoolRequest.new
 
-# Call the delete_worker_pool method.
-result = client.delete_worker_pool request
+  # Call the delete_worker_pool method.
+  result = client.delete_worker_pool request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END cloudbuild_v1_generated_CloudBuild_DeleteWorkerPool_sync]

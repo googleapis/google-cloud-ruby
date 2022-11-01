@@ -19,15 +19,21 @@
 # [START cloudkms_v1_generated_KeyManagementService_UpdateCryptoKey_sync]
 require "google/cloud/kms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Kms::V1::KeyManagementService::Client#update_crypto_key
+#
+def update_crypto_key
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Kms::V1::KeyManagementService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Kms::V1::UpdateCryptoKeyRequest.new
 
-# Call the update_crypto_key method.
-result = client.update_crypto_key request
+  # Call the update_crypto_key method.
+  result = client.update_crypto_key request
 
-# The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
-p result
+  # The returned object is of type Google::Cloud::Kms::V1::CryptoKey.
+  p result
+end
 # [END cloudkms_v1_generated_KeyManagementService_UpdateCryptoKey_sync]

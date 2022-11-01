@@ -19,21 +19,27 @@
 # [START resourcesettings_v1_generated_ResourceSettingsService_ListSettings_sync]
 require "google/cloud/resource_settings/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client#list_settings
+#
+def list_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceSettings::V1::ResourceSettingsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceSettings::V1::ListSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceSettings::V1::ListSettingsRequest.new
 
-# Call the list_settings method.
-result = client.list_settings request
+  # Call the list_settings method.
+  result = client.list_settings request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::ResourceSettings::V1::Setting.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::ResourceSettings::V1::Setting.
+    p response
+  end
 end
 # [END resourcesettings_v1_generated_ResourceSettingsService_ListSettings_sync]

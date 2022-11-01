@@ -19,15 +19,21 @@
 # [START logging_v2_generated_MetricsService_DeleteLogMetric_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::MetricsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::MetricsService::Client#delete_log_metric
+#
+def delete_log_metric
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::MetricsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::DeleteLogMetricRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::DeleteLogMetricRequest.new
 
-# Call the delete_log_metric method.
-result = client.delete_log_metric request
+  # Call the delete_log_metric method.
+  result = client.delete_log_metric request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END logging_v2_generated_MetricsService_DeleteLogMetric_sync]

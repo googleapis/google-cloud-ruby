@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Flows_GetFlow_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Flows::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Flows::Client#get_flow
+#
+def get_flow
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Flows::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::GetFlowRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::GetFlowRequest.new
 
-# Call the get_flow method.
-result = client.get_flow request
+  # Call the get_flow method.
+  result = client.get_flow request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::Flow.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Flow.
+  p result
+end
 # [END dialogflow_v3_generated_Flows_GetFlow_sync]

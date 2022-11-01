@@ -19,15 +19,21 @@
 # [START logging_v2_generated_ConfigService_UpdateSettings_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::ConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::ConfigService::Client#update_settings
+#
+def update_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::ConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::UpdateSettingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::UpdateSettingsRequest.new
 
-# Call the update_settings method.
-result = client.update_settings request
+  # Call the update_settings method.
+  result = client.update_settings request
 
-# The returned object is of type Google::Cloud::Logging::V2::Settings.
-p result
+  # The returned object is of type Google::Cloud::Logging::V2::Settings.
+  p result
+end
 # [END logging_v2_generated_ConfigService_UpdateSettings_sync]

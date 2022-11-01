@@ -19,15 +19,21 @@
 # [START securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#delete_big_query_export
+#
+def delete_big_query_export
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::DeleteBigQueryExportRequest.new
 
-# Call the delete_big_query_export method.
-result = client.delete_big_query_export request
+  # Call the delete_big_query_export method.
+  result = client.delete_big_query_export request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END securitycenter_v1_generated_SecurityCenter_DeleteBigQueryExport_sync]

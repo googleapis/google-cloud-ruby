@@ -19,21 +19,27 @@
 # [START monitoring_v3_generated_QueryService_QueryTimeSeries_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::QueryService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::QueryService::Client#query_time_series
+#
+def query_time_series
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::QueryService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::QueryTimeSeriesRequest.new
 
-# Call the query_time_series method.
-result = client.query_time_series request
+  # Call the query_time_series method.
+  result = client.query_time_series request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Monitoring::V3::TimeSeriesData.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Monitoring::V3::TimeSeriesData.
+    p response
+  end
 end
 # [END monitoring_v3_generated_QueryService_QueryTimeSeries_sync]

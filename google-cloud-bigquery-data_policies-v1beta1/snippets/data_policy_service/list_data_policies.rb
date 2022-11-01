@@ -19,21 +19,27 @@
 # [START bigquerydatapolicy_v1beta1_generated_DataPolicyService_ListDataPolicies_sync]
 require "google/cloud/bigquery/data_policies/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client#list_data_policies
+#
+def list_data_policies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicyService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::DataPolicies::V1beta1::ListDataPoliciesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::DataPolicies::V1beta1::ListDataPoliciesRequest.new
 
-# Call the list_data_policies method.
-result = client.list_data_policies request
+  # Call the list_data_policies method.
+  result = client.list_data_policies request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicy.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Bigquery::DataPolicies::V1beta1::DataPolicy.
+    p response
+  end
 end
 # [END bigquerydatapolicy_v1beta1_generated_DataPolicyService_ListDataPolicies_sync]

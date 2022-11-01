@@ -19,15 +19,21 @@
 # [START artifactregistry_v1beta2_generated_ArtifactRegistry_GetIamPolicy_sync]
 require "google/cloud/artifact_registry/v1beta2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_iam_policy
+#
+def get_iam_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1::GetIamPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1::GetIamPolicyRequest.new
 
-# Call the get_iam_policy method.
-result = client.get_iam_policy request
+  # Call the get_iam_policy method.
+  result = client.get_iam_policy request
 
-# The returned object is of type Google::Iam::V1::Policy.
-p result
+  # The returned object is of type Google::Iam::V1::Policy.
+  p result
+end
 # [END artifactregistry_v1beta2_generated_ArtifactRegistry_GetIamPolicy_sync]

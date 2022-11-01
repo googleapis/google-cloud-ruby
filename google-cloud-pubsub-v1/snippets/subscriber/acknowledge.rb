@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_Subscriber_Acknowledge_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Subscriber::Client#acknowledge
+#
+def acknowledge
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Subscriber::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::AcknowledgeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::AcknowledgeRequest.new
 
-# Call the acknowledge method.
-result = client.acknowledge request
+  # Call the acknowledge method.
+  result = client.acknowledge request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END pubsub_v1_generated_Subscriber_Acknowledge_sync]

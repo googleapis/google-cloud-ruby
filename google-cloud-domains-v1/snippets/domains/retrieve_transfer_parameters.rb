@@ -19,15 +19,21 @@
 # [START domains_v1_generated_Domains_RetrieveTransferParameters_sync]
 require "google/cloud/domains/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Domains::V1::Domains::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Domains::V1::Domains::Client#retrieve_transfer_parameters
+#
+def retrieve_transfer_parameters
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Domains::V1::Domains::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Domains::V1::RetrieveTransferParametersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Domains::V1::RetrieveTransferParametersRequest.new
 
-# Call the retrieve_transfer_parameters method.
-result = client.retrieve_transfer_parameters request
+  # Call the retrieve_transfer_parameters method.
+  result = client.retrieve_transfer_parameters request
 
-# The returned object is of type Google::Cloud::Domains::V1::RetrieveTransferParametersResponse.
-p result
+  # The returned object is of type Google::Cloud::Domains::V1::RetrieveTransferParametersResponse.
+  p result
+end
 # [END domains_v1_generated_Domains_RetrieveTransferParameters_sync]

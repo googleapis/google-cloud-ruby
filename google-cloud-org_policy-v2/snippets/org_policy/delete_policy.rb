@@ -19,15 +19,21 @@
 # [START orgpolicy_v2_generated_OrgPolicy_DeletePolicy_sync]
 require "google/cloud/org_policy/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#delete_policy
+#
+def delete_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OrgPolicy::V2::DeletePolicyRequest.new
 
-# Call the delete_policy method.
-result = client.delete_policy request
+  # Call the delete_policy method.
+  result = client.delete_policy request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END orgpolicy_v2_generated_OrgPolicy_DeletePolicy_sync]

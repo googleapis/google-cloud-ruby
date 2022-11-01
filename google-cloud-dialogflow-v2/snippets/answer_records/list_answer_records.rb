@@ -19,21 +19,27 @@
 # [START dialogflow_v2_generated_AnswerRecords_ListAnswerRecords_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::AnswerRecords::Client#list_answer_records
+#
+def list_answer_records
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::AnswerRecords::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::ListAnswerRecordsRequest.new
 
-# Call the list_answer_records method.
-result = client.list_answer_records request
+  # Call the list_answer_records method.
+  result = client.list_answer_records request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dialogflow::V2::AnswerRecord.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dialogflow::V2::AnswerRecord.
+    p response
+  end
 end
 # [END dialogflow_v2_generated_AnswerRecords_ListAnswerRecords_sync]

@@ -19,15 +19,21 @@
 # [START dataflow_v1beta3_generated_Snapshots_GetSnapshot_sync]
 require "google/cloud/dataflow/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Snapshots::Client#get_snapshot
+#
+def get_snapshot
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataflow::V1beta3::Snapshots::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataflow::V1beta3::GetSnapshotRequest.new
 
-# Call the get_snapshot method.
-result = client.get_snapshot request
+  # Call the get_snapshot method.
+  result = client.get_snapshot request
 
-# The returned object is of type Google::Cloud::Dataflow::V1beta3::Snapshot.
-p result
+  # The returned object is of type Google::Cloud::Dataflow::V1beta3::Snapshot.
+  p result
+end
 # [END dataflow_v1beta3_generated_Snapshots_GetSnapshot_sync]

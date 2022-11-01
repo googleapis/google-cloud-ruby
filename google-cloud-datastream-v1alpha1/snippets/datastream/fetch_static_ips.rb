@@ -19,15 +19,21 @@
 # [START datastream_v1alpha1_generated_Datastream_FetchStaticIps_sync]
 require "google/cloud/datastream/v1alpha1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastream::V1alpha1::Datastream::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastream::V1alpha1::Datastream::Client#fetch_static_ips
+#
+def fetch_static_ips
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastream::V1alpha1::Datastream::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastream::V1alpha1::FetchStaticIpsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastream::V1alpha1::FetchStaticIpsRequest.new
 
-# Call the fetch_static_ips method.
-result = client.fetch_static_ips request
+  # Call the fetch_static_ips method.
+  result = client.fetch_static_ips request
 
-# The returned object is of type Google::Cloud::Datastream::V1alpha1::FetchStaticIpsResponse.
-p result
+  # The returned object is of type Google::Cloud::Datastream::V1alpha1::FetchStaticIpsResponse.
+  p result
+end
 # [END datastream_v1alpha1_generated_Datastream_FetchStaticIps_sync]

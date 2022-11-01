@@ -19,15 +19,21 @@
 # [START securitycenter_v1_generated_SecurityCenter_UpdateBigQueryExport_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_big_query_export
+#
+def update_big_query_export
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::UpdateBigQueryExportRequest.new
 
-# Call the update_big_query_export method.
-result = client.update_big_query_export request
+  # Call the update_big_query_export method.
+  result = client.update_big_query_export request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1::BigQueryExport.
+  p result
+end
 # [END securitycenter_v1_generated_SecurityCenter_UpdateBigQueryExport_sync]

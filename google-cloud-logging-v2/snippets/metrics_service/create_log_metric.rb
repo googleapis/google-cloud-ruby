@@ -19,15 +19,21 @@
 # [START logging_v2_generated_MetricsService_CreateLogMetric_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::MetricsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::MetricsService::Client#create_log_metric
+#
+def create_log_metric
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::MetricsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Logging::V2::CreateLogMetricRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Logging::V2::CreateLogMetricRequest.new
 
-# Call the create_log_metric method.
-result = client.create_log_metric request
+  # Call the create_log_metric method.
+  result = client.create_log_metric request
 
-# The returned object is of type Google::Cloud::Logging::V2::LogMetric.
-p result
+  # The returned object is of type Google::Cloud::Logging::V2::LogMetric.
+  p result
+end
 # [END logging_v2_generated_MetricsService_CreateLogMetric_sync]

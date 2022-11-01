@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_ContentService_DeleteContent_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::ContentService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::ContentService::Client#delete_content
+#
+def delete_content
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::ContentService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::DeleteContentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::DeleteContentRequest.new
 
-# Call the delete_content method.
-result = client.delete_content request
+  # Call the delete_content method.
+  result = client.delete_content request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dataplex_v1_generated_ContentService_DeleteContent_sync]

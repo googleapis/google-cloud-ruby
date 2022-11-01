@@ -19,22 +19,28 @@
 # [START servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_sync]
 require "google/cloud/service_management/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceManagement::V1::ServiceManager::Client#submit_config_source
+#
+def submit_config_source
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceManagement::V1::SubmitConfigSourceRequest.new
 
-# Call the submit_config_source method.
-result = client.submit_config_source request
+  # Call the submit_config_source method.
+  result = client.submit_config_source request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END servicemanagement_v1_generated_ServiceManager_SubmitConfigSource_sync]

@@ -19,15 +19,21 @@
 # [START storagetransfer_v1_generated_StorageTransferService_GetTransferJob_sync]
 require "google/cloud/storage_transfer/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::StorageTransfer::V1::StorageTransferService::Client#get_transfer_job
+#
+def get_transfer_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::StorageTransfer::V1::StorageTransferService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::StorageTransfer::V1::GetTransferJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::StorageTransfer::V1::GetTransferJobRequest.new
 
-# Call the get_transfer_job method.
-result = client.get_transfer_job request
+  # Call the get_transfer_job method.
+  result = client.get_transfer_job request
 
-# The returned object is of type Google::Cloud::StorageTransfer::V1::TransferJob.
-p result
+  # The returned object is of type Google::Cloud::StorageTransfer::V1::TransferJob.
+  p result
+end
 # [END storagetransfer_v1_generated_StorageTransferService_GetTransferJob_sync]

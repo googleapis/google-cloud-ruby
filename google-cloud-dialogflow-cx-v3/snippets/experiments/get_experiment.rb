@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Experiments_GetExperiment_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Experiments::Client#get_experiment
+#
+def get_experiment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::GetExperimentRequest.new
 
-# Call the get_experiment method.
-result = client.get_experiment request
+  # Call the get_experiment method.
+  result = client.get_experiment request
 
-# The returned object is of type Google::Cloud::Dialogflow::CX::V3::Experiment.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::CX::V3::Experiment.
+  p result
+end
 # [END dialogflow_v3_generated_Experiments_GetExperiment_sync]

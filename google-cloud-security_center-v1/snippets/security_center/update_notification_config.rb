@@ -19,15 +19,21 @@
 # [START securitycenter_v1_generated_SecurityCenter_UpdateNotificationConfig_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_notification_config
+#
+def update_notification_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::UpdateNotificationConfigRequest.new
 
-# Call the update_notification_config method.
-result = client.update_notification_config request
+  # Call the update_notification_config method.
+  result = client.update_notification_config request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1::NotificationConfig.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1::NotificationConfig.
+  p result
+end
 # [END securitycenter_v1_generated_SecurityCenter_UpdateNotificationConfig_sync]

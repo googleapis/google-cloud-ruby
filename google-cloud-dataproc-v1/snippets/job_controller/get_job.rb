@@ -19,15 +19,21 @@
 # [START dataproc_v1_generated_JobController_GetJob_sync]
 require "google/cloud/dataproc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataproc::V1::JobController::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::JobController::Client#get_job
+#
+def get_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataproc::V1::JobController::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataproc::V1::GetJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataproc::V1::GetJobRequest.new
 
-# Call the get_job method.
-result = client.get_job request
+  # Call the get_job method.
+  result = client.get_job request
 
-# The returned object is of type Google::Cloud::Dataproc::V1::Job.
-p result
+  # The returned object is of type Google::Cloud::Dataproc::V1::Job.
+  p result
+end
 # [END dataproc_v1_generated_JobController_GetJob_sync]

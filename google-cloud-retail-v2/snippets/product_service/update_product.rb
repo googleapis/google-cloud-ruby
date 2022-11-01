@@ -19,15 +19,21 @@
 # [START retail_v2_generated_ProductService_UpdateProduct_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ProductService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ProductService::Client#update_product
+#
+def update_product
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ProductService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::UpdateProductRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::UpdateProductRequest.new
 
-# Call the update_product method.
-result = client.update_product request
+  # Call the update_product method.
+  result = client.update_product request
 
-# The returned object is of type Google::Cloud::Retail::V2::Product.
-p result
+  # The returned object is of type Google::Cloud::Retail::V2::Product.
+  p result
+end
 # [END retail_v2_generated_ProductService_UpdateProduct_sync]

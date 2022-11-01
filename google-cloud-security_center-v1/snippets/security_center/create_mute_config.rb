@@ -19,15 +19,21 @@
 # [START securitycenter_v1_generated_SecurityCenter_CreateMuteConfig_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#create_mute_config
+#
+def create_mute_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::CreateMuteConfigRequest.new
 
-# Call the create_mute_config method.
-result = client.create_mute_config request
+  # Call the create_mute_config method.
+  result = client.create_mute_config request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1::MuteConfig.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1::MuteConfig.
+  p result
+end
 # [END securitycenter_v1_generated_SecurityCenter_CreateMuteConfig_sync]

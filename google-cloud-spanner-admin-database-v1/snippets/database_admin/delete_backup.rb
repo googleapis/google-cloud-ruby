@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_DatabaseAdmin_DeleteBackup_sync]
 require "google/cloud/spanner/admin/database/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#delete_backup
+#
+def delete_backup
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::Admin::Database::V1::DeleteBackupRequest.new
 
-# Call the delete_backup method.
-result = client.delete_backup request
+  # Call the delete_backup method.
+  result = client.delete_backup request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END spanner_v1_generated_DatabaseAdmin_DeleteBackup_sync]

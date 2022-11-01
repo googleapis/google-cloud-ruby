@@ -19,21 +19,27 @@
 # [START gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_sync]
 require "google/cloud/gke_multi_cloud/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client#list_aws_node_pools
+#
+def list_aws_node_pools
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeMultiCloud::V1::AwsClusters::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeMultiCloud::V1::ListAwsNodePoolsRequest.new
 
-# Call the list_aws_node_pools method.
-result = client.list_aws_node_pools request
+  # Call the list_aws_node_pools method.
+  result = client.list_aws_node_pools request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AwsNodePool.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::GkeMultiCloud::V1::AwsNodePool.
+    p response
+  end
 end
 # [END gkemulticloud_v1_generated_AwsClusters_ListAwsNodePools_sync]

@@ -19,15 +19,21 @@
 # [START bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteCluster_sync]
 require "google/cloud/bigtable/admin/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client#delete_cluster
+#
+def delete_cluster
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigtable::Admin::V2::BigtableInstanceAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigtable::Admin::V2::DeleteClusterRequest.new
 
-# Call the delete_cluster method.
-result = client.delete_cluster request
+  # Call the delete_cluster method.
+  result = client.delete_cluster request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END bigtableadmin_v2_generated_BigtableInstanceAdmin_DeleteCluster_sync]

@@ -19,15 +19,21 @@
 # [START securitycenter_v1_generated_SecurityCenter_UpdateSecurityMarks_sync]
 require "google/cloud/security_center/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1::SecurityCenter::Client#update_security_marks
+#
+def update_security_marks
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1::UpdateSecurityMarksRequest.new
 
-# Call the update_security_marks method.
-result = client.update_security_marks request
+  # Call the update_security_marks method.
+  result = client.update_security_marks request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1::SecurityMarks.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1::SecurityMarks.
+  p result
+end
 # [END securitycenter_v1_generated_SecurityCenter_UpdateSecurityMarks_sync]

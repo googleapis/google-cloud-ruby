@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_Spanner_Commit_sync]
 require "google/cloud/spanner/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::V1::Spanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::V1::Spanner::Client#commit
+#
+def commit
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::V1::Spanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::V1::CommitRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::V1::CommitRequest.new
 
-# Call the commit method.
-result = client.commit request
+  # Call the commit method.
+  result = client.commit request
 
-# The returned object is of type Google::Cloud::Spanner::V1::CommitResponse.
-p result
+  # The returned object is of type Google::Cloud::Spanner::V1::CommitResponse.
+  p result
+end
 # [END spanner_v1_generated_Spanner_Commit_sync]

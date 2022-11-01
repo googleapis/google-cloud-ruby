@@ -19,15 +19,21 @@
 # [START orgpolicy_v2_generated_OrgPolicy_CreatePolicy_sync]
 require "google/cloud/org_policy/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OrgPolicy::V2::OrgPolicy::Client#create_policy
+#
+def create_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OrgPolicy::V2::OrgPolicy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OrgPolicy::V2::CreatePolicyRequest.new
 
-# Call the create_policy method.
-result = client.create_policy request
+  # Call the create_policy method.
+  result = client.create_policy request
 
-# The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
-p result
+  # The returned object is of type Google::Cloud::OrgPolicy::V2::Policy.
+  p result
+end
 # [END orgpolicy_v2_generated_OrgPolicy_CreatePolicy_sync]

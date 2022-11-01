@@ -19,15 +19,21 @@
 # [START vision_v1_generated_ProductSearch_DeleteReferenceImage_sync]
 require "google/cloud/vision/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1::ProductSearch::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1::ProductSearch::Client#delete_reference_image
+#
+def delete_reference_image
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1::ProductSearch::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1::DeleteReferenceImageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1::DeleteReferenceImageRequest.new
 
-# Call the delete_reference_image method.
-result = client.delete_reference_image request
+  # Call the delete_reference_image method.
+  result = client.delete_reference_image request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END vision_v1_generated_ProductSearch_DeleteReferenceImage_sync]

@@ -19,15 +19,21 @@
 # [START bigqueryreservation_v1_generated_ReservationService_CreateReservation_sync]
 require "google/cloud/bigquery/reservation/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#create_reservation
+#
+def create_reservation
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Reservation::V1::CreateReservationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Reservation::V1::CreateReservationRequest.new
 
-# Call the create_reservation method.
-result = client.create_reservation request
+  # Call the create_reservation method.
+  result = client.create_reservation request
 
-# The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Reservation.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Reservation::V1::Reservation.
+  p result
+end
 # [END bigqueryreservation_v1_generated_ReservationService_CreateReservation_sync]

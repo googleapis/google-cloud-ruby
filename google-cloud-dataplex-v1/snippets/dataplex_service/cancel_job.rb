@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_DataplexService_CancelJob_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::DataplexService::Client#cancel_job
+#
+def cancel_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::DataplexService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::CancelJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::CancelJobRequest.new
 
-# Call the cancel_job method.
-result = client.cancel_job request
+  # Call the cancel_job method.
+  result = client.cancel_job request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dataplex_v1_generated_DataplexService_CancelJob_sync]

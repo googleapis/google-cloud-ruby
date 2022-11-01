@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Participants_SuggestSmartReplies_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Participants::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Participants::Client#suggest_smart_replies
+#
+def suggest_smart_replies
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Participants::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::SuggestSmartRepliesRequest.new
 
-# Call the suggest_smart_replies method.
-result = client.suggest_smart_replies request
+  # Call the suggest_smart_replies method.
+  result = client.suggest_smart_replies request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::SuggestSmartRepliesResponse.
+  p result
+end
 # [END dialogflow_v2_generated_Participants_SuggestSmartReplies_sync]

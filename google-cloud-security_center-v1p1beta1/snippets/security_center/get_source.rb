@@ -19,15 +19,21 @@
 # [START securitycenter_v1p1beta1_generated_SecurityCenter_GetSource_sync]
 require "google/cloud/security_center/v1p1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client#get_source
+#
+def get_source
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::SecurityCenter::V1p1beta1::SecurityCenter::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::SecurityCenter::V1p1beta1::GetSourceRequest.new
 
-# Call the get_source method.
-result = client.get_source request
+  # Call the get_source method.
+  result = client.get_source request
 
-# The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Source.
-p result
+  # The returned object is of type Google::Cloud::SecurityCenter::V1p1beta1::Source.
+  p result
+end
 # [END securitycenter_v1p1beta1_generated_SecurityCenter_GetSource_sync]

@@ -19,15 +19,21 @@
 # [START dialogflow_v3_generated_Experiments_DeleteExperiment_sync]
 require "google/cloud/dialogflow/cx/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::CX::V3::Experiments::Client#delete_experiment
+#
+def delete_experiment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::CX::V3::Experiments::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::CX::V3::DeleteExperimentRequest.new
 
-# Call the delete_experiment method.
-result = client.delete_experiment request
+  # Call the delete_experiment method.
+  result = client.delete_experiment request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dialogflow_v3_generated_Experiments_DeleteExperiment_sync]

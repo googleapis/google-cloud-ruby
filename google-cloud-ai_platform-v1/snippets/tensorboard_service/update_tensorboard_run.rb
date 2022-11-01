@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_TensorboardService_UpdateTensorboardRun_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#update_tensorboard_run
+#
+def update_tensorboard_run
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::UpdateTensorboardRunRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::UpdateTensorboardRunRequest.new
 
-# Call the update_tensorboard_run method.
-result = client.update_tensorboard_run request
+  # Call the update_tensorboard_run method.
+  result = client.update_tensorboard_run request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardRun.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardRun.
+  p result
+end
 # [END aiplatform_v1_generated_TensorboardService_UpdateTensorboardRun_sync]

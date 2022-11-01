@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_GameServerConfigsService_GetGameServerConfig_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerConfigsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerConfigsService::Client#get_game_server_config
+#
+def get_game_server_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerConfigsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::GetGameServerConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::GetGameServerConfigRequest.new
 
-# Call the get_game_server_config method.
-result = client.get_game_server_config request
+  # Call the get_game_server_config method.
+  result = client.get_game_server_config request
 
-# The returned object is of type Google::Cloud::Gaming::V1::GameServerConfig.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::GameServerConfig.
+  p result
+end
 # [END gameservices_v1_generated_GameServerConfigsService_GetGameServerConfig_sync]

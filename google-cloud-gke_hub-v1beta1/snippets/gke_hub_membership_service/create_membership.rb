@@ -19,22 +19,28 @@
 # [START gkehub_v1beta1_generated_GkeHubMembershipService_CreateMembership_sync]
 require "google/cloud/gke_hub/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client#create_membership
+#
+def create_membership
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeHub::V1beta1::GkeHubMembershipService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeHub::V1beta1::CreateMembershipRequest.new
 
-# Call the create_membership method.
-result = client.create_membership request
+  # Call the create_membership method.
+  result = client.create_membership request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END gkehub_v1beta1_generated_GkeHubMembershipService_CreateMembership_sync]

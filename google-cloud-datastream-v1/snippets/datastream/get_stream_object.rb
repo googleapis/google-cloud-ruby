@@ -19,15 +19,21 @@
 # [START datastream_v1_generated_Datastream_GetStreamObject_sync]
 require "google/cloud/datastream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastream::V1::Datastream::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastream::V1::Datastream::Client#get_stream_object
+#
+def get_stream_object
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastream::V1::Datastream::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastream::V1::GetStreamObjectRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastream::V1::GetStreamObjectRequest.new
 
-# Call the get_stream_object method.
-result = client.get_stream_object request
+  # Call the get_stream_object method.
+  result = client.get_stream_object request
 
-# The returned object is of type Google::Cloud::Datastream::V1::StreamObject.
-p result
+  # The returned object is of type Google::Cloud::Datastream::V1::StreamObject.
+  p result
+end
 # [END datastream_v1_generated_Datastream_GetStreamObject_sync]

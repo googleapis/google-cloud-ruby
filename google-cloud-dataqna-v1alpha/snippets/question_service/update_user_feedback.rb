@@ -19,15 +19,21 @@
 # [START dataqna_v1alpha_generated_QuestionService_UpdateUserFeedback_sync]
 require "google/cloud/dataqna/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataQnA::V1alpha::QuestionService::Client#update_user_feedback
+#
+def update_user_feedback
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataQnA::V1alpha::QuestionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataQnA::V1alpha::UpdateUserFeedbackRequest.new
 
-# Call the update_user_feedback method.
-result = client.update_user_feedback request
+  # Call the update_user_feedback method.
+  result = client.update_user_feedback request
 
-# The returned object is of type Google::Cloud::DataQnA::V1alpha::UserFeedback.
-p result
+  # The returned object is of type Google::Cloud::DataQnA::V1alpha::UserFeedback.
+  p result
+end
 # [END dataqna_v1alpha_generated_QuestionService_UpdateUserFeedback_sync]

@@ -19,15 +19,21 @@
 # [START dataflow_v1beta3_generated_Jobs_SnapshotJob_sync]
 require "google/cloud/dataflow/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataflow::V1beta3::Jobs::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Jobs::Client#snapshot_job
+#
+def snapshot_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataflow::V1beta3::Jobs::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataflow::V1beta3::SnapshotJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataflow::V1beta3::SnapshotJobRequest.new
 
-# Call the snapshot_job method.
-result = client.snapshot_job request
+  # Call the snapshot_job method.
+  result = client.snapshot_job request
 
-# The returned object is of type Google::Cloud::Dataflow::V1beta3::Snapshot.
-p result
+  # The returned object is of type Google::Cloud::Dataflow::V1beta3::Snapshot.
+  p result
+end
 # [END dataflow_v1beta3_generated_Jobs_SnapshotJob_sync]

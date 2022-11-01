@@ -19,21 +19,27 @@
 # [START transcoder_v1_generated_TranscoderService_ListJobTemplates_sync]
 require "google/cloud/video/transcoder/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Video::Transcoder::V1::TranscoderService::Client#list_job_templates
+#
+def list_job_templates
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Video::Transcoder::V1::TranscoderService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Video::Transcoder::V1::ListJobTemplatesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Video::Transcoder::V1::ListJobTemplatesRequest.new
 
-# Call the list_job_templates method.
-result = client.list_job_templates request
+  # Call the list_job_templates method.
+  result = client.list_job_templates request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Video::Transcoder::V1::JobTemplate.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Video::Transcoder::V1::JobTemplate.
+    p response
+  end
 end
 # [END transcoder_v1_generated_TranscoderService_ListJobTemplates_sync]

@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Fulfillments_GetFulfillment_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Fulfillments::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Fulfillments::Client#get_fulfillment
+#
+def get_fulfillment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Fulfillments::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetFulfillmentRequest.new
 
-# Call the get_fulfillment method.
-result = client.get_fulfillment request
+  # Call the get_fulfillment method.
+  result = client.get_fulfillment request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::Fulfillment.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::Fulfillment.
+  p result
+end
 # [END dialogflow_v2_generated_Fulfillments_GetFulfillment_sync]

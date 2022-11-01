@@ -19,15 +19,21 @@
 # [START cloudbuild_v1_generated_CloudBuild_GetBuild_sync]
 require "google/cloud/build/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Build::V1::CloudBuild::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Build::V1::CloudBuild::Client#get_build
+#
+def get_build
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Build::V1::CloudBuild::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Build::V1::GetBuildRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Build::V1::GetBuildRequest.new
 
-# Call the get_build method.
-result = client.get_build request
+  # Call the get_build method.
+  result = client.get_build request
 
-# The returned object is of type Google::Cloud::Build::V1::Build.
-p result
+  # The returned object is of type Google::Cloud::Build::V1::Build.
+  p result
+end
 # [END cloudbuild_v1_generated_CloudBuild_GetBuild_sync]

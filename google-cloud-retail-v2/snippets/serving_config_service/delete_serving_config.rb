@@ -19,15 +19,21 @@
 # [START retail_v2_generated_ServingConfigService_DeleteServingConfig_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ServingConfigService::Client#delete_serving_config
+#
+def delete_serving_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ServingConfigService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::DeleteServingConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::DeleteServingConfigRequest.new
 
-# Call the delete_serving_config method.
-result = client.delete_serving_config request
+  # Call the delete_serving_config method.
+  result = client.delete_serving_config request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END retail_v2_generated_ServingConfigService_DeleteServingConfig_sync]

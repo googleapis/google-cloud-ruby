@@ -19,15 +19,21 @@
 # [START privateca_v1beta1_generated_CertificateAuthorityService_FetchCertificateAuthorityCsr_sync]
 require "google/cloud/security/private_ca/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client#fetch_certificate_authority_csr
+#
+def fetch_certificate_authority_csr
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Security::PrivateCA::V1beta1::CertificateAuthorityService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrRequest.new
 
-# Call the fetch_certificate_authority_csr method.
-result = client.fetch_certificate_authority_csr request
+  # Call the fetch_certificate_authority_csr method.
+  result = client.fetch_certificate_authority_csr request
 
-# The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrResponse.
-p result
+  # The returned object is of type Google::Cloud::Security::PrivateCA::V1beta1::FetchCertificateAuthorityCsrResponse.
+  p result
+end
 # [END privateca_v1beta1_generated_CertificateAuthorityService_FetchCertificateAuthorityCsr_sync]

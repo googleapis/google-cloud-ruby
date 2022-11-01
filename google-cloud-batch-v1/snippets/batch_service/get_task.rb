@@ -19,15 +19,21 @@
 # [START batch_v1_generated_BatchService_GetTask_sync]
 require "google/cloud/batch/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Batch::V1::BatchService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Batch::V1::BatchService::Client#get_task
+#
+def get_task
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Batch::V1::BatchService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Batch::V1::GetTaskRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Batch::V1::GetTaskRequest.new
 
-# Call the get_task method.
-result = client.get_task request
+  # Call the get_task method.
+  result = client.get_task request
 
-# The returned object is of type Google::Cloud::Batch::V1::Task.
-p result
+  # The returned object is of type Google::Cloud::Batch::V1::Task.
+  p result
+end
 # [END batch_v1_generated_BatchService_GetTask_sync]

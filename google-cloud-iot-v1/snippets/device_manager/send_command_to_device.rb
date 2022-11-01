@@ -19,15 +19,21 @@
 # [START cloudiot_v1_generated_DeviceManager_SendCommandToDevice_sync]
 require "google/cloud/iot/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iot::V1::DeviceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iot::V1::DeviceManager::Client#send_command_to_device
+#
+def send_command_to_device
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iot::V1::DeviceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iot::V1::SendCommandToDeviceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iot::V1::SendCommandToDeviceRequest.new
 
-# Call the send_command_to_device method.
-result = client.send_command_to_device request
+  # Call the send_command_to_device method.
+  result = client.send_command_to_device request
 
-# The returned object is of type Google::Cloud::Iot::V1::SendCommandToDeviceResponse.
-p result
+  # The returned object is of type Google::Cloud::Iot::V1::SendCommandToDeviceResponse.
+  p result
+end
 # [END cloudiot_v1_generated_DeviceManager_SendCommandToDevice_sync]

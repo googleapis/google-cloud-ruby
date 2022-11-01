@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_KnowledgeBases_GetKnowledgeBase_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::KnowledgeBases::Client#get_knowledge_base
+#
+def get_knowledge_base
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::KnowledgeBases::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetKnowledgeBaseRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetKnowledgeBaseRequest.new
 
-# Call the get_knowledge_base method.
-result = client.get_knowledge_base request
+  # Call the get_knowledge_base method.
+  result = client.get_knowledge_base request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::KnowledgeBase.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::KnowledgeBase.
+  p result
+end
 # [END dialogflow_v2_generated_KnowledgeBases_GetKnowledgeBase_sync]

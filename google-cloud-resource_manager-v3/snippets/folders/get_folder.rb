@@ -19,15 +19,21 @@
 # [START cloudresourcemanager_v3_generated_Folders_GetFolder_sync]
 require "google/cloud/resource_manager/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ResourceManager::V3::Folders::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ResourceManager::V3::Folders::Client#get_folder
+#
+def get_folder
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ResourceManager::V3::Folders::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ResourceManager::V3::GetFolderRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ResourceManager::V3::GetFolderRequest.new
 
-# Call the get_folder method.
-result = client.get_folder request
+  # Call the get_folder method.
+  result = client.get_folder request
 
-# The returned object is of type Google::Cloud::ResourceManager::V3::Folder.
-p result
+  # The returned object is of type Google::Cloud::ResourceManager::V3::Folder.
+  p result
+end
 # [END cloudresourcemanager_v3_generated_Folders_GetFolder_sync]

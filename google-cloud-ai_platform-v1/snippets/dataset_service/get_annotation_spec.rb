@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_DatasetService_GetAnnotationSpec_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::DatasetService::Client#get_annotation_spec
+#
+def get_annotation_spec
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::DatasetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetAnnotationSpecRequest.new
 
-# Call the get_annotation_spec method.
-result = client.get_annotation_spec request
+  # Call the get_annotation_spec method.
+  result = client.get_annotation_spec request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::AnnotationSpec.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::AnnotationSpec.
+  p result
+end
 # [END aiplatform_v1_generated_DatasetService_GetAnnotationSpec_sync]

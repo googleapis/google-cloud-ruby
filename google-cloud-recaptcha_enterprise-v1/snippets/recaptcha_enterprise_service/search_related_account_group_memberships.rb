@@ -19,21 +19,27 @@
 # [START recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_sync]
 require "google/cloud/recaptcha_enterprise/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client#search_related_account_group_memberships
+#
+def search_related_account_group_memberships
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecaptchaEnterprise::V1::RecaptchaEnterpriseService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecaptchaEnterprise::V1::SearchRelatedAccountGroupMembershipsRequest.new
 
-# Call the search_related_account_group_memberships method.
-result = client.search_related_account_group_memberships request
+  # Call the search_related_account_group_memberships method.
+  result = client.search_related_account_group_memberships request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::RecaptchaEnterprise::V1::RelatedAccountGroupMembership.
+    p response
+  end
 end
 # [END recaptchaenterprise_v1_generated_RecaptchaEnterpriseService_SearchRelatedAccountGroupMemberships_sync]

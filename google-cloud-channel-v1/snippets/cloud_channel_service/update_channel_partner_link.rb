@@ -19,15 +19,21 @@
 # [START cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#update_channel_partner_link
+#
+def update_channel_partner_link
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::UpdateChannelPartnerLinkRequest.new
 
-# Call the update_channel_partner_link method.
-result = client.update_channel_partner_link request
+  # Call the update_channel_partner_link method.
+  result = client.update_channel_partner_link request
 
-# The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
-p result
+  # The returned object is of type Google::Cloud::Channel::V1::ChannelPartnerLink.
+  p result
+end
 # [END cloudchannel_v1_generated_CloudChannelService_UpdateChannelPartnerLink_sync]

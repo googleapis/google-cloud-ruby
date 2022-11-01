@@ -19,15 +19,21 @@
 # [START bigqueryreservation_v1_generated_ReservationService_DeleteReservation_sync]
 require "google/cloud/bigquery/reservation/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client#delete_reservation
+#
+def delete_reservation
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Reservation::V1::ReservationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Reservation::V1::DeleteReservationRequest.new
 
-# Call the delete_reservation method.
-result = client.delete_reservation request
+  # Call the delete_reservation method.
+  result = client.delete_reservation request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END bigqueryreservation_v1_generated_ReservationService_DeleteReservation_sync]
