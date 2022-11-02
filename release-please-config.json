@@ -1055,10 +1055,6 @@
       "component": "google-cloud-shell-v1",
       "version_file": "lib/google/cloud/shell/v1/version.rb"
     },
-    "google-cloud-spanner": {
-      "component": "google-cloud-spanner",
-      "version_file": "lib/google/cloud/spanner/version.rb"
-    },
     "google-cloud-spanner-admin-database-v1": {
       "component": "google-cloud-spanner-admin-database-v1",
       "version_file": "lib/google/cloud/spanner/admin/database/v1/version.rb"
