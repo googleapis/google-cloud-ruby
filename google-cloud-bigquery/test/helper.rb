@@ -319,9 +319,7 @@ class MockBigquery < Minitest::Spec
   end
 
   def copy_job_gapi source, target, job_id: "job_9876543210", location: "US"
-    job = Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id, location: location)
-    job.configuration.copy.operation_type = nil
-    job
+    Google::Apis::BigqueryV2::Job.from_json copy_job_json(source, target, job_id, location: location)
   end
 
   def copy_job_json source, target, job_id, location: "US"
