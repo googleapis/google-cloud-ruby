@@ -206,7 +206,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     The location and project in which this service should be created.
+            #     Required. The location and project in which this service should be created.
             #     Format: projects/\\{project}/locations/\\{location}
             #     Only lowercase characters, digits, and hyphens.
             #   @param service [::Google::Cloud::Run::V2::Service, ::Hash]
@@ -384,7 +384,7 @@ module Google
             end
 
             ##
-            # List Services.
+            # Lists Services.
             #
             # @overload list_services(request, options = nil)
             #   Pass arguments to `list_services` via a request object, either of type
@@ -696,7 +696,7 @@ module Google
             end
 
             ##
-            # Get the IAM Access Control policy currently in effect for the given
+            # Gets the IAM Access Control policy currently in effect for the given
             # Cloud Run Service. This result does not include any inherited policies.
             #
             # @overload get_iam_policy(request, options = nil)

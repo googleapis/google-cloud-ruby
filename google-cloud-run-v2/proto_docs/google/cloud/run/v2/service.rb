@@ -24,7 +24,7 @@ module Google
         # Request message for creating a Service.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     The location and project in which this service should be created.
+        #     Required. The location and project in which this service should be created.
         #     Format: projects/\\{project}/locations/\\{location}
         #     Only lowercase characters, digits, and hyphens.
         # @!attribute [rw] service
