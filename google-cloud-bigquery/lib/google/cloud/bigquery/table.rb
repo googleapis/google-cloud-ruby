@@ -155,6 +155,19 @@ module Google
         end
 
         ##
+        # The type of the table like if its a TABLE, VIEW or SNAPSHOT etc.,
+        #
+        # @return [String, nil] Type of the table, or
+        #   `nil` if the object is a reference (see {#reference?}).
+        #
+        # @!group Attributes
+        #
+        def type
+          return nil if reference?
+          @gapi.type
+        end
+
+        ##
         # The Information about base table and snapshot time of the table.
         #
         # @return [Google::Apis::BigqueryV2::SnapshotDefinition, nil] Snapshot definition of table snapshot, or
