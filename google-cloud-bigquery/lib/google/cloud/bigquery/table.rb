@@ -1876,6 +1876,23 @@ module Google
         #   Reference](https://cloud.google.com/bigquery/query-reference#from)
         #   (`project-name:dataset_id.table_id`). This is useful for referencing
         #   tables in other projects and datasets.
+        # @param [String] create Specifies whether the job is allowed to create
+        #   new tables. The default value is `needed`.
+        #
+        #   The following values are supported:
+        #
+        #   * `needed` - Create the table if it does not exist.
+        #   * `never` - The table must already exist. A 'notFound' error is
+        #     raised if the table does not exist.
+        # @param [String] write Specifies how to handle data already present in
+        #   the destination table. The default value is `empty`.
+        #
+        #   The following values are supported:
+        #
+        #   * `truncate` - BigQuery overwrites the table data.
+        #   * `append` - BigQuery appends the data to the table.
+        #   * `empty` - An error will be returned if the destination table
+        #     already contains data.
         #
         # @yield [job] a job configuration object
         # @yieldparam [Google::Cloud::Bigquery::CopyJob::Updater] job a job
