@@ -19,15 +19,21 @@
 # [START analyticshub_v1beta1_generated_AnalyticsHubService_GetListing_sync]
 require "google/cloud/bigquery/data_exchange/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client#get_listing
+#
+def get_listing
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::DataExchange::V1beta1::AnalyticsHubService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::DataExchange::V1beta1::GetListingRequest.new
 
-# Call the get_listing method.
-result = client.get_listing request
+  # Call the get_listing method.
+  result = client.get_listing request
 
-# The returned object is of type Google::Cloud::Bigquery::DataExchange::V1beta1::Listing.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::DataExchange::V1beta1::Listing.
+  p result
+end
 # [END analyticshub_v1beta1_generated_AnalyticsHubService_GetListing_sync]

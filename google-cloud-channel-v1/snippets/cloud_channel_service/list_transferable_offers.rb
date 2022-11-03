@@ -19,21 +19,27 @@
 # [START cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_sync]
 require "google/cloud/channel/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Channel::V1::CloudChannelService::Client#list_transferable_offers
+#
+def list_transferable_offers
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Channel::V1::CloudChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Channel::V1::ListTransferableOffersRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Channel::V1::ListTransferableOffersRequest.new
 
-# Call the list_transferable_offers method.
-result = client.list_transferable_offers request
+  # Call the list_transferable_offers method.
+  result = client.list_transferable_offers request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Channel::V1::TransferableOffer.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Channel::V1::TransferableOffer.
+    p response
+  end
 end
 # [END cloudchannel_v1_generated_CloudChannelService_ListTransferableOffers_sync]

@@ -19,21 +19,27 @@
 # [START workflows_v1_generated_Workflows_ListWorkflows_sync]
 require "google/cloud/workflows/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Workflows::V1::Workflows::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Workflows::V1::Workflows::Client#list_workflows
+#
+def list_workflows
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Workflows::V1::Workflows::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Workflows::V1::ListWorkflowsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Workflows::V1::ListWorkflowsRequest.new
 
-# Call the list_workflows method.
-result = client.list_workflows request
+  # Call the list_workflows method.
+  result = client.list_workflows request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Workflows::V1::Workflow.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Workflows::V1::Workflow.
+    p response
+  end
 end
 # [END workflows_v1_generated_Workflows_ListWorkflows_sync]

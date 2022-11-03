@@ -19,15 +19,21 @@
 # [START retail_v2_generated_UserEventService_CollectUserEvent_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::UserEventService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::UserEventService::Client#collect_user_event
+#
+def collect_user_event
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::UserEventService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::CollectUserEventRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::CollectUserEventRequest.new
 
-# Call the collect_user_event method.
-result = client.collect_user_event request
+  # Call the collect_user_event method.
+  result = client.collect_user_event request
 
-# The returned object is of type Google::Api::HttpBody.
-p result
+  # The returned object is of type Google::Api::HttpBody.
+  p result
+end
 # [END retail_v2_generated_UserEventService_CollectUserEvent_sync]

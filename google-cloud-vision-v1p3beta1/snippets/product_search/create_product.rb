@@ -19,15 +19,21 @@
 # [START vision_v1p3beta1_generated_ProductSearch_CreateProduct_sync]
 require "google/cloud/vision/v1p3beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Vision::V1p3beta1::ProductSearch::Client#create_product
+#
+def create_product
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Vision::V1p3beta1::ProductSearch::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Vision::V1p3beta1::CreateProductRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Vision::V1p3beta1::CreateProductRequest.new
 
-# Call the create_product method.
-result = client.create_product request
+  # Call the create_product method.
+  result = client.create_product request
 
-# The returned object is of type Google::Cloud::Vision::V1p3beta1::Product.
-p result
+  # The returned object is of type Google::Cloud::Vision::V1p3beta1::Product.
+  p result
+end
 # [END vision_v1p3beta1_generated_ProductSearch_CreateProduct_sync]

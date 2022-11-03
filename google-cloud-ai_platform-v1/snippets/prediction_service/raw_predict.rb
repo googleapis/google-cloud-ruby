@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_PredictionService_RawPredict_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::PredictionService::Client#raw_predict
+#
+def raw_predict
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::PredictionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::RawPredictRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::RawPredictRequest.new
 
-# Call the raw_predict method.
-result = client.raw_predict request
+  # Call the raw_predict method.
+  result = client.raw_predict request
 
-# The returned object is of type Google::Api::HttpBody.
-p result
+  # The returned object is of type Google::Api::HttpBody.
+  p result
+end
 # [END aiplatform_v1_generated_PredictionService_RawPredict_sync]

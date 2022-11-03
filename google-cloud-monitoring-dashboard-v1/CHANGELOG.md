@@ -1,5 +1,11 @@
 # Release History
 
+### 0.9.0 (2022-11-01)
+
+#### Features
+
+* Added support for PromQL queries ([#19343](https://github.com/googleapis/google-cloud-ruby/issues/19343)) 
+
 ### 0.8.0 (2022-07-05)
 
 #### Features

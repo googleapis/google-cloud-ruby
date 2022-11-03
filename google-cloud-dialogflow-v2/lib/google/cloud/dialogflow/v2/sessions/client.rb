@@ -322,7 +322,7 @@ module Google
             # If you might use
             # [Agent Assist](https://cloud.google.com/dialogflow/docs/#aa)
             # or other CCAI products now or in the future, consider using
-            # [StreamingAnalyzeContent][google.cloud.dialogflow.v2.Participants.StreamingAnalyzeContent]
+            # {::Google::Cloud::Dialogflow::V2::Participants::Client#streaming_analyze_content StreamingAnalyzeContent}
             # instead of `StreamingDetectIntent`. `StreamingAnalyzeContent` has
             # additional functionality for Agent Assist and other CCAI products.
             #

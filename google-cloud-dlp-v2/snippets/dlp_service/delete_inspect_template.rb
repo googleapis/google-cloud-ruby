@@ -19,15 +19,21 @@
 # [START dlp_v2_generated_DlpService_DeleteInspectTemplate_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#delete_inspect_template
+#
+def delete_inspect_template
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::DeleteInspectTemplateRequest.new
 
-# Call the delete_inspect_template method.
-result = client.delete_inspect_template request
+  # Call the delete_inspect_template method.
+  result = client.delete_inspect_template request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END dlp_v2_generated_DlpService_DeleteInspectTemplate_sync]

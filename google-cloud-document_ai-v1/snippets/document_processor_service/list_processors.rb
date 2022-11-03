@@ -19,21 +19,27 @@
 # [START documentai_v1_generated_DocumentProcessorService_ListProcessors_sync]
 require "google/cloud/document_ai/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#list_processors
+#
+def list_processors
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DocumentAI::V1::ListProcessorsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DocumentAI::V1::ListProcessorsRequest.new
 
-# Call the list_processors method.
-result = client.list_processors request
+  # Call the list_processors method.
+  result = client.list_processors request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::DocumentAI::V1::Processor.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::DocumentAI::V1::Processor.
+    p response
+  end
 end
 # [END documentai_v1_generated_DocumentProcessorService_ListProcessors_sync]

@@ -19,15 +19,21 @@
 # [START containeranalysis_v1_generated_ContainerAnalysis_GetIamPolicy_sync]
 require "google/cloud/container_analysis/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client#get_iam_policy
+#
+def get_iam_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ContainerAnalysis::V1::ContainerAnalysis::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1::GetIamPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1::GetIamPolicyRequest.new
 
-# Call the get_iam_policy method.
-result = client.get_iam_policy request
+  # Call the get_iam_policy method.
+  result = client.get_iam_policy request
 
-# The returned object is of type Google::Iam::V1::Policy.
-p result
+  # The returned object is of type Google::Iam::V1::Policy.
+  p result
+end
 # [END containeranalysis_v1_generated_ContainerAnalysis_GetIamPolicy_sync]

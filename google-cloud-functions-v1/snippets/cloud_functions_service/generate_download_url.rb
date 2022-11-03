@@ -19,15 +19,21 @@
 # [START cloudfunctions_v1_generated_CloudFunctionsService_GenerateDownloadUrl_sync]
 require "google/cloud/functions/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Functions::V1::CloudFunctionsService::Client#generate_download_url
+#
+def generate_download_url
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Functions::V1::GenerateDownloadUrlRequest.new
 
-# Call the generate_download_url method.
-result = client.generate_download_url request
+  # Call the generate_download_url method.
+  result = client.generate_download_url request
 
-# The returned object is of type Google::Cloud::Functions::V1::GenerateDownloadUrlResponse.
-p result
+  # The returned object is of type Google::Cloud::Functions::V1::GenerateDownloadUrlResponse.
+  p result
+end
 # [END cloudfunctions_v1_generated_CloudFunctionsService_GenerateDownloadUrl_sync]

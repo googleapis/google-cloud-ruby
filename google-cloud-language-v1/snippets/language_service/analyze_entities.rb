@@ -19,15 +19,21 @@
 # [START language_v1_generated_LanguageService_AnalyzeEntities_sync]
 require "google/cloud/language/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Language::V1::LanguageService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Language::V1::LanguageService::Client#analyze_entities
+#
+def analyze_entities
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Language::V1::LanguageService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Language::V1::AnalyzeEntitiesRequest.new
 
-# Call the analyze_entities method.
-result = client.analyze_entities request
+  # Call the analyze_entities method.
+  result = client.analyze_entities request
 
-# The returned object is of type Google::Cloud::Language::V1::AnalyzeEntitiesResponse.
-p result
+  # The returned object is of type Google::Cloud::Language::V1::AnalyzeEntitiesResponse.
+  p result
+end
 # [END language_v1_generated_LanguageService_AnalyzeEntities_sync]

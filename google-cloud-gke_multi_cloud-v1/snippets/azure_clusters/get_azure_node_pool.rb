@@ -19,15 +19,21 @@
 # [START gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_sync]
 require "google/cloud/gke_multi_cloud/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client#get_azure_node_pool
+#
+def get_azure_node_pool
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeMultiCloud::V1::AzureClusters::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeMultiCloud::V1::GetAzureNodePoolRequest.new
 
-# Call the get_azure_node_pool method.
-result = client.get_azure_node_pool request
+  # Call the get_azure_node_pool method.
+  result = client.get_azure_node_pool request
 
-# The returned object is of type Google::Cloud::GkeMultiCloud::V1::AzureNodePool.
-p result
+  # The returned object is of type Google::Cloud::GkeMultiCloud::V1::AzureNodePool.
+  p result
+end
 # [END gkemulticloud_v1_generated_AzureClusters_GetAzureNodePool_sync]

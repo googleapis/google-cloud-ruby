@@ -19,15 +19,21 @@
 # [START binaryauthorization_v1beta1_generated_SystemPolicy_GetSystemPolicy_sync]
 require "google/cloud/binary_authorization/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client#get_system_policy
+#
+def get_system_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BinaryAuthorization::V1beta1::SystemPolicy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BinaryAuthorization::V1beta1::GetSystemPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BinaryAuthorization::V1beta1::GetSystemPolicyRequest.new
 
-# Call the get_system_policy method.
-result = client.get_system_policy request
+  # Call the get_system_policy method.
+  result = client.get_system_policy request
 
-# The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Policy.
-p result
+  # The returned object is of type Google::Cloud::BinaryAuthorization::V1beta1::Policy.
+  p result
+end
 # [END binaryauthorization_v1beta1_generated_SystemPolicy_GetSystemPolicy_sync]

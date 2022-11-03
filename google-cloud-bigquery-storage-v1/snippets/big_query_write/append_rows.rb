@@ -19,24 +19,30 @@
 # [START bigquerystorage_v1_generated_BigQueryWrite_AppendRows_sync]
 require "google/cloud/bigquery/storage/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client#append_rows
+#
+def append_rows
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Storage::V1::BigQueryWrite::Client.new
 
-# Create an input stream
-input = Gapic::StreamInput.new
+  # Create an input stream
+  input = Gapic::StreamInput.new
 
-# Call the append_rows method to start streaming.
-output = client.append_rows input
+  # Call the append_rows method to start streaming.
+  output = client.append_rows input
 
-# Send requests on the stream. For each request, pass in keyword
-# arguments to set fields. Be sure to close the stream when done.
-input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
-input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
-input.close
+  # Send requests on the stream. For each request, pass in keyword
+  # arguments to set fields. Be sure to close the stream when done.
+  input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
+  input << Google::Cloud::Bigquery::Storage::V1::AppendRowsRequest.new
+  input.close
 
-# Handle streamed responses. These may be interleaved with inputs.
-# Each response is of type ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse.
-output.each do |response|
-  p response
+  # Handle streamed responses. These may be interleaved with inputs.
+  # Each response is of type ::Google::Cloud::Bigquery::Storage::V1::AppendRowsResponse.
+  output.each do |response|
+    p response
+  end
 end
 # [END bigquerystorage_v1_generated_BigQueryWrite_AppendRows_sync]

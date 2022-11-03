@@ -19,15 +19,21 @@
 # [START servicedirectory_v1_generated_RegistrationService_UpdateEndpoint_sync]
 require "google/cloud/service_directory/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1::RegistrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1::RegistrationService::Client#update_endpoint
+#
+def update_endpoint
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1::RegistrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1::UpdateEndpointRequest.new
 
-# Call the update_endpoint method.
-result = client.update_endpoint request
+  # Call the update_endpoint method.
+  result = client.update_endpoint request
 
-# The returned object is of type Google::Cloud::ServiceDirectory::V1::Endpoint.
-p result
+  # The returned object is of type Google::Cloud::ServiceDirectory::V1::Endpoint.
+  p result
+end
 # [END servicedirectory_v1_generated_RegistrationService_UpdateEndpoint_sync]

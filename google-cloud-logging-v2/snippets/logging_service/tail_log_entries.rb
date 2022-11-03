@@ -19,24 +19,30 @@
 # [START logging_v2_generated_LoggingService_TailLogEntries_sync]
 require "google/cloud/logging/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Logging::V2::LoggingService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Logging::V2::LoggingService::Client#tail_log_entries
+#
+def tail_log_entries
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Logging::V2::LoggingService::Client.new
 
-# Create an input stream
-input = Gapic::StreamInput.new
+  # Create an input stream
+  input = Gapic::StreamInput.new
 
-# Call the tail_log_entries method to start streaming.
-output = client.tail_log_entries input
+  # Call the tail_log_entries method to start streaming.
+  output = client.tail_log_entries input
 
-# Send requests on the stream. For each request, pass in keyword
-# arguments to set fields. Be sure to close the stream when done.
-input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
-input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
-input.close
+  # Send requests on the stream. For each request, pass in keyword
+  # arguments to set fields. Be sure to close the stream when done.
+  input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
+  input << Google::Cloud::Logging::V2::TailLogEntriesRequest.new
+  input.close
 
-# Handle streamed responses. These may be interleaved with inputs.
-# Each response is of type ::Google::Cloud::Logging::V2::TailLogEntriesResponse.
-output.each do |response|
-  p response
+  # Handle streamed responses. These may be interleaved with inputs.
+  # Each response is of type ::Google::Cloud::Logging::V2::TailLogEntriesResponse.
+  output.each do |response|
+    p response
+  end
 end
 # [END logging_v2_generated_LoggingService_TailLogEntries_sync]

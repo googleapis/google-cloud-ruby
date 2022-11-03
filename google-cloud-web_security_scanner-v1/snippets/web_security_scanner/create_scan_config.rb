@@ -19,15 +19,21 @@
 # [START websecurityscanner_v1_generated_WebSecurityScanner_CreateScanConfig_sync]
 require "google/cloud/web_security_scanner/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client#create_scan_config
+#
+def create_scan_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::WebSecurityScanner::V1::WebSecurityScanner::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::WebSecurityScanner::V1::CreateScanConfigRequest.new
 
-# Call the create_scan_config method.
-result = client.create_scan_config request
+  # Call the create_scan_config method.
+  result = client.create_scan_config request
 
-# The returned object is of type Google::Cloud::WebSecurityScanner::V1::ScanConfig.
-p result
+  # The returned object is of type Google::Cloud::WebSecurityScanner::V1::ScanConfig.
+  p result
+end
 # [END websecurityscanner_v1_generated_WebSecurityScanner_CreateScanConfig_sync]

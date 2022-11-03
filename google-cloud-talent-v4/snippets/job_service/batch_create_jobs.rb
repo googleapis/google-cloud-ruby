@@ -19,22 +19,28 @@
 # [START jobs_v4_generated_JobService_BatchCreateJobs_sync]
 require "google/cloud/talent/v4"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Talent::V4::JobService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Talent::V4::JobService::Client#batch_create_jobs
+#
+def batch_create_jobs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Talent::V4::JobService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Talent::V4::BatchCreateJobsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Talent::V4::BatchCreateJobsRequest.new
 
-# Call the batch_create_jobs method.
-result = client.batch_create_jobs request
+  # Call the batch_create_jobs method.
+  result = client.batch_create_jobs request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END jobs_v4_generated_JobService_BatchCreateJobs_sync]

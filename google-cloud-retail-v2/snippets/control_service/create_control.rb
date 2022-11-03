@@ -19,15 +19,21 @@
 # [START retail_v2_generated_ControlService_CreateControl_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::ControlService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::ControlService::Client#create_control
+#
+def create_control
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::ControlService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::CreateControlRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::CreateControlRequest.new
 
-# Call the create_control method.
-result = client.create_control request
+  # Call the create_control method.
+  result = client.create_control request
 
-# The returned object is of type Google::Cloud::Retail::V2::Control.
-p result
+  # The returned object is of type Google::Cloud::Retail::V2::Control.
+  p result
+end
 # [END retail_v2_generated_ControlService_CreateControl_sync]

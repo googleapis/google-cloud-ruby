@@ -19,21 +19,27 @@
 # [START appengine_v1_generated_DomainMappings_ListDomainMappings_sync]
 require "google/cloud/app_engine/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AppEngine::V1::DomainMappings::Client#list_domain_mappings
+#
+def list_domain_mappings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AppEngine::V1::DomainMappings::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AppEngine::V1::ListDomainMappingsRequest.new
 
-# Call the list_domain_mappings method.
-result = client.list_domain_mappings request
+  # Call the list_domain_mappings method.
+  result = client.list_domain_mappings request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AppEngine::V1::DomainMapping.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AppEngine::V1::DomainMapping.
+    p response
+  end
 end
 # [END appengine_v1_generated_DomainMappings_ListDomainMappings_sync]

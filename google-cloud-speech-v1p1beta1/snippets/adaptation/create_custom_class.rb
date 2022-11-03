@@ -19,15 +19,21 @@
 # [START speech_v1p1beta1_generated_Adaptation_CreateCustomClass_sync]
 require "google/cloud/speech/v1p1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Speech::V1p1beta1::Adaptation::Client#create_custom_class
+#
+def create_custom_class
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Speech::V1p1beta1::Adaptation::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Speech::V1p1beta1::CreateCustomClassRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Speech::V1p1beta1::CreateCustomClassRequest.new
 
-# Call the create_custom_class method.
-result = client.create_custom_class request
+  # Call the create_custom_class method.
+  result = client.create_custom_class request
 
-# The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
-p result
+  # The returned object is of type Google::Cloud::Speech::V1p1beta1::CustomClass.
+  p result
+end
 # [END speech_v1p1beta1_generated_Adaptation_CreateCustomClass_sync]

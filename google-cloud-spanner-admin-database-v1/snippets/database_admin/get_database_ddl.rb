@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_DatabaseAdmin_GetDatabaseDdl_sync]
 require "google/cloud/spanner/admin/database/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#get_database_ddl
+#
+def get_database_ddl
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlRequest.new
 
-# Call the get_database_ddl method.
-result = client.get_database_ddl request
+  # Call the get_database_ddl method.
+  result = client.get_database_ddl request
 
-# The returned object is of type Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.
-p result
+  # The returned object is of type Google::Cloud::Spanner::Admin::Database::V1::GetDatabaseDdlResponse.
+  p result
+end
 # [END spanner_v1_generated_DatabaseAdmin_GetDatabaseDdl_sync]

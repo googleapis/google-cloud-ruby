@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDataStream_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_data_stream
+#
+def create_data_stream
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::CreateDataStreamRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::CreateDataStreamRequest.new
 
-# Call the create_data_stream method.
-result = client.create_data_stream request
+  # Call the create_data_stream method.
+  result = client.create_data_stream request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::DataStream.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::DataStream.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateDataStream_sync]

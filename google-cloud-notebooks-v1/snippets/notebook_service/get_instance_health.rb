@@ -19,15 +19,21 @@
 # [START notebooks_v1_generated_NotebookService_GetInstanceHealth_sync]
 require "google/cloud/notebooks/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Notebooks::V1::NotebookService::Client#get_instance_health
+#
+def get_instance_health
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Notebooks::V1::NotebookService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Notebooks::V1::GetInstanceHealthRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Notebooks::V1::GetInstanceHealthRequest.new
 
-# Call the get_instance_health method.
-result = client.get_instance_health request
+  # Call the get_instance_health method.
+  result = client.get_instance_health request
 
-# The returned object is of type Google::Cloud::Notebooks::V1::GetInstanceHealthResponse.
-p result
+  # The returned object is of type Google::Cloud::Notebooks::V1::GetInstanceHealthResponse.
+  p result
+end
 # [END notebooks_v1_generated_NotebookService_GetInstanceHealth_sync]

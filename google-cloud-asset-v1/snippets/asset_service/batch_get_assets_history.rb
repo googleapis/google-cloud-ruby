@@ -19,15 +19,21 @@
 # [START cloudasset_v1_generated_AssetService_BatchGetAssetsHistory_sync]
 require "google/cloud/asset/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Asset::V1::AssetService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Asset::V1::AssetService::Client#batch_get_assets_history
+#
+def batch_get_assets_history
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Asset::V1::AssetService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Asset::V1::BatchGetAssetsHistoryRequest.new
 
-# Call the batch_get_assets_history method.
-result = client.batch_get_assets_history request
+  # Call the batch_get_assets_history method.
+  result = client.batch_get_assets_history request
 
-# The returned object is of type Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse.
-p result
+  # The returned object is of type Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse.
+  p result
+end
 # [END cloudasset_v1_generated_AssetService_BatchGetAssetsHistory_sync]

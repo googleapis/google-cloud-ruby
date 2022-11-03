@@ -19,15 +19,21 @@
 # [START apigateway_v1_generated_ApiGatewayService_GetGateway_sync]
 require "google/cloud/api_gateway/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ApiGateway::V1::ApiGatewayService::Client#get_gateway
+#
+def get_gateway
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ApiGateway::V1::ApiGatewayService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ApiGateway::V1::GetGatewayRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ApiGateway::V1::GetGatewayRequest.new
 
-# Call the get_gateway method.
-result = client.get_gateway request
+  # Call the get_gateway method.
+  result = client.get_gateway request
 
-# The returned object is of type Google::Cloud::ApiGateway::V1::Gateway.
-p result
+  # The returned object is of type Google::Cloud::ApiGateway::V1::Gateway.
+  p result
+end
 # [END apigateway_v1_generated_ApiGatewayService_GetGateway_sync]

@@ -19,15 +19,21 @@
 # [START datacatalog_v1_generated_DataCatalog_CreateTagTemplate_sync]
 require "google/cloud/data_catalog/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::DataCatalog::V1::DataCatalog::Client#create_tag_template
+#
+def create_tag_template
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::DataCatalog::V1::DataCatalog::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::DataCatalog::V1::CreateTagTemplateRequest.new
 
-# Call the create_tag_template method.
-result = client.create_tag_template request
+  # Call the create_tag_template method.
+  result = client.create_tag_template request
 
-# The returned object is of type Google::Cloud::DataCatalog::V1::TagTemplate.
-p result
+  # The returned object is of type Google::Cloud::DataCatalog::V1::TagTemplate.
+  p result
+end
 # [END datacatalog_v1_generated_DataCatalog_CreateTagTemplate_sync]

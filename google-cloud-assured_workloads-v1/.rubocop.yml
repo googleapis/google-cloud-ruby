@@ -25,6 +25,9 @@ Metrics/ModuleLength:
   Enabled: false
 Metrics/PerceivedComplexity:
   Enabled: false
+Naming/AccessorMethodName:
+  Exclude:
+    - "snippets/**/*.rb"
 Naming/FileName:
   Exclude:
     - "lib/google-cloud-assured_workloads-v1.rb"

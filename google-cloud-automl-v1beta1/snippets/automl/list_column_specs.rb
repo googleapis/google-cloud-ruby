@@ -19,21 +19,27 @@
 # [START automl_v1beta1_generated_AutoML_ListColumnSpecs_sync]
 require "google/cloud/automl/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#list_column_specs
+#
+def list_column_specs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1beta1::ListColumnSpecsRequest.new
 
-# Call the list_column_specs method.
-result = client.list_column_specs request
+  # Call the list_column_specs method.
+  result = client.list_column_specs request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::AutoML::V1beta1::ColumnSpec.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::AutoML::V1beta1::ColumnSpec.
+    p response
+  end
 end
 # [END automl_v1beta1_generated_AutoML_ListColumnSpecs_sync]

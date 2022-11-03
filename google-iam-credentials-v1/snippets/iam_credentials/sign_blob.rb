@@ -19,15 +19,21 @@
 # [START iamcredentials_v1_generated_IAMCredentials_SignBlob_sync]
 require "google/iam/credentials/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Iam::Credentials::V1::IAMCredentials::Client#sign_blob
+#
+def sign_blob
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Iam::Credentials::V1::IAMCredentials::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::Credentials::V1::SignBlobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::Credentials::V1::SignBlobRequest.new
 
-# Call the sign_blob method.
-result = client.sign_blob request
+  # Call the sign_blob method.
+  result = client.sign_blob request
 
-# The returned object is of type Google::Iam::Credentials::V1::SignBlobResponse.
-p result
+  # The returned object is of type Google::Iam::Credentials::V1::SignBlobResponse.
+  p result
+end
 # [END iamcredentials_v1_generated_IAMCredentials_SignBlob_sync]

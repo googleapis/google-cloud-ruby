@@ -19,15 +19,21 @@
 # [START datastream_v1_generated_Datastream_GetRoute_sync]
 require "google/cloud/datastream/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Datastream::V1::Datastream::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Datastream::V1::Datastream::Client#get_route
+#
+def get_route
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Datastream::V1::Datastream::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Datastream::V1::GetRouteRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Datastream::V1::GetRouteRequest.new
 
-# Call the get_route method.
-result = client.get_route request
+  # Call the get_route method.
+  result = client.get_route request
 
-# The returned object is of type Google::Cloud::Datastream::V1::Route.
-p result
+  # The returned object is of type Google::Cloud::Datastream::V1::Route.
+  p result
+end
 # [END datastream_v1_generated_Datastream_GetRoute_sync]

@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_Environments_CreateEnvironment_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::Environments::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::Environments::Client#create_environment
+#
+def create_environment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::Environments::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::CreateEnvironmentRequest.new
 
-# Call the create_environment method.
-result = client.create_environment request
+  # Call the create_environment method.
+  result = client.create_environment request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::Environment.
+  p result
+end
 # [END dialogflow_v2_generated_Environments_CreateEnvironment_sync]

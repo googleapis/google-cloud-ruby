@@ -19,15 +19,21 @@
 # [START gameservices_v1_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_sync]
 require "google/cloud/gaming/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client#preview_game_server_deployment_rollout
+#
+def preview_game_server_deployment_rollout
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Gaming::V1::GameServerDeploymentsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutRequest.new
 
-# Call the preview_game_server_deployment_rollout method.
-result = client.preview_game_server_deployment_rollout request
+  # Call the preview_game_server_deployment_rollout method.
+  result = client.preview_game_server_deployment_rollout request
 
-# The returned object is of type Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutResponse.
-p result
+  # The returned object is of type Google::Cloud::Gaming::V1::PreviewGameServerDeploymentRolloutResponse.
+  p result
+end
 # [END gameservices_v1_generated_GameServerDeploymentsService_PreviewGameServerDeploymentRollout_sync]

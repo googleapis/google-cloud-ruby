@@ -19,15 +19,21 @@
 # [START iap_v1_generated_IdentityAwareProxyOAuthService_GetBrand_sync]
 require "google/cloud/iap/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client#get_brand
+#
+def get_brand
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Iap::V1::IdentityAwareProxyOAuthService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Iap::V1::GetBrandRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Iap::V1::GetBrandRequest.new
 
-# Call the get_brand method.
-result = client.get_brand request
+  # Call the get_brand method.
+  result = client.get_brand request
 
-# The returned object is of type Google::Cloud::Iap::V1::Brand.
-p result
+  # The returned object is of type Google::Cloud::Iap::V1::Brand.
+  p result
+end
 # [END iap_v1_generated_IdentityAwareProxyOAuthService_GetBrand_sync]

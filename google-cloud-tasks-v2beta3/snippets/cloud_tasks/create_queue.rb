@@ -19,15 +19,21 @@
 # [START cloudtasks_v2beta3_generated_CloudTasks_CreateQueue_sync]
 require "google/cloud/tasks/v2beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta3::CloudTasks::Client#create_queue
+#
+def create_queue
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2beta3::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2beta3::CreateQueueRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2beta3::CreateQueueRequest.new
 
-# Call the create_queue method.
-result = client.create_queue request
+  # Call the create_queue method.
+  result = client.create_queue request
 
-# The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
-p result
+  # The returned object is of type Google::Cloud::Tasks::V2beta3::Queue.
+  p result
+end
 # [END cloudtasks_v2beta3_generated_CloudTasks_CreateQueue_sync]

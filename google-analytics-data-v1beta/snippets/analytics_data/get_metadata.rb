@@ -19,15 +19,21 @@
 # [START analyticsdata_v1beta_generated_AnalyticsData_GetMetadata_sync]
 require "google/analytics/data/v1beta"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Data::V1beta::AnalyticsData::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Data::V1beta::AnalyticsData::Client#get_metadata
+#
+def get_metadata
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Data::V1beta::AnalyticsData::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Data::V1beta::GetMetadataRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Data::V1beta::GetMetadataRequest.new
 
-# Call the get_metadata method.
-result = client.get_metadata request
+  # Call the get_metadata method.
+  result = client.get_metadata request
 
-# The returned object is of type Google::Analytics::Data::V1beta::Metadata.
-p result
+  # The returned object is of type Google::Analytics::Data::V1beta::Metadata.
+  p result
+end
 # [END analyticsdata_v1beta_generated_AnalyticsData_GetMetadata_sync]

@@ -19,21 +19,27 @@
 # [START dataproc_v1_generated_WorkflowTemplateService_ListWorkflowTemplates_sync]
 require "google/cloud/dataproc/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client#list_workflow_templates
+#
+def list_workflow_templates
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataproc::V1::WorkflowTemplateService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataproc::V1::ListWorkflowTemplatesRequest.new
 
-# Call the list_workflow_templates method.
-result = client.list_workflow_templates request
+  # Call the list_workflow_templates method.
+  result = client.list_workflow_templates request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::Dataproc::V1::WorkflowTemplate.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::Dataproc::V1::WorkflowTemplate.
+    p response
+  end
 end
 # [END dataproc_v1_generated_WorkflowTemplateService_ListWorkflowTemplates_sync]

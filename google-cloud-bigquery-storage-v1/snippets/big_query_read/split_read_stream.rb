@@ -19,15 +19,21 @@
 # [START bigquerystorage_v1_generated_BigQueryRead_SplitReadStream_sync]
 require "google/cloud/bigquery/storage/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client#split_read_stream
+#
+def split_read_stream
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Storage::V1::BigQueryRead::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Storage::V1::SplitReadStreamRequest.new
 
-# Call the split_read_stream method.
-result = client.split_read_stream request
+  # Call the split_read_stream method.
+  result = client.split_read_stream request
 
-# The returned object is of type Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse.
-p result
+  # The returned object is of type Google::Cloud::Bigquery::Storage::V1::SplitReadStreamResponse.
+  p result
+end
 # [END bigquerystorage_v1_generated_BigQueryRead_SplitReadStream_sync]

@@ -19,15 +19,21 @@
 # [START cloudfunctions_v2_generated_FunctionService_GenerateUploadUrl_sync]
 require "google/cloud/functions/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Functions::V2::FunctionService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Functions::V2::FunctionService::Client#generate_upload_url
+#
+def generate_upload_url
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Functions::V2::FunctionService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Functions::V2::GenerateUploadUrlRequest.new
 
-# Call the generate_upload_url method.
-result = client.generate_upload_url request
+  # Call the generate_upload_url method.
+  result = client.generate_upload_url request
 
-# The returned object is of type Google::Cloud::Functions::V2::GenerateUploadUrlResponse.
-p result
+  # The returned object is of type Google::Cloud::Functions::V2::GenerateUploadUrlResponse.
+  p result
+end
 # [END cloudfunctions_v2_generated_FunctionService_GenerateUploadUrl_sync]

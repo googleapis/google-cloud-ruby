@@ -19,21 +19,27 @@
 # [START certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_sync]
 require "google/cloud/certificate_manager/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CertificateManager::V1::CertificateManager::Client#list_certificate_maps
+#
+def list_certificate_maps
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CertificateManager::V1::CertificateManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CertificateManager::V1::ListCertificateMapsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CertificateManager::V1::ListCertificateMapsRequest.new
 
-# Call the list_certificate_maps method.
-result = client.list_certificate_maps request
+  # Call the list_certificate_maps method.
+  result = client.list_certificate_maps request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMap.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::CertificateManager::V1::CertificateMap.
+    p response
+  end
 end
 # [END certificatemanager_v1_generated_CertificateManager_ListCertificateMaps_sync]

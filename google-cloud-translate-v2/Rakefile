@@ -158,7 +158,6 @@ desc "Start an interactive shell."
 task :console do
   require "irb"
   require "irb/completion"
-  require "pp"
 
   $LOAD_PATH.unshift "lib"
 

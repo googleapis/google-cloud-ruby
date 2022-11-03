@@ -19,15 +19,21 @@
 # [START accessapproval_v1_generated_AccessApproval_DeleteAccessApprovalSettings_sync]
 require "google/cloud/access_approval/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AccessApproval::V1::AccessApproval::Client#delete_access_approval_settings
+#
+def delete_access_approval_settings
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AccessApproval::V1::DeleteAccessApprovalSettingsMessage.new
 
-# Call the delete_access_approval_settings method.
-result = client.delete_access_approval_settings request
+  # Call the delete_access_approval_settings method.
+  result = client.delete_access_approval_settings request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END accessapproval_v1_generated_AccessApproval_DeleteAccessApprovalSettings_sync]

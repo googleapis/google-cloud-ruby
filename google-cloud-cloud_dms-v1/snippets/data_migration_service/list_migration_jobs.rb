@@ -19,21 +19,27 @@
 # [START datamigration_v1_generated_DataMigrationService_ListMigrationJobs_sync]
 require "google/cloud/cloud_dms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CloudDMS::V1::DataMigrationService::Client#list_migration_jobs
+#
+def list_migration_jobs
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CloudDMS::V1::ListMigrationJobsRequest.new
 
-# Call the list_migration_jobs method.
-result = client.list_migration_jobs request
+  # Call the list_migration_jobs method.
+  result = client.list_migration_jobs request
 
-# The returned object is of type Gapic::PagedEnumerable. You can
-# iterate over all elements by calling #each, and the enumerable
-# will lazily make API calls to fetch subsequent pages. Other
-# methods are also available for managing paging directly.
-result.each do |response|
-  # Each element is of type ::Google::Cloud::CloudDMS::V1::MigrationJob.
-  p response
+  # The returned object is of type Gapic::PagedEnumerable. You can
+  # iterate over all elements by calling #each, and the enumerable
+  # will lazily make API calls to fetch subsequent pages. Other
+  # methods are also available for managing paging directly.
+  result.each do |response|
+    # Each element is of type ::Google::Cloud::CloudDMS::V1::MigrationJob.
+    p response
+  end
 end
 # [END datamigration_v1_generated_DataMigrationService_ListMigrationJobs_sync]

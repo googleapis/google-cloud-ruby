@@ -19,15 +19,21 @@
 # [START dataplex_v1_generated_ContentService_CreateContent_sync]
 require "google/cloud/dataplex/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataplex::V1::ContentService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataplex::V1::ContentService::Client#create_content
+#
+def create_content
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataplex::V1::ContentService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataplex::V1::CreateContentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataplex::V1::CreateContentRequest.new
 
-# Call the create_content method.
-result = client.create_content request
+  # Call the create_content method.
+  result = client.create_content request
 
-# The returned object is of type Google::Cloud::Dataplex::V1::Content.
-p result
+  # The returned object is of type Google::Cloud::Dataplex::V1::Content.
+  p result
+end
 # [END dataplex_v1_generated_ContentService_CreateContent_sync]

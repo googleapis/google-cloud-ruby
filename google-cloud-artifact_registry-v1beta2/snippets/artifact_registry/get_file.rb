@@ -19,15 +19,21 @@
 # [START artifactregistry_v1beta2_generated_ArtifactRegistry_GetFile_sync]
 require "google/cloud/artifact_registry/v1beta2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client#get_file
+#
+def get_file
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ArtifactRegistry::V1beta2::ArtifactRegistry::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ArtifactRegistry::V1beta2::GetFileRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ArtifactRegistry::V1beta2::GetFileRequest.new
 
-# Call the get_file method.
-result = client.get_file request
+  # Call the get_file method.
+  result = client.get_file request
 
-# The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::File.
-p result
+  # The returned object is of type Google::Cloud::ArtifactRegistry::V1beta2::File.
+  p result
+end
 # [END artifactregistry_v1beta2_generated_ArtifactRegistry_GetFile_sync]

@@ -19,15 +19,21 @@
 # [START servicedirectory_v1beta1_generated_LookupService_ResolveService_sync]
 require "google/cloud/service_directory/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client#resolve_service
+#
+def resolve_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1beta1::LookupService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceRequest.new
 
-# Call the resolve_service method.
-result = client.resolve_service request
+  # Call the resolve_service method.
+  result = client.resolve_service request
 
-# The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse.
-p result
+  # The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::ResolveServiceResponse.
+  p result
+end
 # [END servicedirectory_v1beta1_generated_LookupService_ResolveService_sync]

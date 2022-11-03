@@ -1,5 +1,12 @@
 # Release History
 
+### 0.14.0 (2022-10-21)
+
+#### Features
+
+* Provide easier access to IAM functionality via the standard IAMPolicy mixin client 
+* Support Locations functionality using the Locations mixin client 
+
 ### 0.13.0 (2022-07-02)
 
 #### Features

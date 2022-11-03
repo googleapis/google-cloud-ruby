@@ -19,15 +19,21 @@
 # [START analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateFirebaseLink_sync]
 require "google/analytics/admin/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client#create_firebase_link
+#
+def create_firebase_link
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Analytics::Admin::V1alpha::AnalyticsAdminService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Analytics::Admin::V1alpha::CreateFirebaseLinkRequest.new
 
-# Call the create_firebase_link method.
-result = client.create_firebase_link request
+  # Call the create_firebase_link method.
+  result = client.create_firebase_link request
 
-# The returned object is of type Google::Analytics::Admin::V1alpha::FirebaseLink.
-p result
+  # The returned object is of type Google::Analytics::Admin::V1alpha::FirebaseLink.
+  p result
+end
 # [END analyticsadmin_v1alpha_generated_AnalyticsAdminService_CreateFirebaseLink_sync]

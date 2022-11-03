@@ -19,15 +19,21 @@
 # [START recommendationengine_v1beta1_generated_CatalogService_GetCatalogItem_sync]
 require "google/cloud/recommendation_engine/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client#get_catalog_item
+#
+def get_catalog_item
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecommendationEngine::V1beta1::CatalogService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecommendationEngine::V1beta1::GetCatalogItemRequest.new
 
-# Call the get_catalog_item method.
-result = client.get_catalog_item request
+  # Call the get_catalog_item method.
+  result = client.get_catalog_item request
 
-# The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::CatalogItem.
-p result
+  # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::CatalogItem.
+  p result
+end
 # [END recommendationengine_v1beta1_generated_CatalogService_GetCatalogItem_sync]

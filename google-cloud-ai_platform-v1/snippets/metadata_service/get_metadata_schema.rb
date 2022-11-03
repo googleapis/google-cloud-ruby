@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_MetadataService_GetMetadataSchema_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::MetadataService::Client#get_metadata_schema
+#
+def get_metadata_schema
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::MetadataService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetMetadataSchemaRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetMetadataSchemaRequest.new
 
-# Call the get_metadata_schema method.
-result = client.get_metadata_schema request
+  # Call the get_metadata_schema method.
+  result = client.get_metadata_schema request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::MetadataSchema.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::MetadataSchema.
+  p result
+end
 # [END aiplatform_v1_generated_MetadataService_GetMetadataSchema_sync]

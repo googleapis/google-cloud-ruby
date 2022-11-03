@@ -19,15 +19,21 @@
 # [START gkebackup_v1_generated_BackupForGKE_GetVolumeBackup_sync]
 require "google/cloud/gke_backup/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_volume_backup
+#
+def get_volume_backup
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeBackup::V1::GetVolumeBackupRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeBackup::V1::GetVolumeBackupRequest.new
 
-# Call the get_volume_backup method.
-result = client.get_volume_backup request
+  # Call the get_volume_backup method.
+  result = client.get_volume_backup request
 
-# The returned object is of type Google::Cloud::GkeBackup::V1::VolumeBackup.
-p result
+  # The returned object is of type Google::Cloud::GkeBackup::V1::VolumeBackup.
+  p result
+end
 # [END gkebackup_v1_generated_BackupForGKE_GetVolumeBackup_sync]

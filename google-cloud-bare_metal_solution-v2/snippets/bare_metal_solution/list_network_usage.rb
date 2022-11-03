@@ -19,15 +19,21 @@
 # [START baremetalsolution_v2_generated_BareMetalSolution_ListNetworkUsage_sync]
 require "google/cloud/bare_metal_solution/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client#list_network_usage
+#
+def list_network_usage
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::BareMetalSolution::V2::BareMetalSolution::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::BareMetalSolution::V2::ListNetworkUsageRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::BareMetalSolution::V2::ListNetworkUsageRequest.new
 
-# Call the list_network_usage method.
-result = client.list_network_usage request
+  # Call the list_network_usage method.
+  result = client.list_network_usage request
 
-# The returned object is of type Google::Cloud::BareMetalSolution::V2::ListNetworkUsageResponse.
-p result
+  # The returned object is of type Google::Cloud::BareMetalSolution::V2::ListNetworkUsageResponse.
+  p result
+end
 # [END baremetalsolution_v2_generated_BareMetalSolution_ListNetworkUsage_sync]

@@ -19,15 +19,21 @@
 # [START servicedirectory_v1beta1_generated_RegistrationService_UpdateService_sync]
 require "google/cloud/service_directory/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client#update_service
+#
+def update_service
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceDirectory::V1beta1::RegistrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceDirectory::V1beta1::UpdateServiceRequest.new
 
-# Call the update_service method.
-result = client.update_service request
+  # Call the update_service method.
+  result = client.update_service request
 
-# The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::Service.
-p result
+  # The returned object is of type Google::Cloud::ServiceDirectory::V1beta1::Service.
+  p result
+end
 # [END servicedirectory_v1beta1_generated_RegistrationService_UpdateService_sync]

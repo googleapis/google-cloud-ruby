@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_TensorboardService_GetTensorboardExperiment_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::TensorboardService::Client#get_tensorboard_experiment
+#
+def get_tensorboard_experiment
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::TensorboardService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::GetTensorboardExperimentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::GetTensorboardExperimentRequest.new
 
-# Call the get_tensorboard_experiment method.
-result = client.get_tensorboard_experiment request
+  # Call the get_tensorboard_experiment method.
+  result = client.get_tensorboard_experiment request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardExperiment.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::TensorboardExperiment.
+  p result
+end
 # [END aiplatform_v1_generated_TensorboardService_GetTensorboardExperiment_sync]

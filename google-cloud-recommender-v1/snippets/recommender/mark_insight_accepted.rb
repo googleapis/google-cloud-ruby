@@ -19,15 +19,21 @@
 # [START recommender_v1_generated_Recommender_MarkInsightAccepted_sync]
 require "google/cloud/recommender/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Recommender::V1::Recommender::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#mark_insight_accepted
+#
+def mark_insight_accepted
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Recommender::V1::Recommender::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Recommender::V1::MarkInsightAcceptedRequest.new
 
-# Call the mark_insight_accepted method.
-result = client.mark_insight_accepted request
+  # Call the mark_insight_accepted method.
+  result = client.mark_insight_accepted request
 
-# The returned object is of type Google::Cloud::Recommender::V1::Insight.
-p result
+  # The returned object is of type Google::Cloud::Recommender::V1::Insight.
+  p result
+end
 # [END recommender_v1_generated_Recommender_MarkInsightAccepted_sync]

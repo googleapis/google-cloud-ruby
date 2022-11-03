@@ -19,15 +19,21 @@
 # [START recommender_v1_generated_Recommender_MarkRecommendationClaimed_sync]
 require "google/cloud/recommender/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Recommender::V1::Recommender::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Recommender::V1::Recommender::Client#mark_recommendation_claimed
+#
+def mark_recommendation_claimed
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Recommender::V1::Recommender::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Recommender::V1::MarkRecommendationClaimedRequest.new
 
-# Call the mark_recommendation_claimed method.
-result = client.mark_recommendation_claimed request
+  # Call the mark_recommendation_claimed method.
+  result = client.mark_recommendation_claimed request
 
-# The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
-p result
+  # The returned object is of type Google::Cloud::Recommender::V1::Recommendation.
+  p result
+end
 # [END recommender_v1_generated_Recommender_MarkRecommendationClaimed_sync]

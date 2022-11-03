@@ -19,15 +19,21 @@
 # [START pubsub_v1_generated_Subscriber_CreateSnapshot_sync]
 require "google/cloud/pubsub/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::PubSub::V1::Subscriber::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::PubSub::V1::Subscriber::Client#create_snapshot
+#
+def create_snapshot
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::PubSub::V1::Subscriber::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::PubSub::V1::CreateSnapshotRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::PubSub::V1::CreateSnapshotRequest.new
 
-# Call the create_snapshot method.
-result = client.create_snapshot request
+  # Call the create_snapshot method.
+  result = client.create_snapshot request
 
-# The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
-p result
+  # The returned object is of type Google::Cloud::PubSub::V1::Snapshot.
+  p result
+end
 # [END pubsub_v1_generated_Subscriber_CreateSnapshot_sync]

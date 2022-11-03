@@ -1,5 +1,22 @@
 # Release History
 
+### 1.8.0 (2022-10-25)
+
+#### Features
+
+* Added Address#ipv6_endpoint_type 
+* Added enable_ipv6, ipv6_nexthop_address, md5_auth_enabled, peer_ipv6_nexthop_address, and status_reason fields to RouterStatusBgpPeerStatus 
+* Added ErrorDetails#quota_info 
+* Added Instance#resource_status 
+* Added InstanceGroupManager#list_managed_instances_results 
+* Added NetworkEndpointGroup#psc_data 
+* Added Router#md5_authentication_keys 
+* Added RouterBgpPeer#md5_authentication_key_name 
+* Updated Compute Engine API to revision 20221011 ([#19324](https://github.com/googleapis/google-cloud-ruby/issues/19324)) 
+#### Documentation
+
+* Numerous documentation improvements 
+
 ### 1.7.1 (2022-09-28)
 
 #### Bug Fixes

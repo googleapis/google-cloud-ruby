@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_DatabaseAdmin_TestIamPermissions_sync]
 require "google/cloud/spanner/admin/database/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client#test_iam_permissions
+#
+def test_iam_permissions
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::Admin::Database::V1::DatabaseAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Iam::V1::TestIamPermissionsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Iam::V1::TestIamPermissionsRequest.new
 
-# Call the test_iam_permissions method.
-result = client.test_iam_permissions request
+  # Call the test_iam_permissions method.
+  result = client.test_iam_permissions request
 
-# The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
-p result
+  # The returned object is of type Google::Iam::V1::TestIamPermissionsResponse.
+  p result
+end
 # [END spanner_v1_generated_DatabaseAdmin_TestIamPermissions_sync]

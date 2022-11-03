@@ -19,15 +19,21 @@
 # [START datamigration_v1_generated_DataMigrationService_GetConnectionProfile_sync]
 require "google/cloud/cloud_dms/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::CloudDMS::V1::DataMigrationService::Client#get_connection_profile
+#
+def get_connection_profile
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::CloudDMS::V1::DataMigrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::CloudDMS::V1::GetConnectionProfileRequest.new
 
-# Call the get_connection_profile method.
-result = client.get_connection_profile request
+  # Call the get_connection_profile method.
+  result = client.get_connection_profile request
 
-# The returned object is of type Google::Cloud::CloudDMS::V1::ConnectionProfile.
-p result
+  # The returned object is of type Google::Cloud::CloudDMS::V1::ConnectionProfile.
+  p result
+end
 # [END datamigration_v1_generated_DataMigrationService_GetConnectionProfile_sync]

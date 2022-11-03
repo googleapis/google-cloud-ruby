@@ -19,15 +19,21 @@
 # [START clouddeploy_v1_generated_CloudDeploy_RetryJob_sync]
 require "google/cloud/deploy/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Deploy::V1::CloudDeploy::Client#retry_job
+#
+def retry_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Deploy::V1::CloudDeploy::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Deploy::V1::RetryJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Deploy::V1::RetryJobRequest.new
 
-# Call the retry_job method.
-result = client.retry_job request
+  # Call the retry_job method.
+  result = client.retry_job request
 
-# The returned object is of type Google::Cloud::Deploy::V1::RetryJobResponse.
-p result
+  # The returned object is of type Google::Cloud::Deploy::V1::RetryJobResponse.
+  p result
+end
 # [END clouddeploy_v1_generated_CloudDeploy_RetryJob_sync]

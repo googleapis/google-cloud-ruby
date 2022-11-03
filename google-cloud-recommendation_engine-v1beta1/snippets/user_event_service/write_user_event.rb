@@ -19,15 +19,21 @@
 # [START recommendationengine_v1beta1_generated_UserEventService_WriteUserEvent_sync]
 require "google/cloud/recommendation_engine/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client#write_user_event
+#
+def write_user_event
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::RecommendationEngine::V1beta1::UserEventService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::RecommendationEngine::V1beta1::WriteUserEventRequest.new
 
-# Call the write_user_event method.
-result = client.write_user_event request
+  # Call the write_user_event method.
+  result = client.write_user_event request
 
-# The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::UserEvent.
-p result
+  # The returned object is of type Google::Cloud::RecommendationEngine::V1beta1::UserEvent.
+  p result
+end
 # [END recommendationengine_v1beta1_generated_UserEventService_WriteUserEvent_sync]

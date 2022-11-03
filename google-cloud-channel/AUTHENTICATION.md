@@ -27,7 +27,7 @@ export CHANNEL_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/channel"
 
-client = Google::Cloud::Channel.cloud_channel_service
+client = Google::Cloud::Channel.cloud_channel_reports_service
 ```
 
 ## Credential Lookup
@@ -64,7 +64,7 @@ containers where writing files is difficult or not encouraged.
 
 The environment variables that google-cloud-channel
 checks for credentials are configured on the service Credentials class (such as
-`::Google::Cloud::Channel::V1::CloudChannelService::Credentials`):
+`::Google::Cloud::Channel::V1::CloudChannelReportsService::Credentials`):
 
 * `CHANNEL_CREDENTIALS` - Path to JSON file, or JSON contents
 * `CHANNEL_KEYFILE` - Path to JSON file, or JSON contents
@@ -77,7 +77,7 @@ require "google/cloud/channel"
 
 ENV["CHANNEL_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = Google::Cloud::Channel.cloud_channel_service
+client = Google::Cloud::Channel.cloud_channel_reports_service
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/channel"
 
-client = Google::Cloud::Channel.cloud_channel_service do |config|
+client = Google::Cloud::Channel.cloud_channel_reports_service do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -102,7 +102,7 @@ Google::Cloud::Channel.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = Google::Cloud::Channel.cloud_channel_service
+client = Google::Cloud::Channel.cloud_channel_reports_service
 ```
 
 ### Cloud SDK

@@ -19,15 +19,21 @@
 # [START accessapproval_v1_generated_AccessApproval_GetApprovalRequest_sync]
 require "google/cloud/access_approval/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AccessApproval::V1::AccessApproval::Client#get_approval_request
+#
+def get_approval_request
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AccessApproval::V1::AccessApproval::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AccessApproval::V1::GetApprovalRequestMessage.new
 
-# Call the get_approval_request method.
-result = client.get_approval_request request
+  # Call the get_approval_request method.
+  result = client.get_approval_request request
 
-# The returned object is of type Google::Cloud::AccessApproval::V1::ApprovalRequest.
-p result
+  # The returned object is of type Google::Cloud::AccessApproval::V1::ApprovalRequest.
+  p result
+end
 # [END accessapproval_v1_generated_AccessApproval_GetApprovalRequest_sync]

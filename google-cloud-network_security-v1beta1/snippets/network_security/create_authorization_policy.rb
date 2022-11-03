@@ -19,22 +19,28 @@
 # [START networksecurity_v1beta1_generated_NetworkSecurity_CreateAuthorizationPolicy_sync]
 require "google/cloud/network_security/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client#create_authorization_policy
+#
+def create_authorization_policy
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::NetworkSecurity::V1beta1::NetworkSecurity::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::NetworkSecurity::V1beta1::CreateAuthorizationPolicyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::NetworkSecurity::V1beta1::CreateAuthorizationPolicyRequest.new
 
-# Call the create_authorization_policy method.
-result = client.create_authorization_policy request
+  # Call the create_authorization_policy method.
+  result = client.create_authorization_policy request
 
-# The returned object is of type Gapic::Operation. You can use this
-# object to check the status of an operation, cancel it, or wait
-# for results. Here is how to block until completion:
-result.wait_until_done! timeout: 60
-if result.response?
-  p result.response
-else
-  puts "Error!"
+  # The returned object is of type Gapic::Operation. You can use this
+  # object to check the status of an operation, cancel it, or wait
+  # for results. Here is how to block until completion:
+  result.wait_until_done! timeout: 60
+  if result.response?
+    p result.response
+  else
+    puts "Error!"
+  end
 end
 # [END networksecurity_v1beta1_generated_NetworkSecurity_CreateAuthorizationPolicy_sync]

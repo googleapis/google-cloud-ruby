@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_VizierService_CreateStudy_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::VizierService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::VizierService::Client#create_study
+#
+def create_study
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::VizierService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::CreateStudyRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::CreateStudyRequest.new
 
-# Call the create_study method.
-result = client.create_study request
+  # Call the create_study method.
+  result = client.create_study request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::Study.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::Study.
+  p result
+end
 # [END aiplatform_v1_generated_VizierService_CreateStudy_sync]

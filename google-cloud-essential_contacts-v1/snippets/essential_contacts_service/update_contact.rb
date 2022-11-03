@@ -19,15 +19,21 @@
 # [START essentialcontacts_v1_generated_EssentialContactsService_UpdateContact_sync]
 require "google/cloud/essential_contacts/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client#update_contact
+#
+def update_contact
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::EssentialContacts::V1::EssentialContactsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::EssentialContacts::V1::UpdateContactRequest.new
 
-# Call the update_contact method.
-result = client.update_contact request
+  # Call the update_contact method.
+  result = client.update_contact request
 
-# The returned object is of type Google::Cloud::EssentialContacts::V1::Contact.
-p result
+  # The returned object is of type Google::Cloud::EssentialContacts::V1::Contact.
+  p result
+end
 # [END essentialcontacts_v1_generated_EssentialContactsService_UpdateContact_sync]

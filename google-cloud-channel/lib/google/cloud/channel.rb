@@ -45,6 +45,39 @@ module Google
   module Cloud
     module Channel
       ##
+      # Create a new client object for CloudChannelReportsService.
+      #
+      # By default, this returns an instance of
+      # [Google::Cloud::Channel::V1::CloudChannelReportsService::Client](https://googleapis.dev/ruby/google-cloud-channel-v1/latest/Google/Cloud/Channel/V1/CloudChannelReportsService/Client.html)
+      # for version V1 of the API.
+      # However, you can specify specify a different API version by passing it in the
+      # `version` parameter. If the CloudChannelReportsService service is
+      # supported by that API version, and the corresponding gem is available, the
+      # appropriate versioned client will be returned.
+      #
+      # ## About CloudChannelReportsService
+      #
+      # CloudChannelReportsService lets Google Cloud resellers and
+      # distributors retrieve and combine a variety of data in Cloud Channel for
+      # multiple products (Google Cloud Platform (GCP), Google Voice, and
+      # Google Workspace.)
+      #
+      # @param version [::String, ::Symbol] The API version to connect to. Optional.
+      #   Defaults to `:v1`.
+      # @return [CloudChannelReportsService::Client] A client object for the specified version.
+      #
+      def self.cloud_channel_reports_service version: :v1, &block
+        require "google/cloud/channel/#{version.to_s.downcase}"
+
+        package_name = Google::Cloud::Channel
+                       .constants
+                       .select { |sym| sym.to_s.downcase == version.to_s.downcase.tr("_", "") }
+                       .first
+        package_module = Google::Cloud::Channel.const_get package_name
+        package_module.const_get(:CloudChannelReportsService).const_get(:Client).new(&block)
+      end
+
+      ##
       # Create a new client object for CloudChannelService.
       #
       # By default, this returns an instance of

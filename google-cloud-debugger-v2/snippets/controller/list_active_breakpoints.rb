@@ -19,15 +19,21 @@
 # [START clouddebugger_v2_generated_Controller_ListActiveBreakpoints_sync]
 require "google/cloud/debugger/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Debugger::V2::Controller::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Debugger::V2::Controller::Client#list_active_breakpoints
+#
+def list_active_breakpoints
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Debugger::V2::Controller::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Debugger::V2::ListActiveBreakpointsRequest.new
 
-# Call the list_active_breakpoints method.
-result = client.list_active_breakpoints request
+  # Call the list_active_breakpoints method.
+  result = client.list_active_breakpoints request
 
-# The returned object is of type Google::Cloud::Debugger::V2::ListActiveBreakpointsResponse.
-p result
+  # The returned object is of type Google::Cloud::Debugger::V2::ListActiveBreakpointsResponse.
+  p result
+end
 # [END clouddebugger_v2_generated_Controller_ListActiveBreakpoints_sync]

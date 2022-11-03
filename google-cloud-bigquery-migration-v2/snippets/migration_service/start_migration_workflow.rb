@@ -19,15 +19,21 @@
 # [START bigquerymigration_v2_generated_MigrationService_StartMigrationWorkflow_sync]
 require "google/cloud/bigquery/migration/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Bigquery::Migration::V2::MigrationService::Client#start_migration_workflow
+#
+def start_migration_workflow
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Bigquery::Migration::V2::MigrationService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Bigquery::Migration::V2::StartMigrationWorkflowRequest.new
 
-# Call the start_migration_workflow method.
-result = client.start_migration_workflow request
+  # Call the start_migration_workflow method.
+  result = client.start_migration_workflow request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END bigquerymigration_v2_generated_MigrationService_StartMigrationWorkflow_sync]

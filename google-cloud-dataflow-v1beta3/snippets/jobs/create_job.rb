@@ -19,15 +19,21 @@
 # [START dataflow_v1beta3_generated_Jobs_CreateJob_sync]
 require "google/cloud/dataflow/v1beta3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dataflow::V1beta3::Jobs::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dataflow::V1beta3::Jobs::Client#create_job
+#
+def create_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dataflow::V1beta3::Jobs::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dataflow::V1beta3::CreateJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dataflow::V1beta3::CreateJobRequest.new
 
-# Call the create_job method.
-result = client.create_job request
+  # Call the create_job method.
+  result = client.create_job request
 
-# The returned object is of type Google::Cloud::Dataflow::V1beta3::Job.
-p result
+  # The returned object is of type Google::Cloud::Dataflow::V1beta3::Job.
+  p result
+end
 # [END dataflow_v1beta3_generated_Jobs_CreateJob_sync]

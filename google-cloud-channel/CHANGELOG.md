@@ -1,5 +1,11 @@
 # Release History
 
+### 1.2.0 (2022-10-24)
+
+#### Features
+
+* Support for the new CloudChannelReportsService ([#19295](https://github.com/googleapis/google-cloud-ruby/issues/19295)) 
+
 ### 1.1.0 (2022-07-02)
 
 #### Features

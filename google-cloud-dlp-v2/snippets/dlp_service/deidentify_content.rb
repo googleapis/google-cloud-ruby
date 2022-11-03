@@ -19,15 +19,21 @@
 # [START dlp_v2_generated_DlpService_DeidentifyContent_sync]
 require "google/cloud/dlp/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dlp::V2::DlpService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dlp::V2::DlpService::Client#deidentify_content
+#
+def deidentify_content
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dlp::V2::DlpService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dlp::V2::DeidentifyContentRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dlp::V2::DeidentifyContentRequest.new
 
-# Call the deidentify_content method.
-result = client.deidentify_content request
+  # Call the deidentify_content method.
+  result = client.deidentify_content request
 
-# The returned object is of type Google::Cloud::Dlp::V2::DeidentifyContentResponse.
-p result
+  # The returned object is of type Google::Cloud::Dlp::V2::DeidentifyContentResponse.
+  p result
+end
 # [END dlp_v2_generated_DlpService_DeidentifyContent_sync]

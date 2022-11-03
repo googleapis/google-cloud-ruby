@@ -19,15 +19,21 @@
 # [START automl_v1beta1_generated_AutoML_GetAnnotationSpec_sync]
 require "google/cloud/automl/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AutoML::V1beta1::AutoML::Client#get_annotation_spec
+#
+def get_annotation_spec
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AutoML::V1beta1::AutoML::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AutoML::V1beta1::GetAnnotationSpecRequest.new
 
-# Call the get_annotation_spec method.
-result = client.get_annotation_spec request
+  # Call the get_annotation_spec method.
+  result = client.get_annotation_spec request
 
-# The returned object is of type Google::Cloud::AutoML::V1beta1::AnnotationSpec.
-p result
+  # The returned object is of type Google::Cloud::AutoML::V1beta1::AnnotationSpec.
+  p result
+end
 # [END automl_v1beta1_generated_AutoML_GetAnnotationSpec_sync]

@@ -19,15 +19,21 @@
 # [START monitoring_v3_generated_NotificationChannelService_UpdateNotificationChannel_sync]
 require "google/cloud/monitoring/v3"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Monitoring::V3::NotificationChannelService::Client#update_notification_channel
+#
+def update_notification_channel
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Monitoring::V3::NotificationChannelService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Monitoring::V3::UpdateNotificationChannelRequest.new
 
-# Call the update_notification_channel method.
-result = client.update_notification_channel request
+  # Call the update_notification_channel method.
+  result = client.update_notification_channel request
 
-# The returned object is of type Google::Cloud::Monitoring::V3::NotificationChannel.
-p result
+  # The returned object is of type Google::Cloud::Monitoring::V3::NotificationChannel.
+  p result
+end
 # [END monitoring_v3_generated_NotificationChannelService_UpdateNotificationChannel_sync]

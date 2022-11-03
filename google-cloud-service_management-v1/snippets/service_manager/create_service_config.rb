@@ -19,15 +19,21 @@
 # [START servicemanagement_v1_generated_ServiceManager_CreateServiceConfig_sync]
 require "google/cloud/service_management/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::ServiceManagement::V1::ServiceManager::Client#create_service_config
+#
+def create_service_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::ServiceManagement::V1::ServiceManager::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::ServiceManagement::V1::CreateServiceConfigRequest.new
 
-# Call the create_service_config method.
-result = client.create_service_config request
+  # Call the create_service_config method.
+  result = client.create_service_config request
 
-# The returned object is of type Google::Api::Service.
-p result
+  # The returned object is of type Google::Api::Service.
+  p result
+end
 # [END servicemanagement_v1_generated_ServiceManager_CreateServiceConfig_sync]

@@ -19,15 +19,21 @@
 # [START spanner_v1_generated_InstanceAdmin_DeleteInstanceConfig_sync]
 require "google/cloud/spanner/admin/instance/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client#delete_instance_config
+#
+def delete_instance_config
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Spanner::Admin::Instance::V1::InstanceAdmin::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Spanner::Admin::Instance::V1::DeleteInstanceConfigRequest.new
 
-# Call the delete_instance_config method.
-result = client.delete_instance_config request
+  # Call the delete_instance_config method.
+  result = client.delete_instance_config request
 
-# The returned object is of type Google::Protobuf::Empty.
-p result
+  # The returned object is of type Google::Protobuf::Empty.
+  p result
+end
 # [END spanner_v1_generated_InstanceAdmin_DeleteInstanceConfig_sync]

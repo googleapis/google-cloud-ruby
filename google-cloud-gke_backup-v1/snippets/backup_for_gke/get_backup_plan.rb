@@ -19,15 +19,21 @@
 # [START gkebackup_v1_generated_BackupForGKE_GetBackupPlan_sync]
 require "google/cloud/gke_backup/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::GkeBackup::V1::BackupForGKE::Client#get_backup_plan
+#
+def get_backup_plan
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::GkeBackup::V1::BackupForGKE::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::GkeBackup::V1::GetBackupPlanRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::GkeBackup::V1::GetBackupPlanRequest.new
 
-# Call the get_backup_plan method.
-result = client.get_backup_plan request
+  # Call the get_backup_plan method.
+  result = client.get_backup_plan request
 
-# The returned object is of type Google::Cloud::GkeBackup::V1::BackupPlan.
-p result
+  # The returned object is of type Google::Cloud::GkeBackup::V1::BackupPlan.
+  p result
+end
 # [END gkebackup_v1_generated_BackupForGKE_GetBackupPlan_sync]

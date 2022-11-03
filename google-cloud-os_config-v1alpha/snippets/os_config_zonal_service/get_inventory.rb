@@ -19,15 +19,21 @@
 # [START osconfig_v1alpha_generated_OsConfigZonalService_GetInventory_sync]
 require "google/cloud/os_config/v1alpha"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client#get_inventory
+#
+def get_inventory
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::OsConfig::V1alpha::OsConfigZonalService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::OsConfig::V1alpha::GetInventoryRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::OsConfig::V1alpha::GetInventoryRequest.new
 
-# Call the get_inventory method.
-result = client.get_inventory request
+  # Call the get_inventory method.
+  result = client.get_inventory request
 
-# The returned object is of type Google::Cloud::OsConfig::V1alpha::Inventory.
-p result
+  # The returned object is of type Google::Cloud::OsConfig::V1alpha::Inventory.
+  p result
+end
 # [END osconfig_v1alpha_generated_OsConfigZonalService_GetInventory_sync]

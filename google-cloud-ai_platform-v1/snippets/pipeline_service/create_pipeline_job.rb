@@ -19,15 +19,21 @@
 # [START aiplatform_v1_generated_PipelineService_CreatePipelineJob_sync]
 require "google/cloud/ai_platform/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::AIPlatform::V1::PipelineService::Client#create_pipeline_job
+#
+def create_pipeline_job
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::AIPlatform::V1::PipelineService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::AIPlatform::V1::CreatePipelineJobRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::AIPlatform::V1::CreatePipelineJobRequest.new
 
-# Call the create_pipeline_job method.
-result = client.create_pipeline_job request
+  # Call the create_pipeline_job method.
+  result = client.create_pipeline_job request
 
-# The returned object is of type Google::Cloud::AIPlatform::V1::PipelineJob.
-p result
+  # The returned object is of type Google::Cloud::AIPlatform::V1::PipelineJob.
+  p result
+end
 # [END aiplatform_v1_generated_PipelineService_CreatePipelineJob_sync]

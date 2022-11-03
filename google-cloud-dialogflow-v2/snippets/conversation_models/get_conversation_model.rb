@@ -19,15 +19,21 @@
 # [START dialogflow_v2_generated_ConversationModels_GetConversationModel_sync]
 require "google/cloud/dialogflow/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Dialogflow::V2::ConversationModels::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Dialogflow::V2::ConversationModels::Client#get_conversation_model
+#
+def get_conversation_model
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Dialogflow::V2::ConversationModels::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Dialogflow::V2::GetConversationModelRequest.new
 
-# Call the get_conversation_model method.
-result = client.get_conversation_model request
+  # Call the get_conversation_model method.
+  result = client.get_conversation_model request
 
-# The returned object is of type Google::Cloud::Dialogflow::V2::ConversationModel.
-p result
+  # The returned object is of type Google::Cloud::Dialogflow::V2::ConversationModel.
+  p result
+end
 # [END dialogflow_v2_generated_ConversationModels_GetConversationModel_sync]

@@ -19,15 +19,21 @@
 # [START cloudtasks_v2beta2_generated_CloudTasks_LeaseTasks_sync]
 require "google/cloud/tasks/v2beta2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Tasks::V2beta2::CloudTasks::Client#lease_tasks
+#
+def lease_tasks
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Tasks::V2beta2::CloudTasks::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Tasks::V2beta2::LeaseTasksRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Tasks::V2beta2::LeaseTasksRequest.new
 
-# Call the lease_tasks method.
-result = client.lease_tasks request
+  # Call the lease_tasks method.
+  result = client.lease_tasks request
 
-# The returned object is of type Google::Cloud::Tasks::V2beta2::LeaseTasksResponse.
-p result
+  # The returned object is of type Google::Cloud::Tasks::V2beta2::LeaseTasksResponse.
+  p result
+end
 # [END cloudtasks_v2beta2_generated_CloudTasks_LeaseTasks_sync]

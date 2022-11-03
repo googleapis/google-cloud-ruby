@@ -19,15 +19,21 @@
 # [START vpcaccess_v1_generated_VpcAccessService_GetConnector_sync]
 require "google/cloud/vpc_access/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::VpcAccess::V1::VpcAccessService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::VpcAccess::V1::VpcAccessService::Client#get_connector
+#
+def get_connector
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::VpcAccess::V1::VpcAccessService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::VpcAccess::V1::GetConnectorRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::VpcAccess::V1::GetConnectorRequest.new
 
-# Call the get_connector method.
-result = client.get_connector request
+  # Call the get_connector method.
+  result = client.get_connector request
 
-# The returned object is of type Google::Cloud::VpcAccess::V1::Connector.
-p result
+  # The returned object is of type Google::Cloud::VpcAccess::V1::Connector.
+  p result
+end
 # [END vpcaccess_v1_generated_VpcAccessService_GetConnector_sync]

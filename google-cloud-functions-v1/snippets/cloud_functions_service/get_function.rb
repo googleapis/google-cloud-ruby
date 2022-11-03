@@ -19,15 +19,21 @@
 # [START cloudfunctions_v1_generated_CloudFunctionsService_GetFunction_sync]
 require "google/cloud/functions/v1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Functions::V1::CloudFunctionsService::Client#get_function
+#
+def get_function
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Functions::V1::CloudFunctionsService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Functions::V1::GetFunctionRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Functions::V1::GetFunctionRequest.new
 
-# Call the get_function method.
-result = client.get_function request
+  # Call the get_function method.
+  result = client.get_function request
 
-# The returned object is of type Google::Cloud::Functions::V1::CloudFunction.
-p result
+  # The returned object is of type Google::Cloud::Functions::V1::CloudFunction.
+  p result
+end
 # [END cloudfunctions_v1_generated_CloudFunctionsService_GetFunction_sync]

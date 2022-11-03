@@ -19,15 +19,21 @@
 # [START retail_v2_generated_CatalogService_ReplaceCatalogAttribute_sync]
 require "google/cloud/retail/v2"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::Retail::V2::CatalogService::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::Retail::V2::CatalogService::Client#replace_catalog_attribute
+#
+def replace_catalog_attribute
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::Retail::V2::CatalogService::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::Retail::V2::ReplaceCatalogAttributeRequest.new
 
-# Call the replace_catalog_attribute method.
-result = client.replace_catalog_attribute request
+  # Call the replace_catalog_attribute method.
+  result = client.replace_catalog_attribute request
 
-# The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
-p result
+  # The returned object is of type Google::Cloud::Retail::V2::AttributesConfig.
+  p result
+end
 # [END retail_v2_generated_CatalogService_ReplaceCatalogAttribute_sync]

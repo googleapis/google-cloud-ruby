@@ -19,15 +19,21 @@
 # [START texttospeech_v1beta1_generated_TextToSpeech_ListVoices_sync]
 require "google/cloud/text_to_speech/v1beta1"
 
-# Create a client object. The client can be reused for multiple calls.
-client = Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
+##
+# Example demonstrating basic usage of
+# Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client#list_voices
+#
+def list_voices
+  # Create a client object. The client can be reused for multiple calls.
+  client = Google::Cloud::TextToSpeech::V1beta1::TextToSpeech::Client.new
 
-# Create a request. To set request fields, pass in keyword arguments.
-request = Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new
+  # Create a request. To set request fields, pass in keyword arguments.
+  request = Google::Cloud::TextToSpeech::V1beta1::ListVoicesRequest.new
 
-# Call the list_voices method.
-result = client.list_voices request
+  # Call the list_voices method.
+  result = client.list_voices request
 
-# The returned object is of type Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse.
-p result
+  # The returned object is of type Google::Cloud::TextToSpeech::V1beta1::ListVoicesResponse.
+  p result
+end
 # [END texttospeech_v1beta1_generated_TextToSpeech_ListVoices_sync]
