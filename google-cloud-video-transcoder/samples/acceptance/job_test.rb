@@ -98,11 +98,11 @@ describe "Transcoder Snippets" do
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
       output = ""
-      
+
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
@@ -133,7 +133,7 @@ describe "Transcoder Snippets" do
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
@@ -175,7 +175,7 @@ describe "Transcoder Snippets" do
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
@@ -262,7 +262,7 @@ describe "Transcoder Snippets" do
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
@@ -292,7 +292,7 @@ describe "Transcoder Snippets" do
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
@@ -322,7 +322,7 @@ describe "Transcoder Snippets" do
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
@@ -352,7 +352,7 @@ describe "Transcoder Snippets" do
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
@@ -385,7 +385,7 @@ describe "Transcoder Snippets" do
       job_state_retries.times do
         sleep rand(30..35)
         state = ""
-        output = capture_io { 
+        output = capture_io {
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
         }
         break if state.eql? job_state_succeeded
