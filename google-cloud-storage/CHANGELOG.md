@@ -1,5 +1,11 @@
 # Release History
 
+### 1.44.0 (2022-11-02)
+
+#### Features
+
+* support autoclass 
+
 ### 1.43.0 (2022-09-30)
 
 #### Features
