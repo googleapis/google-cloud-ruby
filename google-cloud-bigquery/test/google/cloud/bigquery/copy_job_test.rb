@@ -97,7 +97,6 @@ describe Google::Cloud::Bigquery::CopyJob, :mock_bigquery do
       },
       "createDisposition" => "CREATE_IF_NEEDED",
       "writeDisposition" => "WRITE_EMPTY",
-      "operationYype" => nil
     }
     hash
   end
