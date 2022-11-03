@@ -60,7 +60,7 @@ describe "Transcoder Snippets" do
   let(:output_uri_for_concat) { "#{output_uri_prefix}/test-output-concat/" }
   let(:job_state_retries) { 4 }
   let(:job_state_succeeded) { "SUCCEEDED" }
-  let(:job_state_succeeded_message) { "Job state: #{job_state_succeeded}" }
+  let(:job_state_succeeded_message) { "Job state: #{job_state_succeeded}\n" }
 
   before do
     bucket
@@ -97,15 +97,17 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
-
+      output = ""
+      
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 
@@ -126,15 +128,17 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
+      output = ""
 
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 
@@ -166,15 +170,17 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
+      output = ""
 
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 
@@ -251,15 +257,17 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
+      output = ""
 
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 
@@ -280,15 +288,16 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
-
+      output = ""
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 
@@ -309,15 +318,16 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
-
+      output = ""
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 
@@ -338,15 +348,16 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
-
+      output = ""
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 
@@ -370,15 +381,16 @@ describe "Transcoder Snippets" do
         job_id = str_slice[str_slice.length - 1].rstrip
       }.must_output(%r{Job: projects/#{project_number}/locations/#{location_id}/jobs/})
 
-      state = ""
-
+      output = ""
       job_state_retries.times do
         sleep rand(30..35)
-        expect {
+        state = ""
+        output = capture_io { 
           state = get_job_state project_id: project_id, location: location_id, job_id: job_id
-        }.must_output(/#{job_state_succeeded_message}/)
+        }
         break if state.eql? job_state_succeeded
       end
+      expect(output).must_include(job_state_succeeded_message)
     end
   end
 end
