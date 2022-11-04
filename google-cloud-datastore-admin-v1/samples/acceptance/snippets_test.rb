@@ -14,13 +14,14 @@
 
 require_relative "helper"
 require_relative "../snippets"
+require 'minitest/hooks'
 
 describe "Firestore in Datastore mode Admin V1 samples" do
   let(:project_id) { ENV["GOOGLE_CLOUD_PROJECT"] || raise("missing GOOGLE_CLOUD_PROJECT") }
   let(:storage_file_prefix) { random_storage_file_prefix }
   let(:output_url_prefix) { storage_url prefix: storage_file_prefix }
 
-  before do
+  before :all do
     create_bucket
   end
 
