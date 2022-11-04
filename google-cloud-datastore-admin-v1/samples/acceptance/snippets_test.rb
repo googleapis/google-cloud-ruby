@@ -20,6 +20,10 @@ describe "Firestore in Datastore mode Admin V1 samples" do
   let(:storage_file_prefix) { random_storage_file_prefix }
   let(:output_url_prefix) { storage_url prefix: storage_file_prefix }
 
+  before do
+    create_bucket
+  end
+
   it "client_create" do
     client = client_create
     assert_kind_of Google::Cloud::Datastore::Admin::V1::DatastoreAdmin::Client, client
