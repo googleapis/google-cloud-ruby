@@ -191,7 +191,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The location and project in which this Job should be created.
-            #     Format: projects/\\{project}/locations/\\{location}
+            #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+            #     project id or number.
             #   @param job [::Google::Cloud::Run::V2::Job, ::Hash]
             #     Required. The Job instance to create.
             #   @param job_id [::String]
@@ -293,7 +294,8 @@ module Google
             #
             #   @param name [::String]
             #     Required. The full name of the Job.
-            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+            #     can be project id or number.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Run::V2::Job]
@@ -379,7 +381,8 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The location and project to list resources on.
-            #     Format: projects/\\{project}/locations/\\{location}
+            #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+            #     project id or number.
             #   @param page_size [::Integer]
             #     Maximum number of Jobs to return in this call.
             #   @param page_token [::String]
@@ -579,7 +582,8 @@ module Google
             #
             #   @param name [::String]
             #     Required. The full name of the Job.
-            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+            #     can be project id or number.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated without actually
             #     deleting any resources.
@@ -679,7 +683,8 @@ module Google
             #
             #   @param name [::String]
             #     Required. The full name of the Job.
-            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+            #     can be project id or number.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated without actually
             #     deleting any resources.
@@ -760,7 +765,7 @@ module Google
             end
 
             ##
-            # Get the IAM Access Control policy currently in effect for the given Job.
+            # Gets the IAM Access Control policy currently in effect for the given Job.
             # This result does not include any inherited policies.
             #
             # @overload get_iam_policy(request, options = nil)

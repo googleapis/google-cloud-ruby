@@ -25,7 +25,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location and project in which this Job should be created.
-        #     Format: projects/\\{project}/locations/\\{location}
+        #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+        #     project id or number.
         # @!attribute [rw] job
         #   @return [::Google::Cloud::Run::V2::Job]
         #     Required. The Job instance to create.
@@ -46,7 +47,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The full name of the Job.
-        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+        #     can be project id or number.
         class GetJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -74,7 +76,8 @@ module Google
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location and project to list resources on.
-        #     Format: projects/\\{project}/locations/\\{location}
+        #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+        #     project id or number.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of Jobs to return in this call.
@@ -107,7 +110,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The full name of the Job.
-        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+        #     can be project id or number.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated without actually
@@ -125,7 +129,8 @@ module Google
         # @!attribute [rw] name
         #   @return [::String]
         #     Required. The full name of the Job.
-        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+        #     can be project id or number.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated without actually

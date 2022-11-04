@@ -45,7 +45,7 @@ module Google
             rpc :DeleteJob, ::Google::Cloud::Run::V2::DeleteJobRequest, ::Google::Longrunning::Operation
             # Triggers creation of a new Execution of this Job.
             rpc :RunJob, ::Google::Cloud::Run::V2::RunJobRequest, ::Google::Longrunning::Operation
-            # Get the IAM Access Control policy currently in effect for the given Job.
+            # Gets the IAM Access Control policy currently in effect for the given Job.
             # This result does not include any inherited policies.
             rpc :GetIamPolicy, ::Google::Iam::V1::GetIamPolicyRequest, ::Google::Iam::V1::Policy
             # Sets the IAM Access control policy for the specified Job. Overwrites

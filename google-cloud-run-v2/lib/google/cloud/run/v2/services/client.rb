@@ -207,13 +207,13 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The location and project in which this service should be created.
-            #     Format: projects/\\{project}/locations/\\{location}
-            #     Only lowercase characters, digits, and hyphens.
+            #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+            #     project id or number. Only lowercase characters, digits, and hyphens.
             #   @param service [::Google::Cloud::Run::V2::Service, ::Hash]
             #     Required. The Service instance to create.
             #   @param service_id [::String]
             #     Required. The unique identifier for the Service. It must begin with letter,
-            #     and may not end with hyphen; must contain fewer than 50 characters.
+            #     and cannot end with hyphen; must contain fewer than 50 characters.
             #     The name of the service becomes \\{parent}/services/\\{service_id}.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated and default values
@@ -314,7 +314,8 @@ module Google
             #
             #   @param name [::String]
             #     Required. The full name of the Service.
-            #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}
+            #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}, where
+            #     \\{project} can be project id or number.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Run::V2::Service]
@@ -403,8 +404,9 @@ module Google
             #
             #   @param parent [::String]
             #     Required. The location and project to list resources on.
-            #     Location must be a valid GCP region, and may not be the "-" wildcard.
-            #     Format: projects/\\{project}/locations/\\{location}
+            #     Location must be a valid GCP region, and cannot be the "-" wildcard.
+            #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
+            #     project id or number.
             #   @param page_size [::Integer]
             #     Maximum number of Services to return in this call.
             #   @param page_token [::String]
@@ -612,7 +614,8 @@ module Google
             #
             #   @param name [::String]
             #     Required. The full name of the Service.
-            #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}
+            #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}, where
+            #     \\{project} can be project id or number.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated without actually
             #     deleting any resources.

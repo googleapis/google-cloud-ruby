@@ -192,7 +192,8 @@ module Google
             #   @param name [::String]
             #     Required. The full name of the Execution.
             #     Format:
-            #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution}
+            #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
+            #     where \\{project} can be project id or number.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Run::V2::Execution]
@@ -279,7 +280,8 @@ module Google
             #   @param parent [::String]
             #     Required. The Execution from which the Executions should be listed.
             #     To list all Executions across Jobs, use "-" instead of Job name.
-            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+            #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+            #     can be project id or number.
             #   @param page_size [::Integer]
             #     Maximum number of Executions to return in this call.
             #   @param page_token [::String]
@@ -380,7 +382,8 @@ module Google
             #   @param name [::String]
             #     Required. The name of the Execution to delete.
             #     Format:
-            #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution}
+            #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
+            #     where \\{project} can be project id or number.
             #   @param validate_only [::Boolean]
             #     Indicates that the request should be validated without actually
             #     deleting any resources.

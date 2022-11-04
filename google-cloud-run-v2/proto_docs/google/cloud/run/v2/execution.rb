@@ -26,7 +26,8 @@ module Google
         #   @return [::String]
         #     Required. The full name of the Execution.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution}
+        #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
+        #     where \\{project} can be project id or number.
         class GetExecutionRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -37,7 +38,8 @@ module Google
         #   @return [::String]
         #     Required. The Execution from which the Executions should be listed.
         #     To list all Executions across Jobs, use "-" instead of Job name.
-        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}
+        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+        #     can be project id or number.
         # @!attribute [rw] page_size
         #   @return [::Integer]
         #     Maximum number of Executions to return in this call.
@@ -71,7 +73,8 @@ module Google
         #   @return [::String]
         #     Required. The name of the Execution to delete.
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution}
+        #     projects/\\{project}/locations/\\{location}/jobs/\\{job}/executions/\\{execution},
+        #     where \\{project} can be project id or number.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated without actually
@@ -93,9 +96,8 @@ module Google
         #     Output only. The unique name of this Execution.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the Execution. The value
-        #     is a UUID4 string and guaranteed to remain unchanged until the resource is
-        #     deleted.
+        #     Output only. Server assigned unique identifier for the Execution. The value is a UUID4
+        #     string and guaranteed to remain unchanged until the resource is deleted.
         # @!attribute [r] generation
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
@@ -116,9 +118,9 @@ module Google
         #     KRM-style annotations for the resource.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Represents time when the execution was acknowledged by the
-        #     execution controller. It is not guaranteed to be set in happens-before
-        #     order across separate operations.
+        #     Output only. Represents time when the execution was acknowledged by the execution
+        #     controller. It is not guaranteed to be set in happens-before order across
+        #     separate operations.
         # @!attribute [r] start_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. Represents time when the execution started to run.
@@ -126,8 +128,8 @@ module Google
         #     operations.
         # @!attribute [r] completion_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Output only. Represents time when the execution was completed. It is not
-        #     guaranteed to be set in happens-before order across separate operations.
+        #     Output only. Represents time when the execution was completed. It is not guaranteed to
+        #     be set in happens-before order across separate operations.
         # @!attribute [r] update_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The last-modified time.
@@ -151,16 +153,16 @@ module Google
         #     Output only. The name of the parent Job.
         # @!attribute [r] parallelism
         #   @return [::Integer]
-        #     Output only. Specifies the maximum desired number of tasks the execution
-        #     should run at any given time. Must be <= task_count. The actual number of
+        #     Output only. Specifies the maximum desired number of tasks the execution should
+        #     run at any given time. Must be <= task_count. The actual number of
         #     tasks running in steady state will be less than this number when
         #     ((.spec.task_count - .status.successful) < .spec.parallelism), i.e. when
         #     the work left to do is less than max parallelism. More info:
         #     https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
         # @!attribute [r] task_count
         #   @return [::Integer]
-        #     Output only. Specifies the desired number of tasks the execution should
-        #     run. Setting to 1 means that parallelism is limited to 1 and the success of
+        #     Output only. Specifies the desired number of tasks the execution should run.
+        #     Setting to 1 means that parallelism is limited to 1 and the success of
         #     that task signals the success of the execution.
         #     More info:
         #     https://kubernetes.io/docs/concepts/workloads/controllers/jobs-run-to-completion/
@@ -169,19 +171,17 @@ module Google
         #     Output only. The template used to create tasks for this execution.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Indicates whether the resource's reconciliation is still in
-        #     progress. See comments in `Job.reconciling` for additional information on
+        #     Output only. Indicates whether the resource's reconciliation is still in progress.
+        #     See comments in `Job.reconciling` for additional information on
         #     reconciliation process in Cloud Run.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Run::V2::Condition>]
-        #     Output only. The Condition of this Execution, containing its readiness
-        #     status, and detailed error information in case it did not reach the desired
-        #     state.
+        #     Output only. The Condition of this Execution, containing its readiness status, and
+        #     detailed error information in case it did not reach the desired state.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
-        #     Output only. The generation of this Execution. See comments in
-        #     `reconciling` for additional information on reconciliation process in Cloud
-        #     Run.
+        #     Output only. The generation of this Execution. See comments in `reconciling` for
+        #     additional information on reconciliation process in Cloud Run.
         # @!attribute [r] running_count
         #   @return [::Integer]
         #     Output only. The number of actively running tasks.

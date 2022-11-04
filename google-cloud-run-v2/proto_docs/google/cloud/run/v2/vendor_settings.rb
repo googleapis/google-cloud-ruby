@@ -28,7 +28,8 @@ module Google
         # @!attribute [rw] connector
         #   @return [::String]
         #     VPC Access connector name.
-        #     Format: projects/\\{project}/locations/\\{location}/connectors/\\{connector}
+        #     Format: projects/\\{project}/locations/\\{location}/connectors/\\{connector},
+        #     where \\{project} can be project id or number.
         # @!attribute [rw] egress
         #   @return [::Google::Cloud::Run::V2::VpcAccess::VpcEgress]
         #     Traffic VPC egress settings.
