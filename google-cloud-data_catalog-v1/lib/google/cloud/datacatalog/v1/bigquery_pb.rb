@@ -3,6 +3,8 @@
 
 require 'google/protobuf'
 
+require 'google/api/field_behavior_pb'
+
 Google::Protobuf::DescriptorPool.generated_pool.build do
   add_file("google/cloud/datacatalog/v1/bigquery.proto", :syntax => :proto3) do
     add_message "google.cloud.datacatalog.v1.BigQueryConnectionSpec" do
