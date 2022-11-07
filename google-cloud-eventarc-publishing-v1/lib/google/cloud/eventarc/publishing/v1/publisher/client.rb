@@ -181,7 +181,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload publish_channel_connection_events(channel_connection: nil, events: nil)
+              # @overload publish_channel_connection_events(channel_connection: nil, events: nil, text_events: nil)
               #   Pass arguments to `publish_channel_connection_events` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -191,6 +191,13 @@ module Google
               #     `projects/{partner_project_id}/locations/{location}/channelConnections/{channel_connection_id}`.
               #   @param events [::Array<::Google::Protobuf::Any, ::Hash>]
               #     The CloudEvents v1.0 events to publish. No other types are allowed.
+              #     If this field is set, then the `text_events` fields must not be set.
+              #   @param text_events [::Array<::String>]
+              #     The text representation of events to publish.
+              #     CloudEvent v1.0 in JSON format is the only allowed type. Refer to
+              #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+              #     for specification.
+              #     If this field is set, then the `events` fields must not be set.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Eventarc::Publishing::V1::PublishChannelConnectionEventsResponse]
@@ -269,7 +276,7 @@ module Google
               #   @param options [::Gapic::CallOptions, ::Hash]
               #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
               #
-              # @overload publish_events(channel: nil, events: nil)
+              # @overload publish_events(channel: nil, events: nil, text_events: nil)
               #   Pass arguments to `publish_events` via keyword arguments. Note that at
               #   least one keyword argument is required. To specify no parameters, or to keep all
               #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -279,6 +286,13 @@ module Google
               #     `projects/{project}/locations/{location}/channels/{channel-id}`.
               #   @param events [::Array<::Google::Protobuf::Any, ::Hash>]
               #     The CloudEvents v1.0 events to publish. No other types are allowed.
+              #     If this field is set, then the `text_events` fields must not be set.
+              #   @param text_events [::Array<::String>]
+              #     The text representation of events to publish.
+              #     CloudEvent v1.0 in JSON format is the only allowed type. Refer to
+              #     https://github.com/cloudevents/spec/blob/v1.0.2/cloudevents/formats/json-format.md
+              #     for specification.
+              #     If this field is set, then the `events` fields must not be set.
               #
               # @yield [response, operation] Access the result along with the RPC operation
               # @yieldparam response [::Google::Cloud::Eventarc::Publishing::V1::PublishEventsResponse]
