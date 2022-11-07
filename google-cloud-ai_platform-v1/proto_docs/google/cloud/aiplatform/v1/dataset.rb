@@ -105,6 +105,15 @@ module Google
         #     or pdf bytes).
         #     These labels will be overridden by Annotation labels specified inside index
         #     file referenced by {::Google::Cloud::AIPlatform::V1::ImportDataConfig#import_schema_uri import_schema_uri}, e.g. jsonl file.
+        # @!attribute [rw] annotation_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Labels that will be applied to newly imported Annotations. If two
+        #     Annotations are identical, one of them will be deduped. Two Annotations are
+        #     considered identical if their {::Google::Cloud::AIPlatform::V1::Annotation#payload payload},
+        #     {::Google::Cloud::AIPlatform::V1::Annotation#payload_schema_uri payload_schema_uri} and all of their
+        #     {::Google::Cloud::AIPlatform::V1::Annotation#labels labels} are the same.
+        #     These labels will be overridden by Annotation labels specified inside index
+        #     file referenced by {::Google::Cloud::AIPlatform::V1::ImportDataConfig#import_schema_uri import_schema_uri}, e.g. jsonl file.
         # @!attribute [rw] import_schema_uri
         #   @return [::String]
         #     Required. Points to a YAML file stored on Google Cloud Storage describing the import
@@ -120,6 +129,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class DataItemLabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class AnnotationLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
