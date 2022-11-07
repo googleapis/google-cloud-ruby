@@ -21,99 +21,97 @@ module Google
   module Cloud
     module Run
       module V2
-        # Request message for creating a Service.
+        # Request message for creating a Job.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The location and project in which this service should be created.
+        #     Required. The location and project in which this Job should be created.
         #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
-        #     project id or number. Only lowercase characters, digits, and hyphens.
-        # @!attribute [rw] service
-        #   @return [::Google::Cloud::Run::V2::Service]
-        #     Required. The Service instance to create.
-        # @!attribute [rw] service_id
+        #     project id or number.
+        # @!attribute [rw] job
+        #   @return [::Google::Cloud::Run::V2::Job]
+        #     Required. The Job instance to create.
+        # @!attribute [rw] job_id
         #   @return [::String]
-        #     Required. The unique identifier for the Service. It must begin with letter,
-        #     and cannot end with hyphen; must contain fewer than 50 characters.
-        #     The name of the service becomes \\{parent}/services/\\{service_id}.
+        #     Required. The unique identifier for the Job. The name of the job becomes
+        #     \\{parent}/jobs/\\{job_id}.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated and default values
         #     populated, without persisting the request or creating any resources.
-        class CreateServiceRequest
+        class CreateJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for updating a service.
-        # @!attribute [rw] service
-        #   @return [::Google::Cloud::Run::V2::Service]
-        #     Required. The Service to be updated.
+        # Request message for obtaining a Job by its full name.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Required. The full name of the Job.
+        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+        #     can be project id or number.
+        class GetJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request message for updating a Job.
+        # @!attribute [rw] job
+        #   @return [::Google::Cloud::Run::V2::Job]
+        #     Required. The Job to be updated.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated and default values
         #     populated, without persisting the request or updating any resources.
         # @!attribute [rw] allow_missing
         #   @return [::Boolean]
-        #     If set to true, and if the Service does not exist, it will create a new
+        #     If set to true, and if the Job does not exist, it will create a new
         #     one. Caller must have both create and update permissions for this call if
         #     this is set to true.
-        class UpdateServiceRequest
+        class UpdateJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for retrieving a list of Services.
+        # Request message for retrieving a list of Jobs.
         # @!attribute [rw] parent
         #   @return [::String]
         #     Required. The location and project to list resources on.
-        #     Location must be a valid GCP region, and cannot be the "-" wildcard.
         #     Format: projects/\\{project}/locations/\\{location}, where \\{project} can be
         #     project id or number.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Maximum number of Services to return in this call.
+        #     Maximum number of Jobs to return in this call.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     A page token received from a previous call to ListServices.
+        #     A page token received from a previous call to ListJobs.
         #     All other parameters must match.
         # @!attribute [rw] show_deleted
         #   @return [::Boolean]
         #     If true, returns deleted (but unexpired) resources along with active ones.
-        class ListServicesRequest
+        class ListJobsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Response message containing a list of Services.
-        # @!attribute [rw] services
-        #   @return [::Array<::Google::Cloud::Run::V2::Service>]
-        #     The resulting list of Services.
+        # Response message containing a list of Jobs.
+        # @!attribute [rw] jobs
+        #   @return [::Array<::Google::Cloud::Run::V2::Job>]
+        #     The resulting list of Jobs.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     A token indicating there are more items than page_size. Use it in the next
-        #     ListServices request to continue.
-        class ListServicesResponse
+        #     ListJobs request to continue.
+        class ListJobsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Request message for obtaining a Service by its full name.
+        # Request message to delete a Job by its full name.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The full name of the Service.
-        #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}, where
-        #     \\{project} can be project id or number.
-        class GetServiceRequest
-          include ::Google::Protobuf::MessageExts
-          extend ::Google::Protobuf::MessageExts::ClassMethods
-        end
-
-        # Request message to delete a Service by its full name.
-        # @!attribute [rw] name
-        #   @return [::String]
-        #     Required. The full name of the Service.
-        #     Format: projects/\\{project}/locations/\\{location}/services/\\{service}, where
-        #     \\{project} can be project id or number.
+        #     Required. The full name of the Job.
+        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+        #     can be project id or number.
         # @!attribute [rw] validate_only
         #   @return [::Boolean]
         #     Indicates that the request should be validated without actually
@@ -122,42 +120,49 @@ module Google
         #   @return [::String]
         #     A system-generated fingerprint for this version of the
         #     resource. May be used to detect modification conflict during updates.
-        class DeleteServiceRequest
+        class DeleteJobRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Service acts as a top-level container that manages a set of
-        # configurations and revision templates which implement a network service.
-        # Service exists to provide a singular abstraction which can be access
-        # controlled, reasoned about, and which encapsulates software lifecycle
-        # decisions such as rollout policy and team resource ownership.
+        # Request message to create a new Execution of a Job.
         # @!attribute [rw] name
         #   @return [::String]
-        #     The fully qualified name of this Service. In CreateServiceRequest, this
-        #     field is ignored, and instead composed from CreateServiceRequest.parent and
-        #     CreateServiceRequest.service_id.
+        #     Required. The full name of the Job.
+        #     Format: projects/\\{project}/locations/\\{location}/jobs/\\{job}, where \\{project}
+        #     can be project id or number.
+        # @!attribute [rw] validate_only
+        #   @return [::Boolean]
+        #     Indicates that the request should be validated without actually
+        #     deleting any resources.
+        # @!attribute [rw] etag
+        #   @return [::String]
+        #     A system-generated fingerprint for this version of the
+        #     resource. May be used to detect modification conflict during updates.
+        class RunJobRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Job represents the configuration of a single job. A job an immutable resource
+        # that references a container image which is run to completion.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     The fully qualified name of this Job.
         #
         #     Format:
-        #     projects/\\{project}/locations/\\{location}/services/\\{service_id}
-        # @!attribute [rw] description
-        #   @return [::String]
-        #     User-provided description of the Service. This field currently has a
-        #     512-character limit.
+        #     projects/\\{project}/locations/\\{location}/jobs/\\{job}
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the trigger. The value is a UUID4
+        #     Output only. Server assigned unique identifier for the Execution. The value is a UUID4
         #     string and guaranteed to remain unchanged until the resource is deleted.
         # @!attribute [r] generation
         #   @return [::Integer]
         #     Output only. A number that monotonically increases every time the user
         #     modifies the desired state.
-        #     Please note that unlike v1, this is an int64 value. As with most Google
-        #     APIs, its JSON representation will be a `string` instead of an `integer`.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Map of string keys and values that can be used to organize and categorize
-        #     objects.
+        #     KRM-style labels for the resource.
         #     User-provided labels are shared with Google's billing system, so they can
         #     be used to filter, or break down billing charges by team, component,
         #     environment, state, etc. For more information, visit
@@ -168,8 +173,9 @@ module Google
         #     changes will not be preserved.
         # @!attribute [rw] annotations
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Unstructured key value map that may be set by external tools to store and
-        #     arbitrary metadata. They are not queryable and should be preserved
+        #     KRM-style annotations for the resource. Unstructured key value map that may
+        #     be set by external tools to store and arbitrary metadata.
+        #     They are not queryable and should be preserved
         #     when modifying objects. Cloud Run will populate some annotations using
         #     'run.googleapis.com' or 'serving.knative.dev' namespaces. This field
         #     follows Kubernetes annotations' namespacing, limits, and rules. More info:
@@ -199,11 +205,6 @@ module Google
         # @!attribute [rw] client_version
         #   @return [::String]
         #     Arbitrary version identifier for the API client.
-        # @!attribute [rw] ingress
-        #   @return [::Google::Cloud::Run::V2::IngressTraffic]
-        #     Provides the ingress settings for this Service. On output, returns the
-        #     currently observed ingress settings, or INGRESS_TRAFFIC_UNSPECIFIED if no
-        #     revision is active.
         # @!attribute [rw] launch_stage
         #   @return [::Google::Api::LaunchStage]
         #     The launch stage as defined by [Google Cloud Platform
@@ -214,78 +215,56 @@ module Google
         #   @return [::Google::Cloud::Run::V2::BinaryAuthorization]
         #     Settings for the Binary Authorization feature.
         # @!attribute [rw] template
-        #   @return [::Google::Cloud::Run::V2::RevisionTemplate]
-        #     Required. The template used to create revisions for this Service.
-        # @!attribute [rw] traffic
-        #   @return [::Array<::Google::Cloud::Run::V2::TrafficTarget>]
-        #     Specifies how to distribute traffic over a collection of Revisions
-        #     belonging to the Service. If traffic is empty or not provided, defaults to
-        #     100% traffic to the latest `Ready` Revision.
+        #   @return [::Google::Cloud::Run::V2::ExecutionTemplate]
+        #     Required. The template used to create executions for this Job.
         # @!attribute [r] observed_generation
         #   @return [::Integer]
-        #     Output only. The generation of this Service currently serving traffic. See comments in
-        #     `reconciling` for additional information on reconciliation process in Cloud
-        #     Run.
-        #     Please note that unlike v1, this is an int64 value. As with most Google
-        #     APIs, its JSON representation will be a `string` instead of an `integer`.
+        #     Output only. The generation of this Job. See comments in `reconciling` for additional
+        #     information on reconciliation process in Cloud Run.
         # @!attribute [r] terminal_condition
         #   @return [::Google::Cloud::Run::V2::Condition]
-        #     Output only. The Condition of this Service, containing its readiness status, and
-        #     detailed error information in case it did not reach a serving state. See
-        #     comments in `reconciling` for additional information on reconciliation
-        #     process in Cloud Run.
+        #     Output only. The Condition of this Job, containing its readiness status, and
+        #     detailed error information in case it did not reach the desired state.
         # @!attribute [r] conditions
         #   @return [::Array<::Google::Cloud::Run::V2::Condition>]
         #     Output only. The Conditions of all other associated sub-resources. They contain
-        #     additional diagnostics information in case the Service does not reach its
-        #     Serving state. See comments in `reconciling` for additional information on
+        #     additional diagnostics information in case the Job does not reach its
+        #     desired state. See comments in `reconciling` for additional information on
         #     reconciliation process in Cloud Run.
-        # @!attribute [r] latest_ready_revision
-        #   @return [::String]
-        #     Output only. Name of the latest revision that is serving traffic. See comments in
-        #     `reconciling` for additional information on reconciliation process in Cloud
-        #     Run.
-        # @!attribute [r] latest_created_revision
-        #   @return [::String]
-        #     Output only. Name of the last created revision. See comments in `reconciling` for
-        #     additional information on reconciliation process in Cloud Run.
-        # @!attribute [r] traffic_statuses
-        #   @return [::Array<::Google::Cloud::Run::V2::TrafficTargetStatus>]
-        #     Output only. Detailed status information for corresponding traffic targets. See comments
-        #     in `reconciling` for additional information on reconciliation process in
-        #     Cloud Run.
-        # @!attribute [r] uri
-        #   @return [::String]
-        #     Output only. The main URI in which this Service is serving traffic.
+        # @!attribute [r] execution_count
+        #   @return [::Integer]
+        #     Output only. Number of executions created for this job.
+        # @!attribute [r] latest_created_execution
+        #   @return [::Google::Cloud::Run::V2::ExecutionReference]
+        #     Output only. Name of the last created execution.
         # @!attribute [r] reconciling
         #   @return [::Boolean]
-        #     Output only. Returns true if the Service is currently being acted upon by the system to
+        #     Output only. Returns true if the Job is currently being acted upon by the system to
         #     bring it into the desired state.
         #
-        #     When a new Service is created, or an existing one is updated, Cloud Run
-        #     will asynchronously perform all necessary steps to bring the Service to the
-        #     desired serving state. This process is called reconciliation.
-        #     While reconciliation is in process, `observed_generation`,
-        #     `latest_ready_revison`, `traffic_statuses`, and `uri` will have transient
-        #     values that might mismatch the intended state: Once reconciliation is over
-        #     (and this field is false), there are two possible outcomes: reconciliation
-        #     succeeded and the serving state matches the Service, or there was an error,
-        #     and reconciliation failed. This state can be found in
-        #     `terminal_condition.state`.
+        #     When a new Job is created, or an existing one is updated, Cloud Run
+        #     will asynchronously perform all necessary steps to bring the Job to the
+        #     desired state. This process is called reconciliation.
+        #     While reconciliation is in process, `observed_generation` and
+        #     `latest_succeeded_execution`, will have transient values that might
+        #     mismatch the intended state: Once reconciliation is over (and this field is
+        #     false), there are two possible outcomes: reconciliation succeeded and the
+        #     state matches the Job, or there was an error,  and reconciliation failed.
+        #     This state can be found in `terminal_condition.state`.
         #
-        #     If reconciliation succeeded, the following fields will match: `traffic` and
-        #     `traffic_statuses`, `observed_generation` and `generation`,
-        #     `latest_ready_revision` and `latest_created_revision`.
+        #     If reconciliation succeeded, the following fields will match:
+        #     `observed_generation` and `generation`, `latest_succeeded_execution` and
+        #     `latest_created_execution`.
         #
-        #     If reconciliation failed, `traffic_statuses`, `observed_generation`, and
-        #     `latest_ready_revision` will have the state of the last serving revision,
-        #     or empty for newly created Services. Additional information on the failure
-        #     can be found in `terminal_condition` and `conditions`.
+        #     If reconciliation failed, `observed_generation` and
+        #     `latest_succeeded_execution` will have the state of the last succeeded
+        #     execution or empty for newly created Job. Additional information on the
+        #     failure can be found in `terminal_condition` and `conditions`.
         # @!attribute [r] etag
         #   @return [::String]
         #     Output only. A system-generated fingerprint for this version of the
         #     resource. May be used to detect modification conflict during updates.
-        class Service
+        class Job
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
@@ -306,6 +285,22 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
+        end
+
+        # Reference to an Execution. Use /Executions.GetExecution with the given name
+        # to get full execution including the latest status.
+        # @!attribute [rw] name
+        #   @return [::String]
+        #     Name of the execution.
+        # @!attribute [rw] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Creation timestamp of the execution.
+        # @!attribute [rw] completion_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Creation timestamp of the execution.
+        class ExecutionReference
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
       end
     end
