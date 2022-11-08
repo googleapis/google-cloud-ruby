@@ -45,6 +45,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :text_style, :string, 5
       optional :text_decoration, :string, 6
       optional :font_size, :message, 7, "google.cloud.documentai.v1.Document.Style.FontSize"
+      optional :font_family, :string, 8
     end
     add_message "google.cloud.documentai.v1.Document.Style.FontSize" do
       optional :size, :float, 1
@@ -66,6 +67,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :form_fields, :message, 11, "google.cloud.documentai.v1.Document.Page.FormField"
       repeated :symbols, :message, 12, "google.cloud.documentai.v1.Document.Page.Symbol"
       repeated :detected_barcodes, :message, 15, "google.cloud.documentai.v1.Document.Page.DetectedBarcode"
+      optional :image_quality_scores, :message, 17, "google.cloud.documentai.v1.Document.Page.ImageQualityScores"
       optional :provenance, :message, 16, "google.cloud.documentai.v1.Document.Provenance"
     end
     add_message "google.cloud.documentai.v1.Document.Page.Dimension" do
@@ -142,6 +144,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :header_rows, :message, 2, "google.cloud.documentai.v1.Document.Page.Table.TableRow"
       repeated :body_rows, :message, 3, "google.cloud.documentai.v1.Document.Page.Table.TableRow"
       repeated :detected_languages, :message, 4, "google.cloud.documentai.v1.Document.Page.DetectedLanguage"
+      optional :provenance, :message, 5, "google.cloud.documentai.v1.Document.Provenance"
     end
     add_message "google.cloud.documentai.v1.Document.Page.Table.TableRow" do
       repeated :cells, :message, 1, "google.cloud.documentai.v1.Document.Page.Table.TableCell"
@@ -168,6 +171,14 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.documentai.v1.Document.Page.DetectedLanguage" do
       optional :language_code, :string, 1
+      optional :confidence, :float, 2
+    end
+    add_message "google.cloud.documentai.v1.Document.Page.ImageQualityScores" do
+      optional :quality_score, :float, 1
+      repeated :detected_defects, :message, 2, "google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect"
+    end
+    add_message "google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect" do
+      optional :type, :string, 1
       optional :confidence, :float, 2
     end
     add_message "google.cloud.documentai.v1.Document.Entity" do
@@ -299,6 +310,8 @@ module Google
         Document::Page::FormField = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.FormField").msgclass
         Document::Page::DetectedBarcode = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.DetectedBarcode").msgclass
         Document::Page::DetectedLanguage = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.DetectedLanguage").msgclass
+        Document::Page::ImageQualityScores = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.ImageQualityScores").msgclass
+        Document::Page::ImageQualityScores::DetectedDefect = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Page.ImageQualityScores.DetectedDefect").msgclass
         Document::Entity = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Entity").msgclass
         Document::Entity::NormalizedValue = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.Entity.NormalizedValue").msgclass
         Document::EntityRelation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.documentai.v1.Document.EntityRelation").msgclass

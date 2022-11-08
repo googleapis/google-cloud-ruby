@@ -223,6 +223,8 @@ module Google
             #     false.
             #   @param field_mask [::Google::Protobuf::FieldMask, ::Hash]
             #     Specifies which fields to include in ProcessResponse's document.
+            #     Only supports top level document and pages field so it must be in the form
+            #     of `{document_field_name}` or `pages.{page_field_name}`.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::DocumentAI::V1::ProcessResponse]
