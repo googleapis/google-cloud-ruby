@@ -930,6 +930,126 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_SetIamPolicy_sync",
+      "title": "Snippet for set_iam_policy in AccessContextManager",
+      "description": "Basic snippet for set_iam_policy in AccessContextManager",
+      "file": "access_context_manager/set_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "set_iam_policy",
+        "full_name": "::Google::Identity::AccessContextManager::V1::AccessContextManager::Client#set_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::SetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "AccessContextManager::Client",
+          "full_name": "::Google::Identity::AccessContextManager::V1::AccessContextManager::Client"
+        },
+        "method": {
+          "short_name": "SetIamPolicy",
+          "full_name": "google.identity.accesscontextmanager.v1.AccessContextManager.SetIamPolicy",
+          "service": {
+            "short_name": "AccessContextManager",
+            "full_name": "google.identity.accesscontextmanager.v1.AccessContextManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_GetIamPolicy_sync",
+      "title": "Snippet for get_iam_policy in AccessContextManager",
+      "description": "Basic snippet for get_iam_policy in AccessContextManager",
+      "file": "access_context_manager/get_iam_policy.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "get_iam_policy",
+        "full_name": "::Google::Identity::AccessContextManager::V1::AccessContextManager::Client#get_iam_policy",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::GetIamPolicyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::Policy",
+        "client": {
+          "short_name": "AccessContextManager::Client",
+          "full_name": "::Google::Identity::AccessContextManager::V1::AccessContextManager::Client"
+        },
+        "method": {
+          "short_name": "GetIamPolicy",
+          "full_name": "google.identity.accesscontextmanager.v1.AccessContextManager.GetIamPolicy",
+          "service": {
+            "short_name": "AccessContextManager",
+            "full_name": "google.identity.accesscontextmanager.v1.AccessContextManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "accesscontextmanager_v1_generated_AccessContextManager_TestIamPermissions_sync",
+      "title": "Snippet for test_iam_permissions in AccessContextManager",
+      "description": "Basic snippet for test_iam_permissions in AccessContextManager",
+      "file": "access_context_manager/test_iam_permissions.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "test_iam_permissions",
+        "full_name": "::Google::Identity::AccessContextManager::V1::AccessContextManager::Client#test_iam_permissions",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Iam::V1::TestIamPermissionsRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Iam::V1::TestIamPermissionsResponse",
+        "client": {
+          "short_name": "AccessContextManager::Client",
+          "full_name": "::Google::Identity::AccessContextManager::V1::AccessContextManager::Client"
+        },
+        "method": {
+          "short_name": "TestIamPermissions",
+          "full_name": "google.identity.accesscontextmanager.v1.AccessContextManager.TestIamPermissions",
+          "service": {
+            "short_name": "AccessContextManager",
+            "full_name": "google.identity.accesscontextmanager.v1.AccessContextManager"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }

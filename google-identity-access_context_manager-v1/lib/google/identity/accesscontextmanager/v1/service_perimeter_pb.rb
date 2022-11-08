@@ -51,10 +51,6 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
         optional :resource, :string, 2
       end
     end
-    add_message "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo" do
-      repeated :resources, :string, 1
-      repeated :operations, :message, 2, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation"
-    end
     add_message "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom" do
       repeated :sources, :message, 1, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource"
       repeated :identities, :string, 2
@@ -68,13 +64,18 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :ingress_from, :message, 1, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom"
       optional :ingress_to, :message, 2, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo"
     end
-    add_message "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy" do
-      optional :egress_from, :message, 1, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom"
-      optional :egress_to, :message, 2, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo"
-    end
     add_message "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom" do
       repeated :identities, :string, 1
       optional :identity_type, :enum, 2, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType"
+    end
+    add_message "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo" do
+      repeated :resources, :string, 1
+      repeated :operations, :message, 2, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation"
+      repeated :external_resources, :string, 3
+    end
+    add_message "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy" do
+      optional :egress_from, :message, 1, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom"
+      optional :egress_to, :message, 2, "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo"
     end
     add_enum "google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType" do
       value :IDENTITY_TYPE_UNSPECIFIED, 0
@@ -96,12 +97,12 @@ module Google
         ServicePerimeterConfig::MethodSelector = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.MethodSelector").msgclass
         ServicePerimeterConfig::ApiOperation = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.ApiOperation").msgclass
         ServicePerimeterConfig::IngressSource = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressSource").msgclass
-        ServicePerimeterConfig::EgressTo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo").msgclass
         ServicePerimeterConfig::IngressFrom = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressFrom").msgclass
         ServicePerimeterConfig::IngressTo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressTo").msgclass
         ServicePerimeterConfig::IngressPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IngressPolicy").msgclass
-        ServicePerimeterConfig::EgressPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy").msgclass
         ServicePerimeterConfig::EgressFrom = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressFrom").msgclass
+        ServicePerimeterConfig::EgressTo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressTo").msgclass
+        ServicePerimeterConfig::EgressPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.EgressPolicy").msgclass
         ServicePerimeterConfig::IdentityType = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.identity.accesscontextmanager.v1.ServicePerimeterConfig.IdentityType").enummodule
       end
     end
