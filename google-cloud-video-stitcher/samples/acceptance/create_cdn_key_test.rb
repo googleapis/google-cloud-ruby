@@ -14,7 +14,7 @@
 
 require_relative "helper"
 
-describe "#create_cloud_cdn_key", :stitcher_snippet do
+describe "#create_cdn_key", :stitcher_snippet do
   it "creates a Cloud CDN key" do
     sample = SampleLoader.load "create_cdn_key.rb"
 
@@ -24,6 +24,18 @@ describe "#create_cloud_cdn_key", :stitcher_snippet do
     @cloud_cdn_key_created = true
 
     cdn_key_id_regex = Regexp.escape gcdn_cdn_key_id
+    assert_match %r{CDN key: projects/\S+/locations/#{location_id}/cdnKeys/#{cdn_key_id_regex}}, out
+  end
+
+  it "creates an Akamai CDN key" do
+    sample = SampleLoader.load "create_cdn_key.rb"
+
+    out, _err = capture_io do
+      sample.run project_id: project_id, location: location_id, cdn_key_id: akamai_cdn_key_id, hostname: hostname, gcdn_keyname: nil, gcdn_private_key: nil, akamai_token_key: akamai_token_key
+    end
+    @akamai_cdn_key_created = true
+
+    cdn_key_id_regex = Regexp.escape akamai_cdn_key_id
     assert_match %r{CDN key: projects/\S+/locations/#{location_id}/cdnKeys/#{cdn_key_id_regex}}, out
   end
 end
