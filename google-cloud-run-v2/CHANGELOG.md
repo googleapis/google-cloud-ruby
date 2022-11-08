@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.5.0 (2022-11-08)
+
+#### Features
+
+* support jobs and executions 
+* support new IAM policy 
+
 ### 0.4.0 (2022-10-19)
 
 #### Features
