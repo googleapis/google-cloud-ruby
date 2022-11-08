@@ -83,6 +83,9 @@ module Google
         #     A URI that hosts the employer's company logo.
         # @!attribute [rw] keyword_searchable_job_custom_attributes
         #   @return [::Array<::String>]
+        #     This field is deprecated. Please set the searchability of the custom
+        #     attribute in the {::Google::Cloud::Talent::V4beta1::Job#custom_attributes Job.custom_attributes} going forward.
+        #
         #     A list of keys of filterable {::Google::Cloud::Talent::V4beta1::Job#custom_attributes Job.custom_attributes}, whose
         #     corresponding `string_values` are used in keyword searches. Jobs with
         #     `string_values` under these specified field keys are returned if any
