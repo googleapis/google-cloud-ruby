@@ -1,5 +1,13 @@
 # Release History
 
+### 0.13.0 (2022-11-08)
+
+#### Features
+
+* support enabling private nodes 
+* support enabling private nodes 
+* support GatewayAPIConfig 
+
 ### 0.12.0 (2022-10-18)
 
 #### Features
