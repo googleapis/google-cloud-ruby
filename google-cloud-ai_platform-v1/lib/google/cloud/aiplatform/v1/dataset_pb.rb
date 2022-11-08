@@ -26,6 +26,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.aiplatform.v1.ImportDataConfig" do
       map :data_item_labels, :string, :string, 2
+      map :annotation_labels, :string, :string, 3
       optional :import_schema_uri, :string, 4
       oneof :source do
         optional :gcs_source, :message, 1, "google.cloud.aiplatform.v1.GcsSource"

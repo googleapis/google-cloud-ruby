@@ -161,7 +161,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the Tensorboard to list TensorboardExperiments.
         #     Format:
-        #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}'
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Lists the TensorboardExperiments that match the filter expression.
@@ -298,7 +298,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the TensorboardTimeSeries to list Blobs.
         #     Format:
-        #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}/experiments/\\{experiment}/runs/\\{run}/timeSeries/\\{time_series}'
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}/timeSeries/{time_series}`
         # @!attribute [rw] blob_ids
         #   @return [::Array<::String>]
         #     IDs of the blobs to read.
@@ -321,7 +321,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the TensorboardExperiment to list TensorboardRuns.
         #     Format:
-        #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}/experiments/\\{experiment}'
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Lists the TensorboardRuns that match the filter expression.
@@ -460,7 +460,7 @@ module Google
         #   @return [::String]
         #     Required. The resource name of the TensorboardRun to list TensorboardTimeSeries.
         #     Format:
-        #     'projects/\\{project}/locations/\\{location}/tensorboards/\\{tensorboard}/experiments/\\{experiment}/runs/\\{run}'
+        #     `projects/{project}/locations/{location}/tensorboards/{tensorboard}/experiments/{experiment}/runs/{run}`
         # @!attribute [rw] filter
         #   @return [::String]
         #     Lists the TensorboardTimeSeries that match the filter expression.

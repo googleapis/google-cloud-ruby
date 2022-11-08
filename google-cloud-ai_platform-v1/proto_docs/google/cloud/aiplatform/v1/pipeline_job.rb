@@ -154,8 +154,8 @@ module Google
             # @!attribute [rw] artifact_id
             #   @return [::String]
             #     Artifact resource id from MLMD. Which is the last portion of an
-            #     artifact resource
-            #     name(projects/\\{project}/locations/\\{location}/metadataStores/default/artifacts/\\{artifact_id}).
+            #     artifact resource name:
+            #     `projects/{project}/locations/{location}/metadataStores/default/artifacts/{artifact_id}`.
             #     The artifact must stay within the same project, location and default
             #     metadatastore as the pipeline.
             class InputArtifact
@@ -385,6 +385,17 @@ module Google
           #     execution. This job will be available if the
           #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec} specifies the `pre_caching_check` hook in
           #     the lifecycle events.
+          # @!attribute [r] failed_main_jobs
+          #   @return [::Array<::String>]
+          #     Output only. The names of the previously failed {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the main container
+          #     executions. The list includes the all attempts in chronological order.
+          # @!attribute [r] failed_pre_caching_check_jobs
+          #   @return [::Array<::String>]
+          #     Output only. The names of the previously failed {::Google::Cloud::AIPlatform::V1::CustomJob CustomJob} for the
+          #     pre-caching-check container executions. This job will be available if the
+          #     {::Google::Cloud::AIPlatform::V1::PipelineJob#pipeline_spec PipelineJob.pipeline_spec} specifies the `pre_caching_check` hook in
+          #     the lifecycle events.
+          #     The list includes the all attempts in chronological order.
           class ContainerDetail
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -27,13 +27,14 @@ module Google
         # channel. Note that a channel is associated with exactly one event provider.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The resource name of the channel. Must be unique within the location
-        #     on the project and must be in
+        #     Required. The resource name of the channel. Must be unique within the
+        #     location on the project and must be in
         #     `projects/{project}/locations/{location}/channels/{channel_id}` format.
         # @!attribute [r] uid
         #   @return [::String]
-        #     Output only. Server assigned unique identifier for the channel. The value is a UUID4
-        #     string and guaranteed to remain unchanged until the resource is deleted.
+        #     Output only. Server assigned unique identifier for the channel. The value
+        #     is a UUID4 string and guaranteed to remain unchanged until the resource is
+        #     deleted.
         # @!attribute [r] create_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Output only. The creation time.
@@ -42,22 +43,29 @@ module Google
         #     Output only. The last-modified time.
         # @!attribute [rw] provider
         #   @return [::String]
-        #     Required. The name of the event provider (e.g. Eventarc SaaS partner) associated
+        #     The name of the event provider (e.g. Eventarc SaaS partner) associated
         #     with the channel. This provider will be granted permissions to publish
         #     events to the channel. Format:
         #     `projects/{project}/locations/{location}/providers/{provider_id}`.
         # @!attribute [r] pubsub_topic
         #   @return [::String]
-        #     Output only. The name of the Pub/Sub topic created and managed by Eventarc system as
-        #     a transport for the event delivery. Format:
+        #     Output only. The name of the Pub/Sub topic created and managed by
+        #     Eventarc system as a transport for the event delivery. Format:
         #     `projects/{project}/topics/{topic_id}`.
         # @!attribute [r] state
         #   @return [::Google::Cloud::Eventarc::V1::Channel::State]
         #     Output only. The state of a Channel.
         # @!attribute [r] activation_token
         #   @return [::String]
-        #     Output only. The activation token for the channel. The token must be used by the
-        #     provider to register the channel for publishing.
+        #     Output only. The activation token for the channel. The token must be used
+        #     by the provider to register the channel for publishing.
+        # @!attribute [rw] crypto_key_name
+        #   @return [::String]
+        #     Optional. Resource name of a KMS crypto key (managed by the user) used to
+        #     encrypt/decrypt their event data.
+        #
+        #     It must match the pattern
+        #     `projects/*/locations/*/keyRings/*/cryptoKeys/*`.
         class Channel
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -78,11 +86,13 @@ module Google
             # event provider.
             ACTIVE = 2
 
-            # The INACTIVE state means that the Channel cannot receive events
+            # The INACTIVE state indicates that the Channel cannot receive events
             # permanently. There are two possible cases this state can happen:
+            #
             # 1. The SaaS provider disconnected from this Channel.
             # 2. The Channel activation token has expired but the SaaS provider
             #    wasn't connected.
+            #
             # To re-establish a Connection with a provider, the subscriber
             # should create a new Channel and give it to the provider.
             INACTIVE = 3

@@ -1095,8 +1095,8 @@ module Google
             #     * company_display_name: histogram by {::Google::Cloud::Talent::V4beta1::Job#company_display_name Job.company_display_name}.
             #     * employment_type: histogram by {::Google::Cloud::Talent::V4beta1::Job#employment_types Job.employment_types}, for example,
             #       "FULL_TIME", "PART_TIME".
-            #     * company_size: histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example, "SMALL",
-            #     "MEDIUM", "BIG".
+            #     * company_size (DEPRECATED): histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example,
+            #     "SMALL", "MEDIUM", "BIG".
             #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
             #       in days.
             #       Must specify list of numeric buckets in spec.
@@ -1427,8 +1427,8 @@ module Google
             #     * company_display_name: histogram by {::Google::Cloud::Talent::V4beta1::Job#company_display_name Job.company_display_name}.
             #     * employment_type: histogram by {::Google::Cloud::Talent::V4beta1::Job#employment_types Job.employment_types}, for example,
             #       "FULL_TIME", "PART_TIME".
-            #     * company_size: histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example, "SMALL",
-            #     "MEDIUM", "BIG".
+            #     * company_size (DEPRECATED): histogram by {::Google::Cloud::Talent::V4beta1::CompanySize CompanySize}, for example,
+            #     "SMALL", "MEDIUM", "BIG".
             #     * publish_time_in_day: histogram by the {::Google::Cloud::Talent::V4beta1::Job#posting_publish_time Job.posting_publish_time}
             #       in days.
             #       Must specify list of numeric buckets in spec.

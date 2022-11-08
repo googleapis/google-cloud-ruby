@@ -40,6 +40,9 @@ module Google
         #     net.ipv4.tcp_rmem
         #     net.ipv4.tcp_wmem
         #     net.ipv4.tcp_tw_reuse
+        # @!attribute [rw] cgroup_mode
+        #   @return [::Google::Cloud::Container::V1::LinuxNodeConfig::CgroupMode]
+        #     cgroup_mode specifies the cgroup mode to be used on the node.
         class LinuxNodeConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -51,6 +54,21 @@ module Google
           class SysctlsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # Possible cgroup modes that can be used.
+          module CgroupMode
+            # CGROUP_MODE_UNSPECIFIED is when unspecified cgroup configuration is used.
+            # The default for the GKE node OS image will be used.
+            CGROUP_MODE_UNSPECIFIED = 0
+
+            # CGROUP_MODE_V1 specifies to use cgroupv1 for the cgroup configuration on
+            # the node image.
+            CGROUP_MODE_V1 = 1
+
+            # CGROUP_MODE_V2 specifies to use cgroupv2 for the cgroup configuration on
+            # the node image.
+            CGROUP_MODE_V2 = 2
           end
         end
 
@@ -284,6 +302,10 @@ module Google
         #   @return [::Google::Cloud::Container::V1::ConfidentialNodes]
         #     Confidential nodes config.
         #     All the nodes in the node pool will be Confidential VM once enabled.
+        # @!attribute [rw] resource_labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     The resource labels for the node pool to use to annotate any related
+        #     Google Compute Engine resources.
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     Logging configuration.
@@ -305,6 +327,15 @@ module Google
           # @!attribute [rw] value
           #   @return [::String]
           class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class ResourceLabelsEntry
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
@@ -363,6 +394,11 @@ module Google
         #     Only applicable if `ip_allocation_policy.use_ip_aliases` is true.
         #
         #     This field cannot be changed after the node pool has been created.
+        # @!attribute [rw] enable_private_nodes
+        #   @return [::Boolean]
+        #     Whether nodes have internal IP addresses only.
+        #     If enable_private_nodes is not specified, then the value is derived from
+        #     [cluster.privateClusterConfig.enablePrivateNodes][google.container.v1beta1.PrivateClusterConfig.enablePrivateNodes]
         # @!attribute [rw] network_performance_config
         #   @return [::Google::Cloud::Container::V1::NodeNetworkConfig::NetworkPerformanceConfig]
         #     Network bandwidth tier configuration.
@@ -525,6 +561,25 @@ module Google
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Map of node label keys and node label values.
         class NodeLabels
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # @!attribute [rw] key
+          #   @return [::String]
+          # @!attribute [rw] value
+          #   @return [::String]
+          class LabelsEntry
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+          end
+        end
+
+        # Collection of [GCP
+        # labels](https://cloud.google.com/resource-manager/docs/creating-managing-labels).
+        # @!attribute [rw] labels
+        #   @return [::Google::Protobuf::Map{::String => ::String}]
+        #     Map of node label keys and node label values.
+        class ResourceLabels
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
@@ -741,6 +796,10 @@ module Google
         # @!attribute [rw] master_global_access_config
         #   @return [::Google::Cloud::Container::V1::PrivateClusterMasterGlobalAccessConfig]
         #     Controls master global access settings.
+        # @!attribute [rw] private_endpoint_subnetwork
+        #   @return [::String]
+        #     Subnet to provision the master's private endpoint during cluster creation.
+        #     Specified in projects/*/regions/*/subnetworks/* format.
         class PrivateClusterConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -831,6 +890,9 @@ module Google
         #   @return [::Array<::Google::Cloud::Container::V1::MasterAuthorizedNetworksConfig::CidrBlock>]
         #     cidr_blocks define up to 50 external networks that could access
         #     Kubernetes master through HTTPS.
+        # @!attribute [rw] gcp_public_cidrs_access_enabled
+        #   @return [::Boolean]
+        #     Whether master is accessbile via Google Compute Engine Public IP addresses.
         class MasterAuthorizedNetworksConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1574,6 +1636,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::ServiceExternalIPsConfig]
         #     ServiceExternalIPsConfig specifies the config for the use of Services with
         #     ExternalIPs field.
+        # @!attribute [rw] desired_enable_private_endpoint
+        #   @return [::Boolean]
+        #     Enable/Disable private endpoint for the cluster's master.
         # @!attribute [rw] desired_master_version
         #   @return [::String]
         #     The Kubernetes version to change the master to.
@@ -1593,6 +1658,9 @@ module Google
         #   @return [::Google::Cloud::Container::V1::NetworkTags]
         #     The desired network tags that apply to all auto-provisioned node pools
         #     in autopilot clusters and node auto-provisioning enabled clusters.
+        # @!attribute [rw] desired_gateway_api_config
+        #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig]
+        #     The desired config of Gateway API on this cluster.
         # @!attribute [rw] desired_node_pool_logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     The desired node pool logging configuration defaults for the cluster.
@@ -1948,6 +2016,10 @@ module Google
         # @!attribute [rw] logging_config
         #   @return [::Google::Cloud::Container::V1::NodePoolLoggingConfig]
         #     Logging configuration.
+        # @!attribute [rw] resource_labels
+        #   @return [::Google::Cloud::Container::V1::ResourceLabels]
+        #     The resource labels for the node pool to use to annotate any related
+        #     Google Compute Engine resources.
         class UpdateNodePoolRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -2546,7 +2618,7 @@ module Google
           # Standard rollout policy is the default policy for blue-green.
           # @!attribute [rw] batch_percentage
           #   @return [::Float]
-          #     Percentage of the bool pool nodes to drain in a batch.
+          #     Percentage of the blue pool nodes to drain in a batch.
           #     The range of this field should be (0.0, 1.0].
           # @!attribute [rw] batch_node_count
           #   @return [::Integer]
@@ -3619,9 +3691,38 @@ module Google
         #   @return [::Google::Cloud::Container::V1::ServiceExternalIPsConfig]
         #     ServiceExternalIPsConfig specifies if services with externalIPs field are
         #     blocked or not.
+        # @!attribute [rw] gateway_api_config
+        #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig]
+        #     GatewayAPIConfig contains the desired config of Gateway API on this
+        #     cluster.
         class NetworkConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # GatewayAPIConfig contains the desired config of Gateway API on this cluster.
+        # @!attribute [rw] channel
+        #   @return [::Google::Cloud::Container::V1::GatewayAPIConfig::Channel]
+        #     The Gateway API release channel to use for Gateway API.
+        class GatewayAPIConfig
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Channel describes if/how Gateway API should be installed and implemented in
+          # a cluster.
+          module Channel
+            # Default value.
+            CHANNEL_UNSPECIFIED = 0
+
+            # Gateway API support is disabled
+            CHANNEL_DISABLED = 1
+
+            # Gateway API support is enabled, experimental CRDs are installed
+            CHANNEL_EXPERIMENTAL = 3
+
+            # Gateway API support is enabled, standard CRDs are installed
+            CHANNEL_STANDARD = 4
+          end
         end
 
         # Config to block services with externalIPs field.
@@ -4278,6 +4379,15 @@ module Google
 
             # workloads
             WORKLOADS = 2
+
+            # kube-apiserver
+            APISERVER = 3
+
+            # kube-scheduler
+            SCHEDULER = 4
+
+            # kube-controller-manager
+            CONTROLLER_MANAGER = 5
           end
         end
 

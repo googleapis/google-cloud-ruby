@@ -28,13 +28,13 @@ module Google
         #     For API calls that return a long running operation.
         #     Resource name of the long running operation.
         #     Format:
-        #     'projects/\\{project}/locations/\\{location}/operations/\\{operation}'
+        #     `projects/{project}/locations/{location}/operations/{operation}`
         # @!attribute [rw] data_labeling_job
         #   @return [::String]
         #     For API calls that start a LabelingJob.
         #     Resource name of the LabelingJob.
         #     Format:
-        #     'projects/\\{project}/locations/\\{location}/dataLabelingJobs/\\{data_labeling_job}'
+        #     `projects/{project}/locations/{location}/dataLabelingJobs/{data_labeling_job}`
         # @!attribute [rw] method
         #   @return [::String]
         #     The method name of the API RPC call. For example,
