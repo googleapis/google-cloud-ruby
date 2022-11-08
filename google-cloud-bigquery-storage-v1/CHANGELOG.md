@@ -1,5 +1,11 @@
 # Release History
 
+### 0.15.1 (2022-11-08)
+
+#### Documentation
+
+* remove stale header guidance for AppendRows 
+
 ### 0.15.0 (2022-09-08)
 
 #### Features
