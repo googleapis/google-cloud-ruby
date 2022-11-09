@@ -18,6 +18,8 @@ require "minitest/rg"
 
 require "google/cloud/video/stitcher"
 
+require_relative "akamai_cdn_key_definition"
+require_relative "cloud_cdn_key_definition"
 require_relative "slate_definition"
 require_relative "../../../.toys/.lib/sample_loader"
 
@@ -35,10 +37,28 @@ class StitcherSnippetSpec < Minitest::Spec
   let(:slate_uri) { "https://storage.googleapis.com/cloud-samples-data/media/ForBiggerEscapes.mp4" }
   let(:updated_slate_uri) { "https://storage.googleapis.com/cloud-samples-data/media/ForBiggerJoyrides.mp4" }
 
+  let(:gcdn_cdn_key_id) { "my-gcdn-test-#{(Time.now.to_f * 1000).to_i}" }
+  let(:gcdn_cdn_key_name) { "projects/#{project_id}/locations/#{location_id}/cdnKeys/#{gcdn_cdn_key_id}" }
+  let(:akamai_cdn_key_id) { "my-akamai-test-#{(Time.now.to_f * 1000).to_i}" }
+  let(:akamai_cdn_key_name) { "projects/#{project_id}/locations/#{location_id}/cdnKeys/#{akamai_cdn_key_id}" }
+
+  let(:hostname) { "cdn.example.com" }
+  let(:updated_hostname) { "updated.example.com" }
+  let(:gcdn_key_name) { "gcdn-key" }
+  let(:updated_gcdn_key_name) { "updated-gcdn-key" }
+  let(:gcdn_private_key) { "VGhpcyBpcyBhIHRlc3Qgc3RyaW5nLg==" }
+  let(:updated_gcdn_private_key) { "VGhpcyBpcyBhbiB1cGRhdGVkIHRlc3Qgc3RyaW5nLg==" }
+  let(:akamai_token_key) { "VGhpcyBpcyBhIHRlc3Qgc3RyaW5nLg==" }
+  let(:updated_akamai_token_key) { "VGhpcyBpcyBhbiB1cGRhdGVkIHRlc3Qgc3RyaW5nLg==" }
+
   attr_writer :slate_created
+  attr_writer :akamai_cdn_key_created
+  attr_writer :cloud_cdn_key_created
 
   before do
     @slate_created = false
+    @akamai_cdn_key_created = false
+    @cloud_cdn_key_created = false
     # Remove old slates in the test project if they exist
     response = client.list_slates parent: location_path
     response.each do |slate|
@@ -48,6 +68,20 @@ class StitcherSnippetSpec < Minitest::Spec
       next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
       begin
         client.delete_slate name: slate.name.to_s
+      rescue Google::Cloud::NotFoundError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
+
+    # Remove old CDN keys in the test project if they exist
+    response = client.list_cdn_keys parent: location_path
+    response.each do |cdn_key|
+      tmp = cdn_key.name.to_s.split "-"
+      create_time = tmp.last.to_i
+      now = (Time.now.to_f * 1000).to_i # Milliseconds, preserves float value for precision
+      next if create_time >= (now - DELETION_THRESHOLD_TIME_HOURS_IN_MILLISECONDS)
+      begin
+        client.delete_cdn_key name: cdn_key.name.to_s
       rescue Google::Cloud::NotFoundError => e
         puts "Rescued: #{e.inspect}"
       end
@@ -62,10 +96,40 @@ class StitcherSnippetSpec < Minitest::Spec
     )
   end
 
+  let :akamai_cdn_key do
+    client.create_cdn_key(
+      parent: location_path,
+      cdn_key_id: akamai_cdn_key_id,
+      cdn_key: akamai_cdn_def(akamai_cdn_key_name, hostname, akamai_token_key)
+    )
+  end
+
+  let :cloud_cdn_key do
+    client.create_cdn_key(
+      parent: location_path,
+      cdn_key_id: gcdn_cdn_key_id,
+      cdn_key: cloud_cdn_def(gcdn_cdn_key_name, hostname, gcdn_key_name, gcdn_private_key)
+    )
+  end
+
   after do
     if @slate_created
       begin
         client.delete_slate name: slate_name
+      rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
+    if @akamai_cdn_key_created
+      begin
+        client.delete_cdn_key name: akamai_cdn_key_name
+      rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
+        puts "Rescued: #{e.inspect}"
+      end
+    end
+    if @cloud_cdn_key_created
+      begin
+        client.delete_cdn_key name: gcdn_cdn_key_name
       rescue Google::Cloud::NotFoundError, Google::Cloud::FailedPreconditionError => e
         puts "Rescued: #{e.inspect}"
       end
