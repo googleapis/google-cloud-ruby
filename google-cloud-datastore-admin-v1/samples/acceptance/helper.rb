@@ -26,7 +26,7 @@ end
 
 def create_bucket
   storage = Google::Cloud::Storage.new
-  bucket = storage.bucket(storage_bucket_name)
+  bucket = storage.bucket storage_bucket_name
   storage.create_bucket storage_bucket_name if bucket.nil? 
 end
 
