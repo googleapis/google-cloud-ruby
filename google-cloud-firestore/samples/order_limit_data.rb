@@ -109,7 +109,9 @@ def order_by_name_limit_to_last_query project_id:, collection_path: "cities"
 
   cities_ref = firestore.col collection_path
   # [START fs_order_by_name_limit_to_last_query]
+  # [START firestore_query_order_limit_to_last]
   query = cities_ref.order("name").limit_to_last(3)
+  # [END firestore_query_order_limit_to_last]
   # [END fs_order_by_name_limit_to_last_query]
   query.get do |city|
     puts "Document #{city.document_id} returned by order by name with limit_to_last query."
