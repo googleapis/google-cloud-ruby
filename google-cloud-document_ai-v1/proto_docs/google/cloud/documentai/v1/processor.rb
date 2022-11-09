@@ -34,6 +34,9 @@ module Google
         # @!attribute [rw] display_name
         #   @return [::String]
         #     The display name of the processor version.
+        # @!attribute [rw] document_schema
+        #   @return [::Google::Cloud::DocumentAI::V1::DocumentSchema]
+        #     The schema of the processor version. Describes the output.
         # @!attribute [rw] state
         #   @return [::Google::Cloud::DocumentAI::V1::ProcessorVersion::State]
         #     The state of the processor version.
@@ -104,7 +107,7 @@ module Google
         #     Format: `projects/{project}/locations/{location}/processors/{processor}`
         # @!attribute [rw] type
         #   @return [::String]
-        #     The processor type, e.g., OCR_PROCESSOR, INVOICE_PROCESSOR, etc.
+        #     The processor type, e.g., `OCR_PROCESSOR`, `INVOICE_PROCESSOR`, etc.
         #     To get a list of processors types, see
         #     {::Google::Cloud::DocumentAI::V1::DocumentProcessorService::Client#fetch_processor_types FetchProcessorTypes}.
         # @!attribute [rw] display_name
@@ -143,14 +146,14 @@ module Google
             # The processor is disabled.
             DISABLED = 2
 
-            # The processor is being enabled, will become ENABLED if successful.
+            # The processor is being enabled, will become `ENABLED` if successful.
             ENABLING = 3
 
-            # The processor is being disabled, will become DISABLED if successful.
+            # The processor is being disabled, will become `DISABLED` if successful.
             DISABLING = 4
 
-            # The processor is being created, will become either ENABLED (for
-            # successful creation) or FAILED (for failed ones).
+            # The processor is being created, will become either `ENABLED` (for
+            # successful creation) or `FAILED` (for failed ones).
             # Once a processor is in this state, it can then be used for document
             # processing, but the feature dependencies of the processor might not be
             # fully created yet.
