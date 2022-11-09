@@ -12,6 +12,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :name, :string, 1
       optional :parent, :string, 2
       optional :title, :string, 3
+      repeated :scopes, :string, 7
       optional :create_time, :message, 4, "google.protobuf.Timestamp"
       optional :update_time, :message, 5, "google.protobuf.Timestamp"
       optional :etag, :string, 6
