@@ -655,7 +655,7 @@
   "google-iam-v2+FILLER": "0.0.0",
   "google-identity-access_context_manager": "1.1.1",
   "google-identity-access_context_manager+FILLER": "0.0.0",
-  "google-identity-access_context_manager-v1": "0.2.0",
+  "google-identity-access_context_manager-v1": "0.3.0",
   "google-identity-access_context_manager-v1+FILLER": "0.0.0",
   "grafeas": "1.2.0",
   "grafeas+FILLER": "0.0.0",
