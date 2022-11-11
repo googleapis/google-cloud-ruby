@@ -571,6 +571,13 @@ module Google
             #     inspect_template_name argument.
             #   @param item [::Google::Cloud::Dlp::V2::ContentItem, ::Hash]
             #     The item to de-identify. Will be treated as text.
+            #
+            #     This value must be of type
+            #     {::Google::Cloud::Dlp::V2::Table Table} if your
+            #     {::Google::Cloud::Dlp::V2::DeidentifyContentRequest#deidentify_config deidentify_config}
+            #     is a
+            #     {::Google::Cloud::Dlp::V2::RecordTransformations RecordTransformations}
+            #     object.
             #   @param inspect_template_name [::String]
             #     Template to use. Any configuration directly specified in
             #     inspect_config will override those set in the template. Singular fields

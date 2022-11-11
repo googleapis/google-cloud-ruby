@@ -22,12 +22,17 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     add_message "google.privacy.dlp.v2.ExcludeInfoTypes" do
       repeated :info_types, :message, 1, "google.privacy.dlp.v2.InfoType"
     end
+    add_message "google.privacy.dlp.v2.ExcludeByHotword" do
+      optional :hotword_regex, :message, 1, "google.privacy.dlp.v2.CustomInfoType.Regex"
+      optional :proximity, :message, 2, "google.privacy.dlp.v2.CustomInfoType.DetectionRule.Proximity"
+    end
     add_message "google.privacy.dlp.v2.ExclusionRule" do
       optional :matching_type, :enum, 4, "google.privacy.dlp.v2.MatchingType"
       oneof :type do
         optional :dictionary, :message, 1, "google.privacy.dlp.v2.CustomInfoType.Dictionary"
         optional :regex, :message, 2, "google.privacy.dlp.v2.CustomInfoType.Regex"
         optional :exclude_info_types, :message, 3, "google.privacy.dlp.v2.ExcludeInfoTypes"
+        optional :exclude_by_hotword, :message, 5, "google.privacy.dlp.v2.ExcludeByHotword"
       end
     end
     add_message "google.privacy.dlp.v2.InspectionRule" do
@@ -326,6 +331,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :URUGUAY, 38
       value :VENEZUELA, 39
       value :INTERNAL, 40
+      value :NEW_ZEALAND, 41
     end
     add_enum "google.privacy.dlp.v2.InfoTypeCategory.IndustryCategory" do
       value :INDUSTRY_UNSPECIFIED, 0
@@ -1349,6 +1355,7 @@ module Google
     module Dlp
       module V2
         ExcludeInfoTypes = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ExcludeInfoTypes").msgclass
+        ExcludeByHotword = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ExcludeByHotword").msgclass
         ExclusionRule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.ExclusionRule").msgclass
         InspectionRule = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectionRule").msgclass
         InspectionRuleSet = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.privacy.dlp.v2.InspectionRuleSet").msgclass
