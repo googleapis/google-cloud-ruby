@@ -71,7 +71,7 @@ describe "Create Assessment" do
     @pid = Process.fork do
       @server.start
     end
-    # wait for server to start 
+    # wait for server to start
     sleep 2
   end
 
