@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2022-11-10)
+
+#### Features
+
+* Added Offer#deal_code field ([#19400](https://github.com/googleapis/google-cloud-ruby/issues/19400)) 
+
 ### 0.13.0 (2022-10-19)
 
 #### Features
