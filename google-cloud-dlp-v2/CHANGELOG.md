@@ -1,5 +1,11 @@
 # Release History
 
+### 0.14.0 (2022-11-11)
+
+#### Features
+
+* support ExcludeByHotword and add :NEW_ZEALAND to LocationCategory 
+
 ### 0.13.1 (2022-10-03)
 
 #### Documentation
