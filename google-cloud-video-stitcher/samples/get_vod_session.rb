@@ -16,7 +16,8 @@
 require "google/cloud/video/stitcher"
 
 ##
-# Get a VOD session
+# Get a VOD session. VOD sessions are ephemeral resources that expire
+# after a few hours.
 #
 # @param project_id [String] Your Google Cloud project (e.g. "my-project")
 # @param location [String] The location (e.g. "us-central1")
