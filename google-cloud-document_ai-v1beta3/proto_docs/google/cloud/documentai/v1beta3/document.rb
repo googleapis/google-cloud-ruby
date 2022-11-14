@@ -60,9 +60,9 @@ module Google
         #     Placeholder.  Relationship among {::Google::Cloud::DocumentAI::V1beta3::Document#entities Document.entities}.
         # @!attribute [rw] text_changes
         #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::TextChange>]
-        #     Placeholder.  A list of text corrections made to [Document.text].  This is
-        #     usually used for annotating corrections to OCR mistakes.  Text changes for
-        #     a given revision may not overlap with each other.
+        #     Placeholder.  A list of text corrections made to {::Google::Cloud::DocumentAI::V1beta3::Document#text Document.text}.  This
+        #     is usually used for annotating corrections to OCR mistakes.  Text changes
+        #     for a given revision may not overlap with each other.
         # @!attribute [rw] shard_info
         #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::ShardInfo]
         #     Information about the sharding if this document is sharded part of a larger
@@ -122,6 +122,10 @@ module Google
           # @!attribute [rw] font_size
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Style::FontSize]
           #     Font size.
+          # @!attribute [rw] font_family
+          #   @return [::String]
+          #     Font family such as `Arial`, `Times New Roman`.
+          #     https://www.w3schools.com/cssref/pr_font_font-family.asp
           class Style
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -195,6 +199,9 @@ module Google
           # @!attribute [rw] detected_barcodes
           #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::DetectedBarcode>]
           #     A list of detected barcodes.
+          # @!attribute [rw] image_quality_scores
+          #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Page::ImageQualityScores]
+          #     Image Quality Scores.
           # @!attribute [rw] provenance
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
           #     The history of this page.
@@ -265,7 +272,7 @@ module Google
             #   @return [::Float]
             #     Confidence of the current {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout Layout} within context of the object this
             #     layout is for. e.g. confidence can be for a single token, a table,
-            #     a visual element, etc. depending on context. Range [0, 1].
+            #     a visual element, etc. depending on context. Range `[0, 1]`.
             # @!attribute [rw] bounding_poly
             #   @return [::Google::Cloud::DocumentAI::V1beta3::BoundingPoly]
             #     The bounding polygon for the {::Google::Cloud::DocumentAI::V1beta3::Document::Page::Layout Layout}.
@@ -357,7 +364,7 @@ module Google
             #     A list of detected languages together with confidence.
             # @!attribute [rw] provenance
             #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
-            #     The  history of this annotation.
+            #     The history of this annotation.
             class Token
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -428,6 +435,9 @@ module Google
             # @!attribute [rw] detected_languages
             #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::DetectedLanguage>]
             #     A list of detected languages together with confidence.
+            # @!attribute [rw] provenance
+            #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::Provenance]
+            #     The history of this table.
             class Table
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -514,15 +524,49 @@ module Google
             # Detected language for a structural component.
             # @!attribute [rw] language_code
             #   @return [::String]
-            #     The BCP-47 language code, such as "en-US" or "sr-Latn". For more
+            #     The BCP-47 language code, such as `en-US` or `sr-Latn`. For more
             #     information, see
             #     https://www.unicode.org/reports/tr35/#Unicode_locale_identifier.
             # @!attribute [rw] confidence
             #   @return [::Float]
-            #     Confidence of detected language. Range [0, 1].
+            #     Confidence of detected language. Range `[0, 1]`.
             class DetectedLanguage
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
+            end
+
+            # Image Quality Scores for the page image
+            # @!attribute [rw] quality_score
+            #   @return [::Float]
+            #     The overall quality score. Range `[0, 1]` where 1 is perfect quality.
+            # @!attribute [rw] detected_defects
+            #   @return [::Array<::Google::Cloud::DocumentAI::V1beta3::Document::Page::ImageQualityScores::DetectedDefect>]
+            #     A list of detected defects.
+            class ImageQualityScores
+              include ::Google::Protobuf::MessageExts
+              extend ::Google::Protobuf::MessageExts::ClassMethods
+
+              # Image Quality Defects
+              # @!attribute [rw] type
+              #   @return [::String]
+              #     Name of the defect type. Supported values are:
+              #
+              #     - `quality/defect_blurry`
+              #     - `quality/defect_noisy`
+              #     - `quality/defect_dark`
+              #     - `quality/defect_faint`
+              #     - `quality/defect_text_too_small`
+              #     - `quality/defect_document_cutoff`
+              #     - `quality/defect_text_cutoff`
+              #     - `quality/defect_glare`
+              # @!attribute [rw] confidence
+              #   @return [::Float]
+              #     Confidence of detected defect. Range `[0, 1]` where 1 indicates
+              #     strong confidence of that the defect exists.
+              class DetectedDefect
+                include ::Google::Protobuf::MessageExts
+                extend ::Google::Protobuf::MessageExts::ClassMethods
+              end
             end
           end
 
@@ -538,14 +582,13 @@ module Google
           #     Required. Entity type from a schema e.g. `Address`.
           # @!attribute [rw] mention_text
           #   @return [::String]
-          #     Optional. Text value in the document e.g. `1600 Amphitheatre Pkwy`. If the entity
-          #     is not present in the document, this field will be empty.
+          #     Optional. Text value of the entity e.g. `1600 Amphitheatre Pkwy`.
           # @!attribute [rw] mention_id
           #   @return [::String]
           #     Optional. Deprecated.  Use `id` field instead.
           # @!attribute [rw] confidence
           #   @return [::Float]
-          #     Optional. Confidence of detected Schema entity. Range [0, 1].
+          #     Optional. Confidence of detected Schema entity. Range `[0, 1]`.
           # @!attribute [rw] page_anchor
           #   @return [::Google::Cloud::DocumentAI::V1beta3::Document::PageAnchor]
           #     Optional. Represents the provenance of this entity wrt. the location on the
@@ -610,6 +653,7 @@ module Google
             #     or int normalized text by default.
             #
             #     Below are sample formats mapped to structured values.
+            #
             #     - Money/Currency type (`money_value`) is in the ISO 4217 text format.
             #     - Date type (`date_value`) is in the ISO 8601 text format.
             #     - Datetime type (`datetime_value`) is in the ISO 8601 text format.
@@ -691,7 +735,7 @@ module Google
             #     Optional. Identifies the bounding polygon of a layout element on the page.
             # @!attribute [rw] confidence
             #   @return [::Float]
-            #     Optional. Confidence of detected page element, if applicable. Range [0, 1].
+            #     Optional. Confidence of detected page element, if applicable. Range `[0, 1]`.
             class PageRef
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods

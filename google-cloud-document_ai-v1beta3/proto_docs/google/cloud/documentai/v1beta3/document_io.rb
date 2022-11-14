@@ -28,7 +28,7 @@ module Google
         # @!attribute [rw] mime_type
         #   @return [::String]
         #     An IANA MIME type (RFC6838) indicating the nature and format of the
-        #     [content].
+        #     {::Google::Cloud::DocumentAI::V1beta3::RawDocument#content content}.
         class RawDocument
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -67,7 +67,7 @@ module Google
         # The common config to specify a set of documents used as input.
         # @!attribute [rw] gcs_prefix
         #   @return [::Google::Cloud::DocumentAI::V1beta3::GcsPrefix]
-        #     The set of documents that match the specified Cloud Storage [gcs_prefix].
+        #     The set of documents that match the specified Cloud Storage `gcs_prefix`.
         # @!attribute [rw] gcs_documents
         #   @return [::Google::Cloud::DocumentAI::V1beta3::GcsDocuments]
         #     The set of documents individually specified on Cloud Storage.
