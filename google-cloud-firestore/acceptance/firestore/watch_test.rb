@@ -190,7 +190,7 @@ describe "Watch", :firestore_acceptance do
     until block.call
       fail "wait_until criteria was not met" if wait_count > 6
       wait_count += 1
-      sleep 2 ** wait_count
+      sleep ((2 ** wait_count) + rand(0..wait_count))
     end
   end
 end
