@@ -177,9 +177,9 @@ end
 def wait_until &block
   wait_count = 0
   until block.call
-    raise "wait_until criteria was not met." if wait_count > 200
+    raise "wait_until criteria was not met." if wait_count > 6
     wait_count += 1
-    sleep 0.1
+    sleep 2 ** wait_count
   end
 end
 

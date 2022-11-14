@@ -188,9 +188,9 @@ describe "Watch", :firestore_acceptance do
   def wait_until &block
     wait_count = 0
     until block.call
-      fail "wait_until criteria was not met" if wait_count > 200
+      fail "wait_until criteria was not met" if wait_count > 6
       wait_count += 1
-      sleep 0.01
+      sleep 2 ** wait_count
     end
   end
 end
