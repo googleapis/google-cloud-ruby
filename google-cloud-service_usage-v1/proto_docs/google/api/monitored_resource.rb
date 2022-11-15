@@ -40,6 +40,10 @@ module Google
     #   @return [::String]
     #     Required. The monitored resource type. For example, the type
     #     `"cloudsql_database"` represents databases in Google Cloud SQL.
+    #      For a list of types, see [Monitoring resource
+    #      types](https://cloud.google.com/monitoring/api/resources)
+    #     and [Logging resource
+    #     types](https://cloud.google.com/logging/docs/api/v2/resource-list).
     # @!attribute [rw] display_name
     #   @return [::String]
     #     Optional. A concise name for the monitored resource type that might be
@@ -71,16 +75,19 @@ module Google
     # its attributes according to the schema. For example, a particular Compute
     # Engine VM instance could be represented by the following object, because the
     # {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} for `"gce_instance"` has labels
-    # `"instance_id"` and `"zone"`:
+    # `"project_id"`, `"instance_id"` and `"zone"`:
     #
     #     { "type": "gce_instance",
-    #       "labels": { "instance_id": "12345678901234",
+    #       "labels": { "project_id": "my-project",
+    #                   "instance_id": "12345678901234",
     #                   "zone": "us-central1-a" }}
     # @!attribute [rw] type
     #   @return [::String]
     #     Required. The monitored resource type. This field must match
     #     the `type` field of a {::Google::Api::MonitoredResourceDescriptor MonitoredResourceDescriptor} object. For
     #     example, the type of a Compute Engine VM instance is `gce_instance`.
+    #     Some descriptors include the service name in the type; for example,
+    #     the type of a Datastream stream is `datastream.googleapis.com/Stream`.
     # @!attribute [rw] labels
     #   @return [::Google::Protobuf::Map{::String => ::String}]
     #     Required. Values for all of the labels listed in the associated monitored
