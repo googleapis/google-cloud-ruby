@@ -89,6 +89,11 @@ module Google
           # @!attribute [rw] gcs_uri
           #   @return [::String]
           #     The Cloud Storage uri (a directory) of the output.
+          # @!attribute [rw] field_mask
+          #   @return [::Google::Protobuf::FieldMask]
+          #     Specifies which fields to include in the output documents.
+          #     Only supports top level document and pages field so it must be in the
+          #     form of `{document_field_name}` or `pages.{page_field_name}`.
           class GcsOutputConfig
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
