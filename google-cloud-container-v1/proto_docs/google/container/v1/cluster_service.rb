@@ -2707,6 +2707,9 @@ module Google
         # @!attribute [rw] upgrade_settings
         #   @return [::Google::Cloud::Container::V1::NodePool::UpgradeSettings]
         #     Upgrade settings control disruption and speed of the upgrade.
+        # @!attribute [rw] placement_policy
+        #   @return [::Google::Cloud::Container::V1::NodePool::PlacementPolicy]
+        #     Specifies the node placement policy.
         # @!attribute [r] update_info
         #   @return [::Google::Cloud::Container::V1::NodePool::UpdateInfo]
         #     Output only. [Output only] Update info contains relevant information during a node
@@ -2841,6 +2844,26 @@ module Google
                 # Rollback has been initiated.
                 ROLLBACK_STARTED = 7
               end
+            end
+          end
+
+          # PlacementPolicy defines the placement policy used by the node pool.
+          # @!attribute [rw] type
+          #   @return [::Google::Cloud::Container::V1::NodePool::PlacementPolicy::Type]
+          #     The type of placement.
+          class PlacementPolicy
+            include ::Google::Protobuf::MessageExts
+            extend ::Google::Protobuf::MessageExts::ClassMethods
+
+            # Type defines the type of placement policy.
+            module Type
+              # TYPE_UNSPECIFIED specifies no requirements on nodes
+              # placement.
+              TYPE_UNSPECIFIED = 0
+
+              # COMPACT specifies node placement in the same availability domain to
+              # ensure low communication latency.
+              COMPACT = 1
             end
           end
 
