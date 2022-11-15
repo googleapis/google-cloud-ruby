@@ -32,6 +32,7 @@
     "lib/google/cloud/documentai/v1beta3/processor_pb.rb",
     "lib/google/cloud/documentai/v1beta3/processor_type_pb.rb",
     "proto_docs/README.md",
+    "proto_docs/google/api/client.rb",
     "proto_docs/google/api/field_behavior.rb",
     "proto_docs/google/api/launch_stage.rb",
     "proto_docs/google/api/resource.rb",
