@@ -12,17 +12,19 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source "https://rubygems.org"
+require_relative "helper"
 
-master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
-gem "grpc", "1.47.0"
-gem "google-cloud-video-stitcher", path: master ? "../../google-cloud-video-stitcher" : nil
-gem "google-cloud-video-stitcher-v1", path: master ? "../../google-cloud-video-stitcher-v1" : nil
+describe "#get_vod_session", :stitcher_snippet do
+  it "gets the VOD session" do
+    sample = SampleLoader.load "get_vod_session.rb"
 
-group :test do
-  gem "google-style", "~> 1.26.1"
-  gem "minitest", "~> 5.16"
-  gem "minitest-focus", "~> 1.1"
-  gem "minitest-rg", "~> 5.2"
-  gem "rake"
+    refute_nil vod_session
+    @session_id = vod_session.name.split("/").last
+
+    out, _err = capture_io do
+      sample.run project_id: project_id, location: location_id, session_id: @session_id
+    end
+
+    assert_match %r{VOD session: projects/\S+/locations/#{location_id}/vodSessions/#{@session_id}}, out
+  end
 end

@@ -12,17 +12,17 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-source "https://rubygems.org"
+require_relative "helper"
 
-master = ENV["GOOGLE_CLOUD_SAMPLES_TEST"] == "master"
-gem "grpc", "1.47.0"
-gem "google-cloud-video-stitcher", path: master ? "../../google-cloud-video-stitcher" : nil
-gem "google-cloud-video-stitcher-v1", path: master ? "../../google-cloud-video-stitcher-v1" : nil
+describe "#list_vod_ad_tag_details", :stitcher_snippet do
+  it "lists the ad tag details for a VOD session" do
+    sample = SampleLoader.load "list_vod_ad_tag_details.rb"
 
-group :test do
-  gem "google-style", "~> 1.26.1"
-  gem "minitest", "~> 5.16"
-  gem "minitest-focus", "~> 1.1"
-  gem "minitest-rg", "~> 5.2"
-  gem "rake"
+    refute_nil vod_session
+    @session_id = vod_session.name.split("/").last
+
+    assert_output %r{VOD ad tag details:\n#{vod_session.name}/vodAdTagDetails/\S+} do
+      sample.run project_id: project_id, location: location_id, session_id: @session_id
+    end
+  end
 end

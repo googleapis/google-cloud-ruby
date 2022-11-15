@@ -21,6 +21,7 @@ require "google/cloud/video/stitcher"
 require_relative "akamai_cdn_key_definition"
 require_relative "cloud_cdn_key_definition"
 require_relative "slate_definition"
+require_relative "vod_session_definition"
 require_relative "../../../.toys/.lib/sample_loader"
 
 
@@ -51,6 +52,9 @@ class StitcherSnippetSpec < Minitest::Spec
   let(:akamai_token_key) { "VGhpcyBpcyBhIHRlc3Qgc3RyaW5nLg==" }
   let(:updated_akamai_token_key) { "VGhpcyBpcyBhbiB1cGRhdGVkIHRlc3Qgc3RyaW5nLg==" }
 
+  let(:vod_uri) { "https://storage.googleapis.com/cloud-samples-data/media/hls-vod/manifest.m3u8" }
+  let(:vod_ad_tag_uri) { "https://pubads.g.doubleclick.net/gampad/ads?iu=/21775744923/external/vmap_ad_samples&sz=640x480&cust_params=sample_ar%3Dpreonly&ciu_szs=300x250%2C728x90&gdfp_req=1&ad_rule=1&output=vmap&unviewed_position_start=1&env=vp&impl=s&correlator=" }
+
   attr_writer :slate_created
   attr_writer :akamai_cdn_key_created
   attr_writer :cloud_cdn_key_created
@@ -59,6 +63,9 @@ class StitcherSnippetSpec < Minitest::Spec
     @slate_created = false
     @akamai_cdn_key_created = false
     @cloud_cdn_key_created = false
+    @session_id = ""
+    @ad_tag_detail_id = ""
+    @stitch_detail_id = ""
     # Remove old slates in the test project if they exist
     response = client.list_slates parent: location_path
     response.each do |slate|
@@ -93,6 +100,13 @@ class StitcherSnippetSpec < Minitest::Spec
       parent: location_path,
       slate_id: slate_id,
       slate: slate_def(slate_uri)
+    )
+  end
+
+  let :vod_session do
+    client.create_vod_session(
+      parent: location_path,
+      vod_session: vod_session_def(vod_uri, vod_ad_tag_uri)
     )
   end
 
