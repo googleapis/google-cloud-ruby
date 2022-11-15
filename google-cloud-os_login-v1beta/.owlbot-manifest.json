@@ -30,6 +30,7 @@
     "proto_docs/google/protobuf/empty.rb",
     "proto_docs/google/protobuf/field_mask.rb",
     "snippets/Gemfile",
+    "snippets/os_login_service/create_ssh_public_key.rb",
     "snippets/os_login_service/delete_posix_account.rb",
     "snippets/os_login_service/delete_ssh_public_key.rb",
     "snippets/os_login_service/get_login_profile.rb",
