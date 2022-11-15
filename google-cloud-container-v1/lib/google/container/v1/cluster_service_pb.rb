@@ -639,6 +639,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :conditions, :message, 105, "google.container.v1.StatusCondition"
       optional :pod_ipv4_cidr_size, :int32, 7
       optional :upgrade_settings, :message, 107, "google.container.v1.NodePool.UpgradeSettings"
+      optional :placement_policy, :message, 108, "google.container.v1.NodePool.PlacementPolicy"
       optional :update_info, :message, 109, "google.container.v1.NodePool.UpdateInfo"
     end
     add_message "google.container.v1.NodePool.UpgradeSettings" do
@@ -666,6 +667,13 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :NODE_POOL_SOAKING, 5
       value :DELETING_BLUE_POOL, 6
       value :ROLLBACK_STARTED, 7
+    end
+    add_message "google.container.v1.NodePool.PlacementPolicy" do
+      optional :type, :enum, 1, "google.container.v1.NodePool.PlacementPolicy.Type"
+    end
+    add_enum "google.container.v1.NodePool.PlacementPolicy.Type" do
+      value :TYPE_UNSPECIFIED, 0
+      value :COMPACT, 1
     end
     add_enum "google.container.v1.NodePool.Status" do
       value :STATUS_UNSPECIFIED, 0
@@ -1246,6 +1254,8 @@ module Google
         NodePool::UpdateInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.UpdateInfo").msgclass
         NodePool::UpdateInfo::BlueGreenInfo = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.UpdateInfo.BlueGreenInfo").msgclass
         NodePool::UpdateInfo::BlueGreenInfo::Phase = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.UpdateInfo.BlueGreenInfo.Phase").enummodule
+        NodePool::PlacementPolicy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.PlacementPolicy").msgclass
+        NodePool::PlacementPolicy::Type = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.PlacementPolicy.Type").enummodule
         NodePool::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodePool.Status").enummodule
         NodeManagement = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.NodeManagement").msgclass
         AutoUpgradeOptions = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.container.v1.AutoUpgradeOptions").msgclass
