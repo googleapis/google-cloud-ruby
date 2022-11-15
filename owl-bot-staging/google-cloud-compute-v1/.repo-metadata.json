@@ -1,0 +1,18 @@
+{
+    "api_id": "compute.googleapis.com",
+    "api_shortname": "compute",
+    "client_documentation": "https://cloud.google.com/ruby/docs/reference/google-cloud-compute-v1/latest",
+    "distribution_name": "google-cloud-compute-v1",
+    "is_cloud": true,
+    "language": "ruby",
+    "name": "compute",
+    "name_pretty": "Google Cloud Compute V1 API",
+    "product_documentation": "https://cloud.google.com/compute/",
+    "release_level": "unreleased",
+    "repo": "googleapis/google-cloud-ruby",
+    "requires_billing": true,
+    "ruby-cloud-description": "google-cloud-compute-v1 is the official client library for the Google Cloud Compute V1 API.",
+    "ruby-cloud-env-prefix": "COMPUTE",
+    "ruby-cloud-product-url": "https://cloud.google.com/compute/",
+    "library_type": "GAPIC_AUTO"
+}
