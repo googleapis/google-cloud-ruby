@@ -46,6 +46,18 @@ module Google
           end
         end
 
+        # A request message for creating an SSH public key.
+        # @!attribute [rw] parent
+        #   @return [::String]
+        #     Required. The unique ID for the user in format `users/{user}`.
+        # @!attribute [rw] ssh_public_key
+        #   @return [::Google::Cloud::OsLogin::Common::SshPublicKey]
+        #     Required. The SSH public key and expiration time.
+        class CreateSshPublicKeyRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
         # A request message for deleting a POSIX account entry.
         # @!attribute [rw] name
         #   @return [::String]
@@ -113,6 +125,9 @@ module Google
         # @!attribute [rw] login_profile
         #   @return [::Google::Cloud::OsLogin::V1::LoginProfile]
         #     The login profile information for the user.
+        # @!attribute [rw] details
+        #   @return [::String]
+        #     Detailed information about import results.
         class ImportSshPublicKeyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods

@@ -33,8 +33,8 @@ In order to use this library, you first need to go through the following steps:
 require "google/cloud/os_login/v1"
 
 client = ::Google::Cloud::OsLogin::V1::OsLoginService::Client.new
-request = ::Google::Cloud::OsLogin::V1::DeletePosixAccountRequest.new # (request fields as keyword arguments...)
-response = client.delete_posix_account request
+request = ::Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest.new # (request fields as keyword arguments...)
+response = client.create_ssh_public_key request
 ```
 
 View the [Client Library Documentation](https://cloud.google.com/ruby/docs/reference/google-cloud-os_login-v1/latest)

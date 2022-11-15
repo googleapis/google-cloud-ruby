@@ -18,6 +18,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       repeated :posix_accounts, :message, 2, "google.cloud.oslogin.common.PosixAccount"
       map :ssh_public_keys, :string, :message, 3, "google.cloud.oslogin.common.SshPublicKey"
     end
+    add_message "google.cloud.oslogin.v1.CreateSshPublicKeyRequest" do
+      optional :parent, :string, 1
+      optional :ssh_public_key, :message, 2, "google.cloud.oslogin.common.SshPublicKey"
+    end
     add_message "google.cloud.oslogin.v1.DeletePosixAccountRequest" do
       optional :name, :string, 1
     end
@@ -39,6 +43,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
     end
     add_message "google.cloud.oslogin.v1.ImportSshPublicKeyResponse" do
       optional :login_profile, :message, 1, "google.cloud.oslogin.v1.LoginProfile"
+      optional :details, :string, 2
     end
     add_message "google.cloud.oslogin.v1.UpdateSshPublicKeyRequest" do
       optional :name, :string, 1
@@ -53,6 +58,7 @@ module Google
     module OsLogin
       module V1
         LoginProfile = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.LoginProfile").msgclass
+        CreateSshPublicKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.CreateSshPublicKeyRequest").msgclass
         DeletePosixAccountRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.DeletePosixAccountRequest").msgclass
         DeleteSshPublicKeyRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.DeleteSshPublicKeyRequest").msgclass
         GetLoginProfileRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.oslogin.v1.GetLoginProfileRequest").msgclass
