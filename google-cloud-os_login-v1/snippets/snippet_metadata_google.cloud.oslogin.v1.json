@@ -12,6 +12,46 @@
   },
   "snippets": [
     {
+      "region_tag": "oslogin_v1_generated_OsLoginService_CreateSshPublicKey_sync",
+      "title": "Snippet for create_ssh_public_key in OsLoginService",
+      "description": "Basic snippet for create_ssh_public_key in OsLoginService",
+      "file": "os_login_service/create_ssh_public_key.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "create_ssh_public_key",
+        "full_name": "::Google::Cloud::OsLogin::V1::OsLoginService::Client#create_ssh_public_key",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::OsLogin::V1::CreateSshPublicKeyRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Cloud::OsLogin::Common::SshPublicKey",
+        "client": {
+          "short_name": "OsLoginService::Client",
+          "full_name": "::Google::Cloud::OsLogin::V1::OsLoginService::Client"
+        },
+        "method": {
+          "short_name": "CreateSshPublicKey",
+          "full_name": "google.cloud.oslogin.v1.OsLoginService.CreateSshPublicKey",
+          "service": {
+            "short_name": "OsLoginService",
+            "full_name": "google.cloud.oslogin.v1.OsLoginService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "oslogin_v1_generated_OsLoginService_DeletePosixAccount_sync",
       "title": "Snippet for delete_posix_account in OsLoginService",
       "description": "Basic snippet for delete_posix_account in OsLoginService",
