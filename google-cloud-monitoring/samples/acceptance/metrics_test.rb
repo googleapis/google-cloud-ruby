@@ -44,7 +44,7 @@ describe "metrics", :monitoring do
 
       out, _err = capture_io do
         retry_block 3 do
-           delete_metric_descriptor project_id: project_id, metric_type: metric_type 
+          delete_metric_descriptor project_id: project_id, metric_type: metric_type
         end
       end
       assert_match(/Deleted metric descriptor #{metric_name}/, out)
@@ -97,7 +97,7 @@ describe "metrics", :monitoring do
       start_secs = (Time.now - 2).to_i
       out, _err = capture_io do
         retry_block 3 do
-           write_time_series project_id: project_id, metric_type: metric_type 
+          write_time_series project_id: project_id, metric_type: metric_type
         end
       end
       end_secs = (Time.now + 2).to_i
