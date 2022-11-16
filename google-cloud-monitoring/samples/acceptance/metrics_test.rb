@@ -43,7 +43,9 @@ describe "metrics", :monitoring do
       client.create_metric_descriptor name: project_path, metric_descriptor: descriptor
 
       out, _err = capture_io do
-        delete_metric_descriptor project_id: project_id, metric_type: metric_type
+        retry_block 3 do
+           delete_metric_descriptor project_id: project_id, metric_type: metric_type 
+        end
       end
       assert_match(/Deleted metric descriptor #{metric_name}/, out)
     end
@@ -94,7 +96,9 @@ describe "metrics", :monitoring do
     it "writes time series data that can be read back" do
       start_secs = (Time.now - 2).to_i
       out, _err = capture_io do
-        write_time_series project_id: project_id, metric_type: metric_type
+        retry_block 3 do
+           write_time_series project_id: project_id, metric_type: metric_type 
+        end
       end
       end_secs = (Time.now + 2).to_i
       assert_match(/Time series created/, out)
