@@ -17,7 +17,7 @@ require_relative "helper"
 
 describe "Authorize dataset" do
   it "authorize dataset in a project" do
-    bigquery = Google::Cloud::Bigquery.new project_id: "diptanshu-lex"
+    bigquery = Google::Cloud::Bigquery.new
     # Ensure at least source and user dataset
     dataset1 = bigquery.create_dataset "test_dataset1_#{time_plus_random}"
     dataset2 = bigquery.create_dataset "test_dataset2_#{time_plus_random}"

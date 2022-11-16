@@ -272,7 +272,8 @@ module Google
           ##
           # Add reader access to a dataset.
           #
-          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset. Required
+          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset A DatasetAccessEntry
+          #   or a Hash object. Required
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -652,7 +653,8 @@ module Google
           ##
           # Removes reader access of a dataset.
           #
-          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset. Required
+          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset A DatasetAccessEntry
+          #   or a Hash object. Required
           #
           # @example
           #   require "google/cloud/bigquery"
@@ -1030,7 +1032,8 @@ module Google
           ##
           # Checks reader access for a dataset.
           #
-          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset. Required
+          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset A DatasetAccessEntry
+          #   or a Hash object. Required
           #
           # @example
           #   require "google/cloud/bigquery"
