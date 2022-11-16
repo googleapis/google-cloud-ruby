@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 (2022-11-16)
+
+#### Features
+
+* support create_ssh_public_key 
+
 ### 0.5.0 (2022-07-07)
 
 #### Features
