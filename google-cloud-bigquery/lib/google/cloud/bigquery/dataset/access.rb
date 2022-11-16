@@ -61,8 +61,10 @@ module Google
             "user"           => :user_by_email,
             "user_by_email"  => :user_by_email,
             "userByEmail"    => :user_by_email,
-            "view"           => :view
+            "view"           => :view,
+            "dataset"        => :dataset
           }.freeze
+          attr_reader :rules
 
           # @private
           GROUPS = {
@@ -265,6 +267,43 @@ module Google
           #
           def add_reader_view view
             add_access_view view
+          end
+
+          ##
+          # Add reader access to a dataset.
+          #
+          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset. Required
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   params = {
+          #     dataset_id: other_dataset.dataset_id,
+          #     project_id: other_dataset.project_id,
+          #     target_types: ["VIEWS"]
+          #   }
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_dataset params
+          #   end
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   dataset.access do |access|
+          #     access.add_reader_dataset other_dataset.access_entry(target_types: ["VIEWS"])
+          #   end
+          #
+          def add_reader_dataset dataset
+            add_access_dataset dataset
           end
 
           ##
@@ -611,6 +650,43 @@ module Google
           end
 
           ##
+          # Removes reader access of a dataset.
+          #
+          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset. Required
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   params = {
+          #     dataset_id: other_dataset.dataset_id,
+          #     project_id: other_dataset.project_id,
+          #     target_types: ["VIEWS"]
+          #   }
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_dataset params
+          #   end
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   dataset.access do |access|
+          #     access.remove_reader_dataset other_dataset.access_entry(target_types: ["VIEWS"])
+          #   end
+          #
+          def remove_reader_dataset dataset
+            remove_access_dataset dataset
+          end
+
+          ##
           # Remove writer access from a user.
           #
           # @param [String] email The email address for the entity.
@@ -952,6 +1028,39 @@ module Google
           end
 
           ##
+          # Checks reader access for a dataset.
+          #
+          # @param [Google::Cloud::Bigquery::DatasetAccessEntry, Hash<String,String> ] dataset. Required
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   params = {
+          #     dataset_id: other_dataset.dataset_id,
+          #     project_id: other_dataset.project_id,
+          #     target_types: ["VIEWS"]
+          #   }
+          #
+          #   dataset.access.reader_dataset? params
+          #
+          # @example
+          #   require "google/cloud/bigquery"
+          #
+          #   bigquery = Google::Cloud::Bigquery.new
+          #   dataset = bigquery.dataset "my_dataset"
+          #   other_dataset = bigquery.dataset "my_other_dataset", skip_lookup: true
+          #
+          #   dataset.access.reader_dataset? other_dataset.access_entry(target_types: ["VIEWS"])
+          #
+          def reader_dataset? dataset
+            lookup_access_dataset dataset
+          end
+
+          ##
           # Checks writer access for a user.
           #
           # @param [String] email The email address for the entity.
@@ -1185,6 +1294,15 @@ module Google
           end
 
           # @private
+          def validate_dataset dataset
+            if dataset.is_a? Google::Apis::BigqueryV2::DatasetAccessEntry
+              dataset
+            else
+              Service.dataset_access_entry_from_hash dataset
+            end
+          end
+
+          # @private
           def add_access_role_scope_value role, scope, value
             role = validate_role role
             scope = validate_scope scope
@@ -1219,6 +1337,17 @@ module Google
           end
 
           # @private
+          def add_access_dataset dataset
+            # scope is dataset, make sure value is in the right format
+            value = validate_dataset dataset
+            # Remove existing dataset rule, if any
+            @rules.reject!(&find_by_scope_and_resource_ref(:dataset, value))
+            # Add new rule for this role, scope, and value
+            opts = { dataset: value }
+            @rules << Google::Apis::BigqueryV2::Dataset::Access.new(**opts)
+          end
+
+          # @private
           def remove_access_role_scope_value role, scope, value
             role = validate_role role
             scope = validate_scope scope
@@ -1245,6 +1374,14 @@ module Google
           end
 
           # @private
+          def remove_access_dataset dataset
+            # scope is dataset, make sure value is in the right format
+            value = validate_dataset dataset
+            # Remove existing dataset rule, if any
+            @rules.reject!(&find_by_scope_and_resource_ref(:dataset, value))
+          end
+
+          # @private
           def lookup_access_role_scope_value role, scope, value
             role = validate_role role
             scope = validate_scope scope
@@ -1266,6 +1403,14 @@ module Google
             value = validate_view value
             # Detect view rule, if any
             !(!@rules.detect(&find_by_scope_and_resource_ref(:view, value)))
+          end
+
+          # @private
+          def lookup_access_dataset dataset
+            # scope is dataset, make sure value is in the right format
+            value = validate_dataset dataset
+            # Detect dataset rule, if any
+            !(!@rules.detect(&find_by_scope_and_resource_ref(:dataset, value)))
           end
 
           # @private
