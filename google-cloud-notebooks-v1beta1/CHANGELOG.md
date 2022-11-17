@@ -1,5 +1,11 @@
 # Release History
 
+### 0.6.0 (2022-11-17)
+
+#### Features
+
+* support nic_type, reservation_affinity, can_ip_forward for Instance 
+
 ### 0.5.0 (2022-07-06)
 
 #### Features
