@@ -91,6 +91,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :CLOUD_SHELL_DISABLED, 2
       value :TOS_VIOLATION, 4
       value :QUOTA_EXCEEDED, 5
+      value :ENVIRONMENT_UNAVAILABLE, 6
     end
   end
 end
