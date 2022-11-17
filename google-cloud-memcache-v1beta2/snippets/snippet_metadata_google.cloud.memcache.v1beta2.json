@@ -330,6 +330,46 @@
           "type": "FULL"
         }
       ]
+    },
+    {
+      "region_tag": "memcache_v1beta2_generated_CloudMemcache_RescheduleMaintenance_sync",
+      "title": "Snippet for reschedule_maintenance in CloudMemcache",
+      "description": "Basic snippet for reschedule_maintenance in CloudMemcache",
+      "file": "cloud_memcache/reschedule_maintenance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "reschedule_maintenance",
+        "full_name": "::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#reschedule_maintenance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "CloudMemcache::Client",
+          "full_name": "::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client"
+        },
+        "method": {
+          "short_name": "RescheduleMaintenance",
+          "full_name": "google.cloud.memcache.v1beta2.CloudMemcache.RescheduleMaintenance",
+          "service": {
+            "short_name": "CloudMemcache",
+            "full_name": "google.cloud.memcache.v1beta2.CloudMemcache"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
     }
   ]
 }
