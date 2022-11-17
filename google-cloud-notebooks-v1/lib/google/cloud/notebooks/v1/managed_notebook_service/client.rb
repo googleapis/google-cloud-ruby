@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/notebooks/v1/managed_service_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -75,6 +77,8 @@ module Google
 
                 default_config.rpcs.create_runtime.timeout = 60.0
 
+                default_config.rpcs.update_runtime.timeout = 60.0
+
                 default_config.rpcs.delete_runtime.timeout = 60.0
 
                 default_config.rpcs.start_runtime.timeout = 60.0
@@ -84,6 +88,8 @@ module Google
                 default_config.rpcs.switch_runtime.timeout = 60.0
 
                 default_config.rpcs.report_runtime_event.timeout = 60.0
+
+                default_config.rpcs.diagnose_runtime.timeout = 60.0
 
                 default_config
               end
@@ -160,6 +166,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @managed_notebook_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Notebooks::V1::ManagedNotebookService::Stub,
                 credentials:  credentials,
@@ -175,6 +193,20 @@ module Google
             # @return [::Google::Cloud::Notebooks::V1::ManagedNotebookService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -455,6 +487,125 @@ module Google
                                      retry_policy: @config.retry_policy
 
               @managed_notebook_service_stub.call_rpc :create_runtime, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
+            # Update Notebook Runtime configuration.
+            #
+            # @overload update_runtime(request, options = nil)
+            #   Pass arguments to `update_runtime` via a request object, either of type
+            #   {::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload update_runtime(runtime: nil, update_mask: nil, request_id: nil)
+            #   Pass arguments to `update_runtime` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param runtime [::Google::Cloud::Notebooks::V1::Runtime, ::Hash]
+            #     Required. The Runtime to be updated.
+            #   @param update_mask [::Google::Protobuf::FieldMask, ::Hash]
+            #     Required. Specifies the path, relative to `Runtime`, of
+            #     the field to update. For example, to change the software configuration
+            #     kernels, the `update_mask` parameter would be
+            #     specified as `software_config.kernels`,
+            #     and the `PATCH` request body would specify the new value, as follows:
+            #
+            #         {
+            #           "software_config":{
+            #             "kernels": [{
+            #                'repository':
+            #                'gcr.io/deeplearning-platform-release/pytorch-gpu', 'tag':
+            #                'latest' }],
+            #             }
+            #         }
+            #
+            #
+            #     Currently, only the following fields can be updated:
+            #     - software_config.kernels
+            #     - software_config.post_startup_script
+            #     - software_config.custom_gpu_driver_path
+            #     - software_config.idle_shutdown
+            #     - software_config.idle_shutdown_timeout
+            #     - software_config.disable_terminal
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1::UpdateRuntimeRequest.new
+            #
+            #   # Call the update_runtime method.
+            #   result = client.update_runtime request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def update_runtime request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.update_runtime.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Notebooks::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.runtime&.name
+                header_params["runtime.name"] = request.runtime.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.update_runtime.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.update_runtime.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_notebook_service_stub.call_rpc :update_runtime, request, options: options do |response, operation|
                 response = ::Gapic::Operation.new response, @operations_client, options: options
                 yield response, operation if block_given?
                 return response
@@ -956,6 +1107,102 @@ module Google
             end
 
             ##
+            # Upgrades a Managed Notebook Runtime to the latest version.
+            #
+            # @overload upgrade_runtime(request, options = nil)
+            #   Pass arguments to `upgrade_runtime` via a request object, either of type
+            #   {::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload upgrade_runtime(name: nil, request_id: nil)
+            #   Pass arguments to `upgrade_runtime` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Format:
+            #     `projects/{project_id}/locations/{location}/runtimes/{runtime_id}`
+            #   @param request_id [::String]
+            #     Idempotent request UUID.
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest.new
+            #
+            #   # Call the upgrade_runtime method.
+            #   result = client.upgrade_runtime request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def upgrade_runtime request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.upgrade_runtime.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Notebooks::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.upgrade_runtime.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.upgrade_runtime.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_notebook_service_stub.call_rpc :upgrade_runtime, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Report and process a runtime event.
             #
             # @overload report_runtime_event(request, options = nil)
@@ -1145,6 +1392,102 @@ module Google
             end
 
             ##
+            # Creates a Diagnostic File and runs Diagnostic Tool given a Runtime.
+            #
+            # @overload diagnose_runtime(request, options = nil)
+            #   Pass arguments to `diagnose_runtime` via a request object, either of type
+            #   {::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest} or an equivalent Hash.
+            #
+            #   @param request [::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest, ::Hash]
+            #     A request object representing the call parameters. Required. To specify no
+            #     parameters, or to keep all the default parameter values, pass an empty Hash.
+            #   @param options [::Gapic::CallOptions, ::Hash]
+            #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
+            #
+            # @overload diagnose_runtime(name: nil, diagnostic_config: nil)
+            #   Pass arguments to `diagnose_runtime` via keyword arguments. Note that at
+            #   least one keyword argument is required. To specify no parameters, or to keep all
+            #   the default parameter values, pass an empty Hash as a request object (see above).
+            #
+            #   @param name [::String]
+            #     Required. Format:
+            #     `projects/{project_id}/locations/{location}/runtimes/{runtimes_id}`
+            #   @param diagnostic_config [::Google::Cloud::Notebooks::V1::DiagnosticConfig, ::Hash]
+            #     Required. Defines flags that are used to run the diagnostic tool
+            #
+            # @yield [response, operation] Access the result along with the RPC operation
+            # @yieldparam response [::Gapic::Operation]
+            # @yieldparam operation [::GRPC::ActiveCall::Operation]
+            #
+            # @return [::Gapic::Operation]
+            #
+            # @raise [::Google::Cloud::Error] if the RPC is aborted.
+            #
+            # @example Basic example
+            #   require "google/cloud/notebooks/v1"
+            #
+            #   # Create a client object. The client can be reused for multiple calls.
+            #   client = Google::Cloud::Notebooks::V1::ManagedNotebookService::Client.new
+            #
+            #   # Create a request. To set request fields, pass in keyword arguments.
+            #   request = Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest.new
+            #
+            #   # Call the diagnose_runtime method.
+            #   result = client.diagnose_runtime request
+            #
+            #   # The returned object is of type Gapic::Operation. You can use this
+            #   # object to check the status of an operation, cancel it, or wait
+            #   # for results. Here is how to block until completion:
+            #   result.wait_until_done! timeout: 60
+            #   if result.response?
+            #     p result.response
+            #   else
+            #     puts "Error!"
+            #   end
+            #
+            def diagnose_runtime request, options = nil
+              raise ::ArgumentError, "request must be provided" if request.nil?
+
+              request = ::Gapic::Protobuf.coerce request, to: ::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest
+
+              # Converts hash and nil to an options object
+              options = ::Gapic::CallOptions.new(**options.to_h) if options.respond_to? :to_h
+
+              # Customize the options with defaults
+              metadata = @config.rpcs.diagnose_runtime.metadata.to_h
+
+              # Set x-goog-api-client and x-goog-user-project headers
+              metadata[:"x-goog-api-client"] ||= ::Gapic::Headers.x_goog_api_client \
+                lib_name: @config.lib_name, lib_version: @config.lib_version,
+                gapic_version: ::Google::Cloud::Notebooks::V1::VERSION
+              metadata[:"x-goog-user-project"] = @quota_project_id if @quota_project_id
+
+              header_params = {}
+              if request.name
+                header_params["name"] = request.name
+              end
+
+              request_params_header = header_params.map { |k, v| "#{k}=#{v}" }.join("&")
+              metadata[:"x-goog-request-params"] ||= request_params_header
+
+              options.apply_defaults timeout:      @config.rpcs.diagnose_runtime.timeout,
+                                     metadata:     metadata,
+                                     retry_policy: @config.rpcs.diagnose_runtime.retry_policy
+
+              options.apply_defaults timeout:      @config.timeout,
+                                     metadata:     @config.metadata,
+                                     retry_policy: @config.retry_policy
+
+              @managed_notebook_service_stub.call_rpc :diagnose_runtime, request, options: options do |response, operation|
+                response = ::Gapic::Operation.new response, @operations_client, options: options
+                yield response, operation if block_given?
+                return response
+              end
+            rescue ::GRPC::BadStatus => e
+              raise ::Google::Cloud::Error.from_error(e)
+            end
+
+            ##
             # Configuration class for the ManagedNotebookService API.
             #
             # This class represents the configuration for ManagedNotebookService,
@@ -1295,6 +1638,11 @@ module Google
                 #
                 attr_reader :create_runtime
                 ##
+                # RPC-specific configuration for `update_runtime`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :update_runtime
+                ##
                 # RPC-specific configuration for `delete_runtime`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1320,6 +1668,11 @@ module Google
                 #
                 attr_reader :reset_runtime
                 ##
+                # RPC-specific configuration for `upgrade_runtime`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :upgrade_runtime
+                ##
                 # RPC-specific configuration for `report_runtime_event`
                 # @return [::Gapic::Config::Method]
                 #
@@ -1329,6 +1682,11 @@ module Google
                 # @return [::Gapic::Config::Method]
                 #
                 attr_reader :refresh_runtime_token_internal
+                ##
+                # RPC-specific configuration for `diagnose_runtime`
+                # @return [::Gapic::Config::Method]
+                #
+                attr_reader :diagnose_runtime
 
                 # @private
                 def initialize parent_rpcs = nil
@@ -1338,6 +1696,8 @@ module Google
                   @get_runtime = ::Gapic::Config::Method.new get_runtime_config
                   create_runtime_config = parent_rpcs.create_runtime if parent_rpcs.respond_to? :create_runtime
                   @create_runtime = ::Gapic::Config::Method.new create_runtime_config
+                  update_runtime_config = parent_rpcs.update_runtime if parent_rpcs.respond_to? :update_runtime
+                  @update_runtime = ::Gapic::Config::Method.new update_runtime_config
                   delete_runtime_config = parent_rpcs.delete_runtime if parent_rpcs.respond_to? :delete_runtime
                   @delete_runtime = ::Gapic::Config::Method.new delete_runtime_config
                   start_runtime_config = parent_rpcs.start_runtime if parent_rpcs.respond_to? :start_runtime
@@ -1348,10 +1708,14 @@ module Google
                   @switch_runtime = ::Gapic::Config::Method.new switch_runtime_config
                   reset_runtime_config = parent_rpcs.reset_runtime if parent_rpcs.respond_to? :reset_runtime
                   @reset_runtime = ::Gapic::Config::Method.new reset_runtime_config
+                  upgrade_runtime_config = parent_rpcs.upgrade_runtime if parent_rpcs.respond_to? :upgrade_runtime
+                  @upgrade_runtime = ::Gapic::Config::Method.new upgrade_runtime_config
                   report_runtime_event_config = parent_rpcs.report_runtime_event if parent_rpcs.respond_to? :report_runtime_event
                   @report_runtime_event = ::Gapic::Config::Method.new report_runtime_event_config
                   refresh_runtime_token_internal_config = parent_rpcs.refresh_runtime_token_internal if parent_rpcs.respond_to? :refresh_runtime_token_internal
                   @refresh_runtime_token_internal = ::Gapic::Config::Method.new refresh_runtime_token_internal_config
+                  diagnose_runtime_config = parent_rpcs.diagnose_runtime if parent_rpcs.respond_to? :diagnose_runtime
+                  @diagnose_runtime = ::Gapic::Config::Method.new diagnose_runtime_config
 
                   yield self if block_given?
                 end

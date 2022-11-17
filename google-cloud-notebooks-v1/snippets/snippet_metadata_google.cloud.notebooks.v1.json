@@ -132,6 +132,46 @@
       ]
     },
     {
+      "region_tag": "notebooks_v1_generated_ManagedNotebookService_UpdateRuntime_sync",
+      "title": "Snippet for update_runtime in ManagedNotebookService",
+      "description": "Basic snippet for update_runtime in ManagedNotebookService",
+      "file": "managed_notebook_service/update_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "update_runtime",
+        "full_name": "::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#update_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1::UpdateRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedNotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client"
+        },
+        "method": {
+          "short_name": "UpdateRuntime",
+          "full_name": "google.cloud.notebooks.v1.ManagedNotebookService.UpdateRuntime",
+          "service": {
+            "short_name": "ManagedNotebookService",
+            "full_name": "google.cloud.notebooks.v1.ManagedNotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_DeleteRuntime_sync",
       "title": "Snippet for delete_runtime in ManagedNotebookService",
       "description": "Basic snippet for delete_runtime in ManagedNotebookService",
@@ -332,6 +372,46 @@
       ]
     },
     {
+      "region_tag": "notebooks_v1_generated_ManagedNotebookService_UpgradeRuntime_sync",
+      "title": "Snippet for upgrade_runtime in ManagedNotebookService",
+      "description": "Basic snippet for upgrade_runtime in ManagedNotebookService",
+      "file": "managed_notebook_service/upgrade_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "upgrade_runtime",
+        "full_name": "::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#upgrade_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1::UpgradeRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedNotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client"
+        },
+        "method": {
+          "short_name": "UpgradeRuntime",
+          "full_name": "google.cloud.notebooks.v1.ManagedNotebookService.UpgradeRuntime",
+          "service": {
+            "short_name": "ManagedNotebookService",
+            "full_name": "google.cloud.notebooks.v1.ManagedNotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
       "region_tag": "notebooks_v1_generated_ManagedNotebookService_ReportRuntimeEvent_sync",
       "title": "Snippet for report_runtime_event in ManagedNotebookService",
       "description": "Basic snippet for report_runtime_event in ManagedNotebookService",
@@ -407,6 +487,46 @@
         {
           "start": 20,
           "end": 38,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1_generated_ManagedNotebookService_DiagnoseRuntime_sync",
+      "title": "Snippet for diagnose_runtime in ManagedNotebookService",
+      "description": "Basic snippet for diagnose_runtime in ManagedNotebookService",
+      "file": "managed_notebook_service/diagnose_runtime.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "diagnose_runtime",
+        "full_name": "::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client#diagnose_runtime",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1::DiagnoseRuntimeRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "ManagedNotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1::ManagedNotebookService::Client"
+        },
+        "method": {
+          "short_name": "DiagnoseRuntime",
+          "full_name": "google.cloud.notebooks.v1.ManagedNotebookService.DiagnoseRuntime",
+          "service": {
+            "short_name": "ManagedNotebookService",
+            "full_name": "google.cloud.notebooks.v1.ManagedNotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
           "type": "FULL"
         }
       ]
@@ -1155,6 +1275,46 @@
         "method": {
           "short_name": "RollbackInstance",
           "full_name": "google.cloud.notebooks.v1.NotebookService.RollbackInstance",
+          "service": {
+            "short_name": "NotebookService",
+            "full_name": "google.cloud.notebooks.v1.NotebookService"
+          }
+        }
+      },
+      "canonical": true,
+      "origin": "API_DEFINITION",
+      "segments": [
+        {
+          "start": 20,
+          "end": 45,
+          "type": "FULL"
+        }
+      ]
+    },
+    {
+      "region_tag": "notebooks_v1_generated_NotebookService_DiagnoseInstance_sync",
+      "title": "Snippet for diagnose_instance in NotebookService",
+      "description": "Basic snippet for diagnose_instance in NotebookService",
+      "file": "notebook_service/diagnose_instance.rb",
+      "language": "RUBY",
+      "client_method": {
+        "short_name": "diagnose_instance",
+        "full_name": "::Google::Cloud::Notebooks::V1::NotebookService::Client#diagnose_instance",
+        "async": false,
+        "parameters": [
+          {
+            "type": "::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest",
+            "name": "request"
+          }
+        ],
+        "result_type": "::Google::Longrunning::Operation",
+        "client": {
+          "short_name": "NotebookService::Client",
+          "full_name": "::Google::Cloud::Notebooks::V1::NotebookService::Client"
+        },
+        "method": {
+          "short_name": "DiagnoseInstance",
+          "full_name": "google.cloud.notebooks.v1.NotebookService.DiagnoseInstance",
           "service": {
             "short_name": "NotebookService",
             "full_name": "google.cloud.notebooks.v1.NotebookService"
