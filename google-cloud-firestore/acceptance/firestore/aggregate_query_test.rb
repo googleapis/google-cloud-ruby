@@ -18,9 +18,9 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "returns count for non-zero records" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
     aq.add_count
@@ -43,9 +43,10 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "returns count on filter" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.add({foo: "bar", bar: "foo"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
 
-    query = rand_query_col.where(:foo, :==, :bar)
+    query = rand_query_col.where(:foo, :==, :a)
     
     aq = query.aggregate_query
     aq.add_count
@@ -57,11 +58,11 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "returns count on limit" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
-    query = rand_query_col.order(:foo).limit 2
+    query = rand_query_col.limit 2
     
     aq = query.aggregate_query
     aq.add_count
@@ -73,9 +74,9 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "returns count with a custom alias" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
     aq.add_count aggregate_alias: 'one'
@@ -87,9 +88,9 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "returns count with multiple custom aliases" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
     aq.add_count aggregate_alias: 'one'
@@ -103,9 +104,9 @@ describe "Aggregate Query", :firestore_acceptance do
   
   focus; it "returns nil for unspecified alias" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
     aq.add_count
@@ -117,9 +118,9 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "throws error when duplicating aliases" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
     aq.add_count aggregate_alias: 'one'
@@ -133,9 +134,9 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "returns count for multiple requests" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
     aq.add_count
@@ -151,9 +152,9 @@ describe "Aggregate Query", :firestore_acceptance do
 
   focus; it "returns different count when data changes" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
     aq.add_count
@@ -172,9 +173,9 @@ describe "Aggregate Query", :firestore_acceptance do
   
   focus; it "throws error when no aggregate is added" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
 
     # aggregate object with no added aggregate (ex: aq.add_count)
     aq = rand_query_col.aggregate_query
