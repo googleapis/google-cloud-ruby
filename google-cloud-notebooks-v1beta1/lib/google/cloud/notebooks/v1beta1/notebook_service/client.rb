@@ -18,6 +18,8 @@
 
 require "google/cloud/errors"
 require "google/cloud/notebooks/v1beta1/service_pb"
+require "google/cloud/location"
+require "google/iam/v1"
 
 module Google
   module Cloud
@@ -182,6 +184,18 @@ module Google
                 config.endpoint = @config.endpoint
               end
 
+              @location_client = Google::Cloud::Location::Locations::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
+              @iam_policy_client = Google::Iam::V1::IAMPolicy::Client.new do |config|
+                config.credentials = credentials
+                config.quota_project = @quota_project_id
+                config.endpoint = @config.endpoint
+              end
+
               @notebook_service_stub = ::Gapic::ServiceStub.new(
                 ::Google::Cloud::Notebooks::V1beta1::NotebookService::Stub,
                 credentials:  credentials,
@@ -197,6 +211,20 @@ module Google
             # @return [::Google::Cloud::Notebooks::V1beta1::NotebookService::Operations]
             #
             attr_reader :operations_client
+
+            ##
+            # Get the associated client for mix-in of the Locations.
+            #
+            # @return [Google::Cloud::Location::Locations::Client]
+            #
+            attr_reader :location_client
+
+            ##
+            # Get the associated client for mix-in of the IAMPolicy.
+            #
+            # @return [Google::Iam::V1::IAMPolicy::Client]
+            #
+            attr_reader :iam_policy_client
 
             # Service calls
 
@@ -608,10 +636,10 @@ module Google
             #   @param type [::Google::Cloud::Notebooks::V1beta1::Instance::AcceleratorType]
             #     Required. Type of this accelerator.
             #   @param core_count [::Integer]
-            #     Required. Count of cores of this accelerator. Note that not all
-            #     combinations of `type` and `core_count` are valid. Check [GPUs on Compute
-            #     Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to find a
-            #     valid combination. TPUs are not supported.
+            #     Required. Count of cores of this accelerator. Note that not all combinations
+            #     of `type` and `core_count` are valid. Check [GPUs on
+            #     Compute Engine](https://cloud.google.com/compute/docs/gpus/#gpus-list) to
+            #     find a valid combination. TPUs are not supported.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1360,6 +1388,9 @@ module Google
 
             ##
             # Check if a notebook instance is upgradable.
+            # Deprecated. Please consider using v1.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload is_instance_upgradeable(request, options = nil)
             #   Pass arguments to `is_instance_upgradeable` via a request object, either of type
@@ -1446,6 +1477,9 @@ module Google
 
             ##
             # Upgrades a notebook instance to the latest version.
+            # Deprecated. Please consider using v1.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload upgrade_instance(request, options = nil)
             #   Pass arguments to `upgrade_instance` via a request object, either of type
@@ -1541,6 +1575,9 @@ module Google
             ##
             # Allows notebook instances to
             # call this endpoint to upgrade themselves. Do not use this method directly.
+            # Deprecated. Please consider using v1.
+            #
+            # @deprecated This method is deprecated and may be removed in the next major version update.
             #
             # @overload upgrade_instance_internal(request, options = nil)
             #   Pass arguments to `upgrade_instance_internal` via a request object, either of type
@@ -1840,10 +1877,10 @@ module Google
             #   @param parent [::String]
             #     Required. Format: `projects/{project_id}/locations/{location}`
             #   @param environment_id [::String]
-            #     Required. User-defined unique ID of this environment. The `environment_id`
-            #     must be 1 to 63 characters long and contain only lowercase letters, numeric
-            #     characters, and dashes. The first character must be a lowercase letter and
-            #     the last character cannot be a dash.
+            #     Required. User-defined unique ID of this environment. The `environment_id` must
+            #     be 1 to 63 characters long and contain only lowercase letters,
+            #     numeric characters, and dashes. The first character must be a lowercase
+            #     letter and the last character cannot be a dash.
             #   @param environment [::Google::Cloud::Notebooks::V1beta1::Environment, ::Hash]
             #     Required. The environment to be created.
             #
