@@ -16,14 +16,37 @@ require "firestore_helper"
 
 describe "Aggregate Query", :firestore_acceptance do
 
-  focus; it "works with single named alias" do
+  focus; it "returns count for non-zero records" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.doc("doc1").create({foo: "a"})
     rand_query_col.doc("doc2").create({foo: "b"})
     rand_query_col.doc("doc3").create({foo: "c"})
 
     aq = rand_query_col.aggregate_query
+    aq.add_count
 
+    aq.get do |snapshot|
+      _(snapshot.get('count')).must_equal 3
+    end
+  end
+
+  focus; it "returns 0 for no records" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    
+    aq = rand_query_col.aggregate_query
+    aq.add_count
+
+    aq.get do |snapshot|
+      _(snapshot.get('count')).must_equal 0
+    end
+  end
+  focus; it "returns count with single named alias" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.doc("doc1").create({foo: "a"})
+    rand_query_col.doc("doc2").create({foo: "b"})
+    rand_query_col.doc("doc3").create({foo: "c"})
+
+    aq = rand_query_col.aggregate_query
     aq.add_count aggregate_alias: 'one'
 
     aq.get do |snapshot|
@@ -31,35 +54,19 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "works with multiple named alias" do
+  focus; it "returns count with multiple named aliases" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.doc("doc1").create({foo: "a"})
     rand_query_col.doc("doc2").create({foo: "b"})
     rand_query_col.doc("doc3").create({foo: "c"})
 
     aq = rand_query_col.aggregate_query
-
     aq.add_count aggregate_alias: 'one'
     aq.add_count aggregate_alias: 'two'
 
     aq.get do |snapshot|
       _(snapshot.get('one')).must_equal 3
       _(snapshot.get('two')).must_equal 3
-    end
-  end
-
-  focus; it "works with unnamed alias" do
-    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
-    rand_query_col.doc("doc1").create({foo: "a"})
-    rand_query_col.doc("doc2").create({foo: "b"})
-    rand_query_col.doc("doc3").create({foo: "c"})
-
-    aq = rand_query_col.aggregate_query
-
-    aq.add_count
-
-    aq.get do |snapshot|
-      _(snapshot.get('count')).must_equal 3
     end
   end
   
@@ -70,11 +77,10 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.doc("doc3").create({foo: "c"})
 
     aq = rand_query_col.aggregate_query
-
     aq.add_count
 
     aq.get do |snapshot|
-      _(snapshot.get('afdas')).must_be :nil?
+      _(snapshot.get('unspecified_alias')).must_be :nil?
     end
   end
 
