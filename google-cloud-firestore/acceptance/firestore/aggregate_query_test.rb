@@ -23,7 +23,7 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
-    aq.add_count
+                       .add_count
 
     aq.get do |snapshot|
       _(snapshot.get('count')).must_equal 3
@@ -34,7 +34,7 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     
     aq = rand_query_col.aggregate_query
-    aq.add_count
+                       .add_count
 
     aq.get do |snapshot|
       _(snapshot.get('count')).must_equal 0
@@ -49,7 +49,7 @@ describe "Aggregate Query", :firestore_acceptance do
     query = rand_query_col.where(:foo, :==, :a)
     
     aq = query.aggregate_query
-    aq.add_count
+              .add_count
 
     aq.get do |snapshot|
       _(snapshot.get('count')).must_equal 1
@@ -65,7 +65,7 @@ describe "Aggregate Query", :firestore_acceptance do
     query = rand_query_col.limit 2
     
     aq = query.aggregate_query
-    aq.add_count
+              .add_count
 
     aq.get do |snapshot|
       _(snapshot.get('count')).must_equal 2
@@ -79,7 +79,7 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
-    aq.add_count aggregate_alias: 'one'
+                       .add_count aggregate_alias: 'one'
 
     aq.get do |snapshot|
       _(snapshot.get('one')).must_equal 3
@@ -93,8 +93,8 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
-    aq.add_count aggregate_alias: 'one'
-    aq.add_count aggregate_alias: 'two'
+                       .add_count(aggregate_alias: 'one')
+                       .add_count(aggregate_alias: 'two')
 
     aq.get do |snapshot|
       _(snapshot.get('one')).must_equal 3
@@ -109,7 +109,7 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
-    aq.add_count
+                       .add_count
 
     aq.get do |snapshot|
       _(snapshot.get('unspecified_alias')).must_be :nil?
@@ -123,8 +123,8 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
-    aq.add_count aggregate_alias: 'one'
-    aq.add_count aggregate_alias: 'one'
+                       .add_count(aggregate_alias: 'one')
+                       .add_count(aggregate_alias: 'one')
 
     expect do
       aq.get { |snapshot| }
@@ -139,7 +139,7 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
-    aq.add_count
+                       .add_count
 
     aq.get do |snapshot|
       _(snapshot.get('count')).must_equal 3
@@ -157,7 +157,7 @@ describe "Aggregate Query", :firestore_acceptance do
     rand_query_col.add({qux: "c"})
 
     aq = rand_query_col.aggregate_query
-    aq.add_count
+                       .add_count
 
     aq.get do |snapshot|
       _(snapshot.get('count')).must_equal 3
@@ -183,5 +183,21 @@ describe "Aggregate Query", :firestore_acceptance do
     expect do
       aq.get { |snapshot| }
     end.must_raise GRPC::InvalidArgument
+  end
+
+  it "returns count inside a transaction" do
+    rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
+    rand_query_col.add({foo: "a"})
+    rand_query_col.add({bar: "b"})
+    rand_query_col.add({qux: "c"})
+
+    aq = rand_query_col.aggregate_query
+                       .add_count
+
+    firestore.transaction do |tx|
+      tx.get_aggregate aq do |snapshot|
+        _(snapshot.get('count')).must_equal 3
+      end
+    end
   end
 end
