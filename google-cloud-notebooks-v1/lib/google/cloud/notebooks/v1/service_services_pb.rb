@@ -77,6 +77,8 @@ module Google
             rpc :UpgradeInstance, ::Google::Cloud::Notebooks::V1::UpgradeInstanceRequest, ::Google::Longrunning::Operation
             # Rollbacks a notebook instance to the previous version.
             rpc :RollbackInstance, ::Google::Cloud::Notebooks::V1::RollbackInstanceRequest, ::Google::Longrunning::Operation
+            # Creates a Diagnostic File and runs Diagnostic Tool given an Instance.
+            rpc :DiagnoseInstance, ::Google::Cloud::Notebooks::V1::DiagnoseInstanceRequest, ::Google::Longrunning::Operation
             # Allows notebook instances to
             # call this endpoint to upgrade themselves. Do not use this method directly.
             rpc :UpgradeInstanceInternal, ::Google::Cloud::Notebooks::V1::UpgradeInstanceInternalRequest, ::Google::Longrunning::Operation
