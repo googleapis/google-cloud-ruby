@@ -15,8 +15,6 @@
 require "google/cloud/firestore/v1"
 require "google/cloud/firestore/aggregate_query_snapshot"
 
-require 'debug'
-
 module Google
   module Cloud
     module Firestore
