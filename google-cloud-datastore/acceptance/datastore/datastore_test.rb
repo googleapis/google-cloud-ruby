@@ -402,6 +402,12 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       [rickard, eddard, catelyn, arya, sansa, robb, bran, jon]
     end
 
+    let(:post) do
+      Google::Cloud::Datastore::Entity.new.tap do |e|
+        e["title"]       = "How to make the perfect pizza in your grill"
+      end
+    end
+
     before do
       dataset.transaction { |tx| tx.save *characters }
     end
@@ -422,6 +428,47 @@ describe Google::Cloud::Datastore::Dataset, :datastore do
       query.offset 10
       entities = dataset.run query
       _(entities.count).must_equal 0
+    end
+
+    it "should limit results when limit > 300" do
+      kind_val = "Post_#{SecureRandom.hex(4)}"
+      limit = 700
+
+      # Add 1000 entities of the same kind to the datastore
+      1000.times.each do |id|
+        post_temp = post.dup
+        post_temp.key = Google::Cloud::Datastore::Key.new kind_val, "Post_#{id+1}"
+        dataset.save post_temp
+      end
+
+      # Testing limit with query
+      query = dataset.query(kind_val).limit(limit)
+      entities_count = 0
+      results = dataset.run query
+      loop do
+        entities_count += results.count
+        break unless results.next?
+        results = results.next
+      end
+      _(entities_count).must_equal limit
+
+      # Testing limit with GQL query
+      query_gql = dataset.gql "SELECT * FROM #{kind_val} LIMIT @limit", {limit: limit}
+      entities_count = 0
+      results = dataset.run query_gql
+      loop do
+        entities_count += results.count
+        break unless results.next?
+        results = results.next
+      end
+      _(entities_count).must_equal limit
+
+      # Delete the entities added
+      1000.times.each do |id|
+        post_temp = post.dup
+        post_temp.key = Google::Cloud::Datastore::Key.new kind_val, "Post_#{id+1}"
+        dataset.delete post_temp
+      end
     end
 
     it "should filter queries with simple indexes" do
