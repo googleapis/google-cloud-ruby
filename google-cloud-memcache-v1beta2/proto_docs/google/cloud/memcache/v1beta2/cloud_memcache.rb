@@ -68,7 +68,7 @@ module Google
         #     the latest supported minor version.
         # @!attribute [rw] parameters
         #   @return [::Google::Cloud::Memcache::V1beta2::MemcacheParameters]
-        #     Optional: User defined parameters to apply to the memcached process
+        #     User defined parameters to apply to the memcached process
         #     on each node.
         # @!attribute [r] memcache_nodes
         #   @return [::Array<::Google::Cloud::Memcache::V1beta2::Instance::Node>]
@@ -98,6 +98,14 @@ module Google
         # @!attribute [r] update_available
         #   @return [::Boolean]
         #     Output only. Returns true if there is an update waiting to be applied
+        # @!attribute [rw] maintenance_policy
+        #   @return [::Google::Cloud::Memcache::V1beta2::MaintenancePolicy]
+        #     The maintenance policy for the instance. If not provided,
+        #     the maintenance event will be performed based on Memorystore
+        #     internal rollout schedule.
+        # @!attribute [r] maintenance_schedule
+        #   @return [::Google::Cloud::Memcache::V1beta2::MaintenanceSchedule]
+        #     Output only. Published maintenance schedule.
         class Instance
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -199,12 +207,68 @@ module Google
             # Memcached instance has been created and ready to be used.
             READY = 2
 
+            # Memcached instance is updating configuration such as maintenance policy
+            # and schedule.
+            UPDATING = 3
+
             # Memcached instance is being deleted.
             DELETING = 4
 
             # Memcached instance is going through maintenance, e.g. data plane rollout.
             PERFORMING_MAINTENANCE = 5
           end
+        end
+
+        # Maintenance policy per instance.
+        # @!attribute [r] create_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was created.
+        # @!attribute [r] update_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The time when the policy was updated.
+        # @!attribute [rw] description
+        #   @return [::String]
+        #     Description of what this policy is for. Create/Update methods
+        #     return INVALID_ARGUMENT if the length is greater than 512.
+        # @!attribute [rw] weekly_maintenance_window
+        #   @return [::Array<::Google::Cloud::Memcache::V1beta2::WeeklyMaintenanceWindow>]
+        #     Required. Maintenance window that is applied to resources covered by this
+        #     policy. Minimum 1. For the current version, the maximum number of
+        #     weekly_maintenance_windows is expected to be one.
+        class MaintenancePolicy
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Time window specified for weekly operations.
+        # @!attribute [rw] day
+        #   @return [::Google::Type::DayOfWeek]
+        #     Required. Allows to define schedule that runs specified day of the week.
+        # @!attribute [rw] start_time
+        #   @return [::Google::Type::TimeOfDay]
+        #     Required. Start time of the window in UTC.
+        # @!attribute [rw] duration
+        #   @return [::Google::Protobuf::Duration]
+        #     Required. Duration of the time window.
+        class WeeklyMaintenanceWindow
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Upcoming maintenance schedule.
+        # @!attribute [r] start_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The start time of any upcoming scheduled maintenance for this instance.
+        # @!attribute [r] end_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The end time of any upcoming scheduled maintenance for this instance.
+        # @!attribute [r] schedule_deadline_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Output only. The deadline that the maintenance schedule start time can not go beyond,
+        #     including reschedule.
+        class MaintenanceSchedule
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#list_instances ListInstances}.
@@ -298,6 +362,7 @@ module Google
         # @!attribute [rw] update_mask
         #   @return [::Google::Protobuf::FieldMask]
         #     Required. Mask of fields to update.
+        #
         #      *  `displayName`
         # @!attribute [rw] resource
         #   @return [::Google::Cloud::Memcache::V1beta2::Instance]
@@ -317,6 +382,41 @@ module Google
         class DeleteInstanceRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
+        end
+
+        # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#reschedule_maintenance RescheduleMaintenance}.
+        # @!attribute [rw] instance
+        #   @return [::String]
+        #     Required. Memcache instance resource name using the form:
+        #         `projects/{project_id}/locations/{location_id}/instances/{instance_id}`
+        #     where `location_id` refers to a GCP region.
+        # @!attribute [rw] reschedule_type
+        #   @return [::Google::Cloud::Memcache::V1beta2::RescheduleMaintenanceRequest::RescheduleType]
+        #     Required. If reschedule type is SPECIFIC_TIME, must set up schedule_time as well.
+        # @!attribute [rw] schedule_time
+        #   @return [::Google::Protobuf::Timestamp]
+        #     Timestamp when the maintenance shall be rescheduled to if
+        #     reschedule_type=SPECIFIC_TIME, in RFC 3339 format, for
+        #     example `2012-11-15T16:19:00.094Z`.
+        class RescheduleMaintenanceRequest
+          include ::Google::Protobuf::MessageExts
+          extend ::Google::Protobuf::MessageExts::ClassMethods
+
+          # Reschedule options.
+          module RescheduleType
+            # Not set.
+            RESCHEDULE_TYPE_UNSPECIFIED = 0
+
+            # If the user wants to schedule the maintenance to happen now.
+            IMMEDIATE = 1
+
+            # If the user wants to use the existing maintenance policy to find the
+            # next available window.
+            NEXT_AVAILABLE_WINDOW = 2
+
+            # If the user wants to reschedule the maintenance to a specific time.
+            SPECIFIC_TIME = 3
+          end
         end
 
         # Request for {::Google::Cloud::Memcache::V1beta2::CloudMemcache::Client#apply_parameters ApplyParameters}.
@@ -372,14 +472,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # The unique ID associated with this set of parameters. Users
-        # can use this id to determine if the parameters associated with the instance
-        # differ from the parameters associated with the nodes. A discrepancy between
-        # parameter ids can inform users that they may need to take action to apply
-        # parameters on nodes.
         # @!attribute [r] id
         #   @return [::String]
-        #     Output only.
+        #     Output only. The unique ID associated with this set of parameters. Users
+        #     can use this id to determine if the parameters associated with the instance
+        #     differ from the parameters associated with the nodes. A discrepancy between
+        #     parameter ids can inform users that they may need to take action to apply
+        #     parameters on nodes.
         # @!attribute [rw] params
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     User defined set of parameters to use in the memcached process.
@@ -427,7 +526,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Metadata for the given [google.cloud.location.Location][google.cloud.location.Location].
+        # Metadata for the given `::Google::Cloud::Location::Location`.
         # @!attribute [r] available_zones
         #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Memcache::V1beta2::ZoneMetadata}]
         #     Output only. The set of available zones in the location. The map is keyed
