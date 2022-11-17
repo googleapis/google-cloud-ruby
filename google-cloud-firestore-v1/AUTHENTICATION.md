@@ -27,7 +27,7 @@ export FIRESTORE_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/firestore/v1"
 
-client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
+client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
 ```
 
 ## Credential Lookup
@@ -77,7 +77,7 @@ require "google/cloud/firestore/v1"
 
 ENV["FIRESTORE_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
+client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
 ```
 
 ### Configuration
@@ -88,7 +88,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/firestore/v1"
 
-client = ::Google::Cloud::Firestore::V1::Firestore::Client.new do |config|
+client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -98,11 +98,11 @@ Or globally for all clients:
 ```ruby
 require "google/cloud/firestore/v1"
 
-::Google::Cloud::Firestore::V1::Firestore::Client.configure do |config|
+::Google::Cloud::Firestore::V1::Firestore::Rest::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
+client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
 ```
 
 ### Cloud SDK

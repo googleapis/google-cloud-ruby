@@ -15,8 +15,10 @@
     "lib/google-cloud-location.rb",
     "lib/google/cloud/location.rb",
     "lib/google/cloud/location/locations.rb",
-    "lib/google/cloud/location/locations/client.rb",
     "lib/google/cloud/location/locations/credentials.rb",
+    "lib/google/cloud/location/locations/rest.rb",
+    "lib/google/cloud/location/locations/rest/client.rb",
+    "lib/google/cloud/location/locations/rest/service_stub.rb",
     "lib/google/cloud/location/locations_pb.rb",
     "lib/google/cloud/location/locations_services_pb.rb",
     "lib/google/cloud/location/version.rb",
@@ -31,7 +33,7 @@
     "snippets/locations/get_location.rb",
     "snippets/locations/list_locations.rb",
     "snippets/snippet_metadata_google.cloud.location.json",
-    "test/google/cloud/location/locations_test.rb",
+    "test/google/cloud/location/locations_rest_test.rb",
     "test/helper.rb"
   ],
   "static": [

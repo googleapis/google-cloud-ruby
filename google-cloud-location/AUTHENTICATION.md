@@ -27,7 +27,7 @@ export GOOGLE_CLOUD_CREDENTIALS=path/to/keyfile.json
 ```ruby
 require "google/cloud/location"
 
-client = ::Google::Cloud::Location::Locations::Client.new
+client = ::Google::Cloud::Location::Locations::Rest::Client.new
 ```
 
 ## Credential Lookup
@@ -75,7 +75,7 @@ require "google/cloud/location"
 
 ENV["GOOGLE_CLOUD_CREDENTIALS"] = "path/to/keyfile.json"
 
-client = ::Google::Cloud::Location::Locations::Client.new
+client = ::Google::Cloud::Location::Locations::Rest::Client.new
 ```
 
 ### Configuration
@@ -86,7 +86,7 @@ it in an environment variable. Either on an individual client initialization:
 ```ruby
 require "google/cloud/location"
 
-client = ::Google::Cloud::Location::Locations::Client.new do |config|
+client = ::Google::Cloud::Location::Locations::Rest::Client.new do |config|
   config.credentials = "path/to/keyfile.json"
 end
 ```
@@ -96,11 +96,11 @@ Or globally for all clients:
 ```ruby
 require "google/cloud/location"
 
-::Google::Cloud::Location::Locations::Client.configure do |config|
+::Google::Cloud::Location::Locations::Rest::Client.configure do |config|
   config.credentials = "path/to/keyfile.json"
 end
 
-client = ::Google::Cloud::Location::Locations::Client.new
+client = ::Google::Cloud::Location::Locations::Rest::Client.new
 ```
 
 ### Cloud SDK

@@ -23,12 +23,12 @@ module Google
   module Cloud
     module Firestore
       ##
-      # To load this package, including all its services, and instantiate a client:
+      # To load this package, including all its services, and instantiate a REST client:
       #
       # @example
       #
       #     require "google/cloud/firestore/v1"
-      #     client = ::Google::Cloud::Firestore::V1::Firestore::Client.new
+      #     client = ::Google::Cloud::Firestore::V1::Firestore::Rest::Client.new
       #
       module V1
       end

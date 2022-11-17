@@ -42,7 +42,7 @@ module Google
 
         def firestore
           @firestore ||= \
-            V1::Firestore::Client.new do |config|
+            V1::Firestore::Rest::Client.new do |config|
               config.credentials = credentials if credentials
               config.timeout = timeout if timeout
               config.endpoint = host if host

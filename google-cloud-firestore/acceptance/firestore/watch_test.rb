@@ -193,4 +193,4 @@ describe "Watch", :firestore_acceptance do
       sleep (2**wait_count) + rand(0..wait_count)
     end
   end
-end
+end if false
