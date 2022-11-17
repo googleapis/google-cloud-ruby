@@ -55,15 +55,18 @@ module Google
             rpc :CreateInstance, ::Google::Cloud::Memcache::V1::CreateInstanceRequest, ::Google::Longrunning::Operation
             # Updates an existing Instance in a given project and location.
             rpc :UpdateInstance, ::Google::Cloud::Memcache::V1::UpdateInstanceRequest, ::Google::Longrunning::Operation
-            # Updates the defined Memcached Parameters for an existing Instance.
+            # Updates the defined Memcached parameters for an existing instance.
             # This method only stages the parameters, it must be followed by
-            # ApplyParameters to apply the parameters to nodes of the Memcached Instance.
+            # `ApplyParameters` to apply the parameters to nodes of the Memcached
+            # instance.
             rpc :UpdateParameters, ::Google::Cloud::Memcache::V1::UpdateParametersRequest, ::Google::Longrunning::Operation
             # Deletes a single Instance.
             rpc :DeleteInstance, ::Google::Cloud::Memcache::V1::DeleteInstanceRequest, ::Google::Longrunning::Operation
-            # ApplyParameters will restart the set of specified nodes in order to update
+            # `ApplyParameters` restarts the set of specified nodes in order to update
             # them to the current set of parameters for the Memcached Instance.
             rpc :ApplyParameters, ::Google::Cloud::Memcache::V1::ApplyParametersRequest, ::Google::Longrunning::Operation
+            # Reschedules upcoming maintenance event.
+            rpc :RescheduleMaintenance, ::Google::Cloud::Memcache::V1::RescheduleMaintenanceRequest, ::Google::Longrunning::Operation
           end
 
           Stub = Service.rpc_stub_class
