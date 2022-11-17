@@ -49,20 +49,13 @@ module Google
 
           # return enum_for :get unless block_given?
 
-          # results = service.run_query parent_path, @query
           structured_aggregation_query = StructuredAggregationQuery.new(
             structured_query: @query,
             aggregations: @aggregates
           )
           results = service.run_aggregate_query @parent_path, structured_aggregation_query
-
           snapshot = AggregateQuerySnapshot.from_run_aggregate_query_response results
-
           yield snapshot
-
-          # results.each do |result|
-          #   yield result
-          # end
         end
 
         protected
@@ -87,10 +80,8 @@ module Google
         # @private The Service object.
         def service
           ensure_client!
-
           client.service
         end
-
       end
     end
   end
