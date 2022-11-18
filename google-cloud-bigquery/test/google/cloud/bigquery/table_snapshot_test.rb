@@ -1,4 +1,4 @@
-# Copyright 2015 Google LLC
+# Copyright 2022 Google LLC
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -43,7 +43,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
   let(:target_table_other_proj) { Google::Cloud::Bigquery::Table.from_gapi target_table_other_proj_gapi,
                                                          bigquery.service }
 
-  it "can copy itself" do
+  it "can snapshot itself" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     job_gapi = copy_job_gapi(source_table, target_table)
@@ -51,13 +51,13 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    result = source_table.copy target_table
+    result = source_table.snapshot target_table
     mock.verify
 
     _(result).must_equal true
   end
 
-  it "can copy to a table identified by a string" do
+  it "can snapshot to a table identified by a string" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
 
@@ -66,13 +66,13 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, ["test-project", job_gapi]
 
-    result = source_table.copy "target-project:target_dataset.target_table_id"
+    result = source_table.snapshot "target-project:target_dataset.target_table_id"
     mock.verify
 
     _(result).must_equal true
   end
 
-  it "can copy to a table name string only" do
+  it "can snapshot to a table name string only" do
     mock = Minitest::Mock.new
     bigquery.service.mocked_service = mock
     new_target_table = Google::Cloud::Bigquery::Table.from_gapi(
@@ -88,72 +88,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
     job_resp_gapi.status = status "done"
     mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
 
-    result = source_table.copy "new_target_table_id"
-    mock.verify
-
-    _(result).must_equal true
-  end
-
-  it "can copy itself with create disposition" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = copy_job_gapi(source_table, target_table)
-    job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status "done"
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
-
-    result = source_table.copy target_table, create: "CREATE_NEVER"
-    mock.verify
-
-    _(result).must_equal true
-  end
-
-  it "can copy itself with create disposition symbol" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = copy_job_gapi(source_table, target_table)
-    job_gapi.configuration.copy.create_disposition = "CREATE_NEVER"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status "done"
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
-
-    result = source_table.copy target_table, create: :never
-    mock.verify
-
-    _(result).must_equal true
-  end
-
-
-  it "can copy itself with write disposition" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = copy_job_gapi(source_table, target_table)
-    job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status "done"
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
-
-    result = source_table.copy target_table, write: "WRITE_TRUNCATE"
-    mock.verify
-
-    _(result).must_equal true
-  end
-
-  it "can copy itself with write disposition symbol" do
-    mock = Minitest::Mock.new
-    bigquery.service.mocked_service = mock
-
-    job_gapi = copy_job_gapi(source_table, target_table)
-    job_gapi.configuration.copy.write_disposition = "WRITE_TRUNCATE"
-    job_resp_gapi = job_gapi.dup
-    job_resp_gapi.status = status "done"
-    mock.expect :insert_job, job_resp_gapi, [project, job_gapi]
-
-    result = source_table.copy target_table, write: :truncate
+    result = source_table.snapshot "new_target_table_id"
     mock.verify
 
     _(result).must_equal true
@@ -184,7 +119,7 @@ describe Google::Cloud::Bigquery::Table, :copy, :mock_bigquery do
           },
           "createDisposition" => nil,
           "writeDisposition" => nil,
-          "operationType" => "COPY"
+          "operationType" => "SNAPSHOT"
         },
         "dryRun" => nil
       }
