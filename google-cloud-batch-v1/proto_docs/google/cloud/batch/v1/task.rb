@@ -168,12 +168,12 @@ module Google
           # @!attribute [rw] username
           #   @return [::String]
           #     Optional username for logging in to a docker registry. If username
-          #     matches `projects/*/secrets/*/versions/*` then Batch will read the
+          #     matches "projects/*/secrets/*/versions/*" then Batch will read the
           #     username from the Secret Manager.
           # @!attribute [rw] password
           #   @return [::String]
           #     Optional password for logging in to a docker registry. If password
-          #     matches `projects/*/secrets/*/versions/*` then Batch will read the
+          #     matches "projects/*/secrets/*/versions/*" then Batch will read the
           #     password from the Secret Manager;
           class Container
             include ::Google::Protobuf::MessageExts
