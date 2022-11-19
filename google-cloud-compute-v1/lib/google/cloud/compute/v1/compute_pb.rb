@@ -606,6 +606,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :project, :string, 227560217
       proto3_optional :return_partial_success, :bool, 517198390
     end
+    add_message "google.cloud.compute.v1.AggregatedListTargetTcpProxiesRequest" do
+      proto3_optional :filter, :string, 336120696
+      proto3_optional :include_all_scopes, :bool, 391327988
+      proto3_optional :max_results, :uint32, 54715419
+      proto3_optional :order_by, :string, 160562920
+      proto3_optional :page_token, :string, 19994697
+      optional :project, :string, 227560217
+      proto3_optional :return_partial_success, :bool, 517198390
+    end
     add_message "google.cloud.compute.v1.AggregatedListTargetVpnGatewaysRequest" do
       proto3_optional :filter, :string, 336120696
       proto3_optional :include_all_scopes, :bool, 391327988
@@ -9747,6 +9756,10 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       proto3_optional :self_link, :string, 456214797
       proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
     end
+    add_message "google.cloud.compute.v1.TargetTcpProxiesScopedList" do
+      repeated :target_tcp_proxies, :message, 262056832, "google.cloud.compute.v1.TargetTcpProxy"
+      proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
+    end
     add_message "google.cloud.compute.v1.TargetTcpProxiesSetBackendServiceRequest" do
       proto3_optional :service, :string, 373540533
     end
@@ -9774,6 +9787,15 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       value :UNDEFINED_PROXY_HEADER, 0
       value :NONE, 2402104
       value :PROXY_V1, 334352940
+    end
+    add_message "google.cloud.compute.v1.TargetTcpProxyAggregatedList" do
+      proto3_optional :id, :string, 3355
+      map :items, :string, :message, 100526016, "google.cloud.compute.v1.TargetTcpProxiesScopedList"
+      proto3_optional :kind, :string, 3292052
+      proto3_optional :next_page_token, :string, 79797525
+      proto3_optional :self_link, :string, 456214797
+      repeated :unreachables, :string, 243372063
+      proto3_optional :warning, :message, 50704284, "google.cloud.compute.v1.Warning"
     end
     add_message "google.cloud.compute.v1.TargetTcpProxyList" do
       proto3_optional :id, :string, 3355
@@ -10655,6 +10677,7 @@ module Google
         AggregatedListTargetHttpsProxiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListTargetHttpsProxiesRequest").msgclass
         AggregatedListTargetInstancesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListTargetInstancesRequest").msgclass
         AggregatedListTargetPoolsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListTargetPoolsRequest").msgclass
+        AggregatedListTargetTcpProxiesRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListTargetTcpProxiesRequest").msgclass
         AggregatedListTargetVpnGatewaysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListTargetVpnGatewaysRequest").msgclass
         AggregatedListUrlMapsRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListUrlMapsRequest").msgclass
         AggregatedListVpnGatewaysRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.AggregatedListVpnGatewaysRequest").msgclass
@@ -12018,11 +12041,13 @@ module Google
         TargetSslProxy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetSslProxy").msgclass
         TargetSslProxy::ProxyHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetSslProxy.ProxyHeader").enummodule
         TargetSslProxyList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetSslProxyList").msgclass
+        TargetTcpProxiesScopedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxiesScopedList").msgclass
         TargetTcpProxiesSetBackendServiceRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxiesSetBackendServiceRequest").msgclass
         TargetTcpProxiesSetProxyHeaderRequest = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxiesSetProxyHeaderRequest").msgclass
         TargetTcpProxiesSetProxyHeaderRequest::ProxyHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxiesSetProxyHeaderRequest.ProxyHeader").enummodule
         TargetTcpProxy = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxy").msgclass
         TargetTcpProxy::ProxyHeader = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxy.ProxyHeader").enummodule
+        TargetTcpProxyAggregatedList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxyAggregatedList").msgclass
         TargetTcpProxyList = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetTcpProxyList").msgclass
         TargetVpnGateway = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetVpnGateway").msgclass
         TargetVpnGateway::Status = ::Google::Protobuf::DescriptorPool.generated_pool.lookup("google.cloud.compute.v1.TargetVpnGateway.Status").enummodule
