@@ -18,17 +18,61 @@ require "google/cloud/firestore/aggregate_query_snapshot"
 module Google
   module Cloud
     module Firestore
+      ##
+      # # AggregateQuery
+      #
+      # An aggregate query can be used to fetch aggregate values (ex: count) for a query
+      #
+      # Instances of this class are immutable. All methods that refine the aggregate query
+      # return new instances.
+      #
+      # @example
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #
+      #   query = firestore.col "cities"
+      #
+      #   # Create an aggregate query
+      #   aggregate_query = query.aggregate_query
+      #                          .add_count
+      # 
+      #   aggregate_query.get do |aggregate_snapshot|
+      #     puts aggregate_snapshot.get('count')
+      #   end
+      #
+      # @example Alias an aggregate query
+      #   require "google/cloud/firestore"
+      #
+      #   firestore = Google::Cloud::Firestore.new
+      #
+      #   # Create a query
+      #   query = firestore.col "cities"
+      #
+      #   # Create an aggregate query
+      #   aggregate_query = query.aggregate_query
+      #                          .add_count aggregate_alias: 'total_cities'
+      # 
+      #   aggregate_query.get do |aggregate_snapshot|
+      #     puts aggregate_snapshot.get('total_cities')
+      #   end
+      #
       class AggregateQuery
 
         ##
         # @private The firestore client object.
         attr_accessor :client
 
+        ##
+        # @private The type for limit queries.
         attr_reader :parent_path
 
+        ##
+        # @private The Google::Cloud::Firestore::V1::StructuredQuery object.
         attr_reader :query
 
-
+        ##
+        # @private Creates a new AggregateQuery
         def initialize query, parent_path, client
           @query = query
           @parent_path = parent_path
@@ -36,6 +80,29 @@ module Google
           @client = client
         end
 
+        ##
+        # Adds a count aggregate.
+        #
+        # @yield [snapshot] The block for accessing the aggregate query snapshots.
+        # @yieldparam [AggregateQuerySnapshot] An aggregate query snapshot.
+        #
+        # @return [Enumerator<AggregateQuerySnapshot>] A list of aggregate query snapshots.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_count
+        # 
+        #   aggregate_query.get do |aggregate_snapshot|
+        #     puts aggregate_snapshot.get('count')
+        #   end
+        #
         def add_count aggregate_alias: nil
           aggregate_alias ||= ALIASES[:count]
           @aggregates << StructuredAggregationQuery::Aggregation.new(
@@ -45,21 +112,43 @@ module Google
           self
         end
 
-        # should run the passed block
+        ##
+        # Retrieves document snapshots for the query.
+        #
+        # @yield [snapshot] The block for accessing the aggregate query snapshots.
+        # @yieldparam [AggregateQuerySnapshot] An aggregate query snapshot.
+        #
+        # @return [Enumerator<AggregateQuerySnapshot>] A list of aggregate query snapshots.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #                          .add_count
+        # 
+        #   aggregate_query.get do |aggregate_snapshot|
+        #     puts aggregate_snapshot.get('count')
+        #   end
+        #
         def get
           # ensure_service!
 
-          # return enum_for :get unless block_given?
+          return enum_for :get unless block_given?
 
-          # structured_aggregation_query = StructuredAggregationQuery.new(
-          #   structured_query: @query,
-          #   aggregations: @aggregates
-          # )
           results = service.run_aggregate_query @parent_path, structured_aggregation_query
-          snapshot = AggregateQuerySnapshot.from_run_aggregate_query_response results
-          yield snapshot
+          results.each do |result|
+            next if result.result.nil?
+            yield AggregateQuerySnapshot.from_run_aggregate_query_response result
+          end
         end
 
+        ##
+        # @private Creates a Google::Cloud::Firestore::V1::StructuredAggregationQuery object
         def structured_aggregation_query
           StructuredAggregationQuery.new(
             structured_query: @query,
@@ -80,7 +169,7 @@ module Google
         }.freeze
 
         ##
-        # @private Raise an error unless an database available.
+        # @private Raise an error unless a database is available.
         def ensure_client!
           raise "Must have active connection to service" unless client
         end

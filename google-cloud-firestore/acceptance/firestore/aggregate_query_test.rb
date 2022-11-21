@@ -185,7 +185,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end.must_raise GRPC::InvalidArgument
   end
 
-  focus; it "returns count inside a transaction" do
+  it "returns count inside a transaction" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})

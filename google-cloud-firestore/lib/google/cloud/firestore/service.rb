@@ -124,6 +124,8 @@ module Google
           firestore.run_query run_query_req, call_options(parent: database_path)
         end
 
+        ##
+        # Returns Google::Cloud::Firestore::V1::RunAggregationQueryResponse
         def run_aggregate_query parent, structured_aggregation_query, transaction: nil
           request = {
             parent: parent,

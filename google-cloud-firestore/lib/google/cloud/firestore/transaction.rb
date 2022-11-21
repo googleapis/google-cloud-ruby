@@ -19,8 +19,6 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/commit_response"
 require "google/cloud/firestore/convert"
 
-require 'debug'
-
 module Google
   module Cloud
     module Firestore
@@ -271,23 +269,40 @@ module Google
         end
         alias run get
 
-        # similar behavior as the above method get
+        ##
+        # Retrieves aggregate query snapshots for the given value. Valid values can be
+        # a string representing either a document or a collection of documents,
+        # a document reference object, a collection reference object, or a query
+        # to be run.
+        #
+        # @param [AggregateQuery] aggregate_query
+        #   An AggregateQuery object
+        #
+        # @yield [documents] The block for accessing the aggregate query snapshot.
+        # @yieldparam [AggregateQuerySnapshot] aggregate_snapshot An aggregate query snapshot.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   firestore.transaction do |tx|
+        #     tx.get_aggregate aq do |aggregate_snapshot|
+        #       puts aggregate_snapshot.get('count')
+        #     end
+        #   end
+        #
         def get_aggregate aggregate_query
           ensure_not_closed!
           ensure_service!
 
-          # obj = coalesce_get_argument obj
-
-          # results = service.run_aggregate_query obj.parent_path, obj.aggregate_query,
-          #                                       transaction: transaction_or_create
           results = service.run_aggregate_query aggregate_query.parent_path,
                                                 aggregate_query.structured_aggregation_query,
                                                 transaction: transaction_or_create
           results.each do |result|
             extract_transaction_from_result! result
             next if result.result.nil?
-            # binding.break
-            yield AggregateQuerySnapshot.from_transaction_aggregate_query_response result
+            yield AggregateQuerySnapshot.from_run_aggregate_query_response result
           end
         end
 

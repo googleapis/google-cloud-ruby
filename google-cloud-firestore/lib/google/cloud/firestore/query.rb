@@ -941,6 +941,22 @@ module Google
         end
         alias run get
 
+        ##
+        # Creates an AggregateQuery object for the query.
+        #
+        # @return [AggregateQuery] New empty aggregate query.
+        #
+        # @example
+        #   require "google/cloud/firestore"
+        #
+        #   firestore = Google::Cloud::Firestore.new
+        #
+        #   # Get a collection reference
+        #   query = firestore.col "cities"
+        #
+        #   # Create an aggregate query
+        #   aggregate_query = query.aggregate_query
+        #
         def aggregate_query
           AggregateQuery.new query, parent_path, client
         end
