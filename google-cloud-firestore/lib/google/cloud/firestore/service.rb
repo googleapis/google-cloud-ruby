@@ -124,11 +124,17 @@ module Google
           firestore.run_query run_query_req, call_options(parent: database_path)
         end
 
-        def run_aggregate_query parent, structured_aggregation_query
+        def run_aggregate_query parent, structured_aggregation_query, transaction: nil
           request = {
             parent: parent,
             structured_aggregation_query: structured_aggregation_query
           }
+          if transaction.is_a? String
+            request[:transaction] = transaction
+          elsif transaction
+            request[:new_transaction] = transaction
+          end
+
           firestore.run_aggregation_query request
         end
 

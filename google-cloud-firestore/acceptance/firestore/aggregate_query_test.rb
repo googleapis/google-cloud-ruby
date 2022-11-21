@@ -16,7 +16,7 @@ require "firestore_helper"
 
 describe "Aggregate Query", :firestore_acceptance do
 
-  focus; it "returns count for non-zero records" do
+  it "returns count for non-zero records" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -30,7 +30,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "returns 0 for no records" do
+  it "returns 0 for no records" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     
     aq = rand_query_col.aggregate_query
@@ -41,7 +41,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "returns count on filter" do
+  it "returns count on filter" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -56,7 +56,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "returns count on limit" do
+  it "returns count on limit" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -72,7 +72,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "returns count with a custom alias" do
+  it "returns count with a custom alias" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -86,7 +86,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "returns count with multiple custom aliases" do
+  it "returns count with multiple custom aliases" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -102,7 +102,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
   
-  focus; it "returns nil for unspecified alias" do
+  it "returns nil for unspecified alias" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -116,7 +116,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "throws error when duplicating aliases" do
+  it "throws error when duplicating aliases" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -132,7 +132,7 @@ describe "Aggregate Query", :firestore_acceptance do
   end
 
 
-  focus; it "returns count for multiple requests" do
+  it "returns count for multiple requests" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -150,7 +150,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
 
-  focus; it "returns different count when data changes" do
+  it "returns different count when data changes" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -171,7 +171,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end
   end
   
-  focus; it "throws error when no aggregate is added" do
+  it "throws error when no aggregate is added" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})
@@ -185,7 +185,7 @@ describe "Aggregate Query", :firestore_acceptance do
     end.must_raise GRPC::InvalidArgument
   end
 
-  it "returns count inside a transaction" do
+  focus; it "returns count inside a transaction" do
     rand_query_col = firestore.col "#{root_path}/query/#{SecureRandom.hex(4)}"
     rand_query_col.add({foo: "a"})
     rand_query_col.add({bar: "b"})

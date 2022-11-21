@@ -19,6 +19,8 @@ require "google/cloud/firestore/document_snapshot"
 require "google/cloud/firestore/commit_response"
 require "google/cloud/firestore/convert"
 
+require 'debug'
+
 module Google
   module Cloud
     module Firestore
@@ -268,6 +270,26 @@ module Google
           end
         end
         alias run get
+
+        # similar behavior as the above method get
+        def get_aggregate aggregate_query
+          ensure_not_closed!
+          ensure_service!
+
+          # obj = coalesce_get_argument obj
+
+          # results = service.run_aggregate_query obj.parent_path, obj.aggregate_query,
+          #                                       transaction: transaction_or_create
+          results = service.run_aggregate_query aggregate_query.parent_path,
+                                                aggregate_query.structured_aggregation_query,
+                                                transaction: transaction_or_create
+          results.each do |result|
+            extract_transaction_from_result! result
+            next if result.result.nil?
+            # binding.break
+            yield AggregateQuerySnapshot.from_transaction_aggregate_query_response result
+          end
+        end
 
         # @!endgroup
 

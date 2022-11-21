@@ -24,6 +24,10 @@ module Google
         # @private The firestore client object.
         attr_accessor :client
 
+        attr_reader :parent_path
+
+        attr_reader :query
+
 
         def initialize query, parent_path, client
           @query = query
@@ -47,13 +51,20 @@ module Google
 
           # return enum_for :get unless block_given?
 
-          structured_aggregation_query = StructuredAggregationQuery.new(
-            structured_query: @query,
-            aggregations: @aggregates
-          )
+          # structured_aggregation_query = StructuredAggregationQuery.new(
+          #   structured_query: @query,
+          #   aggregations: @aggregates
+          # )
           results = service.run_aggregate_query @parent_path, structured_aggregation_query
           snapshot = AggregateQuerySnapshot.from_run_aggregate_query_response results
           yield snapshot
+        end
+
+        def structured_aggregation_query
+          StructuredAggregationQuery.new(
+            structured_query: @query,
+            aggregations: @aggregates
+          )
         end
 
         protected

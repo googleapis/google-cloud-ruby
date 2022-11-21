@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'debug'
+
 module Google
   module Cloud
     module Firestore      
@@ -30,6 +32,7 @@ module Google
         end
 
         def self.from_run_aggregate_query_response response
+          # binding.break
           elems = []
           response.each { |res| elems << res }
 
@@ -40,6 +43,16 @@ module Google
           new.tap do |s|
             s.instance_variable_set :@results, aggregate_fields
           end
+        end
+
+        def self.from_transaction_aggregate_query_response result
+          aggregate_fields = result.result.aggregate_fields.to_h
+          # { |k, v| [String(k), String(v)] }
+
+          new.tap do |s|
+            s.instance_variable_set :@results, aggregate_fields
+          end
+
         end
       end
     end
