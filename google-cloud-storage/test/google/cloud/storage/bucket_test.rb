@@ -591,10 +591,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
   it "creates an empty file" do
     new_file_name = random_file_path
 
-    Tempfile.open ["google-cloud", ".txt"] do |tmpfile|
-      tmpfile.write ""
-      tmpfile.rewind
-
+    Tempfile.create ["google-cloud", ".txt"] do |tmpfile|
       mock = Minitest::Mock.new
       mock.expect :insert_object, create_file_gapi(bucket_user_project.name, new_file_name),
         [bucket.name, empty_file_gapi], **insert_object_args(name: new_file_name, upload_source: tmpfile, user_project: "test", options: {retries: 0})
@@ -610,7 +607,7 @@ describe Google::Cloud::Storage::Bucket, :mock_storage do
 
   it "creates an file with a StringIO" do
     new_file_name = random_file_path
-    new_file_contents = StringIO.new ""
+    new_file_contents = StringIO.new
 
     mock = Minitest::Mock.new
     mock.expect :insert_object, create_file_gapi(bucket.name, new_file_name),

@@ -459,19 +459,19 @@ describe Google::Cloud::Storage::File, :storage do
 
   it "should upload and download an empty file" do
     data = ""
-    file = StringIO.new("")
+    file = StringIO.new
 
     uploaded = bucket.create_file file, "uploaded/empty-file.txt"
     _(uploaded.name).must_equal "uploaded/empty-file.txt"
 
-    downloadio = StringIO.new()
+    downloadio = StringIO.new
     downloaded = uploaded.download downloadio
     _(downloaded).must_be_kind_of StringIO
 
-    downloaded_data = downloaded.read
+    downloaded_data = downloaded.string
     _(downloaded_data).must_equal data
-
-    uploaded.delete
+    ensure
+      uploaded.delete
   end
 
   it "should download and verify when Content-Encoding gzip response header with skip_decompress" do
