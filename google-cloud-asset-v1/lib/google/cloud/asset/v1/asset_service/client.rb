@@ -235,17 +235,16 @@ module Google
             # Service calls
 
             ##
-            # Exports assets with time and resource types to a given \\{\\{storage_name}}
-            # location/\\{\\{bigquery_name}} table. For \\{\\{storage_name}} location
-            # destinations, the output format is newline-delimited JSON. Each line
-            # represents a {::Google::Cloud::Asset::V1::Asset google.cloud.asset.v1.Asset} in
-            # the JSON format; for \\{\\{bigquery_name}} table destinations, the output table
-            # stores the fields in asset Protobuf as columns. This API implements the
-            # {::Google::Longrunning::Operation google.longrunning.Operation} API, which
-            # allows you to keep track of the export. We recommend intervals of at least
-            # 2 seconds with exponential retry to poll the export operation result. For
-            # regular-size resource parent, the export operation usually finishes within
-            # 5 minutes.
+            # Exports assets with time and resource types to a given Cloud Storage
+            # location/BigQuery table. For Cloud Storage location destinations, the
+            # output format is newline-delimited JSON. Each line represents a
+            # {::Google::Cloud::Asset::V1::Asset google.cloud.asset.v1.Asset} in the JSON format; for BigQuery table
+            # destinations, the output table stores the fields in asset Protobuf as
+            # columns. This API implements the {::Google::Longrunning::Operation google.longrunning.Operation} API,
+            # which allows you to keep track of the export. We recommend intervals of at
+            # least 2 seconds with exponential retry to poll the export operation result.
+            # For regular-size resource parent, the export operation usually finishes
+            # within 5 minutes.
             #
             # @overload export_assets(request, options = nil)
             #   Pass arguments to `export_assets` via a request object, either of type
@@ -289,15 +288,14 @@ module Google
             #     supported asset type, an INVALID_ARGUMENT error will be returned.
             #
             #     If specified, only matching assets will be returned, otherwise, it will
-            #     snapshot all asset types. See [Introduction to
-            #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
-            #     all supported asset types.
+            #     snapshot all asset types. See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+            #     for all supported asset types.
             #   @param content_type [::Google::Cloud::Asset::V1::ContentType]
             #     Asset content type. If not specified, no content but the asset name will be
             #     returned.
             #   @param output_config [::Google::Cloud::Asset::V1::OutputConfig, ::Hash]
-            #     Required. Output configuration indicating where the results will be output
-            #     to.
+            #     Required. Output configuration indicating where the results will be output to.
             #   @param relationship_types [::Array<::String>]
             #     A list of relationship types to export, for example:
             #     `INSTANCE_TO_INSTANCEGROUP`. This field should only be specified if
@@ -311,9 +309,9 @@ module Google
             #     it snapshots the supported relationships for all [asset_types] or returns
             #     an error if any of the [asset_types] has no relationship support.
             #     An unspecified asset types field means all supported asset_types.
-            #     See [Introduction to
-            #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
-            #     all supported asset types and relationship types.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+            #     supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -407,11 +405,11 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. Name of the organization, folder, or project the assets belong
-            #     to. Format: "organizations/[organization-number]" (such as
-            #     "organizations/123"), "projects/[project-id]" (such as
-            #     "projects/my-project-id"), "projects/[project-number]" (such as
-            #     "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
+            #     Required. Name of the organization, folder, or project the assets belong to. Format:
+            #     "organizations/[organization-number]" (such as "organizations/123"),
+            #     "projects/[project-id]" (such as "projects/my-project-id"),
+            #     "projects/[project-number]" (such as "projects/12345"), or
+            #     "folders/[folder-number]" (such as "folders/12345").
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
             #     Timestamp to take an asset snapshot. This can only be set to a timestamp
             #     between the current time and the current time minus 35 days (inclusive).
@@ -434,9 +432,9 @@ module Google
             #     supported asset type, an INVALID_ARGUMENT error will be returned.
             #
             #     If specified, only matching assets will be returned, otherwise, it will
-            #     snapshot all asset types. See [Introduction to
-            #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
-            #     all supported asset types.
+            #     snapshot all asset types. See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+            #     for all supported asset types.
             #   @param content_type [::Google::Cloud::Asset::V1::ContentType]
             #     Asset content type. If not specified, no content but the asset name will
             #     be returned.
@@ -460,9 +458,9 @@ module Google
             #     it snapshots the supported relationships for all [asset_types] or returns
             #     an error if any of the [asset_types] has no relationship support.
             #     An unspecified asset types field means all supported asset_types.
-            #     See [Introduction to
-            #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
-            #     all supported asset types and relationship types.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
+            #     for all supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::PagedEnumerable<::Google::Cloud::Asset::V1::Asset>]
@@ -538,7 +536,7 @@ module Google
             ##
             # Batch gets the update history of assets that overlap a time window.
             # For IAM_POLICY content, this API outputs history when the asset and its
-            # attached IAM_POLICY both exist. This can create gaps in the output history.
+            # attached IAM POLICY both exist. This can create gaps in the output history.
             # Otherwise, this API outputs history with asset in both non-delete or
             # deleted status.
             # If a specified asset does not exist, this API returns an INVALID_ARGUMENT
@@ -595,9 +593,9 @@ module Google
             #     it outputs the supported relationships' history on the [asset_names] or
             #     returns an error if any of the [asset_names]'s types has no relationship
             #     support.
-            #     See [Introduction to
-            #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
-            #     all supported asset types and relationship types.
+            #     See [Introduction to Cloud Asset
+            #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
+            #     supported asset types and relationship types.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Asset::V1::BatchGetAssetsHistoryResponse]
@@ -692,8 +690,9 @@ module Google
             #     Required. This is the client-assigned asset feed identifier and it needs to
             #     be unique under a specific parent project/folder/organization.
             #   @param feed [::Google::Cloud::Asset::V1::Feed, ::Hash]
-            #     Required. The feed details. The field `name` must be empty and it will be
-            #     generated in the format of: projects/project_number/feeds/feed_id
+            #     Required. The feed details. The field `name` must be empty and it will be generated
+            #     in the format of:
+            #     projects/project_number/feeds/feed_id
             #     folders/folder_number/feeds/feed_id
             #     organizations/organization_number/feeds/feed_id
             #
@@ -955,8 +954,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param feed [::Google::Cloud::Asset::V1::Feed, ::Hash]
-            #     Required. The new values of feed details. It must match an existing feed
-            #     and the field `name` must be in the format of:
+            #     Required. The new values of feed details. It must match an existing feed and the
+            #     field `name` must be in the format of:
             #     projects/project_number/feeds/feed_id or
             #     folders/folder_number/feeds/feed_id or
             #     organizations/organization_number/feeds/feed_id.
@@ -1118,8 +1117,8 @@ module Google
             end
 
             ##
-            # Searches all \\{\\{gcp_name}} resources within the specified scope, such as a
-            # project, folder, or organization. The caller must be granted the
+            # Searches all Cloud resources within the specified scope, such as a project,
+            # folder, or organization. The caller must be granted the
             # `cloudasset.assets.searchAllResources` permission on the desired scope,
             # otherwise the request will be rejected.
             #
@@ -1139,9 +1138,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. A scope can be a project, a folder, or an organization. The
-            #     search is limited to the resources within the `scope`. The caller must be
-            #     granted the
+            #     Required. A scope can be a project, a folder, or an organization. The search is
+            #     limited to the resources within the `scope`. The caller must be granted the
             #     [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
             #     permission on the desired scope.
             #
@@ -1159,30 +1157,26 @@ module Google
             #
             #     Examples:
             #
-            #     * `name:Important` to find \\{\\{gcp_name}} resources whose name contains
+            #     * `name:Important` to find Cloud resources whose name contains
             #       "Important" as a word.
-            #     * `name=Important` to find the \\{\\{gcp_name}} resource whose name is exactly
+            #     * `name=Important` to find the Cloud resource whose name is exactly
             #       "Important".
-            #     * `displayName:Impor*` to find \\{\\{gcp_name}} resources whose display name
+            #     * `displayName:Impor*` to find Cloud resources whose display name
             #       contains "Impor" as a prefix of any word in the field.
-            #     * `location:us-west*` to find \\{\\{gcp_name}} resources whose location
-            #     contains both
+            #     * `location:us-west*` to find Cloud resources whose location contains both
             #       "us" and "west" as prefixes.
-            #     * `labels:prod` to find \\{\\{gcp_name}} resources whose labels contain "prod"
-            #     as
+            #     * `labels:prod` to find Cloud resources whose labels contain "prod" as
             #       a key or value.
-            #     * `labels.env:prod` to find \\{\\{gcp_name}} resources that have a label "env"
+            #     * `labels.env:prod` to find Cloud resources that have a label "env"
             #       and its value is "prod".
-            #     * `labels.env:*` to find \\{\\{gcp_name}} resources that have a label "env".
-            #     * `kmsKey:key` to find \\{\\{gcp_name}} resources encrypted with a
-            #     customer-managed
+            #     * `labels.env:*` to find Cloud resources that have a label "env".
+            #     * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
             #       encryption key whose name contains "key" as a word. This field is
             #       deprecated. Please use the `kmsKeys` field to retrieve KMS key
             #       information.
-            #     * `kmsKeys:key` to find \\{\\{gcp_name}} resources encrypted with
-            #     customer-managed
+            #     * `kmsKeys:key` to find Cloud resources encrypted with customer-managed
             #       encryption keys whose name contains the word "key".
-            #     * `relationships:instance-group-1` to find \\{\\{gcp_name}} resources that have
+            #     * `relationships:instance-group-1` to find Cloud resources that have
             #       relationships with "instance-group-1" in the related resource name.
             #     * `relationships:INSTANCE_TO_INSTANCEGROUP` to find compute instances that
             #       have relationships of type "INSTANCE_TO_INSTANCEGROUP".
@@ -1190,33 +1184,27 @@ module Google
             #       compute instances that have relationships with "instance-group-1" in the
             #       compute instance group resource name, for relationship type
             #       "INSTANCE_TO_INSTANCEGROUP".
-            #     * `state:ACTIVE` to find \\{\\{gcp_name}} resources whose state contains
-            #     "ACTIVE" as a
+            #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
             #       word.
-            #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state doesn't
-            #     contain
+            #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
             #       "ACTIVE" as a word.
-            #     * `createTime<1609459200` to find \\{\\{gcp_name}} resources that were created
-            #     before
+            #     * `createTime<1609459200` to find Cloud resources that were created before
             #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
             #       "2021-01-01 00:00:00 UTC" in seconds.
-            #     * `updateTime>1609459200` to find \\{\\{gcp_name}} resources that were updated
-            #     after
+            #     * `updateTime>1609459200` to find Cloud resources that were updated after
             #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
             #       "2021-01-01 00:00:00 UTC" in seconds.
-            #     * `Important` to find \\{\\{gcp_name}} resources that contain "Important" as a
-            #     word
+            #     * `Important` to find Cloud resources that contain "Important" as a word
             #       in any of the searchable fields.
-            #     * `Impor*` to find \\{\\{gcp_name}} resources that contain "Impor" as a prefix
-            #     of any
+            #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
             #       word in any of the searchable fields.
-            #     * `Important location:(us-west1 OR global)` to find \\{\\{gcp_name}}
+            #     * `Important location:(us-west1 OR global)` to find Cloud
             #       resources that contain "Important" as a word in any of the searchable
             #       fields and are also located in the "us-west1" region or the "global"
             #       location.
             #   @param asset_types [::Array<::String>]
-            #     Optional. A list of asset types that this request searches for. If empty,
-            #     it will search all the [searchable asset
+            #     Optional. A list of asset types that this request searches for. If empty, it will
+            #     search all the [searchable asset
             #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
             #
             #     Regular expressions are also supported. For example:
@@ -1230,20 +1218,19 @@ module Google
             #     regular expression syntax. If the regular expression does not match any
             #     supported asset type, an INVALID_ARGUMENT error will be returned.
             #   @param page_size [::Integer]
-            #     Optional. The page size for search result pagination. Page size is capped
-            #     at 500 even if a larger value is given. If set to zero, server will pick an
-            #     appropriate default. Returned results may be fewer than requested. When
-            #     this happens, there could be more results as long as `next_page_token` is
-            #     returned.
+            #     Optional. The page size for search result pagination. Page size is capped at 500 even
+            #     if a larger value is given. If set to zero, server will pick an appropriate
+            #     default. Returned results may be fewer than requested. When this happens,
+            #     there could be more results as long as `next_page_token` is returned.
             #   @param page_token [::String]
-            #     Optional. If present, then retrieve the next batch of results from the
-            #     preceding call to this method. `page_token` must be the value of
-            #     `next_page_token` from the previous response. The values of all other
-            #     method parameters, must be identical to those in the previous call.
+            #     Optional. If present, then retrieve the next batch of results from the preceding call
+            #     to this method. `page_token` must be the value of `next_page_token` from
+            #     the previous response. The values of all other method parameters, must be
+            #     identical to those in the previous call.
             #   @param order_by [::String]
-            #     Optional. A comma-separated list of fields specifying the sorting order of
-            #     the results. The default order is ascending. Add " DESC" after the field
-            #     name to indicate descending order. Redundant space characters are ignored.
+            #     Optional. A comma-separated list of fields specifying the sorting order of the
+            #     results. The default order is ascending. Add " DESC" after the field name
+            #     to indicate descending order. Redundant space characters are ignored.
             #     Example: "location DESC, name".
             #     Only singular primitive fields in the response are sortable:
             #
@@ -1263,10 +1250,10 @@ module Google
             #     `kmsKeys`), map fields (e.g., `labels`) and struct fields (e.g.,
             #     `additionalAttributes`) are not supported.
             #   @param read_mask [::Google::Protobuf::FieldMask, ::Hash]
-            #     Optional. A comma-separated list of fields specifying which fields to be
-            #     returned in ResourceSearchResult. Only '*' or combination of top level
-            #     fields can be specified. Field names of both snake_case and camelCase are
-            #     supported. Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+            #     Optional. A comma-separated list of fields specifying which fields to be returned in
+            #     ResourceSearchResult. Only '*' or combination of top level fields can be
+            #     specified. Field names of both snake_case and camelCase are supported.
+            #     Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
             #
             #     The read_mask paths must be valid field paths listed but not limited to
             #     (both snake_case and camelCase are supported):
@@ -1369,8 +1356,8 @@ module Google
             end
 
             ##
-            # Searches all \\{\\{iam_name_short}} policies within the specified scope, such
-            # as a project, folder, or organization. The caller must be granted the
+            # Searches all IAM policies within the specified scope, such as a project,
+            # folder, or organization. The caller must be granted the
             # `cloudasset.assets.searchAllIamPolicies` permission on the desired scope,
             # otherwise the request will be rejected.
             #
@@ -1390,9 +1377,9 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. A scope can be a project, a folder, or an organization. The
-            #     search is limited to the \\{\\{iam_name_short}} policies within the `scope`.
-            #     The caller must be granted the
+            #     Required. A scope can be a project, a folder, or an organization. The search is
+            #     limited to the IAM policies within the `scope`. The caller must be granted
+            #     the
             #     [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
             #     permission on the desired scope.
             #
@@ -1406,89 +1393,76 @@ module Google
             #     Optional. The query statement. See [how to construct a
             #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
             #     for more information. If not specified or empty, it will search all the
-            #     \\{\\{iam_name_short}} policies within the specified `scope`. Note that the
-            #     query string is compared against each \\{\\{iam_name_short}} policy binding,
-            #     including its principals, roles, and \\{\\{iam_name_short}} conditions. The
-            #     returned \\{\\{iam_name_short}} policies will only contain the bindings that
-            #     match your query. To learn more about the \\{\\{iam_name_short}} policy
-            #     structure, see the [\\{\\{iam_name_short}} policy
+            #     IAM policies within the specified `scope`. Note that the query string is
+            #     compared against each Cloud IAM policy binding, including its principals,
+            #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
+            #     contain the bindings that match your query. To learn more about the IAM
+            #     policy structure, see the [IAM policy
             #     documentation](https://cloud.google.com/iam/help/allow-policies/structure).
             #
             #     Examples:
             #
-            #     * `policy:amy@gmail.com` to find \\{\\{iam_name_short}} policy bindings that
-            #     specify user
+            #     * `policy:amy@gmail.com` to find IAM policy bindings that specify user
             #       "amy@gmail.com".
-            #     * `policy:roles/compute.admin` to find \\{\\{iam_name_short}} policy bindings
-            #     that specify
+            #     * `policy:roles/compute.admin` to find IAM policy bindings that specify
             #       the Compute Admin role.
-            #     * `policy:comp*` to find \\{\\{iam_name_short}} policy bindings that contain
-            #     "comp" as a
+            #     * `policy:comp*` to find IAM policy bindings that contain "comp" as a
             #       prefix of any word in the binding.
-            #     * `policy.role.permissions:storage.buckets.update` to find
-            #     \\{\\{iam_name_short}} policy
+            #     * `policy.role.permissions:storage.buckets.update` to find IAM policy
             #       bindings that specify a role containing "storage.buckets.update"
             #       permission. Note that if callers don't have `iam.roles.get` access to a
             #       role's included permissions, policy bindings that specify this role will
             #       be dropped from the search results.
-            #     * `policy.role.permissions:upd*` to find \\{\\{iam_name_short}} policy bindings
-            #     that specify a
+            #     * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
             #       role containing "upd" as a prefix of any word in the role permission.
             #       Note that if callers don't have `iam.roles.get` access to a role's
             #       included permissions, policy bindings that specify this role will be
             #       dropped from the search results.
-            #     * `resource:organizations/123456` to find \\{\\{iam_name_short}} policy
-            #     bindings
+            #     * `resource:organizations/123456` to find IAM policy bindings
             #       that are set on "organizations/123456".
             #     * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
-            #       find \\{\\{iam_name_short}} policy bindings that are set on the project named
-            #       "myproject".
-            #     * `Important` to find \\{\\{iam_name_short}} policy bindings that contain
-            #     "Important" as a
+            #       find IAM policy bindings that are set on the project named "myproject".
+            #     * `Important` to find IAM policy bindings that contain "Important" as a
             #       word in any of the searchable fields (except for the included
             #       permissions).
             #     * `resource:(instance1 OR instance2) policy:amy` to find
-            #       \\{\\{iam_name_short}} policy bindings that are set on resources "instance1"
-            #       or "instance2" and also specify user "amy".
-            #     * `roles:roles/compute.admin` to find \\{\\{iam_name_short}} policy bindings
-            #     that specify the
+            #       IAM policy bindings that are set on resources "instance1" or
+            #       "instance2" and also specify user "amy".
+            #     * `roles:roles/compute.admin` to find IAM policy bindings that specify the
             #       Compute Admin role.
-            #     * `memberTypes:user` to find \\{\\{iam_name_short}} policy bindings that
-            #     contain the
+            #     * `memberTypes:user` to find IAM policy bindings that contain the
             #       principal type "user".
             #   @param page_size [::Integer]
-            #     Optional. The page size for search result pagination. Page size is capped
-            #     at 500 even if a larger value is given. If set to zero, server will pick an
-            #     appropriate default. Returned results may be fewer than requested. When
-            #     this happens, there could be more results as long as `next_page_token` is
-            #     returned.
+            #     Optional. The page size for search result pagination. Page size is capped at 500 even
+            #     if a larger value is given. If set to zero, server will pick an appropriate
+            #     default. Returned results may be fewer than requested. When this happens,
+            #     there could be more results as long as `next_page_token` is returned.
             #   @param page_token [::String]
-            #     Optional. If present, retrieve the next batch of results from the preceding
-            #     call to this method. `page_token` must be the value of `next_page_token`
-            #     from the previous response. The values of all other method parameters must
-            #     be identical to those in the previous call.
+            #     Optional. If present, retrieve the next batch of results from the preceding call to
+            #     this method. `page_token` must be the value of `next_page_token` from the
+            #     previous response. The values of all other method parameters must be
+            #     identical to those in the previous call.
             #   @param asset_types [::Array<::String>]
-            #     Optional. A list of asset types that the \\{\\{iam_name_short}} policies are
-            #     attached to. If empty, it will search the \\{\\{iam_name_short}} policies that
-            #     are attached to all the [searchable asset
+            #     Optional. A list of asset types that the IAM policies are attached to. If empty, it
+            #     will search the IAM policies that are attached to all the [searchable asset
             #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
             #
             #     Regular expressions are also supported. For example:
             #
-            #     * "compute.googleapis.com.*" snapshots \\{\\{iam_name_short}} policies attached
-            #     to asset type starts with "compute.googleapis.com".
-            #     * ".*Instance" snapshots \\{\\{iam_name_short}} policies attached to asset type
-            #     ends with "Instance".
-            #     * ".*Instance.*" snapshots \\{\\{iam_name_short}} policies attached to asset
-            #     type contains "Instance".
+            #     * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
+            #     starts with "compute.googleapis.com".
+            #     * ".*Instance" snapshots IAM policies attached to asset type ends with
+            #     "Instance".
+            #     * ".*Instance.*" snapshots IAM policies attached to asset type contains
+            #     "Instance".
             #
             #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
             #     regular expression syntax. If the regular expression does not match any
             #     supported asset type, an INVALID_ARGUMENT error will be returned.
             #   @param order_by [::String]
-            #     Optional. A comma-separated list of fields specifying the sorting order of
-            #     the results. The default order is ascending. Add " DESC" after the field
-            #     name to indicate descending order. Redundant space characters are ignored.
+            #     Optional. A comma-separated list of fields specifying the sorting order of the
+            #     results. The default order is ascending. Add " DESC" after the field name
+            #     to indicate descending order. Redundant space characters are ignored.
             #     Example: "assetType DESC, resource".
             #     Only singular primitive fields in the response are sortable:
             #       * resource
@@ -1569,8 +1543,8 @@ module Google
             end
 
             ##
-            # Analyzes \\{\\{iam_name_short}} policies to answer which identities have what
-            # accesses on which resources.
+            # Analyzes IAM policies to answer which identities have what accesses on
+            # which resources.
             #
             # @overload analyze_iam_policy(request, options = nil)
             #   Pass arguments to `analyze_iam_policy` via a request object, either of type
@@ -1607,8 +1581,7 @@ module Google
             #     0 or empty string, etc., because we use proto3, which doesn't support field
             #     presence yet.
             #   @param execution_timeout [::Google::Protobuf::Duration, ::Hash]
-            #     Optional. Amount of time executable has to complete.  See JSON
-            #     representation of
+            #     Optional. Amount of time executable has to complete.  See JSON representation of
             #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
             #
             #     If this field is set with a value less than the RPC deadline, and the
@@ -1684,17 +1657,15 @@ module Google
             end
 
             ##
-            # Analyzes \\{\\{iam_name_short}} policies asynchronously to answer which
-            # identities have what accesses on which resources, and writes the analysis
-            # results to a Google
-            # \\{\\{storage_name}} or a \\{\\{bigquery_name}} destination. For \\{\\{storage_name}}
-            # destination, the output format is the JSON format that represents a
-            # {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse AnalyzeIamPolicyResponse}.
-            # This method implements the
-            # {::Google::Longrunning::Operation google.longrunning.Operation}, which allows
-            # you to track the operation status. We recommend intervals of at least 2
-            # seconds with exponential backoff retry to poll the operation result. The
-            # metadata contains the metadata for the long-running operation.
+            # Analyzes IAM policies asynchronously to answer which identities have what
+            # accesses on which resources, and writes the analysis results to a Google
+            # Cloud Storage or a BigQuery destination. For Cloud Storage destination, the
+            # output format is the JSON format that represents a
+            # {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse AnalyzeIamPolicyResponse}. This method implements the
+            # {::Google::Longrunning::Operation google.longrunning.Operation}, which allows you to track the operation
+            # status. We recommend intervals of at least 2 seconds with exponential
+            # backoff retry to poll the operation result. The metadata contains the
+            # metadata for the long-running operation.
             #
             # @overload analyze_iam_policy_longrunning(request, options = nil)
             #   Pass arguments to `analyze_iam_policy_longrunning` via a request object, either of type
@@ -1731,8 +1702,7 @@ module Google
             #     0 or empty string, etc., because we use proto3, which doesn't support field
             #     presence yet.
             #   @param output_config [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig, ::Hash]
-            #     Required. Output configuration indicating where the results will be output
-            #     to.
+            #     Required. Output configuration indicating where the results will be output to.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Gapic::Operation]
@@ -1909,7 +1879,7 @@ module Google
 
             ##
             # Issue a job that queries assets using a SQL statement compatible with
-            # [\\{\\{bigquery_name}} Standard
+            # [BigQuery Standard
             # SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
             #
             # If the query execution finishes within timeout and there's no pagination,
@@ -1919,7 +1889,7 @@ module Google
             # with the `job_reference` from the a previous `QueryAssets` call.
             #
             # Note, the query result has approximately 10 GB limitation enforced by
-            # \\{\\{bigquery_name}}
+            # BigQuery
             # https://cloud.google.com/bigquery/docs/best-practices-performance-output,
             # queries return larger results will result in errors.
             #
@@ -1946,15 +1916,14 @@ module Google
             #
             #     Only assets belonging to the `parent` will be returned.
             #   @param statement [::String]
-            #     Optional. A SQL statement that's compatible with [\\{\\{bigquery_name}}
-            #     Standard
+            #     Optional. A SQL statement that's compatible with [BigQuery Standard
             #     SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
             #   @param job_reference [::String]
-            #     Optional. Reference to the query job, which is from the
-            #     `QueryAssetsResponse` of previous `QueryAssets` call.
+            #     Optional. Reference to the query job, which is from the `QueryAssetsResponse` of
+            #     previous `QueryAssets` call.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of rows to return in the results. Responses
-            #     are limited to 10 MB and 1000 rows.
+            #     Optional. The maximum number of rows to return in the results. Responses are limited
+            #     to 10 MB and 1000 rows.
             #
             #     By default, the maximum row count is 1000. When the byte or row count limit
             #     is reached, the rest of the query results will be paginated.
@@ -1965,13 +1934,12 @@ module Google
             #
             #     The field will be ignored when [output_config] is specified.
             #   @param timeout [::Google::Protobuf::Duration, ::Hash]
-            #     Optional. Specifies the maximum amount of time that the client is willing
-            #     to wait for the query to complete. By default, this limit is 5 min for the
-            #     first query, and 1 minute for the following queries. If the query is
-            #     complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
-            #     false.
+            #     Optional. Specifies the maximum amount of time that the client is willing to wait
+            #     for the query to complete. By default, this limit is 5 min for the first
+            #     query, and 1 minute for the following queries. If the query is complete,
+            #     the `done` field in the `QueryAssetsResponse` is true, otherwise false.
             #
-            #     Like \\{\\{bigquery_name}} [jobs.query
+            #     Like BigQuery [jobs.query
             #     API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
             #     The call is not guaranteed to wait for the specified timeout; it typically
             #     returns after around 200 seconds (200,000 milliseconds), even if the query
@@ -1979,12 +1947,11 @@ module Google
             #
             #     The field will be ignored when [output_config] is specified.
             #   @param read_time_window [::Google::Cloud::Asset::V1::TimeWindow, ::Hash]
-            #     Optional. [start_time] is required. [start_time] must be less than
-            #     [end_time] Defaults [end_time] to now if [start_time] is set and
-            #     [end_time] isn't. Maximum permitted time range is 7 days.
+            #     Optional. [start_time] is required. [start_time] must be less than [end_time]
+            #     Defaults [end_time] to now if [start_time] is set and [end_time] isn't.
+            #     Maximum permitted time range is 7 days.
             #   @param read_time [::Google::Protobuf::Timestamp, ::Hash]
-            #     Optional. Queries cloud assets as they appeared at the specified point in
-            #     time.
+            #     Optional. Queries cloud assets as they appeared at the specified point in time.
             #   @param output_config [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig, ::Hash]
             #     Optional. Destination where the query results will be saved.
             #
@@ -2079,18 +2046,18 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The name of the project/folder/organization where this
-            #     saved_query should be created in. It can only be an organization number
-            #     (such as "organizations/123"), a folder number (such as "folders/123"), a
-            #     project ID (such as "projects/my-project-id")", or a project number (such
-            #     as "projects/12345").
+            #     Required. The name of the project/folder/organization where this saved_query
+            #     should be created in. It can only be an organization number (such as
+            #     "organizations/123"), a folder number (such as "folders/123"), a project ID
+            #     (such as "projects/my-project-id")", or a project number (such as
+            #     "projects/12345").
             #   @param saved_query [::Google::Cloud::Asset::V1::SavedQuery, ::Hash]
-            #     Required. The saved_query details. The `name` field must be empty as it
-            #     will be generated based on the parent and saved_query_id.
+            #     Required. The saved_query details. The `name` field must be empty as it will be
+            #     generated based on the parent and saved_query_id.
             #   @param saved_query_id [::String]
-            #     Required. The ID to use for the saved query, which must be unique in the
-            #     specified parent. It will become the final component of the saved query's
-            #     resource name.
+            #     Required. The ID to use for the saved query, which must be unique in the specified
+            #     parent. It will become the final component of the saved query's resource
+            #     name.
             #
             #     This value should be 4-63 characters, and valid characters
             #     are /[a-z][0-9]-/.
@@ -2270,8 +2237,8 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param parent [::String]
-            #     Required. The parent project/folder/organization whose savedQueries are to
-            #     be listed. It can only be using project/folder/organization number (such as
+            #     Required. The parent project/folder/organization whose savedQueries are to be
+            #     listed. It can only be using project/folder/organization number (such as
             #     "folders/12345")", or a project ID (such as "projects/my-project-id").
             #   @param filter [::String]
             #     Optional. The expression to filter resources.
@@ -2282,9 +2249,8 @@ module Google
             #
             #     See https://google.aip.dev/160 for more information on the grammar.
             #   @param page_size [::Integer]
-            #     Optional. The maximum number of saved queries to return per page. The
-            #     service may return fewer than this value. If unspecified, at most 50 will
-            #     be returned.
+            #     Optional. The maximum number of saved queries to return per page. The service may
+            #     return fewer than this value. If unspecified, at most 50 will be returned.
             #      The maximum value is 1000; values above 1000 will be coerced to 1000.
             #   @param page_token [::String]
             #     Optional. A page token, received from a previous `ListSavedQueries` call.
@@ -2477,8 +2443,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param name [::String]
-            #     Required. The name of the saved query to delete. It must be in the format
-            #     of:
+            #     Required. The name of the saved query to delete. It must be in the format of:
             #
             #     * projects/project_number/savedQueries/saved_query_id
             #     * folders/folder_number/savedQueries/saved_query_id
@@ -2549,7 +2514,7 @@ module Google
             end
 
             ##
-            # Gets effective \\{\\{iam_name_short}} policies for a batch of resources.
+            # Gets effective IAM policies for a batch of resources.
             #
             # @overload batch_get_effective_iam_policies(request, options = nil)
             #   Pass arguments to `batch_get_effective_iam_policies` via a request object, either of type
@@ -2567,8 +2532,7 @@ module Google
             #   the default parameter values, pass an empty Hash as a request object (see above).
             #
             #   @param scope [::String]
-            #     Required. Only \\{\\{iam_name_short}} policies on or below the scope will be
-            #     returned.
+            #     Required. Only IAM policies on or below the scope will be returned.
             #
             #     This can only be an organization number (such as "organizations/123"), a
             #     folder number (such as "folders/123"), a project ID (such as

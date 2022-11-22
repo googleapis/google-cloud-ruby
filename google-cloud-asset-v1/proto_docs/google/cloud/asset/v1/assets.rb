@@ -21,7 +21,7 @@ module Google
   module Cloud
     module Asset
       module V1
-        # An asset in \\{\\{gcp_name}} and its temporal metadata, including the time window
+        # An asset in Google Cloud and its temporal metadata, including the time window
         # when it was observed and its status during that window.
         # @!attribute [rw] window
         #   @return [::Google::Cloud::Asset::V1::TimeWindow]
@@ -31,7 +31,7 @@ module Google
         #     Whether the asset has been deleted or not.
         # @!attribute [rw] asset
         #   @return [::Google::Cloud::Asset::V1::Asset]
-        #     An asset in \\{\\{gcp_name}}.
+        #     An asset in Google Cloud.
         # @!attribute [rw] prior_asset_state
         #   @return [::Google::Cloud::Asset::V1::TemporalAsset::PriorAssetState]
         #     State of prior_asset.
@@ -75,13 +75,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An asset in \\{\\{gcp_name}}. An asset can be any resource in the \\{\\{gcp_name}}
+        # An asset in Google Cloud. An asset can be any resource in the Google Cloud
         # [resource
         # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
-        # a resource outside the \\{\\{gcp_name}} resource hierarchy (such as
-        # \\{\\{container_name}} clusters and objects), or a policy (e.g.
-        # \\{\\{iam_name_short}} policy), or a relationship (e.g. an
-        # INSTANCE_TO_INSTANCEGROUP relationship). See [Supported asset
+        # a resource outside the Google Cloud resource hierarchy (such as Google
+        # Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy),
+        # or a relationship (e.g. an INSTANCE_TO_INSTANCEGROUP relationship).
+        # See [Supported asset
         # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
         # for more information.
         # @!attribute [rw] update_time
@@ -108,15 +108,15 @@ module Google
         #     A representation of the resource.
         # @!attribute [rw] iam_policy
         #   @return [::Google::Iam::V1::Policy]
-        #     A representation of the \\{\\{iam_name_short}} policy set on a \\{\\{gcp_name}}
-        #     resource. There can be a maximum of one \\{\\{iam_name_short}} policy set on
-        #     any given resource. In addition, \\{\\{iam_name_short}} policies inherit their
-        #     granted access scope from any policies set on parent resources in the
-        #     resource hierarchy. Therefore, the effectively policy is the union of both
-        #     the policy set on this resource and each policy set on all of the
-        #     resource's ancestry resource levels in the hierarchy. See [this
-        #     topic](https://cloud.google.com/iam/help/allow-policies/inheritance) for
-        #     more information.
+        #     A representation of the Cloud IAM policy set on a Google Cloud resource.
+        #     There can be a maximum of one Cloud IAM policy set on any given resource.
+        #     In addition, Cloud IAM policies inherit their granted access scope from any
+        #     policies set on parent resources in the resource hierarchy. Therefore, the
+        #     effectively policy is the union of both the policy set on this resource
+        #     and each policy set on all of the resource's ancestry resource levels in
+        #     the hierarchy. See
+        #     [this topic](https://cloud.google.com/iam/help/allow-policies/inheritance)
+        #     for more information.
         # @!attribute [rw] org_policy
         #   @return [::Array<::Google::Cloud::OrgPolicy::V1::Policy>]
         #     A representation of an [organization
@@ -152,7 +152,7 @@ module Google
         #     One related asset of the current asset.
         # @!attribute [rw] ancestors
         #   @return [::Array<::String>]
-        #     The ancestry path of an asset in \\{\\{gcp_name}} [resource
+        #     The ancestry path of an asset in Google Cloud [resource
         #     hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
         #     represented as a list of relative resource names. An ancestry path starts
         #     with the closest ancestor in the hierarchy and ends at root. If the asset
@@ -165,7 +165,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A representation of a \\{\\{gcp_name}} resource.
+        # A representation of a Google Cloud resource.
         # @!attribute [rw] version
         #   @return [::String]
         #     The API version. Example: `v1`
@@ -176,14 +176,14 @@ module Google
         #     `https://www.googleapis.com/discovery/v1/apis/compute/v1/rest`
         #
         #     This value is unspecified for resources that do not have an API based on a
-        #     discovery document, such as \\{\\{bigtable_name}}.
+        #     discovery document, such as Cloud Bigtable.
         # @!attribute [rw] discovery_name
         #   @return [::String]
         #     The JSON schema name listed in the discovery document. Example:
         #     `Project`
         #
         #     This value is unspecified for resources that do not have an API based on a
-        #     discovery document, such as \\{\\{bigtable_name}}.
+        #     discovery document, such as Cloud Bigtable.
         # @!attribute [rw] resource_url
         #   @return [::String]
         #     The REST URL for accessing the resource. An HTTP `GET` request using this
@@ -198,8 +198,8 @@ module Google
         #     Names](https://cloud.google.com/apis/design/resource_names#full_resource_name)
         #     for more information.
         #
-        #     For \\{\\{gcp_name}} assets, this value is the parent resource defined in the
-        #     [\\{\\{iam_name_short}} policy
+        #     For Google Cloud assets, this value is the parent resource defined in the
+        #     [Cloud IAM policy
         #     hierarchy](https://cloud.google.com/iam/docs/overview#policy_hierarchy).
         #     Example:
         #     `//cloudresourcemanager.googleapis.com/projects/my_project_123`
@@ -211,7 +211,7 @@ module Google
         #     and may not be present.
         # @!attribute [rw] location
         #   @return [::String]
-        #     The location of the resource in \\{\\{gcp_name}}, such as its zone and region.
+        #     The location of the resource in Google Cloud, such as its zone and region.
         #     For more information, see https://cloud.google.com/about/locations/.
         class Resource
           include ::Google::Protobuf::MessageExts
@@ -256,13 +256,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # An asset identifier in \\{\\{gcp_name}} which contains its name, type and
-        # ancestors. An asset can be any resource in the \\{\\{gcp_name}}
-        # [resource
+        # An asset identifier in Google Cloud which contains its name, type and
+        # ancestors. An asset can be any resource in the Google Cloud [resource
         # hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
-        # a resource outside the \\{\\{gcp_name}} resource hierarchy (such as
-        # \\{\\{container_name}} clusters and objects), or a policy (e.g.
-        # \\{\\{iam_name_short}} policy). See [Supported asset
+        # a resource outside the Google Cloud resource hierarchy (such as Google
+        # Kubernetes Engine clusters and objects), or a policy (e.g. Cloud IAM policy).
+        # See [Supported asset
         # types](https://cloud.google.com/asset-inventory/docs/supported-asset-types)
         # for more information.
         # @!attribute [rw] asset
@@ -282,7 +281,7 @@ module Google
         #     for more information.
         # @!attribute [rw] ancestors
         #   @return [::Array<::String>]
-        #     The ancestors of an asset in \\{\\{gcp_name}} [resource
+        #     The ancestors of an asset in Google Cloud [resource
         #     hierarchy](https://cloud.google.com/resource-manager/docs/cloud-platform-resource-hierarchy),
         #     represented as a list of relative resource names. An ancestry path starts
         #     with the closest ancestor in the hierarchy and ends at root.
@@ -303,7 +302,7 @@ module Google
         #   @return [::String]
         #     The full resource name of this resource. Example:
         #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-        #     See [\\{\\{cai_name}} Resource Name
+        #     See [Cloud Asset Inventory Resource Name
         #     Format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
         #     for more information.
         #
@@ -382,8 +381,7 @@ module Google
         #     * Use a free text query. Example: `us-west*`
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
-        #     Labels associated with this resource. See
-        #     [Labelling and grouping \\{\\{gcp_name}}
+        #     Labels associated with this resource. See [Labelling and grouping GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
         #     for more information. This field is available only when the resource's
         #     Protobuf contains it.
@@ -398,8 +396,7 @@ module Google
         # @!attribute [rw] network_tags
         #   @return [::Array<::String>]
         #     Network tags associated with this resource. Like labels, network tags are a
-        #     type of annotations used to group \\{\\{gcp_name}} resources. See
-        #     [Labelling \\{\\{gcp_name}}
+        #     type of annotations used to group GCP resources. See [Labelling GCP
         #     resources](https://cloud.google.com/blog/products/gcp/labelling-and-grouping-your-google-cloud-platform-resources)
         #     for more information. This field is available only when the resource's
         #     Protobuf contains it.
@@ -410,16 +407,16 @@ module Google
         #     * Use a free text query. Example: `internal`
         # @!attribute [rw] kms_key
         #   @return [::String]
-        #     The \\{\\{kms_name_short}}
+        #     The Cloud KMS
         #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
         #     name or
         #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
         #     name.
         #
         #     This field only presents for the purpose of backward compatibility. Please
-        #     use the `kms_keys` field to retrieve \\{\\{kms_name_short}} key information.
-        #     This field is available only when the resource's Protobuf contains it and
-        #     will only be populated for [these resource
+        #     use the `kms_keys` field to retrieve KMS key information. This field is
+        #     available only when the resource's Protobuf contains it and will only be
+        #     populated for [these resource
         #     types](https://cloud.google.com/asset-inventory/docs/legacy-field-names#resource_types_with_the_to_be_deprecated_kmskey_field)
         #     for backward compatible purposes.
         #
@@ -429,7 +426,7 @@ module Google
         #     * Use a free text query. Example: `key`
         # @!attribute [rw] kms_keys
         #   @return [::Array<::String>]
-        #     The \\{\\{kms_name_short}}
+        #     The Cloud KMS
         #     [CryptoKey](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys)
         #     names or
         #     [CryptoKeyVersion](https://cloud.google.com/kms/docs/reference/rest/v1/projects.locations.keyRings.cryptoKeys.cryptoKeyVersions)
@@ -480,8 +477,8 @@ module Google
         #     SUSPENDING, SUSPENDED, REPAIRING, and TERMINATED. See `status` definition
         #     in [API
         #     Reference](https://cloud.google.com/compute/docs/reference/rest/v1/instances).
-        #     If the resource is a project provided by \\{\\{crm_name}}, its state will
-        #     include LIFECYCLE_STATE_UNSPECIFIED, ACTIVE, DELETE_REQUESTED and
+        #     If the resource is a project provided by Cloud Resource Manager, its state
+        #     will include LIFECYCLE_STATE_UNSPECIFIED, ACTIVE, DELETE_REQUESTED and
         #     DELETE_IN_PROGRESS. See `lifecycleState` definition in [API
         #     Reference](https://cloud.google.com/resource-manager/reference/rest/v1/projects).
         #
@@ -495,15 +492,15 @@ module Google
         #     vary from one resource type to another. Examples: `projectId` for Project,
         #     `dnsName` for DNS ManagedZone. This field contains a subset of the resource
         #     metadata fields that are returned by the List or Get APIs provided by the
-        #     corresponding \\{\\{gcp_name}} service (e.g., Compute Engine). see
-        #     [API references and supported searchable
+        #     corresponding GCP service (e.g., Compute Engine). see [API references and
+        #     supported searchable
         #     attributes](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types)
         #     to see which fields are included.
         #
         #     You can search values of these fields through free text search. However,
         #     you should not consume the field programically as the field names and
-        #     values may change as the \\{\\{gcp_name}} service updates to a new incompatible
-        #     API version.
+        #     values may change as the GCP service updates to a new incompatible API
+        #     version.
         #
         #     To search against the `additional_attributes`:
         #
@@ -687,14 +684,13 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A result of \\{\\{iam_name_short}} Policy search, containing information of an
-        # \\{\\{iam_name_short}} policy.
+        # A result of IAM Policy search, containing information of an IAM policy.
         # @!attribute [rw] resource
         #   @return [::String]
-        #     The full resource name of the resource associated with this
-        #     \\{\\{iam_name_short}} policy. Example:
+        #     The full resource name of the resource associated with this IAM policy.
+        #     Example:
         #     `//compute.googleapis.com/projects/my_project_123/zones/zone1/instances/instance1`.
-        #     See [\\{\\{cai_name}} Resource Name
+        #     See [Cloud Asset Inventory Resource Name
         #     Format](https://cloud.google.com/asset-inventory/docs/resource-name-format)
         #     for more information.
         #
@@ -703,8 +699,7 @@ module Google
         #     * use a field query. Example: `resource:organizations/123`
         # @!attribute [rw] asset_type
         #   @return [::String]
-        #     The type of the resource associated with this \\{\\{iam_name_short}} policy.
-        #     Example:
+        #     The type of the resource associated with this IAM policy. Example:
         #     `compute.googleapis.com/Disk`.
         #
         #     To search against the `asset_type`:
@@ -712,21 +707,19 @@ module Google
         #     * specify the `asset_types` field in your search request.
         # @!attribute [rw] project
         #   @return [::String]
-        #     The project that the associated \\{\\{gcp_name}} resource belongs to, in the
-        #     form of projects/\\{PROJECT_NUMBER}. If an \\{\\{iam_name_short}} policy is set
-        #     on a resource (like VM instance, \\{\\{storage_name}} bucket), the project
-        #     field will indicate the project that contains the resource. If an
-        #     \\{\\{iam_name_short}} policy is set on a folder or orgnization, this field
-        #     will be empty.
+        #     The project that the associated GCP resource belongs to, in the form of
+        #     projects/\\{PROJECT_NUMBER}. If an IAM policy is set on a resource (like VM
+        #     instance, Cloud Storage bucket), the project field will indicate the
+        #     project that contains the resource. If an IAM policy is set on a folder or
+        #     orgnization, this field will be empty.
         #
         #     To search against the `project`:
         #
         #     * specify the `scope` field as this project in your search request.
         # @!attribute [rw] folders
         #   @return [::Array<::String>]
-        #     The folder(s) that the \\{\\{iam_name_short}} policy belongs to, in the form of
-        #     folders/\\{FOLDER_NUMBER}. This field is available when the
-        #     \\{\\{iam_name_short}} policy
+        #     The folder(s) that the IAM policy belongs to, in the form of
+        #     folders/\\{FOLDER_NUMBER}. This field is available when the IAM policy
         #     belongs to one or more folders.
         #
         #     To search against `folders`:
@@ -736,9 +729,9 @@ module Google
         #     * specify the `scope` field as this folder in your search request.
         # @!attribute [rw] organization
         #   @return [::String]
-        #     The organization that the \\{\\{iam_name_short}} policy belongs to, in the form
+        #     The organization that the IAM policy belongs to, in the form
         #     of organizations/\\{ORGANIZATION_NUMBER}. This field is available when the
-        #     \\{\\{iam_name_short}} policy belongs to an organization.
+        #     IAM policy belongs to an organization.
         #
         #     To search against `organization`:
         #
@@ -747,11 +740,10 @@ module Google
         #     * specify the `scope` field as this organization in your search request.
         # @!attribute [rw] policy
         #   @return [::Google::Iam::V1::Policy]
-        #     The \\{\\{iam_name_short}} policy directly set on the given resource. Note that
-        #     the original \\{\\{iam_name_short}} policy can contain multiple bindings. This
-        #     only contains the bindings that match the given query. For queries that
-        #     don't contain a constrain on policies (e.g., an empty query), this contains
-        #     all the bindings.
+        #     The IAM policy directly set on the given resource. Note that the original
+        #     IAM policy can contain multiple bindings. This only contains the bindings
+        #     that match the given query. For queries that don't contain a constrain on
+        #     policies (e.g., an empty query), this contains all the bindings.
         #
         #     To search against the `policy` bindings:
         #
@@ -764,13 +756,13 @@ module Google
         #           `policy.role.permissions:compute.instances.create`
         # @!attribute [rw] explanation
         #   @return [::Google::Cloud::Asset::V1::IamPolicySearchResult::Explanation]
-        #     Explanation about the \\{\\{iam_name_short}} policy search result. It contains
-        #     additional information to explain why the search result matches the query.
+        #     Explanation about the IAM policy search result. It contains additional
+        #     information to explain why the search result matches the query.
         class IamPolicySearchResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # Explanation about the \\{\\{iam_name_short}} policy search result.
+          # Explanation about the IAM policy search result.
           # @!attribute [rw] matched_permissions
           #   @return [::Google::Protobuf::Map{::String => ::Google::Cloud::Asset::V1::IamPolicySearchResult::Explanation::Permissions}]
           #     The map from roles to their included permissions that match the
@@ -784,7 +776,7 @@ module Google
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # \\{\\{iam_name_short}} permissions
+            # IAM permissions
             # @!attribute [rw] permissions
             #   @return [::Array<::String>]
             #     A list of permissions. A sample permission string: `compute.disk.get`.
@@ -848,40 +840,33 @@ module Google
           end
         end
 
-        # \\{\\{iam_name_short}} Policy analysis result, consisting of one
-        # \\{\\{iam_name_short}} policy binding and derived
+        # IAM Policy analysis result, consisting of one IAM policy binding and derived
         # access control lists.
         # @!attribute [rw] attached_resource_full_name
         #   @return [::String]
         #     The [full resource
         #     name](https://cloud.google.com/asset-inventory/docs/resource-name-format)
-        #     of the resource to which the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     policy attaches.
+        #     of the resource to which the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} policy attaches.
         # @!attribute [rw] iam_binding
         #   @return [::Google::Iam::V1::Binding]
-        #     The \\{\\{iam_name_short}} policy binding under analysis.
+        #     The Cloud IAM policy binding under analysis.
         # @!attribute [rw] access_control_lists
         #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::AccessControlList>]
-        #     The access control lists derived from the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     that match or potentially match resource and access selectors specified in
-        #     the request.
+        #     The access control lists derived from the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} that match or
+        #     potentially match resource and access selectors specified in the request.
         # @!attribute [rw] identity_list
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList]
-        #     The identity list derived from members of the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     that match or potentially match identity selector specified in the request.
+        #     The identity list derived from members of the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} that match or
+        #     potentially match identity selector specified in the request.
         # @!attribute [rw] fully_explored
         #   @return [::Boolean]
-        #     Represents whether all analyses on the
-        #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding}
-        #     have successfully finished.
+        #     Represents whether all analyses on the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult#iam_binding iam_binding} have successfully
+        #     finished.
         class IamPolicyAnalysisResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A \\{\\{gcp_name}} resource under analysis.
+          # A Google Cloud resource under analysis.
           # @!attribute [rw] full_resource_name
           #   @return [::String]
           #     The [full resource
@@ -894,7 +879,7 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # An \\{\\{iam_name_short}} role or permission under analysis.
+          # An IAM role or permission under analysis.
           # @!attribute [rw] role
           #   @return [::String]
           #     The role.
@@ -913,7 +898,7 @@ module Google
           # @!attribute [rw] name
           #   @return [::String]
           #     The identity name in any form of members appear in
-          #     [\\{\\{iam_name_short}} policy
+          #     [IAM policy
           #     binding](https://cloud.google.com/iam/reference/rest/v1/Binding), such
           #     as:
           #     - user:foo@google.com
@@ -945,16 +930,15 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # An access control list, derived from the above \\{\\{iam_name_short}} policy
-          # binding, which contains a set of resources and accesses. May include one
+          # An access control list, derived from the above IAM policy binding, which
+          # contains a set of resources and accesses. May include one
           # item from each set to compose an access control entry.
           #
-          # NOTICE that there could be multiple access control lists for one
-          # \\{\\{iam_name_short}} policy binding. The access control lists are created
-          # based on resource and access combinations.
+          # NOTICE that there could be multiple access control lists for one IAM policy
+          # binding. The access control lists are created based on resource and access
+          # combinations.
           #
-          # For example, assume we have the following cases in one
-          # \\{\\{iam_name_short}} policy binding:
+          # For example, assume we have the following cases in one IAM policy binding:
           # - Permission P1 and P2 apply to resource R1 and R2;
           # - Permission P3 applies to resource R2 and R3;
           #
@@ -974,16 +958,14 @@ module Google
           # @!attribute [rw] resource_edges
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
           #     Resource edges of the graph starting from the policy attached
-          #     resource to any descendant resources. The
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
-          #     contains the full resource name of a parent resource and
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
+          #     resource to any descendant resources. The {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node} contains
+          #     the full resource name of a parent resource and {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
           #     contains the full resource name of a child resource. This field is
           #     present only if the output_resource_edges option is enabled in request.
           # @!attribute [rw] condition_evaluation
           #   @return [::Google::Cloud::Asset::V1::ConditionEvaluation]
           #     Condition evaluation for this AccessControlList, if there is a condition
-          #     defined in the above \\{\\{iam_name_short}} policy binding.
+          #     defined in the above IAM policy binding.
           class AccessControlList
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -999,15 +981,12 @@ module Google
           # @!attribute [rw] group_edges
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge>]
           #     Group identity edges of the graph starting from the binding's
-          #     group members to any node of the
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList#identities identities}.
-          #     The
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
+          #     group members to any node of the {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::IdentityList#identities identities}. The {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#source_node Edge.source_node}
           #     contains a group, such as `group:parent@google.com`. The
-          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node}
-          #     contains a member of the group, such as `group:child@google.com` or
-          #     `user:foo@google.com`. This field is present only if the
-          #     output_group_edges option is enabled in request.
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult::Edge#target_node Edge.target_node} contains a member of the group,
+          #     such as `group:child@google.com` or `user:foo@google.com`.
+          #     This field is present only if the output_group_edges option is enabled in
+          #     request.
           class IdentityList
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
