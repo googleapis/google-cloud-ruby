@@ -62,16 +62,17 @@ module Google
         #     supported asset type, an INVALID_ARGUMENT error will be returned.
         #
         #     If specified, only matching assets will be returned, otherwise, it will
-        #     snapshot all asset types. See [Introduction to Cloud Asset
-        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-        #     for all supported asset types.
+        #     snapshot all asset types. See [Introduction to
+        #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
+        #     all supported asset types.
         # @!attribute [rw] content_type
         #   @return [::Google::Cloud::Asset::V1::ContentType]
         #     Asset content type. If not specified, no content but the asset name will be
         #     returned.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::OutputConfig]
-        #     Required. Output configuration indicating where the results will be output to.
+        #     Required. Output configuration indicating where the results will be output
+        #     to.
         # @!attribute [rw] relationship_types
         #   @return [::Array<::String>]
         #     A list of relationship types to export, for example:
@@ -86,17 +87,19 @@ module Google
         #     it snapshots the supported relationships for all [asset_types] or returns
         #     an error if any of the [asset_types] has no relationship support.
         #     An unspecified asset types field means all supported asset_types.
-        #     See [Introduction to Cloud Asset
-        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
-        #     supported asset types and relationship types.
+        #     See [Introduction to
+        #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
+        #     all supported asset types and relationship types.
         class ExportAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
         # The export asset response. This message is returned by the
-        # google.longrunning.Operations.GetOperation method in the returned
-        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response} field.
+        # google.longrunning.Operations.GetOperation
+        # method in the returned
+        # {::Google::Longrunning::Operation#response google.longrunning.Operation.response}
+        # field.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Time the snapshot was taken.
@@ -106,10 +109,10 @@ module Google
         # @!attribute [rw] output_result
         #   @return [::Google::Cloud::Asset::V1::OutputResult]
         #     Output result indicating where the assets were exported to. For example, a
-        #     set of actual Google Cloud Storage object uris where the assets are
+        #     set of actual \\{\\{storage_name}} object uris where the assets are
         #     exported to. The uris can be different from what [output_config] has
         #     specified, as the service will split the output object into multiple ones
-        #     once it exceeds a single Google Cloud Storage object limit.
+        #     once it exceeds a single \\{\\{storage_name}} object limit.
         class ExportAssetsResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -118,11 +121,11 @@ module Google
         # ListAssets request.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. Name of the organization, folder, or project the assets belong to. Format:
-        #     "organizations/[organization-number]" (such as "organizations/123"),
-        #     "projects/[project-id]" (such as "projects/my-project-id"),
-        #     "projects/[project-number]" (such as "projects/12345"), or
-        #     "folders/[folder-number]" (such as "folders/12345").
+        #     Required. Name of the organization, folder, or project the assets belong
+        #     to. Format: "organizations/[organization-number]" (such as
+        #     "organizations/123"), "projects/[project-id]" (such as
+        #     "projects/my-project-id"), "projects/[project-number]" (such as
+        #     "projects/12345"), or "folders/[folder-number]" (such as "folders/12345").
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
         #     Timestamp to take an asset snapshot. This can only be set to a timestamp
@@ -147,9 +150,9 @@ module Google
         #     supported asset type, an INVALID_ARGUMENT error will be returned.
         #
         #     If specified, only matching assets will be returned, otherwise, it will
-        #     snapshot all asset types. See [Introduction to Cloud Asset
-        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-        #     for all supported asset types.
+        #     snapshot all asset types. See [Introduction to
+        #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
+        #     all supported asset types.
         # @!attribute [rw] content_type
         #   @return [::Google::Cloud::Asset::V1::ContentType]
         #     Asset content type. If not specified, no content but the asset name will
@@ -177,9 +180,9 @@ module Google
         #     it snapshots the supported relationships for all [asset_types] or returns
         #     an error if any of the [asset_types] has no relationship support.
         #     An unspecified asset types field means all supported asset_types.
-        #     See [Introduction to Cloud Asset
-        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-        #     for all supported asset types and relationship types.
+        #     See [Introduction to
+        #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
+        #     all supported asset types and relationship types.
         class ListAssetsRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -244,9 +247,9 @@ module Google
         #     it outputs the supported relationships' history on the [asset_names] or
         #     returns an error if any of the [asset_names]'s types has no relationship
         #     support.
-        #     See [Introduction to Cloud Asset
-        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview) for all
-        #     supported asset types and relationship types.
+        #     See [Introduction to
+        #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
+        #     all supported asset types and relationship types.
         class BatchGetAssetsHistoryRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -275,9 +278,8 @@ module Google
         #     be unique under a specific parent project/folder/organization.
         # @!attribute [rw] feed
         #   @return [::Google::Cloud::Asset::V1::Feed]
-        #     Required. The feed details. The field `name` must be empty and it will be generated
-        #     in the format of:
-        #     projects/project_number/feeds/feed_id
+        #     Required. The feed details. The field `name` must be empty and it will be
+        #     generated in the format of: projects/project_number/feeds/feed_id
         #     folders/folder_number/feeds/feed_id
         #     organizations/organization_number/feeds/feed_id
         class CreateFeedRequest
@@ -319,8 +321,8 @@ module Google
         # Update asset feed request.
         # @!attribute [rw] feed
         #   @return [::Google::Cloud::Asset::V1::Feed]
-        #     Required. The new values of feed details. It must match an existing feed and the
-        #     field `name` must be in the format of:
+        #     Required. The new values of feed details. It must match an existing feed
+        #     and the field `name` must be in the format of:
         #     projects/project_number/feeds/feed_id or
         #     folders/folder_number/feeds/feed_id or
         #     organizations/organization_number/feeds/feed_id.
@@ -348,11 +350,11 @@ module Google
         # Output configuration for export assets destination.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::Asset::V1::GcsDestination]
-        #     Destination on Cloud Storage.
+        #     Destination on \\{\\{storage_name}}.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::Asset::V1::BigQueryDestination]
-        #     Destination on BigQuery. The output table stores the fields in asset
-        #     Protobuf as columns in BigQuery.
+        #     Destination on \\{\\{bigquery_name}}. The output table stores the fields in
+        #     asset Protobuf as columns in \\{\\{bigquery_name}}.
         class OutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -361,37 +363,37 @@ module Google
         # Output result of export assets.
         # @!attribute [rw] gcs_result
         #   @return [::Google::Cloud::Asset::V1::GcsOutputResult]
-        #     Export result on Cloud Storage.
+        #     Export result on \\{\\{storage_name}}.
         class OutputResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Cloud Storage output result.
+        # A \\{\\{storage_name}} output result.
         # @!attribute [rw] uris
         #   @return [::Array<::String>]
-        #     List of uris of the Cloud Storage objects. Example:
+        #     List of uris of the \\{\\{storage_name}} objects. Example:
         #     "gs://bucket_name/object_name".
         class GcsOutputResult
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A Cloud Storage location.
+        # A \\{\\{storage_name}} location.
         # @!attribute [rw] uri
         #   @return [::String]
-        #     The uri of the Cloud Storage object. It's the same uri that is used by
+        #     The uri of the \\{\\{storage_name}} object. It's the same uri that is used by
         #     gsutil. Example: "gs://bucket_name/object_name". See [Viewing and
         #     Editing Object
         #     Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
         #     for more information.
         #
-        #     If the specified Cloud Storage object already exists and there is no
+        #     If the specified \\{\\{storage_name}} object already exists and there is no
         #     [hold](https://cloud.google.com/storage/docs/object-holds), it will be
         #     overwritten with the exported result.
         # @!attribute [rw] uri_prefix
         #   @return [::String]
-        #     The uri prefix of all generated Cloud Storage objects. Example:
+        #     The uri prefix of all generated \\{\\{storage_name}} objects. Example:
         #     "gs://bucket_name/object_name_prefix". Each object uri is in format:
         #     "gs://bucket_name/object_name_prefix/<asset type>/<shard number> and only
         #     contains assets for that type. <shard number> starts from 0. Example:
@@ -405,21 +407,21 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A BigQuery destination for exporting assets to.
+        # A \\{\\{bigquery_name}} destination for exporting assets to.
         # @!attribute [rw] dataset
         #   @return [::String]
-        #     Required. The BigQuery dataset in format
+        #     Required. The \\{\\{bigquery_name}} dataset in format
         #     "projects/projectId/datasets/datasetId", to which the snapshot result
         #     should be exported. If this dataset does not exist, the export call returns
         #     an INVALID_ARGUMENT error. Setting the `contentType` for `exportAssets`
         #     determines the
         #     [schema](/asset-inventory/docs/exporting-to-bigquery#bigquery-schema)
-        #     of the BigQuery table. Setting `separateTablesPerAssetType` to `TRUE` also
-        #     influences the schema.
+        #     of the \\{\\{bigquery_name}} table. Setting `separateTablesPerAssetType` to
+        #     `TRUE` also influences the schema.
         # @!attribute [rw] table
         #   @return [::String]
-        #     Required. The BigQuery table to which the snapshot result should be
-        #     written. If this table does not exist, a new table with the given name
+        #     Required. The \\{\\{bigquery_name}} table to which the snapshot result should
+        #     be written. If this table does not exist, a new table with the given name
         #     will be created.
         # @!attribute [rw] force
         #   @return [::Boolean]
@@ -465,7 +467,7 @@ module Google
         #     When [content_type] in the ExportAssetsRequest is `RESOURCE`, the schema of
         #     each table will include RECORD-type columns mapped to the nested fields in
         #     the Asset.resource.data field of that asset type (up to the 15 nested level
-        #     BigQuery supports
+        #     \\{\\{bigquery_name}} supports
         #     (https://cloud.google.com/bigquery/docs/nested-repeated#limitations)). The
         #     fields in >15 nested levels will be stored in JSON format string as a child
         #     column of its parent RECORD column.
@@ -480,18 +482,18 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Specifications of BigQuery partitioned table as export destination.
+        # Specifications of \\{\\{bigquery_name}} partitioned table as export destination.
         # @!attribute [rw] partition_key
         #   @return [::Google::Cloud::Asset::V1::PartitionSpec::PartitionKey]
-        #     The partition key for BigQuery partitioned table.
+        #     The partition key for \\{\\{bigquery_name}} partitioned table.
         class PartitionSpec
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
           # This enum is used to determine the partition key column when exporting
-          # assets to BigQuery partitioned table(s). Note that, if the partition key is
-          # a timestamp column, the actual partition is based on its date value
-          # (expressed in UTC. see details in
+          # assets to \\{\\{bigquery_name}} partitioned table(s). Note that, if the
+          # partition key is a timestamp column, the actual partition is based on its
+          # date value (expressed in UTC. see details in
           # https://cloud.google.com/bigquery/docs/partitioned-tables#date_timestamp_partitioned_tables).
           module PartitionKey
             # Unspecified partition key. If used, it means using non-partitioned table.
@@ -600,9 +602,9 @@ module Google
         #     it outputs the supported relationships of the types of [asset_names] and
         #     [asset_types] or returns an error if any of the [asset_names] or the
         #     [asset_types] has no replationship support.
-        #     See [Introduction to Cloud Asset
-        #     Inventory](https://cloud.google.com/asset-inventory/docs/overview)
-        #     for all supported asset types and relationship types.
+        #     See [Introduction to
+        #     \\{\\{cai_name}}](https://cloud.google.com/asset-inventory/docs/overview) for
+        #     all supported asset types and relationship types.
         class Feed
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -611,8 +613,9 @@ module Google
         # Search all resources request.
         # @!attribute [rw] scope
         #   @return [::String]
-        #     Required. A scope can be a project, a folder, or an organization. The search is
-        #     limited to the resources within the `scope`. The caller must be granted the
+        #     Required. A scope can be a project, a folder, or an organization. The
+        #     search is limited to the resources within the `scope`. The caller must be
+        #     granted the
         #     [`cloudasset.assets.searchAllResources`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
         #     permission on the desired scope.
         #
@@ -631,26 +634,30 @@ module Google
         #
         #     Examples:
         #
-        #     * `name:Important` to find Cloud resources whose name contains
+        #     * `name:Important` to find \\{\\{gcp_name}} resources whose name contains
         #       "Important" as a word.
-        #     * `name=Important` to find the Cloud resource whose name is exactly
+        #     * `name=Important` to find the \\{\\{gcp_name}} resource whose name is exactly
         #       "Important".
-        #     * `displayName:Impor*` to find Cloud resources whose display name
+        #     * `displayName:Impor*` to find \\{\\{gcp_name}} resources whose display name
         #       contains "Impor" as a prefix of any word in the field.
-        #     * `location:us-west*` to find Cloud resources whose location contains both
+        #     * `location:us-west*` to find \\{\\{gcp_name}} resources whose location
+        #     contains both
         #       "us" and "west" as prefixes.
-        #     * `labels:prod` to find Cloud resources whose labels contain "prod" as
+        #     * `labels:prod` to find \\{\\{gcp_name}} resources whose labels contain "prod"
+        #     as
         #       a key or value.
-        #     * `labels.env:prod` to find Cloud resources that have a label "env"
+        #     * `labels.env:prod` to find \\{\\{gcp_name}} resources that have a label "env"
         #       and its value is "prod".
-        #     * `labels.env:*` to find Cloud resources that have a label "env".
-        #     * `kmsKey:key` to find Cloud resources encrypted with a customer-managed
+        #     * `labels.env:*` to find \\{\\{gcp_name}} resources that have a label "env".
+        #     * `kmsKey:key` to find \\{\\{gcp_name}} resources encrypted with a
+        #     customer-managed
         #       encryption key whose name contains "key" as a word. This field is
         #       deprecated. Please use the `kmsKeys` field to retrieve KMS key
         #       information.
-        #     * `kmsKeys:key` to find Cloud resources encrypted with customer-managed
+        #     * `kmsKeys:key` to find \\{\\{gcp_name}} resources encrypted with
+        #     customer-managed
         #       encryption keys whose name contains the word "key".
-        #     * `relationships:instance-group-1` to find Cloud resources that have
+        #     * `relationships:instance-group-1` to find \\{\\{gcp_name}} resources that have
         #       relationships with "instance-group-1" in the related resource name.
         #     * `relationships:INSTANCE_TO_INSTANCEGROUP` to find compute instances that
         #       have relationships of type "INSTANCE_TO_INSTANCEGROUP".
@@ -658,28 +665,34 @@ module Google
         #       compute instances that have relationships with "instance-group-1" in the
         #       compute instance group resource name, for relationship type
         #       "INSTANCE_TO_INSTANCEGROUP".
-        #     * `state:ACTIVE` to find Cloud resources whose state contains "ACTIVE" as a
+        #     * `state:ACTIVE` to find \\{\\{gcp_name}} resources whose state contains
+        #     "ACTIVE" as a
         #       word.
-        #     * `NOT state:ACTIVE` to find Cloud resources whose state doesn't contain
+        #     * `NOT state:ACTIVE` to find \\{\\{gcp_name}} resources whose state doesn't
+        #     contain
         #       "ACTIVE" as a word.
-        #     * `createTime<1609459200` to find Cloud resources that were created before
+        #     * `createTime<1609459200` to find \\{\\{gcp_name}} resources that were created
+        #     before
         #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
         #       "2021-01-01 00:00:00 UTC" in seconds.
-        #     * `updateTime>1609459200` to find Cloud resources that were updated after
+        #     * `updateTime>1609459200` to find \\{\\{gcp_name}} resources that were updated
+        #     after
         #       "2021-01-01 00:00:00 UTC". 1609459200 is the epoch timestamp of
         #       "2021-01-01 00:00:00 UTC" in seconds.
-        #     * `Important` to find Cloud resources that contain "Important" as a word
+        #     * `Important` to find \\{\\{gcp_name}} resources that contain "Important" as a
+        #     word
         #       in any of the searchable fields.
-        #     * `Impor*` to find Cloud resources that contain "Impor" as a prefix of any
+        #     * `Impor*` to find \\{\\{gcp_name}} resources that contain "Impor" as a prefix
+        #     of any
         #       word in any of the searchable fields.
-        #     * `Important location:(us-west1 OR global)` to find Cloud
+        #     * `Important location:(us-west1 OR global)` to find \\{\\{gcp_name}}
         #       resources that contain "Important" as a word in any of the searchable
         #       fields and are also located in the "us-west1" region or the "global"
         #       location.
         # @!attribute [rw] asset_types
         #   @return [::Array<::String>]
-        #     Optional. A list of asset types that this request searches for. If empty, it will
-        #     search all the [searchable asset
+        #     Optional. A list of asset types that this request searches for. If empty,
+        #     it will search all the [searchable asset
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
         #
         #     Regular expressions are also supported. For example:
@@ -694,21 +707,22 @@ module Google
         #     supported asset type, an INVALID_ARGUMENT error will be returned.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The page size for search result pagination. Page size is capped at 500 even
-        #     if a larger value is given. If set to zero, server will pick an appropriate
-        #     default. Returned results may be fewer than requested. When this happens,
-        #     there could be more results as long as `next_page_token` is returned.
+        #     Optional. The page size for search result pagination. Page size is capped
+        #     at 500 even if a larger value is given. If set to zero, server will pick an
+        #     appropriate default. Returned results may be fewer than requested. When
+        #     this happens, there could be more results as long as `next_page_token` is
+        #     returned.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. If present, then retrieve the next batch of results from the preceding call
-        #     to this method. `page_token` must be the value of `next_page_token` from
-        #     the previous response. The values of all other method parameters, must be
-        #     identical to those in the previous call.
+        #     Optional. If present, then retrieve the next batch of results from the
+        #     preceding call to this method. `page_token` must be the value of
+        #     `next_page_token` from the previous response. The values of all other
+        #     method parameters, must be identical to those in the previous call.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. A comma-separated list of fields specifying the sorting order of the
-        #     results. The default order is ascending. Add " DESC" after the field name
-        #     to indicate descending order. Redundant space characters are ignored.
+        #     Optional. A comma-separated list of fields specifying the sorting order of
+        #     the results. The default order is ascending. Add " DESC" after the field
+        #     name to indicate descending order. Redundant space characters are ignored.
         #     Example: "location DESC, name".
         #     Only singular primitive fields in the response are sortable:
         #
@@ -729,10 +743,10 @@ module Google
         #     `additionalAttributes`) are not supported.
         # @!attribute [rw] read_mask
         #   @return [::Google::Protobuf::FieldMask]
-        #     Optional. A comma-separated list of fields specifying which fields to be returned in
-        #     ResourceSearchResult. Only '*' or combination of top level fields can be
-        #     specified. Field names of both snake_case and camelCase are supported.
-        #     Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
+        #     Optional. A comma-separated list of fields specifying which fields to be
+        #     returned in ResourceSearchResult. Only '*' or combination of top level
+        #     fields can be specified. Field names of both snake_case and camelCase are
+        #     supported. Examples: `"*"`, `"name,location"`, `"name,versionedResources"`.
         #
         #     The read_mask paths must be valid field paths listed but not limited to
         #     (both snake_case and camelCase are supported):
@@ -782,12 +796,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Search all IAM policies request.
+        # Search all \\{\\{iam_name_short}} policies request.
         # @!attribute [rw] scope
         #   @return [::String]
-        #     Required. A scope can be a project, a folder, or an organization. The search is
-        #     limited to the IAM policies within the `scope`. The caller must be granted
-        #     the
+        #     Required. A scope can be a project, a folder, or an organization. The
+        #     search is limited to the \\{\\{iam_name_short}} policies within the `scope`.
+        #     The caller must be granted the
         #     [`cloudasset.assets.searchAllIamPolicies`](https://cloud.google.com/asset-inventory/docs/access-control#required_permissions)
         #     permission on the desired scope.
         #
@@ -802,80 +816,93 @@ module Google
         #     Optional. The query statement. See [how to construct a
         #     query](https://cloud.google.com/asset-inventory/docs/searching-iam-policies#how_to_construct_a_query)
         #     for more information. If not specified or empty, it will search all the
-        #     IAM policies within the specified `scope`. Note that the query string is
-        #     compared against each Cloud IAM policy binding, including its principals,
-        #     roles, and Cloud IAM conditions. The returned Cloud IAM policies will only
-        #     contain the bindings that match your query. To learn more about the IAM
-        #     policy structure, see the [IAM policy
+        #     \\{\\{iam_name_short}} policies within the specified `scope`. Note that the
+        #     query string is compared against each \\{\\{iam_name_short}} policy binding,
+        #     including its principals, roles, and \\{\\{iam_name_short}} conditions. The
+        #     returned \\{\\{iam_name_short}} policies will only contain the bindings that
+        #     match your query. To learn more about the \\{\\{iam_name_short}} policy
+        #     structure, see the [\\{\\{iam_name_short}} policy
         #     documentation](https://cloud.google.com/iam/help/allow-policies/structure).
         #
         #     Examples:
         #
-        #     * `policy:amy@gmail.com` to find IAM policy bindings that specify user
+        #     * `policy:amy@gmail.com` to find \\{\\{iam_name_short}} policy bindings that
+        #     specify user
         #       "amy@gmail.com".
-        #     * `policy:roles/compute.admin` to find IAM policy bindings that specify
+        #     * `policy:roles/compute.admin` to find \\{\\{iam_name_short}} policy bindings
+        #     that specify
         #       the Compute Admin role.
-        #     * `policy:comp*` to find IAM policy bindings that contain "comp" as a
+        #     * `policy:comp*` to find \\{\\{iam_name_short}} policy bindings that contain
+        #     "comp" as a
         #       prefix of any word in the binding.
-        #     * `policy.role.permissions:storage.buckets.update` to find IAM policy
+        #     * `policy.role.permissions:storage.buckets.update` to find
+        #     \\{\\{iam_name_short}} policy
         #       bindings that specify a role containing "storage.buckets.update"
         #       permission. Note that if callers don't have `iam.roles.get` access to a
         #       role's included permissions, policy bindings that specify this role will
         #       be dropped from the search results.
-        #     * `policy.role.permissions:upd*` to find IAM policy bindings that specify a
+        #     * `policy.role.permissions:upd*` to find \\{\\{iam_name_short}} policy bindings
+        #     that specify a
         #       role containing "upd" as a prefix of any word in the role permission.
         #       Note that if callers don't have `iam.roles.get` access to a role's
         #       included permissions, policy bindings that specify this role will be
         #       dropped from the search results.
-        #     * `resource:organizations/123456` to find IAM policy bindings
+        #     * `resource:organizations/123456` to find \\{\\{iam_name_short}} policy
+        #     bindings
         #       that are set on "organizations/123456".
         #     * `resource=//cloudresourcemanager.googleapis.com/projects/myproject` to
-        #       find IAM policy bindings that are set on the project named "myproject".
-        #     * `Important` to find IAM policy bindings that contain "Important" as a
+        #       find \\{\\{iam_name_short}} policy bindings that are set on the project named
+        #       "myproject".
+        #     * `Important` to find \\{\\{iam_name_short}} policy bindings that contain
+        #     "Important" as a
         #       word in any of the searchable fields (except for the included
         #       permissions).
         #     * `resource:(instance1 OR instance2) policy:amy` to find
-        #       IAM policy bindings that are set on resources "instance1" or
-        #       "instance2" and also specify user "amy".
-        #     * `roles:roles/compute.admin` to find IAM policy bindings that specify the
+        #       \\{\\{iam_name_short}} policy bindings that are set on resources "instance1"
+        #       or "instance2" and also specify user "amy".
+        #     * `roles:roles/compute.admin` to find \\{\\{iam_name_short}} policy bindings
+        #     that specify the
         #       Compute Admin role.
-        #     * `memberTypes:user` to find IAM policy bindings that contain the
+        #     * `memberTypes:user` to find \\{\\{iam_name_short}} policy bindings that
+        #     contain the
         #       principal type "user".
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The page size for search result pagination. Page size is capped at 500 even
-        #     if a larger value is given. If set to zero, server will pick an appropriate
-        #     default. Returned results may be fewer than requested. When this happens,
-        #     there could be more results as long as `next_page_token` is returned.
+        #     Optional. The page size for search result pagination. Page size is capped
+        #     at 500 even if a larger value is given. If set to zero, server will pick an
+        #     appropriate default. Returned results may be fewer than requested. When
+        #     this happens, there could be more results as long as `next_page_token` is
+        #     returned.
         # @!attribute [rw] page_token
         #   @return [::String]
-        #     Optional. If present, retrieve the next batch of results from the preceding call to
-        #     this method. `page_token` must be the value of `next_page_token` from the
-        #     previous response. The values of all other method parameters must be
-        #     identical to those in the previous call.
+        #     Optional. If present, retrieve the next batch of results from the preceding
+        #     call to this method. `page_token` must be the value of `next_page_token`
+        #     from the previous response. The values of all other method parameters must
+        #     be identical to those in the previous call.
         # @!attribute [rw] asset_types
         #   @return [::Array<::String>]
-        #     Optional. A list of asset types that the IAM policies are attached to. If empty, it
-        #     will search the IAM policies that are attached to all the [searchable asset
+        #     Optional. A list of asset types that the \\{\\{iam_name_short}} policies are
+        #     attached to. If empty, it will search the \\{\\{iam_name_short}} policies that
+        #     are attached to all the [searchable asset
         #     types](https://cloud.google.com/asset-inventory/docs/supported-asset-types#searchable_asset_types).
         #
         #     Regular expressions are also supported. For example:
         #
-        #     * "compute.googleapis.com.*" snapshots IAM policies attached to asset type
-        #     starts with "compute.googleapis.com".
-        #     * ".*Instance" snapshots IAM policies attached to asset type ends with
-        #     "Instance".
-        #     * ".*Instance.*" snapshots IAM policies attached to asset type contains
-        #     "Instance".
+        #     * "compute.googleapis.com.*" snapshots \\{\\{iam_name_short}} policies attached
+        #     to asset type starts with "compute.googleapis.com".
+        #     * ".*Instance" snapshots \\{\\{iam_name_short}} policies attached to asset type
+        #     ends with "Instance".
+        #     * ".*Instance.*" snapshots \\{\\{iam_name_short}} policies attached to asset
+        #     type contains "Instance".
         #
         #     See [RE2](https://github.com/google/re2/wiki/Syntax) for all supported
         #     regular expression syntax. If the regular expression does not match any
         #     supported asset type, an INVALID_ARGUMENT error will be returned.
         # @!attribute [rw] order_by
         #   @return [::String]
-        #     Optional. A comma-separated list of fields specifying the sorting order of the
-        #     results. The default order is ascending. Add " DESC" after the field name
-        #     to indicate descending order. Redundant space characters are ignored.
+        #     Optional. A comma-separated list of fields specifying the sorting order of
+        #     the results. The default order is ascending. Add " DESC" after the field
+        #     name to indicate descending order. Redundant space characters are ignored.
         #     Example: "assetType DESC, resource".
         #     Only singular primitive fields in the response are sortable:
         #       * resource
@@ -888,11 +915,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # Search all IAM policies response.
+        # Search all \\{\\{iam_name_short}} policies response.
         # @!attribute [rw] results
         #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicySearchResult>]
-        #     A list of IamPolicy that match the search query. Related information such
-        #     as the associated resource is returned along with the policy.
+        #     A list of \\{\\{iam_name_short}} policies that match the search query. Related
+        #     information such as the associated resource is returned along with the
+        #     policy.
         # @!attribute [rw] next_page_token
         #   @return [::String]
         #     Set if there are more results than those appearing in this response; to get
@@ -903,11 +931,11 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # IAM policy analysis query message.
+        # \\{\\{iam_name_short}} policy analysis query message.
         # @!attribute [rw] scope
         #   @return [::String]
-        #     Required. The relative name of the root asset. Only resources and IAM policies within
-        #     the scope will be analyzed.
+        #     Required. The relative name of the root asset. Only resources and
+        #     \\{\\{iam_name_short}} policies within the scope will be analyzed.
         #
         #     This can only be an organization number (such as "organizations/123"), a
         #     folder number (such as "folders/123"), a project ID (such as
@@ -932,7 +960,8 @@ module Google
         #     Optional. The query options.
         # @!attribute [rw] condition_context
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery::ConditionContext]
-        #     Optional. The hypothetical context for IAM conditions evaluation.
+        #     Optional. The hypothetical context for \\{\\{iam_name_short}} conditions
+        #     evaluation.
         class IamPolicyAnalysisQuery
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -957,7 +986,7 @@ module Google
           # @!attribute [rw] identity
           #   @return [::String]
           #     Required. The identity appear in the form of principals in
-          #     [IAM policy
+          #     [\\{\\{iam_name_short}} policy
           #     binding](https://cloud.google.com/iam/reference/rest/v1/Binding).
           #
           #     The examples of supported forms are:
@@ -993,11 +1022,12 @@ module Google
           # @!attribute [rw] expand_groups
           #   @return [::Boolean]
           #     Optional. If true, the identities section of the result will expand any
-          #     Google groups appearing in an IAM policy binding.
+          #     Google groups appearing in an \\{\\{iam_name_short}} policy binding.
           #
-          #     If {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#identity_selector IamPolicyAnalysisQuery.identity_selector} is specified, the
-          #     identity in the result will be determined by the selector, and this flag
-          #     is not allowed to set.
+          #     If
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#identity_selector IamPolicyAnalysisQuery.identity_selector}
+          #     is specified, the identity in the result will be determined by the
+          #     selector, and this flag is not allowed to set.
           #
           #     If true, the default max expansion per group is 1000 for
           #     AssetService.AnalyzeIamPolicy][].
@@ -1006,30 +1036,34 @@ module Google
           # @!attribute [rw] expand_roles
           #   @return [::Boolean]
           #     Optional. If true, the access section of result will expand any roles
-          #     appearing in IAM policy bindings to include their permissions.
+          #     appearing in \\{\\{iam_name_short}} policy bindings to include their
+          #     permissions.
           #
-          #     If {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#access_selector IamPolicyAnalysisQuery.access_selector} is specified, the access
-          #     section of the result will be determined by the selector, and this flag
-          #     is not allowed to set.
+          #     If
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#access_selector IamPolicyAnalysisQuery.access_selector}
+          #     is specified, the access section of the result will be determined by the
+          #     selector, and this flag is not allowed to set.
           #
           #     Default is false.
           # @!attribute [rw] expand_resources
           #   @return [::Boolean]
-          #     Optional. If true and {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#resource_selector IamPolicyAnalysisQuery.resource_selector} is not
-          #     specified, the resource section of the result will expand any resource
-          #     attached to an IAM policy to include resources lower in the resource
-          #     hierarchy.
+          #     Optional. If true and
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#resource_selector IamPolicyAnalysisQuery.resource_selector}
+          #     is not specified, the resource section of the result will expand any
+          #     resource attached to an \\{\\{iam_name_short}} policy to include resources
+          #     lower in the resource hierarchy.
           #
           #     For example, if the request analyzes for which resources user A has
-          #     permission P, and the results include an IAM policy with P on a GCP
-          #     folder, the results will also include resources in that folder with
-          #     permission P.
+          #     permission P, and the results include an \\{\\{iam_name_short}} policy with P
+          #     on a GCP folder, the results will also include resources in that folder
+          #     with permission P.
           #
-          #     If true and {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#resource_selector IamPolicyAnalysisQuery.resource_selector} is specified,
-          #     the resource section of the result will expand the specified resource to
-          #     include resources lower in the resource hierarchy. Only project or
-          #     lower resources are supported. Folder and organization resource cannot be
-          #     used together with this option.
+          #     If true and
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery#resource_selector IamPolicyAnalysisQuery.resource_selector}
+          #     is specified, the resource section of the result will expand the
+          #     specified resource to include resources lower in the resource hierarchy.
+          #     Only project or lower resources are supported. Folder and organization
+          #     resource cannot be used together with this option.
           #
           #     For example, if the request analyzes for which users have permission P on
           #     a GCP project with this option enabled, the results will include all
@@ -1042,36 +1076,37 @@ module Google
           #     Default is false.
           # @!attribute [rw] output_resource_edges
           #   @return [::Boolean]
-          #     Optional. If true, the result will output the relevant parent/child relationships
-          #     between resources.
-          #     Default is false.
+          #     Optional. If true, the result will output the relevant parent/child
+          #     relationships between resources. Default is false.
           # @!attribute [rw] output_group_edges
           #   @return [::Boolean]
-          #     Optional. If true, the result will output the relevant membership relationships
-          #     between groups and other groups, and between groups and principals.
-          #     Default is false.
+          #     Optional. If true, the result will output the relevant membership
+          #     relationships between groups and other groups, and between groups and
+          #     principals. Default is false.
           # @!attribute [rw] analyze_service_account_impersonation
           #   @return [::Boolean]
-          #     Optional. If true, the response will include access analysis from identities to
-          #     resources via service account impersonation. This is a very expensive
-          #     operation, because many derived queries will be executed. We highly
-          #     recommend you use {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning} rpc
-          #     instead.
+          #     Optional. If true, the response will include access analysis from
+          #     identities to resources via service account impersonation. This is a very
+          #     expensive operation, because many derived queries will be executed. We
+          #     highly recommend you use
+          #     {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}
+          #     rpc instead.
           #
           #     For example, if the request analyzes for which resources user A has
-          #     permission P, and there's an IAM policy states user A has
+          #     permission P, and there's an \\{\\{iam_name_short}} policy states user A has
           #     iam.serviceAccounts.getAccessToken permission to a service account SA,
-          #     and there's another IAM policy states service account SA has permission P
-          #     to a GCP folder F, then user A potentially has access to the GCP folder
-          #     F. And those advanced analysis results will be included in
+          #     and there's another \\{\\{iam_name_short}} policy states service account SA
+          #     has permission P to a GCP folder F, then user A potentially has access to
+          #     the GCP folder F. And those advanced analysis results will be included in
           #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#service_account_impersonation_analysis AnalyzeIamPolicyResponse.service_account_impersonation_analysis}.
           #
           #     Another example, if the request analyzes for who has
-          #     permission P to a GCP folder F, and there's an IAM policy states user A
-          #     has iam.serviceAccounts.actAs permission to a service account SA, and
-          #     there's another IAM policy states service account SA has permission P to
-          #     the GCP folder F, then user A potentially has access to the GCP folder
-          #     F. And those advanced analysis results will be included in
+          #     permission P to a GCP folder F, and there's an \\{\\{iam_name_short}} policy
+          #     states user A has iam.serviceAccounts.actAs permission to a service
+          #     account SA, and there's another \\{\\{iam_name_short}} policy states service
+          #     account SA has permission P to the GCP folder F, then user A potentially
+          #     has access to the GCP folder F. And those advanced analysis results will
+          #     be included in
           #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#service_account_impersonation_analysis AnalyzeIamPolicyResponse.service_account_impersonation_analysis}.
           #
           #     Only the following permissions are considered in this analysis:
@@ -1089,19 +1124,20 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # The IAM conditions context.
+          # The \\{\\{iam_name_short}} conditions context.
           # @!attribute [rw] access_time
           #   @return [::Google::Protobuf::Timestamp]
-          #     The hypothetical access timestamp to evaluate IAM conditions. Note that
-          #     this value must not be earlier than the current time; otherwise, an
-          #     INVALID_ARGUMENT error will be returned.
+          #     The hypothetical access timestamp to evaluate \\{\\{iam_name_short}}
+          #     conditions. Note that this value must not be earlier than the current
+          #     time; otherwise, an INVALID_ARGUMENT error will be returned.
           class ConditionContext
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
         end
 
-        # A request message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}.
+        # A request message for
+        # {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}.
         # @!attribute [rw] analysis_query
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery]
         #     Required. The request query.
@@ -1125,7 +1161,8 @@ module Google
         #     presence yet.
         # @!attribute [rw] execution_timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. Amount of time executable has to complete.  See JSON representation of
+        #     Optional. Amount of time executable has to complete.  See JSON
+        #     representation of
         #     [Duration](https://developers.google.com/protocol-buffers/docs/proto3#json).
         #
         #     If this field is set with a value less than the RPC deadline, and the
@@ -1140,7 +1177,8 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A response message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}.
+        # A response message for
+        # {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}.
         # @!attribute [rw] main_analysis
         #   @return [::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse::IamPolicyAnalysis]
         #     The main analysis that matches the original request.
@@ -1151,9 +1189,11 @@ module Google
         #     enabled.
         # @!attribute [rw] fully_explored
         #   @return [::Boolean]
-        #     Represents whether all entries in the {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#main_analysis main_analysis} and
-        #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#service_account_impersonation_analysis service_account_impersonation_analysis} have been fully explored to
-        #     answer the query in the request.
+        #     Represents whether all entries in the
+        #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#main_analysis main_analysis}
+        #     and
+        #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse#service_account_impersonation_analysis service_account_impersonation_analysis}
+        #     have been fully explored to answer the query in the request.
         class AnalyzeIamPolicyResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1164,12 +1204,14 @@ module Google
           #     The analysis query.
           # @!attribute [rw] analysis_results
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisResult>]
-          #     A list of {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult IamPolicyAnalysisResult} that matches the analysis query, or
-          #     empty if no result is found.
+          #     A list of
+          #     {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult IamPolicyAnalysisResult}
+          #     that matches the analysis query, or empty if no result is found.
           # @!attribute [rw] fully_explored
           #   @return [::Boolean]
-          #     Represents whether all entries in the {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse::IamPolicyAnalysis#analysis_results analysis_results} have been
-          #     fully explored to answer the query.
+          #     Represents whether all entries in the
+          #     {::Google::Cloud::Asset::V1::AnalyzeIamPolicyResponse::IamPolicyAnalysis#analysis_results analysis_results}
+          #     have been fully explored to answer the query.
           # @!attribute [rw] non_critical_errors
           #   @return [::Array<::Google::Cloud::Asset::V1::IamPolicyAnalysisState>]
           #     A list of non-critical errors happened during the query handling.
@@ -1179,27 +1221,28 @@ module Google
           end
         end
 
-        # Output configuration for export IAM policy analysis destination.
+        # Output configuration for export \\{\\{iam_name_short}} policy analysis
+        # destination.
         # @!attribute [rw] gcs_destination
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::GcsDestination]
-        #     Destination on Cloud Storage.
+        #     Destination on \\{\\{storage_name}}.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::BigQueryDestination]
-        #     Destination on BigQuery.
+        #     Destination on \\{\\{bigquery_name}}.
         class IamPolicyAnalysisOutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # A Cloud Storage location.
+          # A \\{\\{storage_name}} location.
           # @!attribute [rw] uri
           #   @return [::String]
-          #     Required. The uri of the Cloud Storage object. It's the same uri that is used by
-          #     gsutil. Example: "gs://bucket_name/object_name". See [Viewing and
-          #     Editing Object
+          #     Required. The uri of the \\{\\{storage_name}} object. It's the same uri that
+          #     is used by gsutil. Example: "gs://bucket_name/object_name". See [Viewing
+          #     and Editing Object
           #     Metadata](https://cloud.google.com/storage/docs/viewing-editing-metadata)
           #     for more information.
           #
-          #     If the specified Cloud Storage object already exists and there is no
+          #     If the specified \\{\\{storage_name}} object already exists and there is no
           #     [hold](https://cloud.google.com/storage/docs/object-holds), it will be
           #     overwritten with the analysis result.
           class GcsDestination
@@ -1207,16 +1250,18 @@ module Google
             extend ::Google::Protobuf::MessageExts::ClassMethods
           end
 
-          # A BigQuery destination.
+          # A \\{\\{bigquery_name}} destination.
           # @!attribute [rw] dataset
           #   @return [::String]
-          #     Required. The BigQuery dataset in format "projects/projectId/datasets/datasetId",
-          #     to which the analysis results should be exported. If this dataset does
-          #     not exist, the export call will return an INVALID_ARGUMENT error.
+          #     Required. The \\{\\{bigquery_name}} dataset in format
+          #     "projects/projectId/datasets/datasetId", to which the analysis results
+          #     should be exported. If this dataset does not exist, the export call will
+          #     return an INVALID_ARGUMENT error.
           # @!attribute [rw] table_prefix
           #   @return [::String]
-          #     Required. The prefix of the BigQuery tables to which the analysis results will be
-          #     written. Tables will be created based on this table_prefix if not exist:
+          #     Required. The prefix of the \\{\\{bigquery_name}} tables to which the
+          #     analysis results will be written. Tables will be created based on this
+          #     table_prefix if not exist:
           #     * <table_prefix>_analysis table will contain export operation's metadata.
           #     * <table_prefix>_analysis_result will contain all the
           #       {::Google::Cloud::Asset::V1::IamPolicyAnalysisResult IamPolicyAnalysisResult}.
@@ -1224,29 +1269,30 @@ module Google
           #     on the [partition_key].
           # @!attribute [rw] partition_key
           #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig::BigQueryDestination::PartitionKey]
-          #     The partition key for BigQuery partitioned table.
+          #     The partition key for \\{\\{bigquery_name}} partitioned table.
           # @!attribute [rw] write_disposition
           #   @return [::String]
-          #     Optional. Specifies the action that occurs if the destination table or partition
-          #     already exists. The following values are supported:
+          #     Optional. Specifies the action that occurs if the destination table or
+          #     partition already exists. The following values are supported:
           #
-          #     * WRITE_TRUNCATE: If the table or partition already exists, BigQuery
-          #     overwrites the entire table or all the partitions data.
-          #     * WRITE_APPEND: If the table or partition already exists, BigQuery
-          #     appends the data to the table or the latest partition.
+          #     * WRITE_TRUNCATE: If the table or partition already exists,
+          #     \\{\\{bigquery_name}} overwrites the entire table or all the partitions data.
+          #     * WRITE_APPEND: If the table or partition already exists,
+          #     \\{\\{bigquery_name}} appends the data to the table or the latest partition.
           #     * WRITE_EMPTY: If the table already exists and contains data, an error is
           #     returned.
           #
           #     The default value is WRITE_APPEND. Each action is atomic and only occurs
-          #     if BigQuery is able to complete the job successfully. Details are at
+          #     if \\{\\{bigquery_name}} is able to complete the job successfully. Details
+          #     are at
           #     https://cloud.google.com/bigquery/docs/loading-data-local#appending_to_or_overwriting_a_table_using_a_local_file.
           class BigQueryDestination
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # This enum determines the partition key column for the bigquery tables.
-            # Partitioning can improve query performance and reduce query cost by
-            # filtering partitions. Refer to
+            # This enum determines the partition key column for the \\{\\{bigquery_name}}
+            # tables. Partitioning can improve query performance and reduce query cost
+            # by filtering partitions. Refer to
             # https://cloud.google.com/bigquery/docs/partitioned-tables for details.
             module PartitionKey
               # Unspecified partition key. Tables won't be partitioned using this
@@ -1261,7 +1307,8 @@ module Google
           end
         end
 
-        # A request message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}.
+        # A request message for
+        # {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}.
         # @!attribute [rw] analysis_query
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery]
         #     Required. The request query.
@@ -1285,13 +1332,15 @@ module Google
         #     presence yet.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisOutputConfig]
-        #     Required. Output configuration indicating where the results will be output to.
+        #     Required. Output configuration indicating where the results will be output
+        #     to.
         class AnalyzeIamPolicyLongrunningRequest
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A response message for {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}.
+        # A response message for
+        # {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}.
         class AnalyzeIamPolicyLongrunningResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1320,7 +1369,8 @@ module Google
         #     Output only. The last update time of this saved query.
         # @!attribute [r] last_updater
         #   @return [::String]
-        #     Output only. The account's email address who has updated this saved query most recently.
+        #     Output only. The account's email address who has updated this saved query
+        #     most recently.
         # @!attribute [rw] labels
         #   @return [::Google::Protobuf::Map{::String => ::String}]
         #     Labels applied on the resource.
@@ -1336,9 +1386,12 @@ module Google
           # The query content.
           # @!attribute [rw] iam_policy_analysis_query
           #   @return [::Google::Cloud::Asset::V1::IamPolicyAnalysisQuery]
-          #     An IAM Policy Analysis query, which could be used in
-          #     the {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy} rpc or
-          #     the {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning} rpc.
+          #     An \\{\\{iam_name_short}} Policy Analysis query, which could be used in
+          #     the
+          #     {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy AssetService.AnalyzeIamPolicy}
+          #     rpc or the
+          #     {::Google::Cloud::Asset::V1::AssetService::Client#analyze_iam_policy_longrunning AssetService.AnalyzeIamPolicyLongrunning}
+          #     rpc.
           class QueryContent
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1357,20 +1410,20 @@ module Google
         # Request to create a saved query.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The name of the project/folder/organization where this saved_query
-        #     should be created in. It can only be an organization number (such as
-        #     "organizations/123"), a folder number (such as "folders/123"), a project ID
-        #     (such as "projects/my-project-id")", or a project number (such as
-        #     "projects/12345").
+        #     Required. The name of the project/folder/organization where this
+        #     saved_query should be created in. It can only be an organization number
+        #     (such as "organizations/123"), a folder number (such as "folders/123"), a
+        #     project ID (such as "projects/my-project-id")", or a project number (such
+        #     as "projects/12345").
         # @!attribute [rw] saved_query
         #   @return [::Google::Cloud::Asset::V1::SavedQuery]
-        #     Required. The saved_query details. The `name` field must be empty as it will be
-        #     generated based on the parent and saved_query_id.
+        #     Required. The saved_query details. The `name` field must be empty as it
+        #     will be generated based on the parent and saved_query_id.
         # @!attribute [rw] saved_query_id
         #   @return [::String]
-        #     Required. The ID to use for the saved query, which must be unique in the specified
-        #     parent. It will become the final component of the saved query's resource
-        #     name.
+        #     Required. The ID to use for the saved query, which must be unique in the
+        #     specified parent. It will become the final component of the saved query's
+        #     resource name.
         #
         #     This value should be 4-63 characters, and valid characters
         #     are /[a-z][0-9]-/.
@@ -1398,8 +1451,8 @@ module Google
         # Request to list saved queries.
         # @!attribute [rw] parent
         #   @return [::String]
-        #     Required. The parent project/folder/organization whose savedQueries are to be
-        #     listed. It can only be using project/folder/organization number (such as
+        #     Required. The parent project/folder/organization whose savedQueries are to
+        #     be listed. It can only be using project/folder/organization number (such as
         #     "folders/12345")", or a project ID (such as "projects/my-project-id").
         # @!attribute [rw] filter
         #   @return [::String]
@@ -1412,8 +1465,9 @@ module Google
         #     See https://google.aip.dev/160 for more information on the grammar.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of saved queries to return per page. The service may
-        #     return fewer than this value. If unspecified, at most 50 will be returned.
+        #     Optional. The maximum number of saved queries to return per page. The
+        #     service may return fewer than this value. If unspecified, at most 50 will
+        #     be returned.
         #      The maximum value is 1000; values above 1000 will be coerced to 1000.
         # @!attribute [rw] page_token
         #   @return [::String]
@@ -1462,7 +1516,8 @@ module Google
         # Request to delete a saved query.
         # @!attribute [rw] name
         #   @return [::String]
-        #     Required. The name of the saved query to delete. It must be in the format of:
+        #     Required. The name of the saved query to delete. It must be in the format
+        #     of:
         #
         #     * projects/project_number/savedQueries/saved_query_id
         #     * folders/folder_number/savedQueries/saved_query_id
@@ -1514,7 +1569,7 @@ module Google
         # @!attribute [rw] move_analysis
         #   @return [::Array<::Google::Cloud::Asset::V1::MoveAnalysis>]
         #     The list of analyses returned from performing the intended resource move
-        #     analysis. The analysis is grouped by different Cloud services.
+        #     analysis. The analysis is grouped by different \\{\\{gcp_name}} services.
         class AnalyzeMoveResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1523,8 +1578,8 @@ module Google
         # A message to group the analysis information.
         # @!attribute [rw] display_name
         #   @return [::String]
-        #     The user friendly display name of the analysis. E.g. IAM, Organization
-        #     Policy etc.
+        #     The user friendly display name of the analysis. E.g. \\{\\{iam_name_short}},
+        #     \\{\\{orgpol_name}} etc.
         # @!attribute [rw] analysis
         #   @return [::Google::Cloud::Asset::V1::MoveAnalysisResult]
         #     Analysis result of moving the target resource.
@@ -1563,29 +1618,30 @@ module Google
         # Output configuration query assets.
         # @!attribute [rw] bigquery_destination
         #   @return [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig::BigQueryDestination]
-        #     BigQuery destination where the query results will be saved.
+        #     \\{\\{bigquery_name}} destination where the query results will be saved.
         class QueryAssetsOutputConfig
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # BigQuery destination.
+          # \\{\\{bigquery_name}} destination.
           # @!attribute [rw] dataset
           #   @return [::String]
-          #     Required. The BigQuery dataset where the query results will be saved. It has the
-          #     format of "projects/\\{projectId}/datasets/\\{datasetId}".
+          #     Required. The \\{\\{bigquery_name}} dataset where the query results will be
+          #     saved. It has the format of "projects/\\{projectId}/datasets/\\{datasetId}".
           # @!attribute [rw] table
           #   @return [::String]
-          #     Required. The BigQuery table where the query results will be saved. If this table
-          #     does not exist, a new table with the given name will be created.
+          #     Required. The \\{\\{bigquery_name}} table where the query results will be
+          #     saved. If this table does not exist, a new table with the given name will
+          #     be created.
           # @!attribute [rw] write_disposition
           #   @return [::String]
           #     Specifies the action that occurs if the destination table or partition
           #     already exists. The following values are supported:
           #
-          #     * WRITE_TRUNCATE: If the table or partition already exists, BigQuery
-          #     overwrites the entire table or all the partitions data.
-          #     * WRITE_APPEND: If the table or partition already exists, BigQuery
-          #     appends the data to the table or the latest partition.
+          #     * WRITE_TRUNCATE: If the table or partition already exists,
+          #     \\{\\{bigquery_name}} overwrites the entire table or all the partitions data.
+          #     * WRITE_APPEND: If the table or partition already exists,
+          #     \\{\\{bigquery_name}} appends the data to the table or the latest partition.
           #     * WRITE_EMPTY: If the table already exists and contains data, a
           #     'duplicate' error is returned in the job result.
           #
@@ -1607,16 +1663,17 @@ module Google
         #     Only assets belonging to the `parent` will be returned.
         # @!attribute [rw] statement
         #   @return [::String]
-        #     Optional. A SQL statement that's compatible with [BigQuery Standard
+        #     Optional. A SQL statement that's compatible with [\\{\\{bigquery_name}}
+        #     Standard
         #     SQL](http://cloud/bigquery/docs/reference/standard-sql/enabling-standard-sql).
         # @!attribute [rw] job_reference
         #   @return [::String]
-        #     Optional. Reference to the query job, which is from the `QueryAssetsResponse` of
-        #     previous `QueryAssets` call.
+        #     Optional. Reference to the query job, which is from the
+        #     `QueryAssetsResponse` of previous `QueryAssets` call.
         # @!attribute [rw] page_size
         #   @return [::Integer]
-        #     Optional. The maximum number of rows to return in the results. Responses are limited
-        #     to 10 MB and 1000 rows.
+        #     Optional. The maximum number of rows to return in the results. Responses
+        #     are limited to 10 MB and 1000 rows.
         #
         #     By default, the maximum row count is 1000. When the byte or row count limit
         #     is reached, the rest of the query results will be paginated.
@@ -1629,12 +1686,13 @@ module Google
         #     The field will be ignored when [output_config] is specified.
         # @!attribute [rw] timeout
         #   @return [::Google::Protobuf::Duration]
-        #     Optional. Specifies the maximum amount of time that the client is willing to wait
-        #     for the query to complete. By default, this limit is 5 min for the first
-        #     query, and 1 minute for the following queries. If the query is complete,
-        #     the `done` field in the `QueryAssetsResponse` is true, otherwise false.
+        #     Optional. Specifies the maximum amount of time that the client is willing
+        #     to wait for the query to complete. By default, this limit is 5 min for the
+        #     first query, and 1 minute for the following queries. If the query is
+        #     complete, the `done` field in the `QueryAssetsResponse` is true, otherwise
+        #     false.
         #
-        #     Like BigQuery [jobs.query
+        #     Like \\{\\{bigquery_name}} [jobs.query
         #     API](https://cloud.google.com/bigquery/docs/reference/rest/v2/jobs/query#queryrequest)
         #     The call is not guaranteed to wait for the specified timeout; it typically
         #     returns after around 200 seconds (200,000 milliseconds), even if the query
@@ -1643,12 +1701,13 @@ module Google
         #     The field will be ignored when [output_config] is specified.
         # @!attribute [rw] read_time_window
         #   @return [::Google::Cloud::Asset::V1::TimeWindow]
-        #     Optional. [start_time] is required. [start_time] must be less than [end_time]
-        #     Defaults [end_time] to now if [start_time] is set and [end_time] isn't.
-        #     Maximum permitted time range is 7 days.
+        #     Optional. [start_time] is required. [start_time] must be less than
+        #     [end_time] Defaults [end_time] to now if [start_time] is set and
+        #     [end_time] isn't. Maximum permitted time range is 7 days.
         # @!attribute [rw] read_time
         #   @return [::Google::Protobuf::Timestamp]
-        #     Optional. Queries cloud assets as they appeared at the specified point in time.
+        #     Optional. Queries cloud assets as they appeared at the specified point in
+        #     time.
         # @!attribute [rw] output_config
         #   @return [::Google::Cloud::Asset::V1::QueryAssetsOutputConfig]
         #     Optional. Destination where the query results will be saved.
@@ -1694,9 +1753,9 @@ module Google
 
         # Execution results of the query.
         #
-        # The result is formatted as rows represented by BigQuery compatible [schema].
-        # When pagination is necessary, it will contains the page token to retrieve
-        # the results of following pages.
+        # The result is formatted as rows represented by \\{\\{bigquery_name}} compatible
+        # [schema]. When pagination is necessary, it will contains the page token to
+        # retrieve the results of following pages.
         # @!attribute [rw] rows
         #   @return [::Array<::Google::Protobuf::Struct>]
         #     Each row hold a query result in the format of `Struct`.
@@ -1714,7 +1773,7 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # BigQuery Compatible table schema.
+        # \\{\\{bigquery_name}} Compatible table schema.
         # @!attribute [rw] fields
         #   @return [::Array<::Google::Cloud::Asset::V1::TableFieldSchema>]
         #     Describes the fields in a table.
@@ -1759,10 +1818,12 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A request message for {::Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies AssetService.BatchGetEffectiveIamPolicies}.
+        # A request message for
+        # {::Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies AssetService.BatchGetEffectiveIamPolicies}.
         # @!attribute [rw] scope
         #   @return [::String]
-        #     Required. Only IAM policies on or below the scope will be returned.
+        #     Required. Only \\{\\{iam_name_short}} policies on or below the scope will be
+        #     returned.
         #
         #     This can only be an organization number (such as "organizations/123"), a
         #     folder number (such as "folders/123"), a project ID (such as
@@ -1785,52 +1846,66 @@ module Google
           extend ::Google::Protobuf::MessageExts::ClassMethods
         end
 
-        # A response message for {::Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies AssetService.BatchGetEffectiveIamPolicies}.
+        # A response message for
+        # {::Google::Cloud::Asset::V1::AssetService::Client#batch_get_effective_iam_policies AssetService.BatchGetEffectiveIamPolicies}.
         # @!attribute [rw] policy_results
         #   @return [::Array<::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy>]
         #     The effective policies for a batch of resources. Note that the results
         #     order is the same as the order of
-        #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest#names BatchGetEffectiveIamPoliciesRequest.names}. When a resource does not
-        #     have any effective IAM policies, its corresponding policy_result will
-        #     contain empty {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#policies EffectiveIamPolicy.policies}.
+        #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest#names BatchGetEffectiveIamPoliciesRequest.names}.
+        #     When a resource does not have any effective \\{\\{iam_name_short}} policies,
+        #     its corresponding policy_result will contain empty
+        #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#policies EffectiveIamPolicy.policies}.
         class BatchGetEffectiveIamPoliciesResponse
           include ::Google::Protobuf::MessageExts
           extend ::Google::Protobuf::MessageExts::ClassMethods
 
-          # The effective IAM policies on one resource.
+          # The effective \\{\\{iam_name_short}} policies on one resource.
           # @!attribute [rw] full_resource_name
           #   @return [::String]
           #     The [full_resource_name]
           #     (https://cloud.google.com/asset-inventory/docs/resource-name-format)
-          #     for which the {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#policies policies} are computed. This is one of the
-          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest#names BatchGetEffectiveIamPoliciesRequest.names} the caller provides in the
-          #     request.
+          #     for which the
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#policies policies}
+          #     are computed. This is one of the
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest#names BatchGetEffectiveIamPoliciesRequest.names}
+          #     the caller provides in the request.
           # @!attribute [rw] policies
           #   @return [::Array<::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo>]
-          #     The effective policies for the {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#full_resource_name full_resource_name}.
+          #     The effective policies for the
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#full_resource_name full_resource_name}.
           #
-          #     These policies include the policy set on the {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#full_resource_name full_resource_name} and
-          #     those set on its parents and ancestors up to the
-          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest#scope BatchGetEffectiveIamPoliciesRequest.scope}. Note that these policies
-          #     are not filtered according to the resource type of the
+          #     These policies include the policy set on the
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#full_resource_name full_resource_name}
+          #     and those set on its parents and ancestors up to the
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesRequest#scope BatchGetEffectiveIamPoliciesRequest.scope}.
+          #     Note that these policies are not filtered according to the resource type
+          #     of the
           #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#full_resource_name full_resource_name}.
           #
           #     These policies are hierarchically ordered by
-          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource PolicyInfo.attached_resource} starting from {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#full_resource_name full_resource_name}
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource PolicyInfo.attached_resource}
+          #     starting from
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy#full_resource_name full_resource_name}
           #     itself to its parents and ancestors, such that policies[i]'s
-          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource PolicyInfo.attached_resource} is the child of policies[i+1]'s
-          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource PolicyInfo.attached_resource}, if policies[i+1] exists.
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource PolicyInfo.attached_resource}
+          #     is the child of policies[i+1]'s
+          #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource PolicyInfo.attached_resource},
+          #     if policies[i+1] exists.
           class EffectiveIamPolicy
             include ::Google::Protobuf::MessageExts
             extend ::Google::Protobuf::MessageExts::ClassMethods
 
-            # The IAM policy and its attached resource.
+            # The \\{\\{iam_name_short}} policy and its attached resource.
             # @!attribute [rw] attached_resource
             #   @return [::String]
-            #     The full resource name the {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#policy policy} is directly attached to.
+            #     The full resource name the
+            #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#policy policy}
+            #     is directly attached to.
             # @!attribute [rw] policy
             #   @return [::Google::Iam::V1::Policy]
-            #     The IAM policy that's directly attached to the {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource attached_resource}.
+            #     The \\{\\{iam_name_short}} policy that's directly attached to the
+            #     {::Google::Cloud::Asset::V1::BatchGetEffectiveIamPoliciesResponse::EffectiveIamPolicy::PolicyInfo#attached_resource attached_resource}.
             class PolicyInfo
               include ::Google::Protobuf::MessageExts
               extend ::Google::Protobuf::MessageExts::ClassMethods
@@ -1846,13 +1921,13 @@ module Google
           # Resource metadata.
           RESOURCE = 1
 
-          # The actual IAM policy set on a resource.
+          # The actual \\{\\{iam_name_short}} policy set on a resource.
           IAM_POLICY = 2
 
-          # The Cloud Organization Policy set on an asset.
+          # The organization policy set on an asset.
           ORG_POLICY = 4
 
-          # The Cloud Access context manager Policy set on an asset.
+          # The \\{\\{acm_name}} policy set on an asset.
           ACCESS_POLICY = 5
 
           # The runtime OS Inventory information.
