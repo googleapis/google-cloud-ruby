@@ -823,6 +823,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
     crypto_key_version = "hello world"
     algorithm = :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED
     import_job = "hello world"
+    wrapped_key = "hello world"
     rsa_aes_wrapped_key = "hello world"
 
     import_crypto_key_version_client_stub = ClientStub.new grpc_response, grpc_operation do |name, request, options:|
@@ -832,6 +833,7 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       assert_equal "hello world", request["crypto_key_version"]
       assert_equal :CRYPTO_KEY_VERSION_ALGORITHM_UNSPECIFIED, request["algorithm"]
       assert_equal "hello world", request["import_job"]
+      assert_equal "hello world", request["wrapped_key"]
       assert_equal "hello world", request["rsa_aes_wrapped_key"]
       assert_equal :rsa_aes_wrapped_key, request.wrapped_key_material
       refute_nil options
@@ -844,31 +846,31 @@ class ::Google::Cloud::Kms::V1::KeyManagementService::ClientTest < Minitest::Tes
       end
 
       # Use hash object
-      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key }) do |response, operation|
+      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use named arguments
-      client.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key do |response, operation|
+      client.import_crypto_key_version parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object
-      client.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key) do |response, operation|
+      client.import_crypto_key_version ::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use hash object with options
-      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key }, grpc_options) do |response, operation|
+      client.import_crypto_key_version({ parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key }, grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end
 
       # Use protobuf object with options
-      client.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, rsa_aes_wrapped_key: rsa_aes_wrapped_key), grpc_options) do |response, operation|
+      client.import_crypto_key_version(::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest.new(parent: parent, crypto_key_version: crypto_key_version, algorithm: algorithm, import_job: import_job, wrapped_key: wrapped_key, rsa_aes_wrapped_key: rsa_aes_wrapped_key), grpc_options) do |response, operation|
         assert_equal grpc_response, response
         assert_equal grpc_operation, operation
       end

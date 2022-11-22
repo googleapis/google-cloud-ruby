@@ -98,6 +98,7 @@ Google::Protobuf::DescriptorPool.generated_pool.build do
       optional :crypto_key_version, :string, 6
       optional :algorithm, :enum, 2, "google.cloud.kms.v1.CryptoKeyVersion.CryptoKeyVersionAlgorithm"
       optional :import_job, :string, 4
+      optional :wrapped_key, :bytes, 8
       oneof :wrapped_key_material do
         optional :rsa_aes_wrapped_key, :bytes, 5
       end

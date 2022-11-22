@@ -1522,7 +1522,7 @@ module Google
             #   @param options [::Gapic::CallOptions, ::Hash]
             #     Overrides the default settings for this call, e.g, timeout, retries, etc. Optional.
             #
-            # @overload import_crypto_key_version(parent: nil, crypto_key_version: nil, algorithm: nil, import_job: nil, rsa_aes_wrapped_key: nil)
+            # @overload import_crypto_key_version(parent: nil, crypto_key_version: nil, algorithm: nil, import_job: nil, wrapped_key: nil, rsa_aes_wrapped_key: nil)
             #   Pass arguments to `import_crypto_key_version` via keyword arguments. Note that at
             #   least one keyword argument is required. To specify no parameters, or to keep all
             #   the default parameter values, pass an empty Hash as a request object (see above).
@@ -1564,31 +1564,51 @@ module Google
             #     Required. The {::Google::Cloud::Kms::V1::ImportJob#name name} of the
             #     {::Google::Cloud::Kms::V1::ImportJob ImportJob} that was used to wrap this key
             #     material.
-            #   @param rsa_aes_wrapped_key [::String]
-            #     Wrapped key material produced with
-            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_3072_SHA1_AES_256 RSA_OAEP_3072_SHA1_AES_256}
-            #     or
-            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_4096_SHA1_AES_256 RSA_OAEP_4096_SHA1_AES_256}.
+            #   @param wrapped_key [::String]
+            #     Optional. The wrapped key material to import.
             #
-            #     This field contains the concatenation of two wrapped keys:
+            #     Before wrapping, key material must be formatted. If importing symmetric key
+            #     material, the expected key material format is plain bytes. If importing
+            #     asymmetric key material, the expected key material format is PKCS#8-encoded
+            #     DER (the PrivateKeyInfo structure from RFC 5208).
+            #
+            #     When wrapping with import methods
+            #     ({::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_3072_SHA1_AES_256 RSA_OAEP_3072_SHA1_AES_256}
+            #     or
+            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_4096_SHA1_AES_256 RSA_OAEP_4096_SHA1_AES_256}
+            #     or
+            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_3072_SHA256_AES_256 RSA_OAEP_3072_SHA256_AES_256}
+            #     or
+            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_4096_SHA256_AES_256 RSA_OAEP_4096_SHA256_AES_256}),
+            #
+            #     this field must contain the concatenation of:
             #     <ol>
             #       <li>An ephemeral AES-256 wrapping key wrapped with the
             #           {::Google::Cloud::Kms::V1::ImportJob#public_key public_key} using
-            #           RSAES-OAEP with SHA-1/SHA-256, MGF1 with SHA-1/SHA-256, and an
-            #           empty label.
+            #           RSAES-OAEP with SHA-1/SHA-256, MGF1 with SHA-1/SHA-256, and an empty
+            #           label.
             #       </li>
-            #       <li>The key to be imported, wrapped with the ephemeral AES-256 key
-            #           using AES-KWP (RFC 5649).
+            #       <li>The formatted key to be imported, wrapped with the ephemeral AES-256
+            #           key using AES-KWP (RFC 5649).
             #       </li>
             #     </ol>
             #
-            #     If importing symmetric key material, it is expected that the unwrapped
-            #     key contains plain bytes. If importing asymmetric key material, it is
-            #     expected that the unwrapped key is in PKCS#8-encoded DER format (the
-            #     PrivateKeyInfo structure from RFC 5208).
-            #
             #     This format is the same as the format produced by PKCS#11 mechanism
             #     CKM_RSA_AES_KEY_WRAP.
+            #
+            #     When wrapping with import methods
+            #     ({::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_3072_SHA256 RSA_OAEP_3072_SHA256}
+            #     or
+            #     {::Google::Cloud::Kms::V1::ImportJob::ImportMethod::RSA_OAEP_4096_SHA256 RSA_OAEP_4096_SHA256}),
+            #
+            #     this field must contain the formatted key to be imported, wrapped with the
+            #     {::Google::Cloud::Kms::V1::ImportJob#public_key public_key} using RSAES-OAEP
+            #     with SHA-256, MGF1 with SHA-256, and an empty label.
+            #   @param rsa_aes_wrapped_key [::String]
+            #     Optional. This field has the same meaning as
+            #     {::Google::Cloud::Kms::V1::ImportCryptoKeyVersionRequest#wrapped_key wrapped_key}.
+            #     Prefer to use that field in new work. Either that field or this field
+            #     (but not both) must be specified.
             #
             # @yield [response, operation] Access the result along with the RPC operation
             # @yieldparam response [::Google::Cloud::Kms::V1::CryptoKeyVersion]
@@ -2265,7 +2285,9 @@ module Google
             #
             #     The maximum size depends on the key version's
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}.
-            #     For {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the
+            #     For {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE},
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL}, and
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC} keys, the
             #     plaintext must be no larger than 64KiB. For
             #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of
             #     the plaintext and additional_authenticated_data fields must be no larger
@@ -2277,8 +2299,10 @@ module Google
             #
             #     The maximum size depends on the key version's
             #     {::Google::Cloud::Kms::V1::CryptoKeyVersionTemplate#protection_level protection_level}.
-            #     For {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE} keys, the AAD
-            #     must be no larger than 64KiB. For
+            #     For {::Google::Cloud::Kms::V1::ProtectionLevel::SOFTWARE SOFTWARE},
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL EXTERNAL}, and
+            #     {::Google::Cloud::Kms::V1::ProtectionLevel::EXTERNAL_VPC EXTERNAL_VPC} keys the
+            #     AAD must be no larger than 64KiB. For
             #     {::Google::Cloud::Kms::V1::ProtectionLevel::HSM HSM} keys, the combined length of
             #     the plaintext and additional_authenticated_data fields must be no larger
             #     than 8KiB.
